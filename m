@@ -2,56 +2,57 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 244F03163A0
-	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 11:22:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93A1431639E
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 11:22:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id C659D86155;
-	Wed, 10 Feb 2021 10:22:07 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D32D386090;
+	Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oNXWRoYmJ_La; Wed, 10 Feb 2021 10:22:05 +0000 (UTC)
+	with ESMTP id oIHBDh_FObuJ; Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A28EC85FC9;
-	Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C2E1285E98;
+	Wed, 10 Feb 2021 10:22:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7C61BC0174;
-	Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9E15BC013A;
+	Wed, 10 Feb 2021 10:22:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 30703C0174
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 10:22:02 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1DF876F4DC
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 10:22:02 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7gZZAtXkNACt
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3258C013A
  for <virtualization@lists.linux-foundation.org>;
  Wed, 10 Feb 2021 10:22:01 +0000 (UTC)
-Received: by smtp3.osuosl.org (Postfix, from userid 1001)
- id 5CDE56F4F7; Wed, 10 Feb 2021 10:22:01 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 80B006F4DC
+Received: from localhost (localhost [127.0.0.1])
+ by fraxinus.osuosl.org (Postfix) with ESMTP id B1F9D8554A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 10:21:59 +0000 (UTC)
+ Wed, 10 Feb 2021 10:22:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id tp4MsH_AkIMC
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Feb 2021 10:22:00 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 1253A85550
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Feb 2021 10:22:00 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549adcf6.dip0.t-ipconnect.de
  [84.154.220.246])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id E7E49310;
- Wed, 10 Feb 2021 11:21:54 +0100 (CET)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 720283A7;
+ Wed, 10 Feb 2021 11:21:55 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 0/7] x86/seves: Support 32-bit boot path and other updates
-Date: Wed, 10 Feb 2021 11:21:28 +0100
-Message-Id: <20210210102135.30667-1-joro@8bytes.org>
+Subject: [PATCH 1/7] x86/boot/compressed/64: Cleanup exception handling before
+ booting kernel
+Date: Wed, 10 Feb 2021 11:21:29 +0100
+Message-Id: <20210210102135.30667-2-joro@8bytes.org>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210210102135.30667-1-joro@8bytes.org>
+References: <20210210102135.30667-1-joro@8bytes.org>
 MIME-Version: 1.0
 Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
@@ -84,48 +85,74 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Hi,
+Disable the exception handling before booting the kernel to make sure
+any exceptions that happen during early kernel boot are not directed to
+the pre-decompression code.
 
-these patches add support for the 32-bit boot in the decompressor
-code. This is needed to boot an SEV-ES guest on some firmware and grub
-versions. The patches also add the necessary CPUID sanity checks and a
-32-bit version of the C-bit check.
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/boot/compressed/idt_64.c | 14 ++++++++++++++
+ arch/x86/boot/compressed/misc.c   |  7 ++-----
+ arch/x86/boot/compressed/misc.h   |  6 ++++++
+ 3 files changed, 22 insertions(+), 5 deletions(-)
 
-Other updates included here:
-
-	1. Add code to shut down exception handling in the
-	   decompressor code before jumping to the real kernel.
-	   Once in the real kernel it is not safe anymore to jump
-	   back to the decompressor code via exceptions.
-
-	2. Replace open-coded hlt loops with proper calls to
-	   sev_es_terminate().
-
-Please review.
-
-Thanks,
-
-	Joerg
-
-Joerg Roedel (7):
-  x86/boot/compressed/64: Cleanup exception handling before booting
-    kernel
-  x86/boot/compressed/64: Reload CS in startup_32
-  x86/boot/compressed/64: Setup IDT in startup_32 boot path
-  x86/boot/compressed/64: Add 32-bit boot #VC handler
-  x86/boot/compressed/64: Add CPUID sanity check to 32-bit boot-path
-  x86/boot/compressed/64: Check SEV encryption in 32-bit boot-path
-  x86/sev-es: Replace open-coded hlt-loops with sev_es_terminate()
-
- arch/x86/boot/compressed/head_64.S     | 168 ++++++++++++++++++++++++-
- arch/x86/boot/compressed/idt_64.c      |  14 +++
- arch/x86/boot/compressed/mem_encrypt.S | 114 ++++++++++++++++-
- arch/x86/boot/compressed/misc.c        |   7 +-
- arch/x86/boot/compressed/misc.h        |   6 +
- arch/x86/boot/compressed/sev-es.c      |  12 +-
- arch/x86/kernel/sev-es-shared.c        |  10 +-
- 7 files changed, 307 insertions(+), 24 deletions(-)
-
+diff --git a/arch/x86/boot/compressed/idt_64.c b/arch/x86/boot/compressed/idt_64.c
+index 804a502ee0d2..9b93567d663a 100644
+--- a/arch/x86/boot/compressed/idt_64.c
++++ b/arch/x86/boot/compressed/idt_64.c
+@@ -52,3 +52,17 @@ void load_stage2_idt(void)
+ 
+ 	load_boot_idt(&boot_idt_desc);
+ }
++
++void cleanup_exception_handling(void)
++{
++	/*
++	 * Flush GHCB from cache and map it encrypted again when running as
++	 * SEV-ES guest.
++	 */
++	sev_es_shutdown_ghcb();
++
++	/* Set a null-idt, disabling #PF and #VC handling */
++	boot_idt_desc.size    = 0;
++	boot_idt_desc.address = 0;
++	load_boot_idt(&boot_idt_desc);
++}
+diff --git a/arch/x86/boot/compressed/misc.c b/arch/x86/boot/compressed/misc.c
+index 267e7f93050e..cc9fd0e8766a 100644
+--- a/arch/x86/boot/compressed/misc.c
++++ b/arch/x86/boot/compressed/misc.c
+@@ -443,11 +443,8 @@ asmlinkage __visible void *extract_kernel(void *rmode, memptr heap,
+ 	handle_relocations(output, output_len, virt_addr);
+ 	debug_putstr("done.\nBooting the kernel.\n");
+ 
+-	/*
+-	 * Flush GHCB from cache and map it encrypted again when running as
+-	 * SEV-ES guest.
+-	 */
+-	sev_es_shutdown_ghcb();
++	/* Disable exception handling before booting the kernel */
++	cleanup_exception_handling();
+ 
+ 	return output;
+ }
+diff --git a/arch/x86/boot/compressed/misc.h b/arch/x86/boot/compressed/misc.h
+index 901ea5ebec22..e5612f035498 100644
+--- a/arch/x86/boot/compressed/misc.h
++++ b/arch/x86/boot/compressed/misc.h
+@@ -155,6 +155,12 @@ extern pteval_t __default_kernel_pte_mask;
+ extern gate_desc boot_idt[BOOT_IDT_ENTRIES];
+ extern struct desc_ptr boot_idt_desc;
+ 
++#ifdef CONFIG_X86_64
++void cleanup_exception_handling(void);
++#else
++static inline void cleanup_exception_handling(void) { }
++#endif
++
+ /* IDT Entry Points */
+ void boot_page_fault(void);
+ void boot_stage1_vc(void);
 -- 
 2.30.0
 
