@@ -1,103 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 719AC316632
-	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 13:12:44 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 454CB3166A1
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 13:29:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id C8665866E7;
-	Wed, 10 Feb 2021 12:12:42 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id CA89B6F63D
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 12:29:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ClH4KkGEhJLP; Wed, 10 Feb 2021 12:12:42 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id M695TrCM4tKH for <lists.virtualization@lfdr.de>;
+	Wed, 10 Feb 2021 12:29:03 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+	id 129FA6F62B; Wed, 10 Feb 2021 12:29:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id EED78866D7;
-	Wed, 10 Feb 2021 12:12:41 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D40846ED1C;
+	Wed, 10 Feb 2021 12:28:56 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B220BC013A;
-	Wed, 10 Feb 2021 12:12:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A17D4C013A;
+	Wed, 10 Feb 2021 12:28:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1AFABC013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BDC63C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 12:12:40 +0000 (UTC)
+ Wed, 10 Feb 2021 12:28:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 09F1A87148
+ by hemlock.osuosl.org (Postfix) with ESMTP id ABA408715D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 12:12:40 +0000 (UTC)
+ Wed, 10 Feb 2021 12:28:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id BYiwMsOAWjA6
+ with ESMTP id MYafRuaDUSWT
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 12:12:39 +0000 (UTC)
+ Wed, 10 Feb 2021 12:28:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 3FDA08712C
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 2C39A86DD3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 12:12:39 +0000 (UTC)
+ Wed, 10 Feb 2021 12:28:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1612959158;
+ s=mimecast20190719; t=1612960132;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fo185b+KWk8zT3SUUKGeVFpd35TVy7HrhZIt8uxdMU0=;
- b=dTllJmQc5kfX0b4uf8MeyCdNs00B0+63FDox50ON0vH2KozQoOUZ3C9tM+SIVru+Vdh38N
- wfjt/U3B2x4kZtEqW4uS+Kq9QIMA7nNhee6T5TxkNxdjaNI1Z5piko99Qd91x10+TCiqLs
- 6kYUNHW6Y1/HRQAzA8z73H9JkZHci7o=
-Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
- [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-429-HZR9gaNZMQGtUnYN1aUNZQ-1; Wed, 10 Feb 2021 07:12:36 -0500
-X-MC-Unique: HZR9gaNZMQGtUnYN1aUNZQ-1
-Received: by mail-wm1-f70.google.com with SMTP id y18so1271639wma.8
+ bh=i5wXyy1sPUgnnMqVauVL41jvRX6eG8p4VtBbB9PGUS8=;
+ b=GJN9Ms8JS3P8FihrakgZoDJ5qI+SHgzHKJv4e8Q5+mrUAhRZ1nhaqBT+80nCVTBM8+RkjM
+ ioDpHeD5UhxpqLbmVD8QNeCpVNHP/bC+iVrHG7Dr7e2QQRpBNNIu5L5RJVMJWMjP1NeujM
+ as+7uePvBfZS8O/EXZV3wfcxVrCJ348=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-487-denf_n7nPcOnJ10wBWTT0w-1; Wed, 10 Feb 2021 07:28:51 -0500
+X-MC-Unique: denf_n7nPcOnJ10wBWTT0w-1
+Received: by mail-wm1-f69.google.com with SMTP id y84so906479wmg.5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 04:12:36 -0800 (PST)
+ Wed, 10 Feb 2021 04:28:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=fo185b+KWk8zT3SUUKGeVFpd35TVy7HrhZIt8uxdMU0=;
- b=AiQBfwrFCTJB/uTSigYi6n0dKbiSajSySELvlrWldY1EN4hpNEtYaoINPVUEglrdY2
- 6sDKSouem9A/saUdiYXKVGVOpPUh3uJ83N9ZJ0JtwpNj3ngM0sp2sTfQOYY/B6K9jgSM
- WebYyFPhhVt86oJGN9DUZzsxoRGeqBtYb4d4pScfb81RrOMPYO34rGYe7DmltGwQuUma
- uOtNT1MJk8sCvkuj6HM/PAg1PNhjdkXRCOtxu6cND+J8KUdKM/yQejqcSbMvqnbDnaWH
- /O0/nPBtl88uc73TZjLGVjeskknrbUoxe9FKps2+pDYpbtLLZWZlEVgkAIOjAWgixtNA
- 1BSg==
-X-Gm-Message-State: AOAM530e0d7mqtiDy95Mu846KsKc9D43SKXQaJLuYhoec8Q6qKH3FYGl
- kqqqdnniLjy6pD3G4LyNRJpImwB/Ie47+O3jWTeqWyfE41M4YsrfxT8znXQ4F0UoR6xm7CYEhoy
- W4YARKCxS93babakK2L9C+fuC0VhAtOCcPMwQOQHICw==
-X-Received: by 2002:a1c:480a:: with SMTP id v10mr2730116wma.132.1612959155134; 
- Wed, 10 Feb 2021 04:12:35 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxqJ1zRXwLt0V7vMoyUlpyzWYnYnT3tXF+r0Hdj1LTI3bX10t05o4NRDt3JSbViSeLbfsdcxQ==
-X-Received: by 2002:a1c:480a:: with SMTP id v10mr2730098wma.132.1612959154945; 
- Wed, 10 Feb 2021 04:12:34 -0800 (PST)
+ :mime-version:content-disposition:in-reply-to;
+ bh=i5wXyy1sPUgnnMqVauVL41jvRX6eG8p4VtBbB9PGUS8=;
+ b=Wrx/qXL+cEzO4p4rax8TPErvzSoftxcbG3vL5DQxkagoEevvaPVX/VNCig6h1IWde2
+ hsbnaTP+kXCoHMIR7aPvL3pA/RVR6pbG7+Uz9rWFR4XFI5+Mlb1y4pEcwOijCmfLJqNM
+ +Urv+CdAepLDPUk4pM1U6GeIFyJoKC/1t6jXg0DxNzWFh3oDl+9g52Qc/0mNI1Vw+b0d
+ VQR0WqROh9CIjZRm7s1qSTRcKw96lPkxOEPytH/iNZs07icyxZZszzqABIqCmVsvz3ej
+ tmZ9x+MeTwGD51vTHc4Y+zL0cIRd+trDnO4ezjr9RAgHergivurTlTc4d63JIXKRa+1V
+ eGMg==
+X-Gm-Message-State: AOAM530luSZftMoxWiKX2gb65N0QlsFvbXUIPfsw/el/jgnZyX0OPwHn
+ KrbYJI8PNxfKmIiOt79FP7gRBMVgP+I8dWPB6y1rDmYz1LQ92QcmVCBxQuUVUkHnj1jTiB72ouK
+ GgstEwDxGLPpsW5KSkuw1GJizsm2FE3mxw+dTlWIeUQ==
+X-Received: by 2002:adf:b611:: with SMTP id f17mr3364771wre.8.1612960129954;
+ Wed, 10 Feb 2021 04:28:49 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJx9+xzSxdXFmowIk42Rj2TTfAS5qUcbZY08lcAl1KI09s/LaYklsKwABS3n8zQbgdh+YNgXxg==
+X-Received: by 2002:adf:b611:: with SMTP id f17mr3364759wre.8.1612960129805;
+ Wed, 10 Feb 2021 04:28:49 -0800 (PST)
 Received: from redhat.com (bzq-79-180-2-31.red.bezeqint.net. [79.180.2.31])
- by smtp.gmail.com with ESMTPSA id w4sm2695060wrt.69.2021.02.10.04.12.33
+ by smtp.gmail.com with ESMTPSA id i10sm3116755wrp.0.2021.02.10.04.28.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Feb 2021 04:12:34 -0800 (PST)
-Date: Wed, 10 Feb 2021 07:12:31 -0500
+ Wed, 10 Feb 2021 04:28:49 -0800 (PST)
+Date: Wed, 10 Feb 2021 07:28:46 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH] vdpa/mlx5: fix param validation in mlx5_vdpa_get_config()
-Message-ID: <20210210071129-mutt-send-email-mst@kernel.org>
-References: <20210208161741.104939-1-sgarzare@redhat.com>
- <20210209054302.GA210455@mtl-vdi-166.wap.labs.mlnx>
- <20210209090014.xolf5kxri3xdmacz@steredhat>
- <cdd75885-3610-8685-14f3-5467a8ef1501@redhat.com>
+To: Si-Wei Liu <si-wei.liu@oracle.com>
+Subject: Re: [PATCH 2/3] mlx5_vdpa: fix feature negotiation across device reset
+Message-ID: <20210210072758-mutt-send-email-mst@kernel.org>
+References: <1612614564-4220-1-git-send-email-si-wei.liu@oracle.com>
+ <1612614564-4220-2-git-send-email-si-wei.liu@oracle.com>
+ <20210208053500.GA137517@mtl-vdi-166.wap.labs.mlnx>
+ <061486d5-6235-731b-d036-f5d5e9fac22e@oracle.com>
 MIME-Version: 1.0
-In-Reply-To: <cdd75885-3610-8685-14f3-5467a8ef1501@redhat.com>
+In-Reply-To: <061486d5-6235-731b-d036-f5d5e9fac22e@oracle.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Eli Cohen <elic@nvidia.com>, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org
+Cc: netdev@vger.kernel.org, Eli Cohen <elic@nvidia.com>,
+ virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,35 +110,82 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBGZWIgMTAsIDIwMjEgYXQgMTI6MTc6MTlQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPiAKPiBPbiAyMDIxLzIvOSDkuIvljYg1OjAwLCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6
-Cj4gPiBPbiBUdWUsIEZlYiAwOSwgMjAyMSBhdCAwNzo0MzowMkFNICswMjAwLCBFbGkgQ29oZW4g
-d3JvdGU6Cj4gPiA+IE9uIE1vbiwgRmViIDA4LCAyMDIxIGF0IDA1OjE3OjQxUE0gKzAxMDAsIFN0
-ZWZhbm8gR2FyemFyZWxsYSB3cm90ZToKPiA+ID4gPiBJdCdzIGxlZ2FsIHRvIGhhdmUgJ29mZnNl
-dCArIGxlbicgZXF1YWwgdG8KPiA+ID4gPiBzaXplb2Yoc3RydWN0IHZpcnRpb19uZXRfY29uZmln
-KSwgc2luY2UgJ25kZXYtPmNvbmZpZycgaXMgYQo+ID4gPiA+ICdzdHJ1Y3QgdmlydGlvX25ldF9j
-b25maWcnLCBzbyB3ZSBjYW4gc2FmZWx5IGNvcHkgaXRzIGNvbnRlbnQgdW5kZXIKPiA+ID4gPiB0
-aGlzIGNvbmRpdGlvbi4KPiA+ID4gPiAKPiA+ID4gPiBGaXhlczogMWE4NmIzNzdhYTIxICgidmRw
-YS9tbHg1OiBBZGQgVkRQQSBkcml2ZXIgZm9yIHN1cHBvcnRlZAo+ID4gPiA+IG1seDUgZGV2aWNl
-cyIpCj4gPiA+ID4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5lbC5vcmcKPiA+ID4gPiBTaWduZWQtb2Zm
-LWJ5OiBTdGVmYW5vIEdhcnphcmVsbGEgPHNnYXJ6YXJlQHJlZGhhdC5jb20+Cj4gPiA+IAo+ID4g
-PiBBY2tlZC1ieTogRWxpIENvaGVuIDxlbGljQG52aWRpYS5jb20+Cj4gPiA+IAo+ID4gPiBCVFcs
-IHNhbWUgZXJyb3IgaW4gdmRwYV9zaW0geW91IG1heSB3YW50IHRvIGZpeC4KPiA+ID4gCj4gPiAK
-PiA+IENvbW1pdCA2NWI3MDk1ODZlMjIgKCJ2ZHBhX3NpbTogYWRkIGdldF9jb25maWcgY2FsbGJh
-Y2sgaW4KPiA+IHZkcGFzaW1fZGV2X2F0dHIiKSB1bmludGVudGlvbmFsbHkgc29sdmVkIGl0Lgo+
-ID4gCj4gPiBTaW5jZSBpdCdzIGEgc2ltdWxhdG9yLCBtYXliZSB3ZSBjYW4gYXZvaWQgc29sdmlu
-ZyBpdCBpbiB0aGUgc3RhYmxlCj4gPiBicmFuY2hlcy4gT3IgZG9lcyBpdCBtYXR0ZXI/Cj4gCj4g
-Cj4gSSB0aGluayBub3QsIHNpbmNlIHRoZSBtb2R1bGUgZGVwZW5kcyBvbiBSVU5USU1FX1RFU1RJ
-TkdfTUVOVS4KPiAKPiBUaGFua3MKPiAKCldlbGwgcGVvcGxlIHVzZSB0aGUgc2ltdWxhdG9yIGZv
-ciBkZXZlbG9wbWVudC4uLgpJJ20gbm90IGdvaW5nIHRvIGJsb2NrIHRoaXMgcGF0Y2ggb24gaXQs
-IGJ1dCBpZiBzb21lb25lCmhhcyB0aGUgY3ljbGVzIHRvIHBvc3QgYSBzdGFibGUgYnJhbmNoIHBh
-dGNoLCB0aGF0IHdvdWxkIGJlCmdyZWF0LgoKCj4gCj4gCj4gPiAKPiA+IFRoYW5rcywKPiA+IFN0
-ZWZhbm8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZp
-cnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3Vu
-ZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0
-aW5mby92aXJ0dWFsaXphdGlvbg==
+On Mon, Feb 08, 2021 at 05:20:11PM -0800, Si-Wei Liu wrote:
+> 
+> 
+> On 2/7/2021 9:35 PM, Eli Cohen wrote:
+> > On Sat, Feb 06, 2021 at 04:29:23AM -0800, Si-Wei Liu wrote:
+> > > The mlx_features denotes the capability for which
+> > > set of virtio features is supported by device. In
+> > > principle, this field needs not be cleared during
+> > > virtio device reset, as this capability is static
+> > > and does not change across reset.
+> > > 
+> > > In fact, the current code may have the assumption
+> > > that mlx_features can be reloaded from firmware
+> > > via the .get_features ops after device is reset
+> > > (via the .set_status ops), which is unfortunately
+> > > not true. The userspace VMM might save a copy
+> > > of backend capable features and won't call into
+> > > kernel again to get it on reset. This causes all
+> > > virtio features getting disabled on newly created
+> > > virtqs after device reset, while guest would hold
+> > > mismatched view of available features. For e.g.,
+> > > the guest may still assume tx checksum offload
+> > > is available after reset and feature negotiation,
+> > > causing frames with bogus (incomplete) checksum
+> > > transmitted on the wire.
+> > > 
+> > > Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
+> > > ---
+> > >   drivers/vdpa/mlx5/net/mlx5_vnet.c | 1 -
+> > >   1 file changed, 1 deletion(-)
+> > > 
+> > > diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > index b8416c4..aa6f8cd 100644
+> > > --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+> > > @@ -1788,7 +1788,6 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
+> > >   		clear_virtqueues(ndev);
+> > >   		mlx5_vdpa_destroy_mr(&ndev->mvdev);
+> > >   		ndev->mvdev.status = 0;
+> > > -		ndev->mvdev.mlx_features = 0;
+> > >   		++mvdev->generation;
+> > >   		return;
+> > >   	}
+> > Since we assume that device capabilities don't change, I think I would
+> > get the features through a call done in mlx5v_probe after the netdev
+> > object is created and change mlx5_vdpa_get_features() to just return
+> > ndev->mvdev.mlx_features.
+> Yep, it makes sense. Will post a revised patch.
+
+So I'm waiting for v2 of this patchset. Please make sure to post a cover letter
+with an overall description.
+
+> If vdpa tool allows
+> reconfiguration post probing, the code has to be reconciled then.
+> 
+> > 
+> > Did you actually see this issue in action? If you did, can you share
+> > with us how you trigerred this?
+> Issue is indeed seen in action. The mismatched tx-checksum offload as
+> described in the commit message was one of such examples. You would need a
+> guest reboot though (triggering device reset via the .set_status ops and
+> zero'ed mlx_features was loaded to deduce new actual_features for creating
+> the h/w virtq object) for repro.
+> 
+> -Siwei
+> > 
+> > > -- 
+> > > 1.8.3.1
+> > > 
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
