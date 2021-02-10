@@ -2,53 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D87FD31639F
-	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 11:22:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 220C13163A5
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 11:22:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A394E8610F;
-	Wed, 10 Feb 2021 10:22:07 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C11E285C19;
+	Wed, 10 Feb 2021 10:22:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5CMC0EDjzCEw; Wed, 10 Feb 2021 10:22:05 +0000 (UTC)
+	with ESMTP id md4vw5OAZvBR; Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id F3CFD86155;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 6373085B25;
 	Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CA9D9C013A;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 292C4C0174;
 	Wed, 10 Feb 2021 10:22:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ABF48C013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 19BC5C013A
  for <virtualization@lists.linux-foundation.org>;
  Wed, 10 Feb 2021 10:22:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 9A4A88554A
+ by whitealder.osuosl.org (Postfix) with ESMTP id 115D28650D
  for <virtualization@lists.linux-foundation.org>;
  Wed, 10 Feb 2021 10:22:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pL5INX_wzEgh
+ with ESMTP id mHeUhujr1iVB
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 10:22:00 +0000 (UTC)
+ Wed, 10 Feb 2021 10:22:01 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 3B07285569
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 58B83864E6
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 10:22:00 +0000 (UTC)
+ Wed, 10 Feb 2021 10:22:01 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549adcf6.dip0.t-ipconnect.de
  [84.154.220.246])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 1FBD846E;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 9F5B747C;
  Wed, 10 Feb 2021 11:21:57 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 4/7] x86/boot/compressed/64: Add 32-bit boot #VC handler
-Date: Wed, 10 Feb 2021 11:21:32 +0100
-Message-Id: <20210210102135.30667-5-joro@8bytes.org>
+Subject: [PATCH 5/7] x86/boot/compressed/64: Add CPUID sanity check to 32-bit
+ boot-path
+Date: Wed, 10 Feb 2021 11:21:33 +0100
+Message-Id: <20210210102135.30667-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210210102135.30667-1-joro@8bytes.org>
 References: <20210210102135.30667-1-joro@8bytes.org>
@@ -84,131 +85,77 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Add a #VC exception handler which is used when the kernel still executes
-in protected mode. This boot-path already uses CPUID, which will cause #VC
-exceptions in an SEV-ES guest.
+The 32-bit #VC handler has no GHCB and can only handle CPUID exit codes.
+It is needed by the early boot code to handle #VC exceptions raised in
+verify_cpu() and to get the position of the C bit.
+
+But the CPUID information comes from the hypervisor, which is untrusted
+and might return results which trick the guest into the no-SEV boot path
+with no C bit set in the page-tables. All data written to memory would
+then be unencrypted and could leak sensitive data to the hypervisor.
+
+Add sanity checks to the 32-bit boot #VC handler to make sure the
+hypervisor does not pretend that SEV is not enabled.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/boot/compressed/head_64.S     |  6 ++
- arch/x86/boot/compressed/mem_encrypt.S | 77 +++++++++++++++++++++++++-
- 2 files changed, 82 insertions(+), 1 deletion(-)
+ arch/x86/boot/compressed/mem_encrypt.S | 36 ++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
-index 8deeec78cdb4..eadaa0a082b8 100644
---- a/arch/x86/boot/compressed/head_64.S
-+++ b/arch/x86/boot/compressed/head_64.S
-@@ -34,6 +34,7 @@
- #include <asm/asm-offsets.h>
- #include <asm/bootparam.h>
- #include <asm/desc_defs.h>
-+#include <asm/trapnr.h>
- #include "pgtable.h"
- 
- /*
-@@ -856,6 +857,11 @@ SYM_FUNC_START(startup32_set_idt_entry)
- SYM_FUNC_END(startup32_set_idt_entry)
- 
- SYM_FUNC_START(startup32_load_idt)
-+	/* #VC handler */
-+	leal    rva(startup32_vc_handler)(%ebp), %eax
-+	movl    $X86_TRAP_VC, %edx
-+	call    startup32_set_idt_entry
-+
- 	/* Load IDT */
- 	leal	rva(boot32_idt)(%ebp), %eax
- 	movl	%eax, rva(boot32_idt_desc+2)(%ebp)
 diff --git a/arch/x86/boot/compressed/mem_encrypt.S b/arch/x86/boot/compressed/mem_encrypt.S
-index aa561795efd1..350ecb56c7e4 100644
+index 350ecb56c7e4..091502cde070 100644
 --- a/arch/x86/boot/compressed/mem_encrypt.S
 +++ b/arch/x86/boot/compressed/mem_encrypt.S
-@@ -67,10 +67,85 @@ SYM_FUNC_START(get_sev_encryption_bit)
- 	ret
- SYM_FUNC_END(get_sev_encryption_bit)
+@@ -126,6 +126,34 @@ SYM_CODE_START(startup32_vc_handler)
+ 	SEV_ES_REQ_CPUID fn=%ebx reg=3
+ 	movl	%edx, (%esp)
  
-+/*
-+ * Emit code to request an CPUID register from the Hypervisor using
-+ * the MSR-based protocol.
-+ *
-+ * fn: The register containing the CPUID function
-+ * reg: Register requested
-+ *	1 = EAX
-+ *	2 = EBX
-+ *	3 = ECX
-+ *	4 = EDX
-+ *
-+ * Result is in EDX. Jumps to .Lfail on error
-+ */
-+.macro	SEV_ES_REQ_CPUID fn:req reg:req
-+	/* Request CPUID[%ebx].EAX */
-+	movl	$\reg, %eax
-+	shll	$30, %eax
-+	orl	$0x00000004, %eax
-+	movl	\fn, %edx
-+	movl	$MSR_AMD64_SEV_ES_GHCB, %ecx
++	/*
++	 * Sanity check CPUID results from the Hypervisor. See comment in
++	 * do_vc_no_ghcb() for more details on why this is necessary.
++	 */
++
++	/* Fail if Hypervisor bit not set in CPUID[1].ECX[31] */
++	cmpl    $1, %ebx
++	jne     .Lcheck_leaf
++	btl     $31, 4(%esp)
++	jnc     .Lfail
++	jmp     .Ldone
++
++.Lcheck_leaf:
++	/* Fail if SEV leaf not available in CPUID[0x80000000].EAX */
++	cmpl    $0x80000000, %ebx
++	jne     .Lcheck_sev
++	cmpl    $0x8000001f, 12(%esp)
++	jb      .Lfail
++	jmp     .Ldone
++
++.Lcheck_sev:
++	/* Fail if SEV bit not set in CPUID[0x8000001f].EAX[1] */
++	cmpl    $0x8000001f, %ebx
++	jne     .Ldone
++	btl     $1, 12(%esp)
++	jnc     .Lfail
++
++.Ldone:
+ 	popl	%edx
+ 	popl	%ecx
+ 	popl	%ebx
+@@ -139,6 +167,14 @@ SYM_CODE_START(startup32_vc_handler)
+ 
+ 	iret
+ .Lfail:
++	/* Send terminate request to Hypervisor */
++	movl    $0x100, %eax
++	xorl    %edx, %edx
++	movl    $MSR_AMD64_SEV_ES_GHCB, %ecx
 +	wrmsr
 +	rep; vmmcall
-+	rdmsr
-+	/* Check response code */
-+	andl	$0xfff, %eax
-+	cmpl	$5, %eax
-+	jne	.Lfail
-+	/* All good */
-+.endm
 +
-+SYM_CODE_START(startup32_vc_handler)
-+	pushl	%eax
-+	pushl	%ebx
-+	pushl	%ecx
-+	pushl	%edx
-+
-+	/* Keep CPUID function in %ebx */
-+	movl	%eax, %ebx
-+
-+	/* Check if error-code == SVM_EXIT_CPUID */
-+	cmpl	$0x72, 16(%esp)
-+	jne	.Lfail
-+
-+	/* Request CPUID[%ebx].EAX */
-+	SEV_ES_REQ_CPUID fn=%ebx reg=0
-+	movl	%edx, 12(%esp)
-+
-+	/* Request CPUID[%ebx].EBX */
-+	SEV_ES_REQ_CPUID fn=%ebx reg=1
-+	movl	%edx, 8(%esp)
-+
-+	/* Request CPUID[%ebx].ECX */
-+	SEV_ES_REQ_CPUID fn=%ebx reg=2
-+	movl	%edx, 4(%esp)
-+
-+	/* Request CPUID[%ebx].EDX */
-+	SEV_ES_REQ_CPUID fn=%ebx reg=3
-+	movl	%edx, (%esp)
-+
-+	popl	%edx
-+	popl	%ecx
-+	popl	%ebx
-+	popl	%eax
-+
-+	/* Remove error code */
-+	addl	$4, %esp
-+
-+	/* Jump over CPUID instruction */
-+	addl	$2, (%esp)
-+
-+	iret
-+.Lfail:
-+	hlt
-+	jmp .Lfail
-+SYM_CODE_END(startup32_vc_handler)
-+
- 	.code64
- 
- #include "../../kernel/sev_verify_cbit.S"
--
- SYM_FUNC_START(set_sev_encryption_mask)
- #ifdef CONFIG_AMD_MEM_ENCRYPT
- 	push	%rbp
++	/* If request fails, go to hlt loop */
+ 	hlt
+ 	jmp .Lfail
+ SYM_CODE_END(startup32_vc_handler)
 -- 
 2.30.0
 
