@@ -2,97 +2,186 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 46877315945
-	for <lists.virtualization@lfdr.de>; Tue,  9 Feb 2021 23:21:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AF249315B19
+	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 01:27:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id EC4C985B25;
-	Tue,  9 Feb 2021 22:21:25 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id C6F6285FE6;
+	Wed, 10 Feb 2021 00:27:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id leHb6mt4ArSV; Tue,  9 Feb 2021 22:21:24 +0000 (UTC)
+	with ESMTP id mwIQyeKnL-kY; Wed, 10 Feb 2021 00:27:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id AE4D586226;
-	Tue,  9 Feb 2021 22:21:24 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 0668685773;
+	Wed, 10 Feb 2021 00:27:10 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 83949C013A;
-	Tue,  9 Feb 2021 22:21:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DB2BFC0174;
+	Wed, 10 Feb 2021 00:27:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A8EEEC013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 79575C013A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 22:21:23 +0000 (UTC)
+ Wed, 10 Feb 2021 00:27:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9612386C10
+ by whitealder.osuosl.org (Postfix) with ESMTP id 638FF86767
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 22:21:23 +0000 (UTC)
+ Wed, 10 Feb 2021 00:27:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cO-dme5Nf6sE
+ with ESMTP id PvMsKDaJAB5i
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 22:21:22 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from mail-pl1-f175.google.com (mail-pl1-f175.google.com
- [209.85.214.175])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5E3B6868E2
+ Wed, 10 Feb 2021 00:27:07 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+Received: from aserp2130.oracle.com (aserp2130.oracle.com [141.146.126.79])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6588A86765
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Feb 2021 22:21:22 +0000 (UTC)
-Received: by mail-pl1-f175.google.com with SMTP id b8so66322plh.12
- for <virtualization@lists.linux-foundation.org>;
- Tue, 09 Feb 2021 14:21:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=jOyYx1TDjb2A4gHSVOiGYO/bJUu5bLpN/42e2o+FxXM=;
- b=ZudShlgecDcgL2Wf7EG99R2XM3pqdJk3GWkX8vluBL6fzf8DqgL/EzorucwyMsx473
- cWp4bOxGdoorhZtXy7Tr0y1KlPEImuVeXVMi3aIYKeYFmsEGAWYZ4r1y5xDQglrr889X
- NL7wsA8Vp6Tak9bbZi4PWSpfHM5dcxpZ9rkveVr53WNiLM//4j+SpsZXoB5wdDi4C+dI
- NN+OA9jejs5MTmkLQKWHNCRrHffajpvUi6XNEXyxRG9f9fvB8a0qHZxPuNYKe61jRasg
- MIAm1hLLu6hshupMPGoLrP0BL9DLL3SmxlC1gHjdFuC4JmTPNsiwBdutV/opH2MChwlF
- 4oHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=jOyYx1TDjb2A4gHSVOiGYO/bJUu5bLpN/42e2o+FxXM=;
- b=kt7O84G+wpPbCsQOYdtKDKnmymKf46afgH+5lw70+kPiQpFG2Wh6x8GGK7zt0YdPzy
- MtyWxXYSPJB9X2pw0E2NoeJz8TN0xXz5ZkoYqezjYrsLKOPxUdy1JAsADMppCUor5DFa
- 7sxZSLkRxpHkl2dGjBRgTJ2HIhRvZG9gGJ2GjeSUCULXsgwWA1u0CvoZVpXb4N67yhMc
- QR1fd7Em6D4ORf7UT2q47JSns/OLmoS4GUZTcUxAYSubWrNrKoG88J7VyDhvIpg5AlmL
- 0NpK+5T9WC+XW5qsKytpZLOKralEDEkRe1flqWoL3cQfu5WTR6xmxGyJq8KBNDcbx231
- H4EQ==
-X-Gm-Message-State: AOAM531pa1TfEcZdOwQgn5QQrKuzFZ7xf7/Xw2DXMnHri6d9vLcbFVEn
- G7xTMaf4vUoAjlhfflS3mgQ=
-X-Google-Smtp-Source: ABdhPJwGDIgAQd0D3Bj7K7xE4Obh8SaZ1xW5cnD9EhQUhLiG0OIrXKXpw3elA2mYDupV4v1VuXjmJQ==
-X-Received: by 2002:a17:90a:fc3:: with SMTP id 61mr8462pjz.197.1612909281819; 
- Tue, 09 Feb 2021 14:21:21 -0800 (PST)
-Received: from sc2-haas01-esx0118.eng.vmware.com ([66.170.99.1])
- by smtp.gmail.com with ESMTPSA id v9sm58601pju.33.2021.02.09.14.21.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Feb 2021 14:21:21 -0800 (PST)
-From: Nadav Amit <nadav.amit@gmail.com>
-X-Google-Original-From: Nadav Amit
-To: Thomas Gleixner <tglx@linutronix.de>
-Subject: [PATCH v5 4/8] x86/mm/tlb: Flush remote and local TLBs concurrently
-Date: Tue,  9 Feb 2021 14:16:49 -0800
-Message-Id: <20210209221653.614098-5-namit@vmware.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210209221653.614098-1-namit@vmware.com>
-References: <20210209221653.614098-1-namit@vmware.com>
+ Wed, 10 Feb 2021 00:27:07 +0000 (UTC)
+Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
+ by aserp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11A0NtxX013657;
+ Wed, 10 Feb 2021 00:27:06 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=subject : to : cc :
+ references : from : message-id : date : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2020-01-29;
+ bh=9/y2xqYZdAVA2eLu4Eady3GhobXAy4M+KrLahjlb+/o=;
+ b=DZRHX4Bj+gPxa/YInq6tgwkPy4PgE99d79WQLIUYtFvP/LxOgEd5ozAjFiyAg4UzuL6z
+ fljWBc4QoIjg2QWtkgB014R5DW01IAVfnysxKA2vAeQfnnmePtpF3cMeiZ4oZsblA0pw
+ pleyQ60LTVAnm9Ww8SUDOKV4s4UARYKBwCOKAY/hjv6sNCgaE8FXvyqxnlrN8ohZZltp
+ GMSIYNO3nL3JdcOOD01OF+Nm2Z/4HmjJizZ8jFOUFJ0PlFm1MH7P82KzP9sL7/ehsK63
+ LyPvlS/8cQUWpEc3F8k83zABQQDMMGPFDIpUIQ9vBIxOe7SE6+8mp0WlsA4fk3c7bbD0 eQ== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by aserp2130.oracle.com with ESMTP id 36hgmahksa-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 10 Feb 2021 00:27:06 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11A0PwKv180540;
+ Wed, 10 Feb 2021 00:27:05 GMT
+Received: from nam02-sn1-obe.outbound.protection.outlook.com
+ (mail-sn1nam02lp2057.outbound.protection.outlook.com [104.47.36.57])
+ by aserp3030.oracle.com with ESMTP id 36j4ppfrgx-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 10 Feb 2021 00:27:05 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=S0YKJrEcBP9zxTApeEzME8i2Pj85HUiarWQSDpkppnFuciTe4uf7RCYZW/S+OwoLoP8IqZWiNV21y5IiW38R8MIWZb034a/B0qh2/2e/yug07JJdsGmKc+Klaf04IwZXhs4lP/h+rHfiAnhiKrHE30k8FtFU2+mDWagrFI0A9XL6Z7JvpMmN9F3tRqUHqoi4sQNr0zkVUUHgIhgKO0GP2xPaDVb3BfyrRDEoWGN2ECp+gxhrs2lTSB6BEZzk81yjX/kv+1l8ARvWWqHFxSv0P4Iz4N+4EuFseSOgLNEtRqdFpP0DMrpS1WHhBYaPWUelg4e6RYrlwWhhu/vF5RKGbA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9/y2xqYZdAVA2eLu4Eady3GhobXAy4M+KrLahjlb+/o=;
+ b=cnOp5Ok8cW4SFQM448poVecP6P2HCZT2niTyYgs5AYK2Gar06g7lQwShuAmo0332wOY4rRQXKoPcxTmGqs+r2So00XfVEMu2oUiu3huABLe3pNyX7qncOwilBG4GauK+uWK9zW3BVQSrnuIoxtuYXS0B5L1nKASOXFnCRyDa+JrEWN8J1o62AutTxqTeSVCeZwkCkiRnFFkruelS2vTYZlerLdwpL0NYUuP3mGxkGzVymr1IFYD//I0AKKSPdY9x/Vp1IF0NynlILQQSdXBglpHjr5tgIHoerqVMxbn3tB8QmT6aEOMZSOSzFK5/kh5Jiae60oSyZRGxO4XnDKM9Pg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9/y2xqYZdAVA2eLu4Eady3GhobXAy4M+KrLahjlb+/o=;
+ b=wrs96b6sr/+PwpAI5GBFGHW8Nf91NlQk6J1oO/4Sg5zKS81JpY5ZRC368WtOzuHzbEwkW3XXDEdssuCnmpJnoupGay0p/JcKRq8AXSYkzdx/xh9lEKaWhPvpxWI0aW+ud6E/k5dffifp6QwTHyLZIn6od/5QW03ISn8aFdIY1wI=
+Authentication-Results: vger.kernel.org; dkim=none (message not signed)
+ header.d=none; vger.kernel.org; dmarc=none action=none header.from=oracle.com; 
+Received: from BYAPR10MB3287.namprd10.prod.outlook.com (2603:10b6:a03:15c::11)
+ by BYAPR10MB3285.namprd10.prod.outlook.com (2603:10b6:a03:159::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3825.24; Wed, 10 Feb
+ 2021 00:27:03 +0000
+Received: from BYAPR10MB3287.namprd10.prod.outlook.com
+ ([fe80::45b5:49d:d171:5359]) by BYAPR10MB3287.namprd10.prod.outlook.com
+ ([fe80::45b5:49d:d171:5359%5]) with mapi id 15.20.3846.026; Wed, 10 Feb 2021
+ 00:27:03 +0000
+Subject: Re: [PATCH 3/3] mlx5_vdpa: defer clear_virtqueues to until DRIVER_OK
+To: Jason Wang <jasowang@redhat.com>, mst@redhat.com, elic@nvidia.com
+References: <1612614564-4220-1-git-send-email-si-wei.liu@oracle.com>
+ <1612614564-4220-3-git-send-email-si-wei.liu@oracle.com>
+ <2e2bc8d7-5d64-c28c-9aa0-1df32c7dcef3@redhat.com>
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+Organization: Oracle Corporation
+Message-ID: <00d3ec60-3635-a5f1-15fc-21e6ce53202b@oracle.com>
+Date: Tue, 9 Feb 2021 16:26:58 -0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
+In-Reply-To: <2e2bc8d7-5d64-c28c-9aa0-1df32c7dcef3@redhat.com>
+Content-Language: en-US
+X-Originating-IP: [73.189.186.83]
+X-ClientProxiedBy: SN7PR04CA0073.namprd04.prod.outlook.com
+ (2603:10b6:806:121::18) To BYAPR10MB3287.namprd10.prod.outlook.com
+ (2603:10b6:a03:15c::11)
 MIME-Version: 1.0
-Cc: Sasha Levin <sashal@kernel.org>, Juergen Gross <jgross@suse.com>,
- linux-hyperv@vger.kernel.org, x86@kernel.org,
- Stephen Hemminger <sthemmin@microsoft.com>, xen-devel@lists.xenproject.org,
- kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Haiyang Zhang <haiyangz@microsoft.com>,
- Dave Hansen <dave.hansen@linux.intel.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Ingo Molnar <mingo@redhat.com>,
- Nadav Amit <namit@vmware.com>, Andy Lutomirski <luto@kernel.org>,
- Paolo Bonzini <pbonzini@redhat.com>, Borislav Petkov <bp@alien8.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Michael Kelley <mikelley@microsoft.com>
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [192.168.0.19] (73.189.186.83) by
+ SN7PR04CA0073.namprd04.prod.outlook.com (2603:10b6:806:121::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3846.26 via Frontend
+ Transport; Wed, 10 Feb 2021 00:27:02 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 83b9d6e9-73ac-4ea1-afe8-08d8cd5a9684
+X-MS-TrafficTypeDiagnostic: BYAPR10MB3285:
+X-Microsoft-Antispam-PRVS: <BYAPR10MB32853F84E97E924FC07130C1B18D9@BYAPR10MB3285.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: zLiNl76kN9leIVhcGh8EsKGkC+JJBlCpFCNt+/CoXB+qdNXOkUPGKpTJKuGn5GSpYGajgvkWPPF19MFCGPuSfuPU21s/rlF4MU0NqR1Wj8IFxRAxKrSRhODfGubye1QZFCcYQT4sbHtfY7SzRAHvK5od1+hb5YsjDtQNl42BE0w8a1SCdJZgYMcuu3hYPQtAv5jNFxHryjKtuHL0FPE0hciaDMS5nYKXRALOFvmxdqBSf7ZBujE/wwG3OKwIO4LPz3t/tiwAyFT7+oKKJAbLgDGjUNgV6BqK9Nz57xVrCvUa63mQW5+FVZW36hgfL9OjjAOigYyPu4d8MfPxzKD2ySatyURTGFZ1dNEYDJDs+k+amglfuTjvgyJxKgPLvJVpcFrQSpOCHHVdXZ/2eDVxsmesbViNoJbBGcAY+bxMqZPuXNBTlAPRfuS70cGdkzFq/hygIExdKFVIGPWLMOFyyP1TDXIdqkq41iI4RNZbkXVS0CngTVu+30Pd3cU0/GU2gNW9MPeuEHDj8hOf3N2m/V0ouQ/Rl0M4LAbmCBpBrKLmxobpa1l50kunjxx3NVqJXLQCCMSdhmsR4c6lwQLMstw4HJ4PDP+FijhkPQ6QNDE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:BYAPR10MB3287.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(366004)(136003)(39860400002)(376002)(396003)(346002)(16526019)(2616005)(66946007)(66556008)(66476007)(478600001)(31686004)(36756003)(6486002)(26005)(186003)(956004)(8676002)(6666004)(5660300002)(4326008)(53546011)(36916002)(2906002)(8936002)(31696002)(83380400001)(16576012)(86362001)(316002)(43740500002)(45980500001);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData: =?utf-8?B?SjdubG5vRUd6K3lJaFROOGtHVHIwNEVyMTN5aVdEWkR4c3d2bmFEZUNYRm5I?=
+ =?utf-8?B?ZkxaZGorVWVROFpzb0tXMzRDNi85WVFpQlp2YVFaZHFJR3E2aGVyRlg0S2p3?=
+ =?utf-8?B?cU9WbTEyaVZ3MG9yT0dJVnR0eGQyVnYxeGN4dlJsZWoxaTRDNE9RUE1GR2dQ?=
+ =?utf-8?B?elpIc21MZ3lMSklGdHAvbGlwTEpSNEFsMHkxYUZDWGxlVmREb2dUdmxrZVZ5?=
+ =?utf-8?B?SGttOURkSUVFVVFkaTFMUGZIeFlqRjcwWE5YU0pkT1NkeFBDS3dlemlsRnNM?=
+ =?utf-8?B?aG9WY3JhOHNMTk1LQndrQ3gyeEdzazhHNnJFQlI2OTZ2cG5FKzBiaTJzbVc5?=
+ =?utf-8?B?anplRGFnaGVGTGgrSEdacDExRzRtZ3cybmsxQTluMHpZdTRUOGR6YmZnR0Nj?=
+ =?utf-8?B?K0MwN01FUXR4WnlSbDFteGNGb3pYWVlzaXM2S3VocEtyTnZseVR3Nzc3dElW?=
+ =?utf-8?B?cUpWelZGNGRDWFRlVnloYmdmOFkxVG1adjVXUzdEVUpjRHV0V2xOME9hU0E0?=
+ =?utf-8?B?c0wxWUFiR1FlcDFycVJxRlZhZFowcDhMQWZnazlRRlkwNTQzRUQyQUZ5ZUtD?=
+ =?utf-8?B?SWp6bENGM2dlZWNoRTF3ZG9yY1pmM1NWOXRJb0pjRDVBS28xSEZnUGZ2ZFJM?=
+ =?utf-8?B?UWhVNXg3bEU4empISDU1Rm1xU28rTkpFM3VuK1ZmQ0RXS1BQRlpNaGRmQWdU?=
+ =?utf-8?B?Q0w0V1lWQXlLdEFmSWpOSC9JQlFWR2M1dlNQMzFlZ1RPOU9tN1dIYk52T2RN?=
+ =?utf-8?B?eUZEb1JSZmwxT1NIanFDT1NNVzRvUXFBbVgvbTlabFhyRnhKdWVCSGFrdnhH?=
+ =?utf-8?B?RDN1Ynp5VGpXT2hwNkQ2OWhHZUFCcHpWWVZJU0ROcnNDbXNzV2prQjV6OEhn?=
+ =?utf-8?B?aXFBVUExNHVxcm95dnBxQTB2cHpZQ2RsckFiTHpxNXJpd2hjVlllajlSMEQy?=
+ =?utf-8?B?a2wyK1Y3WGdSU29HVm05MzVkNGcvbzFLR0t6QjBEVm85V3NOS3hSVzBMSCt6?=
+ =?utf-8?B?c1lXd0lTNDYrTThsS0w5aUZhcTNEUEx6UkdJaFRZdktxdkFQMmRUdzRsd3Ba?=
+ =?utf-8?B?eGZ6bDA5NWVCNnIxQUFKWk8zZ21WRTFmd2NROWtING5XVUNTd0dZbXB4bEZl?=
+ =?utf-8?B?SmdJb2VJYVdJRUp1bzVnOE5NWWMyejFXazREMzJyVFBWTEI4MlAxN3liRFla?=
+ =?utf-8?B?NUswUDVhNlU3bE1CZmllSVpGMDVqVml0V25QRlJhK0JuVFJtRTBhdysxNnFG?=
+ =?utf-8?B?VFplZVMzcURSNm9EVXJZYUhybzYycjVHSkVISUVWVzJvcUNYdGUrdFlxTVE3?=
+ =?utf-8?B?TU1lejNnWjgzZ05qOFVENHEzeUYwb0FxcDlGK3Y2MEkxeDhyZk5qRnZKbW9N?=
+ =?utf-8?B?NERQTXhvb3Q4cHdPdHJBYU00RTVCeVhJMklmZ0w2YVplTUVGRWI5VWdWdnE2?=
+ =?utf-8?B?SFh0c1VGa2tJdDhxeGR1QU9OMlV1VjJnM1pGcDcyMHVXY2c3bTd0cFFWZlJP?=
+ =?utf-8?B?U3J6WkhoL1ZYdnphMU96dEtFMVkzMGJUbWxpbGdxNWxKMmtSVWdmNUxVK1F2?=
+ =?utf-8?B?VkdYaVltVDJlcUlHRTlKOHFPejFKbWJmcHVxYmxHb3BaVGlxZmh6TUNMVTZM?=
+ =?utf-8?B?L3A0azhMY3FRaUJXSkNyQm53dVVQV213TmlMZFEzd281ZXRFczRDKzhBTFpt?=
+ =?utf-8?B?UkZraUZ1Z1lLSzRhTXlEQlJBZGxpRnpoU1VzOGNXSTVHNDR1UnBJZjFkTStj?=
+ =?utf-8?Q?xNBen8YqstB1ecmrL+pM4qFndqxs6A6qCCHChoZ?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 83b9d6e9-73ac-4ea1-afe8-08d8cd5a9684
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3287.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2021 00:27:03.1262 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +un4OSHraDT9dE8Gd4z90qW9xWcbbgEVyO17ALVQIxIVVh5xxwkElAtTyp8K4oyCYkN32UT2KMQZ/eJU/Oh4fw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB3285
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9890
+ signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ adultscore=0
+ mlxlogscore=999 malwarescore=0 bulkscore=0 phishscore=0 spamscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2102100002
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9890
+ signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+ priorityscore=1501 malwarescore=0
+ spamscore=0 lowpriorityscore=0 phishscore=0 adultscore=0 impostorscore=0
+ suspectscore=0 mlxscore=0 clxscore=1015 mlxlogscore=999 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2102100002
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,412 +193,60 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Nadav Amit <namit@vmware.com>
-
-To improve TLB shootdown performance, flush the remote and local TLBs
-concurrently. Introduce flush_tlb_multi() that does so. Introduce
-paravirtual versions of flush_tlb_multi() for KVM, Xen and hyper-v (Xen
-and hyper-v are only compile-tested).
-
-While the updated smp infrastructure is capable of running a function on
-a single local core, it is not optimized for this case. The multiple
-function calls and the indirect branch introduce some overhead, and
-might make local TLB flushes slower than they were before the recent
-changes.
-
-Before calling the SMP infrastructure, check if only a local TLB flush
-is needed to restore the lost performance in this common case. This
-requires to check mm_cpumask() one more time, but unless this mask is
-updated very frequently, this should impact performance negatively.
-
-Cc: "K. Y. Srinivasan" <kys@microsoft.com>
-Cc: Haiyang Zhang <haiyangz@microsoft.com>
-Cc: Stephen Hemminger <sthemmin@microsoft.com>
-Cc: Sasha Levin <sashal@kernel.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: x86@kernel.org
-Cc: Juergen Gross <jgross@suse.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: linux-hyperv@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Cc: virtualization@lists.linux-foundation.org
-Cc: kvm@vger.kernel.org
-Cc: xen-devel@lists.xenproject.org
-Reviewed-by: Michael Kelley <mikelley@microsoft.com> # Hyper-v parts
-Reviewed-by: Juergen Gross <jgross@suse.com> # Xen and paravirt parts
-Reviewed-by: Dave Hansen <dave.hansen@linux.intel.com>
-Signed-off-by: Nadav Amit <namit@vmware.com>
----
- arch/x86/hyperv/mmu.c                 | 10 +++---
- arch/x86/include/asm/paravirt.h       |  6 ++--
- arch/x86/include/asm/paravirt_types.h |  4 +--
- arch/x86/include/asm/tlbflush.h       |  4 +--
- arch/x86/include/asm/trace/hyperv.h   |  2 +-
- arch/x86/kernel/kvm.c                 | 11 ++++--
- arch/x86/mm/tlb.c                     | 49 +++++++++++++++++----------
- arch/x86/xen/mmu_pv.c                 | 11 +++---
- include/trace/events/xen.h            |  2 +-
- 9 files changed, 58 insertions(+), 41 deletions(-)
-
-diff --git a/arch/x86/hyperv/mmu.c b/arch/x86/hyperv/mmu.c
-index 2c87350c1fb0..681dba8de4f2 100644
---- a/arch/x86/hyperv/mmu.c
-+++ b/arch/x86/hyperv/mmu.c
-@@ -52,8 +52,8 @@ static inline int fill_gva_list(u64 gva_list[], int offset,
- 	return gva_n - offset;
- }
- 
--static void hyperv_flush_tlb_others(const struct cpumask *cpus,
--				    const struct flush_tlb_info *info)
-+static void hyperv_flush_tlb_multi(const struct cpumask *cpus,
-+				   const struct flush_tlb_info *info)
- {
- 	int cpu, vcpu, gva_n, max_gvas;
- 	struct hv_tlb_flush **flush_pcpu;
-@@ -61,7 +61,7 @@ static void hyperv_flush_tlb_others(const struct cpumask *cpus,
- 	u64 status = U64_MAX;
- 	unsigned long flags;
- 
--	trace_hyperv_mmu_flush_tlb_others(cpus, info);
-+	trace_hyperv_mmu_flush_tlb_multi(cpus, info);
- 
- 	if (!hv_hypercall_pg)
- 		goto do_native;
-@@ -164,7 +164,7 @@ static void hyperv_flush_tlb_others(const struct cpumask *cpus,
- 	if (!(status & HV_HYPERCALL_RESULT_MASK))
- 		return;
- do_native:
--	native_flush_tlb_others(cpus, info);
-+	native_flush_tlb_multi(cpus, info);
- }
- 
- static u64 hyperv_flush_tlb_others_ex(const struct cpumask *cpus,
-@@ -239,6 +239,6 @@ void hyperv_setup_mmu_ops(void)
- 		return;
- 
- 	pr_info("Using hypercall for remote TLB flush\n");
--	pv_ops.mmu.flush_tlb_others = hyperv_flush_tlb_others;
-+	pv_ops.mmu.flush_tlb_multi = hyperv_flush_tlb_multi;
- 	pv_ops.mmu.tlb_remove_table = tlb_remove_table;
- }
-diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
-index f8dce11d2bc1..515e49204c8b 100644
---- a/arch/x86/include/asm/paravirt.h
-+++ b/arch/x86/include/asm/paravirt.h
-@@ -50,7 +50,7 @@ static inline void slow_down_io(void)
- void native_flush_tlb_local(void);
- void native_flush_tlb_global(void);
- void native_flush_tlb_one_user(unsigned long addr);
--void native_flush_tlb_others(const struct cpumask *cpumask,
-+void native_flush_tlb_multi(const struct cpumask *cpumask,
- 			     const struct flush_tlb_info *info);
- 
- static inline void __flush_tlb_local(void)
-@@ -68,10 +68,10 @@ static inline void __flush_tlb_one_user(unsigned long addr)
- 	PVOP_VCALL1(mmu.flush_tlb_one_user, addr);
- }
- 
--static inline void __flush_tlb_others(const struct cpumask *cpumask,
-+static inline void __flush_tlb_multi(const struct cpumask *cpumask,
- 				      const struct flush_tlb_info *info)
- {
--	PVOP_VCALL2(mmu.flush_tlb_others, cpumask, info);
-+	PVOP_VCALL2(mmu.flush_tlb_multi, cpumask, info);
- }
- 
- static inline void paravirt_tlb_remove_table(struct mmu_gather *tlb, void *table)
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index b6b02b7c19cc..541fe7193526 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -201,8 +201,8 @@ struct pv_mmu_ops {
- 	void (*flush_tlb_user)(void);
- 	void (*flush_tlb_kernel)(void);
- 	void (*flush_tlb_one_user)(unsigned long addr);
--	void (*flush_tlb_others)(const struct cpumask *cpus,
--				 const struct flush_tlb_info *info);
-+	void (*flush_tlb_multi)(const struct cpumask *cpus,
-+				const struct flush_tlb_info *info);
- 
- 	void (*tlb_remove_table)(struct mmu_gather *tlb, void *table);
- 
-diff --git a/arch/x86/include/asm/tlbflush.h b/arch/x86/include/asm/tlbflush.h
-index a7a598af116d..3c6681def912 100644
---- a/arch/x86/include/asm/tlbflush.h
-+++ b/arch/x86/include/asm/tlbflush.h
-@@ -175,7 +175,7 @@ extern void initialize_tlbstate_and_flush(void);
-  *  - flush_tlb_page(vma, vmaddr) flushes one page
-  *  - flush_tlb_range(vma, start, end) flushes a range of pages
-  *  - flush_tlb_kernel_range(start, end) flushes a range of kernel pages
-- *  - flush_tlb_others(cpumask, info) flushes TLBs on other cpus
-+ *  - flush_tlb_multi(cpumask, info) flushes TLBs on multiple cpus
-  *
-  * ..but the i386 has somewhat limited tlb flushing capabilities,
-  * and page-granular flushes are available only on i486 and up.
-@@ -209,7 +209,7 @@ struct flush_tlb_info {
- void flush_tlb_local(void);
- void flush_tlb_one_user(unsigned long addr);
- void flush_tlb_one_kernel(unsigned long addr);
--void flush_tlb_others(const struct cpumask *cpumask,
-+void flush_tlb_multi(const struct cpumask *cpumask,
- 		      const struct flush_tlb_info *info);
- 
- #ifdef CONFIG_PARAVIRT
-diff --git a/arch/x86/include/asm/trace/hyperv.h b/arch/x86/include/asm/trace/hyperv.h
-index 4d705cb4d63b..a8e5a7a2b460 100644
---- a/arch/x86/include/asm/trace/hyperv.h
-+++ b/arch/x86/include/asm/trace/hyperv.h
-@@ -8,7 +8,7 @@
- 
- #if IS_ENABLED(CONFIG_HYPERV)
- 
--TRACE_EVENT(hyperv_mmu_flush_tlb_others,
-+TRACE_EVENT(hyperv_mmu_flush_tlb_multi,
- 	    TP_PROTO(const struct cpumask *cpus,
- 		     const struct flush_tlb_info *info),
- 	    TP_ARGS(cpus, info),
-diff --git a/arch/x86/kernel/kvm.c b/arch/x86/kernel/kvm.c
-index 5e78e01ca3b4..38ea9dee2456 100644
---- a/arch/x86/kernel/kvm.c
-+++ b/arch/x86/kernel/kvm.c
-@@ -613,7 +613,7 @@ static int kvm_cpu_down_prepare(unsigned int cpu)
- }
- #endif
- 
--static void kvm_flush_tlb_others(const struct cpumask *cpumask,
-+static void kvm_flush_tlb_multi(const struct cpumask *cpumask,
- 			const struct flush_tlb_info *info)
- {
- 	u8 state;
-@@ -627,6 +627,11 @@ static void kvm_flush_tlb_others(const struct cpumask *cpumask,
- 	 * queue flush_on_enter for pre-empted vCPUs
- 	 */
- 	for_each_cpu(cpu, flushmask) {
-+		/*
-+		 * The local vCPU is never preempted, so we do not explicitly
-+		 * skip check for local vCPU - it will never be cleared from
-+		 * flushmask.
-+		 */
- 		src = &per_cpu(steal_time, cpu);
- 		state = READ_ONCE(src->preempted);
- 		if ((state & KVM_VCPU_PREEMPTED)) {
-@@ -636,7 +641,7 @@ static void kvm_flush_tlb_others(const struct cpumask *cpumask,
- 		}
- 	}
- 
--	native_flush_tlb_others(flushmask, info);
-+	native_flush_tlb_multi(flushmask, info);
- }
- 
- static void __init kvm_guest_init(void)
-@@ -654,7 +659,7 @@ static void __init kvm_guest_init(void)
- 	}
- 
- 	if (pv_tlb_flush_supported()) {
--		pv_ops.mmu.flush_tlb_others = kvm_flush_tlb_others;
-+		pv_ops.mmu.flush_tlb_multi = kvm_flush_tlb_multi;
- 		pv_ops.mmu.tlb_remove_table = tlb_remove_table;
- 		pr_info("KVM setup pv remote TLB flush\n");
- 	}
-diff --git a/arch/x86/mm/tlb.c b/arch/x86/mm/tlb.c
-index 07b6701a540a..78fcbd58716e 100644
---- a/arch/x86/mm/tlb.c
-+++ b/arch/x86/mm/tlb.c
-@@ -24,7 +24,7 @@
- # define __flush_tlb_local		native_flush_tlb_local
- # define __flush_tlb_global		native_flush_tlb_global
- # define __flush_tlb_one_user(addr)	native_flush_tlb_one_user(addr)
--# define __flush_tlb_others(msk, info)	native_flush_tlb_others(msk, info)
-+# define __flush_tlb_multi(msk, info)	native_flush_tlb_multi(msk, info)
- #endif
- 
- /*
-@@ -490,7 +490,7 @@ void switch_mm_irqs_off(struct mm_struct *prev, struct mm_struct *next,
- 		/*
- 		 * Even in lazy TLB mode, the CPU should stay set in the
- 		 * mm_cpumask. The TLB shootdown code can figure out from
--		 * from cpu_tlbstate.is_lazy whether or not to send an IPI.
-+		 * cpu_tlbstate.is_lazy whether or not to send an IPI.
- 		 */
- 		if (WARN_ON_ONCE(real_prev != &init_mm &&
- 				 !cpumask_test_cpu(cpu, mm_cpumask(next))))
-@@ -697,7 +697,7 @@ static void flush_tlb_func(void *info)
- 		 * garbage into our TLB.  Since switching to init_mm is barely
- 		 * slower than a minimal flush, just switch to init_mm.
- 		 *
--		 * This should be rare, with native_flush_tlb_others skipping
-+		 * This should be rare, with native_flush_tlb_multi() skipping
- 		 * IPIs to lazy TLB mode CPUs.
- 		 */
- 		switch_mm_irqs_off(NULL, &init_mm, NULL);
-@@ -795,9 +795,14 @@ static bool tlb_is_not_lazy(int cpu)
- 
- static DEFINE_PER_CPU(cpumask_t, flush_tlb_mask);
- 
--STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
-+STATIC_NOPV void native_flush_tlb_multi(const struct cpumask *cpumask,
- 					 const struct flush_tlb_info *info)
- {
-+	/*
-+	 * Do accounting and tracing. Note that there are (and have always been)
-+	 * cases in which a remote TLB flush will be traced, but eventually
-+	 * would not happen.
-+	 */
- 	count_vm_tlb_event(NR_TLB_REMOTE_FLUSH);
- 	if (info->end == TLB_FLUSH_ALL)
- 		trace_tlb_flush(TLB_REMOTE_SEND_IPI, TLB_FLUSH_ALL);
-@@ -816,8 +821,8 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
- 	 * doing a speculative memory access.
- 	 */
- 	if (info->freed_tables) {
--		smp_call_function_many(cpumask, flush_tlb_func,
--			       (void *)info, 1);
-+		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
-+				      cpumask);
- 	} else {
- 		/*
- 		 * Although we could have used on_each_cpu_cond_mask(),
-@@ -844,14 +849,15 @@ STATIC_NOPV void native_flush_tlb_others(const struct cpumask *cpumask,
- 			if (tlb_is_not_lazy(cpu))
- 				__cpumask_set_cpu(cpu, cond_cpumask);
- 		}
--		smp_call_function_many(cond_cpumask, flush_tlb_func, (void *)info, 1);
-+		on_each_cpu_cond_mask(NULL, flush_tlb_func, (void *)info, true,
-+				      cpumask);
- 	}
- }
- 
--void flush_tlb_others(const struct cpumask *cpumask,
-+void flush_tlb_multi(const struct cpumask *cpumask,
- 		      const struct flush_tlb_info *info)
- {
--	__flush_tlb_others(cpumask, info);
-+	__flush_tlb_multi(cpumask, info);
- }
- 
- /*
-@@ -931,16 +937,20 @@ void flush_tlb_mm_range(struct mm_struct *mm, unsigned long start,
- 	info = get_flush_tlb_info(mm, start, end, stride_shift, freed_tables,
- 				  new_tlb_gen);
- 
--	if (mm == this_cpu_read(cpu_tlbstate.loaded_mm)) {
-+	/*
-+	 * flush_tlb_multi() is not optimized for the common case in which only
-+	 * a local TLB flush is needed. Optimize this use-case by calling
-+	 * flush_tlb_func_local() directly in this case.
-+	 */
-+	if (cpumask_any_but(mm_cpumask(mm), cpu) < nr_cpu_ids) {
-+		flush_tlb_multi(mm_cpumask(mm), info);
-+	} else if (mm == this_cpu_read(cpu_tlbstate.loaded_mm)) {
- 		lockdep_assert_irqs_enabled();
- 		local_irq_disable();
- 		flush_tlb_func(info);
- 		local_irq_enable();
- 	}
- 
--	if (cpumask_any_but(mm_cpumask(mm), cpu) < nr_cpu_ids)
--		flush_tlb_others(mm_cpumask(mm), info);
--
- 	put_flush_tlb_info();
- 	put_cpu();
- }
-@@ -1151,17 +1161,20 @@ void arch_tlbbatch_flush(struct arch_tlbflush_unmap_batch *batch)
- 
- 	int cpu = get_cpu();
- 
--	info = get_flush_tlb_info(NULL, 0, TLB_FLUSH_ALL, 0, false, 0);
--	if (cpumask_test_cpu(cpu, &batch->cpumask)) {
-+	/*
-+	 * flush_tlb_multi() is not optimized for the common case in which only
-+	 * a local TLB flush is needed. Optimize this use-case by calling
-+	 * flush_tlb_func_local() directly in this case.
-+	 */
-+	if (cpumask_any_but(&batch->cpumask, cpu) < nr_cpu_ids) {
-+		flush_tlb_multi(&batch->cpumask, info);
-+	} else if (cpumask_test_cpu(cpu, &batch->cpumask)) {
- 		lockdep_assert_irqs_enabled();
- 		local_irq_disable();
- 		flush_tlb_func(info);
- 		local_irq_enable();
- 	}
- 
--	if (cpumask_any_but(&batch->cpumask, cpu) < nr_cpu_ids)
--		flush_tlb_others(&batch->cpumask, info);
--
- 	cpumask_clear(&batch->cpumask);
- 
- 	put_flush_tlb_info();
-diff --git a/arch/x86/xen/mmu_pv.c b/arch/x86/xen/mmu_pv.c
-index cf2ade864c30..09b95c0e876e 100644
---- a/arch/x86/xen/mmu_pv.c
-+++ b/arch/x86/xen/mmu_pv.c
-@@ -1247,8 +1247,8 @@ static void xen_flush_tlb_one_user(unsigned long addr)
- 	preempt_enable();
- }
- 
--static void xen_flush_tlb_others(const struct cpumask *cpus,
--				 const struct flush_tlb_info *info)
-+static void xen_flush_tlb_multi(const struct cpumask *cpus,
-+				const struct flush_tlb_info *info)
- {
- 	struct {
- 		struct mmuext_op op;
-@@ -1258,7 +1258,7 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
- 	const size_t mc_entry_size = sizeof(args->op) +
- 		sizeof(args->mask[0]) * BITS_TO_LONGS(num_possible_cpus());
- 
--	trace_xen_mmu_flush_tlb_others(cpus, info->mm, info->start, info->end);
-+	trace_xen_mmu_flush_tlb_multi(cpus, info->mm, info->start, info->end);
- 
- 	if (cpumask_empty(cpus))
- 		return;		/* nothing to do */
-@@ -1267,9 +1267,8 @@ static void xen_flush_tlb_others(const struct cpumask *cpus,
- 	args = mcs.args;
- 	args->op.arg2.vcpumask = to_cpumask(args->mask);
- 
--	/* Remove us, and any offline CPUS. */
-+	/* Remove any offline CPUs */
- 	cpumask_and(to_cpumask(args->mask), cpus, cpu_online_mask);
--	cpumask_clear_cpu(smp_processor_id(), to_cpumask(args->mask));
- 
- 	args->op.cmd = MMUEXT_TLB_FLUSH_MULTI;
- 	if (info->end != TLB_FLUSH_ALL &&
-@@ -2086,7 +2085,7 @@ static const struct pv_mmu_ops xen_mmu_ops __initconst = {
- 	.flush_tlb_user = xen_flush_tlb,
- 	.flush_tlb_kernel = xen_flush_tlb,
- 	.flush_tlb_one_user = xen_flush_tlb_one_user,
--	.flush_tlb_others = xen_flush_tlb_others,
-+	.flush_tlb_multi = xen_flush_tlb_multi,
- 	.tlb_remove_table = tlb_remove_table,
- 
- 	.pgd_alloc = xen_pgd_alloc,
-diff --git a/include/trace/events/xen.h b/include/trace/events/xen.h
-index 3b61b587e137..44a3f565264d 100644
---- a/include/trace/events/xen.h
-+++ b/include/trace/events/xen.h
-@@ -346,7 +346,7 @@ TRACE_EVENT(xen_mmu_flush_tlb_one_user,
- 	    TP_printk("addr %lx", __entry->addr)
- 	);
- 
--TRACE_EVENT(xen_mmu_flush_tlb_others,
-+TRACE_EVENT(xen_mmu_flush_tlb_multi,
- 	    TP_PROTO(const struct cpumask *cpus, struct mm_struct *mm,
- 		     unsigned long addr, unsigned long end),
- 	    TP_ARGS(cpus, mm, addr, end),
--- 
-2.25.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CgpPbiAyLzgvMjAyMSA3OjM3IFBNLCBKYXNvbiBXYW5nIHdyb3RlOgo+Cj4gT24gMjAyMS8yLzYg
+5LiL5Y2IODoyOSwgU2ktV2VpIExpdSB3cm90ZToKPj4gV2hpbGUgdmlydHEgaXMgc3RvcHBlZCzC
+oCBnZXRfdnFfc3RhdGUoKSBpcyBzdXBwb3NlZCB0bwo+PiBiZcKgIGNhbGxlZCB0b8KgIGdldMKg
+IHN5bmMnZWTCoCB3aXRowqAgdGhlIGxhdGVzdCBpbnRlcm5hbAo+PiBhdmFpbF9pbmRleCBmcm9t
+IGRldmljZS4gVGhlIHNhdmVkIGF2YWlsX2luZGV4IGlzIHVzZWQKPj4gdG8gcmVzdGF0ZcKgIHRo
+ZSB2aXJ0ccKgIG9uY2UgZGV2aWNlIGlzIHN0YXJ0ZWQuwqAgQ29tbWl0Cj4+IGIzNWNjZWJlM2Vm
+NyBpbnRyb2R1Y2VkIHRoZSBjbGVhcl92aXJ0cXVldWVzKCkgcm91dGluZQo+PiB0b8KgIHJlc2V0
+wqAgdGhlIHNhdmVkwqAgYXZhaWxfaW5kZXgswqAgaG93ZXZlciwgdGhlIGluZGV4Cj4+IGdldHMg
+Y2xlYXJlZCBhIGJpdCBlYXJsaWVyIGJlZm9yZSBnZXRfdnFfc3RhdGUoKSB0cmllcwo+PiB0byBy
+ZWFkIGl0LiBUaGlzIHdvdWxkIGNhdXNlIGNvbnNpc3RlbmN5IHByb2JsZW1zIHdoZW4KPj4gdmly
+dHEgaXMgcmVzdGFydGVkLCBlLmcuIHRocm91Z2ggYSBzZXJpZXMgb2YgbGluayBkb3duCj4+IGFu
+ZCBsaW5rIHVwIGV2ZW50cy4gV2XCoCBjb3VsZMKgIGRlZmVywqAgdGhlwqAgY2xlYXJpbmcgb2YK
+Pj4gYXZhaWxfaW5kZXjCoCB0b8KgIHVudGlswqAgdGhlwqAgZGV2aWNlwqAgaXMgdG8gYmUgc3Rh
+cnRlZCwKPj4gaS5lLiB1bnRpbMKgIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0vCoCBpcyBzZXQg
+YWdhaW4gaW4KPj4gc2V0X3N0YXR1cygpLgo+Pgo+PiBGaXhlczogYjM1Y2NlYmUzZWY3ICgidmRw
+YS9tbHg1OiBSZXN0b3JlIHRoZSBoYXJkd2FyZSB1c2VkIGluZGV4IAo+PiBhZnRlciBjaGFuZ2Ug
+bWFwIikKPj4gU2lnbmVkLW9mZi1ieTogU2ktV2VpIExpdSA8c2ktd2VpLmxpdUBvcmFjbGUuY29t
+Pgo+PiAtLS0KPj4gwqAgZHJpdmVycy92ZHBhL21seDUvbmV0L21seDVfdm5ldC5jIHwgMiArLQo+
+PiDCoCAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKPj4KPj4g
+ZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuYyAKPj4gYi9kcml2
+ZXJzL3ZkcGEvbWx4NS9uZXQvbWx4NV92bmV0LmMKPj4gaW5kZXggYWE2ZjhjZC4uNDQ0YWI1OCAx
+MDA2NDQKPj4gLS0tIGEvZHJpdmVycy92ZHBhL21seDUvbmV0L21seDVfdm5ldC5jCj4+ICsrKyBi
+L2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuYwo+PiBAQCAtMTc4NSw3ICsxNzg1LDYg
+QEAgc3RhdGljIHZvaWQgbWx4NV92ZHBhX3NldF9zdGF0dXMoc3RydWN0IAo+PiB2ZHBhX2Rldmlj
+ZSAqdmRldiwgdTggc3RhdHVzKQo+PiDCoMKgwqDCoMKgIGlmICghc3RhdHVzKSB7Cj4+IMKgwqDC
+oMKgwqDCoMKgwqDCoCBtbHg1X3ZkcGFfaW5mbyhtdmRldiwgInBlcmZvcm1pbmcgZGV2aWNlIHJl
+c2V0XG4iKTsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgIHRlYXJkb3duX2RyaXZlcihuZGV2KTsKPj4g
+LcKgwqDCoMKgwqDCoMKgIGNsZWFyX3ZpcnRxdWV1ZXMobmRldik7Cj4+IMKgwqDCoMKgwqDCoMKg
+wqDCoCBtbHg1X3ZkcGFfZGVzdHJveV9tcigmbmRldi0+bXZkZXYpOwo+PiDCoMKgwqDCoMKgwqDC
+oMKgwqAgbmRldi0+bXZkZXYuc3RhdHVzID0gMDsKPj4gwqDCoMKgwqDCoMKgwqDCoMKgICsrbXZk
+ZXYtPmdlbmVyYXRpb247Cj4+IEBAIC0xNzk0LDYgKzE3OTMsNyBAQCBzdGF0aWMgdm9pZCBtbHg1
+X3ZkcGFfc2V0X3N0YXR1cyhzdHJ1Y3QgCj4+IHZkcGFfZGV2aWNlICp2ZGV2LCB1OCBzdGF0dXMp
+Cj4+IMKgIMKgwqDCoMKgwqAgaWYgKChzdGF0dXMgXiBuZGV2LT5tdmRldi5zdGF0dXMpICYgVklS
+VElPX0NPTkZJR19TX0RSSVZFUl9PSykgewo+PiDCoMKgwqDCoMKgwqDCoMKgwqAgaWYgKHN0YXR1
+cyAmIFZJUlRJT19DT05GSUdfU19EUklWRVJfT0spIHsKPj4gK8KgwqDCoMKgwqDCoMKgwqDCoMKg
+wqAgY2xlYXJfdmlydHF1ZXVlcyhuZGV2KTsKPgo+Cj4gUmV0aGluayBhYm91dCB0aGlzLiBBcyBt
+ZW50aW9uZWQgaW4gYW5vdGhlciB0aHJlYWQsIHRoaXMgaW4gZmFjdCAKPiBicmVha3Mgc2V0X3Zx
+X3N0YXRlKCkuwqAgKFNlZSB2aG9zdF92aXJ0cXVldWVfc3RhcnQoKSAtPiAKPiB2aG9zdF92ZHBh
+X3NldF92cmluZ19iYXNlKCkgaW4gcWVtdSBjb2RlcykuCkkgYXNzdW1lIHRoYXQgdGhlIGNsZWFy
+aW5nIGZvciB2aG9zdC12ZHBhIHdvdWxkIGJlIGRvbmUgdmlhIChxZW11IGNvZGUpLAoKdmhvc3Rf
+ZGV2X3N0YXJ0KCktPnZob3N0X3ZkcGFfZGV2X3N0YXJ0KCktPnZob3N0X3ZkcGFfY2FsbChzdGF0
+dXMgfCAKVklSVElPX0NPTkZJR19TX0RSSVZFUl9PSykKCndoaWNoIGlzIF9hZnRlcl8gdmhvc3Rf
+dmlydHF1ZXVlX3N0YXJ0KCkgZ2V0cyBjYWxsZWQgdG8gcmVzdG9yZSB0aGUgCmF2YWlsX2lkeCB0
+byBoL3cgaW4gdmhvc3RfZGV2X3N0YXJ0KCkuIFdoYXQgYW0gSSBtaXNzaW5nIGhlcmU/CgotU2l3
+ZWkKCgo+Cj4gVGhlIGlzc3VlIGlzIHRoYXQgdGhlIGF2YWlsIGlkeCBpcyBmb3Jnb3QsIHdlIG5l
+ZWQga2VlcCBpdC4KPgo+IFRoYW5rcwo+Cj4KPj4gwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAg
+ZXJyID0gc2V0dXBfZHJpdmVyKG5kZXYpOwo+PiDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBp
+ZiAoZXJyKSB7Cj4+IMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqAgbWx4NV92ZHBh
+X3dhcm4obXZkZXYsICJmYWlsZWQgdG8gc2V0dXAgZHJpdmVyXG4iKTsKPgoKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGlu
+ZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8v
+bGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
