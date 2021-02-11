@@ -1,99 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id EE85C3172AA
-	for <lists.virtualization@lfdr.de>; Wed, 10 Feb 2021 22:49:55 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 28C0E318893
+	for <lists.virtualization@lfdr.de>; Thu, 11 Feb 2021 11:52:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id A393C86C92;
-	Wed, 10 Feb 2021 21:49:54 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id A11448734F;
+	Thu, 11 Feb 2021 10:52:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZQdcTVDo-YTW; Wed, 10 Feb 2021 21:49:53 +0000 (UTC)
+	with ESMTP id vqqIqfR2ryOF; Thu, 11 Feb 2021 10:52:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id BA80E86C76;
-	Wed, 10 Feb 2021 21:49:53 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 064CF8722B;
+	Thu, 11 Feb 2021 10:52:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C530C013A;
-	Wed, 10 Feb 2021 21:49:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D0509C1DA9;
+	Thu, 11 Feb 2021 10:52:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3748AC013A
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7A032C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:49:51 +0000 (UTC)
+ Thu, 11 Feb 2021 10:52:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by hemlock.osuosl.org (Postfix) with ESMTP id 1D2F38750E
+ by whitealder.osuosl.org (Postfix) with ESMTP id 5FF328734F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:49:51 +0000 (UTC)
+ Thu, 11 Feb 2021 10:52:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JbCLFAT5IxV7
+ with ESMTP id abbWWf992hL4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:49:50 +0000 (UTC)
+ Thu, 11 Feb 2021 10:52:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from userp2130.oracle.com (userp2130.oracle.com [156.151.31.86])
- by hemlock.osuosl.org (Postfix) with ESMTPS id 88A928750A
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 60B2D8722B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Feb 2021 21:49:50 +0000 (UTC)
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
- by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11ALiej9044025;
- Wed, 10 Feb 2021 21:49:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=mime-version :
- message-id : date : from : to : cc : subject : references : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=IjeoqzhGJEmEwPeoDAEaDlWQzKW/7TddGIZUgTixWOk=;
- b=MvHrkiO2lEgfGX1hJ3GI6PUlUPtuupm0rgdc03GbNNUlDWGmYhhwJhIgwN/QVYU/T8e9
- qlAI9v502I+aMSMUnEk+GDoWqPdixBQSH4X5o69dEwN2rUoMy7uuh1CpdBeshmmkr4dP
- fgM0UVjAON1X82aPVTjjFrXp8eGy0fZ5oPHIwgG0egEKQaEIyNY2ep0EVIi2N53SLU6E
- 2idplvj6Y5C7L00cExPhT0IxJ7g2hIld+0Y/Fcudy3PaAJWT7aGEA/6sSNWYKYT1dv0Q
- ixsRCnKPaW1qGeMrnGMiZ4PpuMlfcx2eixc1wwiwge7Q4rIWPlEmhKoIQ82y3k2ZPgj8 Jw== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
- by userp2130.oracle.com with ESMTP id 36hjhqw80y-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 10 Feb 2021 21:49:48 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
- by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 11ALk0oZ103978;
- Wed, 10 Feb 2021 21:49:47 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
- by aserp3030.oracle.com with ESMTP id 36j4pqpxr7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 10 Feb 2021 21:49:46 +0000
-Received: from abhmp0012.oracle.com (abhmp0012.oracle.com [141.146.116.18])
- by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 11ALnj0S009743;
- Wed, 10 Feb 2021 21:49:45 GMT
-Received: from ban25x6uut24.us.oracle.com (/10.153.73.24) by default (Oracle
- Beehive Gateway v4.0) with ESMTP ; Wed, 10 Feb 2021 13:48:44 -0800
+ Thu, 11 Feb 2021 10:52:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1613040757;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=c6JIyxLiRHESwY6rJeK+rsmJNAoxnfQJq+AkTGikyDY=;
+ b=BduuDeRBVNYOU859XFqQ8QN3O28Mctk9Egpgj4GBRohdB+FMlnt5VcqmXc15xmcN6+Ami6
+ CRNa7VT8G/AIl/ZVH2o5sd/HLcpja9489ywc7a5WYCiQIl4mz0KX6+aMpHIl9H4lj7UUlF
+ 3wEK6HXLvD8J23e7jNUYbbfQRF6p9t0=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-460-CQIfFkxmOyWNNoVp-oM3KQ-1; Thu, 11 Feb 2021 05:52:34 -0500
+X-MC-Unique: CQIfFkxmOyWNNoVp-oM3KQ-1
+Received: by mail-ej1-f69.google.com with SMTP id hx26so4569678ejc.3
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Feb 2021 02:52:34 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=c6JIyxLiRHESwY6rJeK+rsmJNAoxnfQJq+AkTGikyDY=;
+ b=X7QrX588F/rGP4zaGYMnk454e9xn5XZmZ6Lj8Dy0ng/q0ocrzsQcq80S1lsAZVVNaJ
+ 5d933T1RmBnwEHYE2GhbN7BoPTfw0Jn/s8gI/zn2txa3vj3YXPHoWmUUTPSiLGF9OzGI
+ ryiTV5X17vR9PcSu9fOlcTlW5NrrvCVh1rW3UWYsSY4HbLWTye2IEvoDM8l1hEQgqJkN
+ n10XU51H4x2ZGUKzSW8svud7jrxzL7rqdwjDaadG/uIdQs+kBowZQHj/XKST9pwXqVgx
+ +vbLdqw39j46wgEteiQn32F5fu2pe1TgIHRZ4ntdBx0j75p9kSxeRupbpxXw/iez7U2o
+ CVfA==
+X-Gm-Message-State: AOAM532oD2paCamu5HStjd2IXOmQvfVN4PiBIj3uJBoSiBUnzWTf2CUv
+ KkHU4M63w6IhqNRfG0X8eGdtMA6JIp6Ch2iO/+bYXoSrGgubrQajv+1w951Q9nqBk2cxUFmIYA2
+ yIA0DCmbgwr1UM91vCeNctOCqYjZuFL18Pz0MtEbCgA==
+X-Received: by 2002:a50:b765:: with SMTP id g92mr7847351ede.317.1613040752990; 
+ Thu, 11 Feb 2021 02:52:32 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJw4L+tgVkXdxNZfo4WOdRQsyzuiJJ+oUQSD+Mof1i2r3UcuhRlRZ20qv++UXJ9lCcDs9kLlIA==
+X-Received: by 2002:a50:b765:: with SMTP id g92mr7847336ede.317.1613040752718; 
+ Thu, 11 Feb 2021 02:52:32 -0800 (PST)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id l12sm3613142edn.83.2021.02.11.02.52.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Feb 2021 02:52:32 -0800 (PST)
+Date: Thu, 11 Feb 2021 11:52:29 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
+Subject: Re: [RFC PATCH v4 01/17] af_vsock: update functions for connectible
+ socket
+Message-ID: <20210211105229.fmdonwqe3swhq6lb@steredhat>
+References: <20210207151259.803917-1-arseny.krasnov@kaspersky.com>
+ <20210207151426.804348-1-arseny.krasnov@kaspersky.com>
 MIME-Version: 1.0
-Message-ID: <1612993680-29454-4-git-send-email-si-wei.liu@oracle.com>
-Date: Wed, 10 Feb 2021 13:48:00 -0800 (PST)
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: mst@redhat.com, jasowang@redhat.com, elic@nvidia.com
-Subject: [PATCH v2 3/3] vdpa/mlx5: defer clear_virtqueues to until DRIVER_OK
-References: <1612993680-29454-1-git-send-email-si-wei.liu@oracle.com>
-In-Reply-To: <1612993680-29454-1-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-X-Proofpoint-IMR: 1
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9891
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- adultscore=0
- mlxlogscore=999 malwarescore=0 bulkscore=0 phishscore=0 spamscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2009150000 definitions=main-2102100189
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=9891
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- impostorscore=0
- priorityscore=1501 bulkscore=0 suspectscore=0 mlxscore=0 phishscore=0
- lowpriorityscore=0 mlxlogscore=999 clxscore=1015 spamscore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
- definitions=main-2102100189
-Cc: si-wei.liu@oracle.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20210207151426.804348-1-arseny.krasnov@kaspersky.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Andra Paraschiv <andraprs@amazon.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Jeff Vander Stoep <jeffv@google.com>,
+ stsp2@yandex.ru, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, oxffffaa@gmail.com,
+ netdev@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
+ Colin Ian King <colin.king@canonical.com>, Jakub Kicinski <kuba@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,54 +112,214 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-While virtq is stopped,  get_vq_state() is supposed to
-be  called to  get  sync'ed  with  the latest internal
-avail_index from device. The saved avail_index is used
-to restate  the virtq  once device is started.  Commit
-b35ccebe3ef7 introduced the clear_virtqueues() routine
-to  reset  the saved  avail_index,  however, the index
-gets cleared a bit earlier before get_vq_state() tries
-to read it. This would cause consistency problems when
-virtq is restarted, e.g. through a series of link down
-and link up events. We  could  defer  the  clearing of
-avail_index  to  until  the  device  is to be started,
-i.e. until  VIRTIO_CONFIG_S_DRIVER_OK  is set again in
-set_status().
+On Sun, Feb 07, 2021 at 06:14:23PM +0300, Arseny Krasnov wrote:
+>This prepares af_vsock.c for SEQPACKET support: some functions such
+>as setsockopt(), getsockopt(), connect(), recvmsg(), sendmsg() are
+>shared between both types of sockets, so rename them in general
+>manner.
+>
+>Signed-off-by: Arseny Krasnov <arseny.krasnov@kaspersky.com>
+>---
+> net/vmw_vsock/af_vsock.c | 64 +++++++++++++++++++++-------------------
+> 1 file changed, 34 insertions(+), 30 deletions(-)
 
-Fixes: b35ccebe3ef7 ("vdpa/mlx5: Restore the hardware used index after change map")
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
----
- drivers/vdpa/mlx5/net/mlx5_vnet.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This patch LGTM:
 
-diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-index 7c1f789..ce6aae8 100644
---- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
-+++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -1777,7 +1777,6 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
- 	if (!status) {
- 		mlx5_vdpa_info(mvdev, "performing device reset\n");
- 		teardown_driver(ndev);
--		clear_virtqueues(ndev);
- 		mlx5_vdpa_destroy_mr(&ndev->mvdev);
- 		ndev->mvdev.status = 0;
- 		++mvdev->generation;
-@@ -1786,6 +1785,7 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
- 
- 	if ((status ^ ndev->mvdev.status) & VIRTIO_CONFIG_S_DRIVER_OK) {
- 		if (status & VIRTIO_CONFIG_S_DRIVER_OK) {
-+			clear_virtqueues(ndev);
- 			err = setup_driver(ndev);
- 			if (err) {
- 				mlx5_vdpa_warn(mvdev, "failed to setup driver\n");
--- 
-1.8.3.1
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+
+Thanks,
+Stefano
+
+>
+>diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+>index 6894f21dc147..f4fabec50650 100644
+>--- a/net/vmw_vsock/af_vsock.c
+>+++ b/net/vmw_vsock/af_vsock.c
+>@@ -604,8 +604,8 @@ static void vsock_pending_work(struct work_struct *work)
+>
+> /**** SOCKET OPERATIONS ****/
+>
+>-static int __vsock_bind_stream(struct vsock_sock *vsk,
+>-			       struct sockaddr_vm *addr)
+>+static int __vsock_bind_connectible(struct vsock_sock *vsk,
+>+				    struct sockaddr_vm *addr)
+> {
+> 	static u32 port;
+> 	struct sockaddr_vm new_addr;
+>@@ -685,7 +685,7 @@ static int __vsock_bind(struct sock *sk, struct sockaddr_vm *addr)
+> 	switch (sk->sk_socket->type) {
+> 	case SOCK_STREAM:
+> 		spin_lock_bh(&vsock_table_lock);
+>-		retval = __vsock_bind_stream(vsk, addr);
+>+		retval = __vsock_bind_connectible(vsk, addr);
+> 		spin_unlock_bh(&vsock_table_lock);
+> 		break;
+>
+>@@ -767,6 +767,11 @@ static struct sock *__vsock_create(struct net *net,
+> 	return sk;
+> }
+>
+>+static bool sock_type_connectible(u16 type)
+>+{
+>+	return type == SOCK_STREAM;
+>+}
+>+
+> static void __vsock_release(struct sock *sk, int level)
+> {
+> 	if (sk) {
+>@@ -785,7 +790,7 @@ static void __vsock_release(struct sock *sk, int level)
+>
+> 		if (vsk->transport)
+> 			vsk->transport->release(vsk);
+>-		else if (sk->sk_type == SOCK_STREAM)
+>+		else if (sock_type_connectible(sk->sk_type))
+> 			vsock_remove_sock(vsk);
+>
+> 		sock_orphan(sk);
+>@@ -945,7 +950,7 @@ static int vsock_shutdown(struct socket *sock, int mode)
+> 	sk = sock->sk;
+> 	if (sock->state == SS_UNCONNECTED) {
+> 		err = -ENOTCONN;
+>-		if (sk->sk_type == SOCK_STREAM)
+>+		if (sock_type_connectible(sk->sk_type))
+> 			return err;
+> 	} else {
+> 		sock->state = SS_DISCONNECTING;
+>@@ -960,7 +965,7 @@ static int vsock_shutdown(struct socket *sock, int mode)
+> 		sk->sk_state_change(sk);
+> 		release_sock(sk);
+>
+>-		if (sk->sk_type == SOCK_STREAM) {
+>+		if (sock_type_connectible(sk->sk_type)) {
+> 			sock_reset_flag(sk, SOCK_DONE);
+> 			vsock_send_shutdown(sk, mode);
+> 		}
+>@@ -1013,7 +1018,7 @@ static __poll_t vsock_poll(struct file *file, struct socket *sock,
+> 		if (!(sk->sk_shutdown & SEND_SHUTDOWN))
+> 			mask |= EPOLLOUT | EPOLLWRNORM | EPOLLWRBAND;
+>
+>-	} else if (sock->type == SOCK_STREAM) {
+>+	} else if (sock_type_connectible(sk->sk_type)) {
+> 		const struct vsock_transport *transport;
+>
+> 		lock_sock(sk);
+>@@ -1263,8 +1268,8 @@ static void vsock_connect_timeout(struct work_struct *work)
+> 	sock_put(sk);
+> }
+>
+>-static int vsock_stream_connect(struct socket *sock, struct sockaddr *addr,
+>-				int addr_len, int flags)
+>+static int vsock_connect(struct socket *sock, struct sockaddr *addr,
+>+			 int addr_len, int flags)
+> {
+> 	int err;
+> 	struct sock *sk;
+>@@ -1414,7 +1419,7 @@ static int vsock_accept(struct socket *sock, struct socket *newsock, int flags,
+>
+> 	lock_sock(listener);
+>
+>-	if (sock->type != SOCK_STREAM) {
+>+	if (!sock_type_connectible(sock->type)) {
+> 		err = -EOPNOTSUPP;
+> 		goto out;
+> 	}
+>@@ -1491,7 +1496,7 @@ static int vsock_listen(struct socket *sock, int backlog)
+>
+> 	lock_sock(sk);
+>
+>-	if (sock->type != SOCK_STREAM) {
+>+	if (!sock_type_connectible(sk->sk_type)) {
+> 		err = -EOPNOTSUPP;
+> 		goto out;
+> 	}
+>@@ -1535,11 +1540,11 @@ static void vsock_update_buffer_size(struct vsock_sock *vsk,
+> 	vsk->buffer_size = val;
+> }
+>
+>-static int vsock_stream_setsockopt(struct socket *sock,
+>-				   int level,
+>-				   int optname,
+>-				   sockptr_t optval,
+>-				   unsigned int optlen)
+>+static int vsock_connectible_setsockopt(struct socket *sock,
+>+					int level,
+>+					int optname,
+>+					sockptr_t optval,
+>+					unsigned int optlen)
+> {
+> 	int err;
+> 	struct sock *sk;
+>@@ -1617,10 +1622,10 @@ static int vsock_stream_setsockopt(struct socket *sock,
+> 	return err;
+> }
+>
+>-static int vsock_stream_getsockopt(struct socket *sock,
+>-				   int level, int optname,
+>-				   char __user *optval,
+>-				   int __user *optlen)
+>+static int vsock_connectible_getsockopt(struct socket *sock,
+>+					int level, int optname,
+>+					char __user *optval,
+>+					int __user *optlen)
+> {
+> 	int err;
+> 	int len;
+>@@ -1688,8 +1693,8 @@ static int vsock_stream_getsockopt(struct socket *sock,
+> 	return 0;
+> }
+>
+>-static int vsock_stream_sendmsg(struct socket *sock, struct msghdr *msg,
+>-				size_t len)
+>+static int vsock_connectible_sendmsg(struct socket *sock, struct msghdr *msg,
+>+				     size_t len)
+> {
+> 	struct sock *sk;
+> 	struct vsock_sock *vsk;
+>@@ -1828,10 +1833,9 @@ static int vsock_stream_sendmsg(struct socket *sock, struct msghdr *msg,
+> 	return err;
+> }
+>
+>-
+> static int
+>-vsock_stream_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,
+>-		     int flags)
+>+vsock_connectible_recvmsg(struct socket *sock, struct msghdr *msg, size_t len,
+>+			  int flags)
+> {
+> 	struct sock *sk;
+> 	struct vsock_sock *vsk;
+>@@ -2007,7 +2011,7 @@ static const struct proto_ops vsock_stream_ops = {
+> 	.owner = THIS_MODULE,
+> 	.release = vsock_release,
+> 	.bind = vsock_bind,
+>-	.connect = vsock_stream_connect,
+>+	.connect = vsock_connect,
+> 	.socketpair = sock_no_socketpair,
+> 	.accept = vsock_accept,
+> 	.getname = vsock_getname,
+>@@ -2015,10 +2019,10 @@ static const struct proto_ops vsock_stream_ops = {
+> 	.ioctl = sock_no_ioctl,
+> 	.listen = vsock_listen,
+> 	.shutdown = vsock_shutdown,
+>-	.setsockopt = vsock_stream_setsockopt,
+>-	.getsockopt = vsock_stream_getsockopt,
+>-	.sendmsg = vsock_stream_sendmsg,
+>-	.recvmsg = vsock_stream_recvmsg,
+>+	.setsockopt = vsock_connectible_setsockopt,
+>+	.getsockopt = vsock_connectible_getsockopt,
+>+	.sendmsg = vsock_connectible_sendmsg,
+>+	.recvmsg = vsock_connectible_recvmsg,
+> 	.mmap = sock_no_mmap,
+> 	.sendpage = sock_no_sendpage,
+> };
+>-- 
+>2.25.1
+>
 
 _______________________________________________
 Virtualization mailing list
