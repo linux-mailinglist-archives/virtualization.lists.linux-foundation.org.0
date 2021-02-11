@@ -2,76 +2,109 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88394318FC8
-	for <lists.virtualization@lfdr.de>; Thu, 11 Feb 2021 17:25:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 24C55319023
+	for <lists.virtualization@lfdr.de>; Thu, 11 Feb 2021 17:40:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2972A875C1;
-	Thu, 11 Feb 2021 16:25:33 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 8ED4A87599;
+	Thu, 11 Feb 2021 16:40:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id B-U+483PHlDK; Thu, 11 Feb 2021 16:25:32 +0000 (UTC)
+	with ESMTP id n78Ws8lrRXyF; Thu, 11 Feb 2021 16:40:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 89DA587582;
-	Thu, 11 Feb 2021 16:25:32 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2E96A874F7;
+	Thu, 11 Feb 2021 16:40:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F303C013A;
-	Thu, 11 Feb 2021 16:25:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1BAB1C013A;
+	Thu, 11 Feb 2021 16:40:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 40A09C013A
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 094DDC013A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Feb 2021 16:25:30 +0000 (UTC)
+ Thu, 11 Feb 2021 16:40:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 3B1FD87466
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 043E086E4C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Feb 2021 16:25:30 +0000 (UTC)
+ Thu, 11 Feb 2021 16:40:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bLf6qewoqTND
+ with ESMTP id KqGa4Izc-EDm
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Feb 2021 16:25:29 +0000 (UTC)
+ Thu, 11 Feb 2021 16:40:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 96CAC8744D
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 620E186DCD
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Feb 2021 16:25:29 +0000 (UTC)
+ Thu, 11 Feb 2021 16:40:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613060728;
+ s=mimecast20190719; t=1613061615;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=XQoevciACwPLARu60eJww58zrFl7HrSfeZVa0fo4e3M=;
- b=JO56rE8ZPnoxUB05mKi5BX+ISqk8PXYo6zGEyF62IinRpEwzi0bpNx/eBvTlTnWYGCHxrN
- nLy/LduycIjvjaHdOJ96DvqKArHVJPMAKZNUsiBV8EHv2w0NxStyrXl41n29yfmRk8eA5p
- 16wBLdBrRhMBUk1KVx4Wn5XYe92wPQs=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-598-KCaMI8aPOtSm_ZngdVRuxA-1; Thu, 11 Feb 2021 11:25:24 -0500
-X-MC-Unique: KCaMI8aPOtSm_ZngdVRuxA-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6AB3D1005501;
- Thu, 11 Feb 2021 16:25:22 +0000 (UTC)
-Received: from steredhat.redhat.com (ovpn-113-187.ams2.redhat.com
- [10.36.113.187])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C6CEA5C1BD;
- Thu, 11 Feb 2021 16:25:20 +0000 (UTC)
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Lj9y6zovpDL1H8VNnAnIwnGuHO/lQ5y0uBDzrMSzgjs=;
+ b=jKSheiiPtaEzCA5W4pdxVMoBtkvVzCD7ulB+LrvQuoo6DcKM3M08OIc1UvTFGsEmQau61C
+ 4U9tPafks+enGWMerhGjDy5odWSvSyWMkrorcyyUoRkcl4DmfeVJSUB2IFvGBGGfI0pNS4
+ nw9xtKESDdG8ZlImcX9rMm3rg5F873A=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-338-hU6eXmKVPWqnoYmkRbE23g-1; Thu, 11 Feb 2021 11:40:12 -0500
+X-MC-Unique: hU6eXmKVPWqnoYmkRbE23g-1
+Received: by mail-ed1-f69.google.com with SMTP id g2so4864178edq.14
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 11 Feb 2021 08:40:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=Lj9y6zovpDL1H8VNnAnIwnGuHO/lQ5y0uBDzrMSzgjs=;
+ b=ccJ1RjEPuDoI64Klf6timk9VxQ3bbss6iGf+F46KB/TqdfC+I75ynjNLI/XdyIrtgm
+ uEaAKOsQdFilEP/pMs3crJoRE/oxYszrQJ9vCcadNZu6M5IYpN5iLemQ1fOYhCVsk5Uf
+ vndzoui9RDWCODDSbaF9vNrBO2wu2H1pwPpdW9kdLPs3btQP1xu7CwdgKbKsPsZZFzgR
+ 1deOuYz+UUvlnL+5QBxuF41PTgWJiJDpWZTOLP5TFfovhcBapR1qeW7+cgcaRzdd3BuL
+ LplZrg3UgzTJV1ND5LnL3tck0HuQIxsEYeOPpwM4QQcjHpMguvEqZFD6ze4kVr8uuzHW
+ e7dA==
+X-Gm-Message-State: AOAM530R2GVBU1LehOel/hobeuwRQmrzKHkFub2KvRtc72ISs7k3s6Bx
+ Eik6JnYGs8Qzu+y9wk4ea5gRlE3rOdB5zTHLjwnHeBPVxp+QZeiFH1x5HdQiGSmMG5iAGO2l6z3
+ OEPUIIJ0W+7yj/fJG3FrqKBKBquJoGntg7zsfajQyeQ==
+X-Received: by 2002:a05:6402:22f6:: with SMTP id
+ dn22mr8965269edb.277.1613061611042; 
+ Thu, 11 Feb 2021 08:40:11 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwAvYu/wVmfgYAjypXKzDwvmJHlNwAAXIJAYLYHGgD2uuy7YNz2HDw2FUtZ6+pr3Mn3BQ537g==
+X-Received: by 2002:a05:6402:22f6:: with SMTP id
+ dn22mr8965246edb.277.1613061610877; 
+ Thu, 11 Feb 2021 08:40:10 -0800 (PST)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id b6sm4415609edy.31.2021.02.11.08.40.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Feb 2021 08:40:10 -0800 (PST)
+Date: Thu, 11 Feb 2021 17:40:07 +0100
 From: Stefano Garzarella <sgarzare@redhat.com>
-To: stable@vger.kernel.org
-Subject: [PATCH for 5.10] vdpa_sim: fix param validation in
- vdpasim_get_config()
-Date: Thu, 11 Feb 2021 17:25:19 +0100
-Message-Id: <20210211162519.215418-1-sgarzare@redhat.com>
+To: Eugenio Perez Martin <eperezma@redhat.com>
+Subject: Re: [RFC v2 1/7] vhost: Delete trailing dot in errpr_setg argument
+Message-ID: <20210211164007.r6mtlu4dz64gpn2q@steredhat>
+References: <20210209153757.1653598-1-eperezma@redhat.com>
+ <20210209153757.1653598-2-eperezma@redhat.com>
+ <14b2637e-9610-356e-ad18-27a9a8b82508@redhat.com>
+ <CAJaqyWd+NuY3B94HX8J_EzFf4sxeZnFCcw=aXfT-KZ7nfmL6DQ@mail.gmail.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Eli Cohen <elic@nvidia.com>
+In-Reply-To: <CAJaqyWd+NuY3B94HX8J_EzFf4sxeZnFCcw=aXfT-KZ7nfmL6DQ@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Parav Pandit <parav@mellanox.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ qemu-level <qemu-devel@nongnu.org>, Harpreet Singh Anand <hanand@xilinx.com>,
+ Xiao W Wang <xiao.w.wang@intel.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Eli Cohen <eli@mellanox.com>, virtualization@lists.linux-foundation.org,
+ Eric Blake <eblake@redhat.com>, Michael Lilja <ml@napatech.com>,
+ Jim Harford <jim.harford@broadcom.com>, Rob Miller <rob.miller@broadcom.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,47 +116,31 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Commit 65b709586e222fa6ffd4166ac7fdb5d5dad113ee upstream.
+On Tue, Feb 09, 2021 at 07:11:41PM +0100, Eugenio Perez Martin wrote:
+>On Tue, Feb 9, 2021 at 5:25 PM Eric Blake <eblake@redhat.com> wrote:
+>>
+>> On 2/9/21 9:37 AM, Eugenio P=E9rez wrote:
+>> > As error_setg points
+>>
+>> Incomplete sentence?
+>>
+>> Missing Signed-off-by.
+>>
+>
+>Sorry, I should have paid more attention.
+>
+>Maybe it is better to send this though qemu-trivial, so it does not
+>mess with this series?
 
-Before this patch, if 'offset + len' was equal to
-sizeof(struct virtio_net_config), the entire buffer wasn't filled,
-returning incorrect values to the caller.
+Yes, I agree that it can go regardless of this series.
 
-Since 'vdpasim->config' type is 'struct virtio_net_config', we can
-safely copy its content under this condition.
-
-Commit 65b709586e22 ("vdpa_sim: add get_config callback in
-vdpasim_dev_attr") unintentionally solved it upstream while
-refactoring vdpa_sim.c to support multiple devices. But we don't want
-to backport it to stable branches as it contains many changes.
-
-Fixes: 2c53d0f64c06 ("vdpasim: vDPA device simulator")
-Cc: <stable@vger.kernel.org> # 5.10.x
-Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 6a90fdb9cbfc..8ca178d7b02f 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -572,7 +572,7 @@ static void vdpasim_get_config(struct vdpa_device *vdpa, unsigned int offset,
- {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
- 
--	if (offset + len < sizeof(struct virtio_net_config))
-+	if (offset + len <= sizeof(struct virtio_net_config))
- 		memcpy(buf, (u8 *)&vdpasim->config + offset, len);
- }
- 
--- 
-2.29.2
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
