@@ -1,97 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22308319CF0
-	for <lists.virtualization@lfdr.de>; Fri, 12 Feb 2021 12:01:54 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2788031A33A
+	for <lists.virtualization@lfdr.de>; Fri, 12 Feb 2021 18:04:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id AF0A287268;
-	Fri, 12 Feb 2021 11:01:52 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id BB5448659E;
+	Fri, 12 Feb 2021 17:04:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RaatTnkHYiEy; Fri, 12 Feb 2021 11:01:52 +0000 (UTC)
+	with ESMTP id wSkuuBLXLkIA; Fri, 12 Feb 2021 17:04:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 2879087266;
-	Fri, 12 Feb 2021 11:01:52 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id E444485BD5;
+	Fri, 12 Feb 2021 17:04:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EA028C013A;
-	Fri, 12 Feb 2021 11:01:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ADDCCC013A;
+	Fri, 12 Feb 2021 17:04:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A7E46C013A
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D651BC013A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Feb 2021 11:01:49 +0000 (UTC)
+ Fri, 12 Feb 2021 17:04:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 8D3B587266
+ by fraxinus.osuosl.org (Postfix) with ESMTP id D04B585BD5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Feb 2021 11:01:49 +0000 (UTC)
+ Fri, 12 Feb 2021 17:04:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1s8RQxjFhNAZ
+ with ESMTP id YiEzUX7enng0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Feb 2021 11:01:48 +0000 (UTC)
+ Fri, 12 Feb 2021 17:04:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 7CC068706B
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 6557F8659E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Feb 2021 11:01:48 +0000 (UTC)
+ Fri, 12 Feb 2021 17:04:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613127707;
+ s=mimecast20190719; t=1613149465;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+Gx/mG4h1X8FM7fWz9h2H0rRVjTdjgBag2KkGy2ksa4=;
- b=a936kLDHkqiLjLcwxBJvrNHUMlmLzZdP8Fnjge8SbivYNITkB94rR6cC+URVa8bf4XmrVD
- pDvqQj3Xi3v7lfH6Rj5MLv8ow0ZkqiGQyJkMWdRz/4iqEvfhN3qsYTX1Ucttqv4TC7B77+
- r8qa/ZDOzRM4yYpZZ4QghBbiVjrgTPE=
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=muci2bFECA89B0jMNuPjwDVm80b8N6IObvOF04Qj7Xg=;
+ b=O9MZKX4oe3G1eSsSd+dQ0VY1uEeeKZZNaEyqLN0bSa/AGdJcZA7TQzBta1MteRifB/6qFR
+ A+USrKXzCBwIwSF1TtB8aFpPo/zz11bRJx0xIFeapeArT6ebGQbPgGon82RHzYs2qClA1r
+ dnSlajuKYekCchzz0jM1pANbdUFQwRY=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-37-lNMjW9KBPxa8Yl5DPST9Qw-1; Fri, 12 Feb 2021 06:01:45 -0500
-X-MC-Unique: lNMjW9KBPxa8Yl5DPST9Qw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ us-mta-105-PCm_6tleO5CUMpRycwNyYw-1; Fri, 12 Feb 2021 12:04:20 -0500
+X-MC-Unique: PCm_6tleO5CUMpRycwNyYw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DF2A2801965;
- Fri, 12 Feb 2021 11:01:43 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-161.ams2.redhat.com
- [10.36.112.161])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 5255A5C3FD;
- Fri, 12 Feb 2021 11:01:43 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id C438918003AF; Fri, 12 Feb 2021 12:01:40 +0100 (CET)
-Date: Fri, 12 Feb 2021 12:01:40 +0100
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: "Kasireddy, Vivek" <vivek.kasireddy@intel.com>
-Subject: Re: [RFC v3 2/3] virtio: Introduce Vdmabuf driver
-Message-ID: <20210212110140.gdpu7kapnr7ovdcn@sirius.home.kraxel.org>
-References: <20210203073517.1908882-1-vivek.kasireddy@intel.com>
- <20210203073517.1908882-3-vivek.kasireddy@intel.com>
- <YB1sRx1GrT8rATEg@phenom.ffwll.local>
- <20210208075748.xejgcb4il2egow2u@sirius.home.kraxel.org>
- <YCEGrrT0/eqqz/ok@phenom.ffwll.local>
- <8ba4ad64be3546bda9a2ed2129bf98e4@intel.com>
- <20210209084453.5oqepy7zdwtxgrpu@sirius.home.kraxel.org>
- <2ef01dc941684a15a4f30e6239ae42df@intel.com>
- <20210210091641.ahjtgcdalw7viuei@sirius.home.kraxel.org>
- <bad576177eb24085a73570e8ad03d2cc@intel.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 42AFA85B671;
+ Fri, 12 Feb 2021 17:04:16 +0000 (UTC)
+Received: from gondolin.redhat.com (ovpn-113-189.ams2.redhat.com
+ [10.36.113.189])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A4F2B19D80;
+ Fri, 12 Feb 2021 17:04:14 +0000 (UTC)
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: [PATCH] virtio/s390: implement virtio-ccw revision 2 correctly
+Date: Fri, 12 Feb 2021 18:04:11 +0100
+Message-Id: <20210212170411.992217-1-cohuck@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <bad576177eb24085a73570e8ad03d2cc@intel.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: "Kim, Dongwon" <dongwon.kim@intel.com>,
- "christian.koenig@amd.com" <christian.koenig@amd.com>,
- "daniel.vetter@ffwll.ch" <daniel.vetter@ffwll.ch>,
- "dri-devel@lists.freedesktop.org" <dri-devel@lists.freedesktop.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
- "Vetter, Daniel" <daniel.vetter@intel.com>,
- "sumit.semwal@linaro.org" <sumit.semwal@linaro.org>,
- "linux-media@vger.kernel.org" <linux-media@vger.kernel.org>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: linux-s390@vger.kernel.org, Cornelia Huck <cohuck@redhat.com>,
+ kvm@vger.kernel.org, Pierre Morel <pmorel@linux.ibm.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,46 +88,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 12, 2021 at 08:15:12AM +0000, Kasireddy, Vivek wrote:
-> Hi Gerd,
-> 
-> > > > You don't have to use the rendering pipeline.  You can let the i915
-> > > > gpu render into a dma-buf shared with virtio-gpu, then use
-> > > > virtio-gpu only for buffer sharing with the host.
-> [Kasireddy, Vivek] Just to confirm my understanding of what you are suggesting, are
-> you saying that we need to either have Weston allocate scanout buffers (GBM surface/BO)
-> using virtio-gpu and render into them using i915; or have virtio-gpu allocate pages and 
-> export a dma-buf and have Weston create a GBM BO by calling gbm_bo_import(fd) and
-> render into the BO using i915?
+CCW_CMD_READ_STATUS was introduced with revision 2 of virtio-ccw,
+and drivers should only rely on it being implemented when they
+negotiated at least that revision with the device.
 
-Not sure what the difference between the former and the latter is.
+However, virtio_ccw_get_status() issued READ_STATUS for any
+device operating at least at revision 1. If the device accepts
+READ_STATUS regardless of the negotiated revision (which it is
+free to do), everything works as intended; a device rejecting the
+command should also be handled gracefully. For correctness, we
+should really limit the command to revision 2 or higher, though.
 
-> > Hmm, why a big mode switch?  You should be able to do that without modifying the
-> > virtio-gpu guest driver.  On the host side qemu needs some work to support the most
-> > recent virtio-gpu features like the buffer uuids (assuming you use qemu userspace), right
-> > now those are only supported by crosvm.
-> [Kasireddy, Vivek] We are only interested in Qemu UI at the moment but if we were to use
-> virtio-gpu, we are going to need to add one more vq and support for managing buffers, 
-> events, etc.
+We also negotiated the revision to at most 1, as we never bumped
+the maximum revision; let's do that now.
 
-Should be easy and it should not need any virtio-gpu driver changes.
+Fixes: 7d3ce5ab9430 ("virtio/s390: support READ_STATUS command for virtio-ccw")
+Signed-off-by: Cornelia Huck <cohuck@redhat.com>
+---
 
-You can use virtio-gpu like a dumb scanout device.  Create a dumb
-bo, create a framebuffer for the bo, map the framebuffer to the crtc.
+QEMU does not fence off READ_STATUS for revisions < 2, which is probably
+why we never noticed this. I'm not aware of other hypervisors that do
+fence it off, nor any that cannot deal properly with an unknown command.
 
-Then export the bo, import into i915, use it as render target.  When
-rendering is done flush (DRM_IOCTL_MODE_DIRTYFB).  Alternatively
-allocate multiple bo's + framebuffers and pageflip.
+Not sure whether this is stable worthy?
 
-Pretty standard workflow for cases where rendering and scanout are
-handled by different devices.  As far I know not uncommon in the arm
-world.
+---
+ drivers/s390/virtio/virtio_ccw.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Right now this will involve a memcpy() for any display update because
-qemu is a bit behind on supporting recent virtio-gpu features.
-
-take care,
-  Gerd
+diff --git a/drivers/s390/virtio/virtio_ccw.c b/drivers/s390/virtio/virtio_ccw.c
+index 5730572b52cd..54e686dca6de 100644
+--- a/drivers/s390/virtio/virtio_ccw.c
++++ b/drivers/s390/virtio/virtio_ccw.c
+@@ -117,7 +117,7 @@ struct virtio_rev_info {
+ };
+ 
+ /* the highest virtio-ccw revision we support */
+-#define VIRTIO_CCW_REV_MAX 1
++#define VIRTIO_CCW_REV_MAX 2
+ 
+ struct virtio_ccw_vq_info {
+ 	struct virtqueue *vq;
+@@ -952,7 +952,7 @@ static u8 virtio_ccw_get_status(struct virtio_device *vdev)
+ 	u8 old_status = vcdev->dma_area->status;
+ 	struct ccw1 *ccw;
+ 
+-	if (vcdev->revision < 1)
++	if (vcdev->revision < 2)
+ 		return vcdev->dma_area->status;
+ 
+ 	ccw = ccw_device_dma_zalloc(vcdev->cdev, sizeof(*ccw));
+-- 
+2.26.2
 
 _______________________________________________
 Virtualization mailing list
