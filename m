@@ -2,79 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 269E731B907
-	for <lists.virtualization@lfdr.de>; Mon, 15 Feb 2021 13:22:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E8A5731B91B
+	for <lists.virtualization@lfdr.de>; Mon, 15 Feb 2021 13:24:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 479F885B25;
-	Mon, 15 Feb 2021 12:22:04 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id A8BEA85BCD;
+	Mon, 15 Feb 2021 12:24:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qo2XnbglRX_X; Mon, 15 Feb 2021 12:22:03 +0000 (UTC)
+	with ESMTP id Ji91f870ikwS; Mon, 15 Feb 2021 12:24:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id CD84285A5A;
-	Mon, 15 Feb 2021 12:22:03 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 97F9585B3D;
+	Mon, 15 Feb 2021 12:24:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8F80FC013A;
-	Mon, 15 Feb 2021 12:22:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5EE95C013A;
+	Mon, 15 Feb 2021 12:24:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A61AAC013A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 06C0EC013A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Feb 2021 12:22:02 +0000 (UTC)
+ Mon, 15 Feb 2021 12:24:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id A2A9286970
+ by smtp3.osuosl.org (Postfix) with ESMTP id DAC4B6F4A4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Feb 2021 12:22:02 +0000 (UTC)
+ Mon, 15 Feb 2021 12:24:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FqE5-b66ZT7i
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DmqXauIegUly
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Feb 2021 12:22:01 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+ Mon, 15 Feb 2021 12:24:37 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+ id BD7246F4F7; Mon, 15 Feb 2021 12:24:37 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 9A6D086932
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0EBCB6F4A4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Feb 2021 12:22:01 +0000 (UTC)
+ Mon, 15 Feb 2021 12:24:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613391720;
+ s=mimecast20190719; t=1613391874;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iREUH3qcwe+8CMwRTYNN3sl03Q+aaxvnMDnwGmHEACo=;
- b=FGknrUR4BXdhIYmse/JCe9e5p1UoAql+gFPfDQ/CISzZaBn5iRgUpX63QGEzScx7lS2oVo
- CCaTSsRzTjVjSH4oO3nRyOLAfHW0ONb16EHj6cZKwMLRwPHMeenl7NOQlmTgjjhKBgldbN
- VO8+EXpd/ZqC4u31Te3BRT37t+qD44k=
+ bh=uEB/obzSHOtmTVEsdMgjSRNQj0mbOgdNvz1v5u4sJFQ=;
+ b=abOOfXn3xuXJd6rCsrwwhDn4XnKn9G2hNip2KRSlb4JyUNkBr2GidAN5HkvTh4Ds7xeh1B
+ xG/WBWzHLqkmyBu3wt3zRxtnzurLS8dDHOKXIYv/8ESIYDXVpHyzqM2jBou+BV+8XTM4XJ
+ ZhWoCHDMKdu37Q2wp/H+9+fa11j1oVw=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-398-0zyx5x9gNme3xLrVJohpQA-1; Mon, 15 Feb 2021 07:21:56 -0500
-X-MC-Unique: 0zyx5x9gNme3xLrVJohpQA-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-435-4uUu5GQgMdqoALxrJqkUWw-1; Mon, 15 Feb 2021 07:24:32 -0500
+X-MC-Unique: 4uUu5GQgMdqoALxrJqkUWw-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EBDE4192CC43;
- Mon, 15 Feb 2021 12:21:54 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0F82B801962;
+ Mon, 15 Feb 2021 12:24:31 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-114-89.ams2.redhat.com [10.36.114.89])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D81C72BFEC;
- Mon, 15 Feb 2021 12:21:52 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id C0E9D60C0F;
+ Mon, 15 Feb 2021 12:24:22 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 1/2] virtio-mem: don't read big block size in SBM
-Date: Mon, 15 Feb 2021 13:21:42 +0100
-Message-Id: <20210215122143.27608-2-david@redhat.com>
+Subject: [PATCH v1 2/2] virtio-mem: support VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE
+Date: Mon, 15 Feb 2021 13:24:21 +0100
+Message-Id: <20210215122421.27964-1-david@redhat.com>
 In-Reply-To: <20210215122143.27608-1-david@redhat.com>
 References: <20210215122143.27608-1-david@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
  Wei Yang <richard.weiyang@linux.alibaba.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ Sebastien Boeuf <sebastien.boeuf@intel.com>,
  Marek Kedzierski <mkedzier@redhat.com>, Hui Zhu <teawater@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -92,58 +95,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We are reading the a BBM (Big Block Mode) value while in SBM (Sub Block
-Mode) while initializing. Fortunately, vm->bbm.bb_size maps to some counter
-in the vm->sbm.mb_count array, which is 0 at that point in time.
+The spec currently states that while unplugged memory should not be
+read, the device has to allow for reading unplugged memory inside the
+usable region. The primary motivation for this default handling was that
+in some corner cases in Linux, unplugged memory inside added Linux memory
+blocks (and exposed via /proc/iomem as "System RAM (...)") might still
+be read. So to support SBM (Sub Block Mode) in Linux cleanly, the device
+has to support reading unplugged memory.
 
-No harm done; still, this was unintended and is not future-proof.
+One example is kdump(): when makedumpfile isn't used
+or when an older version is used, PG_offline is ignored and unplugged
+memory might still be read. Another corner-case example is /dev/mem: even
+with STRICT_DEVMEM, some unplugged memory might be read by tools
+automatically.
 
-Fixes: 4ba50cd3355d ("virtio-mem: Big Block Mode (BBM) memory hotplug")
+For example, QEMU won't support reading unplugged memory with
+file-backed memory backends initially: there is no shared zero page,
+thus, special handling will be required in the future to allow for
+reading unplugged memory when using a file backing (tmpfs/shmem, hugetlbfs,
+...).
+
+The device will indicate VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE and fail
+device initialization if the driver does not indicate support. The
+result is that Linux won't be able to make use of any memory without
+this change. With this change, Linux will at least be able to (un)plug
+in Linux memory block granularity. Print an info so this handling can
+be identified.
+
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
 Cc: Jason Wang <jasowang@redhat.com>
 Cc: Marek Kedzierski <mkedzier@redhat.com>
 Cc: Hui Zhu <teawater@gmail.com>
+Cc: Sebastien Boeuf <sebastien.boeuf@intel.com>
 Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
 Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 15 ++++++++-------
- 1 file changed, 8 insertions(+), 7 deletions(-)
+ drivers/virtio/virtio_mem.c     | 12 ++++++++++++
+ include/uapi/linux/virtio_mem.h | 10 +++++++---
+ 2 files changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 9fc9ec4a25f5..6d4e01c4e2fa 100644
+index 6d4e01c4e2fa..58d8df528728 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -2409,6 +2409,10 @@ static int virtio_mem_init(struct virtio_mem *vm)
- 		dev_warn(&vm->vdev->dev,
- 			 "Some memory is not addressable. This can make some memory unusable.\n");
+@@ -2425,6 +2425,17 @@ static int virtio_mem_init(struct virtio_mem *vm)
+ 			pageblock_nr_pages) * PAGE_SIZE;
+ 	sb_size = max_t(uint64_t, vm->device_block_size, sb_size);
  
-+	/* Prepare the offline threshold - make sure we can add two blocks. */
-+	vm->offline_threshold = max_t(uint64_t, 2 * memory_block_size_bytes(),
-+				      VIRTIO_MEM_DEFAULT_OFFLINE_THRESHOLD);
-+
- 	/*
- 	 * We want subblocks to span at least MAX_ORDER_NR_PAGES and
- 	 * pageblock_nr_pages pages. This:
-@@ -2453,14 +2457,11 @@ static int virtio_mem_init(struct virtio_mem *vm)
- 		addr = vm->addr + vm->bbm.bb_size - 1;
- 		vm->bbm.first_bb_id = virtio_mem_phys_to_bb_id(vm, addr);
- 		vm->bbm.next_bb_id = vm->bbm.first_bb_id;
--	}
- 
--	/* Prepare the offline threshold - make sure we can add two blocks. */
--	vm->offline_threshold = max_t(uint64_t, 2 * memory_block_size_bytes(),
--				      VIRTIO_MEM_DEFAULT_OFFLINE_THRESHOLD);
--	/* In BBM, we also want at least two big blocks. */
--	vm->offline_threshold = max_t(uint64_t, 2 * vm->bbm.bb_size,
--				      vm->offline_threshold);
-+		/* Make sure we can add two big blocks. */
-+		vm->offline_threshold = max_t(uint64_t, 2 * vm->bbm.bb_size,
-+					      vm->offline_threshold);
++	/*
++	 * Unplugged memory might be read in corner cases, for example, via
++	 * kdump. Fallback to adding/removing individual Linux memory blocks.
++	 */
++	if (sb_size < memory_block_size_bytes() && !force_bbm &&
++	    virtio_has_feature(vm->vdev, VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE)) {
++		sb_size = memory_block_size_bytes();
++		dev_info(&vm->vdev->dev,
++			 "The device does not support reading unplugged memory: using big block mode\n");
 +	}
++
+ 	if (sb_size < memory_block_size_bytes() && !force_bbm) {
+ 		/* SBM: At least two subblocks per Linux memory block. */
+ 		vm->in_sbm = true;
+@@ -2711,6 +2722,7 @@ static unsigned int virtio_mem_features[] = {
+ #if defined(CONFIG_NUMA) && defined(CONFIG_ACPI_NUMA)
+ 	VIRTIO_MEM_F_ACPI_PXM,
+ #endif
++	VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE,
+ };
  
- 	dev_info(&vm->vdev->dev, "start address: 0x%llx", vm->addr);
- 	dev_info(&vm->vdev->dev, "region size: 0x%llx", vm->region_size);
+ static const struct virtio_device_id virtio_mem_id_table[] = {
+diff --git a/include/uapi/linux/virtio_mem.h b/include/uapi/linux/virtio_mem.h
+index 70e01c687d5e..6ac77cfb8aca 100644
+--- a/include/uapi/linux/virtio_mem.h
++++ b/include/uapi/linux/virtio_mem.h
+@@ -68,9 +68,11 @@
+  * explicitly triggered (VIRTIO_MEM_REQ_UNPLUG).
+  *
+  * There are no guarantees what will happen if unplugged memory is
+- * read/written. Such memory should, in general, not be touched. E.g.,
+- * even writing might succeed, but the values will simply be discarded at
+- * random points in time.
++ * read/written. Often, unplugged memory inside the usable region can
++ * be read, to simplify creation of memory dumps; however, some devices
++ * don't even support that. Unplugged memory should, in general, not be
++ * touched. E.g., even writing might succeed, but the values will simply be
++ * discarded at random points in time.
+  *
+  * It can happen that the device cannot process a request, because it is
+  * busy. The device driver has to retry later.
+@@ -87,6 +89,8 @@
+ 
+ /* node_id is an ACPI PXM and is valid */
+ #define VIRTIO_MEM_F_ACPI_PXM		0
++/* any unplugged memory must never be accessed */
++#define VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE	1
+ 
+ 
+ /* --- virtio-mem: guest -> host requests --- */
 -- 
 2.29.2
 
