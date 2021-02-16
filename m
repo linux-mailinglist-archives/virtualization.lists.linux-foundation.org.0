@@ -1,77 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB7F331C841
-	for <lists.virtualization@lfdr.de>; Tue, 16 Feb 2021 10:45:18 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 973AC87095;
-	Tue, 16 Feb 2021 09:45:17 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KCYF1OmVgP0M; Tue, 16 Feb 2021 09:45:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 1690B87111;
-	Tue, 16 Feb 2021 09:45:17 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F0646C0893;
-	Tue, 16 Feb 2021 09:45:16 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 55FDAC013A
- for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:15 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 2460B31C842
+	for <lists.virtualization@lfdr.de>; Tue, 16 Feb 2021 10:45:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id 456EC84917
- for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:15 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id CAB2A84837;
+	Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from fraxinus.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UTBp1CFSIBRO
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7ZrYPzh6BFAI; Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 655A3847F9;
+	Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 49E08C013A;
+	Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E2E5DC013A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
+ Tue, 16 Feb 2021 09:45:41 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id D06516F48C
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 16 Feb 2021 09:45:41 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id MR2x1jtocmSa
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 16 Feb 2021 09:45:41 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+ id 321666F4E4; Tue, 16 Feb 2021 09:45:41 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 72CF184947
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5E0C46F48C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:14 +0000 (UTC)
+ Tue, 16 Feb 2021 09:45:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613468713;
+ s=mimecast20190719; t=1613468739;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=zgJXmECmOauhfYDJPw4bn7OxQRQZ97Yc1PJaarzr/ps=;
- b=hoDqqolm4UfyS3nv8CooXswFswMsOF159g5b0hlFHIVXAiJE1vaf3Q+Tv8JxGhJ0dQAtiv
- 6sDMdUGFEKKyM/yXoiJIbYpibTksZxyyIDnv1N/PAb02J+RKhrw449PyiPGDwlcDW7+8RV
- DlGtuEryGZen25NdIZFbyFbw5A82OuA=
+ bh=aKEudwAL0ABOP6RtR9S4wa4bhOuDErjR+HWjbOMiYD4=;
+ b=hLIwtPGjL5/FAmfR2q7/ASObb3+CcCwNPQAsV6eDxRT1/Hfu2+/sgsC6mCc7tMERNbmleV
+ 8j5nWuv0oyct3E/35QWZpTVIEaw2SPVLTInAzr1v/axj0b6GXPFCUeDdB6iaixePO1V9x5
+ CjXb6O0UmHsp8ozS6Nk14OSg+YEQM54=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-87-VmUvdcoDMjK1N8CpeqbGyA-1; Tue, 16 Feb 2021 04:45:11 -0500
-X-MC-Unique: VmUvdcoDMjK1N8CpeqbGyA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
+ us-mta-249-WHfg1IYJPuup6N6pV86-aQ-1; Tue, 16 Feb 2021 04:45:36 -0500
+X-MC-Unique: WHfg1IYJPuup6N6pV86-aQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EF698100AA21;
- Tue, 16 Feb 2021 09:45:09 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AA36BAFA80;
+ Tue, 16 Feb 2021 09:45:35 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-113-212.ams2.redhat.com
  [10.36.113.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9B2F35D9C0;
- Tue, 16 Feb 2021 09:45:08 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 569F0163F1;
+ Tue, 16 Feb 2021 09:45:31 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [RFC PATCH 03/10] vdpa: add vdpa_set_config() helper
-Date: Tue, 16 Feb 2021 10:44:47 +0100
-Message-Id: <20210216094454.82106-4-sgarzare@redhat.com>
+Subject: [RFC PATCH 04/10] vdpa: remove param checks in the get/set_config
+ callbacks
+Date: Tue, 16 Feb 2021 10:44:48 +0100
+Message-Id: <20210216094454.82106-5-sgarzare@redhat.com>
 In-Reply-To: <20210216094454.82106-1-sgarzare@redhat.com>
 References: <20210216094454.82106-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Cc: linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
  "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -90,56 +93,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's add a function similar to vpda_get_config() to check the
-'offset' and 'len' parameters, call the set_config() device callback,
-and return the amount of bytes written.
+vdpa_get_config() and vdpa_set_config() now check parameters before
+calling callbacks, so we can remove these redundant checks.
 
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- include/linux/vdpa.h |  2 ++
- drivers/vdpa/vdpa.c  | 16 ++++++++++++++++
- 2 files changed, 18 insertions(+)
+ drivers/vdpa/mlx5/net/mlx5_vnet.c | 3 +--
+ drivers/vdpa/vdpa_sim/vdpa_sim.c  | 6 ------
+ 2 files changed, 1 insertion(+), 8 deletions(-)
 
-diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-index 8a679c98f8b1..562fcd14f4b5 100644
---- a/include/linux/vdpa.h
-+++ b/include/linux/vdpa.h
-@@ -334,6 +334,8 @@ static inline int vdpa_set_features(struct vdpa_device *vdev, u64 features)
+diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+index 78043ee567b6..ab63dc9b8432 100644
+--- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
++++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+@@ -1825,8 +1825,7 @@ static void mlx5_vdpa_get_config(struct vdpa_device *vdev, unsigned int offset,
+ 	struct mlx5_vdpa_dev *mvdev = to_mvdev(vdev);
+ 	struct mlx5_vdpa_net *ndev = to_mlx5_vdpa_ndev(mvdev);
  
- int vdpa_get_config(struct vdpa_device *vdev, unsigned int offset,
- 		    void *buf, unsigned int len);
-+int vdpa_set_config(struct vdpa_device *vdev, unsigned int offset,
-+		    const void *buf, unsigned int len);
- 
- /**
-  * vdpa_mgmtdev_ops - vdpa device ops
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 9ed6c779c63c..825afc690a7e 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -86,6 +86,22 @@ int vdpa_get_config(struct vdpa_device *vdev, unsigned int offset,
+-	if (offset + len <= sizeof(struct virtio_net_config))
+-		memcpy(buf, (u8 *)&ndev->config + offset, len);
++	memcpy(buf, (u8 *)&ndev->config + offset, len);
  }
- EXPORT_SYMBOL_GPL(vdpa_get_config);
  
-+int vdpa_set_config(struct vdpa_device *vdev, unsigned int offset,
-+		    const void *buf, unsigned int len)
-+{
-+	const struct vdpa_config_ops *ops = vdev->config;
-+	int bytes_set;
-+
-+	bytes_set = vdpa_config_size_wrap(vdev, offset, len);
-+	if (bytes_set <= 0)
-+		return bytes_set;
-+
-+	ops->set_config(vdev, offset, buf, bytes_set);
-+
-+	return bytes_set;
-+}
-+EXPORT_SYMBOL_GPL(vdpa_set_config);
-+
- static void vdpa_release_dev(struct device *d)
+ static void mlx5_vdpa_set_config(struct vdpa_device *vdev, unsigned int offset, const void *buf,
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index 779ae6c144d7..392180c6f2cf 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -451,9 +451,6 @@ static void vdpasim_get_config(struct vdpa_device *vdpa, unsigned int offset,
  {
- 	struct vdpa_device *vdev = dev_to_vdpa(d);
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
+ 
+-	if (offset + len > vdpasim->dev_attr.config_size)
+-		return;
+-
+ 	if (vdpasim->dev_attr.get_config)
+ 		vdpasim->dev_attr.get_config(vdpasim, vdpasim->config);
+ 
+@@ -465,9 +462,6 @@ static void vdpasim_set_config(struct vdpa_device *vdpa, unsigned int offset,
+ {
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
+ 
+-	if (offset + len > vdpasim->dev_attr.config_size)
+-		return;
+-
+ 	memcpy(vdpasim->config + offset, buf, len);
+ 
+ 	if (vdpasim->dev_attr.set_config)
 -- 
 2.29.2
 
