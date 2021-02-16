@@ -1,47 +1,42 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E670031C845
-	for <lists.virtualization@lfdr.de>; Tue, 16 Feb 2021 10:46:04 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D2E031C843
+	for <lists.virtualization@lfdr.de>; Tue, 16 Feb 2021 10:45:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E49C86F585
-	for <lists.virtualization@lfdr.de>; Tue, 16 Feb 2021 09:46:02 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id M1UAS2jcSPe5 for <lists.virtualization@lfdr.de>;
-	Tue, 16 Feb 2021 09:46:00 +0000 (UTC)
-Received: by smtp3.osuosl.org (Postfix, from userid 1001)
-	id D7DA46F56F; Tue, 16 Feb 2021 09:46:00 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 136686F56A;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 26BC884B08;
 	Tue, 16 Feb 2021 09:45:47 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id OvttvjuVQO0b; Tue, 16 Feb 2021 09:45:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by fraxinus.osuosl.org (Postfix) with ESMTP id AA4A5847E5;
+	Tue, 16 Feb 2021 09:45:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E04C9C0FA7;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 887FDC0FA7;
 	Tue, 16 Feb 2021 09:45:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 67C80C013A
- for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:45 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 54C9E6F48C
- for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Feb 2021 09:45:45 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id k1Og-GW7OQFS
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93579C013A
  for <virtualization@lists.linux-foundation.org>;
  Tue, 16 Feb 2021 09:45:44 +0000 (UTC)
-Received: by smtp3.osuosl.org (Postfix, from userid 1001)
- id 909296F508; Tue, 16 Feb 2021 09:45:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from localhost (localhost [127.0.0.1])
+ by whitealder.osuosl.org (Postfix) with ESMTP id 885698670A
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 16 Feb 2021 09:45:44 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from whitealder.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id CnDafnySQNS7
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 52F0C6F4E4
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 6760386741
  for <virtualization@lists.linux-foundation.org>;
  Tue, 16 Feb 2021 09:45:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -50,30 +45,29 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=epeDldi/RqZNzvZCpZ/Dw6am7oNc4937HhZPeBnWnoI=;
- b=HhU3+wAuHs1jrS1bBj9JWlcbXnTp/uB6yYqaPnh1tdIIyyIseFezVRirZ5cjNxWk3e71Ry
- 3SisRPKdoTe/qS2oOhxvdiw1TOAwfa2TFMfhuAbNGru18D01Zkk0a5xCvP6SWeTorSJ1QU
- GHDl+3hYu/giVtVe9nfE/YfMjCUj4H8=
+ bh=HBRaTQc7Ttw1kohIDA1m2qTU6L8be75odJdy+4tgCL8=;
+ b=LQop7jixI3dp3ed+TmkJx6L/FRb5xPcmt/SaBVhw16xi+C4wNW0Uh23eHS3iUq+E6g+Ghl
+ zvbuSPQYThfgaC9XfVC5PqkDSDUYrEsEjOH1xXkjnm5K5hwDWcPNhter8WgSlIBwqawDMD
+ jsKc1Bs5riZF/7Sh2E0jJ4pwsZrxqDA=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-436-YetAxVWXOEmKjMEu6GCXKw-1; Tue, 16 Feb 2021 04:45:38 -0500
-X-MC-Unique: YetAxVWXOEmKjMEu6GCXKw-1
+ us-mta-369-LEkPaDiQMqOnRTuseGIZ_A-1; Tue, 16 Feb 2021 04:45:40 -0500
+X-MC-Unique: LEkPaDiQMqOnRTuseGIZ_A-1
 Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
  [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 65573100A689;
- Tue, 16 Feb 2021 09:45:37 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 18ED5801962;
+ Tue, 16 Feb 2021 09:45:39 +0000 (UTC)
 Received: from steredhat.redhat.com (ovpn-113-212.ams2.redhat.com
  [10.36.113.212])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 109B216D5E;
- Tue, 16 Feb 2021 09:45:35 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id BA50F1851D;
+ Tue, 16 Feb 2021 09:45:37 +0000 (UTC)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [RFC PATCH 05/10] vdpa: remove WARN_ON() in the get/set_config
- callbacks
-Date: Tue, 16 Feb 2021 10:44:49 +0100
-Message-Id: <20210216094454.82106-6-sgarzare@redhat.com>
+Subject: [RFC PATCH 06/10] virtio_vdpa: use vdpa_set_config()
+Date: Tue, 16 Feb 2021 10:44:50 +0100
+Message-Id: <20210216094454.82106-7-sgarzare@redhat.com>
 In-Reply-To: <20210216094454.82106-1-sgarzare@redhat.com>
 References: <20210216094454.82106-1-sgarzare@redhat.com>
 MIME-Version: 1.0
@@ -96,59 +90,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vdpa_get_config() and vdpa_set_config() now check parameters before
-calling callbacks, so we can remove these warnings.
+Instead of calling the 'set_config' callback directly, we call the
+new vdpa_set_config() helper which also checks the parameters.
 
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
-Maybe we can skip this patch and leave the WARN_ONs in place.
-What do you recommend?
----
- drivers/vdpa/ifcvf/ifcvf_base.c | 3 +--
- drivers/vdpa/ifcvf/ifcvf_main.c | 2 --
- 2 files changed, 1 insertion(+), 4 deletions(-)
+ drivers/virtio/virtio_vdpa.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/vdpa/ifcvf/ifcvf_base.c b/drivers/vdpa/ifcvf/ifcvf_base.c
-index f2a128e56de5..5941ecf934d0 100644
---- a/drivers/vdpa/ifcvf/ifcvf_base.c
-+++ b/drivers/vdpa/ifcvf/ifcvf_base.c
-@@ -222,7 +222,6 @@ void ifcvf_read_net_config(struct ifcvf_hw *hw, u64 offset,
- 	u8 old_gen, new_gen, *p;
- 	int i;
- 
--	WARN_ON(offset + length > sizeof(struct virtio_net_config));
- 	do {
- 		old_gen = ifc_ioread8(&hw->common_cfg->config_generation);
- 		p = dst;
-@@ -240,7 +239,7 @@ void ifcvf_write_net_config(struct ifcvf_hw *hw, u64 offset,
- 	int i;
- 
- 	p = src;
--	WARN_ON(offset + length > sizeof(struct virtio_net_config));
-+
- 	for (i = 0; i < length; i++)
- 		ifc_iowrite8(*p++, hw->net_cfg + offset + i);
- }
-diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
-index 2443271e17d2..e55f88c57461 100644
---- a/drivers/vdpa/ifcvf/ifcvf_main.c
-+++ b/drivers/vdpa/ifcvf/ifcvf_main.c
-@@ -343,7 +343,6 @@ static void ifcvf_vdpa_get_config(struct vdpa_device *vdpa_dev,
+diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
+index e28acf482e0c..2f1c4a2dd241 100644
+--- a/drivers/virtio/virtio_vdpa.c
++++ b/drivers/virtio/virtio_vdpa.c
+@@ -65,9 +65,8 @@ static void virtio_vdpa_set(struct virtio_device *vdev, unsigned offset,
+ 			    const void *buf, unsigned len)
  {
- 	struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
+ 	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
+-	const struct vdpa_config_ops *ops = vdpa->config;
  
--	WARN_ON(offset + len > sizeof(struct virtio_net_config));
- 	ifcvf_read_net_config(vf, offset, buf, len);
+-	ops->set_config(vdpa, offset, buf, len);
++	vdpa_set_config(vdpa, offset, buf, len);
  }
  
-@@ -353,7 +352,6 @@ static void ifcvf_vdpa_set_config(struct vdpa_device *vdpa_dev,
- {
- 	struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
- 
--	WARN_ON(offset + len > sizeof(struct virtio_net_config));
- 	ifcvf_write_net_config(vf, offset, buf, len);
- }
- 
+ static u32 virtio_vdpa_generation(struct virtio_device *vdev)
 -- 
 2.29.2
 
