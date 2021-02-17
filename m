@@ -1,80 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C04B31D97E
-	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:32:38 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9BFE831D975
+	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:32:34 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 273C08612B;
-	Wed, 17 Feb 2021 12:32:36 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1D9BB86D56;
+	Wed, 17 Feb 2021 12:32:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id L1OZtElhRF5L; Wed, 17 Feb 2021 12:32:34 +0000 (UTC)
+	with ESMTP id tn3x8nVW4TqU; Wed, 17 Feb 2021 12:32:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 48B63860C5;
+	by whitealder.osuosl.org (Postfix) with ESMTP id 1611686D42;
 	Wed, 17 Feb 2021 12:32:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3AEC5C013A;
-	Wed, 17 Feb 2021 12:32:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F2447C013A;
+	Wed, 17 Feb 2021 12:32:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B69F2C013A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 61321C0893
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 Feb 2021 12:32:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id A67E086D19
+ by whitealder.osuosl.org (Postfix) with ESMTP id 53DCA86D37
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 Feb 2021 12:32:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6dH1toIKZ2SB
+ with ESMTP id mryJPvGI6A4p
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:32:29 +0000 (UTC)
+ Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 15CFE86D2F
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 2C14E86D1C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
+ Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613565148;
+ s=mimecast20190719; t=1613565144;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JU9xqyDz+/JZ1pv9CUV7jElgPp7ezMbvPiq81Zym9Z8=;
- b=bn4ZD0RkdZxSH7iRT842RFgpdAOgf4MTY0yTtHCyYS+itgxi7XL+K9pqUd8/moMCFFrcnR
- lBWLWvUNwGDGrRCwmPp9X56+0C2+/JWXRUXVckWGdR7w7pwnD2MH3J9PFCAQDXZbafiqWz
- uTDPFcVOPlX6Iz6N5WzCCTCcMefZEb4=
+ bh=ps0qnLl0Vg7nky00C03wCQu+tKKDC6GWGs6Nzz0kPq0=;
+ b=KRK4oFfzaf/2Rxqcb1q3pGnihzsoEoz7tvnZYtO3y0REaFfxk1NJ/xRV1UFd81CvLKg7M7
+ oszbZPWAJEfJSSV8ZjCioshpH8NpAdyfkmL53znmHo4uGwlhxf7Y7qxUsbMKd5VI8MZSQ6
+ 0lAm6qw5YnCS0+/sjbRQoUGUTXcJluU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-289-uUYTIYitMOy6UjmdQVRIAw-1; Wed, 17 Feb 2021 07:32:24 -0500
-X-MC-Unique: uUYTIYitMOy6UjmdQVRIAw-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-249-LeF7OvwsNt6SyXxzpk5-SQ-1; Wed, 17 Feb 2021 07:32:21 -0500
+X-MC-Unique: LeF7OvwsNt6SyXxzpk5-SQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BD3C580196C;
- Wed, 17 Feb 2021 12:32:22 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DE66A6D4E6;
+ Wed, 17 Feb 2021 12:32:19 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-114-184.ams2.redhat.com
  [10.36.114.184])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 9D32310027A5;
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A03CB60853;
  Wed, 17 Feb 2021 12:32:19 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 9127D18003B7; Wed, 17 Feb 2021 13:32:14 +0100 (CET)
+ id AD1EB18003BB; Wed, 17 Feb 2021 13:32:14 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v2 06/11] drm/qxl: add qxl_bo_vmap/qxl_bo_vunmap
-Date: Wed, 17 Feb 2021 13:32:08 +0100
-Message-Id: <20210217123213.2199186-7-kraxel@redhat.com>
+Subject: [PATCH v2 07/11] drm/qxl: fix prime vmap
+Date: Wed, 17 Feb 2021 13:32:09 +0100
+Message-Id: <20210217123213.2199186-8-kraxel@redhat.com>
 In-Reply-To: <20210217123213.2199186-1-kraxel@redhat.com>
 References: <20210217123213.2199186-1-kraxel@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: David Airlie <airlied@linux.ie>, open list <linux-kernel@vger.kernel.org>,
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
+ open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
@@ -95,91 +96,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add vmap/vunmap variants which reserve (and pin) the bo.
-They can be used in case the caller doesn't hold a reservation
-for the bo.
+Use the correct vmap variant.  We don't have a reservation here,
+so we can't use the _locked version.
 
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/qxl/qxl_object.h |  2 ++
- drivers/gpu/drm/qxl/qxl_object.c | 36 ++++++++++++++++++++++++++++++++
- 2 files changed, 38 insertions(+)
+ drivers/gpu/drm/qxl/qxl_prime.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_object.h b/drivers/gpu/drm/qxl/qxl_object.h
-index 2495e5cdf353..ee9c29de4d3d 100644
---- a/drivers/gpu/drm/qxl/qxl_object.h
-+++ b/drivers/gpu/drm/qxl/qxl_object.h
-@@ -64,7 +64,9 @@ extern int qxl_bo_create(struct qxl_device *qdev,
- 			 u32 priority,
- 			 struct qxl_surface *surf,
- 			 struct qxl_bo **bo_ptr);
-+int qxl_bo_vmap(struct qxl_bo *bo, struct dma_buf_map *map);
- int qxl_bo_vmap_locked(struct qxl_bo *bo, struct dma_buf_map *map);
-+int qxl_bo_vunmap(struct qxl_bo *bo);
- void qxl_bo_vunmap_locked(struct qxl_bo *bo);
- void *qxl_bo_kmap_atomic_page(struct qxl_device *qdev, struct qxl_bo *bo, int page_offset);
- void qxl_bo_kunmap_atomic_page(struct qxl_device *qdev, struct qxl_bo *bo, void *map);
-diff --git a/drivers/gpu/drm/qxl/qxl_object.c b/drivers/gpu/drm/qxl/qxl_object.c
-index f4a015381a7f..82c3bf195ad6 100644
---- a/drivers/gpu/drm/qxl/qxl_object.c
-+++ b/drivers/gpu/drm/qxl/qxl_object.c
-@@ -29,6 +29,9 @@
- #include "qxl_drv.h"
- #include "qxl_object.h"
+diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
+index 2bebe662516f..0628d1cc91fe 100644
+--- a/drivers/gpu/drm/qxl/qxl_prime.c
++++ b/drivers/gpu/drm/qxl/qxl_prime.c
+@@ -59,7 +59,7 @@ int qxl_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map)
+ 	struct qxl_bo *bo = gem_to_qxl_bo(obj);
+ 	int ret;
  
-+static int __qxl_bo_pin(struct qxl_bo *bo);
-+static void __qxl_bo_unpin(struct qxl_bo *bo);
-+
- static void qxl_ttm_bo_destroy(struct ttm_buffer_object *tbo)
+-	ret = qxl_bo_vmap_locked(bo, map);
++	ret = qxl_bo_vmap(bo, map);
+ 	if (ret < 0)
+ 		return ret;
+ 
+@@ -71,7 +71,7 @@ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
  {
- 	struct qxl_bo *bo;
-@@ -179,6 +182,25 @@ int qxl_bo_vmap_locked(struct qxl_bo *bo, struct dma_buf_map *map)
- 	return 0;
+ 	struct qxl_bo *bo = gem_to_qxl_bo(obj);
+ 
+-	qxl_bo_vunmap_locked(bo);
++	qxl_bo_vunmap(bo);
  }
  
-+int qxl_bo_vmap(struct qxl_bo *bo, struct dma_buf_map *map)
-+{
-+	int r;
-+
-+	r = qxl_bo_reserve(bo);
-+	if (r)
-+		return r;
-+
-+	r = __qxl_bo_pin(bo);
-+	if (r) {
-+		qxl_bo_unreserve(bo);
-+		return r;
-+	}
-+
-+	r = qxl_bo_vmap_locked(bo, map);
-+	qxl_bo_unreserve(bo);
-+	return r;
-+}
-+
- void *qxl_bo_kmap_atomic_page(struct qxl_device *qdev,
- 			      struct qxl_bo *bo, int page_offset)
- {
-@@ -223,6 +245,20 @@ void qxl_bo_vunmap_locked(struct qxl_bo *bo)
- 	ttm_bo_vunmap(&bo->tbo, &bo->map);
- }
- 
-+int qxl_bo_vunmap(struct qxl_bo *bo)
-+{
-+	int r;
-+
-+	r = qxl_bo_reserve(bo);
-+	if (r)
-+		return r;
-+
-+	qxl_bo_vunmap_locked(bo);
-+	__qxl_bo_unpin(bo);
-+	qxl_bo_unreserve(bo);
-+	return 0;
-+}
-+
- void qxl_bo_kunmap_atomic_page(struct qxl_device *qdev,
- 			       struct qxl_bo *bo, void *pmap)
- {
+ int qxl_gem_prime_mmap(struct drm_gem_object *obj,
 -- 
 2.29.2
 
