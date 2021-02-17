@@ -1,83 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0EBB31D96B
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0914F31D969
 	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:32:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 6EC3C8725F;
-	Wed, 17 Feb 2021 12:32:30 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id B724686031;
+	Wed, 17 Feb 2021 12:32:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from hemlock.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RRK7DtPTrQLt; Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
+	with ESMTP id kZuRkugH4hiX; Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2803387258;
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 7AE6C86004;
 	Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E4727C0893;
-	Wed, 17 Feb 2021 12:32:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 55811C0174;
+	Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 31BC9C0893
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0E552C013A
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1A36C6F49B
+ by hemlock.osuosl.org (Postfix) with ESMTP id 00A9D8724F
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YfJMfIdDV9dv
+Received: from hemlock.osuosl.org ([127.0.0.1])
+ by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fBT7KaBXVGMi
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:32:25 +0000 (UTC)
-Received: by smtp3.osuosl.org (Postfix, from userid 1001)
- id 1F2706F4C0; Wed, 17 Feb 2021 12:32:25 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+ Wed, 17 Feb 2021 12:32:24 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6ACAE6F59D
+ by hemlock.osuosl.org (Postfix) with ESMTPS id B081C86FF2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:32:23 +0000 (UTC)
+ Wed, 17 Feb 2021 12:32:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613565141;
+ s=mimecast20190719; t=1613565143;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=wIgmEdcETYIvmhNMC9LU2v3VYZb5ENHPsx26BQXLWeo=;
- b=M+ebUwwMqV2RqOVPIiOU87bfGaGpY9Em5w1/GJjzhXnA1h20MMry3ksrk9pvGIPtXnQuP+
- eqs9U++DgCqg6qbr3cA67uBfhPeGSQews/8mp6wE9TppqJE8cBMWdw6Sohq/c48k8BduuA
- Vo7kx7RWTcuX/8MXAEgpUnz3aGsjVVc=
+ bh=DiCy0F4/eqFB1kqnyP+DuL/SrqKgOjwfdGc3gxtD5oA=;
+ b=F2omiyuWS/wvS9fHI6h30hnCookBAO4RHu87wStyB2nErm1ZULQiLGuU84DFo6dLVAuwn8
+ 4csXccRgWVRHwwFodgvgO6xb82w4+rvGUzoih+QwYFcal+NiS0kAcj51+R4vFD76P1wjei
+ 0YEWyfNvDBKrFiPs3M2AIu3FiRQn3zM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-490-gRnAcsj5P22VYwIevGInCQ-1; Wed, 17 Feb 2021 07:32:20 -0500
-X-MC-Unique: gRnAcsj5P22VYwIevGInCQ-1
+ us-mta-490-LZV6VvzoNZyiRgwPPjDMRQ-1; Wed, 17 Feb 2021 07:32:19 -0500
+X-MC-Unique: LZV6VvzoNZyiRgwPPjDMRQ-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 88CCB195D56E;
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 89E751020C2C;
  Wed, 17 Feb 2021 12:32:18 +0000 (UTC)
 Received: from sirius.home.kraxel.org (ovpn-114-184.ams2.redhat.com
  [10.36.114.184])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 4001860853;
- Wed, 17 Feb 2021 12:32:14 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B53B560DA1;
+ Wed, 17 Feb 2021 12:32:15 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 87D5918000B6; Wed, 17 Feb 2021 13:32:13 +0100 (CET)
+ id A6D2F1800396; Wed, 17 Feb 2021 13:32:13 +0100 (CET)
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: dri-devel@lists.freedesktop.org
-Subject: [PATCH v2 01/11] drm/qxl: properly handle device init failures
-Date: Wed, 17 Feb 2021 13:32:03 +0100
-Message-Id: <20210217123213.2199186-2-kraxel@redhat.com>
+Subject: [PATCH v2 02/11] drm/qxl: more fence wait rework
+Date: Wed, 17 Feb 2021 13:32:04 +0100
+Message-Id: <20210217123213.2199186-3-kraxel@redhat.com>
 In-Reply-To: <20210217123213.2199186-1-kraxel@redhat.com>
 References: <20210217123213.2199186-1-kraxel@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
- Tong Zhang <ztong0001@gmail.com>, open list <linux-kernel@vger.kernel.org>,
+ open list <linux-kernel@vger.kernel.org>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
  <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
  "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
@@ -98,47 +96,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Specifically do not try release resources which where
-not allocated in the first place.
+Move qxl_io_notify_oom() call into wait condition.
+That way the driver will call it again if one call
+wasn't enough.
 
-Cc: Tong Zhang <ztong0001@gmail.com>
-Tested-by: Tong Zhang <ztong0001@gmail.com>
+Also allows to remove the extra dma_fence_is_signaled()
+check and the goto.
+
+Fixes: 5a838e5d5825 ("drm/qxl: simplify qxl_fence_wait")
 Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
-Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/qxl/qxl_display.c | 3 +++
- drivers/gpu/drm/qxl/qxl_kms.c     | 4 ++++
- 2 files changed, 7 insertions(+)
+ drivers/gpu/drm/qxl/qxl_release.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
-index c326412136c5..ec50d2cfd4e1 100644
---- a/drivers/gpu/drm/qxl/qxl_display.c
-+++ b/drivers/gpu/drm/qxl/qxl_display.c
-@@ -1183,6 +1183,9 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
- {
- 	int ret;
+diff --git a/drivers/gpu/drm/qxl/qxl_release.c b/drivers/gpu/drm/qxl/qxl_release.c
+index 6ed673d75f9f..579c6de10c8e 100644
+--- a/drivers/gpu/drm/qxl/qxl_release.c
++++ b/drivers/gpu/drm/qxl/qxl_release.c
+@@ -62,16 +62,12 @@ static long qxl_fence_wait(struct dma_fence *fence, bool intr,
  
-+	if (!qdev->monitors_config_bo)
-+		return 0;
-+
- 	qdev->monitors_config = NULL;
- 	qdev->ram_header->monitors_config = 0;
+ 	qdev = container_of(fence->lock, struct qxl_device, release_lock);
  
-diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
-index 66d74aaaee06..4dc5ad13f12c 100644
---- a/drivers/gpu/drm/qxl/qxl_kms.c
-+++ b/drivers/gpu/drm/qxl/qxl_kms.c
-@@ -288,6 +288,10 @@ void qxl_device_fini(struct qxl_device *qdev)
- {
- 	int cur_idx;
+-	if (dma_fence_is_signaled(fence))
+-		goto signaled;
+-
+-	qxl_io_notify_oom(qdev);
+ 	if (!wait_event_timeout(qdev->release_event,
+-				dma_fence_is_signaled(fence),
++				(dma_fence_is_signaled(fence) ||
++				 (qxl_io_notify_oom(qdev), 0)),
+ 				timeout))
+ 		return 0;
  
-+	/* check if qxl_device_init() was successful (gc_work is initialized last) */
-+	if (!qdev->gc_work.func)
-+		return;
-+
- 	for (cur_idx = 0; cur_idx < 3; cur_idx++) {
- 		if (!qdev->current_release_bo[cur_idx])
- 			continue;
+-signaled:
+ 	cur = jiffies;
+ 	if (time_after(cur, end))
+ 		return 0;
 -- 
 2.29.2
 
