@@ -1,76 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6B97931D9A4
-	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:41:52 +0100 (CET)
+Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1445931D9AE
+	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:45:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 0ABB2860AD;
-	Wed, 17 Feb 2021 12:41:51 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id C4B5686D3F;
+	Wed, 17 Feb 2021 12:45:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id liK1DKkBrL_c; Wed, 17 Feb 2021 12:41:50 +0000 (UTC)
+	with ESMTP id 0lPXJbOVjtS4; Wed, 17 Feb 2021 12:45:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by fraxinus.osuosl.org (Postfix) with ESMTP id 93C4A86099;
-	Wed, 17 Feb 2021 12:41:50 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3A0CE86D26;
+	Wed, 17 Feb 2021 12:45:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B098C013A;
-	Wed, 17 Feb 2021 12:41:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1785EC013A;
+	Wed, 17 Feb 2021 12:45:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0641AC013A
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8728DC013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:41:49 +0000 (UTC)
+ Wed, 17 Feb 2021 12:45:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by fraxinus.osuosl.org (Postfix) with ESMTP id E7F9A86088
+ by hemlock.osuosl.org (Postfix) with ESMTP id 7A65787262
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:41:48 +0000 (UTC)
+ Wed, 17 Feb 2021 12:45:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from fraxinus.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MhkAtg_CRO6D
+ with ESMTP id mYtvvOTg43FA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:41:48 +0000 (UTC)
+ Wed, 17 Feb 2021 12:45:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by fraxinus.osuosl.org (Postfix) with ESMTPS id 6267C85FB9
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id EFEAA8725F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:41:48 +0000 (UTC)
+ Wed, 17 Feb 2021 12:45:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613565706;
+ s=mimecast20190719; t=1613565899;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=o7pHnryK4vudTBjeC8f619X85eskd6tV+DbXH60fnEw=;
- b=V7rapIAy80DO0wenAmOFZWIWBky5BVEwddcSQT3oGIsqN1hIfgOL+gaw64NxcIt7UJiQDX
- cSYglp0Uk0izaTPKC3t7mClXctctAHrBpNUYCtQ27mL6yw56FqSWAPh1JSbDCvQI8I1HLV
- Pc9YJofsa7PhttsrmquJOTkaiVQN1l8=
+ bh=LdV3rLZJQcwe7yOhKJf+uyqCg3gHM0IziOlYFpxcxzE=;
+ b=eDfq+kVostb2Zaho/wqcPq4tXLO4dBvp9c+l2No15HWEgaZqXiDoXmNG/RbLJ15C0mya8u
+ q98R/JZoVcQd2aNL9ca9ZZfZfcYjqSRIvt5m8YO63gBKcXPAyQGMITfdqL8P/TSu64nd60
+ jaJAQXZAHvLE7lAPpXD2gUI/TQ+WBqc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-446-0GUgyPcyPuuw-vrWj6oRWg-1; Wed, 17 Feb 2021 07:41:42 -0500
-X-MC-Unique: 0GUgyPcyPuuw-vrWj6oRWg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-487-KVfYYkqnM3CpE5qnO8tlJQ-1; Wed, 17 Feb 2021 07:44:56 -0500
+X-MC-Unique: KVfYYkqnM3CpE5qnO8tlJQ-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id ED15191276;
- Wed, 17 Feb 2021 12:41:40 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6ED4B100CCC0;
+ Wed, 17 Feb 2021 12:44:54 +0000 (UTC)
 Received: from localhost (ovpn-115-102.ams2.redhat.com [10.36.115.102])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 128B018B5E;
- Wed, 17 Feb 2021 12:41:35 +0000 (UTC)
-Date: Wed, 17 Feb 2021 12:41:34 +0000
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0B98D10023B4;
+ Wed, 17 Feb 2021 12:44:49 +0000 (UTC)
+Date: Wed, 17 Feb 2021 12:44:48 +0000
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: Eugenio =?iso-8859-1?Q?P=E9rez?= <eperezma@redhat.com>
-Subject: Re: [RFC v2 2/7] virtio: Add virtio_queue_host_notifier_status
-Message-ID: <20210217124134.GD269203@stefanha-x1.localdomain>
+Subject: Re: [RFC v2 3/7] vhost: Save masked_notifier state
+Message-ID: <20210217124448.GE269203@stefanha-x1.localdomain>
 References: <20210209153757.1653598-1-eperezma@redhat.com>
- <20210209153757.1653598-3-eperezma@redhat.com>
+ <20210209153757.1653598-4-eperezma@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210209153757.1653598-3-eperezma@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+In-Reply-To: <20210209153757.1653598-4-eperezma@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=stefanha@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -92,88 +92,50 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7845063742910751000=="
+Content-Type: multipart/mixed; boundary="===============8717427502455008073=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============7845063742910751000==
+--===============8717427502455008073==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="sXc4Kmr5FA7axrvy"
+	protocol="application/pgp-signature"; boundary="7CZp05NP8/gJM8Cl"
 Content-Disposition: inline
 
---sXc4Kmr5FA7axrvy
+--7CZp05NP8/gJM8Cl
 Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 09, 2021 at 04:37:52PM +0100, Eugenio P=E9rez wrote:
-> This allows shadow virtqueue code to assert the queue status before
-> making changes.
+On Tue, Feb 09, 2021 at 04:37:53PM +0100, Eugenio P=E9rez wrote:
+> It will be used to recover call eventfd.
 >=20
 > Signed-off-by: Eugenio P=E9rez <eperezma@redhat.com>
 > ---
->  include/hw/virtio/virtio.h | 1 +
->  hw/virtio/virtio.c         | 5 +++++
->  2 files changed, 6 insertions(+)
->=20
-> diff --git a/include/hw/virtio/virtio.h b/include/hw/virtio/virtio.h
-> index b7ece7a6a8..227cec13a8 100644
-> --- a/include/hw/virtio/virtio.h
-> +++ b/include/hw/virtio/virtio.h
-> @@ -316,6 +316,7 @@ void virtio_device_release_ioeventfd(VirtIODevice *vd=
-ev);
->  bool virtio_device_ioeventfd_enabled(VirtIODevice *vdev);
->  EventNotifier *virtio_queue_get_host_notifier(VirtQueue *vq);
->  void virtio_queue_set_host_notifier_enabled(VirtQueue *vq, bool enabled)=
-;
-> +bool virtio_queue_host_notifier_status(const VirtQueue *vq);
->  void virtio_queue_host_notifier_read(EventNotifier *n);
->  void virtio_queue_aio_set_host_notifier_handler(VirtQueue *vq, AioContex=
-t *ctx,
->                                                  VirtIOHandleAIOOutput ha=
-ndle_output);
-> diff --git a/hw/virtio/virtio.c b/hw/virtio/virtio.c
-> index 1fd1917ca0..53473ae4df 100644
-> --- a/hw/virtio/virtio.c
-> +++ b/hw/virtio/virtio.c
-> @@ -3594,6 +3594,11 @@ EventNotifier *virtio_queue_get_host_notifier(Virt=
-Queue *vq)
->      return &vq->host_notifier;
->  }
-> =20
-> +bool virtio_queue_host_notifier_status(const VirtQueue *vq)
-> +{
-> +    return vq->host_notifier_enabled;
-> +}
-> +
->  void virtio_queue_set_host_notifier_enabled(VirtQueue *vq, bool enabled)
+>  include/hw/virtio/vhost.h | 1 +
+>  hw/virtio/vhost.c         | 2 ++
+>  2 files changed, 3 insertions(+)
 
-Since there is a virtio_queue_set_host_notifier_enabled() I suggest
-calling this function virtio_queue_is_host_notifier_enabled() or
-virtio_queue_get_host_notifier_enabled(). That way it's clear they
-set/get the same thing.
+Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
 
-Stefan
-
---sXc4Kmr5FA7axrvy
+--7CZp05NP8/gJM8Cl
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmAtDv4ACgkQnKSrs4Gr
-c8jhrAgAlJQwWJbQYjx47mMJ+bFY4vIRCvNQ3f/HF9peIeT8o5se2dn0Gz+VOEr9
-1tu8Jf+TzFZgbQ2W8aEoErRF2i02lVU/eMKdnyunQzg6tZR5JFx2Cbepb6P4Dg+t
-yTL9xjzsJCJpBEeZfURzv7FE/CXDz3U/noLZMr1dlQOPqzYGmQbBnHoCt39dLNHK
-u73peJWPVrU1pK/u/dNWvGXswN9zjYS/aLTPlqEZ1Dwm1A7gZy6sYm5JuJnocEtr
-3fKfBNpa25P9RjK5U1Zr6rK/dI9vYNjgA6KeN1Ue7oioBmNG6E1dA+TUhrhChIw+
-SCmXF2F/cfDF4O45jaymVRW4pGqSoA==
-=iuaX
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmAtD8AACgkQnKSrs4Gr
+c8j2awf/UHpk5f3tKV12AGNdVg31ydUM74AvMrV0hYGB6lTdcFDChrTUGA2CJBcO
+g3f5GUVM8kfOYjbtYi7rPJw97nxZ8L65byVZgXC6nvBE/Wl7wzENysTM8a1Og/87
+xquNt0Du/prug5i29Tdt5463ivuZT9vZYa7FsFfdFw1eQPOp3VrCds52eEym4AS0
+zqTy0EVjB8Nk91m+IwTfyNzg3shdYSry8p0r5NK3UpxMRCQv2o3vHG1hXaDLO56/
+kRx3OtHyjC0NlIePRLsyKm9ap8kJEV1F/ioqPXXKPyx7UOxjMcKY1kx6PJM8mMjv
+O1wlfz6yjtOvFq/UNw5imUJ+lj8ytQ==
+=rvvf
 -----END PGP SIGNATURE-----
 
---sXc4Kmr5FA7axrvy--
+--7CZp05NP8/gJM8Cl--
 
 
---===============7845063742910751000==
+--===============8717427502455008073==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -183,5 +145,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============7845063742910751000==--
+--===============8717427502455008073==--
 
