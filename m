@@ -1,75 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4EA1931D545
-	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 07:06:51 +0100 (CET)
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 244F431D674
+	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 09:20:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C3AB06F60F
-	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 06:06:49 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id D5DF684B1C;
+	Wed, 17 Feb 2021 08:20:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FYJVgi6_VBgI for <lists.virtualization@lfdr.de>;
-	Wed, 17 Feb 2021 06:06:48 +0000 (UTC)
-Received: by smtp3.osuosl.org (Postfix, from userid 1001)
-	id 98B156F61C; Wed, 17 Feb 2021 06:06:48 +0000 (UTC)
+Received: from fraxinus.osuosl.org ([127.0.0.1])
+	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xQIbEmQhlrmq; Wed, 17 Feb 2021 08:20:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6807C6F5C6;
-	Wed, 17 Feb 2021 06:06:36 +0000 (UTC)
+	by fraxinus.osuosl.org (Postfix) with ESMTP id 66BC285B5B;
+	Wed, 17 Feb 2021 08:20:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0CF27C1DA9;
-	Wed, 17 Feb 2021 06:06:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4471AC013A;
+	Wed, 17 Feb 2021 08:20:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6DB99C013A
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 24AD7C013A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 06:06:32 +0000 (UTC)
+ Wed, 17 Feb 2021 08:20:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 53A5586866
+ by hemlock.osuosl.org (Postfix) with ESMTP id 0ADAC871E5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 06:06:32 +0000 (UTC)
+ Wed, 17 Feb 2021 08:20:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IXalEHbZRk3j
+ with ESMTP id RelbaN9V8Ry7
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 06:06:31 +0000 (UTC)
+ Wed, 17 Feb 2021 08:20:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from hqnvemgate25.nvidia.com (hqnvemgate25.nvidia.com
- [216.228.121.64])
- by whitealder.osuosl.org (Postfix) with ESMTPS id B1EE186660
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by hemlock.osuosl.org (Postfix) with ESMTPS id 2194F8716C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 06:06:31 +0000 (UTC)
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B602cb2670000>; Tue, 16 Feb 2021 22:06:31 -0800
-Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Wed, 17 Feb 2021 06:06:30 +0000
-From: Parav Pandit <parav@nvidia.com>
-To: <mst@redhat.com>, <virtualization@lists.linux-foundation.org>,
- <jasowang@redhat.com>
-Subject: [PATCH linux-next v2] vdpa: Fix memory leak in error unwinding path
-Date: Wed, 17 Feb 2021 08:06:14 +0200
-Message-ID: <20210217060614.59561-1-parav@nvidia.com>
-X-Mailer: git-send-email 2.26.2
+ Wed, 17 Feb 2021 08:20:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1613550034;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=k0xrNYCR0BWhvnXoy/4bxBpl3MYWqciVP//PEpkTIac=;
+ b=h4tnAd7s2yHffQxUUi9yZg11GcdN0qrU+2etfB1gRgVizSd9yJttuBIeLtjII0gmjBDJSu
+ nS7hs/ja2QAne7TUpjlASoGvytYczKt+EOM/U64FgryoAEvHvYa2ZYaQ/ezuR5U9y5Pmq/
+ /mA6L35ZdL0Pugfyg78/68WlhTEGUFY=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-485-suBpF26pNJiXbyAfOyhA8g-1; Wed, 17 Feb 2021 03:20:32 -0500
+X-MC-Unique: suBpF26pNJiXbyAfOyhA8g-1
+Received: by mail-wr1-f70.google.com with SMTP id h20so16166211wrb.12
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 Feb 2021 00:20:31 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=k0xrNYCR0BWhvnXoy/4bxBpl3MYWqciVP//PEpkTIac=;
+ b=il3Xdu8Mv5qdvOnFLDNE5al0LbuSD585exv/+lzActCkPcCXw5W9519t66K7JJFjY1
+ EESEU0IqERwZAP3Wcg07N5OmulCikCIrGgaEjp+AvicqD4jPQwYfT+ebEvdpIqEluftt
+ Y6Byktv0j4z/FqdKFYzH1Sf8VqPmILcgfiQ8eFvUnlzT/cxoDshCCac/k3Hu7Udcysxc
+ gy2YHdbyr1fW+3cvExz4/dLaWKlh0pvzW30Xr4u3ospsi6epppj46GCf3Pc2Mj5N8ESZ
+ ahoUjtttivZUTUzHEkX62kulEF5Ozf59VgIykutNVV73fWRpzMlkZm/pjMaMoZmT0S2d
+ 7hRA==
+X-Gm-Message-State: AOAM532Ffs0O012/gRGh5U4EBCHrmM4f9t0hPCa2dm8bZ41TJLX5V1UM
+ TWyTZnL7Wn0gRzn7qqw4IUgU+U5sem8xdRdIGOEDd0q6gN17mLW33EZ4uXkisbvjxbKnV2BRf3b
+ MJ3sFDmkhjr7aKeXXGcozj2MJE8yOoPjGz0GD8saR7A==
+X-Received: by 2002:a1c:1fca:: with SMTP id f193mr6115650wmf.102.1613550031042; 
+ Wed, 17 Feb 2021 00:20:31 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxKwiELGnwZ6+W4TohbWsYmTgVZIW1GLms41bk9ZTtd0UxTHXLQozntUN4LjQiHjX3TviPpfA==
+X-Received: by 2002:a1c:1fca:: with SMTP id f193mr6115630wmf.102.1613550030769; 
+ Wed, 17 Feb 2021 00:20:30 -0800 (PST)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id z2sm1689930wmf.46.2021.02.17.00.20.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Feb 2021 00:20:30 -0800 (PST)
+Date: Wed, 17 Feb 2021 09:20:28 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Parav Pandit <parav@nvidia.com>
+Subject: Re: [PATCH linux-next v2] vdpa: Fix memory leak in error unwinding
+ path
+Message-ID: <20210217082028.6dsdydy4wavrl64g@steredhat>
+References: <20210217060614.59561-1-parav@nvidia.com>
 MIME-Version: 1.0
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1613541991; bh=I+qpsHvb3or79Z/XkLxs3wR1yOB0C7v+5jtSjtAo8Qo=;
- h=From:To:CC:Subject:Date:Message-ID:X-Mailer:MIME-Version:
- Content-Transfer-Encoding:Content-Type:X-Originating-IP:
- X-ClientProxiedBy;
- b=A9aRAnRHkRRx6Y3e1VrQKV0CuZzc7P6kT7y7hyQJN/Xa70yyijt3GDorUQxiYO0zx
- J18Ubnk6lNqAx6GOOqK9rKiTykNHvsnlkNKBpY+jgzmaO5KssG+X2Fv3RyQfFylENn
- iuLs3aFbk5VT9LIMqsfPKyu9M17vLrY2UsJxZWomQ+5sivMTWKT6RpqIX9O6qprVxe
- vgqwByqmrVrSZ+4OtbA4kfZVEAujs9LiPn7fBCays1FVrgof/Lmz0C1kaMSeyB8MRH
- vG3xxZNmA2jKn4/Qn77zPJPDV+W2zij7InElBNyaHwVGbrxyVJllSBPqgQyh9GPnXt
- lzPnNsqnPvhFQ==
+In-Reply-To: <20210217060614.59561-1-parav@nvidia.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: virtualization@lists.linux-foundation.org, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,61 +105,65 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When device get command fails to find the device or mdev,
-it skips to free the skb during error unwinding path.
-Fix it by freeing in error unwind path.
-While at it, make error unwind path more clear to avoid such errors.
+On Wed, Feb 17, 2021 at 08:06:14AM +0200, Parav Pandit wrote:
+>When device get command fails to find the device or mdev,
+>it skips to free the skb during error unwinding path.
+>Fix it by freeing in error unwind path.
+>While at it, make error unwind path more clear to avoid such errors.
+>
+>Fixes: a12a2f694ce8 ("vdpa: Enable user to query vdpa device info")
+>Signed-off-by: Parav Pandit <parav@nvidia.com>
+>---
+>changelog:
+>v1->v2:
+> - Addressed Stefano's comment to make error unwind code more clear
+>---
+> drivers/vdpa/vdpa.c | 12 ++++++------
+> 1 file changed, 6 insertions(+), 6 deletions(-)
+>
+>diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+>index 3d997b389345..da67f07e24fd 100644
+>--- a/drivers/vdpa/vdpa.c
+>+++ b/drivers/vdpa/vdpa.c
+>@@ -538,22 +538,22 @@ static int vdpa_nl_cmd_dev_get_doit(struct sk_buff *skb, struct genl_info *info)
+> 	mutex_lock(&vdpa_dev_mutex);
+> 	dev = bus_find_device(&vdpa_bus, NULL, devname, vdpa_name_match);
+> 	if (!dev) {
+>-		mutex_unlock(&vdpa_dev_mutex);
+> 		NL_SET_ERR_MSG_MOD(info->extack, "device not found");
+>-		return -ENODEV;
+>+		err = -ENODEV;
+>+		goto err;
+> 	}
+> 	vdev = container_of(dev, struct vdpa_device, dev);
+> 	if (!vdev->mdev) {
+>-		mutex_unlock(&vdpa_dev_mutex);
+>-		put_device(dev);
+>-		return -EINVAL;
+>+		err = -EINVAL;
+>+		goto mdev_err;
+> 	}
+> 	err = vdpa_dev_fill(vdev, msg, info->snd_portid, info->snd_seq, 0, info->extack);
+> 	if (!err)
+> 		err = genlmsg_reply(msg, info);
+>+mdev_err:
+> 	put_device(dev);
+>+err:
+> 	mutex_unlock(&vdpa_dev_mutex);
+>-
+> 	if (err)
+> 		nlmsg_free(msg);
+> 	return err;
+>-- 
+>2.26.2
+>
 
-Fixes: a12a2f694ce8 ("vdpa: Enable user to query vdpa device info")
-Signed-off-by: Parav Pandit <parav@nvidia.com>
----
-changelog:
-v1->v2:
- - Addressed Stefano's comment to make error unwind code more clear
----
- drivers/vdpa/vdpa.c | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 3d997b389345..da67f07e24fd 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -538,22 +538,22 @@ static int vdpa_nl_cmd_dev_get_doit(struct sk_buff *skb, struct genl_info *info)
- 	mutex_lock(&vdpa_dev_mutex);
- 	dev = bus_find_device(&vdpa_bus, NULL, devname, vdpa_name_match);
- 	if (!dev) {
--		mutex_unlock(&vdpa_dev_mutex);
- 		NL_SET_ERR_MSG_MOD(info->extack, "device not found");
--		return -ENODEV;
-+		err = -ENODEV;
-+		goto err;
- 	}
- 	vdev = container_of(dev, struct vdpa_device, dev);
- 	if (!vdev->mdev) {
--		mutex_unlock(&vdpa_dev_mutex);
--		put_device(dev);
--		return -EINVAL;
-+		err = -EINVAL;
-+		goto mdev_err;
- 	}
- 	err = vdpa_dev_fill(vdev, msg, info->snd_portid, info->snd_seq, 0, info->extack);
- 	if (!err)
- 		err = genlmsg_reply(msg, info);
-+mdev_err:
- 	put_device(dev);
-+err:
- 	mutex_unlock(&vdpa_dev_mutex);
--
- 	if (err)
- 		nlmsg_free(msg);
- 	return err;
--- 
-2.26.2
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
 _______________________________________________
 Virtualization mailing list
