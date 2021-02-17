@@ -1,71 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 002C231D8F9
-	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:02:17 +0100 (CET)
+Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B0EBB31D96B
+	for <lists.virtualization@lfdr.de>; Wed, 17 Feb 2021 13:32:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 9759286D26;
-	Wed, 17 Feb 2021 12:02:16 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 6EC3C8725F;
+	Wed, 17 Feb 2021 12:32:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7iux+OFgdDWM; Wed, 17 Feb 2021 12:02:15 +0000 (UTC)
+	with ESMTP id RRK7DtPTrQLt; Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 7981986D32;
-	Wed, 17 Feb 2021 12:02:15 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 2803387258;
+	Wed, 17 Feb 2021 12:32:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 66E53C0174;
-	Wed, 17 Feb 2021 12:02:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E4727C0893;
+	Wed, 17 Feb 2021 12:32:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D9D2DC013A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 31BC9C0893
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:02:13 +0000 (UTC)
+ Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id C994B86D32
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1A36C6F49B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:02:13 +0000 (UTC)
+ Wed, 17 Feb 2021 12:32:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
- by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2Nnj3FajZlUt
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YfJMfIdDV9dv
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:02:12 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.7.6
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 5E6F586D19
+ Wed, 17 Feb 2021 12:32:25 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+ id 1F2706F4C0; Wed, 17 Feb 2021 12:32:25 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6ACAE6F59D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Feb 2021 12:02:12 +0000 (UTC)
-Received: from cap.home.8bytes.org (p549adcf6.dip0.t-ipconnect.de
- [84.154.220.246])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ Wed, 17 Feb 2021 12:32:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1613565141;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=wIgmEdcETYIvmhNMC9LU2v3VYZb5ENHPsx26BQXLWeo=;
+ b=M+ebUwwMqV2RqOVPIiOU87bfGaGpY9Em5w1/GJjzhXnA1h20MMry3ksrk9pvGIPtXnQuP+
+ eqs9U++DgCqg6qbr3cA67uBfhPeGSQews/8mp6wE9TppqJE8cBMWdw6Sohq/c48k8BduuA
+ Vo7kx7RWTcuX/8MXAEgpUnz3aGsjVVc=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-490-gRnAcsj5P22VYwIevGInCQ-1; Wed, 17 Feb 2021 07:32:20 -0500
+X-MC-Unique: gRnAcsj5P22VYwIevGInCQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id AF1D1412;
- Wed, 17 Feb 2021 13:02:09 +0100 (CET)
-From: Joerg Roedel <joro@8bytes.org>
-To: x86@kernel.org
-Subject: [PATCH 3/3] x86/sev-es: Improve comments in and around
- __sev_es_ist_enter/exit()
-Date: Wed, 17 Feb 2021 13:01:43 +0100
-Message-Id: <20210217120143.6106-4-joro@8bytes.org>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210217120143.6106-1-joro@8bytes.org>
-References: <20210217120143.6106-1-joro@8bytes.org>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 88CCB195D56E;
+ Wed, 17 Feb 2021 12:32:18 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-114-184.ams2.redhat.com
+ [10.36.114.184])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 4001860853;
+ Wed, 17 Feb 2021 12:32:14 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id 87D5918000B6; Wed, 17 Feb 2021 13:32:13 +0100 (CET)
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: dri-devel@lists.freedesktop.org
+Subject: [PATCH v2 01/11] drm/qxl: properly handle device init failures
+Date: Wed, 17 Feb 2021 13:32:03 +0100
+Message-Id: <20210217123213.2199186-2-kraxel@redhat.com>
+In-Reply-To: <20210217123213.2199186-1-kraxel@redhat.com>
+References: <20210217123213.2199186-1-kraxel@redhat.com>
 MIME-Version: 1.0
-Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
- Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
- Juergen Gross <jgross@suse.com>, Mike Stunes <mstunes@vmware.com>,
- Sean Christopherson <seanjc@google.com>, linux-kernel@vger.kernel.org,
- Masami Hiramatsu <mhiramat@kernel.org>, Erdem Aktas <erdemaktas@google.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@linux.ie>,
+ Tong Zhang <ztong0001@gmail.com>, open list <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU"
+ <virtualization@lists.linux-foundation.org>, Daniel Vetter <daniel@ffwll.ch>,
+ "open list:DRM DRIVER FOR QXL VIRTUAL GPU" <spice-devel@lists.freedesktop.org>,
+ Dave Airlie <airlied@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,60 +98,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+Specifically do not try release resources which where
+not allocated in the first place.
 
-Better explain why this code is necessary and what it is doing.
-
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
+Cc: Tong Zhang <ztong0001@gmail.com>
+Tested-by: Tong Zhang <ztong0001@gmail.com>
+Signed-off-by: Gerd Hoffmann <kraxel@redhat.com>
+Acked-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+ drivers/gpu/drm/qxl/qxl_display.c | 3 +++
+ drivers/gpu/drm/qxl/qxl_kms.c     | 4 ++++
+ 2 files changed, 7 insertions(+)
 
-diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index 0df38b185d53..79241bc45f25 100644
---- a/arch/x86/kernel/sev-es.c
-+++ b/arch/x86/kernel/sev-es.c
-@@ -127,14 +127,20 @@ static __always_inline bool on_vc_stack(unsigned long sp)
- }
- 
- /*
-- * This function handles the case when an NMI is raised in the #VC exception
-- * handler entry code. In this case, the IST entry for #VC must be adjusted, so
-- * that any subsequent #VC exception will not overwrite the stack contents of the
-- * interrupted #VC handler.
-+ * This function handles the case when an NMI is raised in the #VC
-+ * exception handler entry code, before the #VC handler has switched off
-+ * its IST stack. In this case, the IST entry for #VC must be adjusted,
-+ * so that any nested #VC exception will not overwrite the stack
-+ * contents of the interrupted #VC handler.
-  *
-  * The IST entry is adjusted unconditionally so that it can be also be
-- * unconditionally adjusted back in sev_es_ist_exit(). Otherwise a nested
-- * sev_es_ist_exit() call may adjust back the IST entry too early.
-+ * unconditionally adjusted back in __sev_es_ist_exit(). Otherwise a
-+ * nested sev_es_ist_exit() call may adjust back the IST entry too
-+ * early.
-+ *
-+ * The __sev_es_ist_enter() and __sev_es_ist_exit() functions always run
-+ * on the NMI IST stack, as they are only called from NMI handling code
-+ * right now.
-  */
- void noinstr __sev_es_ist_enter(struct pt_regs *regs)
+diff --git a/drivers/gpu/drm/qxl/qxl_display.c b/drivers/gpu/drm/qxl/qxl_display.c
+index c326412136c5..ec50d2cfd4e1 100644
+--- a/drivers/gpu/drm/qxl/qxl_display.c
++++ b/drivers/gpu/drm/qxl/qxl_display.c
+@@ -1183,6 +1183,9 @@ int qxl_destroy_monitors_object(struct qxl_device *qdev)
  {
-@@ -143,7 +149,10 @@ void noinstr __sev_es_ist_enter(struct pt_regs *regs)
- 	/* Read old IST entry */
- 	old_ist = __this_cpu_read(cpu_tss_rw.x86_tss.ist[IST_INDEX_VC]);
+ 	int ret;
  
--	/* Make room on the IST stack */
-+	/*
-+	 * Make room on the IST stack - Reserve 8 bytes to store the old
-+	 * IST entry.
-+	 */
- 	if (on_vc_stack(regs->sp) &&
- 	    !user_mode(regs) &&
- 	    !from_syscall_gap(regs))
++	if (!qdev->monitors_config_bo)
++		return 0;
++
+ 	qdev->monitors_config = NULL;
+ 	qdev->ram_header->monitors_config = 0;
+ 
+diff --git a/drivers/gpu/drm/qxl/qxl_kms.c b/drivers/gpu/drm/qxl/qxl_kms.c
+index 66d74aaaee06..4dc5ad13f12c 100644
+--- a/drivers/gpu/drm/qxl/qxl_kms.c
++++ b/drivers/gpu/drm/qxl/qxl_kms.c
+@@ -288,6 +288,10 @@ void qxl_device_fini(struct qxl_device *qdev)
+ {
+ 	int cur_idx;
+ 
++	/* check if qxl_device_init() was successful (gc_work is initialized last) */
++	if (!qdev->gc_work.func)
++		return;
++
+ 	for (cur_idx = 0; cur_idx < 3; cur_idx++) {
+ 		if (!qdev->current_release_bo[cur_idx])
+ 			continue;
 -- 
-2.30.0
+2.29.2
 
 _______________________________________________
 Virtualization mailing list
