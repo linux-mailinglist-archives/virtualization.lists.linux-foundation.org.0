@@ -1,87 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D3C231EDA9
-	for <lists.virtualization@lfdr.de>; Thu, 18 Feb 2021 18:49:26 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D929831EFA2
+	for <lists.virtualization@lfdr.de>; Thu, 18 Feb 2021 20:21:34 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id DBBE886EA3;
-	Thu, 18 Feb 2021 17:49:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 79DF860670
+	for <lists.virtualization@lfdr.de>; Thu, 18 Feb 2021 19:21:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
-	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qRnJeboPol+L; Thu, 18 Feb 2021 17:49:24 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id evpZA6KTFhPV for <lists.virtualization@lfdr.de>;
+	Thu, 18 Feb 2021 19:21:30 +0000 (UTC)
+Received: by smtp3.osuosl.org (Postfix, from userid 1001)
+	id BD7C260628; Thu, 18 Feb 2021 19:21:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 089F486EA4;
-	Thu, 18 Feb 2021 17:49:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EBBC56065C;
+	Thu, 18 Feb 2021 19:21:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D2035C000D;
-	Thu, 18 Feb 2021 17:49:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BC284C0016;
+	Thu, 18 Feb 2021 19:21:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E2E90C000D
+Received: from fraxinus.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6BD54C000D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 17:49:22 +0000 (UTC)
+ Thu, 18 Feb 2021 19:21:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id D193086EA3
+ by fraxinus.osuosl.org (Postfix) with ESMTP id 527FB8691E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 17:49:22 +0000 (UTC)
+ Thu, 18 Feb 2021 19:21:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from whitealder.osuosl.org ([127.0.0.1])
+Received: from fraxinus.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id acuzTH7w5YOR
+ with ESMTP id OxH4lj6sD5DK
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 17:49:22 +0000 (UTC)
+ Thu, 18 Feb 2021 19:21:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 063C886E9E
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by fraxinus.osuosl.org (Postfix) with ESMTPS id 172908688C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 17:49:22 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1ED3964EC0
- for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 17:49:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1613670561;
- bh=S9HE1UIVHUZqDSOtYFkGj6UL4dBAx+REIzCSaf9/6jc=;
- h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
- b=s7bhIMQZdYrG115ebgBKzwl67Mff9DzrFYN7FBNnFvbaYIpVQsBRPRLjt5la2sqql
- HofxG61fNGWR5NSXUJAVA3F24wHCq2KZWx2NfTdppplelzOyi9oZFIW+xAAJ7Z9CYo
- qQD5ZelrwNt0dE8TsJSPnzQ2RY6z80va1NYTrIqaebkWdWIQhZSDTMmh4HWzXUTAc1
- WqQx0UgPovE8pAUPgG0jZSluzgLarSDOT1M2KgSUu1ZIzKVaf2BG+Cmu+Q783dEdMc
- n/dIDW/5TxMrn4rMqcWawfXKKkxttuwxbiAw4yblW9egVcdvq+nU3J2n9Q6up3qBc6
- xSV1GYkvB9Irw==
-Received: by mail-lj1-f175.google.com with SMTP id j6so6734863ljo.5
- for <virtualization@lists.linux-foundation.org>;
- Thu, 18 Feb 2021 09:49:21 -0800 (PST)
-X-Gm-Message-State: AOAM531uK6rIihQDex7/aYwBNHYYgtEcymofzWdvLGvvLwgTPBs2qlvw
- 1HloHTTwNZPaax4/7J9qeOx/CUEYSPuKlYvF6SR7PA==
-X-Google-Smtp-Source: ABdhPJwj3aEDXoeyomFpvPGRsKjYAWGF9foiPbsnT1S5rrYJDU4WAyOZvJVqaV0lfVp5BLdNddsftppBTtCUMQqxZB4=
-X-Received: by 2002:a17:906:d10d:: with SMTP id
- b13mr4988544ejz.204.1613670557791; 
- Thu, 18 Feb 2021 09:49:17 -0800 (PST)
-MIME-Version: 1.0
+ Thu, 18 Feb 2021 19:21:22 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id AC386AED2;
+ Thu, 18 Feb 2021 19:21:19 +0000 (UTC)
+Date: Thu, 18 Feb 2021 20:21:17 +0100
+From: Joerg Roedel <jroedel@suse.de>
+To: Andy Lutomirski <luto@kernel.org>
+Subject: Re: [PATCH 2/3] x86/sev-es: Check if regs->sp is trusted before
+ adjusting #VC IST stack
+Message-ID: <20210218192117.GL12716@suse.de>
 References: <20210217120143.6106-1-joro@8bytes.org>
  <20210217120143.6106-3-joro@8bytes.org>
  <CALCETrWw-we3O4_upDoXJ4NzZHsBqNO69ht6nBp3y+QFhwPgKw@mail.gmail.com>
  <20210218112500.GH7302@8bytes.org>
-In-Reply-To: <20210218112500.GH7302@8bytes.org>
-From: Andy Lutomirski <luto@kernel.org>
-Date: Thu, 18 Feb 2021 09:49:06 -0800
-X-Gmail-Original-Message-ID: <CALCETrUohqQPVTBJZZKh-pj=4aZrwDAu5UFSetj3k5pGLDPbkA@mail.gmail.com>
-Message-ID: <CALCETrUohqQPVTBJZZKh-pj=4aZrwDAu5UFSetj3k5pGLDPbkA@mail.gmail.com>
-Subject: Re: [PATCH 2/3] x86/sev-es: Check if regs->sp is trusted before
- adjusting #VC IST stack
-To: Joerg Roedel <joro@8bytes.org>
+ <CALCETrUohqQPVTBJZZKh-pj=4aZrwDAu5UFSetj3k5pGLDPbkA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CALCETrUohqQPVTBJZZKh-pj=4aZrwDAu5UFSetj3k5pGLDPbkA@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Cc: kvm list <kvm@vger.kernel.org>, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
  Linux Virtualization <virtualization@lists.linux-foundation.org>,
  Arvind Sankar <nivedita@alum.mit.edu>, "H. Peter Anvin" <hpa@zytor.com>,
- Jiri Slaby <jslaby@suse.cz>, X86 ML <x86@kernel.org>,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
+ Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
+ X86 ML <x86@kernel.org>, David Rientjes <rientjes@google.com>,
+ Martin Radev <martin.b.radev@gmail.com>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Kees Cook <keescook@chromium.org>,
+ Cfir Cohen <cfir@google.com>, Dan Williams <dan.j.williams@intel.com>,
  Juergen Gross <jgross@suse.com>, Mike Stunes <mstunes@vmware.com>,
  Sean Christopherson <seanjc@google.com>, LKML <linux-kernel@vger.kernel.org>,
  stable <stable@vger.kernel.org>, Masami Hiramatsu <mhiramat@kernel.org>,
@@ -102,112 +89,78 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 18, 2021 at 3:25 AM Joerg Roedel <joro@8bytes.org> wrote:
->
-> Hi Andy,
->
-> On Wed, Feb 17, 2021 at 10:09:46AM -0800, Andy Lutomirski wrote:
-> > Can you get rid of the linked list hack while you're at it?  This code
-> > is unnecessarily convoluted right now, and it seems to be just asking
-> > for weird bugs.  Just stash the old value in a local variable, please.
->
-> Yeah, the linked list is not really necessary right now, because of the
-> way nested NMI handling works and given that these functions are only
-> used in the NMI handler right now.
-> The whole #VC handling code was written with future requirements in
-> mind, like what is needed when debugging registers get virtualized and
-> #HV gets enabled.
-> Until its clear whether __sev_es_ist_enter/exit() is needed in any of
-> these paths, I'd like to keep the linked list for now. It is more
-> complicated but allows nesting.
+On Thu, Feb 18, 2021 at 09:49:06AM -0800, Andy Lutomirski wrote:
+> I don't understand what this means.  The whole entry mechanism on x86
+> is structured so that we call a C function *and return from that C
+> function without longjmp-like magic* with the sole exception of
+> unwind_stack_do_exit().  This means that you can match up enters and
+> exits, and that unwind_stack_do_exit() needs to unwind correctly.  In
+> the former case, it's normal C and we can use normal local variables.
+> In the latter case, we know exactly what state we're trying to restore
+> and we can restore it directly without any linked lists or similar.
 
-I don't understand what this means.  The whole entry mechanism on x86
-is structured so that we call a C function *and return from that C
-function without longjmp-like magic* with the sole exception of
-unwind_stack_do_exit().  This means that you can match up enters and
-exits, and that unwind_stack_do_exit() needs to unwind correctly.  In
-the former case, it's normal C and we can use normal local variables.
-In the latter case, we know exactly what state we're trying to restore
-and we can restore it directly without any linked lists or similar.
+Okay, the unwinder will likely get confused by this logic.
 
-What do you have in mind that requires a linked list?
+> What do you have in mind that requires a linked list?
 
->
-> > Meanwhile, I'm pretty sure I can break this whole scheme if the
-> > hypervisor is messing with us.  As a trivial example, the sequence
-> > SYSCALL gap -> #VC -> NMI -> #VC will go quite poorly.
->
-> I don't see how this would break, can you elaborate?
->
-> What I think happens is:
->
-> SYSCALL gap (RSP is from userspace and untrusted)
->
->         -> #VC - Handler on #VC IST stack detects that it interrupted
->            the SYSCALL gap and switches to the task stack.
->
+Cases when there are multiple IST vectors besides NMI that can hit while
+the #VC handler is still on its own IST stack. #MCE comes to mind, but
+that is broken anyway. At some point #VC itself will be one of them, but
+when that happens the code will kill the machine.
+This leaves #HV in the list, and I am not sure how that is going to be
+handled yet. I think the goal is that the #HV handler is not allowed to
+cause any #VC exception. In that case the linked-list logic will not be
+needed.
 
-Can you point me to exactly what code you're referring to?  I spent a
-while digging through the code and macro tangle and I can't find this.
+> > I don't see how this would break, can you elaborate?
+> >
+> > What I think happens is:
+> >
+> > SYSCALL gap (RSP is from userspace and untrusted)
+> >
+> >         -> #VC - Handler on #VC IST stack detects that it interrupted
+> >            the SYSCALL gap and switches to the task stack.
+> >
+> 
+> Can you point me to exactly what code you're referring to?  I spent a
+> while digging through the code and macro tangle and I can't find this.
 
->
->         -> NMI - Now running on NMI IST stack. Depending on whether the
->            stack switch in the #VC handler already happened, the #VC IST
->            entry is adjusted so that a subsequent #VC will not overwrite
->            the interrupted handlers stack frame.
->
->         -> #VC - Handler runs on the adjusted #VC IST stack and switches
->            itself back to the NMI IST stack. This is safe wrt. nested
->            NMIs as long as nested NMIs itself are safe.
->
-> As a rule of thumb, think of the #VC handler as trying to be a non-IST
-> handler by switching itself to the interrupted stack or the task stack.
-> If it detects that this is not possible (which can't happen right now,
-> but with SNP), it will kill the guest.
+See the entry code in arch/x86/entry/entry_64.S, macro idtentry_vc. It
+creates the assembly code for the handler. At some point it calls
+vc_switch_off_ist(), which is a C function in arch/x86/kernel/traps.c.
+This function tries to find a new stack for the #VC handler.
 
-I will try to think of this, but it's hard, since I can't find the code :)
+The first thing it does is checking whether the exception came from the
+SYSCALL gap and just uses the task stack in that case.
 
-I found this comment:
+Then it will check for other kernel stacks which are safe to switch
+to. If that fails it uses the fall-back stack (VC2), which will direct
+the handler to a separate function which, for now, just calls panic().
+Not safe are the entry or unknown stacks.
 
- * With the current implementation it is always possible to switch to a safe
- * stack because #VC exceptions only happen at known places, like intercepted
- * instructions or accesses to MMIO areas/IO ports. They can also happen with
- * code instrumentation when the hypervisor intercepts #DB, but the critical
- * paths are forbidden to be instrumented, so #DB exceptions currently also
- * only happen in safe places.
+The function then copies pt_regs and returns the new stack pointer to
+assembly code, which then writes it to %RSP.
 
-Unless AMD is more magic than I realize, the MOV SS bug^Wfeature means
-that #DB is *not* always called in safe places.
+> Unless AMD is more magic than I realize, the MOV SS bug^Wfeature means
+> that #DB is *not* always called in safe places.
 
-But I *thnk* the code you're talking about is this:
+You are right, forgot about this. The MOV SS bug can very well
+trigger a #VC(#DB) exception from the syscall gap.
 
-    /*
-     * If the entry is from userspace, switch stacks and treat it as
-     * a normal entry.
-     */
-    testb    $3, CS-ORIG_RAX(%rsp)
-    jnz    .Lfrom_usermode_switch_stack_\@
+> > And with SNP we need to be able to at least detect a malicious HV so we
+> > can reliably kill the guest. Otherwise the HV could potentially take
+> > control over the guest's execution flow and make it reveal its secrets.
+> 
+> True.  But is the rest of the machinery to be secure against EFLAGS.IF
+> violations and such in place yet?
 
-which does not run on #VC from kernel code.
+Not sure what you mean by EFLAGS.IF violations, probably enabling IRQs
+while in the #VC handler? The #VC handler _must_ _not_ enable IRQs
+anywhere in its call-path. If that ever happens it is a bug.
 
-> It needs to be IST, even without SNP, because #DB is IST too. When the
-> hypervisor intercepts #DB then any #DB exception will be turned into
-> #VC, so #VC needs to be handled anywhere a #DB can happen.
+Regards,
 
-Eww.
-
->
-> And with SNP we need to be able to at least detect a malicious HV so we
-> can reliably kill the guest. Otherwise the HV could potentially take
-> control over the guest's execution flow and make it reveal its secrets.
-
-True.  But is the rest of the machinery to be secure against EFLAGS.IF
-violations and such in place yet?
-
->
-> Regards,
->
->         Joerg
+	Joerg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
