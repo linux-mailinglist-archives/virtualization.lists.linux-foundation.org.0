@@ -2,86 +2,65 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C67BA31F60F
-	for <lists.virtualization@lfdr.de>; Fri, 19 Feb 2021 09:51:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F1D331F6FE
+	for <lists.virtualization@lfdr.de>; Fri, 19 Feb 2021 11:06:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by whitealder.osuosl.org (Postfix) with ESMTP id 81FD886F97;
-	Fri, 19 Feb 2021 08:51:23 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id BD81586E70;
+	Fri, 19 Feb 2021 10:06:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hRbvJQKCA9N4; Fri, 19 Feb 2021 08:51:22 +0000 (UTC)
+	with ESMTP id 87KSFmLuN8QC; Fri, 19 Feb 2021 10:06:02 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by whitealder.osuosl.org (Postfix) with ESMTP id CCF8D86BFA;
-	Fri, 19 Feb 2021 08:51:22 +0000 (UTC)
+	by whitealder.osuosl.org (Postfix) with ESMTP id 3C1E686DCA;
+	Fri, 19 Feb 2021 10:06:02 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AA54CC000D;
-	Fri, 19 Feb 2021 08:51:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2AAB0C000F;
+	Fri, 19 Feb 2021 10:06:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from whitealder.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B6F13C000D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 13C1DC000D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Feb 2021 08:51:21 +0000 (UTC)
+ Fri, 19 Feb 2021 10:06:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by whitealder.osuosl.org (Postfix) with ESMTP id 9E7FA86BFA
+ by whitealder.osuosl.org (Postfix) with ESMTP id 1089D86E70
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Feb 2021 08:51:21 +0000 (UTC)
+ Fri, 19 Feb 2021 10:06:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from whitealder.osuosl.org ([127.0.0.1])
  by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zTjZGbVKidln
+ with ESMTP id KkJR-DxcnVbf
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Feb 2021 08:51:20 +0000 (UTC)
+ Fri, 19 Feb 2021 10:05:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.7.6
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by whitealder.osuosl.org (Postfix) with ESMTPS id 75DAD86AAB
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+ by whitealder.osuosl.org (Postfix) with ESMTPS id 7B1AF86DCA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Feb 2021 08:51:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1613724679;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=bzW38bag0aKrL8zMi/Uhja163ywErKOZZj1OgGSNVuk=;
- b=TKSxXFFYjQAdpIY4526jHNXR+g6VYoyHPKWtGUbWLC7NfoXnGMmKW0fWIJkikUZ2GSbEqg
- 4zvTxmNv+pk512XOzrQmqDQnyWXTga4hOHuc9Xpu8aeHeBLT7HC5W9o/xv1/I4MI8PVT3O
- wmmvw2Om7nt9vDfzFJ+lyZFDTCDPJiA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-567-_fgkeNYdPoevbhB3Idx16A-1; Fri, 19 Feb 2021 03:51:15 -0500
-X-MC-Unique: _fgkeNYdPoevbhB3Idx16A-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0B59F107ACE6;
- Fri, 19 Feb 2021 08:51:14 +0000 (UTC)
-Received: from wangxiaodeMacBook-Air.local (ovpn-12-40.pek2.redhat.com
- [10.72.12.40])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 41A675D9C2;
- Fri, 19 Feb 2021 08:51:06 +0000 (UTC)
-Subject: Re: [PATCH] net: check if protocol extracted by
- virtio_net_hdr_set_proto is correct
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Balazs Nemeth <bnemeth@redhat.com>
-References: <5e910d11a14da17c41317417fc41d3a9d472c6e7.1613659844.git.bnemeth@redhat.com>
- <CA+FuTSe7srSBnAmFNFBFkDrLmPL5XtxhbXEs1mBytUBuuym2fg@mail.gmail.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <2cc06597-8005-7be8-4094-b20f525afde8@redhat.com>
-Date: Fri, 19 Feb 2021 16:51:05 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.7.1
+ Fri, 19 Feb 2021 10:05:58 +0000 (UTC)
+IronPort-SDR: yXnlI1TFZbPuHmHzBN029vsogiGWmZVehMnCoucabzRHNrp44VyB9UUJPLODys8TrJaPgJSIJf
+ QEIeHserexPw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9899"; a="203081225"
+X-IronPort-AV: E=Sophos;i="5.81,189,1610438400"; d="scan'208";a="203081225"
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+ by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Feb 2021 02:05:58 -0800
+IronPort-SDR: eDSKrm5OR9Xfp9mGraN4lpP9IJ7gVYawLZFqjzIawswzu/uhXj6Y8z+F6gUtDcn+r5g3mYnWkj
+ f9ZHEqIOXoVQ==
+X-IronPort-AV: E=Sophos;i="5.81,189,1610438400"; d="scan'208";a="513624301"
+Received: from vkasired-desk2.fm.intel.com ([10.105.128.127])
+ by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Feb 2021 02:05:57 -0800
+From: Vivek Kasireddy <vivek.kasireddy@intel.com>
+To: virtualization@lists.linux-foundation.org, dri-devel@lists.freedesktop.org
+Subject: [RFC v4 0/3] Introduce Virtio based Dmabuf driver(s)
+Date: Fri, 19 Feb 2021 01:55:20 -0800
+Message-Id: <20210219095523.2621884-1-vivek.kasireddy@intel.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <CA+FuTSe7srSBnAmFNFBFkDrLmPL5XtxhbXEs1mBytUBuuym2fg@mail.gmail.com>
-Content-Language: en-GB
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: Network Development <netdev@vger.kernel.org>,
- David Miller <davem@davemloft.net>, virtualization@lists.linux-foundation.org,
- linux-kernel <linux-kernel@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>
+Cc: dongwon.kim@intel.com, daniel.vetter@ffwll.ch, sumit.semwal@linaro.org,
+ daniel.vetter@intel.com, linux-media@vger.kernel.org, christian.koenig@amd.com,
+ stevensd@chromium.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,72 +72,116 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjEvMi8xOCAxMTo1MCDkuIvljYgsIFdpbGxlbSBkZSBCcnVpam4gd3JvdGU6Cj4gT24g
-VGh1LCBGZWIgMTgsIDIwMjEgYXQgMTA6MDEgQU0gQmFsYXpzIE5lbWV0aCA8Ym5lbWV0aEByZWRo
-YXQuY29tPiB3cm90ZToKPj4gRm9yIGdzbyBwYWNrZXRzLCB2aXJ0aW9fbmV0X2hkcl9zZXRfcHJv
-dG8gc2V0cyB0aGUgcHJvdG9jb2wgKGlmIGl0IGlzbid0Cj4+IHNldCkgYmFzZWQgb24gdGhlIHR5
-cGUgaW4gdGhlIHZpcnRpbyBuZXQgaGRyLCBidXQgdGhlIHNrYiBjb3VsZCBjb250YWluCj4+IGFu
-eXRoaW5nIHNpbmNlIGl0IGNvdWxkIGNvbWUgZnJvbSBwYWNrZXRfc25kIHRocm91Z2ggYSByYXcg
-c29ja2V0LiBJZgo+PiB0aGVyZSBpcyBhIG1pc21hdGNoIGJldHdlZW4gd2hhdCB2aXJ0aW9fbmV0
-X2hkcl9zZXRfcHJvdG8gc2V0cyBhbmQKPj4gdGhlIGFjdHVhbCBwcm90b2NvbCwgdGhlbiB0aGUg
-c2tiIGNvdWxkIGJlIGhhbmRsZWQgaW5jb3JyZWN0bHkgbGF0ZXIKPj4gb24gYnkgZ3NvLgo+Pgo+
-PiBUaGUgbmV0d29yayBoZWFkZXIgb2YgZ3NvIHBhY2tldHMgc3RhcnRzIGF0IDE0IGJ5dGVzLCBi
-dXQgYSBzcGVjaWFsbHkKPj4gY3JhZnRlZCBwYWNrZXQgY291bGQgZm9vbCB0aGUgY2FsbCB0byBz
-a2JfZmxvd19kaXNzZWN0X2Zsb3dfa2V5c19iYXNpYwo+PiBhcyB0aGUgbmV0d29yayBoZWFkZXIg
-b2Zmc2V0IGluIHRoZSBza2IgY291bGQgYmUgaW5jb3JyZWN0Lgo+PiBDb25zZXF1ZW50bHksIEVJ
-TlZBTCBpcyBub3QgcmV0dXJuZWQuCj4+Cj4+IFRoZXJlIGFyZSBldmVuIHBhY2tldHMgdGhhdCBj
-YW4gY2F1c2UgYW4gaW5maW5pdGUgbG9vcC4gRm9yIGV4YW1wbGUsIGEKPj4gcGFja2V0IHdpdGgg
-ZXRoZXJuZXQgdHlwZSBFVEhfUF9NUExTX1VDICh3aGljaCBpcyB1bm5vdGljZWQgYnkKPj4gdmly
-dGlvX25ldF9oZHJfdG9fc2tiKSB0aGF0IGlzIHNlbnQgdG8gYSBnZW5ldmUgaW50ZXJmYWNlIHdp
-bGwgYmUKPj4gaGFuZGxlZCBieSBnZW5ldmVfYnVpbGRfc2tiLiBJbiB0dXJuLCBpdCBjYWxscwo+
-PiB1ZHBfdHVubmVsX2hhbmRsZV9vZmZsb2FkcyB3aGljaCB0aGVuIGNhbGxzIHNrYl9yZXNldF9p
-bm5lcl9oZWFkZXJzLgo+PiBBZnRlciB0aGF0LCB0aGUgcGFja2V0IGdldHMgcGFzc2VkIHRvIG1w
-bHNfZ3NvX3NlZ21lbnQuIFRoYXQgZnVuY3Rpb24KPj4gY2FsY3VsYXRlcyB0aGUgbXBscyBoZWFk
-ZXIgbGVuZ3RoIGJ5IHRha2luZyB0aGUgZGlmZmVyZW5jZSBiZXR3ZWVuCj4+IG5ldHdvcmtfaGVh
-ZGVyIGFuZCBpbm5lcl9uZXR3b3JrX2hlYWRlci4gU2luY2UgdGhlIHR3byBhcmUgZXF1YWwKPj4g
-KGR1ZSB0byB0aGUgZWFybGllciBjYWxsIHRvIHNrYl9yZXNldF9pbm5lcl9oZWFkZXJzKSwgaXQg
-d2lsbCBjYWxjdWxhdGUKPj4gYSBoZWFkZXIgb2YgbGVuZ3RoIDAsIGFuZCBpdCB3aWxsIG5vdCBw
-dWxsIGFueSBoZWFkZXJzLiBUaGVuLCBpdCB3aWxsCj4+IGNhbGwgc2tiX21hY19nc29fc2VnbWVu
-dCB3aGljaCB3aWxsIGFnYWluIGNhbGwgbXBsc19nc29fc2VnbWVudCwgZXRjLi4uCj4+IFRoaXMg
-bGVhZHMgdG8gdGhlIGluZmluaXRlIGxvb3AuCgoKSSByZW1lbWJlciBrZXJuZWwgd2lsbCB2YWxp
-ZGF0ZSBkb2RneSBnc28gcGFja2V0cyBpbiBnc28gb3BzLiBJIHdvbmRlciAKd2h5IG5vdCBkbyB0
-aGUgY2hlY2sgdGhlcmU/IFRoZSByZWFzb24gaXMgdGhhdCB2aXJ0aW8vVFVOIGlzIG5vdCB0aGUg
-Cm9ubHkgc291cmNlIGZvciB0aG9zZSBwYWNrZXRzLgoKVGhhbmtzCgoKPj4KPj4gRm9yIHRoYXQg
-cmVhc29uLCBhZGRyZXNzIHRoZSByb290IGNhdXNlIG9mIHRoZSBpc3N1ZTogZG9uJ3QgYmxpbmRs
-eQo+PiB0cnVzdCB0aGUgaW5mb3JtYXRpb24gcHJvdmlkZWQgYnkgdGhlIHZpcnRpbyBuZXQgaGVh
-ZGVyLiBJbnN0ZWFkLAo+PiBjaGVjayBpZiB0aGUgcHJvdG9jb2wgaW4gdGhlIHBhY2tldCBhY3R1
-YWxseSBtYXRjaGVzIHRoZSBwcm90b2NvbCBzZXQgYnkKPj4gdmlydGlvX25ldF9oZHJfc2V0X3By
-b3RvLgo+Pgo+PiBGaXhlczogOTI3NDEyNGYwMjNiICgibmV0OiBzdHJpY3RlciB2YWxpZGF0aW9u
-IG9mIHVudHJ1c3RlZCBnc28gcGFja2V0cyIpCj4+IFNpZ25lZC1vZmYtYnk6IEJhbGF6cyBOZW1l
-dGggPGJuZW1ldGhAcmVkaGF0LmNvbT4KPj4gLS0tCj4+ICAgaW5jbHVkZS9saW51eC92aXJ0aW9f
-bmV0LmggfCA3ICsrKysrKy0KPj4gICAxIGZpbGUgY2hhbmdlZCwgNiBpbnNlcnRpb25zKCspLCAx
-IGRlbGV0aW9uKC0pCj4+Cj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19uZXQu
-aCBiL2luY2x1ZGUvbGludXgvdmlydGlvX25ldC5oCj4+IGluZGV4IGU4YTkyNGVlZWEzZC4uY2Yy
-YzUzNTYzZjIyIDEwMDY0NAo+PiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19uZXQuaAo+PiAr
-KysgYi9pbmNsdWRlL2xpbnV4L3ZpcnRpb19uZXQuaAo+PiBAQCAtNzksOCArNzksMTMgQEAgc3Rh
-dGljIGlubGluZSBpbnQgdmlydGlvX25ldF9oZHJfdG9fc2tiKHN0cnVjdCBza19idWZmICpza2Is
-Cj4+ICAgICAgICAgICAgICAgICAgaWYgKGdzb190eXBlICYmIHNrYi0+bmV0d29ya19oZWFkZXIp
-IHsKPj4gICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCBmbG93X2tleXNfYmFzaWMga2V5
-czsKPj4KPj4gLSAgICAgICAgICAgICAgICAgICAgICAgaWYgKCFza2ItPnByb3RvY29sKQo+PiAr
-ICAgICAgICAgICAgICAgICAgICAgICBpZiAoIXNrYi0+cHJvdG9jb2wpIHsKPj4gKyAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzdHJ1Y3QgZXRoaGRyICpldGggPSBza2JfZXRo
-X2hkcihza2IpOwo+PiArCj4gVW5mb3J0dW5hdGVseSwgY2Fubm90IGFzc3VtZSB0aGF0IHRoZSBk
-ZXZpY2UgdHlwZSBpcyBBUlBIUkRfRVRIRVIuCj4KPiBUaGUgdW5kZXJseWluZyBhcHByb2FjaCBp
-cyBzb3VuZDogcGFja2V0cyB0aGF0IGhhdmUgYSBnc28gdHlwZSBzZXQgaW4KPiB0aGUgdmlydGlv
-X25ldF9oZHIgaGF2ZSB0byBiZSBJUCBwYWNrZXRzLgo+Cj4+ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIHZpcnRpb19uZXRfaGRyX3NldF9wcm90byhza2IsIGhkcik7Cj4+ICsgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHNrYi0+cHJvdG9jb2wgIT0gZXRoLT5oX3By
-b3RvKQo+PiArICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIC1F
-SU5WQUw7Cj4+ICsgICAgICAgICAgICAgICAgICAgICAgIH0KPj4gICByZXRyeToKPj4gICAgICAg
-ICAgICAgICAgICAgICAgICAgIGlmICghc2tiX2Zsb3dfZGlzc2VjdF9mbG93X2tleXNfYmFzaWMo
-TlVMTCwgc2tiLCAma2V5cywKPj4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgTlVMTCwgMCwgMCwgMCwKPj4gLS0KPj4gMi4yOS4y
-Cj4+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0
-dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRh
-dGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGlu
-Zm8vdmlydHVhbGl6YXRpb24=
+The Virtual Dmabuf or Virtio based Dmabuf (Vdmabuf) driver can be used
+to "transfer" a page-backed dmabuf created in the Guest to the Host
+without making any copies. This is mostly accomplished by recreating the
+dmabuf on the Host using the PFNs and other meta-data shared by the guest. 
+A use-case where this driver would be a good fit is a multi-GPU system 
+(perhaps one discrete and one integrated) where one of the GPUs does not 
+have access to the display/connectors/outputs. This could be an embedded 
+system design decision or a restriction made at the firmware/BIOS level
+or perhaps the device is setup in UPT (Universal Passthrough) mode. When 
+such a GPU is passthrough'd to a Guest OS, this driver can help in 
+transferring the scanout buffer(s) (rendered using the native rendering 
+stack) to the Host for the purpose of displaying them. Or, quite simply,
+this driver can be used to transfer a dmabuf created by an application
+running on the Guest to another application running on the Host.
+
+The userspace component running in the Guest that transfers the dmabuf
+is referred to as the producer or exporter and its counterpart running
+in the Host is referred to as importer or consumer. For instance, a
+Wayland compositor would potentially be a producer and Qemu UI would
+be a consumer. It is the producer's responsibility to not reuse or
+destroy the shared buffer while it is still being used by the consumer.
+The consumer would send a release cmd indicating that it is done after
+which the shared buffer can be safely used again by the producer. One
+way the producer can prevent accidental re-use of the shared buffer is
+to lock the buffer when it exports it and unlock it after it gets a 
+release cmd. As an example, the GBM API provides a simple way to lock 
+and unlock a surface's buffers.
+
+For each dmabuf that is to be shared with the Host, a 128-bit unique
+ID is generated that identifies this buffer across the whole system.
+This ID is a combination of the Qemu process ID, a counter and a
+randomizer. We could potentially use UUID API but we currently use
+the above mentioned combination to identify the source of the buffer
+at any given time for potential bookkeeping.
+
+A typical cycle starts with the producer or exporter calling the
+alloc_fd IOCTL to get a new fd/dmabuf from Vdmabuf. It would then import
+and render to it and finally exports it by calling the export IOCTL. A 
+new unique ID is generated for this buffer and it gets registered with
+the Host. The Host then alerts the consumer or importer by raising an
+event and shares the ID. In response, the consumer calls the import IOCTL
+using the ID and gets a newly created dmabuf fd in return. After it is
+done using the dmabuf, the consumer finally calls the release IOCTL and
+the Guest is notified which in turn notifies the producer letting it know
+that the buffer is now safe to reuse. 
+
+v2:
+- Added a notifier mechanism for getting the kvm pointer.
+- Added start and stop routines in the Vhost backend.
+- Augmented the cover letter and made some minor improvements.
+
+v3:
+- Refactored the code to make it similar to vsock.
+- Used two virtqueues instead of one for efficient two-way
+  communication.
+
+v4:
+- Made Vdmabuf guest driver allocate the dma-buf and backing
+  storage and exported it to Weston to be used as a render
+  target. (Gerd)
+
+The Vdmabuf driver was tested using Weston (headless) and Qemu from here:
+https://gitlab.freedesktop.org/Vivek/weston/-/blob/vdmabuf/libweston/backend-headless/headless.c#L522
+
+https://lists.nongnu.org/archive/html/qemu-devel/2021-02/msg02976.html
+
+TODO:
+- Use dma_fences to improve synchronization for multiple importers.
+- Ensure that a process other than Qemu can also be the importer on Host.
+
+Other Considerations:
+- Should virtio-gpu be augmented to provide the same functionality 
+  as vdmabuf?
+- How can virtio-gpu/vdmabuf work with a Windows Guest?
+- Should there be a Vhost backend for virtio-gpu to reduce overhead?
+- Should a transfer of a dma-buf from Guest to Host be dependent on a
+  DRM driver (virtio-gpu)?
+
+Vivek Kasireddy (3):
+  kvm: Add a notifier for create and destroy VM events
+  virtio: Introduce Vdmabuf driver
+  vhost: Add Vdmabuf backend
+
+ drivers/vhost/Kconfig               |    9 +
+ drivers/vhost/Makefile              |    3 +
+ drivers/vhost/vdmabuf.c             | 1372 +++++++++++++++++++++++++++
+ drivers/virtio/Kconfig              |    8 +
+ drivers/virtio/Makefile             |    1 +
+ drivers/virtio/virtio_vdmabuf.c     | 1105 +++++++++++++++++++++
+ include/linux/kvm_host.h            |    5 +
+ include/linux/virtio_vdmabuf.h      |  287 ++++++
+ include/uapi/linux/vhost.h          |    3 +
+ include/uapi/linux/virtio_ids.h     |    1 +
+ include/uapi/linux/virtio_vdmabuf.h |   87 ++
+ virt/kvm/kvm_main.c                 |   20 +-
+ 12 files changed, 2899 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/vhost/vdmabuf.c
+ create mode 100644 drivers/virtio/virtio_vdmabuf.c
+ create mode 100644 include/linux/virtio_vdmabuf.h
+ create mode 100644 include/uapi/linux/virtio_vdmabuf.h
+
+-- 
+2.26.2
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
