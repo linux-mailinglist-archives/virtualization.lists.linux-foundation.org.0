@@ -2,70 +2,73 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from hemlock.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB2EE320AB9
-	for <lists.virtualization@lfdr.de>; Sun, 21 Feb 2021 14:58:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id D8BD0320AB7
+	for <lists.virtualization@lfdr.de>; Sun, 21 Feb 2021 14:58:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 2CC718709E;
-	Sun, 21 Feb 2021 13:58:03 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 685B68709F;
+	Sun, 21 Feb 2021 13:58:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from hemlock.osuosl.org ([127.0.0.1])
 	by localhost (.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2pSwMQUxmn3v; Sun, 21 Feb 2021 13:58:02 +0000 (UTC)
+	with ESMTP id YPpVFio0E7V0; Sun, 21 Feb 2021 13:58:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by hemlock.osuosl.org (Postfix) with ESMTP id 66DEA870A1;
-	Sun, 21 Feb 2021 13:58:02 +0000 (UTC)
+	by hemlock.osuosl.org (Postfix) with ESMTP id 0163C8709D;
+	Sun, 21 Feb 2021 13:58:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D851C000B;
-	Sun, 21 Feb 2021 13:58:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DCCF0C0001;
+	Sun, 21 Feb 2021 13:58:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 72C81C0001
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AC110C0001
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Feb 2021 13:58:00 +0000 (UTC)
+ Sun, 21 Feb 2021 13:57:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 611B360701
+ by smtp3.osuosl.org (Postfix) with ESMTP id 99F2E60701
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Feb 2021 13:58:00 +0000 (UTC)
+ Sun, 21 Feb 2021 13:57:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YY_UJ4cFnrvO
+ with ESMTP id BX-wy6CrenMc
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Feb 2021 13:57:59 +0000 (UTC)
+ Sun, 21 Feb 2021 13:57:58 +0000 (UTC)
 Received: by smtp3.osuosl.org (Postfix, from userid 1001)
- id 40B946F497; Sun, 21 Feb 2021 13:57:59 +0000 (UTC)
+ id BD8AD6F47A; Sun, 21 Feb 2021 13:57:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from mx1.opensynergy.com (mx1.opensynergy.com [217.66.60.4])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 54D4060701
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 562F86E56C
  for <virtualization@lists.linux-foundation.org>;
  Sun, 21 Feb 2021 13:57:57 +0000 (UTC)
 Received: from SR-MAILGATE-02.opensynergy.com (localhost.localdomain
  [127.0.0.1])
- by mx1.opensynergy.com (Proxmox) with ESMTP id 3C5A7A1044;
+ by mx1.opensynergy.com (Proxmox) with ESMTP id BD445A1116;
  Sun, 21 Feb 2021 14:57:53 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opensynergy.com;
  h=cc:cc:content-transfer-encoding:content-type:content-type
- :date:from:from:message-id:mime-version:reply-to:subject:subject
- :to:to; s=srmailgate02; bh=/xTu5poFjS+LOPZgREMd9QUdS5b5LdGNK7Lyt
- ps9hQM=; b=Ok0xqZ4LBO8AGZXFw6kFngR71COWPMzUKV4rGRA3l9eIiq00lTerP
- UAmSycx5gKbf1rDBnK3VxC2FElxOAuRrYmWFd58JRAXfrsXmrBkt2ahX9Hoc3Zg4
- jwJ49ngJZMSQIp5F+BKcZgN+XA5jdKlHB9ZiSj24rl1SWSiLH596Ja+romRDyBDB
- XgPs3cJR1pQmpM4d/H3GQLRxDCMD96K3cTaFM9DJrBqsVyWnLAW2bml4dqSOdRUm
- tZjm4aVxvNGgBsVBylLB3yYBl2z/MNv2IrId+L0dtRE4294hAEvm5IyYVZEV0niQ
- SjBdBRx7KKAZDQziFGYySQGw45aJ6HH+A==
+ :date:from:from:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=srmailgate02; bh=JMWVu00sJKNa
+ UzNO4ZqMeD8FYjdkJxYXTlplUlw+228=; b=uG9+E9I/d1bg/MLj7SPOUDoYPycj
+ c/k9k8uOCRZt3M6oYlEzSXXED6u40Lb+c7OcsxEVY5NGLX6kYfJyKc1IRPN0RZKr
+ wmV61OG2joo6ND3USkRSZY6bKPdF3vKKRaeNs9N93ExrxbbZ63tpHxmBVBzIAWSq
+ xCf9/wV+gbxQXcf9t+OnOCL4jk7d/xAgrfu8HTlaPTKE36gr5TnODHfnnTTObuJO
+ uCH1As/anVSuGxtapgRvh2NkxvJnuzLHAy0TWyf9LEcBp3jS8TKvlKtDquhK9/FD
+ nLqVS9a+y5XAH8hU9+PMNGJZZgSO41d/TeKkS0xOB9poC/A/Vm6thatwYA==
 From: Anton Yakovlev <anton.yakovlev@opensynergy.com>
 To: <virtualization@lists.linux-foundation.org>,
  <alsa-devel@alsa-project.org>, <virtio-dev@lists.oasis-open.org>
-Subject: [PATCH v4 0/9] ALSA: add virtio sound driver
-Date: Sun, 21 Feb 2021 14:57:22 +0100
-Message-ID: <20210221135731.51348-1-anton.yakovlev@opensynergy.com>
+Subject: [PATCH v4 1/9] uapi: virtio_ids: add a sound device type ID from
+ OASIS spec
+Date: Sun, 21 Feb 2021 14:57:23 +0100
+Message-ID: <20210221135731.51348-2-anton.yakovlev@opensynergy.com>
 X-Mailer: git-send-email 2.30.0
+In-Reply-To: <20210221135731.51348-1-anton.yakovlev@opensynergy.com>
+References: <20210221135731.51348-1-anton.yakovlev@opensynergy.com>
 MIME-Version: 1.0
 X-ClientProxiedBy: SR-MAIL-01.open-synergy.com (10.26.10.21) To
  SR-MAIL-02.open-synergy.com (10.26.10.22)
-Cc: Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- "Michael S. Tsirkin" <mst@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Jaroslav Kysela <perex@perex.cz>,
+ Takashi Iwai <tiwai@suse.com>, "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,64 +85,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This series implements a driver part of the virtio sound device
-specification v8 [1].
+The OASIS virtio spec defines a sound device type ID that is not
+present in the header yet.
 
-The driver supports PCM playback and capture substreams, jack and
-channel map controls. A message-based transport is used to write/read
-PCM frames to/from a device.
+Signed-off-by: Anton Yakovlev <anton.yakovlev@opensynergy.com>
+---
+ include/uapi/linux/virtio_ids.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-As a device part was used OpenSynergy proprietary implementation.
-
-v4 changes:
- - fixed sparse warnings, no functional change
-
-[1] https://lists.oasis-open.org/archives/virtio-dev/202003/msg00185.html
-
-
-Anton Yakovlev (9):
-  uapi: virtio_ids: add a sound device type ID from OASIS spec
-  ALSA: virtio: add virtio sound driver
-  ALSA: virtio: handling control messages
-  ALSA: virtio: build PCM devices and substream hardware descriptors
-  ALSA: virtio: handling control and I/O messages for the PCM device
-  ALSA: virtio: PCM substream operators
-  ALSA: virtio: introduce jack support
-  ALSA: virtio: introduce PCM channel map support
-  ALSA: virtio: introduce device suspend/resume support
-
- MAINTAINERS                     |   9 +
- include/uapi/linux/virtio_ids.h |   1 +
- include/uapi/linux/virtio_snd.h | 334 +++++++++++++++++++++
- sound/Kconfig                   |   2 +
- sound/Makefile                  |   3 +-
- sound/virtio/Kconfig            |  10 +
- sound/virtio/Makefile           |  13 +
- sound/virtio/virtio_card.c      | 462 +++++++++++++++++++++++++++++
- sound/virtio/virtio_card.h      | 113 ++++++++
- sound/virtio/virtio_chmap.c     | 219 ++++++++++++++
- sound/virtio/virtio_ctl_msg.c   | 310 ++++++++++++++++++++
- sound/virtio/virtio_ctl_msg.h   |  78 +++++
- sound/virtio/virtio_jack.c      | 233 +++++++++++++++
- sound/virtio/virtio_pcm.c       | 499 ++++++++++++++++++++++++++++++++
- sound/virtio/virtio_pcm.h       | 121 ++++++++
- sound/virtio/virtio_pcm_msg.c   | 392 +++++++++++++++++++++++++
- sound/virtio/virtio_pcm_ops.c   | 491 +++++++++++++++++++++++++++++++
- 17 files changed, 3289 insertions(+), 1 deletion(-)
- create mode 100644 include/uapi/linux/virtio_snd.h
- create mode 100644 sound/virtio/Kconfig
- create mode 100644 sound/virtio/Makefile
- create mode 100644 sound/virtio/virtio_card.c
- create mode 100644 sound/virtio/virtio_card.h
- create mode 100644 sound/virtio/virtio_chmap.c
- create mode 100644 sound/virtio/virtio_ctl_msg.c
- create mode 100644 sound/virtio/virtio_ctl_msg.h
- create mode 100644 sound/virtio/virtio_jack.c
- create mode 100644 sound/virtio/virtio_pcm.c
- create mode 100644 sound/virtio/virtio_pcm.h
- create mode 100644 sound/virtio/virtio_pcm_msg.c
- create mode 100644 sound/virtio/virtio_pcm_ops.c
-
+diff --git a/include/uapi/linux/virtio_ids.h b/include/uapi/linux/virtio_ids.h
+index bc1c0621f5ed..029a2e07a7f9 100644
+--- a/include/uapi/linux/virtio_ids.h
++++ b/include/uapi/linux/virtio_ids.h
+@@ -51,6 +51,7 @@
+ #define VIRTIO_ID_PSTORE		22 /* virtio pstore device */
+ #define VIRTIO_ID_IOMMU			23 /* virtio IOMMU */
+ #define VIRTIO_ID_MEM			24 /* virtio mem */
++#define VIRTIO_ID_SOUND			25 /* virtio sound */
+ #define VIRTIO_ID_FS			26 /* virtio filesystem */
+ #define VIRTIO_ID_PMEM			27 /* virtio pmem */
+ #define VIRTIO_ID_MAC80211_HWSIM	29 /* virtio mac80211-hwsim */
 -- 
 2.30.0
 
