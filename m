@@ -1,58 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9AA4032374F
-	for <lists.virtualization@lfdr.de>; Wed, 24 Feb 2021 07:19:09 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CCBA6323753
+	for <lists.virtualization@lfdr.de>; Wed, 24 Feb 2021 07:19:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0F2AF6F5D1;
-	Wed, 24 Feb 2021 06:19:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1610B4EBDF;
+	Wed, 24 Feb 2021 06:19:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id N2ff93BDj0dd; Wed, 24 Feb 2021 06:19:07 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id wDGbv6_2BIqH; Wed, 24 Feb 2021 06:19:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8F8616F5BD;
+	by smtp4.osuosl.org (Postfix) with ESMTP id E960C4EBD7;
 	Wed, 24 Feb 2021 06:19:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 633C8C0012;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A2846C0015;
 	Wed, 24 Feb 2021 06:19:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DFC62C0001
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4245CC0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Feb 2021 06:19:03 +0000 (UTC)
+ Wed, 24 Feb 2021 06:19:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BEEA143077
+ by smtp2.osuosl.org (Postfix) with ESMTP id 31DD2414ED
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Feb 2021 06:19:03 +0000 (UTC)
+ Wed, 24 Feb 2021 06:19:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=nvidia.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EjM9i5A2f7FV
+ with ESMTP id Xbdjp8hhPIKk
  for <virtualization@lists.linux-foundation.org>;
  Wed, 24 Feb 2021 06:19:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from hqnvemgate26.nvidia.com (hqnvemgate26.nvidia.com
- [216.228.121.65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1205B414ED
+Received: from hqnvemgate24.nvidia.com (hqnvemgate24.nvidia.com
+ [216.228.121.143])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8DAD9414F0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Feb 2021 06:19:02 +0000 (UTC)
+ Wed, 24 Feb 2021 06:19:03 +0000 (UTC)
 Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by
- hqnvemgate26.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
- id <B6035efd60000>; Tue, 23 Feb 2021 22:19:02 -0800
+ hqnvemgate24.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+ id <B6035efd70000>; Tue, 23 Feb 2021 22:19:03 -0800
 Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Wed, 24 Feb 2021 06:19:01 +0000
+ Wed, 24 Feb 2021 06:19:02 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next 3/9] vdpa: Enable user to set mac and mtu of vdpa
- device
-Date: Wed, 24 Feb 2021 08:18:38 +0200
-Message-ID: <20210224061844.137776-4-parav@nvidia.com>
+Subject: [PATCH linux-next 4/9] vdpa_sim_net: Enable user to set mac address
+ and mtu
+Date: Wed, 24 Feb 2021 08:18:39 +0200
+Message-ID: <20210224061844.137776-5-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210224061844.137776-1-parav@nvidia.com>
 References: <20210224061844.137776-1-parav@nvidia.com>
@@ -61,16 +61,16 @@ X-Originating-IP: [172.20.145.6]
 X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
- t=1614147542; bh=DuD3Bd7CzSL2aRSZX83dOLOcz+3lmdoc4NkjKsE+XjY=;
+ t=1614147543; bh=vVjK5k8jxwNSiCFKFBWh7+9cOsQkC1wo8MeRR/vSXHM=;
  h=From:To:CC:Subject:Date:Message-ID:X-Mailer:In-Reply-To:
  References:MIME-Version:Content-Transfer-Encoding:Content-Type:
  X-Originating-IP:X-ClientProxiedBy;
- b=UjNOc8zE8j+RCfAdgeeQuPyPDjz9sRsIt7nUpbV3wAWnryIOEYy6fTNvzt4xCEW/K
- 5M7mHs3pV7lL41A3791hTIkowqqUULZIAROvKvcU/0xkk/Nu8QGN/j8Eu4Gy/LgSnB
- ZMAyyxgMMrPJNkEF6A/HX7YZV4QMMIwVQw/l/CBjdD6yRAG3HDkKxlmceu/zsVK5zV
- v83/VJVNL7oOwC1bzofjcjGmA7H/nF47wRb0ygRUnjMvayD9EkeFr/pLGFCpYdUib4
- bSiEBm0sH8q6DBcUThJbL/SCCbJLZxRS9Ajhutj6qxeh/jxb5Dcmdwt2CHs/X50Off
- K2YqKzHsPMFaA==
+ b=VWkMK86XhYxM1wXmI5ZWLr7aT98Vg6MorJ59S2zabv2UUX+tNSTh81fuhtdfiwP8M
+ 00v7MLi2SPeTungD74NSo0eD8SQkdwyQ/NWRD5tbUR+hpEum2Un3gn4SycgHldS/E6
+ I3IkNBopzPiXxYxD0kYdG8PGSeE+S78NvLvTgC5OTfn65Yt/0hmpIrbGwvA/znfMEI
+ Z6LzmNX+VI++SUaYxt/D8skNX1Rz0Sf8vMeq+JVxXblqlyiPYp8rodl1Kostu+Chnw
+ 1y7iUXhrF9+mpsRx79hIO9e8+xZGHUTuCYCWWzH4iduhLwg77xDP7hC56sje7wddUA
+ gCKbmF8pL7QIQ==
 Cc: Eli Cohen <elic@nvidia.com>, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -88,203 +88,118 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-$ vdpa dev add name bar mgmtdev vdpasim_net
+Enable user to set the mac address and mtu so that each vdpa device
+can have its own user specified mac address and mtu.
+This is done by implementing the management device's configuration
+layout fields setting callback routine.
 
+Now that user is enabled to set the mac address, remove the module
+parameter for same.
+
+And example of setting mac addr and mtu:
+$ vdpa mgmtdev show
+
+$ vdpa dev add name bar mgmtdev vdpasim_net
 $ vdpa dev config set bar mac 00:11:22:33:44:55 mtu 9000
 
+View the config after setting:
 $ vdpa dev config show
 bar: mac 00:11:22:33:44:55 link up link_announce false mtu 9000 speed 0 duplex 0
-
-$ vdpa dev config show -jp
-{
-    "config": {
-        "bar": {
-            "mac": "00:11:22:33:44:55",
-            "link ": "up",
-            "link_announce ": false,
-            "mtu": 9000,
-            "speed": 0,
-            "duplex": 0
-        }
-    }
-}
 
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
 ---
- drivers/vdpa/vdpa.c       | 89 +++++++++++++++++++++++++++++++++++++++
- include/linux/vdpa.h      | 16 +++++++
- include/uapi/linux/vdpa.h |  1 +
- 3 files changed, 106 insertions(+)
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 39 ++++++++++++++++------------
+ 1 file changed, 22 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index cebbba500638..ae4656dcea16 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -778,10 +778,93 @@ vdpa_nl_cmd_dev_config_get_dumpit(struct sk_buff *msg, struct netlink_callback *
- 	return msg->len;
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
+index 240a5f1306b5..6e941b0e7935 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
+@@ -29,12 +29,6 @@
+ 
+ #define VDPASIM_NET_VQ_NUM	2
+ 
+-static char *macaddr;
+-module_param(macaddr, charp, 0);
+-MODULE_PARM_DESC(macaddr, "Ethernet MAC address");
+-
+-static u8 macaddr_buf[ETH_ALEN];
+-
+ static void vdpasim_net_work(struct work_struct *work)
+ {
+ 	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
+@@ -113,9 +107,7 @@ static void vdpasim_net_get_config(struct vdpasim *vdpasim, void *config)
+ 	struct virtio_net_config *net_config =
+ 		(struct virtio_net_config *)config;
+ 
+-	net_config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
+ 	net_config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
+-	memcpy(net_config->mac, macaddr_buf, ETH_ALEN);
  }
  
-+static void build_dev_net_config_attrs(struct genl_info *info,
-+				       struct vdpa_dev_config_set_attr *attrs)
-+{
-+	struct nlattr **nl_attrs = info->attrs;
-+	const u8 *macaddr;
+ static void vdpasim_net_mgmtdev_release(struct device *dev)
+@@ -134,6 +126,7 @@ static struct device vdpasim_net_mgmtdev_dummy = {
+ 
+ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
+ {
++	struct virtio_net_config *cfg;
+ 	struct vdpasim_dev_attr dev_attr = {};
+ 	struct vdpasim *simdev;
+ 	int ret;
+@@ -152,6 +145,10 @@ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
+ 	if (IS_ERR(simdev))
+ 		return PTR_ERR(simdev);
+ 
++	cfg = simdev->config;
++	eth_random_addr(cfg->mac);
++	cfg->mtu = cpu_to_vdpasim16(simdev, 1500);
 +
-+	if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MACADDR]) {
-+		macaddr = nla_data(nl_attrs[VDPA_ATTR_DEV_NET_CFG_MACADDR]);
-+		memcpy(attrs->cfg.mac, macaddr, sizeof(attrs->cfg.mac));
-+		attrs->mask.mac_valid = true;
-+	}
-+	if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MTU]) {
-+		attrs->cfg.mtu =
-+			nla_get_u16(nl_attrs[VDPA_ATTR_DEV_NET_CFG_MTU]);
-+		attrs->mask.mtu_valid = true;
-+	}
-+}
-+
+ 	ret = _vdpa_register_device(&simdev->vdpa);
+ 	if (ret)
+ 		goto reg_err;
+@@ -171,9 +168,25 @@ static void vdpasim_net_dev_del(struct vdpa_mgmt_dev *mdev,
+ 	_vdpa_unregister_device(&simdev->vdpa);
+ }
+ 
 +static int
-+vdpa_dev_net_config_set(struct vdpa_device *vdev,
-+			const struct vdpa_dev_config_set_attr *attrs)
++vdpasim_net_dev_config_set(struct vdpa_mgmt_dev *mdev,
++			   struct vdpa_device *dev,
++			   const struct vdpa_dev_config_set_attr *attrs)
 +{
-+	struct vdpa_mgmt_dev *mdev = vdev->mdev;
++	struct vdpasim *simdev = container_of(dev, struct vdpasim, vdpa);
++	struct virtio_net_config *dev_cfg = simdev->config;
 +
-+	if (!mdev->ops->dev_config_set)
-+		return -EOPNOTSUPP;
-+	return mdev->ops->dev_config_set(mdev, vdev, attrs);
++	if (attrs->mask.mac_valid)
++		memcpy(dev_cfg->mac, attrs->cfg.mac, sizeof(dev_cfg->mac));
++	if (attrs->mask.mtu_valid)
++		dev_cfg->mtu = cpu_to_vdpasim16(simdev, attrs->cfg.mtu);
++	return 0;
 +}
 +
-+static int vdpa_dev_config_set(struct vdpa_device *vdev, struct genl_info *info)
-+{
-+	struct vdpa_dev_config_set_attr attrs = {};
-+	int err = -EOPNOTSUPP;
-+	u32 device_id;
-+
-+	if (!vdev->mdev)
-+		return -EOPNOTSUPP;
-+
-+	device_id = vdev->config->get_device_id(vdev);
-+	switch (device_id) {
-+	case VIRTIO_ID_NET:
-+		build_dev_net_config_attrs(info, &attrs);
-+		err = vdpa_dev_net_config_set(vdev, &attrs);
-+		break;
-+	default:
-+		break;
-+	}
-+	return err;
-+}
-+
-+static int vdpa_nl_cmd_dev_config_set_doit(struct sk_buff *skb, struct genl_info *info)
-+{
-+	struct vdpa_device *vdev;
-+	const char *devname;
-+	struct device *dev;
-+	int err;
-+
-+	if (!info->attrs[VDPA_ATTR_DEV_NAME])
-+		return -EINVAL;
-+	devname = nla_data(info->attrs[VDPA_ATTR_DEV_NAME]);
-+
-+	mutex_lock(&vdpa_dev_mutex);
-+	dev = bus_find_device(&vdpa_bus, NULL, devname, vdpa_name_match);
-+	if (!dev) {
-+		mutex_unlock(&vdpa_dev_mutex);
-+		NL_SET_ERR_MSG_MOD(info->extack, "device not found");
-+		return -ENODEV;
-+	}
-+	vdev = container_of(dev, struct vdpa_device, dev);
-+	if (!vdev->mdev) {
-+		mutex_unlock(&vdpa_dev_mutex);
-+		put_device(dev);
-+		return -EINVAL;
-+	}
-+	err = vdpa_dev_config_set(vdev, info);
-+	put_device(dev);
-+	mutex_unlock(&vdpa_dev_mutex);
-+	return err;
-+}
-+
- static const struct nla_policy vdpa_nl_policy[VDPA_ATTR_MAX + 1] = {
- 	[VDPA_ATTR_MGMTDEV_BUS_NAME] = { .type = NLA_NUL_STRING },
- 	[VDPA_ATTR_MGMTDEV_DEV_NAME] = { .type = NLA_STRING },
- 	[VDPA_ATTR_DEV_NAME] = { .type = NLA_STRING },
-+	[VDPA_ATTR_DEV_NET_CFG_MACADDR] = NLA_POLICY_EXACT_LEN(ETH_ALEN),
-+	/* virtio spec 1.1 section 5.1.4.1 for valid MTU range */
-+	[VDPA_ATTR_DEV_NET_CFG_MTU] = NLA_POLICY_RANGE(NLA_U16, 68, 65535),
+ static const struct vdpa_mgmtdev_ops vdpasim_net_mgmtdev_ops = {
+ 	.dev_add = vdpasim_net_dev_add,
+-	.dev_del = vdpasim_net_dev_del
++	.dev_del = vdpasim_net_dev_del,
++	.dev_config_set = vdpasim_net_dev_config_set,
  };
  
- static const struct genl_ops vdpa_nl_ops[] = {
-@@ -815,6 +898,12 @@ static const struct genl_ops vdpa_nl_ops[] = {
- 		.doit = vdpa_nl_cmd_dev_config_get_doit,
- 		.dumpit = vdpa_nl_cmd_dev_config_get_dumpit,
- 	},
-+	{
-+		.cmd = VDPA_CMD_DEV_CONFIG_SET,
-+		.validate = GENL_DONT_VALIDATE_STRICT | GENL_DONT_VALIDATE_DUMP,
-+		.doit = vdpa_nl_cmd_dev_config_set_doit,
-+		.flags = GENL_ADMIN_PERM,
-+	},
- };
+ static struct virtio_device_id id_table[] = {
+@@ -198,14 +211,6 @@ static int __init vdpasim_net_init(void)
+ {
+ 	int ret;
  
- static struct genl_family vdpa_nl_family __ro_after_init = {
-diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-index 4ab5494503a8..c43a9e86c0ee 100644
---- a/include/linux/vdpa.h
-+++ b/include/linux/vdpa.h
-@@ -6,6 +6,7 @@
- #include <linux/device.h>
- #include <linux/interrupt.h>
- #include <linux/vhost_iotlb.h>
-+#include <linux/virtio_net.h>
- 
- /**
-  * vDPA callback definition.
-@@ -343,6 +344,14 @@ static inline void vdpa_get_config(struct vdpa_device *vdev, unsigned offset,
- 	ops->get_config(vdev, offset, buf, len);
- }
- 
-+struct vdpa_dev_config_set_attr {
-+	struct virtio_net_config cfg;
-+	struct {
-+		u8 mac_valid : 1;
-+		u8 mtu_valid : 1;
-+	} mask;
-+};
-+
- /**
-  * vdpa_mgmtdev_ops - vdpa device ops
-  * @dev_add:	Add a vdpa device using alloc and register
-@@ -356,10 +365,17 @@ static inline void vdpa_get_config(struct vdpa_device *vdev, unsigned offset,
-  *		@dev: vdpa device to remove
-  *		Driver need to remove the specified device by calling
-  *		_vdpa_unregister_device().
-+ * @dev_config_set: Setup one or more fields of the device configuration layout
-+ *		    @mdev: management device of the vdpa device
-+ *		    @dev: vdpa device whose config fields to setup/modify
-+ *		    @attrs: attributes to updated
-  */
- struct vdpa_mgmtdev_ops {
- 	int (*dev_add)(struct vdpa_mgmt_dev *mdev, const char *name);
- 	void (*dev_del)(struct vdpa_mgmt_dev *mdev, struct vdpa_device *dev);
-+	int (*dev_config_set)(struct vdpa_mgmt_dev *mdev,
-+			      struct vdpa_device *dev,
-+			      const struct vdpa_dev_config_set_attr *attrs);
- };
- 
- struct vdpa_mgmt_dev {
-diff --git a/include/uapi/linux/vdpa.h b/include/uapi/linux/vdpa.h
-index 5c31ecc3b956..ec349789b8d1 100644
---- a/include/uapi/linux/vdpa.h
-+++ b/include/uapi/linux/vdpa.h
-@@ -18,6 +18,7 @@ enum vdpa_command {
- 	VDPA_CMD_DEV_DEL,
- 	VDPA_CMD_DEV_GET,		/* can dump */
- 	VDPA_CMD_DEV_CONFIG_GET,	/* can dump */
-+	VDPA_CMD_DEV_CONFIG_SET,
- };
- 
- enum vdpa_attr {
+-	if (macaddr) {
+-		mac_pton(macaddr, macaddr_buf);
+-		if (!is_valid_ether_addr(macaddr_buf))
+-			return -EADDRNOTAVAIL;
+-	} else {
+-		eth_random_addr(macaddr_buf);
+-	}
+-
+ 	ret = device_register(&vdpasim_net_mgmtdev);
+ 	if (ret)
+ 		return ret;
 -- 
 2.26.2
 
