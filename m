@@ -1,79 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D239329667
-	for <lists.virtualization@lfdr.de>; Tue,  2 Mar 2021 07:28:24 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF5C8329669
+	for <lists.virtualization@lfdr.de>; Tue,  2 Mar 2021 07:29:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id EB3DB43030;
-	Tue,  2 Mar 2021 06:28:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 65CC083D97;
+	Tue,  2 Mar 2021 06:29:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rsctmhbQGojv; Tue,  2 Mar 2021 06:28:22 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id reEOtsk_31EV; Tue,  2 Mar 2021 06:29:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C7C3043038;
-	Tue,  2 Mar 2021 06:28:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2172E83D99;
+	Tue,  2 Mar 2021 06:29:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DA5FC0001;
-	Tue,  2 Mar 2021 06:28:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B4EC1C0001;
+	Tue,  2 Mar 2021 06:29:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 49810C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 887CEC0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 06:28:19 +0000 (UTC)
+ Tue,  2 Mar 2021 06:29:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 378F343038
+ by smtp3.osuosl.org (Postfix) with ESMTP id 69C1C606FF
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 06:28:19 +0000 (UTC)
+ Tue,  2 Mar 2021 06:29:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id L8jni2uY6NuW
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=opensynergy.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id UQeQ89T2TyAc
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 06:28:18 +0000 (UTC)
+ Tue,  2 Mar 2021 06:29:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EA60543030
+Received: from mx1.opensynergy.com (mx1.opensynergy.com [217.66.60.4])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7E9F96069F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 06:28:17 +0000 (UTC)
-IronPort-SDR: gPNHx7pybdd/lolwCFiPa+6BJL47eCr/vR+1QsDqD+5rnRGwe8yfWHoV+q83JDec1CImvUYUnl
- 7vNlMTEWtCNw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9910"; a="248111659"
-X-IronPort-AV: E=Sophos;i="5.81,216,1610438400"; d="scan'208";a="248111659"
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Mar 2021 22:28:16 -0800
-IronPort-SDR: 4HEhIRxtLlBjbR5Mq0Pp6v5Wx40ez790z7ZwrTBe9T3G/JC2/2KZSjqbv1hsWgiGI5g7TMbXCP
- Y87wtZlJrYGg==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.81,216,1610438400"; d="scan'208";a="444614627"
-Received: from unknown (HELO [10.239.154.55]) ([10.239.154.55])
- by orsmga001.jf.intel.com with ESMTP; 01 Mar 2021 22:28:09 -0800
-Subject: Re: [PATCH v5] i2c: virtio: add a virtio i2c frontend driver
-To: Viresh Kumar <viresh.kumar@linaro.org>
-References: <00f826ffe1b6b4f5fb41de2b55ad6b8783b7ff45.1614579846.git.jie.deng@intel.com>
- <20210301115441.a4s5xzwm6d6ohz7f@vireshk-i7>
- <16efea9f-d606-4cf9-9213-3c1cf9b1a906@intel.com>
- <20210302034323.gkqymzngyqofrdsr@vireshk-i7>
-From: Jie Deng <jie.deng@intel.com>
-Message-ID: <664d590d-b43f-1829-3ea0-44a4054dfca6@intel.com>
-Date: Tue, 2 Mar 2021 14:28:09 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Firefox/78.0 Thunderbird/78.7.0
+ Tue,  2 Mar 2021 06:29:24 +0000 (UTC)
+Received: from SR-MAILGATE-02.opensynergy.com (localhost.localdomain
+ [127.0.0.1])
+ by mx1.opensynergy.com (Proxmox) with ESMTP id 60282A1377;
+ Tue,  2 Mar 2021 07:29:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opensynergy.com;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:from:from:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=srmailgate02; bh=8Yt0B43U8OdE
+ T4kdbA88SrJ5iYbOz8v13cIrkyLZ+4k=; b=MjzEBush0yFIE3j0zZ105jP/PY0E
+ D7YBPxe7Y6qKmIURtf+Tb8KDVY8cPScamz6XWS7xHZZKlpQ5+c2rW4Q2vJ8/3B+k
+ /AmeysgEuNtVxig0nxAscB2F9Yf8g9Ps3bhJIJ61HedqfjTSepLn12bOyOdPu0wB
+ zq8EDJPin6Z9i8mHmEyv1RjHRKGRq3Stzk/FCVqHPKULSZyLDta1zG7B1qmqWO+0
+ Hw+X6jbo7xY+/GOPgcQi+Eay9FBv1KO/A647aghWFKbYx6UGPx5poyus39XXm8oU
+ kOKM2sPwI/VxIYfhqCxWAz4lmm/LZLqH/vCoHcoDTLcEoF9PaVlTIpGwrg==
+Subject: Re: [PATCH v6 9/9] ALSA: virtio: introduce device suspend/resume
+ support
+To: Takashi Iwai <tiwai@suse.de>
+References: <20210227085956.1700687-1-anton.yakovlev@opensynergy.com>
+ <20210227085956.1700687-10-anton.yakovlev@opensynergy.com>
+ <s5hpn0kjt31.wl-tiwai@suse.de>
+From: Anton Yakovlev <anton.yakovlev@opensynergy.com>
+Message-ID: <7d4daea0-ed59-e84c-c28a-945c49204c83@opensynergy.com>
+Date: Tue, 2 Mar 2021 07:29:20 +0100
 MIME-Version: 1.0
-In-Reply-To: <20210302034323.gkqymzngyqofrdsr@vireshk-i7>
+In-Reply-To: <s5hpn0kjt31.wl-tiwai@suse.de>
 Content-Language: en-US
-Cc: Sergey.Semin@baikalelectronics.ru, bjorn.andersson@linaro.org,
- loic.poulain@linaro.org, tali.perry1@gmail.com, yu1.wang@intel.com,
- arnd@arndb.de, mst@redhat.com, shuo.a.liu@intel.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- wsa@kernel.org, wsa+renesas@sang-engineering.com,
- Paolo Bonzini <pbonzini@redhat.com>, jarkko.nikula@linux.intel.com,
- linux-i2c@vger.kernel.org, u.kleine-koenig@pengutronix.de,
- kblaiech@mellanox.com, andriy.shevchenko@linux.intel.com,
- conghui.chen@intel.com, rppt@kernel.org
+X-ClientProxiedBy: SR-MAIL-01.open-synergy.com (10.26.10.21) To
+ SR-MAIL-01.open-synergy.com (10.26.10.21)
+Cc: virtio-dev@lists.oasis-open.org, alsa-devel@alsa-project.org, "Michael S.
+ Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
+ Takashi Iwai <tiwai@suse.com>, Jaroslav Kysela <perex@perex.cz>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,57 +88,49 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
-On 2021/3/2 11:43, Viresh Kumar wrote:
-> On 02-03-21, 10:21, Jie Deng wrote:
->> On 2021/3/1 19:54, Viresh Kumar wrote:
->> That's my original proposal. I used to mirror this interface with "struct
->> i2c_msg".
+On 28.02.2021 13:05, Takashi Iwai wrote:
+> On Sat, 27 Feb 2021 09:59:56 +0100,
+> Anton Yakovlev wrote:
 >>
->> But the design philosophy of virtio TC is that VIRTIO devices are not
->> specific to Linux
->> so the specs design should avoid the limitations of the current Linux driver
->> behavior.
-> Right, I understand that.
->
->> We had some discussion about this. You may check these links to learn the
->> story.
->> https://lists.oasis-open.org/archives/virtio-comment/202010/msg00016.html
->> https://lists.oasis-open.org/archives/virtio-comment/202010/msg00033.html
->> https://lists.oasis-open.org/archives/virtio-comment/202011/msg00025.html
-> So the thing is that we want to support full duplex mode, right ?
->
-> How will that work protocol wise ? I mean how would we know if we are
-> expecting both tx and rx buffers in a transfer ?
 
-Not for the full duplex. As Paolo explained in those links.
-We defined a combined request called "write-read request"
+[snip]
 
-"
-This is when a write is followed by a read: the master
-starts off the transmission with a write, then sends a second START,
-then continues with a read from the same address.
+>> --- a/sound/virtio/virtio_pcm.c
+>> +++ b/sound/virtio/virtio_pcm.c
+>> @@ -109,6 +109,7 @@ static int virtsnd_pcm_build_hw(struct virtio_pcm_substream *vss,
+>>                SNDRV_PCM_INFO_BATCH |
+>>                SNDRV_PCM_INFO_BLOCK_TRANSFER |
+>>                SNDRV_PCM_INFO_INTERLEAVED |
+>> +             SNDRV_PCM_INFO_RESUME |
+>>                SNDRV_PCM_INFO_PAUSE;
+> 
+> Actually you don't need to set SNDRV_PCM_INFO_RESUME.
+> This flag means that the driver supports the full resume procedure,
+> which isn't often the case; with this, the driver is supposed to
+> resume the stream exactly from the suspended position.
+> 
+> Most drivers don't set this but implement only the suspend-stop
+> action.  Then the application (or the sound backend) will re-setup the
+> stream and restart accordingly.
 
-In theory there's no difference between one multi-segment transaction
-and many single-segment transactions _in a single-master scenario_.
+I tried to resume driver without SNDRV_PCM_INFO_RESUME, and alsa-lib
+called only ops->prepare(). It makes sense for a typical hw, but we have
+"clean" unconfigured device on resume. And we must set hw parameters as
+a first step. It means, that code should be more or less the same. And
+maybe it's better to set SNDRV_PCM_INFO_RESUME, since it allows us to
+resume substream in any situation (regardless of application behavior).
+I can refactor code to only send requests from trigger(RESUME) path and
+not to call ops itself. It should make code more straitforward. What do
+you say?
 
-However, it is a plausible configuration to have multiple guests sharing
-an I2C host device as if they were multiple master.
 
-So the spec should provide a way at least to support for transactions with
-1 write and 1 read segment in one request to the same address.
+-- 
+Anton Yakovlev
+Senior Software Engineer
 
-"
+OpenSynergy GmbH
+Rotherstr. 20, 10245 Berlin
 
- From the perspective of specification design, it hopes to provide more 
-choices
-while from the perspective of specific implementation, we can choose 
-what we need
-as long as it does not violate the specification.
-
-Since the current Linux driver doesn't use this mechanism. I'm 
-considering to move
-the "struct virtio_i2c_req" into the driver and use one "buf" instead.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
