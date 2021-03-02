@@ -1,106 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id B9E9C32A210
-	for <lists.virtualization@lfdr.de>; Tue,  2 Mar 2021 15:15:30 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B6B632A4C8
+	for <lists.virtualization@lfdr.de>; Tue,  2 Mar 2021 16:48:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0FFF64F109;
-	Tue,  2 Mar 2021 14:15:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E51B983D96;
+	Tue,  2 Mar 2021 15:48:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0lZh0C0xY-l8; Tue,  2 Mar 2021 14:15:28 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id eIk6_AKU0wRB; Tue,  2 Mar 2021 15:48:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C210C4F10A;
-	Tue,  2 Mar 2021 14:15:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9438383E54;
+	Tue,  2 Mar 2021 15:48:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 46E06C0001;
-	Tue,  2 Mar 2021 14:15:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 20810C0012;
+	Tue,  2 Mar 2021 15:48:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B1EADC0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C29A2C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 14:15:25 +0000 (UTC)
+ Tue,  2 Mar 2021 15:48:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 972DB4F100
+ by smtp2.osuosl.org (Postfix) with ESMTP id B1008430CA
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 14:15:25 +0000 (UTC)
+ Tue,  2 Mar 2021 15:48:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id K4t4Y2N0MtYx
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=opensynergy.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id IIXcfKLxnpAq
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 14:15:24 +0000 (UTC)
+ Tue,  2 Mar 2021 15:48:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B6A274F0F3
+Received: from mx1.opensynergy.com (mx1.opensynergy.com [217.66.60.4])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B10FF42FD7
  for <virtualization@lists.linux-foundation.org>;
- Tue,  2 Mar 2021 14:15:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1614694523;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=rjOoUYxeG19DT5eJ2WuZnRhWzkvWoRa4HG3rYru+1nk=;
- b=TARHDRKxTcMj23Ok+2Ue2h34m0Or4hNvqr5wYCSrEogVGb6ZEih1dqQ1EZHQayfT86n6JE
- 7AzPiq9hhLfRYpCtyrtr69m1Ww6p6E7CBPmiXu9SqAFAS6rOgEW2LY/MI1Cj3+2HaLmVql
- xSwDW6xoum85NZDzoeoBWeEXQZ+cag8=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-90-0faSmOTLOpioJv-ItkAA5A-1; Tue, 02 Mar 2021 09:15:21 -0500
-X-MC-Unique: 0faSmOTLOpioJv-ItkAA5A-1
-Received: by mail-ej1-f71.google.com with SMTP id n25so8538556ejd.5
- for <virtualization@lists.linux-foundation.org>;
- Tue, 02 Mar 2021 06:15:21 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=rjOoUYxeG19DT5eJ2WuZnRhWzkvWoRa4HG3rYru+1nk=;
- b=p/M0GlFXuPeQ3bn4hfK+IF4foKz0KVGbZ5gsRNP33HWR0Ze54zd48SFwKoFkrvinER
- Kn41LWluXfRjlBspkOQuV2HE8bx5k/ILWyZDyWJCq7IMoqRFQHjonCgxNtnuz+OlkaTL
- SEhuMNUXPMO3rC8NLdDuVp1SINPAhVAQjDNAiujq5w2/kUUVIMMDc7pY3O38gp0TxPaP
- 0EDlfN2O546K50cH5ixrlqSTn/EMhYzdg99L9V0lDmtR+Yc6MTspqHsvH1bMPAXezqTk
- faCejnu67FBGOEHQhjGdzIDI9p40hBCWxgsTnSufhJAndAqy4ZXFwZ8yXu88rmaA2/Pc
- 5GAA==
-X-Gm-Message-State: AOAM530pDoFHfcjiXK9Vk3o0jLWwlfI8roNDDj63NzCA4Up+RfvDA0mB
- S6TRzGFVsV3k5NweKpa+dMcJ7WZPgYFriWflsSD+QCjjg2hQIzcQI3KPc9itGR/QmGEz85enYKU
- tDJc9QlCpDddqblUisPQ4kPdfr2+ZxkUb1NDyvXYhVA==
-X-Received: by 2002:a17:906:f891:: with SMTP id
- lg17mr21120899ejb.69.1614694520442; 
- Tue, 02 Mar 2021 06:15:20 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJygE29SnX3D3HuuzIHfSkf8dbUaigd8KEMZKU0eY9r+w462+eOcRfQHeat9otGJbyl2OKaNyA==
-X-Received: by 2002:a17:906:f891:: with SMTP id
- lg17mr21120877ejb.69.1614694520244; 
- Tue, 02 Mar 2021 06:15:20 -0800 (PST)
-Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
- [79.34.249.199])
- by smtp.gmail.com with ESMTPSA id c17sm18013380edw.32.2021.03.02.06.15.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Mar 2021 06:15:19 -0800 (PST)
-Date: Tue, 2 Mar 2021 15:15:16 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [RFC PATCH 01/10] vdpa: add get_config_size callback in
- vdpa_config_ops
-Message-ID: <20210302141516.oxsdb7jogrvu75yc@steredhat>
-References: <20210216094454.82106-1-sgarzare@redhat.com>
- <20210216094454.82106-2-sgarzare@redhat.com>
- <5de4cd5b-04cb-46ca-1717-075e5e8542fd@redhat.com>
+ Tue,  2 Mar 2021 15:48:17 +0000 (UTC)
+Received: from SR-MAILGATE-02.opensynergy.com (localhost.localdomain
+ [127.0.0.1])
+ by mx1.opensynergy.com (Proxmox) with ESMTP id CE368A178A;
+ Tue,  2 Mar 2021 16:35:25 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=opensynergy.com;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:from:from:in-reply-to:message-id:mime-version:references
+ :reply-to:subject:subject:to:to; s=srmailgate02; bh=3sXhMOkM8LPe
+ kLQJ3JvWQSiaoISGZyoWfcdIHtOJozw=; b=mzldlBoLn0NX3gqduhq7oHrlZOp4
+ MdnN2j6nmr6SccEt9rMCwx1Fp9sfgTRp2Xe6VfqzGoIFItrsWos7VfFvvhtvRi1z
+ ZVD61qHZQN2ajz0hY0ktQzvf7Xa3HhObJtZJObTvK7V7LmxRu3zsorJh7ssWYK9m
+ D8LrFdlko5HsOJR1tUimCA5eViDiEAc/vnKXjvkd5aGqlN26tU8eZSeoydpk9qm0
+ RMr2dArQLodtJXuUw6Rm6gzeWAmMgNIy/wWdroW2gMDrbADAO9PQLDkohZAvpDSl
+ rZrbXOSx2dpsYLzYPYiaUBSzyz/N+4tphZJkTS6d1NBaW4yeCiR78tCmuA==
+Subject: Re: [PATCH v6 9/9] ALSA: virtio: introduce device suspend/resume
+ support
+To: Takashi Iwai <tiwai@suse.de>
+References: <20210227085956.1700687-1-anton.yakovlev@opensynergy.com>
+ <20210227085956.1700687-10-anton.yakovlev@opensynergy.com>
+ <s5hpn0kjt31.wl-tiwai@suse.de>
+ <7d4daea0-ed59-e84c-c28a-945c49204c83@opensynergy.com>
+ <s5hwnuqgifa.wl-tiwai@suse.de>
+ <d9853306-2adf-24fe-935c-f7f8a1295dc3@opensynergy.com>
+ <s5hr1kxhqcn.wl-tiwai@suse.de>
+From: Anton Yakovlev <anton.yakovlev@opensynergy.com>
+Message-ID: <2479ed0f-4c90-f565-81cd-8d0348cd14bc@opensynergy.com>
+Date: Tue, 2 Mar 2021 16:35:24 +0100
 MIME-Version: 1.0
-In-Reply-To: <5de4cd5b-04cb-46ca-1717-075e5e8542fd@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <s5hr1kxhqcn.wl-tiwai@suse.de>
+Content-Language: en-US
+X-ClientProxiedBy: SR-MAIL-01.open-synergy.com (10.26.10.21) To
+ SR-MAIL-01.open-synergy.com (10.26.10.21)
+Cc: virtio-dev@lists.oasis-open.org, alsa-devel@alsa-project.org, "Michael S.
+ Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
+ Takashi Iwai <tiwai@suse.com>, Jaroslav Kysela <perex@perex.cz>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,39 +87,95 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBNYXIgMDIsIDIwMjEgYXQgMTI6MTQ6MTNQTSArMDgwMCwgSmFzb24gV2FuZyB3cm90
-ZToKPgo+T24gMjAyMS8yLzE2IDU6NDQg5LiL5Y2ILCBTdGVmYW5vIEdhcnphcmVsbGEgd3JvdGU6
-Cj4+VGhpcyBuZXcgY2FsbGJhY2sgaXMgdXNlZCB0byBnZXQgdGhlIHNpemUgb2YgdGhlIGNvbmZp
-Z3VyYXRpb24gc3BhY2UKPj5vZiB2RFBBIGRldmljZXMuCj4+Cj4+U2lnbmVkLW9mZi1ieTogU3Rl
-ZmFubyBHYXJ6YXJlbGxhIDxzZ2FyemFyZUByZWRoYXQuY29tPgo+Pi0tLQo+PiAgaW5jbHVkZS9s
-aW51eC92ZHBhLmggICAgICAgICAgICAgIHwgNCArKysrCj4+ICBkcml2ZXJzL3ZkcGEvaWZjdmYv
-aWZjdmZfbWFpbi5jICAgfCA2ICsrKysrKwo+PiAgZHJpdmVycy92ZHBhL21seDUvbmV0L21seDVf
-dm5ldC5jIHwgNiArKysrKysKPj4gIGRyaXZlcnMvdmRwYS92ZHBhX3NpbS92ZHBhX3NpbS5jICB8
-IDkgKysrKysrKysrCj4+ICA0IGZpbGVzIGNoYW5nZWQsIDI1IGluc2VydGlvbnMoKykKPj4KPj5k
-aWZmIC0tZ2l0IGEvaW5jbHVkZS9saW51eC92ZHBhLmggYi9pbmNsdWRlL2xpbnV4L3ZkcGEuaAo+
-PmluZGV4IDRhYjU0OTQ1MDNhOC4uZmRkZjQyYjE3NTczIDEwMDY0NAo+Pi0tLSBhL2luY2x1ZGUv
-bGludXgvdmRwYS5oCj4+KysrIGIvaW5jbHVkZS9saW51eC92ZHBhLmgKPj5AQCAtMTUwLDYgKzE1
-MCw5IEBAIHN0cnVjdCB2ZHBhX2lvdmFfcmFuZ2Ugewo+PiAgICogQHNldF9zdGF0dXM6CQkJU2V0
-IHRoZSBkZXZpY2Ugc3RhdHVzCj4+ICAgKgkJCQlAdmRldjogdmRwYSBkZXZpY2UKPj4gICAqCQkJ
-CUBzdGF0dXM6IHZpcnRpbyBkZXZpY2Ugc3RhdHVzCj4+KyAqIEBnZXRfY29uZmlnX3NpemU6CQlH
-ZXQgdGhlIHNpemUgb2YgdGhlIGNvbmZpZ3VyYXRpb24gc3BhY2UKPj4rICoJCQkJQHZkZXY6IHZk
-cGEgZGV2aWNlCj4+KyAqCQkJCVJldHVybnMgc2l6ZV90OiBjb25maWd1cmF0aW9uIHNpemUKPgo+
-Cj5SZXRoaW5rIGFib3V0IHRoaXMsIGhvdyBtdWNoIHdlIGNvdWxkIGdhaW4gYnkgaW50cm9kdWNp
-bmcgYSBkZWRpY2F0ZWQgCj5vcHMgaGVyZT8gRS5nIHdvdWxkIGl0IGJlIHNpbXBsZXIgaWYgd2Ug
-c2ltcGx5IGludHJvZHVjZSBhIAo+bWF4X2NvbmZpZ19zaXplIHRvIHZkcGEgZGV2aWNlPwoKTWFp
-bmx5IGJlY2F1c2UgaW4gdGhpcyB3YXkgd2UgZG9uJ3QgaGF2ZSB0byBhZGQgbmV3IHBhcmFtZXRl
-cnMgdG8gdGhlIAp2ZHBhX2FsbG9jX2RldmljZSgpIGZ1bmN0aW9uLgoKV2UgZG8gdGhlIHNhbWUg
-Zm9yIGV4YW1wbGUgZm9yICdnZXRfZGV2aWNlX2lkJywgJ2dldF92ZW5kb3JfaWQnLCAKJ2dldF92
-cV9udW1fbWF4Jy4gQWxsIG9mIHRoZXNlIGFyZSB1c3VhbGx5IHN0YXRpYywgYnV0IHdlIGhhdmUg
-b3BzLgpJIHRoaW5rIGJlY2F1c2UgaXQncyBlYXNpZXIgdG8gZXh0ZW5kLgoKSSBkb24ndCBrbm93
-IGlmIGl0J3Mgd29ydGggYWRkaW5nIGEgbmV3IHN0cnVjdHVyZSBmb3IgdGhlc2Ugc3RhdGljIAp2
-YWx1ZXMgYXQgdGhpcyBwb2ludCwgbGlrZSAnc3RydWN0IHZkcGFfY29uZmlnX3BhcmFtcycuCgpU
-aGFua3MsClN0ZWZhbm8KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5s
-aW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFp
-bG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On 02.03.2021 10:11, Takashi Iwai wrote:
+> On Tue, 02 Mar 2021 09:09:33 +0100,
+> Anton Yakovlev wrote:
+>>
+>> On 02.03.2021 07:48, Takashi Iwai wrote:
+>>> On Tue, 02 Mar 2021 07:29:20 +0100,
+>>> Anton Yakovlev wrote:
+>>>>
+>>>> On 28.02.2021 13:05, Takashi Iwai wrote:
+>>>>> On Sat, 27 Feb 2021 09:59:56 +0100,
+>>>>> Anton Yakovlev wrote:
+>>>>>>
+>>>>
+>>>> [snip]
+>>>>
+>>>>>> --- a/sound/virtio/virtio_pcm.c
+>>>>>> +++ b/sound/virtio/virtio_pcm.c
+>>>>>> @@ -109,6 +109,7 @@ static int virtsnd_pcm_build_hw(struct virtio_pcm_substream *vss,
+>>>>>>                  SNDRV_PCM_INFO_BATCH |
+>>>>>>                  SNDRV_PCM_INFO_BLOCK_TRANSFER |
+>>>>>>                  SNDRV_PCM_INFO_INTERLEAVED |
+>>>>>> +             SNDRV_PCM_INFO_RESUME |
+>>>>>>                  SNDRV_PCM_INFO_PAUSE;
+>>>>>
+>>>>> Actually you don't need to set SNDRV_PCM_INFO_RESUME.
+>>>>> This flag means that the driver supports the full resume procedure,
+>>>>> which isn't often the case; with this, the driver is supposed to
+>>>>> resume the stream exactly from the suspended position.
+>>>>>
+>>>>> Most drivers don't set this but implement only the suspend-stop
+>>>>> action.  Then the application (or the sound backend) will re-setup the
+>>>>> stream and restart accordingly.
+>>>>
+>>>> I tried to resume driver without SNDRV_PCM_INFO_RESUME, and alsa-lib
+>>>> called only ops->prepare(). It makes sense for a typical hw, but we have
+>>>> "clean" unconfigured device on resume. And we must set hw parameters as
+>>>> a first step. It means, that code should be more or less the same. And
+>>>> maybe it's better to set SNDRV_PCM_INFO_RESUME, since it allows us to
+>>>> resume substream in any situation (regardless of application behavior).
+>>>> I can refactor code to only send requests from trigger(RESUME) path and
+>>>> not to call ops itself. It should make code more straitforward. What do
+>>>> you say?
+>>>
+>>> How about calling hw_params(NULL) conditionally in the prepare?
+>>
+>> Then the question is that condition. When ops->prepare() is called, the
+>> substream is in SUSPENDED state or not? If not then we need to track
+>> this in some additional field (and it will make logic a little bit
+>> clumsy, since that field is needed to be carefully handled in other
+>> places).
+> 
+> Yes, you'd need to have a suspend/resume PM callback in the driver
+> that flips the internal flag to invalidate the hw_parmas, and in the
+> prepare callback, just call hw_params(NULL) if that flag is set.
+> 
+>>> Doing the full stack work in the trigger callback is bad from the API
+>>> design POV; in general the trigger callback is supposed to be as short
+>>> as possible.
+>>
+>> Yeah, but usually original subsystem design does not take into account
+>> para-virtualized devices, which usually have it's own slightly different
+>> reality. And we need to introduce some tricks.
+> 
+> The hardware drivers do a lot of more things in either suspend/resume
+> PM callbacks or prepare callback for re-setup of the hardware.  We can
+> follow the similar pattern.  Heavy-lifting works in the trigger
+> callbacks is really something to avoid.
+
+Ok, I redone this part and now the driver sets parameters for the device
+in ops->prepare() if the substream was suspended. And everything works
+fine. Thanks! I will send a new patch set soon.
+
+
+> Takashi
+> 
+
+-- 
+Anton Yakovlev
+Senior Software Engineer
+
+OpenSynergy GmbH
+Rotherstr. 20, 10245 Berlin
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
