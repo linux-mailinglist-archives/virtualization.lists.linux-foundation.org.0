@@ -1,90 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7AD4932B985
-	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 18:40:19 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A770E32B98E
+	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 18:46:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BF7374B0ED;
-	Wed,  3 Mar 2021 17:40:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0202A4B2C1;
+	Wed,  3 Mar 2021 17:46:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qUI_x6fbUwqx; Wed,  3 Mar 2021 17:40:16 +0000 (UTC)
+	with ESMTP id uDALwNKKTJPv; Wed,  3 Mar 2021 17:46:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3D008483DE;
-	Wed,  3 Mar 2021 17:40:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 85B844B2D7;
+	Wed,  3 Mar 2021 17:46:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D6E10C0001;
-	Wed,  3 Mar 2021 17:40:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2CC9EC0001;
+	Wed,  3 Mar 2021 17:46:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3F7B3C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C79E8C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:40:14 +0000 (UTC)
+ Wed,  3 Mar 2021 17:46:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2706584059
+ by smtp1.osuosl.org (Postfix) with ESMTP id B61AC840D5
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:40:14 +0000 (UTC)
+ Wed,  3 Mar 2021 17:46:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=linaro.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rkQxrBenFJP3
+ with ESMTP id 68VTItSeKSWP
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:40:12 +0000 (UTC)
-X-Greylist: delayed 00:11:55 by SQLgrey-1.8.0
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A9B888376B
+ Wed,  3 Mar 2021 17:46:47 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4AB7B84008
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:40:12 +0000 (UTC)
-Received: by mail-wm1-x334.google.com with SMTP id w7so5844595wmb.5
+ Wed,  3 Mar 2021 17:46:47 +0000 (UTC)
+Received: by mail-wm1-x32e.google.com with SMTP id m1so7142055wml.2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 03 Mar 2021 09:40:12 -0800 (PST)
+ Wed, 03 Mar 2021 09:46:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=m0yEupP/L76P6gyISve2gAOojgj7J2+MhN1/3SbMwsE=;
- b=C6KCV2Ndp6CnJ973AOgZXdDV2ekUchmEJSgJwIBEmdHi354O2kCSutw5rxsuaetRS2
- 6TWGzr8yJbWn4m3Gscu98rUzjS2Da4D50fqwZ+2nRW3QMP/1VIwc8h4YVEOlFw1OyElu
- xR9MPTccInyAI8SkqACUaRFoBJTIw+uwfVrORZaWtVapcLsDmBiWKh6hdddFwFXInOZh
- xJjh9otvchYhdcs8tvPO2rfa1cVCTzy81vjuAhs8lCNNERHj3NaDswXNENqNEwXgT/6q
- jez/V3484hDD5fJMt5nEduLgJm3Fs3iR+fK1ydpKCCATvHZ1rXTXxQ04lcxTcAOS0RKV
- bPRw==
+ bh=snvF1oZRAeOuQ652xF7hxq8e8Xbivy9W17OCql8Ju58=;
+ b=N4GzE8TYwDr5X4gxi0SyFxRoTBr18n1OZjxbvypLvGP0Y4FoY0LysvNlydxCGejw5o
+ /cBkCZJLNvfwhcIGdhFCqyxDwdKIZ6qjVhtXO7fN9azK3VGGOf3w8vj2aAp59oSB8xdN
+ 0dPT6MSfpozH0a30HioSChw0qmgAqCUYwcaapdq7uWhX/Cau9DcgXlxcfIWQUMNLc/LK
+ TFzBMXyK/zWnYtJMBqnKSmu5upeKLdHMql2kQ6zKb0XVFDIJl4dEbHe0xo7Qskg90KJL
+ JLt1qlFufE95dlru/PO4iXTOUfQzsqlVCf9J3BlUkcK+TVC4CiGinPkkPQSne2U/TFlH
+ LzWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=m0yEupP/L76P6gyISve2gAOojgj7J2+MhN1/3SbMwsE=;
- b=sGO6SNpsGt0Hy9DHY2CWO69lCGXHTvYx/WL62HwdOy32y2ZbixaN6eyAJ0mm6BtB+h
- ldcXqaQWhYIwGqBk76C8t5JoOOOZMnevxh/eGBh/XR68R0k1giFR7oJ2gjmKHAq2YA+N
- 5gK3SPDZGdkvwne18QBzmNBvUtlB0jLPtOzbiDgRB/+AeyypGttQP5j704NQNA2yht+f
- Pmj3kdn4hhDv+Q314PcPcDeESIHOLemLBQWFxi7p1Qp1ihcG1sBh9UvDuCrEFzsMfgFe
- suPQKIdOuCGLxCjwjF/LQA9+Z48EPOunMq9uT70OY6WkKtqSFYrMW+kiOEvOrjuHdXFp
- PNqw==
-X-Gm-Message-State: AOAM532i0uqAOFnwh7bgF+QVxblZuVu3dfMJNW+sR+Mmnpgv/CM4bcTc
- +5ddG3adDtQ0WSxmymlwwuZUljIw5PGRVQ==
-X-Google-Smtp-Source: ABdhPJyTjnQxRH4h4WtoiKSNYqpA2AI+RhtLePJP1THwR+Upij+BED0FnmLt0W2lDduYTxT0WBRsbg==
-X-Received: by 2002:a7b:c308:: with SMTP id k8mr69805wmj.54.1614791690288;
- Wed, 03 Mar 2021 09:14:50 -0800 (PST)
+ bh=snvF1oZRAeOuQ652xF7hxq8e8Xbivy9W17OCql8Ju58=;
+ b=FoJYhb55DZjlASRXJBiwuVYgSV9qqlPYoJdGyWym9E6aBs7KbAwXFAhx9/kYEw9GkO
+ IRQUDvdNG9nC0xdFMB3Zj9ot7rA8r2d1wQa3wUgF0KENl3C14is2sEMvbOFfNzAMnJYC
+ Wzeu4Dv2exzQsixRP+9045lukQg7nhHbHA/qR9Kpt+UOJU+uKFcAGBBIc8iT5I0QjBVP
+ 8VCFSvp/e9S2iJ34IDCa+0mfnzWudpUL8aTiEubRBeVLOWoJvrd4xDeBLRgePiCwjGmr
+ 5pSygBH/cP1RYK2c+BhjheHTu4/p/uErJM9HWALnsXu0Hi2IjiV/53GzGPQ1YYWFOsUJ
+ dA7Q==
+X-Gm-Message-State: AOAM531HSwGGpHWyrkQsEqu+VrE33PQK99SJ2qhd2rs0Qzt2UeM7oKrM
+ QLG0PriVKcLR2OoYNT4JhLTkbxWofqYxcA==
+X-Google-Smtp-Source: ABdhPJz0FpEULBkKSmdBklW+Kq2/Ls1+mEtrqGKqrnMSwdqjEtdd4QHizAokDIN5S9VOM4P4MLCxhg==
+X-Received: by 2002:a1c:7715:: with SMTP id t21mr74337wmi.132.1614792096379;
+ Wed, 03 Mar 2021 09:21:36 -0800 (PST)
 Received: from myrica ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id v5sm6552574wmh.2.2021.03.03.09.14.49
+ by smtp.gmail.com with ESMTPSA id s23sm6477150wmc.35.2021.03.03.09.21.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Mar 2021 09:14:49 -0800 (PST)
-Date: Wed, 3 Mar 2021 18:14:28 +0100
+ Wed, 03 Mar 2021 09:21:35 -0800 (PST)
+Date: Wed, 3 Mar 2021 18:21:14 +0100
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: Vivek Gautam <vivek.gautam@arm.com>
-Subject: Re: [PATCH RFC v1 04/15] iommu/arm-smmu-v3: Update CD base address
- info for user-space
-Message-ID: <YD/D9HJxH9L503an@myrica>
+Subject: Re: [PATCH RFC v1 09/15] iommu/virtio: Update table format probing
+ header
+Message-ID: <YD/Fiuxd9/kThGxt@myrica>
 References: <20210115121342.15093-1-vivek.gautam@arm.com>
- <20210115121342.15093-5-vivek.gautam@arm.com>
+ <20210115121342.15093-10-vivek.gautam@arm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210115121342.15093-5-vivek.gautam@arm.com>
+In-Reply-To: <20210115121342.15093-10-vivek.gautam@arm.com>
 Cc: jacob.jun.pan@linux.intel.com, mst@redhat.com, joro@8bytes.org,
  will.deacon@arm.com, linux-kernel@vger.kernel.org,
  shameerali.kolothum.thodi@huawei.com,
@@ -108,13 +108,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 15, 2021 at 05:43:31PM +0530, Vivek Gautam wrote:
-> Update base address information in vendor pasid table info to pass that
-> to user-space for stage1 table management.
+On Fri, Jan 15, 2021 at 05:43:36PM +0530, Vivek Gautam wrote:
+> Add info about asid_bits and additional flags to table format
+> probing header.
 > 
 > Signed-off-by: Vivek Gautam <vivek.gautam@arm.com>
 > Cc: Joerg Roedel <joro@8bytes.org>
 > Cc: Will Deacon <will.deacon@arm.com>
+> Cc: Michael S. Tsirkin <mst@redhat.com>
 > Cc: Robin Murphy <robin.murphy@arm.com>
 > Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>
 > Cc: Eric Auger <eric.auger@redhat.com>
@@ -125,45 +126,30 @@ On Fri, Jan 15, 2021 at 05:43:31PM +0530, Vivek Gautam wrote:
 > Cc: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
 > Cc: Shameerali Kolothum Thodi <shameerali.kolothum.thodi@huawei.com>
 > ---
->  drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-cd-lib.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  include/uapi/linux/virtio_iommu.h | 5 ++++-
+>  1 file changed, 4 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-cd-lib.c b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-cd-lib.c
-> index 8a7187534706..ec37476c8d09 100644
-> --- a/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-cd-lib.c
-> +++ b/drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-cd-lib.c
-> @@ -55,6 +55,9 @@ static __le64 *arm_smmu_get_cd_ptr(struct iommu_vendor_psdtable_cfg *pst_cfg,
->  		if (arm_smmu_alloc_cd_leaf_table(dev, l1_desc))
->  			return NULL;
->  
-> +		if (s1cfg->s1fmt == STRTAB_STE_0_S1FMT_LINEAR)
-> +			pst_cfg->base = l1_desc->l2ptr_dma;
+> diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
+> index 43821e33e7af..8a0624bab4b2 100644
+> --- a/include/uapi/linux/virtio_iommu.h
+> +++ b/include/uapi/linux/virtio_iommu.h
+> @@ -169,7 +169,10 @@ struct virtio_iommu_probe_pasid_size {
+>  struct virtio_iommu_probe_table_format {
+>  	struct virtio_iommu_probe_property	head;
+>  	__le16					format;
+> -	__u8					reserved[2];
+> +	__le16					asid_bits;
 > +
+> +	__le32					flags;
 
-This isn't the right place, because this path allocates second-level
-tables for two-level tables. I don't think we need pst_cfg->base at all,
-because for both linear and two-level tables, the base pointer is in
-cdcfg->cdtab_dma, which can be read directly.
+This struct should only contain the head and format fields. asid and flags
+should go in a specialized structure - virtio_iommu_probe_pgt_arm64 in the
+latest spec draft, where I dropped the asid_bits field in favor of an
+"ASID16" flag.
 
 Thanks,
 Jean
 
->  		l1ptr = cdcfg->cdtab + idx * CTXDESC_L1_DESC_DWORDS;
->  		arm_smmu_write_cd_l1_desc(l1ptr, l1_desc);
->  		/* An invalid L1CD can be cached */
-> @@ -211,6 +214,9 @@ static int arm_smmu_alloc_cd_tables(struct iommu_vendor_psdtable_cfg *pst_cfg)
->  		goto err_free_l1;
->  	}
->  
-> +	if (s1cfg->s1fmt == STRTAB_STE_0_S1FMT_64K_L2)
-> +		pst_cfg->base = cdcfg->cdtab_dma;
-> +
->  	return 0;
->  
->  err_free_l1:
-> -- 
-> 2.17.1
-> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
