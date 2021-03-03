@@ -1,55 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D3E032B88C
-	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 15:17:41 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id AD22F32B88A
+	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 15:17:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DDFF2494C8;
-	Wed,  3 Mar 2021 14:17:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 311E0839C0;
+	Wed,  3 Mar 2021 14:17:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MlbS7Wyxjlfo; Wed,  3 Mar 2021 14:17:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id IjYjsMZg-oTN; Wed,  3 Mar 2021 14:17:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1526449B86;
+	by smtp1.osuosl.org (Postfix) with ESMTP id D04048433E;
 	Wed,  3 Mar 2021 14:17:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 835D1C0016;
-	Wed,  3 Mar 2021 14:17:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C672BC0001;
+	Wed,  3 Mar 2021 14:17:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B0592C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 462A4C000F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 14:17:32 +0000 (UTC)
+ Wed,  3 Mar 2021 14:17:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9F364839C0
+ by smtp1.osuosl.org (Postfix) with ESMTP id 41E9783A59
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 14:17:32 +0000 (UTC)
+ Wed,  3 Mar 2021 14:17:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ulVK1OYvMcsI
+ with ESMTP id rLUtwpcXEt_K
  for <virtualization@lists.linux-foundation.org>;
  Wed,  3 Mar 2021 14:17:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EE73383827
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 52BDF83842
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 14:17:31 +0000 (UTC)
+ Wed,  3 Mar 2021 14:17:32 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549adcf6.dip0.t-ipconnect.de
  [84.154.220.246])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 7763747C;
- Wed,  3 Mar 2021 15:17:24 +0100 (CET)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 1E31D48E;
+ Wed,  3 Mar 2021 15:17:25 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 4/5] x86/sev-es: Correctly track IRQ states in runtime #VC
- handler
-Date: Wed,  3 Mar 2021 15:17:15 +0100
-Message-Id: <20210303141716.29223-5-joro@8bytes.org>
+Subject: [PATCH 5/5] x86/sev-es: Use __copy_from_user_inatomic()
+Date: Wed,  3 Mar 2021 15:17:16 +0100
+Message-Id: <20210303141716.29223-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210303141716.29223-1-joro@8bytes.org>
 References: <20210303141716.29223-1-joro@8bytes.org>
@@ -85,53 +84,137 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Call irqentry_nmi_enter()/irqentry_nmi_exit() in the #VC handler to
-correctly track the IRQ state during its execution.
+The #VC handler must run atomic and can not be put to sleep. This is a
+problem when it tries to fetch instruction bytes from user-space via
+copy_from_user.
 
-Reported-by: Andy Lutomirski <luto@kernel.org>
-Fixes: 0786138c78e79 ("x86/sev-es: Add a Runtime #VC Exception Handler")
+Introduce a insn_fetch_from_user_inatomic() helper which uses
+__copy_from_user_inatomic() to safely copy the instruction bytes to
+kernel memory in the #VC handler.
+
+Fixes: 5e3427a7bc432 ("x86/sev-es: Handle instruction fetches from user-space")
 Cc: stable@vger.kernel.org # v5.10+
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-es.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/insn-eval.h |  2 +
+ arch/x86/kernel/sev-es.c         |  2 +-
+ arch/x86/lib/insn-eval.c         | 66 +++++++++++++++++++++++++-------
+ 3 files changed, 55 insertions(+), 15 deletions(-)
 
+diff --git a/arch/x86/include/asm/insn-eval.h b/arch/x86/include/asm/insn-eval.h
+index a0f839aa144d..98b4dae5e8bc 100644
+--- a/arch/x86/include/asm/insn-eval.h
++++ b/arch/x86/include/asm/insn-eval.h
+@@ -23,6 +23,8 @@ unsigned long insn_get_seg_base(struct pt_regs *regs, int seg_reg_idx);
+ int insn_get_code_seg_params(struct pt_regs *regs);
+ int insn_fetch_from_user(struct pt_regs *regs,
+ 			 unsigned char buf[MAX_INSN_SIZE]);
++int insn_fetch_from_user_inatomic(struct pt_regs *regs,
++				  unsigned char buf[MAX_INSN_SIZE]);
+ bool insn_decode(struct insn *insn, struct pt_regs *regs,
+ 		 unsigned char buf[MAX_INSN_SIZE], int buf_size);
+ 
 diff --git a/arch/x86/kernel/sev-es.c b/arch/x86/kernel/sev-es.c
-index e1eeb3ef58c5..3d8ec5bf6f79 100644
+index 3d8ec5bf6f79..26f5479a97a8 100644
 --- a/arch/x86/kernel/sev-es.c
 +++ b/arch/x86/kernel/sev-es.c
-@@ -1270,13 +1270,12 @@ static __always_inline bool on_vc_fallback_stack(struct pt_regs *regs)
- DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
- {
- 	struct sev_es_runtime_data *data = this_cpu_read(runtime_data);
-+	irqentry_state_t irq_state;
- 	struct ghcb_state state;
- 	struct es_em_ctxt ctxt;
- 	enum es_result result;
- 	struct ghcb *ghcb;
+@@ -270,7 +270,7 @@ static enum es_result vc_decode_insn(struct es_em_ctxt *ctxt)
+ 	int res;
  
--	lockdep_assert_irqs_disabled();
--
- 	/*
- 	 * Handle #DB before calling into !noinstr code to avoid recursive #DB.
- 	 */
-@@ -1285,6 +1284,8 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
- 		return;
+ 	if (user_mode(ctxt->regs)) {
+-		res = insn_fetch_from_user(ctxt->regs, buffer);
++		res = insn_fetch_from_user_inatomic(ctxt->regs, buffer);
+ 		if (!res) {
+ 			ctxt->fi.vector     = X86_TRAP_PF;
+ 			ctxt->fi.error_code = X86_PF_INSTR | X86_PF_USER;
+diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
+index 4229950a5d78..bb0b3fe1e0a0 100644
+--- a/arch/x86/lib/insn-eval.c
++++ b/arch/x86/lib/insn-eval.c
+@@ -1415,6 +1415,25 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs)
  	}
+ }
  
-+	irq_state = irqentry_nmi_enter(regs);
-+	lockdep_assert_irqs_disabled();
- 	instrumentation_begin();
++static unsigned long insn_get_effective_ip(struct pt_regs *regs)
++{
++	unsigned long seg_base = 0;
++
++	/*
++	 * If not in user-space long mode, a custom code segment could be in
++	 * use. This is true in protected mode (if the process defined a local
++	 * descriptor table), or virtual-8086 mode. In most of the cases
++	 * seg_base will be zero as in USER_CS.
++	 */
++	if (!user_64bit_mode(regs)) {
++		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
++		if (seg_base == -1L)
++			return 0;
++	}
++
++	return seg_base + regs->ip;
++}
++
+ /**
+  * insn_fetch_from_user() - Copy instruction bytes from user-space memory
+  * @regs:	Structure with register values as seen when entering kernel mode
+@@ -1431,24 +1450,43 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs)
+  */
+ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
+ {
+-	unsigned long seg_base = 0;
++	unsigned long ip;
+ 	int not_copied;
  
- 	/*
-@@ -1347,6 +1348,7 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
+-	/*
+-	 * If not in user-space long mode, a custom code segment could be in
+-	 * use. This is true in protected mode (if the process defined a local
+-	 * descriptor table), or virtual-8086 mode. In most of the cases
+-	 * seg_base will be zero as in USER_CS.
+-	 */
+-	if (!user_64bit_mode(regs)) {
+-		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
+-		if (seg_base == -1L)
+-			return 0;
+-	}
++	ip = insn_get_effective_ip(regs);
++	if (!ip)
++		return 0;
++
++	not_copied = copy_from_user(buf, (void __user *)ip, MAX_INSN_SIZE);
  
- out:
- 	instrumentation_end();
-+	irqentry_nmi_exit(regs, irq_state);
++	return MAX_INSN_SIZE - not_copied;
++}
++
++/**
++ * insn_fetch_from_user_inatomic() - Copy instruction bytes from user-space memory
++ *                                   while in atomic code
++ * @regs:	Structure with register values as seen when entering kernel mode
++ * @buf:	Array to store the fetched instruction
++ *
++ * Gets the linear address of the instruction and copies the instruction bytes
++ * to the buf. This function must be used in atomic context.
++ *
++ * Returns:
++ *
++ * Number of instruction bytes copied.
++ *
++ * 0 if nothing was copied.
++ */
++int insn_fetch_from_user_inatomic(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
++{
++	unsigned long ip;
++	int not_copied;
++
++	ip = insn_get_effective_ip(regs);
++	if (!ip)
++		return 0;
  
- 	return;
+-	not_copied = copy_from_user(buf, (void __user *)(seg_base + regs->ip),
+-				    MAX_INSN_SIZE);
++	not_copied = __copy_from_user_inatomic(buf, (void __user *)ip, MAX_INSN_SIZE);
  
+ 	return MAX_INSN_SIZE - not_copied;
+ }
 -- 
 2.30.1
 
