@@ -1,113 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A4D0032B7D8
-	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 13:35:58 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id A581632B81B
+	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 14:43:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C822A489E0;
-	Wed,  3 Mar 2021 12:35:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 26364836F1;
+	Wed,  3 Mar 2021 13:43:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VOz0lGm0lMYE; Wed,  3 Mar 2021 12:35:56 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id yykDGbl7ktJo; Wed,  3 Mar 2021 13:43:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 828234917A;
-	Wed,  3 Mar 2021 12:35:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F7078376B;
+	Wed,  3 Mar 2021 13:43:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 083E2C0001;
-	Wed,  3 Mar 2021 12:35:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 830CCC0001;
+	Wed,  3 Mar 2021 13:43:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3FA28C0001
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 361F4C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 12:35:53 +0000 (UTC)
+ Wed,  3 Mar 2021 13:43:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3A2A66F719
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0E2CA47B32
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 12:35:53 +0000 (UTC)
+ Wed,  3 Mar 2021 13:43:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id P7WCA9Tleibt
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id dY1YzL1tDAqt
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 12:35:52 +0000 (UTC)
+ Wed,  3 Mar 2021 13:43:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 55F446F837
+Received: from youngberry.canonical.com (youngberry.canonical.com
+ [91.189.89.112])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B6DC247661
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 12:35:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1614774951;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=B2/mlaVOc2uXODzqXWHOObyB1QA5PxCqBiUnSj4zWHw=;
- b=Ji2w/6ENPpmS9YPFC7qs7zDNz8y6VtthvxsVPcKnz1idLwONxx3U2dT5BvFOXeNStICnZ4
- zDHc5kbObg/JT0E1M9qgEMMaU+CUNY+cdB5zcxoCq/A9rkM7yHecO2OsPshJcG/V7kbcZI
- m5xdQsC3VqVjcmhE6Q9kTojJxsYHtN4=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-492-G9aSyCJwN-yLbEWqhni8OQ-1; Wed, 03 Mar 2021 07:35:49 -0500
-X-MC-Unique: G9aSyCJwN-yLbEWqhni8OQ-1
-Received: by mail-ej1-f72.google.com with SMTP id v10so10140212ejh.15
- for <virtualization@lists.linux-foundation.org>;
- Wed, 03 Mar 2021 04:35:49 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=B2/mlaVOc2uXODzqXWHOObyB1QA5PxCqBiUnSj4zWHw=;
- b=c6tlSY/D/At12Ypbea0VrYymq2ojnheaGao7oZc/W9zLryMsZXKlZZZfjo8/et8wVZ
- nJbM0P5bJ/MYQ/5ntM6Bff/oK5O0zFFUvwagFWoJZP6NsX/TTrZwHG4+l0bqZ7n4inhy
- KDicTrrnRnLprLX5e9RSxJI+/K1oypfkETSnips56iFPS+6H96s0cm+myerutxm6Ju7Q
- nlZAdWK/U7TRG2N7kALD0K4gUOYVk/QGXjvXZ3FOlHvBdNwB5bfSMQ1jRPW3ay3WDVpW
- ubkiul/ut1Sh+5T8aN1/mP2E00ao8c3SouiACqIY4T96iBhi+BhguL8bBrBJNeQDAfCN
- EZKg==
-X-Gm-Message-State: AOAM5304juFSMrSd6avQgDaRvArAGb2KhdjcYEczb8mk/uwHu1ilJkco
- NWkQ/GepUeUAzNXDtDCTJpfrM7R7g4mLydM+VqmqEhZjs5gNuURwSKJ6reuJo7Wn9NgkQV9VQcz
- XwyDx4uO0q9harMEzUyjdoN4f+0U/flzv9nxqd+jnnw==
-X-Received: by 2002:a17:907:7014:: with SMTP id
- wr20mr25750081ejb.179.1614774948392; 
- Wed, 03 Mar 2021 04:35:48 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwqz7SaBmzUofu3fKgqZP7e5ipUjUVholHQQZM5Mz0adhw0C9xMe8oaCTdhXWVdglpuPhUUzA==
-X-Received: by 2002:a17:907:7014:: with SMTP id
- wr20mr25750055ejb.179.1614774948058; 
- Wed, 03 Mar 2021 04:35:48 -0800 (PST)
-Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
- [79.34.249.199])
- by smtp.gmail.com with ESMTPSA id i13sm21164467ejj.2.2021.03.03.04.35.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Mar 2021 04:35:47 -0800 (PST)
-Date: Wed, 3 Mar 2021 13:35:45 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Cornelia Huck <cohuck@redhat.com>
-Subject: Re: [virtio-comment] [RFC PATCH v1 1/1] virtio-vsock: add
- SOCK_SEQPACKET description
-Message-ID: <20210303123545.hbkda6vuam36y6kv@steredhat>
-References: <20210218060715.1075547-1-arseny.krasnov@kaspersky.com>
- <20210218060827.1075863-1-arseny.krasnov@kaspersky.com>
- <20210224093200.tpflaqgoap4fe5ax@steredhat>
- <20210303130843.6b457503.cohuck@redhat.com>
+ Wed,  3 Mar 2021 13:43:42 +0000 (UTC)
+Received: from 1.general.cking.uk.vpn ([10.172.193.212] helo=localhost)
+ by youngberry.canonical.com with esmtpsa
+ (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.86_2)
+ (envelope-from <colin.king@canonical.com>)
+ id 1lHRmt-0000MV-AT; Wed, 03 Mar 2021 13:43:39 +0000
+From: Colin King <colin.king@canonical.com>
+To: "Michael S . Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
+ netdev@vger.kernel.org
+Subject: [PATCH] scsi: target: vhost-scsi: remove redundant initialization of
+ variable ret
+Date: Wed,  3 Mar 2021 13:43:39 +0000
+Message-Id: <20210303134339.67339-1-colin.king@canonical.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-In-Reply-To: <20210303130843.6b457503.cohuck@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Andra Paraschiv <andraprs@amazon.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Colin Ian King <colin.king@canonical.com>, oxffffaa@gmail.com,
- Norbert Slusarek <nslusarek@gmx.net>, Stefan Hajnoczi <stefanha@redhat.com>,
- virtio-comment@lists.oasis-open.org, Jakub Kicinski <kuba@kernel.org>,
- Arseny Krasnov <arseny.krasnov@kaspersky.com>,
- virtualization@lists.linux-foundation.org,
- "David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
+Cc: kernel-janitors@vger.kernel.org, linux-kernel@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -119,81 +67,38 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Mar 03, 2021 at 01:08:43PM +0100, Cornelia Huck wrote:
->On Wed, 24 Feb 2021 10:32:00 +0100
->Stefano Garzarella <sgarzare@redhat.com> wrote:
->
->> On Thu, Feb 18, 2021 at 09:08:23AM +0300, Arseny Krasnov wrote:
->> >Signed-off-by: Arseny Krasnov <arseny.krasnov@kaspersky.com>
->> >---
->> > virtio-vsock.tex | 40 +++++++++++++++++++++++++++++++++++++---
->> > 1 file changed, 37 insertions(+), 3 deletions(-)
->> >
->> >diff --git a/virtio-vsock.tex b/virtio-vsock.tex
->> >index da7e641..1ee8f99 100644
->> >--- a/virtio-vsock.tex
->> >+++ b/virtio-vsock.tex
->> >@@ -102,6 +102,11 @@ \subsection{Device Operation}\label{sec:Device Types / Socket Device / Device Op
->> > 	VIRTIO_VSOCK_OP_CREDIT_UPDATE = 6,
->> > 	/* Request the peer to send the credit info to us */
->> > 	VIRTIO_VSOCK_OP_CREDIT_REQUEST = 7,
->> >+
->> >+	/* Message begin for SOCK_SEQPACKET */
->> >+	VIRTIO_VSOCK_OP_SEQ_BEGIN = 8,
->> >+	/* Message end for SOCK_SEQPACKET */
->> >+	VIRTIO_VSOCK_OP_SEQ_END = 9,
->> > };
->> > \end{lstlisting}
->> >
->> >@@ -140,11 +145,11 @@ \subsubsection{Addressing}\label{sec:Device Types / Socket Device / Device Opera
->> > consists of a (cid, port number) tuple. The header fields used for this are
->> > \field{src_cid}, \field{src_port}, \field{dst_cid}, and \field{dst_port}.
->> >
->> >-Currently only stream sockets are supported. \field{type} is 1 for stream
->> >-socket types.
->> >+Currently stream and seqpacket sockets are supported. \field{type} is 1 for
->> >+stream socket types. \field{type} is 2 for seqpacket socket types.
->> >
->> > Stream sockets provide in-order, guaranteed, connection-oriented delivery
->> >-without message boundaries.
->> >+without message boundaries. Seqpacket sockets also provide message boundaries.
->> >
->> > \subsubsection{Buffer Space Management}\label{sec:Device Types / Socket Device / Device Operation / Buffer Space Management}
->> > \field{buf_alloc} and \field{fwd_cnt} are used for buffer space management of
->> >@@ -240,6 +245,35 @@ \subsubsection{Stream Sockets}\label{sec:Device Types / Socket Device / Device O
->> > destination) address tuple for a new connection while the other peer is still
->> > processing the old connection.
->> >
->> >+\subsubsection{Seqpacket Sockets}\label{sec:Device Types / Socket Device / Device Operation / Seqpacket Sockets}
->> >+
->> >+Seqpacket sockets differ from stream sockets only in data transmission way: in
->> >+stream sockets all data is sent using only VIRTIO_VSOCK_OP_RW packets. In
->> >+seqpacket sockets, to provide message boundaries, every sequence of
->> >+VIRTIO_VSOCK_OP_RW packets of each message is headed with
->>                                               ^
->> Since this is a spec, I think we should use MUST when something must be
->> respected by the peer, for example here we can say "MUST be headed"
->>
->> >+VIRTIO_VSOCK_OP_SEQ_BEGIN and tailed with VIRTIO_VSOCK_OP_SEQ_END packets.
->> >+Both VIRTIO_VSOCK_OP_SEQ_BEGIN and VIRTIO_VSOCK_OP_SEQ_END packets carry
->>                                                                       ^
->> Same here "MUST carry" and in the rest of the patch.
->
->Actually, MUST and friends are really for normative sections; I'd
->advise to have a description of how this feature works and then some
->device/driver normative clauses with MUST statements (like "the device
->MUST reject <malformed packets>" or so).
->
+From: Colin Ian King <colin.king@canonical.com>
 
-Okay, got it.
+The variable ret is being initialized with a value that is never read
+and it is being updated later with a new value.  The initialization is
+redundant and can be removed.
 
-Thanks for the clarification,
-Stefano
+Addresses-Coverity: ("Unused value")
+Signed-off-by: Colin Ian King <colin.king@canonical.com>
+---
+ drivers/vhost/scsi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
+index d16c04dcc144..9129ab8187fd 100644
+--- a/drivers/vhost/scsi.c
++++ b/drivers/vhost/scsi.c
+@@ -2465,7 +2465,7 @@ static const struct target_core_fabric_ops vhost_scsi_ops = {
+ 
+ static int __init vhost_scsi_init(void)
+ {
+-	int ret = -ENOMEM;
++	int ret;
+ 
+ 	pr_debug("TCM_VHOST fabric module %s on %s/%s"
+ 		" on "UTS_RELEASE"\n", VHOST_SCSI_VERSION, utsname()->sysname,
+-- 
+2.30.0
 
 _______________________________________________
 Virtualization mailing list
