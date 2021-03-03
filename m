@@ -1,71 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5AE732D632
-	for <lists.virtualization@lfdr.de>; Thu,  4 Mar 2021 16:14:14 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 524A132D633
+	for <lists.virtualization@lfdr.de>; Thu,  4 Mar 2021 16:14:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 42BF283E5A;
-	Thu,  4 Mar 2021 15:14:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 938BF4EC02;
+	Thu,  4 Mar 2021 15:14:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id stGctJBoRHfA; Thu,  4 Mar 2021 15:14:12 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 65APyNmpe2IW; Thu,  4 Mar 2021 15:14:13 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 14D67833D3;
-	Thu,  4 Mar 2021 15:14:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 178014EBD8;
+	Thu,  4 Mar 2021 15:14:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F18AC0001;
-	Thu,  4 Mar 2021 15:14:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E2976C000F;
+	Thu,  4 Mar 2021 15:14:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 63345C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 10B9BC000F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Mar 2021 15:14:10 +0000 (UTC)
+ Thu,  4 Mar 2021 15:14:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5568149B7A
+ by smtp1.osuosl.org (Postfix) with ESMTP id E74208372B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Mar 2021 15:14:10 +0000 (UTC)
+ Thu,  4 Mar 2021 15:14:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linutronix.de header.b="xMnck+A/";
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linutronix.de header.b="qB10s7b6";
  dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=linutronix.de header.b="puGQh+pR"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2HpDC1NzlhSf
+ header.d=linutronix.de header.b="2DQyCJ6X"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Q5OBGU3r3KMG
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Mar 2021 15:14:09 +0000 (UTC)
+ Thu,  4 Mar 2021 15:14:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D2C7B475AA
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 00BFA833D3
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Mar 2021 15:14:08 +0000 (UTC)
-Message-Id: <20210303132023.077167457@linutronix.de>
+ Thu,  4 Mar 2021 15:14:10 +0000 (UTC)
+Message-Id: <20210303132711.340553449@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1614870844;
+ s=2020; t=1614870845;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=CdClLt4+fuyCD6ZyqthkXbcv3Ic59BWpZ3AO1GEhCVA=;
- b=xMnck+A//N+JJ/RpCJYdExXhoUvZ2fcDik9DVsp1+5j7nuopQjCucFhmvkqVup9fM19Grj
- BXnfokOAQ6iuFq44L7pJ4+c4eVzu+k+76u9fdHc+X7OnXi0aAftiBRG89BlNAzJpRFBBJD
- 0M4yCujiJH2tIhkhYO+VhD3K8VhrGHcp+ALOlmOexUgS1vIovXUubnt2oT6Nx6A6SmS/l3
- vzPAPkoceU7qZmr7PyHWloesBXaP6TBOlyFg+fytBEZRG2FbHaO8xuMcvI/nmYapv0qIO8
- m8+eGV23YjiKIi9mf8XHp90jzjRch6yjA6YXHjJhKuuZt3XMjXT6+iEyiqVurw==
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=W7oApS46MDPIMz++QVI+vaMG2S2wg5cT666lhSAPmrA=;
+ b=qB10s7b6LEeIwHAxokpDovRbZ4E7paZAZz8Ep8zuCisdn5vUVu1cODeEP868R5dWht+Ccy
+ hTRcgGssSmtpXoIdTHAFyKB1D7ns4yAQSqo8sWDj9gCvOU0oiLphaEUJVRVPP5l4uHhMxA
+ KYFX3xRyBfIS2hbVdCTGXXtx7AdHM56BnSAjFOf8niMB8SNd1G7daMIL9XF3ic0euJni5w
+ 8L4hiHYyq4dU/Egvn6CcnMKftiK9UK1oLEdt4NfM3VpFfkvBUZz1VJkxcfHPaB2vQd2kn8
+ raDJVfyRetjdhytPQrdrf6GOZynJke5+7R6ynEqgS4wGsS1YkSv+Povw5ZhF/A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1614870844;
+ s=2020e; t=1614870845;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=CdClLt4+fuyCD6ZyqthkXbcv3Ic59BWpZ3AO1GEhCVA=;
- b=puGQh+pRRhN/TY3HF9OfSaRiQL69Lg4hw447EvqmiySd+QW3AXl1HHcjurw7yenjNobZem
- +chTQ0TX3LANkTDQ==
-Date: Wed, 03 Mar 2021 14:20:23 +0100
+ content-transfer-encoding:content-transfer-encoding:  references:references;
+ bh=W7oApS46MDPIMz++QVI+vaMG2S2wg5cT666lhSAPmrA=;
+ b=2DQyCJ6XggnTkGy39/on30lgXHHfArioCYAj6vuZB/jAFSaqLL57CRl58SOtKKbLbX5JmL
+ njvWi7Pub9fsXoBg==
+Date: Wed, 03 Mar 2021 14:20:24 +0100
 From: Thomas Gleixner <tglx@linutronix.de>
 To: LKML <linux-kernel@vger.kernel.org>
-Subject: [patch 0/7] drm, highmem: Cleanup io/kmap_atomic*() usage
+Subject: [patch 1/7] drm/ttm: Replace kmap_atomic() usage
+References: <20210303132023.077167457@linutronix.de>
 MIME-Version: 1.0
 Cc: Jani Nikula <jani.nikula@linux.intel.com>, David Airlie <airlied@linux.ie>,
  nouveau@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
@@ -95,32 +96,72 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-None of the DRM usage sites of temporary mappings requires the side
-effects of io/kmap_atomic(), i.e. preemption and pagefault disable.
+From: Thomas Gleixner <tglx@linutronix.de>
 
-Replace them with the io/kmap_local() variants, simplify the
-copy_to/from_user() error handling and remove the atomic variants.
+There is no reason to disable pagefaults and preemption as a side effect of
+kmap_atomic_prot().
 
-Thanks,
+Use kmap_local_page_prot() instead and document the reasoning for the
+mapping usage with the given pgprot.
 
-	tglx
+Remove the NULL pointer check for the map. These functions return a valid
+address for valid pages and the return was bogus anyway as it would have
+left preemption and pagefaults disabled.
+
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Christian Koenig <christian.koenig@amd.com>
+Cc: Huang Rui <ray.huang@amd.com>
+Cc: David Airlie <airlied@linux.ie>
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Cc: dri-devel@lists.freedesktop.org
 ---
- Documentation/driver-api/io-mapping.rst             |   22 +++-------
- drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c      |    7 +--
- drivers/gpu/drm/i915/i915_gem.c                     |   40 ++++++-------------
- drivers/gpu/drm/i915/selftests/i915_gem.c           |    4 -
- drivers/gpu/drm/i915/selftests/i915_gem_gtt.c       |    8 +--
- drivers/gpu/drm/nouveau/nvkm/subdev/devinit/fbmem.h |    8 +--
- drivers/gpu/drm/qxl/qxl_image.c                     |   18 ++++----
- drivers/gpu/drm/qxl/qxl_ioctl.c                     |   27 ++++++------
- drivers/gpu/drm/qxl/qxl_object.c                    |   12 ++---
- drivers/gpu/drm/qxl/qxl_object.h                    |    4 -
- drivers/gpu/drm/qxl/qxl_release.c                   |    4 -
- drivers/gpu/drm/ttm/ttm_bo_util.c                   |   20 +++++----
- drivers/gpu/drm/vmwgfx/vmwgfx_blit.c                |   30 +++++---------
- include/linux/highmem-internal.h                    |   14 ------
- include/linux/io-mapping.h                          |   42 --------------------
- 15 files changed, 93 insertions(+), 167 deletions(-)
+ drivers/gpu/drm/ttm/ttm_bo_util.c |   20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+
+--- a/drivers/gpu/drm/ttm/ttm_bo_util.c
++++ b/drivers/gpu/drm/ttm/ttm_bo_util.c
+@@ -181,13 +181,15 @@ static int ttm_copy_io_ttm_page(struct t
+ 		return -ENOMEM;
+ 
+ 	src = (void *)((unsigned long)src + (page << PAGE_SHIFT));
+-	dst = kmap_atomic_prot(d, prot);
+-	if (!dst)
+-		return -ENOMEM;
++	/*
++	 * Ensure that a highmem page is mapped with the correct
++	 * pgprot. For non highmem the mapping is already there.
++	 */
++	dst = kmap_local_page_prot(d, prot);
+ 
+ 	memcpy_fromio(dst, src, PAGE_SIZE);
+ 
+-	kunmap_atomic(dst);
++	kunmap_local(dst);
+ 
+ 	return 0;
+ }
+@@ -203,13 +205,15 @@ static int ttm_copy_ttm_io_page(struct t
+ 		return -ENOMEM;
+ 
+ 	dst = (void *)((unsigned long)dst + (page << PAGE_SHIFT));
+-	src = kmap_atomic_prot(s, prot);
+-	if (!src)
+-		return -ENOMEM;
++	/*
++	 * Ensure that a highmem page is mapped with the correct
++	 * pgprot. For non highmem the mapping is already there.
++	 */
++	src = kmap_local_page_prot(s, prot);
+ 
+ 	memcpy_toio(dst, src, PAGE_SIZE);
+ 
+-	kunmap_atomic(src);
++	kunmap_local(src);
+ 
+ 	return 0;
+ }
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
