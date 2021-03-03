@@ -1,88 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E836932B96D
-	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 18:24:25 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id EF76332B98B
+	for <lists.virtualization@lfdr.de>; Wed,  3 Mar 2021 18:42:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 544FD605E5;
-	Wed,  3 Mar 2021 17:24:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0B0676F977;
+	Wed,  3 Mar 2021 17:42:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2pmcyqzMyzP7; Wed,  3 Mar 2021 17:24:23 +0000 (UTC)
+	with ESMTP id LnBJ7oGg-ax8; Wed,  3 Mar 2021 17:42:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB2FA6F976;
-	Wed,  3 Mar 2021 17:24:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id DA7B06F820;
+	Wed,  3 Mar 2021 17:42:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9AE11C0001;
-	Wed,  3 Mar 2021 17:24:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DDBBC0001;
+	Wed,  3 Mar 2021 17:42:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4A968C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8CD9C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:24:21 +0000 (UTC)
+ Wed,  3 Mar 2021 17:42:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2CE496F638
+ by smtp1.osuosl.org (Postfix) with ESMTP id C342684008
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:24:21 +0000 (UTC)
+ Wed,  3 Mar 2021 17:42:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4eSjehKKyu8F
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id pcK5wBHvVSy4
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:24:18 +0000 (UTC)
-X-Greylist: delayed 00:05:56 by SQLgrey-1.8.0
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2822E605E5
+ Wed,  3 Mar 2021 17:42:38 +0000 (UTC)
+X-Greylist: delayed 00:18:57 by SQLgrey-1.8.0
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
+ [IPv6:2a00:1450:4864:20::332])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 93CA08376B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 Mar 2021 17:24:18 +0000 (UTC)
-Received: by mail-wm1-x32e.google.com with SMTP id i9so5834131wml.0
+ Wed,  3 Mar 2021 17:42:38 +0000 (UTC)
+Received: by mail-wm1-x332.google.com with SMTP id o2so6615227wme.5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 03 Mar 2021 09:24:18 -0800 (PST)
+ Wed, 03 Mar 2021 09:42:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=5iBsMQqFOU14HEvyYWYO+cEIgAJ26J54CPr7LWlg7Ck=;
- b=tJsSbW7npNeXuT2aUfv+xVzgDPQaXPBn/6WhvvP+1VpmGrNWVlB/6c73uxaz1NkEnV
- kuYCUjcUrfSFI2/OlqRPlXzBBSlUpgblF/vd2AUFIsDz3l1X+8C1xy0N/ypdfroHVoqk
- /sBnwUtbxubfsNj1+4sQS56KQAeYGICeiPg1Sm0yFT6f72NZXglUsrDDWhxlLI8TzRvc
- HyRqlUtaBuwmcy1tpzZ1TG+MQzSeIiYtJrDYvzs/zM6Ksw6N5gyMQKU27zae1ci/Q2zn
- SGKaMqxm9hi2hv5Bg3uSsGsdocWUssbrjXRYj2ff7z6+XkW1cRE5F5QQunLfqdKrxPoN
- 3Ecg==
+ bh=6SXDPW7Ja1F1ZDUtT3b1kT4xu9LP1HVvj8vwXrpadEE=;
+ b=lyUyI0g9Zj/FgoYlRVDMQE99MdUq7AFFW9qlq/OeCWjHW4WT1G0gQTSvzdsz1MMKUM
+ 8JzFnP+jH/he/dc1ISMzHA7ZIipiFJSuMNJIjG9Y4MUt2ijCXcF5TiNZi7HaL6EfAWBt
+ yTjPs2ryh1U1UDjou1XEFlsyJRWvfieUZhO0SkPOY4WfKg4Jp6lvJ5LEJzCNUmWknraN
+ VRSngARsafF/ayj9xm0vjrvzBZpI3BErdZ+l4B1JBURaDEpPbpVHkAphD+D9BAycA/i1
+ D9j+VJybxTslsKQJRMRxIQuRNXKYFjJ4s6yDl5U9xeql47mqIdJlOocvDqogEcH9uDP/
+ xQ7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=5iBsMQqFOU14HEvyYWYO+cEIgAJ26J54CPr7LWlg7Ck=;
- b=m+ynjJJqQDUHsUc5KoV40+GMO/dl+crd7L1YKlVVuGtSnEY3T5n5u/I8L30wIqgkxk
- t/aETF1HlbqFIJoyfl+5fyfCEclluAm1Re0tpKOT5cpFwQstx4RWvzkbJkmrnoSSyAgc
- AiEYE3X68PV+jOP5jpmaE+NKNb+rIN7abwYz8hO2K+yJj8r4LWYhlA+WTCB2ihuuIJDP
- 38qycT/T4wLXanb+Aw+4WMSs+in6aQypP3VWVfTCh0jqQ+u84ivlO88oAmHyu1n23NKT
- rcVCfXgoL5AJHNM/X7ekOFHd+YG76S8aBCs2yuSW6eNjpTuB9yy+xUP2i3jpxeTXKfdM
- 1ojw==
-X-Gm-Message-State: AOAM530KcPCYY3AgUDMQTusIApFaKSOS7L7EdhQEMBKbuEBTe30qUQeM
- 0EDF/BDflD/1xphXtzXJifTzx87zZHIJ3A==
-X-Google-Smtp-Source: ABdhPJwC8M1M+ADRQsf7KzCeua/t0GLhmB9md5x6408Cc3EtgTN6TPy0ZU8dctF1TddT/5Mj9RvYVA==
-X-Received: by 2002:a05:600c:2f08:: with SMTP id r8mr31246wmn.95.1614791900389; 
- Wed, 03 Mar 2021 09:18:20 -0800 (PST)
+ bh=6SXDPW7Ja1F1ZDUtT3b1kT4xu9LP1HVvj8vwXrpadEE=;
+ b=Gm43gOqT6zyIuGd9booTOXjY1k1Ux6xUhRwH54vT2LBbDCM9JlYvHCyvcYGKLDxFag
+ bwnIloKVkD8uEIB6+7iYqAhmN06N/A7eSsBwwNXtgAur+S4eGPgsEcbnHx0DFwENWr9m
+ c30eZPMlQmpG01Y1UOIh2eGx3cMCbmIxmCqQwItP5OMGkUs8/JrZjmFI0bUDaUY2Zhha
+ aBtbnqZ3kIcUN7IsaT03YX0O9LCCVMloUGGdDVp17Y2f1ncf7dEk1bojJ6Gw7hDt/HQ6
+ /vCudqmjnmjS1yw3+ze9alY7uW+gXAe2LCTSd4BqpJ5OBEUzrrWFxqZs3s6lqNqvU/cu
+ wcBA==
+X-Gm-Message-State: AOAM531l/eoDuxYOQg4QrYYJ+WPoBRRbaCGTx9TEx5B6qLAE5+at7Csb
+ yWCSgxnKKVJi/rIvl/V7rIFVVuiUf+uvCQ==
+X-Google-Smtp-Source: ABdhPJxitgbClhWHxPB/Q8czpTna+HwUgtDapft1ST8WuHw0OzA3X/LBjFtvYzMSzsV07jswzlvEYw==
+X-Received: by 2002:a1c:c904:: with SMTP id f4mr72966wmb.14.1614791529643;
+ Wed, 03 Mar 2021 09:12:09 -0800 (PST)
 Received: from myrica ([2001:1715:4e26:a7e0:116c:c27a:3e7f:5eaf])
- by smtp.gmail.com with ESMTPSA id 91sm10498408wrl.20.2021.03.03.09.18.18
+ by smtp.gmail.com with ESMTPSA id m11sm20217474wrz.40.2021.03.03.09.12.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Mar 2021 09:18:19 -0800 (PST)
-Date: Wed, 3 Mar 2021 18:17:58 +0100
+ Wed, 03 Mar 2021 09:12:09 -0800 (PST)
+Date: Wed, 3 Mar 2021 18:11:47 +0100
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: Vivek Gautam <vivek.gautam@arm.com>
-Subject: Re: [PATCH RFC v1 06/15] iommu/virtio: Add headers for table format
- probing
-Message-ID: <YD/ExjIwG/as52CI@myrica>
+Subject: Re: [PATCH RFC v1 02/15] iommu: Add a simple PASID table library
+Message-ID: <YD/DU8XNYHlTzTay@myrica>
 References: <20210115121342.15093-1-vivek.gautam@arm.com>
- <20210115121342.15093-7-vivek.gautam@arm.com>
+ <20210115121342.15093-3-vivek.gautam@arm.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210115121342.15093-7-vivek.gautam@arm.com>
+In-Reply-To: <20210115121342.15093-3-vivek.gautam@arm.com>
 Cc: jacob.jun.pan@linux.intel.com, mst@redhat.com, joro@8bytes.org,
  will.deacon@arm.com, linux-kernel@vger.kernel.org,
  shameerali.kolothum.thodi@huawei.com,
@@ -106,31 +107,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 15, 2021 at 05:43:33PM +0530, Vivek Gautam wrote:
-> From: Jean-Philippe Brucker <jean-philippe.brucker@arm.com>
+Hi Vivek,
+
+Thanks again for working on this. I have a few comments but it looks
+sensible overall.
+
+Regarding the overall design, I was initially assigning page directories
+instead of whole PASID tables, which would simplify the driver and host
+implementation. A major complication, however, is SMMUv3 accesses PASID
+tables using a guest-physical address, so there is a messy negotiation
+needed between host and guest when the host needs to allocate PASID
+tables. Plus vSMMU needs PASID table assignment, so that's what the host
+driver will implement.
+
+On Fri, Jan 15, 2021 at 05:43:29PM +0530, Vivek Gautam wrote:
+> Add a small API in iommu subsystem to handle PASID table allocation
+> requests from different consumer drivers, such as a paravirtualized
+> iommu driver. The API provides ops for allocating and freeing PASID
+> table, writing to it and managing the table caches.
 > 
-> Add required UAPI defines for probing table format for underlying
-> iommu hardware. The device may provide information about hardware
-> tables and additional capabilities for each device.
-> This allows guest to correctly fabricate stage-1 page tables.
-> 
-> Signed-off-by: Jean-Philippe Brucker <jean-philippe.brucker@arm.com>
-> [Vivek: Use a single "struct virtio_iommu_probe_table_format" rather
->         than separate structures for page table and pasid table format.
+> This library also provides for registering a vendor API that attaches
+> to these ops. The vendor APIs would eventually perform arch level
+> implementations for these PASID tables.
 
-Makes sense. I've integrated that into the spec draft, added more precise
-documentation and modified some of the definitions.
+Although Arm might be the only vendor to ever use this, I think the
+abstraction makes sense and isn't too invasive. Even if we called directly
+into the SMMU driver from the virtio one, we'd still need patch 3 and
+separate TLB invalidations ops.
 
-The current draft is here:
-https://jpbrucker.net/virtio-iommu/spec/virtio-iommu-v0.13.pdf
-Posted on the list here
-https://lists.oasis-open.org/archives/virtio-dev/202102/msg00012.html
-
-> 	Also update commit message.]
 > Signed-off-by: Vivek Gautam <vivek.gautam@arm.com>
 > Cc: Joerg Roedel <joro@8bytes.org>
 > Cc: Will Deacon <will.deacon@arm.com>
-> Cc: Michael S. Tsirkin <mst@redhat.com>
 > Cc: Robin Murphy <robin.murphy@arm.com>
 > Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>
 > Cc: Eric Auger <eric.auger@redhat.com>
@@ -141,95 +148,157 @@ https://lists.oasis-open.org/archives/virtio-dev/202102/msg00012.html
 > Cc: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
 > Cc: Shameerali Kolothum Thodi <shameerali.kolothum.thodi@huawei.com>
 > ---
->  include/uapi/linux/virtio_iommu.h | 44 ++++++++++++++++++++++++++++++-
->  1 file changed, 43 insertions(+), 1 deletion(-)
+>  drivers/iommu/iommu-pasid-table.h | 134 ++++++++++++++++++++++++++++++
+>  1 file changed, 134 insertions(+)
+>  create mode 100644 drivers/iommu/iommu-pasid-table.h
 > 
-> diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
-> index 237e36a280cb..43821e33e7af 100644
-> --- a/include/uapi/linux/virtio_iommu.h
-> +++ b/include/uapi/linux/virtio_iommu.h
-> @@ -2,7 +2,7 @@
->  /*
->   * Virtio-iommu definition v0.12
->   *
-> - * Copyright (C) 2019 Arm Ltd.
-> + * Copyright (C) 2019-2021 Arm Ltd.
-
-Not strictly necessary. But if you're modifying this comment please also
-remove the "v0.12" above
-
->   */
->  #ifndef _UAPI_LINUX_VIRTIO_IOMMU_H
->  #define _UAPI_LINUX_VIRTIO_IOMMU_H
-> @@ -111,6 +111,12 @@ struct virtio_iommu_req_unmap {
->  
->  #define VIRTIO_IOMMU_PROBE_T_NONE		0
->  #define VIRTIO_IOMMU_PROBE_T_RESV_MEM		1
-> +#define VIRTIO_IOMMU_PROBE_T_PAGE_SIZE_MASK	2
-> +#define VIRTIO_IOMMU_PROBE_T_INPUT_RANGE	3
-> +#define VIRTIO_IOMMU_PROBE_T_OUTPUT_SIZE	4
-> +#define VIRTIO_IOMMU_PROBE_T_PASID_SIZE		5
-> +#define VIRTIO_IOMMU_PROBE_T_PAGE_TABLE_FMT	6
-> +#define VIRTIO_IOMMU_PROBE_T_PASID_TABLE_FMT	7
-
-Since there is a single struct we can have a single
-VIRTIO_IOMMU_PROBE_T_TABLE_FORMAT.
-
->  
->  #define VIRTIO_IOMMU_PROBE_T_MASK		0xfff
->  
-> @@ -130,6 +136,42 @@ struct virtio_iommu_probe_resv_mem {
->  	__le64					end;
->  };
->  
-> +struct virtio_iommu_probe_page_size_mask {
-> +	struct virtio_iommu_probe_property	head;
-> +	__u8					reserved[4];
-> +	__le64					mask;
+> diff --git a/drivers/iommu/iommu-pasid-table.h b/drivers/iommu/iommu-pasid-table.h
+> new file mode 100644
+> index 000000000000..bd4f57656f67
+> --- /dev/null
+> +++ b/drivers/iommu/iommu-pasid-table.h
+> @@ -0,0 +1,134 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * PASID table management for the IOMMU
+> + *
+> + * Copyright (C) 2021 Arm Ltd.
+> + */
+> +#ifndef __IOMMU_PASID_TABLE_H
+> +#define __IOMMU_PASID_TABLE_H
+> +
+> +#include <linux/io-pgtable.h>
+> +
+> +#include "arm/arm-smmu-v3/arm-smmu-v3.h"
+> +
+> +enum pasid_table_fmt {
+> +	PASID_TABLE_ARM_SMMU_V3,
+> +	PASID_TABLE_NUM_FMTS,
 > +};
 > +
-> +struct virtio_iommu_probe_input_range {
-> +	struct virtio_iommu_probe_property	head;
-> +	__u8					reserved[4];
-> +	__le64					start;
-> +	__le64					end;
+> +/**
+> + * struct arm_smmu_cfg_info - arm-smmu-v3 specific configuration data
+> + *
+> + * @s1_cfg: arm-smmu-v3 stage1 config data
+> + * @feat_flag: features supported by arm-smmu-v3 implementation
+> + */
+> +struct arm_smmu_cfg_info {
+> +	struct arm_smmu_s1_cfg	*s1_cfg;
+> +	u32			feat_flag;
 > +};
 > +
-> +struct virtio_iommu_probe_output_size {
-> +	struct virtio_iommu_probe_property	head;
-> +	__u8					bits;
-> +	__u8					reserved[3];
-> +};
-> +
-> +struct virtio_iommu_probe_pasid_size {
-> +	struct virtio_iommu_probe_property	head;
-> +	__u8					bits;
-> +	__u8					reserved[3];
-> +};
-> +
-> +/* Arm LPAE page table format */
-> +#define VIRTIO_IOMMU_FOMRAT_PGTF_ARM_LPAE	1
+> +/**
+> + * struct iommu_vendor_psdtable_cfg - Configuration data for PASID tables
+> + *
+> + * @iommu_dev: device performing the DMA table walks
+> + * @fmt: The PASID table format
+> + * @base: DMA address of the allocated table, set by the vendor driver
+> + * @cfg: arm-smmu-v3 specific config data
+> + */
+> +struct iommu_vendor_psdtable_cfg {
+> +	struct device		*iommu_dev;
+> +	enum pasid_table_fmt	fmt;
+> +	dma_addr_t		base;
+> +	union {
+> +		struct arm_smmu_cfg_info	cfg;
 
-s/FOMRAT/FORMAT
-
-> +/* Arm smmu-v3 type PASID table format */
-> +#define VIRTIO_IOMMU_FORMAT_PSTF_ARM_SMMU_V3	2
-
-These should be with the Arm-specific definitions patches 11 and 14
+For the union to be extensible, that field should be called "arm" or
+something like that.
 
 Thanks,
 Jean
 
-> +
-> +struct virtio_iommu_probe_table_format {
-> +	struct virtio_iommu_probe_property	head;
-> +	__le16					format;
-> +	__u8					reserved[2];
+> +	} vendor;
 > +};
 > +
->  struct virtio_iommu_req_probe {
->  	struct virtio_iommu_req_head		head;
->  	__le32					endpoint;
+> +struct iommu_vendor_psdtable_ops;
+> +
+> +/**
+> + * struct iommu_pasid_table - describes a set of PASID tables
+> + *
+> + * @cookie: An opaque token provided by the IOMMU driver and passed back to any
+> + * callback routine.
+> + * @cfg: A copy of the PASID table configuration
+> + * @ops: The PASID table operations in use for this set of page tables
+> + */
+> +struct iommu_pasid_table {
+> +	void					*cookie;
+> +	struct iommu_vendor_psdtable_cfg	cfg;
+> +	struct iommu_vendor_psdtable_ops	*ops;
+> +};
+> +
+> +#define pasid_table_cfg_to_table(pst_cfg) \
+> +	container_of((pst_cfg), struct iommu_pasid_table, cfg)
+> +
+> +struct iommu_vendor_psdtable_ops {
+> +	int (*alloc)(struct iommu_vendor_psdtable_cfg *cfg);
+> +	void (*free)(struct iommu_vendor_psdtable_cfg *cfg);
+> +	void (*prepare)(struct iommu_vendor_psdtable_cfg *cfg,
+> +			struct io_pgtable_cfg *pgtbl_cfg, u32 asid);
+> +	int (*write)(struct iommu_vendor_psdtable_cfg *cfg, int ssid,
+> +		     void *cookie);
+> +	void (*sync)(void *cookie, int ssid, bool leaf);
+> +};
+> +
+> +static inline int iommu_psdtable_alloc(struct iommu_pasid_table *tbl,
+> +				       struct iommu_vendor_psdtable_cfg *cfg)
+> +{
+> +	if (!tbl->ops->alloc)
+> +		return -ENOSYS;
+> +
+> +	return tbl->ops->alloc(cfg);
+> +}
+> +
+> +static inline void iommu_psdtable_free(struct iommu_pasid_table *tbl,
+> +				       struct iommu_vendor_psdtable_cfg *cfg)
+> +{
+> +	if (!tbl->ops->free)
+> +		return;
+> +
+> +	tbl->ops->free(cfg);
+> +}
+> +
+> +static inline int iommu_psdtable_prepare(struct iommu_pasid_table *tbl,
+> +					 struct iommu_vendor_psdtable_cfg *cfg,
+> +					 struct io_pgtable_cfg *pgtbl_cfg,
+> +					 u32 asid)
+> +{
+> +	if (!tbl->ops->prepare)
+> +		return -ENOSYS;
+> +
+> +	tbl->ops->prepare(cfg, pgtbl_cfg, asid);
+> +	return 0;
+> +}
+> +
+> +static inline int iommu_psdtable_write(struct iommu_pasid_table *tbl,
+> +				       struct iommu_vendor_psdtable_cfg *cfg,
+> +				       int ssid, void *cookie)
+> +{
+> +	if (!tbl->ops->write)
+> +		return -ENOSYS;
+> +
+> +	return tbl->ops->write(cfg, ssid, cookie);
+> +}
+> +
+> +static inline int iommu_psdtable_sync(struct iommu_pasid_table *tbl,
+> +				      void *cookie, int ssid, bool leaf)
+> +{
+> +	if (!tbl->ops->sync)
+> +		return -ENOSYS;
+> +
+> +	tbl->ops->sync(cookie, ssid, leaf);
+> +	return 0;
+> +}
+> +
+> +/* A placeholder to register vendor specific pasid layer */
+> +static inline struct iommu_pasid_table *
+> +iommu_register_pasid_table(enum pasid_table_fmt fmt,
+> +			   struct device *dev, void *cookie)
+> +{
+> +	return NULL;
+> +}
+> +
+> +#endif /* __IOMMU_PASID_TABLE_H */
 > -- 
 > 2.17.1
 > 
