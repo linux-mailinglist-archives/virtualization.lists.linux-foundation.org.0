@@ -1,58 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5831232D193
-	for <lists.virtualization@lfdr.de>; Thu,  4 Mar 2021 12:10:22 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id EBE1432D41C
+	for <lists.virtualization@lfdr.de>; Thu,  4 Mar 2021 14:27:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3D0336F49A;
-	Thu,  4 Mar 2021 11:10:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 451BD6F5B9;
+	Thu,  4 Mar 2021 13:27:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hHDqWog-xjZk; Thu,  4 Mar 2021 11:10:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2846A6F548;
-	Thu,  4 Mar 2021 11:10:18 +0000 (UTC)
+	with ESMTP id KMed3Qcu2mHw; Thu,  4 Mar 2021 13:27:33 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTP id F3D3B6F8E2;
+	Thu,  4 Mar 2021 13:27:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 42FAEC0015;
-	Thu,  4 Mar 2021 11:10:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78B09C000F;
+	Thu,  4 Mar 2021 13:27:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1F10BC0001;
- Thu,  4 Mar 2021 11:10:16 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EF454C0001
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Mar 2021 13:27:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id ECA708430A;
- Thu,  4 Mar 2021 11:10:15 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id D0ACD84322
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Mar 2021 13:27:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2aXid81c1gjh; Thu,  4 Mar 2021 11:10:13 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 63709842F0;
- Thu,  4 Mar 2021 11:10:12 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id A5EF3321; Thu,  4 Mar 2021 12:10:08 +0100 (CET)
-Date: Thu, 4 Mar 2021 12:10:04 +0100
-From: Joerg Roedel <joro@8bytes.org>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: cleanup unused or almost unused IOMMU APIs and the FSL PAMU driver
-Message-ID: <20210304111004.GA26414@8bytes.org>
-References: <20210301084257.945454-1-hch@lst.de>
+ with ESMTP id XqZ3K5PhcXmx
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Mar 2021 13:27:29 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C96798431F
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  4 Mar 2021 13:27:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1614864448;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=7P35+hl0rGzSm8fNL2MMnwVW2zrFoSI5a4tDCIPtXbw=;
+ b=XEFmpsEVaQR0TfrLn08FdUoXFmc/hr6jPYqmzHgFvxXfHgyhjgy/0ZJ+WqzNDvCKsCRjsX
+ nzSYqF0kOxbvpaC213YIUlbFT9Rg/Y8fCckf/GpsiGMSs27v025cwROWKEJpUEpo0WqJlP
+ s6pUnJX0HDNQWAYnVE2SU1AWLW/EgQg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-226-HpxSyng9Pc-f-1KlWFnBUQ-1; Thu, 04 Mar 2021 08:27:25 -0500
+X-MC-Unique: HpxSyng9Pc-f-1KlWFnBUQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D4DEE108BD1B;
+ Thu,  4 Mar 2021 13:27:23 +0000 (UTC)
+Received: from gondolin.redhat.com (ovpn-114-163.ams2.redhat.com
+ [10.36.114.163])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id E79E84EF68;
+ Thu,  4 Mar 2021 13:27:18 +0000 (UTC)
+From: Cornelia Huck <cohuck@redhat.com>
+To: Halil Pasic <pasic@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowang@redhat.com>
+Subject: [PATCH RFC 0/2] virtio-ccw: allow to disable legacy virtio
+Date: Thu,  4 Mar 2021 14:27:13 +0100
+Message-Id: <20210304132715.1587211-1-cohuck@redhat.com>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210301084257.945454-1-hch@lst.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: freedreno@lists.freedesktop.org, kvm@vger.kernel.org,
- Will Deacon <will@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
- dri-devel@lists.freedesktop.org, Li Yang <leoyang.li@nxp.com>,
- iommu@lists.linux-foundation.org, netdev@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linuxppc-dev@lists.ozlabs.org, David Woodhouse <dwmw2@infradead.org>,
- linux-arm-kernel@lists.infradead.org, Lu Baolu <baolu.lu@linux.intel.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Cc: linux-s390@vger.kernel.org, Cornelia Huck <cohuck@redhat.com>,
+ kvm@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,34 +90,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Mar 01, 2021 at 09:42:40AM +0100, Christoph Hellwig wrote:
-> Diffstat:
->  arch/powerpc/include/asm/fsl_pamu_stash.h   |   12 
->  drivers/gpu/drm/msm/adreno/adreno_gpu.c     |    2 
->  drivers/iommu/amd/iommu.c                   |   23 
->  drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |   85 ---
->  drivers/iommu/arm/arm-smmu/arm-smmu.c       |  122 +---
->  drivers/iommu/dma-iommu.c                   |    8 
->  drivers/iommu/fsl_pamu.c                    |  264 ----------
->  drivers/iommu/fsl_pamu.h                    |   10 
->  drivers/iommu/fsl_pamu_domain.c             |  694 ++--------------------------
->  drivers/iommu/fsl_pamu_domain.h             |   46 -
->  drivers/iommu/intel/iommu.c                 |   55 --
->  drivers/iommu/iommu.c                       |   75 ---
->  drivers/soc/fsl/qbman/qman_portal.c         |   56 --
->  drivers/vfio/vfio_iommu_type1.c             |   31 -
->  drivers/vhost/vdpa.c                        |   10 
->  include/linux/iommu.h                       |   81 ---
->  16 files changed, 214 insertions(+), 1360 deletions(-)
+Unlike virtio-pci, virtio-ccw is currently always a transitional
+driver (i.e. it always includes support for legacy devices.) The
+differences between legacy and virtio-1+ virtio-ccw devices are not
+that big (the most interesting things are in common virtio code
+anyway.)
 
-Nice cleanup, thanks. The fsl_pamu driver and interface has always been
-a little bit of an alien compared to other IOMMU drivers. I am inclined
-to merge this after -rc3 is out, given some reviews. Can you also please
-add changelogs to the last three patches?
+It might be beneficial to make support for legacy virtio generally
+configurable, in case we want to remove it completely in a future
+where we all have flying cars. As a prereq, we need to make it
+configurable for virtio-ccw.
 
-Thanks,
+Patch 1 introduces a parameter; now that I look at it, it's probably
+not that useful (not even for testing), so I'm inclined to drop it
+again.
 
-	Joerg
+Patch 2 adds a new config symbol for generic legacy virtio support,
+which currently does not do anything but being selected by the
+legacy options for virtio-pci and virtio-ccw. A virtio-ccw driver
+without legacy support will require a revision of 1 or higher to
+be supported by the device.
+
+A virtio-ccw driver with legacy turned off works well for me with
+transitional devices and fails onlining gracefully for legacy devices
+(max_revision=0 in QEMU).
+
+(I also have some code that allows to make devices non-transitional
+in QEMU, but I haven't yet found time to polish the patches.)
+
+Cornelia Huck (2):
+  virtio/s390: add parameter for minimum revision
+  virtio/s390: make legacy support configurable
+
+ arch/s390/Kconfig                       |  11 ++
+ drivers/s390/virtio/Makefile            |   1 +
+ drivers/s390/virtio/virtio_ccw.c        | 179 ++++++++----------------
+ drivers/s390/virtio/virtio_ccw_common.h | 113 +++++++++++++++
+ drivers/s390/virtio/virtio_ccw_legacy.c | 138 ++++++++++++++++++
+ drivers/virtio/Kconfig                  |   8 ++
+ 6 files changed, 330 insertions(+), 120 deletions(-)
+ create mode 100644 drivers/s390/virtio/virtio_ccw_common.h
+ create mode 100644 drivers/s390/virtio/virtio_ccw_legacy.c
+
+
+base-commit: cf6acb8bdb1d829b85a4daa2944bf9e71c93f4b9
+-- 
+2.26.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
