@@ -1,73 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 780A0330D7C
-	for <lists.virtualization@lfdr.de>; Mon,  8 Mar 2021 13:29:09 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E9E03312C4
+	for <lists.virtualization@lfdr.de>; Mon,  8 Mar 2021 17:02:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id CB63F400EE;
-	Mon,  8 Mar 2021 12:29:02 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D73ED400D6;
+	Mon,  8 Mar 2021 16:02:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Je9g9xC05Sao; Mon,  8 Mar 2021 12:29:00 +0000 (UTC)
+	with ESMTP id bTdJQivkYtD1; Mon,  8 Mar 2021 16:02:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 232C9400C2;
-	Mon,  8 Mar 2021 12:28:59 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id A9D8C400DC;
+	Mon,  8 Mar 2021 16:02:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 969A3C000B;
-	Mon,  8 Mar 2021 12:28:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 57A4FC0001;
+	Mon,  8 Mar 2021 16:02:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 36C0AC000B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F3D40C0001
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Mar 2021 12:28:56 +0000 (UTC)
+ Mon,  8 Mar 2021 16:02:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D7279605D9
+ by smtp4.osuosl.org (Postfix) with ESMTP id DB9F4499F3
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Mar 2021 12:28:55 +0000 (UTC)
+ Mon,  8 Mar 2021 16:02:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FAZF3ZqDehv4
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=gmail.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id qaKnowloiO3t
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Mar 2021 12:28:55 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C6F6460672
+ Mon,  8 Mar 2021 16:02:19 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7B1944954E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  8 Mar 2021 12:28:54 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
- t=1615206533; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5YR3hNX0yBdFcgPcF7U4KlwSnmq7ehGDCeVDaDqUAAs=;
- b=nsIlf7yThLUOKt6MsOK0KR2favQqI5cdQ+rYrIVBkUKTIUhEwr8HWQZfRZIaQd6qtspr2d
- ZnujTb8510z4sdpXntyiZuYhGe/LpTkqELsPTKyJ4SXe+Ko71LmtNoTLGbPZRTjCDYbGuP
- sXEIHiYWdGVtBb+geIHRSKRIv9TQvgI=
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 115ECAE15;
- Mon,  8 Mar 2021 12:28:53 +0000 (UTC)
-To: xen-devel@lists.xenproject.org, x86@kernel.org,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v5 12/12] x86/paravirt: have only one paravirt patch function
-Date: Mon,  8 Mar 2021 13:28:44 +0100
-Message-Id: <20210308122844.30488-13-jgross@suse.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210308122844.30488-1-jgross@suse.com>
-References: <20210308122844.30488-1-jgross@suse.com>
+ Mon,  8 Mar 2021 16:02:18 +0000 (UTC)
+Received: by mail-ej1-x633.google.com with SMTP id jt13so21475864ejb.0
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 08 Mar 2021 08:02:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=NxiEy8ngZSokddcTCYt4nwbLH8RmaBWtr4TL2Y05SAk=;
+ b=saj2O1QdxK6slYJFU1OOFaCUnduRugIlRrckll+J7guPfb2NP8uN3xVMlAJuW8kE/1
+ yOxLpDxeUqurKTGsL9bh9pHi9R3GYLFqJgW+GttJ9QaaepqCydx35O57yyeqv/WZ7A86
+ G0k8y6bzsEm9SYx1NGh66aoWZAw/79OvaV7AOaGrLpifMFgHZciNwEDKGg17t2Pjmy87
+ IX5p+k1sYcLPuRW2PC9eXIP2JRoVUn3lf8l/w/5rn5QJMXYofAuDp1f7QUhDMxX5e/hP
+ Ne8Tply/7orVzVAgwypbC2CvEn35RLbdRZ5fNtw08EIjS0ka+n0+UG+livh+IApV52XN
+ vssg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=NxiEy8ngZSokddcTCYt4nwbLH8RmaBWtr4TL2Y05SAk=;
+ b=PVkc4wm+8asAgPzUrtzFoc0WAgN8Lxq3m0FzeV09P1uFSJD/s3QKgSuprV4qE71YVn
+ h3EVbzR3roHex4CtYNgkQ+lHop7BABgJqwJr8VXPkf71dYcN3vVekR73P8GiKCwcrkaq
+ hw7Nln6btTae4RvZA2wAA9EFTeYSxAFrae1xeGSKIB3tw7Pssm3jSOLTAeP629gFQqCR
+ WegS3uc2HhZwz7zOHUVdbj/b4q4ffDqL53xLPdtBAnSZaAXNWY/QbpETwcyy/gK+ydlG
+ yokf3gKBY4z/Dq/eFhkn3mKPDzQlQO41zsqsqZCKKpu+EJbNf005Cz8ScTV+KRosuNIj
+ ubIQ==
+X-Gm-Message-State: AOAM532JDxvJxqtjMkyY6l9eTl2w6uBmq4Bpt/3FnvdCqNu7Wjp4SlM9
+ TnEJGyhngocY5s//R5zVejlj7ox1miI=
+X-Google-Smtp-Source: ABdhPJyXYrgpPb2llmjj/iFVGV5PTrGdAUxPBHmmDx24fS0jDW2x+1Jvq2PJ/4sUNWktvnYN0H1Abg==
+X-Received: by 2002:a17:906:414e:: with SMTP id
+ l14mr15043032ejk.406.1615219336333; 
+ Mon, 08 Mar 2021 08:02:16 -0800 (PST)
+Received: from mail-wm1-f44.google.com (mail-wm1-f44.google.com.
+ [209.85.128.44])
+ by smtp.gmail.com with ESMTPSA id r17sm6678827ejz.109.2021.03.08.08.02.14
+ for <virtualization@lists.linux-foundation.org>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 08 Mar 2021 08:02:15 -0800 (PST)
+Received: by mail-wm1-f44.google.com with SMTP id
+ c76-20020a1c9a4f0000b029010c94499aedso4116878wme.0
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 08 Mar 2021 08:02:14 -0800 (PST)
+X-Received: by 2002:a05:600c:198c:: with SMTP id
+ t12mr22392924wmq.183.1615219334650; 
+ Mon, 08 Mar 2021 08:02:14 -0800 (PST)
 MIME-Version: 1.0
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>, "VMware,
- Inc." <pv-drivers@vmware.com>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, "H. Peter Anvin" <hpa@zytor.com>,
- Thomas Gleixner <tglx@linutronix.de>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>
+References: <cover.1615199056.git.bnemeth@redhat.com>
+ <8f2cb8f8614d86bba02df73c1a0665179583f1c3.1615199056.git.bnemeth@redhat.com>
+In-Reply-To: <8f2cb8f8614d86bba02df73c1a0665179583f1c3.1615199056.git.bnemeth@redhat.com>
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+Date: Mon, 8 Mar 2021 11:01:35 -0500
+X-Gmail-Original-Message-ID: <CA+FuTSduKqeLB8wcLxiZXHgQF6y596F-nt+UwzUZngdTWwZ_rA@mail.gmail.com>
+Message-ID: <CA+FuTSduKqeLB8wcLxiZXHgQF6y596F-nt+UwzUZngdTWwZ_rA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/2] net: check if protocol extracted by
+ virtio_net_hdr_set_proto is correct
+To: Balazs Nemeth <bnemeth@redhat.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+ Network Development <netdev@vger.kernel.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org, David Miller <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,187 +109,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Juergen Gross via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-There is no need any longer to have different paravirt patch functions
-for native and Xen. Eliminate native_patch() and rename
-paravirt_patch_default() to paravirt_patch().
+On Mon, Mar 8, 2021 at 5:32 AM Balazs Nemeth <bnemeth@redhat.com> wrote:
+>
+> For gso packets, virtio_net_hdr_set_proto sets the protocol (if it isn't
+> set) based on the type in the virtio net hdr, but the skb could contain
+> anything since it could come from packet_snd through a raw socket. If
+> there is a mismatch between what virtio_net_hdr_set_proto sets and
+> the actual protocol, then the skb could be handled incorrectly later
+> on.
+>
+> An example where this poses an issue is with the subsequent call to
+> skb_flow_dissect_flow_keys_basic which relies on skb->protocol being set
+> correctly. A specially crafted packet could fool
+> skb_flow_dissect_flow_keys_basic preventing EINVAL to be returned.
+>
+> Avoid blindly trusting the information provided by the virtio net header
+> by checking that the protocol in the packet actually matches the
+> protocol set by virtio_net_hdr_set_proto. Note that since the protocol
+> is only checked if skb->dev implements header_ops->parse_protocol,
+> packets from devices without the implementation are not checked at this
+> stage.
+>
+> Fixes: 9274124f023b ("net: stricter validation of untrusted gso packets")
+> Signed-off-by: Balazs Nemeth <bnemeth@redhat.com>
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
----
-V3:
-- remove paravirt_patch_insns() (kernel test robot)
----
- arch/x86/include/asm/paravirt_types.h | 19 +------------------
- arch/x86/kernel/Makefile              |  3 +--
- arch/x86/kernel/alternative.c         |  2 +-
- arch/x86/kernel/paravirt.c            | 20 ++------------------
- arch/x86/kernel/paravirt_patch.c      | 11 -----------
- arch/x86/xen/enlighten_pv.c           |  1 -
- 6 files changed, 5 insertions(+), 51 deletions(-)
- delete mode 100644 arch/x86/kernel/paravirt_patch.c
+Going forward, please mark your the patch as targeting the net tree
+using [PATCH net]
 
-diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
-index 588ff14ce969..62efbf8bd8f0 100644
---- a/arch/x86/include/asm/paravirt_types.h
-+++ b/arch/x86/include/asm/paravirt_types.h
-@@ -68,19 +68,6 @@ struct pv_info {
- 	const char *name;
- };
- 
--struct pv_init_ops {
--	/*
--	 * Patch may replace one of the defined code sequences with
--	 * arbitrary code, subject to the same register constraints.
--	 * This generally means the code is not free to clobber any
--	 * registers other than EAX.  The patch function should return
--	 * the number of bytes of code generated, as we nop pad the
--	 * rest in generic code.
--	 */
--	unsigned (*patch)(u8 type, void *insn_buff,
--			  unsigned long addr, unsigned len);
--} __no_randomize_layout;
--
- #ifdef CONFIG_PARAVIRT_XXL
- struct pv_lazy_ops {
- 	/* Set deferred update mode, used for batching operations. */
-@@ -276,7 +263,6 @@ struct pv_lock_ops {
-  * number for each function using the offset which we use to indicate
-  * what to patch. */
- struct paravirt_patch_template {
--	struct pv_init_ops	init;
- 	struct pv_cpu_ops	cpu;
- 	struct pv_irq_ops	irq;
- 	struct pv_mmu_ops	mmu;
-@@ -317,10 +303,7 @@ extern void (*paravirt_iret)(void);
- /* Simple instruction patching code. */
- #define NATIVE_LABEL(a,x,b) "\n\t.globl " a #x "_" #b "\n" a #x "_" #b ":\n\t"
- 
--unsigned paravirt_patch_default(u8 type, void *insn_buff, unsigned long addr, unsigned len);
--unsigned paravirt_patch_insns(void *insn_buff, unsigned len, const char *start, const char *end);
--
--unsigned native_patch(u8 type, void *insn_buff, unsigned long addr, unsigned len);
-+unsigned int paravirt_patch(u8 type, void *insn_buff, unsigned long addr, unsigned int len);
- 
- int paravirt_disable_iospace(void);
- 
-diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
-index 2ddf08351f0b..0704c2a94272 100644
---- a/arch/x86/kernel/Makefile
-+++ b/arch/x86/kernel/Makefile
-@@ -35,7 +35,6 @@ KASAN_SANITIZE_sev-es.o					:= n
- KCSAN_SANITIZE := n
- 
- OBJECT_FILES_NON_STANDARD_test_nx.o			:= y
--OBJECT_FILES_NON_STANDARD_paravirt_patch.o		:= y
- 
- ifdef CONFIG_FRAME_POINTER
- OBJECT_FILES_NON_STANDARD_ftrace_$(BITS).o		:= y
-@@ -121,7 +120,7 @@ obj-$(CONFIG_AMD_NB)		+= amd_nb.o
- obj-$(CONFIG_DEBUG_NMI_SELFTEST) += nmi_selftest.o
- 
- obj-$(CONFIG_KVM_GUEST)		+= kvm.o kvmclock.o
--obj-$(CONFIG_PARAVIRT)		+= paravirt.o paravirt_patch.o
-+obj-$(CONFIG_PARAVIRT)		+= paravirt.o
- obj-$(CONFIG_PARAVIRT_SPINLOCKS)+= paravirt-spinlocks.o
- obj-$(CONFIG_PARAVIRT_CLOCK)	+= pvclock.o
- obj-$(CONFIG_X86_PMEM_LEGACY_DEVICE) += pmem.o
-diff --git a/arch/x86/kernel/alternative.c b/arch/x86/kernel/alternative.c
-index ab9ad729fc5a..8f922b65c3c5 100644
---- a/arch/x86/kernel/alternative.c
-+++ b/arch/x86/kernel/alternative.c
-@@ -607,7 +607,7 @@ void __init_or_module apply_paravirt(struct paravirt_patch_site *start,
- 		BUG_ON(p->len > MAX_PATCH_LEN);
- 		/* prep the buffer with the original instructions */
- 		memcpy(insn_buff, p->instr, p->len);
--		used = pv_ops.init.patch(p->type, insn_buff, (unsigned long)p->instr, p->len);
-+		used = paravirt_patch(p->type, insn_buff, (unsigned long)p->instr, p->len);
- 
- 		BUG_ON(used > p->len);
- 
-diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
-index 082954930809..3d7b989ed6be 100644
---- a/arch/x86/kernel/paravirt.c
-+++ b/arch/x86/kernel/paravirt.c
-@@ -99,8 +99,8 @@ void __init native_pv_lock_init(void)
- 		static_branch_disable(&virt_spin_lock_key);
- }
- 
--unsigned paravirt_patch_default(u8 type, void *insn_buff,
--				unsigned long addr, unsigned len)
-+unsigned int paravirt_patch(u8 type, void *insn_buff, unsigned long addr,
-+			    unsigned int len)
- {
- 	/*
- 	 * Neat trick to map patch type back to the call within the
-@@ -121,19 +121,6 @@ unsigned paravirt_patch_default(u8 type, void *insn_buff,
- 	return ret;
- }
- 
--unsigned paravirt_patch_insns(void *insn_buff, unsigned len,
--			      const char *start, const char *end)
--{
--	unsigned insn_len = end - start;
--
--	/* Alternative instruction is too large for the patch site and we cannot continue: */
--	BUG_ON(insn_len > len || start == NULL);
--
--	memcpy(insn_buff, start, insn_len);
--
--	return insn_len;
--}
--
- struct static_key paravirt_steal_enabled;
- struct static_key paravirt_steal_rq_enabled;
- 
-@@ -255,9 +242,6 @@ struct pv_info pv_info = {
- #define PTE_IDENT	__PV_IS_CALLEE_SAVE(_paravirt_ident_64)
- 
- struct paravirt_patch_template pv_ops = {
--	/* Init ops. */
--	.init.patch		= native_patch,
--
- 	/* Cpu ops. */
- 	.cpu.io_delay		= native_io_delay,
- 
-diff --git a/arch/x86/kernel/paravirt_patch.c b/arch/x86/kernel/paravirt_patch.c
-deleted file mode 100644
-index 10543dcc8211..000000000000
---- a/arch/x86/kernel/paravirt_patch.c
-+++ /dev/null
-@@ -1,11 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0
--#include <linux/stringify.h>
--
--#include <asm/paravirt.h>
--#include <asm/asm-offsets.h>
--
--unsigned int native_patch(u8 type, void *insn_buff, unsigned long addr,
--			  unsigned int len)
--{
--	return paravirt_patch_default(type, insn_buff, addr, len);
--}
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 08dca7bebb30..4f18cd9eacd8 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1231,7 +1231,6 @@ asmlinkage __visible void __init xen_start_kernel(void)
- 
- 	/* Install Xen paravirt ops */
- 	pv_info = xen_info;
--	pv_ops.init.patch = paravirt_patch_default;
- 	pv_ops.cpu = xen_cpu_ops;
- 	paravirt_iret = xen_iret;
- 	xen_init_irq_ops();
--- 
-2.26.2
+> ---
+>  include/linux/virtio_net.h | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+>
+> diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
+> index e8a924eeea3d..6c478eee0452 100644
+> --- a/include/linux/virtio_net.h
+> +++ b/include/linux/virtio_net.h
+> @@ -79,8 +79,14 @@ static inline int virtio_net_hdr_to_skb(struct sk_buff *skb,
+>                 if (gso_type && skb->network_header) {
+>                         struct flow_keys_basic keys;
+>
+> -                       if (!skb->protocol)
+> +                       if (!skb->protocol) {
+> +                               const struct ethhdr *eth = skb_eth_hdr(skb);
 
+eth is no longer used.
+
+> +                               __be16 etype = dev_parse_header_protocol(skb);
+
+nit: customary to call this protocol. etype, I guess short for
+EtherType, makes sense, but is not commonly used in the kernel.
+
+> +
+>                                 virtio_net_hdr_set_proto(skb, hdr);
+> +                               if (etype && etype != skb->protocol)
+> +                                       return -EINVAL;
+> +                       }
+>  retry:
+>                         if (!skb_flow_dissect_flow_keys_basic(NULL, skb, &keys,
+>                                                               NULL, 0, 0, 0,
+> --
+> 2.29.2
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
