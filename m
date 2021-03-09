@@ -1,95 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B5BB332B20
-	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 16:55:53 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B19A332BD0
+	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 17:22:24 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 098FE42FC3;
-	Tue,  9 Mar 2021 15:55:52 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C30108340C;
+	Tue,  9 Mar 2021 16:22:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DCZtEynzShFO; Tue,  9 Mar 2021 15:55:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id CBB584308F;
-	Tue,  9 Mar 2021 15:55:50 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ITwuKSZgy33A; Tue,  9 Mar 2021 16:22:21 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3F5DB8343E;
+	Tue,  9 Mar 2021 16:22:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 85B8BC0001;
-	Tue,  9 Mar 2021 15:55:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A8CE6C0001;
+	Tue,  9 Mar 2021 16:22:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04033C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 15D86C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:55:49 +0000 (UTC)
+ Tue,  9 Mar 2021 16:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F14214BEF2
+ by smtp3.osuosl.org (Postfix) with ESMTP id E451E6F49A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:55:48 +0000 (UTC)
+ Tue,  9 Mar 2021 16:22:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=gmail.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7kvH9Myccelj
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id F_SWm34H1CLd
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:55:47 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
- [IPv6:2607:f8b0:4864:20::32d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B466D494C8
+ Tue,  9 Mar 2021 16:22:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [63.128.21.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9A04C6E750
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:55:47 +0000 (UTC)
-Received: by mail-ot1-x32d.google.com with SMTP id a17so13280397oto.5
- for <virtualization@lists.linux-foundation.org>;
- Tue, 09 Mar 2021 07:55:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=b5sJf5a/Nsswl7kMHUtt9MARj1P3JFHsuY5CgeMMi5Q=;
- b=reguRV/Ku7o0pbogf/jH0d0oJ9bs8Gg7KnDshPUabTd0DMCyxupAWt3RvDINC7r5FN
- m1aKVH3ls8zAmYf5cgXn/koNUdgNiQZmBhTWj9z9HZK0Tp53SThuvtBjv0ieLH7yTRvE
- +0qzoYZoepRwZ47CR3eucxI6LDO5zP4cMOPXY0uBEgTRKko+XJMdUCaOKgFPjHKuCDaO
- nElHP50cjUEn4xXnHEUvRKTxuRSigssWkPdnbFU3tIpGonKW5WraAixFe6K0qfiy1OkI
- IKfncQi9IMoGZmKdPl9y9aVs0gFU/Rwh9DvTS8INIPDwqR0xMo0Te4UZhoLqtyzwVVow
- M+1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=b5sJf5a/Nsswl7kMHUtt9MARj1P3JFHsuY5CgeMMi5Q=;
- b=M61Rn7vqa2DU3JY0I4xFGTukldgs2lEBe8l2M/1/X4fbPjR2OJNgDKfDWgLr4djA7x
- 18mzdNfMH+1TKNdRvjDAb6zpZ0nfyHvmtC2GfK7QZ8/TJjSt8rEatWhRXWGwmL136XCV
- 6Qayam9hq+uE2Xo2XIJG3aXzlEgSUXFQS6B/cv56hE2cwwRGGxFkrGy5v52m3sYZ4mHL
- ckcNg80qkyoMNhSd/7mVowNPtopk+IE71th09g9/s07IPGXdnNNkcJuuWYXbE57JoLo5
- Oj+biTxiz7J/HQLzNaVX9QPbag+vzCjsVtD7HwSAoKKXqYKw/UvjTMY5/ovqHN01fYke
- vUeQ==
-X-Gm-Message-State: AOAM533QQ2LdDit3nxR9RVfDroOc62GBgAnYECpZLjY7hvniNQwclTt1
- 5H+d6v+ZVZX3Et+NT85Jp7RZUzmBp+0=
-X-Google-Smtp-Source: ABdhPJzOTAJZeoOCLFXCyS3YX0cMxQ/nL2IbduyYBDXUYZMUVtkvcAeYnXQmjN3m07qD/56Cnm4Nmw==
-X-Received: by 2002:a9d:650d:: with SMTP id i13mr25180280otl.12.1615305346631; 
- Tue, 09 Mar 2021 07:55:46 -0800 (PST)
-Received: from Davids-MacBook-Pro.local ([8.48.134.40])
- by smtp.googlemail.com with ESMTPSA id d1sm2950488oop.0.2021.03.09.07.55.45
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Mar 2021 07:55:46 -0800 (PST)
-Subject: Re: [PATCH net v3 2/2] net: avoid infinite loop in mpls_gso_segment
- when mpls_hlen == 0
-To: Balazs Nemeth <bnemeth@redhat.com>, netdev@vger.kernel.org
-References: <cover.1615288658.git.bnemeth@redhat.com>
- <9b79f43d2dfec8b2cb8e896b5591e7b1c3cc1f6c.1615288658.git.bnemeth@redhat.com>
-From: David Ahern <dsahern@gmail.com>
-Message-ID: <0c2f075e-ea66-66df-82e4-2c5fa71b2d43@gmail.com>
-Date: Tue, 9 Mar 2021 08:55:42 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.0
+ Tue,  9 Mar 2021 16:22:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1615306936;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GfvvN9tfZ1vW/DdSGra38p5ZkQa3HZgeLwzsf8q57fs=;
+ b=W1Dtjnj29su8V6/zwHWz6+lBK2eb5L6E1u9O2lmHffspAfqpbe/flpGe3wKQgjp/E6xWxH
+ f8k9Xx2fJ75HbDWbm9LpGzKhQBBysHFuLUbrASWdJoUkwR029o+t8RQxNf4FZ67554av6B
+ G8eT2inDWOXHbhEDe5ej4vG4nXmRnBY=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-464-Nf8Soui0OlueRt3lcaU7qw-1; Tue, 09 Mar 2021 11:22:12 -0500
+X-MC-Unique: Nf8Soui0OlueRt3lcaU7qw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 75388835BDD;
+ Tue,  9 Mar 2021 16:22:09 +0000 (UTC)
+Received: from [10.36.114.143] (ovpn-114-143.ams2.redhat.com [10.36.114.143])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 937A41037E82;
+ Tue,  9 Mar 2021 16:21:57 +0000 (UTC)
+Subject: Re: [PATCH 1/9] fs: rename alloc_anon_inode to alloc_anon_inode_sb
+To: Christoph Hellwig <hch@lst.de>, Al Viro <viro@zeniv.linux.org.uk>
+References: <20210309155348.974875-1-hch@lst.de>
+ <20210309155348.974875-2-hch@lst.de>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat GmbH
+Message-ID: <9b197345-9dbe-ba9c-d1dd-1b432e6a9680@redhat.com>
+Date: Tue, 9 Mar 2021 17:21:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.0
 MIME-Version: 1.0
-In-Reply-To: <9b79f43d2dfec8b2cb8e896b5591e7b1c3cc1f6c.1615288658.git.bnemeth@redhat.com>
+In-Reply-To: <20210309155348.974875-2-hch@lst.de>
 Content-Language: en-US
-Cc: willemb@google.com, mst@redhat.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, davem@davemloft.net
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+Cc: Jason Gunthorpe <jgg@nvidia.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linux-mm@kvack.org, Minchan Kim <minchan@kernel.org>,
+ Nadav Amit <namit@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ linuxppc-dev@lists.ozlabs.org, Nitin Gupta <ngupta@vflare.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,27 +96,232 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 3/9/21 4:31 AM, Balazs Nemeth wrote:
-> A packet with skb_inner_network_header(skb) == skb_network_header(skb)
-> and ETH_P_MPLS_UC will prevent mpls_gso_segment from pulling any headers
-> from the packet. Subsequently, the call to skb_mac_gso_segment will
-> again call mpls_gso_segment with the same packet leading to an infinite
-> loop. In addition, ensure that the header length is a multiple of four,
-> which should hold irrespective of the number of stacked labels.
+On 09.03.21 16:53, Christoph Hellwig wrote:
+> Rename alloc_inode to free the name for a new variant that does not
+> need boilerplate to create a super_block first.
 > 
-> Signed-off-by: Balazs Nemeth <bnemeth@redhat.com>
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
 > ---
->  net/mpls/mpls_gso.c | 3 +++
->  1 file changed, 3 insertions(+)
+>   arch/powerpc/platforms/pseries/cmm.c | 2 +-
+>   drivers/dma-buf/dma-buf.c            | 2 +-
+>   drivers/gpu/drm/drm_drv.c            | 2 +-
+>   drivers/misc/cxl/api.c               | 2 +-
+>   drivers/misc/vmw_balloon.c           | 2 +-
+>   drivers/scsi/cxlflash/ocxl_hw.c      | 2 +-
+>   drivers/virtio/virtio_balloon.c      | 2 +-
+>   fs/aio.c                             | 2 +-
+>   fs/anon_inodes.c                     | 4 ++--
+>   fs/libfs.c                           | 2 +-
+>   include/linux/fs.h                   | 2 +-
+>   kernel/resource.c                    | 2 +-
+>   mm/z3fold.c                          | 2 +-
+>   mm/zsmalloc.c                        | 2 +-
+>   14 files changed, 15 insertions(+), 15 deletions(-)
+> 
+> diff --git a/arch/powerpc/platforms/pseries/cmm.c b/arch/powerpc/platforms/pseries/cmm.c
+> index 45a3a3022a85c9..6d36b858b14df1 100644
+> --- a/arch/powerpc/platforms/pseries/cmm.c
+> +++ b/arch/powerpc/platforms/pseries/cmm.c
+> @@ -580,7 +580,7 @@ static int cmm_balloon_compaction_init(void)
+>   		return rc;
+>   	}
+>   
+> -	b_dev_info.inode = alloc_anon_inode(balloon_mnt->mnt_sb);
+> +	b_dev_info.inode = alloc_anon_inode_sb(balloon_mnt->mnt_sb);
+>   	if (IS_ERR(b_dev_info.inode)) {
+>   		rc = PTR_ERR(b_dev_info.inode);
+>   		b_dev_info.inode = NULL;
+> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
+> index f264b70c383eb4..dedcc9483352dc 100644
+> --- a/drivers/dma-buf/dma-buf.c
+> +++ b/drivers/dma-buf/dma-buf.c
+> @@ -445,7 +445,7 @@ static inline int is_dma_buf_file(struct file *file)
+>   static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
+>   {
+>   	struct file *file;
+> -	struct inode *inode = alloc_anon_inode(dma_buf_mnt->mnt_sb);
+> +	struct inode *inode = alloc_anon_inode_sb(dma_buf_mnt->mnt_sb);
+>   
+>   	if (IS_ERR(inode))
+>   		return ERR_CAST(inode);
+> diff --git a/drivers/gpu/drm/drm_drv.c b/drivers/gpu/drm/drm_drv.c
+> index 20d22e41d7ce74..87e7214a8e3565 100644
+> --- a/drivers/gpu/drm/drm_drv.c
+> +++ b/drivers/gpu/drm/drm_drv.c
+> @@ -519,7 +519,7 @@ static struct inode *drm_fs_inode_new(void)
+>   		return ERR_PTR(r);
+>   	}
+>   
+> -	inode = alloc_anon_inode(drm_fs_mnt->mnt_sb);
+> +	inode = alloc_anon_inode_sb(drm_fs_mnt->mnt_sb);
+>   	if (IS_ERR(inode))
+>   		simple_release_fs(&drm_fs_mnt, &drm_fs_cnt);
+>   
+> diff --git a/drivers/misc/cxl/api.c b/drivers/misc/cxl/api.c
+> index b493de962153ba..2efbf6c98028ef 100644
+> --- a/drivers/misc/cxl/api.c
+> +++ b/drivers/misc/cxl/api.c
+> @@ -73,7 +73,7 @@ static struct file *cxl_getfile(const char *name,
+>   		goto err_module;
+>   	}
+>   
+> -	inode = alloc_anon_inode(cxl_vfs_mount->mnt_sb);
+> +	inode = alloc_anon_inode_sb(cxl_vfs_mount->mnt_sb);
+>   	if (IS_ERR(inode)) {
+>   		file = ERR_CAST(inode);
+>   		goto err_fs;
+> diff --git a/drivers/misc/vmw_balloon.c b/drivers/misc/vmw_balloon.c
+> index b837e7eba5f7dc..5d057a05ddbee8 100644
+> --- a/drivers/misc/vmw_balloon.c
+> +++ b/drivers/misc/vmw_balloon.c
+> @@ -1900,7 +1900,7 @@ static __init int vmballoon_compaction_init(struct vmballoon *b)
+>   		return PTR_ERR(vmballoon_mnt);
+>   
+>   	b->b_dev_info.migratepage = vmballoon_migratepage;
+> -	b->b_dev_info.inode = alloc_anon_inode(vmballoon_mnt->mnt_sb);
+> +	b->b_dev_info.inode = alloc_anon_inode_sb(vmballoon_mnt->mnt_sb);
+>   
+>   	if (IS_ERR(b->b_dev_info.inode))
+>   		return PTR_ERR(b->b_dev_info.inode);
+> diff --git a/drivers/scsi/cxlflash/ocxl_hw.c b/drivers/scsi/cxlflash/ocxl_hw.c
+> index 244fc27215dc79..40184ed926b557 100644
+> --- a/drivers/scsi/cxlflash/ocxl_hw.c
+> +++ b/drivers/scsi/cxlflash/ocxl_hw.c
+> @@ -88,7 +88,7 @@ static struct file *ocxlflash_getfile(struct device *dev, const char *name,
+>   		goto err2;
+>   	}
+>   
+> -	inode = alloc_anon_inode(ocxlflash_vfs_mount->mnt_sb);
+> +	inode = alloc_anon_inode_sb(ocxlflash_vfs_mount->mnt_sb);
+>   	if (IS_ERR(inode)) {
+>   		rc = PTR_ERR(inode);
+>   		dev_err(dev, "%s: alloc_anon_inode failed rc=%d\n",
+> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
+> index 8985fc2cea8615..cae76ee5bdd688 100644
+> --- a/drivers/virtio/virtio_balloon.c
+> +++ b/drivers/virtio/virtio_balloon.c
+> @@ -916,7 +916,7 @@ static int virtballoon_probe(struct virtio_device *vdev)
+>   	}
+>   
+>   	vb->vb_dev_info.migratepage = virtballoon_migratepage;
+> -	vb->vb_dev_info.inode = alloc_anon_inode(balloon_mnt->mnt_sb);
+> +	vb->vb_dev_info.inode = alloc_anon_inode_sb(balloon_mnt->mnt_sb);
+>   	if (IS_ERR(vb->vb_dev_info.inode)) {
+>   		err = PTR_ERR(vb->vb_dev_info.inode);
+>   		goto out_kern_unmount;
+> diff --git a/fs/aio.c b/fs/aio.c
+> index 1f32da13d39ee6..d1c2aa7fd6de7c 100644
+> --- a/fs/aio.c
+> +++ b/fs/aio.c
+> @@ -234,7 +234,7 @@ static const struct address_space_operations aio_ctx_aops;
+>   static struct file *aio_private_file(struct kioctx *ctx, loff_t nr_pages)
+>   {
+>   	struct file *file;
+> -	struct inode *inode = alloc_anon_inode(aio_mnt->mnt_sb);
+> +	struct inode *inode = alloc_anon_inode_sb(aio_mnt->mnt_sb);
+>   	if (IS_ERR(inode))
+>   		return ERR_CAST(inode);
+>   
+> diff --git a/fs/anon_inodes.c b/fs/anon_inodes.c
+> index a280156138ed89..4745fc37014332 100644
+> --- a/fs/anon_inodes.c
+> +++ b/fs/anon_inodes.c
+> @@ -63,7 +63,7 @@ static struct inode *anon_inode_make_secure_inode(
+>   	const struct qstr qname = QSTR_INIT(name, strlen(name));
+>   	int error;
+>   
+> -	inode = alloc_anon_inode(anon_inode_mnt->mnt_sb);
+> +	inode = alloc_anon_inode_sb(anon_inode_mnt->mnt_sb);
+>   	if (IS_ERR(inode))
+>   		return inode;
+>   	inode->i_flags &= ~S_PRIVATE;
+> @@ -231,7 +231,7 @@ static int __init anon_inode_init(void)
+>   	if (IS_ERR(anon_inode_mnt))
+>   		panic("anon_inode_init() kernel mount failed (%ld)\n", PTR_ERR(anon_inode_mnt));
+>   
+> -	anon_inode_inode = alloc_anon_inode(anon_inode_mnt->mnt_sb);
+> +	anon_inode_inode = alloc_anon_inode_sb(anon_inode_mnt->mnt_sb);
+>   	if (IS_ERR(anon_inode_inode))
+>   		panic("anon_inode_init() inode allocation failed (%ld)\n", PTR_ERR(anon_inode_inode));
+>   
+> diff --git a/fs/libfs.c b/fs/libfs.c
+> index e2de5401abca5a..600bebc1cd847f 100644
+> --- a/fs/libfs.c
+> +++ b/fs/libfs.c
+> @@ -1216,7 +1216,7 @@ static int anon_set_page_dirty(struct page *page)
+>   	return 0;
+>   };
+>   
+> -struct inode *alloc_anon_inode(struct super_block *s)
+> +struct inode *alloc_anon_inode_sb(struct super_block *s)
+>   {
+>   	static const struct address_space_operations anon_aops = {
+>   		.set_page_dirty = anon_set_page_dirty,
+> diff --git a/include/linux/fs.h b/include/linux/fs.h
+> index ec8f3ddf4a6aa8..52387368af3c00 100644
+> --- a/include/linux/fs.h
+> +++ b/include/linux/fs.h
+> @@ -3286,7 +3286,7 @@ extern int simple_write_end(struct file *file, struct address_space *mapping,
+>   			loff_t pos, unsigned len, unsigned copied,
+>   			struct page *page, void *fsdata);
+>   extern int always_delete_dentry(const struct dentry *);
+> -extern struct inode *alloc_anon_inode(struct super_block *);
+> +extern struct inode *alloc_anon_inode_sb(struct super_block *);
+>   extern int simple_nosetlease(struct file *, long, struct file_lock **, void **);
+>   extern const struct dentry_operations simple_dentry_operations;
+>   
+> diff --git a/kernel/resource.c b/kernel/resource.c
+> index 627e61b0c12418..0fd091a3f2fc66 100644
+> --- a/kernel/resource.c
+> +++ b/kernel/resource.c
+> @@ -1863,7 +1863,7 @@ static int __init iomem_init_inode(void)
+>   		return rc;
+>   	}
+>   
+> -	inode = alloc_anon_inode(iomem_vfs_mount->mnt_sb);
+> +	inode = alloc_anon_inode_sb(iomem_vfs_mount->mnt_sb);
+>   	if (IS_ERR(inode)) {
+>   		rc = PTR_ERR(inode);
+>   		pr_err("Cannot allocate inode for iomem: %d\n", rc);
+> diff --git a/mm/z3fold.c b/mm/z3fold.c
+> index b5dafa7e44e429..e7cd9298b221f5 100644
+> --- a/mm/z3fold.c
+> +++ b/mm/z3fold.c
+> @@ -376,7 +376,7 @@ static void z3fold_unmount(void)
+>   static const struct address_space_operations z3fold_aops;
+>   static int z3fold_register_migration(struct z3fold_pool *pool)
+>   {
+> -	pool->inode = alloc_anon_inode(z3fold_mnt->mnt_sb);
+> +	pool->inode = alloc_anon_inode_sb(z3fold_mnt->mnt_sb);
+>   	if (IS_ERR(pool->inode)) {
+>   		pool->inode = NULL;
+>   		return 1;
+> diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
+> index 30c358b7202510..a6449a2ad861de 100644
+> --- a/mm/zsmalloc.c
+> +++ b/mm/zsmalloc.c
+> @@ -2086,7 +2086,7 @@ static const struct address_space_operations zsmalloc_aops = {
+>   
+>   static int zs_register_migration(struct zs_pool *pool)
+>   {
+> -	pool->inode = alloc_anon_inode(zsmalloc_mnt->mnt_sb);
+> +	pool->inode = alloc_anon_inode_sb(zsmalloc_mnt->mnt_sb);
+>   	if (IS_ERR(pool->inode)) {
+>   		pool->inode = NULL;
+>   		return 1;
 > 
 
+Reviewed-by: David Hildenbrand <david@redhat.com>
 
-Reviewed-by: David Ahern <dsahern@kernel.org>
+-- 
+Thanks,
+
+David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
