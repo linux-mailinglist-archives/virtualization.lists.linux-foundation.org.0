@@ -1,76 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id DEAC3332B36
-	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 16:57:17 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B5BB332B20
+	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 16:55:53 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5859783DA0;
-	Tue,  9 Mar 2021 15:57:16 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 098FE42FC3;
+	Tue,  9 Mar 2021 15:55:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NIsmhcP87n0d; Tue,  9 Mar 2021 15:57:15 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1AD7B83D7A;
-	Tue,  9 Mar 2021 15:57:15 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id DCZtEynzShFO; Tue,  9 Mar 2021 15:55:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTP id CBB584308F;
+	Tue,  9 Mar 2021 15:55:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D05EC0016;
-	Tue,  9 Mar 2021 15:57:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 85B8BC0001;
+	Tue,  9 Mar 2021 15:55:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9AF7FC0001
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 04033C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:57:12 +0000 (UTC)
+ Tue,  9 Mar 2021 15:55:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7AC834C351
+ by smtp4.osuosl.org (Postfix) with ESMTP id F14214BEF2
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:57:12 +0000 (UTC)
+ Tue,  9 Mar 2021 15:55:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
+ dkim=pass (2048-bit key) header.d=gmail.com
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wAjV48XCeFxC
+ with ESMTP id 7kvH9Myccelj
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:57:11 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from casper.infradead.org (casper.infradead.org [90.155.50.34])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8818D4C6C9
+ Tue,  9 Mar 2021 15:55:47 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B466D494C8
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 15:57:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
- Content-Type:Content-ID:Content-Description;
- bh=81oGSCBl39iypfLV/NoPk/fT5YyYJiKMaMVaZJIwgrQ=; b=K1zd0jFpZYL+ZtHkLHvgFqVo3p
- h0n1mVJ6xBDYsmZ2ahXvorBLK+B3nIqdp9SBF8EG/bXS+IsljPrtJK2g37AP4qDeVxiqHM/RZXx3q
- S2CEFcUd8C43qdjZ+9VdgqfeVWq56HoefjzfpaWwnPCvcAjOqJar1KuO0CyEqdbCe8ML70nAYFfua
- VPC6vyaOhGWsaj+cksNDgySPdh8+mPTd/DfGakuL9yseLjJeQfIk/7NZVe94BnW2qbyUlG2+FyHwZ
- uFSZK8ZEBs8Qdk6n8xtOgSm5GaHD9TgoqPuqa4IUBK0F1IiHVfJUGU91yPDMhg29RGnXUdHnRmOAs
- sVy5rRLQ==;
-Received: from [2001:4bb8:180:9884:c70:4a89:bc61:3] (helo=localhost)
- by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1lJeiQ-000lYx-7J; Tue, 09 Mar 2021 15:56:11 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Al Viro <viro@zeniv.linux.org.uk>
-Subject: [PATCH 9/9] zsmalloc: remove the zsmalloc file system
-Date: Tue,  9 Mar 2021 16:53:48 +0100
-Message-Id: <20210309155348.974875-10-hch@lst.de>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210309155348.974875-1-hch@lst.de>
-References: <20210309155348.974875-1-hch@lst.de>
+ Tue,  9 Mar 2021 15:55:47 +0000 (UTC)
+Received: by mail-ot1-x32d.google.com with SMTP id a17so13280397oto.5
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 09 Mar 2021 07:55:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=subject:to:cc:references:from:message-id:date:user-agent
+ :mime-version:in-reply-to:content-language:content-transfer-encoding;
+ bh=b5sJf5a/Nsswl7kMHUtt9MARj1P3JFHsuY5CgeMMi5Q=;
+ b=reguRV/Ku7o0pbogf/jH0d0oJ9bs8Gg7KnDshPUabTd0DMCyxupAWt3RvDINC7r5FN
+ m1aKVH3ls8zAmYf5cgXn/koNUdgNiQZmBhTWj9z9HZK0Tp53SThuvtBjv0ieLH7yTRvE
+ +0qzoYZoepRwZ47CR3eucxI6LDO5zP4cMOPXY0uBEgTRKko+XJMdUCaOKgFPjHKuCDaO
+ nElHP50cjUEn4xXnHEUvRKTxuRSigssWkPdnbFU3tIpGonKW5WraAixFe6K0qfiy1OkI
+ IKfncQi9IMoGZmKdPl9y9aVs0gFU/Rwh9DvTS8INIPDwqR0xMo0Te4UZhoLqtyzwVVow
+ M+1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=b5sJf5a/Nsswl7kMHUtt9MARj1P3JFHsuY5CgeMMi5Q=;
+ b=M61Rn7vqa2DU3JY0I4xFGTukldgs2lEBe8l2M/1/X4fbPjR2OJNgDKfDWgLr4djA7x
+ 18mzdNfMH+1TKNdRvjDAb6zpZ0nfyHvmtC2GfK7QZ8/TJjSt8rEatWhRXWGwmL136XCV
+ 6Qayam9hq+uE2Xo2XIJG3aXzlEgSUXFQS6B/cv56hE2cwwRGGxFkrGy5v52m3sYZ4mHL
+ ckcNg80qkyoMNhSd/7mVowNPtopk+IE71th09g9/s07IPGXdnNNkcJuuWYXbE57JoLo5
+ Oj+biTxiz7J/HQLzNaVX9QPbag+vzCjsVtD7HwSAoKKXqYKw/UvjTMY5/ovqHN01fYke
+ vUeQ==
+X-Gm-Message-State: AOAM533QQ2LdDit3nxR9RVfDroOc62GBgAnYECpZLjY7hvniNQwclTt1
+ 5H+d6v+ZVZX3Et+NT85Jp7RZUzmBp+0=
+X-Google-Smtp-Source: ABdhPJzOTAJZeoOCLFXCyS3YX0cMxQ/nL2IbduyYBDXUYZMUVtkvcAeYnXQmjN3m07qD/56Cnm4Nmw==
+X-Received: by 2002:a9d:650d:: with SMTP id i13mr25180280otl.12.1615305346631; 
+ Tue, 09 Mar 2021 07:55:46 -0800 (PST)
+Received: from Davids-MacBook-Pro.local ([8.48.134.40])
+ by smtp.googlemail.com with ESMTPSA id d1sm2950488oop.0.2021.03.09.07.55.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 09 Mar 2021 07:55:46 -0800 (PST)
+Subject: Re: [PATCH net v3 2/2] net: avoid infinite loop in mpls_gso_segment
+ when mpls_hlen == 0
+To: Balazs Nemeth <bnemeth@redhat.com>, netdev@vger.kernel.org
+References: <cover.1615288658.git.bnemeth@redhat.com>
+ <9b79f43d2dfec8b2cb8e896b5591e7b1c3cc1f6c.1615288658.git.bnemeth@redhat.com>
+From: David Ahern <dsahern@gmail.com>
+Message-ID: <0c2f075e-ea66-66df-82e4-2c5fa71b2d43@gmail.com>
+Date: Tue, 9 Mar 2021 08:55:42 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.8.0
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- casper.infradead.org. See http://www.infradead.org/rpr.html
-Cc: Jason Gunthorpe <jgg@nvidia.com>, "VMware, Inc." <pv-drivers@vmware.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, Minchan Kim <minchan@kernel.org>,
- Nadav Amit <namit@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
- linuxppc-dev@lists.ozlabs.org, Nitin Gupta <ngupta@vflare.org>
+In-Reply-To: <9b79f43d2dfec8b2cb8e896b5591e7b1c3cc1f6c.1615288658.git.bnemeth@redhat.com>
+Content-Language: en-US
+Cc: willemb@google.com, mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,126 +106,22 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Just use the generic anon_inode file system.
+On 3/9/21 4:31 AM, Balazs Nemeth wrote:
+> A packet with skb_inner_network_header(skb) == skb_network_header(skb)
+> and ETH_P_MPLS_UC will prevent mpls_gso_segment from pulling any headers
+> from the packet. Subsequently, the call to skb_mac_gso_segment will
+> again call mpls_gso_segment with the same packet leading to an infinite
+> loop. In addition, ensure that the header length is a multiple of four,
+> which should hold irrespective of the number of stacked labels.
+> 
+> Signed-off-by: Balazs Nemeth <bnemeth@redhat.com>
+> ---
+>  net/mpls/mpls_gso.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- mm/zsmalloc.c | 48 +++---------------------------------------------
- 1 file changed, 3 insertions(+), 45 deletions(-)
 
-diff --git a/mm/zsmalloc.c b/mm/zsmalloc.c
-index a6449a2ad861de..a7d2f471935447 100644
---- a/mm/zsmalloc.c
-+++ b/mm/zsmalloc.c
-@@ -41,6 +41,7 @@
- #include <linux/slab.h>
- #include <linux/pgtable.h>
- #include <asm/tlbflush.h>
-+#include <linux/anon_inodes.h>
- #include <linux/cpumask.h>
- #include <linux/cpu.h>
- #include <linux/vmalloc.h>
-@@ -176,10 +177,6 @@ struct zs_size_stat {
- static struct dentry *zs_stat_root;
- #endif
- 
--#ifdef CONFIG_COMPACTION
--static struct vfsmount *zsmalloc_mnt;
--#endif
--
- /*
-  * We assign a page to ZS_ALMOST_EMPTY fullness group when:
-  *	n <= N / f, where
-@@ -308,8 +305,6 @@ static void kick_deferred_free(struct zs_pool *pool);
- static void init_deferred_free(struct zs_pool *pool);
- static void SetZsPageMovable(struct zs_pool *pool, struct zspage *zspage);
- #else
--static int zsmalloc_mount(void) { return 0; }
--static void zsmalloc_unmount(void) {}
- static int zs_register_migration(struct zs_pool *pool) { return 0; }
- static void zs_unregister_migration(struct zs_pool *pool) {}
- static void migrate_lock_init(struct zspage *zspage) {}
-@@ -1751,33 +1746,6 @@ static void lock_zspage(struct zspage *zspage)
- 	} while ((page = get_next_page(page)) != NULL);
- }
- 
--static int zs_init_fs_context(struct fs_context *fc)
--{
--	return init_pseudo(fc, ZSMALLOC_MAGIC) ? 0 : -ENOMEM;
--}
--
--static struct file_system_type zsmalloc_fs = {
--	.name		= "zsmalloc",
--	.init_fs_context = zs_init_fs_context,
--	.kill_sb	= kill_anon_super,
--};
--
--static int zsmalloc_mount(void)
--{
--	int ret = 0;
--
--	zsmalloc_mnt = kern_mount(&zsmalloc_fs);
--	if (IS_ERR(zsmalloc_mnt))
--		ret = PTR_ERR(zsmalloc_mnt);
--
--	return ret;
--}
--
--static void zsmalloc_unmount(void)
--{
--	kern_unmount(zsmalloc_mnt);
--}
--
- static void migrate_lock_init(struct zspage *zspage)
- {
- 	rwlock_init(&zspage->lock);
-@@ -2086,7 +2054,7 @@ static const struct address_space_operations zsmalloc_aops = {
- 
- static int zs_register_migration(struct zs_pool *pool)
- {
--	pool->inode = alloc_anon_inode_sb(zsmalloc_mnt->mnt_sb);
-+	pool->inode = alloc_anon_inode();
- 	if (IS_ERR(pool->inode)) {
- 		pool->inode = NULL;
- 		return 1;
-@@ -2506,14 +2474,10 @@ static int __init zs_init(void)
- {
- 	int ret;
- 
--	ret = zsmalloc_mount();
--	if (ret)
--		goto out;
--
- 	ret = cpuhp_setup_state(CPUHP_MM_ZS_PREPARE, "mm/zsmalloc:prepare",
- 				zs_cpu_prepare, zs_cpu_dead);
- 	if (ret)
--		goto hp_setup_fail;
-+		return ret;
- 
- #ifdef CONFIG_ZPOOL
- 	zpool_register_driver(&zs_zpool_driver);
-@@ -2522,11 +2486,6 @@ static int __init zs_init(void)
- 	zs_stat_init();
- 
- 	return 0;
--
--hp_setup_fail:
--	zsmalloc_unmount();
--out:
--	return ret;
- }
- 
- static void __exit zs_exit(void)
-@@ -2534,7 +2493,6 @@ static void __exit zs_exit(void)
- #ifdef CONFIG_ZPOOL
- 	zpool_unregister_driver(&zs_zpool_driver);
- #endif
--	zsmalloc_unmount();
- 	cpuhp_remove_state(CPUHP_MM_ZS_PREPARE);
- 
- 	zs_stat_exit();
--- 
-2.30.1
+Reviewed-by: David Ahern <dsahern@kernel.org>
 
 _______________________________________________
 Virtualization mailing list
