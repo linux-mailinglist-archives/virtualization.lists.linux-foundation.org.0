@@ -1,71 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 142AD332281
-	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 11:02:50 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC4933323E9
+	for <lists.virtualization@lfdr.de>; Tue,  9 Mar 2021 12:26:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2802E605B1;
-	Tue,  9 Mar 2021 10:02:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 11FC683A1C;
+	Tue,  9 Mar 2021 11:26:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RA5xsmTNutCx; Tue,  9 Mar 2021 10:02:47 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VOXESsvid07m; Tue,  9 Mar 2021 11:26:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0F90960590;
-	Tue,  9 Mar 2021 10:02:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C978683A76;
+	Tue,  9 Mar 2021 11:26:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 67BFCC0001;
-	Tue,  9 Mar 2021 10:02:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 528E3C0001;
+	Tue,  9 Mar 2021 11:26:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4254BC0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3F835C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 10:02:44 +0000 (UTC)
+ Tue,  9 Mar 2021 11:26:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2AF7F4017A
+ by smtp3.osuosl.org (Postfix) with ESMTP id 17E906F562
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 10:02:44 +0000 (UTC)
+ Tue,  9 Mar 2021 11:26:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id R6yvF8hW8sYL
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id zadAQytiLWgU
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 10:02:43 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org
- [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 07E354017B
+ Tue,  9 Mar 2021 11:26:16 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 338006F4F9
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Mar 2021 10:02:42 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id B07012E2; Tue,  9 Mar 2021 11:02:39 +0100 (CET)
-Date: Tue, 9 Mar 2021 11:02:36 +0100
-From: Joerg Roedel <joro@8bytes.org>
-To: Borislav Petkov <bp@alien8.de>
-Subject: Re: [PATCH 6/7] x86/boot/compressed/64: Check SEV encryption in
- 32-bit boot-path
-Message-ID: <YEdHvAWaWv8YDiUB@8bytes.org>
-References: <20210210102135.30667-1-joro@8bytes.org>
- <20210210102135.30667-7-joro@8bytes.org>
- <20210302194353.GH15469@zn.tnic>
+ Tue,  9 Mar 2021 11:26:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1615289174;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QJTu97af+WLCQFYiPKebiLOkL3siT4cw4KW3jFKHkGM=;
+ b=KZpoidckAmNZIv+Wir7fZbLO8QUUn9Kqewy4kOisadHDy8ghR3l5e22wVOyYuUMV0v/g8t
+ KpwbIDz+CbLTFxx/zPW2bq3F5Rsm0gdHP0grAQUqrxYuuM2FPFThR3QyXQPHvNtxdfhHi6
+ jqXuQ3g4ei1wi0426o4YcGIyh9Er1Yk=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-429-9BEWdgZONxGSgtdoRKE_Ww-1; Tue, 09 Mar 2021 06:26:12 -0500
+X-MC-Unique: 9BEWdgZONxGSgtdoRKE_Ww-1
+Received: by mail-wr1-f69.google.com with SMTP id g5so6244441wrd.22
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 09 Mar 2021 03:26:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=QJTu97af+WLCQFYiPKebiLOkL3siT4cw4KW3jFKHkGM=;
+ b=OHJ5KHFUB1OPh/gACehcsfUSMHDoCFRi0XejRz4fJjLYS48GUAZpoh77MYvJrTczJe
+ De3hWQ4TwVxSP8cC4EfAiUe9c3hrGlCKfs/PWaeIiE7gesXdZTI4X844GpUrfEU+ph3M
+ MVjS+8GMFXwbt8oB+6Nps8qdEAXsxnC3c1jZnPz/HQ1eQrGSueAiA3us/VtHjWIfnRFf
+ 1hyQiOh7u4tDKWnu4XXZ5pQUNHkDxl0Rp/98C2dSKfp2JR5yLIzdmk1v/0XDX0OgN0py
+ 7T+A6apb8GGhYjIAyu3siYPeCWa9/WLn/5fC8jaa5H0NIBd6YllVN9CSZP5S8nb1TWMt
+ nWfw==
+X-Gm-Message-State: AOAM530RUOf/KLcQAIv46UxGwXXzKg5hbwlRziYdbygZUzasn7oJkcLp
+ DDGgpWXvwMCKwKhNmXqIg9olBZQxusR5nP2mseVEZy9WJ0PsiNbmXgZSXSh1aTy3hlbd35Vf+e3
+ bnm3f/kVclIDNSdmgur2jVik16UkmApFyHjoAfya67g==
+X-Received: by 2002:a1c:67d6:: with SMTP id b205mr3538397wmc.118.1615289170615; 
+ Tue, 09 Mar 2021 03:26:10 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxGyKCvOiCoJXkY1zxim1zjyVYdNBYQs3pqMhTrVxV5v8BM0tI/MjusSGpEIQUXq09e+JkHjw==
+X-Received: by 2002:a1c:67d6:: with SMTP id b205mr3538382wmc.118.1615289170481; 
+ Tue, 09 Mar 2021 03:26:10 -0800 (PST)
+Received: from redhat.com (bzq-79-180-2-31.red.bezeqint.net. [79.180.2.31])
+ by smtp.gmail.com with ESMTPSA id f17sm22314511wru.31.2021.03.09.03.26.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Mar 2021 03:26:09 -0800 (PST)
+Date: Tue, 9 Mar 2021 06:26:06 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Balazs Nemeth <bnemeth@redhat.com>
+Subject: Re: [PATCH v2 1/2] net: check if protocol extracted by
+ virtio_net_hdr_set_proto is correct
+Message-ID: <20210309062116-mutt-send-email-mst@kernel.org>
+References: <cover.1615199056.git.bnemeth@redhat.com>
+ <8f2cb8f8614d86bba02df73c1a0665179583f1c3.1615199056.git.bnemeth@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <8f2cb8f8614d86bba02df73c1a0665179583f1c3.1615199056.git.bnemeth@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20210302194353.GH15469@zn.tnic>
-Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
- Jiri Slaby <jslaby@suse.cz>, x86@kernel.org,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
- Juergen Gross <jgross@suse.com>, Mike Stunes <mstunes@vmware.com>,
- linux-kernel@vger.kernel.org,
- Sean Christopherson <sean.j.christopherson@intel.com>,
- Masami Hiramatsu <mhiramat@kernel.org>, Erdem Aktas <erdemaktas@google.com>
+Cc: willemb@google.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,23 +113,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Mar 02, 2021 at 08:43:53PM +0100, Borislav Petkov wrote:
-> On Wed, Feb 10, 2021 at 11:21:34AM +0100, Joerg Roedel wrote:
-> > +	/*
-> > +	 * Store the sme_me_mask as an indicator that SEV is active. It will be
-> > +	 * set again in startup_64().
+On Mon, Mar 08, 2021 at 11:31:25AM +0100, Balazs Nemeth wrote:
+> For gso packets, virtio_net_hdr_set_proto sets the protocol (if it isn't
+> set) based on the type in the virtio net hdr, but the skb could contain
+> anything since it could come from packet_snd through a raw socket. If
+> there is a mismatch between what virtio_net_hdr_set_proto sets and
+> the actual protocol, then the skb could be handled incorrectly later
+> on.
 > 
-> So why bother? Or does something needs it before that?
+> An example where this poses an issue is with the subsequent call to
+> skb_flow_dissect_flow_keys_basic which relies on skb->protocol being set
+> correctly. A specially crafted packet could fool
+> skb_flow_dissect_flow_keys_basic preventing EINVAL to be returned.
+> 
+> Avoid blindly trusting the information provided by the virtio net header
+> by checking that the protocol in the packet actually matches the
+> protocol set by virtio_net_hdr_set_proto. Note that since the protocol
+> is only checked if skb->dev implements header_ops->parse_protocol,
+> packets from devices without the implementation are not checked at this
+> stage.
+> 
+> Fixes: 9274124f023b ("net: stricter validation of untrusted gso packets")
+> Signed-off-by: Balazs Nemeth <bnemeth@redhat.com>
+> ---
+>  include/linux/virtio_net.h | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
+> index e8a924eeea3d..6c478eee0452 100644
+> --- a/include/linux/virtio_net.h
+> +++ b/include/linux/virtio_net.h
+> @@ -79,8 +79,14 @@ static inline int virtio_net_hdr_to_skb(struct sk_buff *skb,
+>  		if (gso_type && skb->network_header) {
+>  			struct flow_keys_basic keys;
+>  
+> -			if (!skb->protocol)
+> +			if (!skb->protocol) {
+> +				const struct ethhdr *eth = skb_eth_hdr(skb);
+> +				__be16 etype = dev_parse_header_protocol(skb);
+> +
+>  				virtio_net_hdr_set_proto(skb, hdr);
+> +				if (etype && etype != skb->protocol)
+> +					return -EINVAL;
+> +			}
 
-This was actually a bug. The startup32_check_sev_cbit() needs something
-to skip the check when SEV is not active. Therefore the value is set
-here in sme_me_mask, but the function later checks sev_status.
 
-I fixed it by setting sev_status to 1 here (indicates SEV is active).
+Well the protocol in the header is an attempt at an optimization to
+remove need to parse the packet ... any data on whether this
+affecs performance?
 
-Regards,
+>  retry:
+>  			if (!skb_flow_dissect_flow_keys_basic(NULL, skb, &keys,
+>  							      NULL, 0, 0, 0,
+> -- 
+> 2.29.2
 
-	Joerg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
