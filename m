@@ -1,58 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81E30333754
-	for <lists.virtualization@lfdr.de>; Wed, 10 Mar 2021 09:32:41 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 36967333778
+	for <lists.virtualization@lfdr.de>; Wed, 10 Mar 2021 09:37:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id BBFA84314A;
-	Wed, 10 Mar 2021 08:32:39 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JbkRMSQJbkfX; Wed, 10 Mar 2021 08:32:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 79C8043197;
-	Wed, 10 Mar 2021 08:32:38 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 17BCCC0001;
-	Wed, 10 Mar 2021 08:32:38 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6730CC0001
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 08:32:36 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5702C4EC4A
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 08:32:36 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5BB9D4EBA7;
+	Wed, 10 Mar 2021 08:37:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hBOfOOSgdMbd
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4fcBHQIkEa4X; Wed, 10 Mar 2021 08:37:29 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTP id E8F0C4EBB4;
+	Wed, 10 Mar 2021 08:37:28 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8424DC0010;
+	Wed, 10 Mar 2021 08:37:28 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A27E5C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 08:32:35 +0000 (UTC)
+ Wed, 10 Mar 2021 08:37:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8401C43195
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Mar 2021 08:37:27 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id KIImKPl4ZXua
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Mar 2021 08:37:27 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8EB284EC57
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DDC8343194
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 08:32:35 +0000 (UTC)
+ Wed, 10 Mar 2021 08:37:26 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id C9A8168B05; Wed, 10 Mar 2021 09:32:31 +0100 (CET)
-Date: Wed, 10 Mar 2021 09:32:31 +0100
+ id 5F87968B05; Wed, 10 Mar 2021 09:37:23 +0100 (CET)
+Date: Wed, 10 Mar 2021 09:37:23 +0100
 From: Christoph Hellwig <hch@lst.de>
-To: Jason Gunthorpe <jgg@nvidia.com>
+To: Matthew Wilcox <willy@infradead.org>
 Subject: Re: make alloc_anon_inode more useful
-Message-ID: <20210310083231.GB5217@lst.de>
+Message-ID: <20210310083723.GC5217@lst.de>
 References: <20210309155348.974875-1-hch@lst.de>
- <20210309165452.GL2356281@nvidia.com>
+ <20210310040545.GM3479805@casper.infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210309165452.GL2356281@nvidia.com>
+In-Reply-To: <20210310040545.GM3479805@casper.infradead.org>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, "VMware,
- Inc." <pv-drivers@vmware.com>, linux-kernel@vger.kernel.org,
+Cc: Jason Gunthorpe <jgg@nvidia.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
  linux-mm@kvack.org, Minchan Kim <minchan@kernel.org>,
  Nadav Amit <namit@vmware.com>, Al Viro <viro@zeniv.linux.org.uk>,
@@ -75,10 +75,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Mar 09, 2021 at 12:54:52PM -0400, Jason Gunthorpe wrote:
+On Wed, Mar 10, 2021 at 04:05:45AM +0000, Matthew Wilcox wrote:
 > On Tue, Mar 09, 2021 at 04:53:39PM +0100, Christoph Hellwig wrote:
-> > Hi all,
-> > 
 > > this series first renames the existing alloc_anon_inode to
 > > alloc_anon_inode_sb to clearly mark it as requiring a superblock.
 > > 
@@ -88,13 +86,34 @@ On Tue, Mar 09, 2021 at 12:54:52PM -0400, Jason Gunthorpe wrote:
 > > The few remainig callers of alloc_anon_inode_sb all use alloc_file_pseudo
 > > later, but might also be ripe for some cleanup.
 > 
-> I like it
+> On a somewhat related note, could I get you to look at
+> drivers/video/fbdev/core/fb_defio.c?
 > 
-> For a submission plan can we have this on a git branch please? I will
-> need a copy for RDMA and Alex will need one for vfio..
+> As far as I can tell, there's no need for fb_deferred_io_aops to exist.
+> We could just set file->f_mapping->a_ops to NULL, and set_page_dirty()
+> would do the exact same thing this code does (except it would get the
+> return value correct).
 
-anon_inode.c stuff seems to mostly go through Al's tree, but also various
-others.  So best would be if Al has a branch, but I could also set one up.
+> But maybe that would make something else go wrong that distinguishes
+> between page->mapping being NULL and page->mapping->a_ops->foo being NULL?
+
+I can't find any place in the kernel that treats a NULL aops different
+from not having the method it is looking for. 
+
+> Completely untested patch ...
+
+the patch looks mostly good to me.
+
+>  	}
+> -#ifdef CONFIG_FB_DEFERRED_IO
+> -	if (info->fbdefio)
+> -		fb_deferred_io_open(info, inode, file);
+> -#endif
+> +	file->f_mapping->a_ops = NULL;
+
+But I'd also skip this.  Drivers generally do not set aops, but if they
+do a funtion like this really should not override it.  This will require
+an audit of the callers, though.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
