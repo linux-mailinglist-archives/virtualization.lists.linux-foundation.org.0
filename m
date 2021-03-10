@@ -2,91 +2,74 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0379333409
-	for <lists.virtualization@lfdr.de>; Wed, 10 Mar 2021 04:59:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C122333436
+	for <lists.virtualization@lfdr.de>; Wed, 10 Mar 2021 05:07:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2CA8643180;
-	Wed, 10 Mar 2021 03:59:40 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id AF6564318F;
+	Wed, 10 Mar 2021 04:07:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gLr7lfxZm_6E; Wed, 10 Mar 2021 03:59:39 +0000 (UTC)
+	with ESMTP id ffu3irM-4zOB; Wed, 10 Mar 2021 04:07:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0942B43186;
-	Wed, 10 Mar 2021 03:59:39 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 2120243190;
+	Wed, 10 Mar 2021 04:07:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8DF68C0001;
-	Wed, 10 Mar 2021 03:59:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B0AB5C0001;
+	Wed, 10 Mar 2021 04:07:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE95FC0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A696C000F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 03:59:36 +0000 (UTC)
+ Wed, 10 Mar 2021 04:07:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CF0454EBAF
+ by smtp3.osuosl.org (Postfix) with ESMTP id 30E466F6A8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 03:59:36 +0000 (UTC)
+ Wed, 10 Mar 2021 04:07:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nB3G0ZJqwi7e
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id j6WLbo6vMksG
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 03:59:35 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0283B4BA46
+ Wed, 10 Mar 2021 04:07:30 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 855B46F69A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Mar 2021 03:59:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1615348773;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zqvaTm0YYGfnIq7+2390v7zCd44rG+1I8H0HRw9yO+w=;
- b=Rfv47xLLNaBg035BBcXudLYlgavZkHiqwKl5EtxfL5fjoGpyRfn+OTW+pg2jmZYYrkeKj9
- m5Boz9Dfvz/ZLMEns3EVm1T5qOqMsYI65NQeZsc6sYsElreiv8rU7ps7ISnlJHEKaM52SN
- 7hj+iW0bSqSIZ5mJ6c5RITKNROn81Ao=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-442-kucxnTcWNDy5a7PZoL9CWw-1; Tue, 09 Mar 2021 22:59:32 -0500
-X-MC-Unique: kucxnTcWNDy5a7PZoL9CWw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 839FA80432D;
- Wed, 10 Mar 2021 03:59:29 +0000 (UTC)
-Received: from wangxiaodeMacBook-Air.local (ovpn-12-88.pek2.redhat.com
- [10.72.12.88])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 356E65D9DB;
- Wed, 10 Mar 2021 03:59:10 +0000 (UTC)
-Subject: Re: [PATCH v6] i2c: virtio: add a virtio i2c frontend driver
-To: Jie Deng <jie.deng@intel.com>, linux-i2c@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-References: <9a2086f37c0a62069b67c39a3f75941b78a0039c.1614749417.git.jie.deng@intel.com>
- <43b0842b-8b0f-1979-ed07-d6124e3a6b79@redhat.com>
- <db9350b3-b847-8f54-546f-9a0bdec425d4@intel.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <a3d4ce55-db25-5f96-ff44-5b76edfe9e08@redhat.com>
-Date: Wed, 10 Mar 2021 11:59:09 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.0
+ Wed, 10 Mar 2021 04:07:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=MZP04mmRYHSUMNN7Bbpif73MByRe1GqD/bRFFteUyfw=; b=ldgU6n02jJhSaG5jfG/yFXoBjb
+ jqO0xwes2kpfTznTIioIJ6OLRsJ2Rf5BKvl+WRQqfq3ithfHHVTOrh+OiOVFLlkCnr6A6dP6sA/8g
+ Wx51dHg8mloZlZdg/ttj4KY3k1GlayTwG64TE/tu12bbfG6O36fKXrVbls/MysL7RmCmrJuMq9H77
+ VBewHZHaWWnTDDLy4jE9fWXCsINUJACeVhrwMp5LBIjUn60fkuv0edawFzc9/FSWl1eoHTIxAvExX
+ cxW2jUeNPKjL+VpiGPOtLh+akLXAvSlyp6mUR091Ti2VOzOqnxnANFHSVocMPKcksPzQ0Z/4ngUfM
+ 3R7+aFkQ==;
+Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
+ Linux)) id 1lJq6T-002MKD-Jm; Wed, 10 Mar 2021 04:05:49 +0000
+Date: Wed, 10 Mar 2021 04:05:45 +0000
+From: Matthew Wilcox <willy@infradead.org>
+To: Christoph Hellwig <hch@lst.de>
+Subject: Re: make alloc_anon_inode more useful
+Message-ID: <20210310040545.GM3479805@casper.infradead.org>
+References: <20210309155348.974875-1-hch@lst.de>
 MIME-Version: 1.0
-In-Reply-To: <db9350b3-b847-8f54-546f-9a0bdec425d4@intel.com>
-Content-Language: en-GB
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: Sergey.Semin@baikalelectronics.ru, bjorn.andersson@linaro.org,
- loic.poulain@linaro.org, yu1.wang@intel.com, arnd@arndb.de, mst@redhat.com,
- viresh.kumar@linaro.org, shuo.a.liu@intel.com, tali.perry1@gmail.com,
- wsa@kernel.org, wsa+renesas@sang-engineering.com, pbonzini@redhat.com,
- jarkko.nikula@linux.intel.com, stefanha@redhat.com,
- u.kleine-koenig@pengutronix.de, kblaiech@mellanox.com,
- andriy.shevchenko@linux.intel.com, conghui.chen@intel.com, rppt@kernel.org
+Content-Disposition: inline
+In-Reply-To: <20210309155348.974875-1-hch@lst.de>
+Cc: Jason Gunthorpe <jgg@nvidia.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "VMware, Inc." <pv-drivers@vmware.com>, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ linux-mm@kvack.org, Minchan Kim <minchan@kernel.org>,
+ Nadav Amit <namit@vmware.com>, Al Viro <viro@zeniv.linux.org.uk>,
+ Daniel Vetter <daniel@ffwll.ch>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>, linuxppc-dev@lists.ozlabs.org,
+ Nitin Gupta <ngupta@vflare.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,24 +81,101 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjEvMy8xMCAxMDoyMiDkuIrljYgsIEppZSBEZW5nIHdyb3RlOgo+Cj4gT24gMjAyMS8z
-LzQgMTc6MTUsIEphc29uIFdhbmcgd3JvdGU6Cj4+Cj4+Cj4+PiArwqDCoMKgwqDCoMKgwqAgfQo+
-Pj4gKwo+Pj4gK8KgwqDCoMKgwqDCoMKgIGlmIChtc2dzW2ldLmZsYWdzICYgSTJDX01fUkQpCj4+
-PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoCBtZW1jcHkobXNnc1tpXS5idWYsIHJlcS0+YnVmLCBt
-c2dzW2ldLmxlbik7Cj4+Cj4+Cj4+IFNvcnJ5IGlmIEkgaGFkIGFza2VkIHRoaXMgYmVmb3JlIGJ1
-dCBhbnkgcmFzb24gbm90IHRvIHVzZSBtc2dbaV0uYnVmIAo+PiBkaXJlY3RseT8KPj4KPj4KPiBU
-aGUgbXNnW2ldLmJ1ZiBpcyBwYXNzZWQgYnkgdGhlIEkyQyBjb3JlLiBJIGp1c3Qgbm90aWNlZCB0
-aGF0IHRoZXNlIAo+IGJ1ZnMgYXJlIG5vdAo+IGFsd2F5cyBhbGxvY2F0ZWQgYnkga21hbGxvYy4g
-VGhleSBtYXkgY29tZSBmcm9tIHRoZSBzdGFjaywgd2hpY2ggbWF5IAo+IGNhdXNlCj4gdGhlIGNo
-ZWNrICJzZ19pbml0X29uZSAtPiBzZ19zZXRfYnVmIC0+IHZpcnRfYWRkcl92YWxpZCLCoCB0byBm
-YWlsLiAKPiBUaGVyZWZvcmUgdGhlCj4gbXNnW2ldLmJ1ZiBpcyBub3Qgc3VpdGFibGUgZm9yIGRp
-cmVjdCB1c2UgaGVyZS4KPgo+IFJlZ2FyZHMuCgoKUmlnaHQsIHN0YWNrIGlzIHZpcnR1YWxseSBt
-YXBwZWQuCgpUaGFua3MKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5s
-aW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFp
-bG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Tue, Mar 09, 2021 at 04:53:39PM +0100, Christoph Hellwig wrote:
+> this series first renames the existing alloc_anon_inode to
+> alloc_anon_inode_sb to clearly mark it as requiring a superblock.
+> 
+> It then adds a new alloc_anon_inode that works on the anon_inode
+> file system super block, thus removing tons of boilerplate code.
+> 
+> The few remainig callers of alloc_anon_inode_sb all use alloc_file_pseudo
+> later, but might also be ripe for some cleanup.
+
+On a somewhat related note, could I get you to look at
+drivers/video/fbdev/core/fb_defio.c?
+
+As far as I can tell, there's no need for fb_deferred_io_aops to exist.
+We could just set file->f_mapping->a_ops to NULL, and set_page_dirty()
+would do the exact same thing this code does (except it would get the
+return value correct).
+
+But maybe that would make something else go wrong that distinguishes
+between page->mapping being NULL and page->mapping->a_ops->foo being NULL?
+Completely untested patch ...
+
+diff --git a/drivers/video/fbdev/core/fb_defio.c b/drivers/video/fbdev/core/fb_defio.c
+index a591d291b231..441ec31d3e4d 100644
+--- a/drivers/video/fbdev/core/fb_defio.c
++++ b/drivers/video/fbdev/core/fb_defio.c
+@@ -151,17 +151,6 @@ static const struct vm_operations_struct fb_deferred_io_vm_ops = {
+ 	.page_mkwrite	= fb_deferred_io_mkwrite,
+ };
+ 
+-static int fb_deferred_io_set_page_dirty(struct page *page)
+-{
+-	if (!PageDirty(page))
+-		SetPageDirty(page);
+-	return 0;
+-}
+-
+-static const struct address_space_operations fb_deferred_io_aops = {
+-	.set_page_dirty = fb_deferred_io_set_page_dirty,
+-};
+-
+ int fb_deferred_io_mmap(struct fb_info *info, struct vm_area_struct *vma)
+ {
+ 	vma->vm_ops = &fb_deferred_io_vm_ops;
+@@ -212,14 +201,6 @@ void fb_deferred_io_init(struct fb_info *info)
+ }
+ EXPORT_SYMBOL_GPL(fb_deferred_io_init);
+ 
+-void fb_deferred_io_open(struct fb_info *info,
+-			 struct inode *inode,
+-			 struct file *file)
+-{
+-	file->f_mapping->a_ops = &fb_deferred_io_aops;
+-}
+-EXPORT_SYMBOL_GPL(fb_deferred_io_open);
+-
+ void fb_deferred_io_cleanup(struct fb_info *info)
+ {
+ 	struct fb_deferred_io *fbdefio = info->fbdefio;
+diff --git a/drivers/video/fbdev/core/fbmem.c b/drivers/video/fbdev/core/fbmem.c
+index 06f5805de2de..c4ba76359f22 100644
+--- a/drivers/video/fbdev/core/fbmem.c
++++ b/drivers/video/fbdev/core/fbmem.c
+@@ -1415,10 +1415,7 @@ __releases(&info->lock)
+ 		if (res)
+ 			module_put(info->fbops->owner);
+ 	}
+-#ifdef CONFIG_FB_DEFERRED_IO
+-	if (info->fbdefio)
+-		fb_deferred_io_open(info, inode, file);
+-#endif
++	file->f_mapping->a_ops = NULL;
+ out:
+ 	unlock_fb_info(info);
+ 	if (res)
+diff --git a/include/linux/fb.h b/include/linux/fb.h
+index ecfbcc0553a5..a8dccd23c249 100644
+--- a/include/linux/fb.h
++++ b/include/linux/fb.h
+@@ -659,9 +659,6 @@ static inline void __fb_pad_aligned_buffer(u8 *dst, u32 d_pitch,
+ /* drivers/video/fb_defio.c */
+ int fb_deferred_io_mmap(struct fb_info *info, struct vm_area_struct *vma);
+ extern void fb_deferred_io_init(struct fb_info *info);
+-extern void fb_deferred_io_open(struct fb_info *info,
+-				struct inode *inode,
+-				struct file *file);
+ extern void fb_deferred_io_cleanup(struct fb_info *info);
+ extern int fb_deferred_io_fsync(struct file *file, loff_t start,
+ 				loff_t end, int datasync);
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
