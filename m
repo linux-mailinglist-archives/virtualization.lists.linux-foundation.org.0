@@ -1,88 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 18F133388CF
-	for <lists.virtualization@lfdr.de>; Fri, 12 Mar 2021 10:38:29 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A6171338D31
+	for <lists.virtualization@lfdr.de>; Fri, 12 Mar 2021 13:38:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8D2A960667;
-	Fri, 12 Mar 2021 09:38:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D55FC6FA1E;
+	Fri, 12 Mar 2021 12:38:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7QRXMGVuojBR; Fri, 12 Mar 2021 09:38:26 +0000 (UTC)
+	with ESMTP id PqkD_gUWrRGD; Fri, 12 Mar 2021 12:38:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7039B6069C;
-	Fri, 12 Mar 2021 09:38:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 92BEB6FAD1;
+	Fri, 12 Mar 2021 12:38:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 075FFC0012;
-	Fri, 12 Mar 2021 09:38:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87545C0016;
+	Fri, 12 Mar 2021 12:38:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 73F9FC0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 02B4FC000B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Mar 2021 09:38:25 +0000 (UTC)
+ Fri, 12 Mar 2021 12:38:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4D3C24ED44
+ by smtp2.osuosl.org (Postfix) with ESMTP id D61AB43027
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Mar 2021 09:38:25 +0000 (UTC)
+ Fri, 12 Mar 2021 12:38:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 26gpDc0U-OQt
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Xu55UUdcrAQC
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Mar 2021 09:38:24 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 245334EC40
+ Fri, 12 Mar 2021 12:38:34 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B9E5843014
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 Mar 2021 09:38:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1615541903;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=mpHmkAmgeNh6Uudp5GOdEHuyeyiu4LHNc87R2DZlEKg=;
- b=BKq7Gd0c1SkBnPYVk3EeyFIAkyq1REB3ZFyyNSP8/A/7fYZyJAzA8rmZuQVGrPXllh4qw5
- 06DY5ZLOf8IHXzbBN8KJcqmnMFjS5IsS0M+8vpqEofeD1O0NbOlh+6qf/Gov3X+9QNgaoZ
- mFhZqoroqBJAsUtrumiqiB1TT9FAC7I=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-426-m9MHugSjOduLBfBo7siBCg-1; Fri, 12 Mar 2021 04:38:19 -0500
-X-MC-Unique: m9MHugSjOduLBfBo7siBCg-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ Fri, 12 Mar 2021 12:38:34 +0000 (UTC)
+Received: from cap.home.8bytes.org (p549adcf6.dip0.t-ipconnect.de
+ [84.154.220.246])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CDDBC802B7E;
- Fri, 12 Mar 2021 09:38:17 +0000 (UTC)
-Received: from wangxiaodeMacBook-Air.local (ovpn-13-47.pek2.redhat.com
- [10.72.13.47])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 45F9419106;
- Fri, 12 Mar 2021 09:38:06 +0000 (UTC)
-Subject: Re: linux-next: Tree for Mar 11 [drivers/vdpa/virtio_pci/vp_vdpa.ko]
-To: Randy Dunlap <rdunlap@infradead.org>,
- Stephen Rothwell <sfr@canb.auug.org.au>,
- Linux Next Mailing List <linux-next@vger.kernel.org>
-References: <20210311161449.7f58e7a3@canb.auug.org.au>
- <197e3f0f-9e16-3597-f2c7-ab988e3e0a4d@infradead.org>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <eeecbd7e-a11f-8fc7-400b-6aec3919b8f9@redhat.com>
-Date: Fri, 12 Mar 2021 17:38:03 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.8.1
+ by theia.8bytes.org (Postfix) with ESMTPSA id 724822A6;
+ Fri, 12 Mar 2021 13:38:30 +0100 (CET)
+From: Joerg Roedel <joro@8bytes.org>
+To: x86@kernel.org
+Subject: [PATCH v3 0/8] x86/seves: Support 32-bit boot path and other updates
+Date: Fri, 12 Mar 2021 13:38:16 +0100
+Message-Id: <20210312123824.306-1-joro@8bytes.org>
+X-Mailer: git-send-email 2.30.1
 MIME-Version: 1.0
-In-Reply-To: <197e3f0f-9e16-3597-f2c7-ab988e3e0a4d@infradead.org>
-Content-Language: en-GB
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: virtualization@lists.linux-foundation.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>
+Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>,
+ virtualization@lists.linux-foundation.org,
+ Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
+ Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
+ David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
+ Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
+ Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
+ Juergen Gross <jgross@suse.com>, Mike Stunes <mstunes@vmware.com>,
+ Sean Christopherson <seanjc@google.com>, linux-kernel@vger.kernel.org,
+ Masami Hiramatsu <mhiramat@kernel.org>, Erdem Aktas <erdemaktas@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,46 +74,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Ck9uIDIwMjEvMy8xMiAyOjE4IOS4iuWNiCwgUmFuZHkgRHVubGFwIHdyb3RlOgo+IE9uIDMvMTAv
-MjEgOToxNCBQTSwgU3RlcGhlbiBSb3Rod2VsbCB3cm90ZToKPj4gSGkgYWxsLAo+Pgo+PiBXYXJu
-aW5nOiBTb21lIG9mIHRoZSBicmFuY2hlcyBpbiBsaW51eC1uZXh0IGFyZSBzdGlsbCBiYXNlZCBv
-biB2NS4xMi1yYzEsCj4+IHNvIHBsZWFzZSBiZSBjYXJlZnVsIGlmIHlvdSBhcmUgdHJ5aW5nIHRv
-IGJpc2VjdCBhIGJ1Zy4KPj4KPj4gTmV3czogaWYgeW91ciAtbmV4dCBpbmNsdWRlZCB0cmVlIGlz
-IGJhc2VkIG9uIExpbnVzJyB0cmVlIHRhZwo+PiB2NS4xMi1yYzF7LC1kb250dXNlfSAob3Igc29t
-ZXdoZXJlIGJldHdlZW4gdjUuMTEgYW5kIHRoYXQgdGFnKSwgcGxlYXNlCj4+IGNvbnNpZGVyIHJl
-YmFzaW5nIGl0IG9udG8gdjUuMTItcmMyLiBBbHNvLCBwbGVhc2UgY2hlY2sgYW55IGJyYW5jaGVz
-Cj4+IG1lcmdlZCBpbnRvIHlvdXIgYnJhbmNoLgo+Pgo+PiBDaGFuZ2VzIHNpbmNlIDIwMjEwMzEw
-Ogo+Pgo+IG9uIGkzODY6Cj4KPiBFUlJPUjogbW9kcG9zdDogInZwX21vZGVybl9nZXRfcXVldWVf
-bm90aWZ5X29mZiIgW2RyaXZlcnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEua29dIHVuZGVmaW5l
-ZCEKPiBFUlJPUjogbW9kcG9zdDogInZwX21vZGVybl9nZXRfbnVtX3F1ZXVlcyIgW2RyaXZlcnMv
-dmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEua29dIHVuZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9zdDog
-InZwX21vZGVybl9wcm9iZSIgW2RyaXZlcnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEua29dIHVu
-ZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9zdDogInZwX21vZGVybl9xdWV1ZV9hZGRyZXNzIiBbZHJp
-dmVycy92ZHBhL3ZpcnRpb19wY2kvdnBfdmRwYS5rb10gdW5kZWZpbmVkIQo+IEVSUk9SOiBtb2Rw
-b3N0OiAidnBfbW9kZXJuX3NldF9xdWV1ZV9zaXplIiBbZHJpdmVycy92ZHBhL3ZpcnRpb19wY2kv
-dnBfdmRwYS5rb10gdW5kZWZpbmVkIQo+IEVSUk9SOiBtb2Rwb3N0OiAidnBfbW9kZXJuX3NldF9x
-dWV1ZV9lbmFibGUiIFtkcml2ZXJzL3ZkcGEvdmlydGlvX3BjaS92cF92ZHBhLmtvXSB1bmRlZmlu
-ZWQhCj4gRVJST1I6IG1vZHBvc3Q6ICJ2cF9tb2Rlcm5fZ2V0X3F1ZXVlX2VuYWJsZSIgW2RyaXZl
-cnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEua29dIHVuZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9z
-dDogInZwX21vZGVybl9nZXRfZmVhdHVyZXMiIFtkcml2ZXJzL3ZkcGEvdmlydGlvX3BjaS92cF92
-ZHBhLmtvXSB1bmRlZmluZWQhCj4gRVJST1I6IG1vZHBvc3Q6ICJ2cF9tb2Rlcm5fc2V0X2ZlYXR1
-cmVzIiBbZHJpdmVycy92ZHBhL3ZpcnRpb19wY2kvdnBfdmRwYS5rb10gdW5kZWZpbmVkIQo+IEVS
-Uk9SOiBtb2Rwb3N0OiAidnBfbW9kZXJuX3NldF9zdGF0dXMiIFtkcml2ZXJzL3ZkcGEvdmlydGlv
-X3BjaS92cF92ZHBhLmtvXSB1bmRlZmluZWQhCj4gRVJST1I6IG1vZHBvc3Q6ICJ2cF9tb2Rlcm5f
-Z2V0X3N0YXR1cyIgW2RyaXZlcnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEua29dIHVuZGVmaW5l
-ZCEKPiBFUlJPUjogbW9kcG9zdDogInZwX21vZGVybl9jb25maWdfdmVjdG9yIiBbZHJpdmVycy92
-ZHBhL3ZpcnRpb19wY2kvdnBfdmRwYS5rb10gdW5kZWZpbmVkIQo+IEVSUk9SOiBtb2Rwb3N0OiAi
-dnBfbW9kZXJuX3F1ZXVlX3ZlY3RvciIgW2RyaXZlcnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3ZkcGEu
-a29dIHVuZGVmaW5lZCEKPiBFUlJPUjogbW9kcG9zdDogInZwX21vZGVybl9nZW5lcmF0aW9uIiBb
-ZHJpdmVycy92ZHBhL3ZpcnRpb19wY2kvdnBfdmRwYS5rb10gdW5kZWZpbmVkIQo+IEVSUk9SOiBt
-b2Rwb3N0OiAidnBfbW9kZXJuX3JlbW92ZSIgW2RyaXZlcnMvdmRwYS92aXJ0aW9fcGNpL3ZwX3Zk
-cGEua29dIHVuZGVmaW5lZCEKPgo+Cj4gRnVsbCByYW5kY29uZmlnIGZpbGUgaXMgYXR0YWNoZWQu
-CgpGaXggc2VudC4KClRoYW5rcy4KCj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlv
-bkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlv
-bi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+From: Joerg Roedel <jroedel@suse.de>
+
+Hi,
+
+these patches add support for the 32-bit boot in the decompressor
+code. This is needed to boot an SEV-ES guest on some firmware and grub
+versions. The patches also add the necessary CPUID sanity checks and a
+32-bit version of the C-bit check.
+
+Other updates included here:
+
+        1. Add code to shut down exception handling in the
+           decompressor code before jumping to the real kernel.
+           Once in the real kernel it is not safe anymore to jump
+           back to the decompressor code via exceptions.
+
+        2. Replace open-coded hlt loops with proper calls to
+           sev_es_terminate().
+
+Please review.
+
+Thanks,
+
+	Joerg
+
+Changes v2->v3:
+
+	- Added a patch to remove the check for the Hypervisor CPUID
+	  bit for detecting SEV
+
+Changes v1->v2:
+
+	- Addressed Boris' review comments.
+	- Fixed a bug which caused the cbit-check to never be
+	  executed even in an SEV guest.
+
+Joerg Roedel (8):
+  x86/boot/compressed/64: Cleanup exception handling before booting
+    kernel
+  x86/sev: Do not require Hypervisor CPUID bit for SEV guests
+  x86/boot/compressed/64: Reload CS in startup_32
+  x86/boot/compressed/64: Setup IDT in startup_32 boot path
+  x86/boot/compressed/64: Add 32-bit boot #VC handler
+  x86/boot/compressed/64: Add CPUID sanity check to 32-bit boot-path
+  x86/boot/compressed/64: Check SEV encryption in 32-bit boot-path
+  x86/sev-es: Replace open-coded hlt-loops with sev_es_terminate()
+
+ arch/x86/boot/compressed/head_64.S     | 170 ++++++++++++++++++++++++-
+ arch/x86/boot/compressed/idt_64.c      |  14 ++
+ arch/x86/boot/compressed/mem_encrypt.S | 130 ++++++++++++++++++-
+ arch/x86/boot/compressed/misc.c        |   7 +-
+ arch/x86/boot/compressed/misc.h        |   6 +
+ arch/x86/boot/compressed/sev-es.c      |  12 +-
+ arch/x86/kernel/sev-es-shared.c        |  16 +--
+ arch/x86/mm/mem_encrypt_identity.c     |  35 ++---
+ 8 files changed, 340 insertions(+), 50 deletions(-)
+
+-- 
+2.30.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
