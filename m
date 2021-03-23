@@ -1,93 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81D4D3459C5
-	for <lists.virtualization@lfdr.de>; Tue, 23 Mar 2021 09:34:43 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52F84345A19
+	for <lists.virtualization@lfdr.de>; Tue, 23 Mar 2021 09:53:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2E80D40378;
-	Tue, 23 Mar 2021 08:34:42 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E380240492;
+	Tue, 23 Mar 2021 08:53:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bsWD0ELnuZlQ; Tue, 23 Mar 2021 08:34:41 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id EBE8D4037B;
-	Tue, 23 Mar 2021 08:34:40 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bk52R-o7hCEI; Tue, 23 Mar 2021 08:53:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7EAD740435;
+	Tue, 23 Mar 2021 08:53:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 97925C0001;
-	Tue, 23 Mar 2021 08:34:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 08177C0001;
+	Tue, 23 Mar 2021 08:53:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3B6BC0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 424D8C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Mar 2021 08:34:39 +0000 (UTC)
+ Tue, 23 Mar 2021 08:53:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 835CE4037B
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2302F83E40
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Mar 2021 08:34:39 +0000 (UTC)
+ Tue, 23 Mar 2021 08:53:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2hEv-BP4tkaK
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id LQMEaoMT3FZJ
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Mar 2021 08:34:38 +0000 (UTC)
+ Tue, 23 Mar 2021 08:53:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 39205402BF
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7B2E483DB5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 Mar 2021 08:34:37 +0000 (UTC)
+ Tue, 23 Mar 2021 08:53:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1616488476;
+ s=mimecast20190719; t=1616489597;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Q+XqBOYH5szrxcpTS4fDYJhdDcNEt/ZUf2eh1gomiVA=;
- b=LDF0Me4Tt4bu8PAIzdsF1pzRodQIz1Y/w2Is+1tUo8tcqCmZN5MHVuy2WBMqcE5xP0In2N
- Ckd80JCdzjPGZYn1vIbzxE0NAA72y1dLqIgZVPPTSHvVNlNZC8lnULl3fMLUtuEYzmH5U7
- EwOqRanGELluQdGVQkUBHgIy/o31z+Q=
+ bh=rJ6T33O8TvdbDh1NnfwpgW4awfLs4IOQbnDHgdjCAzo=;
+ b=cSBXNQAIPWl+5bG2OgfZwThuC1AWAo2xnCSqVpvzeoxXyrALDqANwimJ1Lped2p8q7BYWk
+ rI+0F/33fVrM2ODbt2vetKlWJhOlGSldVcjlhjIN9R/iUk+qqW2KNEp5GIguHylFD9PLR8
+ fD445sjPN45RbsAmskehg2euRGmmlio=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-359-1gjqH4KlO3KBxRuOedrYOQ-1; Tue, 23 Mar 2021 04:34:32 -0400
-X-MC-Unique: 1gjqH4KlO3KBxRuOedrYOQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
+ us-mta-405-T5P3Wzz3PTaVN-R_VnOKBA-1; Tue, 23 Mar 2021 04:53:13 -0400
+X-MC-Unique: T5P3Wzz3PTaVN-R_VnOKBA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E3315107ACCD;
- Tue, 23 Mar 2021 08:34:30 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A51388189C8;
+ Tue, 23 Mar 2021 08:53:11 +0000 (UTC)
 Received: from localhost (ovpn-114-89.ams2.redhat.com [10.36.114.89])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 208F360C0F;
- Tue, 23 Mar 2021 08:34:26 +0000 (UTC)
-Date: Tue, 23 Mar 2021 08:34:25 +0000
+ by smtp.corp.redhat.com (Postfix) with ESMTP id DACF821EC5;
+ Tue, 23 Mar 2021 08:53:04 +0000 (UTC)
+Date: Tue, 23 Mar 2021 08:53:03 +0000
 From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
-Subject: Re: [virtio-comment] Re: [RFC PATCH v1] virtio-vsock: use C style
- defines for constants
-Message-ID: <YFmoESIM64aiF5sk@stefanha-x1.localdomain>
-References: <20210322063804.641923-1-arseny.krasnov@kaspersky.com>
- <YFiE9opnZ976hwbP@stefanha-x1.localdomain>
- <20210322092547-mutt-send-email-mst@kernel.org>
- <YFip8VVJOXy2EpjH@stefanha-x1.localdomain>
- <71e16d33-b5f5-d551-ad5a-22b45e946b9a@kaspersky.com>
+To: "Jiang Wang ." <jiang.wang@bytedance.com>
+Subject: Re: [External] Re: [RFC PATCH] virtio-vsock: add description for
+ datagram type
+Message-ID: <YFmsb6o82KOSml9u@stefanha-x1.localdomain>
+References: <20210316215644.2254177-1-jiang.wang@bytedance.com>
+ <YFIj+FQQzZmVAqWw@stefanha-x1.localdomain>
+ <CAP_N_Z857fnkc4GejHt_t_nxnhXC60=S51i_XQ-AdgXO2NipFA@mail.gmail.com>
+ <YFjK7MkmJOFaUvgz@stefanha-x1.localdomain>
+ <CAP_N_Z-aOds0-DgSYgGLb3AG7kvf=iqmLHojMjh878j8bTBkwg@mail.gmail.com>
+ <20210322190517-mutt-send-email-mst@kernel.org>
+ <CAP_N_Z_g1jgQE71WLPA45w72WJ8+1WFaP3zzXH8FRpFap=jqCA@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <71e16d33-b5f5-d551-ad5a-22b45e946b9a@kaspersky.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+In-Reply-To: <CAP_N_Z_g1jgQE71WLPA45w72WJ8+1WFaP3zzXH8FRpFap=jqCA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=stefanha@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Cc: Andra Paraschiv <andraprs@amazon.com>,
+Cc: cong.wang@bytedance.com, Xiongchun Duan <duanxiongchun@bytedance.com>,
  "Michael S. Tsirkin" <mst@redhat.com>, cohuck@redhat.com,
- Colin Ian King <colin.king@canonical.com>,
- Norbert Slusarek <nslusarek@gmx.net>, oxffffaa@gmail.com,
- virtio-comment@lists.oasis-open.org, Jakub Kicinski <kuba@kernel.org>,
- virtualization@lists.linux-foundation.org,
- "David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
+ virtualization@lists.linux-foundation.org, xieyongji@bytedance.com,
+ Arseny Krasnov <arseny.krasnov@kaspersky.com>, asias@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,88 +98,55 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6555871770579262714=="
+Content-Type: multipart/mixed; boundary="===============9102685814121889867=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============6555871770579262714==
+--===============9102685814121889867==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="KuhFm2qSGF4L7ua9"
+	protocol="application/pgp-signature"; boundary="AmMEsqlmBmRPrReF"
 Content-Disposition: inline
 
---KuhFm2qSGF4L7ua9
+--AmMEsqlmBmRPrReF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 23, 2021 at 09:18:34AM +0300, Arseny Krasnov wrote:
->=20
-> On 22.03.2021 17:30, Stefan Hajnoczi wrote:
-> > On Mon, Mar 22, 2021 at 09:34:58AM -0400, Michael S. Tsirkin wrote:
-> >> On Mon, Mar 22, 2021 at 11:52:22AM +0000, Stefan Hajnoczi wrote:
-> >>> On Mon, Mar 22, 2021 at 09:37:59AM +0300, Arseny Krasnov wrote:
-> >>>> @@ -227,6 +226,11 @@ \subsubsection{Stream Sockets}\label{sec:Device=
- Types / Socket Device / Device O
-> >>>>  hints are permanent once sent and successive packets with bits clea=
-r do not
-> >>>>  reset them.
-> >>>> =20
-> >>>> +\begin{lstlisting}
-> >>>> +#define VIRTIO_VSOCK_SHUTDOWN_RECEIVE_BIT 0
-> >>>> +#define VIRTIO_VSOCK_SHUTDOWN_SEND_BIT    1
-> >>>> +\end{lstlisting}
-> >>> The spec has no other _BIT constants.
-> >> True. Sometimes there's an _F_ somewhere there instead.
-> > You're right, I missed the virtio-net bit constants:
-> >
-> >   #define VIRTIO_NET_F_GUEST_TSO4 7
-> >
-> > Compared to:
-> >
-> >   #define VIRTQ_DESC_F_AVAIL     (1 << 7)
-> >
-> > or
-> >
-> >   #define VIRTQ_DESC_F_WRITE     2
-> >
-> > It's an inconsistent mix :). Hard to tell them apart when they aren't
-> > bitmask constants with '<<'.
-> >
-> > Can we use '<<' for clarity on new constants?
->=20
-> So for bit constants, i can use:
->=20
-> #define VIRTIO_VSOCK_SHUTDOWN_RECEIVE (1 << 0)
-> #define VIRTIO_VSOCK_SHUTDOWN_SEND    (1 << 1)
->=20
-> for this case and all other next cases, when i'll add SEQPACKET
-> description in spec?
+On Mon, Mar 22, 2021 at 07:23:14PM -0700, Jiang Wang . wrote:
+> Got it. Will do.
 
-Personally I think that's clearest. Michael pointed out that the spec is
-not consistent though, so I won't complain if you prefer to keep the
-_BIT numbering.
+You could look at udp_sendmsg() to see how sockets compete when
+transmitting to the same net device.
+
+I'm not very familiar with this but I guess that the qdisc (like
+fq_codel) decides which packets to place into the device's tx queue. I
+guess sk_buffs waiting to be put onto the device's tx queue are
+accounted for against the socket's sndbuf. Further sendmsg calls will
+fail with -ENOBUFS when the sndbuf limit is reached.
+
+It's not clear to me how much of the existing code can be reused since
+vsock does not use sk_buff or netdev :(.
 
 Stefan
 
---KuhFm2qSGF4L7ua9
+--AmMEsqlmBmRPrReF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmBZqBEACgkQnKSrs4Gr
-c8isxAgAoWCvHA3XJZ2rRVEts+n5e2d96jYiolhYn0bAbZxY6w318IIVO14czZlY
-JrEuzbF5WAHY8rSuTfFiyF9wREsjhDRg0Wvc+c05mHxwN2pMLPmPGk53uZ+i0efV
-+Krzp/e3kONpYaGhyUzmArNRCRJ3e+PJEAVY/snwlVivTM1gHIT0MsNanHVzErED
-t/C3tzB508QCeJBoO4LZuqQiMNWvk4W68+bc8/NRNTJVrccvq+Ae2NkWFmnqqy0y
-jChVEke8Zc8JY52WpP6uWtiaORQWRGUzT6J0eCok9zxZ/G4XJDC9BdUBx9Xgzfxk
-IXqK/3h2cQogJ0URXvKJN40z/fk2mg==
-=fvqJ
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmBZrG8ACgkQnKSrs4Gr
+c8ghywgAsafd2FeFpyEZhm4rjHm6GZZHGgHVDJZC4q02Hr4XHQBOWAD2yKbPny0f
+ZWwqGptLCBekRqRa++4SZgH7lPweL8ycPO4PSDHXI/tgOEu7JOaUzrCphbS55ZDf
+fcOI6qO6YLFa81ZeMWafqKqvJXFt/ZiD9WiBG8987cqTn8BDhuQ+oPhIyBX9tycD
+XFkAU2ecMizcvMGYr2L+4mUl4ec7YR4In0PFaCZDYGDNWL0L6cKe9CWRzEgxM7DW
+3wtUEaUwOebzqK8NgInpwxzYeBhiCuQ68h3Hiw25IsOMqsXS77lDkVItX0TcCRiU
+U4KM2p+RtDBFTVmuGVaFvlFsQWx/2Q==
+=Qn4N
 -----END PGP SIGNATURE-----
 
---KuhFm2qSGF4L7ua9--
+--AmMEsqlmBmRPrReF--
 
 
---===============6555871770579262714==
+--===============9102685814121889867==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -190,5 +156,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6555871770579262714==--
+--===============9102685814121889867==--
 
