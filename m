@@ -1,73 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C7B94351709
-	for <lists.virtualization@lfdr.de>; Thu,  1 Apr 2021 18:59:50 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F15F352AFB
+	for <lists.virtualization@lfdr.de>; Fri,  2 Apr 2021 15:26:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6EAD560603;
-	Thu,  1 Apr 2021 16:59:49 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A77C560617;
+	Fri,  2 Apr 2021 13:26:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8yIq80Upobh1; Thu,  1 Apr 2021 16:59:48 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 36E4260BD9;
-	Thu,  1 Apr 2021 16:59:48 +0000 (UTC)
+	with ESMTP id 3uuF31VvgwHN; Fri,  2 Apr 2021 13:26:09 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5891160668;
+	Fri,  2 Apr 2021 13:26:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9EB0C000A;
-	Thu,  1 Apr 2021 16:59:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DF2CAC000A;
+	Fri,  2 Apr 2021 13:26:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A6E34C000A;
- Thu,  1 Apr 2021 16:59:46 +0000 (UTC)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CC72CC000A
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  2 Apr 2021 13:26:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A19B441844;
- Thu,  1 Apr 2021 16:59:46 +0000 (UTC)
+ by smtp3.osuosl.org (Postfix) with ESMTP id B221A60699
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  2 Apr 2021 13:26:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gZPoPIxG5cEu; Thu,  1 Apr 2021 16:59:45 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B4A644146B;
- Thu,  1 Apr 2021 16:59:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=a335jwrDQUCIDB0PLMT4Bi0PLGtfSsidoCsV+7NPZSw=; b=Jm4YM1cgbTXujlbOs7gh/YkZXl
- 6bHE0FEMAACZyycfzai0Zrl9+34hJNJ67gIyXK6JRT4CXiC62BEJ2u2Xf5O4f/eNl7ZE/T637Sbun
- uOUfGXy7AIV7WWuJoeUBV2LiYRJY6Mq9NDnszI/oN2JzrfKLoXx7xfQMPP4vcQyOgL8CGEM7RkxRG
- snKrJrSiL7ptfKsi0YkiCGWY6qgPobaUY8VNpCHXIzWi0WsxI2lhQmG99snBIuHusV0CsysNNhLBt
- lsb8XMDH5z+8/aFy4jA0asAUu/C66IyIflLuP+uOGzWvUK2BmVRRLIFBdcJULD3dwH9DzQUNx6T2C
- UteOvdqg==;
-Received: from [2001:4bb8:180:7517:83e4:a809:b0aa:ca74] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
- id 1lRzdz-00Cifp-Mc; Thu, 01 Apr 2021 15:54:04 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Joerg Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>,
- Li Yang <leoyang.li@nxp.com>
-Subject: [PATCH 20/20] iommu: remove iommu_domain_{get,set}_attr
-Date: Thu,  1 Apr 2021 17:52:56 +0200
-Message-Id: <20210401155256.298656-21-hch@lst.de>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210401155256.298656-1-hch@lst.de>
-References: <20210401155256.298656-1-hch@lst.de>
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id h9teO9X_OuAg
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  2 Apr 2021 13:26:06 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8407B60617
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  2 Apr 2021 13:26:06 +0000 (UTC)
+Received: by mail-pl1-x636.google.com with SMTP id e14so2538681plj.2
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 02 Apr 2021 06:26:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Nk+eDWG+Yugeh+2vUQ3xh9rieveuu83pFSxXTHCSafY=;
+ b=B2uCfpeLEfh7+GbIRXc92PEReJZPG8BgODY1iTU947PttSc1udmsdBVjcPOoriAixR
+ FyOfN5k0IL+LrCvxBJk/vwh0V+yWkXlw5rO4V9LPmQBEr28bgLoytT4sWrAcG9R3ZZ15
+ p0PHhZljifXdclzWtfw5MPBO3EFOPL5Z3nzIjJoiMKMkMkj+TaFsKk0Q22gmnaxB8x8A
+ vrCcpm9loqwbDrDWd8rznfahQtAgDj6I5xK+K+Lb1WzZq6WOKir4uHHXXs/RqRO1IBMn
+ tqkP4ba57yZE9LLVjuGHsVlr9fXGu0LNLEJPmKFA5+Nxmo7FThhOyxRAzpYtuzQMAVxc
+ QGBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=Nk+eDWG+Yugeh+2vUQ3xh9rieveuu83pFSxXTHCSafY=;
+ b=XijE2ghkFzxVfxlLZiVzibaQqGsyCeiFmVG0+VvWGdSrNWgE4QqFcaqeTwm7PeLizi
+ JVhBQ91B2Dr3c4Quf8MJLEAzhxcROLRyfTiZGOPIg/jQjzsyJ5Zzb73ib9NsHdGzM1js
+ jCHhdpc2xhMMGdNa4Vnrrbon/XYXxFHVZlBtkfCzOjIXr3zX6Zca+7cL1h6mT2LgLKPW
+ IfZCgz4XjKXdHsD/i3VyIGjxn6Z83dR4Ve3YZQdNMeS18V9S3C5sxsc8XkDOz3OgFk1V
+ elinfqcZou7neKhlGYbgJsTPcmR5YLec1P0pZAXd1eJ4WCMOoogSQrbDw2gLFPoa3tbC
+ H00g==
+X-Gm-Message-State: AOAM530FO3JzqV0hmixBz1H1nevqBXGEWqbDIzeIpA/+jdj34gfXbeqk
+ 2tR6xGLIQq6cBDkrgp1EzAM=
+X-Google-Smtp-Source: ABdhPJz75mHHj1AwPACN1N3Khde/fIrHWHsGNKQt88nZjq2LvlV8IY6bbUOiBoDPXvcxYAE3Q9sDVw==
+X-Received: by 2002:a17:902:bd8f:b029:e6:ec5a:3a6 with SMTP id
+ q15-20020a170902bd8fb02900e6ec5a03a6mr13074978pls.31.1617369966016; 
+ Fri, 02 Apr 2021 06:26:06 -0700 (PDT)
+Received: from edumazet1.svl.corp.google.com
+ ([2620:15c:2c4:201:a57a:ec96:644b:4d80])
+ by smtp.gmail.com with ESMTPSA id s22sm8143247pjs.42.2021.04.02.06.26.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Apr 2021 06:26:05 -0700 (PDT)
+From: Eric Dumazet <eric.dumazet@gmail.com>
+To: "David S . Miller" <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>
+Subject: [PATCH net] virtio_net: Do not pull payload in skb->head
+Date: Fri,  2 Apr 2021 06:26:02 -0700
+Message-Id: <20210402132602.3659282-1-eric.dumazet@gmail.com>
+X-Mailer: git-send-email 2.31.0.208.g409f899ff0-goog
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: freedreno@lists.freedesktop.org, kvm@vger.kernel.org,
- Michael Ellerman <mpe@ellerman.id.au>, linuxppc-dev@lists.ozlabs.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- iommu@lists.linux-foundation.org, netdev@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, David Woodhouse <dwmw2@infradead.org>,
- linux-arm-kernel@lists.infradead.org, Lu Baolu <baolu.lu@linux.intel.com>
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ Eric Dumazet <eric.dumazet@gmail.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev <netdev@vger.kernel.org>, virtualization@lists.linux-foundation.org,
+ Eric Dumazet <edumazet@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,129 +101,114 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Remove the now unused iommu attr infrastructure.
+From: Eric Dumazet <edumazet@google.com>
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Acked-by: Will Deacon <will@kernel.org>
+Xuan Zhuo reported that commit 3226b158e67c ("net: avoid 32 x truesize
+under-estimation for tiny skbs") brought  a ~10% performance drop.
+
+The reason for the performance drop was that GRO was forced
+to chain sk_buff (using skb_shinfo(skb)->frag_list), which
+uses more memory but also cause packet consumers to go over
+a lot of overhead handling all the tiny skbs.
+
+It turns out that virtio_net page_to_skb() has a wrong strategy :
+It allocates skbs with GOOD_COPY_LEN (128) bytes in skb->head, then
+copies 128 bytes from the page, before feeding the packet to GRO stack.
+
+This was suboptimal before commit 3226b158e67c ("net: avoid 32 x truesize
+under-estimation for tiny skbs") because GRO was using 2 frags per MSS,
+meaning we were not packing MSS with 100% efficiency.
+
+Fix is to pull only the ethernet header in page_to_skb()
+
+Then, we change virtio_net_hdr_to_skb() to pull the missing
+headers, instead of assuming they were already pulled by callers.
+
+This fixes the performance regression, but could also allow virtio_net
+to accept packets with more than 128bytes of headers.
+
+Many thanks to Xuan Zhuo for his report, and his tests/help.
+
+Fixes: 3226b158e67c ("net: avoid 32 x truesize under-estimation for tiny skbs")
+Reported-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Link: https://www.spinics.net/lists/netdev/msg731397.html
+Co-Developed-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Signed-off-by: Eric Dumazet <edumazet@google.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
 ---
- drivers/iommu/iommu.c | 26 --------------------------
- include/linux/iommu.h | 36 ------------------------------------
- 2 files changed, 62 deletions(-)
+ drivers/net/virtio_net.c   | 10 +++++++---
+ include/linux/virtio_net.h | 14 +++++++++-----
+ 2 files changed, 16 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/iommu/iommu.c b/drivers/iommu/iommu.c
-index bf7dcd2fc08643..d19944733b9dac 100644
---- a/drivers/iommu/iommu.c
-+++ b/drivers/iommu/iommu.c
-@@ -2665,32 +2665,6 @@ static int __init iommu_init(void)
- }
- core_initcall(iommu_init);
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 82e520d2cb1229a0c7b9fd0def3e4a7135536478..0824e6999e49957f7aaf7c990f6259792d42f32b 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -406,9 +406,13 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
+ 	offset += hdr_padded_len;
+ 	p += hdr_padded_len;
  
--int iommu_domain_get_attr(struct iommu_domain *domain,
--			  enum iommu_attr attr, void *data)
--{
--	if (!domain->ops->domain_get_attr)
--		return -EINVAL;
--	return domain->ops->domain_get_attr(domain, attr, data);
--}
--EXPORT_SYMBOL_GPL(iommu_domain_get_attr);
--
--int iommu_domain_set_attr(struct iommu_domain *domain,
--			  enum iommu_attr attr, void *data)
--{
--	int ret = 0;
--
--	switch (attr) {
--	default:
--		if (domain->ops->domain_set_attr == NULL)
--			return -EINVAL;
--
--		ret = domain->ops->domain_set_attr(domain, attr, data);
--	}
--
--	return ret;
--}
--EXPORT_SYMBOL_GPL(iommu_domain_set_attr);
--
- int iommu_enable_nesting(struct iommu_domain *domain)
- {
- 	if (domain->type != IOMMU_DOMAIN_UNMANAGED)
-diff --git a/include/linux/iommu.h b/include/linux/iommu.h
-index 4280be90a27956..1a905446dc4ca1 100644
---- a/include/linux/iommu.h
-+++ b/include/linux/iommu.h
-@@ -96,20 +96,6 @@ enum iommu_cap {
- 	IOMMU_CAP_NOEXEC,		/* IOMMU_NOEXEC flag */
- };
+-	copy = len;
+-	if (copy > skb_tailroom(skb))
+-		copy = skb_tailroom(skb);
++	/* Copy all frame if it fits skb->head, otherwise
++	 * we let virtio_net_hdr_to_skb() and GRO pull headers as needed.
++	 */
++	if (len <= skb_tailroom(skb))
++		copy = len;
++	else
++		copy = ETH_HLEN + metasize;
+ 	skb_put_data(skb, p, copy);
  
--/*
-- * Following constraints are specifc to FSL_PAMUV1:
-- *  -aperture must be power of 2, and naturally aligned
-- *  -number of windows must be power of 2, and address space size
-- *   of each window is determined by aperture size / # of windows
-- *  -the actual size of the mapped region of a window must be power
-- *   of 2 starting with 4KB and physical address must be naturally
-- *   aligned.
-- */
--
--enum iommu_attr {
--	DOMAIN_ATTR_MAX,
--};
--
- /* These are the possible reserved region types */
- enum iommu_resv_type {
- 	/* Memory regions which must be mapped 1:1 at all times */
-@@ -191,8 +177,6 @@ struct iommu_iotlb_gather {
-  * @probe_finalize: Do final setup work after the device is added to an IOMMU
-  *                  group and attached to the groups domain
-  * @device_group: find iommu group for a particular device
-- * @domain_get_attr: Query domain attributes
-- * @domain_set_attr: Change domain attributes
-  * @enable_nesting: Enable nesting
-  * @set_pgtable_quirks: Set io page table quirks (IO_PGTABLE_QUIRK_*)
-  * @get_resv_regions: Request list of reserved regions for a device
-@@ -243,10 +227,6 @@ struct iommu_ops {
- 	void (*release_device)(struct device *dev);
- 	void (*probe_finalize)(struct device *dev);
- 	struct iommu_group *(*device_group)(struct device *dev);
--	int (*domain_get_attr)(struct iommu_domain *domain,
--			       enum iommu_attr attr, void *data);
--	int (*domain_set_attr)(struct iommu_domain *domain,
--			       enum iommu_attr attr, void *data);
- 	int (*enable_nesting)(struct iommu_domain *domain);
- 	int (*set_pgtable_quirks)(struct iommu_domain *domain,
- 				  unsigned long quirks);
-@@ -493,10 +473,6 @@ extern int iommu_page_response(struct device *dev,
- extern int iommu_group_id(struct iommu_group *group);
- extern struct iommu_domain *iommu_group_default_domain(struct iommu_group *);
+ 	if (metasize) {
+diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
+index 98775d7fa69632e2c2da30b581a666f7fbb94b64..b465f8f3e554f27ced45c35f54f113cf6dce1f07 100644
+--- a/include/linux/virtio_net.h
++++ b/include/linux/virtio_net.h
+@@ -65,14 +65,18 @@ static inline int virtio_net_hdr_to_skb(struct sk_buff *skb,
+ 	skb_reset_mac_header(skb);
  
--extern int iommu_domain_get_attr(struct iommu_domain *domain, enum iommu_attr,
--				 void *data);
--extern int iommu_domain_set_attr(struct iommu_domain *domain, enum iommu_attr,
--				 void *data);
- int iommu_enable_nesting(struct iommu_domain *domain);
- int iommu_set_pgtable_quirks(struct iommu_domain *domain,
- 		unsigned long quirks);
-@@ -869,18 +845,6 @@ static inline int iommu_group_id(struct iommu_group *group)
- 	return -ENODEV;
- }
+ 	if (hdr->flags & VIRTIO_NET_HDR_F_NEEDS_CSUM) {
+-		u16 start = __virtio16_to_cpu(little_endian, hdr->csum_start);
+-		u16 off = __virtio16_to_cpu(little_endian, hdr->csum_offset);
++		u32 start = __virtio16_to_cpu(little_endian, hdr->csum_start);
++		u32 off = __virtio16_to_cpu(little_endian, hdr->csum_offset);
++		u32 needed = start + max_t(u32, thlen, off + sizeof(__sum16));
++
++		if (!pskb_may_pull(skb, needed))
++			return -EINVAL;
  
--static inline int iommu_domain_get_attr(struct iommu_domain *domain,
--					enum iommu_attr attr, void *data)
--{
--	return -EINVAL;
--}
--
--static inline int iommu_domain_set_attr(struct iommu_domain *domain,
--					enum iommu_attr attr, void *data)
--{
--	return -EINVAL;
--}
--
- static inline int iommu_set_pgtable_quirks(struct iommu_domain *domain,
- 		unsigned long quirks)
- {
+ 		if (!skb_partial_csum_set(skb, start, off))
+ 			return -EINVAL;
+ 
+ 		p_off = skb_transport_offset(skb) + thlen;
+-		if (p_off > skb_headlen(skb))
++		if (!pskb_may_pull(skb, p_off))
+ 			return -EINVAL;
+ 	} else {
+ 		/* gso packets without NEEDS_CSUM do not set transport_offset.
+@@ -102,14 +106,14 @@ static inline int virtio_net_hdr_to_skb(struct sk_buff *skb,
+ 			}
+ 
+ 			p_off = keys.control.thoff + thlen;
+-			if (p_off > skb_headlen(skb) ||
++			if (!pskb_may_pull(skb, p_off) ||
+ 			    keys.basic.ip_proto != ip_proto)
+ 				return -EINVAL;
+ 
+ 			skb_set_transport_header(skb, keys.control.thoff);
+ 		} else if (gso_type) {
+ 			p_off = thlen;
+-			if (p_off > skb_headlen(skb))
++			if (!pskb_may_pull(skb, p_off))
+ 				return -EINVAL;
+ 		}
+ 	}
 -- 
-2.30.1
+2.31.0.208.g409f899ff0-goog
 
 _______________________________________________
 Virtualization mailing list
