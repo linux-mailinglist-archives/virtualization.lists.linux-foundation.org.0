@@ -1,54 +1,53 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71DAC3559FB
-	for <lists.virtualization@lfdr.de>; Tue,  6 Apr 2021 19:05:32 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DE193559FF
+	for <lists.virtualization@lfdr.de>; Tue,  6 Apr 2021 19:05:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0394184A50;
-	Tue,  6 Apr 2021 17:05:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7301140FAA;
+	Tue,  6 Apr 2021 17:05:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UzpUpZkbfnms; Tue,  6 Apr 2021 17:05:30 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ArlvwJimw_0v; Tue,  6 Apr 2021 17:05:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 69BB884A5C;
-	Tue,  6 Apr 2021 17:05:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E1D91414F1;
+	Tue,  6 Apr 2021 17:05:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3D337C0019;
-	Tue,  6 Apr 2021 17:05:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CAD38C0012;
+	Tue,  6 Apr 2021 17:05:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 18EBDC0016
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 671E8C0018
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  6 Apr 2021 17:05:28 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5460D84A68
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  6 Apr 2021 17:05:28 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=nvidia.com
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id NgG68a_wNY-d
  for <virtualization@lists.linux-foundation.org>;
  Tue,  6 Apr 2021 17:05:27 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D850A40569
- for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:26 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oHNI7mu33aDY
- for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:25 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2061d.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::61d])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 768164055D
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2045.outbound.protection.outlook.com [40.107.223.45])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8763484A6C
  for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:25 +0000 (UTC)
+ Tue,  6 Apr 2021 17:05:27 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Wu8+5hoVLmxCX9wavGVJUuYG8SoP0WB/8zAOuY3PRB9cIie1RvlaKk3nYpR94j183je45InUxLRUmeLCa06P9dchYSghpyuRXzpke/maS+KkcLCjqj9VAtzD5gs5Isr0ciroNMDqhruHQpltG4dCxMRYwHxCuaJBBfAsV4fMX+SAVD+HDn5+aMGEvpHEv8O3eW5kXQqlJyIiZlgqRyqXfbCGgieuqXDcZbRQyCxK1/2kHwzPykxGPpOjeEcuG0wjL6t+95R8y/bsZbJiO/6SqmFuwIMeHSh2TqbZbosat/7lc7wdtPlJtd4TetYUlxzW2bx5uxs2FTjszcHycqAzoQ==
+ b=f63sLL1XzbyCEw7TcxEFQs/4QRb08HTFltBe4AxOeQVAvsrbz5/Gyvc6cHfRv2KW4+rkS6T+RBKcIHwD4d9aJTxQAZTzqFWLlTxzHuboLyAZ0nNTZNhOu9M38Oz+MnbdG9Jf0YygrHFLCO+0YDQpgYxkIX+B7gcfsOQSl1fdlddIMIhEhYRn2potyLHU+pls/sTmZm560E6UEq/a51RBru3RR4ac/z5bCMMmlKLlGRcgd+Fa8njadRhujVvLyHR6OdluuzUpAwTRmTHUVzK1r0+XMka3z9LJ33N7Elie2ncXzdOs6pm3h184fa4SUz6XOABbL+dPZxNw0ww665waaQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kHzOpwP8GJZaiDSs5yO4VkiIcEN27hWf67qKW2UjBnA=;
- b=d4ESNX3QDKim7THCCZRjqBpdKRuqTEky1NnKIM8xSXQCnLopW2LYQGekKacvdKRg/j1fVLItQoZRLgGeb/SUEEEFDlB9XtWxegmQCe7GLmQ+cRK5njjq+T1Jbg+WfKFo3IfZ4ohFZjzdir+0OzNpZpOO95UqpnmD1g3Oqn0unM5yqhm5HPtMox02PlUK+EB+kWTWCSq76N8wWuxfriIJEYa1AwUeZ+wh2dfyBF5Cqk2PxFMmX2d9aTQT7wSWMqsn3sju7t7dSGd8igzouNKEKUrasjclfB9KTZSBAQzJpl2oy/H/7NLzNHSgsolV1It2BvXe2FSq1B+7Um01Kj1U3g==
+ bh=stIP9XUL5wsvBd9b62MaiF6+ChYA9rdyPcttKunGzyY=;
+ b=FMknKh21RTldCcAhr0UXjbb5abktXLhjevVSuJ3cg0jkjbke7c4hDSUaBJNY+k5Qyd6XQIYS3C9qPAXIvNsLkJHkHYHPZOwsKk84EEc0vSFjTro/Ev3E+OTlo/YQyGi9A/NiZLAYerzbTHvzBdwQbzJnmWIF2Tj+tiZKKQ1KHmJAVEDLZQkF3SPFusczcrx4ty7uLVSlVXYYyD78Hlv/ROFEBH+S6YG9bhYjS2HJQ8d3cM2XSK3kPNeZdcz4hHaTsZgXyvwU6muiP1nE3/RYy5b+LD51/JalJVyxMHN64CXV2jqyEK9JiiC1vTU1+zjMexh9wdArI5TzqV+S492iNw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
@@ -56,18 +55,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kHzOpwP8GJZaiDSs5yO4VkiIcEN27hWf67qKW2UjBnA=;
- b=aGgPKq8iVO7EyxHRtKv532ZfQj3W38NSuO4oUCIBbgyrjVmnlA+w50pFLkmnTbmuZFXr3Bn5giWyIdEc1+85B/GGweEQz61e/pGNR5+L4N9g0+lW61wP6kf2nhKGCfgJeAzn6wKGPRSVVFh+ZDmTYB71VerkoduXwJ464QHp4eMabNPHWap1DXiT8kU8UwRbhwYq/VgwTUPi4quI7fogbxx9LN8OhS0x2FORvZLpcdwfKCE8WIKhhpe+SEqEw+61n0zwQwAAtcRypVU8Zq0OL6w8R6r4k1QZ/KmhkA0cQrGLq3k3REVOqjbY2rdiAWUb5zNO32wE2BX7ZEk0FnbnrQ==
-Received: from MWHPR19CA0069.namprd19.prod.outlook.com (2603:10b6:300:94::31)
- by DM6PR12MB3211.namprd12.prod.outlook.com (2603:10b6:5:15c::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.26; Tue, 6 Apr
- 2021 17:05:23 +0000
+ bh=stIP9XUL5wsvBd9b62MaiF6+ChYA9rdyPcttKunGzyY=;
+ b=s7eqaQnciAdm5HBabIt3x/Zm5/o83XY9UWNKtEZm8xRadLoM3eyGill0GsTJvXi3MiXdi0vOKXBLg8YO15msLZB0vKwPzUIaQ/C6aywa4MloVovOjyAzMpBXO/HGsIMPyHMMF6A4XJ5ugxv5t50aFjTMKbDwx/77rF9nfGmMysI4P6z47gH8nMIEU1y09W18AdFGDGa5yioXGYPx/+uAS0J71GX0HUy9JDRnfW3oS2+GZgeDn/uc8NPP9RBpIT4UBcPhDg3kNjmrxlLOgQ+aqhBlyxygiR69PA1R1Gdbl43riW6G1Jj8HB3zBBvFWX+vQK8mW8LWLp/STk6m2KjAqA==
+Received: from MWHPR19CA0067.namprd19.prod.outlook.com (2603:10b6:300:94::29)
+ by MN2PR12MB3038.namprd12.prod.outlook.com (2603:10b6:208:cb::28)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.29; Tue, 6 Apr
+ 2021 17:05:24 +0000
 Received: from CO1NAM11FT030.eop-nam11.prod.protection.outlook.com
- (2603:10b6:300:94:cafe::b6) by MWHPR19CA0069.outlook.office365.com
- (2603:10b6:300:94::31) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:300:94:cafe::7) by MWHPR19CA0067.outlook.office365.com
+ (2603:10b6:300:94::29) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4020.16 via Frontend
- Transport; Tue, 6 Apr 2021 17:05:23 +0000
+ Transport; Tue, 6 Apr 2021 17:05:24 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
  header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
@@ -77,16 +76,15 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.112.34) by
  CO1NAM11FT030.mail.protection.outlook.com (10.13.174.125) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.3999.28 via Frontend Transport; Tue, 6 Apr 2021 17:05:23 +0000
+ 15.20.3999.28 via Frontend Transport; Tue, 6 Apr 2021 17:05:24 +0000
 Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
  Tue, 6 Apr 2021 17:05:21 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next v2 13/14] vdpa/mlx5: Fix suspend/resume index
- restoration
-Date: Tue, 6 Apr 2021 20:04:56 +0300
-Message-ID: <20210406170457.98481-14-parav@nvidia.com>
+Subject: [PATCH linux-next v2 14/14] vdpa/mlx5: Fix wrong use of bit numbers
+Date: Tue, 6 Apr 2021 20:04:57 +0300
+Message-ID: <20210406170457.98481-15-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210406170457.98481-1-parav@nvidia.com>
 References: <20210406170457.98481-1-parav@nvidia.com>
@@ -96,27 +94,27 @@ X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: f785a253-66c3-423f-bed3-08d8f91e2ad9
-X-MS-TrafficTypeDiagnostic: DM6PR12MB3211:
-X-Microsoft-Antispam-PRVS: <DM6PR12MB3211AE56DC23C9AA53C97CC0DC769@DM6PR12MB3211.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+X-MS-Office365-Filtering-Correlation-Id: 7983da9c-3152-4490-0b1b-08d8f91e2b32
+X-MS-TrafficTypeDiagnostic: MN2PR12MB3038:
+X-Microsoft-Antispam-PRVS: <MN2PR12MB3038B0DBCE741C7E709A3C57DC769@MN2PR12MB3038.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: JsRSsLIcVfQvux/4ivOeZI3wauldSnFmSpnDDwh8rCRLoSAwN1gZWDNfOzvuJwk9p8ZUX9XYzXcTxlpFGbwnJ7VkOUJVWmQ+ytxleo41uJ1vi2gj2kkffkRNzkwTryWtLQ56Sy4jt2DmMTP4HKbx4Sd9alv1XVaETJEqok/0Cm4WnhtYx3bdzho4FO9KaVelhiGhV8pgFOaBXACvxj8yAvwK2sZSSMCQXiWW1iAJOSxpAPAD1hPpCmE8jjrS+k9iVmy9haCB/5law6qS0yRUCwby9YtWB3sZnbr9mcI4OvhYcbEgu2TkPaMBmCIULgkrneTn86dTJMK+jZTBn7Jv47y9KBKAAr5hvXF78Epn+8ql358A81Wp+Mue4wrVRcy++lIFgpWsXojfZP1kSFD+5b0h8f3KEoDz9uCRl8KLt1RmmLfcET/gI0YSsWFB33/FNOvkKH7qixTe1gA+yOa6n19tqWhKYiI1WO1NLAuXbbTyMp5YA2PnApqB4vROhbDMRuxfqmPNTRYPU+YK5FpYeNxowLgjJLVCflpqwqA21/Wsdq+HUAsW5iiSDwS0kbGyQrx+AvYUibrNz8pWcNZJvWq/Px36Kj0fKXK7gNF7TRp4vbTbHlISlKTid7g2E/KpzKeW2U8UJfZSmFg1/CB1jxYh4/UYvZZnA8oaJYeRaBs=
+X-Microsoft-Antispam-Message-Info: l/WGYEbvd6nFAiPTQ5MOgHRE2vOCVH/3AESxdaotxkKkDabfqhUAt+khbtjfUTw/ocbI9vmiXLtjQ9Z0SwCJjFTu1p/cc5k6px+fEfDrj7oKTCnDNQm7utPaaUDnpStzDhU79xdfPJfUuGcDWV0+Fn7a0u4MbwbO9vAldUoCvzZNS4gbQVF0BriOK8SStML6PoCU3CqjWDYQXR9O5j+zBzDNvhM96TXChRMf3KPj7OqZkLG01cDEapuK6LD2TWrXRnS7zXQpNy7PuyCf+93e441HCE4fom/yUF/OV3jlCCzXpOZxK4oHk4o90d9FboVGEi2cSiUCB+bqxXJeyEhW10X3mWjAEaLqmwzxxE+syuuVR+eYQbUPcOhVOj197YBWEE9i4mtA2wdoPRwAIBQeOQ0ESGkWgcERxo4GuTtUgSMqeS8a/FznHBtuCFJnAm/2u0qB7wnEVJUBn4bjEiEoWsPFeQXRc/RWeywWJut6YX7sP1JUSdQOHTq2yPqmZ0gAusm0u/BWnEQDY0gyjEFWWWWCsYWVoX607Ryv2XUqYHaE+c8W5vXP6i5PVMVX+/8n487vVhkVoSerSFGlJf1vydBae05CY0t7kLz85+xkwoIKTyz2s0CO2jeVupOAoMKVHY7bzPFPVuS3zOb6wWvG0CW6Vn0R8PhOE7gr5mIJaow=
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(136003)(39860400002)(376002)(346002)(46966006)(36840700001)(1076003)(54906003)(8936002)(86362001)(2906002)(70206006)(6916009)(7636003)(316002)(36906005)(8676002)(5660300002)(83380400001)(4326008)(6666004)(36756003)(15650500001)(356005)(82740400003)(186003)(16526019)(47076005)(336012)(82310400003)(426003)(2616005)(107886003)(26005)(70586007)(478600001)(36860700001);
+ SFS:(4636009)(396003)(39860400002)(346002)(136003)(376002)(36840700001)(46966006)(6916009)(1076003)(6666004)(86362001)(8676002)(186003)(36906005)(316002)(54906003)(8936002)(70586007)(36860700001)(36756003)(107886003)(426003)(5660300002)(2616005)(336012)(16526019)(7636003)(356005)(82310400003)(2906002)(70206006)(82740400003)(83380400001)(478600001)(4326008)(47076005)(26005);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 17:05:23.5114 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f785a253-66c3-423f-bed3-08d8f91e2ad9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 17:05:24.0960 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7983da9c-3152-4490-0b1b-08d8f91e2b32
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT030.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3211
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB3038
 Cc: elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -136,88 +134,59 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Eli Cohen <elic@nvidia.com>
 
-When we suspend the VM, the VDPA interface will be reset. When the VM is
-resumed again, clear_virtqueues() will clear the available and used
-indices resulting in hardware virqtqueue objects becoming out of sync.
-We can avoid this function alltogether since qemu will clear them if
-required, e.g. when the VM went through a reboot.
+VIRTIO_F_VERSION_1 is a bit number. Use BIT_ULL() with mask
+conditionals.
 
-Moreover, since the hw available and used indices should always be
-identical on query and should be restored to the same value same value
-for virtqueues that complete in order, we set the single value provided
-by set_vq_state(). In get_vq_state() we return the value of hardware
-used index.
+Also, in mlx5_vdpa_is_little_endian() use BIT_ULL for consistency with
+the rest of the code.
 
-Fixes: b35ccebe3ef7 ("vdpa/mlx5: Restore the hardware used index after change map")
 Fixes: 1a86b377aa21 ("vdpa/mlx5: Add VDPA driver for supported mlx5 devices")
 Signed-off-by: Eli Cohen <elic@nvidia.com>
 ---
- drivers/vdpa/mlx5/net/mlx5_vnet.c | 17 ++++-------------
- 1 file changed, 4 insertions(+), 13 deletions(-)
+ drivers/vdpa/mlx5/net/mlx5_vnet.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-index 56d463d2be85..a6e6d44b9ca5 100644
+index a6e6d44b9ca5..3b79b5939c7c 100644
 --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
 +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -1170,6 +1170,7 @@ static void suspend_vq(struct mlx5_vdpa_net *ndev, struct mlx5_vdpa_virtqueue *m
- 		return;
- 	}
- 	mvq->avail_idx = attr.available_index;
-+	mvq->used_idx = attr.used_index;
- }
- 
- static void suspend_vqs(struct mlx5_vdpa_net *ndev)
-@@ -1466,6 +1467,7 @@ static int mlx5_vdpa_set_vq_state(struct vdpa_device *vdev, u16 idx,
- 		return -EINVAL;
- 	}
- 
-+	mvq->used_idx = state->avail_index;
- 	mvq->avail_idx = state->avail_index;
- 	return 0;
- }
-@@ -1483,7 +1485,7 @@ static int mlx5_vdpa_get_vq_state(struct vdpa_device *vdev, u16 idx, struct vdpa
- 	 * that cares about emulating the index after vq is stopped.
- 	 */
- 	if (!mvq->initialized) {
--		state->avail_index = mvq->avail_idx;
-+		state->avail_index = mvq->used_idx;
- 		return 0;
- 	}
- 
-@@ -1492,7 +1494,7 @@ static int mlx5_vdpa_get_vq_state(struct vdpa_device *vdev, u16 idx, struct vdpa
- 		mlx5_vdpa_warn(mvdev, "failed to query virtqueue\n");
- 		return err;
- 	}
--	state->avail_index = attr.available_index;
-+	state->avail_index = attr.used_index;
- 	return 0;
- }
- 
-@@ -1572,16 +1574,6 @@ static void teardown_virtqueues(struct mlx5_vdpa_net *ndev)
- 	}
- }
- 
--static void clear_virtqueues(struct mlx5_vdpa_net *ndev)
--{
--	int i;
--
--	for (i = ndev->mvdev.max_vqs - 1; i >= 0; i--) {
--		ndev->vqs[i].avail_idx = 0;
--		ndev->vqs[i].used_idx = 0;
--	}
--}
--
- /* TODO: cross-endian support */
+@@ -821,7 +821,7 @@ static int create_virtqueue(struct mlx5_vdpa_net *ndev, struct mlx5_vdpa_virtque
+ 	MLX5_SET(virtio_q, vq_ctx, event_qpn_or_msix, mvq->fwqp.mqp.qpn);
+ 	MLX5_SET(virtio_q, vq_ctx, queue_size, mvq->num_ent);
+ 	MLX5_SET(virtio_q, vq_ctx, virtio_version_1_0,
+-		 !!(ndev->mvdev.actual_features & VIRTIO_F_VERSION_1));
++		 !!(ndev->mvdev.actual_features & BIT_ULL(VIRTIO_F_VERSION_1)));
+ 	MLX5_SET64(virtio_q, vq_ctx, desc_addr, mvq->desc_addr);
+ 	MLX5_SET64(virtio_q, vq_ctx, used_addr, mvq->device_addr);
+ 	MLX5_SET64(virtio_q, vq_ctx, available_addr, mvq->driver_addr);
+@@ -1578,7 +1578,7 @@ static void teardown_virtqueues(struct mlx5_vdpa_net *ndev)
  static inline bool mlx5_vdpa_is_little_endian(struct mlx5_vdpa_dev *mvdev)
  {
-@@ -1822,7 +1814,6 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
- 	if (!status) {
- 		mlx5_vdpa_info(mvdev, "performing device reset\n");
- 		teardown_driver(ndev);
--		clear_virtqueues(ndev);
- 		mlx5_vdpa_destroy_mr(&ndev->mvdev);
- 		ndev->mvdev.status = 0;
- 		++mvdev->generation;
+ 	return virtio_legacy_is_little_endian() ||
+-		(mvdev->actual_features & (1ULL << VIRTIO_F_VERSION_1));
++		(mvdev->actual_features & BIT_ULL(VIRTIO_F_VERSION_1));
+ }
+ 
+ static __virtio16 cpu_to_mlx5vdpa16(struct mlx5_vdpa_dev *mvdev, u16 val)
+@@ -1985,6 +1985,8 @@ static void query_virtio_features(struct mlx5_vdpa_net *ndev)
+ 	print_features(mvdev, mvdev->mlx_features, false);
+ }
+ 
++#define MIN_MTU 68
++
+ static int query_mtu(struct mlx5_core_dev *mdev, u16 *mtu)
+ {
+ 	u16 hw_mtu;
+@@ -1995,6 +1997,9 @@ static int query_mtu(struct mlx5_core_dev *mdev, u16 *mtu)
+ 		return err;
+ 
+ 	*mtu = hw_mtu - MLX5V_ETH_HARD_MTU;
++	if (*mtu < MIN_MTU)
++		return -EINVAL;
++
+ 	return 0;
+ }
+ 
 -- 
 2.26.2
 
