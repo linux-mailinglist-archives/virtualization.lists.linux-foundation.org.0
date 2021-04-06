@@ -1,53 +1,53 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 63FCE3559F6
-	for <lists.virtualization@lfdr.de>; Tue,  6 Apr 2021 19:05:27 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id F0E213559F2
+	for <lists.virtualization@lfdr.de>; Tue,  6 Apr 2021 19:05:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 09FD040565;
-	Tue,  6 Apr 2021 17:05:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 96C8160B88;
+	Tue,  6 Apr 2021 17:05:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LgkTlQN6Yf_a; Tue,  6 Apr 2021 17:05:23 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hiHVgDgnUokn; Tue,  6 Apr 2021 17:05:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id B39B24055D;
-	Tue,  6 Apr 2021 17:05:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2EF6A60669;
+	Tue,  6 Apr 2021 17:05:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A98C1C0012;
-	Tue,  6 Apr 2021 17:05:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5282BC0012;
+	Tue,  6 Apr 2021 17:05:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F4186C000A
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E544AC000A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:20 +0000 (UTC)
+ Tue,  6 Apr 2021 17:05:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D6FF184A4A
+ by smtp1.osuosl.org (Postfix) with ESMTP id D3FDE84A48
  for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:20 +0000 (UTC)
+ Tue,  6 Apr 2021 17:05:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=nvidia.com
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id s2eGBMUyepgP
+ with ESMTP id 6E8fpgfUEy6o
  for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:19 +0000 (UTC)
+ Tue,  6 Apr 2021 17:05:17 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on2046.outbound.protection.outlook.com [40.107.243.46])
- by smtp1.osuosl.org (Postfix) with ESMTPS id ACFF284A0B
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on2070.outbound.protection.outlook.com [40.107.237.70])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8C8FF84A0B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  6 Apr 2021 17:05:19 +0000 (UTC)
+ Tue,  6 Apr 2021 17:05:17 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZRboBUNWpnihElwDnSRM2+Tn9ZSGz4Fods+iTykInaqn5f8b86r+aaadTZCKS0VOls0VO9sCUHDF4Mi0/DT3HzfApmwNZRJ4SkOazbYJrOwPUvOTPWo0508MgpysojAs2hmAPSf95Ge2Yoy3+QP6X4glX9kX7Wj06Q4A0LJukSRxiWfQytvQ6aZaBm7Rq6UtZrTtQbkdm0DLPLf0D7/23s6jrB/tcNaLrcLtvLZ+yGNRI3SBZHn/pBwQni8cV7oa48Xwzmam4acFSmrejuYixzewIE2BKR6mgHVbahM29heEeHSTTYPQXzEK48P/eKnAmL4DFdZSIpUzpWg8eyVVCQ==
+ b=PFDN3ACKazsPrStx1h0OKf8AKnBVI/DpRLZj/ZWxrf1x2mTr6QNWDJiSs/u+J1Fdjtootb3yKMnppAzPF4eP5g4/wpW1/jnn1+0Kjb8lVux8bwIiAv3BuJ9F5C6DVu1RtfbWkUg6zigkbwMmW2aOmQuyfkCZELXevPV0bIOHThLh7JF9rufxFdZ7cg7GdUuYQhVVWWQpRRGpRLbJ/AmyiAZodgTM815s0CRU7WbT7xh0PkzLg/Ec1Sg0YVCXi1NFp/A9LgL17IYVxYbep494RZg6Zmx3bdlf8ZRUe2qHxwjWTSOiyd6NB9oSS1GIrF4jspu13luwrZ4duwFBn4ujOA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fb9dBBZfLphKszOVRVgdc5bQy+5XowbMq1xrLGutCyg=;
- b=euAkQJkaLWiWU0dFqUJC3xn2Y6w6Z/A19BqofIZPqTepU9vmWhzaUCJr54VFHxE11R+Wz4miQ7UrtJbAvb7xzrI7JbNAKbJeZvzxEUkMMuQK+SUMs4Xwq0hLPOXy9dvHHHubuW5dOeKLaLAUe72/b+cpud/dJyUC8wefcUa6roAwBsV5eyTkO0xj6rbRdlGvDcZbtv250r0QpKSco9zXYpuQjCRlUdw9PlgUmwYLkODNf8tQGEVCtTdWWu/8u2gY40VC3Eq4e3HSKd7ZaXhOaHIssvASfiEXPKysBV665nZioocjHsuhGoHa7ViOAHAcpx7rlt/fw69xA+68YSBwcA==
+ bh=38j+yW5vWMD5IYEFV6GCSNpjdqlW9YUOpXB3tH+AzmY=;
+ b=Dml5PNj0FzSz3RomMhfMrPdF22imdkiI6PDFi7yQiY3Vdx2YFGmy/SJJJAvQuBgfU9NRQbbhHvSHjEKcH47Fv07MOKeS08v+MTE+jIWVi/lZwqqo9CtZd4I0BjtMW5RLs26RBxwaH5yXgh4PpnnXrrlS0G711opy5MfnUBIPZRKR1kZ8xmjQ9vlCGVZFRqkbvUMkjuqVAaLUpAfLxu9HV+ylYvl944jcMx66Ut3zRDXjO7+0LpjPUJYs4jUvuf6kp4QARFwt1Hz1iPjRkVVBiEp+GkrDlL3t17NHC4f333LZ6kLjUP7MDLj6ziTYTYVHIxao2E+ihkXRoWsTVcz1ow==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
@@ -55,18 +55,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fb9dBBZfLphKszOVRVgdc5bQy+5XowbMq1xrLGutCyg=;
- b=fW+QiYn8AOWSEezqggQhUFklqWiwuzKIcdQ/FHmA8Smsyid43Yn0rWKkGQEiqaDtwSxvKNkCD4HEY1gjDPkrOt42f2Wa/S6EbBBAMgKzomQLr6jPHYzACWhN8vMaICDZeTSlYxJSGXenyQZiYC0U45gpSI1x8skJQx16YjbNLuaQhGymmhBz5M6Rl4b+p2tizhQ36kCHj7BQFFjmJF6P6aj8JiO1oTALAEaQrqe7v6z+M2GUeKYaJnr50pzVTARrBJkvhPRwnY1+8cz3f9MJE1VEeCd7V9Rc1T4jwVgtMNAncK5tLiSutoa+2/ul7YdDiTeF71c02TksJ4/5DeSDbg==
-Received: from MWHPR19CA0057.namprd19.prod.outlook.com (2603:10b6:300:94::19)
- by MWHPR1201MB0240.namprd12.prod.outlook.com (2603:10b6:301:58::21)
+ bh=38j+yW5vWMD5IYEFV6GCSNpjdqlW9YUOpXB3tH+AzmY=;
+ b=FFkwL9UlhhiVmY+nmzIzOrcRV/xcDirhMnG9G43SYNJMSwi8MxPVrHaTMlfUKlCG9Lns1PFPfx8RNjc3FLjqhNmNk6ma4uEdI75Dwgs2m8Ze+kphb2AXsuf7utpgeDEjfybeMT70vfJG00OkoY5UOvjwT2jI3CCadejj982D3MpRoMfu81N+feF0s9kquWvSQPPeE3Ez+5h9kmeqGxyw474VV0r4p1LYLIdBRTCymvfIPyL5nygPXbO1tf3AKNBBgY/HZNOSPjZ5b4PdUwZXccW48yetVgRFV+AJK8KUsXuwiIQy5UWR0Vml5WWKMLZhWFFSXpdXcvKV0WX75JiwAA==
+Received: from MWHPR19CA0068.namprd19.prod.outlook.com (2603:10b6:300:94::30)
+ by BL1PR12MB5302.namprd12.prod.outlook.com (2603:10b6:208:31d::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.26; Tue, 6 Apr
- 2021 17:05:16 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.29; Tue, 6 Apr
+ 2021 17:05:15 +0000
 Received: from CO1NAM11FT030.eop-nam11.prod.protection.outlook.com
- (2603:10b6:300:94:cafe::b1) by MWHPR19CA0057.outlook.office365.com
- (2603:10b6:300:94::19) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:300:94:cafe::80) by MWHPR19CA0068.outlook.office365.com
+ (2603:10b6:300:94::30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.29 via Frontend
- Transport; Tue, 6 Apr 2021 17:05:16 +0000
+ Transport; Tue, 6 Apr 2021 17:05:15 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
  header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
@@ -79,12 +79,13 @@ Received: from mail.nvidia.com (216.228.112.34) by
  15.20.3999.28 via Frontend Transport; Tue, 6 Apr 2021 17:05:15 +0000
 Received: from sw-mtx-036.mtx.labs.mlnx (172.20.145.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Tue, 6 Apr 2021 17:05:13 +0000
+ Tue, 6 Apr 2021 17:05:14 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next v2 02/14] vdpa: Follow kdoc comment style
-Date: Tue, 6 Apr 2021 20:04:45 +0300
-Message-ID: <20210406170457.98481-3-parav@nvidia.com>
+Subject: [PATCH linux-next v2 03/14] vdpa: Introduce and use vdpa device get,
+ set config, features helpers
+Date: Tue, 6 Apr 2021 20:04:46 +0300
+Message-ID: <20210406170457.98481-4-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210406170457.98481-1-parav@nvidia.com>
 References: <20210406170457.98481-1-parav@nvidia.com>
@@ -94,27 +95,27 @@ X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 14b94ac9-30a0-4ae1-0b17-08d8f91e2653
-X-MS-TrafficTypeDiagnostic: MWHPR1201MB0240:
-X-Microsoft-Antispam-PRVS: <MWHPR1201MB0240248A615B59BE308B6C47DC769@MWHPR1201MB0240.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
+X-MS-Office365-Filtering-Correlation-Id: d3443d98-8df8-42f1-bec3-08d8f91e25fa
+X-MS-TrafficTypeDiagnostic: BL1PR12MB5302:
+X-Microsoft-Antispam-PRVS: <BL1PR12MB530266BB81F9645266A65B1DDC769@BL1PR12MB5302.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:5236;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 3IsKeEZKew6iudIwmOUwQ06blAWgRGo2nn/iZm4oAweyYXHDrJKI8t/QPWm5pS71WzFEhekLah+Dq3SIieD3hgOkXzZxjMOO5Nna0sKZEgmISuORvwSYB8TwWz6TDjuLEbBnRYgmu0XNugU6oeylPppBI9HLZ/h5MdGbEBngwtBvv9bTKX1UNSCyHVJoz5FbX/gSiWQrSnVzryQghL+4nmnQ3v0vpc+LDv4KyFb2jWPFQ7pMcPJNc+cKBIHkGzRcsVBR6MdKnOpcW7uE36me6nzykCddEGKBt1k8C7W3iuH0QcJAFUQBaM6Eyv1VgPdpUvEEpiWsU799335ZQu9pXVxAgMBDL3VyeU6bwqUZ8bM2nMV0fRVuyN5Xjt/KQmg42aW0S1liCX0R8C3PxQF8p1krupZ7LyE+KrsEAzM7hB7q6JX4pgiwpytV6P8XicfBsBDrXdOctt5ciwLWGBRtYJmMoYgyPR4KG+g+iqXaz5E3HT58GD+m7e7F3n+6P5fV5gy2Ra2wXca3kg/xreMB4pE9wQQf8zfR+PRtUGTKnup3PpV97ZvlLgUAtUKf2b4Asq5LG6hIUIaMnvbzdtB26H1QodMAjGK8xuOgpieAoabdvVq0Z+HTaiYJUFfhzBbJkyADBRQKKW5lREXDUUUzCY4i5FJCeXfefcpasGyQxi198ymOwAs1gxoxKzc/kRajEXJGpWqLM0Q4VRb+28X6aC3mdxRfWFBhLPvLChGz2Ww=
+X-Microsoft-Antispam-Message-Info: 8p19cz6GsTydZD3F28s2uHP0tIrZITB9rFd2KQqkKtdEfWlI/D+hKjn27a5sckjJHQKZW+J3ZCCh92p+g2yTnbDMYMirD6sxMQlrq8s0a1ytrQKzg3NE2186R3G/+sHQnRc8asQUEHISGp+Dnlnc7BhnJ4k9lBgYN6AJWjri3M6nshtcx358ZhQZ3KRYcXfNXCoPcWUjQ7q6kBYR/gHaWLeAHtiusi92zjXtq3+PfKgJJLi4bAioiEduecY9mXcNN+K71A7zXoqFlIFB8G/PK4HeyVO6yjksxH7nzUjeshNb6YtcsTsOL77R1xdPLKWLloFLiutSJO6lVK1U4FH0FmlSCWaWPssKVvySrsZC75NZuQ8Vu6LfTG5gccGsRFsqGNiSpydrIMbUeIApxD6zXklMRmy1qqgdhCFFQlyb8Sh6ibgfQdzPTV+WjjRjkf6ME1KzrQrCpv1KIliT4yHzm0u7RujHXHsJVvFqyB+fSvMGvl3Kk7f3FjBwzYRXf/S33rXgLq0A9YV7LtmuJhrn+p4xEkwycsb6Bg6xPD25GZ9Ofl6T14Kb3NAqyVwSow76kywELP+EfcHRVutIrR17jlmebKsvF4s3xgT1xeRphCEKNWBBMyPO5CEK7U7JttHz6roIb8KD2SVdtH4wJiLv039CYpgL+Mpn4um8Z6Fb3is=
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(136003)(376002)(346002)(39860400002)(46966006)(36840700001)(4326008)(2906002)(86362001)(8676002)(1076003)(26005)(107886003)(8936002)(54906003)(966005)(316002)(36906005)(47076005)(16526019)(5660300002)(426003)(83380400001)(82740400003)(70586007)(336012)(36860700001)(2616005)(356005)(6666004)(6916009)(186003)(7636003)(36756003)(70206006)(82310400003)(478600001);
+ SFS:(4636009)(136003)(396003)(39860400002)(376002)(346002)(36840700001)(46966006)(70586007)(54906003)(26005)(82310400003)(70206006)(36906005)(82740400003)(107886003)(426003)(7636003)(2616005)(356005)(8936002)(36756003)(2906002)(5660300002)(316002)(6916009)(186003)(83380400001)(336012)(1076003)(86362001)(36860700001)(478600001)(47076005)(8676002)(6666004)(4326008)(16526019);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 17:05:15.9167 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14b94ac9-30a0-4ae1-0b17-08d8f91e2653
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Apr 2021 17:05:15.3080 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d3443d98-8df8-42f1-bec3-08d8f91e25fa
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT030.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR1201MB0240
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5302
 Cc: elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -132,96 +133,168 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Follow comment style mentioned in the Writing kernel-doc document [1].
+Subsequent patches enable get and set configuration either
+via management device or via vdpa device' config ops.
 
-Following warnings are fixed.
+This requires synchronization between multiple callers to get and set
+config callbacks. Features setting also influence the layout of the
+configuration fields endianness.
 
-$ scripts/kernel-doc -v -none drivers/vdpa/vdpa.c
-drivers/vdpa/vdpa.c:67: info: Scanning doc for __vdpa_alloc_device
-drivers/vdpa/vdpa.c:84: warning: No description found for return value of '__vdpa_alloc_device'
-drivers/vdpa/vdpa.c:153: info: Scanning doc for _vdpa_register_device
-drivers/vdpa/vdpa.c:163: warning: No description found for return value of '_vdpa_register_device'
-drivers/vdpa/vdpa.c:172: info: Scanning doc for vdpa_register_device
-drivers/vdpa/vdpa.c:180: warning: No description found for return value of 'vdpa_register_device'
-drivers/vdpa/vdpa.c:191: info: Scanning doc for _vdpa_unregister_device
-drivers/vdpa/vdpa.c:205: info: Scanning doc for vdpa_unregister_device
-drivers/vdpa/vdpa.c:217: info: Scanning doc for __vdpa_register_driver
-drivers/vdpa/vdpa.c:224: warning: No description found for return value of '__vdpa_register_driver'
-drivers/vdpa/vdpa.c:233: info: Scanning doc for vdpa_unregister_driver
-drivers/vdpa/vdpa.c:243: info: Scanning doc for vdpa_mgmtdev_register
-drivers/vdpa/vdpa.c:250: warning: No description found for return value of 'vdpa_mgmtdev_register'
-
-After the fix:
-
-scripts/kernel-doc -v -none drivers/vdpa/vdpa.c
-drivers/vdpa/vdpa.c:67: info: Scanning doc for __vdpa_alloc_device
-drivers/vdpa/vdpa.c:153: info: Scanning doc for _vdpa_register_device
-drivers/vdpa/vdpa.c:172: info: Scanning doc for vdpa_register_device
-drivers/vdpa/vdpa.c:191: info: Scanning doc for _vdpa_unregister_device
-drivers/vdpa/vdpa.c:205: info: Scanning doc for vdpa_unregister_device
-drivers/vdpa/vdpa.c:217: info: Scanning doc for __vdpa_register_driver
-drivers/vdpa/vdpa.c:233: info: Scanning doc for vdpa_unregister_driver
-drivers/vdpa/vdpa.c:243: info: Scanning doc for vdpa_mgmtdev_register
-
-[1] https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
+To avoid exposing synchronization primitives to callers, introduce
+helper for setting the configuration and use it.
 
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
 ---
- drivers/vdpa/vdpa.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+changelog:
+v1->v2
+ - new patch to have synchronized access to features and config space
+---
+ drivers/vdpa/vdpa.c  | 57 ++++++++++++++++++++++++++++++++++++++++++++
+ drivers/vhost/vdpa.c |  6 ++---
+ include/linux/vdpa.h | 28 +++++-----------------
+ 3 files changed, 65 insertions(+), 26 deletions(-)
 
 diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 5cffce67cab0..bb3f1d1f0422 100644
+index bb3f1d1f0422..116e076c72fd 100644
 --- a/drivers/vdpa/vdpa.c
 +++ b/drivers/vdpa/vdpa.c
-@@ -75,8 +75,8 @@ static void vdpa_release_dev(struct device *d)
-  * Driver should use vdpa_alloc_device() wrapper macro instead of
-  * using this directly.
-  *
-- * Returns an error when parent/config/dma_dev is not set or fail to get
-- * ida.
-+ * Return: Returns an error when parent/config/dma_dev is not set or fail to get
-+ *	   ida.
-  */
- struct vdpa_device *__vdpa_alloc_device(struct device *parent,
- 					const struct vdpa_config_ops *config,
-@@ -157,7 +157,7 @@ static int __vdpa_register_device(struct vdpa_device *vdev, int nvqs)
-  * @vdev: the vdpa device to be registered to vDPA bus
-  * @nvqs: number of virtqueues supported by this device
-  *
-- * Returns an error when fail to add device to vDPA bus
-+ * Return: Returns an error when fail to add device to vDPA bus
-  */
- int _vdpa_register_device(struct vdpa_device *vdev, int nvqs)
+@@ -261,6 +261,63 @@ int vdpa_mgmtdev_register(struct vdpa_mgmt_dev *mdev)
+ }
+ EXPORT_SYMBOL_GPL(vdpa_mgmtdev_register);
+ 
++/**
++ * vdpa_get_features - Read vDPA device features
++ * @vdev: vdpa device whose features to read
++ *
++ * Return: Returns device features.
++ */
++u64 vdpa_get_features(struct vdpa_device *vdev)
++{
++	return vdev->config->get_features(vdev);
++}
++EXPORT_SYMBOL_GPL(vdpa_get_features);
++
++/**
++ * vdpa_set_features - Set vDPA device features
++ * @vdev: vdpa device whose features to set
++ * @features: features of the vdpa device to enable/disable
++ *
++ * Return: Returns 0 on success or error code.
++ */
++int vdpa_set_features(struct vdpa_device *vdev, u64 features)
++{
++	const struct vdpa_config_ops *ops = vdev->config;
++
++	vdev->features_valid = true;
++	return ops->set_features(vdev, features);
++}
++EXPORT_SYMBOL_GPL(vdpa_set_features);
++
++void vdpa_get_config(struct vdpa_device *vdev, unsigned int offset,
++		     void *buf, unsigned int len)
++{
++	const struct vdpa_config_ops *ops = vdev->config;
++
++	/*
++	 * Config accesses aren't supposed to trigger before features are set.
++	 * If it does happen we assume a legacy guest.
++	 */
++	if (!vdev->features_valid)
++		vdpa_set_features(vdev, 0);
++	ops->get_config(vdev, offset, buf, len);
++}
++EXPORT_SYMBOL_GPL(vdpa_get_config);
++
++/**
++ * vdpa_set_config - Set one or more device configuration fields.
++ * @dev: vdpa device to operate on
++ * @offset: starting byte offset of the field
++ * @buf: buffer pointer to read from
++ * @length: length of the configuration fields in bytes
++ */
++void vdpa_set_config(struct vdpa_device *dev, unsigned int offset,
++		     void *buf, unsigned int length)
++{
++	dev->config->set_config(dev, offset, buf, length);
++}
++EXPORT_SYMBOL_GPL(vdpa_set_config);
++
+ static int vdpa_match_remove(struct device *dev, void *data)
  {
-@@ -174,7 +174,7 @@ EXPORT_SYMBOL_GPL(_vdpa_register_device);
-  * @vdev: the vdpa device to be registered to vDPA bus
-  * @nvqs: number of virtqueues supported by this device
-  *
-- * Returns an error when fail to add to vDPA bus
-+ * Return: Returns an error when fail to add to vDPA bus
-  */
- int vdpa_register_device(struct vdpa_device *vdev, int nvqs)
+ 	struct vdpa_device *vdev = container_of(dev, struct vdpa_device, dev);
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+index e0a27e336293..383f5be8ffa6 100644
+--- a/drivers/vhost/vdpa.c
++++ b/drivers/vhost/vdpa.c
+@@ -236,7 +236,6 @@ static long vhost_vdpa_set_config(struct vhost_vdpa *v,
+ 				  struct vhost_vdpa_config __user *c)
  {
-@@ -218,7 +218,7 @@ EXPORT_SYMBOL_GPL(vdpa_unregister_device);
-  * @drv: the vdpa device driver to be registered
-  * @owner: module owner of the driver
-  *
-- * Returns an err when fail to do the registration
-+ * Return: Returns an err when fail to do the registration
-  */
- int __vdpa_register_driver(struct vdpa_driver *drv, struct module *owner)
+ 	struct vdpa_device *vdpa = v->vdpa;
+-	const struct vdpa_config_ops *ops = vdpa->config;
+ 	struct vhost_vdpa_config config;
+ 	unsigned long size = offsetof(struct vhost_vdpa_config, buf);
+ 	u8 *buf;
+@@ -250,7 +249,7 @@ static long vhost_vdpa_set_config(struct vhost_vdpa *v,
+ 	if (IS_ERR(buf))
+ 		return PTR_ERR(buf);
+ 
+-	ops->set_config(vdpa, config.off, buf, config.len);
++	vdpa_set_config(vdpa, config.off, buf, config.len);
+ 
+ 	kvfree(buf);
+ 	return 0;
+@@ -259,10 +258,9 @@ static long vhost_vdpa_set_config(struct vhost_vdpa *v,
+ static long vhost_vdpa_get_features(struct vhost_vdpa *v, u64 __user *featurep)
  {
-@@ -245,6 +245,8 @@ EXPORT_SYMBOL_GPL(vdpa_unregister_driver);
-  * @mdev: Pointer to vdpa management device
-  * vdpa_mgmtdev_register() register a vdpa management device which supports
-  * vdpa device management.
-+ * Return: Returns 0 on success or failure when required callback ops are not
-+ *         initialized.
-  */
- int vdpa_mgmtdev_register(struct vdpa_mgmt_dev *mdev)
- {
+ 	struct vdpa_device *vdpa = v->vdpa;
+-	const struct vdpa_config_ops *ops = vdpa->config;
+ 	u64 features;
+ 
+-	features = ops->get_features(vdpa);
++	features = vdpa_get_features(vdpa);
+ 
+ 	if (copy_to_user(featurep, &features, sizeof(features)))
+ 		return -EFAULT;
+diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
+index 37b65ca940cf..62e68ccc4c96 100644
+--- a/include/linux/vdpa.h
++++ b/include/linux/vdpa.h
+@@ -320,28 +320,12 @@ static inline void vdpa_reset(struct vdpa_device *vdev)
+         ops->set_status(vdev, 0);
+ }
+ 
+-static inline int vdpa_set_features(struct vdpa_device *vdev, u64 features)
+-{
+-        const struct vdpa_config_ops *ops = vdev->config;
+-
+-	vdev->features_valid = true;
+-        return ops->set_features(vdev, features);
+-}
+-
+-
+-static inline void vdpa_get_config(struct vdpa_device *vdev, unsigned offset,
+-				   void *buf, unsigned int len)
+-{
+-        const struct vdpa_config_ops *ops = vdev->config;
+-
+-	/*
+-	 * Config accesses aren't supposed to trigger before features are set.
+-	 * If it does happen we assume a legacy guest.
+-	 */
+-	if (!vdev->features_valid)
+-		vdpa_set_features(vdev, 0);
+-	ops->get_config(vdev, offset, buf, len);
+-}
++u64 vdpa_get_features(struct vdpa_device *vdev);
++int vdpa_set_features(struct vdpa_device *vdev, u64 features);
++void vdpa_get_config(struct vdpa_device *vdev, unsigned int offset,
++		     void *buf, unsigned int len);
++void vdpa_set_config(struct vdpa_device *dev, unsigned int offset,
++		     void *buf, unsigned int length);
+ 
+ /**
+  * struct vdpa_mgmtdev_ops - vdpa device ops
 -- 
 2.26.2
 
