@@ -1,96 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D39A35BAB1
-	for <lists.virtualization@lfdr.de>; Mon, 12 Apr 2021 09:16:34 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C328735BBF7
+	for <lists.virtualization@lfdr.de>; Mon, 12 Apr 2021 10:19:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D7F8860653;
-	Mon, 12 Apr 2021 07:16:32 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 37684402D0;
+	Mon, 12 Apr 2021 08:19:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hiLxlN5q_5XG; Mon, 12 Apr 2021 07:16:32 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id plHAMuH_0KE6; Mon, 12 Apr 2021 08:19:10 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6771608D1;
-	Mon, 12 Apr 2021 07:16:31 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 0474D403C4;
+	Mon, 12 Apr 2021 08:19:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 46DB9C000A;
-	Mon, 12 Apr 2021 07:16:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B37DC000A;
+	Mon, 12 Apr 2021 08:19:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 824EEC000A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5BEBCC000A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 07:16:30 +0000 (UTC)
+ Mon, 12 Apr 2021 08:19:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 57CFE401B6
+ by smtp3.osuosl.org (Postfix) with ESMTP id 431FF6061F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 07:16:30 +0000 (UTC)
+ Mon, 12 Apr 2021 08:19:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QoiT5EukpliM
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Gf9XkPXTz7Hb
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 07:16:28 +0000 (UTC)
+ Mon, 12 Apr 2021 08:19:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [63.128.21.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5EF97401AD
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0AE50605CB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 07:16:28 +0000 (UTC)
+ Mon, 12 Apr 2021 08:19:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618211786;
+ s=mimecast20190719; t=1618215546;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=+6nhImlR+qM3GuM+TRySf0myMMv0WJfLOSpNifcSyi0=;
- b=U80xVAmBy8GdBZ+Gi7kaK3tZMrBqw4JdhMzmmLr0SDzQDgDkrjpaMk29s3PiPSDj+DXAGq
- OepkL/ioc3oMreNmicqVUgiU1sh808wEy+eAsVdVDd7AFqco1d75I56gKGZtMhyJbj7T9F
- +GEPZS9nDnSrH5kjqdI+DcSpePRykTU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-602-NEo5XLLuME-EhrKf6vyxYQ-1; Mon, 12 Apr 2021 03:16:23 -0400
-X-MC-Unique: NEo5XLLuME-EhrKf6vyxYQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4C679802B4F;
- Mon, 12 Apr 2021 07:16:21 +0000 (UTC)
-Received: from wangxiaodeMacBook-Air.local (ovpn-13-232.pek2.redhat.com
- [10.72.13.232])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 66F2E13488;
- Mon, 12 Apr 2021 07:16:15 +0000 (UTC)
-Subject: Re: [PATCH v6 09/10] vduse: Introduce VDUSE - vDPA Device in Userspace
-To: Yongji Xie <xieyongji@bytedance.com>
-References: <20210331080519.172-1-xieyongji@bytedance.com>
- <20210331080519.172-10-xieyongji@bytedance.com>
- <c817178a-2ac8-bf93-1ed3-528579c657a3@redhat.com>
- <CACycT3v_KFQXoxRbEj8c0Ve6iKn9RbibtBDgBFs=rf0ZOmTBBQ@mail.gmail.com>
- <091dde74-449b-385c-0ec9-11e4847c6c4c@redhat.com>
- <CACycT3vwATp4+Ao0fjuyeeLQN+xHH=dXF+JUyuitkn4k8hELnA@mail.gmail.com>
-From: Jason Wang <jasowang@redhat.com>
-Message-ID: <dc9a90dd-4f86-988c-c1b5-ac606ce5e14b@redhat.com>
-Date: Mon, 12 Apr 2021 15:16:13 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.9.1
+ bh=xJgn3g7ogKt5V6b/6xvZZCO2WGaaJCBspvi1WlJo2ZE=;
+ b=BmqIkCzEGFtaHoL42wQWb9VnwL6oXSo7DLTQoEcECLMqWdLyZ6NY0l0Iaue6dmMm2duDjr
+ AVLdHJKq8I/O2M6ZRzha5ZHs8/tSspk5yCdkp1DU9wtbkbbVvpwuYgUMpCoumY7PgUSM63
+ Vyv7WGgVh3Hs/vXfQbNLaLqIxt/L/ow=
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-304--BjrQaJZPqOVoH-uxpmRDA-1; Mon, 12 Apr 2021 04:19:03 -0400
+X-MC-Unique: -BjrQaJZPqOVoH-uxpmRDA-1
+Received: by mail-ej1-f72.google.com with SMTP id bg7so3563673ejb.12
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 12 Apr 2021 01:19:03 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=xJgn3g7ogKt5V6b/6xvZZCO2WGaaJCBspvi1WlJo2ZE=;
+ b=QTeoCp/9jjAigYsZ+nFhReG99hyde9EpVeFNtpSUzImK8UOIOSjwNkRgy5GsvFGNOx
+ JineNbXVN+s0GHdUJNKx/unNq7pIbdMLBzYskKI/+eYdRT/0+mZUDLWAqgiMy1l4yatc
+ 7TZXGtXEkhpfSknA9WDxniSO62l1QnE3W263ieLASwJYLoP5IKOOF+gGQi7myFNZkxi7
+ rK/S+/KTwTcKzM4vnJKCyE90PSv+Kh15lRi+xdP/XYsts7Q4LGlbgzx46+NXsdFkSuHs
+ RFXEStlRyrSMW56KeSNTpTT/MlWId4kAXrUEQnugg607iFYlD7X6mIl/PIV2wyP+Z05w
+ +gSA==
+X-Gm-Message-State: AOAM530347xvNkXRuD25U6yfPyciZjx5p+gOZ1dVB70JgU0DkQyFX4/l
+ aYwUyb+N8DZ6i6RHCGxZPBqNEbnxA/dCqUZVkCuGP6MzcPn14FGUVhTSdkhb4dct3WmY63SprQu
+ BjU03xoLq+DJu3mhLLrvMnEBVqP2NoK03oqgl1MTyig==
+X-Received: by 2002:a17:906:2808:: with SMTP id
+ r8mr17703897ejc.140.1618215542210; 
+ Mon, 12 Apr 2021 01:19:02 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwBU/GPnTLafg+51MT/N1zJPs8q0egQivnnyULLF6QWNsMSlyND5OuEZ/l/Y8KbZi9Vck2WWQ==
+X-Received: by 2002:a17:906:2808:: with SMTP id
+ r8mr17703884ejc.140.1618215541979; 
+ Mon, 12 Apr 2021 01:19:01 -0700 (PDT)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id a12sm5932454edx.91.2021.04.12.01.19.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Apr 2021 01:19:01 -0700 (PDT)
+Date: Mon, 12 Apr 2021 10:18:58 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH v4 00/14] vdpa: add vdpa simulator for block device
+Message-ID: <20210412081858.wpoitvzyj474yp7s@steredhat>
+References: <20210315163450.254396-1-sgarzare@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <CACycT3vwATp4+Ao0fjuyeeLQN+xHH=dXF+JUyuitkn4k8hELnA@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
-Cc: Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+In-Reply-To: <20210315163450.254396-1-sgarzare@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Laurent Vivier <lvivier@redhat.com>, Max Gurtovoy <mgurtovoy@nvidia.com>,
  kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
- Matthew Wilcox <willy@infradead.org>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org,
- Christoph Hellwig <hch@infradead.org>,
- Christian Brauner <christian.brauner@canonical.com>, bcrl@kvack.org,
- viro@zeniv.linux.org.uk, Stefan Hajnoczi <stefanha@redhat.com>,
- linux-fsdevel@vger.kernel.org, Dan Carpenter <dan.carpenter@oracle.com>,
- =?UTF-8?Q?Mika_Penttil=c3=a4?= <mika.penttila@nextfour.com>
+ Xie Yongji <xieyongji@bytedance.com>, Stefan Hajnoczi <stefanha@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,27 +112,107 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CuWcqCAyMDIxLzQvOSDkuIvljYg0OjAyLCBZb25namkgWGllIOWGmemBkzoKPj4+Pj4gK307Cj4+
-Pj4+ICsKPj4+Pj4gK3N0cnVjdCB2ZHVzZV9kZXZfY29uZmlnX2RhdGEgewo+Pj4+PiArICAgICBf
-X3UzMiBvZmZzZXQ7IC8qIG9mZnNldCBmcm9tIHRoZSBiZWdpbm5pbmcgb2YgY29uZmlnIHNwYWNl
-ICovCj4+Pj4+ICsgICAgIF9fdTMyIGxlbjsgLyogdGhlIGxlbmd0aCB0byByZWFkL3dyaXRlICov
-Cj4+Pj4+ICsgICAgIF9fdTggZGF0YVtWRFVTRV9DT05GSUdfREFUQV9MRU5dOyAvKiBkYXRhIGJ1
-ZmZlciB1c2VkIHRvIHJlYWQvd3JpdGUgKi8KPj4+PiBOb3RlIHRoYXQgc2luY2UgVkRVU0VfQ09O
-RklHX0RBVEFfTEVOIGlzIHBhcnQgb2YgdUFQSSBpdCBtZWFucyB3ZSBjYW4KPj4+PiBub3QgY2hh
-bmdlIGl0IGluIHRoZSBmdXR1cmUuCj4+Pj4KPj4+PiBTbyB0aGlzIG1pZ2h0IHN1ZmZjaWVudCBm
-b3IgZnV0dXJlIGZlYXR1cmVzIG9yIGFsbCB0eXBlIG9mIHZpcnRpbyBkZXZpY2VzLgo+Pj4+Cj4+
-PiBEbyB5b3UgbWVhbiAyNTYgaXMgbm8gZW5vdWdoIGhlcmXvvJ8KPj4gWWVzLgo+Pgo+IEJ1dCB0
-aGlzIHJlcXVlc3Qgd2lsbCBiZSBzdWJtaXR0ZWQgbXVsdGlwbGUgdGltZXMgaWYgY29uZmlnIGxl
-bmdoIGlzCj4gbGFyZ2VyIHRoYW4gMjU2LiBTbyBkbyB5b3UgdGhpbmsgd2hldGhlciB3ZSBuZWVk
-IHRvIGV4dGVudCB0aGUgc2l6ZSB0bwo+IDUxMiBvciBsYXJnZXI/CgoKU28gSSB0aGluayB5b3Un
-ZCBiZXR0ZXIgZWl0aGVyOgoKMSkgZG9jdW1lbnQgdGhlIGxpbWl0YXRpb24gKDI1NikgaW4gc29t
-ZXdoZXJlLCAoYmV0dGVyIGJvdGggdWFwaSBhbmQgZG9jKQoKb3IKCjIpIG1ha2UgaXQgdmFyaWFi
-bGUKClRoYW5rcwoKCj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5s
-aW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFp
-bG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+Hi Michael,
+do you think this series is in an acceptable state to be queued for the 
+next merge window?
+
+All patches should be already acked by Jason, let me know if I need to 
+change anything.
+
+Thanks,
+Stefano
+
+On Mon, Mar 15, 2021 at 05:34:36PM +0100, Stefano Garzarella wrote:
+>v4:
+>- added support for iproute2 vdpa management tool in vdpa_sim_blk
+>- removed get/set_config patches
+>  - 'vdpa: add return value to get_config/set_config callbacks'
+>  - 'vhost/vdpa: remove vhost_vdpa_config_validate()'
+>- added get_config_size() patches
+>  - 'vdpa: add get_config_size callback in vdpa_config_ops'
+>  - 'vhost/vdpa: use get_config_size callback in vhost_vdpa_config_validate()'
+>
+>v3: https://lore.kernel.org/lkml/20210204172230.85853-1-sgarzare@redhat.com/
+>v2: https://lore.kernel.org/lkml/20210128144127.113245-1-sgarzare@redhat.com/
+>v1: https://lore.kernel.org/lkml/93f207c0-61e6-3696-f218-e7d7ea9a7c93@redhat.com/
+>
+>This series is the second part of the v1 linked above. The first part with
+>refactoring of vdpa_sim has already been merged.
+>
+>The patches are based on Max Gurtovoy's work and extend the block simulator to
+>have a ramdisk behaviour.
+>
+>As mentioned in the v1 there was 2 issues and I fixed them in this series:
+>1. The identical mapping in the IOMMU used until now in vdpa_sim created issues
+>   when mapping different virtual pages with the same physical address.
+>   Fixed by patch "vdpa_sim: use iova module to allocate IOVA addresses"
+>
+>2. There was a race accessing the IOMMU between the vdpasim_blk_work() and the
+>   device driver that map/unmap DMA regions. Fixed by patch "vringh: add
+>   'iotlb_lock' to synchronize iotlb accesses"
+>
+>I used the Xie's patch coming from VDUSE series to allow vhost-vdpa to use
+>block devices, and I added get_config_size() callback to allow any device
+>in vhost-vdpa.
+>
+>The series also includes small fixes for vringh, vdpa, and vdpa_sim that I
+>discovered while implementing and testing the block simulator.
+>
+>Thanks for your feedback,
+>Stefano
+>
+>Max Gurtovoy (1):
+>  vdpa: add vdpa simulator for block device
+>
+>Stefano Garzarella (12):
+>  vdpa_sim: use iova module to allocate IOVA addresses
+>  vringh: add 'iotlb_lock' to synchronize iotlb accesses
+>  vringh: reset kiov 'consumed' field in __vringh_iov()
+>  vringh: explain more about cleaning riov and wiov
+>  vringh: implement vringh_kiov_advance()
+>  vringh: add vringh_kiov_length() helper
+>  vdpa_sim: cleanup kiovs in vdpasim_free()
+>  vdpa: add get_config_size callback in vdpa_config_ops
+>  vhost/vdpa: use get_config_size callback in
+>    vhost_vdpa_config_validate()
+>  vdpa_sim_blk: implement ramdisk behaviour
+>  vdpa_sim_blk: handle VIRTIO_BLK_T_GET_ID
+>  vdpa_sim_blk: add support for vdpa management tool
+>
+>Xie Yongji (1):
+>  vhost/vdpa: Remove the restriction that only supports virtio-net
+>    devices
+>
+> drivers/vdpa/vdpa_sim/vdpa_sim.h     |   2 +
+> include/linux/vdpa.h                 |   4 +
+> include/linux/vringh.h               |  19 +-
+> drivers/vdpa/ifcvf/ifcvf_main.c      |   6 +
+> drivers/vdpa/mlx5/net/mlx5_vnet.c    |   6 +
+> drivers/vdpa/vdpa_sim/vdpa_sim.c     | 127 ++++++----
+> drivers/vdpa/vdpa_sim/vdpa_sim_blk.c | 338 +++++++++++++++++++++++++++
+> drivers/vdpa/virtio_pci/vp_vdpa.c    |   8 +
+> drivers/vhost/vdpa.c                 |  15 +-
+> drivers/vhost/vringh.c               |  69 ++++--
+> drivers/vdpa/Kconfig                 |   8 +
+> drivers/vdpa/vdpa_sim/Makefile       |   1 +
+> 12 files changed, 529 insertions(+), 74 deletions(-)
+> create mode 100644 drivers/vdpa/vdpa_sim/vdpa_sim_blk.c
+>
+>-- 
+>2.30.2
+>
+>_______________________________________________
+>Virtualization mailing list
+>Virtualization@lists.linux-foundation.org
+>https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+>
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
