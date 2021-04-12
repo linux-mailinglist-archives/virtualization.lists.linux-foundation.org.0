@@ -1,62 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id EB0A335BCF0
-	for <lists.virtualization@lfdr.de>; Mon, 12 Apr 2021 10:46:57 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5291235BC83
+	for <lists.virtualization@lfdr.de>; Mon, 12 Apr 2021 10:43:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 961108384B;
-	Mon, 12 Apr 2021 08:46:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 92E9940349;
+	Mon, 12 Apr 2021 08:43:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id axbVTqwi5rBe; Mon, 12 Apr 2021 08:46:55 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4B6E783842;
-	Mon, 12 Apr 2021 08:46:55 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AgFZzQh264jt; Mon, 12 Apr 2021 08:43:13 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 13BB8403D5;
+	Mon, 12 Apr 2021 08:43:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E3120C000F;
-	Mon, 12 Apr 2021 08:46:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 963EFC000A;
+	Mon, 12 Apr 2021 08:43:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 62B57C000A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A1B50C000A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 08:46:51 +0000 (UTC)
+ Mon, 12 Apr 2021 08:43:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3B18B4037D
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6FAC86062E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 08:46:51 +0000 (UTC)
+ Mon, 12 Apr 2021 08:43:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XD8QYtBvf3xa
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Q2Xptv_YxFiV
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 08:46:49 +0000 (UTC)
+ Mon, 12 Apr 2021 08:43:09 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DCF2140354
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2D1B96061F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 08:46:49 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 1716C61247;
- Mon, 12 Apr 2021 08:46:48 +0000 (UTC)
+ Mon, 12 Apr 2021 08:43:09 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0C06661221;
+ Mon, 12 Apr 2021 08:43:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1618217209;
- bh=trgiaBG4kEh8rt00jC3X9zIWjcQ2Ue7UylSCEk2Qjkk=;
+ s=korg; t=1618216987;
+ bh=u8MCoY1lSzPeSr7Un5qYDvfw7e+lUZ0+4Z6XeDGkDeg=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=LCS9HHt9hGdaA5G3mvAWUYwLKjCXSGKuZra4FCJFT3++uPN0sTHU1nOzwn83izMIs
- CL3cBGc3ow9oY7Pt2Q/D3LRQXnnHpuP4y+oMaR1pxL8Hhv536GdMnPfYgs7E0T0dgE
- 0sbJX6VrKkfjMy3GyUkgh5sMiFKPRYTg/loMcoy0=
+ b=MkC6969rilZTo9JBJRkusajikVeDmlVD277DgmLA3WgLGFcWtla7i/F1e91gam6CJ
+ 5q/fX1F9QLfI3ObXjMFLOj7Xr/qrbbAHQsjNJ3NMHy7dgLSw61i/mICfoljRMXKv0s
+ pwsEAQvNTLIeL0ROC5Rh7c/Of21fxHQvZ8NMQa/M=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.4 042/111] virtio_net: Do not pull payload in skb->head
-Date: Mon, 12 Apr 2021 10:40:20 +0200
-Message-Id: <20210412084005.653952525@linuxfoundation.org>
+Subject: [PATCH 4.19 28/66] virtio_net: Do not pull payload in skb->head
+Date: Mon, 12 Apr 2021 10:40:34 +0200
+Message-Id: <20210412083959.037627043@linuxfoundation.org>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210412084004.200986670@linuxfoundation.org>
-References: <20210412084004.200986670@linuxfoundation.org>
+In-Reply-To: <20210412083958.129944265@linuxfoundation.org>
+References: <20210412083958.129944265@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Sasha Levin <sashal@kernel.org>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
@@ -128,10 +128,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 16 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index b67460864b3c..d8ee001d8e8e 100644
+index 0b1c6a8906b9..06ddf009f833 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -406,9 +406,13 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
+@@ -413,9 +413,13 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
  	offset += hdr_padded_len;
  	p += hdr_padded_len;
  
@@ -149,7 +149,7 @@ index b67460864b3c..d8ee001d8e8e 100644
  
  	if (metasize) {
 diff --git a/include/linux/virtio_net.h b/include/linux/virtio_net.h
-index 98775d7fa696..b465f8f3e554 100644
+index a1829139ff4a..8f48264f5dab 100644
 --- a/include/linux/virtio_net.h
 +++ b/include/linux/virtio_net.h
 @@ -65,14 +65,18 @@ static inline int virtio_net_hdr_to_skb(struct sk_buff *skb,
