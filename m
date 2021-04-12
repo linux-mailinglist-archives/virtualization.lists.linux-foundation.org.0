@@ -1,100 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5153835D2D6
-	for <lists.virtualization@lfdr.de>; Tue, 13 Apr 2021 00:05:12 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EED235D2E1
+	for <lists.virtualization@lfdr.de>; Tue, 13 Apr 2021 00:08:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BFCAD83D48;
-	Mon, 12 Apr 2021 22:05:09 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8AC4D60B0D;
+	Mon, 12 Apr 2021 22:08:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OwW4xYeIdt0u; Mon, 12 Apr 2021 22:05:09 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vVpkho-yjDlM; Mon, 12 Apr 2021 22:08:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8B95383D94;
-	Mon, 12 Apr 2021 22:05:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5327B60B17;
+	Mon, 12 Apr 2021 22:08:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 25645C000A;
-	Mon, 12 Apr 2021 22:05:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D8E4BC000A;
+	Mon, 12 Apr 2021 22:08:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3F8F2C000A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE3DEC000A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 22:05:06 +0000 (UTC)
+ Mon, 12 Apr 2021 22:08:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9985460B32
+ by smtp2.osuosl.org (Postfix) with ESMTP id D0504404DB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 22:03:54 +0000 (UTC)
+ Mon, 12 Apr 2021 22:08:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xRs7ckBIcQMV
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GDivL5AyfFWn
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 22:03:54 +0000 (UTC)
+ Mon, 12 Apr 2021 22:08:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D943F60B31
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DDF2F40298
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 22:03:53 +0000 (UTC)
+ Mon, 12 Apr 2021 22:08:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618265032;
+ s=mimecast20190719; t=1618265304;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=leWNWd+JCLyGmHEQBEQfB/cGYdo6+6fwiBlPQ2IHRak=;
- b=hl36wYhBXvhQWsXBGHh7IrKgNVPpOKB4l36ua20KYnzpHH5pMIYMZ/6sNY5Vefe/Cab0HS
- s2LSCftgVAcN8OWnVfThAXVK9axafHTOEng1dMaobJP2LCYXSW8uhbBg1v+0L3xxdBDggX
- wj8ScGuGRatVjr4vMdniiSV/C7/t36k=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-408-fzrAhTzxO_WgwVSxDpf5aA-1; Mon, 12 Apr 2021 18:03:51 -0400
-X-MC-Unique: fzrAhTzxO_WgwVSxDpf5aA-1
-Received: by mail-wm1-f72.google.com with SMTP id
- x20-20020a7bc2140000b029012bb4d2b5d6so249192wmi.1
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=AGL7wZWdJprmiLe0nt1hRgifCRO5IhlbubiT9W672a0=;
+ b=bpV/lPOoRNUq1q731oRrr0c0LCNnAiOl/EFDxClN2EIQvTIIDi2rPms/7i03YFCADXq45y
+ LI92LD+BLNmKaQNegNuziIu0oXpwqgAmtmC0eIuhHW9XsDHqZoOd4X2bysr11LXFkiYa4t
+ fK0DXKRzf6M75TqWaX7maioe2Qe7W4g=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-523-QuiEk1INPTShJgPZZA0TRQ-1; Mon, 12 Apr 2021 18:08:23 -0400
+X-MC-Unique: QuiEk1INPTShJgPZZA0TRQ-1
+Received: by mail-wr1-f69.google.com with SMTP id y4so2220592wrs.7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 15:03:51 -0700 (PDT)
+ Mon, 12 Apr 2021 15:08:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=leWNWd+JCLyGmHEQBEQfB/cGYdo6+6fwiBlPQ2IHRak=;
- b=K5RYfPH0bcCbl+O2XXhS4TeozFcm/UcN84eMSdAD+A+3rVu9lpef834bIAPRTnLe5y
- fkVv4i2ue9SsDcRyyTapeB27G1GIB5GVOlAjj+G7v9zXPV2g8cljS45sYh9ImVfTD3wc
- M0h2sEzxNE4HwXu8cpBDFu4RJ9WY0Le46iqEGtgh2cGoOeY89ZtDyIcixWPy8lWpUelT
- k1+wwEwodH6sUSGEO6CmGoLrBau1JSwr7NexaTCVX7fJVRGadQr4gcS/yPGsweaMGF9e
- d4hJwXQi0SGjBzdTI0Od5nrQPazjfagfZjVM0ssa09/mubcVxplH6U0nLX/UpUCk/h8L
- yAOg==
-X-Gm-Message-State: AOAM533FL9tEskuPVaT4x/HBq38umLZDHeQsoJe6Xm8b1AiZoTuLTpNw
- +s+xQQkCurdDLsS1ljVf/9GawlRb9g5SU+N78oK2pE7xw9fQb3U2uALJ9JIQHyTjWm6tzgQvZdY
- QLElSAvJFQH0t5NcdSDrqOTk8Z/tz0nfaHD9Q+Pjr8A==
-X-Received: by 2002:a05:6000:12cb:: with SMTP id
- l11mr13400868wrx.267.1618265030132; 
- Mon, 12 Apr 2021 15:03:50 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJweg8UOE2ZsiZfHi1qDoF06GNmIO7OCOuwIxcOmOr8OtmbITf2h/rMoSuTHu57FodKRe0dBcQ==
-X-Received: by 2002:a05:6000:12cb:: with SMTP id
- l11mr13400850wrx.267.1618265029935; 
- Mon, 12 Apr 2021 15:03:49 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:ccc;
+ bh=AGL7wZWdJprmiLe0nt1hRgifCRO5IhlbubiT9W672a0=;
+ b=fZmYvCwT//UGOQ8SceqHtbZrXAsZWJeFDKjzPGzMTkPfZcZhTYnN+Z0nIjfS53l/kJ
+ SDbZc2F8iIX7xQH4lQunAX2tFuHjKAJjndAv0+qsCVX9MB5YwW7jsgtY8PxMD9qQ+fHp
+ SycmHzf8hXXakfMwJYw6anUmSWa4pTYXNWuI7n9BukjxAbhuFE26gc10u66fadGfs1qi
+ 68anvR0i8jWMWxRzbUyHaERwRA5AGGK3dgq6N+pePMNqYcN/wz/kpXPF5SF/h1VkojBD
+ Z+5xxV9UtTtk4G0J4mIiIZmbs6uMOM5JwUznI1v0mnfsBgEToi4SJ1vWVfk6TVmuZ6i4
+ yJ0A==
+X-Gm-Message-State: AOAM530zSOzXYVMWuM3zw+1ucCg9nqU0OPTiMk681VnfBL+x53rF+453
+ Gz+DNqw2ZJZcIU93aIPZC2HHKNUhraQL4hHmK2AdfuL1MZggoSicsjF+qiW3XVXLoc29TRZrn5V
+ L0y4of9EQuieK4yh8xGyWee08GriiiVlds7O0vrZmhQ==
+X-Received: by 2002:a05:600c:329c:: with SMTP id
+ t28mr1073712wmp.74.1618265302062; 
+ Mon, 12 Apr 2021 15:08:22 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxQq02VEH0x+yR4nCVseGnJU8z9TNWYz+YkkYnKTZ8stWzkVM0s8+ImnNF6USPPWg4NmHoYgQ==
+X-Received: by 2002:a05:600c:329c:: with SMTP id
+ t28mr1073698wmp.74.1618265301866; 
+ Mon, 12 Apr 2021 15:08:21 -0700 (PDT)
 Received: from redhat.com ([2a10:8006:2281:0:1994:c627:9eac:1825])
- by smtp.gmail.com with ESMTPSA id u3sm535389wmg.48.2021.04.12.15.03.48
+ by smtp.gmail.com with ESMTPSA id v7sm17127237wrs.2.2021.04.12.15.08.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Apr 2021 15:03:49 -0700 (PDT)
-Date: Mon, 12 Apr 2021 18:03:46 -0400
+ Mon, 12 Apr 2021 15:08:19 -0700 (PDT)
+Date: Mon, 12 Apr 2021 18:08:16 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: virtio-net: locking in tx napi
-Message-ID: <20210412175341-mutt-send-email-mst@kernel.org>
+To: Wei Wang <weiwan@google.com>
+Subject: Re: [PATCH net] virtio-net: suppress bad irq warning for tx napi
+Message-ID: <20210412180353-mutt-send-email-mst@kernel.org>
+References: <20210129002136.70865-1-weiwan@google.com>
 MIME-Version: 1.0
+In-Reply-To: <20210129002136.70865-1-weiwan@google.com>
+Ccc: Eugenio Perez Martin <eperezma@redhat.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Willem de Bruijn <willemb@google.com>,
- virtualization@lists.linux-foundation.org
+Cc: netdev@vger.kernel.org, Willem de Bruijn <willemb@google.com>,
+ virtualization@lists.linux-foundation.org, David Miller <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,65 +115,101 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-I was working on the spurios interrupt problem and
-I noticed something weird.
+OK I started looking at this again. My idea is simple.
+A. disable callbacks before we try to drain skbs
+B. actually do disable callbacks even with event idx
 
-static int virtnet_poll_tx(struct napi_struct *napi, int budget)
-{       
-        struct send_queue *sq = container_of(napi, struct send_queue, napi);
-        struct virtnet_info *vi = sq->vq->vdev->priv;
-        unsigned int index = vq2txq(sq->vq);
-        struct netdev_queue *txq;
+To make B not regress, we need to
+C. detect the common case of disable after event triggering and skip the write then.
 
-        if (unlikely(is_xdp_raw_buffer_queue(vi, index))) {
-                /* We don't need to enable cb for XDP */
-                napi_complete_done(napi, 0);
-                return 0;
-        }
-
-        txq = netdev_get_tx_queue(vi->dev, index);
-        __netif_tx_lock(txq, raw_smp_processor_id());
-        free_old_xmit_skbs(sq, true);
-        __netif_tx_unlock(txq);
-        
-        virtqueue_napi_complete(napi, sq->vq, 0);
-        
-        if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
-                netif_tx_wake_queue(txq);
-        
-        return 0;
-}       
-
-So virtqueue_napi_complete is called when txq is not locked,
-thinkably start_xmit can happen right?
-
-Now virtqueue_napi_complete
-
-static void virtqueue_napi_complete(struct napi_struct *napi,
-                                    struct virtqueue *vq, int processed)
-{
-        int opaque;
-
-        opaque = virtqueue_enable_cb_prepare(vq);
-        if (napi_complete_done(napi, processed)) {
-                if (unlikely(virtqueue_poll(vq, opaque)))
-                        virtqueue_napi_schedule(napi, vq);
-        } else {
-                virtqueue_disable_cb(vq);
-        }
-}
+I added a new event_triggered flag for that.
+Completely untested - but then I could not see the warnings either.
+Would be very much interested to know whether this patch helps
+resolve the sruprious interrupt problem at all ...
 
 
-So it is calling virtqueue_enable_cb_prepare but tx queue
-could be running and can process things in parallel ...
-What gives? I suspect this corrupts the ring, and explains
-why we are seeing weird hangs with vhost packed ring ...
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 
-Jason?
-
-
--- 
-MST
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 82e520d2cb12..a91a2d6d1ee3 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -1429,6 +1429,7 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
+ 		return;
+ 
+ 	if (__netif_tx_trylock(txq)) {
++		virtqueue_disable_cb(vq);
+ 		free_old_xmit_skbs(sq, true);
+ 		__netif_tx_unlock(txq);
+ 	}
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index 71e16b53e9c1..213bfe8b6051 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -113,6 +113,9 @@ struct vring_virtqueue {
+ 	/* Last used index we've seen. */
+ 	u16 last_used_idx;
+ 
++	/* Hint for event idx: already triggered no need to disable. */
++	bool event_triggered;
++
+ 	union {
+ 		/* Available for split ring */
+ 		struct {
+@@ -739,7 +742,10 @@ static void virtqueue_disable_cb_split(struct virtqueue *_vq)
+ 
+ 	if (!(vq->split.avail_flags_shadow & VRING_AVAIL_F_NO_INTERRUPT)) {
+ 		vq->split.avail_flags_shadow |= VRING_AVAIL_F_NO_INTERRUPT;
+-		if (!vq->event)
++		if (vq->event)
++			/* TODO: this is a hack. Figure out a cleaner value to write. */
++			vring_used_event(&vq->split.vring) = 0x0;
++		else
+ 			vq->split.vring.avail->flags =
+ 				cpu_to_virtio16(_vq->vdev,
+ 						vq->split.avail_flags_shadow);
+@@ -1605,6 +1611,7 @@ static struct virtqueue *vring_create_virtqueue_packed(
+ 	vq->weak_barriers = weak_barriers;
+ 	vq->broken = false;
+ 	vq->last_used_idx = 0;
++	vq->event_triggered = false;
+ 	vq->num_added = 0;
+ 	vq->packed_ring = true;
+ 	vq->use_dma_api = vring_use_dma_api(vdev);
+@@ -1919,6 +1926,14 @@ void virtqueue_disable_cb(struct virtqueue *_vq)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 
++	/* If device triggered an event already it won't trigger one again:
++	 * no need to disable.
++	 */
++	if (vq->event_triggered) {
++		vq->event_triggered = false;
++		return;
++	}
++
+ 	if (vq->packed_ring)
+ 		virtqueue_disable_cb_packed(_vq);
+ 	else
+@@ -2044,6 +2059,10 @@ irqreturn_t vring_interrupt(int irq, void *_vq)
+ 	if (unlikely(vq->broken))
+ 		return IRQ_HANDLED;
+ 
++	/* Just a hint for performance: so it's ok that this can be racy! */
++	if (vq->event)
++		vq->event_triggered = true;
++
+ 	pr_debug("virtqueue callback for %p (%p)\n", vq, vq->vq.callback);
+ 	if (vq->vq.callback)
+ 		vq->vq.callback(&vq->vq);
+@@ -2083,6 +2102,7 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
+ 	vq->weak_barriers = weak_barriers;
+ 	vq->broken = false;
+ 	vq->last_used_idx = 0;
++	vq->event_triggered = false;
+ 	vq->num_added = 0;
+ 	vq->use_dma_api = vring_use_dma_api(vdev);
+ #ifdef DEBUG
 
 _______________________________________________
 Virtualization mailing list
