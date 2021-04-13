@@ -1,104 +1,105 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CF0335D768
-	for <lists.virtualization@lfdr.de>; Tue, 13 Apr 2021 07:48:06 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A1CD235D8DB
+	for <lists.virtualization@lfdr.de>; Tue, 13 Apr 2021 09:29:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7079040664;
-	Tue, 13 Apr 2021 05:48:04 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A378C605D8;
+	Tue, 13 Apr 2021 07:29:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id usDtFOtcpOqW; Tue, 13 Apr 2021 05:48:03 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 22EAD40666;
-	Tue, 13 Apr 2021 05:48:03 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CI4Fd6LwP480; Tue, 13 Apr 2021 07:29:44 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7387B60A37;
+	Tue, 13 Apr 2021 07:29:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C679CC000A;
-	Tue, 13 Apr 2021 05:48:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 11011C0012;
+	Tue, 13 Apr 2021 07:29:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E4982C000A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BAABDC000A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Apr 2021 05:48:01 +0000 (UTC)
+ Tue, 13 Apr 2021 07:29:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E047184335
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9C3AF40400
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Apr 2021 05:48:01 +0000 (UTC)
+ Tue, 13 Apr 2021 07:29:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zCcaQfd0SzY5
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id TDYagngDb0F7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Apr 2021 05:48:01 +0000 (UTC)
+ Tue, 13 Apr 2021 07:29:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3934E84344
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B0022403FC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Apr 2021 05:48:01 +0000 (UTC)
+ Tue, 13 Apr 2021 07:29:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618292880;
+ s=mimecast20190719; t=1618298980;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=QGJBfGcLgKMi1+/2KjTQyyM9awqMoNgF1ipdHiAyD40=;
- b=KFJmODUs9bg1g3CTvYREH5ojlYv8wpBMibY4n03+MGDQ4x0ZdfqW2aB6oa1tIU6xyz6xZC
- hqI/ORvv2kDqBkdIhbCEDrE7DlARI3ZcZjeHl7R/owlg0xPQte02Xc718/0c7sb8RiAFFr
- Z96hXkDFThtaBW/x4RSb0adlP3OD5Ck=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-189-R0Oc2LyeO5uUbSkT4ck_nQ-1; Tue, 13 Apr 2021 01:47:58 -0400
-X-MC-Unique: R0Oc2LyeO5uUbSkT4ck_nQ-1
-Received: by mail-wm1-f71.google.com with SMTP id
- o3-20020a1c75030000b029010f4e02a2f2so666998wmc.6
+ bh=YudAFqILa3mOOE+t1TyWZ2gFUm2V6rY++OIJXhuuw1I=;
+ b=GVFECx12o1HxFMFDi+vKfUZpJyldeRU3GqaOaZAL33IlUdEti5n+MXWu9OP0hh7u7wRhe8
+ TB8ZofjrRkF6FcQSlnJUO2g9FK9lwOVnOr3FnNZk5s3TUTklLDzdmz1ChdAeugi9dHyrkZ
+ 1l0++xy5yXZAO5soWr6+JhPspJXAABU=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-333-ZXzPK8bwPhSWUOactdNkwQ-1; Tue, 13 Apr 2021 03:29:38 -0400
+X-MC-Unique: ZXzPK8bwPhSWUOactdNkwQ-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ ay2-20020a0564022022b02903824b52f2d8so797922edb.22
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Apr 2021 22:47:58 -0700 (PDT)
+ Tue, 13 Apr 2021 00:29:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=QGJBfGcLgKMi1+/2KjTQyyM9awqMoNgF1ipdHiAyD40=;
- b=QlUohnHjYv7+CAiigfMIcfPYn+lxBtGUNk0fRkZJalkVll59bM4MYHZaPrUMsz9e32
- iqaNUeP5jKYOtW4YlasRGOA5agMqNCEHy6tRfUupiWqkGh4DW49oc/X9V4wnU6y9DMt4
- qfv1yRtGghfvDIyRSA8qsNrJgHQFns5SFvYcxRvzVXtbax1mHs/NrJHF0RE6npQ/z/Av
- bf4IO4LJrmFkNUX2uLew2fMfb+mTX4jzbudy77VTSSxu6XmDX07GsOAbylShcxVrQlSY
- Ijh0ktYOYryke2ap0ncFd63VPNqHwDFcbDv+yZT3waq2SUWFJiITQLq2IcEn+sjzUga2
- qVFA==
-X-Gm-Message-State: AOAM531rP0SCfTFF4hkOf2YHkDakVxpdy/6Wl4Bm/nl7MdgVfjNZzGf/
- cB/B+wWdK06yaPsp45tuHx6kNjf7er+czva6qB6nfs605N+nQDZBcd9AWMUhzp+gJVfMVy1GwG+
- Mb3m0+lLKO43zcvNZGP/W5bsjrRvklBAohAcxbAxs4Q==
-X-Received: by 2002:a1c:6a06:: with SMTP id f6mr2254272wmc.179.1618292877176; 
- Mon, 12 Apr 2021 22:47:57 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwW5ocyM6oF51LY1hu/Bl53XZpnXsl6/4JelfE4ZTpiVul59teVVfXyx5S11Km6LpSBfopV3w==
-X-Received: by 2002:a1c:6a06:: with SMTP id f6mr2254249wmc.179.1618292877015; 
- Mon, 12 Apr 2021 22:47:57 -0700 (PDT)
-Received: from redhat.com ([2a10:8006:2281:0:1994:c627:9eac:1825])
- by smtp.gmail.com with ESMTPSA id a8sm20895382wrh.91.2021.04.12.22.47.55
+ bh=YudAFqILa3mOOE+t1TyWZ2gFUm2V6rY++OIJXhuuw1I=;
+ b=qqep63xpgxuz+Zku5U/eY3xBnAL2UaaP4KLr2k46ZtEFC0AnF9FBKEug192RLbd+bu
+ 2nZN46xo+/ah0nuKOymZ4B3nUM3Mes1cg3YlavKkFHYeGMChaXyoOOUA3y7PRy6f/+p5
+ UcGGoZC193QMN6LMFQBhdzeV9TOmWAn1dcxR8IauCFkJXg9UdPqbPw1MhUPbN/vV6BwD
+ 61ZJSF6PZElsFR0K77A/bOz7YC6zIu37D7Csr3I9nHZfe1TjunD7JZHkRp6xU2rNN6pA
+ Fs2sdl6Uz0u6nOQL69OSWSKPhlnp86+oLp/3TTOXRi0ck0q3cRQv1Iwu9RPCIpbsEdI4
+ JPSg==
+X-Gm-Message-State: AOAM532nsH5yr3zu63pYwhOrEZPCL6Rc2m9k95jdP+qHvMhCEGVbky0x
+ +pNgcMRc1ALrqUaFe+fUmdpswwvN+SwmzyHgRXP17V3/qtMqwmxsIGatov2kLMiDa1EX/mDgk5p
+ Epaw78eaaJSwDr1yUxgIYfGOZIcNW9qn4kGO7qY5F1Q==
+X-Received: by 2002:a05:6402:3445:: with SMTP id
+ l5mr33576463edc.27.1618298977497; 
+ Tue, 13 Apr 2021 00:29:37 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxQrY+VYWzozoHawW7aNAan46NiQL9riVrwylV8GXb98pXD2+8ryZFNg9lKT4PGXF62dZbE/g==
+X-Received: by 2002:a05:6402:3445:: with SMTP id
+ l5mr33576447edc.27.1618298977323; 
+ Tue, 13 Apr 2021 00:29:37 -0700 (PDT)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id gt37sm7169639ejc.12.2021.04.13.00.29.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Apr 2021 22:47:56 -0700 (PDT)
-Date: Tue, 13 Apr 2021 01:47:54 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH RFC v2 4/4] virtio_net: move txq wakeups under tx q lock
-Message-ID: <20210413054733.36363-5-mst@redhat.com>
-References: <20210413054733.36363-1-mst@redhat.com>
+ Tue, 13 Apr 2021 00:29:37 -0700 (PDT)
+Date: Tue, 13 Apr 2021 09:29:34 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Colin King <colin.king@canonical.com>
+Subject: Re: [PATCH][next] vdpa/mlx5: Fix resource leak of mgtdev due to
+ incorrect kfree
+Message-ID: <20210413072934.ibz7iersn5byad3h@steredhat>
+References: <20210412162804.1628738-1-colin.king@canonical.com>
 MIME-Version: 1.0
-In-Reply-To: <20210413054733.36363-1-mst@redhat.com>
-X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
-X-Mutt-Fcc: =sent
+In-Reply-To: <20210412162804.1628738-1-colin.king@canonical.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Willem de Bruijn <willemb@google.com>, netdev@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Jakub Kicinski <kuba@kernel.org>,
- Wei Wang <weiwan@google.com>, David Miller <davem@davemloft.net>
+Cc: "Michael S . Tsirkin" <mst@redhat.com>, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,66 +111,43 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We currently check num_free outside tx q lock
-which is unsafe: new packets can arrive meanwhile
-and there won't be space in the queue.
-Thus a spurious queue wakeup causing overhead
-and even packet drops.
+On Mon, Apr 12, 2021 at 05:28:04PM +0100, Colin King wrote:
+>From: Colin Ian King <colin.king@canonical.com>
+>
+>Static analysis is reporting a memory leak on mgtdev, it appears
+>that the wrong object is being kfree'd. Fix this by kfree'ing
+>mgtdev rather than mdev.
+>
+>Addresses-Coverity: ("Resource leak")
+>Fixes: c8a2d4c73e70 ("vdpa/mlx5: Enable user to add/delete vdpa device")
+>Signed-off-by: Colin Ian King <colin.king@canonical.com>
+>---
+> drivers/vdpa/mlx5/net/mlx5_vnet.c | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>index 10c5fef3c020..25533db01f5f 100644
+>--- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>+++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>@@ -2089,7 +2089,7 @@ static int mlx5v_probe(struct auxiliary_device *adev,
+> 	return 0;
+>
+> reg_err:
+>-	kfree(mdev);
+>+	kfree(mgtdev);
+> 	return err;
+> }
+>
+>-- 
+>2.30.2
+>
 
-Move the check under the lock to fix that.
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/net/virtio_net.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
-
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 460ccdbb840e..febaf55ec1f6 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -1431,11 +1431,12 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
- 	if (__netif_tx_trylock(txq)) {
- 		virtqueue_disable_cb(sq->vq);
- 		free_old_xmit_skbs(sq, true);
-+
-+		if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
-+			netif_tx_wake_queue(txq);
-+
- 		__netif_tx_unlock(txq);
- 	}
--
--	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
--		netif_tx_wake_queue(txq);
- }
- 
- static int virtnet_poll(struct napi_struct *napi, int budget)
-@@ -1519,6 +1520,9 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 	virtqueue_disable_cb(sq->vq);
- 	free_old_xmit_skbs(sq, true);
- 
-+	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
-+		netif_tx_wake_queue(txq);
-+
- 	opaque = virtqueue_enable_cb_prepare(sq->vq);
- 
- 	done = napi_complete_done(napi, 0);
-@@ -1539,9 +1543,6 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 		}
- 	}
- 
--	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
--		netif_tx_wake_queue(txq);
--
- 	return 0;
- }
- 
--- 
-MST
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
 _______________________________________________
 Virtualization mailing list
