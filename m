@@ -1,71 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9461D360432
-	for <lists.virtualization@lfdr.de>; Thu, 15 Apr 2021 10:23:25 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1853A360453
+	for <lists.virtualization@lfdr.de>; Thu, 15 Apr 2021 10:33:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C87F140F9C;
-	Thu, 15 Apr 2021 08:23:23 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 87D6B40204;
+	Thu, 15 Apr 2021 08:33:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id g9JLdTUqrk0q; Thu, 15 Apr 2021 08:23:22 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uDuOP4MApKOZ; Thu, 15 Apr 2021 08:33:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6BDEE40FA5;
-	Thu, 15 Apr 2021 08:23:22 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 344AE4020D;
+	Thu, 15 Apr 2021 08:33:50 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0EACBC000A;
-	Thu, 15 Apr 2021 08:23:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AFA19C000A;
+	Thu, 15 Apr 2021 08:33:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 079FFC000A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3E8F8C000A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Apr 2021 08:23:20 +0000 (UTC)
+ Thu, 15 Apr 2021 08:33:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E1F7C60D8B
+ by smtp4.osuosl.org (Postfix) with ESMTP id 06D27400EA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Apr 2021 08:23:19 +0000 (UTC)
+ Thu, 15 Apr 2021 08:33:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qqV6TCiF74ky
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id a_KrdQ4DdA5F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Apr 2021 08:23:19 +0000 (UTC)
+ Thu, 15 Apr 2021 08:33:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0ECBA60D88
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D9BA140FA6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 15 Apr 2021 08:23:18 +0000 (UTC)
-IronPort-SDR: sbAmqZvo/jSvEoJpscG6c5iy4Tndb05CabSTMkBRYjKDGCXfWqQ1bnzaRpQiDprg23ZvFoSp5L
- fm6s2iU+I5dQ==
-X-IronPort-AV: E=McAfee;i="6200,9189,9954"; a="215314311"
-X-IronPort-AV: E=Sophos;i="5.82,223,1613462400"; d="scan'208";a="215314311"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
- by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Apr 2021 01:23:18 -0700
-IronPort-SDR: NnBSBmKZuiQhFP2kUgCvYOyQb6zgnVVK8MCFIcycmWEoC+F4egS5ZnCn9IeXfWpRVyuaPJxnNj
- 7CoPNOG3g9oQ==
-X-IronPort-AV: E=Sophos;i="5.82,223,1613462400"; d="scan'208";a="418665137"
-Received: from lingshan-mobl5.ccr.corp.intel.com (HELO [10.254.209.173])
- ([10.254.209.173])
- by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Apr 2021 01:23:17 -0700
+ Thu, 15 Apr 2021 08:33:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1618475624;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=rFlAp3YvJs0F97eeMuQpRtEailEfpWs3ksvlCDUwXGU=;
+ b=jRruHO67P2po/mnAKqpRWVN3Y+iCe5DwEL+a+qf5LKwPhSWewCNgNJ/p+cIhcYLKhlgU5H
+ 9wRsomrGck1sm3kVTSjW6fJCrMQTzp+e3tAir2Zl8SZfTOVV0uY6XyC5RZT6SgCIB4/17P
+ O2Lkm0JUeQ+/p6/E61Bf5zYp6L3zQX4=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-411-DDwt3vh1Od6YBlwaLyrlCg-1; Thu, 15 Apr 2021 04:33:42 -0400
+X-MC-Unique: DDwt3vh1Od6YBlwaLyrlCg-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ l22-20020a0564021256b0290384ebfba68cso950432edw.2
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 15 Apr 2021 01:33:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=rFlAp3YvJs0F97eeMuQpRtEailEfpWs3ksvlCDUwXGU=;
+ b=qEFtEMcK9jQKsZ/4VgxTlA8jWEBHKa9JZTIX/cozk6443CmkZKAdXyKgdVD9rCFhIC
+ PpzPKMAh5khRzFIVflldI4rcszZA2Qh3p/1PKeSta8nthoky6CTR8ybrBjJFhR9vgjLL
+ RJAvvbBEfbSbJHugmcSxzmNx2UAQDntGc9K3dJH56dEm3XCO5EGqUZ/NxaYhaztydNcw
+ pKerIC0sRfJBdvg3GdayrukqrxDFseQ0VGiPS9PHH1GF+aiYMtsViEkZvnFjFa2bIHXl
+ GIacMoVNgDWdLbf6NfTuYTpG/chGFKA4Kd99rwfOcdWnCL8naFq9gqNXrADlRsG76GAP
+ UV9A==
+X-Gm-Message-State: AOAM530EewE7EYgw1wz5t5pHRoSur/MLIB3FNuyLRDn1f5RltLOqNFpt
+ HNEguNk4sLu52crAeIp8IcQFn6FQyw6Y+5gYIMa9f+EtQTAaFfXmdjo2qSVM4PrJGwb4h0OIccy
+ PPX+WhCj4yPL9bROi4DU33yAj1Rvob0n1tCZ4lahMxA==
+X-Received: by 2002:aa7:d843:: with SMTP id f3mr2754568eds.52.1618475621507;
+ Thu, 15 Apr 2021 01:33:41 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxZa+D9nMdXw6pzlj0Za+o0qAqJsTL5rMTXAQ3+vABY5T8qNRRk2hc2mUbEVvoY1yQonb14Uw==
+X-Received: by 2002:aa7:d843:: with SMTP id f3mr2754555eds.52.1618475621324;
+ Thu, 15 Apr 2021 01:33:41 -0700 (PDT)
+Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
+ [79.34.249.199])
+ by smtp.gmail.com with ESMTPSA id kj24sm1383626ejc.49.2021.04.15.01.33.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Apr 2021 01:33:40 -0700 (PDT)
+Date: Thu, 15 Apr 2021 10:33:39 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Zhu Lingshan <lingshan.zhu@linux.intel.com>
 Subject: Re: [PATCH 3/3] vDPA/ifcvf: get_config_size should return dev
  specific config size
-To: virtualization@lists.linux-foundation.org
+Message-ID: <20210415083339.4whghntxtodt24xz@steredhat>
 References: <20210414091832.5132-1-lingshan.zhu@intel.com>
  <20210414091832.5132-4-lingshan.zhu@intel.com>
  <20210415081236.anbssqtsyjnmiaby@steredhat>
-From: Zhu Lingshan <lingshan.zhu@linux.intel.com>
-Message-ID: <406df891-246e-4eaf-030c-192d49813af0@linux.intel.com>
-Date: Thu, 15 Apr 2021 16:23:15 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.9.0
+ <406df891-246e-4eaf-030c-192d49813af0@linux.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20210415081236.anbssqtsyjnmiaby@steredhat>
-Content-Language: en-US
+In-Reply-To: <406df891-246e-4eaf-030c-192d49813af0@linux.intel.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,51 +113,90 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CgpPbiA0LzE1LzIwMjEgNDoxMiBQTSwgU3RlZmFubyBHYXJ6YXJlbGxhIHdyb3RlOgo+IE9uIFdl
-ZCwgQXByIDE0LCAyMDIxIGF0IDA1OjE4OjMyUE0gKzA4MDAsIFpodSBMaW5nc2hhbiB3cm90ZToK
-Pj4gZ2V0X2NvbmZpZ19zaXplKCkgc2hvdWxkIHJldHVybiB0aGUgc2l6ZSBiYXNlZCBvbiB0aGUg
-ZGVjZWN0ZWQKPj4gZGV2aWNlIHR5cGUuCj4+Cj4+IFNpZ25lZC1vZmYtYnk6IFpodSBMaW5nc2hh
-biA8bGluZ3NoYW4uemh1QGludGVsLmNvbT4KPj4gLS0tCj4+IGRyaXZlcnMvdmRwYS9pZmN2Zi9p
-ZmN2Zl9tYWluLmMgfCAxMSArKysrKysrKysrLQo+PiAxIGZpbGUgY2hhbmdlZCwgMTAgaW5zZXJ0
-aW9ucygrKSwgMSBkZWxldGlvbigtKQo+Pgo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBhL2lm
-Y3ZmL2lmY3ZmX21haW4uYyAKPj4gYi9kcml2ZXJzL3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jCj4+
-IGluZGV4IDliNmEzOGI3OThmYS4uYjQ4Yjk3ODliNjllIDEwMDY0NAo+PiAtLS0gYS9kcml2ZXJz
-L3ZkcGEvaWZjdmYvaWZjdmZfbWFpbi5jCj4+ICsrKyBiL2RyaXZlcnMvdmRwYS9pZmN2Zi9pZmN2
-Zl9tYWluLmMKPj4gQEAgLTM0Nyw3ICszNDcsMTYgQEAgc3RhdGljIHUzMiBpZmN2Zl92ZHBhX2dl
-dF92cV9hbGlnbihzdHJ1Y3QgCj4+IHZkcGFfZGV2aWNlICp2ZHBhX2RldikKPj4KPj4gc3RhdGlj
-IHNpemVfdCBpZmN2Zl92ZHBhX2dldF9jb25maWdfc2l6ZShzdHJ1Y3QgdmRwYV9kZXZpY2UgKnZk
-cGFfZGV2KQo+PiB7Cj4+IC3CoMKgwqAgcmV0dXJuIHNpemVvZihzdHJ1Y3QgdmlydGlvX25ldF9j
-b25maWcpOwo+PiArwqDCoMKgIHN0cnVjdCBpZmN2Zl9odyAqdmYgPSB2ZHBhX3RvX3ZmKHZkcGFf
-ZGV2KTsKPj4gK8KgwqDCoCBzaXplX3Qgc2l6ZTsKPj4gKwo+PiArwqDCoMKgIGlmICh2Zi0+ZGV2
-X3R5cGUgPT0gVklSVElPX0lEX05FVCkKPj4gK8KgwqDCoMKgwqDCoMKgIHNpemUgPSBzaXplb2Yo
-c3RydWN0IHZpcnRpb19uZXRfY29uZmlnKTsKPj4gKwo+PiArwqDCoMKgIGlmICh2Zi0+ZGV2X3R5
-cGUgPT0gVklSVElPX0lEX0JMT0NLKQo+PiArwqDCoMKgwqDCoMKgwqAgc2l6ZSA9IHNpemVvZihz
-dHJ1Y3QgdmlydGlvX2Jsa19jb25maWcpOwo+PiArCj4+ICvCoMKgwqAgcmV0dXJuIHNpemU7Cj4K
-PiBJJ20gbm90IGZhbWlsaWFyIHdpdGggdGhlIGlmY3ZmIGRldGFpbHMsIGJ1dCBjYW4gaXQgaGFw
-cGVuIHRoYXQgdGhlIAo+IGRldmljZSBpcyBub3QgYmxvY2sgb3IgbmV0Pwo+Cj4gU2hvdWxkIHdl
-IHNldCBgc2l6ZWAgdG8gMCBieSBkZWZhdWx0IHRvIGhhbmRsZSB0aGlzIGNhc2Ugb3IgYXJlIHdl
-IAo+IHN1cmUgaXQncyBvbmUgb2YgdGhlIHR3bz8KPgo+IE1heWJlIHdlIHNob3VsZCBhZGQgYSBj
-b21tZW50IG9yIGEgd2FybmluZyBtZXNzYWdlIGluIHRoaXMgY2FzZSwgdG8gCj4gcHJldmVudCBz
-b21lIGFuYWx5c2lzIHRvb2wgb3IgY29tcGlsZXIgZnJvbSB3b3JyeWluZyB0aGF0IGBzaXplYCBt
-aWdodCAKPiBiZSB1bmluaXRpYWxpemVkLgo+Cj4gSSB3YXMgdGhpbmtpbmcgc29tZXRoaW5nIGxp
-a2UgdGhpczoKPgo+IMKgwqDCoMKgc3dpdGNoKHZmLT5kZXZfdHlwZSkgewo+IMKgwqDCoMKgY2Fz
-ZSBWSVJUSU9fSURfTkVUOgo+IMKgwqDCoMKgwqDCoMKgIHNpemUgPSBzaXplb2Yoc3RydWN0IHZp
-cnRpb19uZXRfY29uZmlnKTsKPiDCoMKgwqDCoMKgwqDCoCBicmVhazsKPiDCoMKgwqDCoGNhc2Ug
-VklSVElPX0lEX0JMT0NLOgo+IMKgwqDCoMKgwqDCoMKgIHNpemUgPSBzaXplb2Yoc3RydWN0IHZp
-cnRpb19ibGtfY29uZmlnKTsKPiDCoMKgwqDCoMKgwqDCoCBicmVhazsKPiDCoMKgwqDCoGRlZmF1
-bHQ6Cj4gwqDCoMKgwqDCoMKgwqAgLyogb3IgV0FSTigxLCAiIikgaWYgZGV2X3dhcm4oKSBub3Qg
-YXBwbHkgKi8KPiDCoMKgwqDCoMKgwqDCoCBkZXZfd2FybiguLi4gLCAidmlydGlvIElEIFsweCV4
-XSBub3Qgc3VwcG9ydGVkXG4iKQo+IMKgwqDCoMKgwqDCoMKgIHNpemUgPSAwOwo+Cj4gwqDCoMKg
-wqB9Cj4KPiBUaGFua3MsCj4gU3RlZmFubwphZ3JlZSwgd2lsbCBhZGQgdGhpcyBpbiBWMgoKVGhh
-bmtzCj4KPiBfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwo+
-IFZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdAo+IFZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4
-LWZvdW5kYXRpb24ub3JnCj4gaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxt
-YW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXph
-dGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRh
-dGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Thu, Apr 15, 2021 at 04:23:15PM +0800, Zhu Lingshan wrote:
+>
+>
+>On 4/15/2021 4:12 PM, Stefano Garzarella wrote:
+>>On Wed, Apr 14, 2021 at 05:18:32PM +0800, Zhu Lingshan wrote:
+>>>get_config_size() should return the size based on the decected
+>>>device type.
+>>>
+>>>Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+>>>---
+>>>drivers/vdpa/ifcvf/ifcvf_main.c | 11 ++++++++++-
+>>>1 file changed, 10 insertions(+), 1 deletion(-)
+>>>
+>>>diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c =
+
+>>>b/drivers/vdpa/ifcvf/ifcvf_main.c
+>>>index 9b6a38b798fa..b48b9789b69e 100644
+>>>--- a/drivers/vdpa/ifcvf/ifcvf_main.c
+>>>+++ b/drivers/vdpa/ifcvf/ifcvf_main.c
+>>>@@ -347,7 +347,16 @@ static u32 ifcvf_vdpa_get_vq_align(struct =
+
+>>>vdpa_device *vdpa_dev)
+>>>
+>>>static size_t ifcvf_vdpa_get_config_size(struct vdpa_device *vdpa_dev)
+>>>{
+>>>-=A0=A0=A0 return sizeof(struct virtio_net_config);
+>>>+=A0=A0=A0 struct ifcvf_hw *vf =3D vdpa_to_vf(vdpa_dev);
+>>>+=A0=A0=A0 size_t size;
+>>>+
+>>>+=A0=A0=A0 if (vf->dev_type =3D=3D VIRTIO_ID_NET)
+>>>+=A0=A0=A0=A0=A0=A0=A0 size =3D sizeof(struct virtio_net_config);
+>>>+
+>>>+=A0=A0=A0 if (vf->dev_type =3D=3D VIRTIO_ID_BLOCK)
+>>>+=A0=A0=A0=A0=A0=A0=A0 size =3D sizeof(struct virtio_blk_config);
+>>>+
+>>>+=A0=A0=A0 return size;
+>>
+>>I'm not familiar with the ifcvf details, but can it happen that the =
+
+>>device is not block or net?
+>>
+>>Should we set `size` to 0 by default to handle this case or are we =
+
+>>sure it's one of the two?
+>>
+>>Maybe we should add a comment or a warning message in this case, to =
+
+>>prevent some analysis tool or compiler from worrying that `size` =
+
+>>might be uninitialized.
+>>
+>>I was thinking something like this:
+>>
+>>=A0=A0=A0=A0switch(vf->dev_type) {
+>>=A0=A0=A0=A0case VIRTIO_ID_NET:
+>>=A0=A0=A0=A0=A0=A0=A0 size =3D sizeof(struct virtio_net_config);
+>>=A0=A0=A0=A0=A0=A0=A0 break;
+>>=A0=A0=A0=A0case VIRTIO_ID_BLOCK:
+>>=A0=A0=A0=A0=A0=A0=A0 size =3D sizeof(struct virtio_blk_config);
+>>=A0=A0=A0=A0=A0=A0=A0 break;
+>>=A0=A0=A0=A0default:
+>>=A0=A0=A0=A0=A0=A0=A0 /* or WARN(1, "") if dev_warn() not apply */
+>>=A0=A0=A0=A0=A0=A0=A0 dev_warn(... , "virtio ID [0x%x] not supported\n")
+>>=A0=A0=A0=A0=A0=A0=A0 size =3D 0;
+>>
+>>=A0=A0=A0=A0}
+>>
+>>Thanks,
+>>Stefano
+>agree, will add this in V2
+
+Great, maybe something similar also in patch 2/3 for `features` in =
+
+ifcvf_vdpa_get_features().
+
+Thanks,
+Stefano
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
