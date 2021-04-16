@@ -1,105 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 807DE361BB3
-	for <lists.virtualization@lfdr.de>; Fri, 16 Apr 2021 10:47:50 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B303C361C40
+	for <lists.virtualization@lfdr.de>; Fri, 16 Apr 2021 11:01:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B57814185D;
-	Fri, 16 Apr 2021 08:47:48 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F111F8476F;
+	Fri, 16 Apr 2021 09:00:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8UIR73aV3B2I; Fri, 16 Apr 2021 08:47:47 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cDMHjLF3dzKF; Fri, 16 Apr 2021 09:00:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 608C441866;
-	Fri, 16 Apr 2021 08:47:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9C6418476A;
+	Fri, 16 Apr 2021 09:00:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DE3DCC000A;
-	Fri, 16 Apr 2021 08:47:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6CD8EC0013;
+	Fri, 16 Apr 2021 09:00:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3259EC000A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A21AC000A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Apr 2021 08:47:46 +0000 (UTC)
+ Fri, 16 Apr 2021 09:00:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2DBFE60DCB
+ by smtp3.osuosl.org (Postfix) with ESMTP id 01C4960DD0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Apr 2021 08:47:46 +0000 (UTC)
+ Fri, 16 Apr 2021 09:00:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id r3QszzJSpxCd
+ with ESMTP id oxt7tsaukf5c
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Apr 2021 08:47:45 +0000 (UTC)
+ Fri, 16 Apr 2021 09:00:53 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6CD5660715
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A2A1760652
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Apr 2021 08:47:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618562864;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=2r7NGmqheP2GV+6A/LiwNG2tOhjWpE+ouB1t/RVmSe4=;
- b=FUhgS5DsuE9li4xMlFG9nF2S4BrL+uOfeU8Cwf5Es7/eZ22UJGXVILczvaPcWcHvtbunbU
- 77xXP4Ox9Atq3lLNIW1H1VQx8Bk6kW0iUgYpfPqn/o0BEh/IPLij5ONUcAqTvuF0lRRZet
- /j0lRhQa0q9aRVYVvrA/slWu+49x1Xs=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-107-gXZ55by_Pf-YrEYVLIeasg-1; Fri, 16 Apr 2021 04:47:42 -0400
-X-MC-Unique: gXZ55by_Pf-YrEYVLIeasg-1
-Received: by mail-ed1-f69.google.com with SMTP id
- f9-20020a50fe090000b02903839889635cso4655189edt.14
- for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Apr 2021 01:47:42 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=2r7NGmqheP2GV+6A/LiwNG2tOhjWpE+ouB1t/RVmSe4=;
- b=nbGIAEBVV3yimlE8Xyy98hzcM93Se/ZA19OicLGUAW9dcxPy+NXtilSGZZuB5o1TXE
- 5OLrgicWsOKun7yz+QFyvEFsmMUrIzZmnqrTbcW7gDgGljRDVL0zrsvdMSLhbpFRjpfP
- xpw3gY3XpljFMqlL3CMW84HcaYNo7dSURwepjORg1mWycl6iGJW6iB3FWkn6teSePeNX
- xgzguUEvlQS+GkoYx5GlqZC4fp+ayv3+4SoAxIjtOGBYMEI+IvyjKnAqmn7I6V6IE+7+
- ks/wrcrLUGQr/NvuJbWs7G0YaHneX9Ss9NUVShKmLsyEHFA4NubJYipRVIe0B/uduWqN
- RxAQ==
-X-Gm-Message-State: AOAM532RH8YS86EFee6KKMx2+VjSL6odhO4dB8KnMfQGr59OrtQmDHKN
- dQ4W4FNMcYYtSPp1aruvAyn0JFRP3ornlaO1AgeVIyVCih2YA3yhOD1RMoXimRfY80lBRwxD7ns
- jbdZ3bBtlNcr8mVC88SbkCOinLnzuttNPXhyz++ecSw==
-X-Received: by 2002:aa7:db87:: with SMTP id u7mr8433900edt.16.1618562861496;
- Fri, 16 Apr 2021 01:47:41 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyB2d7tIaEFMBWd3DwYN1KfiOebKxLZRxhbIvY5dtME0hUSHkW/0SULGJHTws6pnnflB3CeaA==
-X-Received: by 2002:aa7:db87:: with SMTP id u7mr8433888edt.16.1618562861323;
- Fri, 16 Apr 2021 01:47:41 -0700 (PDT)
-Received: from steredhat (host-79-34-249-199.business.telecomitalia.it.
- [79.34.249.199])
- by smtp.gmail.com with ESMTPSA id m14sm1016232edc.18.2021.04.16.01.47.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 16 Apr 2021 01:47:41 -0700 (PDT)
-Date: Fri, 16 Apr 2021 10:47:38 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Zhu Lingshan <lingshan.zhu@intel.com>
-Subject: Re: [PATCH V3 3/3] vDPA/ifcvf: get_config_size should return dev
- specific config size
-Message-ID: <20210416084738.k2xr7m6rdhrvoqr2@steredhat>
-References: <20210416071628.4984-1-lingshan.zhu@intel.com>
- <20210416071628.4984-4-lingshan.zhu@intel.com>
+ Fri, 16 Apr 2021 09:00:53 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 443F9ADB3;
+ Fri, 16 Apr 2021 09:00:51 +0000 (UTC)
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
+ mripard@kernel.org, kraxel@redhat.com, corbet@lwn.net, lgirdwood@gmail.com,
+ broonie@kernel.org, sam@ravnborg.org, robh@kernel.org,
+ emil.l.velikov@gmail.com, geert+renesas@glider.be, hdegoede@redhat.com,
+ bluescreen_avenger@verizon.net, gregkh@linuxfoundation.org
+Subject: [PATCH v4 0/9] drm: Support simple-framebuffer devices and firmware
+ fbs
+Date: Fri, 16 Apr 2021 11:00:39 +0200
+Message-Id: <20210416090048.11492-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-In-Reply-To: <20210416071628.4984-4-lingshan.zhu@intel.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: lulu@redhat.com, kvm@vger.kernel.org, mst@redhat.com,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Cc: virtualization@lists.linux-foundation.org,
+ Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
+ linux-doc@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,56 +68,116 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Apr 16, 2021 at 03:16:28PM +0800, Zhu Lingshan wrote:
->get_config_size() should return the size based on the decected
->device type.
->
->Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
->---
-> drivers/vdpa/ifcvf/ifcvf_main.c | 19 ++++++++++++++++++-
-> 1 file changed, 18 insertions(+), 1 deletion(-)
+This patchset adds support for simple-framebuffer platform devices and
+a handover mechanism for native drivers to take-over control of the
+hardware.
 
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+The new driver, called simpledrm, binds to a simple-frambuffer platform
+device. The kernel's boot code creates such devices for firmware-provided
+framebuffers, such as EFI-GOP or VESA. Typically the BIOS, UEFI or boot
+loader sets up the framebuffers. Description via device tree is also an
+option.
 
->
->diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
->index 376b2014916a..3b6f7862dbb8 100644
->--- a/drivers/vdpa/ifcvf/ifcvf_main.c
->+++ b/drivers/vdpa/ifcvf/ifcvf_main.c
->@@ -356,7 +356,24 @@ static u32 ifcvf_vdpa_get_vq_align(struct vdpa_device *vdpa_dev)
->
-> static size_t ifcvf_vdpa_get_config_size(struct vdpa_device *vdpa_dev)
-> {
->-	return sizeof(struct virtio_net_config);
->+	struct ifcvf_adapter *adapter = vdpa_to_adapter(vdpa_dev);
->+	struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
->+	struct pci_dev *pdev = adapter->pdev;
->+	size_t size;
->+
->+	switch (vf->dev_type) {
->+	case VIRTIO_ID_NET:
->+		size = sizeof(struct virtio_net_config);
->+		break;
->+	case VIRTIO_ID_BLOCK:
->+		size = sizeof(struct virtio_blk_config);
->+		break;
->+	default:
->+		size = 0;
->+		IFCVF_ERR(pdev, "VIRTIO ID %u not supported\n", vf->dev_type);
->+	}
->+
->+	return size;
-> }
->
-> static void ifcvf_vdpa_get_config(struct vdpa_device *vdpa_dev,
->-- 
->2.27.0
->
+Simpledrm is small enough to be linked into the kernel. The driver's main
+purpose is to provide graphical output during the early phases of the boot
+process, before the native DRM drivers are available. Native drivers are
+typically loaded from an initrd ram disk. Occationally simpledrm can also
+serve as interim solution on graphics hardware without native DRM driver.
+
+So far distributions rely on fbdev drivers, such as efifb, vesafb or
+simplefb, for early-boot graphical output. However fbdev is deprecated and
+the drivers do not provide DRM interfaces for modern userspace.
+
+Patches 1 and 2 prepare the DRM format helpers for simpledrm.
+
+Patches 4 to 8 add the simpledrm driver. It's build on simple DRM helpers
+and SHMEM. It supports 16-bit, 24-bit and 32-bit RGB framebuffers. During
+pageflips, SHMEM buffers are copied into the framebuffer memory, similar
+to cirrus or mgag200. The code in patches 7 and 8 handles clocks and
+regulators. It's based on the simplefb drivers, but has been modified for
+DRM.
+
+Patches 3 and 9 add a hand-over mechanism. Simpledrm acquires it's
+framebuffer's I/O-memory range and can be hot-unplugged by a native driver.
+The native driver will remove simpledrm before taking over the hardware.
+The removal is integrated into existing helpers, so existing drivers use
+it automatically.
+
+I've also been working on fastboot support (i.e., flicker-free booting).
+This requires state-readout from simpledrm via generic interfaces, as
+outlined in [1]. I do have some prototype code, but it will take a while
+to get this ready. Simpledrm will then support it.
+
+I've tested simpledrm with x86 EFI and VESA framebuffers, which both work
+reliably. The fbdev console and Weston work automatically. Xorg requires
+manual configuration of the device. Xorgs current modesetting driver does
+not work with both, platform and PCI device, for the same physical
+hardware. Once configured, X11 works. I looked into X11, but couldn't see
+an easy way of fixing the problem. With the push towards Wayland+Xwayland
+I expect the problem to become a non-issue soon. Additional testing has
+been reported at [2].
+
+One cosmetical issue is that simpledrm's device file is card0 and the
+native driver's device file is card1. After simpledrm has been kicked out,
+only card1 is left. This does not seem to be a practical problem however.
+
+TODO/IDEAS:
+       	* provide deferred takeover
+	* provide bootsplash DRM client
+	* make simplekms usable with ARM-EFI fbs
+
+v4:
+	* provide interface for acquiring firmware framebuffers (Daniel)
+	* make simpledrm and simplefb mutually exclusive (Maxime)
+	* documentation fixes
+v3:
+	* clear screen to black when disabled (Daniel)
+	* rebase onto existing aperture helpers
+	* detach via hot-unplug via platform_device_unregister()
+v2:
+	* rename to simpledrm, aperture helpers
+	* reorganized patches
+	* use hotplug helpers for removal (Daniel)
+	* added DT match tables (Rob)
+	* use shadow-plane helpers
+	* lots of minor cleanups
+
+[1] https://lore.kernel.org/dri-devel/CAKMK7uHtqHy_oz4W7F+hmp9iqp7W5Ra8CxPvJ=9BwmvfU-O0gg@mail.gmail.com/
+[2] https://lore.kernel.org/dri-devel/1761762.3HQLrFs1K7@nerdopolis/
+
+Thomas Zimmermann (9):
+  drm/format-helper: Pass destination pitch to drm_fb_memcpy_dstclip()
+  drm/format-helper: Add blitter functions
+  drm/aperture: Add infrastructure for aperture ownership
+  drm: Add simpledrm driver
+  drm/simpledrm: Add fbdev emulation
+  drm/simpledrm: Initialize framebuffer data from device-tree node
+  drm/simpledrm: Acquire clocks from DT device node
+  drm/simpledrm: Acquire regulators from DT device node
+  drm/simpledrm: Acquire memory aperture for framebuffer
+
+ Documentation/gpu/drm-internals.rst    |  21 +-
+ MAINTAINERS                            |   7 +
+ drivers/gpu/drm/drm_aperture.c         | 221 +++++-
+ drivers/gpu/drm/drm_format_helper.c    |  96 ++-
+ drivers/gpu/drm/mgag200/mgag200_mode.c |   2 +-
+ drivers/gpu/drm/tiny/Kconfig           |  16 +
+ drivers/gpu/drm/tiny/Makefile          |   1 +
+ drivers/gpu/drm/tiny/cirrus.c          |   2 +-
+ drivers/gpu/drm/tiny/simpledrm.c       | 896 +++++++++++++++++++++++++
+ drivers/video/fbdev/Kconfig            |   2 +-
+ include/drm/drm_aperture.h             |  20 +-
+ include/drm/drm_format_helper.h        |  10 +-
+ 12 files changed, 1254 insertions(+), 40 deletions(-)
+ create mode 100644 drivers/gpu/drm/tiny/simpledrm.c
+
+--
+2.31.1
 
 _______________________________________________
 Virtualization mailing list
