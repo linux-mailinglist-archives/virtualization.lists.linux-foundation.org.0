@@ -1,82 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D2904363D18
-	for <lists.virtualization@lfdr.de>; Mon, 19 Apr 2021 10:01:17 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B66B53646EA
+	for <lists.virtualization@lfdr.de>; Mon, 19 Apr 2021 17:16:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 78D48607BC;
-	Mon, 19 Apr 2021 08:01:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A00C083841;
+	Mon, 19 Apr 2021 15:16:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Rgx8fVilqU0T; Mon, 19 Apr 2021 08:01:15 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4082B607C0;
-	Mon, 19 Apr 2021 08:01:15 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id g__BLRTyRHfM; Mon, 19 Apr 2021 15:16:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTP id AB37C8392B;
+	Mon, 19 Apr 2021 15:16:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C5B03C000B;
-	Mon, 19 Apr 2021 08:01:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 40690C000B;
+	Mon, 19 Apr 2021 15:16:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2B00BC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C63C3C000B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Apr 2021 08:01:12 +0000 (UTC)
+ Mon, 19 Apr 2021 15:16:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 24B964014D
+ by smtp2.osuosl.org (Postfix) with ESMTP id B3F3B4013E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Apr 2021 08:01:12 +0000 (UTC)
+ Mon, 19 Apr 2021 15:16:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id u5MDJ5UEcvmC
+ with ESMTP id 0inwMLp0pJ6z
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Apr 2021 08:01:08 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ua1-f50.google.com (mail-ua1-f50.google.com
- [209.85.222.50])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5C8E34014C
+ Mon, 19 Apr 2021 15:16:24 +0000 (UTC)
+X-Greylist: delayed 00:07:13 by SQLgrey-1.8.0
+Received: from us-smtp-delivery-44.mimecast.com
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E6F8040100
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Apr 2021 08:01:08 +0000 (UTC)
-Received: by mail-ua1-f50.google.com with SMTP id j8so8205958uak.2
- for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Apr 2021 01:01:08 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=BUpGwjpEu/4vLb0RdqZG1KLsDpmabVtYAByt0suTszU=;
- b=A6hSeMSizFkwQdU9ooPgcVQ0aVLujYab0qWaG1jcCzxFmYGaxOUlP8xpsxuJriMMLU
- rfJmwKzsw6V+7UAqIDJJNIygrmHFizDV6mWEDctW+oSC28kRaxS5b4uOObB7tJFoM99W
- q9RLj+m74yYuXOg2Q3ZhMk8VoNi+wtpw45slwA/73ub/V8JGuqtpWFaGUQIUUkX+5S9E
- +je7FqhcTwJ7KdjnSunNixfu8D59ytKA6cyFygSmz7Vorx8gOO8yAJcYvEX6Tuli7vQZ
- wS2Qnl28jy+8nuoQVNrB/1eVqlj2HoJcF3/EvIRzzn2mAAc2QttlLCsOoJM4+SKRuppD
- cJow==
-X-Gm-Message-State: AOAM530Yd4kca8G4bVZ6ls0H/KE6YqTHtVDtBg1/voxB4cWg1jb1/oo0
- xqig9M0b+atNF8MbwQFfw/H/3bf1OMy2tpeKUh0=
-X-Google-Smtp-Source: ABdhPJxWhSqaSXDdtxTrt8N0QC9ouc95t3YD202R1UAd81UELN2SUsFdr7jUmXmQOOF/DBgt7DAQOC6q/DvsGEPBMvg=
-X-Received: by 2002:ab0:2c16:: with SMTP id l22mr6342516uar.100.1618819267298; 
- Mon, 19 Apr 2021 01:01:07 -0700 (PDT)
+ Mon, 19 Apr 2021 15:16:23 +0000 (UTC)
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-239-fF-zZ_MtN7CFjoIojY9c2A-1; Mon, 19 Apr 2021 11:09:04 -0400
+X-MC-Unique: fF-zZ_MtN7CFjoIojY9c2A-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D88311006C8D;
+ Mon, 19 Apr 2021 15:09:02 +0000 (UTC)
+Received: from bahia.redhat.com (ovpn-112-134.ams2.redhat.com [10.36.112.134])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 50BAF614FD;
+ Mon, 19 Apr 2021 15:08:49 +0000 (UTC)
+From: Greg Kurz <groug@kaod.org>
+To: Miklos Szeredi <miklos@szeredi.hu>
+Subject: [PATCH] virtiofs: propagate sync() to file server
+Date: Mon, 19 Apr 2021 17:08:48 +0200
+Message-Id: <20210419150848.275757-1-groug@kaod.org>
 MIME-Version: 1.0
-References: <20210416090048.11492-1-tzimmermann@suse.de>
-In-Reply-To: <20210416090048.11492-1-tzimmermann@suse.de>
-From: Geert Uytterhoeven <geert@linux-m68k.org>
-Date: Mon, 19 Apr 2021 10:00:56 +0200
-Message-ID: <CAMuHMdWcC8O+UzQDQj7Bm4uK_myjFT5D2ccTmneTJYi4SMfCRQ@mail.gmail.com>
-Subject: Re: [PATCH v4 0/9] drm: Support simple-framebuffer devices and
- firmware fbs
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Cc: Rob Herring <robh@kernel.org>, bluescreen_avenger@verizon.net,
- Jonathan Corbet <corbet@lwn.net>, David Airlie <airlied@linux.ie>,
- Emil Velikov <emil.l.velikov@gmail.com>,
- DRI Development <dri-devel@lists.freedesktop.org>,
- "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Liam Girdwood <lgirdwood@gmail.com>, Maxime Ripard <mripard@kernel.org>,
- virtualization@lists.linux-foundation.org, Hans de Goede <hdegoede@redhat.com>,
- Mark Brown <broonie@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
- Greg KH <gregkh@linuxfoundation.org>, Sam Ravnborg <sam@ravnborg.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=groug@kaod.org
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: kaod.org
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ virtio-fs@redhat.com, Stefan Hajnoczi <stefanha@redhat.com>,
+ linux-fsdevel@vger.kernel.org, Robert Krawitz <rlk@redhat.com>,
+ Vivek Goyal <vgoyal@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,36 +83,178 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Thomas,
+Even if POSIX doesn't mandate it, linux users legitimately expect
+sync() to flush all data and metadata to physical storage when it
+is located on the same system. This isn't happening with virtiofs
+though : sync() inside the guest returns right away even though
+data still needs to be flushed from the host page cache.
 
-On Fri, Apr 16, 2021 at 11:00 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
-> This patchset adds support for simple-framebuffer platform devices and
-> a handover mechanism for native drivers to take-over control of the
-> hardware.
->
-> The new driver, called simpledrm, binds to a simple-frambuffer platform
-> device. The kernel's boot code creates such devices for firmware-provided
-> framebuffers, such as EFI-GOP or VESA. Typically the BIOS, UEFI or boot
-> loader sets up the framebuffers. Description via device tree is also an
-> option.
+This is easily demonstrated by doing the following in the guest:
 
-I guess this can be used as a replacement for offb, too...
+$ dd if=/dev/zero of=/mnt/foo bs=1M count=5K ; strace -T -e sync sync
+5120+0 records in
+5120+0 records out
+5368709120 bytes (5.4 GB, 5.0 GiB) copied, 5.22224 s, 1.0 GB/s
+sync()                                  = 0 <0.024068>
++++ exited with 0 +++
 
-> Patches 4 to 8 add the simpledrm driver. It's build on simple DRM helpers
-> and SHMEM. It supports 16-bit, 24-bit and 32-bit RGB framebuffers. During
+and start the following in the host when the 'dd' command completes
+in the guest:
 
-.... if support for 8-bit frame buffers would be added?
+$ strace -T -e fsync sync virtiofs/foo
+fsync(3)                                = 0 <10.371640>
++++ exited with 0 +++
 
-Gr{oetje,eeting}s,
+There are no good reasons not to honor the expected behavior of
+sync() actually : it gives an unrealistic impression that virtiofs
+is super fast and that data has safely landed on HW, which isn't
+the case obviously.
 
-                        Geert
+Implement a ->sync_fs() superblock operation that sends a new
+FUSE_SYNC request type for this purpose. The FUSE_SYNC request
+conveys the 'wait' argument of ->sync_fs() in case the file
+server has a use for it. Like with FUSE_FSYNC and FUSE_FSYNCDIR,
+lack of support for FUSE_SYNC in the file server is treated as
+permanent success.
 
+Note that such an operation allows the file server to DoS sync().
+Since a typical FUSE file server is an untrusted piece of software
+running in userspace, this is disabled by default.  Only enable it
+with virtiofs for now since virtiofsd is supposedly trusted by the
+guest kernel.
+
+Reported-by: Robert Krawitz <rlk@redhat.com>
+Signed-off-by: Greg Kurz <groug@kaod.org>
+---
+
+Can be tested using the following custom QEMU with FUSE_SYNCFS support:
+
+https://gitlab.com/gkurz/qemu/-/tree/fuse-sync
+
+---
+ fs/fuse/fuse_i.h          |  3 +++
+ fs/fuse/inode.c           | 29 +++++++++++++++++++++++++++++
+ fs/fuse/virtio_fs.c       |  1 +
+ include/uapi/linux/fuse.h | 11 ++++++++++-
+ 4 files changed, 43 insertions(+), 1 deletion(-)
+
+diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
+index 63d97a15ffde..68e9ae96cbd4 100644
+--- a/fs/fuse/fuse_i.h
++++ b/fs/fuse/fuse_i.h
+@@ -755,6 +755,9 @@ struct fuse_conn {
+ 	/* Auto-mount submounts announced by the server */
+ 	unsigned int auto_submounts:1;
+ 
++	/* Propagate syncfs() to server */
++	unsigned int sync_fs:1;
++
+ 	/** The number of requests waiting for completion */
+ 	atomic_t num_waiting;
+ 
+diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+index b0e18b470e91..425d567a06c5 100644
+--- a/fs/fuse/inode.c
++++ b/fs/fuse/inode.c
+@@ -506,6 +506,34 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
+ 	return err;
+ }
+ 
++static int fuse_sync_fs(struct super_block *sb, int wait)
++{
++	struct fuse_mount *fm = get_fuse_mount_super(sb);
++	struct fuse_conn *fc = fm->fc;
++	struct fuse_syncfs_in inarg;
++	FUSE_ARGS(args);
++	int err;
++
++	if (!fc->sync_fs)
++		return 0;
++
++	memset(&inarg, 0, sizeof(inarg));
++	inarg.wait = wait;
++	args.in_numargs = 1;
++	args.in_args[0].size = sizeof(inarg);
++	args.in_args[0].value = &inarg;
++	args.opcode = FUSE_SYNCFS;
++	args.out_numargs = 0;
++
++	err = fuse_simple_request(fm, &args);
++	if (err == -ENOSYS) {
++		fc->sync_fs = 0;
++		err = 0;
++	}
++
++	return err;
++}
++
+ enum {
+ 	OPT_SOURCE,
+ 	OPT_SUBTYPE,
+@@ -909,6 +937,7 @@ static const struct super_operations fuse_super_operations = {
+ 	.put_super	= fuse_put_super,
+ 	.umount_begin	= fuse_umount_begin,
+ 	.statfs		= fuse_statfs,
++	.sync_fs	= fuse_sync_fs,
+ 	.show_options	= fuse_show_options,
+ };
+ 
+diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+index 4ee6f734ba83..a3c025308743 100644
+--- a/fs/fuse/virtio_fs.c
++++ b/fs/fuse/virtio_fs.c
+@@ -1441,6 +1441,7 @@ static int virtio_fs_get_tree(struct fs_context *fsc)
+ 	fc->release = fuse_free_conn;
+ 	fc->delete_stale = true;
+ 	fc->auto_submounts = true;
++	fc->sync_fs = true;
+ 
+ 	fsc->s_fs_info = fm;
+ 	sb = sget_fc(fsc, virtio_fs_test_super, set_anon_super_fc);
+diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
+index 54442612c48b..6e8c3cf3207c 100644
+--- a/include/uapi/linux/fuse.h
++++ b/include/uapi/linux/fuse.h
+@@ -179,6 +179,9 @@
+  *  7.33
+  *  - add FUSE_HANDLE_KILLPRIV_V2, FUSE_WRITE_KILL_SUIDGID, FATTR_KILL_SUIDGID
+  *  - add FUSE_OPEN_KILL_SUIDGID
++ *
++ *  7.34
++ *  - add FUSE_SYNCFS
+  */
+ 
+ #ifndef _LINUX_FUSE_H
+@@ -214,7 +217,7 @@
+ #define FUSE_KERNEL_VERSION 7
+ 
+ /** Minor version number of this interface */
+-#define FUSE_KERNEL_MINOR_VERSION 33
++#define FUSE_KERNEL_MINOR_VERSION 34
+ 
+ /** The node ID of the root inode */
+ #define FUSE_ROOT_ID 1
+@@ -499,6 +502,7 @@ enum fuse_opcode {
+ 	FUSE_COPY_FILE_RANGE	= 47,
+ 	FUSE_SETUPMAPPING	= 48,
+ 	FUSE_REMOVEMAPPING	= 49,
++	FUSE_SYNCFS		= 50,
+ 
+ 	/* CUSE specific operations */
+ 	CUSE_INIT		= 4096,
+@@ -957,4 +961,9 @@ struct fuse_removemapping_one {
+ #define FUSE_REMOVEMAPPING_MAX_ENTRY   \
+ 		(PAGE_SIZE / sizeof(struct fuse_removemapping_one))
+ 
++struct fuse_syncfs_in {
++	/* Whether to wait for outstanding I/Os to complete */
++	uint32_t wait;
++};
++
+ #endif /* _LINUX_FUSE_H */
 -- 
-Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+2.26.3
 
-In personal conversations with technical people, I call myself a hacker. But
-when I'm talking to journalists I just say "programmer" or something like that.
-                                -- Linus Torvalds
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
