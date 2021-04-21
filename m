@@ -1,76 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A7A973663EF
-	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 05:21:55 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC4913663F6
+	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 05:22:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A2025608B6;
-	Wed, 21 Apr 2021 03:21:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 658D640622;
+	Wed, 21 Apr 2021 03:22:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DKf2o9Wi-wui; Wed, 21 Apr 2021 03:21:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 463B360B4B;
-	Wed, 21 Apr 2021 03:21:51 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SP0cvxVu8-LU; Wed, 21 Apr 2021 03:22:04 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTP id ACDFC40628;
+	Wed, 21 Apr 2021 03:22:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C141AC000B;
-	Wed, 21 Apr 2021 03:21:50 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 30544C0020;
+	Wed, 21 Apr 2021 03:22:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0E6B1C000B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B9389C000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:21:49 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D38F540628
+ by smtp1.osuosl.org (Postfix) with ESMTP id A335D83DC5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:21:48 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NPCiGcoSZLUa
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GBiz7y0JlwBz
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:21:47 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 285D840624
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id AC53383D8D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:21:47 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618975305;
+ s=mimecast20190719; t=1618975320;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=6Iy/gnaCvLxp4h+bVzLUI8j+eO2vvAPrkrWPiAFq8VY=;
- b=Mq1Iy5VDkXbHZTWFrAKsYFDeSN+iidpP7LjnGtr/iTlLkKuYvArZroPejFxk4EhhBNW53T
- K0UQoY0QCzAxDcF/8TkNo/BTGUOncBkVpFRfOX/8Hz0RfvXL9F7a3UobRjGutD5BObev4a
- 1JmgH3j9kUEsP2vv/6afL1mpQO8CZak=
+ bh=11TQ6i9OVoMbPFRqUnwUHbTRfc/PohdFDbCQomllfUE=;
+ b=OO+Cyq3Y8l20AUwy7KEkiyr5OR4h5+tdGV5Nzrv5R+z9JSxl56OLvLDJj2x3t4rEXgND5V
+ DOs5a3w5H9WgogBqE9ww744Yr+uWNvppcUtHr7kpsmZ1A7Xfy95loszcjb0/NYb7iTeDnu
+ UJFeIvW9HWQuAW2YJmj/MxAiIdeCAbc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-442-tMhfc-cVNlqf6YP-srmgbg-1; Tue, 20 Apr 2021 23:21:44 -0400
-X-MC-Unique: tMhfc-cVNlqf6YP-srmgbg-1
+ us-mta-303-1ye4-MoGNuyd9xnJcffOtQ-1; Tue, 20 Apr 2021 23:21:56 -0400
+X-MC-Unique: 1ye4-MoGNuyd9xnJcffOtQ-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BBACC18397B2;
- Wed, 21 Apr 2021 03:21:42 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2C9A2107ACCD;
+ Wed, 21 Apr 2021 03:21:55 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-189.pek2.redhat.com
  [10.72.13.189])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D0DC45B4A6;
- Wed, 21 Apr 2021 03:21:38 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 0B0D66064B;
+ Wed, 21 Apr 2021 03:21:43 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [RFC PATCH 2/7] virtio_ring: rename vring_desc_extra_packed
-Date: Wed, 21 Apr 2021 11:21:12 +0800
-Message-Id: <20210421032117.5177-3-jasowang@redhat.com>
+Subject: [RFC PATCH 3/7] virtio-ring: factor out desc_extra allocation
+Date: Wed, 21 Apr 2021 11:21:13 +0800
+Message-Id: <20210421032117.5177-4-jasowang@redhat.com>
 In-Reply-To: <20210421032117.5177-1-jasowang@redhat.com>
 References: <20210421032117.5177-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -95,61 +95,72 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Rename vring_desc_extra_packed to vring_desc_extra since the structure
-are pretty generic which could be reused by split virtqueue as well.
+A helper is introduced for the logic of allocating the descriptor
+extra data. This will be reused by split virtqueue.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/virtio/virtio_ring.c | 30 ++++++++++++++++++++----------
+ 1 file changed, 20 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index e1e9ed42e637..c25ea5776687 100644
+index c25ea5776687..0cdd965dba58 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -77,7 +77,7 @@ struct vring_desc_state_packed {
- 	u16 last;			/* The last desc state in a list. */
- };
+@@ -1550,6 +1550,25 @@ static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
+ 	return NULL;
+ }
  
--struct vring_desc_extra_packed {
-+struct vring_desc_extra {
- 	dma_addr_t addr;		/* Buffer DMA addr. */
- 	u32 len;			/* Buffer length. */
- 	u16 flags;			/* Descriptor flags. */
-@@ -166,7 +166,7 @@ struct vring_virtqueue {
++static struct vring_desc_extra *vring_alloc_desc_extra(struct vring_virtqueue *vq,
++						       unsigned int num)
++{
++	struct vring_desc_extra *desc_extra;
++	unsigned int i;
++
++	desc_extra = kmalloc_array(num, sizeof(struct vring_desc_extra),
++				   GFP_KERNEL);
++	if (!desc_extra)
++		return NULL;
++
++	memset(desc_extra, 0, num * sizeof(struct vring_desc_extra));
++
++	for (i = 0; i < num - 1; i++)
++		desc_extra[i].next = i + 1;
++
++	return desc_extra;
++}
++
+ static struct virtqueue *vring_create_virtqueue_packed(
+ 	unsigned int index,
+ 	unsigned int num,
+@@ -1567,7 +1586,6 @@ static struct virtqueue *vring_create_virtqueue_packed(
+ 	struct vring_packed_desc_event *driver, *device;
+ 	dma_addr_t ring_dma_addr, driver_event_dma_addr, device_event_dma_addr;
+ 	size_t ring_size_in_bytes, event_size_in_bytes;
+-	unsigned int i;
  
- 			/* Per-descriptor state. */
- 			struct vring_desc_state_packed *desc_state;
--			struct vring_desc_extra_packed *desc_extra;
-+			struct vring_desc_extra *desc_extra;
+ 	ring_size_in_bytes = num * sizeof(struct vring_packed_desc);
  
- 			/* DMA address and size information */
- 			dma_addr_t ring_dma_addr;
-@@ -912,7 +912,7 @@ static struct virtqueue *vring_create_virtqueue_split(
-  */
- 
- static void vring_unmap_state_packed(const struct vring_virtqueue *vq,
--				     struct vring_desc_extra_packed *state)
-+				     struct vring_desc_extra *state)
- {
- 	u16 flags;
- 
-@@ -1651,13 +1651,13 @@ static struct virtqueue *vring_create_virtqueue_packed(
+@@ -1650,18 +1668,10 @@ static struct virtqueue *vring_create_virtqueue_packed(
+ 	/* Put everything in free lists. */
  	vq->free_head = 0;
  
- 	vq->packed.desc_extra = kmalloc_array(num,
--			sizeof(struct vring_desc_extra_packed),
-+			sizeof(struct vring_desc_extra),
- 			GFP_KERNEL);
+-	vq->packed.desc_extra = kmalloc_array(num,
+-			sizeof(struct vring_desc_extra),
+-			GFP_KERNEL);
++	vq->packed.desc_extra = vring_alloc_desc_extra(vq, num);
  	if (!vq->packed.desc_extra)
  		goto err_desc_extra;
  
- 	memset(vq->packed.desc_extra, 0,
--		num * sizeof(struct vring_desc_extra_packed));
-+		num * sizeof(struct vring_desc_extra));
- 
- 	for (i = 0; i < num - 1; i++)
- 		vq->packed.desc_extra[i].next = i + 1;
+-	memset(vq->packed.desc_extra, 0,
+-		num * sizeof(struct vring_desc_extra));
+-
+-	for (i = 0; i < num - 1; i++)
+-		vq->packed.desc_extra[i].next = i + 1;
+-
+ 	/* No callback?  Tell other side not to bother us. */
+ 	if (!callback) {
+ 		vq->packed.event_flags_shadow = VRING_PACKED_EVENT_FLAG_DISABLE;
 -- 
 2.25.1
 
