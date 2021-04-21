@@ -1,74 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BE063663F8
-	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 05:22:24 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2E14B3663F9
+	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 05:22:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 8083640385;
-	Wed, 21 Apr 2021 03:22:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9F23C608B7;
+	Wed, 21 Apr 2021 03:22:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1Pve5I124orP; Wed, 21 Apr 2021 03:22:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2929340245;
-	Wed, 21 Apr 2021 03:22:21 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ki6jKzcj9cqR; Wed, 21 Apr 2021 03:22:22 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 667A860B49;
+	Wed, 21 Apr 2021 03:22:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B6667C000B;
-	Wed, 21 Apr 2021 03:22:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EBEAEC0020;
+	Wed, 21 Apr 2021 03:22:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A9F2CC000B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BE439C0020
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:22:19 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7EF6040245
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8E93440634
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 21 Apr 2021 03:22:20 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id RibCaTJA0kLV
  for <virtualization@lists.linux-foundation.org>;
  Wed, 21 Apr 2021 03:22:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CryPzd27l9ho
- for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:22:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AEFB84022D
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AD33140642
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 03:22:18 +0000 (UTC)
+ Wed, 21 Apr 2021 03:22:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618975337;
+ s=mimecast20190719; t=1618975338;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=pueseaxcZOwlP6qfuGPWprIWYCt1cs/IoMkOSoirRnc=;
- b=VYGbRcnCWnaL5zYoZAcbTZxc4vHQFe4Q3P5VRMmi7sV9d4es7WBAp945dJlmOQVm3ldcnr
- vOUF+eZlr1AGOI2khZXhsTR1QV3muoiTOubAEHogm6jw6BJ31VLc9s5uJnmZoDImlUBrkO
- PZki+om+9r/lsjf10bZUb8G2VtntGeE=
+ bh=hoojy8FYOBs7XLo+S/qLf7Fvtx0zhibi9/ME4wYJTig=;
+ b=cmhqP0TQxawLYgwR9eD2MA3i4EgqjQuH3w+M3Ti6XBuVF+LVa9faXNhcrpxlU1cmkKYeHy
+ 2NwEAaYJcJGniup4cS6hP+aGLc17B2gmXKCGcQ75DsU4CE/StjZfD/dF/CwALCOuJrbi0h
+ j2T3D/txDG1vX5ZnSrQxP+flc9JxskM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-275-poShEmhKPz6iBPMZItQSvA-1; Tue, 20 Apr 2021 23:22:05 -0400
-X-MC-Unique: poShEmhKPz6iBPMZItQSvA-1
+ us-mta-147-sNW5xQT6NIOK9xVj046-AA-1; Tue, 20 Apr 2021 23:22:16 -0400
+X-MC-Unique: sNW5xQT6NIOK9xVj046-AA-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
  [10.5.11.11])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DF786801A82;
- Wed, 21 Apr 2021 03:22:03 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C83D6801984;
+ Wed, 21 Apr 2021 03:22:14 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-189.pek2.redhat.com
  [10.72.13.189])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F3C7D5B4A6;
- Wed, 21 Apr 2021 03:21:59 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 860E16064B;
+ Wed, 21 Apr 2021 03:22:04 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [RFC PATCH 5/7] virtio_ring: introduce virtqueue_desc_add_split()
-Date: Wed, 21 Apr 2021 11:21:15 +0800
-Message-Id: <20210421032117.5177-6-jasowang@redhat.com>
+Subject: [RFC PATCH 6/7] virtio: use err label in __vring_new_virtqueue()
+Date: Wed, 21 Apr 2021 11:21:16 +0800
+Message-Id: <20210421032117.5177-7-jasowang@redhat.com>
 In-Reply-To: <20210421032117.5177-1-jasowang@redhat.com>
 References: <20210421032117.5177-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -93,87 +95,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduces a helper for storing descriptor in the
-descriptor table for split virtqueue.
+Using error label for unwind in __vring_new_virtqueue. This is useful
+for future refacotring.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 39 ++++++++++++++++++++++--------------
- 1 file changed, 24 insertions(+), 15 deletions(-)
+ drivers/virtio/virtio_ring.c | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 5509c2643fb1..11dfa0dc8ec1 100644
+index 11dfa0dc8ec1..9800f1c9ce4c 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -412,6 +412,20 @@ static struct vring_desc *alloc_indirect_split(struct virtqueue *_vq,
- 	return desc;
+@@ -2137,10 +2137,8 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
+ 
+ 	vq->split.desc_state = kmalloc_array(vring.num,
+ 			sizeof(struct vring_desc_state_split), GFP_KERNEL);
+-	if (!vq->split.desc_state) {
+-		kfree(vq);
+-		return NULL;
+-	}
++	if (!vq->split.desc_state)
++		goto err_state;
+ 
+ 	/* Put everything in free lists. */
+ 	vq->free_head = 0;
+@@ -2151,6 +2149,10 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
+ 
+ 	list_add_tail(&vq->vq.list, &vdev->vqs);
+ 	return &vq->vq;
++
++err_state:
++	kfree(vq);
++	return NULL;
  }
+ EXPORT_SYMBOL_GPL(__vring_new_virtqueue);
  
-+static inline unsigned int virtqueue_add_desc_split(struct virtqueue *vq,
-+						    struct vring_desc *desc,
-+						    unsigned int i,
-+						    dma_addr_t addr,
-+						    unsigned int len,
-+						    u16 flags)
-+{
-+	desc[i].flags = cpu_to_virtio16(vq->vdev, flags);
-+	desc[i].addr = cpu_to_virtio64(vq->vdev, addr);
-+	desc[i].len = cpu_to_virtio32(vq->vdev, len);
-+
-+	return virtio16_to_cpu(vq->vdev, desc[i].next);
-+}
-+
- static inline int virtqueue_add_split(struct virtqueue *_vq,
- 				      struct scatterlist *sgs[],
- 				      unsigned int total_sg,
-@@ -484,11 +498,9 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 			if (vring_mapping_error(vq, addr))
- 				goto unmap_release;
- 
--			desc[i].flags = cpu_to_virtio16(_vq->vdev, VRING_DESC_F_NEXT);
--			desc[i].addr = cpu_to_virtio64(_vq->vdev, addr);
--			desc[i].len = cpu_to_virtio32(_vq->vdev, sg->length);
- 			prev = i;
--			i = virtio16_to_cpu(_vq->vdev, desc[i].next);
-+			i = virtqueue_add_desc_split(_vq, desc, i, addr, sg->length,
-+						     VRING_DESC_F_NEXT);
- 		}
- 	}
- 	for (; n < (out_sgs + in_sgs); n++) {
-@@ -497,11 +509,11 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 			if (vring_mapping_error(vq, addr))
- 				goto unmap_release;
- 
--			desc[i].flags = cpu_to_virtio16(_vq->vdev, VRING_DESC_F_NEXT | VRING_DESC_F_WRITE);
--			desc[i].addr = cpu_to_virtio64(_vq->vdev, addr);
--			desc[i].len = cpu_to_virtio32(_vq->vdev, sg->length);
- 			prev = i;
--			i = virtio16_to_cpu(_vq->vdev, desc[i].next);
-+			i = virtqueue_add_desc_split(_vq, desc, i, addr,
-+						     sg->length,
-+						     VRING_DESC_F_NEXT |
-+						     VRING_DESC_F_WRITE);
- 		}
- 	}
- 	/* Last one doesn't continue. */
-@@ -515,13 +527,10 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 		if (vring_mapping_error(vq, addr))
- 			goto unmap_release;
- 
--		vq->split.vring.desc[head].flags = cpu_to_virtio16(_vq->vdev,
--				VRING_DESC_F_INDIRECT);
--		vq->split.vring.desc[head].addr = cpu_to_virtio64(_vq->vdev,
--				addr);
--
--		vq->split.vring.desc[head].len = cpu_to_virtio32(_vq->vdev,
--				total_sg * sizeof(struct vring_desc));
-+		virtqueue_add_desc_split(_vq, vq->split.vring.desc,
-+					 head, addr,
-+					 total_sg * sizeof(struct vring_desc),
-+			                 VRING_DESC_F_INDIRECT);
- 	}
- 
- 	/* We're using some buffers from the free list. */
 -- 
 2.25.1
 
