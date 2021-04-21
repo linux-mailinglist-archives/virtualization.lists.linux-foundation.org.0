@@ -1,88 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C8453366625
-	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 09:19:55 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id EFD2C366692
+	for <lists.virtualization@lfdr.de>; Wed, 21 Apr 2021 09:56:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 57E14608C5;
-	Wed, 21 Apr 2021 07:19:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5BF3183D23;
+	Wed, 21 Apr 2021 07:56:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0QCaC8PVUozR; Wed, 21 Apr 2021 07:19:53 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uFtAeXyy9HsB; Wed, 21 Apr 2021 07:56:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2729B60B49;
-	Wed, 21 Apr 2021 07:19:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BC61383DD8;
+	Wed, 21 Apr 2021 07:56:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A0E6EC0020;
-	Wed, 21 Apr 2021 07:19:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B3B7C000B;
+	Wed, 21 Apr 2021 07:56:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1AF2CC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D64E8C000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 07:19:51 +0000 (UTC)
+ Wed, 21 Apr 2021 07:56:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E86CD40635
+ by smtp2.osuosl.org (Postfix) with ESMTP id B6D9640382
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 07:19:50 +0000 (UTC)
+ Wed, 21 Apr 2021 07:56:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FKYlXqWEqy3y
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 01-8_ze2cG49
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 07:19:50 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D7B4340582
+ Wed, 21 Apr 2021 07:56:00 +0000 (UTC)
+X-Greylist: delayed 00:09:59 by SQLgrey-1.8.0
+Received: from 10.mo52.mail-out.ovh.net (10.mo52.mail-out.ovh.net
+ [87.98.187.244])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 576A540249
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Apr 2021 07:19:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1618989588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=bpJvWuAak+WCSJcZ0A3y08kYBdBcvdyj4u51SSX61Nc=;
- b=eYvaa8p5n/KSYj788Sg7UTsB/1JadT6OJfPviIYkGLZn+6MBe/YW1LtoSUfLQZr0dfiJJj
- cl1LnknDZ2jBVUyw8rTtr1qdGD3+jm0Ayj5ZgsQrC84GsoaiePKWyJ7DlMKfI1yh8ymQym
- buABLyk6344CGLFivHhLW8pGb15GE5w=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-409-ZEMhuHKQPiSF4Io-fVMqtQ-1; Wed, 21 Apr 2021 03:19:45 -0400
-X-MC-Unique: ZEMhuHKQPiSF4Io-fVMqtQ-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 442C9343A2;
- Wed, 21 Apr 2021 07:19:44 +0000 (UTC)
-Received: from sirius.home.kraxel.org (ovpn-112-178.ams2.redhat.com
- [10.36.112.178])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 057321007604;
- Wed, 21 Apr 2021 07:19:44 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 6AF14180084D; Wed, 21 Apr 2021 09:19:42 +0200 (CEST)
-Date: Wed, 21 Apr 2021 09:19:42 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH] drm/bochs: Add screen blanking support
-Message-ID: <20210421071942.eyzbao63pn54loj2@sirius.home.kraxel.org>
-References: <20210420165659.23163-1-tiwai@suse.de>
- <6d2f59c0-113f-2d9e-1fb3-a794dafbd74a@suse.de>
+ Wed, 21 Apr 2021 07:56:00 +0000 (UTC)
+Received: from mxplan5.mail.ovh.net (unknown [10.108.16.148])
+ by mo52.mail-out.ovh.net (Postfix) with ESMTPS id D494125D488;
+ Wed, 21 Apr 2021 09:39:07 +0200 (CEST)
+Received: from kaod.org (37.59.142.102) by DAG8EX1.mxp5.local (172.16.2.71)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2242.4; Wed, 21 Apr
+ 2021 09:39:07 +0200
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-102R0045a37fe6d-0f6a-4455-830b-97ba067ccd67,
+ 50F065E079F855668D79ED56DF61EE5F1F64E411) smtp.auth=groug@kaod.org
+X-OVh-ClientIp: 78.197.208.248
+Date: Wed, 21 Apr 2021 09:39:04 +0200
+From: Greg Kurz <groug@kaod.org>
+To: Vivek Goyal <vgoyal@redhat.com>
+Subject: Re: [Virtio-fs] [PATCH] virtiofs: propagate sync() to file server
+Message-ID: <20210421093904.68653e3e@bahia.lan>
+In-Reply-To: <20210420184226.GC1529659@redhat.com>
+References: <20210419150848.275757-1-groug@kaod.org>
+ <20210420184226.GC1529659@redhat.com>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <6d2f59c0-113f-2d9e-1fb3-a794dafbd74a@suse.de>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Takashi Iwai <tiwai@suse.de>, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org
+X-Originating-IP: [37.59.142.102]
+X-ClientProxiedBy: DAG1EX1.mxp5.local (172.16.2.1) To DAG8EX1.mxp5.local
+ (172.16.2.71)
+X-Ovh-Tracer-GUID: 2aca8e0f-1894-41d3-9307-bb5aac34cad9
+X-Ovh-Tracer-Id: 15463953748017584489
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduledrvddtjedguddvudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvuffkjghfofggtgfgihesthejredtredtvdenucfhrhhomhepifhrvghgucfmuhhriicuoehgrhhouhhgsehkrghougdrohhrgheqnecuggftrfgrthhtvghrnhepiedtudeuvdfgtdeliefgvedutddtjedtfefhlefgteevueduudfhheffhfduvefgnecuffhomhgrihhnpehgihhtlhgrsgdrtghomhdpkhgvrhhnvghlrdhorhhgnecukfhppedtrddtrddtrddtpdefjedrheelrddugedvrddutddvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepmhigphhlrghnhedrmhgrihhlrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehgrhhouhhgsehkrghougdrohhrghdprhgtphhtthhopehrlhhksehrvgguhhgrthdrtghomh
+Cc: Miklos Szeredi <miklos@szeredi.hu>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
+ linux-fsdevel@vger.kernel.org, Robert Krawitz <rlk@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -99,24 +87,270 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-> > However, a tricky part is that the QEMU vga code does treat VGA_ATT_IW
-> > register always as "flip-flop"; the first write is for index and the
-> > second write is for the data like palette.  Meanwhile, in the current
-> > bochs DRM driver, the flip-flop wasn't considered, and it calls only
-> > the register update once with the value 0x20.
+On Tue, 20 Apr 2021 14:42:26 -0400
+Vivek Goyal <vgoyal@redhat.com> wrote:
+
+> On Mon, Apr 19, 2021 at 05:08:48PM +0200, Greg Kurz wrote:
+> > Even if POSIX doesn't mandate it, linux users legitimately expect
+> > sync() to flush all data and metadata to physical storage when it
+> > is located on the same system. This isn't happening with virtiofs
+> > though : sync() inside the guest returns right away even though
+> > data still needs to be flushed from the host page cache.
 > > 
+> > This is easily demonstrated by doing the following in the guest:
+> > 
+> > $ dd if=/dev/zero of=/mnt/foo bs=1M count=5K ; strace -T -e sync sync
+> > 5120+0 records in
+> > 5120+0 records out
+> > 5368709120 bytes (5.4 GB, 5.0 GiB) copied, 5.22224 s, 1.0 GB/s
+> > sync()                                  = 0 <0.024068>
+> > +++ exited with 0 +++
+> > 
+> > and start the following in the host when the 'dd' command completes
+> > in the guest:
+> > 
+> > $ strace -T -e fsync sync virtiofs/foo
+> 		       ^^^^
+> That "sync" is not /usr/bin/sync and its your own binary to call fsync()?
 > 
-> Unless bochs does things very different, the index should first be reset by
-> reading 0x3da. Then write the index, then the data.
+
+This is /usr/bin/sync. I should have put the full path, sorry for that.
+
+This is the expected behavior when a file is specified as stated in the
+sync(1) manual page:
+
+"If one or more files are specified, sync only them, or their containing
+ file systems.
+
+> > fsync(3)                                = 0 <10.371640>
+> > +++ exited with 0 +++
+> > 
+> > There are no good reasons not to honor the expected behavior of
+> > sync() actually : it gives an unrealistic impression that virtiofs
+> > is super fast and that data has safely landed on HW, which isn't
+> > the case obviously.
+> > 
+> > Implement a ->sync_fs() superblock operation that sends a new
+> > FUSE_SYNC request type for this purpose. The FUSE_SYNC request
+> > conveys the 'wait' argument of ->sync_fs() in case the file
+> > server has a use for it. Like with FUSE_FSYNC and FUSE_FSYNCDIR,
+> > lack of support for FUSE_SYNC in the file server is treated as
+> > permanent success.
+> > 
+> > Note that such an operation allows the file server to DoS sync().
+> > Since a typical FUSE file server is an untrusted piece of software
+> > running in userspace, this is disabled by default.  Only enable it
+> > with virtiofs for now since virtiofsd is supposedly trusted by the
+> > guest kernel.
+> > 
+> > Reported-by: Robert Krawitz <rlk@redhat.com>
+> > Signed-off-by: Greg Kurz <groug@kaod.org>
+> > ---
+> > 
+> > Can be tested using the following custom QEMU with FUSE_SYNCFS support:
+> > 
+> > https://gitlab.com/gkurz/qemu/-/tree/fuse-sync
+> > 
+> > ---
+> >  fs/fuse/fuse_i.h          |  3 +++
+> >  fs/fuse/inode.c           | 29 +++++++++++++++++++++++++++++
+> >  fs/fuse/virtio_fs.c       |  1 +
+> >  include/uapi/linux/fuse.h | 11 ++++++++++-
+> >  4 files changed, 43 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
+> > index 63d97a15ffde..68e9ae96cbd4 100644
+> > --- a/fs/fuse/fuse_i.h
+> > +++ b/fs/fuse/fuse_i.h
+> > @@ -755,6 +755,9 @@ struct fuse_conn {
+> >  	/* Auto-mount submounts announced by the server */
+> >  	unsigned int auto_submounts:1;
+> >  
+> > +	/* Propagate syncfs() to server */
+> > +	unsigned int sync_fs:1;
+> > +
+> >  	/** The number of requests waiting for completion */
+> >  	atomic_t num_waiting;
+> >  
+> > diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+> > index b0e18b470e91..425d567a06c5 100644
+> > --- a/fs/fuse/inode.c
+> > +++ b/fs/fuse/inode.c
+> > @@ -506,6 +506,34 @@ static int fuse_statfs(struct dentry *dentry, struct kstatfs *buf)
+> >  	return err;
+> >  }
+> >  
+> > +static int fuse_sync_fs(struct super_block *sb, int wait)
+> > +{
+> > +	struct fuse_mount *fm = get_fuse_mount_super(sb);
+> > +	struct fuse_conn *fc = fm->fc;
+> > +	struct fuse_syncfs_in inarg;
+> > +	FUSE_ARGS(args);
+> > +	int err;
+> > +
+> > +	if (!fc->sync_fs)
+> > +		return 0;
+> > +
+> > +	memset(&inarg, 0, sizeof(inarg));
+> > +	inarg.wait = wait;
+> > +	args.in_numargs = 1;
+> > +	args.in_args[0].size = sizeof(inarg);
+> > +	args.in_args[0].value = &inarg;
+> > +	args.opcode = FUSE_SYNCFS;
+> > +	args.out_numargs = 0;
+> > +
+> > +	err = fuse_simple_request(fm, &args);
+> > +	if (err == -ENOSYS) {
+> > +		fc->sync_fs = 0;
+> > +		err = 0;
+> > +	}
 > 
-> https://web.stanford.edu/class/cs140/projects/pintos/specs/freevga/vga/vgareg.htm#attribute
+> I was wondering what will happen if older file server does not support
+> FUSE_SYNCFS. So we will get -ENOSYS and future syncfs commmands will not
+> be sent.
+> 
 
-bochs should follow standard vga logic here.
-Also a bochs_set_blank(true/false) helper function probably makes sense.
+Yes and it is consistent with what we already do with FUSE_FSYNC and
+FUSE_FSYNCDIR. Note that -ENOSYS is turned into a permanent success.
+This ensures compatibility with older file servers : the client will
+get the current behavior of sync() not being propagated to the file
+server. I'll mention that explicitely in the changelog.
 
-take care,
-  Gerd
+> > +
+> > +	return err;
+> 
+> Right now we don't propagate this error code all the way to user space.
+> I think I should post my patch to fix it again.
+> 
+> https://lore.kernel.org/linux-fsdevel/20201221195055.35295-2-vgoyal@redhat.com/
+> 
 
+Makes sense even if this seems to be broader issue since it
+requires careful auditing of all ->sync_fs() variants.
+
+> > +}
+> > +
+> >  enum {
+> >  	OPT_SOURCE,
+> >  	OPT_SUBTYPE,
+> > @@ -909,6 +937,7 @@ static const struct super_operations fuse_super_operations = {
+> >  	.put_super	= fuse_put_super,
+> >  	.umount_begin	= fuse_umount_begin,
+> >  	.statfs		= fuse_statfs,
+> > +	.sync_fs	= fuse_sync_fs,
+> >  	.show_options	= fuse_show_options,
+> >  };
+> >  
+> > diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+> > index 4ee6f734ba83..a3c025308743 100644
+> > --- a/fs/fuse/virtio_fs.c
+> > +++ b/fs/fuse/virtio_fs.c
+> > @@ -1441,6 +1441,7 @@ static int virtio_fs_get_tree(struct fs_context *fsc)
+> >  	fc->release = fuse_free_conn;
+> >  	fc->delete_stale = true;
+> >  	fc->auto_submounts = true;
+> > +	fc->sync_fs = true;
+> >  
+> >  	fsc->s_fs_info = fm;
+> >  	sb = sget_fc(fsc, virtio_fs_test_super, set_anon_super_fc);
+> > diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
+> > index 54442612c48b..6e8c3cf3207c 100644
+> > --- a/include/uapi/linux/fuse.h
+> > +++ b/include/uapi/linux/fuse.h
+> > @@ -179,6 +179,9 @@
+> >   *  7.33
+> >   *  - add FUSE_HANDLE_KILLPRIV_V2, FUSE_WRITE_KILL_SUIDGID, FATTR_KILL_SUIDGID
+> >   *  - add FUSE_OPEN_KILL_SUIDGID
+> > + *
+> > + *  7.34
+> > + *  - add FUSE_SYNCFS
+> >   */
+> >  
+> >  #ifndef _LINUX_FUSE_H
+> > @@ -214,7 +217,7 @@
+> >  #define FUSE_KERNEL_VERSION 7
+> >  
+> >  /** Minor version number of this interface */
+> > -#define FUSE_KERNEL_MINOR_VERSION 33
+> > +#define FUSE_KERNEL_MINOR_VERSION 34
+> 
+> I have always wondered what's the usage of minor version and when should
+> it be bumped up. IIUC, it is there to group features into a minor
+> version. So that file server (and may be client too) can deny to not
+> suppor client/server if a certain minimum version is not supported.
+> 
+> So looks like you want to have capability to say it does not support
+> an older client (<34) beacuse it wants to make sure SYNCFS is supported.
+> Is that the reason to bump up the minor version or something else.
+> 
+
+Ah... file history seemed to indicate that minor version was
+bumped up each time a new request was added but I might be
+wrong.
+
+Hopefully, Miklos can shed some light here ?
+
+> >  
+> >  /** The node ID of the root inode */
+> >  #define FUSE_ROOT_ID 1
+> > @@ -499,6 +502,7 @@ enum fuse_opcode {
+> >  	FUSE_COPY_FILE_RANGE	= 47,
+> >  	FUSE_SETUPMAPPING	= 48,
+> >  	FUSE_REMOVEMAPPING	= 49,
+> > +	FUSE_SYNCFS		= 50,
+> >  
+> >  	/* CUSE specific operations */
+> >  	CUSE_INIT		= 4096,
+> > @@ -957,4 +961,9 @@ struct fuse_removemapping_one {
+> >  #define FUSE_REMOVEMAPPING_MAX_ENTRY   \
+> >  		(PAGE_SIZE / sizeof(struct fuse_removemapping_one))
+> >  
+> > +struct fuse_syncfs_in {
+> > +	/* Whether to wait for outstanding I/Os to complete */
+> > +	uint32_t wait;
+> > +};
+> > +
+> 
+> Will it make sense to add a flag and use only one bit to signal whether
+> wait is required or not. Then rest of the 31bits in future can potentially
+> be used for something else if need be.
+> 
+
+I don't envision much changes in this API but yes, we can certainly
+do that.
+
+> Looks like most of the fuse structures are 64bit aligned (except
+> fuse_removemapping_in and now fuse_syncfs_in). I am wondering does
+> it matter if it is 64bit aligned or not.
+> 
+
+I don't know the required alignment but we already have a 32bit
+aligned fuse structure:
+
+struct fuse_removemapping_in {
+	/* number of fuse_removemapping_one follows */
+	uint32_t        count;
+};
+
+which is sent like this:
+
+static int fuse_send_removemapping(struct inode *inode,
+				   struct fuse_removemapping_in *inargp,
+				   struct fuse_removemapping_one *remove_one)
+{
+...
+	args.in_args[0].size = sizeof(*inargp);
+	args.in_args[0].value = inargp;
+
+Again, maybe Miklos can clarify this ?
+
+> Vivek
+> 
+
+Cheers,
+
+--
+Greg
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
