@@ -1,64 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FDA136F8D7
-	for <lists.virtualization@lfdr.de>; Fri, 30 Apr 2021 12:59:01 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBBA836F9FC
+	for <lists.virtualization@lfdr.de>; Fri, 30 Apr 2021 14:18:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id ED59443134;
-	Fri, 30 Apr 2021 10:58:56 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id C9D58400BD;
+	Fri, 30 Apr 2021 12:18:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BanN0tdUEzeV; Fri, 30 Apr 2021 10:58:55 +0000 (UTC)
+	with ESMTP id hvJqX9xzNMyU; Fri, 30 Apr 2021 12:18:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0F7194313B;
-	Fri, 30 Apr 2021 10:58:55 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9CDAC4024A;
+	Fri, 30 Apr 2021 12:18:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C4047C0024;
-	Fri, 30 Apr 2021 10:58:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3184CC0001;
+	Fri, 30 Apr 2021 12:18:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1BB04C0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 859F4C0001
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Apr 2021 10:58:51 +0000 (UTC)
+ Fri, 30 Apr 2021 12:18:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 956ED6F91F
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6685540208
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Apr 2021 10:58:50 +0000 (UTC)
+ Fri, 30 Apr 2021 12:18:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AweWNI4EIX3C
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id HqkAIbgLf6K0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Apr 2021 10:58:49 +0000 (UTC)
+ Fri, 30 Apr 2021 12:18:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9B6786F8FD
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id ACF11400BD
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Apr 2021 10:58:49 +0000 (UTC)
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
- by mx2.suse.de (Postfix) with ESMTP id 2C25DB246;
- Fri, 30 Apr 2021 10:58:48 +0000 (UTC)
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: daniel@ffwll.ch, airlied@linux.ie, maarten.lankhorst@linux.intel.com,
- mripard@kernel.org, kraxel@redhat.com, corbet@lwn.net, lgirdwood@gmail.com,
- broonie@kernel.org, sam@ravnborg.org, robh@kernel.org,
- emil.l.velikov@gmail.com, geert+renesas@glider.be, hdegoede@redhat.com,
- bluescreen_avenger@verizon.net, gregkh@linuxfoundation.org
-Subject: [PATCH v5 9/9] drm/simpledrm: Acquire memory aperture for framebuffer
-Date: Fri, 30 Apr 2021 12:58:40 +0200
-Message-Id: <20210430105840.30515-10-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210430105840.30515-1-tzimmermann@suse.de>
-References: <20210430105840.30515-1-tzimmermann@suse.de>
+ Fri, 30 Apr 2021 12:18:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1619785095;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=QFoo+RFhSNZCaYS4vaZHmUV9XYlNWKNVH9g7dlU2Z6g=;
+ b=fDQDQ9oXVqNIUBePKzhV/Kzvg/b8z5FgUmzlUFoYhKR6ecGx5S0yqnEN7M/2nRofXvIDWD
+ 9TnbzNIqOMfT9d9BjK87IbhUkrRbCIxUU/XA4tyW83pWH0KEF/sIR1OrYTyQsrfJ3++Xdk
+ tpgZTtBeYm9s52p6T7CC6VpgrOosC6E=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-441-y_bAABREPW-S6Zzk2Wddsw-1; Fri, 30 Apr 2021 08:18:13 -0400
+X-MC-Unique: y_bAABREPW-S6Zzk2Wddsw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
+ [10.5.11.23])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2016610CE781;
+ Fri, 30 Apr 2021 12:18:12 +0000 (UTC)
+Received: from horse.redhat.com (ovpn-114-26.rdu2.redhat.com [10.10.114.26])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id EFE6719C79;
+ Fri, 30 Apr 2021 12:17:57 +0000 (UTC)
+Received: by horse.redhat.com (Postfix, from userid 10451)
+ id 8004322054F; Fri, 30 Apr 2021 08:17:57 -0400 (EDT)
+Date: Fri, 30 Apr 2021 08:17:57 -0400
+From: Vivek Goyal <vgoyal@redhat.com>
+To: Greg Kurz <groug@kaod.org>
+Subject: Re: [PATCH v2] virtiofs: propagate sync() to file server
+Message-ID: <20210430121757.GA1936051@redhat.com>
+References: <20210426151011.840459-1-groug@kaod.org>
+ <20210427171206.GA1805363@redhat.com>
+ <20210427210921.7b01c661@bahia.lan>
 MIME-Version: 1.0
-Cc: Maxime Ripard <maxime@cerno.tech>,
- virtualization@lists.linux-foundation.org,
- Thomas Zimmermann <tzimmermann@suse.de>, dri-devel@lists.freedesktop.org,
- linux-doc@vger.kernel.org
+Content-Disposition: inline
+In-Reply-To: <20210427210921.7b01c661@bahia.lan>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+Cc: Miklos Szeredi <miklos@szeredi.hu>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
+ Stefan Hajnoczi <stefanha@redhat.com>, linux-fsdevel@vger.kernel.org,
+ Robert Krawitz <rlk@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -75,121 +95,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We register the simplekms device with the DRM platform helpers. A
-native driver for the graphics hardware will kick-out the simpledrm
-driver before taking over the device.
+On Tue, Apr 27, 2021 at 09:09:21PM +0200, Greg Kurz wrote:
+[..]
+> > > diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
+> > > index 54442612c48b..1265ca17620c 100644
+> > > --- a/include/uapi/linux/fuse.h
+> > > +++ b/include/uapi/linux/fuse.h
+> > > @@ -179,6 +179,9 @@
+> > >   *  7.33
+> > >   *  - add FUSE_HANDLE_KILLPRIV_V2, FUSE_WRITE_KILL_SUIDGID, FATTR_KILL_SUIDGID
+> > >   *  - add FUSE_OPEN_KILL_SUIDGID
+> > > + *
+> > > + *  7.34
+> > > + *  - add FUSE_SYNCFS
+> > >   */
+> > >  
+> > >  #ifndef _LINUX_FUSE_H
+> > > @@ -214,7 +217,7 @@
+> > >  #define FUSE_KERNEL_VERSION 7
+> > >  
+> > >  /** Minor version number of this interface */
+> > > -#define FUSE_KERNEL_MINOR_VERSION 33
+> > > +#define FUSE_KERNEL_MINOR_VERSION 34
+> > >  
+> > >  /** The node ID of the root inode */
+> > >  #define FUSE_ROOT_ID 1
+> > > @@ -499,6 +502,7 @@ enum fuse_opcode {
+> > >  	FUSE_COPY_FILE_RANGE	= 47,
+> > >  	FUSE_SETUPMAPPING	= 48,
+> > >  	FUSE_REMOVEMAPPING	= 49,
+> > > +	FUSE_SYNCFS		= 50,
+> > >  
+> > >  	/* CUSE specific operations */
+> > >  	CUSE_INIT		= 4096,
+> > > @@ -957,4 +961,8 @@ struct fuse_removemapping_one {
+> > >  #define FUSE_REMOVEMAPPING_MAX_ENTRY   \
+> > >  		(PAGE_SIZE / sizeof(struct fuse_removemapping_one))
+> > >  
+> > > +struct fuse_syncfs_in {
+> > > +	uint64_t flags;
+> > > +};
+> > > +
+> > 
+> > Hi Greg,
+> > 
+> > Will it be better if 32bits are for flags and reset 32 are
+> > padding and can be used in whatever manner.
+> > 
+> > struct fuse_syncfs_in {
+> > 	uint32_t flags;
+> > 	uint32_t padding;
+> > };
+> > 
+> > This will increase the flexibility if we were to send more information
+> > in future.
+> > 
+> > I already see bunch of structures where flags are 32 bit and reset
+> > are padding bits. fuse_read_in, fuse_write_in, fuse_rename2_in etc.
+> > 
+> > Thanks
+> > Vivek
+> > 
+> 
+> Yes, it makes sense. I'll wait a few more days and roll out a v3.
 
-The original generic platform device from the simple-framebuffer boot
-code will be unregistered. The native driver will use whatever native
-hardware device it received.
+Thinking more about it. We are not using any of the fields of this
+structure right now. So may be all of it can be padding and no need
+to add "flags".
 
-v4:
-	* convert to drm_aperture_acquire_from_firmware()
-v3:
-	* use platform_device_unregister() and handle detachment
-	  like hot-unplug event (Daniel)
-v2:
-	* adapt to aperture changes
-	* use drm_dev_unplug() and drm_dev_enter/exit()
-	* don't split error string
+struct fuse_syncfs_in {
+	uint64_t padding;
+};
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Maxime Ripard <maxime@cerno.tech>
-Tested-by: nerdopolis <bluescreen_avenger@verizon.net>
----
- drivers/gpu/drm/tiny/simpledrm.c | 25 ++++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+Essentially what you have already done  :-). Just rename flags to
+padding/unused to make it clear its unused for now.
 
-diff --git a/drivers/gpu/drm/tiny/simpledrm.c b/drivers/gpu/drm/tiny/simpledrm.c
-index 9d522473cd7c..2bdb477d9326 100644
---- a/drivers/gpu/drm/tiny/simpledrm.c
-+++ b/drivers/gpu/drm/tiny/simpledrm.c
-@@ -6,6 +6,7 @@
- #include <linux/platform_device.h>
- #include <linux/regulator/consumer.h>
- 
-+#include <drm/drm_aperture.h>
- #include <drm/drm_atomic_state_helper.h>
- #include <drm/drm_connector.h>
- #include <drm/drm_damage_helper.h>
-@@ -517,14 +518,23 @@ static int simpledrm_device_init_fb(struct simpledrm_device *sdev)
- 
- static int simpledrm_device_init_mm(struct simpledrm_device *sdev)
- {
-+	struct drm_device *dev = &sdev->dev;
- 	struct platform_device *pdev = sdev->pdev;
- 	struct resource *mem;
- 	void __iomem *screen_base;
-+	int ret;
- 
- 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
- 	if (!mem)
- 		return -EINVAL;
- 
-+	ret = devm_aperture_acquire_from_firmware(dev, mem->start, resource_size(mem));
-+	if (ret) {
-+		drm_err(dev, "could not acquire memory range [0x%llx:0x%llx]: error %d\n",
-+			mem->start, mem->end, ret);
-+		return ret;
-+	}
-+
- 	screen_base = devm_ioremap_wc(&pdev->dev, mem->start,
- 				      resource_size(mem));
- 	if (!screen_base)
-@@ -625,12 +635,18 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
-+	struct drm_device *dev = &sdev->dev;
-+	int idx;
- 
- 	if (!fb)
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_dstclip(sdev->screen_base, sdev->pitch,
- 			    sdev->format->format, vmap, fb);
-+	drm_dev_exit(idx);
- }
- 
- static void
-@@ -658,7 +674,9 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
- 	struct drm_framebuffer *fb = plane_state->fb;
-+	struct drm_device *dev = &sdev->dev;
- 	struct drm_rect clip;
-+	int idx;
- 
- 	if (!fb)
- 		return;
-@@ -666,8 +684,13 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &clip))
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_rect_dstclip(sdev->screen_base, sdev->pitch,
- 				 sdev->format->format, vmap, fb, &clip);
-+
-+	drm_dev_exit(idx);
- }
- 
- static const struct drm_simple_display_pipe_funcs
-@@ -847,7 +870,7 @@ static int simpledrm_remove(struct platform_device *pdev)
- 	struct simpledrm_device *sdev = platform_get_drvdata(pdev);
- 	struct drm_device *dev = &sdev->dev;
- 
--	drm_dev_unregister(dev);
-+	drm_dev_unplug(dev);
- 
- 	return 0;
- }
--- 
-2.31.1
+Vivek
 
 _______________________________________________
 Virtualization mailing list
