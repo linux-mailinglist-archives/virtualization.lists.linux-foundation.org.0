@@ -1,101 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 43E5A37124A
-	for <lists.virtualization@lfdr.de>; Mon,  3 May 2021 10:11:43 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id DCE2F371259
+	for <lists.virtualization@lfdr.de>; Mon,  3 May 2021 10:16:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C974460B34;
-	Mon,  3 May 2021 08:11:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BFC30841D2;
+	Mon,  3 May 2021 08:16:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id risDptN8zf77; Mon,  3 May 2021 08:11:41 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CpAjSiouE8Qc; Mon,  3 May 2021 08:16:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A96A160B36;
-	Mon,  3 May 2021 08:11:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 71A3983E25;
+	Mon,  3 May 2021 08:16:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5227DC0001;
-	Mon,  3 May 2021 08:11:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0808EC0001;
+	Mon,  3 May 2021 08:16:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01CBBC0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 484F0C0001
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 May 2021 08:11:38 +0000 (UTC)
+ Mon,  3 May 2021 08:16:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DD50E40467
+ by smtp1.osuosl.org (Postfix) with ESMTP id 34DFF83EEF
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 May 2021 08:11:38 +0000 (UTC)
+ Mon,  3 May 2021 08:16:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7TFceQVHOLkd
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id vy9t0EMaTWZl
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 May 2021 08:11:38 +0000 (UTC)
+ Mon,  3 May 2021 08:16:09 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 26896400D0
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6D5B583DD3
  for <virtualization@lists.linux-foundation.org>;
- Mon,  3 May 2021 08:11:37 +0000 (UTC)
+ Mon,  3 May 2021 08:16:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620029496;
+ s=mimecast20190719; t=1620029768;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=vwlHSyZzbGf/1hjjeGeNUgRrxHpiQEqHNLs9/p1ggRw=;
- b=SpnB4wOZYRjWRsZw6CbE6Mx+Vg7HJD6WzRgcfwSky3w5fpAeccqaq2UILjxONahJt3dIqY
- I3rJqAEAihRNarxzQCsVmFZyrKXO6ks++dnv4T+m+Yfo8J5VdHUDu5L17xvNn3pQ/B/4i0
- Xn0AOH9P/eW6AdoYxo/KBkyxXtjPimA=
-Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
- [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-231-pOQ1m4wJOPONaj-2WgL4dw-1; Mon, 03 May 2021 04:11:32 -0400
-X-MC-Unique: pOQ1m4wJOPONaj-2WgL4dw-1
-Received: by mail-ed1-f69.google.com with SMTP id
- y15-20020aa7d50f0000b02903885ee98723so4050463edq.16
+ bh=3uB/EYYvRDIWzIKd9NUtpds132sJrn5ZaXZy/6UA0sM=;
+ b=VZB1iDFbtPLrzaSGD81gg/kYOIvxINyTptqlvF0OeArO8imipNzYhU6IbWY11T8e3CggGl
+ n3qg/023pft56MCXX36gSPreFEVRnTentmo5mP656j63uf3mI5fbUpG6bt6PRI2JTgH0bR
+ LUGWCJY/DEflkSBMdnd6zBipOjWxAgM=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-317-NoV__bMAMVqv1Dz8nc80nw-1; Mon, 03 May 2021 04:16:06 -0400
+X-MC-Unique: NoV__bMAMVqv1Dz8nc80nw-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ m18-20020a0564025112b0290378d2a266ebso4082002edd.15
  for <virtualization@lists.linux-foundation.org>;
- Mon, 03 May 2021 01:11:31 -0700 (PDT)
+ Mon, 03 May 2021 01:16:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:subject:to:cc:references:from:organization
  :message-id:date:user-agent:mime-version:in-reply-to
  :content-language:content-transfer-encoding;
- bh=vwlHSyZzbGf/1hjjeGeNUgRrxHpiQEqHNLs9/p1ggRw=;
- b=niL2gjkpXVlNQzVwCzK4vp3qgBXj4LUjj1TuV7k9pJvOsaxgGQRrriB2y1AvZlxMeM
- iyqvpUL2NC3pfjwfAAzoBQhOWziGMVkR2Cqexcjre1Twcggy+6N378Z/w4dAkPqs2xLV
- dbmBfWLwbTMV+rRHl3qWnhANonpFIl4fR83Bw3hxX8msRz2zYo4DfkUScdigU9/q1flr
- PnurcrBaMEo9S6byvWNC1yRNSlGuIFggUtX6NBIvcmma8PSkmzaTNGv3iKp6DrC08Fs7
- rRcU0jajlhLbTCQfArmQ7vVpW7v0HsEduYvBwT/HNByLt8PNZbJ6WGUDvZu9X+bCnTHm
- GjAQ==
-X-Gm-Message-State: AOAM532r8MWrWDPezDgEjRBr25j4l03K2e0Lcr1NgmsX7oJm8Nbehoy2
- DICER50+GDleG6DmEC7d3yj96AqGCaoPIjoHiWdNj+6yEohH8qGkVFNCqnxR4kHEqSI4HSBRqjx
- p9TbgzHX29YXyDEPqKKhxLbffix6LffbAhRkaPQ8eXQ==
-X-Received: by 2002:a50:eb47:: with SMTP id z7mr16986475edp.68.1620029491000; 
- Mon, 03 May 2021 01:11:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxgC+bCNFZ6IjQ+hZxVb6PiUEspf4Kwd7KdWnjG2fBIRF7s94xAa5mK0csiH8ddS3w5cQDqaA==
-X-Received: by 2002:a50:eb47:: with SMTP id z7mr16986454edp.68.1620029490784; 
- Mon, 03 May 2021 01:11:30 -0700 (PDT)
+ bh=3uB/EYYvRDIWzIKd9NUtpds132sJrn5ZaXZy/6UA0sM=;
+ b=D1lwCk6FB++IsXM1BGCfxPQl3dNb2F9NdsfNO3KNMZuCSgnnwQ/PriigCADMPYU8CB
+ kvavsIFiOtkRpMZucY14LCMJdg4DBPJsSuZQSVWa20nFQE+CJrhHcDtyANycXtl1y+7V
+ Xa+8scHJ+0/FgeSIuD94nHJLJLXN1RqqlB9W4nsl73WfLcN/RZ1HTQNnkEtg1WusegYW
+ XFqpQozEy0d22OvxdnCaNd3lSGAFvq1LXiwlkFdJLiLBhSMZ7Xopbep1rY2B2/zmehef
+ rYzz1W353hD0RyVIGlr/n5045nj1+apEypUXQqZUlusIz23YlDLN88lDBfiwcMFshpRn
+ ZkWw==
+X-Gm-Message-State: AOAM532FMnVfcjjQVt8ch2oh6mksVA65oIR/VOXKI+yPAWJkF21zut6G
+ qu+exNn6zteDd3eHFoHUpQ1T3iAIoChLnHE5wv8hYwH97/NG5dhJyknILxy6HS86vJg8bLrHQfV
+ dFbdrBmpG8DY+bSKBsmTs5kTBbHG/BZE7KVC4lhrQDQ==
+X-Received: by 2002:a17:906:8147:: with SMTP id
+ z7mr11677896ejw.496.1620029764874; 
+ Mon, 03 May 2021 01:16:04 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJz5t6QJnu76x0vRJx5wjyCiN1MvkzdCqG/1DMVBAPOiuRhGpdYa0HWbVhYZGZKhNk34vPvb6A==
+X-Received: by 2002:a17:906:8147:: with SMTP id
+ z7mr11677854ejw.496.1620029764611; 
+ Mon, 03 May 2021 01:16:04 -0700 (PDT)
 Received: from [192.168.3.132] (p5b0c649f.dip0.t-ipconnect.de. [91.12.100.159])
- by smtp.gmail.com with ESMTPSA id d15sm12268494edu.86.2021.05.03.01.11.29
+ by smtp.gmail.com with ESMTPSA id lr15sm4554094ejb.107.2021.05.03.01.16.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 May 2021 01:11:30 -0700 (PDT)
-Subject: Re: [PATCH v1 5/7] mm: introduce
- page_offline_(begin|end|freeze|unfreeze) to synchronize setting PageOffline()
+ Mon, 03 May 2021 01:16:04 -0700 (PDT)
+Subject: Re: [PATCH v1 6/7] virtio-mem: use page_offline_(start|end) when
+ setting PageOffline()
 To: Mike Rapoport <rppt@kernel.org>
 References: <20210429122519.15183-1-david@redhat.com>
- <20210429122519.15183-6-david@redhat.com> <YI5Hp49AmWgfTzNy@kernel.org>
+ <20210429122519.15183-7-david@redhat.com> <YI5HzXN7+ZTNXtcI@kernel.org>
 From: David Hildenbrand <david@redhat.com>
 Organization: Red Hat
-Message-ID: <4aa55978-c224-7ead-f00d-df1a6c3dfda4@redhat.com>
-Date: Mon, 3 May 2021 10:11:29 +0200
+Message-ID: <98f22a46-da8b-2891-fade-09937c0ccf69@redhat.com>
+Date: Mon, 3 May 2021 10:16:03 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
  Thunderbird/78.8.1
 MIME-Version: 1.0
-In-Reply-To: <YI5Hp49AmWgfTzNy@kernel.org>
+In-Reply-To: <YI5HzXN7+ZTNXtcI@kernel.org>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -130,25 +130,50 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On 02.05.21 08:33, Mike Rapoport wrote:
-> On Thu, Apr 29, 2021 at 02:25:17PM +0200, David Hildenbrand wrote:
->> A driver might set a page logically offline -- PageOffline() -- and
->> turn the page inaccessible in the hypervisor; after that, access to page
->> content can be fatal. One example is virtio-mem; while unplugged memory
->> -- marked as PageOffline() can currently be read in the hypervisor, this
->> will no longer be the case in the future; for example, when having
->> a virtio-mem device backed by huge pages in the hypervisor.
+> On Thu, Apr 29, 2021 at 02:25:18PM +0200, David Hildenbrand wrote:
+>> Let's properly use page_offline_(start|end) to synchronize setting
+>> PageOffline(), so we won't have valid page access to unplugged memory
+>> regions from /proc/kcore.
 >>
->> Some special PFN walkers -- i.e., /proc/kcore -- read content of random
->> pages after checking PageOffline(); however, these PFN walkers can race
->> with drivers that set PageOffline().
+>> Signed-off-by: David Hildenbrand <david@redhat.com>
+>> ---
+>>   drivers/virtio/virtio_mem.c | 2 ++
+>>   mm/util.c                   | 2 ++
+>>   2 files changed, 4 insertions(+)
 >>
->> Let's introduce page_offline_(begin|end|freeze|unfreeze) for
+>> diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+>> index 10ec60d81e84..dc2a2e2b2ff8 100644
+>> --- a/drivers/virtio/virtio_mem.c
+>> +++ b/drivers/virtio/virtio_mem.c
+>> @@ -1065,6 +1065,7 @@ static int virtio_mem_memory_notifier_cb(struct notifier_block *nb,
+>>   static void virtio_mem_set_fake_offline(unsigned long pfn,
+>>   					unsigned long nr_pages, bool onlined)
+>>   {
+>> +	page_offline_begin();
+>>   	for (; nr_pages--; pfn++) {
+>>   		struct page *page = pfn_to_page(pfn);
+>>   
+>> @@ -1075,6 +1076,7 @@ static void virtio_mem_set_fake_offline(unsigned long pfn,
+>>   			ClearPageReserved(page);
+>>   		}
+>>   	}
+>> +	page_offline_end();
 > 
-> Bikeshed: freeze|thaw?
->
+> I'm not really familiar with ballooning and memory hotplug, but is it the
+> only place that needs page_offline_{begin,end} ?
 
-Sure :)
+Existing balloon implementations that I am aware of (Hyper-V, XEN, 
+virtio-balloon, vmware-balloon) usually allow reading inflated memory; 
+doing so might result in unnecessary overhead in the hypervisor, so we 
+really want to avoid it -- but it's strictly not forbidden and has been 
+working forever. So we barely care about races: if there would be a rare 
+race, we'd still be able to read that memory.
 
+For virtio-mem, it'll be different in the future when using shmem, huge 
+pages, !anonymous private mappings, ... as backing storage for a VM; 
+there will be a virtio spec extension to document that virtio-mem 
+changes that indicate the new behavior won't allow reading unplugged 
+memory and doing so will result in undefined behavior.
 
 -- 
 Thanks,
