@@ -2,88 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53AC0372714
-	for <lists.virtualization@lfdr.de>; Tue,  4 May 2021 10:21:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DC0E372715
+	for <lists.virtualization@lfdr.de>; Tue,  4 May 2021 10:21:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1EDFA84628;
-	Tue,  4 May 2021 08:21:05 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id EB46684647;
+	Tue,  4 May 2021 08:21:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id D7TwjF0MQlAj; Tue,  4 May 2021 08:21:04 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F0C7F8434B;
-	Tue,  4 May 2021 08:21:03 +0000 (UTC)
+	with ESMTP id yJw9-yuwv6Xd; Tue,  4 May 2021 08:21:07 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTP id B58EC84652;
+	Tue,  4 May 2021 08:21:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 88DE6C001C;
-	Tue,  4 May 2021 08:21:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 81465C000E;
+	Tue,  4 May 2021 08:21:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 490E5C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CCD57C000F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 May 2021 08:21:02 +0000 (UTC)
+ Tue,  4 May 2021 08:21:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2986184340
+ by smtp3.osuosl.org (Postfix) with ESMTP id A98426075B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 May 2021 08:21:02 +0000 (UTC)
+ Tue,  4 May 2021 08:21:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id b-9nRjA4WF-M
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id aIK-IHXzKhCL
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 May 2021 08:21:01 +0000 (UTC)
+ Tue,  4 May 2021 08:21:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 5FDEC84334
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ECB43606C9
  for <virtualization@lists.linux-foundation.org>;
- Tue,  4 May 2021 08:21:01 +0000 (UTC)
+ Tue,  4 May 2021 08:21:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620116459;
+ s=mimecast20190719; t=1620116462;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=ZduZH7uIcqDrcp+Id8iATABsMeFNx9WnKRzKVMxr/dA=;
- b=BKbogr/jMZ/LLENdEwzz8ouQ1CrrdpFcDx9G2k3mvHX1HzzwL6uhUUHBNrLjCy4+8V8nSk
- Lyky+j0zFYUTIvzy80IfCwF5AWItTLVExGIDKyzaasccZD+naFDaotrilf9Mp6DccTTzHL
- RUHjrr+FRwMjsDkN+zurVbuDokdbfYo=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-501-EUq4cWFUM16CQRNVQRPoRg-1; Tue, 04 May 2021 04:20:57 -0400
-X-MC-Unique: EUq4cWFUM16CQRNVQRPoRg-1
-Received: by mail-wr1-f71.google.com with SMTP id
- 88-20020adf95610000b029010758d8d7e2so5402424wrs.19
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=tMP1xx5RM3W39LPjwsE6CWlx07bFQEOIwnlzCme4Sl4=;
+ b=IZ2Ps/CIC8t8c9Iv2vWXqG2ZMiWlhQoC+RROdDl9h1rP4jHuFjUMyCVhcjR3BuFHK7AaBV
+ hgraIlIImeT8hjgE8w/WrxOtshz3zRGEYtIztcQXA/q22yy/u5d8BeaU4KMMcvnLDpb4j0
+ dEcprlleIpyAly+MsNgnzxGUGa4BXOo=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-349-iOCCoM_rPbO5vLmhAD-IRQ-1; Tue, 04 May 2021 04:20:59 -0400
+X-MC-Unique: iOCCoM_rPbO5vLmhAD-IRQ-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ n9-20020a1c40090000b02901401bf40f9dso165184wma.0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 04 May 2021 01:20:57 -0700 (PDT)
+ Tue, 04 May 2021 01:20:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
- :content-disposition;
- bh=ZduZH7uIcqDrcp+Id8iATABsMeFNx9WnKRzKVMxr/dA=;
- b=A+QFJmC6K6jEdRIhQNZmgvlfPfLcc+YTMd4F3BKO2JMEBhKUCg1uiH3lNkvl0YLjgb
- obp+WxIrPPRjntMfCZOuZaxJ1GrB0tNYQZ78UhanOXHKiJNa2w7BrBpZUbj1Qqx+6jFc
- 2K5le2t23LCGmrVA3uA0W+aE04etVV5+HAIm5aXQS5jxbknEoRglLCKRZD41yU3AkXPA
- lz70W9FElzJI5Hz4RFiq6qmYvYWFu8H2iHXbM36lUM8SZ+aHGDaxALn/hMHvKqsNCKti
- Tqcnr6UwlG8hwqVcYccZBLavlIFlVkiZudOVKhUMFkdNhT5Qo6aTSLKWnjMYgiBWueZk
- A9Tw==
-X-Gm-Message-State: AOAM5324stEoK5fIvxJ6HRbsWwU0xQ5ygDAF5AnMhWxuZ9qnQLlVU2ey
- 4FTER+CNrKNxWWn94B+pTvlpFYfER4cfm5EP8RndkiVphruJZzVK45BeCIaJQE18wrbAE22leOZ
- KQvDEzd0Y/xeU7JlYZzeNUpRsatu2sokOgpX4U6XiRw==
-X-Received: by 2002:a1c:4482:: with SMTP id r124mr2599994wma.42.1620116456220; 
- Tue, 04 May 2021 01:20:56 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwio/Fcw9s4W5lDKZ/mtZxroSdSPwEkZaybadnCc9xMJ6LakGIrRp0EXSNfm8bUGh5UKO2N+A==
-X-Received: by 2002:a1c:4482:: with SMTP id r124mr2599983wma.42.1620116455999; 
- Tue, 04 May 2021 01:20:55 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=tMP1xx5RM3W39LPjwsE6CWlx07bFQEOIwnlzCme4Sl4=;
+ b=jEIWypKSTZ07Ikxy5k+lxgWGPYjbvjMBn7XtnVrbEdpSEz67LDn7iEo6O0qm5zVtwT
+ bKUB8D0gnXc9y4+PSlI1LJgl36zMgSdY/vmYZovkLnpP7ri4qov2EgE/UqykYhr/ndif
+ fkZRt96UlghGpijnx+F5lRO6FKyHep6/UwStGAjw1z3Fj+2m3OETTavIlGczqnZ77eCn
+ NP/9QLcGgMjUbWcmKQSjMPktPuCGk6/9wVgeqwkmAPFanT9yKjShi5HgKE7rGTOUy3hA
+ wKwVGFUVuzzNmU3b0rEfMEWFT7iFwntUZBEOBJd1jOSk/TiomskIc+du/j+I5uTXW3jJ
+ Vw6w==
+X-Gm-Message-State: AOAM5316KNKqJpwmiF/+2aFJ/A4UoYl0dEaSfd4d4QS3fbvIc6bRTRIC
+ 6r1JTbooooWid4ibmY1037Atpj8x4IaZtUlQFjRZ7Sk8pqWk6JO25N/Sak1Ten/cHCsSo+tYVQh
+ 9puHNh7uXOipZtYf75NCrIlUWjXIugTVpbuRztI49vg==
+X-Received: by 2002:a1c:38c4:: with SMTP id f187mr2604810wma.144.1620116458150; 
+ Tue, 04 May 2021 01:20:58 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwTbu5ekU7D/8mrl31/CpdYXkrj1VnJHihiA9z9xrr3YZFmIJDwfjFftMechzR6ujZAAVINxg==
+X-Received: by 2002:a1c:38c4:: with SMTP id f187mr2604801wma.144.1620116457988; 
+ Tue, 04 May 2021 01:20:57 -0700 (PDT)
 Received: from redhat.com ([2a10:800a:cdef:0:114d:2085:61e4:7b41])
- by smtp.gmail.com with ESMTPSA id d127sm1633011wmd.14.2021.05.04.01.20.54
+ by smtp.gmail.com with ESMTPSA id l66sm1845078wmf.20.2021.05.04.01.20.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 May 2021 01:20:55 -0700 (PDT)
-Date: Tue, 4 May 2021 04:20:53 -0400
+ Tue, 04 May 2021 01:20:57 -0700 (PDT)
+Date: Tue, 4 May 2021 04:20:56 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 1/2] virtio_pci_modern: __force cast the notify mapping
-Message-ID: <20210504082034.118581-1-mst@redhat.com>
+Subject: [PATCH 2/2] virtio_pci_modern: correct sparse tags for notify
+Message-ID: <20210504082034.118581-2-mst@redhat.com>
+References: <20210504082034.118581-1-mst@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <20210504082034.118581-1-mst@redhat.com>
 X-Mailer: git-send-email 2.27.0.106.g8ac3dc51b1
 X-Mutt-Fcc: =sent
 Authentication-Results: relay.mimecast.com;
@@ -110,33 +115,59 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 When switching virtio_pci_modern to use a helper for mappings we lost an
-__iomem tag. We should restore it.
-
-However, virtio_pci_modern is playing tricks by hiding an iomem pointer
-in a regular vq->priv pointer. Which is okay as long as it's
-all contained within a single file, but we need to __force cast
-the value otherwise we'll get sparse warnings.
+__iomem tag. Restore it.
 
 Reported-by: kernel test robot <lkp@intel.com>
-Fixes: 7dca6c0ea96b ("virtio-pci library: switch to use vp_modern_map_vq_notify()")
+Fixes: 9e3bb9b79a71 ("virtio_pci_modern: introduce helper to map vq notify area")
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/virtio/virtio_pci_modern.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/virtio/virtio_pci_modern_dev.c | 9 ++++-----
+ include/linux/virtio_pci_modern.h      | 4 ++--
+ 2 files changed, 6 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
-index 722ea44e7579..30654d3a0b41 100644
---- a/drivers/virtio/virtio_pci_modern.c
-+++ b/drivers/virtio/virtio_pci_modern.c
-@@ -224,7 +224,7 @@ static struct virtqueue *setup_vq(struct virtio_pci_device *vp_dev,
- 				virtqueue_get_avail_addr(vq),
- 				virtqueue_get_used_addr(vq));
+diff --git a/drivers/virtio/virtio_pci_modern_dev.c b/drivers/virtio/virtio_pci_modern_dev.c
+index ae87b3fa8858..54f297028586 100644
+--- a/drivers/virtio/virtio_pci_modern_dev.c
++++ b/drivers/virtio/virtio_pci_modern_dev.c
+@@ -605,8 +605,8 @@ static u16 vp_modern_get_queue_notify_off(struct virtio_pci_modern_device *mdev,
+  *
+  * Returns the address of the notification area
+  */
+-void *vp_modern_map_vq_notify(struct virtio_pci_modern_device *mdev,
+-			      u16 index, resource_size_t *pa)
++void __iomem *vp_modern_map_vq_notify(struct virtio_pci_modern_device *mdev,
++				      u16 index, resource_size_t *pa)
+ {
+ 	u16 off = vp_modern_get_queue_notify_off(mdev, index);
  
--	vq->priv = vp_modern_map_vq_notify(mdev, index, NULL);
-+	vq->priv = (void __force *)vp_modern_map_vq_notify(mdev, index, NULL);
- 	if (!vq->priv) {
- 		err = -ENOMEM;
- 		goto err_map_notify;
+@@ -624,10 +624,9 @@ void *vp_modern_map_vq_notify(struct virtio_pci_modern_device *mdev,
+ 		if (pa)
+ 			*pa = mdev->notify_pa +
+ 			      off * mdev->notify_offset_multiplier;
+-		return (void __force *)mdev->notify_base +
+-			off * mdev->notify_offset_multiplier;
++		return mdev->notify_base + off * mdev->notify_offset_multiplier;
+ 	} else {
+-		return (void __force *)vp_modern_map_capability(mdev,
++		return vp_modern_map_capability(mdev,
+ 				       mdev->notify_map_cap, 2, 2,
+ 				       off * mdev->notify_offset_multiplier, 2,
+ 				       NULL, pa);
+diff --git a/include/linux/virtio_pci_modern.h b/include/linux/virtio_pci_modern.h
+index cdfabbefacdf..6a95b58fd0f4 100644
+--- a/include/linux/virtio_pci_modern.h
++++ b/include/linux/virtio_pci_modern.h
+@@ -101,8 +101,8 @@ void vp_modern_set_queue_size(struct virtio_pci_modern_device *mdev,
+ u16 vp_modern_get_queue_size(struct virtio_pci_modern_device *mdev,
+ 			     u16 idx);
+ u16 vp_modern_get_num_queues(struct virtio_pci_modern_device *mdev);
+-void *vp_modern_map_vq_notify(struct virtio_pci_modern_device *mdev,
+-                              u16 index, resource_size_t *pa);
++void __iomem * vp_modern_map_vq_notify(struct virtio_pci_modern_device *mdev,
++				       u16 index, resource_size_t *pa);
+ int vp_modern_probe(struct virtio_pci_modern_device *mdev);
+ void vp_modern_remove(struct virtio_pci_modern_device *mdev);
+ #endif
 -- 
 MST
 
