@@ -1,102 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id A3B3D373471
-	for <lists.virtualization@lfdr.de>; Wed,  5 May 2021 06:38:36 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8970D3734C4
+	for <lists.virtualization@lfdr.de>; Wed,  5 May 2021 07:45:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4F54340613;
-	Wed,  5 May 2021 04:38:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 057B140EC1;
+	Wed,  5 May 2021 05:45:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uo6YR1NX5CHH; Wed,  5 May 2021 04:38:33 +0000 (UTC)
+	with ESMTP id V--HpuVhhFuo; Wed,  5 May 2021 05:45:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D7B6040616;
-	Wed,  5 May 2021 04:38:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A6A8F40F0C;
+	Wed,  5 May 2021 05:44:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 759EAC0001;
-	Wed,  5 May 2021 04:38:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2CD6BC0024;
+	Wed,  5 May 2021 05:44:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EDBFFC0001
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 002A2C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 May 2021 04:38:30 +0000 (UTC)
+ Wed,  5 May 2021 05:44:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D416C607FC
+ by smtp4.osuosl.org (Postfix) with ESMTP id D917840EC1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 May 2021 04:38:30 +0000 (UTC)
+ Wed,  5 May 2021 05:44:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Dp-hjeRGMoit
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1yaOgZDcl5aE
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 May 2021 04:38:30 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 097B3607F5
+ Wed,  5 May 2021 05:44:56 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7E683405FC
  for <virtualization@lists.linux-foundation.org>;
- Wed,  5 May 2021 04:38:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620189508;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=6yVNxWj/wGGOgYdtthMPoI7mCPnyJvOQocx3yTI0Fvg=;
- b=RstdNb0YI5jiiCY5ZzPm5k/ka7NKfNUra/X8lTv6ycbVjKR8EON49NwpFwBc8FF/lD10V1
- S0V7bWA79aA/tXMl5tCfVpxLjyC2tBP2QQhD+hPWLzL/WKPyDH7RTzitT1pLPv43uSj7Em
- R8TAkaWs19KveLdDVfnaR8Tkw3FENag=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-132-kQkPfuBGN7GHqGk9NakKUg-1; Wed, 05 May 2021 00:38:27 -0400
-X-MC-Unique: kQkPfuBGN7GHqGk9NakKUg-1
-Received: by mail-wm1-f72.google.com with SMTP id
- n9-20020a1c40090000b02901401bf40f9dso1141587wma.0
- for <virtualization@lists.linux-foundation.org>;
- Tue, 04 May 2021 21:38:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=6yVNxWj/wGGOgYdtthMPoI7mCPnyJvOQocx3yTI0Fvg=;
- b=LPv54fhMkyaM1/ygSV4KUnBWHHgJbuD/NaMDQIsHi1dP9i9eELTQ/yBgAl13c3ApSa
- WJV8cBAVDlfZiyUGeQu54jIxvp6SpMgMTlFh5fHbuinNbxdMwNk10p9bFa4AghZpIS60
- unhBInxQjWGb/lVEJz+cv88DetSJhrwZwOp2HqGc0nvK5074OhFfMkJUz9HrSvOoxhCM
- Yfhdosd6lI7pmfiVSVZegJSHZShDxP8Yh7IlSaAuTZZXXkmMBZJLHYZVnfyZrNlSgHgM
- vaGa6qm3X1W/FnPjQ8HRR7Jkg45lQa/sgOrMmKQqv8MoFmeovevGn9wy5jF3EyaweU8C
- myGg==
-X-Gm-Message-State: AOAM5315mwaL26V4/MYhpmhqpQ57LwQz+JA2Y7YA4l8PfZ8EXQsEArPE
- C7P0DklanKHkP2sFAiZelV75IM+tQdtHRNPopn8CpcmDoB4pP+LFcooBEcz+XuSJSGN3tkEgKwZ
- sZd2tmxIiBEbdDcitGT186EfRN/CljvFyLB0vdaDl4A==
-X-Received: by 2002:a1c:a914:: with SMTP id s20mr7739707wme.106.1620189505927; 
- Tue, 04 May 2021 21:38:25 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw5TxS+BmZuvt5WiviH50Lclf5Xxsj1NDlf/f/RBKa/5VjATFVo470ooq0Cl7f/rAtcAI0oUA==
-X-Received: by 2002:a1c:a914:: with SMTP id s20mr7739697wme.106.1620189505774; 
- Tue, 04 May 2021 21:38:25 -0700 (PDT)
-Received: from redhat.com ([2a10:800c:8fce:0:8e1b:40f0:6a74:513b])
- by smtp.gmail.com with ESMTPSA id f8sm4449512wmc.8.2021.05.04.21.38.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 May 2021 21:38:24 -0700 (PDT)
-Date: Wed, 5 May 2021 00:38:22 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Paul Menzel <pmenzel@molgen.mpg.de>
-Subject: Re: virtio_net: Almost a second until link becomes ready
-Message-ID: <20210505003117-mutt-send-email-mst@kernel.org>
-References: <f4e3a841-ebc4-3f6d-928a-5d81a3ab3f31@molgen.mpg.de>
+ Wed,  5 May 2021 05:44:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=tfIbCE5PtUo+T4UstmLUV156SoaNG1hVSxocsxbyORk=; b=eEM2HbGNb9sSh7hsqOhqfyxB0Z
+ thYxLo4+xbOC3WxI1gvTX5KkEjiRsFwpOT+BRaYxeiPXge6wW5tJzJd9htNuYEQGWAEWPGvJDoQpg
+ LLRtiDwLdJhyXjDBcrS/Dlmjn6yWG1Dt8YeLXLkmBHTp93Kv1BBAzUu/bYLOX4JItQEe9+pgeoSEd
+ iOSh9fTyQ2gqqWf4gOy2fEC+yEVCDcgUp9Athd3cyFKewo2wK5dNxZL62/JhikurmFBN8iIUfjZQT
+ E2o34wT+tCJuoBmPVtchozh9R/wIks5yVJh4GHLrY+LhzC9Tn8pQW43ZR00QI1KKEQ5qlk+7z6rwT
+ PR1zt7nA==;
+Received: from hch by casper.infradead.org with local (Exim 4.94 #2 (Red Hat
+ Linux)) id 1leAJW-00HXKA-L4; Wed, 05 May 2021 05:43:17 +0000
+Date: Wed, 5 May 2021 06:43:14 +0100
+From: Christoph Hellwig <hch@infradead.org>
+To: Enrico Granata <egranata@google.com>
+Subject: Re: [PATCH] Provide detailed specification of virtio-blk lifetime
+ metrics
+Message-ID: <20210505054314.GA4179527@infradead.org>
+References: <20210420162556.217350-1-egranata@google.com>
 MIME-Version: 1.0
-In-Reply-To: <f4e3a841-ebc4-3f6d-928a-5d81a3ab3f31@molgen.mpg.de>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org
+In-Reply-To: <20210420162556.217350-1-egranata@google.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ casper.infradead.org. See http://www.infradead.org/rpr.html
+Cc: hch@infradead.org, virtio-dev@lists.oasis-open.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -108,39 +77,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVHVlLCBNYXkgMDQsIDIwMjEgYXQgMDg6MDQ6NTBQTSArMDIwMCwgUGF1bCBNZW56ZWwgd3Jv
-dGU6Cj4gRGVhciBWaXJ0SU8gbmV0IGRyaXZlciBmb2xrcywKPiAKPiAKPiBJIHdvdWxkIGxpa2Ug
-dG8gc3RhcnQgdGhlIHZpZGVvIGNvbmZlcmVuY2luZyBzb2Z0d2FyZSBKaXRzaSBpbiBhIFFFTVUv
-S1ZNIFZNCj4gYXMgcXVpY2tseSBhcyBwb3NzaWJsZS4KPiAKPiBgYGAKPiAkIHFlbXUtc3lzdGVt
-LXg4Nl82NCAtLXZlcnNpb24KPiBRRU1VIGVtdWxhdG9yIHZlcnNpb24gNS4xLjAKPiBDb3B5cmln
-aHQgKGMpIDIwMDMtMjAyMCBGYWJyaWNlIEJlbGxhcmQgYW5kIHRoZSBRRU1VIFByb2plY3QgZGV2
-ZWxvcGVycwo+ICQgcWVtdS1zeXN0ZW0teDg2XzY0IC1lbmFibGUta3ZtIC1uYW1lIGppdHNpIC1j
-cHUgaG9zdCAtbSA4RyAtc21wIDEyIC1nbG9iYWwKPiB2aXJ0aW8tbmV0LXBjaS5yb21maWxlPSAt
-ZGV2aWNlIHZpcnRpby1ybmctcGNpIC1ib290IG1lbnU9b2ZmIC1kcml2ZQo+IGZpbGU9aml0c2ku
-MDAzLmRpc2ssZm9ybWF0PXFjb3cyLGlmPXZpcnRpbyAtbmljIHRhcCxpZm5hbWU9dGFwLmppdHNp
-LHNjcmlwdD0vYmluL3RydWUsZG93bnNjcmlwdD0vYmluL3RydWUsbW9kZWw9dmlydGlvLW5ldC1w
-Y2ksbWFjPTUyOmM2OjExOjAwOjAwOjE4Cj4gLXZuYyA6NjAgLWsgZGUgLXNlcmlhbCBub25lIC1j
-aGFyZGV2Cj4gc29ja2V0LGlkPW1vbjEscGF0aD1tb24uc29ja2V0LHNlcnZlcixub3dhaXQgLWNo
-YXJkZXYKPiBzb2NrZXQsaWQ9bW9uMixwYXRoPXFtcC5zb2NrZXQsc2VydmVyLG5vd2FpdCAtbW9u
-IGNoYXJkZXY9bW9uMSxtb2RlPXJlYWRsaW5lCj4gLW1vbiBjaGFyZGV2PW1vbjIsbW9kZT1jb250
-cm9sCj4gYGBgCj4gCj4gVGhlIChpbmFjY3VyYXRlKSBtZWFzdXJlbWVudCB3aXRoIGBzeXN0ZW1k
-LWFuYWx5emUgY3JpdGljYWwtY2hhaW5gIHNob3dzCj4gdGhhdCBgc3lzdGVtZC1uZXR3b3JrLXdh
-aXQtb25saW5lLnNlcnZpY2VgIHRha2VzIHNvbWUgdGltZS4KPiAKPiAgICAgICAgICAg4pSU4pSA
-c3lzdGVtZC1uZXR3b3JrZC13YWl0LW9ubGluZS5zZXJ2aWNlIEAxNTltcyArMi44NzFzCj4gCj4g
-TGludXggbG9nczoKPiAKPiAgICAgWyAgICAxLjA1ODI1M10gdmlydGlvX25ldCB2aXJ0aW8wIGVu
-czM6IHJlbmFtZWQgZnJvbSBldGgwCj4gICAgIFvigKZdCj4gICAgIFsgICAgMS4xMDMxNjVdIElQ
-djY6IEFERFJDT05GKE5FVERFVl9VUCk6IGVuczM6IGxpbmsgaXMgbm90IHJlYWR5Cj4gICAgIFvi
-gKZdCj4gICAgIFsgICAgMi4wNDQ5NDddIElQdjY6IEFERFJDT05GKE5FVERFVl9DSEFOR0UpOiBl
-bnMzOiBsaW5rIGJlY29tZXMgcmVhZHkKPiAKCgpJJ20gbm90IHN1cmUgd2hhdCBpcyBnb2luZyBv
-biBoZXJlOiBhIGxvc3QgY29uZmlnIGludGVycnVwdD8Kc3lzdGVtZCBmb3JjaW5nIGxpbmsgZG93
-biB0aGVuIHVwIGZvciBpdHMgb3duIHJlYXNvbnM/CkJ1dCBhIHBvc3NpYmxlIHdvcmthcm91bmQg
-aXMKdG8gYWRkIHN0YXR1cz1vZmYgdG8gdGhlIHZpcnRpbyBuZXQgZGV2aWNlIHRvIGZvcmNlIGxp
-bmsgdG8gYWx3YXlzCmJlIHVwLgoKX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxp
-c3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9y
-Zy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+On Tue, Apr 20, 2021 at 04:25:56PM +0000, Enrico Granata wrote:
+> In the course of review, some concerns were surfaced about the
+> original virtio-blk lifetime proposal, as it depends on the eMMC
+> spec which is not open
+> 
+> Add a more detailed description of the meaning of the fields
+> added by that proposal to the virtio-blk specification, as to
+> make it feasible to understand and implement the new lifetime
+> metrics feature without needing to refer to JEDEC's specification
+> 
+> This patch does not change the meaning of those fields nor add
+> any new fields, but it is intended to provide an open and more
+> clear description of the meaning associated with those fields.
+> 
+> Signed-off-by: Enrico Granata <egranata@google.com>
+
+Still not a fan of the encoding, but at least it is properly documented
+now:
+
+Acked-by: Christoph Hellwig <hch@lst.de>
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
