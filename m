@@ -1,85 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 526ED379EC3
-	for <lists.virtualization@lfdr.de>; Tue, 11 May 2021 06:43:38 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF59E379EC4
+	for <lists.virtualization@lfdr.de>; Tue, 11 May 2021 06:43:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EFFEC84503;
-	Tue, 11 May 2021 04:43:36 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 427B160D5A;
+	Tue, 11 May 2021 04:43:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pCsF6vWJ6FqK; Tue, 11 May 2021 04:43:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 89F8B844DB;
-	Tue, 11 May 2021 04:43:32 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xDUrWsISpKCs; Tue, 11 May 2021 04:43:36 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0F74360D60;
+	Tue, 11 May 2021 04:43:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7FE00C0001;
-	Tue, 11 May 2021 04:43:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BE456C0001;
+	Tue, 11 May 2021 04:43:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AC6CEC000D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 01C5DC0001
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:30 +0000 (UTC)
+ Tue, 11 May 2021 04:43:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9BC6D844DB
+ by smtp3.osuosl.org (Postfix) with ESMTP id D93AF60B96
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:30 +0000 (UTC)
+ Tue, 11 May 2021 04:43:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vZyGjinZ1Fj3
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1paDX10V0OZl
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:26 +0000 (UTC)
+ Tue, 11 May 2021 04:43:27 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E5A7B84472
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2EC07607F4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:25 +0000 (UTC)
-Received: by mail-wm1-x32c.google.com with SMTP id n84so10351216wma.0
+ Tue, 11 May 2021 04:43:27 +0000 (UTC)
+Received: by mail-wm1-x336.google.com with SMTP id
+ s5-20020a7bc0c50000b0290147d0c21c51so471564wmh.4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 May 2021 21:43:25 -0700 (PDT)
+ Mon, 10 May 2021 21:43:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=daynix-com.20150623.gappssmtp.com; s=20150623;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=5pOfhSU30/+74TWykEgYzzcECzknBZN+gG9Fp9jV4LM=;
- b=nh8fG27gkiOXB9Nd6Ql5AKT5b4yZ4SDOzi0e2MCZrznnSTBwvbi3UvjCMFYtvSaa5e
- T5aL7BE9xtRQRhLITeB3qJFmGhMcI2W79nl6PLA8YvU4Mhhm1zyShXvMLKwy62DHATZL
- deNH+G75y8mvkk3t3ZPupo6Mop+VgxQ1XhVfVkLLJ6lonX3bRpoevXYxsuFmxrfwQWNC
- 9V/KziU2Eu967HWhLsQJq/0+fpFxuiw3xvw7fZo5uiMybxBVxXT2SxRxDVKSGKstA2jh
- OhohXmo5shuPLwlqD7ikkEvUQiQjGWXdUEAqvLWNSoHSAYPK/hzkqwIiwmg4gmZFxMaq
- pF8w==
+ bh=bsCvJr4vTwPoE7/DTp7x7jVKKhNxBO/CRiZz1em8k+w=;
+ b=JSBkBA/fZRmJSu3Y9xq3akl7ED6Tvpe7AvXz1yQrByhsaur23klSnr6Gyq5VVkOF/P
+ ehiDxkgCwHbnHX/mXBNSZtuuk7bsIIRGAiQ4j3jut6l8HNUKQNHAopo2HuU2VL5zei60
+ JWVu8C+wV0DiXbMmrKqq77WXG2qN+YjSeDXpu87UOw8Uk9c2CBK5DaS+yiamWcO4kRFR
+ eWmoNtLNlfEI/s1QDxveZYkjyxgFod5GgIjU4xSpwEEoUEKLpYx2FaOMj94DXNvUUu4Y
+ MuzNETQ0sy/X7KcHezWttVz3VxYGEu9aQaUaC9vgboklMJdAAEP3UHyzzWyc75VQnZ2B
+ 1WXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=5pOfhSU30/+74TWykEgYzzcECzknBZN+gG9Fp9jV4LM=;
- b=DXQNGffcHdXiWAJCwts0idqp6dIvUcf4GdmShiSBqhX46knRQJisS490h5VJgyGUf3
- 5zISs26IXSg+OPKZRfcwBwlwlyhiCBZNJLPRF31sRZvjxo+jWqxRB3EdiUANzCBFge9K
- RBnLwP5QUZClKDPF45GyU1FicCwQF6CpP0cXKjAaKdnqCohx/tLn7+T1ZW3c1d8qTsot
- 7C1DrHgsuSbebazcP3tnLAH7S1Z9nSDKjVvdXhhEx68P6QWOkdAETUUBuFFzzO8c+OZe
- 9RYfWQm0759nIKUNNJrqb9vYnKalWYw9rqxMl9kJxA3AfMr6NyVnAxc6ElImS4K3ru/n
- X5+Q==
-X-Gm-Message-State: AOAM53315/CF+YL7JYl9Q16Nsq5n1wxfGq1m20lSJ6+03cVWf27nFxg7
- jRQ/Iak6p/5Lyxbmihy9MqABIysCpgWW2Q==
-X-Google-Smtp-Source: ABdhPJxz2fUN2Ek72KoGClY3cxAT8P1LdAZMCqfO5EoKr2QEdfTvTaJ0vok4Mb2bs3QB8c0H7KV+3A==
-X-Received: by 2002:a1c:7dd1:: with SMTP id y200mr2960343wmc.81.1620708204150; 
- Mon, 10 May 2021 21:43:24 -0700 (PDT)
+ bh=bsCvJr4vTwPoE7/DTp7x7jVKKhNxBO/CRiZz1em8k+w=;
+ b=fkgB9SsCV9hvbX+eG5pYauDZvMgBPP+HX6a58j/0bhrfwExSzkU+BylpujK3Wgr4Cn
+ xRNoYcsajsBXvjvFLwv0oF42cF4UhsRuhODnYHHQmX6RhmHCgQXplnghbsJW75RcF0Cg
+ ukvBfR73WGeXjNswasb8NF6LABtT+74t9tB5PzX0lgIvvtJwutLjpbv1UkTc1Mvv8iIW
+ g2jYNX10pUeRk9oe8Im0tsSjpmhHR5V6I+hhahHpDDnL19UZuO9ClFsAx0UxYcrKsmUN
+ vvC8/rDhEWH7F4t4OkhwEhYQglhDWD62e9buQEfen3jIRP0AyxsJlqA5ylXU3c+4fn0z
+ SfgQ==
+X-Gm-Message-State: AOAM5325JLLQkuF/Oa+NXWVEJpFkkZyc3w4ggQAfz3jUXhscMbiwOSL/
+ JqJkJsDAMg9DnV/UL99/h3Kgrw==
+X-Google-Smtp-Source: ABdhPJzxeGzw+4yEOHbL5HDKHJ+qupAsDGcMzwF55Eut8wUC/I5FZbSmyp0K0X27fWEs54GfArqysw==
+X-Received: by 2002:a1c:545c:: with SMTP id p28mr3073820wmi.118.1620708205432; 
+ Mon, 10 May 2021 21:43:25 -0700 (PDT)
 Received: from f1.Home (bzq-79-180-42-161.red.bezeqint.net. [79.180.42.161])
- by smtp.gmail.com with ESMTPSA id a9sm22360520wmj.1.2021.05.10.21.43.22
+ by smtp.gmail.com with ESMTPSA id a9sm22360520wmj.1.2021.05.10.21.43.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 May 2021 21:43:23 -0700 (PDT)
+ Mon, 10 May 2021 21:43:25 -0700 (PDT)
 From: Yuri Benditovich <yuri.benditovich@daynix.com>
 To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
  netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org
-Subject: [PATCH 3/4] tun: define feature bit for USO support
-Date: Tue, 11 May 2021 07:42:52 +0300
-Message-Id: <20210511044253.469034-4-yuri.benditovich@daynix.com>
+Subject: [PATCH 4/4] tun: indicate support for USO feature
+Date: Tue, 11 May 2021 07:42:53 +0300
+Message-Id: <20210511044253.469034-5-yuri.benditovich@daynix.com>
 X-Mailer: git-send-email 2.26.3
 In-Reply-To: <20210511044253.469034-1-yuri.benditovich@daynix.com>
 References: <20210511044253.469034-1-yuri.benditovich@daynix.com>
@@ -101,26 +102,24 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-User mode software can probe this bit to check whether the
-USO feature is supported by TUN/TAP device.
-
 Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
 ---
- include/uapi/linux/if_tun.h | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/tun.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/include/uapi/linux/if_tun.h b/include/uapi/linux/if_tun.h
-index 454ae31b93c7..24f246920dd5 100644
---- a/include/uapi/linux/if_tun.h
-+++ b/include/uapi/linux/if_tun.h
-@@ -88,6 +88,7 @@
- #define TUN_F_TSO6	0x04	/* I can handle TSO for IPv6 packets */
- #define TUN_F_TSO_ECN	0x08	/* I can handle TSO with ECN bits. */
- #define TUN_F_UFO	0x10	/* I can handle UFO packets */
-+#define TUN_F_USO	0x20	/* I can handle USO packets */
+diff --git a/drivers/net/tun.c b/drivers/net/tun.c
+index 84f832806313..a35054f9d941 100644
+--- a/drivers/net/tun.c
++++ b/drivers/net/tun.c
+@@ -2812,7 +2812,7 @@ static int set_offload(struct tun_struct *tun, unsigned long arg)
+ 			arg &= ~(TUN_F_TSO4|TUN_F_TSO6);
+ 		}
  
- /* Protocol info prepended to the packets (when IFF_NO_PI is not set) */
- #define TUN_PKT_STRIP	0x0001
+-		arg &= ~TUN_F_UFO;
++		arg &= ~(TUN_F_UFO|TUN_F_USO);
+ 	}
+ 
+ 	/* This gives the user a way to test for new features in future by
 -- 
 2.26.3
 
