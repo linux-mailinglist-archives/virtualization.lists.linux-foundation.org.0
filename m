@@ -1,91 +1,76 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CF59E379EC4
-	for <lists.virtualization@lfdr.de>; Tue, 11 May 2021 06:43:41 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8642379F87
+	for <lists.virtualization@lfdr.de>; Tue, 11 May 2021 08:05:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 427B160D5A;
-	Tue, 11 May 2021 04:43:40 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 443694057C;
+	Tue, 11 May 2021 06:05:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xDUrWsISpKCs; Tue, 11 May 2021 04:43:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jfRhB07XuZkq; Tue, 11 May 2021 06:05:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0F74360D60;
-	Tue, 11 May 2021 04:43:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4515240581;
+	Tue, 11 May 2021 06:05:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BE456C0001;
-	Tue, 11 May 2021 04:43:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78638C0001;
+	Tue, 11 May 2021 06:05:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01C5DC0001
- for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:32 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E93F0C0001;
+ Tue, 11 May 2021 06:05:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D93AF60B96
- for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:31 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id CAB1B401EE;
+ Tue, 11 May 2021 06:05:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1paDX10V0OZl
- for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:27 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2EC07607F4
- for <virtualization@lists.linux-foundation.org>;
- Tue, 11 May 2021 04:43:27 +0000 (UTC)
-Received: by mail-wm1-x336.google.com with SMTP id
- s5-20020a7bc0c50000b0290147d0c21c51so471564wmh.4
- for <virtualization@lists.linux-foundation.org>;
- Mon, 10 May 2021 21:43:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=bsCvJr4vTwPoE7/DTp7x7jVKKhNxBO/CRiZz1em8k+w=;
- b=JSBkBA/fZRmJSu3Y9xq3akl7ED6Tvpe7AvXz1yQrByhsaur23klSnr6Gyq5VVkOF/P
- ehiDxkgCwHbnHX/mXBNSZtuuk7bsIIRGAiQ4j3jut6l8HNUKQNHAopo2HuU2VL5zei60
- JWVu8C+wV0DiXbMmrKqq77WXG2qN+YjSeDXpu87UOw8Uk9c2CBK5DaS+yiamWcO4kRFR
- eWmoNtLNlfEI/s1QDxveZYkjyxgFod5GgIjU4xSpwEEoUEKLpYx2FaOMj94DXNvUUu4Y
- MuzNETQ0sy/X7KcHezWttVz3VxYGEu9aQaUaC9vgboklMJdAAEP3UHyzzWyc75VQnZ2B
- 1WXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=bsCvJr4vTwPoE7/DTp7x7jVKKhNxBO/CRiZz1em8k+w=;
- b=fkgB9SsCV9hvbX+eG5pYauDZvMgBPP+HX6a58j/0bhrfwExSzkU+BylpujK3Wgr4Cn
- xRNoYcsajsBXvjvFLwv0oF42cF4UhsRuhODnYHHQmX6RhmHCgQXplnghbsJW75RcF0Cg
- ukvBfR73WGeXjNswasb8NF6LABtT+74t9tB5PzX0lgIvvtJwutLjpbv1UkTc1Mvv8iIW
- g2jYNX10pUeRk9oe8Im0tsSjpmhHR5V6I+hhahHpDDnL19UZuO9ClFsAx0UxYcrKsmUN
- vvC8/rDhEWH7F4t4OkhwEhYQglhDWD62e9buQEfen3jIRP0AyxsJlqA5ylXU3c+4fn0z
- SfgQ==
-X-Gm-Message-State: AOAM5325JLLQkuF/Oa+NXWVEJpFkkZyc3w4ggQAfz3jUXhscMbiwOSL/
- JqJkJsDAMg9DnV/UL99/h3Kgrw==
-X-Google-Smtp-Source: ABdhPJzxeGzw+4yEOHbL5HDKHJ+qupAsDGcMzwF55Eut8wUC/I5FZbSmyp0K0X27fWEs54GfArqysw==
-X-Received: by 2002:a1c:545c:: with SMTP id p28mr3073820wmi.118.1620708205432; 
- Mon, 10 May 2021 21:43:25 -0700 (PDT)
-Received: from f1.Home (bzq-79-180-42-161.red.bezeqint.net. [79.180.42.161])
- by smtp.gmail.com with ESMTPSA id a9sm22360520wmj.1.2021.05.10.21.43.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 May 2021 21:43:25 -0700 (PDT)
-From: Yuri Benditovich <yuri.benditovich@daynix.com>
-To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
- netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
-Subject: [PATCH 4/4] tun: indicate support for USO feature
-Date: Tue, 11 May 2021 07:42:53 +0300
-Message-Id: <20210511044253.469034-5-yuri.benditovich@daynix.com>
-X-Mailer: git-send-email 2.26.3
-In-Reply-To: <20210511044253.469034-1-yuri.benditovich@daynix.com>
-References: <20210511044253.469034-1-yuri.benditovich@daynix.com>
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id QvKjmPA_sunz; Tue, 11 May 2021 06:05:43 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 45921400C3;
+ Tue, 11 May 2021 06:05:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=ivXRfvp0B6bhHcZFQN6o9TvbDYiuEX8y75ZaSbBWqwk=; b=QSMJ3NJ5uT19qxcGuE+coUNmlb
+ yT6P0yLS4aW5ugTz7nrlHAL9y157fuXhzFSUDGjN+UGajFuOpst3+7Q1r+IsllWGSvmcMP6zaCnvP
+ NuzYBH7oq4UO6oSNuHzUKxsqC7iE7c8x5KwMQF4BOoCGpuvTZc481nEUeO9Pe7T9RXQ0hRiHIuaYA
+ 7NLXj7mhlAF0i+ESIHahLpUPYelFixQLV64KQdVSBZtyALcQP8r6U7y65kEs5g/sGjSMPZwG7Jpx9
+ T+dCLrx/3PVjDzEvBNZ77fqkKCogfLUNvijXg4hBZkvqcZnPA4ZzPU2Z3PeHMAchedaCnpQ8iICd9
+ sBsvvTNA==;
+Received: from [2001:4bb8:198:fbc8:d27d:cdc6:80b6:b410] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
+ id 1lgLW9-009KPC-7Y; Tue, 11 May 2021 06:05:17 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+ Huang Rui <ray.huang@amd.com>
+Subject: RFC: use dma_alloc_noncoherent in ttm_pool_alloc_page
+Date: Tue, 11 May 2021 08:05:13 +0200
+Message-Id: <20210511060514.3956745-1-hch@lst.de>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-Cc: yan@daynix.com
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: amd-gfx@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ David Airlie <airlied@linux.ie>, Roland Scheidegger <sroland@vmware.com>,
+ dri-devel@lists.freedesktop.org,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, virtualization@lists.linux-foundation.org,
+ iommu@lists.linux-foundation.org,
+ VMware Graphics <linux-graphics-maintainer@vmware.com>,
+ Ben Skeggs <bskeggs@redhat.com>, Daniel Vetter <daniel@ffwll.ch>,
+ nouveau@lists.freedesktop.org, Alex Deucher <alexander.deucher@amd.com>,
+ Dave Airlie <airlied@redhat.com>, spice-devel@lists.freedesktop.org,
+ Zack Rusin <zackr@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,27 +87,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Signed-off-by: Yuri Benditovich <yuri.benditovich@daynix.com>
----
- drivers/net/tun.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hi all,
 
-diff --git a/drivers/net/tun.c b/drivers/net/tun.c
-index 84f832806313..a35054f9d941 100644
---- a/drivers/net/tun.c
-+++ b/drivers/net/tun.c
-@@ -2812,7 +2812,7 @@ static int set_offload(struct tun_struct *tun, unsigned long arg)
- 			arg &= ~(TUN_F_TSO4|TUN_F_TSO6);
- 		}
- 
--		arg &= ~TUN_F_UFO;
-+		arg &= ~(TUN_F_UFO|TUN_F_USO);
- 	}
- 
- 	/* This gives the user a way to test for new features in future by
--- 
-2.26.3
+the memory allocation for the TTM pool is a big mess with two allocation
+methods that both have issues, a layering violation and odd guessing of
+pools in the callers.
 
+This patch switches to the dma_alloc_noncoherent API instead fixing all
+of the above issues.
+
+Warning:  i don't have any of the relevant hardware, so this is a compile
+tested request for comments only!
+
+Diffstat:
+ drivers/gpu/drm/amd/amdgpu/amdgpu.h     |    1 
+ drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c |    4 
+ drivers/gpu/drm/amd/amdgpu/gmc_v6_0.c   |    1 
+ drivers/gpu/drm/amd/amdgpu/gmc_v7_0.c   |    1 
+ drivers/gpu/drm/amd/amdgpu/gmc_v8_0.c   |    1 
+ drivers/gpu/drm/amd/amdgpu/gmc_v9_0.c   |    1 
+ drivers/gpu/drm/drm_cache.c             |   31 -----
+ drivers/gpu/drm/drm_gem_vram_helper.c   |    3 
+ drivers/gpu/drm/nouveau/nouveau_ttm.c   |    8 -
+ drivers/gpu/drm/qxl/qxl_ttm.c           |    3 
+ drivers/gpu/drm/radeon/radeon.h         |    1 
+ drivers/gpu/drm/radeon/radeon_device.c  |    1 
+ drivers/gpu/drm/radeon/radeon_ttm.c     |    4 
+ drivers/gpu/drm/ttm/ttm_device.c        |    7 -
+ drivers/gpu/drm/ttm/ttm_pool.c          |  178 ++++----------------------------
+ drivers/gpu/drm/ttm/ttm_tt.c            |   25 ----
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c     |    4 
+ include/drm/drm_cache.h                 |    1 
+ include/drm/ttm/ttm_device.h            |    3 
+ include/drm/ttm/ttm_pool.h              |    9 -
+ 20 files changed, 41 insertions(+), 246 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
