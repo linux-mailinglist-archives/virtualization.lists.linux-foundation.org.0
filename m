@@ -1,56 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6281037B733
-	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 09:55:25 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72C7637B72D
+	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 09:55:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5413A40506;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 0371D607E3;
 	Wed, 12 May 2021 07:55:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zbr7T_59lOVo; Wed, 12 May 2021 07:55:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4D084402F3;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 42_cJ4R9DVkn; Wed, 12 May 2021 07:55:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTP id AC6B46075E;
 	Wed, 12 May 2021 07:55:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1EC0BC0027;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7CF22C002E;
 	Wed, 12 May 2021 07:55:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 82508C000D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9BF6BC0001
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 648BF60784
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7681C4027E
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WeWujp2HEM01
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id uu8F6H6GhKnq
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 07:55:11 +0000 (UTC)
+ Wed, 12 May 2021 07:55:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9A5A860753
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 15F014019A
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:11 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549ad305.dip0.t-ipconnect.de
  [84.154.211.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 7C80E2DA;
- Wed, 12 May 2021 09:55:08 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 14ABF3E6;
+ Wed, 12 May 2021 09:55:09 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org,
 	Hyunwook Baek <baekhw@google.com>
-Subject: [PATCH 2/6] x86/sev-es: Forward page-faults which happen during
- emulation
-Date: Wed, 12 May 2021 09:54:41 +0200
-Message-Id: <20210512075445.18935-3-joro@8bytes.org>
+Subject: [PATCH 3/6] x86/sev-es: Use __put_user()/__get_user
+Date: Wed, 12 May 2021 09:54:42 +0200
+Message-Id: <20210512075445.18935-4-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210512075445.18935-1-joro@8bytes.org>
 References: <20210512075445.18935-1-joro@8bytes.org>
@@ -86,32 +85,83 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-When emulating guest instructions for MMIO or IOIO accesses the #VC
-handler might get a page-fault and will not be able to complete. Forward
-the page-fault in this case to the correct handler instead of killing
-the machine.
+The put_user() and get_user() functions do checks on the address which is
+passed to them. They check whether the address is actually a user-space
+address and whether its fine to access it. They also call might_fault()
+to indicate that they could fault and possibly sleep.
 
-Fixes: 0786138c78e7 ("x86/sev-es: Add a Runtime #VC Exception Handler")
+All of these checks are neither wanted nor required in the #VC exception
+handler, which can be invoked from almost any context and also for MMIO
+instructions from kernel space on kernel memory. All the #VC handler
+wants to know is whether a fault happened when the access was tried.
+
+This is provided by __put_user()/__get_user(), which just do the access
+no matter what.
+
+Fixes: f980f9c31a92 ("x86/sev-es: Compile early handler code into kernel image")
 Cc: stable@vger.kernel.org # v5.10+
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/x86/kernel/sev.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index c49270c7669e..6530a844eb61 100644
+index 6530a844eb61..110b39345b40 100644
 --- a/arch/x86/kernel/sev.c
 +++ b/arch/x86/kernel/sev.c
-@@ -1265,6 +1265,10 @@ static __always_inline void vc_forward_exception(struct es_em_ctxt *ctxt)
- 	case X86_TRAP_UD:
- 		exc_invalid_op(ctxt->regs);
+@@ -342,22 +342,22 @@ static enum es_result vc_write_mem(struct es_em_ctxt *ctxt,
+ 	switch (size) {
+ 	case 1:
+ 		memcpy(&d1, buf, 1);
+-		if (put_user(d1, target))
++		if (__put_user(d1, target))
+ 			goto fault;
  		break;
-+	case X86_TRAP_PF:
-+		write_cr2(ctxt->fi.cr2);
-+		exc_page_fault(ctxt->regs, error_code);
-+		break;
- 	case X86_TRAP_AC:
- 		exc_alignment_check(ctxt->regs, error_code);
+ 	case 2:
+ 		memcpy(&d2, buf, 2);
+-		if (put_user(d2, target))
++		if (__put_user(d2, target))
+ 			goto fault;
+ 		break;
+ 	case 4:
+ 		memcpy(&d4, buf, 4);
+-		if (put_user(d4, target))
++		if (__put_user(d4, target))
+ 			goto fault;
+ 		break;
+ 	case 8:
+ 		memcpy(&d8, buf, 8);
+-		if (put_user(d8, target))
++		if (__put_user(d8, target))
+ 			goto fault;
+ 		break;
+ 	default:
+@@ -396,22 +396,22 @@ static enum es_result vc_read_mem(struct es_em_ctxt *ctxt,
+ 
+ 	switch (size) {
+ 	case 1:
+-		if (get_user(d1, s))
++		if (__get_user(d1, s))
+ 			goto fault;
+ 		memcpy(buf, &d1, 1);
+ 		break;
+ 	case 2:
+-		if (get_user(d2, s))
++		if (__get_user(d2, s))
+ 			goto fault;
+ 		memcpy(buf, &d2, 2);
+ 		break;
+ 	case 4:
+-		if (get_user(d4, s))
++		if (__get_user(d4, s))
+ 			goto fault;
+ 		memcpy(buf, &d4, 4);
+ 		break;
+ 	case 8:
+-		if (get_user(d8, s))
++		if (__get_user(d8, s))
+ 			goto fault;
+ 		memcpy(buf, &d8, 8);
  		break;
 -- 
 2.31.1
