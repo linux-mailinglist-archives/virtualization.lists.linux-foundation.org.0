@@ -1,55 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 72C7637B72D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2FDE337B72B
 	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 09:55:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0371D607E3;
-	Wed, 12 May 2021 07:55:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 42_cJ4R9DVkn; Wed, 12 May 2021 07:55:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AC6B46075E;
+	by smtp4.osuosl.org (Postfix) with ESMTP id A864E404E7;
 	Wed, 12 May 2021 07:55:17 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7CF22C002E;
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id JzU_sGJtiPAN; Wed, 12 May 2021 07:55:16 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 42344402F4;
 	Wed, 12 May 2021 07:55:16 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DD558C0001;
+	Wed, 12 May 2021 07:55:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9BF6BC0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7BA94C0001
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7681C4027E
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6A3F0831F1
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id uu8F6H6GhKnq
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id V7Huy2ZptBX6
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 15F014019A
+Received: from theia.8bytes.org (8bytes.org
+ [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A1C1C83096
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 07:55:11 +0000 (UTC)
+ Wed, 12 May 2021 07:55:12 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549ad305.dip0.t-ipconnect.de
  [84.154.211.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 14ABF3E6;
+ by theia.8bytes.org (Postfix) with ESMTPSA id A32B141D;
  Wed, 12 May 2021 09:55:09 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org,
 	Hyunwook Baek <baekhw@google.com>
-Subject: [PATCH 3/6] x86/sev-es: Use __put_user()/__get_user
-Date: Wed, 12 May 2021 09:54:42 +0200
-Message-Id: <20210512075445.18935-4-joro@8bytes.org>
+Subject: [PATCH 4/6] Revert "x86/sev-es: Handle string port IO to kernel
+ memory properly"
+Date: Wed, 12 May 2021 09:54:43 +0200
+Message-Id: <20210512075445.18935-5-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210512075445.18935-1-joro@8bytes.org>
 References: <20210512075445.18935-1-joro@8bytes.org>
@@ -85,84 +87,57 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The put_user() and get_user() functions do checks on the address which is
-passed to them. They check whether the address is actually a user-space
-address and whether its fine to access it. They also call might_fault()
-to indicate that they could fault and possibly sleep.
+This reverts commit 7024f60d655272bd2ca1d3a4c9e0a63319b1eea1.
 
-All of these checks are neither wanted nor required in the #VC exception
-handler, which can be invoked from almost any context and also for MMIO
-instructions from kernel space on kernel memory. All the #VC handler
-wants to know is whether a fault happened when the access was tried.
+The commit reverted here introduces a short-cut into the #VC handlers
+memory access code which only works reliably in task context. But the
+kernels #VC handler can be invoked from any context, making the
+access_ok() call trigger a warning with CONFIG_DEBUG_ATOMIC_SLEEP
+enabled.
 
-This is provided by __put_user()/__get_user(), which just do the access
-no matter what.
+Also the memcpy() used in the reverted patch is wrong, as it has no
+page-fault handling. Access to kernel memory can also fault due to
+kernel bugs, and those should not be reported as faults from the #VC
+handler but as bugs of their real call-site, which is correctly later
+done from vc_forward_exception().
 
-Fixes: f980f9c31a92 ("x86/sev-es: Compile early handler code into kernel image")
-Cc: stable@vger.kernel.org # v5.10+
+Fixes: 7024f60d6552 ("x86/sev-es: Handle string port IO to kernel memory properly")
+Cc: stable@vger.kernel.org # v5.11
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev.c | 16 ++++++++--------
- 1 file changed, 8 insertions(+), 8 deletions(-)
+ arch/x86/kernel/sev.c | 12 ------------
+ 1 file changed, 12 deletions(-)
 
 diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index 6530a844eb61..110b39345b40 100644
+index 110b39345b40..f4f319004713 100644
 --- a/arch/x86/kernel/sev.c
 +++ b/arch/x86/kernel/sev.c
-@@ -342,22 +342,22 @@ static enum es_result vc_write_mem(struct es_em_ctxt *ctxt,
+@@ -333,12 +333,6 @@ static enum es_result vc_write_mem(struct es_em_ctxt *ctxt,
+ 	u16 d2;
+ 	u8  d1;
+ 
+-	/* If instruction ran in kernel mode and the I/O buffer is in kernel space */
+-	if (!user_mode(ctxt->regs) && !access_ok(target, size)) {
+-		memcpy(dst, buf, size);
+-		return ES_OK;
+-	}
+-
  	switch (size) {
  	case 1:
  		memcpy(&d1, buf, 1);
--		if (put_user(d1, target))
-+		if (__put_user(d1, target))
- 			goto fault;
- 		break;
- 	case 2:
- 		memcpy(&d2, buf, 2);
--		if (put_user(d2, target))
-+		if (__put_user(d2, target))
- 			goto fault;
- 		break;
- 	case 4:
- 		memcpy(&d4, buf, 4);
--		if (put_user(d4, target))
-+		if (__put_user(d4, target))
- 			goto fault;
- 		break;
- 	case 8:
- 		memcpy(&d8, buf, 8);
--		if (put_user(d8, target))
-+		if (__put_user(d8, target))
- 			goto fault;
- 		break;
- 	default:
-@@ -396,22 +396,22 @@ static enum es_result vc_read_mem(struct es_em_ctxt *ctxt,
+@@ -388,12 +382,6 @@ static enum es_result vc_read_mem(struct es_em_ctxt *ctxt,
+ 	u16 d2;
+ 	u8  d1;
  
+-	/* If instruction ran in kernel mode and the I/O buffer is in kernel space */
+-	if (!user_mode(ctxt->regs) && !access_ok(s, size)) {
+-		memcpy(buf, src, size);
+-		return ES_OK;
+-	}
+-
  	switch (size) {
  	case 1:
--		if (get_user(d1, s))
-+		if (__get_user(d1, s))
- 			goto fault;
- 		memcpy(buf, &d1, 1);
- 		break;
- 	case 2:
--		if (get_user(d2, s))
-+		if (__get_user(d2, s))
- 			goto fault;
- 		memcpy(buf, &d2, 2);
- 		break;
- 	case 4:
--		if (get_user(d4, s))
-+		if (__get_user(d4, s))
- 			goto fault;
- 		memcpy(buf, &d4, 4);
- 		break;
- 	case 8:
--		if (get_user(d8, s))
-+		if (__get_user(d8, s))
- 			goto fault;
- 		memcpy(buf, &d8, 8);
- 		break;
+ 		if (__get_user(d1, s))
 -- 
 2.31.1
 
