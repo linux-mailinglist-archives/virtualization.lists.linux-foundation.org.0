@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EFE437B730
-	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 09:55:21 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 590CD37B735
+	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 09:55:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A261D8343B;
-	Wed, 12 May 2021 07:55:19 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 08BA640400;
+	Wed, 12 May 2021 07:55:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P_GK4FKEWpqo; Wed, 12 May 2021 07:55:18 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lfm-tg_nwnPa; Wed, 12 May 2021 07:55:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8436483626;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4C69640502;
 	Wed, 12 May 2021 07:55:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6EBBEC0001;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2124CC0025;
 	Wed, 12 May 2021 07:55:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9EB2FC0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8522AC002F
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8C44B60812
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6EDE483518
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8JVSuor9oFaG
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id r18st7X4Jyci
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 07:55:16 +0000 (UTC)
+ Wed, 12 May 2021 07:55:15 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org
  [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D97246075E
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9614283096
  for <virtualization@lists.linux-foundation.org>;
  Wed, 12 May 2021 07:55:15 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549ad305.dip0.t-ipconnect.de
  [84.154.211.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 3F7BE434;
+ by theia.8bytes.org (Postfix) with ESMTPSA id D19EA4B4;
  Wed, 12 May 2021 09:55:10 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org,
 	Hyunwook Baek <baekhw@google.com>
-Subject: [PATCH 5/6] x86/sev-es: Fix error message in runtime #VC handler
-Date: Wed, 12 May 2021 09:54:44 +0200
-Message-Id: <20210512075445.18935-6-joro@8bytes.org>
+Subject: [PATCH 6/6] x86/sev-es: Leave NMI-mode before sending signals
+Date: Wed, 12 May 2021 09:54:45 +0200
+Message-Id: <20210512075445.18935-7-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210512075445.18935-1-joro@8bytes.org>
 References: <20210512075445.18935-1-joro@8bytes.org>
@@ -86,27 +86,74 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-The runtime #VC handler is not "early" anymore. Fix the copy&paste error
-and remove that word from the error message.
+The error path in the runtime #VC handler sends a signal to kill the
+current task if the exception was raised from user-space. Some parts of
+the #VC handler run in NMI mode, because it is critical that it is not
+interrupted (except from an NMI) while the GHCB is in use.
 
+But sending signals in NMI-mode is actually broken and triggers lockdep
+warnings. On the other side, when the signal is sent, there is no reason
+for the handler to still be in NMI-mode, as the GHCB is not used
+anymore.
+
+Leave NMI-mode before entering the error path to get rid of the lockdep
+warnings.
+
+Fixes: 62441a1fb532 ("x86/sev-es: Correctly track IRQ states in runtime #VC handler")
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/kernel/sev.c | 17 +++++++++++++----
+ 1 file changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index f4f319004713..77155c4f07f5 100644
+index 77155c4f07f5..79cbed2f28de 100644
 --- a/arch/x86/kernel/sev.c
 +++ b/arch/x86/kernel/sev.c
-@@ -1326,7 +1326,7 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
- 		vc_finish_insn(&ctxt);
- 		break;
- 	case ES_UNSUPPORTED:
--		pr_err_ratelimited("Unsupported exit-code 0x%02lx in early #VC exception (IP: 0x%lx)\n",
-+		pr_err_ratelimited("Unsupported exit-code 0x%02lx in #VC exception (IP: 0x%lx)\n",
- 				   error_code, regs->ip);
- 		goto fail;
- 	case ES_VMM_ERROR:
+@@ -1300,9 +1300,10 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
+ 		return;
+ 	}
+ 
++	instrumentation_begin();
++
+ 	irq_state = irqentry_nmi_enter(regs);
+ 	lockdep_assert_irqs_disabled();
+-	instrumentation_begin();
+ 
+ 	/*
+ 	 * This is invoked through an interrupt gate, so IRQs are disabled. The
+@@ -1352,13 +1353,19 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
+ 		BUG();
+ 	}
+ 
+-out:
+-	instrumentation_end();
+ 	irqentry_nmi_exit(regs, irq_state);
++	instrumentation_end();
+ 
+ 	return;
+ 
+ fail:
++	/*
++	 * Leave NMI mode - the GHCB is not busy anymore and depending on where
++	 * the #VC came from this code is about to either kill the task (when in
++	 * task context) or kill the machine.
++	 */
++	irqentry_nmi_exit(regs, irq_state);
++
+ 	if (user_mode(regs)) {
+ 		/*
+ 		 * Do not kill the machine if user-space triggered the
+@@ -1380,7 +1387,9 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
+ 		panic("Returned from Terminate-Request to Hypervisor\n");
+ 	}
+ 
+-	goto out;
++	instrumentation_end();
++
++	return;
+ }
+ 
+ /* This handler runs on the #VC fall-back stack. It can cause further #VC exceptions */
 -- 
 2.31.1
 
