@@ -1,95 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 07C9F37B95D
-	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 11:38:16 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 094BD37B94E
+	for <lists.virtualization@lfdr.de>; Wed, 12 May 2021 11:32:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 7C1ED402E1;
-	Wed, 12 May 2021 09:38:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 73468608E4;
+	Wed, 12 May 2021 09:32:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eA7kJsM0kRJZ; Wed, 12 May 2021 09:38:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id YiQRzOmUHRm8; Wed, 12 May 2021 09:32:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 4E99F402E5;
-	Wed, 12 May 2021 09:38:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 43D18608E7;
+	Wed, 12 May 2021 09:32:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B6A61C0001;
-	Wed, 12 May 2021 09:38:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BEFC4C0001;
+	Wed, 12 May 2021 09:32:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 35CBAC0001
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 791C8C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 09:38:12 +0000 (UTC)
+ Wed, 12 May 2021 09:32:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1B055402E0
+ by smtp4.osuosl.org (Postfix) with ESMTP id 35A19404D2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 09:38:12 +0000 (UTC)
+ Wed, 12 May 2021 09:32:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oJ3pwMSgvWlU
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id WFfeHdL8cZVW
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 09:38:11 +0000 (UTC)
-X-Greylist: delayed 00:06:51 by SQLgrey-1.8.0
-Received: from eu-smtp-delivery-151.mimecast.com
- (eu-smtp-delivery-151.mimecast.com [185.58.86.151])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EC0A8402DF
+ Wed, 12 May 2021 09:32:40 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from mx2.suse.de (mx2.suse.de [195.135.220.15])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5D103404C5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 12 May 2021 09:38:10 +0000 (UTC)
-Received: from AcuMS.aculab.com (156.67.243.121 [156.67.243.121]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-79-oLFw4AwlPEex5jOXqlFBlw-1; Wed, 12 May 2021 10:31:12 +0100
-X-MC-Unique: oLFw4AwlPEex5jOXqlFBlw-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
- Server (TLS) id 15.0.1497.2; Wed, 12 May 2021 10:31:10 +0100
-Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
- AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
- 15.00.1497.015; Wed, 12 May 2021 10:31:10 +0100
-From: David Laight <David.Laight@ACULAB.COM>
-To: 'Juergen Gross' <jgross@suse.com>, 'Joerg Roedel' <joro@8bytes.org>
-Subject: RE: [PATCH 3/6] x86/sev-es: Use __put_user()/__get_user
-Thread-Topic: [PATCH 3/6] x86/sev-es: Use __put_user()/__get_user
-Thread-Index: AQHXRwQswpicLJM6a0eoGXhfP+3kQqrfe29ggAAQd36AAAai8A==
-Date: Wed, 12 May 2021 09:31:10 +0000
-Message-ID: <8cdbb6928c7144c6b065c3ff68f03aee@AcuMS.aculab.com>
+ Wed, 12 May 2021 09:32:40 +0000 (UTC)
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+ by mx2.suse.de (Postfix) with ESMTP id 35D6CAF75;
+ Wed, 12 May 2021 09:32:38 +0000 (UTC)
+Date: Wed, 12 May 2021 11:32:35 +0200
+From: Joerg Roedel <jroedel@suse.de>
+To: Juergen Gross <jgross@suse.com>
+Subject: Re: [PATCH 3/6] x86/sev-es: Use __put_user()/__get_user
+Message-ID: <YJugs0CdiNo0/Gbd@suse.de>
 References: <20210512075445.18935-1-joro@8bytes.org>
  <20210512075445.18935-4-joro@8bytes.org>
  <0496626f018d4d27a8034a4822170222@AcuMS.aculab.com>
- <fcb2c501-70ca-1a54-4a75-8ab05c21ee30@suse.com> <YJuW4TtRJKZ+OIhj@8bytes.org>
+ <fcb2c501-70ca-1a54-4a75-8ab05c21ee30@suse.com>
+ <YJuW4TtRJKZ+OIhj@8bytes.org>
  <92244e37-4443-98bd-24aa-bf59548aab47@suse.com>
-In-Reply-To: <92244e37-4443-98bd-24aa-bf59548aab47@suse.com>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <92244e37-4443-98bd-24aa-bf59548aab47@suse.com>
 Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
  Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
  "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
  Arvind Sankar <nivedita@alum.mit.edu>, "hpa@zytor.com" <hpa@zytor.com>,
- Jiri Slaby <jslaby@suse.cz>, "x86@kernel.org" <x86@kernel.org>,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- Hyunwook Baek <baekhw@google.com>,
+ Jiri Slaby <jslaby@suse.cz>, 'Joerg Roedel' <joro@8bytes.org>,
+ "x86@kernel.org" <x86@kernel.org>, David Rientjes <rientjes@google.com>,
+ Martin Radev <martin.b.radev@gmail.com>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Kees Cook <keescook@chromium.org>,
+ Cfir Cohen <cfir@google.com>, Hyunwook Baek <baekhw@google.com>,
  "linux-coco@lists.linux.dev" <linux-coco@lists.linux.dev>,
  Andy Lutomirski <luto@kernel.org>, Dan Williams <dan.j.williams@intel.com>,
  Mike Stunes <mstunes@vmware.com>, Sean Christopherson <seanjc@google.com>,
  "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
  "stable@vger.kernel.org" <stable@vger.kernel.org>,
- Masami Hiramatsu <mhiramat@kernel.org>, Erdem Aktas <erdemaktas@google.com>
+ David Laight <David.Laight@aculab.com>, Masami Hiramatsu <mhiramat@kernel.org>,
+ Erdem Aktas <erdemaktas@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,37 +90,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Juergen Gross
-> Sent: 12 May 2021 09:58
-> 
-> On 12.05.21 10:50, 'Joerg Roedel' wrote:
-> > On Wed, May 12, 2021 at 10:16:12AM +0200, Juergen Gross wrote:
-> >> You want something like xen_safe_[read|write]_ulong().
-> >
-> >  From a first glance I can't see it, what is the difference between the
-> > xen_safe_*_ulong() functions and __get_user()/__put_user()? The only
-> > difference I can see is that __get/__put_user() support different access
-> > sizes, but neither of those disables page-faults by itself, for example.
-> >
-> > Couldn't these xen-specific functions not also be replaces by
-> > __get_user()/__put_user()?
-> 
+On Wed, May 12, 2021 at 10:58:20AM +0200, Juergen Gross wrote:
 > No, those were used before, but commit 9da3f2b7405440 broke Xen's use
 > case. That is why I did commit 1457d8cf7664f.
 
-I've just looked at 9da3f2b7405440.
+I see, thanks for the heads-up. So here this is not a big issue, because
+when an access to kernel space faults under SEV-ES, its a kernel bug
+anyway. The issue is that it is not reported correctly.
 
-It doesn't look right to me - wrong return value for a lot of cases.
-OTOH it isn't in my newest tree at all.
+I think I need to re-work the helper and use probe_kernel_read/write()
+when the address is in kernel space. This distinction is already made
+when fetching instruction bytes in the #VC handler, but I thought I
+could get around it for data accesses.
 
-If bogus_uaccess() is now elsewhere I can't see how (without changes)
-it would allow through these faults.
+Having the distinction between user and kernel memory accesses
+explicitly in the code seems to be the most robust solution.
 
-	David
+Regards,
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
+	Joerg
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
