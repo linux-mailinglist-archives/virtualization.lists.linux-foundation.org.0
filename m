@@ -2,104 +2,105 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8768C380897
-	for <lists.virtualization@lfdr.de>; Fri, 14 May 2021 13:36:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3F9123809A1
+	for <lists.virtualization@lfdr.de>; Fri, 14 May 2021 14:34:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D989D4045B;
-	Fri, 14 May 2021 11:36:25 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id AB4524011D;
+	Fri, 14 May 2021 12:34:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4xglXeoedLx2; Fri, 14 May 2021 11:36:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTP id A99BC40465;
-	Fri, 14 May 2021 11:36:24 +0000 (UTC)
+	with ESMTP id NO1tEYMi3QIL; Fri, 14 May 2021 12:34:27 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTP id 39EF34010C;
+	Fri, 14 May 2021 12:34:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 29619C0001;
-	Fri, 14 May 2021 11:36:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C66BC0027;
+	Fri, 14 May 2021 12:34:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8E98EC0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 71246C0001
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 May 2021 11:36:22 +0000 (UTC)
+ Fri, 14 May 2021 12:34:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 76F3A40162
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5309260ACB
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 May 2021 11:36:22 +0000 (UTC)
+ Fri, 14 May 2021 12:34:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XyaKd2Hi6gri
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Q-Z3y2Qw8Csg
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 May 2021 11:36:20 +0000 (UTC)
+ Fri, 14 May 2021 12:34:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6C74E4011D
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 024E560AC9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 May 2021 11:36:20 +0000 (UTC)
+ Fri, 14 May 2021 12:34:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1620992179;
+ s=mimecast20190719; t=1620995662;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=mIcQUlsHB9GjnPE2QvhbTigpY+9TcUPrmrRb1c8BGPY=;
- b=BhKsNEpaDK/ku6xyrloGUDQklDGReeydD0UKcJ23Sh+TpfpyKGA/4GGrXwHS7Jv8oaCE3U
- f5Yev2vA2oW+wu0cXtQUBHXv4Lty7XUwhZWJnPxiX1OlAYMkL6gMQtRd5Ex/lLIjn0dwZV
- ReXMEC9lwUPe4jiVuR9znD3gizPIsaA=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-186-5FqpViFPMCKjiLOZmninRw-1; Fri, 14 May 2021 07:36:17 -0400
-X-MC-Unique: 5FqpViFPMCKjiLOZmninRw-1
-Received: by mail-wr1-f70.google.com with SMTP id
- i102-20020adf90ef0000b029010dfcfc46c0so12649976wri.1
+ bh=yBw7gIpngSLTMJRgkqlTDn2EW5sfHupDmKkTQSBDQu8=;
+ b=MHCYOJELwyyQYR8uLpNmdjOAmo2hX0Xl+ldVvIrWRE4eJCOnnsAsrTjrn65uMAd2JEvpPW
+ wYpLUjXblOJlEcjtGfpnQvei8UJTuws0g4qEDSexZcS7JkQABGlTmQXHNeY8yoA9LYIg5z
+ d7DNYgPctPscp5YoidXgk3OE5uVNldg=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-293-VphAAfjNPeGkM_OH7e2IOA-1; Fri, 14 May 2021 08:34:19 -0400
+X-MC-Unique: VphAAfjNPeGkM_OH7e2IOA-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ 2-20020adf94020000b0290110481f75ddso1414569wrq.21
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 May 2021 04:36:17 -0700 (PDT)
+ Fri, 14 May 2021 05:34:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=mIcQUlsHB9GjnPE2QvhbTigpY+9TcUPrmrRb1c8BGPY=;
- b=iw6NSRA3FSpcD6Shb8mqjsn+WV8nNM55GrY2kQ+5ZrEzYl0jDmrrYfl51ws+bxN15h
- Nz+CjokE5kBNxHgjFHoXQ0qO9f1zY15v3Sgyx8RBAZNGz+6dxMwvvz+OJy9yj3cimeJP
- 399GNgDnUZGePPb3PHDpEpYgMKokS305uFPZd6MDYR7uLqV8G282zHiomP1yAlEqa2ri
- kQyOjlhechHnITghRcZcMZP6wSZ6z0/YZsGxd94/jyHMIyUEQsW+3js0bkmN60q9RCyr
- 9hhtWlIIikWBmO51UDARZJhBRe9OA2eevRvfx1KdrsIS10F+W9rfP3DgAoAwU1UNXe8Q
- xMRg==
-X-Gm-Message-State: AOAM53219AmVi3Y+OxVqg1xOlbZvI/RHl+UovUKaeM4O7dNo4tzHv6dM
- qarTw34UDlDmEgWRS9RYKvIGy1BiYvjKgphB6cw4A9U1lkCnVx2gU8APHIK1FOlIoA+h4CkEkTN
- ddwp80fwpd/mfxcca52Gi/rJzXsjsM7QjTJfbCk6Ixw==
-X-Received: by 2002:adf:e991:: with SMTP id h17mr13348560wrm.265.1620992176519; 
- Fri, 14 May 2021 04:36:16 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwkheG6+9wAfmTav7j8nkCGClt/d84UwVpHJTyKDfom/4CboPHupI3U474RxUhnHPIO1Tj/hw==
-X-Received: by 2002:adf:e991:: with SMTP id h17mr13348540wrm.265.1620992176305; 
- Fri, 14 May 2021 04:36:16 -0700 (PDT)
+ bh=yBw7gIpngSLTMJRgkqlTDn2EW5sfHupDmKkTQSBDQu8=;
+ b=nDjbd2uIGVTnnO3R+IjuFw7ExE2vViKTCsxMkK8sF32ymgr/Do+kOoeNkB3Zj5QA9O
+ +U9ssUN9ehnQEQId8VwJqeNrPGsU0+9gDosVcSoo7/KZ81YzHmESP4V+lVdxjtyQLFz9
+ QrW1F5UZGrQU82MMXiGhbFrSP59OKIAhsn81UBWqPV2ZFbbOUD7/SdNd5WuTbjTYREQX
+ Dy/F+ZEuFO2iTnO/C98DtVLqpRcdXQxCxEALn0upLe5wvB6OFozUNAO2ow7Ah0LUny5q
+ OQfjj1eEC1ZJMi6hy/Z+P1YE/97p4LyNOn+Bwj0PXlOX9Qv9u91hsyo6CNWAkO/FSvdx
+ ZLeQ==
+X-Gm-Message-State: AOAM530XHAAsUuWDVGYRyQYAhaEzsOLvh0+vANAd+A2e5kKXka0m7VFR
+ wUhsX3EWHaVVeQN/bHK9tF4YVW86gdOdmDg448afaMh9mj/4+msr192L/dcz1qkJfS2VFiv2LuD
+ p81wDxWVW7dmXDpdUtRKmYB3ZcuwXJtico+68yNtVhw==
+X-Received: by 2002:a1c:f30a:: with SMTP id q10mr27822651wmq.138.1620995657956; 
+ Fri, 14 May 2021 05:34:17 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzFPlnSw9Rc/MJc1oJZloOpaijmqBpFKdogoBEFMFg1dOVUteKbEaiQtObG1YSFXWGviULp6Q==
+X-Received: by 2002:a1c:f30a:: with SMTP id q10mr27822619wmq.138.1620995657750; 
+ Fri, 14 May 2021 05:34:17 -0700 (PDT)
 Received: from redhat.com ([2a10:800c:1fa6:0:3809:fe0c:bb87:250e])
- by smtp.gmail.com with ESMTPSA id t7sm4707wrs.87.2021.05.14.04.36.14
+ by smtp.gmail.com with ESMTPSA id j13sm7360302wrd.81.2021.05.14.05.34.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 May 2021 04:36:15 -0700 (PDT)
-Date: Fri, 14 May 2021 07:36:12 -0400
+ Fri, 14 May 2021 05:34:17 -0700 (PDT)
+Date: Fri, 14 May 2021 08:34:13 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Yongji Xie <xieyongji@bytedance.com>
-Subject: Re: Re: [RFC PATCH V2 0/7] Do not read from descripto ring
-Message-ID: <20210514073452-mutt-send-email-mst@kernel.org>
-References: <20210423080942.2997-1-jasowang@redhat.com>
- <YJ1TgoFSwOkQrC+1@stefanha-x1.localdomain>
- <CACGkMEv0uWd+X87cYoG-GGjTXBvRztp2CY3RKyq9jFbSYK1n0Q@mail.gmail.com>
- <YJ5cKe0egklXDpng@stefanha-x1.localdomain>
- <CACycT3u+hQbDJtf5gxS1NVVpiTffMz1skuhTExy5d_oRjYKoxg@mail.gmail.com>
+To: Jean-Philippe Brucker <jean-philippe@linaro.org>
+Subject: Re: [PATCH v2 6/6] iommu/virtio: Enable x86 support
+Message-ID: <20210514083402-mutt-send-email-mst@kernel.org>
+References: <20210423113836.3974972-1-jean-philippe@linaro.org>
+ <20210423113836.3974972-7-jean-philippe@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <CACycT3u+hQbDJtf5gxS1NVVpiTffMz1skuhTExy5d_oRjYKoxg@mail.gmail.com>
+In-Reply-To: <20210423113836.3974972-7-jean-philippe@linaro.org>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: ashish.kalra@amd.com, file@sect.tu-berlin.de, kvm <kvm@vger.kernel.org>,
- konrad.wilk@oracle.com, linux-kernel <linux-kernel@vger.kernel.org>,
- virtualization <virtualization@lists.linux-foundation.org>,
- Christoph Hellwig <hch@infradead.org>, Stefan Hajnoczi <stefanha@redhat.com>
+Cc: lorenzo.pieralisi@arm.com, eric.auger@redhat.com, catalin.marinas@arm.com,
+ joro@8bytes.org, sudeep.holla@arm.com, rjw@rjwysocki.net, robin.murphy@arm.com,
+ virtualization@lists.linux-foundation.org, linux-acpi@vger.kernel.org,
+ iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
+ guohanjun@huawei.com, lenb@kernel.org, will@kernel.org, dwmw2@infradead.org,
+ linux-arm-kernel@lists.infradead.org, baolu.lu@linux.intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,120 +117,81 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, May 14, 2021 at 07:27:22PM +0800, Yongji Xie wrote:
-> On Fri, May 14, 2021 at 7:17 PM Stefan Hajnoczi <stefanha@redhat.com> wrote:
-> >
-> > On Fri, May 14, 2021 at 03:29:20PM +0800, Jason Wang wrote:
-> > > On Fri, May 14, 2021 at 12:27 AM Stefan Hajnoczi <stefanha@redhat.com> wrote:
-> > > >
-> > > > On Fri, Apr 23, 2021 at 04:09:35PM +0800, Jason Wang wrote:
-> > > > > Sometimes, the driver doesn't trust the device. This is usually
-> > > > > happens for the encrtpyed VM or VDUSE[1].
-> > > >
-> > > > Thanks for doing this.
-> > > >
-> > > > Can you describe the overall memory safety model that virtio drivers
-> > > > must follow?
-> > >
-> > > My understanding is that, basically the driver should not trust the
-> > > device (since the driver doesn't know what kind of device that it
-> > > tries to drive)
-> > >
-> > > 1) For any read only metadata (required at the spec level) which is
-> > > mapped as coherent, driver should not depend on the metadata that is
-> > > stored in a place that could be wrote by the device. This is what this
-> > > series tries to achieve.
-> > > 2) For other metadata that is produced by the device, need to make
-> > > sure there's no malicious device triggered behavior, this is somehow
-> > > similar to what vhost did. No DOS, loop, kernel bug and other stuffs.
-> > > 3) swiotb is a must to enforce memory access isolation. (VDUSE or encrypted VM)
-> > >
-> > > > For example:
-> > > >
-> > > > - Driver-to-device buffers must be on dedicated pages to avoid
-> > > >   information leaks.
-> > >
-> > > It looks to me if swiotlb is used, we don't need this since the
-> > > bouncing is not done at byte not page.
-> > >
-> > > But if swiotlb is not used, we need to enforce this.
-> > >
-> > > >
-> > > > - Driver-to-device buffers must be on dedicated pages to avoid memory
-> > > >   corruption.
-> > >
-> > > Similar to the above.
-> > >
-> > > >
-> > > > When I say "pages" I guess it's the IOMMU page size that matters?
-> > > >
-> > >
-> > > And the IOTLB page size.
-> > >
-> > > > What is the memory access granularity of VDUSE?
-> > >
-> > > It has an swiotlb, but the access and bouncing is done per byte.
-> > >
-> > > >
-> > > > I'm asking these questions because there is driver code that exposes
-> > > > kernel memory to the device and I'm not sure it's safe. For example:
-> > > >
-> > > >   static int virtblk_add_req(struct virtqueue *vq, struct virtblk_req *vbr,
-> > > >                   struct scatterlist *data_sg, bool have_data)
-> > > >   {
-> > > >           struct scatterlist hdr, status, *sgs[3];
-> > > >           unsigned int num_out = 0, num_in = 0;
-> > > >
-> > > >           sg_init_one(&hdr, &vbr->out_hdr, sizeof(vbr->out_hdr));
-> > > >                             ^^^^^^^^^^^^^
-> > > >           sgs[num_out++] = &hdr;
-> > > >
-> > > >           if (have_data) {
-> > > >                   if (vbr->out_hdr.type & cpu_to_virtio32(vq->vdev, VIRTIO_BLK_T_OUT))
-> > > >                           sgs[num_out++] = data_sg;
-> > > >                   else
-> > > >                           sgs[num_out + num_in++] = data_sg;
-> > > >           }
-> > > >
-> > > >           sg_init_one(&status, &vbr->status, sizeof(vbr->status));
-> > > >                                ^^^^^^^^^^^^
-> > > >           sgs[num_out + num_in++] = &status;
-> > > >
-> > > >           return virtqueue_add_sgs(vq, sgs, num_out, num_in, vbr, GFP_ATOMIC);
-> > > >   }
-> > > >
-> > > > I guess the drivers don't need to be modified as long as swiotlb is used
-> > > > to bounce the buffers through "insecure" memory so that the memory
-> > > > surrounding the buffers is not exposed?
-> > >
-> > > Yes, swiotlb won't bounce the whole page. So I think it's safe.
-> >
-> > Thanks Jason and Yongji Xie for clarifying. Seems like swiotlb or a
-> > similar mechanism can handle byte-granularity isolation so the drivers
-> > not need to worry about information leaks or memory corruption outside
-> > the mapped byte range.
-> >
-> > We still need to audit virtio guest drivers to ensure they don't trust
-> > data that can be modified by the device. I will look at virtio-blk and
-> > virtio-fs next week.
-> >
+On Fri, Apr 23, 2021 at 01:38:37PM +0200, Jean-Philippe Brucker wrote:
+> With the VIOT support in place, x86 platforms can now use the
+> virtio-iommu.
 > 
-> Oh, that's great. Thank you!
+> Because the other x86 IOMMU drivers aren't yet ready to use the
+> acpi_dma_setup() path, x86 doesn't implement arch_setup_dma_ops() at the
+> moment. Similarly to Vt-d and AMD IOMMU, call iommu_setup_dma_ops() from
+> probe_finalize().
 > 
-> I also did some audit work these days and will send a new version for
-> reviewing next Monday.
+> Acked-by: Joerg Roedel <jroedel@suse.de>
+> Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
+
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+
+> ---
+>  drivers/iommu/Kconfig        | 3 ++-
+>  drivers/iommu/dma-iommu.c    | 1 +
+>  drivers/iommu/virtio-iommu.c | 8 ++++++++
+>  3 files changed, 11 insertions(+), 1 deletion(-)
 > 
-> Thanks,
-> Yongji
-
-Doing it in a way that won't hurt performance for simple
-configs that trust the device is a challenge though.
-Pls take a look at the discussion with Christoph for some ideas
-on how to do this.
-
-
--- 
-MST
+> diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
+> index aff8a4830dd1..07b7c25cbed8 100644
+> --- a/drivers/iommu/Kconfig
+> +++ b/drivers/iommu/Kconfig
+> @@ -400,8 +400,9 @@ config HYPERV_IOMMU
+>  config VIRTIO_IOMMU
+>  	tristate "Virtio IOMMU driver"
+>  	depends on VIRTIO
+> -	depends on ARM64
+> +	depends on (ARM64 || X86)
+>  	select IOMMU_API
+> +	select IOMMU_DMA
+>  	select INTERVAL_TREE
+>  	select ACPI_VIOT if ACPI
+>  	help
+> diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+> index 175f8eaeb5b3..46ed43c400cf 100644
+> --- a/drivers/iommu/dma-iommu.c
+> +++ b/drivers/iommu/dma-iommu.c
+> @@ -1332,6 +1332,7 @@ void iommu_setup_dma_ops(struct device *dev, u64 dma_base, u64 dma_limit)
+>  	 pr_warn("Failed to set up IOMMU for device %s; retaining platform DMA ops\n",
+>  		 dev_name(dev));
+>  }
+> +EXPORT_SYMBOL_GPL(iommu_setup_dma_ops);
+>  
+>  static struct iommu_dma_msi_page *iommu_dma_get_msi_page(struct device *dev,
+>  		phys_addr_t msi_addr, struct iommu_domain *domain)
+> diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
+> index 29a397c2d12f..8be546a338e7 100644
+> --- a/drivers/iommu/virtio-iommu.c
+> +++ b/drivers/iommu/virtio-iommu.c
+> @@ -1027,6 +1027,13 @@ static struct iommu_device *viommu_probe_device(struct device *dev)
+>  	return ERR_PTR(ret);
+>  }
+>  
+> +static void viommu_probe_finalize(struct device *dev)
+> +{
+> +#ifndef CONFIG_ARCH_HAS_SETUP_DMA_OPS
+> +	iommu_setup_dma_ops(dev, 0, U64_MAX);
+> +#endif
+> +}
+> +
+>  static void viommu_release_device(struct device *dev)
+>  {
+>  	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
+> @@ -1063,6 +1070,7 @@ static struct iommu_ops viommu_ops = {
+>  	.iova_to_phys		= viommu_iova_to_phys,
+>  	.iotlb_sync		= viommu_iotlb_sync,
+>  	.probe_device		= viommu_probe_device,
+> +	.probe_finalize		= viommu_probe_finalize,
+>  	.release_device		= viommu_release_device,
+>  	.device_group		= viommu_device_group,
+>  	.get_resv_regions	= viommu_get_resv_regions,
+> -- 
+> 2.31.1
 
 _______________________________________________
 Virtualization mailing list
