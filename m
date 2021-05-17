@@ -1,58 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED35D382B7A
-	for <lists.virtualization@lfdr.de>; Mon, 17 May 2021 13:51:14 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 37A5838314F
+	for <lists.virtualization@lfdr.de>; Mon, 17 May 2021 16:35:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8914D403CA;
-	Mon, 17 May 2021 11:51:12 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D9A6B402C4;
+	Mon, 17 May 2021 14:35:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oNkSstr1BSas; Mon, 17 May 2021 11:51:11 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 12Wo5MI-YYrO; Mon, 17 May 2021 14:35:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 51E64403D6;
-	Mon, 17 May 2021 11:51:11 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id B43B8402EA;
+	Mon, 17 May 2021 14:35:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A631C0027;
-	Mon, 17 May 2021 11:51:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 50BA3C0001;
+	Mon, 17 May 2021 14:35:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E10E8C0001;
- Mon, 17 May 2021 11:51:08 +0000 (UTC)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 21160C0001
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 May 2021 14:35:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B704C83A57;
- Mon, 17 May 2021 11:51:08 +0000 (UTC)
+ by smtp4.osuosl.org (Postfix) with ESMTP id E7CA4402EF
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 May 2021 14:35:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WCbJlUy-ZyV9; Mon, 17 May 2021 11:51:07 +0000 (UTC)
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=lunn.ch
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 3yAQa2hWKozA
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 May 2021 14:35:39 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org
- [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CA28C83576;
- Mon, 17 May 2021 11:51:06 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 92F9C2E7; Mon, 17 May 2021 13:51:02 +0200 (CEST)
-Date: Mon, 17 May 2021 13:51:01 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Jean-Philippe Brucker <jean-philippe@linaro.org>
-Subject: Re: [PATCH v2 0/6] Add support for ACPI VIOT
-Message-ID: <YKJYpZUddMLM+A1M@8bytes.org>
-References: <20210423113836.3974972-1-jean-philippe@linaro.org>
+Received: from vps0.lunn.ch (vps0.lunn.ch [185.16.172.187])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 16C63402C1
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 May 2021 14:35:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+ s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
+ Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
+ bh=+etklaO9vkFUBnNppWvW4wT/pFgZKsFAvZPj7+HIov0=; b=zpD4UKF6csA6gWp48EJrtM/Jcv
+ pr7Ed12Me36Es1mhkIPUQI9CBD7Sqd6mSIVYVSGi4JtlVUhHPk+SPqr9NxuKQqsIUg4vi4+ynw3Ix
+ AEGn9kD+0a4htguaZTizw+/0CSrCsLhA+setHgH0Fm4heqTWKbybbmOQVAzf+DhTgPj8=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
+ (envelope-from <andrew@lunn.ch>)
+ id 1lieL2-004ZSU-Np; Mon, 17 May 2021 16:35:20 +0200
+Date: Mon, 17 May 2021 16:35:20 +0200
+From: Andrew Lunn <andrew@lunn.ch>
+To: Xianting Tian <xianting.tian@linux.alibaba.com>
+Subject: Re: [PATCH] virtio_net: Use BUG_ON instead of if condition followed
+ by BUG
+Message-ID: <YKJ/KPtw5Xcjsea+@lunn.ch>
+References: <56270996-33a6-d71b-d935-452dad121df7@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210423113836.3974972-1-jean-philippe@linaro.org>
-Cc: lorenzo.pieralisi@arm.com, mst@redhat.com, catalin.marinas@arm.com,
- sudeep.holla@arm.com, rjw@rjwysocki.net, robin.murphy@arm.com,
- virtualization@lists.linux-foundation.org, linux-acpi@vger.kernel.org,
- iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
- eric.auger@redhat.com, guohanjun@huawei.com, lenb@kernel.org, will@kernel.org,
- dwmw2@infradead.org, linux-arm-kernel@lists.infradead.org,
- baolu.lu@linux.intel.com
+In-Reply-To: <56270996-33a6-d71b-d935-452dad121df7@linux.alibaba.com>
+Cc: mst@redhat.com, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, kuba@kernel.org,
+ davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -69,25 +80,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jean-Philippe,
+On Mon, May 17, 2021 at 09:31:19PM +0800, Xianting Tian wrote:
+> BUG_ON() uses unlikely in if(), which can be optimized at compile time.
+> 
+> Signed-off-by: Xianting Tian <xianting.tian@linux.alibaba.com>
+> ---
+>  drivers/net/virtio_net.c | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index c921ebf3ae82..212d52204884 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -1646,10 +1646,9 @@ static int xmit_skb(struct send_queue *sq, struct
+> sk_buff *skb)
+>  	else
+>  		hdr = skb_vnet_hdr(skb);
+> 
+> -	if (virtio_net_hdr_from_skb(skb, &hdr->hdr,
 
-On Fri, Apr 23, 2021 at 01:38:31PM +0200, Jean-Philippe Brucker wrote:
-> Jean-Philippe Brucker (6):
->   ACPI: arm64: Move DMA setup operations out of IORT
->   ACPI: Move IOMMU setup code out of IORT
->   ACPI: Add driver for the VIOT table
->   iommu/dma: Pass address limit rather than size to
->     iommu_setup_dma_ops()
->   iommu/dma: Simplify calls to iommu_setup_dma_ops()
->   iommu/virtio: Enable x86 support
+How fatal is it not being able to get the header from the skb? There
+has been push back on the use of BUG() or its variants, since it kills
+the machine dead. Would it be possible to turn this into a WARN_ON and
+return -EPROTO or something?
 
-This looks good to me, I think this all can go through the IOMMU tree?
-In this case I will apply them once the ACPI parts have the Acks
-maintainers ack.
-
-Regards,
-
-	Joerg
+       Andrew
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
