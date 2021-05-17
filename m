@@ -1,87 +1,114 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAE0138294D
-	for <lists.virtualization@lfdr.de>; Mon, 17 May 2021 12:02:45 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B223E382A7C
+	for <lists.virtualization@lfdr.de>; Mon, 17 May 2021 13:02:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 324E883BFD;
-	Mon, 17 May 2021 10:02:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id B3728839F9;
+	Mon, 17 May 2021 11:02:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XMc8g_qtRIHe; Mon, 17 May 2021 10:02:40 +0000 (UTC)
+	with ESMTP id PluDB8RvXsTR; Mon, 17 May 2021 11:02:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 363B883C0B;
-	Mon, 17 May 2021 10:02:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 944D782A2D;
+	Mon, 17 May 2021 11:02:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D42F6C0001;
-	Mon, 17 May 2021 10:02:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F7DBC0001;
+	Mon, 17 May 2021 11:02:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A3343C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 115ECC0001
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 May 2021 10:02:38 +0000 (UTC)
+ Mon, 17 May 2021 11:02:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 845C64031A
+ by smtp1.osuosl.org (Postfix) with ESMTP id D920083A0A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 May 2021 10:02:38 +0000 (UTC)
+ Mon, 17 May 2021 11:02:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=codewreck.org header.b="THvcf4nE";
- dkim=pass (2048-bit key) header.d=codewreck.org header.b="4kmQtAPf"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J-nfl7EE-z1h
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 4uDoP81xLwUE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 May 2021 10:02:34 +0000 (UTC)
-X-Greylist: delayed 00:08:27 by SQLgrey-1.8.0
-Received: from nautica.notk.org (ipv6.notk.org [IPv6:2001:41d0:1:7a93::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7E6404040E
+ Mon, 17 May 2021 11:02:16 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 796E882A2D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 May 2021 10:02:34 +0000 (UTC)
-Received: by nautica.notk.org (Postfix, from userid 108)
- id 9BCB8C020; Mon, 17 May 2021 11:54:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
- t=1621245243; bh=hQ3FIc3FP39hQ5sinVKlpsPMQdlr7pQOzU9Lg3Kuuuk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=THvcf4nEk20zx43KQ4LuIpoZy/4f04nE7K3wdJIUyHn93AEJ/Qd6PVjvLf30BEQ9A
- yQsa4HQILtkj07srQrxej3oRVG4EgZeUtlsyX2DnosEI1CtH0iKYukDUXXPY6IVbxY
- ZXYvC0RhiiuCn/qTVwET+ZYWJl46FTkaOXClh//Zt6gswNPHQPHoKT/FL/2ewvpvOD
- QvS9aq3YTz71mOF3Xl4uioBqbEGDKEvf7efSXPWJtzzr82a/r1V4IDtvmRNMBGHzHd
- HNY6k8IKx6tKEuDlk/hyt5nsYT12qAnmlsuPOBPO4X7CDpQWKLhbBjzasM6cx5y9TN
- liJdD+Tj8t16Q==
-Received: from odin.codewreck.org (localhost [127.0.0.1])
- by nautica.notk.org (Postfix) with ESMTPS id 10DD3C009;
- Mon, 17 May 2021 11:53:57 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
- t=1621245242; bh=hQ3FIc3FP39hQ5sinVKlpsPMQdlr7pQOzU9Lg3Kuuuk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=4kmQtAPfPpp5uxDjwZJVSDRtBlkdcMvHGcC7EqjXyJnNXCvgheRE9z7yBRmPjWogE
- XPnL+vWpTZi7A9LL0SBl1i4VisYN+2IYeqgf5OI35lpD7+2DhjAH6HQSU0/u3mdh7k
- lEItSYNyetultBuJuCnsbzlR2V6vOW/H1zhie1TGQyXfL94evvDHe/uj1wjNhKf9OA
- XbrX262RhR9feraS4tXciTmMAw9djTAUj13+RLNw6FsjmqroVEcICPbT69TCUeNQFa
- FKnWeBfxKuGqNUYyAMOV4by40oQijgsnWWOyCUNicHz8IQs1dFf10MDn2oyzuOT5BS
- bc39PXNegUN5g==
-Received: from localhost (odin.codewreck.org [local])
- by odin.codewreck.org (OpenSMTPD) with ESMTPA id 6f2eecd4;
- Mon, 17 May 2021 09:53:54 +0000 (UTC)
-Date: Mon, 17 May 2021 18:53:39 +0900
-From: asmadeus@codewreck.org
-To: Xie Yongji <xieyongji@bytedance.com>
-Subject: Re: [RFC PATCH 15/15] 9p/trans_virtio: Handle virtio_device_ready()
- failure
-Message-ID: <YKI9I9qg2iISlz65@codewreck.org>
-References: <20210517093428.670-1-xieyongji@bytedance.com>
- <20210517093428.670-16-xieyongji@bytedance.com>
+ Mon, 17 May 2021 11:02:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1621249335;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=7cQMfiU/6CmbRXKnviF1ET7KvNhLtdTnWH8rwrQnGjk=;
+ b=BbSERFzhI8DI8Od2aj7lzN2gNORjE252pNlyK8gX1TeJswFBUMEM3Wjpa5MwOsjdQZlASi
+ tZ+uP8HbNIYWBH62xGjH6E3aV14rUBb0NjjwUB17IWL2GG3RCXEyvnf19tpktCMk+ZCr7t
+ jEuoHQllxVe84sJA01sqA5f9VZ9BkVc=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-46-3Ijkpn5rOmiLiZ4trng2QA-1; Mon, 17 May 2021 07:02:13 -0400
+X-MC-Unique: 3Ijkpn5rOmiLiZ4trng2QA-1
+Received: by mail-ej1-f70.google.com with SMTP id
+ y12-20020a170906558cb02903d65e5767ebso606038ejp.0
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 17 May 2021 04:02:13 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=7cQMfiU/6CmbRXKnviF1ET7KvNhLtdTnWH8rwrQnGjk=;
+ b=Z5PLXWc7sk4cEx10FOFip/4emB5D8SzuP3yyR3g1LMqrxlP5wGj71foCeUdcrMRHUJ
+ Q3zwYwxHA53GLB0h7/lqEPGu0PQqJCWlaYUxI0AiCKiF2Mr1aHf4i3FfZ4hv8861Ao4f
+ nOhKiX/3VXgnI8q0NbEDtXaK4QGSOJkg8Q4sFoWk99HXJPQBM+tGwB988EXLZoctclAM
+ HZpzzQE8J6fsRrTA1Fu1jyQVT4aWWb2gNYoUVHW3UG1syH9rMlmcATJ8MMFiQjR5rNit
+ yF6jp2/fhdwJd4UqKcXTfPwG90cAIqn20Tp4n/KraIyD/8NohPBb1gkGsNuiUxfyJha8
+ Gb4w==
+X-Gm-Message-State: AOAM531GxAluXvtSTKd82J92HYrw7l624bmrrfzrgquTyEmDPCSd9YZX
+ fuvIaKzYpPfsx39CDz+jFiFzD7ivVQwaLJW4NS2gn1zrm0Kl/wxaY/aIX+OWU2lfsqOuO16G0DD
+ x8qjNLTtnuw0UKBER/L0kvCfTB4XnweWjaWSI1fIAoQ==
+X-Received: by 2002:a17:907:161f:: with SMTP id
+ hb31mr62383693ejc.514.1621249331457; 
+ Mon, 17 May 2021 04:02:11 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzlg0uX670Nfd2xSHNOeeZACDhuQCkzpm5rVSLUkgqp/qwOPw8NC0DwyIZ6KIc9MSQkGFO98g==
+X-Received: by 2002:a17:907:161f:: with SMTP id
+ hb31mr62383670ejc.514.1621249331239; 
+ Mon, 17 May 2021 04:02:11 -0700 (PDT)
+Received: from steredhat (host-79-18-148-79.retail.telecomitalia.it.
+ [79.18.148.79])
+ by smtp.gmail.com with ESMTPSA id t23sm6195213edq.74.2021.05.17.04.02.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 May 2021 04:02:10 -0700 (PDT)
+Date: Mon, 17 May 2021 13:02:08 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: "Jiang Wang ." <jiang.wang@bytedance.com>
+Subject: Re: [RFC v2] virtio-vsock: add description for datagram type
+Message-ID: <20210517110208.lippuk4rv57cn6hj@steredhat>
+References: <CAP_N_Z9xPgyf=au4VD+fXF8iorZHHk7Q4-CbJCOVUeupG4v4sw@mail.gmail.com>
+ <20210504161651.3b6fhi64d7g3jui4@steredhat>
+ <CAP_N_Z_cYjTCUpmLAW0xskUM_kAi=8e7iU8RXsMRnYWOxhA5OA@mail.gmail.com>
+ <20210505104933.wgdn4gw56kle2mec@steredhat>
+ <CAP_N_Z_DN+SYZ3E52HGdcmSfopBoNayKVzUdH7Nc2jUK5nfmLA@mail.gmail.com>
+ <CAP_N_Z9yZ4ydXaEn1e=70pDh3FyDjrrxgzis4YTfyDoZ5c8k+g@mail.gmail.com>
+ <20210510145055.y7mxqaq4zggajz5a@steredhat>
+ <CAP_N_Z94Pi4k8Dv6cHR0CZ9RTLJeQ3VWQoQgLTCWE4k+A01xbg@mail.gmail.com>
+ <20210514151701.6fp27qanjseom4tl@steredhat>
+ <CAP_N_Z8CGx83D7yperR3OhMb-6YVrADxbZxocxSbpz9czKoO=w@mail.gmail.com>
 MIME-Version: 1.0
+In-Reply-To: <CAP_N_Z8CGx83D7yperR3OhMb-6YVrADxbZxocxSbpz9czKoO=w@mail.gmail.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20210517093428.670-16-xieyongji@bytedance.com>
-Cc: ohad@wizery.com, jean-philippe@linaro.org, amit@kernel.org,
- airlied@linux.ie, mst@redhat.com, linux-kernel@vger.kernel.org,
- bjorn.andersson@linaro.org, miklos@szeredi.hu, stefanha@redhat.com,
- virtualization@lists.linux-foundation.org, vgoyal@redhat.com
+Cc: cong.wang@bytedance.com, Xiongchun Duan <duanxiongchun@bytedance.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, cohuck@redhat.com,
+ virtualization@lists.linux-foundation.org, xieyongji@bytedance.com,
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Arseny Krasnov <arseny.krasnov@kaspersky.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -93,34 +120,108 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Xie Yongji wrote on Mon, May 17, 2021 at 05:34:28PM +0800:
-> Now virtio_device_ready() will return error if we get
-> invalid status. Let's handle this case on probe.
+On Fri, May 14, 2021 at 11:55:29AM -0700, Jiang Wang . wrote:
+>On Fri, May 14, 2021 at 8:17 AM Stefano Garzarella <sgarzare@redhat.com> wrote:
+>> On Thu, May 13, 2021 at 04:26:03PM -0700, Jiang Wang . wrote:
 
-The change itself looks good to me
+[...]
 
-It's going to be a pain to apply though because it depends on
-https://lkml.kernel.org/r/20210517083557.172-1-xieyongji@bytedance.com
-you just sent, so this won't apply to virtio maintainers on one hand,
-and I can't take just this patch because it depends on the first patch
-in the patchset (well if it weren't RFC)...
+>> >I see. I will add some limit to dgram packets. Also, when the 
+>> >virtqueues
+>> >are shared between stream and dgram, both of them need to grab a lock
+>> >before using the virtqueue, so one will not completely block another one.
+>>
+>> I'm not worried about the concurrent access that we definitely need to
+>> handle with a lock, but more about the uncontrolled packet sending that
+>> dgram might have, flooding the queues and preventing others from
+>> communicating.
+>
+>That is a valid concern. Let me explain how I would handle that if we
+>don't add two new virtqueues. For dgram, I also add a dgram_send_pkt_list,
+>which is similar to send_pkt_list for stream (and seqpacket). But there
+>is one difference. The dgram_send_pkt_list has a maximum size setting,
+>and keep tracking how many pkts are in the list. The track number
+>(dgram_send_pkt_list_size) is  increased when a packet is added
+>to the list and is decreased when a packet
+>is removed from the list and added to the virtqueue. In
+>virtio_transport_send_pkt, if the current
+>dgram_send_pkt_list_size is equal
+>to the maximum ( let's say 128), then it will not add to the
+>dgram_send_pkt_list and return an error to the application.
 
-I guess sending the other patch to Linus fast-ish so it can go in virtio
-tree would be the best way forward? other maintainers please advise, I'm
-bad at this.
+For stream socket, we have the send_pkt_list and the send worker because 
+the virtqueue can be full and the transmitter needs to wait available 
+slots, because we can't discard packets.
 
+For dgram I think we don't need this, so we can avoid the 
+dgram_send_pkt_list and directly enqueue packets in the virtqueue.
 
-> Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
+If there are no slots available, we can simply drop the packet.
+In this way we don't have to put limits other than the available space 
+in the virtqueue.
 
-Acked-by: Dominique Martinet <asmadeus@codewreck.org>
+>
+>In this way, the number of pending dgram pkts to be sent is limited.
+>Then both stream and dgram sockets will compete to hold a lock
+>for the tx virtqueue. Depending on the linux scheduler, this competition
+>will be somewhat fair. As a result, dgram will not block stream completely.
+>It will compete and share the virtqueue with stream, but stream
+>can still send some pkts.
+>
+>Basically, the virtqueue becomes a first-come first-serve resource for
+>the stream and dgram. When both stream and dgram applications
+>have lots of data to send, dgram_send_pkt_list and send_pkt_list
+>will still be a limited size, and each will have some chance to send out
+>the data via virtqueue.  Does this address your concern?
+>
+>
+>> So having 2 dedicated queues could avoid a credit mechanism at all for
+>> connection-less sockets, and simply the receiver discards packets that
+>> it can't handle.
+>
+>With 2 dedicated queues, we still need some kind of accounting for
+>the dgram. Like the dgram_send_pkt_size I mentioned above.  Otherwise,
+>it will cause OOM. It is not a real credit mechanism, but code is similar
+>with or without 2 dedicated queues in my current prototype.
 
--- 
-Dominique
+I think in both cases we don't need an accounting, but we can drop 
+packets if the virtqueue is full.
+
+It's still not clear to me where OOM may occur. Can you elaborate on 
+this?
+
+>
+>For receiver discarding packets part, could you explain more? I think
+>receiver discarding pkts code also is same with or without 2 dedicated
+>queues.
+
+Yep.
+
+> Both will use can_enqueue = virtio_transport_inc_rx_pkt(vvs, pkt);
+>to check if a packet should be discarded or not.
+
+I don't think we can use virtio_transport_inc_rx_pkt() for dgram.
+This is based on the credit mechanism (e.g. buf_alloc) that works when 
+you have a connection oriented socket.
+
+With dgram you can have multiple transmitter for a single socket, so how 
+we can exchange that information?
+
+If we reuse the VMCI implementation with skbuff, the sk_receive_skb() 
+already checks if the sk_rcvbuf is full and discards the packet in this 
+case, so we don't need an internal rx_queue.
+
+Maybe someday we should convert stream to skbuff too, it would make our 
+lives easier.
+
+Thanks,
+Stefano
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
