@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 604F7388F8C
-	for <lists.virtualization@lfdr.de>; Wed, 19 May 2021 15:53:24 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A4721388F87
+	for <lists.virtualization@lfdr.de>; Wed, 19 May 2021 15:53:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 3295960A39;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3067560900;
 	Wed, 19 May 2021 13:53:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hSHj63N3oOPR; Wed, 19 May 2021 13:53:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E81AF608E3;
-	Wed, 19 May 2021 13:53:18 +0000 (UTC)
+	with ESMTP id fhR9antIT9b1; Wed, 19 May 2021 13:53:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTP id E8FC26088B;
+	Wed, 19 May 2021 13:53:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0E338C001C;
-	Wed, 19 May 2021 13:53:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 92422C0001;
+	Wed, 19 May 2021 13:53:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EB7FEC001C
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D89BCC0001
  for <virtualization@lists.linux-foundation.org>;
  Wed, 19 May 2021 13:53:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BDB23403C1
+ by smtp1.osuosl.org (Postfix) with ESMTP id BF871842D9
  for <virtualization@lists.linux-foundation.org>;
  Wed, 19 May 2021 13:53:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id m_-Id6ZXnPhO
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id PnhLz76veLrX
  for <virtualization@lists.linux-foundation.org>;
  Wed, 19 May 2021 13:53:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 936F94011D
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 79FFE842F8
  for <virtualization@lists.linux-foundation.org>;
  Wed, 19 May 2021 13:53:12 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549ad305.dip0.t-ipconnect.de
  [84.154.211.5])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 14C4E3FF;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 9D3EB416;
  Wed, 19 May 2021 15:53:09 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org,
 	Hyunwook Baek <baekhw@google.com>
-Subject: [PATCH v2 2/8] x86/sev-es: Forward page-faults which happen during
- emulation
-Date: Wed, 19 May 2021 15:52:45 +0200
-Message-Id: <20210519135251.30093-3-joro@8bytes.org>
+Subject: [PATCH v2 3/8] x86/sev-es: Use __put_user()/__get_user() for data
+ accesses
+Date: Wed, 19 May 2021 15:52:46 +0200
+Message-Id: <20210519135251.30093-4-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210519135251.30093-1-joro@8bytes.org>
 References: <20210519135251.30093-1-joro@8bytes.org>
@@ -86,32 +86,152 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-When emulating guest instructions for MMIO or IOIO accesses the #VC
-handler might get a page-fault and will not be able to complete. Forward
-the page-fault in this case to the correct handler instead of killing
-the machine.
+The put_user() and get_user() functions do checks on the address which is
+passed to them. They check whether the address is actually a user-space
+address and whether its fine to access it. They also call might_fault()
+to indicate that they could fault and possibly sleep.
 
-Fixes: 0786138c78e7 ("x86/sev-es: Add a Runtime #VC Exception Handler")
+All of these checks are neither wanted nor needed in the #VC exception
+handler, which can be invoked from almost any context and also for MMIO
+instructions from kernel space on kernel memory. All the #VC handler
+wants to know is whether a fault happened when the access was tried.
+
+This is provided by __put_user()/__get_user(), which just do the access
+no matter what. Also add comments explaining why __get_user() and
+__put_user() are the best choice here and why it is safe to use them
+in this context. Also explain why copy_to/from_user can't be used.
+
+In addition, also revert commit
+
+	024f60d6552 x86/sev-es: ("Handle string port IO to kernel memory properly")
+
+because using __get_user()/__put_user() fixes the same problem while
+the above commit introduced several problems:
+
+	1) It uses access_ok() which is only allowed in task context.
+
+	2) It uses memcpy() which has no fault handling at all and is
+	   thus unsafe to use here.
+
+Fixes: f980f9c31a92 ("x86/sev-es: Compile early handler code into kernel image")
 Cc: stable@vger.kernel.org # v5.10+
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/x86/kernel/sev.c | 66 ++++++++++++++++++++++++++++++-------------
+ 1 file changed, 46 insertions(+), 20 deletions(-)
 
 diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index 82bced88153b..1f428f401bed 100644
+index 1f428f401bed..651b81cd648e 100644
 --- a/arch/x86/kernel/sev.c
 +++ b/arch/x86/kernel/sev.c
-@@ -1270,6 +1270,10 @@ static __always_inline void vc_forward_exception(struct es_em_ctxt *ctxt)
- 	case X86_TRAP_UD:
- 		exc_invalid_op(ctxt->regs);
+@@ -315,31 +315,44 @@ static enum es_result vc_write_mem(struct es_em_ctxt *ctxt,
+ 	u16 d2;
+ 	u8  d1;
+ 
+-	/* If instruction ran in kernel mode and the I/O buffer is in kernel space */
+-	if (!user_mode(ctxt->regs) && !access_ok(target, size)) {
+-		memcpy(dst, buf, size);
+-		return ES_OK;
+-	}
+-
++	/*
++	 * This function uses __put_user() independent of whether kernel or user
++	 * memory is accessed. This works fine because __put_user() does no
++	 * sanity checks of the pointer being accessed. All that it does is
++	 * to report when the access failed.
++	 *
++	 * Also, this function runs in atomic context, so __put_user() is not
++	 * allowed to sleep. The page-fault handler detects that it is running
++	 * in atomic context and will not try to take mmap_sem and handle the
++	 * fault, so additional pagefault_enable()/disable() calls are not
++	 * needed.
++	 *
++	 * The access can't be done via copy_to_user() here because
++	 * vc_write_mem() must not use string instructions to access unsafe
++	 * memory. The reason is that MOVS is emulated by the #VC handler by
++	 * splitting the move up into a read and a write and taking a nested #VC
++	 * exception on whatever of them is the MMIO access. Using string
++	 * instructions here would cause infinite nesting.
++	 */
+ 	switch (size) {
+ 	case 1:
+ 		memcpy(&d1, buf, 1);
+-		if (put_user(d1, target))
++		if (__put_user(d1, target))
+ 			goto fault;
  		break;
-+	case X86_TRAP_PF:
-+		write_cr2(ctxt->fi.cr2);
-+		exc_page_fault(ctxt->regs, error_code);
-+		break;
- 	case X86_TRAP_AC:
- 		exc_alignment_check(ctxt->regs, error_code);
+ 	case 2:
+ 		memcpy(&d2, buf, 2);
+-		if (put_user(d2, target))
++		if (__put_user(d2, target))
+ 			goto fault;
+ 		break;
+ 	case 4:
+ 		memcpy(&d4, buf, 4);
+-		if (put_user(d4, target))
++		if (__put_user(d4, target))
+ 			goto fault;
+ 		break;
+ 	case 8:
+ 		memcpy(&d8, buf, 8);
+-		if (put_user(d8, target))
++		if (__put_user(d8, target))
+ 			goto fault;
+ 		break;
+ 	default:
+@@ -370,30 +383,43 @@ static enum es_result vc_read_mem(struct es_em_ctxt *ctxt,
+ 	u16 d2;
+ 	u8  d1;
+ 
+-	/* If instruction ran in kernel mode and the I/O buffer is in kernel space */
+-	if (!user_mode(ctxt->regs) && !access_ok(s, size)) {
+-		memcpy(buf, src, size);
+-		return ES_OK;
+-	}
+-
++	/*
++	 * This function uses __get_user() independent of whether kernel or user
++	 * memory is accessed. This works fine because __get_user() does no
++	 * sanity checks of the pointer being accessed. All that it does is
++	 * to report when the access failed.
++	 *
++	 * Also, this function runs in atomic context, so __get_user() is not
++	 * allowed to sleep. The page-fault handler detects that it is running
++	 * in atomic context and will not try to take mmap_sem and handle the
++	 * fault, so additional pagefault_enable()/disable() calls are not
++	 * needed.
++	 *
++	 * The access can't be done via copy_from_user() here because
++	 * vc_read_mem() must not use string instructions to access unsafe
++	 * memory. The reason is that MOVS is emulated by the #VC handler by
++	 * splitting the move up into a read and a write and taking a nested #VC
++	 * exception on whatever of them is the MMIO access. Using string
++	 * instructions here would cause infinite nesting.
++	 */
+ 	switch (size) {
+ 	case 1:
+-		if (get_user(d1, s))
++		if (__get_user(d1, s))
+ 			goto fault;
+ 		memcpy(buf, &d1, 1);
+ 		break;
+ 	case 2:
+-		if (get_user(d2, s))
++		if (__get_user(d2, s))
+ 			goto fault;
+ 		memcpy(buf, &d2, 2);
+ 		break;
+ 	case 4:
+-		if (get_user(d4, s))
++		if (__get_user(d4, s))
+ 			goto fault;
+ 		memcpy(buf, &d4, 4);
+ 		break;
+ 	case 8:
+-		if (get_user(d8, s))
++		if (__get_user(d8, s))
+ 			goto fault;
+ 		memcpy(buf, &d8, 8);
  		break;
 -- 
 2.31.1
