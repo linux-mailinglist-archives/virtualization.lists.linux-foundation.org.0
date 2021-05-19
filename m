@@ -2,72 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B65D388F8A
-	for <lists.virtualization@lfdr.de>; Wed, 19 May 2021 15:53:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DB345388FE3
+	for <lists.virtualization@lfdr.de>; Wed, 19 May 2021 16:07:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id E99AD4041B;
-	Wed, 19 May 2021 13:53:21 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 80260403CB;
+	Wed, 19 May 2021 14:07:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IiMWsL60yLzt; Wed, 19 May 2021 13:53:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 479634023E;
-	Wed, 19 May 2021 13:53:20 +0000 (UTC)
+	with ESMTP id mdJmqvQAFRH6; Wed, 19 May 2021 14:07:39 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTP id 5E31C403E0;
+	Wed, 19 May 2021 14:07:39 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 75AF3C001C;
-	Wed, 19 May 2021 13:53:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E108CC0001;
+	Wed, 19 May 2021 14:07:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 26CC2C0001
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 33F29C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 May 2021 13:53:17 +0000 (UTC)
+ Wed, 19 May 2021 14:07:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E62CB6079F
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2244E4044A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 May 2021 13:53:16 +0000 (UTC)
+ Wed, 19 May 2021 14:07:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZUUs0ulea9da
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id N-GXlm1o7WyW
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 May 2021 13:53:15 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 24BD3607B4
+ Wed, 19 May 2021 14:07:35 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from szxga06-in.huawei.com (szxga06-in.huawei.com [45.249.212.32])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C25494040A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 May 2021 13:53:15 +0000 (UTC)
-Received: from cap.home.8bytes.org (p549ad305.dip0.t-ipconnect.de
- [84.154.211.5])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 7FCAC50F;
- Wed, 19 May 2021 15:53:12 +0200 (CEST)
-From: Joerg Roedel <joro@8bytes.org>
-To: x86@kernel.org,
-	Hyunwook Baek <baekhw@google.com>
-Subject: [PATCH v2 8/8] x86/sev-es: Propagate #GP if getting linear
- instruction address failed
-Date: Wed, 19 May 2021 15:52:51 +0200
-Message-Id: <20210519135251.30093-9-joro@8bytes.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210519135251.30093-1-joro@8bytes.org>
-References: <20210519135251.30093-1-joro@8bytes.org>
+ Wed, 19 May 2021 14:07:35 +0000 (UTC)
+Received: from dggems704-chm.china.huawei.com (unknown [172.30.72.58])
+ by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FlZQ42kb8zmXDt;
+ Wed, 19 May 2021 22:05:16 +0800 (CST)
+Received: from dggeml759-chm.china.huawei.com (10.1.199.138) by
+ dggems704-chm.china.huawei.com (10.3.19.181) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256) id
+ 15.1.2176.2; Wed, 19 May 2021 22:07:32 +0800
+Received: from localhost.localdomain (10.175.102.38) by
+ dggeml759-chm.china.huawei.com (10.1.199.138) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2176.2; Wed, 19 May 2021 22:07:31 +0800
+From: Wei Yongjun <weiyongjun1@huawei.com>
+To: <weiyongjun1@huawei.com>, "Michael S. Tsirkin" <mst@redhat.com>, "Jason
+ Wang" <jasowang@redhat.com>, Eli Cohen <elic@nvidia.com>, Stefano Garzarella
+ <sgarzare@redhat.com>
+Subject: [PATCH -next] vp_vdpa: fix error return code in vp_vdpa_probe()
+Date: Wed, 19 May 2021 14:16:46 +0000
+Message-ID: <20210519141646.3057093-1-weiyongjun1@huawei.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
- Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- linux-coco@lists.linux.dev, Andy Lutomirski <luto@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>, Juergen Gross <jgross@suse.com>,
- Mike Stunes <mstunes@vmware.com>, Sean Christopherson <seanjc@google.com>,
- linux-kernel@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>,
- Erdem Aktas <erdemaktas@google.com>
+X-Originating-IP: [10.175.102.38]
+X-ClientProxiedBy: dggems705-chm.china.huawei.com (10.3.19.182) To
+ dggeml759-chm.china.huawei.com (10.1.199.138)
+X-CFilter-Loop: Reflected
+Cc: Hulk Robot <hulkci@huawei.com>, kernel-janitors@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,47 +80,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+Fix to return negative error code -ENOMEM from the error handling
+case instead of 0, as done elsewhere in this function.
 
-When an instruction is fetched from user-space, segmentation needs to
-be taken into account. This means that getting the linear address of
-an instruction can fail. Hardware would raise a #GP
-exception in that case, but the #VC exception handler would emulate it
-as a page-fault.
-
-The insn_fetch_from_user*() functions now provide the relevant
-information in case of an failure. Use that and propagate a #GP when
-the linear address of an instruction to fetch could not be calculated.
-
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
+Fixes: 11d8ffed00b2 ("vp_vdpa: switch to use vp_modern_map_vq_notify()")
+Reported-by: Hulk Robot <hulkci@huawei.com>
+Signed-off-by: Wei Yongjun <weiyongjun1@huawei.com>
 ---
- arch/x86/kernel/sev.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/vdpa/virtio_pci/vp_vdpa.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index 1edb6cd5e308..4736290361e4 100644
---- a/arch/x86/kernel/sev.c
-+++ b/arch/x86/kernel/sev.c
-@@ -261,11 +261,16 @@ static enum es_result __vc_decode_user_insn(struct es_em_ctxt *ctxt)
- 	int insn_bytes = 0, res;
- 
- 	res = insn_fetch_from_user_inatomic(ctxt->regs, buffer, &insn_bytes);
--	if (res) {
-+	if (res == -EFAULT) {
- 		ctxt->fi.vector     = X86_TRAP_PF;
- 		ctxt->fi.error_code = X86_PF_INSTR | X86_PF_USER;
- 		ctxt->fi.cr2        = ctxt->regs->ip;
- 		return ES_EXCEPTION;
-+	} else if (res == -EINVAL) {
-+		ctxt->fi.vector     = X86_TRAP_GP;
-+		ctxt->fi.error_code = 0;
-+		ctxt->fi.cr2        = 0;
-+		return ES_EXCEPTION;
- 	}
- 
- 	if (!insn_decode_from_regs(&ctxt->insn, ctxt->regs, buffer, insn_bytes))
--- 
-2.31.1
+diff --git a/drivers/vdpa/virtio_pci/vp_vdpa.c b/drivers/vdpa/virtio_pci/vp_vdpa.c
+index c76ebb531212..e5d92db728d3 100644
+--- a/drivers/vdpa/virtio_pci/vp_vdpa.c
++++ b/drivers/vdpa/virtio_pci/vp_vdpa.c
+@@ -442,6 +442,7 @@ static int vp_vdpa_probe(struct pci_dev *pdev, const struct pci_device_id *id)
+ 			vp_modern_map_vq_notify(mdev, i,
+ 						&vp_vdpa->vring[i].notify_pa);
+ 		if (!vp_vdpa->vring[i].notify) {
++			ret = -ENOMEM;
+ 			dev_warn(&pdev->dev, "Fail to map vq notify %d\n", i);
+ 			goto err;
+ 		}
 
 _______________________________________________
 Virtualization mailing list
