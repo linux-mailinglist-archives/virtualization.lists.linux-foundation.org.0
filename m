@@ -1,78 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id F0A8A38B171
-	for <lists.virtualization@lfdr.de>; Thu, 20 May 2021 16:13:40 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id A3C4238B174
+	for <lists.virtualization@lfdr.de>; Thu, 20 May 2021 16:13:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D8F4D40EFD;
-	Thu, 20 May 2021 14:13:38 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C260660585;
+	Thu, 20 May 2021 14:13:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id b8Vr5cIiiVGd; Thu, 20 May 2021 14:13:37 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7635D40EEE;
-	Thu, 20 May 2021 14:13:37 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ys_lNqEm-Mfw; Thu, 20 May 2021 14:13:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 83B1960BD7;
+	Thu, 20 May 2021 14:13:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 30C97C0001;
-	Thu, 20 May 2021 14:13:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 99748C0027;
+	Thu, 20 May 2021 14:13:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 27F23C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 61001C0001
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 14:13:35 +0000 (UTC)
+ Thu, 20 May 2021 14:13:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0A4F540218
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3AB3683E00
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 14:13:35 +0000 (UTC)
+ Thu, 20 May 2021 14:13:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Z7QPESMT0Knz
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id nZZvpY7B1aWo
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 14:13:34 +0000 (UTC)
+ Thu, 20 May 2021 14:13:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 62612400CC
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6D34B83D81
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 14:13:34 +0000 (UTC)
+ Thu, 20 May 2021 14:13:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621520013;
+ s=mimecast20190719; t=1621520027;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EQLmeFAYlSq9MUn0ggB4grwFyWkzklNm3btxmw1JEAk=;
- b=aYewR6HJe8vzqcwNxcxLIaC1CXppMWd+wz6ErOs4uDpvv3hMvhayT2YR0w4DJwuNZ3k/YG
- ay2foquf2tHgc0zeUYpS+rtAx37CjYQim0UORQrYiuhfobygxoG3ZDD1z9h5Qc2Yad21Zl
- Zi1rXSWXnyNSm6u1Il3inn++HBG7tsQ=
+ bh=Agfgj5H+O2SpDpdHb5XPypSRzbYVYTbhLYER/UTUmY4=;
+ b=A1VzRPiXyCPSIF/csRki/y+JB1FAKQKa5i66BXo9gCgSTolWEJwX6W8OMygNWOblWlRXKT
+ 5Lr8LwuX7cTClnxw0oKMygKdQRrs5qT2ZWkkPYPuj0/sshZEPHR0NECwvc7d9w90g7RgFJ
+ 8Yr75Ddk3Gv9NqzjpxuEp75dP7zfQZM=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-398-LqypewjZMVWBZWKdzJlFSw-1; Thu, 20 May 2021 10:13:31 -0400
-X-MC-Unique: LqypewjZMVWBZWKdzJlFSw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
+ us-mta-206-dBeH17zRMVu4AQcmL-Y4Ow-1; Thu, 20 May 2021 10:13:43 -0400
+X-MC-Unique: dBeH17zRMVu4AQcmL-Y4Ow-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
+ [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4A646872FFE;
- Thu, 20 May 2021 14:13:30 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 29A1E801B14;
+ Thu, 20 May 2021 14:13:42 +0000 (UTC)
 Received: from localhost (ovpn-115-223.ams2.redhat.com [10.36.115.223])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 71E7719718;
- Thu, 20 May 2021 14:13:19 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 78DBC1037F22;
+ Thu, 20 May 2021 14:13:31 +0000 (UTC)
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH 1/3] virtio: add virtioqueue_more_used()
-Date: Thu, 20 May 2021 15:13:03 +0100
-Message-Id: <20210520141305.355961-2-stefanha@redhat.com>
+Subject: [PATCH 2/3] virtio_blk: avoid repeating vblk->vqs[qid]
+Date: Thu, 20 May 2021 15:13:04 +0100
+Message-Id: <20210520141305.355961-3-stefanha@redhat.com>
 In-Reply-To: <20210520141305.355961-1-stefanha@redhat.com>
 References: <20210520141305.355961-1-stefanha@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Cc: Jens Axboe <axboe@kernel.dk>, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
  Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
@@ -93,59 +93,120 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add an API to check whether there are pending used buffers. There is
-already a similar API called virtqueue_poll() but it only works together
-with virtqueue_enable_cb_prepare(). The patches that follow add blk-mq
-->poll() support to virtio_blk and they need to check for used buffers
-without re-enabling virtqueue callbacks, so introduce an API for it.
+struct virtio_blk_vq is accessed in many places. Introduce "vbq" local
+variables to avoid repeating vblk->vqs[qid] throughout the code. The
+patches that follow will add more accesses, making the payoff even
+greater.
+
+virtio_commit_rqs() calls the local variable "vq", which is easily
+confused with struct virtqueue. Rename to "vbq" for clarity.
 
 Signed-off-by: Stefan Hajnoczi <stefanha@redhat.com>
 ---
- include/linux/virtio.h       |  2 ++
- drivers/virtio/virtio_ring.c | 17 +++++++++++++++++
- 2 files changed, 19 insertions(+)
+ drivers/block/virtio_blk.c | 34 +++++++++++++++++-----------------
+ 1 file changed, 17 insertions(+), 17 deletions(-)
 
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index b1894e0323fa..c6ad0f25f412 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -63,6 +63,8 @@ bool virtqueue_kick_prepare(struct virtqueue *vq);
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index b9fa3ef5b57c..fc0fb1dcd399 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -174,16 +174,16 @@ static inline void virtblk_request_done(struct request *req)
+ static void virtblk_done(struct virtqueue *vq)
+ {
+ 	struct virtio_blk *vblk = vq->vdev->priv;
++	struct virtio_blk_vq *vbq = &vblk->vqs[vq->index];
+ 	bool req_done = false;
+-	int qid = vq->index;
+ 	struct virtblk_req *vbr;
+ 	unsigned long flags;
+ 	unsigned int len;
  
- bool virtqueue_notify(struct virtqueue *vq);
+-	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
++	spin_lock_irqsave(&vbq->lock, flags);
+ 	do {
+ 		virtqueue_disable_cb(vq);
+-		while ((vbr = virtqueue_get_buf(vblk->vqs[qid].vq, &len)) != NULL) {
++		while ((vbr = virtqueue_get_buf(vq, &len)) != NULL) {
+ 			struct request *req = blk_mq_rq_from_pdu(vbr);
  
-+bool virtqueue_more_used(const struct virtqueue *vq);
-+
- void *virtqueue_get_buf(struct virtqueue *vq, unsigned int *len);
- 
- void *virtqueue_get_buf_ctx(struct virtqueue *vq, unsigned int *len,
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 71e16b53e9c1..7c3da75da462 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -2032,6 +2032,23 @@ static inline bool more_used(const struct vring_virtqueue *vq)
- 	return vq->packed_ring ? more_used_packed(vq) : more_used_split(vq);
+ 			if (likely(!blk_should_fake_timeout(req->q)))
+@@ -197,32 +197,32 @@ static void virtblk_done(struct virtqueue *vq)
+ 	/* In case queue is stopped waiting for more buffers. */
+ 	if (req_done)
+ 		blk_mq_start_stopped_hw_queues(vblk->disk->queue, true);
+-	spin_unlock_irqrestore(&vblk->vqs[qid].lock, flags);
++	spin_unlock_irqrestore(&vbq->lock, flags);
  }
  
-+/**
-+ * virtqueue_more_used - check if there are used buffers pending
-+ * @_vq: the struct virtqueue we're talking about.
-+ *
-+ * Returns true if there are used buffers, false otherwise. May be called at
-+ * the same time as other virtqueue operations, but actually calling
-+ * virtqueue_get_buf() requires serialization so be mindful of the race between
-+ * calling virtqueue_more_used() and virtqueue_get_buf().
-+ */
-+bool virtqueue_more_used(const struct virtqueue *_vq)
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+
-+	return more_used(vq);
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_more_used);
-+
- irqreturn_t vring_interrupt(int irq, void *_vq)
+ static void virtio_commit_rqs(struct blk_mq_hw_ctx *hctx)
  {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 	struct virtio_blk *vblk = hctx->queue->queuedata;
+-	struct virtio_blk_vq *vq = &vblk->vqs[hctx->queue_num];
++	struct virtio_blk_vq *vbq = &vblk->vqs[hctx->queue_num];
+ 	bool kick;
+ 
+-	spin_lock_irq(&vq->lock);
+-	kick = virtqueue_kick_prepare(vq->vq);
+-	spin_unlock_irq(&vq->lock);
++	spin_lock_irq(&vbq->lock);
++	kick = virtqueue_kick_prepare(vbq->vq);
++	spin_unlock_irq(&vbq->lock);
+ 
+ 	if (kick)
+-		virtqueue_notify(vq->vq);
++		virtqueue_notify(vbq->vq);
+ }
+ 
+ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 			   const struct blk_mq_queue_data *bd)
+ {
+ 	struct virtio_blk *vblk = hctx->queue->queuedata;
++	struct virtio_blk_vq *vbq = &vblk->vqs[hctx->queue_num];
+ 	struct request *req = bd->rq;
+ 	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
+ 	unsigned long flags;
+ 	unsigned int num;
+-	int qid = hctx->queue_num;
+ 	int err;
+ 	bool notify = false;
+ 	bool unmap = false;
+@@ -274,16 +274,16 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 			vbr->out_hdr.type |= cpu_to_virtio32(vblk->vdev, VIRTIO_BLK_T_IN);
+ 	}
+ 
+-	spin_lock_irqsave(&vblk->vqs[qid].lock, flags);
+-	err = virtblk_add_req(vblk->vqs[qid].vq, vbr, vbr->sg, num);
++	spin_lock_irqsave(&vbq->lock, flags);
++	err = virtblk_add_req(vbq->vq, vbr, vbr->sg, num);
+ 	if (err) {
+-		virtqueue_kick(vblk->vqs[qid].vq);
++		virtqueue_kick(vbq->vq);
+ 		/* Don't stop the queue if -ENOMEM: we may have failed to
+ 		 * bounce the buffer due to global resource outage.
+ 		 */
+ 		if (err == -ENOSPC)
+ 			blk_mq_stop_hw_queue(hctx);
+-		spin_unlock_irqrestore(&vblk->vqs[qid].lock, flags);
++		spin_unlock_irqrestore(&vbq->lock, flags);
+ 		switch (err) {
+ 		case -ENOSPC:
+ 			return BLK_STS_DEV_RESOURCE;
+@@ -294,12 +294,12 @@ static blk_status_t virtio_queue_rq(struct blk_mq_hw_ctx *hctx,
+ 		}
+ 	}
+ 
+-	if (bd->last && virtqueue_kick_prepare(vblk->vqs[qid].vq))
++	if (bd->last && virtqueue_kick_prepare(vbq->vq))
+ 		notify = true;
+-	spin_unlock_irqrestore(&vblk->vqs[qid].lock, flags);
++	spin_unlock_irqrestore(&vbq->lock, flags);
+ 
+ 	if (notify)
+-		virtqueue_notify(vblk->vqs[qid].vq);
++		virtqueue_notify(vbq->vq);
+ 	return BLK_STS_OK;
+ }
+ 
 -- 
 2.31.1
 
