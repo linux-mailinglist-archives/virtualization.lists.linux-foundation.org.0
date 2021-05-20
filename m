@@ -1,62 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 798D538A104
-	for <lists.virtualization@lfdr.de>; Thu, 20 May 2021 11:26:46 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 146F938A147
+	for <lists.virtualization@lfdr.de>; Thu, 20 May 2021 11:28:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4A43540EE8;
-	Thu, 20 May 2021 09:26:44 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id AD757401EE;
+	Thu, 20 May 2021 09:28:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DJEXWtyghnx1; Thu, 20 May 2021 09:26:43 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rLwpl1oYAexC; Thu, 20 May 2021 09:28:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 92EFD40EE4;
-	Thu, 20 May 2021 09:26:42 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 5BDD540241;
+	Thu, 20 May 2021 09:28:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 14439C0001;
-	Thu, 20 May 2021 09:26:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E763EC0001;
+	Thu, 20 May 2021 09:28:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 52A57C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2990BC0001
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 09:26:41 +0000 (UTC)
+ Thu, 20 May 2021 09:28:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 40FB54018C
+ by smtp3.osuosl.org (Postfix) with ESMTP id 17EBF60625
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 09:26:41 +0000 (UTC)
+ Thu, 20 May 2021 09:28:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FDajr0XJMJkB
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id OOVtjr4z3MM2
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 09:26:40 +0000 (UTC)
+ Thu, 20 May 2021 09:28:30 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2256F400AB
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3085060623
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 May 2021 09:26:39 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3A9096101D;
- Thu, 20 May 2021 09:26:39 +0000 (UTC)
+ Thu, 20 May 2021 09:28:30 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 4EE15613D8;
+ Thu, 20 May 2021 09:28:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1621502799;
- bh=lbIRNO1WZCWiKbr/Ifjz8eEMSOpWWxfisLEMvMUDHoE=;
+ s=korg; t=1621502909;
+ bh=trgiaBG4kEh8rt00jC3X9zIWjcQ2Ue7UylSCEk2Qjkk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TrW/NESEvGfreSS20raIgkdHbW/LQEOe4PpFtpH2XXO1b6SfXmQ1YUifr6eCJmbLP
- PVh4Jh2lVHZLPprN/Xrz2n566Q5gbxuvSD/27Q8DTq8MQkYIYMtYSsEU+iP2yo65EB
- JUdJbBbuwE8+GmYrhVk8wLAulZ2Mjt2TayzJCxMs=
+ b=vcMeS70lGHLkgMUR9KcNEQLJgV8IPI39mjq14+fRSOy20Np+HEQ5W6xpbom47gdCn
+ fR9i/iSe9kUNjP3Z2xNtcqV3n03gc1WDxQnzLnj6P3MLv9ljs2TfEtxLxfW4uL/wn5
+ XrpH5YMW/CQrOGaIlvJoxfWrHK8ITj7CnsSZatHE=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.10 08/47] virtio_net: Do not pull payload in skb->head
-Date: Thu, 20 May 2021 11:22:06 +0200
-Message-Id: <20210520092053.825306214@linuxfoundation.org>
+Subject: [PATCH 5.4 08/37] virtio_net: Do not pull payload in skb->head
+Date: Thu, 20 May 2021 11:22:29 +0200
+Message-Id: <20210520092052.538236629@linuxfoundation.org>
 X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210520092053.559923764@linuxfoundation.org>
-References: <20210520092053.559923764@linuxfoundation.org>
+In-Reply-To: <20210520092052.265851579@linuxfoundation.org>
+References: <20210520092052.265851579@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Sasha Levin <sashal@kernel.org>, "Michael S. Tsirkin" <mst@redhat.com>,
@@ -127,7 +127,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 16 insertions(+), 8 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 038ce4e5e84b..286f836a53bf 100644
+index b67460864b3c..d8ee001d8e8e 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
 @@ -406,9 +406,13 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
