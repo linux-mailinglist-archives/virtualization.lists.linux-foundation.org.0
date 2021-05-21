@@ -1,78 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4806038C183
-	for <lists.virtualization@lfdr.de>; Fri, 21 May 2021 10:15:45 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA43E38C1CF
+	for <lists.virtualization@lfdr.de>; Fri, 21 May 2021 10:29:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B45D260DFF;
-	Fri, 21 May 2021 08:15:43 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id F36A5400CA;
+	Fri, 21 May 2021 08:29:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Z-4zO-OVJORG; Fri, 21 May 2021 08:15:43 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 945D860DD0;
-	Fri, 21 May 2021 08:15:42 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id mo7hlSxUzWj7; Fri, 21 May 2021 08:29:04 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTP id B956A40207;
+	Fri, 21 May 2021 08:29:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1EE41C0001;
-	Fri, 21 May 2021 08:15:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5A3A9C0001;
+	Fri, 21 May 2021 08:29:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 17FFFC0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6894CC0001
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 May 2021 08:15:41 +0000 (UTC)
+ Fri, 21 May 2021 08:29:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id F2AD96073D
+ by smtp2.osuosl.org (Postfix) with ESMTP id 425DF4010B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 May 2021 08:15:40 +0000 (UTC)
+ Fri, 21 May 2021 08:29:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0zwYjwebquFw
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eHp9Wb5XzkTv
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 May 2021 08:15:40 +0000 (UTC)
+ Fri, 21 May 2021 08:28:59 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-44.mimecast.com
- (us-smtp-delivery-44.mimecast.com [205.139.111.44])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 51D876072D
+ (us-smtp-delivery-44.mimecast.com [207.211.30.44])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 16B95400C3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 May 2021 08:15:40 +0000 (UTC)
+ Fri, 21 May 2021 08:28:58 +0000 (UTC)
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-134-P7MMZ4skNEasB_Ci5O7ioQ-1; Fri, 21 May 2021 04:15:35 -0400
-X-MC-Unique: P7MMZ4skNEasB_Ci5O7ioQ-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
+ us-mta-13-IzwURQWAMn2VOcSgFBBl0Q-1; Fri, 21 May 2021 04:28:45 -0400
+X-MC-Unique: IzwURQWAMn2VOcSgFBBl0Q-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9FD3F107ACCD;
- Fri, 21 May 2021 08:15:34 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id B08B48042A8;
+ Fri, 21 May 2021 08:28:44 +0000 (UTC)
 Received: from bahia.lan (ovpn-112-49.ams2.redhat.com [10.36.112.49])
- by smtp.corp.redhat.com (Postfix) with ESMTP id B74C65C8A8;
- Fri, 21 May 2021 08:15:24 +0000 (UTC)
-Date: Fri, 21 May 2021 10:15:23 +0200
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 610C25D764;
+ Fri, 21 May 2021 08:28:35 +0000 (UTC)
+Date: Fri, 21 May 2021 10:28:33 +0200
 From: Greg Kurz <groug@kaod.org>
 To: Miklos Szeredi <miklos@szeredi.hu>
-Subject: Re: [PATCH v4 1/5] fuse: Fix leak in fuse_dentry_automount() error
- path
-Message-ID: <20210521101523.4f276dac@bahia.lan>
-In-Reply-To: <CAJfpegvFUasy_8djyvo-fpyboOLGwRV9k_CL-e1nqxcXHkvzOg@mail.gmail.com>
+Subject: Re: [PATCH v4 2/5] fuse: Call vfs_get_tree() for submounts
+Message-ID: <20210521102833.4a7595b7@bahia.lan>
+In-Reply-To: <YKdtJCo/06q594pM@miu.piliscsaba.redhat.com>
 References: <20210520154654.1791183-1-groug@kaod.org>
- <20210520154654.1791183-2-groug@kaod.org>
- <YKa8SZ8s6QeKZ4XP@zeniv-ca.linux.org.uk>
- <CAJfpegvFUasy_8djyvo-fpyboOLGwRV9k_CL-e1nqxcXHkvzOg@mail.gmail.com>
+ <20210520154654.1791183-3-groug@kaod.org>
+ <YKdtJCo/06q594pM@miu.piliscsaba.redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=groug@kaod.org
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: kaod.org
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- virtio-fs-list <virtio-fs@redhat.com>, Al Viro <viro@zeniv.linux.org.uk>,
- Stefan Hajnoczi <stefanha@redhat.com>, linux-fsdevel@vger.kernel.org,
- Max Reitz <mreitz@redhat.com>, Vivek Goyal <vgoyal@redhat.com>
+Cc: linux-kernel@vger.kernel.org, Max Reitz <mreitz@redhat.com>,
+ virtio-fs@redhat.com, Stefan Hajnoczi <stefanha@redhat.com>,
+ linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Vivek Goyal <vgoyal@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,37 +85,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, 21 May 2021 09:54:19 +0200
+On Fri, 21 May 2021 10:19:48 +0200
 Miklos Szeredi <miklos@szeredi.hu> wrote:
 
-> On Thu, 20 May 2021 at 21:45, Al Viro <viro@zeniv.linux.org.uk> wrote:
-> >
-> > On Thu, May 20, 2021 at 05:46:50PM +0200, Greg Kurz wrote:
-> > > Some rollback was forgotten during the addition of crossmounts.
-> >
-> > Have you actually tested that?  Because I strongly suspect that
-> > by that point the ownership of fc and fm is with sb and those
-> > should be taken care of by deactivate_locked_super().
+> On Thu, May 20, 2021 at 05:46:51PM +0200, Greg Kurz wrote:
+> > We don't set the SB_BORN flag on submounts superblocks. This is wrong
+> > as these superblocks are then considered as partially constructed or
+> > dying in the rest of the code and can break some assumptions.
+> > 
+> > One such case is when you have a virtiofs filesystem and you try to
+> > mount it again : virtio_fs_get_tree() tries to obtain a superblock
+> > with sget_fc(). The matching criteria in virtio_fs_test_super() is
+> > the pointer of the underlying virtiofs device, which is shared by
+> > the root mount and its submounts. This means that any submount can
+> > be picked up instead of the root mount. This is itself a bug :
+> > submounts should be ignored in this case. But, most importantly, it
+> > then triggers an infinite loop in sget_fc() because it fails to grab
+> > the superblock (very easy to reproduce).
+> > 
+> > The only viable solution is to set SB_BORN at some point. This
+> > must be done with vfs_get_tree() because setting SB_BORN requires
+> > special care, i.e. a memory barrier for super_cache_count() which
+> > can check SB_BORN without taking any lock.
 > 
-> Not quite.  Patch looks correct because destruction of fm is done in
-> fuse_put_super(), which only gets called if the sb initialization gets
-> as far as setting up sb->s_root, which only happens after the
-> successful fuse_fill_super_submount() call in this case.
+> Looks correct, but...
 > 
-> Doing the destruction from the various ->kill_sb() instances instead
-> of from ->put_super() would also fix this, but I'm not quite sure that
-> that would be any cleaner.
+> as an easily backportable and verifiable bugfix I'd still go with the
+> simple two liner:
+> 
+> --- a/fs/fuse/dir.c
+> +++ b/fs/fuse/dir.c
+> @@ -351,6 +351,9 @@ static struct vfsmount *fuse_dentry_automount(struct path *path)
+>  	list_add_tail(&fm->fc_entry, &fc->mounts);
+>  	up_write(&fc->killsb);
+>  
+> +	smp_wmb();
+> +	sb->s_flags |= SB_BORN;
+> +
+
+plus the mandatory comment one must put to justify the
+need for a memory barrier.
+
+>  	/* Create the submount */
+>  	mnt = vfs_create_mount(fsc);
+>  	if (IS_ERR(mnt)) {
+> 
+> And have this patch be the cleanup.
 > 
 
-As saying in the answer I've just posted, a failure in
-fuse_fill_super_submount() causes an actual crash because
-fuse_mount_remove() logically assumes fm to already be in
-fc->mounts, which isn't the case at this point.
+Fair enough.
 
-In the root mount case, this is handled by taking back
-the ownership on fm, i.e. do the rollback *and* clear
-sb->s_fs_info. It seems that the same should be done
-for submounts.
+> Also we need Fixes: and a Cc: stable@... tags on that one.
+> 
+
+Oops, I'll add these in the next round.
 
 > Thanks,
 > Miklos
