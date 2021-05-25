@@ -1,81 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF1D838FBE8
-	for <lists.virtualization@lfdr.de>; Tue, 25 May 2021 09:39:26 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2428F38FC15
+	for <lists.virtualization@lfdr.de>; Tue, 25 May 2021 10:06:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 306FC607CF;
-	Tue, 25 May 2021 07:39:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7956683C05;
+	Tue, 25 May 2021 08:06:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fpDRMR59zW8m; Tue, 25 May 2021 07:39:24 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zyhUIZOx9mAz; Tue, 25 May 2021 08:06:47 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E11CF6085E;
-	Tue, 25 May 2021 07:39:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4A00183C07;
+	Tue, 25 May 2021 08:06:47 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 81421C0001;
-	Tue, 25 May 2021 07:39:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DFA81C0001;
+	Tue, 25 May 2021 08:06:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F0798C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7742CC0001
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 May 2021 07:39:21 +0000 (UTC)
+ Tue, 25 May 2021 08:06:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D08E240166
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6B41983AC7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 May 2021 07:39:21 +0000 (UTC)
+ Tue, 25 May 2021 08:06:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id aI90cIypzVg6
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id hZ41ADqmcx96
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 May 2021 07:39:21 +0000 (UTC)
+ Tue, 25 May 2021 08:06:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DAA2C400E4
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 77E8A831BD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 May 2021 07:39:20 +0000 (UTC)
+ Tue, 25 May 2021 08:06:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1621928359;
+ s=mimecast20190719; t=1621930003;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jeWJ7HGi3jq6uRXU1bbWV9h6gPERN4k8ZMEjEkjKNkc=;
- b=i+PODPJNdkRbppd/fRtTT4Grvms1TDF1uNz1C9VfW6Z50w9u/5DcBo+GUhVGRltiQoNG7j
- KRQJYiv4koxs1DE9bwswYGpDCQqD4kNt4QyXJzCjpYZ2H62hw/BDaHqX493Cypmn3sZI+q
- FXdnfJcDQw7FX9jumZEmK1Yq8irZfOU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-386-S4dYbxgOOQe4yMwIJ2HYlw-1; Tue, 25 May 2021 03:39:15 -0400
-X-MC-Unique: S4dYbxgOOQe4yMwIJ2HYlw-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
- [10.5.11.12])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8684F1009465;
- Tue, 25 May 2021 07:39:14 +0000 (UTC)
-Received: from T590 (ovpn-13-203.pek2.redhat.com [10.72.13.203])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id C5E3A60BF1;
- Tue, 25 May 2021 07:38:47 +0000 (UTC)
-Date: Tue, 25 May 2021 15:38:42 +0800
-From: Ming Lei <ming.lei@redhat.com>
-To: Paolo Bonzini <pbonzini@redhat.com>
+ bh=Ub5yjHLwnKgzkGvx4GaW/I0s0yGaXeZ4jZCMAsk/qs4=;
+ b=ONGluuS6Dj9+GBOTCE7PEnMcun4BZV6k8P21zDM5VXgG1V1nTa838S2NnILhK5KCslf+5Q
+ JXgFc/NduQpmhRlvJ5z4ZiKjiQFMwAX5PZ0Pa47g0Ac//oMemWfuR/2vjpbo+D1j9I0LCz
+ WKVZo/GEqaRAs6mfPEHpNbapFc7jyrU=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-498-fat8IIlXNYSPC9Kasdg91g-1; Tue, 25 May 2021 04:06:39 -0400
+X-MC-Unique: fat8IIlXNYSPC9Kasdg91g-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ u14-20020a05640207ceb029038d4bfbf3a6so13348630edy.9
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 25 May 2021 01:06:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-language
+ :content-transfer-encoding;
+ bh=Ub5yjHLwnKgzkGvx4GaW/I0s0yGaXeZ4jZCMAsk/qs4=;
+ b=hjN5eIE5cXczTL629zR9vvsoSjRJSQyg6FitWvmkY0UMgKfcTWFpPmwLYVFTATi9Ms
+ cBtATCXYpS1/zAKO2AZLohKxoBDmQEBKNQYrNGQQ3oLPbXk7Jqmxgewk+1TibXTdxT7q
+ UwcZX6aA6Vc/CKB1Jhima5fLevkjmtunIJN/eFKWKlz9oZKtfHbPapvyrlczzmxTm+co
+ y1YmEarg+BIZicvFNiCwG9gLrHYj5Jpl8Awqe8UFezYCpa4WKGAxx0GZBn1rZNZvPRXn
+ YQ2n+n3C1z31FXQDkZV6cDQKjVfBEhcGjOlzgv0mZDcIJiiwGg/5LV091oKO00+bLejt
+ aPAg==
+X-Gm-Message-State: AOAM532LZjRlSuKoZ9HYVworSSmWkWElK2zTHXDozG56PAwelL0vP+wi
+ 55TAh3SP8YpcSyFMD9GfdQSw7o5uFNU9y1BA0rJvtTQjRgSx/gVgf9Pln1/TbbR3NC12XI7rkD/
+ lGG8Idx92sqQ53NLNkmQzbJfmvpRx1ykTGIQS0UTevQ==
+X-Received: by 2002:a05:6402:40c1:: with SMTP id
+ z1mr29288923edb.97.1621929998252; 
+ Tue, 25 May 2021 01:06:38 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJygZqhf+xYB7Ndg3ayTHtQu/3t0kArAedOP5pe98sDgQVP2z7+rV66oJGM/D3XST8tFG3f5gA==
+X-Received: by 2002:a05:6402:40c1:: with SMTP id
+ z1mr29288906edb.97.1621929998039; 
+ Tue, 25 May 2021 01:06:38 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a?
+ ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+ by smtp.gmail.com with ESMTPSA id n8sm8645618ejl.0.2021.05.25.01.06.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 May 2021 01:06:37 -0700 (PDT)
 Subject: Re: [PATCH 3/3] virtio_blk: implement blk_mq_ops->poll()
-Message-ID: <YKypgi2qcYVTgYdv@T590>
+To: Ming Lei <ming.lei@redhat.com>
 References: <20210520141305.355961-1-stefanha@redhat.com>
- <20210520141305.355961-4-stefanha@redhat.com>
- <20210524145928.GA3873@lst.de>
- <7cc7f19b-34b3-1501-898d-3f41e047d766@redhat.com>
+ <20210520141305.355961-4-stefanha@redhat.com> <20210524145928.GA3873@lst.de>
+ <7cc7f19b-34b3-1501-898d-3f41e047d766@redhat.com> <YKypgi2qcYVTgYdv@T590>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <f1997919-e059-b50b-19b3-5741e3309000@redhat.com>
+Date: Tue, 25 May 2021 10:06:36 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.8.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <7cc7f19b-34b3-1501-898d-3f41e047d766@redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+In-Reply-To: <YKypgi2qcYVTgYdv@T590>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=pbonzini@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
 Cc: Jens Axboe <axboe@kernel.dk>, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  linux-block@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
@@ -91,42 +116,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, May 25, 2021 at 09:22:48AM +0200, Paolo Bonzini wrote:
-> On 24/05/21 16:59, Christoph Hellwig wrote:
-> > On Thu, May 20, 2021 at 03:13:05PM +0100, Stefan Hajnoczi wrote:
-> > > Possible drawbacks of this approach:
-> > > 
-> > > - Hardware virtio_blk implementations may find virtqueue_disable_cb()
-> > >    expensive since it requires DMA. If such devices become popular then
-> > >    the virtio_blk driver could use a similar approach to NVMe when
-> > >    VIRTIO_F_ACCESS_PLATFORM is detected in the future.
-> > > 
-> > > - If a blk_poll() thread is descheduled it not only hurts polling
-> > >    performance but also delays completion of non-REQ_HIPRI requests on
-> > >    that virtqueue since vq notifications are disabled.
-> > 
-> > Yes, I think this is a dangerous configuration.  What argument exists
-> > again just using dedicated poll queues?
+On 25/05/21 09:38, Ming Lei wrote:
+> On Tue, May 25, 2021 at 09:22:48AM +0200, Paolo Bonzini wrote:
+>> On 24/05/21 16:59, Christoph Hellwig wrote:
+>>> On Thu, May 20, 2021 at 03:13:05PM +0100, Stefan Hajnoczi wrote:
+>>>> Possible drawbacks of this approach:
+>>>>
+>>>> - Hardware virtio_blk implementations may find virtqueue_disable_cb()
+>>>>     expensive since it requires DMA. If such devices become popular then
+>>>>     the virtio_blk driver could use a similar approach to NVMe when
+>>>>     VIRTIO_F_ACCESS_PLATFORM is detected in the future.
+>>>>
+>>>> - If a blk_poll() thread is descheduled it not only hurts polling
+>>>>     performance but also delays completion of non-REQ_HIPRI requests on
+>>>>     that virtqueue since vq notifications are disabled.
+>>>
+>>> Yes, I think this is a dangerous configuration.  What argument exists
+>>> again just using dedicated poll queues?
+>>
+>> There isn't an equivalent of the admin queue in virtio-blk, which would
+>> allow the guest to configure the desired number of poll queues.  The number
+>> of queues is fixed.
 > 
-> There isn't an equivalent of the admin queue in virtio-blk, which would
-> allow the guest to configure the desired number of poll queues.  The number
-> of queues is fixed.
+> Dedicated vqs can be used for poll only, and I understand VM needn't to know
+> if the vq is polled or driven by IRQ in VM.
+> 
+> I tried that in v5.4, but not see obvious IOPS boost, so give up.
+> 
+> https://github.com/ming1/linux/commits/my_v5.4-virtio-irq-poll
 
-Dedicated vqs can be used for poll only, and I understand VM needn't to know
-if the vq is polled or driven by IRQ in VM.
+Sure, but polling can be beneficial even for a single queue.  Queues 
+have a cost on the host side as well, so a 1 vCPU - 1 queue model may 
+not be always the best.
 
-I tried that in v5.4, but not see obvious IOPS boost, so give up.
-
-https://github.com/ming1/linux/commits/my_v5.4-virtio-irq-poll
-
-
-Thanks,
-Ming
+Paolo
 
 _______________________________________________
 Virtualization mailing list
