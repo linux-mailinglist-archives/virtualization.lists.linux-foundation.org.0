@@ -1,75 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 06B173913CC
-	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 11:32:15 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id A01253913C0
+	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 11:31:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8B10940540;
-	Wed, 26 May 2021 09:32:13 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 47D16400CA;
+	Wed, 26 May 2021 09:31:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dehRRn9uaYMt; Wed, 26 May 2021 09:32:12 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0FD784059C;
-	Wed, 26 May 2021 09:32:12 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UaugWwUQb30D; Wed, 26 May 2021 09:31:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTP id 0E43C401B9;
+	Wed, 26 May 2021 09:31:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B4528C0001;
-	Wed, 26 May 2021 09:32:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ABC45C0001;
+	Wed, 26 May 2021 09:31:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4247CC0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3FCBAC0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 09:32:10 +0000 (UTC)
+ Wed, 26 May 2021 09:31:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 23E0140208
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2249060763
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 09:32:10 +0000 (UTC)
+ Wed, 26 May 2021 09:31:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id b_bLXJ4fiRhv
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Q0Ny1Dxv87H8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 09:32:09 +0000 (UTC)
+ Wed, 26 May 2021 09:31:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5374D401B9
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2B0D160638
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 09:32:09 +0000 (UTC)
+ Wed, 26 May 2021 09:31:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622021528;
+ s=mimecast20190719; t=1622021493;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=HpQl70FCJrKzkRws/ycp8B14QnuETKoEKh3YFLooSpk=;
- b=gqiObnwYZBPS9mVSMmPBvXlbdA/lVJynS9Kl15KUOiCLT9XWSndR7bDmW9krIqLejnBxjL
- hDErOrWJrRSo0Nb/74Iimiox0jl8LP6C0fCtPQossoFesT7O1zVjHbOV4MZjmxIFyauL4Q
- oycehSI7QW88FB6R4T+F92hRnSqe7So=
+ bh=0LN0J8fOWqC6Tk5wkSbpwkNZtNpLvOB+CwQIFMbUdeo=;
+ b=AnIppB8NgblNZ0a7jsbJMwU4h5WyngA5mcaVh/bYm038pee2Ynh2AHzYYiZmMRPTLbdED7
+ f+U/pL6mfMWmTArjT3FNy7MBw/UyfydjHOTWalvyR+qwWZgpaI+rXhNZQj9ZHcharl2e+4
+ I/t+TVHMfQL+h54WSNz4h4FhQn7yoss=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-273-bVRoSnEGNimMg5ofHHzOIg-1; Wed, 26 May 2021 05:31:26 -0400
-X-MC-Unique: bVRoSnEGNimMg5ofHHzOIg-1
+ us-mta-574-gnXabOTcN2GlrtYNjLBgrQ-1; Wed, 26 May 2021 05:31:31 -0400
+X-MC-Unique: gnXabOTcN2GlrtYNjLBgrQ-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
  [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2C4F0106BB2B;
- Wed, 26 May 2021 09:31:23 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0899D107ACE3;
+ Wed, 26 May 2021 09:31:29 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-113-99.ams2.redhat.com [10.36.113.99])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 668435D9CC;
- Wed, 26 May 2021 09:31:17 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 892915D9D3;
+ Wed, 26 May 2021 09:31:23 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 3/6] fs/proc/kcore: don't read offline sections,
- logically offline pages and hwpoisoned pages
-Date: Wed, 26 May 2021 11:30:38 +0200
-Message-Id: <20210526093041.8800-4-david@redhat.com>
+Subject: [PATCH v3 4/6] mm: introduce page_offline_(begin|end|freeze|thaw) to
+ synchronize setting PageOffline()
+Date: Wed, 26 May 2021 11:30:39 +0200
+Message-Id: <20210526093041.8800-5-david@redhat.com>
 In-Reply-To: <20210526093041.8800-1-david@redhat.com>
 References: <20210526093041.8800-1-david@redhat.com>
 MIME-Version: 1.0
@@ -102,108 +102,111 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's avoid reading:
+A driver might set a page logically offline -- PageOffline() -- and
+turn the page inaccessible in the hypervisor; after that, access to page
+content can be fatal. One example is virtio-mem; while unplugged memory
+-- marked as PageOffline() can currently be read in the hypervisor, this
+will no longer be the case in the future; for example, when having
+a virtio-mem device backed by huge pages in the hypervisor.
 
-1) Offline memory sections: the content of offline memory sections is stale
-   as the memory is effectively unused by the kernel. On s390x with standby
-   memory, offline memory sections (belonging to offline storage
-   increments) are not accessible. With virtio-mem and the hyper-v balloon,
-   we can have unavailable memory chunks that should not be accessed inside
-   offline memory sections. Last but not least, offline memory sections
-   might contain hwpoisoned pages which we can no longer identify
-   because the memmap is stale.
+Some special PFN walkers -- i.e., /proc/kcore -- read content of random
+pages after checking PageOffline(); however, these PFN walkers can race
+with drivers that set PageOffline().
 
-2) PG_offline pages: logically offline pages that are documented as
-   "The content of these pages is effectively stale. Such pages should not
-    be touched (read/write/dump/save) except by their owner.".
-   Examples include pages inflated in a balloon or unavailble memory
-   ranges inside hotplugged memory sections with virtio-mem or the hyper-v
-   balloon.
+Let's introduce page_offline_(begin|end|freeze|thaw) for
+synchronizing.
 
-3) PG_hwpoison pages: Reading pages marked as hwpoisoned can be fatal.
-   As documented: "Accessing is not safe since it may cause another machine
-   check. Don't touch!"
+page_offline_freeze()/page_offline_thaw() allows for a subsystem to
+synchronize with such drivers, achieving that a page cannot be set
+PageOffline() while frozen.
 
-Introduce is_page_hwpoison(), adding a comment that it is inherently
-racy but best we can really do.
+page_offline_begin()/page_offline_end() is used by drivers that care about
+such races when setting a page PageOffline().
 
-Reading /proc/kcore now performs similar checks as when reading
-/proc/vmcore for kdump via makedumpfile: problematic pages are exclude.
-It's also similar to hibernation code, however, we don't skip hwpoisoned
-pages when processing pages in kernel/power/snapshot.c:saveable_page() yet.
+For simplicity, use a rwsem for now; neither drivers nor users are
+performance sensitive.
 
-Note 1: we can race against memory offlining code, especially
-memory going offline and getting unplugged: however, we will properly tear
-down the identity mapping and handle faults gracefully when accessing
-this memory from kcore code.
-
-Note 2: we can race against drivers setting PageOffline() and turning
-memory inaccessible in the hypervisor. We'll handle this in a follow-up
-patch.
-
+Acked-by: Michal Hocko <mhocko@suse.com>
 Reviewed-by: Mike Rapoport <rppt@linux.ibm.com>
 Reviewed-by: Oscar Salvador <osalvador@suse.de>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- fs/proc/kcore.c            | 14 +++++++++++++-
- include/linux/page-flags.h | 12 ++++++++++++
- 2 files changed, 25 insertions(+), 1 deletion(-)
+ include/linux/page-flags.h | 10 ++++++++++
+ mm/util.c                  | 40 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 50 insertions(+)
 
-diff --git a/fs/proc/kcore.c b/fs/proc/kcore.c
-index ed6fbb3bd50c..92ff1e4436cb 100644
---- a/fs/proc/kcore.c
-+++ b/fs/proc/kcore.c
-@@ -465,6 +465,9 @@ read_kcore(struct file *file, char __user *buffer, size_t buflen, loff_t *fpos)
- 
- 	m = NULL;
- 	while (buflen) {
-+		struct page *page;
-+		unsigned long pfn;
-+
- 		/*
- 		 * If this is the first iteration or the address is not within
- 		 * the previous entry, search for a matching entry.
-@@ -503,7 +506,16 @@ read_kcore(struct file *file, char __user *buffer, size_t buflen, loff_t *fpos)
- 			}
- 			break;
- 		case KCORE_RAM:
--			if (!pfn_is_ram(__pa(start) >> PAGE_SHIFT)) {
-+			pfn = __pa(start) >> PAGE_SHIFT;
-+			page = pfn_to_online_page(pfn);
-+
-+			/*
-+			 * Don't read offline sections, logically offline pages
-+			 * (e.g., inflated in a balloon), hwpoisoned pages,
-+			 * and explicitly excluded physical ranges.
-+			 */
-+			if (!page || PageOffline(page) ||
-+			    is_page_hwpoison(page) || !pfn_is_ram(pfn)) {
- 				if (clear_user(buffer, tsz)) {
- 					ret = -EFAULT;
- 					goto out;
 diff --git a/include/linux/page-flags.h b/include/linux/page-flags.h
-index 04a34c08e0a6..daed82744f4b 100644
+index daed82744f4b..382464aa3c20 100644
 --- a/include/linux/page-flags.h
 +++ b/include/linux/page-flags.h
-@@ -694,6 +694,18 @@ PAGEFLAG_FALSE(DoubleMap)
- 	TESTSCFLAG_FALSE(DoubleMap)
- #endif
+@@ -769,9 +769,19 @@ PAGE_TYPE_OPS(Buddy, buddy)
+  * relies on this feature is aware that re-onlining the memory block will
+  * require to re-set the pages PageOffline() and not giving them to the
+  * buddy via online_page_callback_t.
++ *
++ * There are drivers that mark a page PageOffline() and expect there won't be
++ * any further access to page content. PFN walkers that read content of random
++ * pages should check PageOffline() and synchronize with such drivers using
++ * page_offline_freeze()/page_offline_thaw().
+  */
+ PAGE_TYPE_OPS(Offline, offline)
  
-+/*
-+ * Check if a page is currently marked HWPoisoned. Note that this check is
-+ * best effort only and inherently racy: there is no way to synchronize with
-+ * failing hardware.
-+ */
-+static inline bool is_page_hwpoison(struct page *page)
-+{
-+	if (PageHWPoison(page))
-+		return true;
-+	return PageHuge(page) && PageHWPoison(compound_head(page));
-+}
++extern void page_offline_freeze(void);
++extern void page_offline_thaw(void);
++extern void page_offline_begin(void);
++extern void page_offline_end(void);
 +
  /*
-  * For pages that are never mapped to userspace (and aren't PageSlab),
-  * page_type may be used.  Because it is initialised to -1, we invert the
+  * Marks pages in use as page tables.
+  */
+diff --git a/mm/util.c b/mm/util.c
+index a8bf17f18a81..a034525e7ba2 100644
+--- a/mm/util.c
++++ b/mm/util.c
+@@ -1010,3 +1010,43 @@ void mem_dump_obj(void *object)
+ }
+ EXPORT_SYMBOL_GPL(mem_dump_obj);
+ #endif
++
++/*
++ * A driver might set a page logically offline -- PageOffline() -- and
++ * turn the page inaccessible in the hypervisor; after that, access to page
++ * content can be fatal.
++ *
++ * Some special PFN walkers -- i.e., /proc/kcore -- read content of random
++ * pages after checking PageOffline(); however, these PFN walkers can race
++ * with drivers that set PageOffline().
++ *
++ * page_offline_freeze()/page_offline_thaw() allows for a subsystem to
++ * synchronize with such drivers, achieving that a page cannot be set
++ * PageOffline() while frozen.
++ *
++ * page_offline_begin()/page_offline_end() is used by drivers that care about
++ * such races when setting a page PageOffline().
++ */
++static DECLARE_RWSEM(page_offline_rwsem);
++
++void page_offline_freeze(void)
++{
++	down_read(&page_offline_rwsem);
++}
++
++void page_offline_thaw(void)
++{
++	up_read(&page_offline_rwsem);
++}
++
++void page_offline_begin(void)
++{
++	down_write(&page_offline_rwsem);
++}
++EXPORT_SYMBOL(page_offline_begin);
++
++void page_offline_end(void)
++{
++	up_write(&page_offline_rwsem);
++}
++EXPORT_SYMBOL(page_offline_end);
 -- 
 2.31.1
 
