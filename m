@@ -1,93 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13B71391238
-	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 10:24:52 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 18F9739123F
+	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 10:24:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A56AA83C05;
-	Wed, 26 May 2021 08:24:50 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id ADEC3839DB;
+	Wed, 26 May 2021 08:24:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lR2DYWNlpADV; Wed, 26 May 2021 08:24:49 +0000 (UTC)
+	with ESMTP id V2AM5lmJeQ3L; Wed, 26 May 2021 08:24:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 62C1E839DB;
-	Wed, 26 May 2021 08:24:49 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 96CF883C49;
+	Wed, 26 May 2021 08:24:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 052FBC0001;
-	Wed, 26 May 2021 08:24:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 499A3C0001;
+	Wed, 26 May 2021 08:24:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1ABD2C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 64801C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 08:24:48 +0000 (UTC)
+ Wed, 26 May 2021 08:24:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E5286403F6
+ by smtp1.osuosl.org (Postfix) with ESMTP id 46C3F83C47
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 08:24:47 +0000 (UTC)
+ Wed, 26 May 2021 08:24:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PYy-F_EqealG
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XEo-S1f9Ga4B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 08:24:47 +0000 (UTC)
+ Wed, 26 May 2021 08:24:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1B4B2401FD
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 91D31839DB
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 08:24:46 +0000 (UTC)
+ Wed, 26 May 2021 08:24:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622017486;
+ s=mimecast20190719; t=1622017490;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=xQ4VlAVqH25DzMLpMhdVuF4QUuvJ8Qp+k4bIKP2VcN4=;
- b=VbCJBpN5sfVfjhpT6yHTPPLNGbOld9cjVPoWj8oDGuQH01AKHcHD6EVRu2ToO13KBmOGTJ
- MoKHfJhGv2ohFRIVdtaGbMYtEICvHYV6h8/N7d5LT1MBYv0NbAIW9sPg9g2jAREEzDC3ef
- tvF9ldPM9xspWWn1rCNVKMb4JdtDoF0=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-598-AIF2j-__Ng2Q7S_NqbI4Bg-1; Wed, 26 May 2021 04:24:44 -0400
-X-MC-Unique: AIF2j-__Ng2Q7S_NqbI4Bg-1
-Received: by mail-wr1-f69.google.com with SMTP id
- f19-20020adfb6130000b02901121afc9a31so39963wre.10
+ bh=o40Fmid6nNIkbFe8iYePDZhpBrn8pMAYTwjh787uFdE=;
+ b=bMgWZzvxoCCUOHiqAt0w139I9D42aQf9cd8BYUDxKX/uDjIEkOzpeo62tkp5FvqyWDP7Aa
+ rm3CPN2Qp+lzFBggvoHlokDF1QVUFH9JQyXMZbeqpgWtE4xc36908E1BjbXIIrrgdrujnt
+ iKk9y9eolWhyG7h//Rh6E2PzNDkgCno=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-120-kBSzwGxyOV-lZr1MFEJ0HQ-1; Wed, 26 May 2021 04:24:46 -0400
+X-MC-Unique: kBSzwGxyOV-lZr1MFEJ0HQ-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ q2-20020a05600c2e42b0290192cdd9d918so238866wmf.4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 01:24:44 -0700 (PDT)
+ Wed, 26 May 2021 01:24:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=xQ4VlAVqH25DzMLpMhdVuF4QUuvJ8Qp+k4bIKP2VcN4=;
- b=FPQWPYT8VMB1MUF6BiqpZ5daz6xc3gL7/Zwsqw2+BS7OiUrQ8Wbf507v+Y9eGGNijN
- a1W/kaPZYlZ8eBLNiaB665tFxnyFs1b6npVlTRsUo0fuFF6288BotmKHVrdXodzu5jiG
- ECaUnZC1VsvLDmvJ8XCp78vPKNspexpeEnEBW41dfYKsBys7Hfc6jOCswXgu4yRgKC/l
- 6j2O62zv8vDtZqZCtHX+Kz+9oRQClLA5Ov3YFoUHV9NBuVEf60vLUqGOj9AFJ3owCBKT
- QStsVQAUBDClLUT42CjFUNDITphdB07sgV0iU1k0S00eJVSlx3CHF1g/tlTXMq8ni1y2
- 54Eg==
-X-Gm-Message-State: AOAM530NWVEEdlh68FNmgopkJgCs0lJ0CGaT0KSrfk+rBa0P8jgu66s2
- cLgw0Nk/JnbVOAJH8/ceZ/TaoNw42T/NkYVBrr+dP1gLDsS8Kk7z7TLqNTORbecIqpx9hJcHr9f
- kZtTxjcpzDUXeEfThTY5IQkRvg+UzIpqicnZUnrXQhg==
-X-Received: by 2002:a05:6000:192:: with SMTP id
- p18mr31087414wrx.252.1622017483279; 
- Wed, 26 May 2021 01:24:43 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJwBruCkcm4GOWWMpK9+L6RBQgOo0DFFffIWCQmTsoaoIsXJIdCDaUTvqMzWEVx0KNyBacvMzw==
-X-Received: by 2002:a05:6000:192:: with SMTP id
- p18mr31087397wrx.252.1622017483114; 
- Wed, 26 May 2021 01:24:43 -0700 (PDT)
+ bh=o40Fmid6nNIkbFe8iYePDZhpBrn8pMAYTwjh787uFdE=;
+ b=LduHz8Kw8UV8foIGHQdeUopVIe9ljk1V9XlT0GsnBX5UxBpHFwz8DumjJ5uyNRwnKX
+ H98b2yRf4u7nRw2jL9Ih1iUVqn5QnFD1lr2W+ky23lR1S/c1OUoibL25//WTueDXzVEj
+ ipzN1DzFJHi1GETEURK9lzkGHKGZNw1Qu3zAZv0JH2FsQJoAJrJ0IEFFPOZUhazvV4BH
+ A9nfvLkvc2Go45xuozBzQ/FKgP3lEwwrUVM9OVtveqTdx32+7BBMNEnYIsdbOP+ifxJf
+ J0gySV1HjeYEHJq4J9Wv8i+TtV2TA/1J3dSwliQQV9Pgkd7zO8cIvhFsxRz304bRwNKQ
+ txxw==
+X-Gm-Message-State: AOAM531s+rm/A0Ky2NgAIyymoauBudq1MONh0bKBr0i6yiE4475/iTja
+ X6dn/wvDOamQpe2Mhwbl/S3A2mQqjhpyVw6Gp1dvr4BRN2oSCqI+R2mWITiDa4vpUfo/D/23mtK
+ U2xNYA6w7kDFnS7tGrxUsw85wHC5TljuWs+uJ9sjk4w==
+X-Received: by 2002:a1c:f303:: with SMTP id q3mr2246263wmq.9.1622017485573;
+ Wed, 26 May 2021 01:24:45 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJy3YaY8d7OxUasPPsyIXLBzSHdDVjW4txQgjFtjWKP91pjY4SLYxtZjAEHxMjzrOAh+TdWZzQ==
+X-Received: by 2002:a1c:f303:: with SMTP id q3mr2246253wmq.9.1622017485441;
+ Wed, 26 May 2021 01:24:45 -0700 (PDT)
 Received: from redhat.com ([2a10:8006:fcda:0:90d:c7e7:9e26:b297])
- by smtp.gmail.com with ESMTPSA id r7sm5281221wmq.3.2021.05.26.01.24.41
+ by smtp.gmail.com with ESMTPSA id l188sm769420wmf.27.2021.05.26.01.24.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 May 2021 01:24:42 -0700 (PDT)
-Date: Wed, 26 May 2021 04:24:40 -0400
+ Wed, 26 May 2021 01:24:45 -0700 (PDT)
+Date: Wed, 26 May 2021 04:24:43 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 3/4] virtio: fix up virtio_disable_cb
-Message-ID: <20210526082423.47837-4-mst@redhat.com>
+Subject: [PATCH v3 4/4] virtio_net: disable cb aggressively
+Message-ID: <20210526082423.47837-5-mst@redhat.com>
 References: <20210526082423.47837-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20210526082423.47837-1-mst@redhat.com>
@@ -117,115 +113,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtio_disable_cb is currently a nop for split ring with event index.
-This is because it used to be always called from a callback when we know
-device won't trigger more events until we update the index.  However,
-now that we run with interrupts enabled a lot we also poll without a
-callback so that is different: disabling callbacks will help reduce the
-number of spurious interrupts.
-Further, if using event index with a packed ring, and if being called
-from a callback, we actually do disable interrupts which is unnecessary.
+There are currently two cases where we poll TX vq not in response to a
+callback: start xmit and rx napi.  We currently do this with callbacks
+enabled which can cause extra interrupts from the card.  Used not to be
+a big issue as we run with interrupts disabled but that is no longer the
+case, and in some cases the rate of spurious interrupts is so high
+linux detects this and actually kills the interrupt.
 
-Fix both issues by tracking whenever we get a callback. If that is
-the case disabling interrupts with event index can be a nop.
-If not the case disable interrupts. Note: with a split ring
-there's no explicit "no interrupts" value. For now we write
-a fixed value so our chance of triggering an interupt
-is 1/ring size. It's probably better to write something
-related to the last used index there to reduce the chance
-even further. For now I'm keeping it simple.
+Fix up by disabling the callbacks before polling the tx vq.
 
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ drivers/net/virtio_net.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 71e16b53e9c1..88f0b16b11b8 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -113,6 +113,9 @@ struct vring_virtqueue {
- 	/* Last used index we've seen. */
- 	u16 last_used_idx;
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index c29f42d1e04f..a83dc038d8af 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -1433,7 +1433,10 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
+ 		return;
  
-+	/* Hint for event idx: already triggered no need to disable. */
-+	bool event_triggered;
+ 	if (__netif_tx_trylock(txq)) {
+-		free_old_xmit_skbs(sq, true);
++		do {
++			virtqueue_disable_cb(sq->vq);
++			free_old_xmit_skbs(sq, true);
++		} while (unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
+ 
+ 		if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
+ 			netif_tx_wake_queue(txq);
+@@ -1605,12 +1608,17 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
+ 	struct netdev_queue *txq = netdev_get_tx_queue(dev, qnum);
+ 	bool kick = !netdev_xmit_more();
+ 	bool use_napi = sq->napi.weight;
++	unsigned int bytes = skb->len;
+ 
+ 	/* Free up any pending old buffers before queueing new ones. */
+-	free_old_xmit_skbs(sq, false);
++	do {
++		if (use_napi)
++			virtqueue_disable_cb(sq->vq);
+ 
+-	if (use_napi && kick)
+-		virtqueue_enable_cb_delayed(sq->vq);
++		free_old_xmit_skbs(sq, false);
 +
- 	union {
- 		/* Available for split ring */
- 		struct {
-@@ -739,7 +742,10 @@ static void virtqueue_disable_cb_split(struct virtqueue *_vq)
++	} while (use_napi && kick &&
++	       unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
  
- 	if (!(vq->split.avail_flags_shadow & VRING_AVAIL_F_NO_INTERRUPT)) {
- 		vq->split.avail_flags_shadow |= VRING_AVAIL_F_NO_INTERRUPT;
--		if (!vq->event)
-+		if (vq->event)
-+			/* TODO: this is a hack. Figure out a cleaner value to write. */
-+			vring_used_event(&vq->split.vring) = 0x0;
-+		else
- 			vq->split.vring.avail->flags =
- 				cpu_to_virtio16(_vq->vdev,
- 						vq->split.avail_flags_shadow);
-@@ -1605,6 +1611,7 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	vq->weak_barriers = weak_barriers;
- 	vq->broken = false;
- 	vq->last_used_idx = 0;
-+	vq->event_triggered = false;
- 	vq->num_added = 0;
- 	vq->packed_ring = true;
- 	vq->use_dma_api = vring_use_dma_api(vdev);
-@@ -1919,6 +1926,12 @@ void virtqueue_disable_cb(struct virtqueue *_vq)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
- 
-+	/* If device triggered an event already it won't trigger one again:
-+	 * no need to disable.
-+	 */
-+	if (vq->event_triggered)
-+		return;
-+
- 	if (vq->packed_ring)
- 		virtqueue_disable_cb_packed(_vq);
- 	else
-@@ -1942,6 +1955,9 @@ unsigned virtqueue_enable_cb_prepare(struct virtqueue *_vq)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
- 
-+	if (vq->event_triggered)
-+		vq->event_triggered = false;
-+
- 	return vq->packed_ring ? virtqueue_enable_cb_prepare_packed(_vq) :
- 				 virtqueue_enable_cb_prepare_split(_vq);
- }
-@@ -2005,6 +2021,9 @@ bool virtqueue_enable_cb_delayed(struct virtqueue *_vq)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
- 
-+	if (vq->event_triggered)
-+		vq->event_triggered = false;
-+
- 	return vq->packed_ring ? virtqueue_enable_cb_delayed_packed(_vq) :
- 				 virtqueue_enable_cb_delayed_split(_vq);
- }
-@@ -2044,6 +2063,10 @@ irqreturn_t vring_interrupt(int irq, void *_vq)
- 	if (unlikely(vq->broken))
- 		return IRQ_HANDLED;
- 
-+	/* Just a hint for performance: so it's ok that this can be racy! */
-+	if (vq->event)
-+		vq->event_triggered = true;
-+
- 	pr_debug("virtqueue callback for %p (%p)\n", vq, vq->vq.callback);
- 	if (vq->vq.callback)
- 		vq->vq.callback(&vq->vq);
-@@ -2083,6 +2106,7 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
- 	vq->weak_barriers = weak_barriers;
- 	vq->broken = false;
- 	vq->last_used_idx = 0;
-+	vq->event_triggered = false;
- 	vq->num_added = 0;
- 	vq->use_dma_api = vring_use_dma_api(vdev);
- #ifdef DEBUG
+ 	/* timestamp packet in software */
+ 	skb_tx_timestamp(skb);
 -- 
 MST
 
