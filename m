@@ -1,91 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 03680391458
-	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 12:04:30 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B10A391461
+	for <lists.virtualization@lfdr.de>; Wed, 26 May 2021 12:05:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 87EE782BBA;
-	Wed, 26 May 2021 10:04:28 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D62C940219;
+	Wed, 26 May 2021 10:05:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0AQDUia5bIJC; Wed, 26 May 2021 10:04:27 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4EBDD82ECF;
-	Wed, 26 May 2021 10:04:27 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bUhrXINVs2He; Wed, 26 May 2021 10:05:32 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTP id C322240208;
+	Wed, 26 May 2021 10:05:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 56D33C0027;
-	Wed, 26 May 2021 10:04:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E994BC0027;
+	Wed, 26 May 2021 10:05:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3A261C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7B5FBC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 10:04:25 +0000 (UTC)
+ Wed, 26 May 2021 10:05:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1A0D440208
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5017C60009
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 10:04:25 +0000 (UTC)
+ Wed, 26 May 2021 10:05:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=linaro.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1Xybl3XppvQV
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id C7LCA41v-Kij
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 10:04:24 +0000 (UTC)
+ Wed, 26 May 2021 10:05:27 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BD36D400CA
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7709A605B5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 10:04:23 +0000 (UTC)
-Received: by mail-ej1-x636.google.com with SMTP id gb17so1484897ejc.8
+ Wed, 26 May 2021 10:05:26 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id i13so643571edb.9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 May 2021 03:04:23 -0700 (PDT)
+ Wed, 26 May 2021 03:05:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=6vKl5wXX6m3B8S615pg0hNiDymSmdGcKHVZ5IanzTbQ=;
- b=RvdlZigy0NWOWJ5IX5kOqv4M+9H8owkJpPuwqCEa0ZFeXMQvC2wnCU0G1XLX2Oh6Qc
- UAXeaBKUhYPqs1/d/mttTaGZGK9zKg+9e4AxltWH+fx4279o+OGKgeEKOSqFliABtgMd
- F5RxumrPAmjoNhm4FfbM/nnmwiar30lyihH6qjQ/l9AeaQfwTFxDUQ5ihdPJQg49O5EB
- xqKeQmK8Hhze3vM0He32bxgYZrIYVzF1W6r7Zf3YaPHaylVedwvZbQi2Ub/EoitPSdKS
- 9isi5bRJBqy0mWSlA6p4kk3B9OZH1XzUFbOe0Q2MUXOGJckm8xFm2WR4gOBvIf1ClDZb
- zwwQ==
+ bh=wN1QhgZSLh/Q1cWPqcMwfOkLFO+D9Okqk24H5LLAjws=;
+ b=nPXeq6WiNxgg6lSxeUnm2xUIASnDhmktguH8A6hssAjEktOyNSvFrXb7nk9Jwtb+NO
+ yFRlCwYbpgu1I3XfvONpplYhusGl1LZzYH8skxO3FMlur4Ub99+Y+fFTNkOsTrN5w38z
+ OVf9eYTP/FPPU3gd8SPWnmbwhEmLy2lOF0pC3GW4VrVUrahiv7yYM6zET6w7Z3my6L0S
+ cHNhcGsinerK+PASVPV7OHMOudUBIlgvybDpP7ziWJzNizZCFYD1ZSZ3if2EX1bSR+BK
+ ZxzluxhQR+3Vc6n46FiKg0ibO/Yga0tgQunYLwLIIwStAZJn5nD7INiwGK+RxyPP0Qb4
+ pUgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=6vKl5wXX6m3B8S615pg0hNiDymSmdGcKHVZ5IanzTbQ=;
- b=pQCqGRFv0e5LrxXmNPj6ujhTpXCw7gZcXKqq58TypJOZbLo3RhU17CEcSRrG8TkMlU
- E3rhenq35ncUP3v8nrMq1sJUBTTi0avcvztlZ5+vyCR5P3Mtr1lXVP0SthEUX164l++4
- ImX+fTkwntFQJ67RgpT0y2/m+EgWPFhufBsQGnFT9SLooYGVGA3ZbYg33/9M5vA04yAQ
- a2ZnoRAisCQWWhdgtWC/eQNKv2+Z/0BHVHxWO5hEamb01u8QVuWrz5F+4hg8eTJ+AL0n
- XCWzsZpIpTMEqAaSP4oZVIApIX4lwzESYtUqQqD28JafgMRZxYTePd8ffU9SECZE1yX8
- MepQ==
-X-Gm-Message-State: AOAM533M+FR4TVol/EV66tdzNm7PbsizF5AOoiARq6TevEL0Of5M9YI9
- y/4XX87VcFmWCPjWW0dKe2WB9A==
-X-Google-Smtp-Source: ABdhPJyikgVRUFu3nC9T4AMVWatJFwbVikBSeD8fXfrM/F9mmEI89dlrOXNO+Hf2sPTVJ5KE1IhXEQ==
-X-Received: by 2002:a17:906:7f06:: with SMTP id
- d6mr32984690ejr.189.1622023461876; 
- Wed, 26 May 2021 03:04:21 -0700 (PDT)
+ bh=wN1QhgZSLh/Q1cWPqcMwfOkLFO+D9Okqk24H5LLAjws=;
+ b=ZnWVcDmVVj81lPue3mbgIFhyZM046A4FapQmF5h6s498hptHEYJoD0Wa6wDv9kGW0N
+ K0i0LC4BnVtlsCKsgzSikKY7E8ltzEwTNxW7rhufEgny/RV1qtpianSivS1o3LqnvZyA
+ FKwzOYv2y6T4NeY2PsR12PG5XZ3Tnz28+ZpCVrINRw7XgSwjPvFINJ3HyXNjFqpoBA0c
+ XjetLjIgUej/YlZFqrTOrZyloqKDQc2LfBttyCGQZDPmZXm1W8LJVXb76j5l4QamB9eL
+ kFhKoWPY1On/UZriyxr+IUh/R5gGSEAL8shdhPRxeS6WPNrrq8dyfS9MG8NLX9YbAvBA
+ njTw==
+X-Gm-Message-State: AOAM533FR6dXIIWU+5ACng7h/8114yN/BxExIGHfXSzDpCD3CDcFfrAM
+ UIoDanPJEVGVSv/wNFzU9qosDA==
+X-Google-Smtp-Source: ABdhPJwLqgT0dI13/qQ6yT3UWt2a30pzQv780qX8pFwjZ6m2oIQpbMs47aFTz509ycnSHGVFoSWOMw==
+X-Received: by 2002:a50:bf0f:: with SMTP id f15mr34885274edk.205.1622023525169; 
+ Wed, 26 May 2021 03:05:25 -0700 (PDT)
 Received: from myrica (adsl-84-226-106-126.adslplus.ch. [84.226.106.126])
- by smtp.gmail.com with ESMTPSA id j4sm9339398edq.13.2021.05.26.03.04.20
+ by smtp.gmail.com with ESMTPSA id k22sm10054730ejz.108.2021.05.26.03.05.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 May 2021 03:04:21 -0700 (PDT)
-Date: Wed, 26 May 2021 12:04:03 +0200
+ Wed, 26 May 2021 03:05:24 -0700 (PDT)
+Date: Wed, 26 May 2021 12:05:06 +0200
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: "Rafael J. Wysocki" <rafael@kernel.org>
-Subject: Re: [PATCH v2 3/6] ACPI: Add driver for the VIOT table
-Message-ID: <YK4dE+46ukG1Gcza@myrica>
+Subject: Re: [PATCH v2 2/6] ACPI: Move IOMMU setup code out of IORT
+Message-ID: <YK4dUpIS5LJmAU2s@myrica>
 References: <20210423113836.3974972-1-jean-philippe@linaro.org>
- <20210423113836.3974972-4-jean-philippe@linaro.org>
- <CAJZ5v0hoM-y2ajCVx8y4pXdPgAiNUBU6NUZ9m==NiVH8QcvWtw@mail.gmail.com>
+ <20210423113836.3974972-3-jean-philippe@linaro.org>
+ <CAJZ5v0j=vqv3aJb_eitOVtpxgU3j5_j5hKPzyTEeHxfo_5MXdQ@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAJZ5v0hoM-y2ajCVx8y4pXdPgAiNUBU6NUZ9m==NiVH8QcvWtw@mail.gmail.com>
+In-Reply-To: <CAJZ5v0j=vqv3aJb_eitOVtpxgU3j5_j5hKPzyTEeHxfo_5MXdQ@mail.gmail.com>
 Cc: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
  Catalin Marinas <catalin.marinas@arm.com>, Joerg Roedel <joro@8bytes.org>,
@@ -113,39 +112,19 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, May 21, 2021 at 06:39:24PM +0200, Rafael J. Wysocki wrote:
-> > diff --git a/drivers/acpi/viot.c b/drivers/acpi/viot.c
-> > new file mode 100644
-> > index 000000000000..710e5a5eac70
-> > --- /dev/null
-> > +++ b/drivers/acpi/viot.c
-> > @@ -0,0 +1,350 @@
-> > +// SPDX-License-Identifier: GPL-2.0
-> > +/*
-> > + * Virtual I/O topology
+On Fri, May 21, 2021 at 06:42:09PM +0200, Rafael J. Wysocki wrote:
+> On Fri, Apr 23, 2021 at 1:57 PM Jean-Philippe Brucker
+> <jean-philippe@linaro.org> wrote:
+> >
+> > Some of the IOMMU setup code in IORT is fairly generic and can be reused
+> > by VIOT. Extract it from IORT.
 > 
-> In the first place, more information on what this is all about, please.
-> 
-> What it does and how it is used.
+> Except that iort_iommu_configure_id() is not really generic AFAICS.
 
-Sure, I can add:
-
- *
- * The Virtual I/O Translation Table (VIOT) describes the topology of
- * para-virtual IOMMUs and the endpoints they manage. The OS uses it to
- * initialize devices in the right order, preventing endpoints from
- * issuing DMA before their IOMMU is ready. 
- *
- * When binding a driver to a device, before calling the device driver's
- * probe() method, the driver infrastructure calls dma_configure(). At
- * that point the VIOT driver looks for an IOMMU associated to the device
- * in the VIOT table. If an IOMMU exists and has been initialized, the
- * VIOT driver initializes the device's IOMMU fwspec, allowing the DMA
- * infrastructure to invoke the IOMMU ops when the device driver
- * configures DMA mappings. If an IOMMU exists and hasn't yet been
- * initialized, VIOT returns -EPROBE_DEFER to postpone probing the device
- * until the IOMMU is available.
- */
+I'll clarify the commit message: the parts of iort_iommu_configure_id()
+that set up the IOMMU infrastructure can be extracted and reused by VIOT.
+The rest of the function, that iterates over the IORT subtables, is
+specific to the driver.
 
 Thanks,
 Jean
