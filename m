@@ -1,62 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C759A395127
-	for <lists.virtualization@lfdr.de>; Sun, 30 May 2021 15:57:11 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E8F2395146
+	for <lists.virtualization@lfdr.de>; Sun, 30 May 2021 16:22:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 15AFA606F5;
-	Sun, 30 May 2021 13:57:10 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D97A640139;
+	Sun, 30 May 2021 14:22:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lVzflxVaR86y; Sun, 30 May 2021 13:57:09 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LeEWjY5_SqOf; Sun, 30 May 2021 14:22:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 917DF6079F;
-	Sun, 30 May 2021 13:57:08 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 8422440166;
+	Sun, 30 May 2021 14:22:21 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 34065C0001;
-	Sun, 30 May 2021 13:57:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2791CC001C;
+	Sun, 30 May 2021 14:22:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D4E17C0001
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 25B43C0001
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 May 2021 13:57:05 +0000 (UTC)
+ Sun, 30 May 2021 14:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id B2694403AE
+ by smtp4.osuosl.org (Postfix) with ESMTP id 04BD3403BA
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 May 2021 13:57:05 +0000 (UTC)
+ Sun, 30 May 2021 14:22:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tHuEgvGZ5jgM
+ with ESMTP id 4ubHf-6jyuCX
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 May 2021 13:57:04 +0000 (UTC)
+ Sun, 30 May 2021 14:22:17 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6C84940398
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B4D2D403AE
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 May 2021 13:57:04 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 456AD60FEE;
- Sun, 30 May 2021 13:57:03 +0000 (UTC)
+ Sun, 30 May 2021 14:22:17 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A33C260FDB;
+ Sun, 30 May 2021 14:22:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1622383023;
- bh=y4ozF0ydaqaDsoSvDIh4socil8d25uG+yf8lhImPMNo=;
+ s=korg; t=1622384537;
+ bh=lg9oi8XSg2SEd60XxCO5oczaE9sCr4YeOLWScbo2VcQ=;
  h=Subject:To:Cc:From:Date:From;
- b=n7sof6BPJrUZ5SSdZzPGWbbMkvbJvMZ7uuLw5JZGEv0JA4Y247L9S6cwwIVuY8vB2
- n3FYE2QKvvWakeVeM+Oy2ehtKHre3tPLzxc9ykbBFaYX+Ll+Dzqf8MyyBqyoNrWFhq
- qbymV/jnhFL9sVZVohx8rdzTNwnGu3UVEbitFvy8=
+ b=I7q02FXDIT7VY4aQ6CtFGs+Ke+3HH971M0MHofNSkHR7uL60db00EcgyqmaESTUYH
+ 9faiOBEErKORZ3h3kr1CVR+vgdgXwhx7opC8B3pKB4r8yThtZ/xBTPUKRAtEJgq0HU
+ 9DHJFpGaWz2Wb10m7hXlG27BzQkepz0o7SUuUb6o=
 Subject: Patch "{net,
  vdpa}/mlx5: Configure interface MAC into mpfs L2 table" has been
- added to the 5.12-stable tree
+ added to the 5.10-stable tree
 To: elic@nvidia.com, gregkh@linuxfoundation.org, jasowang@redhat.com,
  mst@redhat.com, saeedm@nvidia.com, virtualization@lists.linux-foundation.org
 From: <gregkh@linuxfoundation.org>
-Date: Sun, 30 May 2021 15:56:34 +0200
-Message-ID: <162238299482129@kroah.com>
+Date: Sun, 30 May 2021 16:20:51 +0200
+Message-ID: <16223844514771@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -82,12 +82,12 @@ This is a note to let you know that I've just added the patch titled
 
     {net,vdpa}/mlx5: Configure interface MAC into mpfs L2 table
 
-to the 5.12-stable tree which can be found at:
+to the 5.10-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      net-vdpa-mlx5-configure-interface-mac-into-mpfs-l2-table.patch
-and it can be found in the queue-5.12 subdirectory.
+and it can be found in the queue-5.10 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -196,15 +196,15 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  #endif
 --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
 +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -15,6 +15,7 @@
+@@ -9,6 +9,7 @@
  #include <linux/mlx5/vport.h>
  #include <linux/mlx5/fs.h>
- #include <linux/mlx5/mlx5_ifc_vdpa.h>
+ #include <linux/mlx5/device.h>
 +#include <linux/mlx5/mpfs.h>
+ #include "mlx5_vnet.h"
+ #include "mlx5_vdpa_ifc.h"
  #include "mlx5_vdpa.h"
- 
- MODULE_AUTHOR("Eli Cohen <eli@mellanox.com>");
-@@ -1854,11 +1855,16 @@ static int mlx5_vdpa_set_map(struct vdpa
+@@ -1839,11 +1840,16 @@ static int mlx5_vdpa_set_map(struct vdpa
  static void mlx5_vdpa_free(struct vdpa_device *vdev)
  {
  	struct mlx5_vdpa_dev *mvdev = to_mvdev(vdev);
@@ -221,15 +221,15 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  	mlx5_vdpa_free_resources(&ndev->mvdev);
  	mutex_destroy(&ndev->reslock);
  }
-@@ -1980,6 +1986,7 @@ static int mlx5v_probe(struct auxiliary_
- 	struct mlx5_adev *madev = container_of(adev, struct mlx5_adev, adev);
- 	struct mlx5_core_dev *mdev = madev->mdev;
+@@ -1962,6 +1968,7 @@ static void init_mvqs(struct mlx5_vdpa_n
+ void *mlx5_vdpa_add_dev(struct mlx5_core_dev *mdev)
+ {
  	struct virtio_net_config *config;
 +	struct mlx5_core_dev *pfmdev;
  	struct mlx5_vdpa_dev *mvdev;
  	struct mlx5_vdpa_net *ndev;
  	u32 max_vqs;
-@@ -2008,10 +2015,17 @@ static int mlx5v_probe(struct auxiliary_
+@@ -1990,10 +1997,17 @@ void *mlx5_vdpa_add_dev(struct mlx5_core
  	if (err)
  		goto err_mtu;
  
@@ -248,7 +248,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  
  	err = alloc_resources(ndev);
  	if (err)
-@@ -2028,6 +2042,9 @@ err_reg:
+@@ -2009,6 +2023,9 @@ err_reg:
  	free_resources(ndev);
  err_res:
  	mlx5_vdpa_free_resources(&ndev->mvdev);
@@ -283,7 +283,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from elic@nvidia.com are
 
-queue-5.12/net-vdpa-mlx5-configure-interface-mac-into-mpfs-l2-table.patch
+queue-5.10/net-vdpa-mlx5-configure-interface-mac-into-mpfs-l2-table.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
