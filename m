@@ -1,81 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5790D396F38
-	for <lists.virtualization@lfdr.de>; Tue,  1 Jun 2021 10:45:38 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CF658396F3F
+	for <lists.virtualization@lfdr.de>; Tue,  1 Jun 2021 10:45:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6969683C9F;
-	Tue,  1 Jun 2021 08:45:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 652894045F;
+	Tue,  1 Jun 2021 08:45:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GTYVJuKeFktf; Tue,  1 Jun 2021 08:45:34 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 42D5683CD3;
-	Tue,  1 Jun 2021 08:45:34 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ap5klw8xUVmH; Tue,  1 Jun 2021 08:45:41 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0958E40460;
+	Tue,  1 Jun 2021 08:45:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6DC90C0027;
-	Tue,  1 Jun 2021 08:45:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ACBE4C0001;
+	Tue,  1 Jun 2021 08:45:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A7945C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6377CC0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Jun 2021 08:45:32 +0000 (UTC)
+ Tue,  1 Jun 2021 08:45:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 89500607CB
+ by smtp1.osuosl.org (Postfix) with ESMTP id 527F683CD1
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Jun 2021 08:45:32 +0000 (UTC)
+ Tue,  1 Jun 2021 08:45:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id T6rXfgYqP19G
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id aLzpL80zZwv6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Jun 2021 08:45:32 +0000 (UTC)
+ Tue,  1 Jun 2021 08:45:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CBB956078B
+ by smtp1.osuosl.org (Postfix) with ESMTPS id A6B8A83CC7
  for <virtualization@lists.linux-foundation.org>;
- Tue,  1 Jun 2021 08:45:31 +0000 (UTC)
+ Tue,  1 Jun 2021 08:45:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622537130;
+ s=mimecast20190719; t=1622537137;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=WrB6mvofF/eyGV52SKIt7JTVB1esFhxct19/WhmLXiU=;
- b=aHG+6lyPQjSMzlSsJEQAAONYoHswJC28or+6ucxWm7ds9V6oIUwE5oAFAwe7vwNpfWsZob
- JE7KgCSj9Z6DxQYPRnoaxzdFh/WfJ08bpbN4z662BVSHhKSsV3KuT1mXkyDq0T4YcvtjZZ
- jh/32L2c25LGPvMKpuV71rnSZmvvKtM=
+ bh=0N48jdl0LC6EEeO/MPQo8KIfakfiafpunndtsq1f0hA=;
+ b=QOgxd9MpoTi+pilPGEza1P7Yf3/ZdoxiE1hJ29DjtUuOihupQ6KuwouJypRnZkNK09HXM7
+ QOAjxGyKstWkVPL1D5NvSO5kAUJ1QUPzP1Hl8AEYRCPW/bFEzXyDZ2SVWeS4+Bie/h8LUr
+ CtCwXM9GGg7RWC8PS610wz6tzcGjmYo=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-325-p9zeVaMKOt2wE7gdk0fP-w-1; Tue, 01 Jun 2021 04:45:29 -0400
-X-MC-Unique: p9zeVaMKOt2wE7gdk0fP-w-1
+ us-mta-429-Okf16E4rOF-PsWMWXG2vHg-1; Tue, 01 Jun 2021 04:45:36 -0400
+X-MC-Unique: Okf16E4rOF-PsWMWXG2vHg-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 29C14802E80;
- Tue,  1 Jun 2021 08:45:28 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 8FEE3106BAEA;
+ Tue,  1 Jun 2021 08:45:34 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-12-16.pek2.redhat.com [10.72.12.16])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AEBAC1037F21;
- Tue,  1 Jun 2021 08:45:25 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id D050D100E113;
+ Tue,  1 Jun 2021 08:45:28 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com, jasowang@redhat.com,
  virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
  kvm@vger.kernel.org, netdev@vger.kernel.org
-Subject: [PATCH 3/4] vp_vdpa: allow set vq state to initial state after reset
-Date: Tue,  1 Jun 2021 16:45:02 +0800
-Message-Id: <20210601084503.34724-4-jasowang@redhat.com>
+Subject: [PATCH 4/4] virtio/vdpa: clear the virtqueue state during probe
+Date: Tue,  1 Jun 2021 16:45:03 +0800
+Message-Id: <20210601084503.34724-5-jasowang@redhat.com>
 In-Reply-To: <20210601084503.34724-1-jasowang@redhat.com>
 References: <20210601084503.34724-1-jasowang@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: eli@mellanox.com
+Cc: Eli Cohen <elic@nvidia.com>, eli@mellanox.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,75 +92,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We used to fail the set_vq_state() since it was not supported yet by
-the virtio spec. But if the bus tries to set the state which is equal
-to the device initial state after reset, we can let it go.
+From: Eli Cohen <elic@nvidia.com>
 
-This is a must for virtio_vdpa() to set vq state during probe which is
-required for some vDPA parents.
+Clear the available index as part of the initialization process to
+clear and values that might be left from previous usage of the device.
+For example, if the device was previously used by vhost_vdpa and now
+probed by vhost_vdpa, you want to start with indices.
 
+Fixes: c043b4a8cf3b ("virtio: introduce a vDPA based transport")
+Signed-off-by: Eli Cohen <elic@nvidia.com>
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/vdpa/virtio_pci/vp_vdpa.c | 42 ++++++++++++++++++++++++++++---
- 1 file changed, 39 insertions(+), 3 deletions(-)
+ drivers/virtio/virtio_vdpa.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/drivers/vdpa/virtio_pci/vp_vdpa.c b/drivers/vdpa/virtio_pci/vp_vdpa.c
-index c76ebb531212..18bf4a422772 100644
---- a/drivers/vdpa/virtio_pci/vp_vdpa.c
-+++ b/drivers/vdpa/virtio_pci/vp_vdpa.c
-@@ -210,13 +210,49 @@ static int vp_vdpa_get_vq_state(struct vdpa_device *vdpa, u16 qid,
- 	return -EOPNOTSUPP;
- }
+diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
+index e28acf482e0c..e1a141135992 100644
+--- a/drivers/virtio/virtio_vdpa.c
++++ b/drivers/virtio/virtio_vdpa.c
+@@ -142,6 +142,8 @@ virtio_vdpa_setup_vq(struct virtio_device *vdev, unsigned int index,
+ 	struct vdpa_callback cb;
+ 	struct virtqueue *vq;
+ 	u64 desc_addr, driver_addr, device_addr;
++	/* Assume split virtqueue, switch to packed if necessary */
++	struct vdpa_vq_state state = {0};
+ 	unsigned long flags;
+ 	u32 align, num;
+ 	int err;
+@@ -191,6 +193,19 @@ virtio_vdpa_setup_vq(struct virtio_device *vdev, unsigned int index,
+ 		goto err_vq;
+ 	}
  
-+static int vp_vdpa_set_vq_state_split(struct vdpa_device *vdpa,
-+				      const struct vdpa_vq_state *state)
-+{
-+	const struct vdpa_vq_state_split *split = &state->split;
++	/* reset virtqueue state index */
++	if (virtio_has_feature(vdev, VIRTIO_F_RING_PACKED)) {
++		struct vdpa_vq_state_packed *s = &state.packed;
 +
-+	if (split->avail_index == 0)
-+		return 0;
-+
-+	return -EOPNOTSUPP;
-+}
-+
-+static int vp_vdpa_set_vq_state_packed(struct vdpa_device *vdpa,
-+				       const struct vdpa_vq_state *state)
-+{
-+	const struct vdpa_vq_state_packed *packed = &state->packed;
-+
-+	if (packed->last_avail_counter == 1 &&
-+	    packed->last_avail_idx == 0 &&
-+	    packed->last_used_counter == 1 &&
-+	    packed->last_used_idx == 0)
-+		return 0;
-+
-+	return -EOPNOTSUPP;
-+}
-+
- static int vp_vdpa_set_vq_state(struct vdpa_device *vdpa, u16 qid,
- 				const struct vdpa_vq_state *state)
- {
--	/* Note that this is not supported by virtio specification, so
--	 * we return -ENOPOTSUPP here. This means we can't support live
--	 * migration, vhost device start/stop.
-+	struct virtio_pci_modern_device *mdev = vdpa_to_mdev(vdpa);
-+
-+	/* Note that this is not supported by virtio specification.
-+	 * But if the state is by chance equal to the device initial
-+	 * state, we can let it go.
- 	 */
-+	if ((vp_modern_get_status(mdev) & VIRTIO_CONFIG_S_FEATURES_OK) &&
-+	    !vp_modern_get_queue_enable(mdev, qid)) {
-+		if (vp_modern_get_driver_features(mdev) &
-+		    BIT_ULL(VIRTIO_F_RING_PACKED))
-+			return vp_vdpa_set_vq_state_packed(vdpa, state);
-+		else
-+			return vp_vdpa_set_vq_state_split(vdpa,	state);
++		s->last_avail_counter = 1;
++		s->last_avail_idx = 0;
++		s->last_used_counter = 1;
++		s->last_used_idx = 0;
 +	}
++	err = ops->set_vq_state(vdpa, index, &state);
++	if (err)
++		goto err_vq;
 +
- 	return -EOPNOTSUPP;
- }
+ 	ops->set_vq_ready(vdpa, index, 1);
  
+ 	vq->priv = info;
 -- 
 2.25.1
 
