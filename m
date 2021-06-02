@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2AA4F398182
-	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 08:54:42 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BA61398183
+	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 08:54:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6395F608C0;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 34F92402BE;
 	Wed,  2 Jun 2021 06:54:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xOL10xEBQkFr; Wed,  2 Jun 2021 06:54:39 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BqaWmH34MH4C; Wed,  2 Jun 2021 06:54:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EB25F608A6;
+	by smtp2.osuosl.org (Postfix) with ESMTP id A232F40249;
 	Wed,  2 Jun 2021 06:54:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C3EAEC0024;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87E3DC0001;
 	Wed,  2 Jun 2021 06:54:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9BFE7C0026
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7A925C0024
  for <virtualization@lists.linux-foundation.org>;
  Wed,  2 Jun 2021 06:54:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7487F40112
+ by smtp1.osuosl.org (Postfix) with ESMTP id 36A9E82CEA
  for <virtualization@lists.linux-foundation.org>;
  Wed,  2 Jun 2021 06:54:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rzc7I9dHCVDC
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id vd1zFkuZaPPc
  for <virtualization@lists.linux-foundation.org>;
  Wed,  2 Jun 2021 06:54:35 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E2E91400BA
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 97C7182BF5
  for <virtualization@lists.linux-foundation.org>;
  Wed,  2 Jun 2021 06:54:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=Yi0gWgny8DlRPvb2CPLj2qpffFrZ3FaoaK+2w2W5Ero=; b=Ht4009yUCSzO+7+WkZSpPv8/pg
- DF4TuO/V/1LnprDJA3jlEhqFaXKBH7nFqyPlLMER9C4xGoA29+zO97djThq/H5WGD+qvf9L+NXUS+
- NF+wjIhh/npg/q4yZwzJ2XU8Rh/TBSfn+u/dM7E/U9YdPLNk9qDr3C//ieS4lZI5LRisQPRidcs0K
- 1KxMYlyEV+r/yTnMeO4E9D5sjO0i2VDyXsAV0BqYgFAku1jAbz09LqX7rvILnxpnxFg/tBckuBSOC
- E+KSpkcLJ/UGUgdvZ89eU6BxLq+pC8HlqDRtF4O6vNTYENtcydGYMepxD+bizsH8Il7O6KAzLt54A
- NMGPi+1w==;
+ bh=9pvQ9WWixoN79V+IFrwZ0yGtfnJdYnRvQElOajEUx4E=; b=gnk1MFf6oC2iDvM0lQExGF55IT
+ Fu4WEOCNNJ9mVEtVcIDrtrwvLS92XEx/Y9jJNPlMZzP3mxVH717a4VCLxOLSslRLKspq6OAA9D5yw
+ EQDkVL09aPuAvCsSUDM3ZFzSxHOeCU6gBkEfhYQCCehrU9uW68j9GkCyo7Ds0V43zhcXAh05TNWGS
+ LhXZW/q9HT26Y7QKqOeqywIxRBtkOI49AYNNeXwG3akyX15CxDIe0h/fq/1eJkZhMao+G/fiRrulm
+ dyrb+u0WyEaL8vr4wMg0Ys8BKcowBJnF+Zn2V2osWkSUWM27u+JhH6YkPr+2yh9LuvxLx7wgsnTfO
+ l9Bduvjw==;
 Received: from shol69.static.otenet.gr ([83.235.170.67] helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1loKlS-0025JJ-Ew; Wed, 02 Jun 2021 06:54:07 +0000
+ id 1loKlW-0025KS-9M; Wed, 02 Jun 2021 06:54:10 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 03/30] blk-mq: add the blk_mq_alloc_disk APIs
-Date: Wed,  2 Jun 2021 09:53:18 +0300
-Message-Id: <20210602065345.355274-4-hch@lst.de>
+Subject: [PATCH 04/30] virtio-blk: use blk_mq_alloc_disk
+Date: Wed,  2 Jun 2021 09:53:19 +0300
+Message-Id: <20210602065345.355274-5-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210602065345.355274-1-hch@lst.de>
 References: <20210602065345.355274-1-hch@lst.de>
@@ -98,68 +98,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add a new API to allocate a gendisk including the request_queue for use
-with blk-mq based drivers.  This is to avoid boilerplate code in drivers.
+Use the blk_mq_alloc_disk API to simplify the gendisk and request_queue
+allocation.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- block/blk-mq.c         | 19 +++++++++++++++++++
- include/linux/blk-mq.h | 12 ++++++++++++
- 2 files changed, 31 insertions(+)
+ drivers/block/virtio_blk.c | 26 +++++++-------------------
+ 1 file changed, 7 insertions(+), 19 deletions(-)
 
-diff --git a/block/blk-mq.c b/block/blk-mq.c
-index 6112741e1ff9..1e6036e6fd66 100644
---- a/block/blk-mq.c
-+++ b/block/blk-mq.c
-@@ -3137,6 +3137,25 @@ struct request_queue *blk_mq_init_queue(struct blk_mq_tag_set *set)
- }
- EXPORT_SYMBOL(blk_mq_init_queue);
+diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+index b9fa3ef5b57c..e4bd3b1fc3c2 100644
+--- a/drivers/block/virtio_blk.c
++++ b/drivers/block/virtio_blk.c
+@@ -749,13 +749,6 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 	if (err)
+ 		goto out_free_vblk;
  
-+struct gendisk *__blk_mq_alloc_disk(struct blk_mq_tag_set *set, void *queuedata)
-+{
-+	struct request_queue *q;
-+	struct gendisk *disk;
-+
-+	q = blk_mq_init_queue_data(set, queuedata);
-+	if (IS_ERR(q))
-+		return ERR_CAST(q);
-+
-+	disk = __alloc_disk_node(0, set->numa_node);
-+	if (!disk) {
-+		blk_cleanup_queue(q);
-+		return ERR_PTR(-ENOMEM);
-+	}
-+	disk->queue = q;
-+	return disk;
-+}
-+EXPORT_SYMBOL(__blk_mq_alloc_disk);
-+
- /*
-  * Helper for setting up a queue with mq ops, given queue depth, and
-  * the passed in mq ops flags.
-diff --git a/include/linux/blk-mq.h b/include/linux/blk-mq.h
-index 73750b2838d2..f496c6c5b5d2 100644
---- a/include/linux/blk-mq.h
-+++ b/include/linux/blk-mq.h
-@@ -426,6 +426,18 @@ enum {
- 	((policy & ((1 << BLK_MQ_F_ALLOC_POLICY_BITS) - 1)) \
- 		<< BLK_MQ_F_ALLOC_POLICY_START_BIT)
+-	/* FIXME: How many partitions?  How long is a piece of string? */
+-	vblk->disk = alloc_disk(1 << PART_BITS);
+-	if (!vblk->disk) {
+-		err = -ENOMEM;
+-		goto out_free_vq;
+-	}
+-
+ 	/* Default queue sizing is to fill the ring. */
+ 	if (likely(!virtblk_queue_depth)) {
+ 		queue_depth = vblk->vqs[0].vq->num_free;
+@@ -779,21 +772,20 @@ static int virtblk_probe(struct virtio_device *vdev)
  
-+#define blk_mq_alloc_disk(set, queuedata)				\
-+({									\
-+	static struct lock_class_key __key;				\
-+	struct gendisk *__disk = __blk_mq_alloc_disk(set, queuedata);	\
-+									\
-+	if (__disk)							\
-+		lockdep_init_map(&__disk->lockdep_map,			\
-+			"(bio completion)", &__key, 0);			\
-+	__disk;								\
-+})
-+struct gendisk *__blk_mq_alloc_disk(struct blk_mq_tag_set *set,
-+		void *queuedata);
- struct request_queue *blk_mq_init_queue(struct blk_mq_tag_set *);
- struct request_queue *blk_mq_init_queue_data(struct blk_mq_tag_set *set,
- 		void *queuedata);
+ 	err = blk_mq_alloc_tag_set(&vblk->tag_set);
+ 	if (err)
+-		goto out_put_disk;
++		goto out_free_vq;
+ 
+-	q = blk_mq_init_queue(&vblk->tag_set);
+-	if (IS_ERR(q)) {
+-		err = -ENOMEM;
++	vblk->disk = blk_mq_alloc_disk(&vblk->tag_set, vblk);
++	if (IS_ERR(vblk->disk)) {
++		err = PTR_ERR(vblk->disk);
+ 		goto out_free_tags;
+ 	}
+-	vblk->disk->queue = q;
+-
+-	q->queuedata = vblk;
++	q = vblk->disk->queue;
+ 
+ 	virtblk_name_format("vd", index, vblk->disk->disk_name, DISK_NAME_LEN);
+ 
+ 	vblk->disk->major = major;
+ 	vblk->disk->first_minor = index_to_minor(index);
++	vblk->disk->minors = 1 << PART_BITS;
+ 	vblk->disk->private_data = vblk;
+ 	vblk->disk->fops = &virtblk_fops;
+ 	vblk->disk->flags |= GENHD_FL_EXT_DEVT;
+@@ -892,8 +884,6 @@ static int virtblk_probe(struct virtio_device *vdev)
+ 
+ out_free_tags:
+ 	blk_mq_free_tag_set(&vblk->tag_set);
+-out_put_disk:
+-	put_disk(vblk->disk);
+ out_free_vq:
+ 	vdev->config->del_vqs(vdev);
+ 	kfree(vblk->vqs);
+@@ -913,8 +903,7 @@ static void virtblk_remove(struct virtio_device *vdev)
+ 	flush_work(&vblk->config_work);
+ 
+ 	del_gendisk(vblk->disk);
+-	blk_cleanup_queue(vblk->disk->queue);
+-
++	blk_cleanup_disk(vblk->disk);
+ 	blk_mq_free_tag_set(&vblk->tag_set);
+ 
+ 	mutex_lock(&vblk->vdev_mutex);
+@@ -925,7 +914,6 @@ static void virtblk_remove(struct virtio_device *vdev)
+ 	/* Virtqueues are stopped, nothing can use vblk->vdev anymore. */
+ 	vblk->vdev = NULL;
+ 
+-	put_disk(vblk->disk);
+ 	vdev->config->del_vqs(vdev);
+ 	kfree(vblk->vqs);
+ 
 -- 
 2.30.2
 
