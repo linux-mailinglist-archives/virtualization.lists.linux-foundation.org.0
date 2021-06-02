@@ -2,76 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 376F2397EA9
-	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 04:15:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 16996397EAA
+	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 04:16:02 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AD1C440324;
-	Wed,  2 Jun 2021 02:15:57 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id B751D40379;
+	Wed,  2 Jun 2021 02:16:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P_iFwdXuSBg2; Wed,  2 Jun 2021 02:15:56 +0000 (UTC)
+	with ESMTP id bvD9DmQfZeko; Wed,  2 Jun 2021 02:15:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 47B9D40354;
-	Wed,  2 Jun 2021 02:15:56 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6A34240354;
+	Wed,  2 Jun 2021 02:15:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D4F98C0001;
-	Wed,  2 Jun 2021 02:15:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 161D1C0001;
+	Wed,  2 Jun 2021 02:15:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0C21BC0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6F9A7C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 02:15:54 +0000 (UTC)
+ Wed,  2 Jun 2021 02:15:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EF189402BE
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5F4DC60770
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 02:15:53 +0000 (UTC)
+ Wed,  2 Jun 2021 02:15:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7Jeekk2_mhSV
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id NenoEaimg3FD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 02:15:53 +0000 (UTC)
+ Wed,  2 Jun 2021 02:15:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5BDE3402AA
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 987896062F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 02:15:53 +0000 (UTC)
+ Wed,  2 Jun 2021 02:15:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622600152;
+ s=mimecast20190719; t=1622600155;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=xpp86MKQOz0QZsgGameycFz6/zr05nCyS0wGULJidQo=;
- b=EEyZRWdnzxJ92DOiM4xZpPhMV6brZBY4HgLm4kRwuSqCWhMFHsOWbb6da0BNA/1R8CDw1A
- MFCni970uAFv8tAEsBnNjfZ39XkN/u7PYlPLQc5hM0psO5FujFsv8LaIYugNHmDH2Hl/j8
- H/ncTp7B9eFaB9L8MTMbr9dB9OlR9Ck=
+ bh=WrB6mvofF/eyGV52SKIt7JTVB1esFhxct19/WhmLXiU=;
+ b=L6lrQGFxZSLaA+RgaAXYX7qOsNHTujJ0lMRbLLlVNaY0M4DbhdnyumdpLENr4KiWDkz2Tp
+ YaOZNqmeCpPpLQH05gfPV9Gxb14JwiaaOnUoUgrHaAwexy2kb4HaNIDCYBmtcKt+xZ89xn
+ Up/JPJ8pktD0tly7KmGaU+gSkdbCPKc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-26-MBW2L-pqMV-XN_dfTNrBqQ-1; Tue, 01 Jun 2021 22:15:51 -0400
-X-MC-Unique: MBW2L-pqMV-XN_dfTNrBqQ-1
+ us-mta-427-ovGSsat1O1GuplKFzNOW6A-1; Tue, 01 Jun 2021 22:15:54 -0400
+X-MC-Unique: ovGSsat1O1GuplKFzNOW6A-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 548CD10082E0;
- Wed,  2 Jun 2021 02:15:50 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4A24F501E5;
+ Wed,  2 Jun 2021 02:15:53 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-12-99.pek2.redhat.com [10.72.12.99])
- by smtp.corp.redhat.com (Postfix) with ESMTP id C719B6A03C;
- Wed,  2 Jun 2021 02:15:47 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CED216A03C;
+ Wed,  2 Jun 2021 02:15:50 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com, jasowang@redhat.com,
  virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
  kvm@vger.kernel.org, netdev@vger.kernel.org
-Subject: [PATCH V2 RESEND 2/4] virtio-pci library: introduce
- vp_modern_get_driver_features()
-Date: Wed,  2 Jun 2021 10:15:34 +0800
-Message-Id: <20210602021536.39525-3-jasowang@redhat.com>
+Subject: [PATCH V2 RESEND 3/4] vp_vdpa: allow set vq state to initial state
+ after reset
+Date: Wed,  2 Jun 2021 10:15:35 +0800
+Message-Id: <20210602021536.39525-4-jasowang@redhat.com>
 In-Reply-To: <20210602021536.39525-1-jasowang@redhat.com>
 References: <20210602021536.39525-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -93,59 +93,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduce a helper to get driver/guest features from the
-device.
+We used to fail the set_vq_state() since it was not supported yet by
+the virtio spec. But if the bus tries to set the state which is equal
+to the device initial state after reset, we can let it go.
+
+This is a must for virtio_vdpa() to set vq state during probe which is
+required for some vDPA parents.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_pci_modern_dev.c | 21 +++++++++++++++++++++
- include/linux/virtio_pci_modern.h      |  1 +
- 2 files changed, 22 insertions(+)
+ drivers/vdpa/virtio_pci/vp_vdpa.c | 42 ++++++++++++++++++++++++++++---
+ 1 file changed, 39 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/virtio/virtio_pci_modern_dev.c b/drivers/virtio/virtio_pci_modern_dev.c
-index 54f297028586..e11ed748e661 100644
---- a/drivers/virtio/virtio_pci_modern_dev.c
-+++ b/drivers/virtio/virtio_pci_modern_dev.c
-@@ -383,6 +383,27 @@ u64 vp_modern_get_features(struct virtio_pci_modern_device *mdev)
+diff --git a/drivers/vdpa/virtio_pci/vp_vdpa.c b/drivers/vdpa/virtio_pci/vp_vdpa.c
+index c76ebb531212..18bf4a422772 100644
+--- a/drivers/vdpa/virtio_pci/vp_vdpa.c
++++ b/drivers/vdpa/virtio_pci/vp_vdpa.c
+@@ -210,13 +210,49 @@ static int vp_vdpa_get_vq_state(struct vdpa_device *vdpa, u16 qid,
+ 	return -EOPNOTSUPP;
  }
- EXPORT_SYMBOL_GPL(vp_modern_get_features);
  
-+/*
-+ * vp_modern_get_driver_features - get driver features from device
-+ * @mdev: the modern virtio-pci device
-+ *
-+ * Returns the driver features read from the device
-+ */
-+u64 vp_modern_get_driver_features(struct virtio_pci_modern_device *mdev)
++static int vp_vdpa_set_vq_state_split(struct vdpa_device *vdpa,
++				      const struct vdpa_vq_state *state)
 +{
-+	struct virtio_pci_common_cfg __iomem *cfg = mdev->common;
++	const struct vdpa_vq_state_split *split = &state->split;
 +
-+	u64 features;
++	if (split->avail_index == 0)
++		return 0;
 +
-+	vp_iowrite32(0, &cfg->guest_feature_select);
-+	features = vp_ioread32(&cfg->guest_feature);
-+	vp_iowrite32(1, &cfg->guest_feature_select);
-+	features |= ((u64)vp_ioread32(&cfg->guest_feature) << 32);
-+
-+	return features;
++	return -EOPNOTSUPP;
 +}
-+EXPORT_SYMBOL_GPL(vp_modern_get_driver_features);
 +
- /*
-  * vp_modern_set_features - set features to device
-  * @mdev: the modern virtio-pci device
-diff --git a/include/linux/virtio_pci_modern.h b/include/linux/virtio_pci_modern.h
-index 6a95b58fd0f4..eb2bd9b4077d 100644
---- a/include/linux/virtio_pci_modern.h
-+++ b/include/linux/virtio_pci_modern.h
-@@ -79,6 +79,7 @@ static inline void vp_iowrite64_twopart(u64 val,
++static int vp_vdpa_set_vq_state_packed(struct vdpa_device *vdpa,
++				       const struct vdpa_vq_state *state)
++{
++	const struct vdpa_vq_state_packed *packed = &state->packed;
++
++	if (packed->last_avail_counter == 1 &&
++	    packed->last_avail_idx == 0 &&
++	    packed->last_used_counter == 1 &&
++	    packed->last_used_idx == 0)
++		return 0;
++
++	return -EOPNOTSUPP;
++}
++
+ static int vp_vdpa_set_vq_state(struct vdpa_device *vdpa, u16 qid,
+ 				const struct vdpa_vq_state *state)
+ {
+-	/* Note that this is not supported by virtio specification, so
+-	 * we return -ENOPOTSUPP here. This means we can't support live
+-	 * migration, vhost device start/stop.
++	struct virtio_pci_modern_device *mdev = vdpa_to_mdev(vdpa);
++
++	/* Note that this is not supported by virtio specification.
++	 * But if the state is by chance equal to the device initial
++	 * state, we can let it go.
+ 	 */
++	if ((vp_modern_get_status(mdev) & VIRTIO_CONFIG_S_FEATURES_OK) &&
++	    !vp_modern_get_queue_enable(mdev, qid)) {
++		if (vp_modern_get_driver_features(mdev) &
++		    BIT_ULL(VIRTIO_F_RING_PACKED))
++			return vp_vdpa_set_vq_state_packed(vdpa, state);
++		else
++			return vp_vdpa_set_vq_state_split(vdpa,	state);
++	}
++
+ 	return -EOPNOTSUPP;
  }
  
- u64 vp_modern_get_features(struct virtio_pci_modern_device *mdev);
-+u64 vp_modern_get_driver_features(struct virtio_pci_modern_device *mdev);
- void vp_modern_set_features(struct virtio_pci_modern_device *mdev,
- 		     u64 features);
- u32 vp_modern_generation(struct virtio_pci_modern_device *mdev);
 -- 
 2.25.1
 
