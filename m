@@ -1,73 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7BB6A3992FD
-	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 20:58:05 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 60BA23992FE
+	for <lists.virtualization@lfdr.de>; Wed,  2 Jun 2021 20:58:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1AFED40536;
+	by smtp2.osuosl.org (Postfix) with ESMTP id D462A400AE;
 	Wed,  2 Jun 2021 18:58:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Z8_TF5_4LyZg; Wed,  2 Jun 2021 18:58:03 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HINWqY21EiZW; Wed,  2 Jun 2021 18:58:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8D2614053B;
-	Wed,  2 Jun 2021 18:58:02 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 8F08740265;
+	Wed,  2 Jun 2021 18:58:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 38F9FC0001;
-	Wed,  2 Jun 2021 18:58:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A5C5C0001;
+	Wed,  2 Jun 2021 18:58:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 42F93C0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 297F3C0001
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 18:58:00 +0000 (UTC)
+ Wed,  2 Jun 2021 18:58:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3EA2940536
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0A73640265
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  2 Jun 2021 18:58:01 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id EGzHDvhk9DqT
  for <virtualization@lists.linux-foundation.org>;
  Wed,  2 Jun 2021 18:58:00 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NHi1__hyGMj8
- for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 18:57:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2C1BB4052E
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3457E400AE
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Jun 2021 18:57:59 +0000 (UTC)
+ Wed,  2 Jun 2021 18:58:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622660278;
+ s=mimecast20190719; t=1622660279;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=opX8nHoEd36stvd7Apu9m63irxvh9gxuAe97ioC+BQQ=;
- b=UvQWWIVl865Y6GkRWiXKjoLH+bOx2ZS8h5euKeHqnxaxuEdmGmobxLV58+7t+umcSVNyfD
- Oo0KPtrErXx1ERnZrpmzHwkMKoartkWJhCzFE060fr1wmGrWbKYDy/3h4FL1gcEVzVX4aZ
- LKKUbARYT4GXPON/1XMHmUEaOaOYb2k=
+ bh=gd8uzZwFJ8pHYnrxMQBkbl2rE25HoIkxoK5pX+TDCFU=;
+ b=UpEQ1qf9JQTYwpeKSXmYxBWQ6lbWeBiB3owoapx2hn36nM5LBzkObDC97O1Ve6f0uaF4CF
+ tZ0Ei3lVpqukoGA/+o7596Ymh4JZZrhtHrQAh84bBZNi0Y+5f07524c/pFGm+SlP5ExWAM
+ 8Zf+u/Jok1rjfEoyF0DEkuyJqGcNqqI=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-471-yPJ8YLn9PiC5J6o7nhb5Lg-1; Wed, 02 Jun 2021 14:57:54 -0400
-X-MC-Unique: yPJ8YLn9PiC5J6o7nhb5Lg-1
+ us-mta-531-B2e0lhOmNU-qi2sTrzxVQA-1; Wed, 02 Jun 2021 14:57:58 -0400
+X-MC-Unique: B2e0lhOmNU-qi2sTrzxVQA-1
 Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
  [10.5.11.22])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1C90E180FD64;
- Wed,  2 Jun 2021 18:57:53 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 500BC802690;
+ Wed,  2 Jun 2021 18:57:56 +0000 (UTC)
 Received: from t480s.redhat.com (ovpn-114-159.ams2.redhat.com [10.36.114.159])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 70247100238C;
- Wed,  2 Jun 2021 18:57:50 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6842110074EF;
+ Wed,  2 Jun 2021 18:57:53 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 4/7] virtio-mem: simplify high-level unplug handling in Sub
+Subject: [PATCH v1 5/7] virtio-mem: prioritize unplug from ZONE_MOVABLE in Sub
  Block Mode
-Date: Wed,  2 Jun 2021 20:57:17 +0200
-Message-Id: <20210602185720.31821-5-david@redhat.com>
+Date: Wed,  2 Jun 2021 20:57:18 +0200
+Message-Id: <20210602185720.31821-6-david@redhat.com>
 In-Reply-To: <20210602185720.31821-1-david@redhat.com>
 References: <20210602185720.31821-1-david@redhat.com>
 MIME-Version: 1.0
@@ -94,169 +94,198 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's simplify by introducing a new virtio_mem_sbm_unplug_any_sb(),
-similar to virtio_mem_sbm_plug_any_sb(), to simplify high-level memory
-block selection when unplugging in Sub Block Mode.
+Until now, memory provided by a single virtio-mem device was usually
+either onlined completely to ZONE_MOVABLE (online_movable) or to
+ZONE_NORMAL (online_kernel); however, that will change in the future.
 
-Rename existing virtio_mem_sbm_unplug_any_sb() to
-virtio_mem_sbm_unplug_any_sb_raw().
+There are two reasons why we want to track to which zone a memory blocks
+belongs to and prioritize ZONE_MOVABLE blocks:
 
-The only change is that we now temporarily unlock the hotplug mutex around
-cond_resched() when processing offline memory blocks, which doesn't
-make a real difference as we already have to temporarily unlock in
-virtio_mem_sbm_unplug_any_sb_offline() when removing a memory block.
+1) Memory managed by ZONE_MOVABLE can more likely get unplugged, therefore,
+   resulting in a faster memory hotunplug process. Further, we can more
+   reliably unplug and remove complete memory blocks, removing metadata
+   allocated for the whole memory block.
+
+2) We want to avoid corner cases where unplugging with the current scheme
+   (highest to lowest address) could result in accidential zone imbalances,
+   whereby we remove too much ZONE_NORMAL memory for ZONE_MOVABLE memory
+   of the same device.
+
+Let's track the zone via memory block states and try unplug from
+ZONE_MOVABLE first. Rename VIRTIO_MEM_SBM_MB_ONLINE* to
+VIRTIO_MEM_SBM_MB_KERNEL* to avoid even longer state names.
+
+In commit 27f852795a06 ("virtio-mem: don't special-case ZONE_MOVABLE"),
+we removed slightly similar tracking for fully plugged memory blocks to
+support unplugging from ZONE_MOVABLE at all -- as we didn't allow partially
+plugged memory blocks in ZONE_MOVABLE before that. That commit already
+mentioned "In the future, we might want to remember the zone again and use
+the information when (un)plugging memory."
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 103 ++++++++++++++++++++----------------
- 1 file changed, 57 insertions(+), 46 deletions(-)
+ drivers/virtio/virtio_mem.c | 72 ++++++++++++++++++++++++++-----------
+ 1 file changed, 52 insertions(+), 20 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index c0e6ea6244e4..d54bb34a7ed8 100644
+index d54bb34a7ed8..156a79ceb9fc 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -1453,8 +1453,8 @@ static int virtio_mem_bbm_plug_bb(struct virtio_mem *vm, unsigned long bb_id)
-  *
-  * Note: can fail after some subblocks were unplugged.
-  */
--static int virtio_mem_sbm_unplug_any_sb(struct virtio_mem *vm,
--					unsigned long mb_id, uint64_t *nb_sb)
-+static int virtio_mem_sbm_unplug_any_sb_raw(struct virtio_mem *vm,
-+					    unsigned long mb_id, uint64_t *nb_sb)
- {
- 	int sb_id, count;
- 	int rc;
-@@ -1496,7 +1496,7 @@ static int virtio_mem_sbm_unplug_mb(struct virtio_mem *vm, unsigned long mb_id)
- {
- 	uint64_t nb_sb = vm->sbm.sbs_per_mb;
+@@ -75,10 +75,14 @@ enum virtio_mem_sbm_mb_state {
+ 	VIRTIO_MEM_SBM_MB_OFFLINE,
+ 	/* Partially plugged, fully added to Linux, offline. */
+ 	VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL,
+-	/* Fully plugged, fully added to Linux, online. */
+-	VIRTIO_MEM_SBM_MB_ONLINE,
+-	/* Partially plugged, fully added to Linux, online. */
+-	VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL,
++	/* Fully plugged, fully added to Linux, onlined to a kernel zone. */
++	VIRTIO_MEM_SBM_MB_KERNEL,
++	/* Partially plugged, fully added to Linux, online to a kernel zone */
++	VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL,
++	/* Fully plugged, fully added to Linux, onlined to ZONE_MOVABLE. */
++	VIRTIO_MEM_SBM_MB_MOVABLE,
++	/* Partially plugged, fully added to Linux, onlined to ZONE_MOVABLE. */
++	VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL,
+ 	VIRTIO_MEM_SBM_MB_COUNT
+ };
  
--	return virtio_mem_sbm_unplug_any_sb(vm, mb_id, &nb_sb);
-+	return virtio_mem_sbm_unplug_any_sb_raw(vm, mb_id, &nb_sb);
+@@ -832,11 +836,13 @@ static void virtio_mem_sbm_notify_offline(struct virtio_mem *vm,
+ 					  unsigned long mb_id)
+ {
+ 	switch (virtio_mem_sbm_get_mb_state(vm, mb_id)) {
+-	case VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL:
++	case VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL:
++	case VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL:
+ 		virtio_mem_sbm_set_mb_state(vm, mb_id,
+ 					    VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL);
+ 		break;
+-	case VIRTIO_MEM_SBM_MB_ONLINE:
++	case VIRTIO_MEM_SBM_MB_KERNEL:
++	case VIRTIO_MEM_SBM_MB_MOVABLE:
+ 		virtio_mem_sbm_set_mb_state(vm, mb_id,
+ 					    VIRTIO_MEM_SBM_MB_OFFLINE);
+ 		break;
+@@ -847,21 +853,29 @@ static void virtio_mem_sbm_notify_offline(struct virtio_mem *vm,
  }
  
- /*
-@@ -1806,7 +1806,7 @@ static int virtio_mem_sbm_unplug_any_sb_offline(struct virtio_mem *vm,
+ static void virtio_mem_sbm_notify_online(struct virtio_mem *vm,
+-					 unsigned long mb_id)
++					 unsigned long mb_id,
++					 unsigned long start_pfn)
  {
++	const bool is_movable = page_zonenum(pfn_to_page(start_pfn)) ==
++				ZONE_MOVABLE;
++	int new_state;
++
+ 	switch (virtio_mem_sbm_get_mb_state(vm, mb_id)) {
+ 	case VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL:
+-		virtio_mem_sbm_set_mb_state(vm, mb_id,
+-					VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL);
++		new_state = VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL;
++		if (is_movable)
++			new_state = VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL;
+ 		break;
+ 	case VIRTIO_MEM_SBM_MB_OFFLINE:
+-		virtio_mem_sbm_set_mb_state(vm, mb_id,
+-					    VIRTIO_MEM_SBM_MB_ONLINE);
++		new_state = VIRTIO_MEM_SBM_MB_KERNEL;
++		if (is_movable)
++			new_state = VIRTIO_MEM_SBM_MB_MOVABLE;
+ 		break;
+ 	default:
+ 		BUG();
+ 		break;
+ 	}
++	virtio_mem_sbm_set_mb_state(vm, mb_id, new_state);
+ }
+ 
+ static void virtio_mem_sbm_notify_going_offline(struct virtio_mem *vm,
+@@ -1015,7 +1029,7 @@ static int virtio_mem_memory_notifier_cb(struct notifier_block *nb,
+ 		break;
+ 	case MEM_ONLINE:
+ 		if (vm->in_sbm)
+-			virtio_mem_sbm_notify_online(vm, id);
++			virtio_mem_sbm_notify_online(vm, id, mhp->start_pfn);
+ 
+ 		atomic64_sub(size, &vm->offline_size);
+ 		/*
+@@ -1626,7 +1640,8 @@ static int virtio_mem_sbm_plug_any_sb(struct virtio_mem *vm,
+ static int virtio_mem_sbm_plug_request(struct virtio_mem *vm, uint64_t diff)
+ {
+ 	const int mb_states[] = {
+-		VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL,
++		VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL,
++		VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL,
+ 		VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL,
+ 	};
+ 	uint64_t nb_sb = diff / vm->sbm.sb_size;
+@@ -1843,6 +1858,7 @@ static int virtio_mem_sbm_unplug_sb_online(struct virtio_mem *vm,
+ 					   int count)
+ {
+ 	const unsigned long nr_pages = PFN_DOWN(vm->sbm.sb_size) * count;
++	const int old_state = virtio_mem_sbm_get_mb_state(vm, mb_id);
+ 	unsigned long start_pfn;
  	int rc;
  
--	rc = virtio_mem_sbm_unplug_any_sb(vm, mb_id, nb_sb);
-+	rc = virtio_mem_sbm_unplug_any_sb_raw(vm, mb_id, nb_sb);
+@@ -1861,8 +1877,17 @@ static int virtio_mem_sbm_unplug_sb_online(struct virtio_mem *vm,
+ 		return rc;
+ 	}
  
- 	/* some subblocks might have been unplugged even on failure */
- 	if (!virtio_mem_sbm_test_sb_plugged(vm, mb_id, 0, vm->sbm.sbs_per_mb))
-@@ -1929,11 +1929,46 @@ static int virtio_mem_sbm_unplug_any_sb_online(struct virtio_mem *vm,
+-	virtio_mem_sbm_set_mb_state(vm, mb_id,
+-				    VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL);
++	switch (old_state) {
++	case VIRTIO_MEM_SBM_MB_KERNEL:
++		virtio_mem_sbm_set_mb_state(vm, mb_id,
++					    VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL);
++		break;
++	case VIRTIO_MEM_SBM_MB_MOVABLE:
++		virtio_mem_sbm_set_mb_state(vm, mb_id,
++					    VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL);
++		break;
++	}
++
  	return 0;
  }
  
-+/*
-+ * Unplug the desired number of plugged subblocks of a memory block that is
-+ * already added to Linux. Will skip subblock of online memory blocks that are
-+ * busy (by the OS). Will fail if any subblock that's not busy cannot get
-+ * unplugged.
-+ *
-+ * Will modify the state of the memory block. Might temporarily drop the
-+ * hotplug_mutex.
-+ *
-+ * Note: Can fail after some subblocks were successfully unplugged. Can
-+ *       return 0 even if subblocks were busy and could not get unplugged.
-+ */
-+static int virtio_mem_sbm_unplug_any_sb(struct virtio_mem *vm,
-+					unsigned long mb_id,
-+					uint64_t *nb_sb)
-+{
-+	const int old_state = virtio_mem_sbm_get_mb_state(vm, mb_id);
-+
-+	switch (old_state) {
-+	case VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL:
-+	case VIRTIO_MEM_SBM_MB_ONLINE:
-+		return virtio_mem_sbm_unplug_any_sb_online(vm, mb_id, nb_sb);
-+	case VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL:
-+	case VIRTIO_MEM_SBM_MB_OFFLINE:
-+		return virtio_mem_sbm_unplug_any_sb_offline(vm, mb_id, nb_sb);
-+	}
-+	return -EINVAL;
-+}
-+
- static int virtio_mem_sbm_unplug_request(struct virtio_mem *vm, uint64_t diff)
- {
-+	const int mb_states[] = {
-+		VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL,
-+		VIRTIO_MEM_SBM_MB_OFFLINE,
-+		VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL,
-+		VIRTIO_MEM_SBM_MB_ONLINE,
-+	};
+@@ -1948,8 +1973,10 @@ static int virtio_mem_sbm_unplug_any_sb(struct virtio_mem *vm,
+ 	const int old_state = virtio_mem_sbm_get_mb_state(vm, mb_id);
+ 
+ 	switch (old_state) {
+-	case VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL:
+-	case VIRTIO_MEM_SBM_MB_ONLINE:
++	case VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL:
++	case VIRTIO_MEM_SBM_MB_KERNEL:
++	case VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL:
++	case VIRTIO_MEM_SBM_MB_MOVABLE:
+ 		return virtio_mem_sbm_unplug_any_sb_online(vm, mb_id, nb_sb);
+ 	case VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL:
+ 	case VIRTIO_MEM_SBM_MB_OFFLINE:
+@@ -1963,8 +1990,10 @@ static int virtio_mem_sbm_unplug_request(struct virtio_mem *vm, uint64_t diff)
+ 	const int mb_states[] = {
+ 		VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL,
+ 		VIRTIO_MEM_SBM_MB_OFFLINE,
+-		VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL,
+-		VIRTIO_MEM_SBM_MB_ONLINE,
++		VIRTIO_MEM_SBM_MB_MOVABLE_PARTIAL,
++		VIRTIO_MEM_SBM_MB_KERNEL_PARTIAL,
++		VIRTIO_MEM_SBM_MB_MOVABLE,
++		VIRTIO_MEM_SBM_MB_KERNEL,
+ 	};
  	uint64_t nb_sb = diff / vm->sbm.sb_size;
  	unsigned long mb_id;
--	int rc;
-+	int rc, i;
+@@ -1982,7 +2011,10 @@ static int virtio_mem_sbm_unplug_request(struct virtio_mem *vm, uint64_t diff)
  
- 	if (!nb_sb)
- 		return 0;
-@@ -1945,47 +1980,23 @@ static int virtio_mem_sbm_unplug_request(struct virtio_mem *vm, uint64_t diff)
+ 	/*
+ 	 * We try unplug from partially plugged blocks first, to try removing
+-	 * whole memory blocks along with metadata.
++	 * whole memory blocks along with metadata. We prioritize ZONE_MOVABLE
++	 * as it's more reliable to unplug memory and remove whole memory
++	 * blocks, and we don't want to trigger a zone imbalances by
++	 * accidentially removing too much kernel memory.
  	 */
- 	mutex_lock(&vm->hotplug_mutex);
- 
--	/* Try to unplug subblocks of partially plugged offline blocks. */
--	virtio_mem_sbm_for_each_mb_rev(vm, mb_id,
--				       VIRTIO_MEM_SBM_MB_OFFLINE_PARTIAL) {
--		rc = virtio_mem_sbm_unplug_any_sb_offline(vm, mb_id, &nb_sb);
--		if (rc || !nb_sb)
--			goto out_unlock;
--		cond_resched();
--	}
--
--	/* Try to unplug subblocks of plugged offline blocks. */
--	virtio_mem_sbm_for_each_mb_rev(vm, mb_id, VIRTIO_MEM_SBM_MB_OFFLINE) {
--		rc = virtio_mem_sbm_unplug_any_sb_offline(vm, mb_id, &nb_sb);
--		if (rc || !nb_sb)
--			goto out_unlock;
--		cond_resched();
--	}
--
--	if (!unplug_online) {
--		mutex_unlock(&vm->hotplug_mutex);
--		return 0;
--	}
--
--	/* Try to unplug subblocks of partially plugged online blocks. */
--	virtio_mem_sbm_for_each_mb_rev(vm, mb_id,
--				       VIRTIO_MEM_SBM_MB_ONLINE_PARTIAL) {
--		rc = virtio_mem_sbm_unplug_any_sb_online(vm, mb_id, &nb_sb);
--		if (rc || !nb_sb)
--			goto out_unlock;
--		mutex_unlock(&vm->hotplug_mutex);
--		cond_resched();
--		mutex_lock(&vm->hotplug_mutex);
--	}
--
--	/* Try to unplug subblocks of plugged online blocks. */
--	virtio_mem_sbm_for_each_mb_rev(vm, mb_id, VIRTIO_MEM_SBM_MB_ONLINE) {
--		rc = virtio_mem_sbm_unplug_any_sb_online(vm, mb_id, &nb_sb);
--		if (rc || !nb_sb)
--			goto out_unlock;
--		mutex_unlock(&vm->hotplug_mutex);
--		cond_resched();
--		mutex_lock(&vm->hotplug_mutex);
-+	/*
-+	 * We try unplug from partially plugged blocks first, to try removing
-+	 * whole memory blocks along with metadata.
-+	 */
-+	for (i = 0; i < ARRAY_SIZE(mb_states); i++) {
-+		virtio_mem_sbm_for_each_mb_rev(vm, mb_id, mb_states[i]) {
-+			rc = virtio_mem_sbm_unplug_any_sb(vm, mb_id, &nb_sb);
-+			if (rc || !nb_sb)
-+				goto out_unlock;
-+			mutex_unlock(&vm->hotplug_mutex);
-+			cond_resched();
-+			mutex_lock(&vm->hotplug_mutex);
-+		}
-+		if (!unplug_online && i == 1) {
-+			mutex_unlock(&vm->hotplug_mutex);
-+			return 0;
-+		}
- 	}
- 
- 	mutex_unlock(&vm->hotplug_mutex);
+ 	for (i = 0; i < ARRAY_SIZE(mb_states); i++) {
+ 		virtio_mem_sbm_for_each_mb_rev(vm, mb_id, mb_states[i]) {
 -- 
 2.31.1
 
