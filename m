@@ -1,78 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BF48539A34B
-	for <lists.virtualization@lfdr.de>; Thu,  3 Jun 2021 16:33:43 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD91D39A372
+	for <lists.virtualization@lfdr.de>; Thu,  3 Jun 2021 16:38:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 47306608F6;
-	Thu,  3 Jun 2021 14:33:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 422D983DD1;
+	Thu,  3 Jun 2021 14:38:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ba9lsO-fwSD6; Thu,  3 Jun 2021 14:33:38 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2762960B25;
-	Thu,  3 Jun 2021 14:33:38 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Rmj_vPC2pRmF; Thu,  3 Jun 2021 14:38:11 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1D68B83E1D;
+	Thu,  3 Jun 2021 14:38:11 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD22AC0001;
-	Thu,  3 Jun 2021 14:33:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C89A8C0001;
+	Thu,  3 Jun 2021 14:38:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 62546C0001
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 06BFBC0001
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Jun 2021 14:33:36 +0000 (UTC)
+ Thu,  3 Jun 2021 14:38:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4F55F405B5
+ by smtp3.osuosl.org (Postfix) with ESMTP id E5E3A60682
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Jun 2021 14:33:36 +0000 (UTC)
+ Thu,  3 Jun 2021 14:38:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GoD4ntIfqU-H
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id PDvkfusqdYs5
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Jun 2021 14:33:31 +0000 (UTC)
+ Thu,  3 Jun 2021 14:38:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 78224405BE
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 27C0460811
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Jun 2021 14:33:31 +0000 (UTC)
+ Thu,  3 Jun 2021 14:38:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1622730810;
+ s=mimecast20190719; t=1622731082;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ffqU2pTHvgdCYPe0Q2G5XamulxR8bjf1k2Ncp4K3ymc=;
- b=MZQiGvmzBomnEpoO0kmTp/9rzmiqo+45q9eCvyx+5mnPIuTK+lgo5i/NEz2v6kgkLvyakz
- tGPoqDqtEOa3iRInDoyHXy/WRGZlbjK4RIDxqqWLmu7SUJLdC67ytdLLltU2KAfNqA/BKk
- iYvHTd9s0fjaGyN+dNll8LL1OXkZFwo=
+ bh=awF3rK7dRpOei0bYGNfeYmW5cxqhvdc1qb6GqP+cefk=;
+ b=Q+AJfK7+j6pnrg8LtTGcNuptWgSNiBBwuSL3lCpVTlFOygpBkudDQBePzfGZArBb7kYHOD
+ 35lsIyIABl1hyW6KNEItDuWjG+Ma87Mt0gYfzhXD5/CfvcVGM80pECpfkRb81wHunotdMn
+ 9F26kn3t65nnKLnSKTSa8eqP2oZw3Xk=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-435-ixezL8r6NLerul-0h_8Tvg-1; Thu, 03 Jun 2021 10:32:53 -0400
-X-MC-Unique: ixezL8r6NLerul-0h_8Tvg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-515-fr8FIAB6M32CRVDe3Mhacw-1; Thu, 03 Jun 2021 10:37:43 -0400
+X-MC-Unique: fr8FIAB6M32CRVDe3Mhacw-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E6FC319251AF;
- Thu,  3 Jun 2021 14:32:51 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 06865805EF2;
+ Thu,  3 Jun 2021 14:37:42 +0000 (UTC)
 Received: from localhost (ovpn-114-228.ams2.redhat.com [10.36.114.228])
- by smtp.corp.redhat.com (Postfix) with ESMTP id F05EF10023AB;
- Thu,  3 Jun 2021 14:32:47 +0000 (UTC)
-Date: Thu, 3 Jun 2021 15:32:46 +0100
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 924535D705;
+ Thu,  3 Jun 2021 14:37:38 +0000 (UTC)
+Date: Thu, 3 Jun 2021 15:37:37 +0100
 From: Stefan Hajnoczi <stefanha@redhat.com>
 To: Mike Christie <michael.christie@oracle.com>
-Subject: Re: [PATCH 9/9] vhost: support sharing workers across devs
-Message-ID: <YLjoDjas6ga3Ovad@stefanha-x1.localdomain>
+Subject: Re: vhost: multiple worker support
+Message-ID: <YLjpMXbfJsaLrgF5@stefanha-x1.localdomain>
 References: <20210525180600.6349-1-michael.christie@oracle.com>
- <20210525180600.6349-10-michael.christie@oracle.com>
 MIME-Version: 1.0
-In-Reply-To: <20210525180600.6349-10-michael.christie@oracle.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+In-Reply-To: <20210525180600.6349-1-michael.christie@oracle.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Cc: linux-scsi@vger.kernel.org, mst@redhat.com,
  virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
  pbonzini@redhat.com
@@ -87,52 +86,69 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2750852010909408383=="
+Content-Type: multipart/mixed; boundary="===============0380628033513256850=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
---===============2750852010909408383==
+--===============0380628033513256850==
 Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Z17amfYzuCxbaWBX"
+	protocol="application/pgp-signature"; boundary="H4b3lFVzSqimIVsY"
 Content-Disposition: inline
 
 
---Z17amfYzuCxbaWBX
+--H4b3lFVzSqimIVsY
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, May 25, 2021 at 01:06:00PM -0500, Mike Christie wrote:
-> This allows a worker to handle multiple device's vqs.
+On Tue, May 25, 2021 at 01:05:51PM -0500, Mike Christie wrote:
+> The following patches apply over linus's tree or mst's vhost branch
+> and my cleanup patchset:
 >=20
-> TODO:
-> - The worker is attached to the cgroup of the device that created it. In
-> this patch you can share workers with devices with different owners which
-> could be in different cgroups. Do we want to restict sharing workers with
-> devices that have the same owner (dev->mm value)?
+> https://lists.linuxfoundation.org/pipermail/virtualization/2021-May/05435=
+4.html
+>=20
+> These patches allow us to support multiple vhost workers per device. I
+> ended up just doing Stefan's original idea where userspace has the
+> kernel create a worker and we pass back the pid. This has the benefit
+> over the workqueue and userspace thread approach where we only have
+> one'ish code path in the kernel during setup to detect old tools. The
+> main IO paths and device/vq setup/teardown paths all use common code.
+>=20
+> The kernel patches here allow us to then do N workers device and also
+> share workers across devices.
+>=20
+> I've also included a patch for qemu so you can get an idea of how it
+> works. If we are ok with the kernel code then I'll break that up into
+> a patchset and send to qemu-devel.
 
-Question for Michael or Jason.
+It seems risky to allow userspace process A to "share" a vhost worker
+thread with userspace process B based on a matching pid alone. Should
+they have ptrace_may_access() or similar?
 
---Z17amfYzuCxbaWBX
+For example, two competing users could sabotague each other by running
+lots of work items on their competitor's vhost worker thread.
+
+--H4b3lFVzSqimIVsY
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmC46A4ACgkQnKSrs4Gr
-c8gPmgf/Vvk8j1U+cTELBrRn7FiW5F0i56uYi7uGSqGO7nC1ceRKUTl4kdOEdCJh
-M7CtuhHM4rGFqReb68IKB6isGdJbobo9RA42azy4Jz60BZu1fPRzdF9Hqts+cAnW
-2a74nuPIpys+Sr6QWcOOzayd7SJCYGIQqhPKEE3WmMMLMGfZqB3KDhPrBUSZGmf8
-A6vCH6KhCv6NytVOsvlqNmHr2UHN+sxm91igFwIqajYwlbpZIo/4KI64Ttw+98RF
-VfqHxb1QlVbLOIQyvrRAvbUcK/HdmyRezFPZ6gxGQkdIykvOAJnRXHujxYX4VzsI
-V0rDVjKF3kmoDcSjt25mI9po/PHYbQ==
-=7Wkj
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmC46TEACgkQnKSrs4Gr
+c8haPggAr/8lGql69lIQrCD9sUNPvVDvTO3r+S7svNqfhMUpvJ+df1CrE/hWLnzc
+H++l75ZD8kBFbsem2XbZ4S7wkcOU2iF21BKNhSUu+Mw6S0kzE0Q1XXG1xDRWzmJs
+rN5VguzigMJ1J/+/FqhKEjvWOgFQgQIpWWQ29qP+m91DMLZ3zB/boDfTMCYtBSGk
+l0pW6WWfss5a9kie1YEkQ90I6BvIoDKUF5uDwoJvD3MweslUGDqjduJsBNlTWN1Y
+ywvTkEiHAo+YJlNrQAuJkv1MR62wSoddxERu/3MGvuD/GRzYf2vSxsMFEbNL2P+O
+iMKCMek0JfRa1u921sgglNbHQ9z1Wg==
+=UByy
 -----END PGP SIGNATURE-----
 
---Z17amfYzuCxbaWBX--
+--H4b3lFVzSqimIVsY--
 
 
---===============2750852010909408383==
+--===============0380628033513256850==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -142,5 +158,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2750852010909408383==--
+--===============0380628033513256850==--
 
