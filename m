@@ -1,55 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C56B39F305
-	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:55:05 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E5E1439F2FF
+	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:54:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 21A4340444;
-	Tue,  8 Jun 2021 09:55:02 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o0A5dg_XZnTy; Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D721E4044B;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 59D0460872;
 	Tue,  8 Jun 2021 09:54:56 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tF6wpjjdiSC1; Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTP id 31AF4606ED;
+	Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9013C002B;
-	Tue,  8 Jun 2021 09:54:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A941DC0011;
+	Tue,  8 Jun 2021 09:54:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9A8F0C0001
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DE04EC0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E1525404C2
+ by smtp1.osuosl.org (Postfix) with ESMTP id BA6FF82FD5
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1G6bojIpnhOw
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id tE1xn-OIT4st
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Jun 2021 09:54:48 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1B35140299
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 260C982D61
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Jun 2021 09:54:48 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2ba7c.dip0.t-ipconnect.de
  [79.242.186.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 0B5D2222;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 91B0A386;
  Tue,  8 Jun 2021 11:54:44 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 0/7] x86/sev-es: Fixes for SEV-ES Guest Support
-Date: Tue,  8 Jun 2021 11:54:32 +0200
-Message-Id: <20210608095439.12668-1-joro@8bytes.org>
+Subject: [PATCH v3 1/7] x86/ioremap: Map efi_mem_reserve() memory as encrypted
+ for SEV
+Date: Tue,  8 Jun 2021 11:54:33 +0200
+Message-Id: <20210608095439.12668-2-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210608095439.12668-1-joro@8bytes.org>
+References: <20210608095439.12668-1-joro@8bytes.org>
 MIME-Version: 1.0
 Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
@@ -80,47 +83,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+From: Tom Lendacky <thomas.lendacky@amd.com>
 
-Hi,
+Some drivers require memory that is marked as EFI boot services data. So that
+this memory is not re-used by the kernel after ExitBootServices(),
+efi_mem_reserve() is used to preserve it by inserting a new EFI memory
+descriptor and marking it with the EFI_MEMORY_RUNTIME attribute.
 
-here is the next revision of my pending fixes for SEV-ES guest
-support. Changes to the previous version are:
+Under SEV, memory marked with the EFI_MEMORY_RUNTIME attribute needs to
+be mapped encrypted by Linux, otherwise the kernel might crash at boot
+like below:
 
-	- Removed the patches already merged
-	- Added a new fix to map the EFI MOKVar table encrypted
-	- Disabled IRQs when GHCB is active
-	- Relaxed state tracking by using irqentry_enter()/exit
-	  instead of irqentry_nmi_enter()/exit()
-	- Changed error reporting from insn_fetch_from_user*() as
-	  requested by Boris
+ EFI Variables Facility v0.08 2004-May-17
+ general protection fault, probably for non-canonical address 0x3597688770a868b2: 0000 [#1] SMP NOPTI
+ CPU: 13 PID: 1 Comm: swapper/0 Not tainted 5.12.4-2-default #1 openSUSE Tumbleweed
+ Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS 0.0.0 02/06/2015
+ RIP: 0010:efi_mokvar_entry_next+0x34/0x40
+ Code: c5 01 48 8b 17 48 c7 07 00 00 00 00 48 85 c0 74 24 48 85 d2 74 14 80 3a 00 74 18 48 8b 82 00 01 00 00 48 8d 84 02 08 01 00 00 <80> 38 00 74 04 48 89 07 c3 31 c0 c3 0f 1f 44 00 00 41 54 4c 8b 25
+ [...]
+ Call Trace:
+  efi_mokvar_sysfs_init
+  ? efi_mokvar_table_init
+  do_one_initcall
+  ? __kmalloc
+  kernel_init_freeable
+  ? rest_init
+  kernel_init
+  ret_from_fork
+ Modules linked in:
+ ---[ end trace 0de27ecc25d41b73 ]---
 
-Changes are based on tip/x86/urgent. Please review.
+Expand the __ioremap_check_other() function to additionally check for this
+other type of "runtime" data and indicate that it should be mapped encrypted
+for an SEV guest.
 
-Thanks,
+Fixes: 58c909022a5a ("efi: Support for MOK variable config table")
+Reported-by: Joerg Roedel <jroedel@suse.de>
+Tested-by: Joerg Roedel <jroedel@suse.de>
+Signed-off-by: Tom Lendacky <thomas.lendacky@amd.com>
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/mm/ioremap.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-	Joerg
-
-Joerg Roedel (6):
-  x86/sev-es: Fix error message in runtime #VC handler
-  x86/sev-es: Disable IRQs while GHCB is active
-  x86/sev-es: Run #VC handler in plain IRQ state
-  x86/insn-eval: Make 0 a valid RIP for insn_get_effective_ip()
-  x86/insn: Extend error reporting from
-    insn_fetch_from_user[_inatomic]()
-  x86/sev-es: Propagate #GP if getting linear instruction address failed
-
-Tom Lendacky (1):
-  x86/ioremap: Map efi_mem_reserve() memory as encrypted for SEV
-
- arch/x86/kernel/sev.c    | 61 +++++++++++++++++++++++++---------------
- arch/x86/kernel/umip.c   | 10 +++----
- arch/x86/lib/insn-eval.c | 22 +++++++++------
- arch/x86/mm/ioremap.c    |  4 ++-
- 4 files changed, 59 insertions(+), 38 deletions(-)
-
-
-base-commit: 009767dbf42ac0dbe3cf48c1ee224f6b778aa85a
+diff --git a/arch/x86/mm/ioremap.c b/arch/x86/mm/ioremap.c
+index 12c686c65ea9..60ade7dd71bd 100644
+--- a/arch/x86/mm/ioremap.c
++++ b/arch/x86/mm/ioremap.c
+@@ -118,7 +118,9 @@ static void __ioremap_check_other(resource_size_t addr, struct ioremap_desc *des
+ 	if (!IS_ENABLED(CONFIG_EFI))
+ 		return;
+ 
+-	if (efi_mem_type(addr) == EFI_RUNTIME_SERVICES_DATA)
++	if (efi_mem_type(addr) == EFI_RUNTIME_SERVICES_DATA ||
++	    (efi_mem_type(addr) == EFI_BOOT_SERVICES_DATA &&
++	     efi_mem_attributes(addr) & EFI_MEMORY_RUNTIME))
+ 		desc->flags |= IORES_MAP_ENCRYPTED;
+ }
+ 
 -- 
 2.31.1
 
