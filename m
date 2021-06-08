@@ -1,54 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4DB739F301
-	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:54:59 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED5FE39F300
+	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:54:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 942C140452;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 46805839E6;
 	Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XClXCm-yjYoW; Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E1D654041E;
-	Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kg38xjZ9xeRk; Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1282F83046;
+	Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D87D1C0026;
-	Tue,  8 Jun 2021 09:54:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A13CC002C;
+	Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F400FC000B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C3EF7C0001
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E119860732
+ by smtp1.osuosl.org (Postfix) with ESMTP id A4C3882FD5
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ves06fvvNSuZ
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fGLNhtxtXqqy
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4D1F460701
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 09BEF82D61
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2ba7c.dip0.t-ipconnect.de
  [79.242.186.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 504BD465;
+ by theia.8bytes.org (Postfix) with ESMTPSA id E2B2648E;
  Tue,  8 Jun 2021 11:54:46 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 4/7] x86/sev-es: Run #VC handler in plain IRQ state
-Date: Tue,  8 Jun 2021 11:54:36 +0200
-Message-Id: <20210608095439.12668-5-joro@8bytes.org>
+Subject: [PATCH v3 5/7] x86/insn-eval: Make 0 a valid RIP for
+ insn_get_effective_ip()
+Date: Tue,  8 Jun 2021 11:54:37 +0200
+Message-Id: <20210608095439.12668-6-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210608095439.12668-1-joro@8bytes.org>
 References: <20210608095439.12668-1-joro@8bytes.org>
@@ -84,43 +85,62 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Use irqentry_enter() and irqentry_exit() to track the runtime state of
-the #VC handler. The reason it ran in NMI mode was solely to make sure
-nothing interrupts the handler while the GHCB is in use.
+In theory 0 is a valid value for the instruction pointer, so don't use
+it as the error return value from insn_get_effective_ip().
 
-This is handled now in sev_es_get/put_ghcb() directly, so there is no
-reason the #VC handler can not run in normal IRQ mode and enjoy the
-benefits like being able to send signals.
-
-Fixes: 62441a1fb532 ("x86/sev-es: Correctly track IRQ states in runtime #VC handler")
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ arch/x86/lib/insn-eval.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index 2a922d1b03c8..b563fb747aed 100644
---- a/arch/x86/kernel/sev.c
-+++ b/arch/x86/kernel/sev.c
-@@ -1354,8 +1354,7 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
- 		return;
+diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
+index a67afd74232c..4eecb9c7c6a0 100644
+--- a/arch/x86/lib/insn-eval.c
++++ b/arch/x86/lib/insn-eval.c
+@@ -1417,7 +1417,7 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs)
+ 	}
+ }
+ 
+-static unsigned long insn_get_effective_ip(struct pt_regs *regs)
++static int insn_get_effective_ip(struct pt_regs *regs, unsigned long *ip)
+ {
+ 	unsigned long seg_base = 0;
+ 
+@@ -1430,10 +1430,12 @@ static unsigned long insn_get_effective_ip(struct pt_regs *regs)
+ 	if (!user_64bit_mode(regs)) {
+ 		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
+ 		if (seg_base == -1L)
+-			return 0;
++			return -EINVAL;
  	}
  
--	irq_state = irqentry_nmi_enter(regs);
--	lockdep_assert_irqs_disabled();
-+	irq_state = irqentry_enter(regs);
- 	instrumentation_begin();
+-	return seg_base + regs->ip;
++	*ip = seg_base + regs->ip;
++
++	return 0;
+ }
  
- 	/*
-@@ -1408,7 +1407,7 @@ DEFINE_IDTENTRY_VC_SAFE_STACK(exc_vmm_communication)
+ /**
+@@ -1455,8 +1457,7 @@ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
+ 	unsigned long ip;
+ 	int not_copied;
  
- out:
- 	instrumentation_end();
--	irqentry_nmi_exit(regs, irq_state);
-+	irqentry_exit(regs, irq_state);
+-	ip = insn_get_effective_ip(regs);
+-	if (!ip)
++	if (insn_get_effective_ip(regs, &ip))
+ 		return 0;
  
- 	return;
+ 	not_copied = copy_from_user(buf, (void __user *)ip, MAX_INSN_SIZE);
+@@ -1484,8 +1485,7 @@ int insn_fetch_from_user_inatomic(struct pt_regs *regs, unsigned char buf[MAX_IN
+ 	unsigned long ip;
+ 	int not_copied;
  
+-	ip = insn_get_effective_ip(regs);
+-	if (!ip)
++	if (insn_get_effective_ip(regs, &ip))
+ 		return 0;
+ 
+ 	not_copied = __copy_from_user_inatomic(buf, (void __user *)ip, MAX_INSN_SIZE);
 -- 
 2.31.1
 
