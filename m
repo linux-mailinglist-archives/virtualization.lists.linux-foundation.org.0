@@ -1,55 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id ED5FE39F300
-	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:54:58 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 916A339F304
+	for <lists.virtualization@lfdr.de>; Tue,  8 Jun 2021 11:55:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 46805839E6;
-	Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9DA32404C2;
+	Tue,  8 Jun 2021 09:55:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kg38xjZ9xeRk; Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Z5eHeeMATDbS; Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1282F83046;
-	Tue,  8 Jun 2021 09:54:53 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 3F3F0404BB;
+	Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A13CC002C;
-	Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 14524C0001;
+	Tue,  8 Jun 2021 09:54:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C3EF7C0001
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 00A52C000B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A4C3882FD5
+ by smtp2.osuosl.org (Postfix) with ESMTP id DEF81404C4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
+ Tue,  8 Jun 2021 09:54:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fGLNhtxtXqqy
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id soL2Sp44w9gE
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  8 Jun 2021 09:54:52 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from theia.8bytes.org (8bytes.org
+ [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7959B404AC
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Jun 2021 09:54:50 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 09BEF82D61
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Jun 2021 09:54:49 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2ba7c.dip0.t-ipconnect.de
  [79.242.186.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id E2B2648E;
- Tue,  8 Jun 2021 11:54:46 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 75B594B4;
+ Tue,  8 Jun 2021 11:54:47 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 5/7] x86/insn-eval: Make 0 a valid RIP for
- insn_get_effective_ip()
-Date: Tue,  8 Jun 2021 11:54:37 +0200
-Message-Id: <20210608095439.12668-6-joro@8bytes.org>
+Subject: [PATCH v3 6/7] x86/insn: Extend error reporting from
+ insn_fetch_from_user[_inatomic]()
+Date: Tue,  8 Jun 2021 11:54:38 +0200
+Message-Id: <20210608095439.12668-7-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210608095439.12668-1-joro@8bytes.org>
 References: <20210608095439.12668-1-joro@8bytes.org>
@@ -85,62 +86,109 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-In theory 0 is a valid value for the instruction pointer, so don't use
-it as the error return value from insn_get_effective_ip().
+The error reporting from the insn_fetch_from_user*() functions is not
+very verbose. Extend it to include information on whether the linear
+RIP could not be calculated or whether the memory access faulted.
+
+This will be used in the SEV-ES code to propagate the correct
+exception depending on what went wrong during instruction fetch.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/lib/insn-eval.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+ arch/x86/kernel/sev.c    |  8 ++++----
+ arch/x86/kernel/umip.c   | 10 ++++------
+ arch/x86/lib/insn-eval.c |  8 ++++++--
+ 3 files changed, 14 insertions(+), 12 deletions(-)
 
+diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
+index b563fb747aed..2b499affb2fb 100644
+--- a/arch/x86/kernel/sev.c
++++ b/arch/x86/kernel/sev.c
+@@ -267,17 +267,17 @@ static int vc_fetch_insn_kernel(struct es_em_ctxt *ctxt,
+ static enum es_result __vc_decode_user_insn(struct es_em_ctxt *ctxt)
+ {
+ 	char buffer[MAX_INSN_SIZE];
+-	int res;
++	int insn_bytes;
+ 
+-	res = insn_fetch_from_user_inatomic(ctxt->regs, buffer);
+-	if (!res) {
++	insn_bytes = insn_fetch_from_user_inatomic(ctxt->regs, buffer);
++	if (insn_bytes <= 0) {
+ 		ctxt->fi.vector     = X86_TRAP_PF;
+ 		ctxt->fi.error_code = X86_PF_INSTR | X86_PF_USER;
+ 		ctxt->fi.cr2        = ctxt->regs->ip;
+ 		return ES_EXCEPTION;
+ 	}
+ 
+-	if (!insn_decode_from_regs(&ctxt->insn, ctxt->regs, buffer, res))
++	if (!insn_decode_from_regs(&ctxt->insn, ctxt->regs, buffer, insn_bytes))
+ 		return ES_DECODE_FAILED;
+ 
+ 	if (ctxt->insn.immediate.got)
+diff --git a/arch/x86/kernel/umip.c b/arch/x86/kernel/umip.c
+index 8daa70b0d2da..337178809c89 100644
+--- a/arch/x86/kernel/umip.c
++++ b/arch/x86/kernel/umip.c
+@@ -346,14 +346,12 @@ bool fixup_umip_exception(struct pt_regs *regs)
+ 	if (!regs)
+ 		return false;
+ 
+-	nr_copied = insn_fetch_from_user(regs, buf);
+-
+ 	/*
+-	 * The insn_fetch_from_user above could have failed if user code
+-	 * is protected by a memory protection key. Give up on emulation
+-	 * in such a case.  Should we issue a page fault?
++	 * Give up on emulation if fetching the instruction failed. Should we
++	 * issue a page fault or a #GP?
+ 	 */
+-	if (!nr_copied)
++	nr_copied = insn_fetch_from_user(regs, buf);
++	if (nr_copied <= 0)
+ 		return false;
+ 
+ 	if (!insn_decode_from_regs(&insn, regs, buf, nr_copied))
 diff --git a/arch/x86/lib/insn-eval.c b/arch/x86/lib/insn-eval.c
-index a67afd74232c..4eecb9c7c6a0 100644
+index 4eecb9c7c6a0..1b5cdf8b7a4e 100644
 --- a/arch/x86/lib/insn-eval.c
 +++ b/arch/x86/lib/insn-eval.c
-@@ -1417,7 +1417,7 @@ void __user *insn_get_addr_ref(struct insn *insn, struct pt_regs *regs)
- 	}
- }
- 
--static unsigned long insn_get_effective_ip(struct pt_regs *regs)
-+static int insn_get_effective_ip(struct pt_regs *regs, unsigned long *ip)
+@@ -1451,6 +1451,8 @@ static int insn_get_effective_ip(struct pt_regs *regs, unsigned long *ip)
+  * Number of instruction bytes copied.
+  *
+  * 0 if nothing was copied.
++ *
++ * -EINVAL if the linear address of the instruction could not be calculated
+  */
+ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
  {
- 	unsigned long seg_base = 0;
- 
-@@ -1430,10 +1430,12 @@ static unsigned long insn_get_effective_ip(struct pt_regs *regs)
- 	if (!user_64bit_mode(regs)) {
- 		seg_base = insn_get_seg_base(regs, INAT_SEG_REG_CS);
- 		if (seg_base == -1L)
--			return 0;
-+			return -EINVAL;
- 	}
- 
--	return seg_base + regs->ip;
-+	*ip = seg_base + regs->ip;
-+
-+	return 0;
- }
- 
- /**
-@@ -1455,8 +1457,7 @@ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
- 	unsigned long ip;
+@@ -1458,7 +1460,7 @@ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
  	int not_copied;
  
--	ip = insn_get_effective_ip(regs);
--	if (!ip)
-+	if (insn_get_effective_ip(regs, &ip))
- 		return 0;
+ 	if (insn_get_effective_ip(regs, &ip))
+-		return 0;
++		return -EINVAL;
  
  	not_copied = copy_from_user(buf, (void __user *)ip, MAX_INSN_SIZE);
-@@ -1484,8 +1485,7 @@ int insn_fetch_from_user_inatomic(struct pt_regs *regs, unsigned char buf[MAX_IN
- 	unsigned long ip;
+ 
+@@ -1479,6 +1481,8 @@ int insn_fetch_from_user(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
+  * Number of instruction bytes copied.
+  *
+  * 0 if nothing was copied.
++ *
++ * -EINVAL if the linear address of the instruction could not be calculated
+  */
+ int insn_fetch_from_user_inatomic(struct pt_regs *regs, unsigned char buf[MAX_INSN_SIZE])
+ {
+@@ -1486,7 +1490,7 @@ int insn_fetch_from_user_inatomic(struct pt_regs *regs, unsigned char buf[MAX_IN
  	int not_copied;
  
--	ip = insn_get_effective_ip(regs);
--	if (!ip)
-+	if (insn_get_effective_ip(regs, &ip))
- 		return 0;
+ 	if (insn_get_effective_ip(regs, &ip))
+-		return 0;
++		return -EINVAL;
  
  	not_copied = __copy_from_user_inatomic(buf, (void __user *)ip, MAX_INSN_SIZE);
+ 
 -- 
 2.31.1
 
