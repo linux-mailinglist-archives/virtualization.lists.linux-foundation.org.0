@@ -1,97 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 535863A1255
-	for <lists.virtualization@lfdr.de>; Wed,  9 Jun 2021 13:20:30 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E16E3A124F
+	for <lists.virtualization@lfdr.de>; Wed,  9 Jun 2021 13:20:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8817A83C4F;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 62B0C83C4A;
 	Wed,  9 Jun 2021 11:20:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xJgjzf_BIoFS; Wed,  9 Jun 2021 11:20:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 39BC883C51;
+	with ESMTP id rfGSeisC1KsQ; Wed,  9 Jun 2021 11:20:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 09D0383C4F;
 	Wed,  9 Jun 2021 11:20:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1FE3BC002C;
-	Wed,  9 Jun 2021 11:20:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E6CCAC0028;
+	Wed,  9 Jun 2021 11:20:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2B547C000B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C5CC3C000B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Jun 2021 11:20:21 +0000 (UTC)
+ Wed,  9 Jun 2021 11:20:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8652F403C8
+ by smtp1.osuosl.org (Postfix) with ESMTP id A039483C46
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Jun 2021 11:20:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="Rq55Tcom";
- dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="UohKZc2F"; dkim=pass (1024-bit key)
- header.d=suse.de header.b="Rq55Tcom"; dkim=neutral
- reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="UohKZc2F"
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YY290zI6VxXS
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id AXmhTa4qj_Nt
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Jun 2021 11:20:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DA4F2403BD
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DFA3F83C42
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Jun 2021 11:20:19 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 72A051FD5E;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 1EEE2219DE;
+ Wed,  9 Jun 2021 11:20:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1623237618; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
+ b=Qqr+wxRHDfcailoytXEx2oS2lcd/30JrzOhkpalX061VmVUSrdLwmnhSN0MtbG7SF3Lswx
+ sQnQ8cPp3QB4PF/l8crVWeS09RmiLZkfgwuhMYtcPRnrUahhNxSrscRyW90luzSwv3G0CF
+ 7A0GUIi66rqUX0OkNYcpsZIV/8EwyQU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1623237618;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
+ b=EYZQ1fZ4GiUePdUKfwvu3c7uANqrcaYHVRwXY+xLr2rs0MZBPp9J/4r/U+gB27YIyBmPIF
+ iyt7y2F2VM4VApDw==
+Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
+ by imap.suse.de (Postfix) with ESMTP id 77538118DD;
  Wed,  9 Jun 2021 11:20:17 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1623237617; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1623237618; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DKNzmpUMnKGetW9gWSfXN0fWNO4Ill+y5d1BrTMC3Bc=;
- b=Rq55TcomPGhMXwpeFyESUm3GDvlg7OmaZX/qRaxtJN732EyZeijE7CTgQQ81HFu+nOAnWo
- Z+WU7zDsm0G3ahHPlWoKBpb5pqwby6nzNTPZ1PS16fXw3BOYMdf/6A8Nsq4lS+x0+pYTRj
- GUC+kQK64wYiUp8guoJ8SnsSvgqFYrw=
+ bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
+ b=Qqr+wxRHDfcailoytXEx2oS2lcd/30JrzOhkpalX061VmVUSrdLwmnhSN0MtbG7SF3Lswx
+ sQnQ8cPp3QB4PF/l8crVWeS09RmiLZkfgwuhMYtcPRnrUahhNxSrscRyW90luzSwv3G0CF
+ 7A0GUIi66rqUX0OkNYcpsZIV/8EwyQU=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1623237617;
+ s=susede2_ed25519; t=1623237618;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DKNzmpUMnKGetW9gWSfXN0fWNO4Ill+y5d1BrTMC3Bc=;
- b=UohKZc2F4Ut9lh/4Tyt67jSW7I9hMjqHQGWVvsSXRh0Vw7JlrrpjYo8yCJSaYDQ6uGjzTJ
- H4WzmfaRgb3bONBg==
-Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id C7C0311A98;
- Wed,  9 Jun 2021 11:20:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1623237617; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DKNzmpUMnKGetW9gWSfXN0fWNO4Ill+y5d1BrTMC3Bc=;
- b=Rq55TcomPGhMXwpeFyESUm3GDvlg7OmaZX/qRaxtJN732EyZeijE7CTgQQ81HFu+nOAnWo
- Z+WU7zDsm0G3ahHPlWoKBpb5pqwby6nzNTPZ1PS16fXw3BOYMdf/6A8Nsq4lS+x0+pYTRj
- GUC+kQK64wYiUp8guoJ8SnsSvgqFYrw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1623237617;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=DKNzmpUMnKGetW9gWSfXN0fWNO4Ill+y5d1BrTMC3Bc=;
- b=UohKZc2F4Ut9lh/4Tyt67jSW7I9hMjqHQGWVvsSXRh0Vw7JlrrpjYo8yCJSaYDQ6uGjzTJ
- H4WzmfaRgb3bONBg==
+ bh=IRUa/mvyWAtsipKLLVmWT7cpX13C9nTjn7UKOIQtpok=;
+ b=EYZQ1fZ4GiUePdUKfwvu3c7uANqrcaYHVRwXY+xLr2rs0MZBPp9J/4r/U+gB27YIyBmPIF
+ iyt7y2F2VM4VApDw==
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id UPnRL/CjwGBTUgAALh3uQQ
- (envelope-from <tzimmermann@suse.de>); Wed, 09 Jun 2021 11:20:16 +0000
+ id 4KVTHPGjwGBTUgAALh3uQQ
+ (envelope-from <tzimmermann@suse.de>); Wed, 09 Jun 2021 11:20:17 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
  l.stach@pengutronix.de, linux+etnaviv@armlinux.org.uk,
@@ -102,9 +95,9 @@ To: daniel@ffwll.ch, mripard@kernel.org, maarten.lankhorst@linux.intel.com,
  sean@poorly.run, airlied@redhat.com, kraxel@redhat.com, hjc@rock-chips.com,
  heiko@sntech.de, oleksandr_andrushchenko@epam.com, sumit.semwal@linaro.org,
  christian.koenig@amd.com
-Subject: [PATCH 5/9] drm/qxl: Remove empty qxl_gem_prime_mmap()
-Date: Wed,  9 Jun 2021 13:20:08 +0200
-Message-Id: <20210609112012.10019-6-tzimmermann@suse.de>
+Subject: [PATCH 6/9] drm/vgem: Implement mmap as GEM object function
+Date: Wed,  9 Jun 2021 13:20:09 +0200
+Message-Id: <20210609112012.10019-7-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210609112012.10019-1-tzimmermann@suse.de>
 References: <20210609112012.10019-1-tzimmermann@suse.de>
@@ -132,57 +125,100 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The function qxl_gem_prime_mmap() returns an error. The two callers
-of gem_prime_mmap are drm_fbdev_fb_mmap() and drm_gem_dmabuf_mmap(),
-which both already handle NULL-callbacks with an error code. So clear
-gem_prime_mmap in qxl and remove qxl_gem_prime_mmap().
+Moving the driver-specific mmap code into a GEM object function allows
+for using DRM helpers for various mmap callbacks.
+
+The respective vgem functions are being removed. The file_operations
+structure vgem_driver_fops is now being created by the helper macro
+DEFINE_DRM_GEM_FOPS().
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/qxl/qxl_drv.c   | 1 -
- drivers/gpu/drm/qxl/qxl_drv.h   | 2 --
- drivers/gpu/drm/qxl/qxl_prime.c | 6 ------
- 3 files changed, 9 deletions(-)
+ drivers/gpu/drm/vgem/vgem_drv.c | 46 ++++-----------------------------
+ 1 file changed, 5 insertions(+), 41 deletions(-)
 
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.c b/drivers/gpu/drm/qxl/qxl_drv.c
-index 854e6c5a563f..b3d75ea7e6b3 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.c
-+++ b/drivers/gpu/drm/qxl/qxl_drv.c
-@@ -281,7 +281,6 @@ static struct drm_driver qxl_driver = {
- 	.prime_handle_to_fd = drm_gem_prime_handle_to_fd,
- 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
- 	.gem_prime_import_sg_table = qxl_gem_prime_import_sg_table,
--	.gem_prime_mmap = qxl_gem_prime_mmap,
- 	.fops = &qxl_fops,
- 	.ioctls = qxl_ioctls,
- 	.irq_handler = qxl_irq_handler,
-diff --git a/drivers/gpu/drm/qxl/qxl_drv.h b/drivers/gpu/drm/qxl/qxl_drv.h
-index dd6abee55f56..f95885a8bd2b 100644
---- a/drivers/gpu/drm/qxl/qxl_drv.h
-+++ b/drivers/gpu/drm/qxl/qxl_drv.h
-@@ -434,8 +434,6 @@ struct drm_gem_object *qxl_gem_prime_import_sg_table(
- int qxl_gem_prime_vmap(struct drm_gem_object *obj, struct dma_buf_map *map);
- void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
- 			  struct dma_buf_map *map);
--int qxl_gem_prime_mmap(struct drm_gem_object *obj,
--				struct vm_area_struct *vma);
+diff --git a/drivers/gpu/drm/vgem/vgem_drv.c b/drivers/gpu/drm/vgem/vgem_drv.c
+index bf38a7e319d1..df634aa52638 100644
+--- a/drivers/gpu/drm/vgem/vgem_drv.c
++++ b/drivers/gpu/drm/vgem/vgem_drv.c
+@@ -239,32 +239,7 @@ static struct drm_ioctl_desc vgem_ioctls[] = {
+ 	DRM_IOCTL_DEF_DRV(VGEM_FENCE_SIGNAL, vgem_fence_signal_ioctl, DRM_RENDER_ALLOW),
+ };
  
- /* qxl_irq.c */
- int qxl_irq_init(struct qxl_device *qdev);
-diff --git a/drivers/gpu/drm/qxl/qxl_prime.c b/drivers/gpu/drm/qxl/qxl_prime.c
-index 0628d1cc91fe..4a10cb0a413b 100644
---- a/drivers/gpu/drm/qxl/qxl_prime.c
-+++ b/drivers/gpu/drm/qxl/qxl_prime.c
-@@ -73,9 +73,3 @@ void qxl_gem_prime_vunmap(struct drm_gem_object *obj,
- 
- 	qxl_bo_vunmap(bo);
- }
--
--int qxl_gem_prime_mmap(struct drm_gem_object *obj,
--		       struct vm_area_struct *area)
+-static int vgem_mmap(struct file *filp, struct vm_area_struct *vma)
 -{
--	return -ENOSYS;
+-	unsigned long flags = vma->vm_flags;
+-	int ret;
+-
+-	ret = drm_gem_mmap(filp, vma);
+-	if (ret)
+-		return ret;
+-
+-	/* Keep the WC mmaping set by drm_gem_mmap() but our pages
+-	 * are ordinary and not special.
+-	 */
+-	vma->vm_flags = flags | VM_DONTEXPAND | VM_DONTDUMP;
+-	return 0;
 -}
+-
+-static const struct file_operations vgem_driver_fops = {
+-	.owner		= THIS_MODULE,
+-	.open		= drm_open,
+-	.mmap		= vgem_mmap,
+-	.poll		= drm_poll,
+-	.read		= drm_read,
+-	.unlocked_ioctl = drm_ioctl,
+-	.compat_ioctl	= drm_compat_ioctl,
+-	.release	= drm_release,
+-};
++DEFINE_DRM_GEM_FOPS(vgem_driver_fops);
+ 
+ static struct page **vgem_pin_pages(struct drm_vgem_gem_object *bo)
+ {
+@@ -387,24 +362,12 @@ static void vgem_prime_vunmap(struct drm_gem_object *obj, struct dma_buf_map *ma
+ 	vgem_unpin_pages(bo);
+ }
+ 
+-static int vgem_prime_mmap(struct drm_gem_object *obj,
+-			   struct vm_area_struct *vma)
++static int vgem_prime_mmap(struct drm_gem_object *obj, struct vm_area_struct *vma)
+ {
+-	int ret;
+-
+-	if (obj->size < vma->vm_end - vma->vm_start)
+-		return -EINVAL;
+-
+-	if (!obj->filp)
+-		return -ENODEV;
+-
+-	ret = call_mmap(obj->filp, vma);
+-	if (ret)
+-		return ret;
+-
+ 	vma_set_file(vma, obj->filp);
+ 	vma->vm_flags |= VM_DONTEXPAND | VM_DONTDUMP;
+ 	vma->vm_page_prot = pgprot_writecombine(vm_get_page_prot(vma->vm_flags));
++	vma->vm_page_prot = pgprot_decrypted(vma->vm_page_prot);
+ 
+ 	return 0;
+ }
+@@ -416,6 +379,7 @@ static const struct drm_gem_object_funcs vgem_gem_object_funcs = {
+ 	.get_sg_table = vgem_prime_get_sg_table,
+ 	.vmap = vgem_prime_vmap,
+ 	.vunmap = vgem_prime_vunmap,
++	.mmap = vgem_prime_mmap,
+ 	.vm_ops = &vgem_gem_vm_ops,
+ };
+ 
+@@ -433,7 +397,7 @@ static const struct drm_driver vgem_driver = {
+ 	.prime_fd_to_handle = drm_gem_prime_fd_to_handle,
+ 	.gem_prime_import = vgem_prime_import,
+ 	.gem_prime_import_sg_table = vgem_prime_import_sg_table,
+-	.gem_prime_mmap = vgem_prime_mmap,
++	.gem_prime_mmap = drm_gem_prime_mmap,
+ 
+ 	.name	= DRIVER_NAME,
+ 	.desc	= DRIVER_DESC,
 -- 
 2.31.1
 
