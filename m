@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F3803A26B1
-	for <lists.virtualization@lfdr.de>; Thu, 10 Jun 2021 10:22:27 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 602883A26C1
+	for <lists.virtualization@lfdr.de>; Thu, 10 Jun 2021 10:22:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BDB9260A39;
-	Thu, 10 Jun 2021 08:22:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8A32D60862;
+	Thu, 10 Jun 2021 08:22:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ce6Us0pAs_6p; Thu, 10 Jun 2021 08:22:22 +0000 (UTC)
+	with ESMTP id Qguq8v2HHebK; Thu, 10 Jun 2021 08:22:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 6F0866084C;
-	Thu, 10 Jun 2021 08:22:22 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D77E5608FE;
+	Thu, 10 Jun 2021 08:22:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6EF98C0022;
-	Thu, 10 Jun 2021 08:22:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C7182C0028;
+	Thu, 10 Jun 2021 08:22:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 49D42C000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 55940C000B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:17 +0000 (UTC)
+ Thu, 10 Jun 2021 08:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 39C7260844
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3770A40539
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 10 Jun 2021 08:22:19 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id xxJvb7yA0DZG
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 10 Jun 2021 08:22:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 20225405BD
  for <virtualization@lists.linux-foundation.org>;
  Thu, 10 Jun 2021 08:22:17 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FuqkUBAe5muH
- for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:16 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7059C606F8
- for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:16 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R901e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=21; SR=0; TI=SMTPD_---0UbxDLwc_1623313330; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=21; SR=0; TI=SMTPD_---0Ubx5.Hk_1623313331; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0UbxDLwc_1623313330) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0Ubx5.Hk_1623313331) by smtp.aliyun-inc.com(127.0.0.1);
  Thu, 10 Jun 2021 16:22:11 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v5 04/15] xsk: XDP_SETUP_XSK_POOL support option
- IFF_NOT_USE_DMA_ADDR
-Date: Thu, 10 Jun 2021 16:21:58 +0800
-Message-Id: <20210610082209.91487-5-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v5 05/15] virtio: support
+ virtqueue_detach_unused_buf_ctx
+Date: Thu, 10 Jun 2021 16:21:59 +0800
+Message-Id: <20210610082209.91487-6-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20210610082209.91487-1-xuanzhuo@linux.alibaba.com>
 References: <20210610082209.91487-1-xuanzhuo@linux.alibaba.com>
@@ -83,30 +83,92 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Some devices, such as virtio-net, do not directly use dma addr. These
-devices do not initialize dma after completing the xsk setup, so the dma
-check is skipped here.
+Supports returning ctx while recycling unused buf, which helps to
+release buf in different ways for different bufs.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Reviewed-by: Dust Li <dust.li@linux.alibaba.com>
-Acked-by: Magnus Karlsson <magnus.karlsson@intel.com>
 ---
- net/xdp/xsk_buff_pool.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/virtio/virtio_ring.c | 22 +++++++++++++++-------
+ include/linux/virtio.h       |  2 ++
+ 2 files changed, 17 insertions(+), 7 deletions(-)
 
-diff --git a/net/xdp/xsk_buff_pool.c b/net/xdp/xsk_buff_pool.c
-index 8de01aaac4a0..a7e434de0308 100644
---- a/net/xdp/xsk_buff_pool.c
-+++ b/net/xdp/xsk_buff_pool.c
-@@ -171,7 +171,7 @@ int xp_assign_dev(struct xsk_buff_pool *pool,
- 	if (err)
- 		goto err_unreg_pool;
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index 71e16b53e9c1..a3d7ec1c9ea7 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -815,7 +815,8 @@ static bool virtqueue_enable_cb_delayed_split(struct virtqueue *_vq)
+ 	return true;
+ }
  
--	if (!pool->dma_pages) {
-+	if (!(netdev->priv_flags & IFF_NOT_USE_DMA_ADDR) && !pool->dma_pages) {
- 		WARN(1, "Driver did not DMA map zero-copy buffers");
- 		err = -EINVAL;
- 		goto err_unreg_xsk;
+-static void *virtqueue_detach_unused_buf_split(struct virtqueue *_vq)
++static void *virtqueue_detach_unused_buf_ctx_split(struct virtqueue *_vq,
++						   void **ctx)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 	unsigned int i;
+@@ -828,7 +829,7 @@ static void *virtqueue_detach_unused_buf_split(struct virtqueue *_vq)
+ 			continue;
+ 		/* detach_buf_split clears data, so grab it now. */
+ 		buf = vq->split.desc_state[i].data;
+-		detach_buf_split(vq, i, NULL);
++		detach_buf_split(vq, i, ctx);
+ 		vq->split.avail_idx_shadow--;
+ 		vq->split.vring.avail->idx = cpu_to_virtio16(_vq->vdev,
+ 				vq->split.avail_idx_shadow);
+@@ -1526,7 +1527,8 @@ static bool virtqueue_enable_cb_delayed_packed(struct virtqueue *_vq)
+ 	return true;
+ }
+ 
+-static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
++static void *virtqueue_detach_unused_buf_ctx_packed(struct virtqueue *_vq,
++						    void **ctx)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 	unsigned int i;
+@@ -1539,7 +1541,7 @@ static void *virtqueue_detach_unused_buf_packed(struct virtqueue *_vq)
+ 			continue;
+ 		/* detach_buf clears data, so grab it now. */
+ 		buf = vq->packed.desc_state[i].data;
+-		detach_buf_packed(vq, i, NULL);
++		detach_buf_packed(vq, i, ctx);
+ 		END_USE(vq);
+ 		return buf;
+ 	}
+@@ -2018,12 +2020,18 @@ EXPORT_SYMBOL_GPL(virtqueue_enable_cb_delayed);
+  * This is not valid on an active queue; it is useful only for device
+  * shutdown.
+  */
+-void *virtqueue_detach_unused_buf(struct virtqueue *_vq)
++void *virtqueue_detach_unused_buf_ctx(struct virtqueue *_vq, void **ctx)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 
+-	return vq->packed_ring ? virtqueue_detach_unused_buf_packed(_vq) :
+-				 virtqueue_detach_unused_buf_split(_vq);
++	return vq->packed_ring ?
++		virtqueue_detach_unused_buf_ctx_packed(_vq, ctx) :
++		virtqueue_detach_unused_buf_ctx_split(_vq, ctx);
++}
++
++void *virtqueue_detach_unused_buf(struct virtqueue *_vq)
++{
++	return virtqueue_detach_unused_buf_ctx(_vq, NULL);
+ }
+ EXPORT_SYMBOL_GPL(virtqueue_detach_unused_buf);
+ 
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index b1894e0323fa..8aada4d29e04 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -78,6 +78,8 @@ bool virtqueue_poll(struct virtqueue *vq, unsigned);
+ 
+ bool virtqueue_enable_cb_delayed(struct virtqueue *vq);
+ 
++void *virtqueue_detach_unused_buf_ctx(struct virtqueue *vq, void **ctx);
++
+ void *virtqueue_detach_unused_buf(struct virtqueue *vq);
+ 
+ unsigned int virtqueue_get_vring_size(struct virtqueue *vq);
 -- 
 2.31.0
 
