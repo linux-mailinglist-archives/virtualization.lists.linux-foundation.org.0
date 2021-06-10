@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54B553A26C3
-	for <lists.virtualization@lfdr.de>; Thu, 10 Jun 2021 10:22:37 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D526F3A26C9
+	for <lists.virtualization@lfdr.de>; Thu, 10 Jun 2021 10:22:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8B6806084C;
-	Thu, 10 Jun 2021 08:22:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7EA1060844;
+	Thu, 10 Jun 2021 08:22:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UwUJA2JTg7dj; Thu, 10 Jun 2021 08:22:27 +0000 (UTC)
+	with ESMTP id 61UieuVcDHBJ; Thu, 10 Jun 2021 08:22:52 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 5DCEF6090A;
-	Thu, 10 Jun 2021 08:22:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 3E0DE60834;
+	Thu, 10 Jun 2021 08:22:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 29FFFC000B;
-	Thu, 10 Jun 2021 08:22:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C9BACC0022;
+	Thu, 10 Jun 2021 08:22:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 27607C001C
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4E6ABC000B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:22 +0000 (UTC)
+ Thu, 10 Jun 2021 08:22:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 760B6606A7
+ by smtp3.osuosl.org (Postfix) with ESMTP id 33EDB60834
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:21 +0000 (UTC)
+ Thu, 10 Jun 2021 08:22:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MZYMSdC8bK6Z
+ with ESMTP id C_2-Arfhguu1
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:19 +0000 (UTC)
+ Thu, 10 Jun 2021 08:22:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-45.freemail.mail.aliyun.com
- (out30-45.freemail.mail.aliyun.com [115.124.30.45])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 472656058B
+Received: from out30-57.freemail.mail.aliyun.com
+ (out30-57.freemail.mail.aliyun.com [115.124.30.57])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 44861606F8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Jun 2021 08:22:18 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R561e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=21; SR=0; TI=SMTPD_---0Ubx5.Id_1623313335; 
+ Thu, 10 Jun 2021 08:22:48 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=21; SR=0; TI=SMTPD_---0Ubx5.Io_1623313336; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Ubx5.Id_1623313335) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0Ubx5.Io_1623313336) by smtp.aliyun-inc.com(127.0.0.1);
  Thu, 10 Jun 2021 16:22:16 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v5 14/15] virtio-net: xsk direct xmit inside xsk
- wakeup
-Date: Thu, 10 Jun 2021 16:22:08 +0800
-Message-Id: <20210610082209.91487-15-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v5 15/15] virtio-net: xsk zero copy xmit kick by
+ threshold
+Date: Thu, 10 Jun 2021 16:22:09 +0800
+Message-Id: <20210610082209.91487-16-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20210610082209.91487-1-xuanzhuo@linux.alibaba.com>
 References: <20210610082209.91487-1-xuanzhuo@linux.alibaba.com>
@@ -83,78 +83,134 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Calling virtqueue_napi_schedule() in wakeup results in napi running on
-the current cpu. If the application is not busy, then there is no
-problem. But if the application itself is busy, it will cause a lot of
-scheduling.
+After testing, the performance of calling kick every time is not stable.
+And if all the packets are sent and kicked again, the performance is not
+good. So add a module parameter to specify how many packets are sent to
+call a kick.
 
-If the application is continuously sending data packets, due to the
-continuous scheduling between the application and napi, the data packet
-transmission will not be smooth, and there will be an obvious delay in
-the transmission (you can use tcpdump to see it). When pressing a
-channel to 100% (vhost reaches 100%), the cpu where the application is
-located reaches 100%.
+8 is a relatively stable value with the best performance.
 
-This patch sends a small amount of data directly in wakeup. The purpose
-of this is to trigger the tx interrupt. The tx interrupt will be
-awakened on the cpu of its affinity, and then trigger the operation of
-the napi mechanism, napi can continue to consume the xsk tx queue. Two
-cpus are running, cpu0 is running applications, cpu1 executes
-napi consumption data. The same is to press a channel to 100%, but the
-utilization rate of cpu0 is 12.7% and the utilization rate of cpu1 is
-2.9%.
+Here is the pps of the test of xsk_kick_thr under different values (from
+1 to 64).
+
+thr  PPS             thr PPS             thr PPS
+1    2924116.74247 | 23  3683263.04348 | 45  2777907.22963
+2    3441010.57191 | 24  3078880.13043 | 46  2781376.21739
+3    3636728.72378 | 25  2859219.57656 | 47  2777271.91304
+4    3637518.61468 | 26  2851557.9593  | 48  2800320.56575
+5    3651738.16251 | 27  2834783.54408 | 49  2813039.87599
+6    3652176.69231 | 28  2847012.41472 | 50  3445143.01839
+7    3665415.80602 | 29  2860633.91304 | 51  3666918.01281
+8    3665045.16555 | 30  2857903.5786  | 52  3059929.2709
+9    3671023.2401  | 31  2835589.98963 | 53  2831515.21739
+10   3669532.23274 | 32  2862827.88706 | 54  3451804.07204
+11   3666160.37749 | 33  2871855.96696 | 55  3654975.92385
+12   3674951.44813 | 34  3434456.44816 | 56  3676198.3188
+13   3667447.57331 | 35  3656918.54177 | 57  3684740.85619
+14   3018846.0503  | 36  3596921.16722 | 58  3060958.8594
+15   2792773.84505 | 37  3603460.63903 | 59  2828874.57191
+16   3430596.3602  | 38  3595410.87666 | 60  3459926.11027
+17   3660525.85806 | 39  3604250.17819 | 61  3685444.47599
+18   3045627.69054 | 40  3596542.28428 | 62  3049959.0809
+19   2841542.94177 | 41  3600705.16054 | 63  2806280.04013
+20   2830475.97348 | 42  3019833.71191 | 64  3448494.3913
+21   2845655.55789 | 43  2752951.93264 |
+22   3450389.84365 | 44  2753107.27164 |
+
+It can be found that when the value of xsk_kick_thr is relatively small,
+the performance is not good, and when its value is greater than 13, the
+performance will be more irregular and unstable. It looks similar from 3
+to 13, I chose 8 as the default value.
+
+The test environment is qemu + vhost-net. I modified vhost-net to drop
+the packets sent by vm directly, so that the cpu of vm can run higher.
+By default, the processes in the vm and the cpu of softirqd are too low,
+and there is no obvious difference in the test data.
+
+During the test, the cpu of softirq reached 100%. Each xsk_kick_thr was
+run for 300s, the pps of every second was recorded, and the average of
+the pps was finally taken. The vhost process cpu on the host has also
+reached 100%.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Reviewed-by: Dust Li <dust.li@linux.alibaba.com>
 ---
- drivers/net/virtio/xsk.c | 28 +++++++++++++++++++++++-----
- 1 file changed, 23 insertions(+), 5 deletions(-)
+ drivers/net/virtio/virtio_net.c |  1 +
+ drivers/net/virtio/xsk.c        | 18 ++++++++++++++++--
+ drivers/net/virtio/xsk.h        |  2 ++
+ 3 files changed, 19 insertions(+), 2 deletions(-)
 
+diff --git a/drivers/net/virtio/virtio_net.c b/drivers/net/virtio/virtio_net.c
+index 9503133e71f0..dfe509939b45 100644
+--- a/drivers/net/virtio/virtio_net.c
++++ b/drivers/net/virtio/virtio_net.c
+@@ -14,6 +14,7 @@ static bool csum = true, gso = true, napi_tx = true;
+ module_param(csum, bool, 0444);
+ module_param(gso, bool, 0444);
+ module_param(napi_tx, bool, 0644);
++module_param(xsk_kick_thr, int, 0644);
+ 
+ /* FIXME: MTU in config. */
+ #define GOOD_PACKET_LEN (ETH_HLEN + VLAN_HLEN + ETH_DATA_LEN)
 diff --git a/drivers/net/virtio/xsk.c b/drivers/net/virtio/xsk.c
-index 36cda2dcf8e7..3973c82d1ad2 100644
+index 3973c82d1ad2..2f3ba6ab4798 100644
 --- a/drivers/net/virtio/xsk.c
 +++ b/drivers/net/virtio/xsk.c
-@@ -547,6 +547,7 @@ int virtnet_xsk_wakeup(struct net_device *dev, u32 qid, u32 flag)
- {
- 	struct virtnet_info *vi = netdev_priv(dev);
- 	struct xsk_buff_pool *pool;
-+	struct netdev_queue *txq;
- 	struct send_queue *sq;
+@@ -5,6 +5,8 @@
  
- 	if (!netif_running(dev))
-@@ -559,11 +560,28 @@ int virtnet_xsk_wakeup(struct net_device *dev, u32 qid, u32 flag)
+ #include "virtio_net.h"
  
- 	rcu_read_lock();
- 	pool = rcu_dereference(sq->xsk.pool);
--	if (pool) {
--		local_bh_disable();
--		virtqueue_napi_schedule(&sq->napi, sq->vq);
--		local_bh_enable();
--	}
-+	if (!pool)
-+		goto end;
++int xsk_kick_thr = 8;
 +
-+	if (napi_if_scheduled_mark_missed(&sq->napi))
-+		goto end;
+ static struct virtio_net_hdr_mrg_rxbuf xsk_hdr;
+ 
+ static struct virtnet_xsk_ctx *virtnet_xsk_ctx_get(struct virtnet_xsk_ctx_head *head)
+@@ -455,6 +457,7 @@ static int virtnet_xsk_xmit_batch(struct send_queue *sq,
+ 	struct xdp_desc desc;
+ 	int err, packet = 0;
+ 	int ret = -EAGAIN;
++	int need_kick = 0;
+ 
+ 	while (budget-- > 0) {
+ 		if (sq->vq->num_free < 2 + MAX_SKB_FRAGS) {
+@@ -475,11 +478,22 @@ static int virtnet_xsk_xmit_batch(struct send_queue *sq,
+ 		}
+ 
+ 		++packet;
++		++need_kick;
++		if (need_kick > xsk_kick_thr) {
++			if (virtqueue_kick_prepare(sq->vq) &&
++			    virtqueue_notify(sq->vq))
++				++stats->kicks;
 +
-+	txq = netdev_get_tx_queue(dev, qid);
++			need_kick = 0;
++		}
+ 	}
+ 
+ 	if (packet) {
+-		if (virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq))
+-			++stats->kicks;
++		if (need_kick) {
++			if (virtqueue_kick_prepare(sq->vq) &&
++			    virtqueue_notify(sq->vq))
++				++stats->kicks;
++		}
+ 
+ 		*done += packet;
+ 		stats->xdp_tx += packet;
+diff --git a/drivers/net/virtio/xsk.h b/drivers/net/virtio/xsk.h
+index fe22cf78d505..4f0f4f9cf23b 100644
+--- a/drivers/net/virtio/xsk.h
++++ b/drivers/net/virtio/xsk.h
+@@ -7,6 +7,8 @@
+ 
+ #define VIRTNET_XSK_BUFF_CTX  ((void *)(unsigned long)~0L)
+ 
++extern int xsk_kick_thr;
 +
-+	__netif_tx_lock_bh(txq);
-+
-+	/* Send part of the packet directly to reduce the delay in sending the
-+	 * packet, and this can actively trigger the tx interrupts.
-+	 *
-+	 * If no packet is sent out, the ring of the device is full. In this
-+	 * case, we will still get a tx interrupt response. Then we will deal
-+	 * with the subsequent packet sending work.
-+	 */
-+	virtnet_xsk_run(sq, pool, sq->napi.weight, false);
-+
-+	__netif_tx_unlock_bh(txq);
-+
-+end:
- 	rcu_read_unlock();
- 	return 0;
- }
+ /* When xsk disable, under normal circumstances, the network card must reclaim
+  * all the memory that has been sent and the memory added to the rq queue by
+  * destroying the queue.
 -- 
 2.31.0
 
