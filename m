@@ -1,55 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD96A3A43F6
-	for <lists.virtualization@lfdr.de>; Fri, 11 Jun 2021 16:20:46 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 486683A4425
+	for <lists.virtualization@lfdr.de>; Fri, 11 Jun 2021 16:34:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 36B7A400C2;
-	Fri, 11 Jun 2021 14:20:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EC7BB60ABE;
+	Fri, 11 Jun 2021 14:34:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ppkgpaDuNKRO; Fri, 11 Jun 2021 14:20:44 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UuBDX7S7ucc7; Fri, 11 Jun 2021 14:34:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 0DB2C404E2;
-	Fri, 11 Jun 2021 14:20:44 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D401260AB8;
+	Fri, 11 Jun 2021 14:34:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8E789C000B;
-	Fri, 11 Jun 2021 14:20:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6047DC000B;
+	Fri, 11 Jun 2021 14:34:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CB016C000B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 03700C000B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Jun 2021 14:20:41 +0000 (UTC)
+ Fri, 11 Jun 2021 14:34:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AF94B414C6
+ by smtp4.osuosl.org (Postfix) with ESMTP id D856D401DF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Jun 2021 14:20:41 +0000 (UTC)
+ Fri, 11 Jun 2021 14:34:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=alien8.de
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZJtZYUoCanUr
+ with ESMTP id 9y7rzHqBJMvl
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Jun 2021 14:20:40 +0000 (UTC)
+ Fri, 11 Jun 2021 14:34:15 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 639F1414C2
+Received: from mail.skyhub.de (mail.skyhub.de [5.9.137.197])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B7C3740130
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Jun 2021 14:20:40 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 4D7A52FA; Fri, 11 Jun 2021 16:20:37 +0200 (CEST)
-Date: Fri, 11 Jun 2021 16:20:36 +0200
-From: Joerg Roedel <joro@8bytes.org>
-To: Borislav Petkov <bp@alien8.de>
+ Fri, 11 Jun 2021 14:34:13 +0000 (UTC)
+Received: from zn.tnic (p200300ec2f0aec00fa6ee867e791c992.dip0.t-ipconnect.de
+ [IPv6:2003:ec:2f0a:ec00:fa6e:e867:e791:c992])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id B0AA21EC053C;
+ Fri, 11 Jun 2021 16:34:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+ t=1623422051;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+ bh=JGxv2dGnM8cqh24lNorMXXQYkTm9QOB8k1UUbsYV/vA=;
+ b=PH73syyPX9IvgmsETxZdfxrCSsZMWTcA/pYMQegpkdofXR1cXEg1XEPuJS9MYErLFdFNqX
+ ITpfIWTUsaN5vpq8JBkZPeXh5LbRBqlJGvqLVqRf8JiTAeW7VP9luNAuq1h46swcUr7Uja
+ MtzdkWa9Pi00OJI9vUBJ/0Onm7xcNq0=
+Date: Fri, 11 Jun 2021 16:34:05 +0200
+From: Borislav Petkov <bp@alien8.de>
+To: Joerg Roedel <joro@8bytes.org>
 Subject: Re: [PATCH v4 2/6] x86/sev-es: Disable IRQs while GHCB is active
-Message-ID: <YMNxNEb/T3iF4TG8@8bytes.org>
+Message-ID: <YMN0XT8Job08HfWH@zn.tnic>
 References: <20210610091141.30322-1-joro@8bytes.org>
  <20210610091141.30322-3-joro@8bytes.org> <YMNtmz6W1apXL5q+@zn.tnic>
+ <YMNxNEb/T3iF4TG8@8bytes.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YMNtmz6W1apXL5q+@zn.tnic>
+In-Reply-To: <YMNxNEb/T3iF4TG8@8bytes.org>
 Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
  virtualization@lists.linux-foundation.org,
@@ -79,41 +95,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jun 11, 2021 at 04:05:15PM +0200, Borislav Petkov wrote:
-> On Thu, Jun 10, 2021 at 11:11:37AM +0200, Joerg Roedel wrote:
-> Why not simply "sandwich" them:
-> 
-> 	local_irq_save()
-> 	sev_es_get_ghcb()
-> 
-> 	...blablabla
-> 
-> 	sev_es_put_ghcb()
-> 	local_irq_restore();
-> 
-> in every call site?
+On Fri, Jun 11, 2021 at 04:20:36PM +0200, Joerg Roedel wrote:
+> I am not a fan of this, because its easily forgotten to add
+> local_irq_save()/local_irq_restore() calls around those. Yes, we can add
+> irqs_disabled() assertions to the functions, but we can as well just
+> disable/enable IRQs in them. Only the previous value of EFLAGS.IF needs
+> to be carried from one function to the other.
 
-I am not a fan of this, because its easily forgotten to add
-local_irq_save()/local_irq_restore() calls around those. Yes, we can add
-irqs_disabled() assertions to the functions, but we can as well just
-disable/enable IRQs in them. Only the previous value of EFLAGS.IF needs
-to be carried from one function to the other.
+Wrappers:
 
-> Hmm, so why aren't you accessing/setting data->ghcb_active and
-> data->backup_ghcb_active safely using cmpxchg() if this path can be
-> interrupted by an NMI?
+	sev_es_get_ghcb():
 
-Using cmpxchg is not necessary here. It is all per-cpu data, so local to
-the current cpu. If an NMI happens anywhere in sev_es_get_ghcb() it can
-still use the GHCB, because the interrupted #VC handler will not start
-writing to it before sev_es_get_ghcb() returned.
+		local_irq_save()
+		__sev_es_get_ghcb()
 
-Problems only come up when one path starts writing to the GHCB, but that
-happens long after it is marked active.
+and the reverse.
 
-Regards,
+-- 
+Regards/Gruss,
+    Boris.
 
-	Joerg
+https://people.kernel.org/tglx/notes-about-netiquette
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
