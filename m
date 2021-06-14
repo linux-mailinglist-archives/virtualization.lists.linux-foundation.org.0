@@ -1,101 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0EED3A5D66
-	for <lists.virtualization@lfdr.de>; Mon, 14 Jun 2021 09:08:10 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id DF5643A5E22
+	for <lists.virtualization@lfdr.de>; Mon, 14 Jun 2021 10:12:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4CF2B60642;
-	Mon, 14 Jun 2021 07:08:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8AB7182661;
+	Mon, 14 Jun 2021 08:12:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0N-WEo6tYKUP; Mon, 14 Jun 2021 07:08:08 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 05B8C605C0;
-	Mon, 14 Jun 2021 07:08:08 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id B1ToF0EEG4LN; Mon, 14 Jun 2021 08:12:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8182C82503;
+	Mon, 14 Jun 2021 08:12:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8CF63C000B;
-	Mon, 14 Jun 2021 07:08:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 11458C0024;
+	Mon, 14 Jun 2021 08:12:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 96AF3C000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F397EC000B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Jun 2021 07:08:06 +0000 (UTC)
+ Mon, 14 Jun 2021 08:12:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 71DD540428
+ by smtp2.osuosl.org (Postfix) with ESMTP id D266340130
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Jun 2021 07:08:06 +0000 (UTC)
+ Mon, 14 Jun 2021 08:12:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linaro.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Uhy8QpRzvBKo
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=gmail.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id WHYMe0ah2fvX
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Jun 2021 07:08:05 +0000 (UTC)
+ Mon, 14 Jun 2021 08:12:25 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 35362403ED
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5258640100
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Jun 2021 07:08:05 +0000 (UTC)
-Received: by mail-pf1-x435.google.com with SMTP id u18so9831944pfk.11
+ Mon, 14 Jun 2021 08:12:25 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id i34so7988536pgl.9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Jun 2021 00:08:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=cE3BItc0etFTtT3DKKS6LEXcYghKEYuPi31YretVNcI=;
- b=hWGT7pC/nY1a2nMRch8iUAFWwQsjRaVi4BiGQljxV/RwRoCWJ01uKjH5GmCBiGtGkB
- GLLf/GjcUX7EgxD5tTYCyHuRD4t0QfSopGKWadTOWw8aSoO4NC+U2JYiiIsvzVkqqozS
- 2PI1oTA4Y3K+cj2SqXFa2JzN3fvJZVJylNsG4UttFA6yYMP2ViTnkFWBGvZE2yqmZmqT
- gUsKmEBGP7NGyTCPge1i5aQHj5dCqzRCVjV/hBavRvjBgLI4wfnCpSrhiyyMKW6Nqmj9
- PD0v6gSlTaAhbmmz+VUpIQ/0IEapL5qUYbW9GBTULD78lJ2JPu/MkHHPvIZjPMKelz2u
- mpEQ==
+ Mon, 14 Jun 2021 01:12:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=+Vv3hBAQ8kpZIe+1+G82nUGelWzwqMrss8OA+ER4ISc=;
+ b=c4fGtjeg/GfqEDJFxCfTs2qulnbzuKMp0HYaOci+oQWvyQM4dQ7rcIDbSs28NollGJ
+ 3TfnXLmrNnyCeUoYBrT6kPf1LySbpdqm9+fZ2yBD2Hw1Z4k4R7o3l6UidYHfhxQ151m/
+ MD5wP9xxOkMmZWiml42sWS2OMHvvYyzQqZJyMvE87DohZjCJMRmcXWLybcsRYqwQ3gyK
+ eCVWaiYa9epVi8oi50IEWlMypfrBpZ9vwUq1IZ2ShmB3bjAIM1O3NOwjfIh0U78zqhMr
+ mK9GFJFicIgurMGWWACJqLodhke8XP+w8c/DqpaxgC9Zt/Mdm02QiaZdUXTBg6yZW/DE
+ aJHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=cE3BItc0etFTtT3DKKS6LEXcYghKEYuPi31YretVNcI=;
- b=GvnxIjbCdyATK227XncBdAIHDAfHRxkns4pmwy6FC5AGdYA90N4weWD8t80w924PDp
- enRvOlYlSmp17VigsHpUokCYTs0b6JbGaontBn1OsXORUW4gnz15tk6LOJW7DRL4YLEw
- SdHKeH70uUUqlM4ws2t9p+ZW+OEPJTqAXZscfPMSyvhfoM8toCsEXvrFeecIJHTm5Fq6
- aEff5LfVZzEeBOqCVbDUmVAJmrAaYvFxca/C+HVie6jG2ViTIhJ1Cxn6DR+HmcrpZ4qn
- cxCXn7XjuU9uGVuib1JvH7Y3aWe0J3e62GaZ5ljV+XtKo5U8lo3Oap5UXwMjVW2LXrLT
- fJoA==
-X-Gm-Message-State: AOAM530JSj5VzeQhoOqiw/mUU2TiEioxPxo+QLGN+YLGQ4PnMcQYWOc9
- zo6jHn+Ok0xoi4SATTbTsbzLrA==
-X-Google-Smtp-Source: ABdhPJwv8FULBhRjCLmONqNqPjUMDKsZ3zKpN+cND2VwYFv5+MAD8+DlWsZbZGvBVCHy0VZ4Wi3A0g==
-X-Received: by 2002:aa7:949c:0:b029:2fa:c881:dd0 with SMTP id
- z28-20020aa7949c0000b02902fac8810dd0mr639470pfk.9.1623654484468; 
- Mon, 14 Jun 2021 00:08:04 -0700 (PDT)
-Received: from localhost ([136.185.134.182])
- by smtp.gmail.com with ESMTPSA id t143sm13203696pgb.93.2021.06.14.00.08.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 14 Jun 2021 00:08:03 -0700 (PDT)
-Date: Mon, 14 Jun 2021 12:38:01 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Linus Walleij <linus.walleij@linaro.org>
-Subject: Re: [PATCH V3 2/3] gpio: virtio: Add IRQ support
-Message-ID: <20210614070801.5tbkebxmz4gvcpai@vireshk-i7>
-References: <cover.1623326176.git.viresh.kumar@linaro.org>
- <911941d4bf19f18abdc9700abca9f26b3c04c343.1623326176.git.viresh.kumar@linaro.org>
- <CACRpkdYHMtG_X3FgiArbQW49kTwJwOGn90peDvAV5Bs5oDiC7A@mail.gmail.com>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=+Vv3hBAQ8kpZIe+1+G82nUGelWzwqMrss8OA+ER4ISc=;
+ b=E3+ab7jTxLf9v17nyqrouxotRkMTndPgUFzdJCv8XndS4wh7GPD3EjUt4Psb8vCwmP
+ ++Bf0kqJCflOtmwWExcwv8KwrMubna/Bch7Jtm8/2rphwCDH3POWaHB6RxsClSPEHbPe
+ qOP3dEG0ReSczW7gXqrn6RWmfj7zuESXLZ3KR03KH2VDSMaucly6tMEthhu9O2VgSMr1
+ eGenxzMtBc6C7ZsoEkEBzQGQUs3R2Ne2ug1w+4d1QNGAbSx2XbabsqtM8i3/ZA84Qy4T
+ ZUTjlu860CYa5LwETVnTgRgrJm5UiSuyw6sPT2XmZGHHAE4yTSNCFZd9f/Sk5U4VUTJ2
+ afTQ==
+X-Gm-Message-State: AOAM532QtIvc5oijAGznhwA/KDrgoDE2kNMRmG5fx7bL+UpjkqW1KYt4
+ +97fV2b6EO4aYbGJ4iil7qM1+fhgsloL3KtNn0k=
+X-Google-Smtp-Source: ABdhPJxhe15j5OGsgf6ubg65hqo067+sEZz2F1/eOHojX+9gZ7QSWo1iAgCyufmjG6vo/Icejnu1ejDf08TGvFILI5M=
+X-Received: by 2002:a05:6a00:139c:b029:2f7:102c:5393 with SMTP id
+ t28-20020a056a00139cb02902f7102c5393mr13962018pfg.40.1623658344790; Mon, 14
+ Jun 2021 01:12:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACRpkdYHMtG_X3FgiArbQW49kTwJwOGn90peDvAV5Bs5oDiC7A@mail.gmail.com>
-User-Agent: NeoMutt/20180716-391-311a52
-Cc: Vincent Guittot <vincent.guittot@linaro.org>,
+References: <cover.1623326176.git.viresh.kumar@linaro.org>
+ <10442926ae8a65f716bfc23f32339a6b35e51d5a.1623326176.git.viresh.kumar@linaro.org>
+ <CACRpkdZV2v2S5z7CZf_8DV=At9-oPSj7RYFH78hWy3ZX37QnDQ@mail.gmail.com>
+ <20210611035623.z4f2ynumzozigqnv@vireshk-i7>
+ <CAMuHMdVrtSnFpPbB0P3Wxqm1D6vU1_cnh3ypsZJRNF6ueKdAsw@mail.gmail.com>
+ <20210611080122.tlkidv6bowuka6fw@vireshk-i7>
+ <0478822f-9d10-deb8-86ae-3b4ac3bb0c6c@metux.net>
+In-Reply-To: <0478822f-9d10-deb8-86ae-3b4ac3bb0c6c@metux.net>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Mon, 14 Jun 2021 11:12:08 +0300
+Message-ID: <CAHp75Vf0+bCnnD3wtkrPvFbr2k3A0r3eWNp87PyksiC7euaqdw@mail.gmail.com>
+Subject: Re: [PATCH V3 1/3] gpio: Add virtio-gpio driver
+To: "Enrico Weigelt, metux IT consult" <lkml@metux.net>
+Cc: Alistair Strachan <astrachan@google.com>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
  Stefan Hajnoczi <stefanha@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- Marc Zyngier <maz@kernel.org>, linux-kernel <linux-kernel@vger.kernel.org>,
+ Viresh Kumar <viresh.kumar@linaro.org>,
+ Linus Walleij <linus.walleij@linaro.org>,
  virtualization@lists.linux-foundation.org,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ Bjorn Andersson <bjorn.andersson@linaro.org>,
  Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
  "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
- Viresh Kumar <vireshk@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Viresh Kumar <vireshk@kernel.org>, stratos-dev@op-lists.linaro.org,
  "Enrico Weigelt, metux IT consult" <info@metux.net>,
- Bill Mills <bill.mills@linaro.org>, stratos-dev@op-lists.linaro.org
+ Bill Mills <bill.mills@linaro.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,126 +114,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 10-06-21, 23:30, Linus Walleij wrote:
-> On Thu, Jun 10, 2021 at 2:16 PM Viresh Kumar <viresh.kumar@linaro.org> wrote:
-> > +static void virtio_gpio_irq_unmask(struct irq_data *d)
-> > +{
-> > +       struct gpio_chip *gc = irq_data_to_gpio_chip(d);
-> > +       struct virtio_gpio *vgpio = gpio_chip_to_vgpio(gc);
-> > +       struct vgpio_line *line = &vgpio->lines[d->hwirq];
-> > +
-> > +       line->masked = false;
-> > +       line->masked_pending = true;
-> > +}
-> 
-> This looks dangerous in combination with this:
-> 
-> > +static void virtio_gpio_interrupt(struct virtqueue *vq)
-> > +{
-> (...)
-> > +       local_irq_disable();
-> > +       ret = generic_handle_irq(irq);
-> > +       local_irq_enable();
-> 
-> Nominally slow IRQs like those being marshalled over
-> virtio should be nested, handle_nested_irq(irq);
-> but are they?
+On Mon, Jun 14, 2021 at 11:08 AM Enrico Weigelt, metux IT consult
+<lkml@metux.net> wrote:
+>
+> On 11.06.21 10:01, Viresh Kumar wrote:
+>
+> > No, QEMU passes the raw messages to the backend daemon running in host
+> > userspace (which shares a socket with qemu). The backend understands
+> > the virtio/vhost protocols and so won't be required to change at all
+> > if we move from Qemu to something else. And that's what we (Linaro)
+> > are looking to do here with Project Stratos.
+>
+> Note that this is completely different from my approach that I've posted
+> in autumn last year. Viresh's protocol hasn't much in common with mine.
 
-Hmm, this is the call trace:
-
-Call trace:
- virtio_gpio_interrupt+0x34/0x168
- vring_interrupt+0x64/0x98
- vp_vring_interrupt+0x5c/0xa8
- vp_interrupt+0x40/0x78
- __handle_irq_event_percpu+0x5c/0x180
- handle_irq_event_percpu+0x38/0x90
- handle_irq_event+0x48/0xe0
- handle_fasteoi_irq+0xb0/0x138
- generic_handle_irq+0x30/0x48
- __handle_domain_irq+0x60/0xb8
- gic_handle_irq+0x58/0x128
- el1_irq+0xb0/0x180
- arch_cpu_idle+0x18/0x28
- default_idle_call+0x24/0x5c
- do_idle+0x1ec/0x288
- cpu_startup_entry+0x28/0x68
- rest_init+0xd8/0xe8
- arch_call_rest_init+0x10/0x1c
- start_kernel+0x508/0x540
-
-I don't see a threaded interrupt in the path and vp_vring_interrupt()
-already takes spin_lock_irqsave().
-
-This is what handle_nested_irq() says:
-
- *	Handle interrupts which are nested into a threaded interrupt
- *	handler. The handler function is called inside the calling
- *	threads context.
-
-So AFAICT, handle_nested_irq() is relevant if the irq-chip's handler
-is called in threaded context instead of hard one. In this case it is
-called from hard-irq context and so calling generic_handle_irq() looks
-to be the right thing.
-
-Right ?
-
-> Or are they just quite slow not super slow?
-
-It doesn't use another slow bus like I2C, but this should be slow
-anyway.
-
-> If a threaded IRQF_ONESHOT was requested the
-> IRQ core will kick the thread and *MASK* this IRQ,
-> which means it will call back to your .irq_mask() function
-> and expect it to be masked from this
-> point.
-> 
-> But the IRQ will not actually be masked until you issue
-> your callbacks in the .irq_bus_sync_unlock() callback
-> right?
-
-Yes.
-
-> So from this point until .irq_bus_sync_unlock()
-> get called and actually mask the IRQ, it could be
-> fired again?
-
-Since we are defining the spec right now, this is up to us to decide
-how we want to do it.
-
-> I suppose the IRQ handler is reentrant?
-
-It shouldn't happen because of the locking in place in the virtqueue
-core (vp_vring_interrupt()).
-
-> This would violate the API.
-> 
-> I would say that from this point and until you sync
-> you need a spinlock or other locking primitive to
-> stop this IRQ from fireing again, and a spinlock will
-> imply local_irq_disable() so this gets really complex.
-> 
-> I would say only using nesting IRQs or guarantee this
-> some other way, one way would be to specify that
-> whatever is at the other side of virtio cannot send another
-> GPIO IRQ message before the last one is handled,
-> so you would need to send a specific (new)
-> VIRTIO_GPIO_REQ_IRQ_ACK after all other messages
-> have been sent in .irq_bus_sync_unlock()
-> so that the next GPIO IRQ can be dispatched after that.
-
-I was thinking of mentioning this clearly in the spec at first, but
-now after checking the sequence of things it looks like Linux will do
-it anyway. Though adding this clearly in the spec can be better. We
-should just send a response message here instead of another message
-type VIRTIO_GPIO_REQ_IRQ_ACK.
-
-> (Is this how messaged signalled interrupts work? No idea.
-> When in doubt ask the IRQ maintainers.)
+That's why we have a thing called standard. And AFAIU virtio API/ABIs
+should be officially registered and standardized.
 
 -- 
-viresh
+With Best Regards,
+Andy Shevchenko
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
