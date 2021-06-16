@@ -1,52 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D5E43AA40D
-	for <lists.virtualization@lfdr.de>; Wed, 16 Jun 2021 21:12:27 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 301C53AA40F
+	for <lists.virtualization@lfdr.de>; Wed, 16 Jun 2021 21:12:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2D2A5401D3;
-	Wed, 16 Jun 2021 19:12:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6E09B4149A;
+	Wed, 16 Jun 2021 19:12:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8GE-33kuDJA1; Wed, 16 Jun 2021 19:12:25 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HWZUSkp7cb9k; Wed, 16 Jun 2021 19:12:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id DEE41404B8;
-	Wed, 16 Jun 2021 19:12:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id DE727414CA;
+	Wed, 16 Jun 2021 19:12:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F01BC000B;
-	Wed, 16 Jun 2021 19:12:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B9E0C000E;
+	Wed, 16 Jun 2021 19:12:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8296BC000B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0ABB6C000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Jun 2021 19:12:22 +0000 (UTC)
+ Wed, 16 Jun 2021 19:12:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5F837404BA
+ by smtp2.osuosl.org (Postfix) with ESMTP id F3F16401D3
  for <virtualization@lists.linux-foundation.org>;
  Wed, 16 Jun 2021 19:12:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=nvidia.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5f5ZZVCddZMM
+ with ESMTP id NHtUDR1104yF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Jun 2021 19:12:20 +0000 (UTC)
+ Wed, 16 Jun 2021 19:12:22 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on2060e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::60e])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7F78340158
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on20617.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eab::617])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E7F2C4021B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Jun 2021 19:12:20 +0000 (UTC)
+ Wed, 16 Jun 2021 19:12:21 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Yr6vv7lLG0I7LDBWCvkstDBilKj2FVi8h00lBJAzuhK48Dmze8KWs2y/azE2b95TDKSDxcTpoIXb05tENZYzG5fxo74AQPjhS/7Q6/U0XtjaR7fSRF2fxc+BnMWJ5UuwvUowqsJW5Xxicq90b0tWbiG3PmMhMivePdkjqeTS0eCFdZBhZv0ZvakoRD+c54s6ebDRkrnQlCjB6t52T2N5kqZ0w2MkXjRLpxhHvtFNZraU+98T9k+ySkxgzpzMktbEJEXwAOf7NbLjXyS2ylQl4VvRD6/Z3zqgjbjE6j+gwQ4GLkhAq0STz+Ei/MjjyKaVbguWUePr3TcGNr1gVg+a7Q==
+ b=DB12lX8sOzhwSUfTj+Mtp39tuit+3GY988vzrOeA7oPoDzhVUBkOQCZjQwNnnbxYJ6ZWnFHJ7NB6tefnv47VTuv5sB/zp/2N/9uA73outxPpVQoFXMJBSEUOUw+sdmvhgky2j1zfBz9+57Y3FgwnASTWVFxThnOqUgukQC3f7SlBuHtkMnG2ghaJAXoqi97EsLuNPGWURe//nLHemqJCU8+lI/b6sVZMARe7t3w+Ipn8+HQ/LpeAqqRUEQp0Y12ibA6hJ5krVnHtTn3qHR0qUejdQ5MyeMABV3vYXhYIGEjnOYm3p39neUFMCHGK5lsaX/Agj8hatx8djWqdEqiqVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GzYKFoqmEtg9PgeBSESKtfqacxgdfGcWBGz2dsZnGYo=;
- b=DkqkYbhWqUOBTrQln66bVRu0n0MFon3wJ7K212SnYu9rzt0NhwhtLWSNEmuNnOvUZ0YywEpzWT8qZsv9XZLguzvjJjUADrG0BGtgedhkKFCuSyTKUoWwfkZ8ROzMwP6z0fA5TB70hUu6WBvz2S6cyPvwrzw3Wreng93SPQza/Zujrzw6cT4C44SYMcs286y7XUD9KKf1elYRPkkICUcROtQ2M0WvlsLt9KDJOcrPDjol/VJdRtKeFvEDyeF5s1vWd56USE6wFqRo7QILGtrd+u9wgLyCC5p3pmrmgiY7POv5WUmcgHOuBCaUTqvs2DgPEWtyr8r/3NwfIkVI+L2Iyg==
+ bh=kHRm3h4QjaNOCy3lE2dGbX2jU6D9Jzg6V6g3yK7w+NU=;
+ b=O3q5e1dKcNA1GE+RC+L1mNoa5uYSkYdfjzMl3ePY93iy9XeJZLsUkw8BogGPgXpyydVQxmgpvndvaUdF4MptVXAHIK9MJw9HuiFtNlwXveRWS1pyomzcnXDcd3rxuFveVGyy6X5SGOTuOm5MynlwqjCDxFp3gh65iX4R6S5/zeUUjGz26r6hk9NrezzdLzIZBpNOBnZ3dZ9FlKYkzR9SiXvt3eHLGHIcqOafHfkT8lChomp4vQO6YZTCClHh1/Wkdcw2XYKCOUQTr4B4nxu40um9g9ElSQsmzkWUAjaPPJkz+la+g9JP7hPFA2vxcfRKK7cFl5P3gZ8arcxAu5u4dw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
@@ -54,18 +56,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GzYKFoqmEtg9PgeBSESKtfqacxgdfGcWBGz2dsZnGYo=;
- b=OgoPrucDQOI+qTPOVgam1tdMxvuO4z+id85Sf2AeKzMbDSPHTN7jQQdpYT6c+WvgNDrHS/72Da6EV3vXIHsOYj1qtSR7rYZf1jpyv6ZGWNXaqX3y6qP9+vBXUxHMpxu/1Upga1gXVWuV8O8AvSfUQjQ2MthAOh6maiAW1nwlUFh+ZKpQP7/XT0ilMQfbBYSDkqaWTO2xO0yUU/RHmOaKe11SmH7cDJaVP6KTjQHbVwkao5qt+9v1VxRlCYoHmQnU5ZkWotxY6VxKMbLRv4x/WgpG9Z7t9VIMtvjmPkTxjPac99JIxQK+ImFiv/LZusVx2Mi+Rg0oAggLQa16o83U9A==
-Received: from MWHPR22CA0053.namprd22.prod.outlook.com (2603:10b6:300:12a::15)
- by MN2PR12MB4045.namprd12.prod.outlook.com (2603:10b6:208:1d6::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.16; Wed, 16 Jun
+ bh=kHRm3h4QjaNOCy3lE2dGbX2jU6D9Jzg6V6g3yK7w+NU=;
+ b=GayjaMUGfqFBsSHAjY/VKSjeL5kXjXIS+/Zpiyp7MH2YKqgoGxgbZHnzc9K/RH+cCrYhvtNywGbAIckDiluaKCYLKKhWiULXEIvWdDqOXRFGEsTiW6X4S/kKO5ud8dgK7eVIxtGGG/5rchueA3o0hunfI+P+xfbAsM8q2yqBRkS9b4JojtSmjR1vMOMNYIYibkC4bnYtzJzj4I9+OgCIxUSgc2s8b7doN+HWVA9uU6sqHvrUHAQFGyERuY3vcptZtigRTVSzX2W/kW0TF9dQoVin9OoLPpNbWL3H34UqvUIq5snjo39+UwUzy2UAogCFz9swBHy8lfa0f08nkR9Mmw==
+Received: from MWHPR22CA0059.namprd22.prod.outlook.com (2603:10b6:300:12a::21)
+ by CH2PR12MB5514.namprd12.prod.outlook.com (2603:10b6:610:62::9) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.18; Wed, 16 Jun
  2021 19:12:18 +0000
 Received: from CO1NAM11FT018.eop-nam11.prod.protection.outlook.com
- (2603:10b6:300:12a:cafe::6a) by MWHPR22CA0053.outlook.office365.com
- (2603:10b6:300:12a::15) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:300:12a:cafe::1c) by MWHPR22CA0059.outlook.office365.com
+ (2603:10b6:300:12a::21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4242.15 via Frontend
- Transport; Wed, 16 Jun 2021 19:12:17 +0000
+ Transport; Wed, 16 Jun 2021 19:12:18 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
  header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
@@ -75,16 +77,16 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.112.34) by
  CO1NAM11FT018.mail.protection.outlook.com (10.13.175.16) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4242.16 via Frontend Transport; Wed, 16 Jun 2021 19:12:17 +0000
+ 15.20.4242.16 via Frontend Transport; Wed, 16 Jun 2021 19:12:18 +0000
 Received: from sw-mtx-036.mtx.labs.mlnx (172.20.187.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Wed, 16 Jun 2021 19:12:14 +0000
+ Wed, 16 Jun 2021 19:12:15 +0000
 From: Parav Pandit <parav@nvidia.com>
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next v3 3/6] vdpa: Enable user to set mac and mtu of
- vdpa device
-Date: Wed, 16 Jun 2021 22:11:52 +0300
-Message-ID: <20210616191155.102303-4-parav@nvidia.com>
+Subject: [PATCH linux-next v3 4/6] vdpa_sim_net: Enable user to set mac
+ address and mtu
+Date: Wed, 16 Jun 2021 22:11:53 +0300
+Message-ID: <20210616191155.102303-5-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210616191155.102303-1-parav@nvidia.com>
 References: <20210616191155.102303-1-parav@nvidia.com>
@@ -94,27 +96,27 @@ X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 96422abc-7656-452c-a2a8-08d930faa8a1
-X-MS-TrafficTypeDiagnostic: MN2PR12MB4045:
-X-Microsoft-Antispam-PRVS: <MN2PR12MB4045864E6A56EC17553E8227DC0F9@MN2PR12MB4045.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:569;
+X-MS-Office365-Filtering-Correlation-Id: 815a6de7-2ed9-48b0-1a14-08d930faa901
+X-MS-TrafficTypeDiagnostic: CH2PR12MB5514:
+X-Microsoft-Antispam-PRVS: <CH2PR12MB551412CA0B85713595AB77EEDC0F9@CH2PR12MB5514.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2449;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: qqlxT4aWMJxvVDFua+r9NB5K56xbv4ZT1RmmMUfamQJOFDhRVXvs5KyO6YTu33d+2cJohKTa6LGS6mj2UPdRoCZ+wfiMh92CiCCBFnRZrK+o+e96yVrWEnJszaVkMm+0NFjgsSjSQ5i8Y6BCvzDn+7E5I2W161QowEUIAcPDLVuSMxuJaKgl0Nt+mAVJ2RWzvfQoJ5sHeOWS6qDhe4dztwvwREhbVKaEmOvfnTqHrl5CgR0Cs+y9BrQmuOQj4F1Ge1PQZUBgyfw62YOtG036vsWNS3UlwZh00jwQ//hCR828DBPMSAstiE1sYU0boIBQ38LPm9jjE0BFS2Txib7piLl0Zh7nvvkJNiFAG8flijN87X986vFm7ZDt8bqxQ/fFyCIfLrTVlAFyflEbAF8kleH4RRIm8Rlwkm33fCVcB7sja1xAX3JjxDhiS31kNNSX0s5nPSQfZmVi7hadvuK6ZcSf8V57mDUP+gqMqOgj6lzTiKuW0ZWUdr6+C/juitqsMrgM4OYZ1RM1uno7IEu4jfCBeH05i/PKeu4uVBJDmgaXCtgNS37JyCKcvhdsuBJMwXWexIIbVu5MkoErRiXzAhnoOixgZ6VdktGdfvKuErz6clWipSTKRNEQvJBHlReZvfK3FRKMKoQpbtVRb9MBLA==
+X-Microsoft-Antispam-Message-Info: b3PRQh/XEP7E0xBq79a7odGQNfLCwpwf/wp89dMfKgYf9vQIlDDNyO8cIP/QIYUN+pnZrn0eUFQAaFSR01ovNl2DtaS4GNXF7XzqgsY/nHaj8grE2zEys4hB0SKo78y+mRl0GRCUrfLx5sacYYBn609UoYVFnFSkX1wZXKVS5yMaMYSY5Qv+UV9jgD7EBIW6G1wHdaiW6OFwdDn2h5LEe4kC8e/wCnxa02rLOL4mKIXURYwVGEP+whPuqkGuQNXpgeAVwnNAxrcssf7JrJUkWo/cNm1Xj4wz2Q46AzLNEOl+iAczsVZzN7rp1nL5iK3rPVRYo0st9RvqxD4ttLoE960ajcSyuZ8E7M6djW70081B2k/a+I+ooE8U2JSl5fQ+LQvHMXjymyhR2EOQ9MBIxVzTpD/RUWhIrO6BOKO38Z1mHIuWJTmQkUzh8IXlgNgvzvxktYMtRmsy5EQ6KhZSRwFYdPI0AumPHTQuJ/XBYYXFnLeIlTmCYE2NhiQYLEi6UDGRcMsKS7yzYtf9GcP7CBBjLqi2LMj3v/QbdaV3HoU8r4RzKc941G0r5Rpv8QsEnjvxi7sUPpIfsq/u7kc8RNMX6QlxKKEwsUzfyz1Xgbofm4lKwaW9rlJa2KmjXlvejnRvjtR826qqc+HwfhgC/cDsFPigW9S1RxmOt963LfY=
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(376002)(136003)(39860400002)(346002)(46966006)(36840700001)(426003)(86362001)(186003)(70206006)(316002)(54906003)(36906005)(107886003)(356005)(6916009)(2616005)(2906002)(6666004)(26005)(8936002)(8676002)(36860700001)(83380400001)(82310400003)(5660300002)(47076005)(336012)(478600001)(82740400003)(1076003)(36756003)(7636003)(70586007)(4326008)(16526019);
+ SFS:(4636009)(376002)(39860400002)(136003)(396003)(346002)(36840700001)(46966006)(6916009)(82310400003)(2616005)(6666004)(16526019)(186003)(2906002)(8676002)(86362001)(336012)(5660300002)(1076003)(26005)(8936002)(7636003)(83380400001)(36860700001)(54906003)(356005)(316002)(36906005)(4326008)(36756003)(47076005)(426003)(82740400003)(70206006)(70586007)(107886003)(478600001);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 19:12:17.7688 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 96422abc-7656-452c-a2a8-08d930faa8a1
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Jun 2021 19:12:18.3915 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 815a6de7-2ed9-48b0-1a14-08d930faa901
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT018.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4045
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB5514
 Cc: elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -132,222 +134,168 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-$ vdpa dev add name bar mgmtdev vdpasim_net
+Enable user to set the mac address and mtu so that each vdpa device
+can have its own user specified mac address and mtu.
+This is done by implementing the management device's configuration
+layout fields setting callback routine.
 
+Now that user is enabled to set the mac address, remove the module
+parameter for same.
+
+And example of setting mac addr and mtu:
+$ vdpa mgmtdev show
+
+$ vdpa dev add name bar mgmtdev vdpasim_net
 $ vdpa dev config set bar mac 00:11:22:33:44:55 mtu 9000
 
+View the config after setting:
 $ vdpa dev config show
 bar: mac 00:11:22:33:44:55 link up link_announce false mtu 9000 speed 0 duplex 0
-
-$ vdpa dev config show -jp
-{
-    "config": {
-        "bar": {
-            "mac": "00:11:22:33:44:55",
-            "link ": "up",
-            "link_announce ": false,
-            "mtu": 9000,
-            "speed": 0,
-            "duplex": 0
-        }
-    }
-}
 
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
 ---
 changelog:
-v2->v3:
- - using new setup_config callback to setup device params via mgmt tool
-   to avoid mixing with existing set_config().
+v1->v2:
+ - using updated interface and callbacks for get/set config
 ---
- drivers/vdpa/vdpa.c       | 91 ++++++++++++++++++++++++++++++++++++++-
- include/linux/vdpa.h      | 18 ++++++++
- include/uapi/linux/vdpa.h |  1 +
- 3 files changed, 109 insertions(+), 1 deletion(-)
+ drivers/vdpa/vdpa_sim/vdpa_sim.c     | 13 +++++++++++
+ drivers/vdpa/vdpa_sim/vdpa_sim.h     |  2 ++
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 34 +++++++++++++++-------------
+ 3 files changed, 33 insertions(+), 16 deletions(-)
 
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 1295528244c3..40874bd92126 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -14,7 +14,6 @@
- #include <uapi/linux/vdpa.h>
- #include <net/genetlink.h>
- #include <linux/mod_devicetable.h>
--#include <linux/virtio_net.h>
- #include <linux/virtio_ids.h>
- 
- static LIST_HEAD(mdev_head);
-@@ -849,10 +848,94 @@ vdpa_nl_cmd_dev_config_get_dumpit(struct sk_buff *msg, struct netlink_callback *
- 	return msg->len;
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index 98f793bc9376..e57cd1ff47e3 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -497,6 +497,17 @@ static void vdpasim_set_config(struct vdpa_device *vdpa, unsigned int offset,
+ 		vdpasim->dev_attr.set_config(vdpasim, vdpasim->config);
  }
  
-+static int vdpa_dev_net_config_set(struct vdpa_device *vdev,
-+				   struct sk_buff *skb, struct genl_info *info)
++static int vdpasim_setup_config(struct vdpa_device *vdpa,
++				const struct vdpa_dev_set_config *config)
 +{
-+	struct nlattr **nl_attrs = info->attrs;
-+	struct vdpa_dev_set_config config = {};
-+	const u8 *macaddr;
-+	int err;
++	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
 +
-+	if (!netlink_capable(skb, CAP_NET_ADMIN))
-+		return -EPERM;
-+
-+	if (!vdev->config->setup_config)
++	if (!vdpasim->dev_attr.setup_config)
 +		return -EOPNOTSUPP;
 +
-+	if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MACADDR]) {
-+		macaddr = nla_data(nl_attrs[VDPA_ATTR_DEV_NET_CFG_MACADDR]);
-+		memcpy(config.net.mac, macaddr, sizeof(config.net.mac));
-+		config.net_mask.mac_valid = true;
-+	}
-+	if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MTU]) {
-+		config.net.mtu =
-+			nla_get_u16(nl_attrs[VDPA_ATTR_DEV_NET_CFG_MTU]);
-+		config.net_mask.mtu_valid = true;
-+	}
-+
-+	mutex_lock(&vdev->cf_mutex);
-+	err = vdev->config->setup_config(vdev, &config);
-+	mutex_unlock(&vdev->cf_mutex);
-+	return err;
++	return vdpasim->dev_attr.setup_config(vdpasim, config);
 +}
 +
-+static int vdpa_dev_config_set(struct vdpa_device *vdev, struct sk_buff *skb,
-+			       struct genl_info *info)
-+{
-+	int err = -EOPNOTSUPP;
-+	u32 device_id;
-+
-+	if (!vdev->mdev)
-+		return -EOPNOTSUPP;
-+
-+	device_id = vdev->config->get_device_id(vdev);
-+	switch (device_id) {
-+	case VIRTIO_ID_NET:
-+		err = vdpa_dev_net_config_set(vdev, skb, info);
-+		break;
-+	default:
-+		break;
-+	}
-+	return err;
-+}
-+
-+static int vdpa_nl_cmd_dev_config_set_doit(struct sk_buff *skb, struct genl_info *info)
-+{
-+	struct vdpa_device *vdev;
-+	const char *devname;
-+	struct device *dev;
-+	int err;
-+
-+	if (!info->attrs[VDPA_ATTR_DEV_NAME])
-+		return -EINVAL;
-+	devname = nla_data(info->attrs[VDPA_ATTR_DEV_NAME]);
-+
-+	mutex_lock(&vdpa_dev_mutex);
-+	dev = bus_find_device(&vdpa_bus, NULL, devname, vdpa_name_match);
-+	if (!dev) {
-+		mutex_unlock(&vdpa_dev_mutex);
-+		NL_SET_ERR_MSG_MOD(info->extack, "device not found");
-+		return -ENODEV;
-+	}
-+	vdev = container_of(dev, struct vdpa_device, dev);
-+	if (!vdev->mdev) {
-+		mutex_unlock(&vdpa_dev_mutex);
-+		put_device(dev);
-+		return -EINVAL;
-+	}
-+	err = vdpa_dev_config_set(vdev, skb, info);
-+	put_device(dev);
-+	mutex_unlock(&vdpa_dev_mutex);
-+	return err;
-+}
-+
- static const struct nla_policy vdpa_nl_policy[VDPA_ATTR_MAX + 1] = {
- 	[VDPA_ATTR_MGMTDEV_BUS_NAME] = { .type = NLA_NUL_STRING },
- 	[VDPA_ATTR_MGMTDEV_DEV_NAME] = { .type = NLA_STRING },
- 	[VDPA_ATTR_DEV_NAME] = { .type = NLA_STRING },
-+	[VDPA_ATTR_DEV_NET_CFG_MACADDR] = NLA_POLICY_ETH_ADDR,
-+	/* virtio spec 1.1 section 5.1.4.1 for valid MTU range */
-+	[VDPA_ATTR_DEV_NET_CFG_MTU] = NLA_POLICY_MIN(NLA_U16, 68),
- };
- 
- static const struct genl_ops vdpa_nl_ops[] = {
-@@ -886,6 +969,12 @@ static const struct genl_ops vdpa_nl_ops[] = {
- 		.doit = vdpa_nl_cmd_dev_config_get_doit,
- 		.dumpit = vdpa_nl_cmd_dev_config_get_dumpit,
- 	},
-+	{
-+		.cmd = VDPA_CMD_DEV_CONFIG_SET,
-+		.validate = GENL_DONT_VALIDATE_STRICT | GENL_DONT_VALIDATE_DUMP,
-+		.doit = vdpa_nl_cmd_dev_config_set_doit,
-+		.flags = GENL_ADMIN_PERM,
-+	},
- };
- 
- static struct genl_family vdpa_nl_family __ro_after_init = {
-diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-index bf104f9f461a..9b7238d5310e 100644
---- a/include/linux/vdpa.h
-+++ b/include/linux/vdpa.h
-@@ -6,6 +6,8 @@
- #include <linux/device.h>
- #include <linux/interrupt.h>
- #include <linux/vhost_iotlb.h>
-+#include <linux/virtio_net.h>
-+#include <linux/if_ether.h>
- 
- /**
-  * struct vdpa_calllback - vDPA callback definition.
-@@ -70,6 +72,17 @@ struct vdpa_iova_range {
- 	u64 last;
- };
- 
-+struct vdpa_dev_set_config {
-+	struct {
-+		u8 mac[ETH_ALEN];
-+		u16 mtu;
-+	} net;
-+	struct {
-+		u8 mac_valid: 1;
-+		u8 mtu_valid: 1;
-+	} net_mask;
-+};
-+
- /**
-  * struct vdpa_config_ops - operations for configuring a vDPA device.
-  * Note: vDPA device drivers are required to implement all of the
-@@ -169,6 +182,9 @@ struct vdpa_iova_range {
-  *				@buf: buffer used to write from
-  *				@len: the length to write to
-  *				configuration space
-+ * @setup_config:		Setup configuration space
-+ *				@vdev: vdpa device
-+ *				#config: configuration to apply to device
-  * @get_generation:		Get device config generation (optional)
-  *				@vdev: vdpa device
-  *				Returns u32: device generation
-@@ -241,6 +257,8 @@ struct vdpa_config_ops {
- 			   void *buf, unsigned int len);
- 	void (*set_config)(struct vdpa_device *vdev, unsigned int offset,
- 			   const void *buf, unsigned int len);
-+	int (*setup_config)(struct vdpa_device *vdev,
+ static u32 vdpasim_get_generation(struct vdpa_device *vdpa)
+ {
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
+@@ -608,6 +619,7 @@ static const struct vdpa_config_ops vdpasim_config_ops = {
+ 	.get_config_size        = vdpasim_get_config_size,
+ 	.get_config             = vdpasim_get_config,
+ 	.set_config             = vdpasim_set_config,
++	.setup_config		= vdpasim_setup_config,
+ 	.get_generation         = vdpasim_get_generation,
+ 	.get_iova_range         = vdpasim_get_iova_range,
+ 	.dma_map                = vdpasim_dma_map,
+@@ -636,6 +648,7 @@ static const struct vdpa_config_ops vdpasim_batch_config_ops = {
+ 	.get_config_size        = vdpasim_get_config_size,
+ 	.get_config             = vdpasim_get_config,
+ 	.set_config             = vdpasim_set_config,
++	.setup_config		= vdpasim_setup_config,
+ 	.get_generation         = vdpasim_get_generation,
+ 	.get_iova_range         = vdpasim_get_iova_range,
+ 	.set_map                = vdpasim_set_map,
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.h b/drivers/vdpa/vdpa_sim/vdpa_sim.h
+index cd58e888bcf3..395894635010 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.h
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.h
+@@ -45,6 +45,8 @@ struct vdpasim_dev_attr {
+ 	work_func_t work_fn;
+ 	void (*get_config)(struct vdpasim *vdpasim, void *config);
+ 	void (*set_config)(struct vdpasim *vdpasim, const void *config);
++	int (*setup_config)(struct vdpasim *vdpasim,
 +			    const struct vdpa_dev_set_config *config);
- 	u32 (*get_generation)(struct vdpa_device *vdev);
- 	struct vdpa_iova_range (*get_iova_range)(struct vdpa_device *vdev);
- 
-diff --git a/include/uapi/linux/vdpa.h b/include/uapi/linux/vdpa.h
-index 5c31ecc3b956..ec349789b8d1 100644
---- a/include/uapi/linux/vdpa.h
-+++ b/include/uapi/linux/vdpa.h
-@@ -18,6 +18,7 @@ enum vdpa_command {
- 	VDPA_CMD_DEV_DEL,
- 	VDPA_CMD_DEV_GET,		/* can dump */
- 	VDPA_CMD_DEV_CONFIG_GET,	/* can dump */
-+	VDPA_CMD_DEV_CONFIG_SET,
  };
  
- enum vdpa_attr {
+ /* State of each vdpasim device */
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
+index a1ab6163f7d1..5fcee88a89c5 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
+@@ -29,12 +29,6 @@
+ 
+ #define VDPASIM_NET_VQ_NUM	2
+ 
+-static char *macaddr;
+-module_param(macaddr, charp, 0);
+-MODULE_PARM_DESC(macaddr, "Ethernet MAC address");
+-
+-static u8 macaddr_buf[ETH_ALEN];
+-
+ static void vdpasim_net_work(struct work_struct *work)
+ {
+ 	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
+@@ -112,9 +106,19 @@ static void vdpasim_net_get_config(struct vdpasim *vdpasim, void *config)
+ {
+ 	struct virtio_net_config *net_config = config;
+ 
+-	net_config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
+ 	net_config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
+-	memcpy(net_config->mac, macaddr_buf, ETH_ALEN);
++}
++
++static int vdpasim_net_setup_config(struct vdpasim *vdpasim,
++				    const struct vdpa_dev_set_config *config)
++{
++	struct virtio_net_config *vio_config = vdpasim->config;
++
++	if (config->net_mask.mac_valid)
++		memcpy(vio_config->mac, config->net.mac, ETH_ALEN);
++	if (config->net_mask.mtu_valid)
++		vio_config->mtu = cpu_to_vdpasim16(vdpasim, config->net.mtu);
++	return 0;
+ }
+ 
+ static void vdpasim_net_mgmtdev_release(struct device *dev)
+@@ -128,6 +132,7 @@ static struct device vdpasim_net_mgmtdev = {
+ 
+ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
+ {
++	struct virtio_net_config *vio_config;
+ 	struct vdpasim_dev_attr dev_attr = {};
+ 	struct vdpasim *simdev;
+ 	int ret;
+@@ -139,6 +144,7 @@ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
+ 	dev_attr.nvqs = VDPASIM_NET_VQ_NUM;
+ 	dev_attr.config_size = sizeof(struct virtio_net_config);
+ 	dev_attr.get_config = vdpasim_net_get_config;
++	dev_attr.setup_config = vdpasim_net_setup_config;
+ 	dev_attr.work_fn = vdpasim_net_work;
+ 	dev_attr.buffer_size = PAGE_SIZE;
+ 
+@@ -146,6 +152,10 @@ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name)
+ 	if (IS_ERR(simdev))
+ 		return PTR_ERR(simdev);
+ 
++	vio_config = simdev->config;
++	/* Setup default MTU to be 1500 */
++	vio_config->mtu = cpu_to_le16(1500);
++
+ 	ret = _vdpa_register_device(&simdev->vdpa, VDPASIM_NET_VQ_NUM);
+ 	if (ret)
+ 		goto reg_err;
+@@ -185,14 +195,6 @@ static int __init vdpasim_net_init(void)
+ {
+ 	int ret;
+ 
+-	if (macaddr) {
+-		mac_pton(macaddr, macaddr_buf);
+-		if (!is_valid_ether_addr(macaddr_buf))
+-			return -EADDRNOTAVAIL;
+-	} else {
+-		eth_random_addr(macaddr_buf);
+-	}
+-
+ 	ret = device_register(&vdpasim_net_mgmtdev);
+ 	if (ret)
+ 		return ret;
 -- 
 2.26.2
 
