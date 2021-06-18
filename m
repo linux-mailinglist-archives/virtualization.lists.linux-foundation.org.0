@@ -1,95 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 215613AC526
-	for <lists.virtualization@lfdr.de>; Fri, 18 Jun 2021 09:44:14 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D3D6B3AC56D
+	for <lists.virtualization@lfdr.de>; Fri, 18 Jun 2021 09:54:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BE89A605F4;
-	Fri, 18 Jun 2021 07:44:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 28E1B40562;
+	Fri, 18 Jun 2021 07:54:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id W5R52Os88jfY; Fri, 18 Jun 2021 07:44:12 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 90CF3605FF;
-	Fri, 18 Jun 2021 07:44:11 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id quPghZz-jbU8; Fri, 18 Jun 2021 07:54:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 5436240547;
+	Fri, 18 Jun 2021 07:54:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9C60C0022;
-	Fri, 18 Jun 2021 07:44:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 55BAEC0028;
+	Fri, 18 Jun 2021 07:54:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6BD9AC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 95270C000D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 07:44:09 +0000 (UTC)
+ Fri, 18 Jun 2021 07:54:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 566EC605F6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 839894027C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 07:44:09 +0000 (UTC)
+ Fri, 18 Jun 2021 07:54:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CF2SkWmi5RlA
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id AwIpkP9IHsFO
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 07:44:08 +0000 (UTC)
+ Fri, 18 Jun 2021 07:54:50 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 85917605F4
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B935840221
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 07:44:08 +0000 (UTC)
-Received: by mail-ed1-x529.google.com with SMTP id b11so7341584edy.4
+ Fri, 18 Jun 2021 07:54:49 +0000 (UTC)
+Received: by mail-ed1-x534.google.com with SMTP id w21so7382264edv.3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 00:44:08 -0700 (PDT)
+ Fri, 18 Jun 2021 00:54:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=date:from:to:cc:subject:message-id:references:mime-version
  :content-disposition:in-reply-to;
- bh=xrVDbV297cRNejKsonngV4vGhbIFMI93Q9VE4px56sk=;
- b=DJrFso3Sd/PK31zGllWY1zpb+A/KUBtA1E8u5Qir0hsdifTQYSdRZW1U6CNektQcl7
- 8Gwsv7C1odv1jrBJeUaUkxlcjlp8X1pKeC2J+1DP3IUSv0CsFCITaq8JZc3WjTws7uPQ
- 4IxWmREr3j6FYQj+LSiYl4jQTvWE68g/xCWzMfT0kpokkoIFlm0HlOIaovz3NUm3XRbN
- wE7uyBGbqLDvxaWPAzFanMx77+YZjL556iOB0wbtNEUUYyaZWtg3ae9HJjDoNyKVy1IK
- fvCBuKgdbz3tUsMUMs1z8Q2cwdxKNYtxY/sI/BfDgxkDL/babYZa0vN5UhC3RLA+ilVb
- 2Qtw==
+ bh=o2WQZjhwoaHMxBb+srOde8YwelPLzLRldEZbtvlgRGU=;
+ b=k1T0ECGGh1W0dhEm5YpW3R4tr4w2ouXUmoAkc4fnu+nm3wfGl1D/XzfrjxPVvNpD9R
+ GUN87sw+XheVvqk6OE0++OuYZdogI1z1/Z+Lp7EcaWueCIl0eiIDcgBLTpL+k3ODqRRi
+ o1irouPqfd1Q1/YN2nVPDXvXxcg204pgHRGlmEY1D6DM1HPSCvgbILp/o8l/Wvkr0Iw3
+ rGuOE9LxvMTkCXpX5w0+1LTUHt3sZIF4mC2s2Skw8CTsGlTa12/M8ao345z4GdUAlnPd
+ JDFt5F5xmanD8rpTrdfn3E8eDxfl207dVuGecnb6ZmTyEXAW4IxIunr2hSUFxui1Sf+u
+ +S/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=xrVDbV297cRNejKsonngV4vGhbIFMI93Q9VE4px56sk=;
- b=BkJFd16/tixETVyNYTCM6DdWxoR+V4M5c/j6tt/or3V+N3R0yrICS6wKh1o0l8UOeP
- xrDCiyefEu90R0KbMwsUJAWvk4/Lv23HY9AMWpqMcA3b+CnQz8935FYlzchxel1Jklr7
- gfrwkciDD7UAcqBDuHtLyPYzf3fDQR0olEEOIjJMyqceOcZaqIRlGhyxCDSfU7h5g7N2
- 9GPH0Dj9HRIj7ZnfpxIAHjD/QJWmtOhZ96UAkZE7cpv5Rf4mYLbt/yzyO0RTf8efgsh4
- k9ajONZE1lKnW83XaZxKj726AhoDBwQr4oO6lKjS1fXOXr6+oUmGMmv0e9uskmGkXjaJ
- lRYg==
-X-Gm-Message-State: AOAM532xO/wq9Kl9wCYY3DjGYmEUPSnUGvyDjnVdo3zYrBq79liaHXV/
- c0iGGTJrk8IjQpyxOKzl8zE1Eg==
-X-Google-Smtp-Source: ABdhPJzREIN0+D0Q7W8RSrNNQ4NDgbr/Euk9okd86tzehslscukuMpktyxR1ml4l0LZerVVX4xGYvQ==
-X-Received: by 2002:a05:6402:17d3:: with SMTP id
- s19mr1921993edy.222.1624002246807; 
- Fri, 18 Jun 2021 00:44:06 -0700 (PDT)
+ bh=o2WQZjhwoaHMxBb+srOde8YwelPLzLRldEZbtvlgRGU=;
+ b=qju85uhtZLhWonejvCWwBy5lS4CWQd5BBMCQoKZvAwzxQkGNpBbgvBuMBpnDeVUd8v
+ ClRW0MPzzHLBIT7IV2oYz5G/ljata7kiIM6v/wpZCSzbwnNj89Hf1aMOAG8TddhhfbQi
+ HsDkhfgaHrPTCnHkA3ZFpgg1ELacadQbzRE6RlgOjIRhUgQm6a8Lw+8AHaSUqyhy7ftW
+ v7aMncsahtfhqXADFp8loSuNMoJ8HNPqo6/nRDRC7UgcEd999Tw1HSoXmgyXmjg/J7ij
+ o0grrzqwEL1CQsc7dYr7p/0r2fZ/9bQZhRh/SoCXJmfrwIXvgOeFs5KNFfm1avW3jQQh
+ FFdA==
+X-Gm-Message-State: AOAM5335CniRNp3XIG8xs702QZjPaoIafga1fE+WIAdxakZE+5+Q9pmr
+ 8j58AbbgFoHzkcOf5IIp6SughA==
+X-Google-Smtp-Source: ABdhPJw47GTVGsZ2XZZsLWgVTPMHWXGLZ9JfMKbH6mO4cozlyWGnWGY9YGBYGbYr6USC4QNEMkKYww==
+X-Received: by 2002:a05:6402:4395:: with SMTP id
+ o21mr3261040edc.163.1624002887797; 
+ Fri, 18 Jun 2021 00:54:47 -0700 (PDT)
 Received: from myrica (adsl-84-226-111-173.adslplus.ch. [84.226.111.173])
- by smtp.gmail.com with ESMTPSA id cf26sm680470ejb.38.2021.06.18.00.44.05
+ by smtp.gmail.com with ESMTPSA id j22sm680988eje.123.2021.06.18.00.54.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jun 2021 00:44:06 -0700 (PDT)
-Date: Fri, 18 Jun 2021 09:43:47 +0200
+ Fri, 18 Jun 2021 00:54:47 -0700 (PDT)
+Date: Fri, 18 Jun 2021 09:54:28 +0200
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: Eric Auger <eric.auger@redhat.com>
+To: "Rafael J. Wysocki" <rafael@kernel.org>
 Subject: Re: [PATCH v4 3/6] ACPI: Add driver for the VIOT table
-Message-ID: <YMxOs8MV+nlCKq7j@myrica>
+Message-ID: <YMxRNHVjKk3H6r7t@myrica>
 References: <20210610075130.67517-1-jean-philippe@linaro.org>
  <20210610075130.67517-4-jean-philippe@linaro.org>
- <5a16c21f-ca02-1016-80e9-c374a6fe2b25@redhat.com>
+ <CAJZ5v0gTZDyEC7MuBEv2gg6Usq+PD-WEQJbiAqKrFC3KV-M52g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <5a16c21f-ca02-1016-80e9-c374a6fe2b25@redhat.com>
-Cc: lorenzo.pieralisi@arm.com, mst@redhat.com, catalin.marinas@arm.com,
- joro@8bytes.org, sudeep.holla@arm.com, rjw@rjwysocki.net, robin.murphy@arm.com,
- virtualization@lists.linux-foundation.org, linux-acpi@vger.kernel.org,
- iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
- guohanjun@huawei.com, baolu.lu@linux.intel.com, will@kernel.org,
- dwmw2@infradead.org, linux-arm-kernel@lists.infradead.org, lenb@kernel.org
+In-Reply-To: <CAJZ5v0gTZDyEC7MuBEv2gg6Usq+PD-WEQJbiAqKrFC3KV-M52g@mail.gmail.com>
+Cc: Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, Joerg Roedel <joro@8bytes.org>,
+ Sudeep Holla <sudeep.holla@arm.com>, "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+ Robin Murphy <robin.murphy@arm.com>, virtualization@lists.linux-foundation.org,
+ ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
+ "open list:AMD IOMMU \(AMD-VI\)" <iommu@lists.linux-foundation.org>,
+ sebastien.boeuf@intel.com, Eric Auger <eric.auger@redhat.com>,
+ Hanjun Guo <guohanjun@huawei.com>, Lu Baolu <baolu.lu@linux.intel.com>,
+ Will Deacon <will@kernel.org>, David Woodhouse <dwmw2@infradead.org>,
+ Linux ARM <linux-arm-kernel@lists.infradead.org>, Len Brown <lenb@kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,48 +113,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jun 16, 2021 at 03:26:08PM +0200, Eric Auger wrote:
-> > +	default:
-> > +		pr_warn("Unsupported node %x\n", hdr->type);
-> > +		ret = 0;
-> > +		goto err_free;
-> > +	}
+On Thu, Jun 17, 2021 at 01:50:59PM +0200, Rafael J. Wysocki wrote:
+> > diff --git a/drivers/acpi/bus.c b/drivers/acpi/bus.c
+> > index be7da23fad76..b835ca702ff0 100644
+> > --- a/drivers/acpi/bus.c
+> > +++ b/drivers/acpi/bus.c
+> > @@ -27,6 +27,7 @@
+> >  #include <linux/dmi.h>
+> >  #endif
+> >  #include <linux/acpi_iort.h>
+> > +#include <linux/acpi_viot.h>
+> >  #include <linux/pci.h>
+> >  #include <acpi/apei.h>
+> >  #include <linux/suspend.h>
+> > @@ -1339,6 +1340,7 @@ static int __init acpi_init(void)
+> >         pci_mmcfg_late_init();
+> >         acpi_iort_init();
+> >         acpi_scan_init();
+> > +       acpi_viot_init();
+> 
+> Is there a specific reason why to call it right here?
+> 
+> In particular, does it need to be called after acpi_scan_init()?  And
+> does it need to be called before the subsequent functions?  If so,
+> then why?
+
+It does need to be called after acpi_scan_init(), because it relies on
+struct device and their fwnode to be initialized. In particular to find a
+PCI device we call pci_get_domain_bus_and_slot(), which needs the PCI
+topology made available by acpi_scan_init().
+
+It does not need to be before the subsequent functions however, I can move
+it at the end.
+
+> > +void __init acpi_viot_init(void)
+> > +{
+> > +       int i;
+> > +       acpi_status status;
+> > +       struct acpi_table_header *hdr;
+> > +       struct acpi_viot_header *node;
 > > +
-> > +	/*
-> > +	 * To be compatible with future versions of the table which may include
-> > +	 * other node types, keep parsing.
-> > +	 */
-> nit: doesn't this comment rather apply to the default clause in the
-> switch.
+> > +       status = acpi_get_table(ACPI_SIG_VIOT, 0, &hdr);
+> > +       if (ACPI_FAILURE(status)) {
+> > +               if (status != AE_NOT_FOUND) {
+> > +                       const char *msg = acpi_format_exception(status);
+> > +
+> > +                       pr_err("Failed to get table, %s\n", msg);
+> > +               }
+> > +               return;
+> > +       }
+> > +
+> > +       viot = (void *)hdr;
+> > +
+> > +       node = ACPI_ADD_PTR(struct acpi_viot_header, viot, viot->node_offset);
+> > +       for (i = 0; i < viot->node_count; i++) {
+> > +               if (viot_parse_node(node))
+> > +                       return;
+> > +
+> > +               node = ACPI_ADD_PTR(struct acpi_viot_header, node,
+> > +                                   node->length);
+> > +       }
+> 
+> Do you still need the table after the above is complete?  If not,
+> release the reference on it acquired above.
 
-Yes, the comment doesn't accurately explain the code below, I'll tweak it.
+We don't need the table anymore, I'll drop the reference
 
-        /*
-         * A future version of the table may use the node for other purposes.
-         * Keep parsing.
-         */
-
-> In case the PCI range node or the single MMIO endoint node does
-> not refer to any translation element, isn't it simply an error case?
-
-It is permissible in my opinion. If a future version of the spec appends
-new fields to the MMIO endpoint describing some PV property (I can't think
-of a useful example), then the table can contain the vIOMMU topology as
-usual plus one MMIO node that's only here to describe that property, and
-doesn't have a translation element. If we encounter that I think we should
-keep parsing.
-
-> > +	if (!ep->viommu) {
-> > +		pr_warn("No IOMMU node found\n");
-> > +		ret = 0;
-> > +		goto err_free;
-> > +	}
-
-> Besides
-> Reviewed-by: Eric Auger <eric.auger@redhat.com>
-
-Thanks!
+Thanks,
 Jean
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
