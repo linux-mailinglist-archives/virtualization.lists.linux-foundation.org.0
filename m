@@ -1,99 +1,116 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D2B83ACF11
-	for <lists.virtualization@lfdr.de>; Fri, 18 Jun 2021 17:30:38 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 305A93ACF8D
+	for <lists.virtualization@lfdr.de>; Fri, 18 Jun 2021 17:56:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 36CC7607CE;
-	Fri, 18 Jun 2021 15:30:33 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7C65A400DC;
+	Fri, 18 Jun 2021 15:56:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id c1d91gf4IAUI; Fri, 18 Jun 2021 15:30:32 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Zr3lIYElzrjm; Fri, 18 Jun 2021 15:56:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id C98DA60819;
-	Fri, 18 Jun 2021 15:30:31 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 309954023C;
+	Fri, 18 Jun 2021 15:56:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 17B98C000D;
-	Fri, 18 Jun 2021 15:30:31 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B665DC000B;
+	Fri, 18 Jun 2021 15:56:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 26725C000F
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 74873C000B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 15:30:28 +0000 (UTC)
+ Fri, 18 Jun 2021 15:56:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 16B2583CD8
+ by smtp3.osuosl.org (Postfix) with ESMTP id 55981606B1
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 15:30:28 +0000 (UTC)
+ Fri, 18 Jun 2021 15:56:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linaro.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rg7W7aQDUkf2
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id nsVTA6MuIc-8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 15:30:27 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4709483CC8
+ Fri, 18 Jun 2021 15:56:04 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 226D660684
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 15:30:27 +0000 (UTC)
-Received: by mail-ej1-x62f.google.com with SMTP id og14so16523220ejc.5
+ Fri, 18 Jun 2021 15:56:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1624031763;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Awjn2v8qac0K7VClk6HbxoaGBdL5LeTfJlE9EQ+fOjk=;
+ b=OAACkEV23Oi9tlYJ9U6BKxTTlbDgCuADiI3NKHffgpkobmiW82yyTu/8q3N8yYbpn25lYO
+ nq0D3IsNHqkMs+XJxXZr4g3Hr23r4ngMGb8N0S0UYbqnXCQvomAYTXutfLQdbI6O+dhW4T
+ IAuC/ma+p4ISyUZCXqAIUlmO4Tssu70=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-390--xXq2hOiOBmxt5o1VujLRQ-1; Fri, 18 Jun 2021 11:56:01 -0400
+X-MC-Unique: -xXq2hOiOBmxt5o1VujLRQ-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ k3-20020a5d62830000b029011a69a4d069so4355464wru.21
  for <virtualization@lists.linux-foundation.org>;
- Fri, 18 Jun 2021 08:30:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=rpRcMlANuJMVLr/XwX8HEu/R5blh278L1JFLoof2k1A=;
- b=jO4a4H8Yhggcga4GQdZHUtondp+5Jx+D9WWbrevj+4RY3niqEa7Gjxo9T0BM+3mFzj
- q7Kjb+dga1Uy0PA0AIU3gPoqzIGyr3Zyhhr+ELhL6dj55qnE/8J00aGATXw7obrxrjHc
- fDxsl5c0eNS6ExRmSIPOIogUma7fv7B+Zlb9CXFU+YbLEtXgmxZUosqgnUPtM2gTMoFb
- 3EHZu4+eKUmgSdc/Gnm9yDnbIJSrWyiNtION2WYfgl59CR3LvTGF12+CATOUdvom3/XV
- cGh+zU5eQWCjbhXehiI74kJeaclkuwe5nSulA+QKKQuKMvcBkYkApJH7trVKqt7Txo5D
- j3fw==
+ Fri, 18 Jun 2021 08:56:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=rpRcMlANuJMVLr/XwX8HEu/R5blh278L1JFLoof2k1A=;
- b=RstcBRNBsW6uI78kV/q61S8+PEep7wsqffUw77x69on72cB7NDzSEncK2ZcqFAy6eg
- mseu4WFWP8NoZRz81Aaz3hRkxXcKPZQtwQ3KLncPhULSkkzMibSwmNrKnmxuTXip4WWk
- CFH04h6T+w+/t6rCFVyvZZ4EKYsacjk+vxrAwFxZSNyjKD84TTiDXdGR//BgFr+BKn2o
- G6+FDJMN33thFfPc474sHq90mZq9u3a0qHuHrBAZQiypafxMYXKx9qcuO0lgcJ5aYBIJ
- +ifPJ7ORxLSGkndc9mlsL7Sp5eagIHAKYESXiq9v2Np08FtaUyXqEvdOBvBrHLzo/R1+
- LosA==
-X-Gm-Message-State: AOAM530Vsyj9MSSkvWerolBTMFeT7/uIOcfceMiaHBITbyymFb5KzCjK
- +Sygk8o49ZukfFNv8LSoRKEiUA==
-X-Google-Smtp-Source: ABdhPJwv2gkUGSnBNaByT41YPue7mNT8OUrgVjtrwBeLgH2oLQ6rAXxgrzJb3pLtycur69cTKQfF+A==
-X-Received: by 2002:a17:906:b0c6:: with SMTP id
- bk6mr11670554ejb.97.1624030225430; 
- Fri, 18 Jun 2021 08:30:25 -0700 (PDT)
-Received: from localhost.localdomain (adsl-84-226-111-173.adslplus.ch.
- [84.226.111.173])
- by smtp.gmail.com with ESMTPSA id bn7sm1197613ejb.111.2021.06.18.08.30.24
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=Awjn2v8qac0K7VClk6HbxoaGBdL5LeTfJlE9EQ+fOjk=;
+ b=gLmdQGwfTiZljQrbBauElNlC5WmFBL23CbOb5+C94IJ6RJp9MblqZQMzm3IN12dZ9z
+ WhpXX7tS85SVDRuddOXwfM+6hTdVL4hEv9LoG/u6CyrhqAuHOxPQInpM2DzT9yG7Rn24
+ 69n6lXJj35bnlD4w3WM+KKQUmiyawMZHjOPnNYVFcuMNucP6MKEzlqccGILm2wwdGKxq
+ l13RTAlNgUS9pi3A7FOpbr5yudvwLIysL3JasyowErRnqxjUxdE1DnvRisc6k5CdRnDT
+ GQ55vrd2rPGQESfP20OmI72kVVMfktYcCLVWeNGu0pglAzBRnIIbrgMifGSyHm5Mm9rG
+ xi9w==
+X-Gm-Message-State: AOAM530PiI/m93Vjx1vCCA0iHobbiCjvPj3aOYKfxVekgBCnxjKc4dJo
+ qAN/vhd4XIX+fXr+6hpUnZ+grLIdu5hHMFtrSjZ2tvzJgyIF5zWpieq0oXy04MqQ+1DyIXNJls5
+ OnANKDHCCY1FkL+gAo3j65QPLRBzeGmUEPyVhQ7yslw==
+X-Received: by 2002:a5d:6d8a:: with SMTP id l10mr13665854wrs.63.1624031760677; 
+ Fri, 18 Jun 2021 08:56:00 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyb8+5HIJLdutX7cENNNI1/ecBZD9YW9aCIcD5DoBeecwsxaAXgeOQAGd3lSOiR1Xdg+NTIjg==
+X-Received: by 2002:a5d:6d8a:: with SMTP id l10mr13665839wrs.63.1624031760459; 
+ Fri, 18 Jun 2021 08:56:00 -0700 (PDT)
+Received: from steredhat.lan ([5.170.128.175])
+ by smtp.gmail.com with ESMTPSA id m18sm8968801wmq.45.2021.06.18.08.55.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Jun 2021 08:30:25 -0700 (PDT)
-From: Jean-Philippe Brucker <jean-philippe@linaro.org>
-To: rjw@rjwysocki.net,
-	lenb@kernel.org,
-	joro@8bytes.org,
-	mst@redhat.com
-Subject: [PATCH v5 5/5] iommu/virtio: Enable x86 support
-Date: Fri, 18 Jun 2021 17:21:00 +0200
-Message-Id: <20210618152059.1194210-6-jean-philippe@linaro.org>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210618152059.1194210-1-jean-philippe@linaro.org>
-References: <20210618152059.1194210-1-jean-philippe@linaro.org>
+ Fri, 18 Jun 2021 08:56:00 -0700 (PDT)
+Date: Fri, 18 Jun 2021 17:55:55 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
+Subject: Re: [PATCH v11 11/18] virtio/vsock: dequeue callback for
+ SOCK_SEQPACKET
+Message-ID: <20210618155555.j5p4v6j5gk2dboj3@steredhat.lan>
+References: <20210611110744.3650456-1-arseny.krasnov@kaspersky.com>
+ <20210611111241.3652274-1-arseny.krasnov@kaspersky.com>
+ <20210618134423.mksgnbmchmow4sgh@steredhat.lan>
+ <bb323125-f802-1d16-7530-6e4f4abb00a6@kaspersky.com>
 MIME-Version: 1.0
-Cc: jean-philippe@linaro.org, lorenzo.pieralisi@arm.com, eric.auger@redhat.com,
- catalin.marinas@arm.com, sudeep.holla@arm.com, robin.murphy@arm.com,
- virtualization@lists.linux-foundation.org, linux-acpi@vger.kernel.org,
- iommu@lists.linux-foundation.org, sebastien.boeuf@intel.com,
- guohanjun@huawei.com, will@kernel.org, dwmw2@infradead.org,
- linux-arm-kernel@lists.infradead.org, baolu.lu@linux.intel.com
+In-Reply-To: <bb323125-f802-1d16-7530-6e4f4abb00a6@kaspersky.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Andra Paraschiv <andraprs@amazon.com>,
+ "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "oxffffaa@gmail.com" <oxffffaa@gmail.com>,
+ Norbert Slusarek <nslusarek@gmx.net>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Colin Ian King <colin.king@canonical.com>, Jakub Kicinski <kuba@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,95 +122,174 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-With the VIOT support in place, x86 platforms can now use the
-virtio-iommu.
+On Fri, Jun 18, 2021 at 06:04:37PM +0300, Arseny Krasnov wrote:
+>
+>On 18.06.2021 16:44, Stefano Garzarella wrote:
+>> Hi Arseny,
+>> the series looks great, I have just a question below about
+>> seqpacket_dequeue.
+>>
+>> I also sent a couple a simple fixes, it would be great if you can review
+>> them:
+>> https://lore.kernel.org/netdev/20210618133526.300347-1-sgarzare@redhat.c=
+om/
+>>
+>>
+>> On Fri, Jun 11, 2021 at 02:12:38PM +0300, Arseny Krasnov wrote:
+>>> Callback fetches RW packets from rx queue of socket until whole record
+>>> is copied(if user's buffer is full, user is not woken up). This is done
+>>> to not stall sender, because if we wake up user and it leaves syscall,
+>>> nobody will send credit update for rest of record, and sender will wait
+>>> for next enter of read syscall at receiver's side. So if user buffer is
+>>> full, we just send credit update and drop data.
+>>>
+>>> Signed-off-by: Arseny Krasnov <arseny.krasnov@kaspersky.com>
+>>> ---
+>>> v10 -> v11:
+>>> 1) 'msg_count' field added to count current number of EORs.
+>>> 2) 'msg_ready' argument removed from callback.
+>>> 3) If 'memcpy_to_msg()' failed during copy loop, there will be
+>>>    no next attempts to copy data, rest of record will be freed.
+>>>
+>>> include/linux/virtio_vsock.h            |  5 ++
+>>> net/vmw_vsock/virtio_transport_common.c | 84 +++++++++++++++++++++++++
+>>> 2 files changed, 89 insertions(+)
+>>>
+>>> diff --git a/include/linux/virtio_vsock.h b/include/linux/virtio_vsock.h
+>>> index dc636b727179..1d9a302cb91d 100644
+>>> --- a/include/linux/virtio_vsock.h
+>>> +++ b/include/linux/virtio_vsock.h
+>>> @@ -36,6 +36,7 @@ struct virtio_vsock_sock {
+>>> 	u32 rx_bytes;
+>>> 	u32 buf_alloc;
+>>> 	struct list_head rx_queue;
+>>> +	u32 msg_count;
+>>> };
+>>>
+>>> struct virtio_vsock_pkt {
+>>> @@ -80,6 +81,10 @@ virtio_transport_dgram_dequeue(struct vsock_sock *vs=
+k,
+>>> 			       struct msghdr *msg,
+>>> 			       size_t len, int flags);
+>>>
+>>> +ssize_t
+>>> +virtio_transport_seqpacket_dequeue(struct vsock_sock *vsk,
+>>> +				   struct msghdr *msg,
+>>> +				   int flags);
+>>> s64 virtio_transport_stream_has_data(struct vsock_sock *vsk);
+>>> s64 virtio_transport_stream_has_space(struct vsock_sock *vsk);
+>>>
+>>> diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/vi=
+rtio_transport_common.c
+>>> index ad0d34d41444..1e1df19ec164 100644
+>>> --- a/net/vmw_vsock/virtio_transport_common.c
+>>> +++ b/net/vmw_vsock/virtio_transport_common.c
+>>> @@ -393,6 +393,78 @@ virtio_transport_stream_do_dequeue(struct vsock_so=
+ck *vsk,
+>>> 	return err;
+>>> }
+>>>
+>>> +static int virtio_transport_seqpacket_do_dequeue(struct vsock_sock *vs=
+k,
+>>> +						 struct msghdr *msg,
+>>> +						 int flags)
+>>> +{
+>>> +	struct virtio_vsock_sock *vvs =3D vsk->trans;
+>>> +	struct virtio_vsock_pkt *pkt;
+>>> +	int dequeued_len =3D 0;
+>>> +	size_t user_buf_len =3D msg_data_left(msg);
+>>> +	bool copy_failed =3D false;
+>>> +	bool msg_ready =3D false;
+>>> +
+>>> +	spin_lock_bh(&vvs->rx_lock);
+>>> +
+>>> +	if (vvs->msg_count =3D=3D 0) {
+>>> +		spin_unlock_bh(&vvs->rx_lock);
+>>> +		return 0;
+>>> +	}
+>>> +
+>>> +	while (!msg_ready) {
+>>> +		pkt =3D list_first_entry(&vvs->rx_queue, struct virtio_vsock_pkt, li=
+st);
+>>> +
+>>> +		if (!copy_failed) {
+>>> +			size_t pkt_len;
+>>> +			size_t bytes_to_copy;
+>>> +
+>>> +			pkt_len =3D (size_t)le32_to_cpu(pkt->hdr.len);
+>>> +			bytes_to_copy =3D min(user_buf_len, pkt_len);
+>>> +
+>>> +			if (bytes_to_copy) {
+>>> +				int err;
+>>> +
+>>> +				/* sk_lock is held by caller so no one else can dequeue.
+>>> +				 * Unlock rx_lock since memcpy_to_msg() may sleep.
+>>> +				 */
+>>> +				spin_unlock_bh(&vvs->rx_lock);
+>>> +
+>>> +				err =3D memcpy_to_msg(msg, pkt->buf, bytes_to_copy);
+>>> +				if (err) {
+>>> +					/* Copy of message failed, set flag to skip
+>>> +					 * copy path for rest of fragments. Rest of
+>>> +					 * fragments will be freed without copy.
+>>> +					 */
+>>> +					copy_failed =3D true;
+>>> +					dequeued_len =3D err;
+>> If we fail to copy the message we will discard the entire packet.
+>> Is it acceptable for the user point of view, or we should leave the
+>> packet in the queue and the user can retry, maybe with a different
+>> buffer?
+>>
+>> Then we can remove the packets only when we successfully copied all the
+>> fragments.
+>>
+>> I'm not sure make sense, maybe better to check also other
+>> implementations :-)
+>>
+>> Thanks,
+>> Stefano
+>
+>Understand, i'll check it on weekend, anyway I think it is
+>not critical for implementation.
 
-Because the other x86 IOMMU drivers aren't yet ready to use the
-acpi_dma_setup() path, x86 doesn't implement arch_setup_dma_ops() at the
-moment. Similarly to Vt-d and AMD IOMMU, clear the DMA ops and call
-iommu_setup_dma_ops() from probe_finalize().
+Yep, I agree.
 
-Acked-by: Joerg Roedel <jroedel@suse.de>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Tested-by: Eric Auger <eric.auger@redhat.com>
-Reviewed-by: Eric Auger <eric.auger@redhat.com>
-Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
----
- drivers/iommu/Kconfig        |  3 ++-
- drivers/iommu/dma-iommu.c    |  1 +
- drivers/iommu/virtio-iommu.c | 11 +++++++++++
- 3 files changed, 14 insertions(+), 1 deletion(-)
+>
+>
+>I have another question: may be it is useful to research for
+>approach where packets are not queued until whole message
+>is received, but copied to user's buffer thus freeing memory.
+>(like previous implementation, of course with solution of problem
+>where part of message still in queue, while reader was woken
+>by timeout or signal).
+>
+>I think it is better, because=A0 in current version, sender may set
+>'peer_alloc_buf' to=A0 for example 1MB, so at receiver we get
+>1MB of 'kmalloc()' memory allocated, while having user's buffer
+>to copy data there or drop it(if user's buffer is full). This way
+>won't change spec(e.g. no message id or SEQ_BEGIN will be added).
+>
+>What do You think?
 
-diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
-index aff8a4830dd1..07b7c25cbed8 100644
---- a/drivers/iommu/Kconfig
-+++ b/drivers/iommu/Kconfig
-@@ -400,8 +400,9 @@ config HYPERV_IOMMU
- config VIRTIO_IOMMU
- 	tristate "Virtio IOMMU driver"
- 	depends on VIRTIO
--	depends on ARM64
-+	depends on (ARM64 || X86)
- 	select IOMMU_API
-+	select IOMMU_DMA
- 	select INTERVAL_TREE
- 	select ACPI_VIOT if ACPI
- 	help
-diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
-index c62e19bed302..9dbbc95c8189 100644
---- a/drivers/iommu/dma-iommu.c
-+++ b/drivers/iommu/dma-iommu.c
-@@ -1330,6 +1330,7 @@ void iommu_setup_dma_ops(struct device *dev, u64 dma_base, u64 dma_limit)
- 	 pr_warn("Failed to set up IOMMU for device %s; retaining platform DMA ops\n",
- 		 dev_name(dev));
- }
-+EXPORT_SYMBOL_GPL(iommu_setup_dma_ops);
- 
- static struct iommu_dma_msi_page *iommu_dma_get_msi_page(struct device *dev,
- 		phys_addr_t msi_addr, struct iommu_domain *domain)
-diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
-index c6e5ee4d9cef..fe581f0c9b3a 100644
---- a/drivers/iommu/virtio-iommu.c
-+++ b/drivers/iommu/virtio-iommu.c
-@@ -10,6 +10,7 @@
- #include <linux/amba/bus.h>
- #include <linux/delay.h>
- #include <linux/dma-iommu.h>
-+#include <linux/dma-map-ops.h>
- #include <linux/freezer.h>
- #include <linux/interval_tree.h>
- #include <linux/iommu.h>
-@@ -904,6 +905,15 @@ static struct iommu_device *viommu_probe_device(struct device *dev)
- 	return ERR_PTR(ret);
- }
- 
-+static void viommu_probe_finalize(struct device *dev)
-+{
-+#ifndef CONFIG_ARCH_HAS_SETUP_DMA_OPS
-+	/* First clear the DMA ops in case we're switching from a DMA domain */
-+	set_dma_ops(dev, NULL);
-+	iommu_setup_dma_ops(dev, 0, U64_MAX);
-+#endif
-+}
-+
- static void viommu_release_device(struct device *dev)
- {
- 	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(dev);
-@@ -940,6 +950,7 @@ static struct iommu_ops viommu_ops = {
- 	.iova_to_phys		= viommu_iova_to_phys,
- 	.iotlb_sync		= viommu_iotlb_sync,
- 	.probe_device		= viommu_probe_device,
-+	.probe_finalize		= viommu_probe_finalize,
- 	.release_device		= viommu_release_device,
- 	.device_group		= viommu_device_group,
- 	.get_resv_regions	= viommu_get_resv_regions,
--- 
-2.32.0
+Yep, I see your point and it would be great, but I think the main issues =
+
+to fix is how to handle a signal while we are waiting other fragments =
+
+since the other peer can take unspecified time to send them.
+
+Note that the 'peer_alloc_buf' in the sender, is the value get from the =
+
+receiver, so if the receiver doesn't want to allocate 1MB, can advertise =
+
+a small buffer size.
+
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
