@@ -1,104 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D81743AF1E1
-	for <lists.virtualization@lfdr.de>; Mon, 21 Jun 2021 19:25:38 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C2AC3AF1F9
+	for <lists.virtualization@lfdr.de>; Mon, 21 Jun 2021 19:27:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5E818403DF;
-	Mon, 21 Jun 2021 17:25:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C9A74827C5;
+	Mon, 21 Jun 2021 17:27:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BzSjpLPF_edz; Mon, 21 Jun 2021 17:25:36 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xtTVFTISoEP8; Mon, 21 Jun 2021 17:27:56 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 0732F40408;
-	Mon, 21 Jun 2021 17:25:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id B070D82684;
+	Mon, 21 Jun 2021 17:27:55 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6233EC000C;
-	Mon, 21 Jun 2021 17:25:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 41642C000C;
+	Mon, 21 Jun 2021 17:27:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 01203C000C
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4D71CC000C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Jun 2021 17:25:34 +0000 (UTC)
+ Mon, 21 Jun 2021 17:27:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E2F33403CF
+ by smtp2.osuosl.org (Postfix) with ESMTP id 25BC4401CD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Jun 2021 17:25:33 +0000 (UTC)
+ Mon, 21 Jun 2021 17:27:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Jde5zUfFcuoi
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=bytedance-com.20150623.gappssmtp.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Fufw-CCK4oo3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Jun 2021 17:25:32 +0000 (UTC)
+ Mon, 21 Jun 2021 17:27:52 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
- [IPv6:2607:f8b0:4864:20::236])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9EDF7403CE
+Received: from mail-ot1-x336.google.com (mail-ot1-x336.google.com
+ [IPv6:2607:f8b0:4864:20::336])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5B1AF400DD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Jun 2021 17:25:32 +0000 (UTC)
-Received: by mail-oi1-x236.google.com with SMTP id t40so20696524oiw.8
+ Mon, 21 Jun 2021 17:27:52 +0000 (UTC)
+Received: by mail-ot1-x336.google.com with SMTP id
+ 7-20020a9d0d070000b0290439abcef697so18512605oti.2
  for <virtualization@lists.linux-foundation.org>;
- Mon, 21 Jun 2021 10:25:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to;
- bh=PnPX+kMwwqow5LYukSPE/j5CcoTy7NRtog3utuQq2IE=;
- b=IlM4/QIr6kXMDieXq2favI4BOm+o5ZxnHdZwUYTjCqrBZSaWC4gwwIF+F4B9F5qSdf
- aixUjWQLgS/AXi3OR7McxgHlOKNSFUlc5g8bEKu9UXwxwf9AWPQ4i/9DyNe9ICC96o0z
- KXXcpuxr22bkxc2HK8qkfH9ZOQKs907KKN6SL4471gnxBZfLveRLtNG/2P3sUyGNT0K5
- tiK962EvGmj2OJ/2eAMO7IcauWF3j/t64jubulaqCaE5JZZ94PVrXN+lDT9dpBDyomDp
- IqPIGpw72Sz99ly/1y5ASkIq/xzK1JWnDxNmEiFazMrjkUnxkFj6UFfRxO4Cp/r+TIz8
- Tgmw==
+ Mon, 21 Jun 2021 10:27:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=WmGjGSnaoIjbfNbK6jg4Z58leTIpBSXXFk+GdaHK+O8=;
+ b=IkafJuMXU1dxFooFT/Z7CDiyPl66XkMYfmNHgkZ7Zr9ROZgxDLuuLCItaGKVG+g3ei
+ StPnLiq+x2oO47VLNdr3X8f2MNhdKMSBQivdUZebRFGoy+8PcRI5KnPzwKoGXDq0vAms
+ uOKTDF1aPZqzzgWio3fYUV04SFgYxLlLuiGV0yHop2Fdw9SW3u5n5BFTJBU3vnd9WFvD
+ Rimi7mod+IOXsJwod9l4B5e+z9QEueios+GMwLdNvEMPmTXIUsXGBP1I7DyrZPQQLIen
+ dV6MBOQTH1MFJyB6tKOmOFlqEnXysxtjprh6XkRv1/cGvUFGMFih52BaeUDAlxYnQOsP
+ I4yQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=PnPX+kMwwqow5LYukSPE/j5CcoTy7NRtog3utuQq2IE=;
- b=pG38Vxs3CCipnmFIGxztH0b8NU8MZVAf1SOw6ljagUi/838J86c1SSks+g2MmWCfdw
- m/UUGshI0NZC9eLex/mfey6gb8jL0P3zXtdhMhFRRvx5wN7cvgX/cwe8qoLQWGY+Vk5x
- 28miw0q866aYn8hlKBLjdkx4D6VBVw7HU9my8FKUK0GSzIQNGIVWLl+U1H1xsNOrc2RT
- byc/bSprjw1ZvbnovJGEl7gsK1+BR3OiF3gp+cYOu2ozSabnhMWTGRjert4Z0IQNanZ5
- ARBFiS8CraTLa14Z2Dfqi3mVwMD4HNOKSPBkbjlW3GwpWi25EAd/r0qzOZ1ubQ7lLTET
- 6iMQ==
-X-Gm-Message-State: AOAM533zAI0CWXweyvwbMw3RF/F4shNwERBhecBYwv9PPpMreBhNYY4/
- BLmwh+/yy4rxdQLDGh+BDKCE1A==
-X-Google-Smtp-Source: ABdhPJyoXPEE4Y+PUiCrrS+ozWk1/WGyHTeIxyXg0SQgO/W4PkuHBbK13rxi4TsTt6HtaEnAmw6ebQ==
-X-Received: by 2002:aca:b38a:: with SMTP id c132mr17388459oif.90.1624296331567; 
- Mon, 21 Jun 2021 10:25:31 -0700 (PDT)
-Received: from yoga (104-57-184-186.lightspeed.austtx.sbcglobal.net.
- [104.57.184.186])
- by smtp.gmail.com with ESMTPSA id u10sm4235029otj.75.2021.06.21.10.25.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 21 Jun 2021 10:25:31 -0700 (PDT)
-Date: Mon, 21 Jun 2021 12:25:28 -0500
-From: Bjorn Andersson <bjorn.andersson@linaro.org>
-To: "Enrico Weigelt, metux IT consult" <lkml@metux.net>
-Subject: Re: [PATCH V3 1/3] gpio: Add virtio-gpio driver
-Message-ID: <YNDLiPYkmLZN076t@yoga>
-References: <cover.1623326176.git.viresh.kumar@linaro.org>
- <10442926ae8a65f716bfc23f32339a6b35e51d5a.1623326176.git.viresh.kumar@linaro.org>
- <CACRpkdZV2v2S5z7CZf_8DV=At9-oPSj7RYFH78hWy3ZX37QnDQ@mail.gmail.com>
- <YMlwTiN4Y9bK3M4Q@yoga>
- <8d58da79-8e54-048b-db89-8c1caaa0320f@metux.net>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=WmGjGSnaoIjbfNbK6jg4Z58leTIpBSXXFk+GdaHK+O8=;
+ b=VWBogH93tjVGabFbWZfeCt30NMw1sb0G3yDbCOklP97IxdpWbHVnx4vWekh2qu4XN9
+ 6QQx4Uo0f5jDDs9wXfuc70lH5Aok+yu/2VJ40hGgRCJysJXGsPNiAvcwlGc0sC86mbEz
+ Jv3WxbcUNtRaHFGxNh9KUBdcbXRc0CfIs2kuBoi98c2B4fRWlHtDvGPeTeOZNgcMjqAu
+ IGhA5rS+sl/LKbKuhd1K1OrCzRE7fM65NK1xEHC4bUcQCKMWEKZkGwM4BQhr3s/7VwD7
+ 5r7TWNCTQTaEUnzT8xjXcYhrzNjneTYBKswjV9yQwLHbY2CVdlOmOKJ0PDRFisX9Fycq
+ q6TA==
+X-Gm-Message-State: AOAM533PtD5r7wyiE92N9rEMC302gK0NfZ/NzIGHMSa58qsNyr1lGUEQ
+ CILDO/rhwm6GJvOqx4xsRGUVOgX7Nn2ISrLJF1YdMA==
+X-Google-Smtp-Source: ABdhPJwi8uED1KtCHcgJosUou/U3YERsHdEZWa6Y4ITdxzqfoSrQyjLejdlRZ2O4PLdCBDaz+Bchb6q7YPN7hVIoEJI=
+X-Received: by 2002:a05:6830:1dd5:: with SMTP id
+ a21mr21512580otj.180.1624296471321; 
+ Mon, 21 Jun 2021 10:27:51 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <8d58da79-8e54-048b-db89-8c1caaa0320f@metux.net>
-Cc: Alistair Strachan <astrachan@google.com>,
- Vincent Guittot <vincent.guittot@linaro.org>,
- Stefan Hajnoczi <stefanha@redhat.com>,
- Geert Uytterhoeven <geert+renesas@glider.be>,
- "Michael S. Tsirkin" <mst@redhat.com>, Viresh Kumar <viresh.kumar@linaro.org>,
- Linus Walleij <linus.walleij@linaro.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
+References: <20210609232501.171257-1-jiang.wang@bytedance.com>
+ <20210609232501.171257-7-jiang.wang@bytedance.com>
+ <20210618100424.wfljrnycxxguwt3d@steredhat.lan>
+In-Reply-To: <20210618100424.wfljrnycxxguwt3d@steredhat.lan>
+From: "Jiang Wang ." <jiang.wang@bytedance.com>
+Date: Mon, 21 Jun 2021 10:27:40 -0700
+Message-ID: <CAP_N_Z-U0_XP69iNLA1Ray9EEVWyXqb2f85bL-sG2oxjM5PaMA@mail.gmail.com>
+Subject: Re: [External] Re: [RFC v1 6/6] virtio/vsock: add sysfs for rx buf
+ len for dgram
+To: Stefano Garzarella <sgarzare@redhat.com>
+Cc: Lu Wei <luwei32@huawei.com>, cong.wang@bytedance.com,
+ Xiongchun Duan <duanxiongchun@bytedance.com>,
+ Andra Paraschiv <andraprs@amazon.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Networking <netdev@vger.kernel.org>,
+ linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
  virtualization@lists.linux-foundation.org,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>,
- "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
- Viresh Kumar <vireshk@kernel.org>, stratos-dev@op-lists.linaro.org,
- "Enrico Weigelt, metux IT consult" <info@metux.net>,
- Bill Mills <bill.mills@linaro.org>
+ Yongji Xie <xieyongji@bytedance.com>,
+ =?UTF-8?B?5p+056iz?= <chaiwen.cc@bytedance.com>,
+ Norbert Slusarek <nslusarek@gmx.net>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Colin Ian King <colin.king@canonical.com>, Jakub Kicinski <kuba@kernel.org>,
+ Arseny Krasnov <arseny.krasnov@kaspersky.com>, Ingo Molnar <mingo@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>,
+ Alexander Popov <alex.popov@linux.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,40 +112,107 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed 16 Jun 10:52 CDT 2021, Enrico Weigelt, metux IT consult wrote:
+On Fri, Jun 18, 2021 at 3:04 AM Stefano Garzarella <sgarzare@redhat.com> wrote:
+>
+> On Wed, Jun 09, 2021 at 11:24:58PM +0000, Jiang Wang wrote:
+> >Make rx buf len configurable via sysfs
+> >
+> >Signed-off-by: Jiang Wang <jiang.wang@bytedance.com>
+> >---
+> > net/vmw_vsock/virtio_transport.c | 37 +++++++++++++++++++++++++++++++++++--
+> > 1 file changed, 35 insertions(+), 2 deletions(-)
+> >
+> >diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+> >index cf47aadb0c34..2e4dd9c48472 100644
+> >--- a/net/vmw_vsock/virtio_transport.c
+> >+++ b/net/vmw_vsock/virtio_transport.c
+> >@@ -29,6 +29,14 @@ static struct virtio_vsock __rcu *the_virtio_vsock;
+> > static struct virtio_vsock *the_virtio_vsock_dgram;
+> > static DEFINE_MUTEX(the_virtio_vsock_mutex); /* protects the_virtio_vsock */
+> >
+> >+static int rx_buf_len = VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE;
+> >+static struct kobject *kobj_ref;
+> >+static ssize_t  sysfs_show(struct kobject *kobj,
+> >+                      struct kobj_attribute *attr, char *buf);
+> >+static ssize_t  sysfs_store(struct kobject *kobj,
+> >+                      struct kobj_attribute *attr, const char *buf, size_t count);
+> >+static struct kobj_attribute rxbuf_attr = __ATTR(rx_buf_value, 0660, sysfs_show, sysfs_store);
+>
+> Maybe better to use a 'dgram' prefix.
 
-> On 16.06.21 05:30, Bjorn Andersson wrote:
-> 
-> > Combined with the virtio-i2c effort this could provide an alternative by
-> > simply tunneling the busses and GPIOs into Linux and use standard iio
-> > drivers, for cases where this suits your product requirements better.
-> 
-> So, you wanna use virtio as logical interface between the two CPUs ?
-> Interesting idea. Usually folks use rpmsg for those things.
-> 
+Sure.
 
-rpmsg is a layer on top of virtio, so this would be an extension of the
-existing model.
+> >+
+> > struct virtio_vsock {
+> >       struct virtio_device *vdev;
+> >       struct virtqueue **vqs;
+> >@@ -360,7 +368,7 @@ virtio_transport_cancel_pkt(struct vsock_sock *vsk)
+> >
+> > static void virtio_vsock_rx_fill(struct virtio_vsock *vsock, bool is_dgram)
+> > {
+> >-      int buf_len = VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE;
+> >+      int buf_len = rx_buf_len;
+> >       struct virtio_vsock_pkt *pkt;
+> >       struct scatterlist hdr, buf, *sgs[2];
+> >       struct virtqueue *vq;
+> >@@ -1003,6 +1011,22 @@ static struct virtio_driver virtio_vsock_driver = {
+> >       .remove = virtio_vsock_remove,
+> > };
+> >
+> >+static ssize_t sysfs_show(struct kobject *kobj,
+> >+              struct kobj_attribute *attr, char *buf)
+> >+{
+> >+      return sprintf(buf, "%d", rx_buf_len);
+> >+}
+> >+
+> >+static ssize_t sysfs_store(struct kobject *kobj,
+> >+              struct kobj_attribute *attr, const char *buf, size_t count)
+> >+{
+> >+      if (kstrtou32(buf, 0, &rx_buf_len) < 0)
+> >+              return -EINVAL;
+> >+      if (rx_buf_len < 1024)
+> >+              rx_buf_len = 1024;
+> >+      return count;
+> >+}
+> >+
+> > static int __init virtio_vsock_init(void)
+> > {
+> >       int ret;
+> >@@ -1020,8 +1044,17 @@ static int __init virtio_vsock_init(void)
+> >       if (ret)
+> >               goto out_vci;
+> >
+> >-      return 0;
+> >+      kobj_ref = kobject_create_and_add("vsock", kernel_kobj);
+>
+> So, IIUC, the path will be /sys/vsock/rx_buf_value?
+>
+> I'm not sure if we need to add a `virtio` subdir (e.g.
+> /sys/vsock/virtio/dgram_rx_buf_size)
 
-There's been discussions (and I believe some implementations) related to
-bridging I2C requests over rpmsg, but I think it's preferable to
-standardize around the virtio based bearer directly.
+I agree adding a virtio is better in case vmware or hyperv will
+also have some settings.
 
-> What is running on the secondary CPU ? Some OS like Linux or some bare
-> metal stuff ? What kind of CPU is that anyways ?
-> 
-
-These ideas revolves around platforms that implements something like the
-"Android Sensor Hub", which provides some resource constraint
-co-processor that deals with sensor device interaction and processing of
-the data without waking up the power-hungry ARM cores.
-
-Given the focus on power consumption I would guess that these are not
-going to run Linux. Core-wise I've seen this implemented using primarily
-ARM and Hexagon cores.
-
-Regards,
-Bjorn
+> Thanks,
+> Stefano
+>
+> >
+> >+      /*Creating sysfs file for etx_value*/
+> >+      ret = sysfs_create_file(kobj_ref, &rxbuf_attr.attr);
+> >+      if (ret)
+> >+              goto out_sysfs;
+> >+
+> >+      return 0;
+> >+out_sysfs:
+> >+      kobject_put(kobj_ref);
+> >+      sysfs_remove_file(kernel_kobj, &rxbuf_attr.attr);
+> > out_vci:
+> >       vsock_core_unregister(&virtio_transport.transport);
+> > out_wq:
+> >--
+> >2.11.0
+> >
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
