@@ -1,55 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 315B13B07E1
-	for <lists.virtualization@lfdr.de>; Tue, 22 Jun 2021 16:48:52 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D70F63B07E0
+	for <lists.virtualization@lfdr.de>; Tue, 22 Jun 2021 16:48:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7D44182D85;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1CE45402F9;
 	Tue, 22 Jun 2021 14:48:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jptHD6lCojUi; Tue, 22 Jun 2021 14:48:49 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7DFE783A9F;
-	Tue, 22 Jun 2021 14:48:49 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id TNg1syitZQFp; Tue, 22 Jun 2021 14:48:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C259E40292;
+	Tue, 22 Jun 2021 14:48:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6D0E9C0025;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 35F10C000E;
 	Tue, 22 Jun 2021 14:48:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 857B1C001A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7B724C000E
  for <virtualization@lists.linux-foundation.org>;
  Tue, 22 Jun 2021 14:48:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 71F2E4024E
+ by smtp3.osuosl.org (Postfix) with ESMTP id 60BC660818
  for <virtualization@lists.linux-foundation.org>;
  Tue, 22 Jun 2021 14:48:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lUVZfssetE-Y
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id AwAJStB1TFdw
  for <virtualization@lists.linux-foundation.org>;
  Tue, 22 Jun 2021 14:48:45 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7F4DC40245
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 98D54605C3
  for <virtualization@lists.linux-foundation.org>;
  Tue, 22 Jun 2021 14:48:45 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2ba7c.dip0.t-ipconnect.de
  [79.242.186.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 0A56D133;
+ by theia.8bytes.org (Postfix) with ESMTPSA id 9AE0F260;
  Tue, 22 Jun 2021 16:48:41 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 0/3] x86/sev: Minor updates for SEV guest support
-Date: Tue, 22 Jun 2021 16:48:22 +0200
-Message-Id: <20210622144825.27588-1-joro@8bytes.org>
+Subject: [PATCH 1/3] x86/sev: Add Comments to existing GHCB MSR protocol
+ defines
+Date: Tue, 22 Jun 2021 16:48:23 +0200
+Message-Id: <20210622144825.27588-2-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
+In-Reply-To: <20210622144825.27588-1-joro@8bytes.org>
+References: <20210622144825.27588-1-joro@8bytes.org>
 MIME-Version: 1.0
 Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>,
@@ -82,30 +85,34 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Hi,
+Add comments to the defines for SEV Info and CPUID MSR protocol defines
+to document to which protocol part they belong.
 
-here are three small patches to update SEV-ES guest support in Linux.
-It would be great to have at least patch 3 merged for v5.14 to avoid
-future merge conflicts. It contains defines needed by KVM and X86
-patches under development.
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/include/asm/sev-common.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Thanks,
-
-	Joerg
-
-Brijesh Singh (1):
-  x86/sev: Add defines for GHCB version 2 MSR protocol requests
-
-Joerg Roedel (2):
-  x86/sev: Add Comments to existing GHCB MSR protocol defines
-  x86/sev: Use "SEV: " prefix for messages from sev.c
-
- arch/x86/include/asm/sev-common.h | 17 +++++++++++++++++
- arch/x86/kernel/sev.c             |  2 +-
- 2 files changed, 18 insertions(+), 1 deletion(-)
-
-
-base-commit: be1a5408868af341f61f93c191b5e346ee88c82a
+diff --git a/arch/x86/include/asm/sev-common.h b/arch/x86/include/asm/sev-common.h
+index 629c3df243f0..1cc9e7dd8107 100644
+--- a/arch/x86/include/asm/sev-common.h
++++ b/arch/x86/include/asm/sev-common.h
+@@ -11,6 +11,7 @@
+ #define GHCB_MSR_INFO_POS		0
+ #define GHCB_MSR_INFO_MASK		(BIT_ULL(12) - 1)
+ 
++/* SEV Information Request/Response */
+ #define GHCB_MSR_SEV_INFO_RESP		0x001
+ #define GHCB_MSR_SEV_INFO_REQ		0x002
+ #define GHCB_MSR_VER_MAX_POS		48
+@@ -28,6 +29,7 @@
+ #define GHCB_MSR_PROTO_MAX(v)		(((v) >> GHCB_MSR_VER_MAX_POS) & GHCB_MSR_VER_MAX_MASK)
+ #define GHCB_MSR_PROTO_MIN(v)		(((v) >> GHCB_MSR_VER_MIN_POS) & GHCB_MSR_VER_MIN_MASK)
+ 
++/* CPUID Request/Response */
+ #define GHCB_MSR_CPUID_REQ		0x004
+ #define GHCB_MSR_CPUID_RESP		0x005
+ #define GHCB_MSR_CPUID_FUNC_POS		32
 -- 
 2.31.1
 
