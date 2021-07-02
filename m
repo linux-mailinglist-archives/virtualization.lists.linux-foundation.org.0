@@ -1,78 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CBDDB3BA00F
-	for <lists.virtualization@lfdr.de>; Fri,  2 Jul 2021 13:49:00 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B5BE3BA010
+	for <lists.virtualization@lfdr.de>; Fri,  2 Jul 2021 13:49:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 60F2C42265;
-	Fri,  2 Jul 2021 11:48:59 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 254A783DC6;
+	Fri,  2 Jul 2021 11:49:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EAbmGf8B86Lv; Fri,  2 Jul 2021 11:48:58 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id DEE7C4052C;
-	Fri,  2 Jul 2021 11:48:57 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id TuT7E-h5IgPL; Fri,  2 Jul 2021 11:48:59 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id E63DF83DCA;
+	Fri,  2 Jul 2021 11:48:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 77EDAC000E;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D377BC0029;
 	Fri,  2 Jul 2021 11:48:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A4E1FC002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 916EDC001D
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  2 Jul 2021 11:48:54 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 93B6740465
  for <virtualization@lists.linux-foundation.org>;
  Fri,  2 Jul 2021 11:48:53 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A925540455
- for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 11:48:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.com header.b="o4x9NiSg";
+ dkim=pass (1024-bit key) header.d=suse.com header.b="o4x9NiSg"
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J88pkRiKHO8L
+ with ESMTP id RmlQ6fpbQQv4
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 11:48:51 +0000 (UTC)
+ Fri,  2 Jul 2021 11:48:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BE79E40465
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4CE12404B1
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 11:48:51 +0000 (UTC)
+ Fri,  2 Jul 2021 11:48:52 +0000 (UTC)
 Received: from imap.suse.de (imap-alt.suse-dmz.suse.de [192.168.254.47])
  (using TLSv1.2 with cipher ECDHE-ECDSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 0FDA82055A;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 7BA1822982;
  Fri,  2 Jul 2021 11:48:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
  t=1625226530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NWVtsIZNVyli015FxwN2RGU3q5E2rKCEUllZcSA6C4A=;
- b=CDtHo6IdWNwWCIDk6UmBa1rnZ82B2bNRnzU0o9zJQnsU+VWB/zKN7nQKY8K5+EsnpkdHxw
- RG7dxeLZJWL1j8Skejt6jLylCBC8QxvJWXAxw9SmpYzw+2W+A7Z6SDU/h/YmIij2P4fH86
- IW1+wBUS+8QpqRTMynd/Xwz/9pnZFYc=
+ bh=oQFJfMtJ7d44u/Eg9demA0543TOxxcunVlC/ArZcDv0=;
+ b=o4x9NiSgX+HD1y+cGs/NAtT0HAa569xMwAnQBHAA5HKhlnRdlykHhBczJHNXLbMZ1xG6Uy
+ bYECwfUOYzpioSUoN/tgTr5/bYGhP9JbITbGLjRUQ1gvUYUMoRI0P24FtzV09AoG/xW63b
+ Q9ixPWR0fbsQJ5pyEpOs3MkaxxUwwE0=
 Received: from imap3-int (imap-alt.suse-dmz.suse.de [192.168.254.47])
- by imap.suse.de (Postfix) with ESMTP id AA22711C84;
- Fri,  2 Jul 2021 11:48:49 +0000 (UTC)
+ by imap.suse.de (Postfix) with ESMTP id 1C24B11C84;
+ Fri,  2 Jul 2021 11:48:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
  t=1625226530; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=NWVtsIZNVyli015FxwN2RGU3q5E2rKCEUllZcSA6C4A=;
- b=CDtHo6IdWNwWCIDk6UmBa1rnZ82B2bNRnzU0o9zJQnsU+VWB/zKN7nQKY8K5+EsnpkdHxw
- RG7dxeLZJWL1j8Skejt6jLylCBC8QxvJWXAxw9SmpYzw+2W+A7Z6SDU/h/YmIij2P4fH86
- IW1+wBUS+8QpqRTMynd/Xwz/9pnZFYc=
+ bh=oQFJfMtJ7d44u/Eg9demA0543TOxxcunVlC/ArZcDv0=;
+ b=o4x9NiSgX+HD1y+cGs/NAtT0HAa569xMwAnQBHAA5HKhlnRdlykHhBczJHNXLbMZ1xG6Uy
+ bYECwfUOYzpioSUoN/tgTr5/bYGhP9JbITbGLjRUQ1gvUYUMoRI0P24FtzV09AoG/xW63b
+ Q9ixPWR0fbsQJ5pyEpOs3MkaxxUwwE0=
 Received: from director2.suse.de ([192.168.254.72]) by imap3-int with ESMTPSA
- id iPHlJyH93mDDDAAALh3uQQ
- (envelope-from <varad.gautam@suse.com>); Fri, 02 Jul 2021 11:48:49 +0000
+ id SOhgBSL93mDDDAAALh3uQQ
+ (envelope-from <varad.gautam@suse.com>); Fri, 02 Jul 2021 11:48:50 +0000
 To: kvm@vger.kernel.org,
 	virtualization@lists.linux-foundation.org
-Subject: [kvm-unit-tests PATCH 5/6] cstart64.S: x86_64 bootstrapping after
- exiting EFI
-Date: Fri,  2 Jul 2021 13:48:19 +0200
-Message-Id: <20210702114820.16712-6-varad.gautam@suse.com>
+Subject: [kvm-unit-tests PATCH 6/6] x86: Disable some breaking tests for EFI
+ and modify vmexit test
+Date: Fri,  2 Jul 2021 13:48:20 +0200
+Message-Id: <20210702114820.16712-7-varad.gautam@suse.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210702114820.16712-1-varad.gautam@suse.com>
 References: <20210702114820.16712-1-varad.gautam@suse.com>
@@ -98,165 +101,80 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-EFI sets up long mode with arbitrary state before calling the
-image entrypoint. To run the testcases at hand, it is necessary
-to redo some of the bootstrapping to not rely on what EFI
-provided.
+Disable some tests from building on EFI. These fail early, and need some
+adaptation (eg. inline asm changes / AP initialization / memory
+reclamation from EFI).
 
-Adapt start64() for EFI testcases to fixup %rsp/GDT/IDT/TSS and
-friends, and jump here after relocation from efi_main. Switch to
-RIP-relative addressing where necessary.
-
-Initially leave out:
-- AP init - leave EFI to single CPU
-- Testcase arg passing
+Eg, asyncpf: runs out of memory since the allocator only uses the largest
+  EFI_CONVENTIONAL_MEMORY block.
+hyperv_*: untested with EFI.
+vmexit: breaks since test arg passing isn't enabled - enable it except for
+  pci-* cases since iomem needs more fixups.
 
 Signed-off-by: Varad Gautam <varad.gautam@suse.com>
 ---
- x86/cstart64.S | 57 ++++++++++++++++++++++++++++++++++++++++++++------
- x86/efi_main.c |  1 +
- 2 files changed, 52 insertions(+), 6 deletions(-)
+ x86/Makefile.common | 21 +++++++++++----------
+ x86/vmexit.c        |  7 +++++++
+ 2 files changed, 18 insertions(+), 10 deletions(-)
 
-diff --git a/x86/cstart64.S b/x86/cstart64.S
-index 98e7848..d4448c2 100644
---- a/x86/cstart64.S
-+++ b/x86/cstart64.S
-@@ -242,16 +242,17 @@ ap_start32:
+diff --git a/x86/Makefile.common b/x86/Makefile.common
+index 98d8de9..b995a67 100644
+--- a/x86/Makefile.common
++++ b/x86/Makefile.common
+@@ -62,17 +62,18 @@ FLATLIBS = lib/libcflat.a
+ 	@chmod a-x $@
  
- .code64
- save_id:
--#ifndef CONFIG_EFI
- 	movl $(APIC_DEFAULT_PHYS_BASE + APIC_ID), %eax
- 	movl (%rax), %eax
- 	shrl $24, %eax
-+#ifdef CONFIG_EFI
-+	lock btsl %eax, online_cpus(%rip)
-+#else
- 	lock btsl %eax, online_cpus
- #endif
- 	retq
- 
- ap_start64:
--#ifndef CONFIG_EFI
- 	call reset_apic
- 	call load_tss
- 	call enable_apic
-@@ -259,12 +260,37 @@ ap_start64:
- 	call enable_x2apic
- 	sti
- 	nop
-+#ifdef CONFIG_EFI
-+	lock incw cpu_online_count(%rip)
-+#else
- 	lock incw cpu_online_count
- #endif
+ tests-flatonly = $(TEST_DIR)/realmode.$(out) $(TEST_DIR)/eventinj.$(out)		\
+-		$(TEST_DIR)/smap.$(out) $(TEST_DIR)/umip.$(out)
+-
+-tests-common = $(TEST_DIR)/vmexit.$(out) $(TEST_DIR)/tsc.$(out)				\
+-		$(TEST_DIR)/smptest.$(out) $(TEST_DIR)/msr.$(out)			\
+-		$(TEST_DIR)/hypercall.$(out) $(TEST_DIR)/sieve.$(out)			\
+-		$(TEST_DIR)/kvmclock_test.$(out) $(TEST_DIR)/s3.$(out)			\
++		$(TEST_DIR)/smap.$(out) $(TEST_DIR)/umip.$(out)				\
++		$(TEST_DIR)/kvmclock_test.$(out) $(TEST_DIR)/hypercall.$(out)		\
++		$(TEST_DIR)/init.$(out)							\
++		$(TEST_DIR)/asyncpf.$(out) $(TEST_DIR)/hyperv_synic.$(out)		\
++		$(TEST_DIR)/hyperv_stimer.$(out) $(TEST_DIR)/hyperv_connections.$(out)
 +
- 1:	hlt
- 	jmp 1b
++tests-common = $(TEST_DIR)/tsc.$(out) $(TEST_DIR)/smptest.$(out)			\
++		$(TEST_DIR)/msr.$(out) $(TEST_DIR)/sieve.$(out)				\
++		$(TEST_DIR)/sieve.$(out) $(TEST_DIR)/s3.$(out)				\
+ 		$(TEST_DIR)/pmu.$(out) $(TEST_DIR)/setjmp.$(out)			\
+-		$(TEST_DIR)/tsc_adjust.$(out) $(TEST_DIR)/asyncpf.$(out)		\
+-		$(TEST_DIR)/init.$(out) $(TEST_DIR)/hyperv_synic.$(out)			\
+-		$(TEST_DIR)/hyperv_stimer.$(out) $(TEST_DIR)/hyperv_connections.$(out)	\
+-		$(TEST_DIR)/tsx-ctrl.$(out)
++		$(TEST_DIR)/tsc_adjust.$(out) $(TEST_DIR)/tsx-ctrl.$(out)		\
++		$(TEST_DIR)/vmexit.$(out)
  
- #ifdef CONFIG_EFI
-+setup_gdt64:
-+	lgdt gdt64_desc(%rip)
-+
-+	setup_segments
-+
-+	movabsq $flush_cs, %rax
-+	pushq $0x8
-+	pushq %rax
-+	retfq
-+flush_cs:
-+	ret
-+
-+setup_idt64:
-+	lidtq idt_descr(%rip)
-+	ret
-+
-+setup_cr3:
-+	movabsq $ptl4, %rax
-+	mov %rax, %cr3
-+	ret
-+
- .globl _efi_pe_entry
- _efi_pe_entry:
- 	# EFI image loader calls this with rcx=efi_handle,
-@@ -276,15 +302,25 @@ _efi_pe_entry:
- 	pushq   %rsi
+ ifneq ($(CONFIG_EFI),y)
+ tests-common += $(tests-flatonly)
+diff --git a/x86/vmexit.c b/x86/vmexit.c
+index 999babf..4062f7a 100644
+--- a/x86/vmexit.c
++++ b/x86/vmexit.c
+@@ -560,6 +560,12 @@ static void enable_nx(void *junk)
  
- 	call efi_main
--#endif
- 
-+.globl start64
- start64:
--#ifndef CONFIG_EFI
-+	cli
-+	lea stacktop(%rip), %rsp
-+
-+	setup_percpu_area
-+	call setup_gdt64
-+	call setup_idt64
-+	call setup_cr3
-+#else
-+start64:
-+#endif
- 	call reset_apic
- 	call load_tss
- 	call mask_pic_interrupts
- 	call enable_apic
- 	call save_id
-+#ifndef CONFIG_EFI
- 	mov mb_boot_info(%rip), %rbx
- 	mov %rbx, %rdi
- 	call setup_multiboot
-@@ -292,18 +328,24 @@ start64:
- 	mov mb_cmdline(%rbx), %eax
- 	mov %rax, __args(%rip)
- 	call __setup_args
-+#endif
- 
- 	call ap_init
- 	call enable_x2apic
- 	call smp_init
- 
-+#ifdef CONFIG_EFI
-+	mov $0, %edi
-+	mov $0, %rsi
-+	mov $0, %rdx
-+#else
- 	mov __argc(%rip), %edi
- 	lea __argv(%rip), %rsi
- 	lea __environ(%rip), %rdx
-+#endif
- 	call main
- 	mov %eax, %edi
- 	call exit
--#endif
- 
- .globl setup_5level_page_table
- setup_5level_page_table:
-@@ -328,7 +370,10 @@ online_cpus:
- 	.fill (max_cpus + 7) / 8, 1, 0
- 
- load_tss:
--#ifndef CONFIG_EFI
-+#ifdef CONFIG_EFI
-+	mov $(tss_descr - gdt64), %rax
-+	ltr %ax
-+#else
- 	lidtq idt_descr
- 	mov $(APIC_DEFAULT_PHYS_BASE + APIC_ID), %eax
- 	mov (%rax), %eax
-diff --git a/x86/efi_main.c b/x86/efi_main.c
-index be3f9ab..c542fb9 100644
---- a/x86/efi_main.c
-+++ b/x86/efi_main.c
-@@ -7,6 +7,7 @@ efi_system_table_t *efi_system_table = NULL;
- 
- extern char ImageBase;
- extern char _DYNAMIC;
-+extern void start64(void);
- 
- static void efi_free_pool(void *ptr)
+ static bool test_wanted(struct test *test, char *wanted[], int nwanted)
  {
++#ifdef CONFIG_EFI
++	if (strcmp(test->name, "pci-io") == 0 || strcmp(test->name, "pci-mem") == 0 )
++		return false;
++
++	return true;
++#else
+ 	int i;
+ 
+ 	if (!nwanted)
+@@ -570,6 +576,7 @@ static bool test_wanted(struct test *test, char *wanted[], int nwanted)
+ 			return true;
+ 
+ 	return false;
++#endif
+ }
+ 
+ int main(int ac, char **av)
 -- 
 2.30.2
 
