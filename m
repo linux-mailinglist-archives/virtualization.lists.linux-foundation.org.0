@@ -1,70 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 479913B9C6C
-	for <lists.virtualization@lfdr.de>; Fri,  2 Jul 2021 08:52:24 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 82ECE3B9CA4
+	for <lists.virtualization@lfdr.de>; Fri,  2 Jul 2021 08:56:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2AA7B405D0;
-	Fri,  2 Jul 2021 06:52:22 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D481B83C1B;
+	Fri,  2 Jul 2021 06:56:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id b8Faj10-ixzo; Fri,  2 Jul 2021 06:52:21 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4lj0dwqAdb3f; Fri,  2 Jul 2021 06:56:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id DD400405EF;
-	Fri,  2 Jul 2021 06:52:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id B398083C34;
+	Fri,  2 Jul 2021 06:56:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 54994C000E;
-	Fri,  2 Jul 2021 06:52:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2E296C000E;
+	Fri,  2 Jul 2021 06:56:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF9B6C000E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F3BD4C000E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 06:52:18 +0000 (UTC)
+ Fri,  2 Jul 2021 06:56:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 97993405EF
+ by smtp4.osuosl.org (Postfix) with ESMTP id DFFCD4065D
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 06:52:18 +0000 (UTC)
+ Fri,  2 Jul 2021 06:56:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KyfzefaQhVxq
+ with ESMTP id pVk45Jhs4qw7
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 06:52:17 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
- by smtp4.osuosl.org (Postfix) with ESMTPS id AB508405D0
+ Fri,  2 Jul 2021 06:56:28 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CC3A44065C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jul 2021 06:52:16 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10032"; a="269811345"
-X-IronPort-AV: E=Sophos;i="5.83,316,1616482800"; d="scan'208";a="269811345"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 01 Jul 2021 23:52:15 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.83,316,1616482800"; d="scan'208";a="482188013"
-Received: from dengjie-mobl1.ccr.corp.intel.com (HELO [10.239.154.58])
- ([10.239.154.58])
- by FMSMGA003.fm.intel.com with ESMTP; 01 Jul 2021 23:52:12 -0700
+ Fri,  2 Jul 2021 06:56:28 +0000 (UTC)
+Received: by mail-pg1-x52d.google.com with SMTP id a2so8682179pgi.6
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 01 Jul 2021 23:56:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=bRTZFZ1E3CpWrLbQ7HRC4Me3IA6jdcuP5hZkPy8aTqQ=;
+ b=cPTSpOr4Y/ib3p0oVnLcMOPoCVA4W1519zFDRhfxi/uCtnS57a1MfwBzYEH9JJnTXg
+ 8MzSrGxsX9E/7tvsWnkkpL2FdMmKxWCRn05paSKE7R0C7X12dizUgxonJ/cZhu3p8Pi6
+ ZxOF5CxF+VsXgzt3zYkNvbGKfbfnvf0Xmgg6g83a/CUV3Kk2Sm8hBbuXWQOTJbQOpL4D
+ 2u7ZKhxrMgTlFp9gvGFE7htnxEWSMikZM+7ae7FovIVVaSzPKEih1VWpYHaqqKB0z/7m
+ elg+D+S/qK8GfNncidfw2annOuFP6gf7Gqdnruf5ENF55lVCzRCCOHr2pA4KZ1agDDMu
+ HNWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=bRTZFZ1E3CpWrLbQ7HRC4Me3IA6jdcuP5hZkPy8aTqQ=;
+ b=DOHez0y0iyf9sfk2/WwJRhDfbz6WNolwKztjO4cMrOlFTJ9HqLiKYHalUFhBmldl8c
+ R13QMnp1ZDWDM00R6cRTSK6kVKxL0SrqspTiGvsp/+c9iExnIGUB72UMRtxObYUtP6Id
+ WRwRb6PEPJ8al/fncfJQW4oSU2DkSUsC/3+PNgKkPQTgODuvN7bmuVj1x4Et1IhErRmH
+ qHIdtP3zN1HZ11NOs7b6GU6C9TpvrBsD/kCc1mDcQBORnYj6ZHEED3kdPt5Y8z/qiN3z
+ wHDIwwyBFvnVmcYVJBAJFi/r2BmlEXKZazEo5ijEiAS91TxmjZxwyPxA7EHZ30F9itMh
+ 2MyA==
+X-Gm-Message-State: AOAM531DjuZ2KTJMyhBGkkZoFHWAbKUW8lJplQlBFJqeYCbo5KibhA2Z
+ GyjEb2btl8mIR07oJhY0BqDwkA==
+X-Google-Smtp-Source: ABdhPJxavtN37ys1rmwQed3n/qbrHe7nbn8CnsVNS+IEutFRk9yJ8cEvH5dkgIHmH2s1Uoq0OvHW1A==
+X-Received: by 2002:a65:6544:: with SMTP id a4mr286407pgw.280.1625208988205;
+ Thu, 01 Jul 2021 23:56:28 -0700 (PDT)
+Received: from localhost ([106.201.108.2])
+ by smtp.gmail.com with ESMTPSA id p29sm2206840pfq.55.2021.07.01.23.56.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Jul 2021 23:56:27 -0700 (PDT)
+Date: Fri, 2 Jul 2021 12:26:25 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Jie Deng <jie.deng@intel.com>
 Subject: Re: [PATCH v11] i2c: virtio: add a virtio i2c frontend driver
-To: Viresh Kumar <viresh.kumar@linaro.org>, Wolfram Sang <wsa@kernel.org>,
- linux-i2c@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-kernel@vger.kernel.org, mst@redhat.com, arnd@arndb.de,
- jasowang@redhat.com, andriy.shevchenko@linux.intel.com, yu1.wang@intel.com,
- shuo.a.liu@intel.com, conghui.chen@intel.com, stefanha@redhat.com
+Message-ID: <20210702065625.qielhnfyrlvrtrkk@vireshk-i7>
 References: <510c876952efa693339ab0d6cc78ba7be9ef6897.1625104206.git.jie.deng@intel.com>
- <20210701040436.p7kega6rzeqz5tlm@vireshk-i7> <YN4WeJCepCrpylOD@kunai>
+ <20210701040436.p7kega6rzeqz5tlm@vireshk-i7>
+ <YN4WeJCepCrpylOD@kunai>
  <20210702045512.u4dvbapoc5a2a4jb@vireshk-i7>
-From: Jie Deng <jie.deng@intel.com>
-Message-ID: <409b6cc3-3339-61b2-7f42-0c69b6486bb3@intel.com>
-Date: Fri, 2 Jul 2021 14:52:11 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Firefox/78.0 Thunderbird/78.10.0
+ <409b6cc3-3339-61b2-7f42-0c69b6486bb3@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20210702045512.u4dvbapoc5a2a4jb@vireshk-i7>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <409b6cc3-3339-61b2-7f42-0c69b6486bb3@intel.com>
+User-Agent: NeoMutt/20180716-391-311a52
+Cc: yu1.wang@intel.com, arnd@arndb.de, mst@redhat.com,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Wolfram Sang <wsa@kernel.org>, linux-i2c@vger.kernel.org, stefanha@redhat.com,
+ shuo.a.liu@intel.com, andriy.shevchenko@linux.intel.com,
+ conghui.chen@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,51 +104,39 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On 02-07-21, 14:52, Jie Deng wrote:
+> This is not efficient. If adding the ith request to the queue fails, we can
+> still send
+> 
+> the requests before it.
 
-On 2021/7/2 12:55, Viresh Kumar wrote:
-> On 01-07-21, 21:24, Wolfram Sang wrote:
->>> I just noticed this now, but this function even tries to send data
->>> partially, which isn't right. If the caller (i2c device's driver)
->>> calls this for 5 struct i2c_msg instances, then all 5 need to get
->>> through or none.. where as we try to send as many as possible here.
->>>
->>> This looks broken to me. Rather return an error value here on success,
->>> or make it complete failure.
->>>
->>> Though to be fair I see i2c-core also returns number of messages
->>> processed from i2c_transfer().
->>>
->>> Wolfram, what's expected here ? Shouldn't all message transfer or
->>> none?
->> Well, on a physical bus, it can simply happen that after message 3 of 5,
->> the bus is stalled, so we need to bail out.
-> Right, and in that case the transfer will have any meaning left? I believe it
-> needs to be fully retried as the requests may have been dependent on each other.
->
->> Again, I am missing details of a virtqueue, but I'd think it is
->> different. If adding to the queue fails, then it probably make sense to
->> drop the whole transfer.
-> Exactly my point.
->
+Not really. Normally the requests which are sent together by clients, are linked
+together, like a state machine. So if the first one is sent, but not the second
+one, then there is not going to be any meaningful result of that.
 
-This is not efficient. If adding the ith request to the queue fails, we 
-can still send
+The i2c core doesn't club requests together from different clients in a single
+i2c_transfer() call. So you must assume i2c_transfer(), irrespective of the
+number of underlying messages in it, as atomic. If you fail, the client is going
+to retry everything again or assume it failed completely.
 
-the requests before it. We don't need to know if it fails here (adding 
-to the queue)
+> We don't need to know if it fails here (adding to
+> the queue)
+> 
+> or there (later in the host). The "master_xfer" just need to return final
+> number of
+> 
+> messages successfully processed.
 
-or there (later in the host). The "master_xfer" just need to return 
-final number of
+No, that isn't going to help and it is rather inefficient, trying to send
+transfer when we already know part of it failed.
 
-messages successfully processed.
-
-
-
+-- 
+viresh
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
