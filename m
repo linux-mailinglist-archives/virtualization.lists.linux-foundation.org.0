@@ -1,82 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 024B03BB994
-	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:46:06 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1FD4C3BB9AA
+	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:56:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 928E340452;
-	Mon,  5 Jul 2021 08:46:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id C816F83696;
+	Mon,  5 Jul 2021 08:56:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lLgi5eFrBa-O; Mon,  5 Jul 2021 08:46:03 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2BEZGRtE-zZ0; Mon,  5 Jul 2021 08:56:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 2FB2C40450;
-	Mon,  5 Jul 2021 08:46:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id BA08883A71;
+	Mon,  5 Jul 2021 08:56:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7939C0022;
-	Mon,  5 Jul 2021 08:46:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 39468C000E;
+	Mon,  5 Jul 2021 08:56:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4819FC000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 00B3DC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:46:01 +0000 (UTC)
+ Mon,  5 Jul 2021 08:56:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 254AB40450
+ by smtp2.osuosl.org (Postfix) with ESMTP id D54A240371
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:46:01 +0000 (UTC)
+ Mon,  5 Jul 2021 08:56:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RmQhgTPujBRL
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id t7c9K3jkjP73
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:46:00 +0000 (UTC)
+ Mon,  5 Jul 2021 08:56:13 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6BB4140407
+Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
+ [IPv6:2607:f8b0:4864:20::434])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F392D40343
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:46:00 +0000 (UTC)
-Received: by mail-pl1-x62d.google.com with SMTP id s13so6782380plg.12
+ Mon,  5 Jul 2021 08:56:12 +0000 (UTC)
+Received: by mail-pf1-x434.google.com with SMTP id f17so4599936pfj.8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 05 Jul 2021 01:46:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=6tzBQn21ISHfDplCImGeslYtqyN4YOQPVRToQhASUVY=;
- b=lsyuPfdJN1JWMUyysgrmTUfLuyr+r0n/yyXQm8uXA8jGs2fsp5d4/xg38840DuDWnP
- dNwFse8mYFi+94lzCONUh+VbsDypmP81Gh2xIx/jklcTzT0DJbocwiXiasCTWRv9h3Fs
- Qsu0ukBiK1gHvejWCW+J4KessUsdPdovGVfQSfGAW6fuAAl5ooVWYkpdMxDhNsAPl64E
- y3O0fJcB2t51hSu5/KJNeVRB7lEkDoV2AxlnEioAB4vJDsJ4d60MXfUfvtrsOIubi6tB
- 0H2WFtDCmj/EQs/tc0f96x0/ZANR04KZEdWJCJdFipN2zFC98IzkhaGHGG02AbZ1Sqbm
- 72WQ==
+ Mon, 05 Jul 2021 01:56:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=al5EeP8QXH1RSq+yYN15w1dJ9cxYy0MXetYFBHF4BSo=;
+ b=qxMcLlfGOx0W2JA5nKbBKobaGjC/IWWZnUhRyQ6J3/Ux38uY7SbIZQH3eWvXKiXIIQ
+ gTGNHlA9cNQZVeFzOyeMFf9ipQXRGMbQSXZ2t2WUY/KqnsbKWGLA/xchnGdhv3D6T4Kh
+ 9M8IM1PcZRSN9uXxO5MWZqMoyms6DbbXqgdZNYKQL8DycFbVx6So919oFjhW5IIeF1lw
+ jGNi7JgVNRAHGfoo4jHeLmEvz6DrG7P4icd03qbBvrWfQ4oL7/MkPb2HOE14rvSejuvZ
+ 4Zr6BZusasXGeBGZLwNBTKfKoaupAg9r1YazNL/uwaIq7jNc+6NYfqeLazMFVV8Dshum
+ aL8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=6tzBQn21ISHfDplCImGeslYtqyN4YOQPVRToQhASUVY=;
- b=YIMoNNUoFKLOZ0VXJ7MOHQqgzHazJ9x/8nmVQD6i8DnHmLx+MQTk75vqJt6EjgKEsF
- IJpIJYtOQ2+5TLnlY3ScnHCFaZ1ZdJT7k5PCuZuRQ29VuozF1fljLve80jcrUFUCcyR7
- JaIDaVS1fL5rFBkKsEkUoz6yLGNM8Fu348eAfrDsWx54CFPLhqP5RqIAm2riTFqYgekt
- XBFwFkw3qsiwMXSH+vNQCrG4OuhlQcjXwON7VirMr0pdqDUYK7VrR4wS08nfAFDq/UcV
- lJqhg4M8Riudw7+19kSvNR2N7Nsfw96TIqFBu+lVrptNqFl1puZbl/Dg+9P4fWVwXoB2
- tZrg==
-X-Gm-Message-State: AOAM531rGwlqdyQ1GpsYAu+t/2K94HJm99qYxjVw94ytW6BFPpyLyiB+
- 4h6HvYTA57tpc3Nogi78QqMtjr53Nx8mly2VzrU=
-X-Google-Smtp-Source: ABdhPJxaGRHGr1fnUoBJYB2DuDcGdLzBdN2BoqqbsjtiY+qO7FtCAXUoJSviJ2x8m0W3QCYd0ctKBmkOnhJEbg53W+A=
-X-Received: by 2002:a17:902:fe0a:b029:11d:81c9:3adf with SMTP id
- g10-20020a170902fe0ab029011d81c93adfmr11680070plj.0.1625474759804; Mon, 05
- Jul 2021 01:45:59 -0700 (PDT)
-MIME-Version: 1.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=al5EeP8QXH1RSq+yYN15w1dJ9cxYy0MXetYFBHF4BSo=;
+ b=Rc4q+vH5KrDBa8TU7Ox9I9lIkgtlamh5+1wJHQgY2ewcd3cCG1oLQUd5YoxIM36CTa
+ ajg+AmQSuXWupPdLazWbwGIvzB/vuh17T/+KSM+mJj6w2Ii3oXh10Danji8lGAsxvOUw
+ yBcSKeXqo469c+7nmcnIDd+t9dMuq281T9mPO6SRXBC2BNgvhQYRqscBi8H4TpsX5Ekv
+ mN8Cov4HfYdhUpwpz1cjKGaDg/TZVj3gUcDeMITrl8NrXyKwU9SH3WdoRuzNZN/skSXr
+ vwKepkbisN/yumqdR2muDFxFZmMmAq1ob3OBuuAK9JAAbX2MoscExWLlxKnhtOlQxXtW
+ H8zQ==
+X-Gm-Message-State: AOAM532Zc5AeDNcFRakvxIqf4dQUEdFk9gVnNd4BglJxgGXp3XJoTBE1
+ eNz80gyBDEFWamrX7NkA3or6Mg==
+X-Google-Smtp-Source: ABdhPJyIQbG4Z5iuwB551KL53cMIMxfhI49MIvYS5ne9261aa9T6dN/WzZgpRpsdddED6oNm+/NA6w==
+X-Received: by 2002:a63:4c19:: with SMTP id z25mr14586040pga.160.1625475372402; 
+ Mon, 05 Jul 2021 01:56:12 -0700 (PDT)
+Received: from localhost ([106.201.108.2])
+ by smtp.gmail.com with ESMTPSA id ga1sm10547756pjb.43.2021.07.05.01.56.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Jul 2021 01:56:11 -0700 (PDT)
+Date: Mon, 5 Jul 2021 14:26:10 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Andy Shevchenko <andy.shevchenko@gmail.com>
+Subject: Re: [PATCH v13] i2c: virtio: add a virtio i2c frontend driver
+Message-ID: <20210705085610.okcvnhwhwehjiehy@vireshk-i7>
 References: <8908f35a741e25a630d521e1012494e67d31ea64.1625466616.git.jie.deng@intel.com>
  <20210705080245.yabjlrgje5l7vndt@vireshk-i7>
-In-Reply-To: <20210705080245.yabjlrgje5l7vndt@vireshk-i7>
-From: Andy Shevchenko <andy.shevchenko@gmail.com>
-Date: Mon, 5 Jul 2021 11:45:23 +0300
-Message-ID: <CAHp75Vf0_8+KW_cp2g0V1miMx1cegBdjLzBjTbtpmcmdCHQJxA@mail.gmail.com>
-Subject: Re: [PATCH v13] i2c: virtio: add a virtio i2c frontend driver
-To: Viresh Kumar <viresh.kumar@linaro.org>
+ <CAHp75Vf0_8+KW_cp2g0V1miMx1cegBdjLzBjTbtpmcmdCHQJxA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <CAHp75Vf0_8+KW_cp2g0V1miMx1cegBdjLzBjTbtpmcmdCHQJxA@mail.gmail.com>
+User-Agent: NeoMutt/20180716-391-311a52
 Cc: Arnd Bergmann <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
@@ -101,29 +110,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jul 5, 2021 at 11:03 AM Viresh Kumar <viresh.kumar@linaro.org> wrote:
-> On 05-07-21, 14:53, Jie Deng wrote:
+On 05-07-21, 11:45, Andy Shevchenko wrote:
+> On Mon, Jul 5, 2021 at 11:03 AM Viresh Kumar <viresh.kumar@linaro.org> wrote:
+> > On 05-07-21, 14:53, Jie Deng wrote:
+> 
+> > > +#include <linux/types.h>
+> > > +#include <linux/const.h>
+> >
+> > Both of these need to be the uapi headers as Andy said earlier
+> 
+> They are already since this header _is_ UAPI,
 
-> > +#include <linux/types.h>
-> > +#include <linux/const.h>
->
-> Both of these need to be the uapi headers as Andy said earlier
+Ahh, there is some tricky header inclusion there :)
 
-They are already since this header _is_ UAPI, what you are suggesting
-is gonna not work, although it's correct for in-kernel users of UAPI
-headers.
+> what you are suggesting is gonna not work,
 
->  and they better
-> be in alphabetical order.
+Why ?
 
-I prefer that as well.
-
-> #include <uapi/linux/const.h>
-> #include <uapi/linux/types.h>
+> although it's correct for in-kernel users of UAPI
+> headers.
 
 -- 
-With Best Regards,
-Andy Shevchenko
+viresh
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
