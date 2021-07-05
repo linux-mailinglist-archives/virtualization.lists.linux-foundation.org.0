@@ -1,93 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2A2183BB53D
-	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 04:43:49 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id D3F713BB547
+	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 04:49:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BEF0D60810;
-	Mon,  5 Jul 2021 02:43:47 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 81F3B402AE;
+	Mon,  5 Jul 2021 02:49:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WIU4cdm8t1Js; Mon,  5 Jul 2021 02:43:47 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id be4M_Wnk-N7J; Mon,  5 Jul 2021 02:49:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 918A060817;
-	Mon,  5 Jul 2021 02:43:46 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 503D840425;
+	Mon,  5 Jul 2021 02:49:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 03717C001F;
-	Mon,  5 Jul 2021 02:43:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 21CEFC000E;
+	Mon,  5 Jul 2021 02:49:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 163A9C000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 59DAEC0010
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 02:43:44 +0000 (UTC)
+ Mon,  5 Jul 2021 02:49:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id DD010606B3
+ by smtp4.osuosl.org (Postfix) with ESMTP id 44DE24044E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 02:43:43 +0000 (UTC)
+ Mon,  5 Jul 2021 02:49:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TZd2msPvXCJ9
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Bkxj_NWHbrvV
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 02:43:43 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
- [IPv6:2607:f8b0:4864:20::52f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 562006066B
+ Mon,  5 Jul 2021 02:49:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 312AF403C0
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 02:43:43 +0000 (UTC)
-Received: by mail-pg1-x52f.google.com with SMTP id e20so17001023pgg.0
- for <virtualization@lists.linux-foundation.org>;
- Sun, 04 Jul 2021 19:43:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=xuSwe/RfSoZsmqWmRxSCKHgdBKSJxFIJ1HP2k67JkNE=;
- b=TLV4gOuFn+VPLM41B7YR5L1wKfxLzcF6bpswN35lacqXklwXMThcUo1B9UxFGWGPbc
- 6PBWQHbzjUGYKZ4JQhq1j45l5gCQTgzTlmgp5zMxaCGufDbwT4VFfkCk5bl+oqhW97Ta
- HRAnqvXotEJYQ7QiirWsTDMvf6wLaXM0XnMGWZcVZcUj6S8YkdKEuKBzvpucQF5ZHLJ4
- ZnDjDJKLK8jD2lgAz9H92+hFKOWObUF09q/ReTqmmbwTHHaaKBkkBPlY40wMnTHYpETJ
- m24o5HYwIKUPJz0kfdBUvF1aeIizRv8nbCZMwoJmD4y8bZAbDrmSb/tvRuiNfpb0wX3I
- V0VA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=xuSwe/RfSoZsmqWmRxSCKHgdBKSJxFIJ1HP2k67JkNE=;
- b=D8qkH3tppcS7ZISI5HnRD0V/JLTyCYEpW8CRfcfeUoMJdh9WKt/qeoXoJtH4KRlzUE
- tx6iGqOfJijJtdxaQ/55+vO8Bwq8We1MGyqBARV0gi9uuMhqWXZyKjSkmN8kh7oVyYx4
- e37ohWiKSOadeXYJGu8hZ+8zXv8rZYhLV77y5Ci0gAMtv/hmiuhhXQ49oBIg6ltd/IUI
- a0DYPGDPCW3VG46E1WXzp1icouRnFKfu9tnOJAhXaslovcFtOIpXN5SweuA8WV5tfrS9
- UOFm01UgGqXZWg4lQYS9C6UBIvWA/VTf6H9xGPIIB9d4zdpozwTpQkpyIJ/Wvl2EZ1o+
- 3xFg==
-X-Gm-Message-State: AOAM532JkWCNREd/0t8LsGnRq997i6mdugakOLg8qv572/unD6OeqT7f
- LaIkFhjJqmpWfIlrQbWhLjA6jQ==
-X-Google-Smtp-Source: ABdhPJwmAJLOYAES7tvc7lRmiTWlLmQtQ+z3LyBxTrAkUo6791EZO4D8kVO6bvovxidDnExrClJHKA==
-X-Received: by 2002:a63:284:: with SMTP id 126mr13154170pgc.347.1625453022687; 
- Sun, 04 Jul 2021 19:43:42 -0700 (PDT)
-Received: from localhost ([106.201.108.2])
- by smtp.gmail.com with ESMTPSA id y127sm5987540pfg.96.2021.07.04.19.43.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 04 Jul 2021 19:43:42 -0700 (PDT)
-Date: Mon, 5 Jul 2021 08:13:40 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Subject: Re: [PATCH v12] i2c: virtio: add a virtio i2c frontend driver
-Message-ID: <20210705024340.mb5sv5epxbdatgsg@vireshk-i7>
-References: <f229cd761048bc143f88f33a3437bdbf891c39fd.1625214435.git.jie.deng@intel.com>
- <YN7jOm68fUL4UA2Q@smile.fi.intel.com>
+ Mon,  5 Jul 2021 02:49:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1625453356;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=BLeXj+8XKMxLFChu+De6U7Z5h/Ve0EnpqGdSTfh+Oog=;
+ b=NHJZgpONmyuxBVJzep3ZjC0iordRam/hK+we7ygjzSmoPLKDWlIogOjILg3OX4gkbdUo6D
+ Pyhxg2/44gTwtRCHjEMHFxqCiKwEb8lC1ASrVhYbjUyIwWReyjtXbymjPtbxfdE39wwh9R
+ dGN83Q6j+CwTZ5RdVCm0/sJPYAQEFmU=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-430-xXC6zSW9MTmViJGyU_E-qA-1; Sun, 04 Jul 2021 22:49:15 -0400
+X-MC-Unique: xXC6zSW9MTmViJGyU_E-qA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
+ [10.5.11.16])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DD287100B3AC;
+ Mon,  5 Jul 2021 02:49:12 +0000 (UTC)
+Received: from T590 (ovpn-13-193.pek2.redhat.com [10.72.13.193])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 759025C1A1;
+ Mon,  5 Jul 2021 02:48:57 +0000 (UTC)
+Date: Mon, 5 Jul 2021 10:48:53 +0800
+From: Ming Lei <ming.lei@redhat.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH V2 5/6] virtio: add one field into virtio_device for
+ recording if device uses managed irq
+Message-ID: <YOJzFe3xcLK279Wv@T590>
+References: <20210702150555.2401722-1-ming.lei@redhat.com>
+ <20210702150555.2401722-6-ming.lei@redhat.com>
+ <20210702115430-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <YN7jOm68fUL4UA2Q@smile.fi.intel.com>
-User-Agent: NeoMutt/20180716-391-311a52
-Cc: arnd@arndb.de, mst@redhat.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, wsa@kernel.org,
- wsa+renesas@sang-engineering.com, linux-i2c@vger.kernel.org,
- stefanha@redhat.com, shuo.a.liu@intel.com, conghui.chen@intel.com,
- yu1.wang@intel.com
+In-Reply-To: <20210702115430-mutt-send-email-mst@kernel.org>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
+Cc: Jens Axboe <axboe@kernel.dk>, Damien Le Moal <damien.lemoal@wdc.com>,
+ John Garry <john.garry@huawei.com>, linux-scsi@vger.kernel.org,
+ "Martin K . Petersen" <martin.petersen@oracle.com>,
+ Daniel Wagner <dwagner@suse.de>, linux-nvme@lists.infradead.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ Keith Busch <kbusch@kernel.org>, Wen Xiong <wenxiong@us.ibm.com>,
+ Christoph Hellwig <hch@lst.de>, Sagi Grimberg <sagi@grimberg.me>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,57 +99,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 02-07-21, 12:58, Andy Shevchenko wrote:
-> On Fri, Jul 02, 2021 at 04:46:47PM +0800, Jie Deng wrote:
-> > +static int virtio_i2c_complete_reqs(struct virtqueue *vq,
-> > +				    struct virtio_i2c_req *reqs,
-> > +				    struct i2c_msg *msgs, int nr,
-> > +				    bool fail)
-> > +{
-> > +	struct virtio_i2c_req *req;
-> > +	bool failed = fail;
+On Fri, Jul 02, 2021 at 11:55:40AM -0400, Michael S. Tsirkin wrote:
+> On Fri, Jul 02, 2021 at 11:05:54PM +0800, Ming Lei wrote:
+> > blk-mq needs to know if the device uses managed irq, so add one field
+> > to virtio_device for recording if device uses managed irq.
+> > 
+> > If the driver use managed irq, this flag has to be set so it can be
+> > passed to blk-mq.
+> > 
+> > Cc: "Michael S. Tsirkin" <mst@redhat.com>
+> > Cc: Jason Wang <jasowang@redhat.com>
+> > Cc: virtualization@lists.linux-foundation.org
+> > Signed-off-by: Ming Lei <ming.lei@redhat.com>
+> 
+> 
+> The API seems somewhat confusing. virtio does not request
+> a managed irq as such, does it? I think it's a decision taken
+> by the irq core.
 
-Jie, you can actually get rid of this variable too. Jut rename fail to failed
-and everything shall work as you want.
+vp_request_msix_vectors():
 
-> > +	unsigned int len;
-> > +	int i, j = 0;
-> > +
-> > +	for (i = 0; i < nr; i++) {
-> > +		/* Detach the ith request from the vq */
-> > +		req = virtqueue_get_buf(vq, &len);
-> > +
-> > +		/*
-> > +		 * Condition (req && req == &reqs[i]) should always meet since
-> > +		 * we have total nr requests in the vq.
-> > +		 */
-> > +		if (!failed && (WARN_ON(!(req && req == &reqs[i])) ||
-> > +		    (req->in_hdr.status != VIRTIO_I2C_MSG_OK)))
-> > +			failed = true;
-> 
-> ...and after failed is true, we are continuing the loop, why?
+        if (desc) {
+                flags |= PCI_IRQ_AFFINITY;
+                desc->pre_vectors++; /* virtio config vector */
+                vdev->use_managed_irq = true;
+        }
 
-Actually this function can be called with fail set to true. We proceed as we
-need to call i2c_put_dma_safe_msg_buf() for all buffers we allocated earlier.
+        err = pci_alloc_irq_vectors_affinity(vp_dev->pci_dev, nvectors,
+                                             nvectors, flags, desc);
 
-> > +		i2c_put_dma_safe_msg_buf(reqs[i].buf, &msgs[i], !failed);
-> > +		if (!failed)
-> 
-> > +			++j;
-> 
-> Besides better to read j++ the j itself can be renamed to something more
-> verbose.
-> 
-> > +	}
-> 
-> > +	return (fail ? -ETIMEDOUT : j);
-> 
-> Redundant parentheses.
-> 
-> > +}
+Managed irq is used once PCI_IRQ_AFFINITY is passed to
+pci_alloc_irq_vectors_affinity().
 
--- 
-viresh
+> 
+> Any way to query the irq to find out if it's managed?
+
+So far the managed info isn't exported via /proc/irq, but if one irq is
+managed, its smp_affinity & smp_affinity_list attributes can't be
+changed successfully.
+
+If irq's debugfs is enabled, this info can be retrieved.
+
+
+Thanks,
+Ming
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
