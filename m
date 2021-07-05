@@ -2,71 +2,89 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6AF383BB923
-	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:26:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 024B03BB994
+	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:46:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3C7C640498;
-	Mon,  5 Jul 2021 08:26:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 928E340452;
+	Mon,  5 Jul 2021 08:46:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0sz5kawsjxLk; Mon,  5 Jul 2021 08:26:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id B97CB40497;
-	Mon,  5 Jul 2021 08:26:27 +0000 (UTC)
+	with ESMTP id lLgi5eFrBa-O; Mon,  5 Jul 2021 08:46:03 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 2FB2C40450;
+	Mon,  5 Jul 2021 08:46:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A5EEDC0025;
-	Mon,  5 Jul 2021 08:26:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A7939C0022;
+	Mon,  5 Jul 2021 08:46:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57B2AC002A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4819FC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:24 +0000 (UTC)
+ Mon,  5 Jul 2021 08:46:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 32C1640497
+ by smtp4.osuosl.org (Postfix) with ESMTP id 254AB40450
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:24 +0000 (UTC)
+ Mon,  5 Jul 2021 08:46:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6sqJTMriVeUV
+ with ESMTP id RmQhgTPujBRL
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:23 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3754740485
+ Mon,  5 Jul 2021 08:46:00 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6BB4140407
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:23 +0000 (UTC)
-Received: from cap.home.8bytes.org (p5b006775.dip0.t-ipconnect.de
- [91.0.103.117])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 61136CAE;
- Mon,  5 Jul 2021 10:26:19 +0200 (CEST)
-From: Joerg Roedel <joro@8bytes.org>
-To: x86@kernel.org
-Subject: [RFC PATCH 12/12] x86/sev: Support kexec under SEV-ES with AP Jump
- Table blob
-Date: Mon,  5 Jul 2021 10:24:43 +0200
-Message-Id: <20210705082443.14721-13-joro@8bytes.org>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210705082443.14721-1-joro@8bytes.org>
-References: <20210705082443.14721-1-joro@8bytes.org>
+ Mon,  5 Jul 2021 08:46:00 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id s13so6782380plg.12
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 05 Jul 2021 01:46:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=6tzBQn21ISHfDplCImGeslYtqyN4YOQPVRToQhASUVY=;
+ b=lsyuPfdJN1JWMUyysgrmTUfLuyr+r0n/yyXQm8uXA8jGs2fsp5d4/xg38840DuDWnP
+ dNwFse8mYFi+94lzCONUh+VbsDypmP81Gh2xIx/jklcTzT0DJbocwiXiasCTWRv9h3Fs
+ Qsu0ukBiK1gHvejWCW+J4KessUsdPdovGVfQSfGAW6fuAAl5ooVWYkpdMxDhNsAPl64E
+ y3O0fJcB2t51hSu5/KJNeVRB7lEkDoV2AxlnEioAB4vJDsJ4d60MXfUfvtrsOIubi6tB
+ 0H2WFtDCmj/EQs/tc0f96x0/ZANR04KZEdWJCJdFipN2zFC98IzkhaGHGG02AbZ1Sqbm
+ 72WQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=6tzBQn21ISHfDplCImGeslYtqyN4YOQPVRToQhASUVY=;
+ b=YIMoNNUoFKLOZ0VXJ7MOHQqgzHazJ9x/8nmVQD6i8DnHmLx+MQTk75vqJt6EjgKEsF
+ IJpIJYtOQ2+5TLnlY3ScnHCFaZ1ZdJT7k5PCuZuRQ29VuozF1fljLve80jcrUFUCcyR7
+ JaIDaVS1fL5rFBkKsEkUoz6yLGNM8Fu348eAfrDsWx54CFPLhqP5RqIAm2riTFqYgekt
+ XBFwFkw3qsiwMXSH+vNQCrG4OuhlQcjXwON7VirMr0pdqDUYK7VrR4wS08nfAFDq/UcV
+ lJqhg4M8Riudw7+19kSvNR2N7Nsfw96TIqFBu+lVrptNqFl1puZbl/Dg+9P4fWVwXoB2
+ tZrg==
+X-Gm-Message-State: AOAM531rGwlqdyQ1GpsYAu+t/2K94HJm99qYxjVw94ytW6BFPpyLyiB+
+ 4h6HvYTA57tpc3Nogi78QqMtjr53Nx8mly2VzrU=
+X-Google-Smtp-Source: ABdhPJxaGRHGr1fnUoBJYB2DuDcGdLzBdN2BoqqbsjtiY+qO7FtCAXUoJSviJ2x8m0W3QCYd0ctKBmkOnhJEbg53W+A=
+X-Received: by 2002:a17:902:fe0a:b029:11d:81c9:3adf with SMTP id
+ g10-20020a170902fe0ab029011d81c93adfmr11680070plj.0.1625474759804; Mon, 05
+ Jul 2021 01:45:59 -0700 (PDT)
 MIME-Version: 1.0
-Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
- Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
- David Rientjes <rientjes@google.com>, Martin Radev <martin.b.radev@gmail.com>,
- Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
- linux-coco@lists.linux.dev, Andy Lutomirski <luto@kernel.org>,
- Dan Williams <dan.j.williams@intel.com>, Juergen Gross <jgross@suse.com>,
- Mike Stunes <mstunes@vmware.com>, Sean Christopherson <seanjc@google.com>,
- linux-kernel@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>,
- Erdem Aktas <erdemaktas@google.com>
+References: <8908f35a741e25a630d521e1012494e67d31ea64.1625466616.git.jie.deng@intel.com>
+ <20210705080245.yabjlrgje5l7vndt@vireshk-i7>
+In-Reply-To: <20210705080245.yabjlrgje5l7vndt@vireshk-i7>
+From: Andy Shevchenko <andy.shevchenko@gmail.com>
+Date: Mon, 5 Jul 2021 11:45:23 +0300
+Message-ID: <CAHp75Vf0_8+KW_cp2g0V1miMx1cegBdjLzBjTbtpmcmdCHQJxA@mail.gmail.com>
+Subject: Re: [PATCH v13] i2c: virtio: add a virtio i2c frontend driver
+To: Viresh Kumar <viresh.kumar@linaro.org>
+Cc: Arnd Bergmann <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ virtualization@lists.linux-foundation.org, Wolfram Sang <wsa@kernel.org>,
+ Wolfram Sang <wsa+renesas@sang-engineering.com>,
+ linux-i2c <linux-i2c@vger.kernel.org>, Stefan Hajnoczi <stefanha@redhat.com>,
+ shuo.a.liu@intel.com, Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ conghui.chen@intel.com, yu1.wang@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,87 +101,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Joerg Roedel <jroedel@suse.de>
+On Mon, Jul 5, 2021 at 11:03 AM Viresh Kumar <viresh.kumar@linaro.org> wrote:
+> On 05-07-21, 14:53, Jie Deng wrote:
 
-When the AP Jump Table blob is installed the kernel can hand over the
-APs from the old to the new kernel. Enable kexec when the AP Jump
-Table blob has been installed.
+> > +#include <linux/types.h>
+> > +#include <linux/const.h>
+>
+> Both of these need to be the uapi headers as Andy said earlier
 
-Signed-off-by: Joerg Roedel <jroedel@suse.de>
----
- arch/x86/include/asm/sev.h         |  2 ++
- arch/x86/kernel/machine_kexec_64.c |  6 +++++-
- arch/x86/kernel/sev.c              | 12 ++++++++++++
- 3 files changed, 19 insertions(+), 1 deletion(-)
+They are already since this header _is_ UAPI, what you are suggesting
+is gonna not work, although it's correct for in-kernel users of UAPI
+headers.
 
-diff --git a/arch/x86/include/asm/sev.h b/arch/x86/include/asm/sev.h
-index cd14b6e10f12..61910caf2a0d 100644
---- a/arch/x86/include/asm/sev.h
-+++ b/arch/x86/include/asm/sev.h
-@@ -87,6 +87,7 @@ static __always_inline void sev_es_stop_this_cpu(void)
- 	if (static_branch_unlikely(&sev_es_enable_key))
- 		__sev_es_stop_this_cpu();
- }
-+bool sev_kexec_supported(void);
- #else
- static inline void sev_es_ist_enter(struct pt_regs *regs) { }
- static inline void sev_es_ist_exit(void) { }
-@@ -94,6 +95,7 @@ static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh) { ret
- static inline void sev_es_nmi_complete(void) { }
- static inline int sev_es_efi_map_ghcbs(pgd_t *pgd) { return 0; }
- static inline void sev_es_stop_this_cpu(void) { }
-+static bool sev_kexec_supported(void) { return true; }
- #endif
- 
- #endif
-diff --git a/arch/x86/kernel/machine_kexec_64.c b/arch/x86/kernel/machine_kexec_64.c
-index f902cc9cc634..d08eae4f7694 100644
---- a/arch/x86/kernel/machine_kexec_64.c
-+++ b/arch/x86/kernel/machine_kexec_64.c
-@@ -26,6 +26,7 @@
- #include <asm/kexec-bzimage64.h>
- #include <asm/setup.h>
- #include <asm/set_memory.h>
-+#include <asm/sev.h>
- 
- #ifdef CONFIG_ACPI
- /*
-@@ -626,5 +627,8 @@ void arch_kexec_pre_free_pages(void *vaddr, unsigned int pages)
-  */
- bool arch_kexec_supported(void)
- {
--	return !sev_es_active();
-+	if (!sev_kexec_supported())
-+		return false;
-+
-+	return true;
- }
-diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
-index 113903ba3095..731bbf941a82 100644
---- a/arch/x86/kernel/sev.c
-+++ b/arch/x86/kernel/sev.c
-@@ -901,6 +901,18 @@ static int __init sev_es_setup_ap_jump_table_blob(void)
- }
- core_initcall(sev_es_setup_ap_jump_table_blob);
- 
-+bool sev_kexec_supported(void)
-+{
-+	/*
-+	 * KEXEC with SEV-ES and more than one CPU is only supported
-+	 * when the AP Jump Table is installed.
-+	 */
-+	if (num_possible_cpus() > 1)
-+		return !sev_es_active() || sev_ap_jumptable_blob_installed;
-+	else
-+		return true;
-+}
-+
- static void __init alloc_runtime_data(int cpu)
- {
- 	struct sev_es_runtime_data *data;
+>  and they better
+> be in alphabetical order.
+
+I prefer that as well.
+
+> #include <uapi/linux/const.h>
+> #include <uapi/linux/types.h>
+
 -- 
-2.31.1
-
+With Best Regards,
+Andy Shevchenko
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
