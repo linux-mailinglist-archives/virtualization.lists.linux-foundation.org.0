@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6641F3BB922
-	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:26:30 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6AF383BB923
+	for <lists.virtualization@lfdr.de>; Mon,  5 Jul 2021 10:26:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EDC1F83A8D;
-	Mon,  5 Jul 2021 08:26:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3C7C640498;
+	Mon,  5 Jul 2021 08:26:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ABYoq5XCjlju; Mon,  5 Jul 2021 08:26:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0sz5kawsjxLk; Mon,  5 Jul 2021 08:26:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id ECDC783A77;
-	Mon,  5 Jul 2021 08:26:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id B97CB40497;
+	Mon,  5 Jul 2021 08:26:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 798E8C000E;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A5EEDC0025;
 	Mon,  5 Jul 2021 08:26:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 935BBC0022
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 57B2AC002A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:23 +0000 (UTC)
+ Mon,  5 Jul 2021 08:26:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 721CE83A72
+ by smtp4.osuosl.org (Postfix) with ESMTP id 32C1640497
+ for <virtualization@lists.linux-foundation.org>;
+ Mon,  5 Jul 2021 08:26:24 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 6sqJTMriVeUV
  for <virtualization@lists.linux-foundation.org>;
  Mon,  5 Jul 2021 08:26:23 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OjL0M02aoVIN
- for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:22 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org
- [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A937083A7A
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3754740485
  for <virtualization@lists.linux-foundation.org>;
- Mon,  5 Jul 2021 08:26:22 +0000 (UTC)
+ Mon,  5 Jul 2021 08:26:23 +0000 (UTC)
 Received: from cap.home.8bytes.org (p5b006775.dip0.t-ipconnect.de
  [91.0.103.117])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id D03EBAA3;
- Mon,  5 Jul 2021 10:26:18 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 61136CAE;
+ Mon,  5 Jul 2021 10:26:19 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [RFC PATCH 11/12] x86/sev: Handle CLFLUSH MMIO events
-Date: Mon,  5 Jul 2021 10:24:42 +0200
-Message-Id: <20210705082443.14721-12-joro@8bytes.org>
+Subject: [RFC PATCH 12/12] x86/sev: Support kexec under SEV-ES with AP Jump
+ Table blob
+Date: Mon,  5 Jul 2021 10:24:43 +0200
+Message-Id: <20210705082443.14721-13-joro@8bytes.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20210705082443.14721-1-joro@8bytes.org>
 References: <20210705082443.14721-1-joro@8bytes.org>
@@ -85,35 +85,82 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Handle CLFLUSH instruction to MMIO memory in the #VC handler. The
-instruction is ignored by the handler, as the Hypervisor is
-responsible for cache management of emulated MMIO memory.
+When the AP Jump Table blob is installed the kernel can hand over the
+APs from the old to the new kernel. Enable kexec when the AP Jump
+Table blob has been installed.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/kernel/sev-shared.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/x86/include/asm/sev.h         |  2 ++
+ arch/x86/kernel/machine_kexec_64.c |  6 +++++-
+ arch/x86/kernel/sev.c              | 12 ++++++++++++
+ 3 files changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/arch/x86/kernel/sev-shared.c b/arch/x86/kernel/sev-shared.c
-index a7a0793c4f98..682fa202444f 100644
---- a/arch/x86/kernel/sev-shared.c
-+++ b/arch/x86/kernel/sev-shared.c
-@@ -632,6 +632,15 @@ static enum es_result vc_handle_mmio_twobyte_ops(struct ghcb *ghcb,
- 	long *reg_data;
+diff --git a/arch/x86/include/asm/sev.h b/arch/x86/include/asm/sev.h
+index cd14b6e10f12..61910caf2a0d 100644
+--- a/arch/x86/include/asm/sev.h
++++ b/arch/x86/include/asm/sev.h
+@@ -87,6 +87,7 @@ static __always_inline void sev_es_stop_this_cpu(void)
+ 	if (static_branch_unlikely(&sev_es_enable_key))
+ 		__sev_es_stop_this_cpu();
+ }
++bool sev_kexec_supported(void);
+ #else
+ static inline void sev_es_ist_enter(struct pt_regs *regs) { }
+ static inline void sev_es_ist_exit(void) { }
+@@ -94,6 +95,7 @@ static inline int sev_es_setup_ap_jump_table(struct real_mode_header *rmh) { ret
+ static inline void sev_es_nmi_complete(void) { }
+ static inline int sev_es_efi_map_ghcbs(pgd_t *pgd) { return 0; }
+ static inline void sev_es_stop_this_cpu(void) { }
++static bool sev_kexec_supported(void) { return true; }
+ #endif
  
- 	switch (insn->opcode.bytes[1]) {
-+		/* CLFLUSH */
-+	case 0xae:
-+		/*
-+		 * Ignore CLFLUSHes - those go to emulated MMIO anyway and the
-+		 * hypervisor is responsible for cache management.
-+		 */
-+		ret = ES_OK;
-+		break;
+ #endif
+diff --git a/arch/x86/kernel/machine_kexec_64.c b/arch/x86/kernel/machine_kexec_64.c
+index f902cc9cc634..d08eae4f7694 100644
+--- a/arch/x86/kernel/machine_kexec_64.c
++++ b/arch/x86/kernel/machine_kexec_64.c
+@@ -26,6 +26,7 @@
+ #include <asm/kexec-bzimage64.h>
+ #include <asm/setup.h>
+ #include <asm/set_memory.h>
++#include <asm/sev.h>
+ 
+ #ifdef CONFIG_ACPI
+ /*
+@@ -626,5 +627,8 @@ void arch_kexec_pre_free_pages(void *vaddr, unsigned int pages)
+  */
+ bool arch_kexec_supported(void)
+ {
+-	return !sev_es_active();
++	if (!sev_kexec_supported())
++		return false;
 +
- 		/* MMIO Read w/ zero-extension */
- 	case 0xb6:
- 		bytes = 1;
++	return true;
+ }
+diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
+index 113903ba3095..731bbf941a82 100644
+--- a/arch/x86/kernel/sev.c
++++ b/arch/x86/kernel/sev.c
+@@ -901,6 +901,18 @@ static int __init sev_es_setup_ap_jump_table_blob(void)
+ }
+ core_initcall(sev_es_setup_ap_jump_table_blob);
+ 
++bool sev_kexec_supported(void)
++{
++	/*
++	 * KEXEC with SEV-ES and more than one CPU is only supported
++	 * when the AP Jump Table is installed.
++	 */
++	if (num_possible_cpus() > 1)
++		return !sev_es_active() || sev_ap_jumptable_blob_installed;
++	else
++		return true;
++}
++
+ static void __init alloc_runtime_data(int cpu)
+ {
+ 	struct sev_es_runtime_data *data;
 -- 
 2.31.1
 
