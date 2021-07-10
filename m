@@ -1,73 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D72133C37BF
-	for <lists.virtualization@lfdr.de>; Sun, 11 Jul 2021 01:50:17 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53F8D3C37C1
+	for <lists.virtualization@lfdr.de>; Sun, 11 Jul 2021 01:50:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 2D77483AC5;
-	Sat, 10 Jul 2021 23:50:16 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5DF1C404AA;
+	Sat, 10 Jul 2021 23:50:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4au2u_cdCnfM; Sat, 10 Jul 2021 23:50:14 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id EB40A83ABA;
-	Sat, 10 Jul 2021 23:50:13 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id u7jrpRjD-165; Sat, 10 Jul 2021 23:50:16 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 4CB8C404A0;
+	Sat, 10 Jul 2021 23:50:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B7F0C0022;
-	Sat, 10 Jul 2021 23:50:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DC326C000E;
+	Sat, 10 Jul 2021 23:50:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AFA95C000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2E11AC000E
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jul 2021 23:50:12 +0000 (UTC)
+ Sat, 10 Jul 2021 23:50:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A2033404A1
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1C23C404E0
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jul 2021 23:50:12 +0000 (UTC)
+ Sat, 10 Jul 2021 23:50:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=kernel.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zU4LbsJh37Vh
+ with ESMTP id 3F3iq6--b_IU
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jul 2021 23:50:11 +0000 (UTC)
+ Sat, 10 Jul 2021 23:50:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 89401404A0
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E80D0404A0
  for <virtualization@lists.linux-foundation.org>;
+ Sat, 10 Jul 2021 23:50:12 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id BE14961355;
  Sat, 10 Jul 2021 23:50:11 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 838F06135B;
- Sat, 10 Jul 2021 23:50:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1625961011;
- bh=SKpTulOQsB1muIIu1mUb1yLPC2hghqOH6HIQtYxWNco=;
+ s=k20201202; t=1625961012;
+ bh=HOxSyPrt04JCbP6msvV7QklAOcAnbKgXxpTQnRh46tI=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=gfVKDKzCGcHfzUAqk9SSlOEYTf0Q6eVmKAgVYsS5RIKh+UMJBwCMJs/a7nLH5rp9O
- CqfE76Y+K20CMd8MgiH+7dxnkgvyptn5xO4J16cKmPzm1COZb+8M+LqLleoYnIQ+9S
- NEyU4kevSXWfKkF+YuI2gwxS2Up6z6CoyP2mUEsTdT7LDSyjpUpxOb0hyceIKkXRE1
- uKvlMgcRjL98vIfVSBxIv63weNYVrRRttvRpv2FvOg2Tg7a5uOoWxvc7AAKG/Pw3jC
- 5S1/kUUrdoMMvnVEGwS0YwHPx+NR+LehkjIAqMLIMlPx8mKYKoKE5m0P6jHgbdBJVl
- kIO1AYYONMGbQ==
+ b=JWCchJ8gB9juOrF6tEwdaMiiULSicP5443SSuV1DJZEdPfaIr8jSpEqFT1Vt9Uahk
+ MHDaZTvu4ZTWwSaMxOcHvlpIuZle5+ThkLAoLwFT2QH7LO1g2jdSVcPy//u1frsPRI
+ 6QDpfQ7ZRuPu+dseFTxCU85+uOYCMPl2o0jfA+2xkR4ukuO5S4Z7IkIetPN1nXtGH7
+ qZN3VFhTb6AGauxEVbfY0PvEj1HFpN67q9TfQS6+L+2UARAwEJBzp6uhF0y/EY3A32
+ fuaUAHuWf+8gTOVmJfuMpVPaCDRyddkQAyMLrA33/o7zGyxd/ysHr/OYomLbFJ6T79
+ lTRbJjOa7PAqQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.12 40/43] virtio_net: Fix error handling in
- virtnet_restore()
-Date: Sat, 10 Jul 2021 19:49:12 -0400
-Message-Id: <20210710234915.3220342-40-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.12 41/43] virtio_console: Assure used length from
+ device is limited
+Date: Sat, 10 Jul 2021 19:49:13 -0400
+Message-Id: <20210710234915.3220342-41-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210710234915.3220342-1-sashal@kernel.org>
 References: <20210710234915.3220342-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, "Michael S . Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Xie Yongji <xieyongji@bytedance.com>
+Cc: Sasha Levin <sashal@kernel.org>, Xie Yongji <xieyongji@bytedance.com>,
+ virtualization@lists.linux-foundation.org,
+ "Michael S . Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,36 +84,43 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Xie Yongji <xieyongji@bytedance.com>
 
-[ Upstream commit 3f2869cace829fb4b80fc53b3ddaa7f4ba9acbf1 ]
+[ Upstream commit d00d8da5869a2608e97cfede094dfc5e11462a46 ]
 
-Do some cleanups in virtnet_restore() when virtnet_cpu_notif_add() failed.
+The buf->len might come from an untrusted device. This
+ensures the value would not exceed the size of the buffer
+to avoid data corruption or loss.
 
 Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
-Link: https://lore.kernel.org/r/20210517084516.332-1-xieyongji@bytedance.com
 Acked-by: Jason Wang <jasowang@redhat.com>
+Link: https://lore.kernel.org/r/20210525125622.1203-1-xieyongji@bytedance.com
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/net/virtio_net.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ drivers/char/virtio_console.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 0824e6999e49..9007d73863d0 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -3223,8 +3223,11 @@ static __maybe_unused int virtnet_restore(struct virtio_device *vdev)
- 	virtnet_set_queues(vi, vi->curr_queue_pairs);
+diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
+index 1836cc56e357..673522874cec 100644
+--- a/drivers/char/virtio_console.c
++++ b/drivers/char/virtio_console.c
+@@ -475,7 +475,7 @@ static struct port_buffer *get_inbuf(struct port *port)
  
- 	err = virtnet_cpu_notif_add(vi);
--	if (err)
-+	if (err) {
-+		virtnet_freeze_down(vdev);
-+		remove_vq_common(vi);
- 		return err;
-+	}
+ 	buf = virtqueue_get_buf(port->in_vq, &len);
+ 	if (buf) {
+-		buf->len = len;
++		buf->len = min_t(size_t, len, buf->size);
+ 		buf->offset = 0;
+ 		port->stats.bytes_received += len;
+ 	}
+@@ -1712,7 +1712,7 @@ static void control_work_handler(struct work_struct *work)
+ 	while ((buf = virtqueue_get_buf(vq, &len))) {
+ 		spin_unlock(&portdev->c_ivq_lock);
  
- 	return 0;
- }
+-		buf->len = len;
++		buf->len = min_t(size_t, len, buf->size);
+ 		buf->offset = 0;
+ 
+ 		handle_control_message(vq->vdev, portdev, buf);
 -- 
 2.30.2
 
