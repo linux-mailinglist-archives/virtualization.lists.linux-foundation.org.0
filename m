@@ -1,86 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id B71F43C6EED
-	for <lists.virtualization@lfdr.de>; Tue, 13 Jul 2021 12:51:01 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E3D7B3C6EEC
+	for <lists.virtualization@lfdr.de>; Tue, 13 Jul 2021 12:50:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 50C094039C;
-	Tue, 13 Jul 2021 10:51:00 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6FC6B4024A;
+	Tue, 13 Jul 2021 10:50:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rmtOF2EFvr_4; Tue, 13 Jul 2021 10:50:56 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 37A7F40494;
-	Tue, 13 Jul 2021 10:50:56 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7Uisx9YnppBK; Tue, 13 Jul 2021 10:50:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 410FA40428;
+	Tue, 13 Jul 2021 10:50:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D3E5BC0022;
-	Tue, 13 Jul 2021 10:50:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 19AB8C000E;
+	Tue, 13 Jul 2021 10:50:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 45B08C000E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D002C000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Jul 2021 10:50:53 +0000 (UTC)
+ Tue, 13 Jul 2021 10:50:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 343804038F
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5DDEF4038F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Jul 2021 10:50:53 +0000 (UTC)
+ Tue, 13 Jul 2021 10:50:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FB8JERfHfki6
+ with ESMTP id neZ_OAZ_EIdV
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Jul 2021 10:50:50 +0000 (UTC)
+ Tue, 13 Jul 2021 10:50:53 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6ED834039C
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3C6094039C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Jul 2021 10:50:50 +0000 (UTC)
-Received: by mail-pj1-x1034.google.com with SMTP id
- p4-20020a17090a9304b029016f3020d867so1836372pjo.3
+ Tue, 13 Jul 2021 10:50:53 +0000 (UTC)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ oj10-20020a17090b4d8ab0290172f77377ebso1861806pjb.0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 13 Jul 2021 03:50:50 -0700 (PDT)
+ Tue, 13 Jul 2021 03:50:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
  h=from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding;
- bh=VovCFljnf1vTBUJ7EdFbbYpvvdVza8LaWe5CrOJSY7g=;
- b=POuW7HR8+JRq0XcNb2gwX87+Cdjg734uF/GDz9PpL8tv7tfi4R7JI4s3lyzjd2HTky
- etuO4Xl+zc7ofYqTlHgCoeEuDnEJAUvuD59GNUTQJofDM4e9n8MVO2Udb5UWRTw9AQWE
- QgYDoVAvfyhm1eK6OHAJen6/cxYL6xox1/+zVUMCQQ4rD83iGXwWdj5AMUl6DhxxS3b5
- 8TVnfRubFFifGeIY6CRsrgy4lJeF25GP00i+yiscR/aM4wYTi2rRgT3SzaGeuxkZ2aBY
- HGFkrDpEonK2gGrgOrQIJvCVmsz2HQbt5ijEbpE3Z0DmCaTBIxFT788zMADnVE8F4MQM
- Gk5g==
+ bh=986/a+XL1T//36W39++oB7kOlKnW5eYSo8veeEHej88=;
+ b=A3Q/umcFWAyQTFsjWu0zZq7yNfzjuO2F03oZsK9+N4gsF+Yto7uv9o93Cw5O4pU30l
+ pmnq3CcUhEL/8tHaQIa+H/J2XMafGoTkXXFgigVY7VlwFGYDdhNmVsHwifGLRFlY6aBF
+ MhZjtulyDf+CNgTgvShltXI9F0SdCXh8U3XJrTebKTTnwD7KJkBiCo6+0X64QFfMWTCP
+ mpx5FAYJl1zlDjBE91cO4IM6oEEZBzb7Oh9yI6PC8BwncgDUhYF+CuBM/obQfTg5AqOc
+ 4JVUPbUiBB3xNewdVUjwYvLePcJIV3R0zNGOZDUrLFAn56bpGPhYm7ZQgbg+7xnbUY6v
+ 9gcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
  :references:mime-version:content-transfer-encoding;
- bh=VovCFljnf1vTBUJ7EdFbbYpvvdVza8LaWe5CrOJSY7g=;
- b=BoDUsE80Sbv30ix2wchHVqYbn7RSIttEYonpi0iVMf3kqIDCHalxJHgQAcZlk9nXGn
- nIdXl3k8CpHlB0VrZJUgCDKNwrGjtF+Wp70tZr/7YAdtP441DGJYk5tnjBR0yzsEf4DH
- KTlx5J49Fx+5DjHsNYu5QRRVY+fKjPixThNY7jzu29ddQQYHXh8aZrOs3FXf6Ai8i3It
- wJjlEfAM0Ms2gxGZvRPO/vnilOB9fzYaLUihB/6xZdDuJ5MiQR1yZ84om8yfAS9v2enH
- 5btbrdpOAXqIj7/2AY+sFGxlXkomhxsPJBt73cAlVAlMDshUWMvC29f84N4eu1d/Cq3M
- /6yA==
-X-Gm-Message-State: AOAM533KzPbgK4AUdM72l7BV2V17rhwYqSzLGH5LF/RAchlCJDWPMlzw
- M236m0r2CxejcevYd2bZdWDF6w==
-X-Google-Smtp-Source: ABdhPJxfSRrVqHX7TowizBcJeXp3Vooup9t0ZmJr+Y2H9dkwyZZxmOQynaJr596l4TvHmyCKKrHzzg==
-X-Received: by 2002:a17:903:184:b029:12b:3b0f:a7a3 with SMTP id
- z4-20020a1709030184b029012b3b0fa7a3mr472500plg.24.1626173449854; 
- Tue, 13 Jul 2021 03:50:49 -0700 (PDT)
+ bh=986/a+XL1T//36W39++oB7kOlKnW5eYSo8veeEHej88=;
+ b=ZEJKx1IZ5d9GPbPKHQzabjcP2YlYl/Dvpy9Ssi8l2UAxeqeNRUsTpqcCazXgvSy5gP
+ bpp60ripWl8bd6LZT6/uCZ4YPPp4CaDHlwGRsscGuVea/8PDV1u89qn5qWB9DX6XO/Q8
+ gSawv9fRSuKY94TedZa9AwiTIzpgBgmFCxC21lOQmLKUtojCfDGuVbjLFHfOu4jnPdCl
+ Tr7Zj8QgQazrJyE9HPU9ZY97upp1xqoBE0L1Colpq30XAUTN3i2ZrcM8jk38RDc5IXxj
+ sq9jdwcRDNbQJnrVWzSraDa5gYb2WFdOqZ/eJb7hM6plDh9PXuvo+ake8eLfMCkuuub3
+ 2A/Q==
+X-Gm-Message-State: AOAM532KihIbj7TqttmZ5+hjfnlHoPRyYyQ9rqq4M6kGP9VQKhIDgVAj
+ UAfWrP9R4/FpzgaqUQGX/rB4bw==
+X-Google-Smtp-Source: ABdhPJzdSsYRQEKyCDDhOUHI4C1uEGpynqL8WeWZ0/WvMY/knBSGmDC2UG1V/5sgTs+RTyv3zKragQ==
+X-Received: by 2002:a17:90a:1549:: with SMTP id
+ y9mr3808382pja.211.1626173452771; 
+ Tue, 13 Jul 2021 03:50:52 -0700 (PDT)
 Received: from localhost ([106.201.108.2])
- by smtp.gmail.com with ESMTPSA id h11sm5086664pjv.57.2021.07.13.03.50.48
+ by smtp.gmail.com with ESMTPSA id y15sm8993842pfn.63.2021.07.13.03.50.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 13 Jul 2021 03:50:49 -0700 (PDT)
+ Tue, 13 Jul 2021 03:50:52 -0700 (PDT)
 From: Viresh Kumar <viresh.kumar@linaro.org>
 To: Jason Wang <jasowang@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  Rob Herring <robh+dt@kernel.org>, Arnd Bergmann <arnd@kernel.org>,
  Jean-Philippe Brucker <jean-philippe@linaro.org>
-Subject: [PATCH 1/5] dt-bindings: virtio: mmio: Add support for device subnode
-Date: Tue, 13 Jul 2021 16:20:30 +0530
-Message-Id: <aa4bf68fdd13b885a6dc1b98f88834916d51d97d.1626173013.git.viresh.kumar@linaro.org>
+Subject: [PATCH 2/5] virtio_mmio: Bind virtio device to device-tree node
+Date: Tue, 13 Jul 2021 16:20:31 +0530
+Message-Id: <26ba6941fa01eee88c99ecdd611d235c22bd6e3c.1626173013.git.viresh.kumar@linaro.org>
 X-Mailer: git-send-email 2.31.1.272.g89b43f80a514
 In-Reply-To: <cover.1626173013.git.viresh.kumar@linaro.org>
 References: <cover.1626173013.git.viresh.kumar@linaro.org>
@@ -105,91 +107,84 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Allow virtio,mmio nodes to contain device specific subnodes. Since each
-virtio,mmio node can represent a single virtio device, each virtio node
-is allowed to contain a maximum of one device specific subnode.
-
-The device subnode must have the "reg" property, and its value must
-match the virtio device ID used by the virtio mmio node.
-
-A phandle to this device subnode can then be used by the users of the
-virtio device.
-
-Also add a symbolic link to uapi/linux/virtio_ids.h in order to use the
-definitions here.
+Bind the virtio device with its device protocol's sub-node. This will
+help users of the virtio device to mention their dependencies on the
+device in the DT file itself. Like GPIO pin users can use the phandle of
+the device node, or the node may contain more subnodes to add i2c or spi
+eeproms and other users.
 
 Signed-off-by: Viresh Kumar <viresh.kumar@linaro.org>
 ---
- .../devicetree/bindings/virtio/mmio.yaml      | 41 +++++++++++++++++++
- include/dt-bindings/virtio/virtio_ids.h       |  1 +
- 2 files changed, 42 insertions(+)
- create mode 120000 include/dt-bindings/virtio/virtio_ids.h
+ drivers/virtio/virtio_mmio.c | 44 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/virtio/mmio.yaml b/Documentation/devicetree/bindings/virtio/mmio.yaml
-index d46597028cf1..e5f9fe6ecb5e 100644
---- a/Documentation/devicetree/bindings/virtio/mmio.yaml
-+++ b/Documentation/devicetree/bindings/virtio/mmio.yaml
-@@ -31,6 +31,31 @@ title: virtio memory mapped devices
-     description: Required for devices making accesses thru an IOMMU.
-     maxItems: 1
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 56128b9c46eb..ae40546a66a3 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -551,11 +551,51 @@ static void virtio_mmio_release_dev(struct device *_d)
+ 	struct virtio_mmio_device *vm_dev = to_virtio_mmio_device(vdev);
+ 	struct platform_device *pdev = vm_dev->pdev;
  
-+  "#address-cells":
-+    const: 1
-+    description:
-+      The cell is the device ID if a device subnode is used.
-+
-+  "#size-cells":
-+    const: 0
-+
-+patternProperties:
-+  '^[a-z0-9]+-virtio@[0-9]+$':
-+    type: object
-+    description: |
-+      Exactly one node describing the virtio device. The name of the node isn't
-+      significant but its phandle can be used to by an user of the virtio
-+      device.
-+
-+    properties:
-+      reg:
-+        description:
-+          Must contain the Virtio ID of the device.
-+        $ref: /schemas/types.yaml#/definitions/uint32
-+
-+    required:
-+      - reg
-+
- required:
-   - compatible
-   - reg
-@@ -57,4 +82,20 @@ additionalProperties: false
-         #iommu-cells = <1>;
-     };
++	of_node_put(vdev->dev.of_node);
+ 	devm_kfree(&pdev->dev, vm_dev);
+ }
  
-+  - |
-+    #include <dt-bindings/virtio/virtio_ids.h>
+ /* Platform device */
+ 
++static int virtio_mmio_of_init(struct virtio_device *vdev)
++{
++	struct device_node *np, *pnode = vdev->dev.parent->of_node;
++	int ret, count;
++	u32 reg;
 +
-+    virtio@3200 {
-+        compatible = "virtio,mmio";
-+        reg = <0x3200 0x100>;
-+        interrupts = <43>;
++	if (!pnode)
++		return 0;
 +
-+        #address-cells = <1>;
-+        #size-cells = <0>;
++	count = of_get_available_child_count(pnode);
++	if (!count)
++		return 0;
 +
-+        i2c-virtio@0 {
-+            reg = <VIRTIO_ID_I2C_ADAPTER>;
-+        };
-+    };
++	/* There can be only 1 child node */
++	if (WARN_ON(count > 1))
++		return -EINVAL;
 +
- ...
-diff --git a/include/dt-bindings/virtio/virtio_ids.h b/include/dt-bindings/virtio/virtio_ids.h
-new file mode 120000
-index 000000000000..6e59ba332216
---- /dev/null
-+++ b/include/dt-bindings/virtio/virtio_ids.h
-@@ -0,0 +1 @@
-+../../uapi/linux/virtio_ids.h
-\ No newline at end of file
++	np = of_get_next_available_child(pnode, NULL);
++	if (WARN_ON(!np))
++		return -ENODEV;
++
++	ret = of_property_read_u32(np, "reg", &reg);
++	if (ret < 0)
++		goto out;
++
++	/* The reg field should match the device id */
++	if (WARN_ON(reg != vdev->id.device)) {
++		ret = -EINVAL;
++		goto out;
++	}
++
++	vdev->dev.of_node = np;
++	return 0;
++
++out:
++	of_node_put(np);
++	return ret;
++}
++
+ static int virtio_mmio_probe(struct platform_device *pdev)
+ {
+ 	struct virtio_mmio_device *vm_dev;
+@@ -621,6 +661,10 @@ static int virtio_mmio_probe(struct platform_device *pdev)
+ 	if (rc)
+ 		dev_warn(&pdev->dev, "Failed to enable 64-bit or 32-bit DMA.  Trying to continue, but this might not work.\n");
+ 
++	rc = virtio_mmio_of_init(&vm_dev->vdev);
++	if (rc)
++		return rc;
++
+ 	platform_set_drvdata(pdev, vm_dev);
+ 
+ 	rc = register_virtio_device(&vm_dev->vdev);
 -- 
 2.31.1.272.g89b43f80a514
 
