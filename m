@@ -1,61 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CFF823CB095
-	for <lists.virtualization@lfdr.de>; Fri, 16 Jul 2021 03:53:00 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 586903CB09D
+	for <lists.virtualization@lfdr.de>; Fri, 16 Jul 2021 03:59:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BCA2760792;
-	Fri, 16 Jul 2021 01:52:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E99A0842EC;
+	Fri, 16 Jul 2021 01:59:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UkkFVknzbHSC; Fri, 16 Jul 2021 01:52:58 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id A71D0607E0;
-	Fri, 16 Jul 2021 01:52:57 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ayl4vLDZME2V; Fri, 16 Jul 2021 01:59:33 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id C5C48842B1;
+	Fri, 16 Jul 2021 01:59:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F946C000E;
-	Fri, 16 Jul 2021 01:52:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4C10AC001F;
+	Fri, 16 Jul 2021 01:59:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9662FC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D9B46C000E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Jul 2021 01:52:54 +0000 (UTC)
+ Fri, 16 Jul 2021 01:59:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7EC9B607C0
+ by smtp4.osuosl.org (Postfix) with ESMTP id C80E64163F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Jul 2021 01:52:54 +0000 (UTC)
+ Fri, 16 Jul 2021 01:59:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iQtw71VnNRQE
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id qI3sWPlBdVEx
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Jul 2021 01:52:53 +0000 (UTC)
+ Fri, 16 Jul 2021 01:59:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-57.freemail.mail.aliyun.com
- (out30-57.freemail.mail.aliyun.com [115.124.30.57])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D84DB60792
+Received: from out30-132.freemail.mail.aliyun.com
+ (out30-132.freemail.mail.aliyun.com [115.124.30.132])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9DD864161F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 16 Jul 2021 01:52:52 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=6; SR=0; TI=SMTPD_---0Ufw0VTO_1626400369; 
-Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0Ufw0VTO_1626400369) by smtp.aliyun-inc.com(127.0.0.1);
- Fri, 16 Jul 2021 09:52:50 +0800
-From: Jeffle Xu <jefflexu@linux.alibaba.com>
-To: vgoyal@redhat.com
-Subject: [PATCH] virtiofsd: support per-file DAX
-Date: Fri, 16 Jul 2021 09:52:49 +0800
-Message-Id: <20210716015249.86064-1-jefflexu@linux.alibaba.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <YPDhv0JJHqbMCyXD@redhat.com>
-References: <YPDhv0JJHqbMCyXD@redhat.com>
+ Fri, 16 Jul 2021 01:59:28 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R551e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=6; SR=0; TI=SMTPD_---0Ufw0Wkn_1626400764; 
+Received: from admindeMacBook-Pro-2.local(mailfrom:jefflexu@linux.alibaba.com
+ fp:SMTPD_---0Ufw0Wkn_1626400764) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 16 Jul 2021 09:59:25 +0800
+Subject: Re: [RFC PATCH 3/3] fuse: add per-file DAX flag
+To: Vivek Goyal <vgoyal@redhat.com>
+References: <20210715093031.55667-1-jefflexu@linux.alibaba.com>
+ <20210715093031.55667-4-jefflexu@linux.alibaba.com>
+ <20210716004028.GA30967@rsjd01523.et2sqa> <YPDX9S3/TD3CL0CZ@redhat.com>
+ <6d956097-47c1-5193-bbaa-faf14f0989ef@linux.alibaba.com>
+ <YPDhv0JJHqbMCyXD@redhat.com>
+From: JeffleXu <jefflexu@linux.alibaba.com>
+Message-ID: <bfde6c40-4b67-fd24-0df1-21f0cf5a8fd1@linux.alibaba.com>
+Date: Fri, 16 Jul 2021 09:59:24 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.11.0
 MIME-Version: 1.0
+In-Reply-To: <YPDhv0JJHqbMCyXD@redhat.com>
+Content-Language: en-US
 Cc: linux-fsdevel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- bo.liu@linux.alibaba.com, stefanha@redhat.com, miklos@szeredi.hu
+ Liu Bo <bo.liu@linux.alibaba.com>, stefanha@redhat.com, miklos@szeredi.hu
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,54 +78,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-An example implementation of supporting per-file DAX flag for virtiofsd,
-where DAx is enabled for files larger than 1M size.
 
-Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
----
- contrib/virtiofsd/fuse_kernel.h   | 4 +++-
- contrib/virtiofsd/fuse_lowlevel.c | 3 +++
- 2 files changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/contrib/virtiofsd/fuse_kernel.h b/contrib/virtiofsd/fuse_kernel.h
-index d2b7ccf96b..9c476b7021 100644
---- a/contrib/virtiofsd/fuse_kernel.h
-+++ b/contrib/virtiofsd/fuse_kernel.h
-@@ -165,6 +165,8 @@
- /** The node ID of the root inode */
- #define FUSE_ROOT_ID 1
- 
-+#define FUSE_ATTR_DAX  (1 << 1)
-+
- /* Make sure all structures are padded to 64bit boundary, so 32bit
-    userspace works under 64bit kernels */
- 
-@@ -184,7 +186,7 @@ struct fuse_attr {
- 	uint32_t	gid;
- 	uint32_t	rdev;
- 	uint32_t	blksize;
--	uint32_t	padding;
-+	uint32_t	flags;
- };
- 
- struct fuse_kstatfs {
-diff --git a/contrib/virtiofsd/fuse_lowlevel.c b/contrib/virtiofsd/fuse_lowlevel.c
-index 046a1b4a02..d8a3873246 100644
---- a/contrib/virtiofsd/fuse_lowlevel.c
-+++ b/contrib/virtiofsd/fuse_lowlevel.c
-@@ -60,6 +60,9 @@ static void convert_stat(const struct stat *stbuf, struct fuse_attr *attr)
- 	attr->atimensec = ST_ATIM_NSEC(stbuf);
- 	attr->mtimensec = ST_MTIM_NSEC(stbuf);
- 	attr->ctimensec = ST_CTIM_NSEC(stbuf);
-+
-+	if (stbuf->st_size >= 1048576)
-+		attr->flags |= FUSE_ATTR_DAX;
- }
- 
- static void convert_attr(const struct fuse_setattr_in *attr, struct stat *stbuf)
+On 7/16/21 9:32 AM, Vivek Goyal wrote:
+> On Fri, Jul 16, 2021 at 09:18:34AM +0800, JeffleXu wrote:
+>>
+>>
+>> On 7/16/21 8:51 AM, Vivek Goyal wrote:
+>>> On Fri, Jul 16, 2021 at 08:40:29AM +0800, Liu Bo wrote:
+>>>> On Thu, Jul 15, 2021 at 05:30:31PM +0800, Jeffle Xu wrote:
+>>>>> Add one flag for fuse_attr.flags indicating if DAX shall be enabled for
+>>>>> this file.
+>>>>>
+>>>>> When the per-file DAX flag changes for an *opened* file, the state of
+>>>>> the file won't be updated until this file is closed and reopened later.
+>>>>>
+>>>>> Currently it is not implemented yet to change per-file DAX flag inside
+>>>>> guest kernel, e.g., by chattr(1).
+>>>>
+>>>> Thanks for the patch, it looks good to me.
+>>>>
+>>>> I think it's a good starting point, what I'd like to discuss here is
+>>>> whether we're going to let chattr to toggle the dax flag.
+>>>
+>>> I have the same question. Why not take chattr approach as taken
+>>> by ext4/xfs as well.
+>>>
+>>> Vivek
+>>
+>> Thanks.
+>>
+>> We can implement the chattr approach as ext4/xfs do, if we have this use
+>> scenario. It's an RFC patch, and I want to collect more feedback as soon
+>> as possible.
+> 
+> I guess chattr approach will allow client (as well as server) to control
+> which files should be DAX. While this approach allows only server to
+> specify which files should use DAX. Given currently we let client
+> control whether to use dax or not (-o dax), it probably will make
+> sense to use chattr based approach?
+
+Yes, changing the per-file DAX flag from guest side, such as by chattr,
+may be needed for completeness. I will include this in the next version.
+
+> 
+> I will look at the patches. Do you have a corresponding user space
+> implementation somewhere so that I can test it?
+
+Thanks. I have sent the corresponding patch in-reply-to your mail.
+
 -- 
-2.27.0
-
+Thanks,
+Jeffle
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
