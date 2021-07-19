@@ -1,54 +1,54 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 670B13CD212
-	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 12:39:06 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B36AC3CD211
+	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 12:39:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AE95E606F9;
-	Mon, 19 Jul 2021 10:39:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4838C82444;
+	Mon, 19 Jul 2021 10:39:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iPevX1VnX3Tc; Mon, 19 Jul 2021 10:39:03 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hjH7sXpz-gmT; Mon, 19 Jul 2021 10:39:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8E0C76077E;
-	Mon, 19 Jul 2021 10:39:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 14D7E83544;
+	Mon, 19 Jul 2021 10:39:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9E6D7C0029;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 041A9C0010;
 	Mon, 19 Jul 2021 10:39:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7BED6C000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8260CC0010
  for <virtualization@lists.linux-foundation.org>;
  Mon, 19 Jul 2021 10:39:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id EE89C82444
+ by smtp2.osuosl.org (Postfix) with ESMTP id 71EA54012D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 10:38:59 +0000 (UTC)
+ Mon, 19 Jul 2021 10:39:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WMKWislZrO_t
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id jPbfNKctUchy
  for <virtualization@lists.linux-foundation.org>;
  Mon, 19 Jul 2021 10:38:59 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam08on20618.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8d::618])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 283238248F
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe5a::612])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B0031400C7
  for <virtualization@lists.linux-foundation.org>;
  Mon, 19 Jul 2021 10:38:59 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=nshTxpKQawjkmiokkalOZUhLEkn/50qdhsY4IB0Y+sSlEyv778Zyi7v9u0F7/x9lq5B268qJnXDDViGs46DubjdfLO/hLZ6IjtNly4s6w8T+/roYMQZJXy1pR8AkBTtk0+uVDtR5HdATg6R42E4BYEmhtGnOV0lfo65WQ2YSAy5JYriTOylHMjNMqWcYW2kkJZH2PiJOusi6XmbRJ2R/7rsdY+Gl4BkaQkoykmcINwshH45YJfNJCVN//OxkqzTrWmT2KsqGVd9PIF1IY+vo5FJo4FRNp99HwbIxzl/bBi7+hNxxgWXDbAwLnmyiuxpu1RybQCP8+mkVNDgrM1mqtQ==
+ b=HdAfCkELPq6KiBtTqwv3bba0XRaj9UP+ZSTjcbh+LVy1OBOm+GLQ4M6mBmyY5sI71A+bXbDaAbUM+7t3f3+L92PMcuKI7jveRAjm25PpN5gF0hMuVTafXp1qbsJygAfoV8pCFHRuT7tiYAGtMu7eGGfRo/HC0NWKcs8ZaPY39JE6KBCcgNulUCv/GyfYVzHfFxXclBf7rDreK2zMIxPkqM24kA8ORTAGTKDFYbpPctVI01tTWhAm7seIz6pQSRlS7Yv71OYBFSkRo+u3LmNTSqyI7uA08VzP1SdwtA7Ru5ne1TcXSjo60TDyjJW4d13KoDcV1/PRHXHQJ0ogrVOndw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3EfQ+lBOsFJLRpN8t3XNB3V3eeXEUiQ0k1njRKr4HAg=;
- b=APWyLa7R1Iy6nUisCAOnc61QBImpkPcUemfxk1aYtFPRsJ/fUlwDKYBMMN0xYXaDj22W69MiHZCU9xERXctiHWCeBfgFswvvO25/+2AUD98Tp4toFHWVsA8ub/Sf8U6eMHpSvFR9PczT6aq6GSAGfue6dwblUfjzrmmCfPzYcS3r3vRQyLlXi1U7DZmDgTvv9d17zaS2Fs98B4i+rlX8ELEdZ7idqkqg5MROUzn0FZ+sEdpDqHMCm+9eyc1bMV01UXnpIrVZ8BaYNd6Ayt7E4m0XVnEYMUSTuYZqeGlADKNE6w4o6Eclm5pnMq9u14Jsgm7bJsFAUHjSDFdNJuft5w==
+ bh=bRPLg6HV1FDjY6d0jnN3qhdMWR0Ny0/qx0PiF7upXIw=;
+ b=UjskiqEtK70HKU2HXwz7gbR/wy12CxLsBLv5xEZDoFjdECBgvupD46l/Aq1nvu5vnzmgDv4ixgkVV6zHbbNneCC0LJndZ4AZTdCq3brNxGhQY5GaIy/U90kesokZO3TyRSPGQw/wCTlYxfDG3QjKDPrAjCZDq61ZkrvE8pgPDsOmW7Og6jkyja15r7U2OmBiZbBDiubt8HkWm/Jf4ml01bIETcyCScM6iLARoh/QowajAUgtTKVPLU77Jp9ODj9NTS/D7Fao+4wkO9dNtLOOwqzofYFcC07sIHu27ENM9RmG2WWNak24KDNz/LOp8W6043hBI8mN9SCrE3iONDmXRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=lists.linux-foundation.org
  smtp.mailfrom=nvidia.com; dmarc=pass (p=quarantine sp=none pct=100)
@@ -56,17 +56,17 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3EfQ+lBOsFJLRpN8t3XNB3V3eeXEUiQ0k1njRKr4HAg=;
- b=qKRTfIRoSEvVxaxLGe1lIJ7i4e4Lue6+iMwWjQ9PfCQ2tiCRVrLg8cdq6p5e74zuxbjipZVqWjlPOa15s704kluCh9CAeL8gFymC0fvdbytSFtoAbZ3mfGI9hgjTdFHhIHMyyVRV66VyKNZz1J+auQH5Wljabq3k2VRkhFsWZNgJIvzcVTs2pr8hmOA3pZNqKRB5uQXv9Y1ktpkEDkkmZUs59J5M7PXmcpWMFSvTc/zMGKnUkttBwFVwclLjntSzQ0S/RQjZ/1C1tDMxzOJm1t62SFGTHzgNS3x5rz3rje8MVVo2ipaXK4vbeiLHvENInUdCvVI9W5Oc8mwNjxPO1A==
-Received: from DM6PR11CA0009.namprd11.prod.outlook.com (2603:10b6:5:190::22)
- by DM4PR12MB5085.namprd12.prod.outlook.com (2603:10b6:5:388::11) with
+ bh=bRPLg6HV1FDjY6d0jnN3qhdMWR0Ny0/qx0PiF7upXIw=;
+ b=oA5Q45A1ealwh3c4cmgs5KLSAxqIJgdmoh+aHve6vpNnp/+aoV68t5k6bd7IFwHBsOIcL7fvvO0s6pEkK8QR1eExbI/vVVsC448mhHd931swaGhVJtYTCBExStGjgp4e6/12bb67xqbKAufK3ChKeUm/Cz9ALx4y4pW8tYaK2y7r9sFbBUcT4a6ulaCnct/d3HlTt1fumxG+Hca/3cUxW/fQsf7hqoBIv+fC1xzS9Zpv8rb9yZFnGL3RDEpCoaquEcuWxwU7YLsjS4H0IW1n5g+BwkBQruwwwpP4+IwqXjoVWVi9RXdMD64Hrs+3WJRnE6KSAWnyCqNgoo1fKhssMQ==
+Received: from DM6PR11CA0034.namprd11.prod.outlook.com (2603:10b6:5:190::47)
+ by CY4PR12MB1431.namprd12.prod.outlook.com (2603:10b6:903:43::18) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.21; Mon, 19 Jul
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.25; Mon, 19 Jul
  2021 10:38:57 +0000
 Received: from DM6NAM11FT060.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:190:cafe::59) by DM6PR11CA0009.outlook.office365.com
- (2603:10b6:5:190::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.21 via Frontend
+ (2603:10b6:5:190:cafe::bf) by DM6PR11CA0034.outlook.office365.com
+ (2603:10b6:5:190::47) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.22 via Frontend
  Transport; Mon, 19 Jul 2021 10:38:57 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; lists.linux-foundation.org; dkim=none (message not
@@ -83,9 +83,9 @@ Received: from sw-mtx-036.mtx.labs.mlnx (172.20.187.5) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
  Mon, 19 Jul 2021 10:38:56 +0000
 To: <mst@redhat.com>, <virtualization@lists.linux-foundation.org>
-Subject: [PATCH v2 2/4] virtio: Keep vring_del_virtqueue() mirror of VQ create
-Date: Mon, 19 Jul 2021 13:38:39 +0300
-Message-ID: <20210719103841.1488049-3-parav@nvidia.com>
+Subject: [PATCH v2 3/4] virtio: Protect vqs list access
+Date: Mon, 19 Jul 2021 13:38:40 +0300
+Message-ID: <20210719103841.1488049-4-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20210719103841.1488049-1-parav@nvidia.com>
 References: <20210719103841.1488049-1-parav@nvidia.com>
@@ -95,28 +95,28 @@ X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 5d55c1a7-bb0c-4572-e89d-08d94aa169bb
-X-MS-TrafficTypeDiagnostic: DM4PR12MB5085:
-X-Microsoft-Antispam-PRVS: <DM4PR12MB50859AC983F457312E087E2CDCE19@DM4PR12MB5085.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:3044;
+X-MS-Office365-Filtering-Correlation-Id: c1ef9ce9-3f39-4cc6-622a-08d94aa169f7
+X-MS-TrafficTypeDiagnostic: CY4PR12MB1431:
+X-Microsoft-Antispam-PRVS: <CY4PR12MB1431FD38D1A0B195A515C6F5DCE19@CY4PR12MB1431.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6790;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xwjnTAMuE/tdKZRxFcfP+W3rMeYNQGVEouB7gnfkj5G+pQJdzhQuuf3hbqy8MZcOr5ZNFp+QM+PUCzFLOjFbuk62uNMtYJCqPq+hsPCQdsubaDznoKc3GVI2T7pK4OygMqRyMKdsQb8d7eVf4qvw16BYo7xYgIVWLIAxm7lTr4oDlCsfgVm4wg6Q5yAFtj3NB4As3TU62XQALENOUkzmQb0on9kv5sxfph6+DxU2bgJwVvHomOV58RHb4SU1JTHZAyobHoUhpFs9hKzDncIPRIS9LWyrrH7jHWb533Z+QmnEMI6Z24ssyrSvxpy//V16No6daqeq2bboBC2Q446pupOzifA/TJOxWszTa/3HMXx9FMW3QgoC6lwq42DpXtCufrkW/LBrQyNgfewDuwdrMc87AeEu/rvRCnNVaPYFvxQMwRNtIskROzzE1uyrT2vhTGN/XadrnXdF4WWcUTx8YOiybouaeyPA0nAZqVW6lc6iSzqZdsgAiRNon0+Imf5MSgY62/+0e6CCyKp/PP8I+w6p5oeLXK7DXr0I16TaYA8qCdHJSPi+ZyQ4uXYPyiDIicOtIMmSA5wgEZXjEHRUO+/7XuEF/Vcp2Z6Jhq6DVoLfh4tuEIKrQsrcLZXhsMy0q98ppYwGGdSdIggvE7n3wE3jUWTtS078SvYmjGNI4uWgKmjUTjjytp7Ksq5gBlxeH1LhXNwDxdEynzhDhi8U0A==
+X-Microsoft-Antispam-Message-Info: hWMbsjJbovQ/R4Q+hRDaN/JYKdZ5XX447RTUzHBoSeSt5xHtBNIrqKclH3bGIKWJRDqWSAwPDxoa90HwZnE5kuTyqDOXbNxaS4k80c5h6P9EUhHeVdmWCpooGqzpnRweeQFyOjZ/fHHMzN/AWtkI0YNh/KoxluU/uINWqpZDvDSSRQwIBmUAYVGmpCCwCNXBTrWdNLfQu5cXEjOE3UjS+4AIWQ0qscWruEQ7xB3SFyxGiz7xZdkXM5OAkqgUv7/Y/JIZGnVMqRyaCxNdQCqumi/py5ngUD+6iDfUj9t6Rq7Y63Kc5AvAfPYBJgBmsFVeKeV7hAtMCGyopX903rXfUtbx4eTBH43sT4u2prIJl8CNiHeAVU5NXBD3mTjW8aDUQXzImhobxRD8lNT3QSpr6UlQNNv2YN+cw9WFlyswK5/doSAYH/TulxAP3r3XL3A7MIBlYhYPsTdbV8MygD4CUkrPbwhsGJM416myqllstj/7+XI62QuyfnG/U1G05/PtXGMBpLFKMO3oyfTmRrlGxZ4lDLmOppOb0Gxicfq6mkmYB3747vcWl9h4GVKsv/gZZhpnB+EPHsOFhoEXH9y/0fd3t+6itYzgPkIyCFgLgnO0MZ0wxQt7plVBY3/5qFeCQEvUIiyapOWuW3NzimH32lhTCJClPbLXYinXR/01/Nq5vqfQaY86N0QWfyINDL2t59Lq/ppQ7um/SNiIfR2h7g==
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(346002)(39860400002)(136003)(376002)(46966006)(36840700001)(5660300002)(336012)(2906002)(426003)(478600001)(70586007)(8936002)(1076003)(70206006)(6666004)(110136005)(8676002)(36906005)(107886003)(2616005)(4326008)(316002)(16526019)(186003)(26005)(4744005)(82310400003)(356005)(82740400003)(36756003)(86362001)(36860700001)(83380400001)(47076005)(7636003);
+ SFS:(4636009)(396003)(39860400002)(376002)(136003)(346002)(36840700001)(46966006)(36860700001)(6666004)(70206006)(8936002)(316002)(110136005)(2906002)(26005)(83380400001)(107886003)(186003)(16526019)(36756003)(47076005)(82310400003)(336012)(70586007)(478600001)(7636003)(86362001)(4326008)(356005)(8676002)(5660300002)(82740400003)(1076003)(426003)(36906005)(2616005);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jul 2021 10:38:57.2549 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d55c1a7-bb0c-4572-e89d-08d94aa169bb
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Jul 2021 10:38:57.6466 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c1ef9ce9-3f39-4cc6-622a-08d94aa169f7
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT060.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5085
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR12MB1431
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -136,36 +136,96 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Keep the vring_del_virtqueue() mirror of the create routines.
-i.e. to delete list entry first as it is added last during the create
-routine.
+VQs may be accessed to mark the device broken while they are
+created/destroyed. Hence protect the access to the vqs list.
 
+Fixes: e2dcdfe95c0b ("virtio: virtio_break_device() to mark all virtqueues broken.")
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 ---
- drivers/virtio/virtio_ring.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+changelog:
+v1->v2:
+ - use the hole in current struct to place vqs_list_lock to have natural packing
+v0->v1:
+ - use spinlock instead of rwlock
+---
+ drivers/virtio/virtio.c      | 1 +
+ drivers/virtio/virtio_ring.c | 8 ++++++++
+ include/linux/virtio.h       | 1 +
+ 3 files changed, 10 insertions(+)
 
+diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+index 4b15c00c0a0a..49984d2cba24 100644
+--- a/drivers/virtio/virtio.c
++++ b/drivers/virtio/virtio.c
+@@ -355,6 +355,7 @@ int register_virtio_device(struct virtio_device *dev)
+ 	virtio_add_status(dev, VIRTIO_CONFIG_S_ACKNOWLEDGE);
+ 
+ 	INIT_LIST_HEAD(&dev->vqs);
++	spin_lock_init(&dev->vqs_list_lock);
+ 
+ 	/*
+ 	 * device_add() causes the bus infrastructure to look for a matching
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index e179c7c7622c..d5934c2e5a89 100644
+index d5934c2e5a89..c2aaa0eff6df 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2291,6 +2291,8 @@ void vring_del_virtqueue(struct virtqueue *_vq)
+@@ -1755,7 +1755,9 @@ static struct virtqueue *vring_create_virtqueue_packed(
+ 			cpu_to_le16(vq->packed.event_flags_shadow);
+ 	}
+ 
++	spin_lock(&vdev->vqs_list_lock);
+ 	list_add_tail(&vq->vq.list, &vdev->vqs);
++	spin_unlock(&vdev->vqs_list_lock);
+ 	return &vq->vq;
+ 
+ err_desc_extra:
+@@ -2229,7 +2231,9 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
+ 	memset(vq->split.desc_state, 0, vring.num *
+ 			sizeof(struct vring_desc_state_split));
+ 
++	spin_lock(&vdev->vqs_list_lock);
+ 	list_add_tail(&vq->vq.list, &vdev->vqs);
++	spin_unlock(&vdev->vqs_list_lock);
+ 	return &vq->vq;
+ 
+ err_extra:
+@@ -2291,7 +2295,9 @@ void vring_del_virtqueue(struct virtqueue *_vq)
  {
  	struct vring_virtqueue *vq = to_vvq(_vq);
  
-+	list_del(&_vq->list);
-+
++	spin_lock(&vq->vq.vdev->vqs_list_lock);
+ 	list_del(&_vq->list);
++	spin_unlock(&vq->vq.vdev->vqs_list_lock);
+ 
  	if (vq->we_own_ring) {
  		if (vq->packed_ring) {
- 			vring_free_queue(vq->vq.vdev,
-@@ -2321,7 +2323,6 @@ void vring_del_virtqueue(struct virtqueue *_vq)
- 		kfree(vq->split.desc_state);
- 		kfree(vq->split.desc_extra);
+@@ -2386,12 +2392,14 @@ void virtio_break_device(struct virtio_device *dev)
+ {
+ 	struct virtqueue *_vq;
+ 
++	spin_lock(&dev->vqs_list_lock);
+ 	list_for_each_entry(_vq, &dev->vqs, list) {
+ 		struct vring_virtqueue *vq = to_vvq(_vq);
+ 
+ 		/* Pairs with READ_ONCE() in virtqueue_is_broken(). */
+ 		WRITE_ONCE(vq->broken, true);
  	}
--	list_del(&_vq->list);
- 	kfree(vq);
++	spin_unlock(&dev->vqs_list_lock);
  }
- EXPORT_SYMBOL_GPL(vring_del_virtqueue);
+ EXPORT_SYMBOL_GPL(virtio_break_device);
+ 
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index b1894e0323fa..41edbc01ffa4 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -110,6 +110,7 @@ struct virtio_device {
+ 	bool config_enabled;
+ 	bool config_change_pending;
+ 	spinlock_t config_lock;
++	spinlock_t vqs_list_lock; /* Protects VQs list access */
+ 	struct device dev;
+ 	struct virtio_device_id id;
+ 	const struct virtio_config_ops *config;
 -- 
 2.27.0
 
