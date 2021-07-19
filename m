@@ -1,81 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 347B53CEAD2
-	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 20:02:47 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C81883CEB12
+	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 20:41:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 704E140231;
-	Mon, 19 Jul 2021 18:02:45 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 67A89400EA;
+	Mon, 19 Jul 2021 18:41:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RCetmabYPdzG; Mon, 19 Jul 2021 18:02:44 +0000 (UTC)
+	with ESMTP id 7n2hd1NqmnJ3; Mon, 19 Jul 2021 18:41:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 35270400BE;
-	Mon, 19 Jul 2021 18:02:44 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 4BDB640241;
+	Mon, 19 Jul 2021 18:41:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D515C000E;
-	Mon, 19 Jul 2021 18:02:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BDF29C000E;
+	Mon, 19 Jul 2021 18:41:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EDEE0C000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0A41CC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 18:02:41 +0000 (UTC)
+ Mon, 19 Jul 2021 18:41:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id DC0B5403BE
+ by smtp4.osuosl.org (Postfix) with ESMTP id DF9DD40350
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 18:02:41 +0000 (UTC)
+ Mon, 19 Jul 2021 18:41:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id B9QbKpdmkpN3
+ with ESMTP id AdxIy-aMN0ks
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 18:02:40 +0000 (UTC)
+ Mon, 19 Jul 2021 18:41:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CC8F4403BB
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8189F4034D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 18:02:40 +0000 (UTC)
+ Mon, 19 Jul 2021 18:41:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1626717759;
+ s=mimecast20190719; t=1626720099;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=x8yd+DRZO8vTRPuL5X35e3D3WtSixgW0f5O77HlkSTw=;
- b=A/R6aKmqV09HJvHKftjSlTlIILBfFl7a6cypWQN8vk0S4ca0Q5mzk9Xb2WQmW9tYbkbmt+
- w8F/l/c/ClJpNYSR4Rtan8h2b1S8z+uRztE/nz9urA0LDkP3OoZH3PWmNwYBsbg6VvZIOd
- ED5KfGrDOx0UahwMREAm8/FjdfpWTmY=
+ bh=p204Ua/8UMVEDK/XuK5qa9JXwwuGxX3Scr0fvegt0Q8=;
+ b=NU4B4IIYND7BQGflnhCsU1nYeg1AJ+c9LkcHabMcQUX+2wmaa4lzEOQHrHj36R/LHebBdM
+ QHlYtaw7qE+Lfol1DBBnV9F8BesY9d1UnYhr95dvYyyMXqb/qw05r8/WhrW8Y8sYkzo7Za
+ nLpM6zHCr5EbEIjG2nEqzzIox3n3sgc=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-290-cf8_p-lDPE2TGk-vKS33-w-1; Mon, 19 Jul 2021 14:02:36 -0400
-X-MC-Unique: cf8_p-lDPE2TGk-vKS33-w-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com
- [10.5.11.11])
+ us-mta-231-iNZ3s_tHMRaavc_J-FzkGg-1; Mon, 19 Jul 2021 14:41:37 -0400
+X-MC-Unique: iNZ3s_tHMRaavc_J-FzkGg-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
+ [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DBBE0192D785;
- Mon, 19 Jul 2021 18:02:34 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 04456101F7A5;
+ Mon, 19 Jul 2021 18:41:36 +0000 (UTC)
 Received: from horse.redhat.com (ovpn-118-17.rdu2.redhat.com [10.10.118.17])
- by smtp.corp.redhat.com (Postfix) with ESMTP id EE3066E0B7;
- Mon, 19 Jul 2021 18:02:30 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F16055D6A1;
+ Mon, 19 Jul 2021 18:41:30 +0000 (UTC)
 Received: by horse.redhat.com (Postfix, from userid 10451)
- id 7F9B7223E4F; Mon, 19 Jul 2021 14:02:30 -0400 (EDT)
-Date: Mon, 19 Jul 2021 14:02:30 -0400
+ id 79845223E4F; Mon, 19 Jul 2021 14:41:30 -0400 (EDT)
+Date: Mon, 19 Jul 2021 14:41:30 -0400
 From: Vivek Goyal <vgoyal@redhat.com>
 To: Jeffle Xu <jefflexu@linux.alibaba.com>
-Subject: Re: [PATCH v2 2/4] fuse: Make DAX mount option a tri-state
-Message-ID: <YPW+NgbMDnGQ2UPI@redhat.com>
+Subject: Re: [PATCH v2 3/4] fuse: add per-file DAX flag
+Message-ID: <YPXHWmiYXMNxxhf7@redhat.com>
 References: <20210716104753.74377-1-jefflexu@linux.alibaba.com>
- <20210716104753.74377-3-jefflexu@linux.alibaba.com>
+ <20210716104753.74377-4-jefflexu@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210716104753.74377-3-jefflexu@linux.alibaba.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+In-Reply-To: <20210716104753.74377-4-jefflexu@linux.alibaba.com>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
 Cc: miklos@szeredi.hu, virtualization@lists.linux-foundation.org,
  joseph.qi@linux.alibaba.com, bo.liu@linux.alibaba.com, stefanha@redhat.com,
  linux-fsdevel@vger.kernel.org
@@ -95,203 +95,52 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jul 16, 2021 at 06:47:51PM +0800, Jeffle Xu wrote:
-> We add 'always', 'never', and 'inode' (default). '-o dax' continues to
-> operate the same which is equivalent to 'always'.
+On Fri, Jul 16, 2021 at 06:47:52PM +0800, Jeffle Xu wrote:
+> Add one flag for fuse_attr.flags indicating if DAX shall be enabled for
+> this file.
 > 
-> By the time this patch is applied, 'inode' mode is actually equal to
-> 'always' mode, before the per-file DAX flag is introduced in the
-> following patch.
+> When the per-file DAX flag changes for an *opened* file, the state of
+> the file won't be updated until this file is closed and reopened later.
 > 
 > Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
-> ---
->  fs/fuse/dax.c       | 13 ++++++++++++-
->  fs/fuse/fuse_i.h    | 11 +++++++++--
->  fs/fuse/inode.c     |  2 +-
->  fs/fuse/virtio_fs.c | 16 ++++++++++++++--
->  4 files changed, 36 insertions(+), 6 deletions(-)
-> 
-> diff --git a/fs/fuse/dax.c b/fs/fuse/dax.c
-> index c6f4e82e65f3..a478e824c2d0 100644
-> --- a/fs/fuse/dax.c
-> +++ b/fs/fuse/dax.c
-> @@ -70,6 +70,9 @@ struct fuse_inode_dax {
->  };
->  
->  struct fuse_conn_dax {
-> +	/** dax mode: FUSE_DAX_MOUNT_* (always, never or per-file) **/
-> +	unsigned int mode;
 
-Why "/**" ?
-
-How about make it something like "enum fuse_dax_mode mode" instead?
-
-enum fuse_dax_mode dax_mode;
-
-> +
->  	/* DAX device */
->  	struct dax_device *dev;
+[..]
+> diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
+> index 36ed092227fa..90c9df10d37a 100644
+> --- a/include/uapi/linux/fuse.h
+> +++ b/include/uapi/linux/fuse.h
+> @@ -184,6 +184,9 @@
+>   *
+>   *  7.34
+>   *  - add FUSE_SYNCFS
+> + *
+> + *  7.35
+> + *  - add FUSE_ATTR_DAX
+>   */
 >  
-> @@ -1288,7 +1291,8 @@ static int fuse_dax_mem_range_init(struct fuse_conn_dax *fcd)
->  	return ret;
->  }
->  
-> -int fuse_dax_conn_alloc(struct fuse_conn *fc, struct dax_device *dax_dev)
-> +int fuse_dax_conn_alloc(struct fuse_conn *fc, unsigned int mode,
-> +			struct dax_device *dax_dev)
->  {
->  	struct fuse_conn_dax *fcd;
->  	int err;
-> @@ -1301,6 +1305,7 @@ int fuse_dax_conn_alloc(struct fuse_conn *fc, struct dax_device *dax_dev)
->  		return -ENOMEM;
->  
->  	spin_lock_init(&fcd->lock);
-> +	fcd->mode = mode;
->  	fcd->dev = dax_dev;
->  	err = fuse_dax_mem_range_init(fcd);
->  	if (err) {
-> @@ -1339,10 +1344,16 @@ static const struct address_space_operations fuse_dax_file_aops  = {
->  static bool fuse_should_enable_dax(struct inode *inode)
->  {
->  	struct fuse_conn *fc = get_fuse_conn(inode);
-> +	unsigned int mode;
->  
->  	if (!fc->dax)
->  		return false;
->  
-> +	mode = fc->dax->mode;
-> +
-> +	if (mode == FUSE_DAX_MOUNT_NEVER)
-> +		return false;
-> +
->  	return true;
->  }
->  
-> diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
-> index 07829ce78695..f29018323845 100644
-> --- a/fs/fuse/fuse_i.h
-> +++ b/fs/fuse/fuse_i.h
-> @@ -487,6 +487,12 @@ struct fuse_dev {
->  	struct list_head entry;
->  };
->  
-> +enum {
-And this becomes.
+>  #ifndef _LINUX_FUSE_H
+> @@ -449,8 +452,10 @@ struct fuse_file_lock {
+>   * fuse_attr flags
+>   *
+>   * FUSE_ATTR_SUBMOUNT: Object is a submount root
+> + * FUSE_ATTR_DAX: Enable DAX for this file in per-file DAX mode
+>   */
+>  #define FUSE_ATTR_SUBMOUNT      (1 << 0)
+> +#define FUSE_ATTR_DAX		(1 << 1)
 
-enum fuse_dax_mode {
-};
+Generic fuse changes (addition of FUSE_ATTR_DAX) should probably in
+a separate patch. 
 
-> +	FUSE_DAX_MOUNT_INODE,
-> +	FUSE_DAX_MOUNT_ALWAYS,
-> +	FUSE_DAX_MOUNT_NEVER,
-> +};
+I am not clear on one thing. If we are planning to rely on persistent
+inode attr (FS_XFLAG_DAX as per Documentation/filesystems/dax.rst), then
+why fuse server needs to communicate the state of that attr using a 
+flag? Can client directly query it?  I am not sure where at these
+attrs stored and if fuse protocol currently supports it.
 
-How about getting rid of "MOUNT" and just do.
-
-	FUSE_DAX_INODE,
-	FUSE_DAX_ALWAYS,
-	FUSE_DAX_NEVER,
-
-> +
->  struct fuse_fs_context {
->  	int fd;
->  	unsigned int rootmode;
-> @@ -503,7 +509,7 @@ struct fuse_fs_context {
->  	bool no_control:1;
->  	bool no_force_umount:1;
->  	bool legacy_opts_show:1;
-> -	bool dax:1;
-> +	unsigned int dax;
-
-enum fuse_dax_mode dax_mode;
-
->  	unsigned int max_read;
->  	unsigned int blksize;
->  	const char *subtype;
-> @@ -1242,7 +1248,8 @@ ssize_t fuse_dax_read_iter(struct kiocb *iocb, struct iov_iter *to);
->  ssize_t fuse_dax_write_iter(struct kiocb *iocb, struct iov_iter *from);
->  int fuse_dax_mmap(struct file *file, struct vm_area_struct *vma);
->  int fuse_dax_break_layouts(struct inode *inode, u64 dmap_start, u64 dmap_end);
-> -int fuse_dax_conn_alloc(struct fuse_conn *fc, struct dax_device *dax_dev);
-> +int fuse_dax_conn_alloc(struct fuse_conn *fc, unsigned int mode,
-						   ^^
-						enum fuse_dax_mode dax_mode
-> +			struct dax_device *dax_dev);
->  void fuse_dax_conn_free(struct fuse_conn *fc);
->  bool fuse_dax_inode_alloc(struct super_block *sb, struct fuse_inode *fi);
->  void fuse_dax_inode_init(struct inode *inode);
-> diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
-> index b9beb39a4a18..f6b46395edb2 100644
-> --- a/fs/fuse/inode.c
-> +++ b/fs/fuse/inode.c
-> @@ -1434,7 +1434,7 @@ int fuse_fill_super_common(struct super_block *sb, struct fuse_fs_context *ctx)
->  	sb->s_subtype = ctx->subtype;
->  	ctx->subtype = NULL;
->  	if (IS_ENABLED(CONFIG_FUSE_DAX)) {
-> -		err = fuse_dax_conn_alloc(fc, ctx->dax_dev);
-> +		err = fuse_dax_conn_alloc(fc, ctx->dax, ctx->dax_dev);
->  		if (err)
->  			goto err;
->  	}
-> diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
-> index 8f52cdaa8445..561f711d1945 100644
-> --- a/fs/fuse/virtio_fs.c
-> +++ b/fs/fuse/virtio_fs.c
-> @@ -88,12 +88,21 @@ struct virtio_fs_req_work {
->  static int virtio_fs_enqueue_req(struct virtio_fs_vq *fsvq,
->  				 struct fuse_req *req, bool in_flight);
->  
-> +static const struct constant_table dax_param_enums[] = {
-> +	{"inode",	FUSE_DAX_MOUNT_INODE },
-> +	{"always",	FUSE_DAX_MOUNT_ALWAYS },
-> +	{"never",	FUSE_DAX_MOUNT_NEVER },
-> +	{}
-> +};
-> +
->  enum {
->  	OPT_DAX,
-> +	OPT_DAX_ENUM,
->  };
->  
->  static const struct fs_parameter_spec virtio_fs_parameters[] = {
->  	fsparam_flag("dax", OPT_DAX),
-> +	fsparam_enum("dax", OPT_DAX_ENUM, dax_param_enums),
->  	{}
->  };
->  
-> @@ -110,7 +119,10 @@ static int virtio_fs_parse_param(struct fs_context *fc,
->  
->  	switch (opt) {
->  	case OPT_DAX:
-> -		ctx->dax = 1;
-> +		ctx->dax = FUSE_DAX_MOUNT_ALWAYS;
-> +		break;
-> +	case OPT_DAX_ENUM:
-> +		ctx->dax = result.uint_32;
-
-Do we want to check here if result.uint_32 has one of the allowed values.
-FUSE_DAX_MOUNT_INODE, FUSE_DAX_MOUNT_ALWAYS or FUSE_DAX_MOUNT_NEVER. Or
-VFS has already taken care of that?
+What about flag STATX_ATTR_DAX. We probably should report that too
+in stat if we are using dax on the inode?
 
 Vivek
-
-
-
->  		break;
->  	default:
->  		return -EINVAL;
-> @@ -1326,7 +1338,7 @@ static int virtio_fs_fill_super(struct super_block *sb, struct fs_context *fsc)
->  
->  	/* virtiofs allocates and installs its own fuse devices */
->  	ctx->fudptr = NULL;
-> -	if (ctx->dax) {
-> +	if (ctx->dax != FUSE_DAX_MOUNT_NEVER) {
->  		if (!fs->dax_dev) {
->  			err = -EINVAL;
->  			pr_err("virtio-fs: dax can't be enabled as filesystem"
-> -- 
-> 2.27.0
-> 
 
 _______________________________________________
 Virtualization mailing list
