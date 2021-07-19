@@ -1,92 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 424263CCD2D
-	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 06:46:34 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 34E363CCD43
+	for <lists.virtualization@lfdr.de>; Mon, 19 Jul 2021 07:15:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AA1A260647;
-	Mon, 19 Jul 2021 04:46:32 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9B4B2401B2;
+	Mon, 19 Jul 2021 05:15:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wYTEmQ-68m-B; Mon, 19 Jul 2021 04:46:30 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 7EB5D605DB;
-	Mon, 19 Jul 2021 04:46:30 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 38wWaNWzKk9T; Mon, 19 Jul 2021 05:15:05 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 6D937400D8;
+	Mon, 19 Jul 2021 05:15:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 096E1C0022;
-	Mon, 19 Jul 2021 04:46:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CE4B9C0022;
+	Mon, 19 Jul 2021 05:15:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F37B8C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B2DCAC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 04:46:28 +0000 (UTC)
+ Mon, 19 Jul 2021 05:15:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D0CBF40410
+ by smtp3.osuosl.org (Postfix) with ESMTP id 91A4660680
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 04:46:28 +0000 (UTC)
+ Mon, 19 Jul 2021 05:15:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="zp2HODPM";
- dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="4Xq2C4ZW"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bSqrhEfo9dcT
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id EJXkI8Nol_Os
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 04:46:27 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8FDE24040F
+ Mon, 19 Jul 2021 05:15:01 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from baidu.com (mx21.baidu.com [220.181.3.85])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5A25360643
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Jul 2021 04:46:27 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id D82DE201BC;
- Mon, 19 Jul 2021 04:46:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1626669984; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=byI/6kuVm+w6U1j7g/ero6LHcS1QEQJ5HjyuaLKXYTw=;
- b=zp2HODPMvY4UOuXr2VCkq7iDuqoTVW5oIv4+faSGohoPaMHPWtaf/mH3qtSo+OsYwahbIe
- M+ihw3Rv8CKWGy2DZDzEw5licZTmH9lOuIkxt77W7Fmn+VBwTIx42n865ev0wvOaBD13ZI
- OTjfWsAhkf1WLO6P2PXZ5VJdPp1J7j0=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1626669984;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=byI/6kuVm+w6U1j7g/ero6LHcS1QEQJ5HjyuaLKXYTw=;
- b=4Xq2C4ZWrQc4ujCyuZOqvVLbJnugnOv1/6aduFZI1we2XaYilIRnVfyqqlldouKPotebSd
- y30pk6T9ibtBxfDA==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D056013C8C;
- Mon, 19 Jul 2021 04:46:24 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id LlWgMqAD9WAbYwAAMHmgww
- (envelope-from <lma@suse.de>); Mon, 19 Jul 2021 04:46:24 +0000
+ Mon, 19 Jul 2021 05:15:01 +0000 (UTC)
+Received: from BJHW-Mail-Ex08.internal.baidu.com (unknown [10.127.64.18])
+ by Forcepoint Email with ESMTPS id 5AE66E362F1524674B1A;
+ Mon, 19 Jul 2021 13:14:56 +0800 (CST)
+Received: from BJHW-MAIL-EX25.internal.baidu.com (10.127.64.40) by
+ BJHW-Mail-Ex08.internal.baidu.com (10.127.64.18) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2308.14; Mon, 19 Jul 2021 13:14:56 +0800
+Received: from BJHW-MAIL-EX27.internal.baidu.com (10.127.64.42) by
+ BJHW-MAIL-EX25.internal.baidu.com (10.127.64.40) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+ 15.1.2308.14; Mon, 19 Jul 2021 13:14:55 +0800
+Received: from BJHW-MAIL-EX27.internal.baidu.com ([169.254.58.247]) by
+ BJHW-MAIL-EX27.internal.baidu.com ([169.254.58.247]) with mapi id
+ 15.01.2308.014; Mon, 19 Jul 2021 13:14:55 +0800
+From: "Cai,Huoqing" <caihuoqing@baidu.com>
+To: "sgarzare@redhat.com" <sgarzare@redhat.com>, "mst@redhat.com"
+ <mst@redhat.com>, "jasowang@redhat.com" <jasowang@redhat.com>
+Subject: RE: [PATCH 1/2] virtio_ring: fix error - unknown type name
+ 'spinlock_t'
+Thread-Topic: [PATCH 1/2] virtio_ring: fix error - unknown type name
+ 'spinlock_t'
+Thread-Index: AQHXeFgEtZ7bhfAxVUC3N/ftcHawDatJyDiQ
+Date: Mon, 19 Jul 2021 05:14:55 +0000
+Message-ID: <c25458bf5b2c46c390afb4851836f7dc@baidu.com>
+References: <20210714022854.1077-1-caihuoqing@baidu.com>
+ <20210714022854.1077-2-caihuoqing@baidu.com>
+In-Reply-To: <20210714022854.1077-2-caihuoqing@baidu.com>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.18.18.49]
 MIME-Version: 1.0
-Date: Mon, 19 Jul 2021 04:46:24 +0000
-From: lma <lma@suse.de>
-To: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-Subject: Re: [Question] virtio-net: About napi_tx
-In-Reply-To: <CA+FuTSeTC3cU7YrBv4wgTXM9s+2NjiHAgTJaKVHnYFk3=0aDFw@mail.gmail.com>
-References: <c94e89f8ba97b4ac66f8fca35eb2f0ba@suse.de>
- <CA+FuTSeTC3cU7YrBv4wgTXM9s+2NjiHAgTJaKVHnYFk3=0aDFw@mail.gmail.com>
-User-Agent: Roundcube Webmail
-Message-ID: <182b4f84d2b83d1c6b0d018ccb57f61c@suse.de>
-X-Sender: lma@suse.de
-Cc: virtualization@lists.linux-foundation.org
+X-Baidu-BdMsfe-DateCheck: 1_BJHW-Mail-Ex08_2021-07-19 13:14:56:368
+Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,25 +86,34 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="gb2312"
 Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-5ZyoIDIwMjEtMDctMTMgMDc6NTLvvIxXaWxsZW0gZGUgQnJ1aWpuIOWGmemBk++8mgo+IE9uIFR1
-ZSwgSnVsIDEzLCAyMDIxIGF0IDM6MDQgQU0gbG1hIDxsbWFAc3VzZS5kZT4gd3JvdGU6Cj4+IAo+
-PiBIaSBXaWxsZW0gYW5kIGxpc3QsCj4+IAo+PiBUaGUgbmFwaV90eCBvZiB2aXJ0aW9fbmV0IGlz
-IGVuYWJsZWQgYnkgZGVmYXVsdCBieSBjb21taXQgMzFjMDNhZWYuCj4+IAo+PiBhbmQgdGhlIGNv
-bW1pdCBtZXNzYWdlIG1lbnRpb25lZDoKPj4gICAgICBJbiB0aGUgdW5saWtlbHkgY2FzZSBvZiBy
-ZWdyZXNzaW9uLCB3ZSBoYXZlIGxhbmRlZCBhIGNyZWRpYmxlCj4+IHJ1bnRpbWUKPj4gICAgICBz
-b2x1dGlvbi4gRXRodG9vbCBjYW4gY29uZmlndXJlIGl0IHdpdGggLUMgdHgtZnJhbWVzIFswfDFd
-IGFzIG9mCj4+ICAgICAgY29tbWl0IDBjNDY1YmUxODNjNyAoInZpcnRpb19uZXQ6IGV0aHRvb2wg
-dHggbmFwaSAKPj4gY29uZmlndXJhdGlvbiIpLgo+PiAKPj4gSSdkIGxpa2UgdG8ga25vdyBtb3Jl
-IGFib3V0ICJ0aGUgdW5saWtlbHkgY2FzZSBvZiByZWdyZXNzaW9uIi4KPj4gSXMgaXQgd29ya2xv
-YWRzIHJlbGF0ZWQgb3IgYmFyZSBtZXRhbCBoYXJkd2FyZSByZWxhdGVkPwo+IAo+IFRoZXJlIGFy
-ZSBubyBzcGVjaWZpYyBrbm93biBjYXNlcy4gVGhpcyBpcyBhIHByZWNhdXRpb24gaWYgYSB1c2Vy
-Cj4gZGlzY292ZXJzIGEgcmVncmVzc2lvbi4KClRoYW5rcyBmb3IgdGhlIGluZm9ybWF0aW9uLApM
-aW4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVh
-bGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRp
-b24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L3ZpcnR1YWxpemF0aW9u
+SXMgaXQgYSBlcnJvciwgIHRyeSChsG1ha2UgdmlydGlvobEgaW4gdGhlIHBhdGggb2YgbGludXgv
+dG9vbHMvIHdpdGggY29uZmlnIFZIT1NUX0lPVExCPW4NCg0KLS0tLS1PcmlnaW5hbCBNZXNzYWdl
+LS0tLS0NCkZyb206IENhaSxIdW9xaW5nIDxjYWlodW9xaW5nQGJhaWR1LmNvbT4gDQpTZW50OiAy
+MDIxxOo31MIxNMjVIDEwOjI5DQpUbzogc2dhcnphcmVAcmVkaGF0LmNvbTsgbXN0QHJlZGhhdC5j
+b207IGphc293YW5nQHJlZGhhdC5jb20NCkNjOiB2aXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1m
+b3VuZGF0aW9uLm9yZzsgbGludXgta2VybmVsQHZnZXIua2VybmVsLm9yZzsgQ2FpLEh1b3Fpbmcg
+PGNhaWh1b3FpbmdAYmFpZHUuY29tPg0KU3ViamVjdDogW1BBVENIIDEvMl0gdmlydGlvX3Jpbmc6
+IGZpeCBlcnJvciAtIHVua25vd24gdHlwZSBuYW1lICdzcGlubG9ja190Jw0KDQp3aGVuIHJ1biAi
+bWFrZSB2aXJ0aW8iIGluIGxpbnV4L3Rvb2xzLA0KdGhlIGVycm9yOiB1bmtub3duIHR5cGUgbmFt
+ZSAnc3BpbmxvY2tfdCcgb2NjdXJzDQoNClNpZ25lZC1vZmYtYnk6IENhaSBIdW9xaW5nIDxjYWlo
+dW9xaW5nQGJhaWR1LmNvbT4NCi0tLQ0KIGluY2x1ZGUvbGludXgvdnJpbmdoLmggfCAyICsrDQog
+MSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9ucygrKQ0KDQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9s
+aW51eC92cmluZ2guaCBiL2luY2x1ZGUvbGludXgvdnJpbmdoLmggaW5kZXggODRkYjdiOGY5MTJm
+Li5mZjIxYzI2NDM3OTIgMTAwNjQ0DQotLS0gYS9pbmNsdWRlL2xpbnV4L3ZyaW5naC5oDQorKysg
+Yi9pbmNsdWRlL2xpbnV4L3ZyaW5naC5oDQpAQCAtNDMsMTEgKzQzLDEzIEBAIHN0cnVjdCB2cmlu
+Z2ggew0KICAgICAgICAvKiBUaGUgdnJpbmcgKG5vdGU6IGl0IG1heSBjb250YWluIHVzZXIgcG9p
+bnRlcnMhKSAqLw0KICAgICAgICBzdHJ1Y3QgdnJpbmcgdnJpbmc7DQoNCisjaWYgSVNfUkVBQ0hB
+QkxFKENPTkZJR19WSE9TVF9JT1RMQikNCiAgICAgICAgLyogSU9UTEIgZm9yIHRoaXMgdnJpbmcg
+Ki8NCiAgICAgICAgc3RydWN0IHZob3N0X2lvdGxiICppb3RsYjsNCg0KICAgICAgICAvKiBzcGlu
+bG9jayB0byBzeW5jaHJvbml6ZSBJT1RMQiBhY2Nlc3NlcyAqLw0KICAgICAgICBzcGlubG9ja190
+ICppb3RsYl9sb2NrOw0KKyNlbmRpZg0KDQogICAgICAgIC8qIFRoZSBmdW5jdGlvbiB0byBjYWxs
+IHRvIG5vdGlmeSB0aGUgZ3Vlc3QgYWJvdXQgYWRkZWQgYnVmZmVycyAqLw0KICAgICAgICB2b2lk
+ICgqbm90aWZ5KShzdHJ1Y3QgdnJpbmdoICopOw0KLS0NCjIuMjUuMQ0KDQpfX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5n
+IGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9s
+aXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
