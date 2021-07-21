@@ -1,123 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EDBF3D1153
-	for <lists.virtualization@lfdr.de>; Wed, 21 Jul 2021 16:27:31 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56AFA3D115C
+	for <lists.virtualization@lfdr.de>; Wed, 21 Jul 2021 16:30:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A3615405B3;
-	Wed, 21 Jul 2021 14:27:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id E34FF60787;
+	Wed, 21 Jul 2021 14:30:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id COg9a8cQxMxZ; Wed, 21 Jul 2021 14:27:27 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ayqjDE4S6d23; Wed, 21 Jul 2021 14:30:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D1AB74059F;
-	Wed, 21 Jul 2021 14:27:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id BF26560891;
+	Wed, 21 Jul 2021 14:30:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D6A24C0025;
-	Wed, 21 Jul 2021 14:27:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3CFEBC000E;
+	Wed, 21 Jul 2021 14:30:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F1C30C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2290AC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jul 2021 14:27:24 +0000 (UTC)
+ Wed, 21 Jul 2021 14:30:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E8FCA82FF9
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1159160891
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jul 2021 14:27:24 +0000 (UTC)
+ Wed, 21 Jul 2021 14:30:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bo8j1QueQSHw
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id FKr_wWit-rzN
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jul 2021 14:27:23 +0000 (UTC)
+ Wed, 21 Jul 2021 14:30:16 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::605])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AA8C28308D
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1786360787
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jul 2021 14:27:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Uqz4TH7VbXr8DPviYmQVLILCtRZ8LaeCMBvjW8fThUhD84NrC9hdRRqgw8YD2gsYDOKSKAVUYSdfHTfMoEQD2ktMDyKpVx4ZiViTUshwqSX+82GGNZLJOq7v6uMRw3aKYySBMfigq5n5mEuN+7j+olJP8dHYLI1izLw2YrOCkvs3rkPMiGDN4ba2ZJ3VOaFDu9vjunuiNkHI/6t9TLZeQXfxi8LbBaXAmZ4GLvTqAJk40bBirx3dLQL5YuHINyLDejLszJflcSajDW2qfX9p4M8kjdOUzuQSW2M0Z1UewtM6UVK/ds3lQvl+TDRM6TrBdG4NmkXi3/G34jenGmb2qw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zqr0cMIdgdwmZmBUmAD7MYIwWJ6SotNbx+U0JPjAhB0=;
- b=Y56dlnUG2akORoYt/tI2cqMaiYdnQCR0QDte2dfGidgfcCjprn5sJ+sDDOVEY3IXvHlqVvRmua6n8qiPnkQeWJxtPw1q78jZV8WAnP6Hjufo0FaLXbqRxOk8ivAjrGbV4z6JwlbOYgKMHSVakWGcPZBxM92ok1Bef5zwcCC6eddCKESZWKarCMBgYMpDypBxQMMuut6zgyDTnAUhZcmGbS5Xgyw7MfbpVttC/0objff7moe6xbmj8qz/WLF7PC76n8nUrVBW0U8Biyi4oaOha4cDtvOL0wMJVZxXvkI5OtZmpMXSJvnr9Z9dBZJiuTlFmhHCgnbaS2GRf9HEcYHDIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=lists.linux-foundation.org
- smtp.mailfrom=nvidia.com; dmarc=pass (p=quarantine sp=none pct=100)
- action=none header.from=nvidia.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zqr0cMIdgdwmZmBUmAD7MYIwWJ6SotNbx+U0JPjAhB0=;
- b=uqS+9BjQx0/IaYRklt6qqcvAMYR3WWm+R2WkvX584rxhAIeNhjq+ju2m8Pztgq1t+aEEkjq6I6+WkLGrrPwKt0K0/SqfE6mU1foSO5M9GkwtAMCRY9F8/Z+Cw2T3SsCND+ypRnWkw23/DSU8v3N4iipVDY54l/ePuyZpls0XdAmsg7cL3jSn4c2DZQ+yw8FzYXm85zON0Z+KffyhBDP1l/+6BJPSsTPBSvA22HGC0evJxs6wKr0LBDa1Ai3ZJp0NmVzKfQtb5/9P4L/oDgoBEzLg1YLxJQjeNnoFsCcyfm5vYghTSjiWtE2OuOSHOljSlweVaYjzVnrLa4jc33YGPQ==
-Received: from MW4PR03CA0141.namprd03.prod.outlook.com (2603:10b6:303:8c::26)
- by BL1PR12MB5352.namprd12.prod.outlook.com (2603:10b6:208:314::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4331.31; Wed, 21 Jul
- 2021 14:27:21 +0000
-Received: from CO1NAM11FT064.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:8c:cafe::fd) by MW4PR03CA0141.outlook.office365.com
- (2603:10b6:303:8c::26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4352.25 via Frontend
- Transport; Wed, 21 Jul 2021 14:27:21 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; lists.linux-foundation.org; dkim=none (message not
- signed) header.d=none;lists.linux-foundation.org; dmarc=pass action=none
- header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- CO1NAM11FT064.mail.protection.outlook.com (10.13.175.77) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4352.24 via Frontend Transport; Wed, 21 Jul 2021 14:27:21 +0000
-Received: from sw-mtx-036.mtx.labs.mlnx (172.20.187.5) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2;
- Wed, 21 Jul 2021 14:27:19 +0000
-To: <mst@redhat.com>, <virtualization@lists.linux-foundation.org>
-Subject: [PATCH v3 4/4] virtio_pci: Support surprise removal of virtio pci
- device
-Date: Wed, 21 Jul 2021 17:26:48 +0300
-Message-ID: <20210721142648.1525924-5-parav@nvidia.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210721142648.1525924-1-parav@nvidia.com>
-References: <20210721142648.1525924-1-parav@nvidia.com>
+ Wed, 21 Jul 2021 14:30:16 +0000 (UTC)
+Received: by mail-wr1-x42b.google.com with SMTP id c12so2437069wrt.3
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 21 Jul 2021 07:30:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LsCZd4JYUlf4DgBXgVbea7RBOXoDbg1vUKFjYIRULao=;
+ b=aRMmcMrQz3DNodcGZGJNIgwPB9ul8Scws6Wh44encugspS+AkIqOs1L5KeTTCR2oCr
+ xm3up+Q1gK1r4UgRJfAUz0oWx54v97ib7+QiXJpg427VUpaTcC+kpFi2/kD7Pi2HuD9n
+ amhCyXF4Un6rMyMpJ7diOOYjlg1OEoudCOCJAHmUH2+Lk8EDjkFIEdZo6zCvF/+FEnum
+ pDNnXX42eNYuz/mqaozaReZ1dbcX5I19N5au4G2LtPAwqeEe/DqaFnJhKhtJjH0Ag/oC
+ S9iAWmdAyeBp8wGcibVN1oM45ePOc9cSysgEkLqnvI5ihNEyG+lZ2phdaums+IGcpXAw
+ ALBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=LsCZd4JYUlf4DgBXgVbea7RBOXoDbg1vUKFjYIRULao=;
+ b=A9U5v/XD41fgizR6+sruvpZEQP+CMcXFcQIaGyQRbKkX5UVQBrZS6Wdg9mkLPJcB4W
+ W/E5CyESD5HhuOt6p28gZOjkSvWVPLU7/Q0pFZIoGKEMtaLlAPTdCNF1v2GpVMh0y4hK
+ +9gBbqSflPagp5xj0uI9pn/QycAeAMcoZ39fY8vz87idOr+sQ3aFS8T3anOx4JJ0xEuf
+ 321uLdrTiDlPEOWrWmIecElDXVhGXOG7JpxAcIXolVopTWUAYY/QS6JGRky1fbBcFVCi
+ 6k7ecadsZN+dpuCQpiLszelJoo0t3/s0cR+Z07OVODeSXvk1Ehnu2g7Fr0Q1qdZ375pS
+ HQSw==
+X-Gm-Message-State: AOAM5319UmjVvdEip7wJTKycVoxfyxL2Ahy79gl/3K+66z1li9nDaq/k
+ niAKu8lP6JkdpvlMKUbtarx/rQ==
+X-Google-Smtp-Source: ABdhPJy+FE5eryA5W6yWBtAOKXEQABDp/4ZN/cKYH6WivHT4TnZA/3j3HuxrxR7/mHKgfaB1peeREg==
+X-Received: by 2002:adf:f149:: with SMTP id y9mr42188978wro.85.1626877814260; 
+ Wed, 21 Jul 2021 07:30:14 -0700 (PDT)
+Received: from localhost.localdomain ([31.124.24.141])
+ by smtp.gmail.com with ESMTPSA id 19sm133900wmj.2.2021.07.21.07.30.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jul 2021 07:30:13 -0700 (PDT)
+From: Lee Jones <lee.jones@linaro.org>
+To: lee.jones@linaro.org
+Subject: [PATCH 1/1] virtio/vsock: Make vsock virtio packet buff size
+ configurable
+Date: Wed, 21 Jul 2021 15:30:00 +0100
+Message-Id: <20210721143001.182009-1-lee.jones@linaro.org>
+X-Mailer: git-send-email 2.32.0.402.g57bb445576-goog
 MIME-Version: 1.0
-X-Originating-IP: [172.20.187.5]
-X-ClientProxiedBy: HQMAIL111.nvidia.com (172.20.187.18) To
- HQMAIL107.nvidia.com (172.20.187.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 816e12cd-ba37-4def-77d8-08d94c53a6fd
-X-MS-TrafficTypeDiagnostic: BL1PR12MB5352:
-X-Microsoft-Antispam-PRVS: <BL1PR12MB5352EFED447D712AB25FD1E2DCE39@BL1PR12MB5352.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8273;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ji0A3Tf4935+ZqTS+KxK/oImZudEMaQvJwe+h84AyNKHuVjcmcLq7RFzhjFJR0SrpIfeCR0aGTHyGseT6YUE5nFcXDr3+Z/jkhz9wM8y7P3B65aY1HlFUSOtkHQtCmAbY7L/1uPCDZstfJOqV8Q5P730Ax7LNvprNSxL9UiTZ4Eb9SNJ/xn82aHhVEwGAJy0maRE3bqcsinMDGx1R0TEPtsrTsFMC/RsEGl6/w2fKtqRCcTvx7nB7qyogaLVBiUhYnsE4bnfaJDh/I9O794cOgBYAVGrOyjWBmI/co3a8Rcx9jnL5+druDRHvgLg7Dy4Ng8D4Fh7o7XIwbs74N+5FQTI823tsGR+Mg95u8lmayOTxDj/0BtOCETga8j6xBTWgFRJYTp8ERkoim7YbnmQr6ZbZ5OvyYk4yD9VxFCvrAUWX2v565mvtqPvqw8RvN4LeqzdvVaMGllEqnFOXUiUbyKb8MBK/ee5HyHBEvK9/uBdWB+0sazl/fldS9fMbKQAGc5yjalqAoDLtlLs0Ai9X1czPdtxj8ZYuV8VMfvnnKWgQgwJMZtmYMS0AooOC/x+EMQRghh/8KkmrNIzDLatwQh4ecED5vORFEZ4HmAi9Gh/sdn/b15uDccI4hSxJgf3NZ0rCgXWuP9meFm7xPtc8aYv+GyZReIjLvhk2OSDgzo3BW03fuhgn9QhDwokl2gpkaw0HAyRFV78xVkUf++ytw==
-X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(396003)(39860400002)(346002)(136003)(376002)(36840700001)(46966006)(70586007)(356005)(83380400001)(316002)(82740400003)(36756003)(478600001)(6666004)(110136005)(107886003)(47076005)(7636003)(4326008)(8676002)(70206006)(36906005)(36860700001)(16526019)(2616005)(86362001)(336012)(5660300002)(426003)(1076003)(8936002)(2906002)(186003)(82310400003)(26005);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Jul 2021 14:27:21.6202 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 816e12cd-ba37-4def-77d8-08d94c53a6fd
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT064.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5352
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Ram Muthiah <rammuthiah@google.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Jakub Kicinski <kuba@kernel.org>, virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -129,85 +96,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Parav Pandit via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Parav Pandit <parav@nvidia.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When a virtio pci device undergo surprise removal (aka async removal in
-PCIe spec), mark the device as broken so that any upper layer drivers can
-abort any outstanding operation.
+From: Ram Muthiah <rammuthiah@google.com>
 
-When a virtio net pci device undergo surprise removal which is used by a
-NetworkManager, a below call trace was observed.
+After a virtual device has been running for some time, the SLAB
+sustains ever increasing fragmentation. Contributing to this
+fragmentation are the virtio packet buffer allocations which
+are a drain on 64Kb compound pages. Eventually these can't be
+allocated due to fragmentation.
 
-kernel:watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [kworker/1:1:27059]
-watchdog: BUG: soft lockup - CPU#1 stuck for 52s! [kworker/1:1:27059]
-CPU: 1 PID: 27059 Comm: kworker/1:1 Tainted: G S      W I  L    5.13.0-hotplug+ #8
-Hardware name: Dell Inc. PowerEdge R640/0H28RR, BIOS 2.9.4 11/06/2020
-Workqueue: events linkwatch_event
-RIP: 0010:virtnet_send_command+0xfc/0x150 [virtio_net]
-Call Trace:
- virtnet_set_rx_mode+0xcf/0x2a7 [virtio_net]
- ? __hw_addr_create_ex+0x85/0xc0
- __dev_mc_add+0x72/0x80
- igmp6_group_added+0xa7/0xd0
- ipv6_mc_up+0x3c/0x60
- ipv6_find_idev+0x36/0x80
- addrconf_add_dev+0x1e/0xa0
- addrconf_dev_config+0x71/0x130
- addrconf_notify+0x1f5/0xb40
- ? rtnl_is_locked+0x11/0x20
- ? __switch_to_asm+0x42/0x70
- ? finish_task_switch+0xaf/0x2c0
- ? raw_notifier_call_chain+0x3e/0x50
- raw_notifier_call_chain+0x3e/0x50
- netdev_state_change+0x67/0x90
- linkwatch_do_dev+0x3c/0x50
- __linkwatch_run_queue+0xd2/0x220
- linkwatch_event+0x21/0x30
- process_one_work+0x1c8/0x370
- worker_thread+0x30/0x380
- ? process_one_work+0x370/0x370
- kthread+0x118/0x140
- ? set_kthread_struct+0x40/0x40
- ret_from_fork+0x1f/0x30
+To enable successful allocations for this packet buffer, the
+packet buffer's size needs to be reduced.
 
-Hence, add the ability to abort the command on surprise removal
-which prevents infinite loop and system lockup.
+In order to enable a reduction without impacting current users,
+this variable is being exposed as a command line parameter.
 
-Signed-off-by: Parav Pandit <parav@nvidia.com>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Stefano Garzarella <sgarzare@redhat.com>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: virtualization@lists.linux-foundation.org
+Cc: kvm@vger.kernel.org
+Cc: netdev@vger.kernel.org
+Signed-off-by: Ram Muthiah <rammuthiah@google.com>
+Signed-off-by: Lee Jones <lee.jones@linaro.org>
 ---
-changelog:
-v0->v1:
- - fixed typo in comment
----
- drivers/virtio/virtio_pci_common.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ include/linux/virtio_vsock.h            | 4 +++-
+ net/vmw_vsock/virtio_transport_common.c | 4 ++++
+ 2 files changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/virtio/virtio_pci_common.c b/drivers/virtio/virtio_pci_common.c
-index 222d630c41fc..b35bb2d57f62 100644
---- a/drivers/virtio/virtio_pci_common.c
-+++ b/drivers/virtio/virtio_pci_common.c
-@@ -576,6 +576,13 @@ static void virtio_pci_remove(struct pci_dev *pci_dev)
- 	struct virtio_pci_device *vp_dev = pci_get_drvdata(pci_dev);
- 	struct device *dev = get_device(&vp_dev->vdev.dev);
+diff --git a/include/linux/virtio_vsock.h b/include/linux/virtio_vsock.h
+index 35d7eedb5e8e4..8c77d60a74d34 100644
+--- a/include/linux/virtio_vsock.h
++++ b/include/linux/virtio_vsock.h
+@@ -7,9 +7,11 @@
+ #include <net/sock.h>
+ #include <net/af_vsock.h>
  
-+	/*
-+	 * Device is marked broken on surprise removal so that virtio upper
-+	 * layers can abort any ongoing operation.
-+	 */
-+	if (!pci_device_is_present(pci_dev))
-+		virtio_break_device(&vp_dev->vdev);
++extern uint virtio_transport_max_vsock_pkt_buf_size;
 +
- 	pci_disable_sriov(pci_dev);
+ #define VIRTIO_VSOCK_DEFAULT_RX_BUF_SIZE	(1024 * 4)
+ #define VIRTIO_VSOCK_MAX_BUF_SIZE		0xFFFFFFFFUL
+-#define VIRTIO_VSOCK_MAX_PKT_BUF_SIZE		(1024 * 64)
++#define VIRTIO_VSOCK_MAX_PKT_BUF_SIZE		virtio_transport_max_vsock_pkt_buf_size
  
- 	unregister_virtio_device(&vp_dev->vdev);
+ enum {
+ 	VSOCK_VQ_RX     = 0, /* for host to guest data */
+diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
+index 169ba8b72a630..d0d913afec8b6 100644
+--- a/net/vmw_vsock/virtio_transport_common.c
++++ b/net/vmw_vsock/virtio_transport_common.c
+@@ -26,6 +26,10 @@
+ /* Threshold for detecting small packets to copy */
+ #define GOOD_COPY_LEN  128
+ 
++uint virtio_transport_max_vsock_pkt_buf_size = 1024 * 64;
++module_param(virtio_transport_max_vsock_pkt_buf_size, uint, 0444);
++EXPORT_SYMBOL_GPL(virtio_transport_max_vsock_pkt_buf_size);
++
+ static const struct virtio_transport *
+ virtio_transport_get_ops(struct vsock_sock *vsk)
+ {
 -- 
-2.27.0
+2.32.0.402.g57bb445576-goog
 
 _______________________________________________
 Virtualization mailing list
