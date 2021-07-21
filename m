@@ -1,86 +1,110 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB3E03D0238
-	for <lists.virtualization@lfdr.de>; Tue, 20 Jul 2021 21:40:41 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7C393D075D
+	for <lists.virtualization@lfdr.de>; Wed, 21 Jul 2021 05:30:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4175883410;
-	Tue, 20 Jul 2021 19:40:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 383ED60703;
+	Wed, 21 Jul 2021 03:30:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rL6-m1-n5DcL; Tue, 20 Jul 2021 19:40:39 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4SDZVrfLb3FK; Wed, 21 Jul 2021 03:30:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 1825683415;
-	Tue, 20 Jul 2021 19:40:39 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D3F2A60697;
+	Wed, 21 Jul 2021 03:30:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C901C000E;
-	Tue, 20 Jul 2021 19:40:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 505B3C0022;
+	Wed, 21 Jul 2021 03:30:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 37F8FC000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D0D2BC000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jul 2021 19:40:38 +0000 (UTC)
+ Wed, 21 Jul 2021 03:30:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 26BEE401E8
+ by smtp1.osuosl.org (Postfix) with ESMTP id AA8A682D14
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jul 2021 19:40:38 +0000 (UTC)
+ Wed, 21 Jul 2021 03:30:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id drXNDqBdLFZc
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XwXxkdnfHLK6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jul 2021 19:40:37 +0000 (UTC)
+ Wed, 21 Jul 2021 03:30:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2E044401B0
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3D3B982D12
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jul 2021 19:40:36 +0000 (UTC)
+ Wed, 21 Jul 2021 03:30:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1626810035;
+ s=mimecast20190719; t=1626838210;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZX6jEwOeEdHBQeHLTDnSnVT2DALhakaB/D7jciFUVJo=;
- b=fpH/onOpW2cXElI7eX9I+cUezbwozNj+JMR3Say1sq45Jm28W8obsDRLhu0JGsbC84pOgU
- Jqp87KWS3Ehfi8kxdXfgToFLWBNI9r0ycJPaiRLX9TgN7SDRax36UNECa2ckeNRe5C7OZ0
- QyqrIcCk6kSQ7RLDtq/YjrRFI0BmdWM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-427-b7tab7UHNzihncjbNRzdlA-1; Tue, 20 Jul 2021 15:40:34 -0400
-X-MC-Unique: b7tab7UHNzihncjbNRzdlA-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EF05B10C1ADC;
- Tue, 20 Jul 2021 19:40:32 +0000 (UTC)
-Received: from horse.redhat.com (ovpn-113-228.rdu2.redhat.com [10.10.113.228])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 3549D10016DB;
- Tue, 20 Jul 2021 19:40:29 +0000 (UTC)
-Received: by horse.redhat.com (Postfix, from userid 10451)
- id B308F223E70; Tue, 20 Jul 2021 15:40:28 -0400 (EDT)
-Date: Tue, 20 Jul 2021 15:40:28 -0400
-From: Vivek Goyal <vgoyal@redhat.com>
-To: JeffleXu <jefflexu@linux.alibaba.com>
-Subject: Re: [PATCH v2 3/4] fuse: add per-file DAX flag
-Message-ID: <YPcmrK/XdPiFIisJ@redhat.com>
-References: <20210716104753.74377-1-jefflexu@linux.alibaba.com>
- <20210716104753.74377-4-jefflexu@linux.alibaba.com>
- <YPXHWmiYXMNxxhf7@redhat.com>
- <99f346bf-e08d-3dad-d931-9d7aeb16ad08@linux.alibaba.com>
+ bh=k05rJ04IU9dEG8xbaeJSAOzZNy8JTOVIRfo0vVOjOCg=;
+ b=jJJZ6hkO+9CUej3+OQ/FgMMLnOTzaT/0Oai6Ibdm/W4id9Pn6Sm3RzEB3FwLHFImApKBc/
+ qp6WJa4Z9LAi4MICsWmJdg56HGb0IwHAOXPICuXNNQnqf0TXhgR+Yz1B69/UkYQJVGxdms
+ t8zB+lRLMiiTERIhjrIfesgaTziQnXU=
+Received: from mail-pf1-f197.google.com (mail-pf1-f197.google.com
+ [209.85.210.197]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-565-yMQt2lBsNxGHMOvAe6wc2Q-1; Tue, 20 Jul 2021 23:30:07 -0400
+X-MC-Unique: yMQt2lBsNxGHMOvAe6wc2Q-1
+Received: by mail-pf1-f197.google.com with SMTP id
+ g17-20020a6252110000b029030423e1ef64so933515pfb.18
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Jul 2021 20:30:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=k05rJ04IU9dEG8xbaeJSAOzZNy8JTOVIRfo0vVOjOCg=;
+ b=S8J49DKXq8uxS04fq7aN9St6Pf+++85iY8ZB7NFZBsrZ4LeELDB2MwN1wzZQRHrmgN
+ rQw79NtfKlaPB1g1Z6LFojI4kGAaAAN0PZJt3aFRFI7klOCieY3WyXK9yZDBdd8CBJrX
+ /pxG/z4zqh7oXzvboKWVgt1QPmhrOcPRauRro2PCAS1DGkLOuumrGDjEM7JYMqBAtYI/
+ 7l8x6sJFj0hi9mYHHgWKJKMdgIkxpVvOXKLO2caJcdYieZbVMn/lR7EJtI7DcIsXXTr9
+ DnzZR977+8UFDFAlLppqjLDmBlqoFOvN2qx0V/fF9r36Lts3QS8jD2DyCFlaDzQ6otj+
+ 8VIA==
+X-Gm-Message-State: AOAM532PmUzcjI+aRiRX+95isRNXqnhn4dQXueEcdRpdb+uVJkSEx5WF
+ c6HJciyGXb40h0eqpwCjZ+W89ZM4LY/84CYnEXFNvVbpVAkLsaTCTREBkScTCzpK2D2l5rvvZpP
+ 9JfovkgL9WdqSP2BMuO48Ogpbeafd2B6bUo8uGN1uAA==
+X-Received: by 2002:a17:90a:17eb:: with SMTP id
+ q98mr1637493pja.183.1626838206005; 
+ Tue, 20 Jul 2021 20:30:06 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyESsAEWCDLWvcTfXZOmxCYVAakGzjamKbkQkgTTty1VuN8o5+HezI8WKMk3qXoufEpH/sFbw==
+X-Received: by 2002:a17:90a:17eb:: with SMTP id
+ q98mr1637476pja.183.1626838205751; 
+ Tue, 20 Jul 2021 20:30:05 -0700 (PDT)
+Received: from wangxiaodeMacBook-Air.local ([209.132.188.80])
+ by smtp.gmail.com with ESMTPSA id w14sm30244343pgo.75.2021.07.20.20.30.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 20 Jul 2021 20:30:05 -0700 (PDT)
+Subject: Re: [RFC 0/3] cpuidle: add poll_source API and virtio vq polling
+To: Stefan Hajnoczi <stefanha@redhat.com>, linux-kernel@vger.kernel.org
+References: <20210713161906.457857-1-stefanha@redhat.com>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <1008dee4-fce1-2462-1520-f5432bc89a07@redhat.com>
+Date: Wed, 21 Jul 2021 11:29:55 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <99f346bf-e08d-3dad-d931-9d7aeb16ad08@linux.alibaba.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
-Cc: miklos@szeredi.hu, virtualization@lists.linux-foundation.org,
- joseph.qi@linux.alibaba.com, bo.liu@linux.alibaba.com, stefanha@redhat.com,
- linux-fsdevel@vger.kernel.org
+In-Reply-To: <20210713161906.457857-1-stefanha@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Cc: Jens Axboe <axboe@kernel.dk>, Christoph Hellwig <hch@infradead.org>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
+ "Michael S . Tsirkin" <mst@redhat.com>, linux-pm@vger.kernel.org,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Ming Lei <ming.lei@redhat.com>,
+ linux-block@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,110 +116,74 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jul 20, 2021 at 03:19:50PM +0800, JeffleXu wrote:
-> 
-> 
-> On 7/20/21 2:41 AM, Vivek Goyal wrote:
-> > On Fri, Jul 16, 2021 at 06:47:52PM +0800, Jeffle Xu wrote:
-> >> Add one flag for fuse_attr.flags indicating if DAX shall be enabled for
-> >> this file.
-> >>
-> >> When the per-file DAX flag changes for an *opened* file, the state of
-> >> the file won't be updated until this file is closed and reopened later.
-> >>
-> >> Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
-> > 
-> > [..]
-> >> diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
-> >> index 36ed092227fa..90c9df10d37a 100644
-> >> --- a/include/uapi/linux/fuse.h
-> >> +++ b/include/uapi/linux/fuse.h
-> >> @@ -184,6 +184,9 @@
-> >>   *
-> >>   *  7.34
-> >>   *  - add FUSE_SYNCFS
-> >> + *
-> >> + *  7.35
-> >> + *  - add FUSE_ATTR_DAX
-> >>   */
-> >>  
-> >>  #ifndef _LINUX_FUSE_H
-> >> @@ -449,8 +452,10 @@ struct fuse_file_lock {
-> >>   * fuse_attr flags
-> >>   *
-> >>   * FUSE_ATTR_SUBMOUNT: Object is a submount root
-> >> + * FUSE_ATTR_DAX: Enable DAX for this file in per-file DAX mode
-> >>   */
-> >>  #define FUSE_ATTR_SUBMOUNT      (1 << 0)
-> >> +#define FUSE_ATTR_DAX		(1 << 1)
-> > 
-> > Generic fuse changes (addition of FUSE_ATTR_DAX) should probably in
-> > a separate patch. 
-> 
-> Got it.
-> 
-> > 
-> > I am not clear on one thing. If we are planning to rely on persistent
-> > inode attr (FS_XFLAG_DAX as per Documentation/filesystems/dax.rst), then
-> > why fuse server needs to communicate the state of that attr using a 
-> > flag? Can client directly query it?  I am not sure where at these
-> > attrs stored and if fuse protocol currently supports it.
-> 
-> There are two issues.
-> 
-> 1. FUSE server side: Algorithm of deciding whether DAX is enabled for a
-> file.
-> 
-> As I previously replied in [1], FUSE server must enable DAX if the
-> backend file is flagged with FS_XFLAG_DAX, to make the FS_XFLAG_DAX
-> previously set by FUSE client effective.
-> 
-> But I will argue that FUSE server also has the flexibility of the
-> algorithm implementation. Even if guest queries FS_XFLAG_DAX by
-> GETFLAGS/FSGETXATTR ioctl, FUSE server can still enable DAX when the
-> backend file is not FS_XFLAG_DAX flagged.
-> 
-> 
-> 2. The protocol between server and client.
-> 
-> extending LOOKUP vs. LOOKUP + GETFLAGS/FSGETXATTR ioctl
-> 
-> As I said in [1], client can directly query the FS_XFLAG_DAX flag, but
-> there will be one more round trip.
-> 
-> 
-> [1]
-> https://lore.kernel.org/linux-fsdevel/031efb1d-7c0d-35fb-c147-dcc3b6cac0ef@linux.alibaba.com/T/#m3f3407158b2c028694c85d82d0d6bd0387f4e24e
-> 
-> > 
-> > What about flag STATX_ATTR_DAX. We probably should report that too
-> > in stat if we are using dax on the inode?
-> > 
-> 
-> VFS will automatically report STATX_ATTR_DAX if inode is in DAX mode,
-> e.g., in vfs_getattr_nosec().
-
-Good to know. Given user will know which files are using dax and 
-which ones are not, it is even more important to define semantics
-properly. In what cases DAX will be driven by FS_XFLAGS_DAX attr
-and in what cases DAX will completely be driven by server.
-
-May be we should divide it in two patch series. First patch series
-implements "-o dax=inode" and server follows FS_XFLAGS_DAX attr
-and reports during lookup/getattr/..... 
-
-And once that is merged this can be ehanced with "-o dax=server" where
-server is free to choose what files dax should be used on. Only if
-this is still needed.
-
-Vivek
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+CuWcqCAyMDIxLzcvMTQg5LiK5Y2IMTI6MTksIFN0ZWZhbiBIYWpub2N6aSDlhpnpgZM6Cj4gVGhl
+c2UgcGF0Y2hlcyBhcmUgbm90IHBvbGlzaGVkIHlldCBidXQgSSB3b3VsZCBsaWtlIHJlcXVlc3Qg
+ZmVlZGJhY2sgb24gdGhpcwo+IGFwcHJvYWNoIGFuZCBzaGFyZSBwZXJmb3JtYW5jZSByZXN1bHRz
+IHdpdGggeW91Lgo+Cj4gSWRsZSBDUFVzIHRlbnRhdGl2ZWx5IGVudGVyIGEgYnVzeSB3YWl0IGxv
+b3AgYmVmb3JlIGhhbHRpbmcgd2hlbiB0aGUgY3B1aWRsZQo+IGhhbHRwb2xsIGRyaXZlciBpcyBl
+bmFibGVkIGluc2lkZSBhIHZpcnR1YWwgbWFjaGluZS4gVGhpcyByZWR1Y2VzIHdha2V1cAo+IGxh
+dGVuY3kgZm9yIGV2ZW50cyB0aGF0IG9jY3VyIHNvb24gYWZ0ZXIgdGhlIHZDUFUgYmVjb21lcyBp
+ZGxlLgo+Cj4gVGhpcyBwYXRjaCBzZXJpZXMgZXh0ZW5kcyB0aGUgY3B1aWRsZSBidXN5IHdhaXQg
+bG9vcCB3aXRoIHRoZSBuZXcgcG9sbF9zb3VyY2UKPiBBUEkgc28gZHJpdmVycyBjYW4gcGFydGlj
+aXBhdGUgaW4gcG9sbGluZy4gU3VjaCBwb2xsaW5nLWF3YXJlIGRyaXZlcnMgZGlzYWJsZQo+IHRo
+ZWlyIGRldmljZSdzIGlycSBkdXJpbmcgdGhlIGJ1c3kgd2FpdCBsb29wIHRvIGF2b2lkIHRoZSBj
+b3N0IG9mIGludGVycnVwdHMuCj4gVGhpcyByZWR1Y2VzIGxhdGVuY3kgZnVydGhlciB0aGFuIHJl
+Z3VsYXIgY3B1aWRsZSBoYWx0cG9sbCwgd2hpY2ggc3RpbGwgcmVsaWVzCj4gb24gaXJxcy4KPgo+
+IFZpcnRpbyBkcml2ZXJzIGFyZSBtb2RpZmllZCB0byB1c2UgdGhlIHBvbGxfc291cmNlIEFQSSBz
+byBhbGwgdmlydGlvIGRldmljZQo+IHR5cGVzIGdldCB0aGlzIGZlYXR1cmUuIFRoZSBmb2xsb3dp
+bmcgdmlydGlvLWJsayBmaW8gYmVuY2htYXJrIHJlc3VsdHMgc2hvdyB0aGUKPiBpbXByb3ZlbWVu
+dDoKPgo+ICAgICAgICAgICAgICAgSU9QUyAobnVtam9icz00LCBpb2RlcHRoPTEsIDQgdmlydHF1
+ZXVlcykKPiAgICAgICAgICAgICAgICAgYmVmb3JlICAgcG9sbF9zb3VyY2UgICAgICBpb19wb2xs
+Cj4gNGsgcmFuZHJlYWQgICAgMTY3MTAyICAxODYwNDkgKCsxMSUpICAxODY2NTQgKCsxMSUpCj4g
+NGsgcmFuZHdyaXRlICAgMTYyMjA0ICAxODEyMTQgKCsxMSUpICAxODE4NTAgKCsxMiUpCj4gNGsg
+cmFuZHJ3ICAgICAgMTU5NTIwICAxNzcwNzEgKCsxMSUpICAxNzc5MjggKCsxMSUpCj4KPiBUaGUg
+Y29tcGFyaXNvbiBhZ2FpbnN0IGlvX3BvbGwgc2hvd3MgdGhhdCBjcHVpZGxlIHBvbGxfc291cmNl
+IGFjaGlldmVzCj4gZXF1aXZhbGVudCBwZXJmb3JtYW5jZSB0byB0aGUgYmxvY2sgbGF5ZXIncyBp
+b19wb2xsIGZlYXR1cmUgKHdoaWNoIEkKPiBpbXBsZW1lbnRlZCBpbiBhIHNlcGFyYXRlIHBhdGNo
+IHNlcmllcyBbMV0pLgo+Cj4gVGhlIGFkdmFudGFnZSBvZiBwb2xsX3NvdXJjZSBpcyB0aGF0IGFw
+cGxpY2F0aW9ucyBkbyBub3QgbmVlZCB0byBleHBsaWNpdGx5IHNldAo+IHRoZSBSV0ZfSElQUkkg
+SS9PIHJlcXVlc3QgZmxhZy4gVGhlIHBvbGxfc291cmNlIGFwcHJvYWNoIGlzIGF0dHJhY3RpdmUg
+YmVjYXVzZQo+IGZldyBhcHBsaWNhdGlvbnMgYWN0dWFsbHkgdXNlIFJXRl9ISVBSSSBhbmQgaXQg
+dGFrZXMgYWR2YW50YWdlIG9mIENQVSBjeWNsZXMgd2UKPiB3b3VsZCBoYXZlIHNwZW50IGluIGNw
+dWlkbGUgaGFsdHBvbGwgYW55d2F5Lgo+Cj4gVGhlIGN1cnJlbnQgc2VyaWVzIGRvZXMgbm90IGlt
+cHJvdmUgdmlydGlvLW5ldC4gSSBoYXZlbid0IGludmVzdGlnYXRlZCBkZWVwbHksCj4gYnV0IGl0
+IGlzIHBvc3NpYmxlIHRoYXQgTkFQSSBhbmQgcG9sbF9zb3VyY2UgZG8gbm90IGNvbWJpbmUuIFNl
+ZSB0aGUgZmluYWwKPiBwYXRjaCBmb3IgYSBzdGFydGluZyBwb2ludCBvbiBtYWtpbmcgdGhlIHR3
+byB3b3JrIHRvZ2V0aGVyLgo+Cj4gSSBoYXZlIG5vdCB0cmllZCB0aGlzIG9uIGJhcmUgbWV0YWwg
+YnV0IGl0IG1pZ2h0IGhlbHAgdGhlcmUgdG9vLiBUaGUgY29zdCBvZgo+IGRpc2FibGluZyBhIGRl
+dmljZSdzIGlycSBtdXN0IGJlIGxlc3MgdGhhbiB0aGUgc2F2aW5ncyBmcm9tIGF2b2lkaW5nIGly
+cQo+IGhhbmRsaW5nIGZvciB0aGlzIG9wdGltaXphdGlvbiB0byBtYWtlIHNlbnNlLgo+Cj4gWzFd
+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL2xpbnV4LWJsb2NrLzIwMjEwNTIwMTQxMzA1LjM1NTk2
+MS0xLXN0ZWZhbmhhQHJlZGhhdC5jb20vCgoKSGkgU3RlZmFuOgoKU29tZSBxdWVzdGlvbnM6Cgox
+KSBXaGF0J3MgdGhlIGFkdmFudGFnZXMgb2YgaW50cm9kdWNpbmcgcG9sbGluZyBhdCB2aXJ0aW8g
+bGV2ZWwgaW5zdGVhZCAKb2YgZG9pbmcgaXQgYXQgZWFjaCBzdWJzeXN0ZW1zPyBQb2xsaW5nIGlu
+IHZpcnRpbyBsZXZlbCBtYXkgb25seSB3b3JrIAp3ZWxsIGlmIGFsbCAob3IgbW9zdCkgb2YgdGhl
+IGRldmljZXMgYXJlIHZpcnRpbwoyKSBXaGF0J3MgdGhlIGFkdmFudGFnZXMgb2YgdXNpbmcgY3B1
+aWRsZSBpbnN0ZWFkIG9mIHVzaW5nIGEgdGhyZWFkIChhbmQgCmxldmVyYWdlIHRoZSBzY2hlZHVs
+ZXIpPwozKSBBbnkgcmVhc29uIGl0J3MgdmlydGlvX3BjaSBzcGVjaWZpYyBub3QgYSBnZW5lcmFs
+IHZpcnRpbyBvbmU/CgpUaGFua3MKCihCdHcsIGRvIHdlIG5lZWQgdG8gY2Mgc2NoZWR1bGVyIGd1
+eXM/KQoKCj4KPiBTdGVmYW4gSGFqbm9jemkgKDMpOgo+ICAgIGNwdWlkbGU6IGFkZCBwb2xsX3Nv
+dXJjZSBBUEkKPiAgICB2aXJ0aW86IGFkZCBwb2xsX3NvdXJjZSB2aXJ0cXVldWUgcG9sbGluZwo+
+ICAgIHNvZnRpcnE6IHBhcnRpY2lwYXRlIGluIGNwdWlkbGUgcG9sbGluZwo+Cj4gICBkcml2ZXJz
+L2NwdWlkbGUvTWFrZWZpbGUgICAgICAgICAgIHwgICAxICsKPiAgIGRyaXZlcnMvdmlydGlvL3Zp
+cnRpb19wY2lfY29tbW9uLmggfCAgIDcgKysKPiAgIGluY2x1ZGUvbGludXgvaW50ZXJydXB0Lmgg
+ICAgICAgICAgfCAgIDIgKwo+ICAgaW5jbHVkZS9saW51eC9wb2xsX3NvdXJjZS5oICAgICAgICB8
+ICA1MyArKysrKysrKysrKysrKysKPiAgIGluY2x1ZGUvbGludXgvdmlydGlvLmggICAgICAgICAg
+ICAgfCAgIDIgKwo+ICAgaW5jbHVkZS9saW51eC92aXJ0aW9fY29uZmlnLmggICAgICB8ICAgMiAr
+Cj4gICBkcml2ZXJzL2NwdWlkbGUvcG9sbF9zb3VyY2UuYyAgICAgIHwgMTAyICsrKysrKysrKysr
+KysrKysrKysrKysrKysrKysrCj4gICBkcml2ZXJzL2NwdWlkbGUvcG9sbF9zdGF0ZS5jICAgICAg
+IHwgICA2ICsrCj4gICBkcml2ZXJzL3ZpcnRpby92aXJ0aW8uYyAgICAgICAgICAgIHwgIDM0ICsr
+KysrKysrKysKPiAgIGRyaXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfY29tbW9uLmMgfCAgODYgKysr
+KysrKysrKysrKysrKysrKysrKysrCj4gICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX21vZGVy
+bi5jIHwgICAyICsKPiAgIGtlcm5lbC9zb2Z0aXJxLmMgICAgICAgICAgICAgICAgICAgfCAgMTQg
+KysrKwo+ICAgMTIgZmlsZXMgY2hhbmdlZCwgMzExIGluc2VydGlvbnMoKykKPiAgIGNyZWF0ZSBt
+b2RlIDEwMDY0NCBpbmNsdWRlL2xpbnV4L3BvbGxfc291cmNlLmgKPiAgIGNyZWF0ZSBtb2RlIDEw
+MDY0NCBkcml2ZXJzL2NwdWlkbGUvcG9sbF9zb3VyY2UuYwo+CgpfX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QK
+VmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5s
+aW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
