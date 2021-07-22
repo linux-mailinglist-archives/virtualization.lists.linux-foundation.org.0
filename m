@@ -1,96 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7D7F13D1D44
-	for <lists.virtualization@lfdr.de>; Thu, 22 Jul 2021 07:14:49 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B364F3D1DF9
+	for <lists.virtualization@lfdr.de>; Thu, 22 Jul 2021 08:06:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id BFE3A82846;
-	Thu, 22 Jul 2021 05:14:47 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2D03882C8E;
+	Thu, 22 Jul 2021 06:06:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZrT4JRAbCoYO; Thu, 22 Jul 2021 05:14:47 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 9F1AA82EB4;
-	Thu, 22 Jul 2021 05:14:46 +0000 (UTC)
+	with ESMTP id PPIGo-OS40XW; Thu, 22 Jul 2021 06:06:45 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id E755582C98;
+	Thu, 22 Jul 2021 06:06:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 249EDC000E;
-	Thu, 22 Jul 2021 05:14:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 712F5C000E;
+	Thu, 22 Jul 2021 06:06:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E160FC000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C9DD4C000E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Jul 2021 05:14:44 +0000 (UTC)
+ Thu, 22 Jul 2021 06:06:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CFB5040206
+ by smtp1.osuosl.org (Postfix) with ESMTP id AA0F682C8E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Jul 2021 05:14:44 +0000 (UTC)
+ Thu, 22 Jul 2021 06:06:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linaro.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jDA2z_Ub4JxK
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id dsD1hIlNhaPq
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Jul 2021 05:14:41 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3461B401EB
+ Thu, 22 Jul 2021 06:06:41 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id ED0D682C7D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Jul 2021 05:14:41 +0000 (UTC)
-Received: by mail-pj1-x1036.google.com with SMTP id
- p5-20020a17090a8685b029015d1a9a6f1aso2612838pjn.1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jul 2021 22:14:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=x5SPZyEeIR7cDZy3lUojZmJw7O7Dz9BIOkg7BRhzZ2w=;
- b=bxJGU+QOwf3Ftj9yKJ3uVgM7FcgPQLcl11zYOrXuclg1uwqqHdVkAfbAmbiVMIAzoO
- FTvXRGr7731VeNA7/5RNTiVU5REGvxNLeS4BAPdJKSUKTlQqdrCasSAm1jJyvhtHjykq
- 2B0q0XLD5tGB0LNrc5zHzfqJOWYVZKgLBcrBrqikptR0sQyps7KcsZZQZ3Pq7jGZB100
- ILfl+7IC0qiqO50fHamwHcBRRziKZXIJ95Z7utigNFPi9vVUYIyt/8S68hFDAU2/ZYYL
- /q51yoWGYe6nMZwGLfn6Pmn1h9If9SRTUxarGshuq1gJe5HfKD4KoIPaNJae6Iq42HLP
- mVCg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=x5SPZyEeIR7cDZy3lUojZmJw7O7Dz9BIOkg7BRhzZ2w=;
- b=MkOBFRMSKVyWXrFk/2HOewKveY6e22iG6pJVedmojcfobok0Cx55RTx4CjDNWpkE2T
- 4d7429Wcf8gn05ZeY9A6Z/R8fHIR6A2n1GLYG43Thf3DJ8p7qh9db3rMK+NnCM75Sxa6
- sHH+5X0qJUkWdGvM728WkTnQEAzqhMJ4BBHsf5hpFVozo2olSKo19aAi6o2Iy1i3ciJ8
- ZI5lIU4ueM67w3CJLRkhctA+EDIJcyh62eZnMpPCc0COUJhETHcai+8IxzP/+1kiN3sq
- O6RNtLIpKBLHn8VallUY2MbqVOwl2Ooqt8so8SUdT9hdVfJALVzG92aW5Y/dDOvpgGkO
- cidw==
-X-Gm-Message-State: AOAM531jHiirAQKenUumoqBjM84bAnsa3P1EmJCmFcrIthnkXsjNZpG9
- X/SvD6mYhwwGvZ0f9HUnvqKkcA==
-X-Google-Smtp-Source: ABdhPJz+c56smMs/30jrQXG0ui77AzZEHDx4M8oXH02LK5FomM1u4knGmr1cv7pcbsAt2Rx58z/TYQ==
-X-Received: by 2002:a17:90b:1041:: with SMTP id
- gq1mr7123687pjb.222.1626930880559; 
- Wed, 21 Jul 2021 22:14:40 -0700 (PDT)
-Received: from localhost ([106.201.108.2])
- by smtp.gmail.com with ESMTPSA id 26sm15414111pjg.8.2021.07.21.22.14.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Jul 2021 22:14:40 -0700 (PDT)
-Date: Thu, 22 Jul 2021 10:44:33 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Jie Deng <jie.deng@intel.com>, wsa@kernel.org
+ Thu, 22 Jul 2021 06:06:41 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id AB3AF6120C;
+ Thu, 22 Jul 2021 06:06:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1626934001;
+ bh=p/2Uc5VBVsF31pzvmQeIG0ihbNJEza0BqK/3Fxmnvgo=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RKmYbK8pUIX0h9+BRZAG4KNlffU0luYQLtgeTrDMnOHoi2hw3f007IKGescfM/T12
+ 3vKvJFOcJYlAW0LZ2OMaysmQ0nnyqSsWT51GEXzmR0kpUK3c2Z7GNpRfHT/p6Gj/ks
+ CgMYSUQSeKtpEAV7Q0r4m1voLhLzGWbqL+tls0OM=
+Date: Thu, 22 Jul 2021 08:06:37 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Viresh Kumar <viresh.kumar@linaro.org>
 Subject: Re: [PATCH v14] i2c: virtio: add a virtio i2c frontend driver
-Message-ID: <20210722051433.3f2ix75wbi5pphp2@vireshk-i7>
+Message-ID: <YPkK7RlufYj1b+2f@kroah.com>
 References: <984ebecaf697058eb73389ed14ead9dd6d38fb53.1625796246.git.jie.deng@intel.com>
+ <20210722051433.3f2ix75wbi5pphp2@vireshk-i7>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <984ebecaf697058eb73389ed14ead9dd6d38fb53.1625796246.git.jie.deng@intel.com>
-User-Agent: NeoMutt/20180716-391-311a52
-Cc: yu1.wang@intel.com, arnd@arndb.de, mst@redhat.com,
- gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, wsa+renesas@sang-engineering.com,
- linux-i2c@vger.kernel.org, stefanha@redhat.com, shuo.a.liu@intel.com,
- andriy.shevchenko@linux.intel.com, conghui.chen@intel.com
+In-Reply-To: <20210722051433.3f2ix75wbi5pphp2@vireshk-i7>
+Cc: arnd@arndb.de, mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, wsa@kernel.org,
+ wsa+renesas@sang-engineering.com, linux-i2c@vger.kernel.org,
+ stefanha@redhat.com, shuo.a.liu@intel.com, andriy.shevchenko@linux.intel.com,
+ conghui.chen@intel.com, yu1.wang@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,36 +78,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 09-07-21, 10:25, Jie Deng wrote:
-> Add an I2C bus driver for virtio para-virtualization.
+On Thu, Jul 22, 2021 at 10:44:33AM +0530, Viresh Kumar wrote:
+> On 09-07-21, 10:25, Jie Deng wrote:
+> > Add an I2C bus driver for virtio para-virtualization.
+> > 
+> > The controller can be emulated by the backend driver in
+> > any device model software by following the virtio protocol.
+> > 
+> > The device specification can be found on
+> > https://lists.oasis-open.org/archives/virtio-comment/202101/msg00008.html.
+> > 
+> > By following the specification, people may implement different
+> > backend drivers to emulate different controllers according to
+> > their needs.
+> > 
+> > Co-developed-by: Conghui Chen <conghui.chen@intel.com>
+> > Signed-off-by: Conghui Chen <conghui.chen@intel.com>
+> > Signed-off-by: Jie Deng <jie.deng@intel.com>
+> > ---
+> > Changes v13 -> v14
+> > 	- Put the headers in virtio_i2c.h in alphabetical order.
+> > 	- Dropped I2C_FUNC_SMBUS_QUICK support.
+> > 	- Dropped few unnecessary variables and checks.
+> > 	- Use "num" everywhere instead of num or nr, to be consistent.
+> > 	- Added few comments which make the design more clear. 
 > 
-> The controller can be emulated by the backend driver in
-> any device model software by following the virtio protocol.
+> Wolfram,
 > 
-> The device specification can be found on
-> https://lists.oasis-open.org/archives/virtio-comment/202101/msg00008.html.
-> 
-> By following the specification, people may implement different
-> backend drivers to emulate different controllers according to
-> their needs.
-> 
-> Co-developed-by: Conghui Chen <conghui.chen@intel.com>
-> Signed-off-by: Conghui Chen <conghui.chen@intel.com>
-> Signed-off-by: Jie Deng <jie.deng@intel.com>
-> ---
-> Changes v13 -> v14
-> 	- Put the headers in virtio_i2c.h in alphabetical order.
-> 	- Dropped I2C_FUNC_SMBUS_QUICK support.
-> 	- Dropped few unnecessary variables and checks.
-> 	- Use "num" everywhere instead of num or nr, to be consistent.
-> 	- Added few comments which make the design more clear. 
+> Is it still possible to queue this for 5.14 ?
 
-Wolfram,
+No new features are allowed for 5.14, you know this.  It's but fixes
+only now.
 
-Is it still possible to queue this for 5.14 ?
+thanks,
 
--- 
-viresh
+greg k-h
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
