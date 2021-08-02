@@ -1,61 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7E1D3DD7D4
-	for <lists.virtualization@lfdr.de>; Mon,  2 Aug 2021 15:48:20 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 887E83DD814
+	for <lists.virtualization@lfdr.de>; Mon,  2 Aug 2021 15:49:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 50DFD40168;
-	Mon,  2 Aug 2021 13:48:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3957883404;
+	Mon,  2 Aug 2021 13:49:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uSw-qsLbCNF6; Mon,  2 Aug 2021 13:48:18 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZYP8RZib1mTy; Mon,  2 Aug 2021 13:49:32 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id A7E064017A;
-	Mon,  2 Aug 2021 13:48:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id EFD1183438;
+	Mon,  2 Aug 2021 13:49:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 34843C0022;
-	Mon,  2 Aug 2021 13:48:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C820C0022;
+	Mon,  2 Aug 2021 13:49:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B7AEEC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CA19CC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Aug 2021 13:48:16 +0000 (UTC)
+ Mon,  2 Aug 2021 13:49:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A2104400DB
+ by smtp4.osuosl.org (Postfix) with ESMTP id AC829402FC
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Aug 2021 13:48:16 +0000 (UTC)
+ Mon,  2 Aug 2021 13:49:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UkO2_MoRjYZW
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=linuxfoundation.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id g-uZb6pbmO0h
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Aug 2021 13:48:15 +0000 (UTC)
+ Mon,  2 Aug 2021 13:49:29 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 851F240004
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E929E402F7
  for <virtualization@lists.linux-foundation.org>;
- Mon,  2 Aug 2021 13:48:15 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8A84760551;
- Mon,  2 Aug 2021 13:48:14 +0000 (UTC)
+ Mon,  2 Aug 2021 13:49:29 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 2745E60FC2;
+ Mon,  2 Aug 2021 13:49:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1627912095;
- bh=1yqFSfZW7LcjYBwmmxWCElw/fXIIy1D4JlGsxkNbb2c=;
+ s=korg; t=1627912169;
+ bh=vJIBOiTKBn2Pw8XTRqsavUutmB6ffwpZU+05RjBBOEs=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=NXDF2z/vnpQUbS72CcdOCX5MjduaBR2kzP8NcB7XTfsT9jxE31fdUfqRDP24FJO6w
- IvU4cPpzq32ac2WHc+gKxOPBCXgSjLbbr45pQHEDWTn+6Jn2MfLdMDzHecjZjnJAJc
- k1/zePpln771S6MGiNHz9xP8BZvf8YHgmkU/1cKk=
+ b=FWFmcziQGdnEOLGTGOV8C9rsnG6LZoD7bIdlEmpO1F3O0+lnJGe7oLCt3aFewhPrN
+ lTiAUnZb723/NjVHgWiIIeTD5zrYPoCuXgPkqM+XpI98EymwZB6FEEWe/s6YdHuTu4
+ 8tVdd1SrNoKTvZGrFzVreT8IWjvAX+jyvKzL285k=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4.14 14/38] virtio_net: Do not pull payload in skb->head
-Date: Mon,  2 Aug 2021 15:44:36 +0200
-Message-Id: <20210802134335.285560278@linuxfoundation.org>
+Subject: [PATCH 4.19 01/30] virtio_net: Do not pull payload in skb->head
+Date: Mon,  2 Aug 2021 15:44:39 +0200
+Message-Id: <20210802134334.130644975@linuxfoundation.org>
 X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210802134334.835358048@linuxfoundation.org>
-References: <20210802134334.835358048@linuxfoundation.org>
+In-Reply-To: <20210802134334.081433902@linuxfoundation.org>
+References: <20210802134334.081433902@linuxfoundation.org>
 User-Agent: quilt/0.66
+X-stable: review
+X-Patchwork-Hint: ignore
 MIME-Version: 1.0
 Cc: "Michael S. Tsirkin" <mst@redhat.com>,
  Greg Kroah-Hartman <gregkh@linuxfoundation.org>, stable@vger.kernel.org,
@@ -128,7 +132,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -339,9 +339,13 @@ static struct sk_buff *page_to_skb(struc
+@@ -413,9 +413,13 @@ static struct sk_buff *page_to_skb(struc
  	offset += hdr_padded_len;
  	p += hdr_padded_len;
  
@@ -141,10 +145,10 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 +	if (len <= skb_tailroom(skb))
 +		copy = len;
 +	else
-+		copy = ETH_HLEN;
++		copy = ETH_HLEN + metasize;
  	skb_put_data(skb, p, copy);
  
- 	len -= copy;
+ 	if (metasize) {
 --- a/include/linux/virtio_net.h
 +++ b/include/linux/virtio_net.h
 @@ -65,14 +65,18 @@ static inline int virtio_net_hdr_to_skb(
@@ -169,7 +173,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  			return -EINVAL;
  	} else {
  		/* gso packets without NEEDS_CSUM do not set transport_offset.
-@@ -100,14 +104,14 @@ retry:
+@@ -102,14 +106,14 @@ retry:
  			}
  
  			p_off = keys.control.thoff + thlen;
