@@ -1,89 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E3453DEE84
-	for <lists.virtualization@lfdr.de>; Tue,  3 Aug 2021 14:59:42 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7EEC93DEE87
+	for <lists.virtualization@lfdr.de>; Tue,  3 Aug 2021 14:59:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A97526076D;
-	Tue,  3 Aug 2021 12:59:40 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 06DC382980;
+	Tue,  3 Aug 2021 12:59:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lvMYLugYoHRX; Tue,  3 Aug 2021 12:59:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8A69360720;
-	Tue,  3 Aug 2021 12:59:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Qt-q3ubTfILF; Tue,  3 Aug 2021 12:59:41 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D47B1829B6;
+	Tue,  3 Aug 2021 12:59:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E9BB1C000E;
-	Tue,  3 Aug 2021 12:59:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EB930C002B;
+	Tue,  3 Aug 2021 12:59:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A994FC000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 20F43C000E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:36 +0000 (UTC)
+ Tue,  3 Aug 2021 12:59:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 99A58401C4
+ by smtp2.osuosl.org (Postfix) with ESMTP id BF110402E1
  for <virtualization@lists.linux-foundation.org>;
  Tue,  3 Aug 2021 12:59:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="vaEhDgsZ";
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="orCpdJ0/";
  dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="F2wsvLOO"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 05vkqLTITCgA
+ header.d=suse.de header.b="dLKeWZnh"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id H2bLIuSFI9re
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:35 +0000 (UTC)
+ Tue,  3 Aug 2021 12:59:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CA247401BB
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D41D24032E
  for <virtualization@lists.linux-foundation.org>;
  Tue,  3 Aug 2021 12:59:35 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 76B6E200CB;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id F252F22011;
  Tue,  3 Aug 2021 12:59:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1627995573; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9QPs+cU2ZGWZbuOTh+h4AsI971+Z+102tN5zRb+VoGc=;
- b=vaEhDgsZN4ercqzarSKgkxlhKq84cFuK8QDW4MLVA3nxoocpHHUvKQPgye648IZADVsOag
- MVmheGMCqxndgHRaf2XDxUWqgsbl91W/rtOWW7qwcpEooitKjCwvPHZ3jSQptvY2V0Au/t
- ZrdtxE9z8nWomhA4/BaysCUcnaMoKfI=
+ bh=yFiY4u32arT7OgiUEedPHigxtJQfjbOaGbE/92GSMWQ=;
+ b=orCpdJ0/3vL9Ex6+RdKGkjGNuBKTD6gOW9JlXMLsjHsEv17BZNm/pmeoKrMY+u7fZWIvLO
+ ShXHi95p66lIpU19nlUQnyK676wcP3rTMG5SKPcUEXS1N8QyMF86QxMVhM8LlGgmALuTzN
+ FPiHiW1fuLH9MDlo6+BMMqf1RRzMQv4=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1627995573;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=9QPs+cU2ZGWZbuOTh+h4AsI971+Z+102tN5zRb+VoGc=;
- b=F2wsvLOOLOs04M7+ojOYTgaMcmHjZ9bdvykBV8dqYNkgZj3hNKieU770K0+zqN2fyrWdSQ
- XH5TehGkmxC/fkAA==
+ bh=yFiY4u32arT7OgiUEedPHigxtJQfjbOaGbE/92GSMWQ=;
+ b=dLKeWZnh0CYi9UOjMc3KZuEZ+svm+hmXVHwy2WlSUZ2KOZzmHvOPr/OsMWxkL9w4fln5u1
+ uRThSSOGVpHHNBAw==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F3BAA13CD6;
- Tue,  3 Aug 2021 12:59:32 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7CB5413CEF;
+ Tue,  3 Aug 2021 12:59:33 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id IL4yOrQ9CWExZwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Tue, 03 Aug 2021 12:59:32 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id iIYkHbU9CWExZwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Tue, 03 Aug 2021 12:59:33 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: airlied@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
  maarten.lankhorst@linux.intel.com, mripard@kernel.org, noralf@tronnes.org,
  drawat.floss@gmail.com, kraxel@redhat.com, hdegoede@redhat.com,
  sean@poorly.run, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com,
  sam@ravnborg.org
-Subject: [PATCH 05/11] drm/mgag200: Use offset-adjusted shadow-plane mappings
-Date: Tue,  3 Aug 2021 14:59:22 +0200
-Message-Id: <20210803125928.27780-6-tzimmermann@suse.de>
+Subject: [PATCH 06/11] drm/cirrus: Use offset-adjusted shadow-plane mappings
+Date: Tue,  3 Aug 2021 14:59:23 +0200
+Message-Id: <20210803125928.27780-7-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.32.0
 In-Reply-To: <20210803125928.27780-1-tzimmermann@suse.de>
 References: <20210803125928.27780-1-tzimmermann@suse.de>
@@ -108,35 +108,35 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 For framebuffers with non-zero offset fields, shadow-plane helpers
 provide a pointer to the first byte of the contained data. Use it in
-mgag200.
+cirrus.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/mgag200/mgag200_mode.c | 4 ++--
+ drivers/gpu/drm/tiny/cirrus.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/mgag200/mgag200_mode.c b/drivers/gpu/drm/mgag200/mgag200_mode.c
-index 3b3059f471c2..6e2db8cfe3b7 100644
---- a/drivers/gpu/drm/mgag200/mgag200_mode.c
-+++ b/drivers/gpu/drm/mgag200/mgag200_mode.c
-@@ -1601,7 +1601,7 @@ mgag200_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	mga_crtc_load_lut(crtc);
- 	mgag200_enable_display(mdev);
+diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
+index a8b476a59c0d..4611ec408506 100644
+--- a/drivers/gpu/drm/tiny/cirrus.c
++++ b/drivers/gpu/drm/tiny/cirrus.c
+@@ -435,7 +435,7 @@ static void cirrus_pipe_enable(struct drm_simple_display_pipe *pipe,
+ 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
  
--	mgag200_handle_damage(mdev, fb, &fullscreen, &shadow_plane_state->map[0]);
-+	mgag200_handle_damage(mdev, fb, &fullscreen, &shadow_plane_state->data[0]);
+ 	cirrus_mode_set(cirrus, &crtc_state->mode, plane_state->fb);
+-	cirrus_fb_blit_fullscreen(plane_state->fb, &shadow_plane_state->map[0]);
++	cirrus_fb_blit_fullscreen(plane_state->fb, &shadow_plane_state->data[0]);
  }
  
- static void
-@@ -1650,7 +1650,7 @@ mgag200_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 		return;
+ static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
+@@ -451,7 +451,7 @@ static void cirrus_pipe_update(struct drm_simple_display_pipe *pipe,
+ 		cirrus_mode_set(cirrus, &crtc->mode, state->fb);
  
- 	if (drm_atomic_helper_damage_merged(old_state, state, &damage))
--		mgag200_handle_damage(mdev, fb, &damage, &shadow_plane_state->map[0]);
-+		mgag200_handle_damage(mdev, fb, &damage, &shadow_plane_state->data[0]);
+ 	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
+-		cirrus_fb_blit_rect(state->fb, &shadow_plane_state->map[0], &rect);
++		cirrus_fb_blit_rect(state->fb, &shadow_plane_state->data[0], &rect);
  }
  
- static const struct drm_simple_display_pipe_funcs
+ static const struct drm_simple_display_pipe_funcs cirrus_pipe_funcs = {
 -- 
 2.32.0
 
