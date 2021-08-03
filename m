@@ -1,96 +1,130 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8077B3DEE92
-	for <lists.virtualization@lfdr.de>; Tue,  3 Aug 2021 14:59:48 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 16D7B3DEFDB
+	for <lists.virtualization@lfdr.de>; Tue,  3 Aug 2021 16:16:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 58869404D8;
-	Tue,  3 Aug 2021 12:59:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7D5EC8380E;
+	Tue,  3 Aug 2021 14:16:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VvAiWXPGJWLd; Tue,  3 Aug 2021 12:59:43 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id s8hbQp9b2Ucw; Tue,  3 Aug 2021 14:16:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 41E9940378;
-	Tue,  3 Aug 2021 12:59:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 016D683807;
+	Tue,  3 Aug 2021 14:16:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 12C39C0028;
-	Tue,  3 Aug 2021 12:59:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 809E0C000E;
+	Tue,  3 Aug 2021 14:16:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5BEE2C0028
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 992ACC000E
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:39 +0000 (UTC)
+ Tue,  3 Aug 2021 14:16:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F0D2582980
+ by smtp4.osuosl.org (Postfix) with ESMTP id 86AFE402D1
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:38 +0000 (UTC)
+ Tue,  3 Aug 2021 14:16:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="03nHvHKc";
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linutronix.de header.b="fStBYY9c";
  dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="+sLddtzu"
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id usR7AcBcI_Kk
+ header.d=linutronix.de header.b="pGmFmcj1"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id OiPpdku9fY9F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:38 +0000 (UTC)
+ Tue,  3 Aug 2021 14:16:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4DE5A829B1
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AF460402CA
  for <virtualization@lists.linux-foundation.org>;
- Tue,  3 Aug 2021 12:59:38 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 91337200CF;
- Tue,  3 Aug 2021 12:59:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1627995576; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=W7ylt/LkXCFDYa0trOnuiQMZfBkOMCMsvTE5vWeTxxo=;
- b=03nHvHKcmElHbm95QNo2MKi4qepvs2P2xu9gsNwgST1B8H8y5nhu/OJPvkABzNbq2kYt0q
- OSVSf6jBKduaNFLtfhSe9+yNqZrqloTQ7VjI7xOasOrxJollu2r4AJuwiGnPy0MM8OGi7Y
- iG/+kAmtLPsmCXcCG8lA0q8ko+mDaeo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1627995576;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=W7ylt/LkXCFDYa0trOnuiQMZfBkOMCMsvTE5vWeTxxo=;
- b=+sLddtzuh2lb/DJOhOg7H28j5jphT87tEFrrijEV4Z6O6Cd5eIJ1bWiB67MhmrbM+4Uona
- a0JI8LUeE2xPswCw==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 19A2E13CD6;
- Tue,  3 Aug 2021 12:59:36 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id ELDgBLg9CWExZwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Tue, 03 Aug 2021 12:59:36 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: airlied@redhat.com, airlied@linux.ie, daniel@ffwll.ch,
- maarten.lankhorst@linux.intel.com, mripard@kernel.org, noralf@tronnes.org,
- drawat.floss@gmail.com, kraxel@redhat.com, hdegoede@redhat.com,
- sean@poorly.run, rodrigosiqueiramelo@gmail.com, melissa.srw@gmail.com,
- sam@ravnborg.org
-Subject: [PATCH 11/11] drm/vkms: Use offset-adjusted shadow-plane mappings and
- output
-Date: Tue,  3 Aug 2021 14:59:28 +0200
-Message-Id: <20210803125928.27780-12-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.32.0
-In-Reply-To: <20210803125928.27780-1-tzimmermann@suse.de>
-References: <20210803125928.27780-1-tzimmermann@suse.de>
+ Tue,  3 Aug 2021 14:16:37 +0000 (UTC)
+From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1628000193;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qkfc7lxCqn4p3B20wjfjiLsyLpuZIa2kIlbDitBY8sw=;
+ b=fStBYY9cDOofnMkMc6JUcZVYcNWx/eg2N05Pb/o7ef6JJTcTG48t+GioJgBl+eXKMJGEgi
+ TVCeDR+EwHJjgdulnpLwVy12sseYnaixefw5o14vk+2PAOm/LUlJHLssIOZ+nJyuRxaM3r
+ fCCG5ZeBAdz/Q3kIzOJQstWW7ST+mFehWQwEJk+hKZizcoepZD/zOgz+f7GO7oZ2MtK2DY
+ wm7slubFVtLqvtY6o7cEl9ZIw3mvJ35go7HuaiPxyi+ESejsT+e0qaP6D0Fis4EUqsKcRu
+ JGNGT0BYA9PAUGHVfsb3cVOtZwFCr59O6V6ObVy+T4OF395mknhLgwpLJFiGUg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1628000193;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=Qkfc7lxCqn4p3B20wjfjiLsyLpuZIa2kIlbDitBY8sw=;
+ b=pGmFmcj1u+vX59p9gWCClfCslb9a1WxY2Pwa8q+HwkfzdAY6X/r9JgYaxIXaCJOpPNDW2W
+ rceMZSe2cSwuwVDA==
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 00/38] Replace deprecated CPU-hotplug
+Date: Tue,  3 Aug 2021 16:15:43 +0200
+Message-Id: <20210803141621.780504-1-bigeasy@linutronix.de>
 MIME-Version: 1.0
-Cc: linux-hyperv@vger.kernel.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+Cc: Juri Lelli <juri.lelli@redhat.com>,
+ Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+ Ben Segall <bsegall@google.com>, Paul Mackerras <paulus@samba.org>,
+ Pavel Machek <pavel@ucw.cz>,
+ Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Michael Ellerman <mpe@ellerman.id.au>, linux-acpi@vger.kernel.org,
+ Mel Gorman <mgorman@suse.de>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Guenter Roeck <linux@roeck-us.net>, Petr Mladek <pmladek@suse.com>,
+ Jean Delvare <jdelvare@suse.com>, linux-pm@vger.kernel.org,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Pekka Paalanen <ppaalanen@gmail.com>, Andy Lutomirski <luto@kernel.org>,
+ tglx@linutronix.de, Dietmar Eggemann <dietmar.eggemann@arm.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rjw@rjwysocki.net>, Karol Herbst <karolherbst@gmail.com>,
+ linux-crypto@vger.kernel.org, Tejun Heo <tj@kernel.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Mark Rutland <mark.rutland@arm.com>,
+ Zefan Li <lizefan.x@bytedance.com>, linux-doc@vger.kernel.org,
+ nouveau@lists.freedesktop.org, Dave Hansen <dave.hansen@linux.intel.com>,
+ virtualization@lists.linux-foundation.org, Song Liu <song@kernel.org>,
+ Ingo Molnar <mingo@kernel.org>, linux-s390@vger.kernel.org,
+ Davidlohr Bueso <dave@stgolabs.net>,
+ Daniel Lezcano <daniel.lezcano@linaro.org>,
+ Julian Wiedmann <jwi@linux.ibm.com>,
+ Daniel Jordan <daniel.m.jordan@oracle.com>, Len Brown <lenb@kernel.org>,
+ Vasily Gorbik <gor@linux.ibm.com>, Suzuki K Poulose <suzuki.poulose@arm.com>,
+ Mike Travis <mike.travis@hpe.com>, coresight@lists.linaro.org,
+ kvm-ppc@vger.kernel.org, John Stultz <john.stultz@linaro.org>,
+ cgroups@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ Tony Luck <tony.luck@intel.com>, Mathieu Poirier <mathieu.poirier@linaro.org>,
+ Stephen Boyd <sboyd@kernel.org>, Robin Holt <robinmholt@gmail.com>,
+ Daniel Bristot de Oliveira <bristot@redhat.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Amit Kucheria <amitk@kernel.org>, Lai Jiangshan <jiangshanlai@gmail.com>,
+ platform-driver-x86@vger.kernel.org, Steve Wahl <steve.wahl@hpe.com>,
+ Joel Fernandes <joel@joelfernandes.org>, Mark Gross <mgross@linux.intel.com>,
+ Jonathan Corbet <corbet@lwn.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Christian Borntraeger <borntraeger@de.ibm.com>, Arnd Bergmann <arnd@arndb.de>,
+ Jiri Kosina <jikos@kernel.org>, Josh Triplett <josh@joshtriplett.org>,
+ Steven Rostedt <rostedt@goodmis.org>, rcu@vger.kernel.org,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ linux-hwmon@vger.kernel.org, Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Stuart Hayes <stuart.w.hayes@gmail.com>,
+ "David S. Miller" <davem@davemloft.net>, Len Brown <len.brown@intel.com>,
+ Peter Zijlstra <peterz@infradead.org>, linux-mm@kvack.org,
+ "H. Peter Anvin" <hpa@zytor.com>, live-patching@vger.kernel.org,
+ Miroslav Benes <mbenes@suse.cz>, Jiri Olsa <jolsa@redhat.com>,
+ Steffen Klassert <steffen.klassert@secunet.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>, x86@kernel.org,
+ Ingo Molnar <mingo@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
+ Zhang Rui <rui.zhang@intel.com>, Mike Leach <mike.leach@linaro.org>,
+ "Paul E. McKenney" <paulmck@kernel.org>, Heiko Carstens <hca@linux.ibm.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, linux-raid@vger.kernel.org,
+ Hans de Goede <hdegoede@redhat.com>, Joe Lawrence <joe.lawrence@redhat.com>,
+ Josh Poimboeuf <jpoimboe@redhat.com>, Namhyung Kim <namhyung@kernel.org>,
+ linux-edac@vger.kernel.org, netdev@vger.kernel.org, linux-mips@vger.kernel.org,
+ Leo Yan <leo.yan@linaro.org>, Borislav Petkov <bp@alien8.de>,
+ linuxppc-dev@lists.ozlabs.org, Karsten Graul <kgraul@linux.ibm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,75 +141,118 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-For framebuffers with non-zero offset fields, shadow-plane helpers
-provide a pointer to the first byte of the contained data. Use it in
-vkms.
+This is a tree wide replacement of the deprecated CPU hotplug functions
+which are only wrappers around the actual functions.
 
-Also provide use the offset-adjusted data address for the writeback
-job's output buffers. Output framebuffers with non-zero offsets now
-have their content written to the correct location.
+Each patch is independent and can be picked up by the relevant maintainer.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/vkms/vkms_composer.c  | 2 +-
- drivers/gpu/drm/vkms/vkms_drv.h       | 1 +
- drivers/gpu/drm/vkms/vkms_plane.c     | 2 +-
- drivers/gpu/drm/vkms/vkms_writeback.c | 2 +-
- 4 files changed, 4 insertions(+), 3 deletions(-)
+Cc: Alexander Shishkin <alexander.shishkin@linux.intel.com>
+Cc: Amit Kucheria <amitk@kernel.org>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Andy Lutomirski <luto@kernel.org>
+Cc: Arnaldo Carvalho de Melo <acme@kernel.org>
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: Ben Segall <bsegall@google.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: cgroups@vger.kernel.org
+Cc: Christian Borntraeger <borntraeger@de.ibm.com>
+Cc: coresight@lists.linaro.org
+Cc: Daniel Bristot de Oliveira <bristot@redhat.com>
+Cc: Daniel Jordan <daniel.m.jordan@oracle.com>
+Cc: Daniel Lezcano <daniel.lezcano@linaro.org>
+Cc: Dave Hansen <dave.hansen@linux.intel.com>
+Cc: Davidlohr Bueso <dave@stgolabs.net>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: Dietmar Eggemann <dietmar.eggemann@arm.com>
+Cc: Gonglei <arei.gonglei@huawei.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Guenter Roeck <linux@roeck-us.net>
+Cc: Hans de Goede <hdegoede@redhat.com>
+Cc: Heiko Carstens <hca@linux.ibm.com>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Jean Delvare <jdelvare@suse.com>
+Cc: Jiri Kosina <jikos@kernel.org>
+Cc: Jiri Olsa <jolsa@redhat.com>
+Cc: Joe Lawrence <joe.lawrence@redhat.com>
+Cc: Joel Fernandes <joel@joelfernandes.org>
+Cc: Johannes Weiner <hannes@cmpxchg.org>
+Cc: John Stultz <john.stultz@linaro.org>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Josh Poimboeuf <jpoimboe@redhat.com>
+Cc: Josh Triplett <josh@joshtriplett.org>
+Cc: Julian Wiedmann <jwi@linux.ibm.com>
+Cc: Juri Lelli <juri.lelli@redhat.com>
+Cc: Karol Herbst <karolherbst@gmail.com>
+Cc: Karsten Graul <kgraul@linux.ibm.com>
+Cc: kvm-ppc@vger.kernel.org
+Cc: Lai Jiangshan <jiangshanlai@gmail.com>
+Cc: Len Brown <lenb@kernel.org>
+Cc: Len Brown <len.brown@intel.com>
+Cc: Leo Yan <leo.yan@linaro.org>
+Cc: linux-acpi@vger.kernel.org
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-crypto@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-edac@vger.kernel.org
+Cc: linux-hwmon@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+Cc: linux-mips@vger.kernel.org
+Cc: linux-mm@kvack.org
+Cc: linux-pm@vger.kernel.org
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: linux-raid@vger.kernel.org
+Cc: linux-s390@vger.kernel.org
+Cc: live-patching@vger.kernel.org
+Cc: Mark Gross <mgross@linux.intel.com>
+Cc: Mark Rutland <mark.rutland@arm.com>
+Cc: Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
+Cc: Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Mel Gorman <mgorman@suse.de>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Mike Leach <mike.leach@linaro.org>
+Cc: Mike Travis <mike.travis@hpe.com>
+Cc: Miroslav Benes <mbenes@suse.cz>
+Cc: Namhyung Kim <namhyung@kernel.org>
+Cc: netdev@vger.kernel.org
+Cc: nouveau@lists.freedesktop.org
+Cc: "Paul E. McKenney" <paulmck@kernel.org>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Pavel Machek <pavel@ucw.cz>
+Cc: Pekka Paalanen <ppaalanen@gmail.com>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Petr Mladek <pmladek@suse.com>
+Cc: platform-driver-x86@vger.kernel.org
+Cc: "Rafael J. Wysocki" <rjw@rjwysocki.net>
+Cc: rcu@vger.kernel.org
+Cc: Robin Holt <robinmholt@gmail.com>
+Cc: Song Liu <song@kernel.org>
+Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc: Steffen Klassert <steffen.klassert@secunet.com>
+Cc: Stephen Boyd <sboyd@kernel.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>
+Cc: Steve Wahl <steve.wahl@hpe.com>
+Cc: Stuart Hayes <stuart.w.hayes@gmail.com>
+Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
+Cc: Tejun Heo <tj@kernel.org>
+Cc: Thomas Bogendoerfer <tsbogend@alpha.franken.de>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Tony Luck <tony.luck@intel.com>
+Cc: Vasily Gorbik <gor@linux.ibm.com>
+Cc: Vincent Guittot <vincent.guittot@linaro.org>
+Cc: Viresh Kumar <viresh.kumar@linaro.org>
+Cc: virtualization@lists.linux-foundation.org
+Cc: x86@kernel.org
+Cc: Zefan Li <lizefan.x@bytedance.com>
+Cc: Zhang Rui <rui.zhang@intel.com>
 
-diff --git a/drivers/gpu/drm/vkms/vkms_composer.c b/drivers/gpu/drm/vkms/vkms_composer.c
-index 49f109c3a2b3..9e8204be9a14 100644
---- a/drivers/gpu/drm/vkms/vkms_composer.c
-+++ b/drivers/gpu/drm/vkms/vkms_composer.c
-@@ -257,7 +257,7 @@ void vkms_composer_worker(struct work_struct *work)
- 		return;
- 
- 	if (wb_pending)
--		vaddr_out = crtc_state->active_writeback->map[0].vaddr;
-+		vaddr_out = crtc_state->active_writeback->data[0].vaddr;
- 
- 	ret = compose_active_planes(&vaddr_out, primary_composer,
- 				    crtc_state);
-diff --git a/drivers/gpu/drm/vkms/vkms_drv.h b/drivers/gpu/drm/vkms/vkms_drv.h
-index 8bc9e3f52e1f..d48c23d40ce5 100644
---- a/drivers/gpu/drm/vkms/vkms_drv.h
-+++ b/drivers/gpu/drm/vkms/vkms_drv.h
-@@ -22,6 +22,7 @@
- 
- struct vkms_writeback_job {
- 	struct dma_buf_map map[DRM_FORMAT_MAX_PLANES];
-+	struct dma_buf_map data[DRM_FORMAT_MAX_PLANES];
- };
- 
- struct vkms_composer {
-diff --git a/drivers/gpu/drm/vkms/vkms_plane.c b/drivers/gpu/drm/vkms/vkms_plane.c
-index 8a56fbf572b0..32409e15244b 100644
---- a/drivers/gpu/drm/vkms/vkms_plane.c
-+++ b/drivers/gpu/drm/vkms/vkms_plane.c
-@@ -111,7 +111,7 @@ static void vkms_plane_atomic_update(struct drm_plane *plane,
- 	memcpy(&composer->src, &new_state->src, sizeof(struct drm_rect));
- 	memcpy(&composer->dst, &new_state->dst, sizeof(struct drm_rect));
- 	memcpy(&composer->fb, fb, sizeof(struct drm_framebuffer));
--	memcpy(&composer->map, &shadow_plane_state->map, sizeof(composer->map));
-+	memcpy(&composer->map, &shadow_plane_state->data, sizeof(composer->map));
- 	drm_framebuffer_get(&composer->fb);
- 	composer->offset = fb->offsets[0];
- 	composer->pitch = fb->pitches[0];
-diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
-index 3a8e2ed93e7c..8694227f555f 100644
---- a/drivers/gpu/drm/vkms/vkms_writeback.c
-+++ b/drivers/gpu/drm/vkms/vkms_writeback.c
-@@ -75,7 +75,7 @@ static int vkms_wb_prepare_job(struct drm_writeback_connector *wb_connector,
- 	if (!vkmsjob)
- 		return -ENOMEM;
- 
--	ret = drm_gem_fb_vmap(job->fb, vkmsjob->map, NULL);
-+	ret = drm_gem_fb_vmap(job->fb, vkmsjob->map, vkmsjob->data);
- 	if (ret) {
- 		DRM_ERROR("vmap failed: %d\n", ret);
- 		goto err_kfree;
--- 
-2.32.0
+Sebastian
 
 _______________________________________________
 Virtualization mailing list
