@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B6773DFE96
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:00:09 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id CB8823DFEA2
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:00:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D8C00400F8;
-	Wed,  4 Aug 2021 10:00:01 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 705F54011B;
+	Wed,  4 Aug 2021 10:00:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id E1-IMKnuuOTo; Wed,  4 Aug 2021 10:00:00 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 5F3214023E;
-	Wed,  4 Aug 2021 10:00:00 +0000 (UTC)
+	with ESMTP id zWu-_NX9-RR7; Wed,  4 Aug 2021 10:00:36 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D918A40339;
+	Wed,  4 Aug 2021 10:00:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EB78BC001F;
-	Wed,  4 Aug 2021 09:59:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5D7B3C000E;
+	Wed,  4 Aug 2021 10:00:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C83C1C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8204DC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 09:59:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:00:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B870E82DE6
+ by smtp3.osuosl.org (Postfix) with ESMTP id 715A960636
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 09:59:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:00:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cpEM57lb72Qx
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id hxc0C7OJbT2P
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 09:59:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:00:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1D0C282CFD
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B827360604
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 09:59:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:00:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=UJrCb7CGT+ZAjfUzBrDvox/kj9NEI6DcJ2NjSWkF2zM=; b=sYPxayznDPwIRyL7nKUygoZD3k
- dt/bjMT5bAbfRZ13gnpvjc5NY9EksxP5d32LJBcepAgioku0FtN2VHK7R7M7Afs6OF/FfY8D4q2NS
- Ys9QfpkLm0yZEn2Yq8/JAyeP6uZhYAYHcOZgrcndDEeHPgfKy9aR+1m/S5KIqNBPJusPfmCvukDGK
- HDIiS0Sp1Dg5y6Sguy/uqGCvuCY2RruHbmHkNPU54WL6WooDs1ZFZ0+/VZCp4ENDmurNe1u3w4CYN
- wJPMT1dd8CyN11OgdFiYEiEIAngynUkdd6r9ITrs/sxLPRokEREfq2f3JisClKZP8l+gfo3TC+ru9
- p2MBCyUQ==;
+ bh=9PnIwd90XM6OC3TUiZ1/4ur9Fh/NQr+Mi1lLoOWKMW4=; b=wMA1ImSgUgljxEB/DVjr1OPNNo
+ Vu5Yy/3EZNV5JPqg8zL7z1ZM9lYw8t8u6ky24W17xUAKc5X7SC4d9uiKIZTMSjdUMsssLldDF5QHX
+ /p6onbdx/YKqkBVWMi+x+L4p/xB4/UtKHflV4J4VU14kBvsFru9TONqpuWBMmoYYCASYCkkqcmtKu
+ CJYOtT8H18ngH3klzAGOhco6BP5TluC7i78I0VIylgcTaiVcOo9qpcwrUUc9V2MlXSBjOnpLxzF89
+ Mr15Zbrkbbvs5usqWfIWvGQV0C7stOD86xyX9fCbce3CHbuux8zAh9CXoVOs4Zyuv+iJwcrQobKcL
+ apSCm7jA==;
 Received: from [2a02:1205:5023:1f80:c068:bd3d:78b3:7d37] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mBDeG-005eu2-Q4; Wed, 04 Aug 2021 09:57:31 +0000
+ id 1mBDet-005ewi-MZ; Wed, 04 Aug 2021 09:58:15 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 01/15] bvec: add a bvec_virt helper
-Date: Wed,  4 Aug 2021 11:56:20 +0200
-Message-Id: <20210804095634.460779-2-hch@lst.de>
+Subject: [PATCH 02/15] block: use bvec_virt in bio_integrity_{process,free}
+Date: Wed,  4 Aug 2021 11:56:21 +0200
+Message-Id: <20210804095634.460779-3-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210804095634.460779-1-hch@lst.de>
 References: <20210804095634.460779-1-hch@lst.de>
@@ -93,35 +93,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add a helper to get the virtual address for a bvec.  This avoids that
-all callers need to know about the page + offset representation.
+Use the bvec_virt helper to clean up the bio integrity processing a
+little bit.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- include/linux/bvec.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ block/bio-integrity.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/include/linux/bvec.h b/include/linux/bvec.h
-index f9fa43b940ff..0e9bdd42dafb 100644
---- a/include/linux/bvec.h
-+++ b/include/linux/bvec.h
-@@ -229,4 +229,16 @@ static inline void memzero_bvec(struct bio_vec *bvec)
- 	memzero_page(bvec->bv_page, bvec->bv_offset, bvec->bv_len);
- }
+diff --git a/block/bio-integrity.c b/block/bio-integrity.c
+index 8f54d49dc500..6b47cddbbca1 100644
+--- a/block/bio-integrity.c
++++ b/block/bio-integrity.c
+@@ -104,8 +104,7 @@ void bio_integrity_free(struct bio *bio)
+ 	struct bio_set *bs = bio->bi_pool;
  
-+/**
-+ * bvec_virt - return the virtual address for a bvec
-+ * @bvec: bvec to return the virtual address for
-+ *
-+ * Note: the caller must ensure that @bvec->bv_page is not a highmem page.
-+ */
-+static inline void *bvec_virt(struct bio_vec *bvec)
-+{
-+	WARN_ON_ONCE(PageHighMem(bvec->bv_page));
-+	return page_address(bvec->bv_page) + bvec->bv_offset;
-+}
-+
- #endif /* __LINUX_BVEC_H */
+ 	if (bip->bip_flags & BIP_BLOCK_INTEGRITY)
+-		kfree(page_address(bip->bip_vec->bv_page) +
+-		      bip->bip_vec->bv_offset);
++		kfree(bvec_virt(bip->bip_vec));
+ 
+ 	__bio_integrity_free(bs, bip);
+ 	bio->bi_integrity = NULL;
+@@ -163,13 +162,11 @@ static blk_status_t bio_integrity_process(struct bio *bio,
+ 	struct bio_vec bv;
+ 	struct bio_integrity_payload *bip = bio_integrity(bio);
+ 	blk_status_t ret = BLK_STS_OK;
+-	void *prot_buf = page_address(bip->bip_vec->bv_page) +
+-		bip->bip_vec->bv_offset;
+ 
+ 	iter.disk_name = bio->bi_bdev->bd_disk->disk_name;
+ 	iter.interval = 1 << bi->interval_exp;
+ 	iter.seed = proc_iter->bi_sector;
+-	iter.prot_buf = prot_buf;
++	iter.prot_buf = bvec_virt(bip->bip_vec);
+ 
+ 	__bio_for_each_segment(bv, bio, bviter, *proc_iter) {
+ 		void *kaddr = bvec_kmap_local(&bv);
 -- 
 2.30.2
 
