@@ -1,57 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id F136A3DFBC2
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:07:04 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 51D233DFBCB
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:07:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5D9F883BF3;
-	Wed,  4 Aug 2021 07:07:03 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 97F63400FD;
+	Wed,  4 Aug 2021 07:07:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JT_MxWOqxAfP; Wed,  4 Aug 2021 07:07:02 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5MpB7_8c22ls; Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 3F1A983BA3;
-	Wed,  4 Aug 2021 07:07:02 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 33951401FD;
+	Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BC92FC0025;
-	Wed,  4 Aug 2021 07:07:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F681C001F;
+	Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6F7A1C000E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 19C06C0021
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:07:00 +0000 (UTC)
+ Wed,  4 Aug 2021 07:07:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 599EA40209
+ by smtp2.osuosl.org (Postfix) with ESMTP id 64BE140173
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:07:00 +0000 (UTC)
+ Wed,  4 Aug 2021 07:07:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dD13bt3Tqhld
+ with ESMTP id QvdIF9B9vpqK
  for <virtualization@lists.linux-foundation.org>;
  Wed,  4 Aug 2021 07:06:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-56.freemail.mail.aliyun.com
- (out30-56.freemail.mail.aliyun.com [115.124.30.56])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 20C2040173
+Received: from out30-43.freemail.mail.aliyun.com
+ (out30-43.freemail.mail.aliyun.com [115.124.30.43])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 81FE1401FD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:06:58 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UhwuUVR_1628060816; 
+ Wed,  4 Aug 2021 07:06:59 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UhwuUVZ_1628060816; 
 Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UhwuUVR_1628060816) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0UhwuUVZ_1628060816) by smtp.aliyun-inc.com(127.0.0.1);
  Wed, 04 Aug 2021 15:06:56 +0800
 From: Jeffle Xu <jefflexu@linux.alibaba.com>
 To: vgoyal@redhat.com,
 	stefanha@redhat.com,
 	miklos@szeredi.hu
-Subject: [PATCH v3 7/8] fuse: support changing per-file DAX flag inside guest
-Date: Wed,  4 Aug 2021 15:06:52 +0800
-Message-Id: <20210804070653.118123-8-jefflexu@linux.alibaba.com>
+Subject: [PATCH v3 8/8] fuse: show '-o dax=inode' option only when FUSE server
+ supports
+Date: Wed,  4 Aug 2021 15:06:53 +0800
+Message-Id: <20210804070653.118123-9-jefflexu@linux.alibaba.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210804070653.118123-1-jefflexu@linux.alibaba.com>
 References: <20210804070653.118123-1-jefflexu@linux.alibaba.com>
@@ -75,47 +76,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Fuse client can enable or disable per-file DAX inside kernel/guest by
-chattr(1). Similarly the new state won't be updated until the file is
-closed and reopened later.
+Prior of this patch, the mount option will still show '-o dax=inode'
+when FUSE server advertises that it doesn't support per-file DAX.
 
 Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
 ---
- fs/fuse/ioctl.c | 15 +++++++++++++--
- 1 file changed, 13 insertions(+), 2 deletions(-)
+ fs/fuse/inode.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/fs/fuse/ioctl.c b/fs/fuse/ioctl.c
-index 546ea3d58fb4..a9ed53c5dbd1 100644
---- a/fs/fuse/ioctl.c
-+++ b/fs/fuse/ioctl.c
-@@ -469,8 +469,6 @@ int fuse_fileattr_set(struct user_namespace *mnt_userns,
- 	if (fa->flags_valid) {
- 		err = fuse_priv_ioctl(inode, ff, FS_IOC_SETFLAGS,
- 				      &flags, sizeof(flags));
--		if (err)
--			goto cleanup;
- 	} else {
- 		memset(&xfa, 0, sizeof(xfa));
- 		xfa.fsx_xflags = fa->fsx_xflags;
-@@ -483,6 +481,19 @@ int fuse_fileattr_set(struct user_namespace *mnt_userns,
- 				      &xfa, sizeof(xfa));
- 	}
- 
-+	if (err)
-+		goto cleanup;
-+
-+	if (IS_ENABLED(CONFIG_FUSE_DAX)) {
-+		bool newdax;
-+
-+		if (fa->flags_valid)
-+			newdax = flags & FS_DAX_FL;
-+		else
-+			newdax = fa->fsx_xflags & FS_XFLAG_DAX;
-+		fuse_dax_dontcache(inode, newdax);
-+	}
-+
- cleanup:
- 	fuse_priv_ioctl_cleanup(inode, ff);
+diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+index 9108d8ab39bc..439f74a041fa 100644
+--- a/fs/fuse/inode.c
++++ b/fs/fuse/inode.c
+@@ -697,7 +697,7 @@ static int fuse_show_options(struct seq_file *m, struct dentry *root)
+ 		seq_puts(m, ",dax=always");
+ 	else if (fc->dax_mode == FUSE_DAX_NEVER)
+ 		seq_puts(m, ",dax=never");
+-	else if (fc->dax_mode == FUSE_DAX_INODE)
++	else if ((fc->dax_mode == FUSE_DAX_INODE) && fc->perfile_dax)
+ 		seq_puts(m, ",dax=inode");
+ #endif
  
 -- 
 2.27.0
