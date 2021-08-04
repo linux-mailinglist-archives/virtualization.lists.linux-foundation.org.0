@@ -1,76 +1,110 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C2753DFF28
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:10:14 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A0F2B3E017C
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 14:57:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id EAA0140441;
-	Wed,  4 Aug 2021 10:10:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2490440626;
+	Wed,  4 Aug 2021 12:57:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NKTJQVi5ch1m; Wed,  4 Aug 2021 10:10:11 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9XCN2MgwlIjn; Wed,  4 Aug 2021 12:57:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 8287640238;
-	Wed,  4 Aug 2021 10:10:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 45C43405F7;
+	Wed,  4 Aug 2021 12:57:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F287C001F;
-	Wed,  4 Aug 2021 10:10:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C827EC000E;
+	Wed,  4 Aug 2021 12:57:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CBC1C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2D1E3C000E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:10:09 +0000 (UTC)
+ Wed,  4 Aug 2021 12:57:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3E12C83AC8
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2402860632
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:10:09 +0000 (UTC)
+ Wed,  4 Aug 2021 12:57:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rzDmRRCpwNwh
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id HV574CkCMgXD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:10:08 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from www.kot-begemot.co.uk (ivanoab7.miniserver.com [37.128.132.42])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 40E7B83AA4
+ Wed,  4 Aug 2021 12:57:47 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C369F60624
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:10:08 +0000 (UTC)
-Received: from tun252.jain.kot-begemot.co.uk ([192.168.18.6]
- helo=jain.kot-begemot.co.uk)
- by www.kot-begemot.co.uk with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.92) (envelope-from <anton.ivanov@cambridgegreys.com>)
- id 1mBDqd-0007cx-Mc; Wed, 04 Aug 2021 10:10:03 +0000
-Received: from jain.kot-begemot.co.uk ([192.168.3.3])
- by jain.kot-begemot.co.uk with esmtp (Exim 4.92)
- (envelope-from <anton.ivanov@cambridgegreys.com>)
- id 1mBDqa-00016q-Pt; Wed, 04 Aug 2021 11:10:03 +0100
-Subject: Re: [PATCH 11/15] ubd: use bvec_virt
-To: Christoph Hellwig <hch@lst.de>, Jens Axboe <axboe@kernel.dk>
-References: <20210804095634.460779-1-hch@lst.de>
- <20210804095634.460779-12-hch@lst.de>
-From: Anton Ivanov <anton.ivanov@cambridgegreys.com>
-Message-ID: <0abadeca-d0fc-26ad-088e-2b137a029957@cambridgegreys.com>
-Date: Wed, 4 Aug 2021 11:10:00 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.12.0
+ Wed,  4 Aug 2021 12:57:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1628081866;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=0/bO+MgPDOUvO02RQ1/ITQ19fPYuZ/wXOCdSbbV0LTs=;
+ b=Sjgg8Ao0Trwp81RWAEPO0dUa7lOoKtZ5BPnl5k5yKQcH8T+vSPrBkFoHqrXRBlkpK1rc/W
+ LgdrACJHyhl/AzIWpOknBraAU0v3e4HYCR6tqi51v5JlorUmzctOpmAv7X+iY8WjSpOO4k
+ ntoLJOAP/OhitVXgn7Vgcenpi4P5KR4=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-228-p8fwpVW_NmuL9Hnqn3gkxA-1; Wed, 04 Aug 2021 08:57:45 -0400
+X-MC-Unique: p8fwpVW_NmuL9Hnqn3gkxA-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ c1-20020aa7df010000b02903bb5c6f746eso1401057edy.10
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 04 Aug 2021 05:57:45 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=0/bO+MgPDOUvO02RQ1/ITQ19fPYuZ/wXOCdSbbV0LTs=;
+ b=cWHLJpaC2X5gTsoP+6vbYc7xAInl8ZL45PpRdJGL2rmGdnXHkG9IB3DttwSZ+rO7Ab
+ w/bNYTjOVPsaKIkfbhNgsKbKO+wU41zcaf8rVN7UcuKXjwugdnVdGOX2oClH4Ecy2EsA
+ qpuKdmsmnoaTaXjWP4OtChUHrcJR0dZuCZ+62ZRlR4YxU1ODjCHpwY2dSUj7tpffIUM+
+ gEnUVKp/o6NBPnrt0rvom0x03PcPJ1ND/VXU/klFURA/kFh5jugZeL7ww8zNC9/9oA5x
+ vMR9kSeJ+7n/UD9o6je+0pZG5Ff82yGA33FJwzrfGK3i4f2uLvZihTKTXq2GOgmRrWvR
+ 6SiQ==
+X-Gm-Message-State: AOAM531jQrmVyp0xkGY7mtwxI0aHeTfD9d3p394zFpzNK6UB38BeKduj
+ BBln6/StSOxSTpkmR2mtlJxYDLhVk2OwhU8U9CmRCDnwF/Z0svagSh76rE2yZO0ZC4/xEHV/gBJ
+ WJYsv/fh8gGyoKB38OgeAzhI1AJl5h7X2ph+leJnTew==
+X-Received: by 2002:a17:906:c085:: with SMTP id
+ f5mr26109119ejz.250.1628081864047; 
+ Wed, 04 Aug 2021 05:57:44 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwiZNmhNR8yr3j+9pHq54LbMN6zvfVQtndDuehBDERZ/x4tZYc2Uu210Q95TZ8Abyb0Xl5IzQ==
+X-Received: by 2002:a17:906:c085:: with SMTP id
+ f5mr26109096ejz.250.1628081863868; 
+ Wed, 04 Aug 2021 05:57:43 -0700 (PDT)
+Received: from steredhat (host-79-18-148-79.retail.telecomitalia.it.
+ [79.18.148.79])
+ by smtp.gmail.com with ESMTPSA id n11sm666345ejg.111.2021.08.04.05.57.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 04 Aug 2021 05:57:43 -0700 (PDT)
+Date: Wed, 4 Aug 2021 14:57:37 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
+Subject: Re: [RFC PATCH v1 0/7] virtio/vsock: introduce MSG_EOR flag for
+ SEQPACKET
+Message-ID: <20210804125737.kbgc6mg2v5lw25wu@steredhat>
+References: <20210726163137.2589102-1-arseny.krasnov@kaspersky.com>
 MIME-Version: 1.0
-In-Reply-To: <20210804095634.460779-12-hch@lst.de>
-Content-Language: en-US
-X-Clacks-Overhead: GNU Terry Pratchett
-Cc: Jan Hoeppner <hoeppner@linux.ibm.com>, Mike Snitzer <snitzer@redhat.com>,
- linux-nvme@lists.infradead.org, virtualization@lists.linux-foundation.org,
- Song Liu <song@kernel.org>, dm-devel@redhat.com, linux-s390@vger.kernel.org,
- linux-scsi@vger.kernel.org, Richard Weinberger <richard@nod.at>,
- Ilya Dryomov <idryomov@gmail.com>, linux-um@lists.infradead.org,
- Coly Li <colyli@suse.de>, linux-raid@vger.kernel.org,
- linux-bcache@vger.kernel.org, Stefan Haberland <sth@linux.ibm.com>,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
- ceph-devel@vger.kernel.org, linux-block@vger.kernel.org,
- "Martin K. Petersen" <martin.petersen@oracle.com>,
- Geoff Levand <geoff@infradead.org>, Phillip Lougher <phillip@squashfs.org.uk>
+In-Reply-To: <20210726163137.2589102-1-arseny.krasnov@kaspersky.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Andra Paraschiv <andraprs@amazon.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ oxffffaa@gmail.com, Norbert Slusarek <nslusarek@gmx.net>,
+ Stefan Hajnoczi <stefanha@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
+ Colin Ian King <colin.king@canonical.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,37 +121,46 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Hi Arseny,
 
+On Mon, Jul 26, 2021 at 07:31:33PM +0300, Arseny Krasnov wrote:
+>	This patchset implements support of MSG_EOR bit for SEQPACKET
+>AF_VSOCK sockets over virtio transport.
+>	Idea is to distinguish concepts of 'messages' and 'records'.
+>Message is result of sending calls: 'write()', 'send()', 'sendmsg()'
+>etc. It has fixed maximum length, and it bounds are visible using
+>return from receive calls: 'read()', 'recv()', 'recvmsg()' etc.
+>Current implementation based on message definition above.
 
-On 04/08/2021 10:56, Christoph Hellwig wrote:
-> Use bvec_virt instead of open coding it.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->   arch/um/drivers/ubd_kern.c | 3 +--
->   1 file changed, 1 insertion(+), 2 deletions(-)
-> 
-> diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-> index e497185dd393..cd9dc0556e91 100644
-> --- a/arch/um/drivers/ubd_kern.c
-> +++ b/arch/um/drivers/ubd_kern.c
-> @@ -1268,8 +1268,7 @@ static void ubd_map_req(struct ubd *dev, struct io_thread_req *io_req,
->   		rq_for_each_segment(bvec, req, iter) {
->   			BUG_ON(i >= io_req->desc_cnt);
->   
-> -			io_req->io_desc[i].buffer =
-> -				page_address(bvec.bv_page) + bvec.bv_offset;
-> +			io_req->io_desc[i].buffer = bvec_virt(&bvec);
->   			io_req->io_desc[i].length = bvec.bv_len;
->   			i++;
->   		}
-> 
-Acked-By: Anton Ivanov <anton.ivanov@cambridgegreys.com>
+Okay, so the implementation we merged is wrong right?
+Should we disable the feature bit in stable kernels that contain it? Or 
+maybe we can backport the fixes...
 
--- 
-Anton R. Ivanov
-Cambridgegreys Limited. Registered in England. Company Number 10273661
-https://www.cambridgegreys.com/
+>	Record has unlimited length, it consists of multiple message,
+>and bounds of record are visible via MSG_EOR flag returned from
+>'recvmsg()' call. Sender passes MSG_EOR to sending system call and
+>receiver will see MSG_EOR when corresponding message will be processed.
+>	To support MSG_EOR new bit was added along with existing
+>'VIRTIO_VSOCK_SEQ_EOR': 'VIRTIO_VSOCK_SEQ_EOM'(end-of-message) - now it
+>works in the same way as 'VIRTIO_VSOCK_SEQ_EOR'. But 'VIRTIO_VSOCK_SEQ_EOR'
+>is used to mark 'MSG_EOR' bit passed from userspace.
+
+I understand that it makes sense to remap VIRTIO_VSOCK_SEQ_EOR to 
+MSG_EOR to make the user understand the boundaries, but why do we need 
+EOM as well?
+
+Why do we care about the boundaries of a message within a record?
+I mean, if the sender makes 3 calls:
+     send(A1,0)
+     send(A2,0)
+     send(A3, MSG_EOR);
+
+IIUC it should be fine if the receiver for example receives all in one 
+single recv() calll with MSG_EOR set, so why do we need EOM?
+
+Thanks,
+Stefano
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
