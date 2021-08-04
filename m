@@ -2,63 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A7FB3DFF04
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:07:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4C3C93DFF0D
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:08:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B344883BF3;
-	Wed,  4 Aug 2021 10:07:27 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DF17483BE9;
+	Wed,  4 Aug 2021 10:08:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pLblDiL8G2AS; Wed,  4 Aug 2021 10:07:26 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 8C3A883BF4;
-	Wed,  4 Aug 2021 10:07:26 +0000 (UTC)
+	with ESMTP id yhTZi5hA59kO; Wed,  4 Aug 2021 10:08:24 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id CEA8983BF5;
+	Wed,  4 Aug 2021 10:08:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 19D3EC000E;
-	Wed,  4 Aug 2021 10:07:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5FC85C001F;
+	Wed,  4 Aug 2021 10:08:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 13278C000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32057C000E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:07:25 +0000 (UTC)
+ Wed,  4 Aug 2021 10:08:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EA425606EB
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1FAAF4035E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:07:24 +0000 (UTC)
+ Wed,  4 Aug 2021 10:08:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id mH3qDf45HOkR
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ZYEu708Oqze2
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:07:24 +0000 (UTC)
+ Wed,  4 Aug 2021 10:08:21 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4FA2560685
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 42B7C40105
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:07:24 +0000 (UTC)
+ Wed,  4 Aug 2021 10:08:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=NZknjnxuRdtVbQDQYhSn8YTBpZ/TDM68s7+7a3SjKg0=; b=btczJd5QJxPrmePLIu+d3R+FxZ
- iP+SfhLRaRrUCwlvcXh6uqOXKqHWDqH+IS9T4Qr1c3Y3S5zGwPZuvTui5y1euzpNDTmFWZuRemdqz
- PNgBVV0qeCdgNBkm473GGvmEIjMhT/3eTMMMJd3gyghRK90WdcWMWwiSOzomnsUnqLz235mJAIKXg
- xQBi5388xGH/XQ1fLh82k3mCJ3JLqUErRqrn41ICzF8+Z001NhPZh567KvBZo+EHrbeVp7XYo2jAz
- 2Io/T7Mo6KNEag5y4PJfRwGSCnXSdGAYE6mzQ9DuGxwarjmBMxhWvYeh15e+JnfvyM32rPYPjokZ2
- EBliTZcQ==;
+ bh=oMvRWCLKrL+bowlss1NI78OonpPCjFhffGqbW1HL1dE=; b=PiGgligciY2JYE5SDrtu6obMwA
+ JlTA6jTK8DsWt04NG7bvfXCd+jFrkLqFjyatUHoFYIHCjgKeYJHw3+FkCqJnEq1IM4m6SyvLHfIJB
+ IRnccfp2CZ5McjKDNc9c7POb5ql3XzqYFBzggkxh/WzrVV8xKnQttPADvzjZVY/nRh6IDSsdELvrg
+ a6ZMV56E6o35SIqhcJHlfw7iPo52vpVltSfZrzxDhEiyw0nqFlqT1n3kVZllZ4u4cF3qVZyWoOD/2
+ fgdrcUVO1Ri/vrLWCR+Aym2cAZN57zgC2UrwuLGhgZ/j39gtQYnEJWfxeU8NnOr37FNumoD4pKxGo
+ Vjm7IimQ==;
 Received: from [2a02:1205:5023:1f80:c068:bd3d:78b3:7d37] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mBDly-005fn4-Il; Wed, 04 Aug 2021 10:05:46 +0000
+ id 1mBDmp-005fsd-4I; Wed, 04 Aug 2021 10:06:21 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 11/15] ubd: use bvec_virt
-Date: Wed,  4 Aug 2021 11:56:30 +0200
-Message-Id: <20210804095634.460779-12-hch@lst.de>
+Subject: [PATCH 12/15] ps3vram: use bvec_virt
+Date: Wed,  4 Aug 2021 11:56:31 +0200
+Message-Id: <20210804095634.460779-13-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210804095634.460779-1-hch@lst.de>
 References: <20210804095634.460779-1-hch@lst.de>
@@ -97,23 +97,22 @@ Use bvec_virt instead of open coding it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- arch/um/drivers/ubd_kern.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+ drivers/block/ps3vram.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-index e497185dd393..cd9dc0556e91 100644
---- a/arch/um/drivers/ubd_kern.c
-+++ b/arch/um/drivers/ubd_kern.c
-@@ -1268,8 +1268,7 @@ static void ubd_map_req(struct ubd *dev, struct io_thread_req *io_req,
- 		rq_for_each_segment(bvec, req, iter) {
- 			BUG_ON(i >= io_req->desc_cnt);
+diff --git a/drivers/block/ps3vram.c b/drivers/block/ps3vram.c
+index 7fbf469651c4..c7b19e128b03 100644
+--- a/drivers/block/ps3vram.c
++++ b/drivers/block/ps3vram.c
+@@ -541,7 +541,7 @@ static struct bio *ps3vram_do_bio(struct ps3_system_bus_device *dev,
  
--			io_req->io_desc[i].buffer =
--				page_address(bvec.bv_page) + bvec.bv_offset;
-+			io_req->io_desc[i].buffer = bvec_virt(&bvec);
- 			io_req->io_desc[i].length = bvec.bv_len;
- 			i++;
- 		}
+ 	bio_for_each_segment(bvec, bio, iter) {
+ 		/* PS3 is ppc64, so we don't handle highmem */
+-		char *ptr = page_address(bvec.bv_page) + bvec.bv_offset;
++		char *ptr = bvec_virt(&bvec);
+ 		size_t len = bvec.bv_len, retlen;
+ 
+ 		dev_dbg(&dev->core, "    %s %zu bytes at offset %llu\n", op,
 -- 
 2.30.2
 
