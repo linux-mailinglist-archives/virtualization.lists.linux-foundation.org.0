@@ -1,57 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A8383DFBCA
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:07:10 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E444F3DFBC8
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:07:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 9689040636;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 47FC240209;
 	Wed,  4 Aug 2021 07:07:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Px9Bkud6Hnmf; Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1LB9lvxVR_ji; Wed,  4 Aug 2021 07:07:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 6DEBF40669;
-	Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 74F394025D;
+	Wed,  4 Aug 2021 07:07:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4E194C000E;
-	Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B3B3AC001F;
+	Wed,  4 Aug 2021 07:07:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20DD9C000E
- for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:07:05 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A49DB400FD
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 058DBC000E
  for <virtualization@lists.linux-foundation.org>;
  Wed,  4 Aug 2021 07:07:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 465A8401F3
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  4 Aug 2021 07:07:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SrJt8FA5tFk0
+ with ESMTP id 5kbi7Hqd4QQI
  for <virtualization@lists.linux-foundation.org>;
  Wed,  4 Aug 2021 07:07:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-132.freemail.mail.aliyun.com
- (out30-132.freemail.mail.aliyun.com [115.124.30.132])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 65BFE401B3
+Received: from out30-131.freemail.mail.aliyun.com
+ (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9C5B3400FD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:06:58 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R441e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UhxBmel_1628060814; 
+ Wed,  4 Aug 2021 07:06:59 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04420; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UhwmW-T_1628060814; 
 Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UhxBmel_1628060814) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 04 Aug 2021 15:06:54 +0800
+ fp:SMTPD_---0UhwmW-T_1628060814) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 04 Aug 2021 15:06:55 +0800
 From: Jeffle Xu <jefflexu@linux.alibaba.com>
 To: vgoyal@redhat.com,
 	stefanha@redhat.com,
 	miklos@szeredi.hu
-Subject: [PATCH v3 3/8] fuse: support per-file DAX
-Date: Wed,  4 Aug 2021 15:06:48 +0800
-Message-Id: <20210804070653.118123-4-jefflexu@linux.alibaba.com>
+Subject: [PATCH v3 4/8] fuse: negotiate if server/client supports per-file DAX
+Date: Wed,  4 Aug 2021 15:06:49 +0800
+Message-Id: <20210804070653.118123-5-jefflexu@linux.alibaba.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210804070653.118123-1-jefflexu@linux.alibaba.com>
 References: <20210804070653.118123-1-jefflexu@linux.alibaba.com>
@@ -75,69 +75,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Expand the fuse protocol to support per-file DAX.
+Among the FUSE_INIT phase, server/client shall negotiate if supporting
+per-file DAX.
 
-FUSE_PERFILE_DAX flag is added indicating if fuse server/client
-supporting per-file DAX when sending or replying FUSE_INIT request.
+Requirements for server:
+- capable of handling SETFLAGS/FSSETXATTR ioctl and storing
+  FS_DAX_FL/FS_XFLAG_DAX persistently.
+- set FUSE_ATTR_DAX if the file capable of per-file DAX when replying
+  FUSE_LOOKUP request accordingly.
 
-Besides, FUSE_ATTR_DAX flag is added indicating if DAX shall be enabled
-for corresponding file when replying FUSE_LOOKUP request.
+Requirements for client:
+- capable of handling per-file DAX when receiving FUSE_ATTR_DAX.
 
 Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
 ---
- include/uapi/linux/fuse.h | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ fs/fuse/fuse_i.h |  3 +++
+ fs/fuse/inode.c  | 12 +++++++-----
+ 2 files changed, 10 insertions(+), 5 deletions(-)
 
-diff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h
-index 36ed092227fa..15a1f5fc0797 100644
---- a/include/uapi/linux/fuse.h
-+++ b/include/uapi/linux/fuse.h
-@@ -184,6 +184,9 @@
-  *
-  *  7.34
-  *  - add FUSE_SYNCFS
-+ *
-+ *  7.35
-+ *  - add FUSE_PERFILE_DAX, FUSE_ATTR_DAX
-  */
+diff --git a/fs/fuse/fuse_i.h b/fs/fuse/fuse_i.h
+index a23dd8d0c181..0b21e76a379a 100644
+--- a/fs/fuse/fuse_i.h
++++ b/fs/fuse/fuse_i.h
+@@ -770,6 +770,9 @@ struct fuse_conn {
+ 	/* Propagate syncfs() to server */
+ 	unsigned int sync_fs:1;
  
- #ifndef _LINUX_FUSE_H
-@@ -219,7 +222,7 @@
- #define FUSE_KERNEL_VERSION 7
++	/* Does the filesystem support per-file DAX? */
++	unsigned int perfile_dax:1;
++
+ 	/** The number of requests waiting for completion */
+ 	atomic_t num_waiting;
  
- /** Minor version number of this interface */
--#define FUSE_KERNEL_MINOR_VERSION 34
-+#define FUSE_KERNEL_MINOR_VERSION 35
- 
- /** The node ID of the root inode */
- #define FUSE_ROOT_ID 1
-@@ -336,6 +339,7 @@ struct fuse_file_lock {
-  *			write/truncate sgid is killed only if file has group
-  *			execute permission. (Same as Linux VFS behavior).
-  * FUSE_SETXATTR_EXT:	Server supports extended struct fuse_setxattr_in
-+ * FUSE_PERFILE_DAX:	kernel supports per-file DAX
-  */
- #define FUSE_ASYNC_READ		(1 << 0)
- #define FUSE_POSIX_LOCKS	(1 << 1)
-@@ -367,6 +371,7 @@ struct fuse_file_lock {
- #define FUSE_SUBMOUNTS		(1 << 27)
- #define FUSE_HANDLE_KILLPRIV_V2	(1 << 28)
- #define FUSE_SETXATTR_EXT	(1 << 29)
-+#define FUSE_PERFILE_DAX	(1 << 30)
- 
- /**
-  * CUSE INIT request/reply flags
-@@ -449,8 +454,10 @@ struct fuse_file_lock {
-  * fuse_attr flags
-  *
-  * FUSE_ATTR_SUBMOUNT: Object is a submount root
-+ * FUSE_ATTR_DAX: Enable DAX for this file in per-file DAX mode
-  */
- #define FUSE_ATTR_SUBMOUNT      (1 << 0)
-+#define FUSE_ATTR_DAX		(1 << 1)
- 
- /**
-  * Open flags
+diff --git a/fs/fuse/inode.c b/fs/fuse/inode.c
+index 0bc0d8af81e1..d59aea41d70d 100644
+--- a/fs/fuse/inode.c
++++ b/fs/fuse/inode.c
+@@ -1087,10 +1087,12 @@ static void process_init_reply(struct fuse_mount *fm, struct fuse_args *args,
+ 					min_t(unsigned int, fc->max_pages_limit,
+ 					max_t(unsigned int, arg->max_pages, 1));
+ 			}
+-			if (IS_ENABLED(CONFIG_FUSE_DAX) &&
+-			    arg->flags & FUSE_MAP_ALIGNMENT &&
+-			    !fuse_dax_check_alignment(fc, arg->map_alignment)) {
+-				ok = false;
++			if (IS_ENABLED(CONFIG_FUSE_DAX)) {
++				if (arg->flags & FUSE_MAP_ALIGNMENT &&
++				    !fuse_dax_check_alignment(fc, arg->map_alignment))
++					ok = false;
++				if (arg->flags & FUSE_PERFILE_DAX)
++					fc->perfile_dax = 1;
+ 			}
+ 			if (arg->flags & FUSE_HANDLE_KILLPRIV_V2) {
+ 				fc->handle_killpriv_v2 = 1;
+@@ -1144,7 +1146,7 @@ void fuse_send_init(struct fuse_mount *fm)
+ 		FUSE_HANDLE_KILLPRIV_V2 | FUSE_SETXATTR_EXT;
+ #ifdef CONFIG_FUSE_DAX
+ 	if (fm->fc->dax)
+-		ia->in.flags |= FUSE_MAP_ALIGNMENT;
++		ia->in.flags |= FUSE_MAP_ALIGNMENT | FUSE_PERFILE_DAX;
+ #endif
+ 	if (fm->fc->auto_submounts)
+ 		ia->in.flags |= FUSE_SUBMOUNTS;
 -- 
 2.27.0
 
