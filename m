@@ -2,63 +2,63 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F82B3DFEB4
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:02:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9470E3DFEC1
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 12:03:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C05D240105;
-	Wed,  4 Aug 2021 10:02:00 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 30582403B4;
+	Wed,  4 Aug 2021 10:02:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id szV5X8WgPQtt; Wed,  4 Aug 2021 10:01:59 +0000 (UTC)
+	with ESMTP id 6cWKrpgikNjY; Wed,  4 Aug 2021 10:02:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 6517C40339;
-	Wed,  4 Aug 2021 10:01:59 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D23394036D;
+	Wed,  4 Aug 2021 10:02:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F1043C001F;
-	Wed,  4 Aug 2021 10:01:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B54DC000E;
+	Wed,  4 Aug 2021 10:02:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3F240C000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E45F4C000E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:01:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:02:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2E4C04058A
+ by smtp1.osuosl.org (Postfix) with ESMTP id C3FFB83A4C
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:01:57 +0000 (UTC)
+ Wed,  4 Aug 2021 10:02:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bH7J2MxXXYiC
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8nr9uFDpqRT6
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:01:56 +0000 (UTC)
+ Wed,  4 Aug 2021 10:02:55 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 910CA4052F
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2519583281
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 10:01:56 +0000 (UTC)
+ Wed,  4 Aug 2021 10:02:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=tt1taHmY3o8vbuA2AsPbb7cVrfeK82HOf8oIyKb3FTc=; b=hQD8KAYgeD+mcu3L+5xHSLBo6v
- KqojgNbYvl2wtrtH74G2n7RfNh4yKrQ6VFFH0zqcE312iaQ3rdaOtuiLLhlgi6inMl2tvjqN44r72
- 8uFEgjIi2C8hWo+D6boAKH/PyxlyQ5HOTIkyPuBK6Mf0/D9MQC28Vfvk98Wd/tCkX5OPbz8e9hns7
- iFrSC8YNN3h2HIBA7MnCkr1wp7PIx30YO2pOm1Jvv0UyrDjAotS7zcZNT86qxhTcottNy1CIKwe7E
- eBqYoK9R7/9DBi0elNYmpi9Zu1wOHzahpeNqX2Mbv82BVMilP4Ziw9RJf0cJQZV2KmrCwCOqyBakx
- asS/u03g==;
+ bh=38PP0nqE1Rr5Q2SngGpX8SaabB796rszA7pe5/OYcCE=; b=NZVo6Syey+ucG1T/H4GNaod0LQ
+ R3HS7TqZ5afkR+W+LPQJkznZOdAp8uReL+jaUNSYRPcVYrEd+QKJpXhyMJeIOUpxn6c6kg6oOcnrj
+ ycZVGqV90IGpgWJAdd/4RU4VedNIa+ouNFQPdggcsnOZH0MibUQDRqjnN6Klph1gOoqn8Oowgd+90
+ SKSpiLwMFkfPxHoVq1iUv+bgY8YaLlGZCl1KwsC1LwwnnIhdy0CzjMqtFV9iC0vVxrqjp46rQonBS
+ dvE79Kmj5hVeLSHgBE3iwZOdeXA8BcSCT2lsyusJ9iEyY1RsgiF6m8nRVF5xP1/KOWT5fQu+V9TFA
+ MzZrJ0rg==;
 Received: from [2a02:1205:5023:1f80:c068:bd3d:78b3:7d37] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mBDga-005f7A-CF; Wed, 04 Aug 2021 09:59:54 +0000
+ id 1mBDhE-005fC7-4b; Wed, 04 Aug 2021 10:00:43 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 04/15] dm-ebs: use bvec_virt
-Date: Wed,  4 Aug 2021 11:56:23 +0200
-Message-Id: <20210804095634.460779-5-hch@lst.de>
+Subject: [PATCH 05/15] dm-integrity: use bvec_virt
+Date: Wed,  4 Aug 2021 11:56:24 +0200
+Message-Id: <20210804095634.460779-6-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20210804095634.460779-1-hch@lst.de>
 References: <20210804095634.460779-1-hch@lst.de>
@@ -97,22 +97,31 @@ Use bvec_virt instead of open coding it.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/md/dm-ebs-target.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/md/dm-integrity.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/md/dm-ebs-target.c b/drivers/md/dm-ebs-target.c
-index 71475a2410be..0c509dae0ff8 100644
---- a/drivers/md/dm-ebs-target.c
-+++ b/drivers/md/dm-ebs-target.c
-@@ -74,7 +74,7 @@ static int __ebs_rw_bvec(struct ebs_c *ec, int rw, struct bio_vec *bv, struct bv
- 	if (unlikely(!bv->bv_page || !bv_len))
- 		return -EIO;
+diff --git a/drivers/md/dm-integrity.c b/drivers/md/dm-integrity.c
+index 20f2510db1f6..a9ea361769a7 100644
+--- a/drivers/md/dm-integrity.c
++++ b/drivers/md/dm-integrity.c
+@@ -1819,7 +1819,7 @@ static void integrity_metadata(struct work_struct *w)
+ 				unsigned this_len;
  
--	pa = page_address(bv->bv_page) + bv->bv_offset;
-+	pa = bvec_virt(bv);
- 
- 	/* Handle overlapping page <-> blocks */
- 	while (bv_len) {
+ 				BUG_ON(PageHighMem(biv.bv_page));
+-				tag = lowmem_page_address(biv.bv_page) + biv.bv_offset;
++				tag = bvec_virt(&biv);
+ 				this_len = min(biv.bv_len, data_to_process);
+ 				r = dm_integrity_rw_tag(ic, tag, &dio->metadata_block, &dio->metadata_offset,
+ 							this_len, dio->op == REQ_OP_READ ? TAG_READ : TAG_WRITE);
+@@ -2006,7 +2006,7 @@ static bool __journal_read_write(struct dm_integrity_io *dio, struct bio *bio,
+ 					unsigned tag_now = min(biv.bv_len, tag_todo);
+ 					char *tag_addr;
+ 					BUG_ON(PageHighMem(biv.bv_page));
+-					tag_addr = lowmem_page_address(biv.bv_page) + biv.bv_offset;
++					tag_addr = bvec_virt(&biv);
+ 					if (likely(dio->op == REQ_OP_WRITE))
+ 						memcpy(tag_ptr, tag_addr, tag_now);
+ 					else
 -- 
 2.30.2
 
