@@ -1,106 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F5BB3DFBB7
-	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:05:42 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50C483DFBCC
+	for <lists.virtualization@lfdr.de>; Wed,  4 Aug 2021 09:07:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2834740198;
-	Wed,  4 Aug 2021 07:05:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0842E40669;
+	Wed,  4 Aug 2021 07:07:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id a3B6xCKsX4kz; Wed,  4 Aug 2021 07:05:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 6649F40173;
-	Wed,  4 Aug 2021 07:05:39 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ghUTh-gS70ee; Wed,  4 Aug 2021 07:07:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id EC5BA4066F;
+	Wed,  4 Aug 2021 07:07:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D8AD0C000E;
-	Wed,  4 Aug 2021 07:05:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A229C000E;
+	Wed,  4 Aug 2021 07:07:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id F3F01C000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1670FC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:05:36 +0000 (UTC)
+ Wed,  4 Aug 2021 07:07:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E2D3F405C2
+ by smtp2.osuosl.org (Postfix) with ESMTP id F27B74025C
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:05:36 +0000 (UTC)
+ Wed,  4 Aug 2021 07:07:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linaro.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9c-puHstartM
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8vSeXdPdhF4l
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:05:34 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E3AA940580
+ Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6C0B340282
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 Aug 2021 07:05:34 +0000 (UTC)
-Received: by mail-pj1-x102c.google.com with SMTP id
- pj14-20020a17090b4f4eb029017786cf98f9so2284972pjb.2
- for <virtualization@lists.linux-foundation.org>;
- Wed, 04 Aug 2021 00:05:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=xDSd0Sk7OOVTJLj0Kr0rQVLGfrtRCoQjOaaQ0mH27Zc=;
- b=fxsKekn9JqnpNnefBJPwd6/QD8EB7YVxndmXqB12cVPdkohoFoTF1C6irb1p8woFOV
- YwA1PZQBC5ZtUJGTnXpK8sUfJQcX02ruLcRwjlr/EzK9HG3G1wJ9D7aF5P93Z2kIMaeF
- HueontkvDeYtzD3vFtWkPDBtJ+JTNQLIV8clSzQ41M9svM+XDDAy4QKAbvzdYUerA7Xn
- Yqz5cod5kAdMQ7Uyrpgz0bJoLREjvyiY3sNeY/PfO6U1E3Da6Kf1Q4Do32Ngux8ut9Ol
- WcL/66S4ncTnvw5Co+l6c1CEBFALS2yls/ebtbzTi8ekvFsZqmrqm7wBRWfQeEVVXOn7
- XU/Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=xDSd0Sk7OOVTJLj0Kr0rQVLGfrtRCoQjOaaQ0mH27Zc=;
- b=Vu9R4+gMuzIm3f4mmxTtFaIhrwxaO5iFr4bC3lwWHh71/cBtjIkG+D1yd5Ltvz4SAd
- xa7H5YJAqyho4i341OvX5f6XojtDkuEKBnhM/ik6Nyyz+kqdAYb/05QTBwmmIBqL4Tqe
- U6hQqkM3IP1JY9QN+DlCTKNnRqCyfaG+IqpHyvnn59LG/xa5mRv4Z9t++JBMe8IWKpZC
- 9ydK31PzP58iq7LmSzrJgJ6S8egYooWmBgIUebzUgiQutbUNvUKNSWMLyEgLqTOS1zJs
- uV+5SdGBTkhMqC29aCiopCuP7CYF7/RxOUQTob5aztfy//m63k3CUtW4ohbwWA2YdO0K
- nfbA==
-X-Gm-Message-State: AOAM530hm7Va92vWYhjg0VnvrOuB86/efaidyr3S5rHFjHPVJOI3AHti
- KEXKeDwuQJ/rs5K8LSSIe2D7nw==
-X-Google-Smtp-Source: ABdhPJwVg3WujjcjF/nTzPLHSowRjAx5x8su7mXB5PqRTS/R6Pkzz9WKHeu21n3s7YJl987X9va5Zg==
-X-Received: by 2002:a17:90a:eb0a:: with SMTP id
- j10mr26253461pjz.16.1628060734234; 
- Wed, 04 Aug 2021 00:05:34 -0700 (PDT)
-Received: from localhost ([122.172.201.85])
- by smtp.gmail.com with ESMTPSA id n1sm1823083pgt.63.2021.08.04.00.05.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 04 Aug 2021 00:05:33 -0700 (PDT)
-Date: Wed, 4 Aug 2021 12:35:31 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Arnd Bergmann <arnd@kernel.org>
-Subject: Re: [PATCH V4 2/2] gpio: virtio: Add IRQ support
-Message-ID: <20210804070531.w3h3jm6rou2hpgqj@vireshk-i7>
-References: <cover.1627989586.git.viresh.kumar@linaro.org>
- <75c8e6e5e8dfa1889938f3a6b2d991763c7a3717.1627989586.git.viresh.kumar@linaro.org>
- <CAK8P3a29NfFWwtGHhqos1P8f_SmzPJTXvEY5BZJAEMbV2SKe-Q@mail.gmail.com>
+ Wed,  4 Aug 2021 07:07:06 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=alimailimapcm10staff010182156082;
+ MF=jefflexu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0Uhx4ykY_1628060813; 
+Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
+ fp:SMTPD_---0Uhx4ykY_1628060813) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 04 Aug 2021 15:06:53 +0800
+From: Jeffle Xu <jefflexu@linux.alibaba.com>
+To: vgoyal@redhat.com,
+	stefanha@redhat.com,
+	miklos@szeredi.hu
+Subject: [PATCH v3 0/8] fuse,virtiofs: support per-file DAX
+Date: Wed,  4 Aug 2021 15:06:45 +0800
+Message-Id: <20210804070653.118123-1-jefflexu@linux.alibaba.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAK8P3a29NfFWwtGHhqos1P8f_SmzPJTXvEY5BZJAEMbV2SKe-Q@mail.gmail.com>
-User-Agent: NeoMutt/20180716-391-311a52
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
- Vincent Guittot <vincent.guittot@linaro.org>,
- "Michael S. Tsirkin" <mst@redhat.com>, Viresh Kumar <vireshk@kernel.org>,
- Linus Walleij <linus.walleij@linaro.org>, Cornelia Huck <cohuck@redhat.com>,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
- <virtualization@lists.linux-foundation.org>,
- Bartosz Golaszewski <bgolaszewski@baylibre.com>,
- Geert Uytterhoeven <geert@linux-m68k.org>,
- "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
- Marc Zyngier <maz@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
- Stratos Mailing List <stratos-dev@op-lists.linaro.org>, "Enrico Weigelt,
- metux IT consult" <info@metux.net>, Bill Mills <bill.mills@linaro.org>
+Cc: linux-fsdevel@vger.kernel.org, virtio-fs@redhat.com,
+ bo.liu@linux.alibaba.com, joseph.qi@linux.alibaba.com,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,148 +74,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 03-08-21, 17:01, Arnd Bergmann wrote:
-> On Tue, Aug 3, 2021 at 1:36 PM Viresh Kumar <viresh.kumar@linaro.org> wrote:
-> > +struct vgpio_irq_line {
-> > +       u8 type;
-> > +       bool masked;
-> > +       bool update_pending;
-> > +       bool queued;
-> > +
-> > +       struct virtio_gpio_irq_request ireq;
-> > +       struct virtio_gpio_irq_response ires;
-> > +};
-> 
-> I think the last two members should be marked as __cacheline_aligned,
-> since they are transferred separately over DMA.
-
-Right.
-
-> > +static void virtio_gpio_irq_eoi(struct irq_data *d)
-> > +{
-> > +       /*
-> > +        * Queue buffers, by calling virtio_gpio_irq_prepare(), from
-> > +        * virtio_gpio_event_vq() itself, after taking into consideration the
-> > +        * masking status of the interrupt.
-> > +        */
-> > +}
-> 
-> Shouldn't this just requeue the interrupt? There is no reason to
-> defer this, and I think we want the normal operation to not have
-> to involve any scheduling.
-> 
-> > +static void virtio_gpio_irq_unmask(struct irq_data *d)
-> > +{
-> > +       struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
-> > +       struct virtio_gpio *vgpio = gpiochip_get_data(gc);
-> > +       struct vgpio_irq_line *irq_line = &vgpio->irq_lines[d->hwirq];
-> > +
-> > +       irq_line->masked = false;
-> > +       irq_line->update_pending = true;
-> > +}
-> 
-> Same here. unmask is probably less important, but it's the
-> same operation: if you want interrupts to become active
-> again when they are not, just queue the request
-
-We can't because its a slow bus ? And unmask can be called from
-irq-context. That's exactly why we had the irq_bus_lock/unlock
-discussion earlier.
-
-> > +static void virtio_gpio_irq_mask(struct irq_data *d)
-> > +{
-> > +       struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
-> > +       struct virtio_gpio *vgpio = gpiochip_get_data(gc);
-> > +       struct vgpio_irq_line *irq_line = &vgpio->irq_lines[d->hwirq];
-> > +
-> > +       irq_line->masked = true;
-> > +       irq_line->update_pending = true;
-> > +}
-> 
-> This is of course the tricky bit, I was hoping you had found a solution
-> based on what I wrote above for eio() and unmask().
-> 
-> > +static void vgpio_work_handler(struct work_struct *work)
-> > +{
-> > +       struct virtio_gpio *vgpio = container_of(work, struct virtio_gpio,
-> > +                                                work);
-> > +       struct device *dev = &vgpio->vdev->dev;
-> > +       struct vgpio_irq_line *irq_line;
-> > +       int irq, gpio, ret;
-> > +       unsigned int len;
-> > +
-> > +       mutex_lock(&vgpio->irq_lock);
-> > +
-> > +       while (true) {
-> > +               irq_line = virtqueue_get_buf(vgpio->event_vq, &len);
-> > +               if (!irq_line)
-> > +                       break;
-> 
-> Related to above, I think all the eventq handling should be moved into the
-> virtio_gpio_event_vq() function directly.
-
-You mean without scheduling a work ?
-
-> > +               /* The interrupt may have been disabled by now */
-> > +               if (irq_line->update_pending && irq_line->masked)
-> > +                       update_irq_type(vgpio, gpio, VIRTIO_GPIO_IRQ_TYPE_NONE);
-> 
-> This is a part I'm not sure about, and I suppose it's the same part that
-> Marc was also confused by.
-> 
-> As far as I can tell, the update_irq_type() message would lead to the
-> interrupt getting delivered when it was armed and is now getting disabled,
-> but I don't see why we would call update_irq_type() as a result of the
-> eventq notification.
-
-Lemme try to explain answer to all other question together here.
-
-The irq related functions get called in two scenarios:
-
-- request_irq() or irq_set_irq_type(), enable/disable_irq(), etc:
-
-  The call sequence here is like this:
-
-  ->irq_bus_lock()
-
-  ->spin-lock-irqsave
-  ->irq_mask()/irq_unmask()/irq_set_type()..
-  ->spin-unlock-irqsave
-
-  ->irq_bus_unlock()
+changes since v2:
+- modify fuse_show_options() accordingly to make it compatible with
+  new tri-state mount option (patch 2)
+- extract FUSE protocol changes into one seperate patch (patch 3)
+- FUSE server/client need to negotiate if they support per-file DAX
+  (patch 4)
+- extract DONT_CACHE logic into patch 6/7
 
 
-  So the mask/unmask/set-type routines can't issue virtio requests and
-  we need to do that from irq_bus_unlock(). This shall answer your
-  question about mask/unmask, right ? Or maybe I misunderstood them
-  then ?
+This patchset adds support of per-file DAX for virtiofs, which is
+inspired by Ira Weiny's work on ext4[1] and xfs[2].
 
+Any comment is welcome.
 
-- Interrupt: i.e. buffer sent back by the host over virtio.
+[1] commit 9cb20f94afcd ("fs/ext4: Make DAX mount option a tri-state")
+[2] commit 02beb2686ff9 ("fs/xfs: Make DAX mount option a tri-state")
 
-  virtio_gpio_event_vq() schedules a work item, which processes the
-  items from the eventq virtqueue and eventually calls
-  generic_handle_irq(). The irq-core can issue calls to
-  ->irq_mask/unmask() here without a prior call to
-  irq_bus_lock/unlock(), normally they will balance out by the end,
-  but I am not sure if it is guaranteed. Moreover, interrupt should be
-  re-enabled only after unmask() is called (for ONESHOT) and not at
-  EOI, right ?
+v2: https://www.spinics.net/lists/linux-fsdevel/msg199584.html
+v1: https://www.spinics.net/lists/linux-virtualization/msg51008.html
 
-  I chose not to queue the buffers back from eoi() as it is possible
-  that we won't want to queue them at all, as the interrupt needs to
-  be disabled by the time generic_handle_irq() returns. And so I did
-  everything from the end of vgpio_work_handler()'s loop, i.e. either
-  disable the interrupts with VIRTIO_GPIO_IRQ_TYPE_NONE or enable the
-  interrupt again by re-queuing the buffer.
+Jeffle Xu (8):
+  fuse: add fuse_should_enable_dax() helper
+  fuse: Make DAX mount option a tri-state
+  fuse: support per-file DAX
+  fuse: negotiate if server/client supports per-file DAX
+  fuse: enable per-file DAX
+  fuse: mark inode DONT_CACHE when per-file DAX indication changes
+  fuse: support changing per-file DAX flag inside guest
+  fuse: show '-o dax=inode' option only when FUSE server supports
 
-Regarding irq handling using work-item, I had to move to that to take
-care of locking for re-queuing the buffers for a GPIO line from
-irq-handler and bus-unlock. Nothing else seemed to work, though I am
-continuing to look into that to see if there is an alternative here.
+ fs/fuse/dax.c             | 32 ++++++++++++++++++++++++++++++--
+ fs/fuse/file.c            |  4 ++--
+ fs/fuse/fuse_i.h          | 22 ++++++++++++++++++----
+ fs/fuse/inode.c           | 27 ++++++++++++++++++---------
+ fs/fuse/ioctl.c           | 15 +++++++++++++--
+ fs/fuse/virtio_fs.c       | 16 ++++++++++++++--
+ include/uapi/linux/fuse.h |  9 ++++++++-
+ 7 files changed, 103 insertions(+), 22 deletions(-)
 
 -- 
-viresh
+2.27.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
