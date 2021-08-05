@@ -1,132 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 11FDC3E0B60
-	for <lists.virtualization@lfdr.de>; Thu,  5 Aug 2021 02:43:32 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B3E03E0EDD
+	for <lists.virtualization@lfdr.de>; Thu,  5 Aug 2021 09:05:45 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7B1E3835B1;
-	Thu,  5 Aug 2021 00:43:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E62C0402E5;
+	Thu,  5 Aug 2021 07:05:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id c_KNszi-l043; Thu,  5 Aug 2021 00:43:29 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VRKPKXCdpb3U; Thu,  5 Aug 2021 07:05:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 58F4B835A6;
-	Thu,  5 Aug 2021 00:43:29 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id AFAE540303;
+	Thu,  5 Aug 2021 07:05:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BE23AC0022;
-	Thu,  5 Aug 2021 00:43:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2CB3BC000E;
+	Thu,  5 Aug 2021 07:05:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2AEFCC000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B8051C000E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Aug 2021 00:43:27 +0000 (UTC)
+ Thu,  5 Aug 2021 07:05:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0BF98605EB
+ by smtp3.osuosl.org (Postfix) with ESMTP id A6AE7605D5
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Aug 2021 00:43:27 +0000 (UTC)
+ Thu,  5 Aug 2021 07:05:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=gmail.com
+ dkim=pass (2048-bit key) header.d=linaro.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KdbTwXCXhSvz
+ with ESMTP id uQ_K6Ut8CGMy
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Aug 2021 00:43:26 +0000 (UTC)
+ Thu,  5 Aug 2021 07:05:38 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-ot1-x32a.google.com (mail-ot1-x32a.google.com
- [IPv6:2607:f8b0:4864:20::32a])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5E364605C1
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id AA67A605BF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  5 Aug 2021 00:43:26 +0000 (UTC)
-Received: by mail-ot1-x32a.google.com with SMTP id
- e13-20020a056830200db02904f06fa2790cso3451863otp.1
+ Thu,  5 Aug 2021 07:05:38 +0000 (UTC)
+Received: by mail-pl1-x631.google.com with SMTP id c16so5952273plh.7
  for <virtualization@lists.linux-foundation.org>;
- Wed, 04 Aug 2021 17:43:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
- h=subject:to:cc:references:from:message-id:date:user-agent
- :mime-version:in-reply-to:content-language:content-transfer-encoding;
- bh=vGJp7Qm+vWDqCZWodUNjzWvMf7Y6QRcUPiH81G9CbDc=;
- b=sQkknu+u8jaaB0OcDj6EoRyQO9F7NA9Ud0m6EJ+C2C0ePjqe9hNCnkVkIhC0pjyIZP
- W97xALtifJROfE1qpdGxVX7t01xf3OUl9KJgqZPDl5v3D6FxuuVF0VVTvppzKi5XXtsE
- 4ed0zRbT1+oeflIJYRddJz7nhap0Itb932QISt28jF0AZkADODWGr6pauN4688v0ms2M
- NL3LcQi8aY7fs3XjiOEGT3q7TyCWHHsWz+H/9xBY3cUpaylthKBA06O7oI6ZQSb+zUI6
- Oxd5Gj32aEAFvzY1Eyn/QvPv46r/JIqp3cYCy2IUn4Zc1ZseVwoPv3/E1/xwjWiG8rg8
- wnYw==
+ Thu, 05 Aug 2021 00:05:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=FxHHuwRa022IYUpHzp8PytbjIjdvdslF6xPwTOr4scE=;
+ b=PnZSsVQppiMftx9XAoP2jHE7p7gt88wSLY43rk+K5mszCd/AgD0tkmG+Wwtk3qEE5E
+ kbxQmqI+25CfGeUrwQhdpOJpZIMhChvAP089r9bAOaTuwoNZVwOLIbC9PITQXGrrPG6J
+ 0wZnVly6bHbY3JsItrJZ7L3ccRLAzCt0spZT6bT0gG3sD7flYYZDRpj9SLUNRlzfBJeP
+ 6Dblpv2Yz8JjSob7NlaQPl2+bgH3JuidhA2K9xCJnASFsLS964d7vZiO2QHoK4lRMuIQ
+ XhhQPYqPNXGKeV2snjx4zymwss/Q+4tnjsD5C0Nv/O+18LscFeNk0tDpAHd/0JUIw3hD
+ A1gQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:message-id:date
- :user-agent:mime-version:in-reply-to:content-language
- :content-transfer-encoding;
- bh=vGJp7Qm+vWDqCZWodUNjzWvMf7Y6QRcUPiH81G9CbDc=;
- b=C42xnB6HT0beuhrNJy9buPJZSwffqi2f3koH5a62OsX3r8w9j5xEQ+p7PMCGknqt2b
- +ONWrEicNxG+qX5xGZw9omg47VBcUFSTkCz8yaERWsQPbVdUqflentk0FUTSet+oBEsE
- ujqRvYuqmn3dlt6tdnV8JPOfOGftsttOe/tNspxMsOyAGwdxC9sJnnECbtoGqTUAKA5o
- xLEHTE+eCab5v1gHcqZtoRvwGCVZP5lrRyuxrq7CzkLq2Uk0+7bWBM7TnuqFdbQ/am6A
- Fs8kzW+Rr6SMv+EBzh2Fl0g59Hw8+ab8VOih8v6CcPbeBZKoJwVBv2kpdK9kZlbkvVsw
- AR1A==
-X-Gm-Message-State: AOAM532WUBUVgl55BL4GqMDZHTl/I53PNB3TytCxvERCdqxeDxl4PV5R
- gstEkC38bOKohyr16MVeOJU=
-X-Google-Smtp-Source: ABdhPJz7SOE1TlkK7NDXzrAWjDSQbCEogTY9jw9xb8Kf3WqLv/BBMLwqDVgoBq0L3LxOht5ewMZflQ==
-X-Received: by 2002:a9d:63d3:: with SMTP id e19mr1640471otl.147.1628124205501; 
- Wed, 04 Aug 2021 17:43:25 -0700 (PDT)
-Received: from Davids-MacBook-Pro.local ([8.48.134.45])
- by smtp.googlemail.com with ESMTPSA id v13sm563634ook.40.2021.08.04.17.43.21
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 04 Aug 2021 17:43:24 -0700 (PDT)
-Subject: Re: [PATCH net-next 03/21] ethtool, stats: introduce standard XDP
- statistics
-To: Saeed Mahameed <saeed@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
- Tariq Toukan <ttoukan.linux@gmail.com>, Tariq Toukan <tariqt@nvidia.com>
-References: <20210803163641.3743-1-alexandr.lobakin@intel.com>
- <20210803163641.3743-4-alexandr.lobakin@intel.com>
- <20210803134900.578b4c37@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <ec0aefbc987575d1979f9102d331bd3e8f809824.camel@kernel.org>
- <20210804053650.22aa8a5b@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <43e91ce1-0f82-5820-7cac-b42461a0311a@gmail.com>
- <20210804094432.08d0fa86@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
- <d21933cb-9d24-9bdd-cf18-e5077796ddf7@gmail.com>
- <11091d33ff7803257e38ee921e4ba9597acfccfc.camel@kernel.org>
-From: David Ahern <dsahern@gmail.com>
-Message-ID: <4b2358e1-a802-b0ab-129d-1432f49c46ec@gmail.com>
-Date: Wed, 4 Aug 2021 18:43:19 -0600
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.12.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=FxHHuwRa022IYUpHzp8PytbjIjdvdslF6xPwTOr4scE=;
+ b=lmDIRXLXdxltPOkuoIBHMRv6RzZFjbGyPC6vjvmnfT1cRSQ/1aYgLQDWXKP0FTU0Hq
+ J1tU2cU/uERfjFJXxuOnZ6A7VQByiB8s3w2G94Ftwecoqo1NXKekugb8WGiIYKoK9CXo
+ +zzgr1UydRvS9mlXBjJMMdCdKzDxcjhLv1I5RTC1oMnl5dHGvNJ1/yIAQzWdi5ZpaOsV
+ ZhMgDPKygcwAYHe+nZc9qILMn/xh6G7LrcTpNfM/29jGRF0uu0rn4zEAnUI02aZZZ1F/
+ 0EKI70tWrTY3P3nvGGNE6aOdPNNzhlIT4WNBEIONcgtWH9K3iQgQrgikdVtUEENtC41e
+ PvDg==
+X-Gm-Message-State: AOAM533RbAfVL+uTVTMFdJG6ZulxmY9NCfN9utb6aYfqXIAcEG0h8hdn
+ dOdfELftcQNwXbCTKkHyNOruQw==
+X-Google-Smtp-Source: ABdhPJz9GPgd7WBGMGktlIchOl0wZ/x/nX/NNuIBF+bGBdyQkk3ZaIp0SU4+uWUtnHYBuugcVZzUbQ==
+X-Received: by 2002:a05:6a00:a8a:b029:356:be61:7f18 with SMTP id
+ b10-20020a056a000a8ab0290356be617f18mr3404921pfl.29.1628147137949; 
+ Thu, 05 Aug 2021 00:05:37 -0700 (PDT)
+Received: from localhost ([122.172.201.85])
+ by smtp.gmail.com with ESMTPSA id 21sm5191968pfp.211.2021.08.05.00.05.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 05 Aug 2021 00:05:37 -0700 (PDT)
+Date: Thu, 5 Aug 2021 12:35:34 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Arnd Bergmann <arnd@kernel.org>
+Subject: Re: [PATCH V4 2/2] gpio: virtio: Add IRQ support
+Message-ID: <20210805070534.lia6bc5c2l73d7cf@vireshk-i7>
+References: <cover.1627989586.git.viresh.kumar@linaro.org>
+ <75c8e6e5e8dfa1889938f3a6b2d991763c7a3717.1627989586.git.viresh.kumar@linaro.org>
+ <CAK8P3a29NfFWwtGHhqos1P8f_SmzPJTXvEY5BZJAEMbV2SKe-Q@mail.gmail.com>
+ <20210804070531.w3h3jm6rou2hpgqj@vireshk-i7>
+ <CAK8P3a0vBhP6ZJuqCxAUVZG_eAPu1Lk_Nw8FEarnHb286pPPyQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <11091d33ff7803257e38ee921e4ba9597acfccfc.camel@kernel.org>
-Content-Language: en-US
-Cc: Michal Kubecek <mkubecek@suse.cz>, Andrew Lunn <andrew@lunn.ch>,
- Song Liu <songliubraving@fb.com>, Vladyslav Tarasiuk <vladyslavt@nvidia.com>,
- Sameeh Jubran <sameehj@amazon.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- YueHaibing <yuehaibing@huawei.com>, Alexei Starovoitov <ast@kernel.org>,
- Zheng Yongjun <zhengyongjun3@huawei.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Ioana Ciornei <ioana.ciornei@nxp.com>, Petr Vorel <petr.vorel@gmail.com>,
- Alexander Duyck <alexanderduyck@fb.com>, Jian Shen <shenjian15@huawei.com>,
- Arthur Kiyanovski <akiyano@amazon.com>, Daniel Borkmann <daniel@iogearbox.net>,
- Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
- John Fastabend <john.fastabend@gmail.com>,
- Russell King <linux@armlinux.org.uk>, Michal Kubiak <michal.kubiak@intel.com>,
- Martin Habets <habetsm.xilinx@gmail.com>,
- virtualization@lists.linux-foundation.org, Guy Tzalik <gtzalik@amazon.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Ido Schimmel <idosch@nvidia.com>, Lukasz Czapnik <lukasz.czapnik@intel.com>,
- KP Singh <kpsingh@kernel.org>, Andrii Nakryiko <andrii@kernel.org>,
- Claudiu Manoil <claudiu.manoil@nxp.com>,
- Alexander Lobakin <alexandr.lobakin@intel.com>, Dan Murphy <dmurphy@ti.com>,
- Yonghong Song <yhs@fb.com>, Shay Agroskin <shayagr@amazon.com>,
- Marcin Wojtas <mw@semihalf.com>, Johannes Berg <johannes@sipsolutions.net>,
- Danielle Ratson <danieller@nvidia.com>,
- Michal Swiatkowski <michal.swiatkowski@intel.com>, netdev@vger.kernel.org,
- bpf@vger.kernel.org, linux-kernel@vger.kernel.org,
- Martin KaFai Lau <kafai@fb.com>, Edward Cree <ecree.xilinx@gmail.com>,
- Netanel Belgazal <netanel@amazon.com>, Marcin Kubiak <marcin.kubiak@intel.com>,
- Yangbo Lu <yangbo.lu@nxp.com>, Saeed Bishara <saeedb@amazon.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- "David S. Miller" <davem@davemloft.net>,
- Heiner Kallweit <hkallweit1@gmail.com>
+Content-Disposition: inline
+In-Reply-To: <CAK8P3a0vBhP6ZJuqCxAUVZG_eAPu1Lk_Nw8FEarnHb286pPPyQ@mail.gmail.com>
+User-Agent: NeoMutt/20180716-391-311a52
+Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Viresh Kumar <vireshk@kernel.org>,
+ Linus Walleij <linus.walleij@linaro.org>, Cornelia Huck <cohuck@redhat.com>,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ "open list:DRM DRIVER FOR QEMU'S CIRRUS DEVICE"
+ <virtualization@lists.linux-foundation.org>,
+ Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+ Geert Uytterhoeven <geert@linux-m68k.org>,
+ "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+ Marc Zyngier <maz@kernel.org>, Thomas Gleixner <tglx@linutronix.de>,
+ Stratos Mailing List <stratos-dev@op-lists.linaro.org>, "Enrico Weigelt,
+ metux IT consult" <info@metux.net>, Bill Mills <bill.mills@linaro.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -143,21 +118,100 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 8/4/21 12:27 PM, Saeed Mahameed wrote:
+On 04-08-21, 10:27, Arnd Bergmann wrote:
+> On Wed, Aug 4, 2021 at 9:05 AM Viresh Kumar <viresh.kumar@linaro.org> wrote:
+> > On 03-08-21, 17:01, Arnd Bergmann wrote:
+> > > >
+> > > > +static void virtio_gpio_irq_unmask(struct irq_data *d)
+> > > > +{
+> > > > +       struct gpio_chip *gc = irq_data_get_irq_chip_data(d);
+> > > > +       struct virtio_gpio *vgpio = gpiochip_get_data(gc);
+> > > > +       struct vgpio_irq_line *irq_line = &vgpio->irq_lines[d->hwirq];
+> > > > +
+> > > > +       irq_line->masked = false;
+> > > > +       irq_line->update_pending = true;
+> > > > +}
+> > >
+> > > Same here. unmask is probably less important, but it's the
+> > > same operation: if you want interrupts to become active
+> > > again when they are not, just queue the request
+> >
+> > We can't because its a slow bus ? And unmask can be called from
+> > irq-context. That's exactly why we had the irq_bus_lock/unlock
+> > discussion earlier.
 > 
->> I just ran some quick tests with my setup and measured about 1.2%
->> worst
+> I thought only 'mask' is slow, since that has to wait for the completion,
+> but 'unmask' just involves sending the eventq request without having
+> to wait for it.
+
+Ahh, so you are suggesting of just sending the request without waiting
+for the response. We can do it, but I am not sure if it is going to be
+worth it considering the additional complexity in the driver.
+
+Maybe lets come back to this later, if this is going to make anything
+better, once the basic support for irqs look good here.
+
+> I don't think it is correct that you cannot issue virtio requests from
+> atomic context, only that you cannot wait for the reply.
+
+Yes, you are right. I was having a mess because of all the races and
+different ways things were getting called.
+
+> For 'unmask', there is no waiting, since the reply is the actual IRQ
+> event. For the others, the sequence makes sense.
+ 
+> > - Interrupt: i.e. buffer sent back by the host over virtio.
+> >
+> >   virtio_gpio_event_vq() schedules a work item, which processes the
+> >   items from the eventq virtqueue and eventually calls
+> >   generic_handle_irq(). The irq-core can issue calls to
+> >   ->irq_mask/unmask() here without a prior call to
+> >   irq_bus_lock/unlock(), normally they will balance out by the end,
+> >   but I am not sure if it is guaranteed. Moreover, interrupt should be
+> >   re-enabled only after unmask() is called (for ONESHOT) and not at
+> >   EOI, right ?
+> >
+> >   I chose not to queue the buffers back from eoi() as it is possible
+> >   that we won't want to queue them at all, as the interrupt needs to
+> >   be disabled by the time generic_handle_irq() returns. And so I did
+> >   everything from the end of vgpio_work_handler()'s loop, i.e. either
+> >   disable the interrupts with VIRTIO_GPIO_IRQ_TYPE_NONE or enable the
+> >   interrupt again by re-queuing the buffer.
+> >
+> > Regarding irq handling using work-item, I had to move to that to take
+> > care of locking for re-queuing the buffers for a GPIO line from
+> > irq-handler and bus-unlock. Nothing else seemed to work, though I am
+> > continuing to look into that to see if there is an alternative here.
 > 
-> 1.2% is a lot ! what was the test ? what is the change ?
+> I don't think it makes sense to optimize for the rare case that the
+> irq handler disables the irq, when that makes the common case
+> (irq remains unmasked and enabled) much slower.
 
-I did say "quick test ... not exhaustive" and it was definitely
-eyeballing a pps change over a small time window.
+I am not worried about that case only, i.e. where the
+interrupt-handler disables the interrupt. It should work fine though,
+even if it isn't optimized.
 
-If multiple counters are bumped 20-25 million times a second (e.g. XDP
-drop case), how measurable is it? I was just trying to ballpark the
-overhead - 1%, 5%, more? If it is <~ 1% then there is no performance
-argument in which case let's do the right thing for users - export via
-existing APIs.
+A) If the client has registered with irq with IRQF_ONESHOT, irq core
+   will call ->irq_mask(), irq-handler(), ->irq_eoi(), and finally
+   ->irq_unmask(). Looking at this basic sequence itself, irq_eoi()
+   shouldn't enable the interrupt again by re-queuing the buffer,
+   rather it should happen from unmask in this case.
+
+B) If the client has registered a threaded-irq, it gets even more
+   complex. The core does this in that case:
+
+   call ->irq_mask(), ->irq_eoi(), and return control back to
+   virtio_gpio_event_vq().
+
+   The thread gets scheduled then and calls the irq-handler and then
+   the irq-core calls irq-bus-lock(), ->irq_unmask(),
+   irq-bus-unlock().
+
+Looking at these, eoi shouldn't be queuing the buffer. Also, I wonder
+if we should use handle_fasteoi_irq() here or something else.
+
+-- 
+viresh
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
