@@ -1,75 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4C873E2AD5
-	for <lists.virtualization@lfdr.de>; Fri,  6 Aug 2021 14:48:36 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A48C93E2AD9
+	for <lists.virtualization@lfdr.de>; Fri,  6 Aug 2021 14:48:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 7287540163;
-	Fri,  6 Aug 2021 12:48:35 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 4301840581;
+	Fri,  6 Aug 2021 12:48:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9f3UqvGwHpYm; Fri,  6 Aug 2021 12:48:34 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vcU6YyGmot_I; Fri,  6 Aug 2021 12:48:45 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id CEF0640388;
-	Fri,  6 Aug 2021 12:48:33 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 27B6B40556;
+	Fri,  6 Aug 2021 12:48:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A98CC000E;
-	Fri,  6 Aug 2021 12:48:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A9EC2C000E;
+	Fri,  6 Aug 2021 12:48:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 84FA1C000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8F834C000E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Aug 2021 12:48:31 +0000 (UTC)
+ Fri,  6 Aug 2021 12:48:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 74A4483BC5
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7E5EE40581
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Aug 2021 12:48:31 +0000 (UTC)
+ Fri,  6 Aug 2021 12:48:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VzFknnkqCAVP
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id MAwx446Z7NPq
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Aug 2021 12:48:30 +0000 (UTC)
+ Fri,  6 Aug 2021 12:48:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C3D3283B91
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CBA6F40556
  for <virtualization@lists.linux-foundation.org>;
- Fri,  6 Aug 2021 12:48:30 +0000 (UTC)
+ Fri,  6 Aug 2021 12:48:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1628254109;
+ s=mimecast20190719; t=1628254120;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=BFeBqOXfkyt43N/bfzc7r20R6enM8cPml+FtmtRNnCk=;
- b=LemyeBI/qkzSRZ522F2ds1gkTyFVHpM3kMD7eO5Iy9jd7FXksFP/E+5OadFH6vQpyk2KEC
- eyLhtyQw59sOHEZ7iWOrh4KGK1VcFIp5WUrBASuAOmdpqBx4vU+2UfmGli4hwlYLTJ6QGG
- r9d3oezBy7jXG/Fc1vMOtsuOYAQozyg=
+ bh=s/KddycY40Z4LqW96eG3IVtIPqM03IoorWzmAhpSWjI=;
+ b=VEl4N/4B2dEuqQdtEAzSJnHtduJLTcIuHseIMKcMhETPjR8CxiMrlr6wezQXdLCzQssJlc
+ bWV2ngJUljNlz1A388UpGdjq8FhcM0VMMHJv1+PmfzlY/d4ZN1tPOY/8r+xfp8dUkZASZ5
+ d//XDH133F/Qb/qJJItxaiVV7wSEFZ4=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-126-4zB_OUpUOfiCyMBukTa9Hg-1; Fri, 06 Aug 2021 08:48:26 -0400
-X-MC-Unique: 4zB_OUpUOfiCyMBukTa9Hg-1
+ us-mta-233-1aaSeAFvPw2EJ5ER6kcCmg-1; Fri, 06 Aug 2021 08:48:39 -0400
+X-MC-Unique: 1aaSeAFvPw2EJ5ER6kcCmg-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4824D8042EB;
- Fri,  6 Aug 2021 12:48:24 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id DA7828042EB;
+ Fri,  6 Aug 2021 12:48:36 +0000 (UTC)
 Received: from t480s.redhat.com (unknown [10.39.192.224])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E5B715D6A1;
- Fri,  6 Aug 2021 12:48:18 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A4F0A5D6A1;
+ Fri,  6 Aug 2021 12:48:24 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 6/9] dax/kmem: use a single static memory group for a
- single probed unit
-Date: Fri,  6 Aug 2021 14:47:12 +0200
-Message-Id: <20210806124715.17090-7-david@redhat.com>
+Subject: [PATCH v3 7/9] virtio-mem: use a single dynamic memory group for a
+ single virtio-mem device
+Date: Fri,  6 Aug 2021 14:47:13 +0200
+Message-Id: <20210806124715.17090-8-david@redhat.com>
 In-Reply-To: <20210806124715.17090-1-david@redhat.com>
 References: <20210806124715.17090-1-david@redhat.com>
 MIME-Version: 1.0
@@ -104,118 +102,88 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Although dax/kmem users often disable auto-onlining and instead online
-memory manually (usually to ZONE_MOVABLE), there is still value in
-having auto-onlining be aware of the relationship of memory blocks.
-
-Let's treat one probed unit as a single static memory device, similar to
-a single ACPI memory device.
+Let's use a single dynamic memory group.
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/dax/kmem.c | 40 ++++++++++++++++++++++++++++++++--------
- 1 file changed, 32 insertions(+), 8 deletions(-)
+ drivers/virtio/virtio_mem.c | 22 +++++++++++++++++++---
+ 1 file changed, 19 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/dax/kmem.c b/drivers/dax/kmem.c
-index 99e0f60c4c26..a37622060fff 100644
---- a/drivers/dax/kmem.c
-+++ b/drivers/dax/kmem.c
-@@ -37,15 +37,16 @@ static int dax_kmem_range(struct dev_dax *dev_dax, int i, struct range *r)
- 
- struct dax_kmem_data {
- 	const char *res_name;
+diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
+index 774986695dc4..8945f248ce69 100644
+--- a/drivers/virtio/virtio_mem.c
++++ b/drivers/virtio/virtio_mem.c
+@@ -143,6 +143,8 @@ struct virtio_mem {
+ 	 * add_memory_driver_managed().
+ 	 */
+ 	const char *resource_name;
++	/* Memory group identification. */
 +	int mgid;
- 	struct resource *res[];
- };
- 
- static int dev_dax_kmem_probe(struct dev_dax *dev_dax)
- {
- 	struct device *dev = &dev_dax->dev;
-+	unsigned long total_len = 0;
- 	struct dax_kmem_data *data;
--	int rc = -ENOMEM;
--	int i, mapped = 0;
-+	int i, rc, mapped = 0;
- 	int numa_node;
  
  	/*
-@@ -61,24 +62,44 @@ static int dev_dax_kmem_probe(struct dev_dax *dev_dax)
- 		return -EINVAL;
- 	}
+ 	 * We don't want to add too much memory if it's not getting onlined,
+@@ -626,8 +628,8 @@ static int virtio_mem_add_memory(struct virtio_mem *vm, uint64_t addr,
+ 		addr + size - 1);
+ 	/* Memory might get onlined immediately. */
+ 	atomic64_add(size, &vm->offline_size);
+-	rc = add_memory_driver_managed(vm->nid, addr, size, vm->resource_name,
+-				       MHP_MERGE_RESOURCE);
++	rc = add_memory_driver_managed(vm->mgid, addr, size, vm->resource_name,
++				       MHP_MERGE_RESOURCE | MHP_NID_IS_MGID);
+ 	if (rc) {
+ 		atomic64_sub(size, &vm->offline_size);
+ 		dev_warn(&vm->vdev->dev, "adding memory failed: %d\n", rc);
+@@ -2562,6 +2564,7 @@ static bool virtio_mem_has_memory_added(struct virtio_mem *vm)
+ static int virtio_mem_probe(struct virtio_device *vdev)
+ {
+ 	struct virtio_mem *vm;
++	uint64_t unit_pages;
+ 	int rc;
  
-+	for (i = 0; i < dev_dax->nr_range; i++) {
-+		struct range range;
-+
-+		rc = dax_kmem_range(dev_dax, i, &range);
-+		if (rc) {
-+			dev_info(dev, "mapping%d: %#llx-%#llx too small after alignment\n",
-+					i, range.start, range.end);
-+			continue;
-+		}
-+		total_len += range_len(&range);
-+	}
-+
-+	if (!total_len) {
-+		dev_warn(dev, "rejecting DAX region without any memory after alignment\n");
-+		return -EINVAL;
-+	}
-+
- 	data = kzalloc(struct_size(data, res, dev_dax->nr_range), GFP_KERNEL);
- 	if (!data)
- 		return -ENOMEM;
+ 	BUILD_BUG_ON(sizeof(struct virtio_mem_req) != 24);
+@@ -2596,6 +2599,16 @@ static int virtio_mem_probe(struct virtio_device *vdev)
+ 	if (rc)
+ 		goto out_del_vq;
  
-+	rc = -ENOMEM;
- 	data->res_name = kstrdup(dev_name(dev), GFP_KERNEL);
- 	if (!data->res_name)
- 		goto err_res_name;
- 
-+	rc = memory_group_register_static(numa_node, total_len);
++	/* use a single dynamic memory group to cover the whole memory device */
++	if (vm->in_sbm)
++		unit_pages = PHYS_PFN(memory_block_size_bytes());
++	else
++		unit_pages = PHYS_PFN(vm->bbm.bb_size);
++	rc = memory_group_register_dynamic(vm->nid, unit_pages);
 +	if (rc < 0)
-+		goto err_reg_mgid;
-+	data->mgid = rc;
++		goto out_del_resource;
++	vm->mgid = rc;
 +
- 	for (i = 0; i < dev_dax->nr_range; i++) {
- 		struct resource *res;
- 		struct range range;
- 
- 		rc = dax_kmem_range(dev_dax, i, &range);
--		if (rc) {
--			dev_info(dev, "mapping%d: %#llx-%#llx too small after alignment\n",
--					i, range.start, range.end);
-+		if (rc)
- 			continue;
--		}
- 
- 		/* Region is permanently reserved if hotremove fails. */
- 		res = request_mem_region(range.start, range_len(&range), data->res_name);
-@@ -108,8 +129,8 @@ static int dev_dax_kmem_probe(struct dev_dax *dev_dax)
- 		 * Ensure that future kexec'd kernels will not treat
- 		 * this as RAM automatically.
- 		 */
--		rc = add_memory_driver_managed(numa_node, range.start,
--				range_len(&range), kmem_name, MHP_NONE);
-+		rc = add_memory_driver_managed(data->mgid, range.start,
-+				range_len(&range), kmem_name, MHP_NID_IS_MGID);
- 
- 		if (rc) {
- 			dev_warn(dev, "mapping%d: %#llx-%#llx memory add failed\n",
-@@ -129,6 +150,8 @@ static int dev_dax_kmem_probe(struct dev_dax *dev_dax)
+ 	/*
+ 	 * If we still have memory plugged, we have to unplug all memory first.
+ 	 * Registering our parent resource makes sure that this memory isn't
+@@ -2610,7 +2623,7 @@ static int virtio_mem_probe(struct virtio_device *vdev)
+ 	vm->memory_notifier.notifier_call = virtio_mem_memory_notifier_cb;
+ 	rc = register_memory_notifier(&vm->memory_notifier);
+ 	if (rc)
+-		goto out_del_resource;
++		goto out_unreg_group;
+ 	rc = register_virtio_mem_device(vm);
+ 	if (rc)
+ 		goto out_unreg_mem;
+@@ -2624,6 +2637,8 @@ static int virtio_mem_probe(struct virtio_device *vdev)
  	return 0;
- 
- err_request_mem:
-+	memory_group_unregister(data->mgid);
-+err_reg_mgid:
- 	kfree(data->res_name);
- err_res_name:
- 	kfree(data);
-@@ -171,6 +194,7 @@ static void dev_dax_kmem_remove(struct dev_dax *dev_dax)
+ out_unreg_mem:
+ 	unregister_memory_notifier(&vm->memory_notifier);
++out_unreg_group:
++	memory_group_unregister(vm->mgid);
+ out_del_resource:
+ 	virtio_mem_delete_resource(vm);
+ out_del_vq:
+@@ -2688,6 +2703,7 @@ static void virtio_mem_remove(struct virtio_device *vdev)
+ 	} else {
+ 		virtio_mem_delete_resource(vm);
+ 		kfree_const(vm->resource_name);
++		memory_group_unregister(vm->mgid);
  	}
  
- 	if (success >= dev_dax->nr_range) {
-+		memory_group_unregister(data->mgid);
- 		kfree(data->res_name);
- 		kfree(data);
- 		dev_set_drvdata(dev, NULL);
+ 	/* remove all tracking data - no locking needed */
 -- 
 2.31.1
 
