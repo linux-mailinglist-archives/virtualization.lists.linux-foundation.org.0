@@ -1,115 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB3813E40F1
-	for <lists.virtualization@lfdr.de>; Mon,  9 Aug 2021 09:42:39 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80A543E4200
+	for <lists.virtualization@lfdr.de>; Mon,  9 Aug 2021 11:04:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id BF8AA400C8;
-	Mon,  9 Aug 2021 07:42:37 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id E5A76401E2;
+	Mon,  9 Aug 2021 09:04:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KAV9NrJ0icWF; Mon,  9 Aug 2021 07:42:36 +0000 (UTC)
+	with ESMTP id Gw83XF6AEVVh; Mon,  9 Aug 2021 09:04:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 4007840178;
-	Mon,  9 Aug 2021 07:42:36 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 710FD401D9;
+	Mon,  9 Aug 2021 09:04:46 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9D246C001F;
-	Mon,  9 Aug 2021 07:42:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 013F6C000E;
+	Mon,  9 Aug 2021 09:04:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 12748C000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 42CADC000E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Aug 2021 07:42:35 +0000 (UTC)
+ Mon,  9 Aug 2021 09:04:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E6ECF82C3B
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3F01982521
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Aug 2021 07:42:34 +0000 (UTC)
+ Mon,  9 Aug 2021 09:04:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id D_6aurxlALwK
+ with ESMTP id wzanm-tWRNQM
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Aug 2021 07:42:34 +0000 (UTC)
+ Mon,  9 Aug 2021 09:04:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 37DD482C1E
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7C5D68249E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  9 Aug 2021 07:42:34 +0000 (UTC)
+ Mon,  9 Aug 2021 09:04:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1628494952;
+ s=mimecast20190719; t=1628499882;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=rpTchTW2WHBbp1FKZwjHPai3s4d7skP1b3ls4uFFkQM=;
- b=VOMQEzhr9grrnoTBTxRICfIpqMVHm8yvO2nxzJvBZMLEhjXc3E7KbcJIfMKmVEXnuBqiZ9
- AYtQHVKC15CoTGkp4CNRQeqccgBgE+f1K1ppzDRedIkMO89vMQ1vvV48O9CAP51S7OuxFv
- rczKIFfdSryWYJstljIZuUCorH7Ffpg=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-507-ul1Mf-i-O1uf3IGzduvPgw-1; Mon, 09 Aug 2021 03:42:29 -0400
-X-MC-Unique: ul1Mf-i-O1uf3IGzduvPgw-1
-Received: by mail-wr1-f71.google.com with SMTP id
- l7-20020a5d48070000b0290153b1557952so5100015wrq.16
+ bh=Ki0M/ROeQnFyAUomdoEV2Uzb2XMJVx3V8RfPhtihxzg=;
+ b=iNvGjx9i8Tj2sNjhNKWeU+h1pg6UXzDEL3Gg+fW+aZC7I4JaJot6K7JLwxFt/x9C6KWtKn
+ i/vV/m8SR5iRwJMjgmSXXMjYyyNYCGXn1r+Dnth7u5HI2qxAjjIS3rx5t1xuZkt5nRiFTV
+ ZdYoTdpunxPwtuDW3E/FAYM+pBxMzc0=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-96-UpmQsZM2OHeqnozv_-bB8A-1; Mon, 09 Aug 2021 05:04:40 -0400
+X-MC-Unique: UpmQsZM2OHeqnozv_-bB8A-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ b16-20020a0564022790b02903be6352006cso1367501ede.15
  for <virtualization@lists.linux-foundation.org>;
- Mon, 09 Aug 2021 00:42:29 -0700 (PDT)
+ Mon, 09 Aug 2021 02:04:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
- h=x-gm-message-state:subject:to:cc:references:from:organization
- :message-id:date:user-agent:mime-version:in-reply-to
- :content-language:content-transfer-encoding;
- bh=rpTchTW2WHBbp1FKZwjHPai3s4d7skP1b3ls4uFFkQM=;
- b=TNU7JElfKdypVanXE3znPC+PPZGfQi3SIjCiVUPkOCSqFxeEjJs0jVgySCjZg3Fj81
- XeBYq8qB+PUpGIZ0qBQhNyqbJfbq6f42ypm6bRhyQBTA1i0eaWK7GeZfz+pnab1zywus
- 2zqdgAf4Q3FV8g1V/ck/UI9moA+1P8yclhjPmRKqgauwzHFmw7KjcDOkPFXP2WC+EW+f
- MYs0EsJxZaFj5MVaa5vn41kxHuxvy2otkm2oIvzxYKIsgY9U3jR1Y9fLbXaicU79CVB7
- nsOtJfO3yLU7JL7OlQ4ZANJyY4Q1GXMUjVoE5p1i6ZfQbXvnX4aLK5lY+wI5Eindl54Q
- YsPQ==
-X-Gm-Message-State: AOAM5305739KcDYuLFv0VSifJjxHEInM3c+Yc5E+vtjF13eG78IBbvhI
- gZ9ZyUKhe/ae4ZcQ2hzbKxOeBJbrOAaZZ4xolQY3Ln3+Eu0Ym7+sT+WPlmWk9ef0UQbHFmA3Zu9
- MwmKXu6tD7NdsBCo3y+QJseaZ23bqEuDL8bzBPVs2y5F58KcirM8FDjNH04hItioKz9bWKbS+3c
- ztedpssq/rs07d2Q==
-X-Received: by 2002:a5d:4a50:: with SMTP id v16mr785833wrs.77.1628494948508;
- Mon, 09 Aug 2021 00:42:28 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzxIs0Mx3OKFD9xz5+nORNxkQlRcKGJL37rseXuAmlE7FZXZNGrGWmsWEyh3ihAd2BaJSF+0Q==
-X-Received: by 2002:a5d:4a50:: with SMTP id v16mr785813wrs.77.1628494948372;
- Mon, 09 Aug 2021 00:42:28 -0700 (PDT)
-Received: from ?IPv6:2003:d8:2f0a:7f00:fad7:3bc9:69d:31f?
- (p200300d82f0a7f00fad73bc9069d031f.dip0.t-ipconnect.de.
- [2003:d8:2f0a:7f00:fad7:3bc9:69d:31f])
- by smtp.gmail.com with ESMTPSA id a11sm4453865wrw.67.2021.08.09.00.42.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 09 Aug 2021 00:42:28 -0700 (PDT)
-Subject: Re: [RFC PATCH 10/15] virtio: virtio_balloon: use PAGES_PER_SECTION
- instead of MAX_ORDER_NR_PAGES.
-To: Zi Yan <ziy@nvidia.com>, linux-mm@kvack.org
-References: <20210805190253.2795604-1-zi.yan@sent.com>
- <20210805190253.2795604-11-zi.yan@sent.com>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-Message-ID: <3e27818c-970d-7138-0258-928274bf294e@redhat.com>
-Date: Mon, 9 Aug 2021 09:42:26 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.11.0
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Ki0M/ROeQnFyAUomdoEV2Uzb2XMJVx3V8RfPhtihxzg=;
+ b=OG8A9NWzYw+EDk656rT0bVj5kJArbOo37aJbOka5+e369Sa3e91HCmSMifCcygh5wh
+ XiccUhjMNGRyt6YpK2EcG4TRUfb1BjQzixPEUOhCe6UeCQTPluz7CsdUjNvCCADHOnPF
+ YQu0nnYM6jVcJaGrIm+5rPxVxcMK8YYca10cMvUohF9lv1wbkSttLOwwRVOw9QnM5PWq
+ IawQnr8QoI9oP1bTKRD9SPCIglCr07hQNnJ1rnt5SaP69/puJyQwU7/wNrsFYqBs8cxr
+ j+ECUPF/3DOcbo2zooaqb7/VU9jk4MzCxw3fwVZVzC1psxvdItzEFq85pwaubpEXiliO
+ qNiQ==
+X-Gm-Message-State: AOAM531RKmf/0AbnL9mXrBt8PCii+299rttFuo8/ppUzzsKRRZSzLIRA
+ nIKOj57K2jz4xvhWVhZ43Byz/5ymIIgGev3+ZaeB9j4xyJKXnUUlcN4+EU6SBI90/NNAN2nRTiD
+ mlp2Y6yw/y7hSpODIqBm7cIS9B82GcpXkRYg85b2mGA==
+X-Received: by 2002:a50:fc96:: with SMTP id f22mr6420993edq.367.1628499879136; 
+ Mon, 09 Aug 2021 02:04:39 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzkSN6hz5wCoR1ihaTfQVYU0G5SXcnlIsl04C8vUod+pZfjkrA0xPcoI4EIK+tSlo04UabGMA==
+X-Received: by 2002:a50:fc96:: with SMTP id f22mr6420895edq.367.1628499877660; 
+ Mon, 09 Aug 2021 02:04:37 -0700 (PDT)
+Received: from steredhat (a-nu5-14.tin.it. [212.216.181.13])
+ by smtp.gmail.com with ESMTPSA id og35sm5774625ejc.28.2021.08.09.02.04.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 09 Aug 2021 02:04:37 -0700 (PDT)
+Date: Mon, 9 Aug 2021 11:04:35 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Xie Yongji <xieyongji@bytedance.com>
+Subject: Re: [PATCH] vdpa_sim: Fix incorrect size passed to alloc_iova()
+Message-ID: <20210809090435.e5dpn4fw75rjwtw5@steredhat>
+References: <20210809060257.99-1-xieyongji@bytedance.com>
 MIME-Version: 1.0
-In-Reply-To: <20210805190253.2795604-11-zi.yan@sent.com>
+In-Reply-To: <20210809060257.99-1-xieyongji@bytedance.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Cc: "Michael S. Tsirkin" <mst@redhat.com>, John Hubbard <jhubbard@nvidia.com>,
- linux-kernel@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
- Michal Hocko <mhocko@kernel.org>, Vlastimil Babka <vbabka@suse.cz>,
- virtualization@lists.linux-foundation.org,
- "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>,
- Mike Kravetz <mike.kravetz@oracle.com>
+Content-Disposition: inline
+Cc: virtualization@lists.linux-foundation.org, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -126,46 +111,44 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 05.08.21 21:02, Zi Yan wrote:
-> From: Zi Yan <ziy@nvidia.com>
-> 
-> It keeps the existing behavior when MAX_ORDER grows beyond a section.
-> 
+On Mon, Aug 09, 2021 at 02:02:57PM +0800, Xie Yongji wrote:
+>The size passed to alloc_iova() should be the size of
+>page frames to allocate rather than size in bytes.
+>
+>Fixes: 4080fc106750 ("vdpa_sim: use iova module to allocate IOVA addresses")
+>Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
+>---
+> drivers/vdpa/vdpa_sim/vdpa_sim.c | 3 ++-
+> 1 file changed, 2 insertions(+), 1 deletion(-)
+>
+>diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>index 14e024de5cbf..1ccf615221fe 100644
+>--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+>@@ -137,7 +137,8 @@ static dma_addr_t vdpasim_map_range(struct vdpasim *vdpasim, phys_addr_t paddr,
+> 	int ret;
+>
+> 	/* We set the limit_pfn to the maximum (ULONG_MAX - 1) */
+>-	iova = alloc_iova(&vdpasim->iova, size, ULONG_MAX - 1, true);
+>+	iova = alloc_iova(&vdpasim->iova, size >> iova_shift(&vdpasim->iova),
+>+			  ULONG_MAX - 1, true);
+> 	if (!iova)
+> 		return DMA_MAPPING_ERROR;
+>
+>-- 
+>2.11.0
+>
 
-... but it breaks/changes existing behavior if MAX_ORDER is smaller than 
-a section?
+We invoked init_iova_domain() with granularity = 1, so it should be 
+correct to use the size in bytes.
 
-> Signed-off-by: Zi Yan <ziy@nvidia.com>
-> Cc: "Michael S. Tsirkin" <mst@redhat.com>
-> Cc: David Hildenbrand <david@redhat.com>
-> Cc: Jason Wang <jasowang@redhat.com>
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: linux-mm@kvack.org
-> Cc: linux-kernel@vger.kernel.org
-> ---
->   drivers/virtio/virtio_balloon.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/drivers/virtio/virtio_balloon.c b/drivers/virtio/virtio_balloon.c
-> index 47dce91f788c..de8d0355d827 100644
-> --- a/drivers/virtio/virtio_balloon.c
-> +++ b/drivers/virtio/virtio_balloon.c
-> @@ -36,7 +36,7 @@
->   #define VIRTIO_BALLOON_FREE_PAGE_ALLOC_FLAG (__GFP_NORETRY | __GFP_NOWARN | \
->   					     __GFP_NOMEMALLOC)
->   /* The order of free page blocks to report to host */
-> -#define VIRTIO_BALLOON_HINT_BLOCK_ORDER (MAX_ORDER - 1)
-> +#define VIRTIO_BALLOON_HINT_BLOCK_ORDER (PFN_SECTION_SHIFT - 1)
->   /* The size of a free page block in bytes */
->   #define VIRTIO_BALLOON_HINT_BLOCK_BYTES \
->   	(1 << (VIRTIO_BALLOON_HINT_BLOCK_ORDER + PAGE_SHIFT))
-> 
+However, in order to avoid future bugs if we change granularity, I agree 
+that it's better to use iova_shift():
 
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
--- 
 Thanks,
-
-David / dhildenb
+Stefano
 
 _______________________________________________
 Virtualization mailing list
