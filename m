@@ -1,57 +1,108 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 399F03E8CC6
-	for <lists.virtualization@lfdr.de>; Wed, 11 Aug 2021 11:03:02 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 44EDF3E8BEC
+	for <lists.virtualization@lfdr.de>; Wed, 11 Aug 2021 10:38:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AE96B608CE;
-	Wed, 11 Aug 2021 09:03:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D778260A84;
+	Wed, 11 Aug 2021 08:38:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rJjpTUqg7j1p; Wed, 11 Aug 2021 09:02:57 +0000 (UTC)
+	with ESMTP id 1C51r6PGfSXX; Wed, 11 Aug 2021 08:38:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id BB0176089E;
-	Wed, 11 Aug 2021 09:02:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D954B608FE;
+	Wed, 11 Aug 2021 08:38:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 273CBC001A;
-	Wed, 11 Aug 2021 09:02:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E4C0CC0020;
+	Wed, 11 Aug 2021 08:37:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5FA02C001A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CB006C001F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:02:54 +0000 (UTC)
+ Wed, 11 Aug 2021 08:37:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3CC8B404F2
+ by smtp3.osuosl.org (Postfix) with ESMTP id A3031608DC
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:02:54 +0000 (UTC)
+ Wed, 11 Aug 2021 08:37:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xUd8QcJ3mJyH
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XM2LSLPt1Q6j
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:02:49 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
- [IPv6:2a03:f480:1:14::7d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8A6ED401EF
+ Wed, 11 Aug 2021 08:37:56 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A7F2A60889
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:02:49 +0000 (UTC)
-Received: from [37.189.17.205] (helo=LAPTOP-EPOV2LRR)
- by s052d7dde.fastvps-server.com with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <marle@saisti.eu>) id 1mDjdX-0003X9-Nc
- for virtualization@lists.linux-foundation.org; Wed, 11 Aug 2021 11:30:55 +0300
-From: "ML" <marialemos72@gmail.com>
-Subject: [WorldCIST'22]: Call for Workshops Proposals
-To: virtualization@lists.linux-foundation.org
+ Wed, 11 Aug 2021 08:37:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1628671074;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=VQGq2oZOOou0uTNhMEWRj+fRhTCJj6KrKluauxdPWec=;
+ b=GE/DzZpXQmGBmy5KAOmeaW3rFXQcZDbd5hibOBxyCkiey8XL4iHPnwgNmWPlRmrIfCnX8m
+ KJw4URZ64Jg4mFLDu8gkK7v5/OiWWXDoIvOthxf4+2INMLMlpqaiirFXZSmdjHE7qojqkR
+ d85saej3L7g6Vkc5gazFsMdags1OSDk=
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
+ [209.85.216.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-201-xYXG5u8QP923faUmaoQ__Q-1; Wed, 11 Aug 2021 04:37:53 -0400
+X-MC-Unique: xYXG5u8QP923faUmaoQ__Q-1
+Received: by mail-pj1-f70.google.com with SMTP id
+ t16-20020a17090ae510b0290178bb9f2f04so1884768pjy.1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 11 Aug 2021 01:37:53 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+ :user-agent:mime-version:in-reply-to:content-transfer-encoding
+ :content-language;
+ bh=VQGq2oZOOou0uTNhMEWRj+fRhTCJj6KrKluauxdPWec=;
+ b=NtScwOrY8GBvzG8sf+DL6Skmtpl51m5cLUrTkLTMUjEn+zscC0ARWWWuSDHgHvl0H/
+ nsdOEqX/YLXZy9PGaO8DMkIAFMUNh0GcRcaiRmrtpZURbROdzYMH+SjxLuUmEJuyTR2l
+ lc9622eDfdEC4QTBQTEKih82DDvVPXZdfwzRHqZAlZf0VVpXebkSeOiyLodEThQIGZBv
+ CeWaE0822vv1hVS16GwRc0JcClWCGmDBhTaUIDX6OOTClgEDh8cb27LEfHofTQwxlNs4
+ xoFMPDYkKAJseck6E3EU6chL/lKfbEyXsGIjdok+u9lp0kslxEH5r75/kqReuobr3Aw3
+ pHMA==
+X-Gm-Message-State: AOAM530/Q3fIMKuz3+TkLWeEb6S4+tjItv/XavG4JYzJjYiG6HVj8F3N
+ il54/+6qPQpNLmqNGLUxi2AEH218pX2grsmtQvNzR2QiwJMaYc5ZhE6NJAbH7jxuCCdKgwCnKjv
+ ePiuEBjtFsgcn08HN0ROxKfMmSSmBcUlQu/mDWeBXrA==
+X-Received: by 2002:a17:902:7611:b029:12b:e55e:6ee8 with SMTP id
+ k17-20020a1709027611b029012be55e6ee8mr3400246pll.4.1628671072349; 
+ Wed, 11 Aug 2021 01:37:52 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw8M+P+1SPtfMiCt8mkLKE/uE5E3kENy5i80lkucyDlma2z4frINix2pdk2iHQ0iasUy7EKTA==
+X-Received: by 2002:a17:902:7611:b029:12b:e55e:6ee8 with SMTP id
+ k17-20020a1709027611b029012be55e6ee8mr3400230pll.4.1628671072113; 
+ Wed, 11 Aug 2021 01:37:52 -0700 (PDT)
+Received: from wangxiaodeMacBook-Air.local ([209.132.188.80])
+ by smtp.gmail.com with ESMTPSA id u24sm20027369pfm.85.2021.08.11.01.37.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 11 Aug 2021 01:37:51 -0700 (PDT)
+Subject: Re: [Patch v1 3/3] vdpa/mlx5: Add multiqueue support
+To: Eli Cohen <elic@nvidia.com>
+References: <20210809140800.97835-1-elic@nvidia.com>
+ <20210809140800.97835-4-elic@nvidia.com>
+ <07002568-e792-aa35-ec42-5e0f12883a03@redhat.com>
+ <20210811075347.GC56418@mtl-vdi-166.wap.labs.mlnx>
+From: Jason Wang <jasowang@redhat.com>
+Message-ID: <fccc39c8-f9af-e489-8804-511cb07f1ed2@redhat.com>
+Date: Wed, 11 Aug 2021 16:37:44 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-Date: Wed, 11 Aug 2021 09:30:56 +0100
-Message-ID: <201081173628265@gmail-com>
-X-Antivirus: AVG (VPS 210810-14, 10/8/2021), Outbound message
-X-Antivirus-Status: Clean
+In-Reply-To: <20210811075347.GC56418@mtl-vdi-166.wap.labs.mlnx>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Cc: eperezma@redhat.com, virtualization@lists.linux-foundation.org,
+ mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -63,251 +114,36 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: worldcist@gmail.com
-Content-Type: multipart/mixed; boundary="===============6335896275178784714=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is a multi-part message in MIME format
-
---===============6335896275178784714==
-Content-Type: multipart/alternative; charset=utf-8; boundary="nFN7cmn0QjpB=_QOkEqVNfrY3ZyiulKsEi"
-
-This is a multi-part message in MIME format
-
---nFN7cmn0QjpB=_QOkEqVNfrY3ZyiulKsEi
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
----------------------------------------------
-
-Call for Workshops Proposals 
-
-WorldCist'22 - 10th World Conference on Information Systems and Technologie=
-s
-
-Budva, Montenegro, 12 - 14 April 2022
-
-http://worldcist.org/ <http://worldcist.org/>
-
----------------------------------------------------------------------------=
------------------------------------------
-
-The Information Systems and Technologies research and industrial community =
-is invited to submit proposals for the organization of Workshops at WorldCi=
-st'22 - 10th World Conference on Information Systems and Technologies, to b=
-e held in Budva, Montenegro, 12-14 April 2022. WorldCist is a global forum =
-for researchers and practitioners to present and discuss the most recent in=
-novations, trends, results, experiences and concerns in the several perspec=
-tives of Information Systems and Technologies.
-
-
-WORKSHOP FORMAT
-
-Workshops should focus on a specific scientific subject on the scope of Wor=
-ldCist'22 but not directly included on the main conference areas. Each work=
-shop will be coordinated by an Organizing Committee composed of, at least, =
-two researchers in the field, preferably from different institutions and di=
-fferent countries. The organizers should create an international Program Co=
-mmittee for the Workshop, with recognized researchers within the specific W=
-orkshop scientific area. Each workshop should have at least ten submissions=
- and five accepted papers in order to be conducted at WorldCist'22.
-
-The selection of Workshops will be performed by WorldCist'22 Conference/Wor=
-kshop Chairs. Each Workshop will have 1 article offered for 10 articles wit=
-h paid registration, 2 articles offered for 20 articles with paid registrat=
-ion, and 3 articles offered for 40 articles with paid registration.
-
-Workshops full and short papers will be published in the conference main pr=
-oceedings in specific Workshop chapters published by Springer in a book of =
-the Lecture Notes in Networks and Systems series, will  be submitted for in=
-dexation by SCOPUS, WoS, Google Scholar, SCImago, among others, and will be=
- available in the SpringerLink Digital Library. Extended versions of best s=
-elected papers will be published in journals indexed by WoS/SCI, SCOPUS and=
- DBLP. Detailed and up-to-date information may be found at WorldCist'22 web=
-site: http://worldcist.org/ <http://worldcist.org/>
-
-
-WORKSHOP ORGANIZATION
-
-The Organizing Committee of each Workshop will be responsible for:
-
-- Producing and distributing the Workshop Call for Papers (CFP);
-- Coordinating the review and selection process for the papers submitted to=
- the Workshop, as Workshop chairs (on the paper submission system to be ins=
-talled);
-- Delivering the final versions of the papers accepted for the Workshop in =
-accordance with the guidelines and deadlines defined by WorldCist'22 organi=
-zers;
-- Coordinating and chairing the Workshop sessions at the conference.
-
-WorldCist'22 organizers reserve the right to cancel any Workshop if deadlin=
-es are missed or if the number of registered attendees is too low to suppor=
-t the costs associated with the Workshop.
-
-
-PROPOSAL CONTENT
-
-Workshop proposals should contain the following information:
-
-- Workshop title;
-- Brief description of the specific scientific scope of the Workshop;
-- List of topics of interest (max 15 topics);
-- Reasons the Workshop should be held within WorldCist=E2=80=9922;
-- Name, postal address, phone and email of all the members of the Workshop =
-Organizing Committee;
-- Preliminary proposal for the Workshop Program Committee (Names and affili=
-ations).
-
-Proposals should be submitted at https://easychair.org/conferences/?conf=3D=
-worldcistworkshops2022 <https://easychair.org/conferences/?conf=3Dworldcist=
-workshops2022> in PDF (in English), by September 8, 2021.
-
-
-IMPORTANT DATES
-
-- Deadline for Workshop proposals: September 8, 2021
-- Notification of Workshop acceptance: September 15, 2021
-- Workshop Final Information and Program Committee: September 25, 2021
-- Deadline for paper submission: November 30, 2021
-- Notification of paper acceptance: December 25, 2021
-- Deadline for final versions and conference registration: January 8, 2022
-- Conference dates: 12-14 April 2022
-
- 
-
-Website of WorldCIST'22: http://worldcist.org/ <http://worldcist.org/>
-
-
-WorldCIST'22 Team
-http://worldcist.org/ <http://worldcist.org/>
-
-
--- 
-This email has been checked for viruses by AVG.
-https://www.avg.com
-
---nFN7cmn0QjpB=_QOkEqVNfrY3ZyiulKsEi
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-<html>
-  <head>
-    <title></title>
-    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
-" />
-  </head>
-  <body>
-    <p>---------------------------------------------</p>
-    <p>Call for Workshops Proposals </p>
-    <p>WorldCist'22 - 10th World Conference on Information Systems and Tech=
-nologies</p>
-    <p>Budva, Montenegro, 12 - 14 April 2022</p>
-    <p><a href=3D"http://worldcist.org/">http://worldcist.org/</a></p>
-    <p>--------------------------------------------------------------------=
-------------------------------------------------</p>
-    <p>The Information Systems and Technologies research and industrial com=
-munity is invited to submit proposals for the organization of Workshops at =
-WorldCist'22 - 10th World Conference on Information Systems and Technologie=
-s, to be held in Budva, Montenegro, 12-14 April 2022. WorldCist is a global=
- forum for researchers and practitioners to present and discuss the most re=
-cent innovations, trends, results, experiences and concerns in the several =
-perspectives of Information Systems and Technologies.</p>
-    <p><br />WORKSHOP FORMAT</p>
-    <p>Workshops should focus on a specific scientific subject on the scope=
- of WorldCist'22 but not directly included on the main conference areas. Ea=
-ch workshop will be coordinated by an Organizing Committee composed of, at =
-least, two researchers in the field, preferably from different institutions=
- and different countries. The organizers should create an international Pro=
-gram Committee for the Workshop, with recognized researchers within the spe=
-cific Workshop scientific area. Each workshop should have at least ten subm=
-issions and five accepted papers in order to be conducted at WorldCist'22.<=
-/p>
-    <p>The selection of Workshops will be performed by WorldCist'22 Confere=
-nce/Workshop Chairs. Each Workshop will have 1 article offered for 10 artic=
-les with paid registration, 2 articles offered for 20 articles with paid re=
-gistration, and 3 articles offered for 40 articles with paid registration.<=
-/p>
-    <p>Workshops full and short papers will be published in the conference =
-main proceedings in specific Workshop chapters published by Springer in a b=
-ook of the Lecture Notes in Networks and Systems series, will&nbsp; be subm=
-itted for indexation by SCOPUS, WoS, Google Scholar, SCImago, among others,=
- and will be available in the SpringerLink Digital Library. Extended versio=
-ns of best selected papers will be published in journals indexed by WoS/SCI=
-, SCOPUS and DBLP. Detailed and up-to-date information may be found at Worl=
-dCist'22 website: <a href=3D"http://worldcist.org/">http://worldcist.org/</=
-a></p>
-    <p><br />WORKSHOP ORGANIZATION</p>
-    <p>The Organizing Committee of each Workshop will be responsible for:</=
-p>
-    <p>- Producing and distributing the Workshop Call for Papers (CFP);<br =
-/>- Coordinating the review and selection process for the papers submitted =
-to the Workshop, as Workshop chairs (on the paper submission system to be i=
-nstalled);<br />- Delivering the final versions of the papers accepted for =
-the Workshop in accordance with the guidelines and deadlines defined by Wor=
-ldCist'22 organizers;<br />- Coordinating and chairing the Workshop session=
-s at the conference.</p>
-    <p>WorldCist'22 organizers reserve the right to cancel any Workshop if =
-deadlines are missed or if the number of registered attendees is too low to=
- support the costs associated with the Workshop.</p>
-    <p><br />PROPOSAL CONTENT</p>
-    <p>Workshop proposals should contain the following information:</p>
-    <p>- Workshop title;<br />- Brief description of the specific scientifi=
-c scope of the Workshop;<br />- List of topics of interest (max 15 topics);=
-<br />- Reasons the Workshop should be held within WorldCist&rsquo;22;<br /=
->- Name, postal address, phone and email of all the members of the Workshop=
- Organizing Committee;<br />- Preliminary proposal for the Workshop Program=
- Committee (Names and affiliations).</p>
-    <p>Proposals should be submitted at <a href=3D"https://easychair.org/co=
-nferences/?conf=3Dworldcistworkshops2022">https://easychair.org/conferences=
-/?conf=3Dworldcistworkshops2022</a> in PDF (in English), by September 8, 20=
-21.</p>
-    <p><br />IMPORTANT DATES</p>
-    <p>- Deadline for Workshop proposals: September 8, 2021<br />- Notifica=
-tion of Workshop acceptance: September 15, 2021<br />- Workshop Final Infor=
-mation and Program Committee: September 25, 2021<br />- Deadline for paper =
-submission: November 30, 2021<br />- Notification of paper acceptance: Dece=
-mber 25, 2021<br />- Deadline for final versions and conference registratio=
-n: January 8, 2022<br />- Conference dates: 12-14 April 2022</p>
-    <p>&nbsp;</p>
-    <p>Website of WorldCIST'22: <a href=3D"http://worldcist.org/">http://wo=
-rldcist.org/</a></p>
-    <p><br />WorldCIST'22 Team<br /><a href=3D"http://worldcist.org/">http:=
-//worldcist.org/</a></p>
-  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
-<table style=3D"border-top: 1px solid #D3D4DE;">
-	<tr>
-        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
-=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
-n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
-s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
-=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
-a></td>
-		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
-13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
-free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
-source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
-"_blank" style=3D"color: #4453ea;">www.avg.com</a>
-		</td>
-	</tr>
-</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
-t=3D"1"> </a></div></body>
-</html>
-
---nFN7cmn0QjpB=_QOkEqVNfrY3ZyiulKsEi--
-
-
---===============6335896275178784714==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6335896275178784714==--
-
+CuWcqCAyMDIxLzgvMTEg5LiL5Y2IMzo1MywgRWxpIENvaGVuIOWGmemBkzoKPj4gT25lIHRoaW5n
+IG5lZWQgdG8gc29sdmUgZm9yIG1xIGlzIHRoYXQgdGhlOgo+Pgo+Pgo+Pj4gK3N0YXRpYyB1MTYg
+Y3RybF92cV9pZHgoc3RydWN0ICBtbHg1X3ZkcGFfZGV2ICptdmRldikKPj4+ICt7Cj4+PiArwqAg
+wqAgwqByZXR1cm4gMiAqICBtbHg1X3ZkcGFfbWF4X3FwcyhtdmRldi0+bWF4X3Zxcyk7Cj4+PiAr
+fQo+PiBXZSBzaG91bGQgaGFuZGxlIHRoZSBjYXNlIHdoZW4gTVEgaXMgc3VwcG9ydGVkIGJ5IHRo
+ZSBkZXZpY2UgYnV0IG5vdCB0aGUKPj4gZHJpdmVyLgo+Pgo+PiBFLmcgaW4gdGhlIGNhc2Ugd2hl
+biB3ZSBoYXZlIDIgcXVldWUgcGFpcnM6Cj4+Cj4+IFdoZW4gTVEgaXMgZW5hYmxlZCwgY3ZxIGlz
+IHF1ZXVlIDQKPj4KPj4gV2hlbiBNUSBpcyBub3QgZW5hYmxlZCwgY3ZxIGlzIHF1ZXVlIDIKPj4K
+PiBUaGVyZSdzIHNvbWUgaXNzdWUgd2l0aCB0aGlzLiBJIGdldCBjYWxsYmFja3MgdGFyZ2V0aW5n
+IHNwZWNpZmljCj4gdmlydHF1ZXVlcyBiZWZvcmUgZmVhdHVyZXMgbmVnb3RpYXRpb24gaGFzIGJl
+ZW4gY29tcGxldGVkLgo+Cj4gU3BlY2lmaWNhbGx5LCBJIGdldCBzZXRfdnFfY2IoKSBjYWxscy4g
+QXQgdGhpcyBwb2ludCBJIG11c3Qga25vdyB0aGUKPiBjb250cm9sIHZxIGluZGV4LgoKClNvIEkg
+dGhpbmsgd2UgbmVlZCBkbyBib3RoOgoKMSkgQXQgb25lIGhhbmQsIGl0J3MgYSBidWcgZm9yIHRo
+ZSB1c2Vyc3BhY2UgdG8gdXNlIHZxX2luZGV4IGJlZm9yZSAKZmVhdHVyZSBpcyBuZWdvdGlhdGVk
+CgoobG9va3MgbGlrZSBhIGJ1ZyBpbiBteSBjdnEgc2VyaWVzIHRoYXQgd2lsbCBjYWxsIFNFVF9W
+UklOR19DQUxMIGJlZm9yZSAKZmVhdHVyZSBpcyBuZWdvdGlhdGUsIHdoaWNoIEkgd2lsbCBsb29r
+KS4KCjIpIEF0IHRoZSBvdGhlciBoYW5kLCB0aGUgZHJpdmVyIHNob3VsZCBiZSBhYmxlIHRvIGRl
+YWwgd2l0aCB0aGF0CgoKPgo+IEkgdGhpbmsgdGhlIENWUSBpbmRleCBtdXN0IG5vdCBkZXBlbmQg
+b24gdGhlIG5lZ290aWF0ZWQgZmVhdHVyZXMgYnV0Cj4gcmF0aGVyIGRlcGVuZCBvZiB0aGUgdmFs
+dWUgdGhlIGRldmljZSBkcml2ZXIgcHJvdmlkZXMgaW4gdGhlIGNhbGwgdG8KPiBfdmRwYV9yZWdp
+c3Rlcl9kZXZpY2UoKS4KCgpBdCB0aGUgdmlydGlvIGxldmVsLCBpdCdzIHRvbyBsYXRlIHRvIGNo
+YW5nZSB0aGF0IGFuZCBpdCBicmVha3MgdGhlIApiYWNrd2FyZCBjb21wYXRpYmlsaXR5LgoKQnV0
+IGF0IHRoZSB2RFBBIGxldmVsLCB0aGUgdW5kZXIgbGF5ZXIgZGV2aWNlIGNhbiBtYXAgdmlydGlv
+IGN2cSB0byBhbnkgCm9mIGl0J3MgdmlydHF1ZXVlLgoKRS5nIG1hcCBjdnEgKGluZGV4IDIpIHRv
+IG1seDUgY3ZxICh0aGUgbGFzdCkuCgpUaGFua3MKCgo+CgpfX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmly
+dHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51
+eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
