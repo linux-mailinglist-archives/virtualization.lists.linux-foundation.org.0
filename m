@@ -1,97 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B1943E8CBB
-	for <lists.virtualization@lfdr.de>; Wed, 11 Aug 2021 11:00:48 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 167C43E8CCF
+	for <lists.virtualization@lfdr.de>; Wed, 11 Aug 2021 11:06:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DBFAE404E9;
-	Wed, 11 Aug 2021 09:00:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A074182A2D;
+	Wed, 11 Aug 2021 09:06:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RGavVUBXkgdg; Wed, 11 Aug 2021 09:00:43 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id m-buBynbEGCh; Wed, 11 Aug 2021 09:06:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id BBF2A40521;
-	Wed, 11 Aug 2021 09:00:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 81CD2838B6;
+	Wed, 11 Aug 2021 09:06:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 649E2C000E;
-	Wed, 11 Aug 2021 09:00:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 77632C001C;
+	Wed, 11 Aug 2021 09:06:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7A6DCC000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 31313C000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:00:41 +0000 (UTC)
+ Wed, 11 Aug 2021 09:06:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 69EF560869
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1ED07402E0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:00:41 +0000 (UTC)
+ Wed, 11 Aug 2021 09:06:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JNB0c9o-I9Pz
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id d0k1MQC8IW-8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:00:38 +0000 (UTC)
+ Wed, 11 Aug 2021 09:06:14 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7881A60889
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3CD8C402C4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 09:00:38 +0000 (UTC)
+ Wed, 11 Aug 2021 09:06:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1628672437;
+ s=mimecast20190719; t=1628672773;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=xVYk6O6UbKVQlEk4hpiQ+ioYAfkIhHzccxHN1Fx+454=;
- b=hePHulxC8UlcraAHRT2aUEJTodurv0JfJB9iGv/keICH5v5gAk1a4MswaPA2PaGeGq6jQO
- e99154TPgPsnoOaGSIYAW6iAJjQy74HNu5CREQhux9Ps7/Kze5KZNfk+7obpIdZMDC+uox
- yjQKBYEESEuCGB7QEYKXU/3iLbs/0kc=
+ bh=nY+KsOIvdmq/I8f8sHJvd3e52ylxx2cGgSYbPUMLTyI=;
+ b=dfCHBeibix8mWwilFzqiAj8jYXl6P/PrYH4dQ7fdDrkL4VMPxlVbhUAynIFVi4vGbA/hWX
+ sb2+ubHQkwvNOPAKKX8Ug+HprAwgin9Lf2BnbczoLlRaCro96pDbUTlCG9EnFiK4ovFHLt
+ /0C7iCImodKKdBZcQS+Pm2kWJMacR9c=
 Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
  [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-272-PjX0ftHdP0mLvw9wXRS_NA-1; Wed, 11 Aug 2021 05:00:36 -0400
-X-MC-Unique: PjX0ftHdP0mLvw9wXRS_NA-1
+ us-mta-324-Li4NKtqxO6ajnxaKYslb0g-1; Wed, 11 Aug 2021 05:06:11 -0400
+X-MC-Unique: Li4NKtqxO6ajnxaKYslb0g-1
 Received: by mail-ej1-f71.google.com with SMTP id
- ci25-20020a1709072679b029058e79f6c38aso414229ejc.13
+ x5-20020a1709064bc5b02905305454f5d1so422309ejv.10
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Aug 2021 02:00:36 -0700 (PDT)
+ Wed, 11 Aug 2021 02:06:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20161025;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=xVYk6O6UbKVQlEk4hpiQ+ioYAfkIhHzccxHN1Fx+454=;
- b=WTyhRTrwLIuYiEtuRCSp3UNjStPItixeP1qJcMwjgycrziGIdyYgrV7X2C+h1Ohcx3
- UrovMJVFnlKRzmjtY+zU24aJyejazEJgLVl9I49Xmfomk890VbalQ+hK8iDtuBBOnzf3
- iZJHNzwR5wDFkzlIgBAPiFqGHzGEl8JnoUJ2K0g0rDqJwThPc6HLr0aP9KfcZKAOAEU/
- hgzXntUYVbIbucwAKK/LBvIaNSyYnlTKP7t19DGX2zCM/1AX8hxwNWmd0yvL+Y7fai1w
- 1qHAiXXcbvESyJWWRNuFCS5IOKB/MGjr5A8186EGIgwimMIip5yPdhkMLd2RZSwtjApd
- ORPQ==
-X-Gm-Message-State: AOAM5305shFxzF+/f0xLPzZYUzTQyJIaJHV+I0sKTZRDyEDld0LqRMFI
- rk+YBbr3A2aoh+3ToMV8XXYCfLqr/vHcklg/dAuxS4CleR4pI0ERvubPF6NdxXGD8InYUkHiE5d
- DnGfwzPbgAdw/QO6a0ZKRbG8gwgFPRA8n85B2TWSw5Q==
-X-Received: by 2002:a17:906:a08a:: with SMTP id
- q10mr2593177ejy.100.1628672433810; 
- Wed, 11 Aug 2021 02:00:33 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx+Wh3oVEmn3QZnNAXMGsVm3JaAoH4eSr1ZKRKUam8aqa4jKG8XOA/RBO+z8M1b/2H29w2Viw==
-X-Received: by 2002:a17:906:a08a:: with SMTP id
- q10mr2593146ejy.100.1628672433523; 
- Wed, 11 Aug 2021 02:00:33 -0700 (PDT)
+ bh=nY+KsOIvdmq/I8f8sHJvd3e52ylxx2cGgSYbPUMLTyI=;
+ b=bVQpCcODIQRFXJVDBqxWQ85LETB/0KNz983Yq3hph2Ei0ft3sTdXg6CtTHoSs9SAl3
+ 2QVkssq0pFrxN2PfO+mR29sPlm8oW6ohUjp+xHc8Ve0XWOTnFhRspb/9a0fbigmc08UW
+ 5iLCo1N6r1h3nRFszeMsXR/DhzfDzAbHP0beBTP0bXUSYKuwOcW4IhptosGHz+9EZhwi
+ UXxEkIbIEhCf8D20uKLyrfiLDJ+JBXKQTBc3I6BTmAQreE3UYbfP2LbVNjjjmOmEPEug
+ V2chYzuHBeWXxdU/GDRtbACmqPOVtGKfohYSOEt5hcidFL3f4BOPVxi4gUiPHLdpuH1Q
+ pqxw==
+X-Gm-Message-State: AOAM532UhhZFgABIMIg9OvN/kePt9GG2ToT5Vyop609z6adj/Dgec+vH
+ 9vfO/8BDn28ToC9VSPWeXJlZio3mNLcYTfQBETCh1Njp1HINMt7CvkS9A4Izq+lUGFyqpNvkc+j
+ F8ny4w8URGGmmjvQHCG4G+LsaSY/0HgrLY7ly0gvvrg==
+X-Received: by 2002:a17:906:e57:: with SMTP id
+ q23mr2580416eji.483.1628672770530; 
+ Wed, 11 Aug 2021 02:06:10 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJydlQt4cUzS593TJoOXM9aBHzAXiW4JJ0JmGJ2tgg4wf8bTFkdPRDcvQCA3d1fcsJESLEh/Sg==
+X-Received: by 2002:a17:906:e57:: with SMTP id
+ q23mr2580395eji.483.1628672770414; 
+ Wed, 11 Aug 2021 02:06:10 -0700 (PDT)
 Received: from steredhat (a-nu5-14.tin.it. [212.216.181.13])
- by smtp.gmail.com with ESMTPSA id l19sm4147213edb.86.2021.08.11.02.00.32
+ by smtp.gmail.com with ESMTPSA id m12sm7955692ejd.21.2021.08.11.02.06.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 Aug 2021 02:00:33 -0700 (PDT)
-Date: Wed, 11 Aug 2021 11:00:30 +0200
+ Wed, 11 Aug 2021 02:06:10 -0700 (PDT)
+Date: Wed, 11 Aug 2021 11:06:07 +0200
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
-Subject: Re: [RFC PATCH v2 1/5] virtio/vsock: add 'VIRTIO_VSOCK_SEQ_EOM' bit
-Message-ID: <20210811090030.snu5ckf6bdkzxdg7@steredhat>
+Subject: Re: [RFC PATCH v2 2/5] vhost/vsock: support MSG_EOR bit processing
+Message-ID: <20210811090607.bl3cjsjrsg2ss7dp@steredhat>
 References: <20210810113901.1214116-1-arseny.krasnov@kaspersky.com>
- <20210810113956.1214463-1-arseny.krasnov@kaspersky.com>
+ <20210810114018.1214619-1-arseny.krasnov@kaspersky.com>
 MIME-Version: 1.0
-In-Reply-To: <20210810113956.1214463-1-arseny.krasnov@kaspersky.com>
+In-Reply-To: <20210810114018.1214619-1-arseny.krasnov@kaspersky.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -101,9 +101,9 @@ Cc: Andra Paraschiv <andraprs@amazon.com>, kvm@vger.kernel.org,
  "Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org, stsp2@yandex.ru,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  oxffffaa@gmail.com, Norbert Slusarek <nslusarek@gmx.net>,
- Stefan Hajnoczi <stefanha@redhat.com>, Jakub Kicinski <kuba@kernel.org>,
- Colin Ian King <colin.king@canonical.com>,
- "David S. Miller" <davem@davemloft.net>
+ Stefan Hajnoczi <stefanha@redhat.com>,
+ Colin Ian King <colin.king@canonical.com>, Jakub Kicinski <kuba@kernel.org>,
+ "David S. Miller" <davem@davemloft.net>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,129 +120,67 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Aug 10, 2021 at 02:39:53PM +0300, Arseny Krasnov wrote:
+On Tue, Aug 10, 2021 at 02:40:15PM +0300, Arseny Krasnov wrote:
+>It works in the same way as 'end-of-message' bit: if packet has
+>'EOM' bit, also check for 'EOR' bit.
 
-The title is confusing, we are renaming EOR in EOM.
+Please describe all changes, e.g. the new variable to accumulate flags 
+to restore.
 
->This bit is used to mark end of messages('EOM' - end of message), while
->'VIRIO_VSOCK_SEQ_EOR' is used to pass MSG_EOR. Also rename 'record' to
->'message' in implementation as it is different things.
 >
 >Signed-off-by: Arseny Krasnov <arseny.krasnov@kaspersky.com>
 >---
-> drivers/vhost/vsock.c                   | 12 ++++++------
-> include/uapi/linux/virtio_vsock.h       |  3 ++-
-> net/vmw_vsock/virtio_transport_common.c | 14 +++++++-------
-> 3 files changed, 15 insertions(+), 14 deletions(-)
+> drivers/vhost/vsock.c | 12 ++++++++----
+> 1 file changed, 8 insertions(+), 4 deletions(-)
 >
 >diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
->index f249622ef11b..feaf650affbe 100644
+>index feaf650affbe..06fc132b13c8 100644
 >--- a/drivers/vhost/vsock.c
 >+++ b/drivers/vhost/vsock.c
->@@ -178,15 +178,15 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
-> 			 * small rx buffers, headers of packets in rx queue are
-> 			 * created dynamically and are initialized with 
-> 			 header
-> 			 * of current packet(except length). But in case of
->-			 * SOCK_SEQPACKET, we also must clear record delimeter
->-			 * bit(VIRTIO_VSOCK_SEQ_EOR). Otherwise, instead of one
->-			 * packet with delimeter(which marks end of record),
->+			 * SOCK_SEQPACKET, we also must clear message delimeter
->+			 * bit(VIRTIO_VSOCK_SEQ_EOM). Otherwise, instead of one
->+			 * packet with delimeter(which marks end of message),
-> 			 * there will be sequence of packets with delimeter
-> 			 * bit set. After initialized header will be copied to
-> 			 * rx buffer, this bit will be restored.
+>@@ -114,7 +114,7 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+> 		size_t nbytes;
+> 		size_t iov_len, payload_len;
+> 		int head;
+>-		bool restore_flag = false;
+>+		uint32_t flags_to_restore = 0;
+>
+> 		spin_lock_bh(&vsock->send_pkt_list_lock);
+> 		if (list_empty(&vsock->send_pkt_list)) {
+>@@ -187,7 +187,12 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
 > 			 */
->-			if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOR) {
->-				pkt->hdr.flags &= ~cpu_to_le32(VIRTIO_VSOCK_SEQ_EOR);
->+			if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM) {
->+				pkt->hdr.flags &= ~cpu_to_le32(VIRTIO_VSOCK_SEQ_EOM);
-> 				restore_flag = true;
+> 			if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM) {
+> 				pkt->hdr.flags &= ~cpu_to_le32(VIRTIO_VSOCK_SEQ_EOM);
+>-				restore_flag = true;
+>+				flags_to_restore |= le32_to_cpu(VIRTIO_VSOCK_SEQ_EOM);
+>+
+>+				if (le32_to_cpu(pkt->hdr.flags & VIRTIO_VSOCK_SEQ_EOR)) {
+>+					pkt->hdr.flags &= ~cpu_to_le32(VIRTIO_VSOCK_SEQ_EOR);
+>+					flags_to_restore |= le32_to_cpu(VIRTIO_VSOCK_SEQ_EOR);
+                                                             ^
+I'm not sure this is needed, VIRTIO_VSOCK_SEQ_EOR is represented in the 
+cpu endianess.
+
+I think here you can simpy do `flags_to_restore |= VIRTIO_VSOCK_SEQ_EOR` 
+then use `pkt->hdr.flags |= cpu_to_le32(flags_to_restore);` as you 
+already do.
+
+>+				}
 > 			}
 > 		}
->@@ -225,7 +225,7 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+>
+>@@ -224,8 +229,7 @@ vhost_transport_do_send_pkt(struct vhost_vsock *vsock,
+> 		 * to send it with the next available buffer.
 > 		 */
 > 		if (pkt->off < pkt->len) {
-> 			if (restore_flag)
->-				pkt->hdr.flags |= cpu_to_le32(VIRTIO_VSOCK_SEQ_EOR);
->+				pkt->hdr.flags |= cpu_to_le32(VIRTIO_VSOCK_SEQ_EOM);
+>-			if (restore_flag)
+>-				pkt->hdr.flags |= cpu_to_le32(VIRTIO_VSOCK_SEQ_EOM);
+>+			pkt->hdr.flags |= cpu_to_le32(flags_to_restore);
 >
 > 			/* We are queueing the same virtio_vsock_pkt to handle
 > 			 * the remaining bytes, and we want to deliver it
->diff --git a/include/uapi/linux/virtio_vsock.h b/include/uapi/linux/virtio_vsock.h
->index 3dd3555b2740..64738838bee5 100644
->--- a/include/uapi/linux/virtio_vsock.h
->+++ b/include/uapi/linux/virtio_vsock.h
->@@ -97,7 +97,8 @@ enum virtio_vsock_shutdown {
->
-> /* VIRTIO_VSOCK_OP_RW flags values */
-> enum virtio_vsock_rw {
->-	VIRTIO_VSOCK_SEQ_EOR = 1,
->+	VIRTIO_VSOCK_SEQ_EOM = 1,
->+	VIRTIO_VSOCK_SEQ_EOR = 2,
-         ^
-I think is better to add this new flag in a separate patch.
-
-> };
->
-> #endif /* _UAPI_LINUX_VIRTIO_VSOCK_H */
->diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
->index 081e7ae93cb1..4d5a93beceb0 100644
->--- a/net/vmw_vsock/virtio_transport_common.c
->+++ b/net/vmw_vsock/virtio_transport_common.c
->@@ -77,7 +77,7 @@ virtio_transport_alloc_pkt(struct virtio_vsock_pkt_info *info,
->
-> 		if (msg_data_left(info->msg) == 0 &&
-> 		    info->type == VIRTIO_VSOCK_TYPE_SEQPACKET)
->-			pkt->hdr.flags |= cpu_to_le32(VIRTIO_VSOCK_SEQ_EOR);
->+			pkt->hdr.flags |= cpu_to_le32(VIRTIO_VSOCK_SEQ_EOM);
-> 	}
->
-> 	trace_virtio_transport_alloc_pkt(src_cid, src_port,
->@@ -457,7 +457,7 @@ static int virtio_transport_seqpacket_do_dequeue(struct vsock_sock *vsk,
-> 				dequeued_len += pkt_len;
-> 		}
->
->-		if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOR) {
->+		if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM) {
-> 			msg_ready = true;
-> 			vvs->msg_count--;
-> 		}
->@@ -1029,7 +1029,7 @@ virtio_transport_recv_enqueue(struct vsock_sock *vsk,
-> 		goto out;
-> 	}
->
->-	if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOR)
->+	if (le32_to_cpu(pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM)
-> 		vvs->msg_count++;
->
-> 	/* Try to copy small packets into the buffer of last packet queued,
->@@ -1044,12 +1044,12 @@ virtio_transport_recv_enqueue(struct vsock_sock *vsk,
->
-> 		/* If there is space in the last packet queued, we copy the
-> 		 * new packet in its buffer. We avoid this if the last packet
->-		 * queued has VIRTIO_VSOCK_SEQ_EOR set, because this is
->-		 * delimiter of SEQPACKET record, so 'pkt' is the first packet
->-		 * of a new record.
->+		 * queued has VIRTIO_VSOCK_SEQ_EOM set, because this is
->+		 * delimiter of SEQPACKET message, so 'pkt' is the first packet
->+		 * of a new message.
-> 		 */
-> 		if ((pkt->len <= last_pkt->buf_len - last_pkt->len) &&
->-		    !(le32_to_cpu(last_pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOR)) {
->+		    !(le32_to_cpu(last_pkt->hdr.flags) & VIRTIO_VSOCK_SEQ_EOM)) {
-> 			memcpy(last_pkt->buf + last_pkt->len, pkt->buf,
-> 			       pkt->len);
-> 			last_pkt->len += pkt->len;
 >-- 
 >2.25.1
 >
-
-The rest LGTM!
-
-Thanks,
-Stefano
 
 _______________________________________________
 Virtualization mailing list
