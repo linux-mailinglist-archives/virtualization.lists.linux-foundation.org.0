@@ -1,57 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B1C03E9E10
-	for <lists.virtualization@lfdr.de>; Thu, 12 Aug 2021 07:46:32 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B14B3E9E12
+	for <lists.virtualization@lfdr.de>; Thu, 12 Aug 2021 07:46:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A155960A88;
-	Thu, 12 Aug 2021 05:46:30 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 286584002B;
+	Thu, 12 Aug 2021 05:46:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NkDo5nqZrcoo; Thu, 12 Aug 2021 05:46:26 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 65A3D60A6D;
-	Thu, 12 Aug 2021 05:46:26 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id QvN4iObuflYW; Thu, 12 Aug 2021 05:46:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id CE333404ED;
+	Thu, 12 Aug 2021 05:46:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C6E77C000E;
-	Thu, 12 Aug 2021 05:46:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 66363C0023;
+	Thu, 12 Aug 2021 05:46:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 648D4C000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 79489C001A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Aug 2021 05:46:24 +0000 (UTC)
+ Thu, 12 Aug 2021 05:46:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3FAFC40581
+ by smtp4.osuosl.org (Postfix) with ESMTP id D8FAB40580
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Aug 2021 05:46:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3GY_PR2OpWYt
+ with ESMTP id ZUuL-wy-Qcu2
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Aug 2021 05:46:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-44.freemail.mail.aliyun.com
- (out30-44.freemail.mail.aliyun.com [115.124.30.44])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E69E540555
+Received: from out30-45.freemail.mail.aliyun.com
+ (out30-45.freemail.mail.aliyun.com [115.124.30.45])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 539E540560
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Aug 2021 05:46:22 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04420; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UilC9jt_1628747179; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R531e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UilCXZJ_1628747179; 
 Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UilC9jt_1628747179) by smtp.aliyun-inc.com(127.0.0.1);
- Thu, 12 Aug 2021 13:46:19 +0800
+ fp:SMTPD_---0UilCXZJ_1628747179) by smtp.aliyun-inc.com(127.0.0.1);
+ Thu, 12 Aug 2021 13:46:20 +0800
 From: Jeffle Xu <jefflexu@linux.alibaba.com>
 To: vgoyal@redhat.com,
 	stefanha@redhat.com,
 	miklos@szeredi.hu
-Subject: [PATCH 1/2] fuse: disable atomic_o_trunc if no_open is enabled
-Date: Thu, 12 Aug 2021 13:46:17 +0800
-Message-Id: <20210812054618.26057-2-jefflexu@linux.alibaba.com>
+Subject: [PATCH 2/2] virtiofs: reduce lock contention on fpq->lock
+Date: Thu, 12 Aug 2021 13:46:18 +0800
+Message-Id: <20210812054618.26057-3-jefflexu@linux.alibaba.com>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <20210812054618.26057-1-jefflexu@linux.alibaba.com>
 References: <20210812054618.26057-1-jefflexu@linux.alibaba.com>
@@ -77,44 +77,39 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Liu Bo <bo.liu@linux.alibaba.com>
 
-When 'no_open' is used by virtiofsd, guest kernel won't send OPEN request
-any more.  However, with atomic_o_trunc, SETATTR request is also omitted in
-OPEN(O_TRUNC) so that the backend file is not truncated.  With a following
-GETATTR, inode size on guest side is updated to be same with that on host
-side, the end result is that O_TRUNC semantic is broken.
+Since %req has been removed from fpq->processing_list, no one except
+request_wait_answer() is looking at this %req and request_wait_answer()
+waits only on FINISH flag, it's OK to remove fpq->lock after %req is
+dropped from the list.
 
-This disables atomic_o_trunc as well if with no_open.
-
-Reviewed-by: Peng Tao <tao.peng@linux.alibaba.com>
 Signed-off-by: Liu Bo <bo.liu@linux.alibaba.com>
 Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
 ---
- fs/fuse/file.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ fs/fuse/virtio_fs.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/fs/fuse/file.c b/fs/fuse/file.c
-index b494ff08f08c..1231128f8dd6 100644
---- a/fs/fuse/file.c
-+++ b/fs/fuse/file.c
-@@ -151,10 +151,16 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
- 			fuse_file_free(ff);
- 			return ERR_PTR(err);
- 		} else {
--			if (isdir)
-+			if (isdir) {
- 				fc->no_opendir = 1;
--			else
-+			} else {
- 				fc->no_open = 1;
-+				/*
-+				 * In case of no_open, disable atomic_o_trunc as
-+				 * well.
-+				 */
-+				fc->atomic_o_trunc = 0;
-+			}
+diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+index 0050132e2787..7dbf5502c57e 100644
+--- a/fs/fuse/virtio_fs.c
++++ b/fs/fuse/virtio_fs.c
+@@ -557,7 +557,6 @@ static void copy_args_from_argbuf(struct fuse_args *args, struct fuse_req *req)
+ static void virtio_fs_request_complete(struct fuse_req *req,
+ 				       struct virtio_fs_vq *fsvq)
+ {
+-	struct fuse_pqueue *fpq = &fsvq->fud->pq;
+ 	struct fuse_args *args;
+ 	struct fuse_args_pages *ap;
+ 	unsigned int len, i, thislen;
+@@ -586,9 +585,7 @@ static void virtio_fs_request_complete(struct fuse_req *req,
  		}
  	}
  
+-	spin_lock(&fpq->lock);
+ 	clear_bit(FR_SENT, &req->flags);
+-	spin_unlock(&fpq->lock);
+ 
+ 	fuse_request_end(req);
+ 	spin_lock(&fsvq->lock);
 -- 
 2.27.0
 
