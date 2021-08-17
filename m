@@ -1,78 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 254A03EE425
-	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 04:04:11 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A20B3EE44B
+	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 04:22:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 9EE8740DCB;
-	Tue, 17 Aug 2021 02:04:09 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7E4BD40350;
+	Tue, 17 Aug 2021 02:22:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hBh0O24PNvWl; Tue, 17 Aug 2021 02:04:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 4388B402F4;
-	Tue, 17 Aug 2021 02:04:05 +0000 (UTC)
+	with ESMTP id Z21z87wIWR3G; Tue, 17 Aug 2021 02:22:33 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 3821E402A4;
+	Tue, 17 Aug 2021 02:22:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A0779C0022;
-	Tue, 17 Aug 2021 02:04:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4E805C0025;
+	Tue, 17 Aug 2021 02:22:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B1D35C000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6A8BCC0023
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:04:02 +0000 (UTC)
+ Tue, 17 Aug 2021 02:22:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A1BD56079A
+ by smtp2.osuosl.org (Postfix) with ESMTP id 32DB6402C9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:04:02 +0000 (UTC)
+ Tue, 17 Aug 2021 02:22:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8YGqJ9DmyhyC
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GwPfz05d2fXY
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:03:59 +0000 (UTC)
+ Tue, 17 Aug 2021 02:22:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id ED1C96067C
+Received: from out30-42.freemail.mail.aliyun.com
+ (out30-42.freemail.mail.aliyun.com [115.124.30.42])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9EE1040012
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:03:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1629165837;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Oe74KUoqJHrJWPuwrj1dbWTw7Ns3p122axDxZOz+uFY=;
- b=CdyHxWdZocNS1El25dlLWmI3hnPYgj2A7TrtMepo0vlksTF6uG9FwBAdZDONA0QTJ9oz/L
- E2UHlk9E52wvijonaFYi8O1Szwo+hXVx0GnVHETpvWGi4IFUNYmmatz3o0PFcQDfynTXak
- 6TLRfBl0GnW1kPG7UyWj2XD2pVdNmdY=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-163-FppgmRmjMhGXea1rNUOKqw-1; Mon, 16 Aug 2021 22:03:55 -0400
-X-MC-Unique: FppgmRmjMhGXea1rNUOKqw-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com
- [10.5.11.23])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 2797687122E;
- Tue, 17 Aug 2021 02:03:54 +0000 (UTC)
-Received: from localhost.localdomain (ovpn-12-226.pek2.redhat.com
- [10.72.12.226])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6C78B19C44;
- Tue, 17 Aug 2021 02:03:46 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com, jasowang@redhat.com, davem@davemloft.net, kuba@kernel.org
-Subject: [PATCH net] virtio-net: use NETIF_F_GRO_HW instead of NETIF_F_LRO
-Date: Tue, 17 Aug 2021 10:03:38 +0800
-Message-Id: <20210817020338.6400-1-jasowang@redhat.com>
+ Tue, 17 Aug 2021 02:22:24 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R981e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UjH7KAY_1629166940; 
+Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
+ fp:SMTPD_---0UjH7KAY_1629166940) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 17 Aug 2021 10:22:21 +0800
+From: Jeffle Xu <jefflexu@linux.alibaba.com>
+To: vgoyal@redhat.com,
+	stefanha@redhat.com,
+	miklos@szeredi.hu
+Subject: [PATCH v4 0/8] fuse,virtiofs: support per-file DAX
+Date: Tue, 17 Aug 2021 10:22:12 +0800
+Message-Id: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
-Cc: willemb@google.com, netdev@vger.kernel.org, ivan@prestigetransportation.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+Cc: linux-fsdevel@vger.kernel.org, virtio-fs@redhat.com,
+ bo.liu@linux.alibaba.com, joseph.qi@linux.alibaba.com,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,85 +73,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Commit a02e8964eaf92 ("virtio-net: ethtool configurable LRO") tries to
-advertise LRO on behalf of the guest offloading features and allow the
-administrator to enable and disable those features via ethtool.
+This patchset adds support of per-file DAX for virtiofs, which is
+inspired by Ira Weiny's work on ext4[1] and xfs[2].
 
-This may lead several issues:
+Any comment is welcome.
 
-- For the device that doesn't support control guest offloads, the
-  "LRO" can't be disabled so we will get a warn in the
-  dev_disable_lro()
-- For the device that have the control guest offloads, the guest
-  offloads were disabled in the case of bridge etc which may slow down
-  the traffic.
+[1] commit 9cb20f94afcd ("fs/ext4: Make DAX mount option a tri-state")
+[2] commit 02beb2686ff9 ("fs/xfs: Make DAX mount option a tri-state")
 
-Fixing this by using NETIF_F_GRO_HW instead. Though the spec does not
-guaranteed to be re-segmented as original explicitly now, we can add
-that to the spec and then we can catch the bad configuration and
-setup.
 
-Fixes: a02e8964eaf92 ("virtio-net: ethtool configurable LRO")
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/net/virtio_net.c | 14 +++++++-------
- 1 file changed, 7 insertions(+), 7 deletions(-)
+changes since v3:
+- bug fix (patch 6): s/"IS_DAX(inode) != newdax"/"!!IS_DAX(inode) != newdax"
+- during FUSE_INIT, advertise capability for per-file DAX only when
+  mounted as "-o dax=inode" (patch 4)
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 0416a7e00914..10c382b08bce 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -63,7 +63,7 @@ static const unsigned long guest_offloads[] = {
- 	VIRTIO_NET_F_GUEST_CSUM
- };
- 
--#define GUEST_OFFLOAD_LRO_MASK ((1ULL << VIRTIO_NET_F_GUEST_TSO4) | \
-+#define GUEST_OFFLOAD_GRO_HW_MASK ((1ULL << VIRTIO_NET_F_GUEST_TSO4) | \
- 				(1ULL << VIRTIO_NET_F_GUEST_TSO6) | \
- 				(1ULL << VIRTIO_NET_F_GUEST_ECN)  | \
- 				(1ULL << VIRTIO_NET_F_GUEST_UFO))
-@@ -2481,7 +2481,7 @@ static int virtnet_xdp_set(struct net_device *dev, struct bpf_prog *prog,
- 	        virtio_has_feature(vi->vdev, VIRTIO_NET_F_GUEST_ECN) ||
- 		virtio_has_feature(vi->vdev, VIRTIO_NET_F_GUEST_UFO) ||
- 		virtio_has_feature(vi->vdev, VIRTIO_NET_F_GUEST_CSUM))) {
--		NL_SET_ERR_MSG_MOD(extack, "Can't set XDP while host is implementing LRO/CSUM, disable LRO/CSUM first");
-+		NL_SET_ERR_MSG_MOD(extack, "Can't set XDP while host is implementing GRO_HW/CSUM, disable GRO_HW/CSUM first");
- 		return -EOPNOTSUPP;
- 	}
- 
-@@ -2612,15 +2612,15 @@ static int virtnet_set_features(struct net_device *dev,
- 	u64 offloads;
- 	int err;
- 
--	if ((dev->features ^ features) & NETIF_F_LRO) {
-+	if ((dev->features ^ features) & NETIF_F_GRO_HW) {
- 		if (vi->xdp_enabled)
- 			return -EBUSY;
- 
--		if (features & NETIF_F_LRO)
-+		if (features & NETIF_F_GRO_HW)
- 			offloads = vi->guest_offloads_capable;
- 		else
- 			offloads = vi->guest_offloads_capable &
--				   ~GUEST_OFFLOAD_LRO_MASK;
-+				   ~GUEST_OFFLOAD_GRO_HW_MASK;
- 
- 		err = virtnet_set_guest_offloads(vi, offloads);
- 		if (err)
-@@ -3100,9 +3100,9 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		dev->features |= NETIF_F_RXCSUM;
- 	if (virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO4) ||
- 	    virtio_has_feature(vdev, VIRTIO_NET_F_GUEST_TSO6))
--		dev->features |= NETIF_F_LRO;
-+		dev->features |= NETIF_F_GRO_HW;
- 	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_GUEST_OFFLOADS))
--		dev->hw_features |= NETIF_F_LRO;
-+		dev->hw_features |= NETIF_F_GRO_HW;
- 
- 	dev->vlan_features = dev->features;
- 
+changes since v2:
+- modify fuse_show_options() accordingly to make it compatible with
+  new tri-state mount option (patch 2)
+- extract FUSE protocol changes into one seperate patch (patch 3)
+- FUSE server/client need to negotiate if they support per-file DAX
+  (patch 4)
+- extract DONT_CACHE logic into patch 6/7
+
+v3: https://www.spinics.net/lists/linux-fsdevel/msg200852.html
+v2: https://www.spinics.net/lists/linux-fsdevel/msg199584.html
+v1: https://www.spinics.net/lists/linux-virtualization/msg51008.html
+
+Jeffle Xu (8):
+  fuse: add fuse_should_enable_dax() helper
+  fuse: Make DAX mount option a tri-state
+  fuse: support per-file DAX
+  fuse: negotiate if server/client supports per-file DAX
+  fuse: enable per-file DAX
+  fuse: mark inode DONT_CACHE when per-file DAX indication changes
+  fuse: support changing per-file DAX flag inside guest
+  fuse: show '-o dax=inode' option only when FUSE server supports
+
+ fs/fuse/dax.c             | 32 +++++++++++++++++++++++++++++---
+ fs/fuse/file.c            |  4 ++--
+ fs/fuse/fuse_i.h          | 22 ++++++++++++++++++----
+ fs/fuse/inode.c           | 27 +++++++++++++++++++--------
+ fs/fuse/ioctl.c           | 15 +++++++++++++--
+ fs/fuse/virtio_fs.c       | 16 ++++++++++++++--
+ include/uapi/linux/fuse.h |  9 ++++++++-
+ 7 files changed, 103 insertions(+), 22 deletions(-)
+
 -- 
-2.25.1
+2.27.0
 
 _______________________________________________
 Virtualization mailing list
