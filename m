@@ -1,89 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2EFA93EEF07
-	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 17:20:21 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 62D0B3EEF66
+	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 17:48:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 97D8B80DFC;
-	Tue, 17 Aug 2021 15:20:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 12F4660B7D;
+	Tue, 17 Aug 2021 15:48:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id m7xRPTGr6ueX; Tue, 17 Aug 2021 15:20:14 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id asgkRimAu2rD; Tue, 17 Aug 2021 15:48:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 65E9580EAC;
-	Tue, 17 Aug 2021 15:20:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 1FD95611D8;
+	Tue, 17 Aug 2021 15:48:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CD217C0022;
-	Tue, 17 Aug 2021 15:20:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 95EBBC000E;
+	Tue, 17 Aug 2021 15:48:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2163DC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E1DE7C000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 15:20:11 +0000 (UTC)
+ Tue, 17 Aug 2021 15:48:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 04A834044A
+ by smtp4.osuosl.org (Postfix) with ESMTP id D225940525
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 15:20:11 +0000 (UTC)
+ Tue, 17 Aug 2021 15:48:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Kv5T6kI3eUVI
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=linuxfoundation.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id F1cO3eCRvjJs
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 15:20:10 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6EC33401CC
+ Tue, 17 Aug 2021 15:48:10 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D85D0404EF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 15:20:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1629213608;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Be+Prm+eAgDG7EnJxJOUP6plitOtAD+UIwtIrNoX3hY=;
- b=UmnXreIRxBvY/NjoPSg/AFWtLbcbRy6hRddG2cGVo0wCPXEGt94ES4sCRUVRPRponnCaDB
- dZmUm+99zcuzmVit2Ei8wDvZOE03PlalINaTZYicyjkAwbtpNyKzR+ett6/pL/0HmF7ypu
- JisTH2mtAr9N3erj0ihM6gv0fCi1JN4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-241-C0N0TL4FMMuP7TLeFOLm0Q-1; Tue, 17 Aug 2021 11:20:06 -0400
-X-MC-Unique: C0N0TL4FMMuP7TLeFOLm0Q-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
- [10.5.11.15])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 5A665100E324;
- Tue, 17 Aug 2021 15:20:05 +0000 (UTC)
-Received: from horse.redhat.com (unknown [10.22.10.24])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 0F4636A90E;
- Tue, 17 Aug 2021 15:19:53 +0000 (UTC)
-Received: by horse.redhat.com (Postfix, from userid 10451)
- id 82EE3220637; Tue, 17 Aug 2021 11:19:52 -0400 (EDT)
-Date: Tue, 17 Aug 2021 11:19:52 -0400
-From: Vivek Goyal <vgoyal@redhat.com>
-To: Miklos Szeredi <miklos@szeredi.hu>
-Subject: Re: [Virtio-fs] [PATCH v4 0/8] fuse,virtiofs: support per-file DAX
-Message-ID: <YRvTmIjt/WAl/UOP@redhat.com>
-References: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
- <CAJfpeguw1hMOaxpDmjmijhf=-JEW95aEjxfVo_=D_LyWx8LDgw@mail.gmail.com>
- <YRuCHvhICtTzMK04@work-vm>
- <CAJfpegvM+S5Xru3Yfc88C64mecvco=f99y-TajQBDfkLD-S8zQ@mail.gmail.com>
- <0896b1f6-c8c4-6071-c05b-a333c6cccacd@linux.alibaba.com>
- <CAJfpeguA3zeJq-HJUVZHv4nNybqFezkzPNhcWmj0n5+i7YpW4Q@mail.gmail.com>
+ Tue, 17 Aug 2021 15:48:10 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E254460F58;
+ Tue, 17 Aug 2021 15:48:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1629215290;
+ bh=5H+7vJbliQsK8rs/+6iZ2HR7NrfuQkz/HOEYxQLMkoI=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=pK+MLTaqQaH4Vkn15pGfHDsShIQF/E8n2g8oBolYwxlF9M4WGXhND3rv0j/TUhOuD
+ HiRo3zpGif/fRzNswPlKWa93QFr85bNRh1wNFt2EYzO0LpWZEiiG1iYNikRRNN/spO
+ GeiaoWrNZS7RoMl81z0aN9Kx2cNsBbzlF/6gi1lY=
+Date: Tue, 17 Aug 2021 17:48:07 +0200
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Xianting Tian <xianting.tian@linux.alibaba.com>
+Subject: Re: [PATCH v7 1/2] tty: hvc: pass DMA capable memory to put_chars()
+Message-ID: <YRvaN0RwW03kkO1O@kroah.com>
+References: <20210817132300.165014-1-xianting.tian@linux.alibaba.com>
+ <20210817132300.165014-2-xianting.tian@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAJfpeguA3zeJq-HJUVZHv4nNybqFezkzPNhcWmj0n5+i7YpW4Q@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: Joseph Qi <joseph.qi@linux.alibaba.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- virtualization@lists.linux-foundation.org,
- virtio-fs-list <virtio-fs@redhat.com>, linux-fsdevel@vger.kernel.org
+In-Reply-To: <20210817132300.165014-2-xianting.tian@linux.alibaba.com>
+Cc: arnd@arndb.de, amit@kernel.org, jirislaby@kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linuxppc-dev@lists.ozlabs.org, osandov@fb.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,39 +78,20 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Aug 17, 2021 at 04:11:14PM +0200, Miklos Szeredi wrote:
+On Tue, Aug 17, 2021 at 09:22:59PM +0800, Xianting Tian wrote:
+> We tested the patch, it worked normally.
 
-[..]
-> > As for virtiofs, Dr. David Alan Gilbert has mentioned that various files
-> > may compete for limited DAX window resource.
-> >
-> > Besides, supporting DAX for small files can be expensive. Small files
-> > can consume DAX window resource rapidly, and if small files are accessed
-> > only once, the cost of mmap/munmap on host can not be ignored.
-> 
-> That's a good point.   Maybe we should disable DAX for file sizes much
-> smaller than the chunk size?
+Who is "we"?
 
-This indeed seems like a valid concern. 2MB chunk size will consume
-512 struct page entries. If an entry is 64 bytes in size, then that's
-32K RAM used to access 4K bytes of file. Does not sound like good usage
-of resources.
+> Signed-off-by: Xianting Tian <xianting.tian@linux.alibaba.com>
 
-If we end up selectively disabling dax based on file size, two things
-come to me mind.
+Like I said before, I need another developer from your company to review
+and sign-off on this patch (and the other one), before I am willing to
+look at it, based on the previous mistakes that have happened here.
 
-- Will be good if it is users can opt-in for this behavior. There
-  might be a class of users who always want to enable dax on all
-  files.
+thanks,
 
-- Secondly, we will have to figure out how to do it safely in the
-  event of shared filesystem where file size can change suddenly.
-  Will need to make sure change from dax to no-dax and vice-versa
-  is safe w.r.t page cache and other paths.
-
-Thanks
-Vivek
-
+greg k-h
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
