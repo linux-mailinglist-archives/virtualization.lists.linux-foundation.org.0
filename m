@@ -1,58 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5A20B3EE44B
-	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 04:22:40 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B11C3EE443
+	for <lists.virtualization@lfdr.de>; Tue, 17 Aug 2021 04:22:34 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 7E4BD40350;
-	Tue, 17 Aug 2021 02:22:37 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Z21z87wIWR3G; Tue, 17 Aug 2021 02:22:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 3821E402A4;
-	Tue, 17 Aug 2021 02:22:33 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4E805C0025;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 82B75404B5;
 	Tue, 17 Aug 2021 02:22:32 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id C16RcjZA4I8b; Tue, 17 Aug 2021 02:22:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 4224040425;
+	Tue, 17 Aug 2021 02:22:28 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8F39AC000E;
+	Tue, 17 Aug 2021 02:22:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6A8BCC0023
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32850C000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:22:30 +0000 (UTC)
+ Tue, 17 Aug 2021 02:22:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 32DB6402C9
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0BEF8404A4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Aug 2021 02:22:29 +0000 (UTC)
+ Tue, 17 Aug 2021 02:22:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GwPfz05d2fXY
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id jkMomzz7Ivcm
  for <virtualization@lists.linux-foundation.org>;
  Tue, 17 Aug 2021 02:22:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9EE1040012
+Received: from out30-57.freemail.mail.aliyun.com
+ (out30-57.freemail.mail.aliyun.com [115.124.30.57])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id DDC5540425
  for <virtualization@lists.linux-foundation.org>;
  Tue, 17 Aug 2021 02:22:24 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R981e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UjH7KAY_1629166940; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426; MF=jefflexu@linux.alibaba.com;
+ NM=1; PH=DS; RN=8; SR=0; TI=SMTPD_---0UjHTKZ._1629166941; 
 Received: from localhost(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UjH7KAY_1629166940) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0UjHTKZ._1629166941) by smtp.aliyun-inc.com(127.0.0.1);
  Tue, 17 Aug 2021 10:22:21 +0800
 From: Jeffle Xu <jefflexu@linux.alibaba.com>
 To: vgoyal@redhat.com,
 	stefanha@redhat.com,
 	miklos@szeredi.hu
-Subject: [PATCH v4 0/8] fuse,virtiofs: support per-file DAX
-Date: Tue, 17 Aug 2021 10:22:12 +0800
-Message-Id: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
+Subject: [PATCH v4 1/8] fuse: add fuse_should_enable_dax() helper
+Date: Tue, 17 Aug 2021 10:22:13 +0800
+Message-Id: <20210817022220.17574-2-jefflexu@linux.alibaba.com>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
+References: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
 MIME-Version: 1.0
 Cc: linux-fsdevel@vger.kernel.org, virtio-fs@redhat.com,
  bo.liu@linux.alibaba.com, joseph.qi@linux.alibaba.com,
@@ -73,51 +75,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patchset adds support of per-file DAX for virtiofs, which is
-inspired by Ira Weiny's work on ext4[1] and xfs[2].
+This is in prep for following per-file DAX checking.
 
-Any comment is welcome.
+Signed-off-by: Jeffle Xu <jefflexu@linux.alibaba.com>
+---
+ fs/fuse/dax.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-[1] commit 9cb20f94afcd ("fs/ext4: Make DAX mount option a tri-state")
-[2] commit 02beb2686ff9 ("fs/xfs: Make DAX mount option a tri-state")
-
-
-changes since v3:
-- bug fix (patch 6): s/"IS_DAX(inode) != newdax"/"!!IS_DAX(inode) != newdax"
-- during FUSE_INIT, advertise capability for per-file DAX only when
-  mounted as "-o dax=inode" (patch 4)
-
-changes since v2:
-- modify fuse_show_options() accordingly to make it compatible with
-  new tri-state mount option (patch 2)
-- extract FUSE protocol changes into one seperate patch (patch 3)
-- FUSE server/client need to negotiate if they support per-file DAX
-  (patch 4)
-- extract DONT_CACHE logic into patch 6/7
-
-v3: https://www.spinics.net/lists/linux-fsdevel/msg200852.html
-v2: https://www.spinics.net/lists/linux-fsdevel/msg199584.html
-v1: https://www.spinics.net/lists/linux-virtualization/msg51008.html
-
-Jeffle Xu (8):
-  fuse: add fuse_should_enable_dax() helper
-  fuse: Make DAX mount option a tri-state
-  fuse: support per-file DAX
-  fuse: negotiate if server/client supports per-file DAX
-  fuse: enable per-file DAX
-  fuse: mark inode DONT_CACHE when per-file DAX indication changes
-  fuse: support changing per-file DAX flag inside guest
-  fuse: show '-o dax=inode' option only when FUSE server supports
-
- fs/fuse/dax.c             | 32 +++++++++++++++++++++++++++++---
- fs/fuse/file.c            |  4 ++--
- fs/fuse/fuse_i.h          | 22 ++++++++++++++++++----
- fs/fuse/inode.c           | 27 +++++++++++++++++++--------
- fs/fuse/ioctl.c           | 15 +++++++++++++--
- fs/fuse/virtio_fs.c       | 16 ++++++++++++++--
- include/uapi/linux/fuse.h |  9 ++++++++-
- 7 files changed, 103 insertions(+), 22 deletions(-)
-
+diff --git a/fs/fuse/dax.c b/fs/fuse/dax.c
+index 0e5407f48e6a..c6f4e82e65f3 100644
+--- a/fs/fuse/dax.c
++++ b/fs/fuse/dax.c
+@@ -1336,11 +1336,19 @@ static const struct address_space_operations fuse_dax_file_aops  = {
+ 	.invalidatepage	= noop_invalidatepage,
+ };
+ 
+-void fuse_dax_inode_init(struct inode *inode)
++static bool fuse_should_enable_dax(struct inode *inode)
+ {
+ 	struct fuse_conn *fc = get_fuse_conn(inode);
+ 
+ 	if (!fc->dax)
++		return false;
++
++	return true;
++}
++
++void fuse_dax_inode_init(struct inode *inode)
++{
++	if (!fuse_should_enable_dax(inode))
+ 		return;
+ 
+ 	inode->i_flags |= S_DAX;
 -- 
 2.27.0
 
