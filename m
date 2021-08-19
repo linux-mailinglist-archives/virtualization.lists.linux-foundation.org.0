@@ -1,89 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D56523F0A9D
-	for <lists.virtualization@lfdr.de>; Wed, 18 Aug 2021 19:55:18 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E8DF3F0F9E
+	for <lists.virtualization@lfdr.de>; Thu, 19 Aug 2021 02:50:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 14A17402B7;
-	Wed, 18 Aug 2021 17:55:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id BEF7A80CFE;
+	Thu, 19 Aug 2021 00:50:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kxCJti_esK0v; Wed, 18 Aug 2021 17:55:13 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1PZY1_ctWtxl; Thu, 19 Aug 2021 00:50:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id C7BA3404AF;
-	Wed, 18 Aug 2021 17:55:12 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8524580D12;
+	Thu, 19 Aug 2021 00:50:31 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9C81CC001D;
-	Wed, 18 Aug 2021 17:55:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0CDBAC000E;
+	Thu, 19 Aug 2021 00:50:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 12442C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3A3FDC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Aug 2021 17:55:11 +0000 (UTC)
+ Thu, 19 Aug 2021 00:50:29 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E5FD240399
+ by smtp3.osuosl.org (Postfix) with ESMTP id 21BBD60649
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Aug 2021 17:55:10 +0000 (UTC)
+ Thu, 19 Aug 2021 00:50:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bb0vsFJnlzGb
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 2ohfif0qXhRp
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Aug 2021 17:55:10 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- by smtp2.osuosl.org (Postfix) with ESMTPS id BDE75404AE
+ Thu, 19 Aug 2021 00:50:28 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7AD2E605E3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Aug 2021 17:55:07 +0000 (UTC)
-Received: by mail-lj1-x232.google.com with SMTP id q21so6596822ljj.6
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Aug 2021 10:55:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20150623.gappssmtp.com; s=20150623;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=FaxHlGthirATxFhjaA6+LodZEweSNS8npuY55w+kwqI=;
- b=ueRgO9rsDH8h9Dl0VwHX2lFZDbo6wJ/hp2dx513bA7Vjy8ckwys5RknhabUcbciaUz
- njaAo6cj1gI6O24fDdfYNL4oTe+iiEvj+AJIfeYmaWltf2ww9jhHMtHmtO6yTOU9TjqJ
- zWTozWykUKnVLhAak+OuFdw9Qpk7lIsh/VmNLNg8JoBWoPjBYpD7/3lBRD5ry9gjxkYL
- 2SeZ2ASJ98Y1WHG0cxVmLntEe1GzRtzgwfuiu/w0yW1mAp2j0zbKj9OhChvBysi3Vj4l
- 0KWzwY3PGzXCXr55XUL5321t8iGPT6btF6a0hCsFNWeTn/AXPK3CVHLaCBIS8kgreTb3
- D64Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=FaxHlGthirATxFhjaA6+LodZEweSNS8npuY55w+kwqI=;
- b=Id5CuHxLH6EWXo82M0qgPTRvWCanVNNxxApVDGZN+qgx+RtWdaZkPF9chNWV2vtVhR
- YKTPpmoaJPTVk+wkx+x4LcSWGOHI/ci3ENm7Lqmh1H1zebM8kQ0Sb+RnJCapESL+4mmJ
- bU61Alrx05puqkjzQTHL+wSChGGT7RtcmJfLlcKx2kEegRv1LTtYU5oPxQRDIJFzdiK5
- sqTKFQoupQXooYenHrmv/b4W+OUt1eSJAOG6WywQS4nWDwpWUCP2/qloFDbW4YHkGNbx
- QsVdHkiVypLLFlnXXHGjA9in7V6+CWj00GAUKDR0t1IqlUjet+80lRqA69FH0w+rRQoE
- geHQ==
-X-Gm-Message-State: AOAM530EYrXu+4GVHCmd0Gpepkw3J1ixXnvukrxhvgCPRhEw6HFygtXL
- dnDRDy3Kh7W5XMtYUte3EYGKEQ==
-X-Google-Smtp-Source: ABdhPJy5ThR5uwyZiMpJBsOcvGSZdjgDAXV+IUj3zSolVN+xfllaNSK4wygdy5FFjijVKRaCYS++bA==
-X-Received: by 2002:a2e:a549:: with SMTP id e9mr8906892ljn.500.1629309305717; 
- Wed, 18 Aug 2021 10:55:05 -0700 (PDT)
-Received: from navi.cosmonova.net.ua ([95.67.24.131])
- by smtp.gmail.com with ESMTPSA id c5sm55820lji.67.2021.08.18.10.55.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Aug 2021 10:55:05 -0700 (PDT)
-From: Andrew Melnychenko <andrew@daynix.com>
-To: mst@redhat.com, jasowang@redhat.com, davem@davemloft.net, kuba@kernel.org
-Subject: [RFC PATCH 3/3] drivers/net/virtio_net: Added RSS hash report.
-Date: Wed, 18 Aug 2021 20:54:40 +0300
-Message-Id: <20210818175440.128691-4-andrew@daynix.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210818175440.128691-1-andrew@daynix.com>
-References: <20210818175440.128691-1-andrew@daynix.com>
-MIME-Version: 1.0
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+ Thu, 19 Aug 2021 00:50:28 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10080"; a="203657798"
+X-IronPort-AV: E=Sophos;i="5.84,333,1620716400"; d="scan'208";a="203657798"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Aug 2021 17:50:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.84,333,1620716400"; d="scan'208";a="678768847"
+Received: from jiedeng-optiplex-7050.sh.intel.com ([10.239.154.104])
+ by fmsmga006.fm.intel.com with ESMTP; 18 Aug 2021 17:50:24 -0700
+From: Jie Deng <jie.deng@intel.com>
+To: linux-i2c@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH] i2c: virtio: Fix the compiler warning when CONFIG_ACPI is not
+ set
+Date: Thu, 19 Aug 2021 08:48:41 +0800
+Message-Id: <4309f869890e70810f2c40a8d60495240e318303.1629333590.git.jie.deng@intel.com>
+X-Mailer: git-send-email 2.7.4
+Cc: wsa@kernel.org, viresh.kumar@linaro.org, conghui.chen@intel.com,
+ sfr@canb.auug.org.au
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,255 +68,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added set_hash for skb.
-Also added hashflow set/get callbacks.
-Virtio RSS "IPv6 extensions" hashes disabled.
-Also, disabling RXH_IP_SRC/DST for TCP would disable them for UDP.
-TCP and UDP supports only:
-ethtool -U eth0 rx-flow-hash tcp4 sd
-    RXH_IP_SRC + RXH_IP_DST
-ethtool -U eth0 rx-flow-hash tcp4 sdfn
-    RXH_IP_SRC + RXH_IP_DST + RXH_L4_B_0_1 + RXH_L4_B_2_3
+Fix the compiler warning "drivers/i2c/busses/i2c-virtio.c:208:17:
+warning: unused variable 'pdev' [-Wunused-variable]" when CONFIG_ACPI
+is not set.
 
-Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
+Fixes: 8fb12751ac78 ("i2c: virtio: add a virtio i2c frontend driver")
+Signed-off-by: Jie Deng <jie.deng@intel.com>
 ---
- drivers/net/virtio_net.c | 177 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 177 insertions(+)
+ drivers/i2c/busses/i2c-virtio.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index d87bde246305..6a52eeaf9292 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -1151,6 +1151,8 @@ static void receive_buf(struct virtnet_info *vi, struct receive_queue *rq,
- 	struct net_device *dev = vi->dev;
- 	struct sk_buff *skb;
- 	struct virtio_net_hdr_mrg_rxbuf *hdr;
-+	struct virtio_net_hdr_v1_hash *hdr_hash;
-+	enum pkt_hash_types rss_hash_type;
+diff --git a/drivers/i2c/busses/i2c-virtio.c b/drivers/i2c/busses/i2c-virtio.c
+index d3e60d9..964c601 100644
+--- a/drivers/i2c/busses/i2c-virtio.c
++++ b/drivers/i2c/busses/i2c-virtio.c
+@@ -205,7 +205,6 @@ static const struct i2c_adapter_quirks virtio_i2c_quirks = {
  
- 	if (unlikely(len < vi->hdr_len + ETH_HLEN)) {
- 		pr_debug("%s: short packet %i\n", dev->name, len);
-@@ -1177,6 +1179,29 @@ static void receive_buf(struct virtnet_info *vi, struct receive_queue *rq,
- 		return;
- 
- 	hdr = skb_vnet_hdr(skb);
-+	if (vi->has_rss_hash_report && (dev->features & NETIF_F_RXHASH)) {
-+		hdr_hash = (struct virtio_net_hdr_v1_hash *)(hdr);
-+
-+		switch (hdr_hash->hash_report) {
-+		case VIRTIO_NET_HASH_REPORT_TCPv4:
-+		case VIRTIO_NET_HASH_REPORT_UDPv4:
-+		case VIRTIO_NET_HASH_REPORT_TCPv6:
-+		case VIRTIO_NET_HASH_REPORT_UDPv6:
-+		case VIRTIO_NET_HASH_REPORT_TCPv6_EX:
-+		case VIRTIO_NET_HASH_REPORT_UDPv6_EX:
-+			rss_hash_type = PKT_HASH_TYPE_L4;
-+			break;
-+		case VIRTIO_NET_HASH_REPORT_IPv4:
-+		case VIRTIO_NET_HASH_REPORT_IPv6:
-+		case VIRTIO_NET_HASH_REPORT_IPv6_EX:
-+			rss_hash_type = PKT_HASH_TYPE_L3;
-+			break;
-+		case VIRTIO_NET_HASH_REPORT_NONE:
-+		default:
-+			rss_hash_type = PKT_HASH_TYPE_NONE;
-+		}
-+		skb_set_hash(skb, hdr_hash->hash_value, rss_hash_type);
-+	}
- 
- 	if (hdr->hdr.flags & VIRTIO_NET_HDR_F_DATA_VALID)
- 		skb->ip_summed = CHECKSUM_UNNECESSARY;
-@@ -2250,6 +2275,132 @@ static void virtnet_init_default_rss(struct virtnet_info *vi)
- 	netdev_rss_key_fill(vi->ctrl->rss.key, vi->rss_key_size);
- }
- 
-+void virtnet_get_hashflow(const struct virtnet_info *vi, struct ethtool_rxnfc *info)
-+{
-+	info->data = 0;
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_TCPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case TCP_V6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_TCPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case UDP_V4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_UDPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case UDP_V6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_UDPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case IPV4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4)
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+
-+		break;
-+	case IPV6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4)
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+
-+		break;
-+	default:
-+		info->data = 0;
-+		break;
-+	}
-+}
-+
-+bool virtnet_set_hashflow(struct virtnet_info *vi, struct ethtool_rxnfc *info)
-+{
-+	u64 is_iphash = info->data & (RXH_IP_SRC | RXH_IP_DST);
-+	u64 is_porthash = info->data & (RXH_L4_B_0_1 | RXH_L4_B_2_3);
-+	u32 new_hashtypes = vi->rss_hash_types_saved;
-+
-+	if ((is_iphash && (is_iphash != (RXH_IP_SRC | RXH_IP_DST))) ||
-+	    (is_porthash && (is_porthash != (RXH_L4_B_0_1 | RXH_L4_B_2_3)))) {
-+		return false;
-+	}
-+
-+	if (!is_iphash && is_porthash)
-+		return false;
-+
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+	case UDP_V4_FLOW:
-+	case IPV4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_IPv4;
-+		if (is_iphash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_IPv4;
-+
-+		break;
-+	case TCP_V6_FLOW:
-+	case UDP_V6_FLOW:
-+	case IPV6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_IPv6;
-+		if (is_iphash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_IPv6;
-+
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_TCPv4;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_TCPv4;
-+
-+		break;
-+	case UDP_V4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_UDPv4;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_UDPv4;
-+
-+		break;
-+	case TCP_V6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_TCPv6;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_TCPv6;
-+
-+		break;
-+	case UDP_V6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_UDPv6;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_UDPv6;
-+
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	if (new_hashtypes != vi->rss_hash_types_saved) {
-+		vi->rss_hash_types_saved = new_hashtypes;
-+		vi->ctrl->rss.table_info.hash_types = vi->rss_hash_types_saved;
-+		if (vi->dev->features & NETIF_F_RXHASH)
-+			return virtnet_commit_rss_command(vi);
-+	}
-+
-+	return true;
-+}
-+
- static void virtnet_get_drvinfo(struct net_device *dev,
- 				struct ethtool_drvinfo *info)
+ static int virtio_i2c_probe(struct virtio_device *vdev)
  {
-@@ -2530,8 +2681,28 @@ int virtnet_get_rxnfc(struct net_device *dev, struct ethtool_rxnfc *info, u32 *r
- 	switch (info->cmd) {
- 	case ETHTOOL_GRXRINGS:
- 		info->data = vi->curr_queue_pairs;
-+		break;
-+	case ETHTOOL_GRXFH:
-+		virtnet_get_hashflow(vi, info);
-+		break;
-+	default:
- 		rc = -EOPNOTSUPP;
- 	}
-+
-+	return rc;
-+}
-+
-+static int virtnet_set_rxnfc(struct net_device *dev, struct ethtool_rxnfc *info)
-+{
-+	struct virtnet_info *vi = netdev_priv(dev);
-+	int rc = 0;
-+
-+	switch (info->cmd) {
-+	case ETHTOOL_SRXFH:
-+		if (!virtnet_set_hashflow(vi, info))
-+			rc = -EINVAL;
-+
-+		break;
- 	default:
- 		rc = -EOPNOTSUPP;
- 	}
-@@ -2559,6 +2730,7 @@ static const struct ethtool_ops virtnet_ethtool_ops = {
- 	.get_rxfh = virtnet_get_rxfh,
- 	.set_rxfh = virtnet_set_rxfh,
- 	.get_rxnfc = virtnet_get_rxnfc,
-+	.set_rxnfc = virtnet_set_rxnfc,
- };
+-	struct device *pdev = vdev->dev.parent;
+ 	struct virtio_i2c *vi;
+ 	int ret;
  
- static void virtnet_freeze_down(struct virtio_device *vdev)
-@@ -3351,8 +3523,13 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	if (vi->has_rss || vi->has_rss_hash_report) {
- 		vi->rss_hash_types_supported =
- 		    virtio_cread32(vdev, offsetof(struct virtio_net_config, supported_hash_types));
-+		vi->rss_hash_types_supported &=
-+				~(VIRTIO_NET_RSS_HASH_TYPE_IP_EX |
-+				  VIRTIO_NET_RSS_HASH_TYPE_TCP_EX |
-+				  VIRTIO_NET_RSS_HASH_TYPE_UDP_EX);
+@@ -234,7 +233,7 @@ static int virtio_i2c_probe(struct virtio_device *vdev)
+ 	 * Setup ACPI node for controlled devices which will be probed through
+ 	 * ACPI.
+ 	 */
+-	ACPI_COMPANION_SET(&vi->adap.dev, ACPI_COMPANION(pdev));
++	ACPI_COMPANION_SET(&vi->adap.dev, ACPI_COMPANION(vdev->dev.parent));
  
- 		dev->hw_features |= NETIF_F_RXHASH;
-+		dev->features |= NETIF_F_NTUPLE;
- 	}
- 
- 	if (vi->has_cvq && vi->has_rss_hash_report)
+ 	ret = i2c_add_adapter(&vi->adap);
+ 	if (ret)
 -- 
-2.31.1
+2.7.4
 
 _______________________________________________
 Virtualization mailing list
