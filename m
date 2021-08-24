@@ -1,64 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C1F593F6A47
-	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 22:14:18 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id B810F3F6A72
+	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 22:31:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1B19242516;
-	Tue, 24 Aug 2021 20:14:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3E55A60745;
+	Tue, 24 Aug 2021 20:31:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uWTjPsvOp5S0; Tue, 24 Aug 2021 20:14:13 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id CF55042502;
-	Tue, 24 Aug 2021 20:14:12 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id aFo61RQMPWWb; Tue, 24 Aug 2021 20:31:19 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 08F3D60C11;
+	Tue, 24 Aug 2021 20:31:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 576CCC0022;
-	Tue, 24 Aug 2021 20:14:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F499C000E;
+	Tue, 24 Aug 2021 20:31:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9B17FC000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 846EFC000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 20:14:10 +0000 (UTC)
+ Tue, 24 Aug 2021 20:31:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 88F3F42516
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6FC3481886
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 20:14:10 +0000 (UTC)
+ Tue, 24 Aug 2021 20:31:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id r8IXyYCkhkxV
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=kernel.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id C0dKI8Xbhr5m
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 20:14:07 +0000 (UTC)
+ Tue, 24 Aug 2021 20:31:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D83A342502
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 06A948183D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 20:14:06 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10086"; a="204591559"
-X-IronPort-AV: E=Sophos;i="5.84,348,1620716400"; d="scan'208";a="204591559"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Aug 2021 13:14:05 -0700
-X-IronPort-AV: E=Sophos;i="5.84,348,1620716400"; d="scan'208";a="526813111"
-Received: from akleen-mobl1.amr.corp.intel.com (HELO [10.209.119.65])
- ([10.209.119.65])
- by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Aug 2021 13:14:03 -0700
+ Tue, 24 Aug 2021 20:31:16 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 3738C610F7;
+ Tue, 24 Aug 2021 20:31:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1629837076;
+ bh=u89RhbA1T4/YcegxqumOKFDZveULzg7IH3BXxWstXGA=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:From;
+ b=E7gmG9cu+2X8EpSv9jHNw194dQ/bFH+W8S5CviPC+WEzgK9x1GqwxeKDnQA93Ubc6
+ pIROpW9mCbmFawlLNt183dkzLJG92jUie48vdct5nMY9KMIpav4jCN5vVtcBqt99IN
+ LlMRmUTD9hQbKroaOXlhVlrUixEOK798eHEQ6pmGyuqfJJo5J4wfidKynCvdtb3s37
+ PjcEO5DOcIPu3SLREF0Tt+IUZRL6NjCeGqQy3Vt+WmnxMDtnryxVfbjA5YVJAeYKm9
+ BpOJvSuNngQVXkAMINkK0ZwKmdIz+EDYyzVhKaDWPyJSTPhZYBRtaAf1VAW/wDK4NO
+ xT3mGvV5LJ4bA==
+Date: Tue, 24 Aug 2021 15:31:15 -0500
+From: Bjorn Helgaas <helgaas@kernel.org>
+To: Andi Kleen <ak@linux.intel.com>
 Subject: Re: [PATCH v4 11/15] pci: Add pci_iomap_shared{,_range}
-To: Bjorn Helgaas <helgaas@kernel.org>
-References: <20210824185541.GA3485816@bjorn-Precision-5520>
-From: Andi Kleen <ak@linux.intel.com>
-Message-ID: <a80fc61a-bc55-b82c-354b-b57863ab03db@linux.intel.com>
-Date: Tue, 24 Aug 2021 13:14:02 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.13.0
+Message-ID: <20210824203115.GA3492097@bjorn-Precision-5520>
 MIME-Version: 1.0
-In-Reply-To: <20210824185541.GA3485816@bjorn-Precision-5520>
-Content-Language: en-US
+Content-Disposition: inline
+In-Reply-To: <a80fc61a-bc55-b82c-354b-b57863ab03db@linux.intel.com>
 Cc: "Kuppuswamy, Sathyanarayanan" <sathyanarayanan.kuppuswamy@linux.intel.com>,
  Kuppuswamy Sathyanarayanan <knsathya@kernel.org>,
  "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
@@ -90,28 +91,28 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+On Tue, Aug 24, 2021 at 01:14:02PM -0700, Andi Kleen wrote:
+> 
+> On 8/24/2021 11:55 AM, Bjorn Helgaas wrote:
+> > [+cc Rajat; I still don't know what "shared memory with a hypervisor
+> > in a confidential guest" means,
+> 
+> A confidential guest is a guest which uses memory encryption to isolate
+> itself from the host. It doesn't trust the host. But it still needs to
+> communicate with the host for IO, so it has some special memory areas that
+> are explicitly marked shared. These are used to do IO with the host. All
+> their usage needs to be carefully hardened to avoid any security attacks on
+> the guest, that's why we want to limit this interaction only to a small set
+> of hardened drivers. For MMIO, the set is currently only virtio and MSI-X.
 
-On 8/24/2021 11:55 AM, Bjorn Helgaas wrote:
-> [+cc Rajat; I still don't know what "shared memory with a hypervisor
-> in a confidential guest" means,
+Good material for the commit log next time around.  Thanks!
 
-A confidential guest is a guest which uses memory encryption to isolate 
-itself from the host. It doesn't trust the host. But it still needs to 
-communicate with the host for IO, so it has some special memory areas 
-that are explicitly marked shared. These are used to do IO with the 
-host. All their usage needs to be carefully hardened to avoid any 
-security attacks on the guest, that's why we want to limit this 
-interaction only to a small set of hardened drivers. For MMIO, the set 
-is currently only virtio and MSI-X.
-
--Andi
-
-
+Bjorn
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
