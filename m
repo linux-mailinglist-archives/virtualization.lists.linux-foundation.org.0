@@ -2,117 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 76A053F5C29
-	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 12:31:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3BD973F5C93
+	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 13:00:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7FBB8404BA;
-	Tue, 24 Aug 2021 10:31:50 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 331FD40416;
+	Tue, 24 Aug 2021 11:00:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id eAVVlu2qMQ8H; Tue, 24 Aug 2021 10:31:46 +0000 (UTC)
+	with ESMTP id jf3BtKvH7G8H; Tue, 24 Aug 2021 11:00:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 4D75A404B1;
-	Tue, 24 Aug 2021 10:31:46 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 6025940424;
+	Tue, 24 Aug 2021 11:00:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A95A2C001F;
-	Tue, 24 Aug 2021 10:31:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C78ECC000E;
+	Tue, 24 Aug 2021 11:00:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CA7D0C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7AD91C000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 10:31:44 +0000 (UTC)
+ Tue, 24 Aug 2021 11:00:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B11E5400BA
+ by smtp3.osuosl.org (Postfix) with ESMTP id 77CAC6058B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 10:31:44 +0000 (UTC)
+ Tue, 24 Aug 2021 11:00:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vmZsO_x5gT4r
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DvFXrDlKq8ia
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 10:31:43 +0000 (UTC)
+ Tue, 24 Aug 2021 11:00:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B9EDA400A8
+ by smtp3.osuosl.org (Postfix) with ESMTPS id ECBFC6060F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 10:31:43 +0000 (UTC)
+ Tue, 24 Aug 2021 11:00:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1629801102;
+ s=mimecast20190719; t=1629802806;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=feIhjhva5jefoIxfoE0azoq+AbsdStJdrlY7GGgP55M=;
- b=Grp/aBGff6h+IQKzcuhP/volgFxSahSJj1muP9IeiGj7oGmiZSE36X3qiwXyuhVBf5EFrf
- W4K4wPx5IzdGKqYnD4G4faGs0xCPCLn6xFHR9eJnAWQOCpTfqzawi1sPNxXhn6wnE4THEu
- CaH+7hgkszL/EP52op9TNBSVnxWPmpY=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-173-i12KxII0Ple0SlEFWX6r4Q-1; Tue, 24 Aug 2021 06:31:41 -0400
-X-MC-Unique: i12KxII0Ple0SlEFWX6r4Q-1
-Received: by mail-ed1-f72.google.com with SMTP id
- m16-20020a056402511000b003bead176527so1722569edd.10
- for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 03:31:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=feIhjhva5jefoIxfoE0azoq+AbsdStJdrlY7GGgP55M=;
- b=WnItKgsrZdV6xzVef39DUXju56G2EZub+0tjFdEp319Vi7h9GOfkKJzAgcmn8+fUmp
- jZanexgrFlY8WbJUmoyBWGfb+2YGytRBcXFD2mj/gnbmsFQb5CV7Wi1WwXS5FDz2Sbjl
- mFbdI2uCWPkCkx+pxFqL/05VioZv2KVQYod4GeCIOYQTlSdwnjsWCQz+0evgffCU7lHV
- mmNXnU/p36xElKxaYCDOQdLKwGWlLyjr6S+8jVRGqjVrA9arPGc8XwOxa+l+kxQPbZsx
- gi9F433qMdYVc1CseK6nZkBwCIVGY3MZosR8C+SccgsvVH8p/cF+pal3eoT/cQWn2zck
- f5Hg==
-X-Gm-Message-State: AOAM533tI5u10zkMJ2HPBDusR49s5pXuJORcyRgPxhUAT8tpdi4zPhJ6
- Eei+pV8bXLeEsfX7VyyUExFfjOYz73k4ACrijJsISyhrPpYz3KVtJXC1iE7MwelAFDz+IQcdGCp
- 19eHGy+/LhHDEkAdG1ndClsHYSsTjzvfAAyAsNkgOzg==
-X-Received: by 2002:a17:906:d04b:: with SMTP id
- bo11mr40707211ejb.513.1629801100366; 
- Tue, 24 Aug 2021 03:31:40 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx1lClZImhRtvJCoGEAqkfeG/l8kJgXUskqq5Rw2DFLftK9EBSu/dk7LEDZ72T8m++O+df9pA==
-X-Received: by 2002:a17:906:d04b:: with SMTP id
- bo11mr40707195ejb.513.1629801100235; 
- Tue, 24 Aug 2021 03:31:40 -0700 (PDT)
-Received: from steredhat (host-79-45-8-152.retail.telecomitalia.it.
- [79.45.8.152])
- by smtp.gmail.com with ESMTPSA id c28sm9029348ejc.102.2021.08.24.03.31.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 24 Aug 2021 03:31:39 -0700 (PDT)
-Date: Tue, 24 Aug 2021 12:31:37 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Arseny Krasnov <arseny.krasnov@kaspersky.com>
-Subject: Re: [RFC PATCH v3 0/6] virtio/vsock: introduce MSG_EOR flag for
- SEQPACKET
-Message-ID: <20210824103137.v3fny2yc5ww46p33@steredhat>
-References: <20210816085036.4173627-1-arseny.krasnov@kaspersky.com>
- <3f3fc268-10fc-1917-32c2-dc0e7737dc48@kaspersky.com>
- <20210824100523.yn5hgiycz2ysdnvm@steredhat>
- <d28ff03e-c8ab-f7c6-68a2-90c9a400d029@kaspersky.com>
+ content-transfer-encoding:content-transfer-encoding;
+ bh=b832D+EXyszaBxwNcuDTgB1pwTGihDYZVkFT3v4m2hk=;
+ b=DV3KPsokOYyRrK8W5og4C8z3bsaUmPMW3rmf/4xnuVXTyKgyB47+MX9/wc8Kfxm/R/ebpL
+ /otFpLAkrA0lB1Iz5/NJ+5yx09qgZ+UeMraTheD07M4NOID4BJ5RozWHCu9O/oLeBPmfZP
+ ToXfNL7FE6iSm59pvFjvC1sDuom5gzQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-59-q3b7joqBNYiDAOHpiP__sw-1; Tue, 24 Aug 2021 07:00:05 -0400
+X-MC-Unique: q3b7joqBNYiDAOHpiP__sw-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E7D1E879A09;
+ Tue, 24 Aug 2021 11:00:03 +0000 (UTC)
+Received: from localhost (unknown [10.39.195.0])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 572F5226F0;
+ Tue, 24 Aug 2021 10:59:51 +0000 (UTC)
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: virtualization@lists.linux-foundation.org
+Subject: [RFC PATCH 0/1] virtio: false unhandled irqs from vring_interrupt()
+Date: Tue, 24 Aug 2021 11:59:43 +0100
+Message-Id: <20210824105944.172659-1-stefanha@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <d28ff03e-c8ab-f7c6-68a2-90c9a400d029@kaspersky.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Andra Paraschiv <andraprs@amazon.com>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "stsp2@yandex.ru" <stsp2@yandex.ru>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "oxffffaa@gmail.com" <oxffffaa@gmail.com>,
- Norbert Slusarek <nslusarek@gmx.net>, Stefan Hajnoczi <stefanha@redhat.com>,
- Colin Ian King <colin.king@canonical.com>, Jakub Kicinski <kuba@kernel.org>,
- "David S. Miller" <davem@davemloft.net>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, David Airlie <airlied@linux.ie>,
+ linux-kernel@vger.kernel.org, Stefan Hajnoczi <stefanha@redhat.com>,
+ vgoyal@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -124,39 +84,83 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Aug 24, 2021 at 01:18:06PM +0300, Arseny Krasnov wrote:
->
->On 24.08.2021 13:05, Stefano Garzarella wrote:
->> Caution: This is an external email. Be cautious while opening links or attachments.
->>
->>
->>
->> Hi Arseny,
->>
->> On Mon, Aug 23, 2021 at 09:41:16PM +0300, Arseny Krasnov wrote:
->>> Hello, please ping :)
->>>
->> Sorry, I was off last week.
->> I left some minor comments in the patches.
->>
->> Let's wait a bit for other comments before next version, also on the
->> spec, then I think you can send the next version without RFC tag.
->> The target should be the net-next tree, since this is a new feature.
->Hello,
->
->E.g. next version will be [net-next] instead of [RFC] for both
->kernel and spec patches?
+While investigating an unhandled irq from vring_interrupt() with virtiofs I
+stumbled onto a possible race that also affects virtio_gpu. This theory is
+based on code inspection and hopefully you can point out something that makes
+this a non-issue in practice :).
 
-Nope, net-next tag is useful only for kernel patches (net tree - 
-Documentation/networking/netdev-FAQ.rst).
+The vring_interrupt() function returns IRQ_NONE when an MSI-X interrupt is
+taken with no used (completed) buffers in the virtqueue. The kernel disables
+the irq and the driver is no longer receives irqs when this happens:
 
-Thanks,
-Stefano
+  irq 77: nobody cared (try booting with the "irqpoll" option)
+  ...
+  handlers:
+  [<00000000a40a49bb>] vring_interrupt
+  Disabling IRQ #77
+
+Consider the following:
+
+1. An virtiofs irq is handled and the virtio_fs_requests_done_work() work
+   function is scheduled to dequeue used buffers:
+   vring_interrupt() -> virtio_fs_vq_done() -> schedule_work()
+
+2. The device adds more used requests and just before...
+
+3. ...virtio_fs_requests_done_work() empties the virtqueue with
+   virtqueue_get_buf().
+
+4. The device raises the irq and vring_interrupt() is called after
+   virtio_fs_requests_done_work emptied the virtqueue:
+
+   irqreturn_t vring_interrupt(int irq, void *_vq)
+   {
+       struct vring_virtqueue *vq = to_vvq(_vq);
+
+       if (!more_used(vq)) {
+           pr_debug("virtqueue interrupt with no work for %p\n", vq);
+           return IRQ_NONE;
+           ^^^^^^^^^^^^^^^^
+
+I have included a patch that switches virtiofs from spin_lock() to
+spin_lock_irqsave() to prevent vring_interrupt() from running while the
+virtqueue is processed from a work function.
+
+virtio_gpu has a similar case where virtio_gpu_dequeue_ctrl_func() and
+virtio_gpu_dequeue_cursor_func() work functions only use spin_lock().
+I think this can result in the same false unhandled irq problem as virtiofs.
+
+This race condition could in theory affect all drivers. The VIRTIO
+specification says:
+
+  Neither of these notification suppression methods are reliable, as they are
+  not synchronized with the device, but they serve as useful optimizations.
+
+If virtqueue_disable_cb() is just a hint and might not disable virtqueue irqs
+then virtio_net and other drivers have a problem because because an irq could
+be raised while the driver is dequeuing used buffers. I think we haven't seen
+this because software VIRTIO devices honor virtqueue_disable_cb(). Hardware
+devices might cache the value and not disable notifications for some time...
+
+Have I missed something?
+
+The virtiofs patch I attached is being stress tested to see if the unhandled
+irqs still occur.
+
+Stefan Hajnoczi (1):
+  fuse: disable local irqs when processing vq completions
+
+ fs/fuse/virtio_fs.c | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+-- 
+2.31.1
+
 
 _______________________________________________
 Virtualization mailing list
