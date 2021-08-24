@@ -1,71 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3BA843F544F
-	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 02:54:24 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B2B5B3F545A
+	for <lists.virtualization@lfdr.de>; Tue, 24 Aug 2021 02:54:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 3062B40366;
-	Tue, 24 Aug 2021 00:54:17 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9FCD64017C;
+	Tue, 24 Aug 2021 00:54:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DOahSkagcT3D; Tue, 24 Aug 2021 00:54:13 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9V-YuFQyw6UT; Tue, 24 Aug 2021 00:54:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E2E16400E6;
-	Tue, 24 Aug 2021 00:54:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 6F1C8400F8;
+	Tue, 24 Aug 2021 00:54:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F282C001F;
-	Tue, 24 Aug 2021 00:54:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 103D7C0010;
+	Tue, 24 Aug 2021 00:54:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6E7EBC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5372BC000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 00:54:11 +0000 (UTC)
+ Tue, 24 Aug 2021 00:54:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5F09A607FA
+ by smtp4.osuosl.org (Postfix) with ESMTP id 50BF6400ED
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 00:54:11 +0000 (UTC)
+ Tue, 24 Aug 2021 00:54:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kdNCB-Fulq-T
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id uB5FOa8dIXFo
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 00:54:10 +0000 (UTC)
+ Tue, 24 Aug 2021 00:54:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B9490607F9
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 96261400E3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Aug 2021 00:54:10 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id CBA36613D3;
- Tue, 24 Aug 2021 00:54:09 +0000 (UTC)
+ Tue, 24 Aug 2021 00:54:38 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 790A36140A;
+ Tue, 24 Aug 2021 00:54:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1629766450;
- bh=MX15jXYsKAQSTdXzIGLldkw4vbzR57DqkIQBOCZI4Xc=;
+ s=k20201202; t=1629766478;
+ bh=sIL8ujoxV3s+6lnSojtoKCjFr6HnHs52BWB+6AGRydU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=D2qe/pgcHslppU9DgTYapTwXjfkxx8igc1WWbCrFFaHt6ezIdkuDLzckl9Apxh5Q8
- +JyLyu6sYozt3fFvbIjFbVb/kigfPDP1mVIgjA8pGQZW4yJkLIOmDLgfCUlju7qVZG
- wHK1mflOI/8SjPAA6vb34vtFR+yO8HyJwScZFUbeySKb3b2eLB6Byb7hbk1eKOcoxm
- scBTx/tpI9oBnHj4CHSBvHgCs2nNyLBHPINfZ9+uCd76bQHsSdPwC4RxN1s2DMKUAa
- z8vK7gEOiRFNwPcK5u0Qp8L0OeXNhQZT9gpnkjjem9spRJ5oTBZbeEVrwLRVThTedP
- 0GwpIc5mtZMvw==
+ b=AP6Mnh10nDbYEDQyuAQ5MJJg+K+Y6Fa8zuhtj3Ni9SS9yyM5arRG8oWnUaE7+5F6q
+ AYQnq0MUtsRw03KS0omYHoeDGQifByr+hgUJx4W9YFRU1wll5DNKCUYsI5Cnl7CMT0
+ IpWG28P+lr3gYYv9twRVcwI3UATMS6bDVZeM7/otG6t2GVHBdWMzX48+wLUtVVyLUB
+ Co1YG1JoPZfuZOCi4H4UAotqe58c6bFdvw9+zcXlVTf+PDqEuPZhv8uu6gg1UqJjmu
+ CGSmLZLZDFkyeEMrZ7BeaJtrl3kdOkUfXhkWUlK5Ts+iU/wAX9rRaQAXee0gXBk8Td
+ iQCA2lRODu5fg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.13 10/26] tools/virtio: fix build
-Date: Mon, 23 Aug 2021 20:53:40 -0400
-Message-Id: <20210824005356.630888-10-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.10 04/18] virtio: Improve vq->broken access to avoid
+ any compiler optimization
+Date: Mon, 23 Aug 2021 20:54:18 -0400
+Message-Id: <20210824005432.631154-4-sashal@kernel.org>
 X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210824005356.630888-1-sashal@kernel.org>
-References: <20210824005356.630888-1-sashal@kernel.org>
+In-Reply-To: <20210824005432.631154-1-sashal@kernel.org>
+References: <20210824005432.631154-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
 Cc: Sasha Levin <sashal@kernel.org>, virtualization@lists.linux-foundation.org,
- "Michael S. Tsirkin" <mst@redhat.com>
+ "Michael S . Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -82,118 +81,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: "Michael S. Tsirkin" <mst@redhat.com>
+From: Parav Pandit <parav@nvidia.com>
 
-[ Upstream commit a24ce06c70fe7df795a846ad713ccaa9b56a7666 ]
+[ Upstream commit 60f0779862e4ab943810187752c462e85f5fa371 ]
 
-We use a spinlock now so add a stub.
-Ignore bogus uninitialized variable warnings.
+Currently vq->broken field is read by virtqueue_is_broken() in busy
+loop in one context by virtnet_send_command().
 
+vq->broken is set to true in other process context by
+virtio_break_device(). Reader and writer are accessing it without any
+synchronization. This may lead to a compiler optimization which may
+result to optimize reading vq->broken only once.
+
+Hence, force reading vq->broken on each invocation of
+virtqueue_is_broken() and also force writing it so that such
+update is visible to the readers.
+
+It is a theoretical fix that isn't yet encountered in the field.
+
+Signed-off-by: Parav Pandit <parav@nvidia.com>
+Link: https://lore.kernel.org/r/20210721142648.1525924-2-parav@nvidia.com
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- tools/virtio/Makefile         |  3 +-
- tools/virtio/linux/spinlock.h | 56 +++++++++++++++++++++++++++++++++++
- tools/virtio/linux/virtio.h   |  2 ++
- 3 files changed, 60 insertions(+), 1 deletion(-)
- create mode 100644 tools/virtio/linux/spinlock.h
+ drivers/virtio/virtio_ring.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/tools/virtio/Makefile b/tools/virtio/Makefile
-index b587b9a7a124..0d7bbe49359d 100644
---- a/tools/virtio/Makefile
-+++ b/tools/virtio/Makefile
-@@ -4,7 +4,8 @@ test: virtio_test vringh_test
- virtio_test: virtio_ring.o virtio_test.o
- vringh_test: vringh_test.o vringh.o virtio_ring.o
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index 71e16b53e9c1..dea3bb47ca52 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -2262,7 +2262,7 @@ bool virtqueue_is_broken(struct virtqueue *_vq)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
  
--CFLAGS += -g -O2 -Werror -Wall -I. -I../include/ -I ../../usr/include/ -Wno-pointer-sign -fno-strict-overflow -fno-strict-aliasing -fno-common -MMD -U_FORTIFY_SOURCE -include ../../include/linux/kconfig.h
-+CFLAGS += -g -O2 -Werror -Wno-maybe-uninitialized -Wall -I. -I../include/ -I ../../usr/include/ -Wno-pointer-sign -fno-strict-overflow -fno-strict-aliasing -fno-common -MMD -U_FORTIFY_SOURCE -include ../../include/linux/kconfig.h
-+LDFLAGS += -lpthread
- vpath %.c ../../drivers/virtio ../../drivers/vhost
- mod:
- 	${MAKE} -C `pwd`/../.. M=`pwd`/vhost_test V=${V}
-diff --git a/tools/virtio/linux/spinlock.h b/tools/virtio/linux/spinlock.h
-new file mode 100644
-index 000000000000..028e3cdcc5d3
---- /dev/null
-+++ b/tools/virtio/linux/spinlock.h
-@@ -0,0 +1,56 @@
-+#ifndef SPINLOCK_H_STUB
-+#define SPINLOCK_H_STUB
-+
-+#include <pthread.h>
-+
-+typedef pthread_spinlock_t  spinlock_t;
-+
-+static inline void spin_lock_init(spinlock_t *lock)
-+{
-+	int r = pthread_spin_init(lock, 0);
-+	assert(!r);
-+}
-+
-+static inline void spin_lock(spinlock_t *lock)
-+{
-+	int ret = pthread_spin_lock(lock);
-+	assert(!ret);
-+}
-+
-+static inline void spin_unlock(spinlock_t *lock)
-+{
-+	int ret = pthread_spin_unlock(lock);
-+	assert(!ret);
-+}
-+
-+static inline void spin_lock_bh(spinlock_t *lock)
-+{
-+	spin_lock(lock);
-+}
-+
-+static inline void spin_unlock_bh(spinlock_t *lock)
-+{
-+	spin_unlock(lock);
-+}
-+
-+static inline void spin_lock_irq(spinlock_t *lock)
-+{
-+	spin_lock(lock);
-+}
-+
-+static inline void spin_unlock_irq(spinlock_t *lock)
-+{
-+	spin_unlock(lock);
-+}
-+
-+static inline void spin_lock_irqsave(spinlock_t *lock, unsigned long f)
-+{
-+	spin_lock(lock);
-+}
-+
-+static inline void spin_unlock_irqrestore(spinlock_t *lock, unsigned long f)
-+{
-+	spin_unlock(lock);
-+}
-+
-+#endif
-diff --git a/tools/virtio/linux/virtio.h b/tools/virtio/linux/virtio.h
-index 5d90254ddae4..363b98228301 100644
---- a/tools/virtio/linux/virtio.h
-+++ b/tools/virtio/linux/virtio.h
-@@ -3,6 +3,7 @@
- #define LINUX_VIRTIO_H
- #include <linux/scatterlist.h>
- #include <linux/kernel.h>
-+#include <linux/spinlock.h>
+-	return vq->broken;
++	return READ_ONCE(vq->broken);
+ }
+ EXPORT_SYMBOL_GPL(virtqueue_is_broken);
  
- struct device {
- 	void *parent;
-@@ -12,6 +13,7 @@ struct virtio_device {
- 	struct device dev;
- 	u64 features;
- 	struct list_head vqs;
-+	spinlock_t vqs_list_lock;
- };
+@@ -2276,7 +2276,9 @@ void virtio_break_device(struct virtio_device *dev)
  
- struct virtqueue {
+ 	list_for_each_entry(_vq, &dev->vqs, list) {
+ 		struct vring_virtqueue *vq = to_vvq(_vq);
+-		vq->broken = true;
++
++		/* Pairs with READ_ONCE() in virtqueue_is_broken(). */
++		WRITE_ONCE(vq->broken, true);
+ 	}
+ }
+ EXPORT_SYMBOL_GPL(virtio_break_device);
 -- 
 2.30.2
 
