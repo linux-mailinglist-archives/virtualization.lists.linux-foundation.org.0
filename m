@@ -1,106 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2D63A3FEFF2
-	for <lists.virtualization@lfdr.de>; Thu,  2 Sep 2021 17:16:39 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 870B43FF0C6
+	for <lists.virtualization@lfdr.de>; Thu,  2 Sep 2021 18:09:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 929CA80D58;
-	Thu,  2 Sep 2021 15:16:37 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3662B60707;
+	Thu,  2 Sep 2021 16:09:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Exu8GfIgtXrF; Thu,  2 Sep 2021 15:16:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 6A15B82FBE;
-	Thu,  2 Sep 2021 15:16:33 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tMuCz-LsZLhs; Thu,  2 Sep 2021 16:09:31 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 09EE7606FD;
+	Thu,  2 Sep 2021 16:09:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E3585C001F;
-	Thu,  2 Sep 2021 15:16:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 90619C000E;
+	Thu,  2 Sep 2021 16:09:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 14867C000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D531C001A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 15:16:32 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 01F4140768
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6A37B82C3B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 15:16:32 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I_tE9aDhM5pd
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 6seyOp1p4aor
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 15:16:31 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 40F2740749
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 8749382B51
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 15:16:31 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630595789;
+ s=mimecast20190719; t=1630598966;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=P+xP+wLYOPrkRCNRBb2x5tHhjBwlMaOVmyphk+jfNrg=;
- b=GZQ2YH3vtgEXTQ7m+yUY4cxfKGg7DYtYs/dcanDeNFeFuw0uLFeRTmMGFpiWoM93atErsO
- 52s0+vGXkW8Jzj2eUYVo3hWkPdUsgb39/2tnTZlt4twfLEVH7QM+BAx50UTKfchdA8g82k
- Fr9cwPwgVO2wi1f5iR1N85NN0KTatEs=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-482-SxfHZRLmO2qnE8cILPj6lA-1; Thu, 02 Sep 2021 11:16:28 -0400
-X-MC-Unique: SxfHZRLmO2qnE8cILPj6lA-1
-Received: by mail-ej1-f72.google.com with SMTP id
- x21-20020a170906135500b005d8d4900c5eso1094923ejb.4
- for <virtualization@lists.linux-foundation.org>;
- Thu, 02 Sep 2021 08:16:28 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20161025;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=P+xP+wLYOPrkRCNRBb2x5tHhjBwlMaOVmyphk+jfNrg=;
- b=j6gs71hFSpaiooGwuZSjXKq4WalUzw0TCbpSDWPPWIngx/v7q5zLTL74ftwMSAoPYL
- jRTwQmKazwYZnrI/3BqBVwjoJ6vmGYqMgx7FNX7O0MZoG6hyZxgjLdTEOE200UAc73Mr
- ntLLW339wCQ2W+/XdQxmf+ml4z7oid+nZSZGl/OqwQGPQkt8PgnXGjx0KAtTpfBnYyhc
- RmT37OII9HqO+ow3eFWD5Q13qk3aC2+awXGiHLCZH/FZ0o13b8Ct6dxbXw0ClmH9/7eU
- JGxpFTK+vAklWNxBGc5LLSIJ1tNEn14IEG384r14bxjKS645rO/YI3z7FVLxulGR/K9D
- cETw==
-X-Gm-Message-State: AOAM531MMlQty1Wi4iRK1v9gMha9iojR5I0mqAPfSRp48IArVaef5EgM
- FenSkPb0DVlV5E1SjumWKx9P2RoGEz2qCEZkZvhLxSCiNp3yTrkb2f/Nys1/d1bZhdmncWXdbRy
- Dp6Uf5+vCzdS7LmQvWB/sVDqJ/kGohnvNwHGYxOgPRQ==
-X-Received: by 2002:a05:6402:2909:: with SMTP id
- ee9mr3940287edb.377.1630595787552; 
- Thu, 02 Sep 2021 08:16:27 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxvdswIUfKGCpx598o8TrM8YiJqz9vjAp7AEL9/nn4zRuT+kpCK9mYHSHPKCJI7JCs7p2TIFQ==
-X-Received: by 2002:a05:6402:2909:: with SMTP id
- ee9mr3940266edb.377.1630595787408; 
- Thu, 02 Sep 2021 08:16:27 -0700 (PDT)
-Received: from redhat.com ([2.55.140.175])
- by smtp.gmail.com with ESMTPSA id bx11sm1366868ejb.107.2021.09.02.08.16.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Sep 2021 08:16:26 -0700 (PDT)
-Date: Thu, 2 Sep 2021 11:16:22 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Junji Wei <weijunji@bytedance.com>
-Subject: Re: [RFC 5/5] hw/virtio-rdma: VirtIO rdma device
-Message-ID: <20210902111601-mutt-send-email-mst@kernel.org>
-References: <20210902130625.25277-1-weijunji@bytedance.com>
- <20210902130625.25277-6-weijunji@bytedance.com>
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=mXH2n/UZqZkS6UTydkV0bNVxlvNTafikkYo4yOh5+V8=;
+ b=G9BYcg12YhjBYRoP7PZB9943jOJRBT5zsiy7X5i2g1qarG8EZFph7ANRTBWeiJ/xCs4J28
+ No+7esdR9IFVCIfa0r7WPfL78JenCUABowTJ+ze+NlJp0Nmu/R7aJF3YVIo3r5scunTajV
+ IAUaItgTqSNiYI9WYeFow3N0mjvDWmI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-227-vQyWhdU8OqijUtU0czrTOg-1; Thu, 02 Sep 2021 12:09:25 -0400
+X-MC-Unique: vQyWhdU8OqijUtU0czrTOg-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
+ [10.5.11.13])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 87C2D835DE0;
+ Thu,  2 Sep 2021 16:09:23 +0000 (UTC)
+Received: from t480s.redhat.com (unknown [10.39.193.198])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 6637360853;
+ Thu,  2 Sep 2021 16:09:20 +0000 (UTC)
+From: David Hildenbrand <david@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH v4 0/3] virtio-mem: disallow mapping virtio-mem memory via
+ /dev/mem
+Date: Thu,  2 Sep 2021 18:09:16 +0200
+Message-Id: <20210902160919.25683-1-david@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210902130625.25277-6-weijunji@bytedance.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: qemu-devel@nongnu.org, xieyongji@bytedance.com, linux-rdma@vger.kernel.org,
- cohuck@redhat.com, yuval.shaia.ml@gmail.com,
- virtualization@lists.linux-foundation.org, jgg@ziepe.ca, dledford@redhat.com,
- chaiwen.cc@bytedance.com
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Cc: Arnd Bergmann <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+ virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
+ Andy Shevchenko <andy.shevchenko@gmail.com>, Hanjun Guo <guohanjun@huawei.com>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Dan Williams <dan.j.williams@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,22 +94,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Sep 02, 2021 at 09:06:25PM +0800, Junji Wei wrote:
-> diff --git a/include/standard-headers/linux/virtio_ids.h b/include/standard-headers/linux/virtio_ids.h
-> index b052355ac7..4c2151bffb 100644
-> --- a/include/standard-headers/linux/virtio_ids.h
-> +++ b/include/standard-headers/linux/virtio_ids.h
-> @@ -48,5 +48,6 @@
->  #define VIRTIO_ID_FS           26 /* virtio filesystem */
->  #define VIRTIO_ID_PMEM         27 /* virtio pmem */
->  #define VIRTIO_ID_MAC80211_HWSIM 29 /* virtio mac80211-hwsim */
-> +#define VIRTIO_ID_RDMA         30 /* virtio rdma */
+I think this might be a good fit for the -mm tree, as the actual virtio-mem
+changes are rather small.
 
-You can start by registering this with the virtio TC.
+--
 
->  #endif /* _LINUX_VIRTIO_IDS_H */
-> -- 
-> 2.11.0
+Let's add the basic infrastructure to exclude some physical memory
+regions marked as "IORESOURCE_SYSTEM_RAM" completely from /dev/mem access,
+even though they are not marked IORESOURCE_BUSY and even though
+"iomem=relaxed" is set. Resource IORESOURCE_EXCLUSIVE for that purpose
+instead of adding new flags to express something similar to
+"soft-busy" or "not busy yet, but already prepared by a driver and not
+to be mapped by user space".
+
+Use it for virtio-mem, to disallow mapping any virtio-mem memory via
+/dev/mem to user space after the virtio-mem driver was loaded.
+
+Details can be found in patch #2 and #3.
+
+v3 -> v4:
+- Added Dans RBs (thanks!)
+- Actually send the patches to the CC list ...
+
+v2 -> v3:
+- "kernel/resource: clean up and optimize iomem_is_exclusive()"
+-- Reshuffled and moved for_each_resource() etc. into this patch
+- "kernel/resource: disallow access to exclusive system RAM regions"
+-- Leave CONFIG_STRICT_DEVMEM=n alone. Hoog into iomem_is_exclusive()
+   instead.
+-- Improve comments
+- "virtio-mem: disallow mapping virtio-mem memory via /dev/mem"
+-- Don't allow building virtio_mem without CONFIG_STRICT_DEVMEM when we
+   have CONFIG_DEVMEM, where we don't have any guarantees.
+- Rework all patch descriptions
+
+v1 -> v2:
+- "/dev/mem: disallow access to explicitly excluded system RAM regions"
+-- Introduce and use for_each_resource() and next_resource_skip_children()
+-- s/iomem_range_contains_excluded/iomem_range_contains_excluded_devmem/
+- "kernel/resource: cleanup and optimize iomem_is_exclusive()"
+-- Use for_each_resource()
+
+Cc: Arnd Bergmann <arnd@arndb.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Dan Williams <dan.j.williams@intel.com>
+Cc: Hanjun Guo <guohanjun@huawei.com>
+Cc: Andy Shevchenko <andy.shevchenko@gmail.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: linux-mm@kvack.org
+
+David Hildenbrand (3):
+  kernel/resource: clean up and optimize iomem_is_exclusive()
+  kernel/resource: disallow access to exclusive system RAM regions
+  virtio-mem: disallow mapping virtio-mem memory via /dev/mem
+
+ drivers/virtio/Kconfig      |  1 +
+ drivers/virtio/virtio_mem.c |  4 ++-
+ kernel/resource.c           | 54 ++++++++++++++++++++++++++-----------
+ 3 files changed, 43 insertions(+), 16 deletions(-)
+
+
+base-commit: 7d2a07b769330c34b4deabeed939325c77a7ec2f
+-- 
+2.31.1
 
 _______________________________________________
 Virtualization mailing list
