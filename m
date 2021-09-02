@@ -1,75 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id E7C623FF0C7
-	for <lists.virtualization@lfdr.de>; Thu,  2 Sep 2021 18:09:39 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1BBDA3FF0C8
+	for <lists.virtualization@lfdr.de>; Thu,  2 Sep 2021 18:09:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 77661425E9;
-	Thu,  2 Sep 2021 16:09:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id AED58425EE;
+	Thu,  2 Sep 2021 16:09:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3x354Jav7ot2; Thu,  2 Sep 2021 16:09:34 +0000 (UTC)
+	with ESMTP id aWXqCuI1wS2c; Thu,  2 Sep 2021 16:09:43 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 40FFC425ED;
-	Thu,  2 Sep 2021 16:09:34 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 68DB6425EB;
+	Thu,  2 Sep 2021 16:09:43 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C039DC000E;
-	Thu,  2 Sep 2021 16:09:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EBE30C000E;
+	Thu,  2 Sep 2021 16:09:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0A28AC000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 20DCDC000E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:32 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id ECC00401C7
+ by smtp2.osuosl.org (Postfix) with ESMTP id 000F040186
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:31 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YKaKnzavs4tM
+ with ESMTP id 57IwpE4Oz6S4
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:31 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1963C40778
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DEC924012B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:30 +0000 (UTC)
+ Thu,  2 Sep 2021 16:09:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630598969;
+ s=mimecast20190719; t=1630598979;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MaetS8LnMuKprqnjrvobw+SaaiElk101NGu5Z0Rv9V0=;
- b=DNSWm3HNUP4uxOI4PwzR+KPUFrrWUByFRvSwIgnIERjzURq/WwBrFkffelU3X2NKf70xzJ
- Am46MrUjowx/YxxPqUZ67eyqAXtDQpogycTdRl1BUGfDFXmEYCjawHgoXTpl0En4xtIzx5
- FYY4clVmVTtU29QsSsPz5dAtgIBsre8=
+ bh=35N7k3a81h8IFJDkaZOQjP2o+rAflN0TIT3sjhQeT4w=;
+ b=FID3cffkh/7PRvLx6AXVZTvCckMK3rrwpZA1AVEg8AnKnoamI2yi9eOYEEKyzBpLU9CVdp
+ CFZhlmNXmtZVdoN42cbqL4UOBYD/ZfAbmwAc2qv4bgZ8oLtW9IUFQUHEUfCNintf4Hmi46
+ xuJx0kt3E7iW8Hx2GPQro28VYhYoZz8=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-143-z6gW9uNbPEOUCfPY9NX9Vw-1; Thu, 02 Sep 2021 12:09:28 -0400
-X-MC-Unique: z6gW9uNbPEOUCfPY9NX9Vw-1
+ us-mta-483-gkxFaDnrPoCByd5TPmeHqg-1; Thu, 02 Sep 2021 12:09:38 -0400
+X-MC-Unique: gkxFaDnrPoCByd5TPmeHqg-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id F29BF801ADA;
- Thu,  2 Sep 2021 16:09:26 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1FAE06D5C2;
+ Thu,  2 Sep 2021 16:09:37 +0000 (UTC)
 Received: from t480s.redhat.com (unknown [10.39.193.198])
- by smtp.corp.redhat.com (Postfix) with ESMTP id DB9ED60853;
- Thu,  2 Sep 2021 16:09:23 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5D3B160853;
+ Thu,  2 Sep 2021 16:09:27 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 1/3] kernel/resource: clean up and optimize
- iomem_is_exclusive()
-Date: Thu,  2 Sep 2021 18:09:17 +0200
-Message-Id: <20210902160919.25683-2-david@redhat.com>
+Subject: [PATCH v4 2/3] kernel/resource: disallow access to exclusive system
+ RAM regions
+Date: Thu,  2 Sep 2021 18:09:18 +0200
+Message-Id: <20210902160919.25683-3-david@redhat.com>
 In-Reply-To: <20210902160919.25683-1-david@redhat.com>
 References: <20210902160919.25683-1-david@redhat.com>
 MIME-Version: 1.0
@@ -97,73 +97,127 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We end up traversing subtrees of ranges we are not interested in; let's
-optimize this case, skipping such subtrees, cleaning up the function a bit.
+virtio-mem dynamically exposes memory inside a device memory region as
+system RAM to Linux, coordinating with the hypervisor which parts are
+actually "plugged" and consequently usable/accessible. On the one hand, the
+virtio-mem driver adds/removes whole memory blocks, creating/removing busy
+IORESOURCE_SYSTEM_RAM resources, on the other hand, it logically (un)plugs
+memory inside added memory blocks, dynamically either exposing them to
+the buddy or hiding them from the buddy and marking them PG_offline.
+
+In contrast to physical devices, like a DIMM, the virtio-mem driver
+is required to actually make use of any of the device-provided memory,
+because it performs the handshake with the hypervisor. virtio-mem memory
+cannot simply be access via /dev/mem without a driver.
+
+There is no safe way to:
+a) Access plugged memory blocks via /dev/mem, as they might contain
+   unplugged holes or might get silently unplugged by the virtio-mem
+   driver and consequently turned inaccessible.
+b) Access unplugged memory blocks via /dev/mem because the virtio-mem
+   driver is required to make them actually accessible first.
+
+The virtio-spec states that unplugged memory blocks MUST NOT be
+written, and only selected unplugged memory blocks MAY be read. We want
+to make sure, this is the case in sane environments -- where the
+virtio-mem driver was loaded.
+
+We want to make sure that in a sane environment, nobody "accidentially"
+accesses unplugged memory inside the device managed region. For example,
+a user might spot a memory region in /proc/iomem and try accessing it via
+/dev/mem via gdb or dumping it via something else. By the time the mmap()
+happens, the memory might already have been removed by the virtio-mem
+driver silently: the mmap() would succeeed and user space might
+accidentially access unplugged memory.
+
+So once the driver was loaded and detected the device along the
+device-managed region, we just want to disallow any access via
+/dev/mem to it.
+
+In an ideal world, we would mark the whole region as busy ("owned by a
+driver") and exclude it; however, that would be wrong, as we don't
+really have actual system RAM at these ranges added to Linux ("busy system
+RAM"). Instead, we want to mark such ranges as "not actual busy system RAM
+but still soft-reserved and prepared by a driver for future use."
+
+Let's teach iomem_is_exclusive() to reject access to any range
+with "IORESOURCE_SYSTEM_RAM | IORESOURCE_EXCLUSIVE", even if not busy
+and even if "iomem=relaxed" is set.
+
+For now, there are no applicable ranges and we'll modify virtio-mem next to
+properly set IORESOURCE_EXCLUSIVE on the parent resource container it
+creates to contain all actual busy system RAM added via
+add_memory_driver_managed().
 
 Reviewed-by: Dan Williams <dan.j.williams@intel.com>
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- kernel/resource.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ kernel/resource.c | 29 +++++++++++++++++++----------
+ 1 file changed, 19 insertions(+), 10 deletions(-)
 
 diff --git a/kernel/resource.c b/kernel/resource.c
-index ca9f5198a01f..2999f57da38c 100644
+index 2999f57da38c..5ad3eba619ba 100644
 --- a/kernel/resource.c
 +++ b/kernel/resource.c
-@@ -73,6 +73,18 @@ static struct resource *next_resource(struct resource *p)
- 	return p->sibling;
- }
+@@ -1719,26 +1719,23 @@ static int strict_iomem_checks;
+ #endif
  
-+static struct resource *next_resource_skip_children(struct resource *p)
-+{
-+	while (!p->sibling && p->parent)
-+		p = p->parent;
-+	return p->sibling;
-+}
-+
-+#define for_each_resource(_root, _p, _skip_children) \
-+	for ((_p) = (_root)->child; (_p); \
-+	     (_p) = (_skip_children) ? next_resource_skip_children(_p) : \
-+				       next_resource(_p))
-+
- static void *r_next(struct seq_file *m, void *v, loff_t *pos)
- {
- 	struct resource *p = v;
-@@ -1712,10 +1724,9 @@ static int strict_iomem_checks;
+ /*
+- * check if an address is reserved in the iomem resource tree
+- * returns true if reserved, false if not reserved.
++ * Check if an address is exclusive to the kernel and must not be mapped to
++ * user space, for example, via /dev/mem.
++ *
++ * Returns true if exclusive to the kernel, otherwise returns false.
   */
  bool iomem_is_exclusive(u64 addr)
  {
--	struct resource *p = &iomem_resource;
--	bool err = false;
--	loff_t l;
-+	bool skip_children = false, err = false;
++	const unsigned int exclusive_system_ram = IORESOURCE_SYSTEM_RAM |
++						  IORESOURCE_EXCLUSIVE;
+ 	bool skip_children = false, err = false;
  	int size = PAGE_SIZE;
-+	struct resource *p;
+ 	struct resource *p;
  
- 	if (!strict_iomem_checks)
- 		return false;
-@@ -1723,15 +1734,19 @@ bool iomem_is_exclusive(u64 addr)
+-	if (!strict_iomem_checks)
+-		return false;
+-
  	addr = addr & PAGE_MASK;
  
  	read_lock(&resource_lock);
--	for (p = p->child; p ; p = r_next(NULL, p, &l)) {
-+	for_each_resource(&iomem_resource, p, skip_children) {
- 		/*
- 		 * We can probably skip the resources without
- 		 * IORESOURCE_IO attribute?
- 		 */
+ 	for_each_resource(&iomem_resource, p, skip_children) {
+-		/*
+-		 * We can probably skip the resources without
+-		 * IORESOURCE_IO attribute?
+-		 */
  		if (p->start >= addr + size)
  			break;
--		if (p->end < addr)
-+		if (p->end < addr) {
-+			skip_children = true;
- 			continue;
+ 		if (p->end < addr) {
+@@ -1747,12 +1744,24 @@ bool iomem_is_exclusive(u64 addr)
+ 		}
+ 		skip_children = false;
+ 
++		/*
++		 * IORESOURCE_SYSTEM_RAM resources are exclusive if
++		 * IORESOURCE_EXCLUSIVE is set, even if they
++		 * are not busy and even if "iomem=relaxed" is set. The
++		 * responsible driver dynamically adds/removes system RAM within
++		 * such an area and uncontrolled access is dangerous.
++		 */
++		if ((p->flags & exclusive_system_ram) == exclusive_system_ram) {
++			err = true;
++			break;
 +		}
-+		skip_children = false;
 +
  		/*
  		 * A resource is exclusive if IORESOURCE_EXCLUSIVE is set
  		 * or CONFIG_IO_STRICT_DEVMEM is enabled and the
+ 		 * resource is busy.
+ 		 */
+-		if ((p->flags & IORESOURCE_BUSY) == 0)
++		if (!strict_iomem_checks || !(p->flags & IORESOURCE_BUSY))
+ 			continue;
+ 		if (IS_ENABLED(CONFIG_IO_STRICT_DEVMEM)
+ 				|| p->flags & IORESOURCE_EXCLUSIVE) {
 -- 
 2.31.1
 
