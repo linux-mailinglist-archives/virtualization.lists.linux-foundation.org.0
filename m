@@ -2,85 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 254233FF0C9
-	for <lists.virtualization@lfdr.de>; Thu,  2 Sep 2021 18:09:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F7893FF841
+	for <lists.virtualization@lfdr.de>; Fri,  3 Sep 2021 02:08:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BACE26070D;
-	Thu,  2 Sep 2021 16:09:50 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9CC9760673;
+	Fri,  3 Sep 2021 00:08:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WYEV4LlnBfVM; Thu,  2 Sep 2021 16:09:47 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8F5F46071C;
-	Thu,  2 Sep 2021 16:09:46 +0000 (UTC)
+	with ESMTP id q1qZRno6iEIo; Fri,  3 Sep 2021 00:08:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 5D80960749;
+	Fri,  3 Sep 2021 00:08:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 207E9C000E;
-	Thu,  2 Sep 2021 16:09:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DA03AC001F;
+	Fri,  3 Sep 2021 00:08:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EA08AC000E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 25B4AC000E
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:44 +0000 (UTC)
+ Fri,  3 Sep 2021 00:08:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D900D82F3D
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0C7D84017A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:44 +0000 (UTC)
+ Fri,  3 Sep 2021 00:08:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p7n8eD7aG9tr
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=bytedance-com.20150623.gappssmtp.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id R004VXJawiZs
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 303F582C3B
+ Fri,  3 Sep 2021 00:08:14 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
+ [IPv6:2a00:1450:4864:20::22f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 648E0400DE
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Sep 2021 16:09:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1630598983;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0npxqTFAo/f4YDe14xZvE/iGq1A3ahPk7+KrbVC6uOo=;
- b=TotSYCCLw6mxcxZu8zjqeL8wgwi00rU7KEDFM2u0bl/VJPMRmeACIw+B5wTgY9XUymRwRg
- MiRb9Fe/SCVxhxL2qy91AWGzsVsgYS2KLEKuyM/QoEoe9LZvcg3U5k0xe91wOhvTEBopNH
- BIdF4EbZ0wBimUVEho5jak68vzp/zdA=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-324-uPdac5v3Nc6WMQcAN-9FTg-1; Thu, 02 Sep 2021 12:09:42 -0400
-X-MC-Unique: uPdac5v3Nc6WMQcAN-9FTg-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
- [10.5.11.13])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id AF10E801ADA;
- Thu,  2 Sep 2021 16:09:40 +0000 (UTC)
-Received: from t480s.redhat.com (unknown [10.39.193.198])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7E76E60853;
- Thu,  2 Sep 2021 16:09:37 +0000 (UTC)
-From: David Hildenbrand <david@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v4 3/3] virtio-mem: disallow mapping virtio-mem memory via
- /dev/mem
-Date: Thu,  2 Sep 2021 18:09:19 +0200
-Message-Id: <20210902160919.25683-4-david@redhat.com>
-In-Reply-To: <20210902160919.25683-1-david@redhat.com>
-References: <20210902160919.25683-1-david@redhat.com>
+ Fri,  3 Sep 2021 00:08:14 +0000 (UTC)
+Received: by mail-lj1-x22f.google.com with SMTP id i28so6737346ljm.7
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 02 Sep 2021 17:08:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+ h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+ :cc; bh=shoT/h8kZ8kAkaA/UCG7GFMuSxrSKJjs1CdQsvCygG4=;
+ b=bXpajAQ4YFoGiili5xZh4yiZPANCuRjVBDTFUtxOoRjwEXRRf3VR7omR3fmnzUp13s
+ S7ZP2z4LKv0ZxZ/1CRtgI3OxrIW1G2dNoL1h0F06NbJoThJkO/yU6Ce0Gh+Bn4adXGlV
+ tiSutVH0hsf78sIOeucQ81ZuZPEMYBo+1/ZovJPGccXoMt8uQJQV9Sf/WuDgcRwg0j62
+ du2mkFsrLEfPOAQTnAn3ucXbccPzpulNu7tKOHV2dn8U+ZehFlFfuKW/Ihgjgw4W3jly
+ /tw4qDb7ldtyVpij9vyJPT5SJXK+lC8wV4UCXx/mT6su90anp815C5pexZnrliwA3MnX
+ 7rBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=shoT/h8kZ8kAkaA/UCG7GFMuSxrSKJjs1CdQsvCygG4=;
+ b=aJDX7laxM53nB2O5AHsjng8CVyJOJl2EIn2ueJ3LPgimRgsPE8qmrkm1TCZDmVmDp2
+ RGhXHj/e/dkwHjgE3TjDzaZm1i2KUK6XTcH7tNuGr7poQqSaFtK0UOhLPZDbG+1js+lP
+ gBebhH+pbI6hmJwycpWeBswZ0G8FP1lTGH2uBw9KArYy2uCy3krCAYplq7lD33Gpkl08
+ HapmnM+0L1FWfeYCLJ+1EYaiNypBF1Dm0LI6v/KRK1Usbj8FAXUetvPUt3N7uGm308mB
+ LzfJ3tvGTqwuSQBW43Z6DA5nOHgO+UCL6XQc7r+IN4h43dojMmb52B+GhB+ZIOEXowtn
+ qFcA==
+X-Gm-Message-State: AOAM531Vns+MEXwRKQukD2weih2W9ITtTKB+m4pSnJdNZHoIWKAD/oxb
+ MdiN5nq2DlHTvjqlO3NPcdAuTx6PapYsz2NV1uPOVA==
+X-Google-Smtp-Source: ABdhPJx5I1IdpxhkpsguRQ4JPAPtlipDcsgKg+UlXLioNZhYCF8dI5mAyqAScnV24edPO9Z8E/BPvGUEu6lw4Ff0vQA=
+X-Received: by 2002:a2e:b001:: with SMTP id y1mr742680ljk.360.1630627692098;
+ Thu, 02 Sep 2021 17:08:12 -0700 (PDT)
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Cc: Arnd Bergmann <arnd@arndb.de>, "Michael S. Tsirkin" <mst@redhat.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- Andy Shevchenko <andy.shevchenko@gmail.com>, Hanjun Guo <guohanjun@huawei.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- Dan Williams <dan.j.williams@intel.com>
+References: <20210610181203.979686-1-jiang.wang@bytedance.com>
+ <YTDam7jdjRz686bp@stefanha-x1.localdomain>
+In-Reply-To: <YTDam7jdjRz686bp@stefanha-x1.localdomain>
+From: "Jiang Wang ." <jiang.wang@bytedance.com>
+Date: Thu, 2 Sep 2021 17:08:01 -0700
+Message-ID: <CAP_N_Z_hHFbmd4tVMNYMrGiUt43Rs0N9rwM6F3Q_Wu1MTyfeKA@mail.gmail.com>
+Subject: Re: [virtio-comment] Re: [PATCH v5] virtio-vsock: add description for
+ datagram type
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Cong Wang <cong.wang@bytedance.com>,
+ Xiongchun Duan <duanxiongchun@bytedance.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, cohuck@redhat.com,
+ virtualization@lists.linux-foundation.org,
+ Yongji Xie <xieyongji@bytedance.com>,
+ =?UTF-8?B?5p+056iz?= <chaiwen.cc@bytedance.com>,
+ virtio-comment@lists.oasis-open.org, asias@redhat.com,
+ Arseny Krasnov <arseny.krasnov@kaspersky.com>,
+ Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,70 +105,134 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We don't want user space to be able to map virtio-mem device memory
-directly (e.g., via /dev/mem) in order to have guarantees that in a sane
-setup we'll never accidentially access unplugged memory within the
-device-managed region of a virtio-mem device, just as required by the
-virtio-spec.
+On Thu, Sep 2, 2021 at 7:07 AM Stefan Hajnoczi <stefanha@redhat.com> wrote:
+>
+> On Thu, Jun 10, 2021 at 06:12:03PM +0000, Jiang Wang wrote:
+> > Add supports for datagram type for virtio-vsock. Datagram
+> > sockets are connectionless and unreliable. To avoid contention
+> > with stream and other sockets, add two more virtqueues and
+> > a new feature bit to identify if those two new queues exist or not.
+> >
+> > Also add descriptions for resource management of datagram, which
+> > does not use the existing credit update mechanism associated with
+> > stream sockets.
+> >
+> > Signed-off-by: Jiang Wang <jiang.wang@bytedance.com>
+> > ---
+>
+> Overall this looks good. The tricky thing will be implementing dgram
+> sockets in a way that minimizes dropped packets and provides some degree
+> of fairness between senders. Those are implementation issues though and
+> not visible at the device specification level.
+>
+> > diff --git a/virtio-vsock.tex b/virtio-vsock.tex
+> > index da7e641..26a62ac 100644
+> > --- a/virtio-vsock.tex
+> > +++ b/virtio-vsock.tex
+> > @@ -9,14 +9,37 @@ \subsection{Device ID}\label{sec:Device Types / Socket Device / Device ID}
+> >
+> >  \subsection{Virtqueues}\label{sec:Device Types / Socket Device / Virtqueues}
+> >  \begin{description}
+> > -\item[0] rx
+> > -\item[1] tx
+> > +\item[0] stream rx
+> > +\item[1] stream tx
+> > +\item[2] datagram rx
+> > +\item[3] datagram tx
+> > +\item[4] event
+> > +\end{description}
+> > +The virtio socket device uses 5 queues if feature bit VIRTIO_VSOCK_F_DRGAM is set. Otherwise, it
+> > +only uses 3 queues, as the following.
+>
+> s/as the following/as follows:/
+>
+Will do.
 
-As soon as the virtio-mem driver is loaded, the device region is visible
-in /proc/iomem via the parent device region. From that point on user space
-is aware of the device region and we want to disallow mapping anything
-inside that region (where we will dynamically (un)plug memory) until
-the driver has been unloaded cleanly and e.g., another driver might take
-over.
+> > +
+> > +\begin{description}
+> > +\item[0] stream rx
+> > +\item[1] stream tx
+> >  \item[2] event
+> >  \end{description}
+> >
+> > +When behavior differs between stream and datagram rx/tx virtqueues
+> > +their full names are used. Common behavior is simply described in
+> > +terms of rx/tx virtqueues and applies to both stream and datagram
+> > +virtqueues.
+> > +
+> >  \subsection{Feature bits}\label{sec:Device Types / Socket Device / Feature bits}
+> >
+> > -There are currently no feature bits defined for this device.
+> > +\begin{description}
+> > +\item[VIRTIO_VSOCK_F_STREAM (0)] Device has support for stream socket type.
+> > +\end{description}
+> > +
+> > +\begin{description}
+> > +\item[VIRTIO_VSOCK_F_DGRAM (2)] Device has support for datagram socket type.
+>
+> Is this really bit 2 or did you mean bit 1 (value 0x2)?
+>
+I left bit 1 for SEQPACKET feature bit.  That will probably merge
+before this patch.
 
-By creating our parent IORESOURCE_SYSTEM_RAM resource with
-IORESOURCE_EXCLUSIVE, we will disallow any /dev/mem access to our
-device region until the driver was unloaded cleanly and removed the
-parent region. This will work even though only some memory blocks are
-actually currently added to Linux and appear as busy in the resource tree.
+> What happens to the virtqueue layout when VIRTIO_VSOCK_F_DGRAM is
+> present and VIRTIO_VSOCK_F_STREAM is absent? The virtqueue section above
+> implies that VIRTIO_VSOCK_F_STREAM is always present.
+>
+yeah, good question. I  think then it means the first two queues will be used
+for dgram?
 
-So access to the region from user space is only possible
-a) if we don't load the virtio-mem driver.
-b) after unloading the virtio-mem driver cleanly.
+> > +\end{description}
+> > +
+> > +If no feature bits are defined, assume device only supports stream socket type.
+>
+> It's cleaner to define VIRTIO_VSOCK_F_NO_STREAM (0) instead. When the
+> bit is set the stream socket type is not available and the stream_rx/tx
+> virtqueues are absent.
+>
+> This way it's not necessary to define special behavior depending on
+> certain combinations of feature bits.
+>
+Agree. I went back and read old emails again and found I missed the
+negative bit part. So repeating the previous question, if
+VIRTIO_VSOCK_F_NO_STREAM  and VIRTIO_VSOCK_F_DGRAM
+present, then we will only have 3 queues and the first two are for dgram, right?
 
-Don't build virtio-mem if access to /dev/mem cannot be restricticted --
-if we have CONFIG_DEVMEM=y but CONFIG_STRICT_DEVMEM is not set.
+Also, I am wondering what if an implementation only sets
+VIRTIO_VSOCK_F_NO_STREAM bit, but somehow forgot (or for whatever
+reason) to set VIRTIO_VSOCK_F_DGRAM bit? Does that mean there will
+be no virtqueues? The implementation is a mistake? Because it will not
+do anything.
+Do we need to explicitly add a sentence in the spec to say something like
+"Don't set VIRTIO_VSOCK_F_NO_STREAM alone" etc?
 
-Reviewed-by: Dan Williams <dan.j.williams@intel.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- drivers/virtio/Kconfig      | 1 +
- drivers/virtio/virtio_mem.c | 4 +++-
- 2 files changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
-index ce1b3f6ec325..ff80cd03f1d1 100644
---- a/drivers/virtio/Kconfig
-+++ b/drivers/virtio/Kconfig
-@@ -101,6 +101,7 @@ config VIRTIO_MEM
- 	depends on MEMORY_HOTPLUG_SPARSE
- 	depends on MEMORY_HOTREMOVE
- 	depends on CONTIG_ALLOC
-+	depends on !DEVMEM || STRICT_DEVMEM
- 	help
- 	 This driver provides access to virtio-mem paravirtualized memory
- 	 devices, allowing to hotplug and hotunplug memory.
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index b91bc810a87e..c2d93492cf0f 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -2523,8 +2523,10 @@ static int virtio_mem_create_resource(struct virtio_mem *vm)
- 	if (!name)
- 		return -ENOMEM;
- 
-+	/* Disallow mapping device memory via /dev/mem completely. */
- 	vm->parent_resource = __request_mem_region(vm->addr, vm->region_size,
--						   name, IORESOURCE_SYSTEM_RAM);
-+						   name, IORESOURCE_SYSTEM_RAM |
-+						   IORESOURCE_EXCLUSIVE);
- 	if (!vm->parent_resource) {
- 		kfree(name);
- 		dev_warn(&vm->vdev->dev, "could not reserve device region\n");
--- 
-2.31.1
+> >  \subsubsection{Receive and Transmit}\label{sec:Device Types / Socket Device / Device Operation / Receive and Transmit}
+> > -The driver queues outgoing packets on the tx virtqueue and incoming packet
+> > +The driver queues outgoing packets on the tx virtqueue and allocates incoming packet
+> >  receive buffers on the rx virtqueue. Packets are of the following form:
+>
+> This change seems unrelated to dgram sockets. I don't think adding the
+> word "allocates" makes things clearer or more precise. The driver may
+> reuse receive buffers rather than allocating fresh buffers. I suggest
+> dropping this change.
+>
+Got it. Will do.
 
+> >
+> >  \begin{lstlisting}
+> > @@ -195,6 +235,7 @@ \subsubsection{Receive and Transmit}\label{sec:Device Types / Socket Device / De
+> >  };
+> >  \end{lstlisting}
+> >
+> > +
+> >  Virtqueue buffers for outgoing packets are read-only. Virtqueue buffers for
+> >  incoming packets are write-only.
+> >
+>
+> Unnecessary whitespace change. Please drop.
+
+Sure.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
