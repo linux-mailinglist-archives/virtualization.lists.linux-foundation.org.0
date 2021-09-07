@@ -1,84 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C0162402E31
-	for <lists.virtualization@lfdr.de>; Tue,  7 Sep 2021 20:11:03 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D614140315B
+	for <lists.virtualization@lfdr.de>; Wed,  8 Sep 2021 01:04:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 75DF040250;
-	Tue,  7 Sep 2021 18:11:02 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B48D607AC;
+	Tue,  7 Sep 2021 23:04:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TBo0_bIRxifG; Tue,  7 Sep 2021 18:11:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rxr3EZVfcTg9; Tue,  7 Sep 2021 23:04:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 2376840155;
-	Tue,  7 Sep 2021 18:11:01 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 3193360818;
+	Tue,  7 Sep 2021 23:04:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7CB3C001D;
-	Tue,  7 Sep 2021 18:11:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C150FC000D;
+	Tue,  7 Sep 2021 23:04:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57560C000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0BC77C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 18:10:59 +0000 (UTC)
+ Tue,  7 Sep 2021 23:04:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 38F1540155
+ by smtp4.osuosl.org (Postfix) with ESMTP id E1D7640410
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 18:10:59 +0000 (UTC)
+ Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id i80PKtXW1Azy
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=kernel.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eZvwhm2TVGfq
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 18:10:58 +0000 (UTC)
+ Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0AF8F40019
+Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6F06440401
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 18:10:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631038256;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=8ZQ77LfQrAYIlW/IP+7FgGcr5kmtkI9421/WQcrZKBc=;
- b=PDqoEJaDSgD5wWJxrQ0fSicyxUoLjnUootSHY0CFD+z9TXY46LgJpAdMrOipWW23rBBXDa
- BHHCPbio3wdGiW2sCILShtHRoqilofgumQFvZeF7rvSmTx5F6mh0B/fVeUf32B8Fsk6b++
- 7laXhwOwXLS6wFdvZrr4I0EExb2XQn4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-485-TxqX7602Pjijwm8cjH2BZA-1; Tue, 07 Sep 2021 14:10:55 -0400
-X-MC-Unique: TxqX7602Pjijwm8cjH2BZA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
- [10.5.11.14])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 223B8425D9;
- Tue,  7 Sep 2021 18:10:54 +0000 (UTC)
-Received: from horse.redhat.com (unknown [10.22.17.57])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 2AA475D9CA;
- Tue,  7 Sep 2021 18:10:48 +0000 (UTC)
-Received: by horse.redhat.com (Postfix, from userid 10451)
- id 9E36E220257; Tue,  7 Sep 2021 14:10:47 -0400 (EDT)
-Date: Tue, 7 Sep 2021 14:10:47 -0400
-From: Vivek Goyal <vgoyal@redhat.com>
-To: Miklos Szeredi <miklos@szeredi.hu>
-Subject: Re: [PATCH 2/2] virtiofs: reduce lock contention on fpq->lock
-Message-ID: <YTerJ1bvGSfOYjBY@redhat.com>
-References: <20210812054618.26057-1-jefflexu@linux.alibaba.com>
- <20210812054618.26057-3-jefflexu@linux.alibaba.com>
- <CAJfpegt48RM_y7mOj5EBcohF0zEmE4D6D7sHNgYgKNgGqDgTsA@mail.gmail.com>
+ Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 365DD61102;
+ Tue,  7 Sep 2021 23:04:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1631055873;
+ bh=U4r90XGeMFMBTYQzJqJqJ72n/aEzus0q4Z98AOX2grc=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=sKXNN3dc3jccHx69/sKD47gbQLIRPr5FvdMGBsnJ/eUfbMNTLqUqNfWSvns+I69ck
+ U25GKT7tGRJbAWVj0zvnCcxOB6w4HzBT1Fe6R/PlLWnsRJcpQuvxrlr71Ab0Gl0r/g
+ yCUbkzUr9DQXvBlG7STLjsnFeql70rUCYRhVNXo5P9Gd5NRMXopOXF68LZg0JtLbDj
+ NWDsTld22BYYdo8O+Vk07IJEW02ZwlwcdChvtN2kzeHNXcIDL0mt9ZFToQ/iPeAFMS
+ FGhfCRqW9/t3Jn7umP3x8hpJMQ+gNd+0TD6+cH0YIKQMIROMhf40SlprUdwNv8QkXz
+ HpLc51HwA2u3Q==
+Date: Wed, 8 Sep 2021 02:04:30 +0300
+From: Leon Romanovsky <leon@kernel.org>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH v3 1/1] virtio-blk: add num_request_queues module parameter
+Message-ID: <YTfv/s8v0MsCya5r@unreal>
+References: <20210902204622.54354-1-mgurtovoy@nvidia.com>
+ <YTR12AHOGs1nhfz1@unreal>
+ <b2e60035-2e63-3162-6222-d8c862526a28@gmail.com>
+ <YTSZ6CYM6BCsbVmk@unreal>
+ <20210905111415-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <CAJfpegt48RM_y7mOj5EBcohF0zEmE4D6D7sHNgYgKNgGqDgTsA@mail.gmail.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
-Cc: Joseph Qi <joseph.qi@linux.alibaba.com>,
- virtualization@lists.linux-foundation.org,
- virtio-fs-list <virtio-fs@redhat.com>, linux-fsdevel@vger.kernel.org,
- Liu Bo <bo.liu@linux.alibaba.com>, Stefan Hajnoczi <stefanha@redhat.com>
+In-Reply-To: <20210905111415-mutt-send-email-mst@kernel.org>
+Cc: Max Gurtovoy <mgurtovoy@nvidia.com>, linux-block@vger.kernel.org,
+ kvm@vger.kernel.org, israelr@nvidia.com, nitzanc@nvidia.com,
+ virtualization@lists.linux-foundation.org, hch@infradead.org,
+ Chaitanya Kulkarni <ckulkarnilinux@gmail.com>, axboe@kernel.dk,
+ stefanha@redhat.com, oren@nvidia.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,41 +86,52 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 07, 2021 at 10:57:07AM +0200, Miklos Szeredi wrote:
-> On Thu, 12 Aug 2021 at 07:46, Jeffle Xu <jefflexu@linux.alibaba.com> wrote:
-> >
-> > From: Liu Bo <bo.liu@linux.alibaba.com>
-> >
-> > Since %req has been removed from fpq->processing_list, no one except
-> > request_wait_answer() is looking at this %req and request_wait_answer()
-> > waits only on FINISH flag, it's OK to remove fpq->lock after %req is
-> > dropped from the list.
+On Sun, Sep 05, 2021 at 11:15:16AM -0400, Michael S. Tsirkin wrote:
+> On Sun, Sep 05, 2021 at 01:20:24PM +0300, Leon Romanovsky wrote:
+> > On Sun, Sep 05, 2021 at 01:49:46AM -0700, Chaitanya Kulkarni wrote:
+> > > 
+> > > On 9/5/2021 12:46 AM, Leon Romanovsky wrote:
+> > > > > +static unsigned int num_request_queues;
+> > > > > +module_param_cb(num_request_queues, &queue_count_ops, &num_request_queues,
+> > > > > +		0644);
+> > > > > +MODULE_PARM_DESC(num_request_queues,
+> > > > > +		 "Number of request queues to use for blk device. Should > 0");
+> > > > > +
+> > > > Won't it limit all virtio block devices to the same limit?
+> > > > 
+> > > > It is very common to see multiple virtio-blk devices on the same system
+> > > > and they probably need different limits.
+> > > > 
+> > > > Thanks
+> > > 
+> > > 
+> > > Without looking into the code, that can be done adding a configfs
+> > > 
+> > > interface and overriding a global value (module param) when it is set from
+> > > 
+> > > configfs.
+> > 
+> > So why should we do double work instead of providing one working
+> > interface from the beginning?
+> > 
+> > Thanks
+> > 
+> > > 
+> > > 
 > 
-> I'll accept a patch to remove FR_SENT completely from virtiofs.
-> 
+> The main way to do it is really from the hypervisor. This one
+> is a pretty blunt instrument, Max here says it's useful to reduce
+> memory usage of the driver. If that's the usecase then a global limit
+> seems sufficient.
 
-Recently I was also looking at FR_SENT flag and was wondering if it
-is atomic bit flag, then why do we need to take spin lock around it.
-Probably we need just some barrier if code needs it but not necessarily
-any lock.
-
-But I agree that FR_SENT seems not usable from virtiofs point of view
-as we don't have support for interrupt request.
-
-> This flag is used for queuing interrupts but interrupts are not yet
-> implemented in virtiofs.    When blocking lock support is added the
-> interrupt handling needs to be properly designed.
-
-Hmm.., I did not think about this. I was getting ready to post patches
-for blocking posix locks but it does not have any support for interrupting
-the locking request (either blocked or queued).
-
-Is implementing interrupt support a requirement for getting blocking
-posix lock patches in?
+How memory will you reduce? It is worth to write it in the commit message.
 
 Thanks
-Vivek
 
+> 
+> -- 
+> MST
+> 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
