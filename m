@@ -1,65 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 36DC64021DE
-	for <lists.virtualization@lfdr.de>; Tue,  7 Sep 2021 04:07:31 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1C34440227C
+	for <lists.virtualization@lfdr.de>; Tue,  7 Sep 2021 05:34:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7A874404F4;
-	Tue,  7 Sep 2021 02:07:29 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5D02980CB9;
+	Tue,  7 Sep 2021 03:34:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2iNEBdOpuZXD; Tue,  7 Sep 2021 02:07:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 7C02E4050D;
-	Tue,  7 Sep 2021 02:07:28 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Cuo7k4Gsx0h8; Tue,  7 Sep 2021 03:34:03 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 418E780CEB;
+	Tue,  7 Sep 2021 03:34:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E27D4C001B;
-	Tue,  7 Sep 2021 02:07:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A8647C000D;
+	Tue,  7 Sep 2021 03:34:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9CF17C001B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 900E5C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 02:07:25 +0000 (UTC)
+ Tue,  7 Sep 2021 03:34:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 82D6C60B90
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7CB76402CA
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 02:07:25 +0000 (UTC)
+ Tue,  7 Sep 2021 03:34:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8FMU1gP5ijYD
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ZCPLNJL7rYUU
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 02:07:24 +0000 (UTC)
+ Tue,  7 Sep 2021 03:34:00 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-131.freemail.mail.aliyun.com
- (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 09DED60A35
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8F9DF40294
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 02:07:23 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R451e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=alimailimapcm10staff010182156082;
- MF=jefflexu@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
- TI=SMTPD_---0UnXJ-6m_1630980439; 
-Received: from admindeMacBook-Pro-2.local(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UnXJ-6m_1630980439) by smtp.aliyun-inc.com(127.0.0.1);
- Tue, 07 Sep 2021 10:07:20 +0800
-Subject: Re: [PATCH 0/2] virtiofs: miscellaneous fixes
-From: JeffleXu <jefflexu@linux.alibaba.com>
-To: vgoyal@redhat.com, stefanha@redhat.com, miklos@szeredi.hu
-References: <20210812054618.26057-1-jefflexu@linux.alibaba.com>
-Message-ID: <dd4c7cd8-bbf0-4e15-8ed9-d6babdc40eca@linux.alibaba.com>
-Date: Tue, 7 Sep 2021 10:07:19 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.13.0
+ Tue,  7 Sep 2021 03:34:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1630985638;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=6qozqAbZdT8oBMXjzeSMRm8sIhkC+A5GlfcPc9QaFNI=;
+ b=cafBvGanvahWRxZVKLP15TULtBqL1Grq63hE6MmvH18L7hRJoZpq8lcM6KxWUPdlZRVGFT
+ Vl+9oowl056zgbNMUIfGb7O4nNJSUY+8dYzLy6kxKGnuZwZjcU1kNwBZJfCOylCGgwKpIF
+ ucDLph8Kmt/n0ozCNAozVBw8e6xUhwQ=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-434-bZf3mP9xNaq6Tbxyv2ku9Q-1; Mon, 06 Sep 2021 23:33:57 -0400
+X-MC-Unique: bZf3mP9xNaq6Tbxyv2ku9Q-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ x33-20020a0565121321b02903ac51262781so2080024lfu.9
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 06 Sep 2021 20:33:57 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20161025;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=6qozqAbZdT8oBMXjzeSMRm8sIhkC+A5GlfcPc9QaFNI=;
+ b=AFargHf5jdC+0qYl/v/nLsLiWpm33m4deJmeLXkGf2Dm0sI7eG1odqh7fW6gJjJ/rm
+ L/wzzmaXfyQR7MvJdYAXwUGgwP2IFwNcuVAHhC17abnyr0JXoBIjUQxkkoKgP3OsRdiw
+ lyKljG5aMwFCmKbZUMLOox4IgeDwOmDOAxJ6E6O3WA4Cc85MkXPcqYQ8BeUGze688Qsg
+ yvMUCNDGCrargYASVzQhQD/StYZAS6jZW4QsYdKHnYPzoYKOdOYdMJNHodH5F//0ouqj
+ z+Bv5ioCwICMt8nZguFuDI86eDHYWr0/6PMctUr7PlmpHujNOuV1+4rerxUQHTTVbHhE
+ w37g==
+X-Gm-Message-State: AOAM530/0AVo0CC19zagpWaSL9VForSEAdFl7MuE3GxVvsLOS87vCitZ
+ tOFjqMUxSKYCDWFDQ45njq0a6wS9igmLTzqOEtT6aLcVHtw0dGhSreyZqopAdcji8Q1U2MSONgo
+ yjy84okMjWv4zO2e89y4npqNFw96p1oZvF4/X909iUPolaab5g6MOAKah2Q==
+X-Received: by 2002:a2e:7018:: with SMTP id l24mr13065597ljc.277.1630985636117; 
+ Mon, 06 Sep 2021 20:33:56 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJx69cexoVOtk0lchQNIoBgVFSKES0O/KRMCdMmYPZmDg7gnkeHxmIUhvWGG37UEAcsc08y7SEkZVfrGcXO8U2o=
+X-Received: by 2002:a2e:7018:: with SMTP id l24mr13065585ljc.277.1630985635952; 
+ Mon, 06 Sep 2021 20:33:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20210812054618.26057-1-jefflexu@linux.alibaba.com>
-Content-Language: en-US
-Cc: linux-fsdevel@vger.kernel.org, virtio-fs@redhat.com,
- bo.liu@linux.alibaba.com, joseph.qi@linux.alibaba.com,
- virtualization@lists.linux-foundation.org
+References: <20210906142158.181-1-xieyongji@bytedance.com>
+In-Reply-To: <20210906142158.181-1-xieyongji@bytedance.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Tue, 7 Sep 2021 11:33:45 +0800
+Message-ID: <CACGkMEuSFFvo=6DGKA-beUs0XZiWS3R+OpqcHa8eChf4twt+rQ@mail.gmail.com>
+Subject: Re: [PATCH] vduse: Cleanup the old kernel states after reset failure
+To: Xie Yongji <xieyongji@bytedance.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: virtualization <virtualization@lists.linux-foundation.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>, mst <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,23 +107,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-ping ...
+On Mon, Sep 6, 2021 at 10:22 PM Xie Yongji <xieyongji@bytedance.com> wrote:
+>
+> We should cleanup the old kernel states e.g. interrupt callback
+> no matter whether the userspace handle the reset correctly or not
+> since virtio-vdpa can't handle the reset failure now.
+>
+> Otherwise, the old state might be used after reset which might
+> break something, e.g. the old interrupt callback might be triggered
+> by userspace after reset, which can break the virtio device driver.
+>
+> Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
+> ---
+>  drivers/vdpa/vdpa_user/vduse_dev.c | 6 ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/vdpa/vdpa_user/vduse_dev.c b/drivers/vdpa/vdpa_user/vduse_dev.c
+> index 59a93e5b967a..61695521066c 100644
+> --- a/drivers/vdpa/vdpa_user/vduse_dev.c
+> +++ b/drivers/vdpa/vdpa_user/vduse_dev.c
+> @@ -665,13 +665,11 @@ static void vduse_vdpa_set_config(struct vdpa_device *vdpa, unsigned int offset,
+>  static int vduse_vdpa_reset(struct vdpa_device *vdpa)
+>  {
+>         struct vduse_dev *dev = vdpa_to_vduse(vdpa);
+> -
+> -       if (vduse_dev_set_status(dev, 0))
+> -               return -EIO;
+> +       int ret = vduse_dev_set_status(dev, 0);
+>
+>         vduse_dev_reset(dev);
+>
+> -       return 0;
+> +       return ret;
+>  }
+>
+>  static u32 vduse_vdpa_get_generation(struct vdpa_device *vdpa)
+> --
+> 2.11.0
+>
 
-On 8/12/21 1:46 PM, Jeffle Xu wrote:
-> Some fixes or optimization for virtiofs, which are authored by Liu Bo.
-> 
-> Liu Bo (2):
->   virtio-fs: disable atomic_o_trunc if no_open is enabled
->   virtiofs: reduce lock contention on fpq->lock
-> 
->  fs/fuse/file.c      | 11 +++++++++--
->  fs/fuse/virtio_fs.c |  3 ---
->  2 files changed, 9 insertions(+), 5 deletions(-)
-> 
+Acked-by: Jason Wang <jasowang@redhat.com>
 
--- 
-Thanks,
-Jeffle
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
