@@ -1,75 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D614140315B
-	for <lists.virtualization@lfdr.de>; Wed,  8 Sep 2021 01:04:38 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C1D24403277
+	for <lists.virtualization@lfdr.de>; Wed,  8 Sep 2021 04:07:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5B48D607AC;
-	Tue,  7 Sep 2021 23:04:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0C48982CA3;
+	Wed,  8 Sep 2021 02:07:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rxr3EZVfcTg9; Tue,  7 Sep 2021 23:04:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 3193360818;
-	Tue,  7 Sep 2021 23:04:36 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZnkaO0uXXUDd; Wed,  8 Sep 2021 02:07:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id BF00882C84;
+	Wed,  8 Sep 2021 02:07:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C150FC000D;
-	Tue,  7 Sep 2021 23:04:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 50237C000D;
+	Wed,  8 Sep 2021 02:07:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0BC77C000D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 978D9C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 23:04:35 +0000 (UTC)
+ Wed,  8 Sep 2021 02:07:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E1D7640410
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7246780F43
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
+ Wed,  8 Sep 2021 02:07:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id eZvwhm2TVGfq
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id BzwXII58KOZ4
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
+ Wed,  8 Sep 2021 02:07:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6F06440401
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 89B0E80F42
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Sep 2021 23:04:34 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 365DD61102;
- Tue,  7 Sep 2021 23:04:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1631055873;
- bh=U4r90XGeMFMBTYQzJqJqJ72n/aEzus0q4Z98AOX2grc=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=sKXNN3dc3jccHx69/sKD47gbQLIRPr5FvdMGBsnJ/eUfbMNTLqUqNfWSvns+I69ck
- U25GKT7tGRJbAWVj0zvnCcxOB6w4HzBT1Fe6R/PlLWnsRJcpQuvxrlr71Ab0Gl0r/g
- yCUbkzUr9DQXvBlG7STLjsnFeql70rUCYRhVNXo5P9Gd5NRMXopOXF68LZg0JtLbDj
- NWDsTld22BYYdo8O+Vk07IJEW02ZwlwcdChvtN2kzeHNXcIDL0mt9ZFToQ/iPeAFMS
- FGhfCRqW9/t3Jn7umP3x8hpJMQ+gNd+0TD6+cH0YIKQMIROMhf40SlprUdwNv8QkXz
- HpLc51HwA2u3Q==
-Date: Wed, 8 Sep 2021 02:04:30 +0300
-From: Leon Romanovsky <leon@kernel.org>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH v3 1/1] virtio-blk: add num_request_queues module parameter
-Message-ID: <YTfv/s8v0MsCya5r@unreal>
-References: <20210902204622.54354-1-mgurtovoy@nvidia.com>
- <YTR12AHOGs1nhfz1@unreal>
- <b2e60035-2e63-3162-6222-d8c862526a28@gmail.com>
- <YTSZ6CYM6BCsbVmk@unreal>
- <20210905111415-mutt-send-email-mst@kernel.org>
+ Wed,  8 Sep 2021 02:07:34 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10100"; a="207476989"
+X-IronPort-AV: E=Sophos;i="5.85,276,1624345200"; d="scan'208";a="207476989"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 07 Sep 2021 19:07:33 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.85,276,1624345200"; d="scan'208";a="503324076"
+Received: from dengjie-mobl1.ccr.corp.intel.com (HELO [10.239.154.46])
+ ([10.239.154.46])
+ by fmsmga008.fm.intel.com with ESMTP; 07 Sep 2021 19:07:30 -0700
+Subject: Re: [PATCH v14] i2c: virtio: add a virtio i2c frontend driver
+To: Viresh Kumar <viresh.kumar@linaro.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>
+References: <984ebecaf697058eb73389ed14ead9dd6d38fb53.1625796246.git.jie.deng@intel.com>
+ <20210904160059-mutt-send-email-mst@kernel.org>
+ <20210906044307.se4dcld2wlblieyv@vireshk-i7>
+From: Jie Deng <jie.deng@intel.com>
+Message-ID: <5bb91030-c4be-a3c1-fe25-337999348e9a@intel.com>
+Date: Wed, 8 Sep 2021 10:07:29 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.12.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20210905111415-mutt-send-email-mst@kernel.org>
-Cc: Max Gurtovoy <mgurtovoy@nvidia.com>, linux-block@vger.kernel.org,
- kvm@vger.kernel.org, israelr@nvidia.com, nitzanc@nvidia.com,
- virtualization@lists.linux-foundation.org, hch@infradead.org,
- Chaitanya Kulkarni <ckulkarnilinux@gmail.com>, axboe@kernel.dk,
- stefanha@redhat.com, oren@nvidia.com
+In-Reply-To: <20210906044307.se4dcld2wlblieyv@vireshk-i7>
+Content-Language: en-US
+Cc: yu1.wang@intel.com, arnd@arndb.de, gregkh@linuxfoundation.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ wsa@kernel.org, wsa+renesas@sang-engineering.com, linux-i2c@vger.kernel.org,
+ stefanha@redhat.com, shuo.a.liu@intel.com, andriy.shevchenko@linux.intel.com,
+ conghui.chen@intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,57 +78,30 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Sun, Sep 05, 2021 at 11:15:16AM -0400, Michael S. Tsirkin wrote:
-> On Sun, Sep 05, 2021 at 01:20:24PM +0300, Leon Romanovsky wrote:
-> > On Sun, Sep 05, 2021 at 01:49:46AM -0700, Chaitanya Kulkarni wrote:
-> > > 
-> > > On 9/5/2021 12:46 AM, Leon Romanovsky wrote:
-> > > > > +static unsigned int num_request_queues;
-> > > > > +module_param_cb(num_request_queues, &queue_count_ops, &num_request_queues,
-> > > > > +		0644);
-> > > > > +MODULE_PARM_DESC(num_request_queues,
-> > > > > +		 "Number of request queues to use for blk device. Should > 0");
-> > > > > +
-> > > > Won't it limit all virtio block devices to the same limit?
-> > > > 
-> > > > It is very common to see multiple virtio-blk devices on the same system
-> > > > and they probably need different limits.
-> > > > 
-> > > > Thanks
-> > > 
-> > > 
-> > > Without looking into the code, that can be done adding a configfs
-> > > 
-> > > interface and overriding a global value (module param) when it is set from
-> > > 
-> > > configfs.
-> > 
-> > So why should we do double work instead of providing one working
-> > interface from the beginning?
-> > 
-> > Thanks
-> > 
-> > > 
-> > > 
-> 
-> The main way to do it is really from the hypervisor. This one
-> is a pretty blunt instrument, Max here says it's useful to reduce
-> memory usage of the driver. If that's the usecase then a global limit
-> seems sufficient.
 
-How memory will you reduce? It is worth to write it in the commit message.
+On 2021/9/6 12:43, Viresh Kumar wrote:
+>
+>> Let's let the dust settle on them then, then
+>> resubmit?
+> It doesn't break anything for now since we don't have much users and
+> we know zero length transfers don't work. I will submit the necessary
+> changes once spec is finalized.
 
-Thanks
+Agree. The currently merged spec and driver are consistent.
 
-> 
-> -- 
-> MST
-> 
+We can support zero length request once the following spec change is 
+accepted.
+
+[PATCH V3] virtio: i2c: Allow zero-length transactions 
+(https://lists.oasis-open.org/archives/virtio-dev/202109/msg00004.html)
+
+So, can we start a ballot for this new feature ?
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
