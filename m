@@ -1,73 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5415D4037EE
-	for <lists.virtualization@lfdr.de>; Wed,  8 Sep 2021 12:35:04 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6E538403909
+	for <lists.virtualization@lfdr.de>; Wed,  8 Sep 2021 13:42:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AAD9E60643;
-	Wed,  8 Sep 2021 10:35:02 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 0102040204;
+	Wed,  8 Sep 2021 11:42:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kKZyZjP0pOmE; Wed,  8 Sep 2021 10:35:01 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 6585360727;
-	Wed,  8 Sep 2021 10:35:01 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kCRWxImUQnbw; Wed,  8 Sep 2021 11:42:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 9C22D401F2;
+	Wed,  8 Sep 2021 11:42:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E6046C000D;
-	Wed,  8 Sep 2021 10:35:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 228B0C000D;
+	Wed,  8 Sep 2021 11:42:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BE6A7C000D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7026BC000D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Sep 2021 10:34:58 +0000 (UTC)
+ Wed,  8 Sep 2021 11:42:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9CF04606E7
+ by smtp2.osuosl.org (Postfix) with ESMTP id 590E240204
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Sep 2021 10:34:58 +0000 (UTC)
+ Wed,  8 Sep 2021 11:42:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fUUoxTnhpZT7
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id kYeTZ_k5j6tD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Sep 2021 10:34:57 +0000 (UTC)
+ Wed,  8 Sep 2021 11:42:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-130.freemail.mail.aliyun.com
- (out30-130.freemail.mail.aliyun.com [115.124.30.130])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 256A960643
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 50B27400CD
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Sep 2021 10:34:56 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=jefflexu@linux.alibaba.com;
- NM=1; PH=DS; RN=9; SR=0; TI=SMTPD_---0UngnJV5_1631097293; 
-Received: from admindeMacBook-Pro-2.local(mailfrom:jefflexu@linux.alibaba.com
- fp:SMTPD_---0UngnJV5_1631097293) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 08 Sep 2021 18:34:53 +0800
-Subject: Re: [Virtio-fs] [virtiofsd PATCH v4 4/4] virtiofsd: support per-file
- DAX in FUSE_LOOKUP
-To: Greg Kurz <groug@kaod.org>
-References: <20210817022220.17574-1-jefflexu@linux.alibaba.com>
- <20210817022347.18098-1-jefflexu@linux.alibaba.com>
- <20210817022347.18098-5-jefflexu@linux.alibaba.com>
- <YRwHRmL/jUSqgkIU@work-vm>
- <29627110-e4bf-836f-2343-1faeb36ad4d3@linux.alibaba.com>
- <YR5Xzw02IuVAN94b@work-vm>
- <4494052b-aff1-e2e3-e704-c8743168f62e@linux.alibaba.com>
- <20210824121515.5419d6a7@bahia.lan>
-From: JeffleXu <jefflexu@linux.alibaba.com>
-Message-ID: <88041d90-d170-3ae1-903e-2fa32e51027f@linux.alibaba.com>
-Date: Wed, 8 Sep 2021 18:34:53 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.13.0
+ Wed,  8 Sep 2021 11:42:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631101357;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0OKWbveyBp4LK+jfSbX2BcrMPG8lLWS9NwmPSKg8Irs=;
+ b=WHnhxyLvxvvemgHKtBLFfJesmYwdrYUyxEas9UCehtO5JbJ6vNHu4E8gxza5Z4kKeoD+lB
+ 92WFq9nAi3100p/fMADPdBj+7Nz8wGIc++E3S2ptJzPayT6A+H8w4ZdeIZy0FEHISG7U7d
+ GohDU6R8dN2Qo6UKRIsSfXLcEA+qADg=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-315-20EbSMTJPlid_wF6ZA4jZg-1; Wed, 08 Sep 2021 07:42:35 -0400
+X-MC-Unique: 20EbSMTJPlid_wF6ZA4jZg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com
+ [10.5.11.12])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BCCF8835DE0;
+ Wed,  8 Sep 2021 11:42:34 +0000 (UTC)
+Received: from gerbillo.redhat.com (unknown [10.39.192.231])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id AC24560C17;
+ Wed,  8 Sep 2021 11:42:29 +0000 (UTC)
+From: Paolo Abeni <pabeni@redhat.com>
+To: netdev@vger.kernel.org
+Subject: [PATCH] vhost_net: fix OoB on sendmsg() failure.
+Date: Wed,  8 Sep 2021 13:42:09 +0200
+Message-Id: <463c1b02ca6f65fc1183431d8d85ec8154a2c28e.1631090797.git.pabeni@redhat.com>
 MIME-Version: 1.0
-In-Reply-To: <20210824121515.5419d6a7@bahia.lan>
-Content-Language: en-US
-Cc: miklos@szeredi.hu, "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- virtualization@lists.linux-foundation.org, virtio-fs@redhat.com,
- joseph.qi@linux.alibaba.com, stefanha@redhat.com,
- linux-fsdevel@vger.kernel.org, vgoyal@redhat.com
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
+Cc: virtualization@lists.linux-foundation.org, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,57 +86,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+If the sendmsg() call in vhost_tx_batch() fails, both the 'batched_xdp'
+and 'done_idx' indexes are left unchanged. If such failure happens
+when batched_xdp == VHOST_NET_BATCH, the next call to
+vhost_net_build_xdp() will access and write memory outside the xdp
+buffers area.
 
+Since sendmsg() can only error with EBADFD, this change addresses the
+issue explicitly freeing the XDP buffers batch on error.
 
-On 8/24/21 6:15 PM, Greg Kurz wrote:
-> On Fri, 20 Aug 2021 13:03:23 +0800
-> JeffleXu <jefflexu@linux.alibaba.com> wrote:
->>
->> Fine. Got it. However the returned fd (opened without O_PATH) is only
->> used for FS_IOC_GETFLAGS/FS_IOC_FSGETXATTR ioctl, while in most cases
->> for special device files, these two ioctls should return -ENOTTY.
->>
-> 
-> The actual problem is that a FIFO will cause openat() to block until
-> the other end of the FIFO is open for writing...
+Fixes: 0a0be13b8fe2 ("vhost_net: batch submitting XDP buffers to underlayer sockets")
+Suggested-by: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Paolo Abeni <pabeni@redhat.com>
+---
+Note: my understanding is that this should go through MST's tree, please
+educate me otherwise, thanks!
+---
+ drivers/vhost/net.c | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-Got it.
-
-> 
->> If it's really a security issue, then lo_inode_open() could be used to
-> 
-> ... and cause a DoS on virtiofsd. So yes, this is a security issue and
-> lo_inode_open() was introduced specifically to handle this.
-> 
->> get a temporary fd, i.e., check if it's a special file before opening.
->> After all, FUSE_OPEN also handles in this way. Besides, I can't
->> understand what "race-free way" means.
->>
-> 
-> "race-free way" means a way that guarantees that file type
-> cannot change between the time you check it and the time
-> you open it (TOCTOU error). For example, doing a plain stat(),
-> checking st_mode and proceeding to open() is wrong : nothing
-> prevents the file to be unlinked and replaced by something
-> else between stat() and open().
-> 
-> We avoid that by keeping O_PATH fds around and using
-> lo_inode_open() instead of openat().
-
-Thanks for the detailed explanation. Got it.
-
-> 
-> In your case, it seems that you should do the checking after
-> you have an actual lo_inode for the target file, and pass
-> that to lo_should_enable_dax() instead of the parent lo_inode
-> and target name.
-> 
-
-Yes, that will be more reasonable. Thanks.
-
+diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
+index 3a249ee7e144..28ef323882fb 100644
+--- a/drivers/vhost/net.c
++++ b/drivers/vhost/net.c
+@@ -467,7 +467,7 @@ static void vhost_tx_batch(struct vhost_net *net,
+ 		.num = nvq->batched_xdp,
+ 		.ptr = nvq->xdp,
+ 	};
+-	int err;
++	int i, err;
+ 
+ 	if (nvq->batched_xdp == 0)
+ 		goto signal_used;
+@@ -476,6 +476,15 @@ static void vhost_tx_batch(struct vhost_net *net,
+ 	err = sock->ops->sendmsg(sock, msghdr, 0);
+ 	if (unlikely(err < 0)) {
+ 		vq_err(&nvq->vq, "Fail to batch sending packets\n");
++
++		/* free pages owned by XDP; since this is an unlikely error path,
++		 * keep it simple and avoid more complex bulk update for the
++		 * used pages
++		 */
++		for (i = 0; i < nvq->batched_xdp; ++i)
++			put_page(virt_to_head_page(nvq->xdp[i].data));
++		nvq->batched_xdp = 0;
++		nvq->done_idx = 0;
+ 		return;
+ 	}
+ 
 -- 
-Thanks,
-Jeffle
+2.26.3
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
