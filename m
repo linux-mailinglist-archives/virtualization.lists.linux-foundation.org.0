@@ -1,89 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD1904047C9
-	for <lists.virtualization@lfdr.de>; Thu,  9 Sep 2021 11:31:43 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id D74BC4047D1
+	for <lists.virtualization@lfdr.de>; Thu,  9 Sep 2021 11:32:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3D4394028A;
-	Thu,  9 Sep 2021 09:31:42 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 285A340563;
+	Thu,  9 Sep 2021 09:32:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rj90YaYYIpx3; Thu,  9 Sep 2021 09:31:41 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uiXfd1AnAHz0; Thu,  9 Sep 2021 09:32:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 2579E402C4;
-	Thu,  9 Sep 2021 09:31:41 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id C471F40185;
+	Thu,  9 Sep 2021 09:32:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A915DC0022;
-	Thu,  9 Sep 2021 09:31:40 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DB38C000D;
+	Thu,  9 Sep 2021 09:32:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2CDB2C000D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B3240C000D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Sep 2021 09:31:39 +0000 (UTC)
+ Thu,  9 Sep 2021 09:32:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 14FB0402C3
+ by smtp1.osuosl.org (Postfix) with ESMTP id 95549849B0
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Sep 2021 09:31:39 +0000 (UTC)
+ Thu,  9 Sep 2021 09:32:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kv85rpfeKdBd
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id zBwm0EsA1RYO
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Sep 2021 09:31:38 +0000 (UTC)
+ Thu,  9 Sep 2021 09:32:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 53A064028A
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E5D3080DD0
  for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Sep 2021 09:31:38 +0000 (UTC)
+ Thu,  9 Sep 2021 09:32:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631179897;
+ s=mimecast20190719; t=1631179953;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=oyk/5xbj6JBnipmhdcExzScdKjpjWsEFPTKPgPPwe0U=;
- b=YBl/gCbGJS+/Frcz0DURoZyWvbHlLCOT4mCtA+Sp/RGXFaJtcKRIllP8WZVWOlOWBS2gYF
- nuvJo+YF1ZhM9qvfY097qr8xHt/Fuu23mvKyMWJEVqEvFar0J3R7GY38PjXwSzrJk+t2rY
- bBupyCD+mzMP9hrPvNQAiG0/vx3sIrE=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-441-qwnOF98_PUS4XJLHZEC6xw-1; Thu, 09 Sep 2021 05:31:36 -0400
-X-MC-Unique: qwnOF98_PUS4XJLHZEC6xw-1
-Received: by mail-lf1-f72.google.com with SMTP id
- x33-20020a0565121321b02903ac51262781so508492lfu.9
+ bh=l6oxYI9ut8npw7lFLZ/z3EUqhsCOkpfGiXzm3CrP2Pc=;
+ b=hx8ktJsYHfshQC0D+JvZytQIVzVKJgiRIRKF2vk/Vhwzv40gxVeHHiVqGfkDSVuw5vRjff
+ bw24jIqwaZMS/ImmOZeujXb8di+EFSnYIxRAonqT1D3pR8xnMBxB/VRhJUIsqCkC91yldT
+ XGOikG1iOjW1+LoDY0zjtb+VkOZ7HCg=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-487-KmPPBu7lN1Gvxq3Ls_fZpg-1; Thu, 09 Sep 2021 05:32:32 -0400
+X-MC-Unique: KmPPBu7lN1Gvxq3Ls_fZpg-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ bp18-20020a056512159200b003eb84833c98so500581lfb.14
  for <virtualization@lists.linux-foundation.org>;
- Thu, 09 Sep 2021 02:31:35 -0700 (PDT)
+ Thu, 09 Sep 2021 02:32:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=oyk/5xbj6JBnipmhdcExzScdKjpjWsEFPTKPgPPwe0U=;
- b=cariZfuNFWYc3QCcBx/A+bJnMg5UnjvA6XoDnK04gVh6ZD7iTB8r5O8ge5whO42uCW
- P0pWI+08BFgGJMHo/99ggrMv5qSpzfesQaPqgNJ3AT9UiRy5etb6i0USc+QSApMVIxpb
- xyx8Dhfz73wXqzEuoCr9CZjkOPvrFpqUZP3hPpPNsyZVIloZ854zh9aOoMF41BkGSo1G
- hCn2kvoAHTvVv/04RP0OnHGLgvyP4tU8TxP3xpU0yEycxtzflk6AIaClQdzm+01WRAAp
- 1Rb5rFEwk+nhlYXHvd7T3oC29yFk9bmN5rfTYQXrNO5L3IlVsKZj4IGI8i9IKsMw8K0u
- glyA==
-X-Gm-Message-State: AOAM531XIeMJmKPp+rdiXb8+Hsg4cjEtiY9wKn18b8Dfp3TfICnmU6Zw
- aj0hKFMr2kS44Mwf3APkrXItR5HktIoNlqByov5i8fR0rmvZ/Dcs+O989Yezho+A3AI9SA3Ho7w
- rFNuwVSebrRVOT8emRjtNLM7IDelfHC/CisSbS4UAG0ETmOYjfLGU8yEBIQ==
-X-Received: by 2002:ac2:5fc5:: with SMTP id q5mr1579264lfg.629.1631179894479; 
- Thu, 09 Sep 2021 02:31:34 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxoCrurk4RtgIW8ahoORtM+vXj+ouEemSvE6SvpTvr8/YNjYdY8lb0LhbVcW+5BwC5jNXDL7KpsEazZVqPsEz4=
-X-Received: by 2002:ac2:5fc5:: with SMTP id q5mr1579255lfg.629.1631179894307; 
- Thu, 09 Sep 2021 02:31:34 -0700 (PDT)
+ bh=l6oxYI9ut8npw7lFLZ/z3EUqhsCOkpfGiXzm3CrP2Pc=;
+ b=lIGjU3tfg8rXJh7tI87Sy1rLlkiK1aO9BbSs2APOaYBT9Tj/Xp3TYqUN0Ze/Sab7hO
+ xjT5oEQGs73xvGlHVvLTMYg6/sQDc9D5IEETosK3rMLDnbFZIzHlmF3TR1gePolZRGvX
+ CMH6MOJNx/uY51uRbJuqLJlvfFgr1Y7xo56eVQ+MfXWNNlZfUPG5eJNZ53fCXDoV04+X
+ OmBDb8WmS0ON+JnIagb7qtXX5XkuMNDgU5LUualyFoFmVGJ3L0pZ3Os5ijU5fk3/rQyV
+ FdDD9mwgLberfx518nDXLSMFhXq666Z8xVjAdSRJ639q6HAAEf/wZjtt+n3Kq8jY2FlM
+ 7Tow==
+X-Gm-Message-State: AOAM533vnqvjPvAsxIcuege6yrzuL9/U6pCsmm8n22oGaOMnvdgfay70
+ nDIFa8m4ylHWNIF7Xy9LuFf9G+ivqWvhrTuWsT2bxt7We+vGFNPN7a1EoCaP3kSLGHvzU7Rw8hn
+ 2sYxkCbiq11ITL+q621bDLP1Hq/WSWeQbJPSbyk7solcxRTv5TeAF6EaDEg==
+X-Received: by 2002:a05:6512:2001:: with SMTP id
+ a1mr1631115lfb.498.1631179950932; 
+ Thu, 09 Sep 2021 02:32:30 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzl0hlu0tmaQ2CMyDCL+WTPdOq32+SzUOb2yeoKq+vIsS1TTq4pXoe92IahEto4NDmVJCxLKpcU5CL4QNu/9Hg=
+X-Received: by 2002:a05:6512:2001:: with SMTP id
+ a1mr1631107lfb.498.1631179950780; 
+ Thu, 09 Sep 2021 02:32:30 -0700 (PDT)
 MIME-Version: 1.0
 References: <cover.1631101392.git.wuzongyong@linux.alibaba.com>
- <CACGkMEuEwbDQUtYHz=0O4pQcb6ibY0MAT7hLDjN=Okw8c9CZGA@mail.gmail.com>
- <20210909051936-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20210909051936-mutt-send-email-mst@kernel.org>
+ <ebd83066e3897aae63e4b02f8729a73dd09931c6.1631101392.git.wuzongyong@linux.alibaba.com>
+ <CACGkMEtAZg+Nkx_1WJAP2=xQ6o6G9Vd=xYvFmR6YRp8vBg2Tqg@mail.gmail.com>
+ <20210909051706-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20210909051706-mutt-send-email-mst@kernel.org>
 From: Jason Wang <jasowang@redhat.com>
-Date: Thu, 9 Sep 2021 17:31:23 +0800
-Message-ID: <CACGkMEvt5G-f4U=ReXNdmBcbywzsAhV1eYL2bP2Wp4RA_pKrYQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] vDPA driver for legacy virtio-pci device
+Date: Thu, 9 Sep 2021 17:32:20 +0800
+Message-ID: <CACGkMEuSX6McCf2hcZJNKVj_1errDQGN9uPGhYWo55fsB5NKBw@mail.gmail.com>
+Subject: Re: [PATCH 5/6] vdpa: add get_vq_num_unchangeable callback in
+ vdpa_config_ops
 To: "Michael S. Tsirkin" <mst@redhat.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
@@ -108,43 +114,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Sep 9, 2021 at 5:21 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+On Thu, Sep 9, 2021 at 5:18 PM Michael S. Tsirkin <mst@redhat.com> wrote:
 >
-> On Thu, Sep 09, 2021 at 11:05:06AM +0800, Jason Wang wrote:
-> > On Wed, Sep 8, 2021 at 8:22 PM Wu Zongyong <wuzongyong@linux.alibaba.com> wrote:
+> On Thu, Sep 09, 2021 at 10:55:03AM +0800, Jason Wang wrote:
+> > On Wed, Sep 8, 2021 at 8:23 PM Wu Zongyong <wuzongyong@linux.alibaba.com> wrote:
 > > >
-> > > This series implements the vDPA driver for legacy virtio-pci device.
-> > > Currently we already have the vDPA driver for modern virtio-pci device
-> > > only, but there are some legacy virtio-pci devices conforming to the
-> > > virtio-pci specifications of 0.9.x or older versions. For example,
-> > > ENI(Elastic Network Interface) of Alibaba ECS baremetal instance is a
-> > > hardware virtio network device which follows the Virtio PCI Card 0.9.5
-> > > Draft specification. Such legacy virtio-pci devices have some
-> > > inconsistent behaviour with modern virtio-pci devices, so some common
-> > > codes are split out and modern device specific codes are moved to a
-> > > separated file.
+> > > This new callback is used to indicate whether the vring size can be
+> > > change or not. It is useful when we have a legacy virtio pci device as
+> > > the vdpa device for there is no way to negotiate the vring num by the
+> > > specification.
 > >
-> > What worries me a little bit are:
+> > So I'm not sure it's worth bothering. E.g what if we just fail
+> > VHOST_SET_VRING_NUM it the value doesn't match what hardware has?
 > >
-> > 1) vDPA requires IOMMU_PLATFORM to be supported by the device to work,
-> > if I understand ENI correctly, it's a legacy device so it can't
-> > support ACCESS_PLATFORM. Or is it a legacy device that supports
-> > ACCESS_PLATFORM implicitly.
-> > 2) vDPA tries to present a 1.0 device, in this case the behavior could
-> > be ruled by the spec. If we tries to present an 1.0 device on top of
-> > legacy device we may suffer a lot of issues:
-> >
-> > - endian issue: 1.0 use le but legacy may use native endian
-> > - queue_enable semantic which is missed in the legacy
-> > - virtqueue size, as you mentioned below
+> > Thanks
 >
-> So this all kind of works when guest and host are
-> strongly ordered and LE. Case in point x86.
-> Question is how do we limit this to an x86 guest?
-> Add a new ioctl declaring that this is the case?
+> More importantly is there and actual plan for supporting
+> legacy devices? I don't think they currently work at a number
+> of levels.
 
-I think the most simple way is to disable the driver on non LE host
-(assuming it tries to use native endian which is kind of impossible).
+I think the answer is no, it would introduce a lot of burdens.
 
 Thanks
 
