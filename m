@@ -1,100 +1,130 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 59FCC407A95
-	for <lists.virtualization@lfdr.de>; Sun, 12 Sep 2021 00:00:36 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E9667407AFB
+	for <lists.virtualization@lfdr.de>; Sun, 12 Sep 2021 01:54:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEFAB6080A;
-	Sat, 11 Sep 2021 21:56:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6AD4A82548;
+	Sat, 11 Sep 2021 23:54:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nqgMSiX1x1c9; Sat, 11 Sep 2021 21:56:34 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KWrDWs_9q0od; Sat, 11 Sep 2021 23:54:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8275A60B4D;
-	Sat, 11 Sep 2021 21:56:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 39238824C1;
+	Sat, 11 Sep 2021 23:54:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F37DC0022;
-	Sat, 11 Sep 2021 21:56:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4408C0022;
+	Sat, 11 Sep 2021 23:54:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A916DC000D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 07E8FC000D
  for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 21:56:32 +0000 (UTC)
+ Sat, 11 Sep 2021 23:54:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8B53C826C1
+ by smtp2.osuosl.org (Postfix) with ESMTP id D55E740161
  for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 21:56:32 +0000 (UTC)
+ Sat, 11 Sep 2021 23:54:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=linux-foundation.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IQRo_BqDoBcU
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id A39EbjNt0Bqh
  for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 21:56:32 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C2427826C0
+ Sat, 11 Sep 2021 23:54:46 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BFA964015C
  for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 21:56:31 +0000 (UTC)
-Received: by mail-lf1-x12a.google.com with SMTP id l11so12089778lfe.1
+ Sat, 11 Sep 2021 23:54:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631404485;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=XhzTiX0DZYV1X5ckSDoJZp4U7aZCZRTdTtc5atz14SI=;
+ b=HIYOtFgY4HxMNyU0nzLti5A8vG2pVu6p4v3N2hqr9VCqnSjvaEgH03c0xLylchB2XX6JhZ
+ MZja69E6+/mBnkFFoaH07qfH2BNOXewJXF/fF6FcQeepTpcoGIs0L1KGN//6havxYew7HX
+ 7hUkBeY6or6zno1I58JXf2KSUB2lf60=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-393-3wVZsbiNMZq-dk1zgIaTbg-1; Sat, 11 Sep 2021 19:54:44 -0400
+X-MC-Unique: 3wVZsbiNMZq-dk1zgIaTbg-1
+Received: by mail-ej1-f71.google.com with SMTP id
+ n18-20020a170906089200b005dc91303dfeso2258409eje.15
  for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 14:56:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux-foundation.org; s=google;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=fVJ++gcLyqeb6D8u1bo0Qp2kTZx0cgjBEYii9V19c2g=;
- b=LLoNF6oh8l3EZwSYDeoHHad+NI8KQodeBADF5xTQPYQy8DfffT6/oL+SAksiZVHb5+
- q7GML4URU9mehf3zntJZ23AkN/TV1AUFum60PC0RF5KNdJx2mQE4YKpZQ0ayOhWHPfKB
- xNonKr7pi7T7RpKSX5hWNYhSSkD/lXVv/43vc=
+ Sat, 11 Sep 2021 16:54:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=fVJ++gcLyqeb6D8u1bo0Qp2kTZx0cgjBEYii9V19c2g=;
- b=EkCJ/wR5ryfTTKjyD3TKWJq4uyZwMBvVfl2w1+og9mI/3P9YvPXFPgcG3CShFyo3LW
- glNsa3p5d3ZOFW8eSzJI9QhTxOk8RmjQo1kVdjehxUPMD7MhUEpku/hZcDvL5izpz0Lj
- 3I9UqVgy5Tr3U76mCpNz47Z9tv5BdN58BiAG5KPSpuS5dkO0z6tE5k4CJLQF3fdM0K9Q
- oN3pTOI+/AlJJQxfLdgmuyZh5JB25l19dq7YxS7VaOKz5BAzCE3Ck0RDDwydeTUek2zS
- d6Ul6om8rK+BfgLQz0aiuIFBgYLetp1LC6x9BUD3HcjOGA4v/T/fvR8oWVbUzM9f7P08
- 4kyg==
-X-Gm-Message-State: AOAM5320NDkhZlTQXaCXJaK3PdMvru4Yd2cqbtbKheHJMhZiHdR7zeRx
- +e3x69NHASCTt59OcSzg76UeGSAtvzEdrrQ+o8o=
-X-Google-Smtp-Source: ABdhPJzIYODMDX8O/9gORdwbsPgDwzrmXVbQeR8a3TYpvaf3iPQUaM/SbIbmBHSTbfet/ytLDIdBpQ==
-X-Received: by 2002:ac2:5fa3:: with SMTP id s3mr3380623lfe.605.1631397389204; 
- Sat, 11 Sep 2021 14:56:29 -0700 (PDT)
-Received: from mail-lf1-f53.google.com (mail-lf1-f53.google.com.
- [209.85.167.53])
- by smtp.gmail.com with ESMTPSA id x4sm330025ljm.98.2021.09.11.14.56.28
- for <virtualization@lists.linux-foundation.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 11 Sep 2021 14:56:28 -0700 (PDT)
-Received: by mail-lf1-f53.google.com with SMTP id h16so12043840lfk.10
- for <virtualization@lists.linux-foundation.org>;
- Sat, 11 Sep 2021 14:56:28 -0700 (PDT)
-X-Received: by 2002:a05:6512:2611:: with SMTP id
- bt17mr3487995lfb.141.1631397388084; 
- Sat, 11 Sep 2021 14:56:28 -0700 (PDT)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=XhzTiX0DZYV1X5ckSDoJZp4U7aZCZRTdTtc5atz14SI=;
+ b=mCR3vk1dEFmmQ5IFct+eW8RNyFX9HK2vNBzl7Y8A2mXcxrJJ2yoqPqvyZv5sV34PwF
+ +Dxtu7fU/PIT04sh/gmJ/+ANN+8MsBRDUwqjJavc8nZ1R7RjFlq3Oq7VyvRQfzj2bGKG
+ n6DV3Y00Bj+h6kOwkj3143cOIEKUtuG3xg9ODUv/ob/1O9kmHJBvZKJGBn6xeS6TxpQy
+ h7S47Pr+I2wt4XqEakFq/ysMldftdFdR874sjewCfGhAouXZaP/Sw17bslEP2IdbCa5k
+ Zv4wxLXyH28tgCgTZEqjJFbqz29pHO/gqVzni0pYU7UW3uMGQ1ULcjeHXncsMY9goK7D
+ czSw==
+X-Gm-Message-State: AOAM530j5wEHDMkhZzHleU0INtXdXZUe5/sAWrmzQ4g7rWEbITQ951VD
+ S5foRUXdQWfQgeIMaIUgWgebnRpop/0QG7ox42ZlsbIKsVp6Fh6bj85ew4jShRDy2p40iifugFZ
+ FkhhgxubsxCv++RoOFEY1x4by+W7KAfgpFnwxJcgHrg==
+X-Received: by 2002:a17:906:5855:: with SMTP id
+ h21mr4944820ejs.230.1631404482988; 
+ Sat, 11 Sep 2021 16:54:42 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzUJ/Dz7qpoDYQNg7a7mY8Cl7pe7fwOabdq++HQzqfzjVSc2KbxoH+7byBLBBXMvIdUmNqg2Q==
+X-Received: by 2002:a17:906:5855:: with SMTP id
+ h21mr4944788ejs.230.1631404482774; 
+ Sat, 11 Sep 2021 16:54:42 -0700 (PDT)
+Received: from redhat.com ([2.55.27.174])
+ by smtp.gmail.com with ESMTPSA id n13sm1309780ejk.97.2021.09.11.16.54.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 11 Sep 2021 16:54:41 -0700 (PDT)
+Date: Sat, 11 Sep 2021 19:54:36 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Andi Kleen <ak@linux.intel.com>
+Subject: Re: [PATCH v4 11/15] pci: Add pci_iomap_shared{,_range}
+Message-ID: <20210911195006-mutt-send-email-mst@kernel.org>
+References: <20210824053830-mutt-send-email-mst@kernel.org>
+ <d21a2a2d-4670-ba85-ce9a-fc8ea80ef1be@linux.intel.com>
+ <20210829112105-mutt-send-email-mst@kernel.org>
+ <09b340dd-c8a8-689c-4dad-4fe0e36d39ae@linux.intel.com>
+ <20210829181635-mutt-send-email-mst@kernel.org>
+ <3a88a255-a528-b00a-912b-e71198d5f58f@linux.intel.com>
+ <20210830163723-mutt-send-email-mst@kernel.org>
+ <69fc30f4-e3e2-add7-ec13-4db3b9cc0cbd@linux.intel.com>
+ <20210910054044-mutt-send-email-mst@kernel.org>
+ <f672dc1c-5280-7bbc-7a56-7c7aab31725c@linux.intel.com>
 MIME-Version: 1.0
-References: <20210909095608-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20210909095608-mutt-send-email-mst@kernel.org>
-From: Linus Torvalds <torvalds@linux-foundation.org>
-Date: Sat, 11 Sep 2021 14:56:12 -0700
-X-Gmail-Original-Message-ID: <CAHk-=wgcXzshPVvVgGDqa9Y9Sde6RsUvj9jvx0htBqPuaTGX4Q@mail.gmail.com>
-Message-ID: <CAHk-=wgcXzshPVvVgGDqa9Y9Sde6RsUvj9jvx0htBqPuaTGX4Q@mail.gmail.com>
-Subject: Re: [GIT PULL] virtio,vdpa,vhost: features, fixes
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: mgurtovoy@nvidia.com, lingshan.zhu@intel.com,
- KVM list <kvm@vger.kernel.org>, xianting.tian@linux.alibaba.com,
- Netdev <netdev@vger.kernel.org>,
+In-Reply-To: <f672dc1c-5280-7bbc-7a56-7c7aab31725c@linux.intel.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: "Kuppuswamy, Sathyanarayanan" <sathyanarayanan.kuppuswamy@linux.intel.com>,
+ Kuppuswamy Sathyanarayanan <knsathya@kernel.org>,
+ Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+ Peter Zijlstra <peterz@infradead.org>, Linux PCI <linux-pci@vger.kernel.org>,
+ linux-mips@vger.kernel.org,
+ James E J Bottomley <James.Bottomley@hansenpartnership.com>,
+ Dave Hansen <dave.hansen@intel.com>, Peter H Anvin <hpa@zytor.com>,
+ sparclinux@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+ linux-arch <linux-arch@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+ Helge Deller <deller@gmx.de>, X86 ML <x86@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
+ Tony Luck <tony.luck@intel.com>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Dan Williams <dan.j.williams@intel.com>,
+ virtualization@lists.linux-foundation.org, Richard Henderson <rth@twiddle.net>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>, linux-parisc@vger.kernel.org,
+ Sean Christopherson <seanjc@google.com>,
  Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- virtualization@lists.linux-foundation.org, Wolfram Sang <wsa@kernel.org>,
- xieyongji@bytedance.com, Viresh Kumar <viresh.kumar@linaro.org>,
- arseny.krasnov@kaspersky.com, Will Deacon <will@kernel.org>, elic@nvidia.com
+ linux-alpha@vger.kernel.org, "David S . Miller" <davem@davemloft.net>,
+ Kirill Shutemov <kirill.shutemov@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -111,48 +141,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Sep 9, 2021 at 6:56 AM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> NB: when merging this with
-> b542e383d8c0 ("eventfd: Make signal recursion protection a task bit")
-> from Linus' tree, replace eventfd_signal_count with
-> eventfd_signal_allowed, and drop the export of eventfd_wake_count from
-> ("eventfd: Export eventfd_wake_count to modules").
+On Fri, Sep 10, 2021 at 09:34:45AM -0700, Andi Kleen wrote:
+> > > that's why
+> > > an extra level of defense of ioremap opt-in is useful.
+> > OK even assuming this, why is pci_iomap opt-in useful?
+> > That never happens before probe - there's simply no pci_device then.
+> 
+> 
+> Hmm, yes that's true. I guess we can make it default to opt-in for
+> pci_iomap.
+> 
+> It only really matters for device less ioremaps.
 
-What? No. That can't be right.
+OK. And same thing for other things with device, such as
+devm_platform_ioremap_resource.
+If we agree on all that, this will basically remove virtio
+changes from the picture ;)
 
-Do you mean "replace eventfd_signal_count with !eventfd_signal_allowed()"?
+-- 
+MST
 
-Because if I read the logic correctly, the issue is that
-'vduse_vq_kick()' will call eventfd_signal().
-
-Which it must not do it eventfd_signal_allowed() returns false.
-
-So if eventfd_signal_allowed() is _not_ set, the code needs to defer
-it to the workqueue.
-
-No?
-
-Side note: I was _this_ close to just not pulling this. The commits
-were all from after the merge window opened, and I got this pull
-request in the latter half of the second week of the merge window.
-
-Your "explanations"  for this pull are also not any language I
-recognize, or even remotely human-readable.
-
-WTF does "vduse driver supporting blk" mean, and how is that supposed
-to explain anything at all?
-
-That is NOT how these things are supposed to work. AT ALL.
-
-So you are hereby put on notice: next time I get this kind of
-half-arsed garbage pull request, I won't spend the energy on trying to
-figure out what is actually going on. I will just throw it in the
-trash.
-
-Because honestly, that's where this pull request belonged.
-
-              Linus
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
