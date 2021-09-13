@@ -1,83 +1,117 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9911E408437
-	for <lists.virtualization@lfdr.de>; Mon, 13 Sep 2021 07:55:27 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 738DD408464
+	for <lists.virtualization@lfdr.de>; Mon, 13 Sep 2021 08:04:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4B2054042D;
-	Mon, 13 Sep 2021 05:55:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2F88E6138F;
+	Mon, 13 Sep 2021 06:04:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Y96ufueKMoRn; Mon, 13 Sep 2021 05:55:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 16B7D40422;
-	Mon, 13 Sep 2021 05:55:25 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8qYYvV21xGZ1; Mon, 13 Sep 2021 06:04:09 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6918B608ED;
+	Mon, 13 Sep 2021 06:04:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 95A8CC000D;
-	Mon, 13 Sep 2021 05:55:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id EB7A4C000D;
+	Mon, 13 Sep 2021 06:04:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BD985C000D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93E1AC000D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 05:55:22 +0000 (UTC)
+ Mon, 13 Sep 2021 06:04:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id ACB9E60849
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7BB9D607AB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 05:55:22 +0000 (UTC)
+ Mon, 13 Sep 2021 06:04:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QbU8rjEHTr-Q
+ with ESMTP id 5N7MiSctMFx8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 05:55:22 +0000 (UTC)
+ Mon, 13 Sep 2021 06:04:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id F10E7600C6
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A04F6605D8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 05:55:21 +0000 (UTC)
+ Mon, 13 Sep 2021 06:04:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631512521;
+ s=mimecast20190719; t=1631513045;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=59mlc5MAZl17Bwg0fnZF6E06RySu8Fbe/iP8dyny6Ao=;
- b=gqfGxGRXWnu7gpXgj/89W0/4BloCQvOh4StusNfWjHGsi/N1FWPt517wEudV7KeJeKTsg+
- cDub8Y5ies7KTJFBeLaUOy9VsWvHn9mgWZ9TmoNQDWQXHwMbT+44wUtm1588CKvUnq8O2H
- PkCIJ405uzxPccB8iQ/vyDcwwzoUG64=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-602-JyQ73bKlN4WvJZxjyD7e5Q-1; Mon, 13 Sep 2021 01:55:17 -0400
-X-MC-Unique: JyQ73bKlN4WvJZxjyD7e5Q-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com
- [10.5.11.16])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 251B88145E7;
- Mon, 13 Sep 2021 05:55:16 +0000 (UTC)
-Received: from localhost.localdomain (ovpn-13-146.pek2.redhat.com
- [10.72.13.146])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 759F85C23A;
- Mon, 13 Sep 2021 05:55:02 +0000 (UTC)
-From: Jason Wang <jasowang@redhat.com>
-To: mst@redhat.com,
-	jasowang@redhat.com
-Subject: [PATCH 9/9] virtio_ring: validate used buffer length
-Date: Mon, 13 Sep 2021 13:53:53 +0800
-Message-Id: <20210913055353.35219-10-jasowang@redhat.com>
-In-Reply-To: <20210913055353.35219-1-jasowang@redhat.com>
+ bh=MsctpVGQyV6/v25aTDpvQ7QvrlAiAoDMHUqgBQtcFic=;
+ b=URoJmHCXDZXpaKtG9NArGQZzdUffswsXxtoFIppXFHmVCtOQ531j6BU6RkJz/4tGTXghl4
+ foikBqAlcOCEopHyNZOvpyhhhPn2vKjKB9LhxzYwtn4f2TeeD2bw+o7fy+CGlR7iYgRbsK
+ IImQ5E0XnUma0IXB6CuMFfntg6FSkZ0=
+Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
+ [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-352-YgBbHxxDPcaZ0vWHK9O0wA-1; Mon, 13 Sep 2021 02:04:02 -0400
+X-MC-Unique: YgBbHxxDPcaZ0vWHK9O0wA-1
+Received: by mail-ej1-f71.google.com with SMTP id
+ v12-20020a170906858c00b005f03d2ccaf5so792064ejx.14
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 12 Sep 2021 23:04:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=MsctpVGQyV6/v25aTDpvQ7QvrlAiAoDMHUqgBQtcFic=;
+ b=En2nrkPvItfahPAf8hjzFQ81AQqiYDVTAu/7iRLbCDQlUib0m+YZeizLRQG8GRKzkc
+ YTDHPUfT8X/qVyhLA4lVbrVCIOpp1D9rLC8/iBD64mFvNtJkjEjt4JUAHi965LdDyOeO
+ 778/fNZlQxgUZggJN8GauVa8NRhQHk3I8wB01cIWUJMjUZp3NJ/9vt5/AcDrvsXEVOX8
+ e6O4nM1jvtsPJrjuvH2GI93UqCxFjQg/JB9GaJ/yJaxGFQrcpVRxv48dZU1ahprC59kJ
+ QjJ5rqQ7PUgyxXEk1eaGD3QYtJEt62LSq7PC75k5y2ajmYdtxVd32Rz2seiaQdegLmu/
+ iQqQ==
+X-Gm-Message-State: AOAM530qTawT7/PKGWh4j6BcKyGVecSQ3xxkaQejul9W6wTvYDq4ztEq
+ tdAw/UBNyHvxVGmi7DSMvAlluHVOJRRh+BL8Wz3yXTU5IokBoF4piq1EZPVdIYvfTXlIHljY3g8
+ 1H8osCQ0iXUUQgckF1RUN/D0aEgPRTWiUTPhr7qbQDA==
+X-Received: by 2002:a17:906:5d6:: with SMTP id
+ t22mr10909808ejt.98.1631513040931; 
+ Sun, 12 Sep 2021 23:04:00 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzm1Vcn6NiQyB4mKJJv2BPvNXfCEw4nbTwxBVWrIIE5IykDgNkBqc1gcdkp/JIonsUfnn89vg==
+X-Received: by 2002:a17:906:5d6:: with SMTP id
+ t22mr10909795ejt.98.1631513040747; 
+ Sun, 12 Sep 2021 23:04:00 -0700 (PDT)
+Received: from redhat.com ([2.55.27.174])
+ by smtp.gmail.com with ESMTPSA id t16sm2881663ejj.54.2021.09.12.23.03.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 12 Sep 2021 23:03:59 -0700 (PDT)
+Date: Mon, 13 Sep 2021 02:03:51 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH 6/9] virtio_pci: harden MSI-X interrupts
+Message-ID: <20210913015711-mutt-send-email-mst@kernel.org>
 References: <20210913055353.35219-1-jasowang@redhat.com>
+ <20210913055353.35219-7-jasowang@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
-Cc: konrad.wilk@oracle.com, f.hetzelt@tu-berlin.de,
- linux-kernel@vger.kernel.org, david.kaplan@amd.com,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20210913055353.35219-7-jasowang@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: "Kuppuswamy, Sathyanarayanan" <sathyanarayanan.kuppuswamy@linux.intel.com>,
+ Kuppuswamy Sathyanarayanan <knsathya@kernel.org>, david.kaplan@amd.com,
+ Peter Zijlstra <peterz@infradead.org>,
+ virtualization@lists.linux-foundation.org,
+ James E J Bottomley <James.Bottomley@hansenpartnership.com>,
+ Dave Hansen <dave.hansen@intel.com>, Peter H Anvin <hpa@zytor.com>,
+ Thomas Gleixner <tglx@linutronix.de>, Andi Kleen <ak@linux.intel.com>,
+ Jonathan Corbet <corbet@lwn.net>, Helge Deller <deller@gmx.de>,
+ X86 ML <x86@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+ Arnd Bergmann <arnd@arndb.de>, konrad.wilk@oracle.com, f.hetzelt@tu-berlin.de,
+ Tony Luck <tony.luck@intel.com>, Borislav Petkov <bp@alien8.de>,
+ Andy Lutomirski <luto@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+ Dan Williams <dan.j.williams@intel.com>, Richard Henderson <rth@twiddle.net>,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Sean Christopherson <seanjc@google.com>, linux-kernel@vger.kernel.org,
+ pbonzini@redhat.com, "David S . Miller" <davem@davemloft.net>,
+ Kirill Shutemov <kirill.shutemov@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,138 +128,175 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch validate the used buffer length provided by the device
-before trying to use it. This is done by record the in buffer length
-in a new field in desc_state structure during virtqueue_add(), then we
-can fail the virtqueue_get_buf() when we find the device is trying to
-give us a used buffer length which is greater than the in buffer
-length.
+On Mon, Sep 13, 2021 at 01:53:50PM +0800, Jason Wang wrote:
+> We used to synchronize pending MSI-X irq handlers via
+> synchronize_irq(), this may not work for the untrusted device which
+> may keep sending interrupts after reset which may lead unexpected
+> results. Similarly, we should not enable MSI-X interrupt until the
+> device is ready. So this patch fixes those two issues by:
+> 
+> 1) switching to use disable_irq() to prevent the virtio interrupt
+>    handlers to be called after the device is reset.
+> 2) using IRQF_NO_AUTOEN and enable the MSI-X irq during .ready()
+> 
+> This can make sure the virtio interrupt handler won't be called before
+> virtio_device_ready() and after reset.
+> 
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
 
-Signed-off-by: Jason Wang <jasowang@redhat.com>
----
- drivers/virtio/virtio_ring.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+I don't get the threat model here. Isn't disabling irqs done by the 
+hypervisor anyway? Is there a reason to trust disable_irq but not
+device reset?
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index d2ca0a7365f8..b8374a6144f3 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -69,6 +69,7 @@
- struct vring_desc_state_split {
- 	void *data;			/* Data for callback. */
- 	struct vring_desc *indir_desc;	/* Indirect descriptor, if any. */
-+	u64 buflen;			/* In buffer length */
- };
- 
- struct vring_desc_state_packed {
-@@ -76,6 +77,7 @@ struct vring_desc_state_packed {
- 	struct vring_packed_desc *indir_desc; /* Indirect descriptor, if any. */
- 	u16 num;			/* Descriptor list length. */
- 	u16 last;			/* The last desc state in a list. */
-+	u64 buflen;			/* In buffer length */
- };
- 
- struct vring_desc_extra {
-@@ -490,6 +492,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 	unsigned int i, n, avail, descs_used, prev, err_idx;
- 	int head;
- 	bool indirect;
-+	u64 buflen = 0;
- 
- 	START_USE(vq);
- 
-@@ -571,6 +574,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 						     VRING_DESC_F_NEXT |
- 						     VRING_DESC_F_WRITE,
- 						     indirect);
-+			buflen += sg->length;
- 		}
- 	}
- 	/* Last one doesn't continue. */
-@@ -605,6 +609,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 
- 	/* Store token and indirect buffer state. */
- 	vq->split.desc_state[head].data = data;
-+	vq->split.desc_state[head].buflen = buflen;
- 	if (indirect)
- 		vq->split.desc_state[head].indir_desc = desc;
- 	else
-@@ -784,6 +789,11 @@ static void *virtqueue_get_buf_ctx_split(struct virtqueue *_vq,
- 		BAD_RING(vq, "id %u is not a head!\n", i);
- 		return NULL;
- 	}
-+	if (unlikely(*len > vq->split.desc_state[i].buflen)) {
-+		BAD_RING(vq, "used len %d is larger than in buflen %lld\n",
-+			*len, vq->split.desc_state[i].buflen);
-+		return NULL;
-+	}
- 
- 	/* detach_buf_split clears data, so grab it now. */
- 	ret = vq->split.desc_state[i].data;
-@@ -1062,6 +1072,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 	unsigned int i, n, err_idx;
- 	u16 head, id;
- 	dma_addr_t addr;
-+	u64 buflen = 0;
- 
- 	head = vq->packed.next_avail_idx;
- 	desc = alloc_indirect_packed(total_sg, gfp);
-@@ -1089,6 +1100,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 			desc[i].addr = cpu_to_le64(addr);
- 			desc[i].len = cpu_to_le32(sg->length);
- 			i++;
-+			if (n >= out_sgs)
-+				buflen += sg->length;
- 		}
- 	}
- 
-@@ -1141,6 +1154,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 	vq->packed.desc_state[id].data = data;
- 	vq->packed.desc_state[id].indir_desc = desc;
- 	vq->packed.desc_state[id].last = id;
-+	vq->packed.desc_state[id].buflen = buflen;
- 
- 	vq->num_added += 1;
- 
-@@ -1176,6 +1190,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	unsigned int i, n, c, descs_used, err_idx;
- 	__le16 head_flags, flags;
- 	u16 head, id, prev, curr, avail_used_flags;
-+	u64 buflen = 0;
- 
- 	START_USE(vq);
- 
-@@ -1250,6 +1265,8 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 					1 << VRING_PACKED_DESC_F_AVAIL |
- 					1 << VRING_PACKED_DESC_F_USED;
- 			}
-+			if (n >= out_sgs)
-+				buflen += sg->length;
- 		}
- 	}
- 
-@@ -1268,6 +1285,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	vq->packed.desc_state[id].data = data;
- 	vq->packed.desc_state[id].indir_desc = ctx;
- 	vq->packed.desc_state[id].last = prev;
-+	vq->packed.desc_state[id].buflen = buflen;
- 
- 	/*
- 	 * A driver MUST NOT make the first descriptor in the list
-@@ -1455,6 +1473,11 @@ static void *virtqueue_get_buf_ctx_packed(struct virtqueue *_vq,
- 		BAD_RING(vq, "id %u is not a head!\n", id);
- 		return NULL;
- 	}
-+	if (unlikely(*len > vq->packed.desc_state[id].buflen)) {
-+		BAD_RING(vq, "used len %d is larger than in buflen %lld\n",
-+			*len, vq->packed.desc_state[id].buflen);
-+		return NULL;
-+	}
- 
- 	/* detach_buf_packed clears data, so grab it now. */
- 	ret = vq->packed.desc_state[id].data;
--- 
-2.25.1
+Cc a bunch more people ...
+
+
+> ---
+>  drivers/virtio/virtio_pci_common.c | 27 +++++++++++++++++++++------
+>  drivers/virtio/virtio_pci_common.h |  6 ++++--
+>  drivers/virtio/virtio_pci_legacy.c |  5 +++--
+>  drivers/virtio/virtio_pci_modern.c |  6 ++++--
+>  4 files changed, 32 insertions(+), 12 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio_pci_common.c b/drivers/virtio/virtio_pci_common.c
+> index b35bb2d57f62..0b9523e6dd39 100644
+> --- a/drivers/virtio/virtio_pci_common.c
+> +++ b/drivers/virtio/virtio_pci_common.c
+> @@ -24,8 +24,8 @@ MODULE_PARM_DESC(force_legacy,
+>  		 "Force legacy mode for transitional virtio 1 devices");
+>  #endif
+>  
+> -/* wait for pending irq handlers */
+> -void vp_synchronize_vectors(struct virtio_device *vdev)
+> +/* disable irq handlers */
+> +void vp_disable_vectors(struct virtio_device *vdev)
+>  {
+>  	struct virtio_pci_device *vp_dev = to_vp_device(vdev);
+>  	int i;
+> @@ -34,7 +34,20 @@ void vp_synchronize_vectors(struct virtio_device *vdev)
+>  		synchronize_irq(vp_dev->pci_dev->irq);
+>  
+>  	for (i = 0; i < vp_dev->msix_vectors; ++i)
+> -		synchronize_irq(pci_irq_vector(vp_dev->pci_dev, i));
+> +		disable_irq(pci_irq_vector(vp_dev->pci_dev, i));
+> +}
+> +
+> +/* enable irq handlers */
+> +void vp_enable_vectors(struct virtio_device *vdev)
+> +{
+> +	struct virtio_pci_device *vp_dev = to_vp_device(vdev);
+> +	int i;
+> +
+> +	if (vp_dev->intx_enabled)
+> +		return;
+> +
+> +	for (i = 0; i < vp_dev->msix_vectors; ++i)
+> +		enable_irq(pci_irq_vector(vp_dev->pci_dev, i));
+>  }
+>  
+>  /* the notify function used when creating a virt queue */
+> @@ -141,7 +154,8 @@ static int vp_request_msix_vectors(struct virtio_device *vdev, int nvectors,
+>  	snprintf(vp_dev->msix_names[v], sizeof *vp_dev->msix_names,
+>  		 "%s-config", name);
+>  	err = request_irq(pci_irq_vector(vp_dev->pci_dev, v),
+> -			  vp_config_changed, 0, vp_dev->msix_names[v],
+> +			  vp_config_changed, IRQF_NO_AUTOEN,
+> +			  vp_dev->msix_names[v],
+>  			  vp_dev);
+>  	if (err)
+>  		goto error;
+> @@ -160,7 +174,8 @@ static int vp_request_msix_vectors(struct virtio_device *vdev, int nvectors,
+>  		snprintf(vp_dev->msix_names[v], sizeof *vp_dev->msix_names,
+>  			 "%s-virtqueues", name);
+>  		err = request_irq(pci_irq_vector(vp_dev->pci_dev, v),
+> -				  vp_vring_interrupt, 0, vp_dev->msix_names[v],
+> +				  vp_vring_interrupt, IRQF_NO_AUTOEN,
+> +				  vp_dev->msix_names[v],
+>  				  vp_dev);
+>  		if (err)
+>  			goto error;
+> @@ -337,7 +352,7 @@ static int vp_find_vqs_msix(struct virtio_device *vdev, unsigned nvqs,
+>  			 "%s-%s",
+>  			 dev_name(&vp_dev->vdev.dev), names[i]);
+>  		err = request_irq(pci_irq_vector(vp_dev->pci_dev, msix_vec),
+> -				  vring_interrupt, 0,
+> +				  vring_interrupt, IRQF_NO_AUTOEN,
+>  				  vp_dev->msix_names[msix_vec],
+>  				  vqs[i]);
+>  		if (err)
+> diff --git a/drivers/virtio/virtio_pci_common.h b/drivers/virtio/virtio_pci_common.h
+> index beec047a8f8d..a235ce9ff6a5 100644
+> --- a/drivers/virtio/virtio_pci_common.h
+> +++ b/drivers/virtio/virtio_pci_common.h
+> @@ -102,8 +102,10 @@ static struct virtio_pci_device *to_vp_device(struct virtio_device *vdev)
+>  	return container_of(vdev, struct virtio_pci_device, vdev);
+>  }
+>  
+> -/* wait for pending irq handlers */
+> -void vp_synchronize_vectors(struct virtio_device *vdev);
+> +/* disable irq handlers */
+> +void vp_disable_vectors(struct virtio_device *vdev);
+> +/* enable irq handlers */
+> +void vp_enable_vectors(struct virtio_device *vdev);
+>  /* the notify function used when creating a virt queue */
+>  bool vp_notify(struct virtqueue *vq);
+>  /* the config->del_vqs() implementation */
+> diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
+> index d62e9835aeec..bdf6bc667ab5 100644
+> --- a/drivers/virtio/virtio_pci_legacy.c
+> +++ b/drivers/virtio/virtio_pci_legacy.c
+> @@ -97,8 +97,8 @@ static void vp_reset(struct virtio_device *vdev)
+>  	/* Flush out the status write, and flush in device writes,
+>  	 * including MSi-X interrupts, if any. */
+>  	ioread8(vp_dev->ioaddr + VIRTIO_PCI_STATUS);
+> -	/* Flush pending VQ/configuration callbacks. */
+> -	vp_synchronize_vectors(vdev);
+> +	/* Disable VQ/configuration callbacks. */
+> +	vp_disable_vectors(vdev);
+>  }
+>  
+>  static u16 vp_config_vector(struct virtio_pci_device *vp_dev, u16 vector)
+> @@ -194,6 +194,7 @@ static void del_vq(struct virtio_pci_vq_info *info)
+>  }
+>  
+>  static const struct virtio_config_ops virtio_pci_config_ops = {
+> +	.ready		= vp_enable_vectors,
+>  	.get		= vp_get,
+>  	.set		= vp_set,
+>  	.get_status	= vp_get_status,
+> diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
+> index 30654d3a0b41..acf0f6b6381d 100644
+> --- a/drivers/virtio/virtio_pci_modern.c
+> +++ b/drivers/virtio/virtio_pci_modern.c
+> @@ -172,8 +172,8 @@ static void vp_reset(struct virtio_device *vdev)
+>  	 */
+>  	while (vp_modern_get_status(mdev))
+>  		msleep(1);
+> -	/* Flush pending VQ/configuration callbacks. */
+> -	vp_synchronize_vectors(vdev);
+> +	/* Disable VQ/configuration callbacks. */
+> +	vp_disable_vectors(vdev);
+>  }
+>  
+>  static u16 vp_config_vector(struct virtio_pci_device *vp_dev, u16 vector)
+> @@ -380,6 +380,7 @@ static bool vp_get_shm_region(struct virtio_device *vdev,
+>  }
+>  
+>  static const struct virtio_config_ops virtio_pci_config_nodev_ops = {
+> +	.ready		= vp_enable_vectors,
+>  	.get		= NULL,
+>  	.set		= NULL,
+>  	.generation	= vp_generation,
+> @@ -397,6 +398,7 @@ static const struct virtio_config_ops virtio_pci_config_nodev_ops = {
+>  };
+>  
+>  static const struct virtio_config_ops virtio_pci_config_ops = {
+> +	.ready		= vp_enable_vectors,
+>  	.get		= vp_get,
+>  	.set		= vp_set,
+>  	.generation	= vp_generation,
+> -- 
+> 2.25.1
 
 _______________________________________________
 Virtualization mailing list
