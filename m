@@ -1,80 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BA28409F3E
-	for <lists.virtualization@lfdr.de>; Mon, 13 Sep 2021 23:36:36 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 21A55409F6D
+	for <lists.virtualization@lfdr.de>; Tue, 14 Sep 2021 00:01:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 94B3860690;
-	Mon, 13 Sep 2021 21:36:34 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 4319A40210;
+	Mon, 13 Sep 2021 22:01:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ydt5SpzOANoJ; Mon, 13 Sep 2021 21:36:33 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id U7pcQtZl_CjZ; Mon, 13 Sep 2021 22:01:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 5873860699;
-	Mon, 13 Sep 2021 21:36:33 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id C9A0B401E2;
+	Mon, 13 Sep 2021 22:01:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CBDA3C000D;
-	Mon, 13 Sep 2021 21:36:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4254EC001E;
+	Mon, 13 Sep 2021 22:01:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2635EC000D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1E9E3C000D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 21:36:31 +0000 (UTC)
+ Mon, 13 Sep 2021 22:01:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0928340318
+ by smtp1.osuosl.org (Postfix) with ESMTP id EFA8080DAA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 21:36:31 +0000 (UTC)
+ Mon, 13 Sep 2021 22:01:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linutronix.de header.b="ngqDZuDq";
- dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=linutronix.de header.b="pxMUNCY7"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id v1py_WomcgHM
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Be4vJ_gP27pR
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 21:36:30 +0000 (UTC)
+ Mon, 13 Sep 2021 22:01:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 22CEC4030F
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 03A8980DA9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 13 Sep 2021 21:36:29 +0000 (UTC)
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1631568985;
+ Mon, 13 Sep 2021 22:01:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631570473;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=LgVFF6xr9X77eEH5ReBqzJav7XI77CiOd3yTIuQR1BU=;
- b=ngqDZuDqjeoqNDOC3ymvNE3J2o6Fc2ckRwRgYs7eIYDQHH1O6+vDj1vCGJvd1jPdLz79fg
- qngi0IObYKleP+dY4OW1j1XDlG4fCLd5xIHUEhDnkAbd8R2Ya6TiBYSgDMLbUeAVLRTDZq
- 53tQiYDpMS9ToXwBAicbuFfrpennVC8Bu3zITNTCc0Pa9181LuM5cgpIm7oDUZT6xgeOUh
- gV+irG4IG7hhOqaL5ezOZyCh6pUnhZq+UbbGedfkYf/oIkj1+Gq/+PQC8iInUu6Zf1Ju7j
- 7y2vMDmwyRKF1/GQsUJWiV+z3hcVP/Kb7/g/5SvxR32L6ZTQi233nI6i/R5iEA==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1631568985;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LgVFF6xr9X77eEH5ReBqzJav7XI77CiOd3yTIuQR1BU=;
- b=pxMUNCY7fX8I7jg+qZYt6ey+2E7HiVy5AIBHk976GV4aDMhuWX5rZIZBx6Iw1r/qiTfV2R
- ch7nx5AXCseYy5BQ==
-To: Jason Wang <jasowang@redhat.com>, mst@redhat.com, jasowang@redhat.com
+ bh=hBIFmwovN0AX7FNl3CrTwWZ3rAWB/MKhfO4Mt83/g5Q=;
+ b=FUl5igrIhdofxOqXbp9y7NgtBcZM2a0M/GOzbY9mhPoBCiuUhseK3CeZOSGn7s5xeeNvjL
+ STq+1lenwGaDiVKM+NiLsSPnRRTQGfn7uLCwkG8dkK2jknTdHVSnNumvln4IBAJ3aQb8Gk
+ /fob5HUiTO0zHXPQ46pqiGwMfTAlVNo=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-376-Doe-148VPCO-msvo5tyonQ-1; Mon, 13 Sep 2021 18:01:10 -0400
+X-MC-Unique: Doe-148VPCO-msvo5tyonQ-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ u2-20020adfdd42000000b001579f5d6779so3167551wrm.8
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 13 Sep 2021 15:01:09 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=hBIFmwovN0AX7FNl3CrTwWZ3rAWB/MKhfO4Mt83/g5Q=;
+ b=KHmTDfSFj7Z1uaPOqb2Z65AOVh5ibsSr9tQSMI81Y8t8nZbgluvfnXD19C2h5mIsMP
+ tb1kZfM3VUeXw4ELVH9XpBqsIKQ5yFgflRPN6p8Aycz1Q94Dd1IggbpU8A/77bPNsauS
+ eznDymlwohBofFdtN+1tbGYiIU4Wp7rcGqdpZ3lhw39w8NJ8IHCFnCPPKuRXYOF9sagh
+ r2nz4WREZhugwrc7Kgz+PCrVocF5fOkkJpmxREVqHgwOk+akLx8nMdjQSj3eC0KG9e45
+ bOSmFIIQSDuQXJ8teTz/K8YfpIJ0jiqVR6YcaYsqP1stOd3rtgDXMTXTiqepVyPJUJrt
+ I0XA==
+X-Gm-Message-State: AOAM531K3qTnq1mrRe0Rsm5tuKGjSUn+nBJKH7xauYRsTYy9jou87sxr
+ B3pGxr+u8Y2nP3ll8wd8jjek/Lb7gHr6QG3L61YiuUCUhlQKFWPCYwa0a64f9tjhUzSVM1y0ooM
+ qniEmEB+XLVEm6qtq9z/IcnoawgJ1EoLUnA1eousBtA==
+X-Received: by 2002:a05:600c:19d0:: with SMTP id
+ u16mr13251213wmq.21.1631570468927; 
+ Mon, 13 Sep 2021 15:01:08 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzgHCJVlTo5Q7ufuv4RmgQflxRDkka0ghsQSd8ubKToVxE5UDhUvgwSIExgPSoK0Pk5nJxZyA==
+X-Received: by 2002:a05:600c:19d0:: with SMTP id
+ u16mr13251198wmq.21.1631570468793; 
+ Mon, 13 Sep 2021 15:01:08 -0700 (PDT)
+Received: from redhat.com ([2.55.151.134])
+ by smtp.gmail.com with ESMTPSA id m1sm7570288wmq.10.2021.09.13.15.01.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 13 Sep 2021 15:01:08 -0700 (PDT)
+Date: Mon, 13 Sep 2021 18:01:04 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Thomas Gleixner <tglx@linutronix.de>
 Subject: Re: [PATCH 7/9] virtio-pci: harden INTX interrupts
-In-Reply-To: <20210913055353.35219-8-jasowang@redhat.com>
+Message-ID: <20210913175428-mutt-send-email-mst@kernel.org>
 References: <20210913055353.35219-1-jasowang@redhat.com>
- <20210913055353.35219-8-jasowang@redhat.com>
-Date: Mon, 13 Sep 2021 23:36:24 +0200
-Message-ID: <875yv4f99j.ffs@tglx>
+ <20210913055353.35219-8-jasowang@redhat.com> <875yv4f99j.ffs@tglx>
 MIME-Version: 1.0
+In-Reply-To: <875yv4f99j.ffs@tglx>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Cc: "Paul E. McKenney" <paulmck@kernel.org>, david.kaplan@amd.com,
  konrad.wilk@oracle.com, Peter Zijlstra <peterz@infradead.org>,
- Boqun Feng <boqun.feng@gmail.com>, f.hetzelt@tu-berlin.de,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Will Deacon <will@kernel.org>
+ f.hetzelt@tu-berlin.de, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Will Deacon <will@kernel.org>,
+ Boqun Feng <boqun.feng@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,161 +118,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Jason,
+On Mon, Sep 13, 2021 at 11:36:24PM +0200, Thomas Gleixner wrote:
+> >From the interrupt perspective the sequence:
+> 
+>         disable_irq();
+>         vp_dev->intx_soft_enabled = true;
+>         enable_irq();
+> 
+> is perfectly fine as well. Any interrupt arriving during the disabled
+> section will be reraised on enable_irq() in hardware because it's a
+> level interrupt. Any resulting failure is either a hardware or a
+> hypervisor bug.
 
-On Mon, Sep 13 2021 at 13:53, Jason Wang wrote:
-> This patch tries to make sure the virtio interrupt handler for INTX
-> won't be called after a reset and before virtio_device_ready(). We
-> can't use IRQF_NO_AUTOEN since we're using shared interrupt
-> (IRQF_SHARED). So this patch tracks the INTX enabling status in a new
-> intx_soft_enabled variable and toggle it during in
-> vp_disable/enable_vectors(). The INTX interrupt handler will check
-> intx_soft_enabled before processing the actual interrupt.
+yes but it's a shared interrupt. what happens if multiple callers do
+this in parallel?
 
-Ah, there it is :)
-
-Cc'ed our memory ordering wizards as I might be wrong as usual.
-
-> -	if (vp_dev->intx_enabled)
-> +	if (vp_dev->intx_enabled) {
-> +		vp_dev->intx_soft_enabled = false;
-> +		/* ensure the vp_interrupt see this intx_soft_enabled value */
-> +		smp_wmb();
->  		synchronize_irq(vp_dev->pci_dev->irq);
-
-As you are synchronizing the interrupt here anyway, what is the value of
-the barrier?
-
- 		vp_dev->intx_soft_enabled = false;
-  		synchronize_irq(vp_dev->pci_dev->irq);
-
-is sufficient because of:
-
-synchronize_irq()
-   do {
-   	raw_spin_lock(desc->lock);
-        in_progress = check_inprogress(desc);
-   	raw_spin_unlock(desc->lock);
-   } while (in_progress);     
-
-raw_spin_lock() has ACQUIRE semantics so the store to intx_soft_enabled
-can complete after lock has been acquired which is uninteresting.
-
-raw_spin_unlock() has RELEASE semantics so the store to intx_soft_enabled
-has to be completed before the unlock completes.
-
-So if the interrupt is on the flight then it might or might not see
-intx_soft_enabled == false. But that's true for your barrier construct
-as well.
-
-The important part is that any interrupt for this line arriving after
-synchronize_irq() has completed is guaranteed to see intx_soft_enabled
-== false.
-
-That is what you want to achieve, right?
-
->  	for (i = 0; i < vp_dev->msix_vectors; ++i)
->  		disable_irq(pci_irq_vector(vp_dev->pci_dev, i));
-> @@ -43,8 +47,12 @@ void vp_enable_vectors(struct virtio_device *vdev)
->  	struct virtio_pci_device *vp_dev = to_vp_device(vdev);
->  	int i;
->  
-> -	if (vp_dev->intx_enabled)
-> +	if (vp_dev->intx_enabled) {
-> +		vp_dev->intx_soft_enabled = true;
-> +		/* ensure the vp_interrupt see this intx_soft_enabled value */
-> +		smp_wmb();
-
-For the enable case the barrier is pointless vs. intx_soft_enabled
-
-CPU 0                                           CPU 1
-
-interrupt                                       vp_enable_vectors()
-  vp_interrupt()                                
-    if (!vp_dev->intx_soft_enabled)
-       return IRQ_NONE;
-                                                  vp_dev->intx_soft_enabled = true;
-
-IOW, the concurrent interrupt might or might not see the store. That's
-not a problem for legacy PCI interrupts. If it did not see the store and
-the interrupt originated from that device then it will account it as one
-spurious interrupt which will get raised again because those interrupts
-are level triggered and nothing acknowledged it at the device level.
-
-Now, what's more interesting is that is has to be guaranteed that the
-interrupt which observes
-
-        vp_dev->intx_soft_enabled == true
-
-also observes all preceeding stores, i.e. those which make the interrupt
-handler capable of handling the interrupt.
-
-That's the real problem and for that your barrier is at the wrong place
-because you want to make sure that those stores are visible before the
-store to intx_soft_enabled becomes visible, i.e. this should be:
-
-
-        /* Ensure that all preceeding stores are visible before intx_soft_enabled */
-	smp_wmb();
-	vp_dev->intx_soft_enabled = true;
-
-Now Micheal is not really enthusiatic about the barrier in the interrupt
-handler hotpath, which is understandable.
-
-As the device startup is not really happening often it's sensible to do
-the following
-
-        disable_irq();
-        vp_dev->intx_soft_enabled = true;
-        enable_irq();
-
-because:
-
-        disable_irq()
-          synchronize_irq()
-
-acts as a barrier for the preceeding stores:
-
-        disable_irq()
-   	  raw_spin_lock(desc->lock);
-          __disable_irq(desc);
-   	  raw_spin_unlock(desc->lock);
-
-          synchronize_irq()
-            do {
-   	      raw_spin_lock(desc->lock);
-              in_progress = check_inprogress(desc);
-   	      raw_spin_unlock(desc->lock);
-            } while (in_progress);     
-
-        intx_soft_enabled = true;
-
-        enable_irq();
-
-In this case synchronize_irq() prevents the subsequent store to
-intx_soft_enabled to leak into the __disable_irq(desc) section which in
-turn makes it impossible for an interrupt handler to observe
-intx_soft_enabled == true before the prerequisites which preceed the
-call to disable_irq() are visible.
-
-Of course the memory ordering wizards might disagree, but if they do,
-then we have a massive chase of ordering problems vs. similar constructs
-all over the tree ahead of us.
-
-From the interrupt perspective the sequence:
-
-        disable_irq();
-        vp_dev->intx_soft_enabled = true;
-        enable_irq();
-
-is perfectly fine as well. Any interrupt arriving during the disabled
-section will be reraised on enable_irq() in hardware because it's a
-level interrupt. Any resulting failure is either a hardware or a
-hypervisor bug.
-
-Thanks,
-
-        tglx
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
