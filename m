@@ -2,79 +2,80 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4938740BFA9
-	for <lists.virtualization@lfdr.de>; Wed, 15 Sep 2021 08:33:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id B730940BFB3
+	for <lists.virtualization@lfdr.de>; Wed, 15 Sep 2021 08:38:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A942880F90;
-	Wed, 15 Sep 2021 06:33:54 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3767B81D3A;
+	Wed, 15 Sep 2021 06:38:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id K7AMOlz5Wd04; Wed, 15 Sep 2021 06:33:54 +0000 (UTC)
+	with ESMTP id kUZbQsA8lj9H; Wed, 15 Sep 2021 06:38:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 91E8C80F92;
-	Wed, 15 Sep 2021 06:33:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 2460081D19;
+	Wed, 15 Sep 2021 06:38:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0BFCAC000D;
-	Wed, 15 Sep 2021 06:33:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A0538C001E;
+	Wed, 15 Sep 2021 06:38:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 32F1EC000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BEA4CC000D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Sep 2021 06:33:52 +0000 (UTC)
+ Wed, 15 Sep 2021 06:38:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1EEAE40553
+ by smtp4.osuosl.org (Postfix) with ESMTP id B55C240186
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Sep 2021 06:33:52 +0000 (UTC)
+ Wed, 15 Sep 2021 06:38:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Qc88lZSZpdOD
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VSX73ahanJKv
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Sep 2021 06:33:51 +0000 (UTC)
+ Wed, 15 Sep 2021 06:38:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 65A814052D
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2088340174
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Sep 2021 06:33:50 +0000 (UTC)
+ Wed, 15 Sep 2021 06:38:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1631687629;
+ s=mimecast20190719; t=1631687927;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=syP9u21I0X13+NfaoXP/B0PHgpOt46v9RYaImlgDpiM=;
- b=crQnyZXy48areDFvC/CHzOq49P4MGB4vzEPSLh/Xlh6zC3oLcQ2XaNRM+bTYrY097f1ff9
- 2Ho+2An6hNMnr66PuuNrOzngyfyR0PC5OPev4r3OUJhK5C9uOv/e3WkqQ5ZjhKAat+LkLF
- MGI4ehlSsmFOEm+sbwR6mt9o+Lrr1UY=
+ bh=2jrv4qpH+SsfqVOrOyTWjCAMipmK09EdyvQxDfD9z+o=;
+ b=HP8qQNtJDYIe2chVF4/DFELENVOlB/wZOFnaCvsAsHYWHSUo6TeZnx2mLAovNxpBHIRte1
+ C3UqHVEFnhjZ/EhnwqCR/Y8vYxRfIH4xUz1NuX/TE+A14NQ5EWtTVRSlN+YBIC73Hy1zNe
+ sgj6wc1H7wwxK6RPlNAQXTYdp/TJKJU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-257-A7VfICycPX-ZylX37M_ICg-1; Wed, 15 Sep 2021 02:33:48 -0400
-X-MC-Unique: A7VfICycPX-ZylX37M_ICg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com
- [10.5.11.22])
+ us-mta-156-7qemqFm_PtCHmUhwK6aNNQ-1; Wed, 15 Sep 2021 02:38:41 -0400
+X-MC-Unique: 7qemqFm_PtCHmUhwK6aNNQ-1
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com
+ [10.5.11.14])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id D18771B18BC6;
- Wed, 15 Sep 2021 06:33:46 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0A72684A5E0;
+ Wed, 15 Sep 2021 06:38:40 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.91])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 8843E10016F5;
- Wed, 15 Sep 2021 06:33:46 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id A210C5D9D3;
+ Wed, 15 Sep 2021 06:38:36 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 0F6A518003BF; Wed, 15 Sep 2021 08:33:45 +0200 (CEST)
-Date: Wed, 15 Sep 2021 08:33:45 +0200
+ id 290BE18003BF; Wed, 15 Sep 2021 08:38:35 +0200 (CEST)
+Date: Wed, 15 Sep 2021 08:38:35 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: bibo mao <maobibo@loongson.cn>
-Subject: Re: [PATCH 1/2] drm/qxl: User page size macro for qxl release bo
-Message-ID: <20210915063345.yvzulffu6ekycz6p@sirius.home.kraxel.org>
+Subject: Re: [PATCH 2/2] drm/qxl: Add qxl dma fence release function
+Message-ID: <20210915063835.36bhpadzbzuj7shw@sirius.home.kraxel.org>
 References: <20210914062352.6102-1-maobibo@loongson.cn>
+ <20210914062352.6102-2-maobibo@loongson.cn>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20210914062352.6102-1-maobibo@loongson.cn>
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
+In-Reply-To: <20210914062352.6102-2-maobibo@loongson.cn>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
 Cc: Dave Airlie <airlied@redhat.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -93,16 +94,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 14, 2021 at 02:23:51AM -0400, bibo mao wrote:
-> Some architectures have different default page size, this patch
-> replaces hardcoded 4096 with PAGE_SIZE macro, since cmd bo size
-> is page aligned.
-> 
-> Signed-off-by: bibo mao <maobibo@loongson.cn>
+On Tue, Sep 14, 2021 at 02:23:52AM -0400, bibo mao wrote:
+> Add qxl dma fence release function, previously default dma fence
+> release function is used, and fence pointer is used to free 
+> the memory. With this patch, actual qxl release pointer is used
+> to free memory, so that dma fence can put at any place of 
+> struct qxl_release.
 
-Pushed to drm-misc-next.
+Why?  Is there a problem with struct dma_fence being the first
+element of struct qxl_release?
 
-thanks,
+take care,
   Gerd
 
 _______________________________________________
