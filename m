@@ -2,184 +2,109 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C78040EC61
-	for <lists.virtualization@lfdr.de>; Thu, 16 Sep 2021 23:21:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A258D40ED9F
+	for <lists.virtualization@lfdr.de>; Fri, 17 Sep 2021 00:58:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 05C0A83F26;
-	Thu, 16 Sep 2021 21:21:19 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 49D3C80C0A;
+	Thu, 16 Sep 2021 22:58:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4XOgreGhwz1r; Thu, 16 Sep 2021 21:21:18 +0000 (UTC)
+	with ESMTP id cLcGmdZHLb-U; Thu, 16 Sep 2021 22:58:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 9CD8D83F6E;
-	Thu, 16 Sep 2021 21:21:17 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D2CAF82CEC;
+	Thu, 16 Sep 2021 22:58:54 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 77B02C0025;
-	Thu, 16 Sep 2021 21:21:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 60AF8C000D;
+	Thu, 16 Sep 2021 22:58:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6E1CCC0011
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0685DC000D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Sep 2021 21:21:16 +0000 (UTC)
+ Thu, 16 Sep 2021 22:58:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5DB4D614EF
+ by smtp1.osuosl.org (Postfix) with ESMTP id D3EA9830D7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Sep 2021 21:21:16 +0000 (UTC)
+ Thu, 16 Sep 2021 22:58:52 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=oracle.com header.b="lLHnqz85";
- dkim=pass (2048-bit key) header.d=oracle.com header.b="wB6fwUT0";
- dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com
- header.b="pthlpSgm"
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GgyoZyd5O9ZW
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 9uFBi0PuoHgA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Sep 2021 21:21:15 +0000 (UTC)
+ Thu, 16 Sep 2021 22:58:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B160E6080F
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id CA6B682CEC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 16 Sep 2021 21:21:15 +0000 (UTC)
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 18GJxiiZ019726; 
- Thu, 16 Sep 2021 21:21:14 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version;
- s=corp-2021-07-09; bh=dEKbVwcYKEj6PtXOfVUbjWSi2YavsG6EPXSMPVWDcE0=;
- b=lLHnqz85dFBn22dtv8CXQO9ZJLgx0bTaydJKu/V7udgZPCudzAqZeEA6bEYtK3vToq4Y
- /HvQrSrB5419iwSY/ic4JYG4QUyNli3a7ukNIWqCTYitxLwe8dc5CRz1/bq2Bdj8KnJ9
- rTCGQLEixq1EcOiBqRCP5IUkJTPONOcP9f+uthg6zvTkyqs1WZ4l6I7vlzlJgIabXIIc
- 6f5G/otFP/AhKM/BTvjhUHVRLS0h6lH3MY4bRRrcFkVGG2JkTGgKpGZfwhws048a6sIz
- ZOzsAUv5CAB/carJkH5VLIlZ963Xfbuyn1aRVG5NvGC/l9ncGTkgCAAD7CmE+Izr5GWi nA== 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version;
- s=corp-2020-01-29; bh=dEKbVwcYKEj6PtXOfVUbjWSi2YavsG6EPXSMPVWDcE0=;
- b=wB6fwUT0yzKBNFqd4ds8YE1jgOnYWiMpZ5iFJO33zkftS++gi1Ytfknvl4jGfACOqR0z
- k4smN06WJyQN+ZXT9A4Ga3DkITDpxCMrQKukAUe/lkcs7fNzOc1qkhsykf60faVyoL2u
- mpq/cVh0UsWV5FVigXW++IP6Ju3OnEMW4vmerZizV+9duyoPsEwiBQS0nYk/DOhhoey3
- 37HM7GOiIhVv8NeQj+JDsSQovpQSyvF9kaKJJQqEeFQaLBSgQzFfbpwmLHaoJMthOug0
- ZY2a5VphjtubDnWqB0xVf/HWbRL1mbOVHDTjEoJ0ZzgZu1GLKdykbq9VIM+KulGU8LfK uA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by mx0b-00069f02.pphosted.com with ESMTP id 3b3t92m6qr-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 16 Sep 2021 21:21:13 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 18GL5Y3v011322;
- Thu, 16 Sep 2021 21:21:12 GMT
-Received: from nam02-bn1-obe.outbound.protection.outlook.com
- (mail-bn1nam07lp2040.outbound.protection.outlook.com [104.47.51.40])
- by userp3030.oracle.com with ESMTP id 3b0hjyuvwg-2
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 16 Sep 2021 21:21:12 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=naX/87BKvpD5bVa9vy+dw1H4uhCW58PHGHiBsZuStWqh6wiv40U07XZPsJhQsHhrghmFtBaIGMYu8fazR9cvNOwfIKCafpLRgyYnnc0jB8JNanUwJvY5CFQUVXBEKMUcWgRkOsXihLxRRrHR5nlLSZS7DPFsX3+M0NwGUZNzgdurSLUMZVGlOw5BLIbxopCMIrB2FT2ghtUftMRG40fvamMmzAIKBskvXfU8m6frwKxiGpn1HXVq2D5f+zbCZrQo4Hb0jRqWYudLUW2byoZlF8yjncnH3707eQ00RHMY0WiSVg16adHHF4Tb8I256VmWu2qRqfFXLnqSAUl7/d0HmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version; 
- bh=dEKbVwcYKEj6PtXOfVUbjWSi2YavsG6EPXSMPVWDcE0=;
- b=IqpYsD6sLKVHffEfYGxa9kMZW5gO2RWRz02/mkDeSAHdfLIYH6rdHtDph51z1MzeqPrRfVePKelBhgQNpQZGStPgyemSafK+++xwFbv8Z6z/DFnMqQOpnpiYH0BSlNYE1l197K7347VrmpdqWKjnhL8FzqQaEpqjS+FR/H4lMrR1nq7qX6XyIiYjJZkBprVfT2piS7yEd4yOJUHUiNkyrljtBrSYZ1wKwZx4yRDNo5/0IJyw/OOPuZa0M/M4aXrjVaNX0Ug3/cOf32s/vEMBB9pUfpGcvwu1kogBZBz9SHS1UQUe4e6DgBCUuLIA4mJPU4N6ZCQ/MSBHt6MPrkg5gw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dEKbVwcYKEj6PtXOfVUbjWSi2YavsG6EPXSMPVWDcE0=;
- b=pthlpSgmscv/OGJ8CyxFwJ3YR8rN/Maw/1NmIckgWXzJCwzJcleShs1ES6pzBjDjzDwu+VW0wEohdalG0NpwJqcFT94BmkNq37JU5HA2S/BH7ItHd/Sd1FPaXoL4hDMnYIXMY4HtbXr4HOq19C0wKBtmHVaWXhQtoUW4jomRyww=
-Authentication-Results: redhat.com; dkim=none (message not signed)
- header.d=none;redhat.com; dmarc=none action=none header.from=oracle.com;
-Received: from BYAPR10MB3573.namprd10.prod.outlook.com (2603:10b6:a03:11e::32)
- by BYAPR10MB2935.namprd10.prod.outlook.com (2603:10b6:a03:8e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4500.18; Thu, 16 Sep
- 2021 21:21:11 +0000
-Received: from BYAPR10MB3573.namprd10.prod.outlook.com
- ([fe80::5881:380c:7098:5701]) by BYAPR10MB3573.namprd10.prod.outlook.com
- ([fe80::5881:380c:7098:5701%6]) with mapi id 15.20.4523.014; Thu, 16 Sep 2021
- 21:21:11 +0000
-From: Mike Christie <michael.christie@oracle.com>
-To: stefanha@redhat.com, jasowang@redhat.com, mst@redhat.com,
- sgarzare@redhat.com, virtualization@lists.linux-foundation.org,
- christian.brauner@ubuntu.com, axboe@kernel.dk, linux-kernel@vger.kernel.org
-Subject: [PATCH 8/8] vhost: remove cgroup code
-Date: Thu, 16 Sep 2021 16:20:51 -0500
-Message-Id: <20210916212051.6918-9-michael.christie@oracle.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210916212051.6918-1-michael.christie@oracle.com>
-References: <20210916212051.6918-1-michael.christie@oracle.com>
-X-ClientProxiedBy: DM5PR04CA0027.namprd04.prod.outlook.com
- (2603:10b6:3:12b::13) To BYAPR10MB3573.namprd10.prod.outlook.com
- (2603:10b6:a03:11e::32)
+ Thu, 16 Sep 2021 22:58:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1631833129;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=uWuX79Oma33ajffLz8sEoqWJG5Af27VtCrWnpaV0H50=;
+ b=dn1aG03PPoIdpLH2AP4RVEM0wIoXyCFttjRSkzdy7d34g1o1ydYfCcTrtRqLpAErS7G6k+
+ V0QNNtluSl1WKdBp1BBL294Of4iIvQRMjlhjbDwYpNg7My5SUxHydWKXRDZ8MaZuOVPuvp
+ 75XtUDmX0yixHqloXe4oLSbaCDLfxR8=
+Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
+ [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-379-1OwCGShkNdGFUjgQzz0OpA-1; Thu, 16 Sep 2021 18:58:46 -0400
+X-MC-Unique: 1OwCGShkNdGFUjgQzz0OpA-1
+Received: by mail-ed1-f69.google.com with SMTP id
+ h24-20020a50cdd8000000b003d8005fe2f8so2958693edj.6
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 16 Sep 2021 15:58:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=uWuX79Oma33ajffLz8sEoqWJG5Af27VtCrWnpaV0H50=;
+ b=sc5ql9vmEqCYW67n9DrJ2HoYGBCCAQMRuG+/U5VGIRpxgvvDni8/8ZaiYi2C1GozsQ
+ +g1+aW+yhA0G7ten9swubjMUHLiFa4njuBK2REl6jjT9R3jmbFpp8ULdyKK3A3uYVHVM
+ OOUd0dqtHI/FWLMvn6/qSi7BLjapyYvi99nJt5D2SV+/c4SSjgDxIBr4qZ1k0RS82Hmr
+ IdpQPlbnaAaNEBiMMX1cX0Q2U1Max17UgwJXN1a9N7qy2crBSHJGYeheoOTwHPvg/ZE+
+ ZQka4fmpzKcBm8h29WNA+cuUVwkR+PTq7v3Yfcoxd3Df4Ek3wfzXAdiEz8Igm2I9JSDg
+ qjCQ==
+X-Gm-Message-State: AOAM531R6MLZSEa3QWRv/HVQw6WzRMAZHcdFhOdJ8lIkr2AMWb45lFPN
+ U1K4uRVDR9ySS2toRDfeYw0106wlQhwtvLzf0Cq4SWPsokX6mXCoanfSizD7twfNhxlg1sHG71c
+ Z+P3uWNfkSBBRobbdosXlg8PqHAkN8t8MKMKD1dQAaA==
+X-Received: by 2002:a17:906:ca1:: with SMTP id
+ k1mr8967507ejh.369.1631833125341; 
+ Thu, 16 Sep 2021 15:58:45 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJw+8w8N7qiIOx45XijBLBK6P1k3TNVlEXVvyE9jP/wdNCT2Rv81vH7kEG6Yq5KMkmzha72DFw==
+X-Received: by 2002:a17:906:ca1:: with SMTP id
+ k1mr8967487ejh.369.1631833125139; 
+ Thu, 16 Sep 2021 15:58:45 -0700 (PDT)
+Received: from redhat.com ([176.12.194.242])
+ by smtp.gmail.com with ESMTPSA id bx11sm1634433ejb.107.2021.09.16.15.58.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 16 Sep 2021 15:58:44 -0700 (PDT)
+Date: Thu, 16 Sep 2021 18:58:40 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Laurent Vivier <lvivier@redhat.com>
+Subject: Re: Use of uninitialized memory with CONFIG_HW_RANDOM_VIRTIO
+Message-ID: <20210916185802-mutt-send-email-mst@kernel.org>
+References: <CAG_fn=WwQ29akxY1Eq=N_=HCF3t7z+T2obh9aRVUDFy1FSA3-Q@mail.gmail.com>
+ <20210819165742-mutt-send-email-mst@kernel.org>
+ <d0d232ab-5222-5eef-60de-e8cc0f2a0791@redhat.com>
+ <CAG_fn=Um3Up2VyGOC0ezJ51N8AWZfGcWz+98cvwpBrJkby3+NA@mail.gmail.com>
+ <639bbb70-eca8-97c5-7faa-8563e594d67a@redhat.com>
+ <CAG_fn=VGU5A+JDC9mqksLbHHjHEJ6RSB9Ce2WVF9ysAHd=RWKg@mail.gmail.com>
+ <e4ecab9b-1d09-069f-1ef1-d8d5a3499826@redhat.com>
 MIME-Version: 1.0
-Received: from localhost.localdomain (73.88.28.6) by
- DM5PR04CA0027.namprd04.prod.outlook.com (2603:10b6:3:12b::13) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4523.14 via Frontend Transport; Thu, 16 Sep 2021 21:21:09 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: da181553-3758-4baf-f98d-08d97957e7b7
-X-MS-TrafficTypeDiagnostic: BYAPR10MB2935:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <BYAPR10MB2935CBB7687715ECA16F2EB2F1DC9@BYAPR10MB2935.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:175;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ol63cmSBpT/HTF+qaTFMV9yMkyMdiqUQKePvdhLu75o2wTiHQO/wfu1wjso/sTtBgPFOGb9fpkbd5JOeRxMQeYEN3LUswPHKj9VZzcnu3Uu0kjdeb1CrOnMPmo/QJ6o3VHtpw4meD4I8ozT+sIi94DB7Kn2HbkAZBAZGYQm6KXtT5gGpI2A3wiSHIDLYmVn524jK0akKzUyTjx1y9J3DUr6AYYSG+F7DwoDMHWCnvTxlul4z3XS5XMlRXTh27PXy7CAoy0IcDsrdB42sla1NbcccIF1YGq2hX2Zu/G3UHicdIqENbR1H9jJie8j0IW8vOm3rgs9Qnvbyya5TGVKITHA8nWFxGUuSnNS9fNmFXm5LU2bye+FZ4tEfuHLs3Xr/C1nRr+SX16Qj0QyiR9hO7QawpuZ5lte7USq/CgKEsm/oQVcU8vUYkfK9fsiOnMbPMlJdpq165RtX7Ndx1lFwW/tAOOULY/1DXZXkgh1K9Y4aLsyKvfPwv3XiZmKtqTmCaokxMsuL2r8IF0i4XOHEY3OFCklKUL7djyq8ao+OmUR1BIYLVE+5old59wRUIO/t69OoaWM9UBshc4DY6rdqE5mbNySQVdIWSOWqixT1aGBs9cSkGpjxT1QM1Xbg5yQuTWnv83nba/3BNvEHp+3KNhmoZf9bZYkc2+37a1bOQ9OrmqOewF1S4rsBTNfD43Ku2/EozA8vQ369htsEQ639hg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR10MB3573.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(366004)(316002)(86362001)(36756003)(26005)(107886003)(508600001)(8676002)(8936002)(66556008)(83380400001)(66946007)(5660300002)(6506007)(66476007)(4326008)(6486002)(2906002)(38100700002)(38350700002)(1076003)(52116002)(2616005)(6512007)(956004)(6666004)(186003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WZRRXeZsg+FDLdGZw1DdHBgne/mfiHpv9vzGnNqUk78IH0ouFEIMIYkeWNpd?=
- =?us-ascii?Q?mKlBrmTxLEsCXpVgUYGr2uYQab9dU4jkZDO0cdsWbyQ0F6K91wvZKiRuvQlL?=
- =?us-ascii?Q?zQwPrPajsXmwnZtUl7BK7ET5u3RONhNtaRKwsUt7X2YrjLSkpeDtTqj9Qx9d?=
- =?us-ascii?Q?PU+oaTgAMbVvSDK9W34WLj2OMfPyom74buj306tuBb+jllsG83D8YcQTLP0k?=
- =?us-ascii?Q?YWQFdmr20MICzd2q1WPerzVjzY8qTSBNCwNIdDs0PnMbV089NZ1u6dQntFIa?=
- =?us-ascii?Q?/HSeoa1DbpOWPFnxHzhUnk6VI35sF39Mwc1JZBeUik3V8jXzk+Yryl90bBUc?=
- =?us-ascii?Q?JACVpd5YIZrbVkAVAw9Z3A5ns/9BSwoYAyZhGkSsCgx7fEam0fTvKiUshPsB?=
- =?us-ascii?Q?9JBufV1o9fxLi8cdd8PgP1xpM1Jd/fByXysOmgd8ryLUb0KkwOw2D9u0dvA6?=
- =?us-ascii?Q?12xq3sCZg5CtRjqOekKQEBYo14uy7ZDBVuqxu9IPqPZApk/duOePywf1rhMN?=
- =?us-ascii?Q?X0sFmAxnmHmNZskTv1RZTM4dKs0cGckRNgIAkRgojm+B2my6R0sUhUo7ZuXj?=
- =?us-ascii?Q?DuWmqmMPaAhgv/CxytQxTvrE31Qxo55vse9e3hgoa/3EbxTfTl7yt3sMKsLI?=
- =?us-ascii?Q?itgMDhWTikpuQecUFF5W9Q/dSduqi9TSsXvmcZ4hsEbVm2MXRQ9zA/sxfjJj?=
- =?us-ascii?Q?641LcTkDY3CC/pCXMhbMCKaOKFQXaXrEVpG3Snj24b1+BGe87jdxB7QynMvF?=
- =?us-ascii?Q?3acTjvflmlNdOb/KAT8ePpWcdnhvtVyWUSOmUvSUgjq/18PqcQq99ZOPxlko?=
- =?us-ascii?Q?TsUN3t2EvuFlcSMpS9bDWKCB3jWqgpoigrfJf9Gw8EsCRjlQ+KEk7KiuDXjk?=
- =?us-ascii?Q?uYhqQkqGh/dVWuzde6RKKYPOh17FLtp9cl80ewJBgMZS0MVUtgZIdL2LHtXE?=
- =?us-ascii?Q?Bn4zaNeeUB4M2mJBzUd8sQg8iNTn5z2whrvc5wGWz/FXnK5SMqJL+abWISUa?=
- =?us-ascii?Q?OxFV5GyzPAroOFa+om0sDwTDbZMcDacgTYKVKk/pM7Oh2cI5lGkdf2ci6tLf?=
- =?us-ascii?Q?By1aZPelRQ4tjMX54CvseKXPxUternnyDMvb2NbG8LmaC5EiYyas/uty1ntJ?=
- =?us-ascii?Q?qPf/qbCjMLjMtuZlxxbUG5+Ul5GpJ04NQzpiGVmXJX8JvZwl3P9VBXSBMLns?=
- =?us-ascii?Q?/i9X37FM9Giq7zRK6kLy1oR0fIrUqc5Go4Nnx2etpEljXCPXtVvc8RB5fdEZ?=
- =?us-ascii?Q?KYBUfB4s2iUnyMk5KYm0jkbD+4nUUG+VlOfPU7XLInCNOuU4movQBruPOvHj?=
- =?us-ascii?Q?KL1jS9tN5sVenDXwiK0UTmrj?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: da181553-3758-4baf-f98d-08d97957e7b7
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3573.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2021 21:21:11.3791 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qsnxQxi3YUJQQk2d1KqZrfopn3SJ8oSKxVhv6BusuXNO8iOMPmz4Psq3bmT4f2EFJeJwdCo3FvoZFEZRz7PbeVKxnF7QsHtGNyzjChAzTiI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR10MB2935
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10109
- signatures=668682
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
- adultscore=0 phishscore=0
- mlxlogscore=999 suspectscore=0 spamscore=0 bulkscore=0 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2109030001
- definitions=main-2109160122
-X-Proofpoint-ORIG-GUID: 0OkHgCRhnlJ7p1RVM3OFV_jyOb93E7ms
-X-Proofpoint-GUID: 0OkHgCRhnlJ7p1RVM3OFV_jyOb93E7ms
+In-Reply-To: <e4ecab9b-1d09-069f-1ef1-d8d5a3499826@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: amit@kernel.org, rusty@rustcorp.com.au,
+ virtualization@lists.linux-foundation.org,
+ syzkaller <syzkaller@googlegroups.com>,
+ Alexander Potapenko <glider@google.com>, akong@redhat.com,
+ Dmitriy Vyukov <dvyukov@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -196,60 +121,229 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We inherit v1 and v2 cgroups from copy_process now, so we can drop the v1
-only code.
+On Thu, Sep 16, 2021 at 10:52:59AM +0200, Laurent Vivier wrote:
+> On 13/09/2021 10:25, Alexander Potapenko wrote:
+> > Hi Laurent,
+> > 
+> > I took the latest kernel (5.15-rc1,
+> > 6880fa6c56601bb8ed59df6c30fd390cc5f6dd8f) and a slightly modified
+> > config from syzbot (see attached)
+> > The latter has a lot of unnecessary debug checks, but those should not
+> > affect the RNG.
+> > 
+> > You then need to apply the following patch to the kernel:
+> > 
+> > ====================================================
+> > diff --git a/drivers/char/hw_random/core.c b/drivers/char/hw_random/core.c
+> > index a3db27916256d..a4cba9f0ff8cb 100644
+> > --- a/drivers/char/hw_random/core.c
+> > +++ b/drivers/char/hw_random/core.c
+> > @@ -433,8 +433,11 @@ static int hwrng_fillfn(void *unused)
+> >                  if (IS_ERR(rng) || !rng)
+> >                          break;
+> >                  mutex_lock(&reading_mutex);
+> > +               memset(rng_fillbuf, 'A', rng_buffer_size());
+> > +               rng_fillbuf[rng_buffer_size()-1] = 0;
+> >                  rc = rng_get_data(rng, rng_fillbuf,
+> >                                    rng_buffer_size(), 1);
+> > +               pr_err("rng_fillbuf: %s\n", rng_fillbuf);
+> >                  mutex_unlock(&reading_mutex);
+> >                  put_rng(rng);
+> >                  if (rc <= 0) {
+> > ====================================================
+> > 
+> > and run the kernel under QEMU.
+> > 
+> > On my machine I'm seeing the following output:
+> > 
+> > $ cat log | strings | grep rng_fillbuf
+> > [    4.901931][  T897] rng_fillbuf:
+> > AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+> > [    4.903104][  T897] rng_fillbuf: >
+> > [    4.903641][  T897] rng_fillbuf:
+> > [    4.904846][  T897] rng_fillbuf: ?
+> > [    4.913442][  T897] rng_fillbuf: [
+> > 
+> > , which denotes that the first call to rng_get_data() leaves
+> > rng_fillbuf uninitialized.
+> 
+> 
+> Thank you for the detailed steps.
+> 
+> The problem happens because we mix two different buffers:
+> - in add_early_randomness() we provide rng_buffer but don't wait it is full (see [1])
+> - in hwrng_fillfn() we provide rng_fillbuf, and we wait data here, but we
+> received the signal from QEMU that there are data, but these data are in
+> rng_buffer while we expect them in rng_fillbuf.
+> 
+> There are several ways to fix/workaround that:
+> 
+> 1- ignore the read when wait=0 :
+> 
+> diff --git a/drivers/char/hw_random/virtio-rng.c b/drivers/char/hw_random/virtio-rng.c
+> index a90001e02bf7..8466d76566fd 100644
+> --- a/drivers/char/hw_random/virtio-rng.c
+> +++ b/drivers/char/hw_random/virtio-rng.c
+> @@ -59,15 +59,15 @@ static int virtio_read(struct hwrng *rng, void *buf,
+> size_t size, bool wait)
+>         if (vi->hwrng_removed)
+>                 return -ENODEV;
+> 
+> +       if (!wait)
+> +               return 0;
+> +
+>         if (!vi->busy) {
+>                 vi->busy = true;
+>                 reinit_completion(&vi->have_data);
+>                 register_buffer(vi, buf, size);
+>         }
+> 
+> -       if (!wait)
+> -               return 0;
+> -
+>         ret = wait_for_completion_killable(&vi->have_data);
+>         if (ret < 0)
+>                 return ret;
+> 
+> 
+> 2- Use an internal intermediate buffer in virtio-rng, at a cost of a copy,
+>    I have some patches (somewhere) I can refresh to do that.
+> 
+> 3- modify hw_random/core.c to use only one buffer
+> 
+> Thanks,
+> Laurent
+> 
+> [1] 78887832e765 ("hwrng: core - don't wait on add_early_randomness()")
 
-Signed-off-by: Mike Christie <michael.christie@oracle.com>
----
- drivers/vhost/vhost.c | 26 --------------------------
- 1 file changed, 26 deletions(-)
+4. actually differentiate between the two
+using the pointer returned by get_buf.
 
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index 6e58417b13fc..b561c5ea00fc 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -22,7 +22,6 @@
- #include <linux/slab.h>
- #include <linux/vmalloc.h>
- #include <linux/kthread.h>
--#include <linux/cgroup.h>
- #include <linux/module.h>
- #include <linux/sort.h>
- #include <linux/sched/mm.h>
-@@ -515,31 +514,6 @@ long vhost_dev_check_owner(struct vhost_dev *dev)
- }
- EXPORT_SYMBOL_GPL(vhost_dev_check_owner);
- 
--struct vhost_attach_cgroups_struct {
--	struct vhost_work work;
--	struct task_struct *owner;
--	int ret;
--};
--
--static void vhost_attach_cgroups_work(struct vhost_work *work)
--{
--	struct vhost_attach_cgroups_struct *s;
--
--	s = container_of(work, struct vhost_attach_cgroups_struct, work);
--	s->ret = cgroup_attach_task_all(s->owner, current);
--}
--
--static int vhost_attach_cgroups(struct vhost_dev *dev)
--{
--	struct vhost_attach_cgroups_struct attach;
--
--	attach.owner = current;
--	vhost_work_init(&attach.work, vhost_attach_cgroups_work);
--	vhost_work_queue(dev, &attach.work);
--	vhost_work_dev_flush(dev);
--	return attach.ret;
--}
--
- /* Caller should have device mutex */
- bool vhost_dev_has_owner(struct vhost_dev *dev)
- {
--- 
-2.25.1
+> > 
+> > HTH,
+> > Alex
+> > 
+> > On Mon, Sep 13, 2021 at 8:52 AM Laurent Vivier <lvivier@redhat.com> wrote:
+> > > 
+> > > Hi Alexander,
+> > > 
+> > > On 12/09/2021 19:05, Alexander Potapenko wrote:
+> > > > Hi Laurent,
+> > > > 
+> > > > Do you by any chance have an update on this?
+> > > 
+> > > I'm sorry I didn't have the time until now.
+> > > 
+> > > I try today.
+> > > 
+> > > Could you give more details how to reproduce this?
+> > > (kernel version, .config, tools to run?)
+> > > 
+> > > Thanks,
+> > > Laurent
+> > > > Thanks,
+> > > > Alex
+> > > > 
+> > > > On Fri, Aug 20, 2021 at 6:15 PM Laurent Vivier <lvivier@redhat.com> wrote:
+> > > > > 
+> > > > > On 19/08/2021 22:58, Michael S. Tsirkin wrote:
+> > > > > > On Fri, Nov 13, 2020 at 06:26:16PM +0100, Alexander Potapenko wrote:
+> > > > > > > Hi Amos, Rusty, Amit, Michael,
+> > > > > > > 
+> > > > > > > I am hitting something that I believe to be a minor problem in the
+> > > > > > > virtio RNG driver.
+> > > > > > > When running the kernel under KMSAN with "-device virtio-rng-pci"
+> > > > > > > passed to QEMU, I am seeing reports about rng_fillbuf in
+> > > > > > > drivers/char/hw_random/core.c being used before initialization (see
+> > > > > > > the report below).
+> > > > > > > 
+> > > > > > > This can be verified by initializing rng_fillbuf with 'A' as follows:
+> > > > > > > ==========================================
+> > > > > > > diff --git a/drivers/char/hw_random/core.c b/drivers/char/hw_random/core.c
+> > > > > > > index 8c1c47dd9f46..44d609a5796a 100644
+> > > > > > > --- a/drivers/char/hw_random/core.c
+> > > > > > > +++ b/drivers/char/hw_random/core.c
+> > > > > > > @@ -439,8 +439,11 @@ static int hwrng_fillfn(void *unused)
+> > > > > > >                  if (IS_ERR(rng) || !rng)
+> > > > > > >                          break;
+> > > > > > >                  mutex_lock(&reading_mutex);
+> > > > > > > +               memset(rng_fillbuf, 'A', rng_buffer_size());
+> > > > > > > +               rng_fillbuf[rng_buffer_size()-1] = 0;
+> > > > > > >                  rc = rng_get_data(rng, rng_fillbuf,
+> > > > > > >                                    rng_buffer_size(), 1);
+> > > > > > > +               pr_err("rng_fillbuf: %s\n", rng_fillbuf);
+> > > > > > >                  mutex_unlock(&reading_mutex);
+> > > > > > >                  put_rng(rng);
+> > > > > > >                  if (rc <= 0) {
+> > > > > > > ==========================================
+> > > > > > > 
+> > > > > > > and booting the kernel: the first call of hwrng_fillfn() will print
+> > > > > > > "AAAAAAA.." instead of random data.
+> > > > > > > 
+> > > > > > > For some reason on that first iteration vi->busy is true here:
+> > > > > > > https://elixir.bootlin.com/linux/latest/source/drivers/char/hw_random/virtio-rng.c#L62,
+> > > > > > > therefore the buffer is not being sent to virtio ring.
+> > > > > > > 
+> > > > > > > While probably being benign, this bug is preventing syzkaller from
+> > > > > > > finding more bugs, so it would be nice to fix it.
+> > > > > > > Perhaps the easiest solution is to kzalloc rng_fillbuf, but if it's
+> > > > > > > critical for this driver to not skip even the first read, then maybe
+> > > > > > > you have better ideas?
+> > > > > > > 
+> > > > > > > KMSAN report follows:
+> > > > > > > 
+> > > > > > > =====================================================
+> > > > > > > BUG: KMSAN: uninit-value in _mix_pool_bytes+0x7d2/0x950
+> > > > > > > drivers/char/random.c:570
+> > > > > > > CPU: 0 PID: 2711 Comm: hwrng Not tainted 5.9.0-rc8-syzkaller #0
+> > > > > > > Hardware name: Google Google Compute Engine/Google Compute Engine,
+> > > > > > > BIOS Google 01/01/2011
+> > > > > > > Call Trace:
+> > > > > > >   __dump_stack lib/dump_stack.c:77 [inline]
+> > > > > > >   dump_stack+0x21c/0x280 lib/dump_stack.c:118
+> > > > > > >   kmsan_report+0xf7/0x1e0 mm/kmsan/kmsan_report.c:122
+> > > > > > >   __msan_warning+0x5f/0xa0 mm/kmsan/kmsan_instr.c:201
+> > > > > > >   _mix_pool_bytes+0x7d2/0x950 drivers/char/random.c:570
+> > > > > > >   mix_pool_bytes+0xca/0x2a0 drivers/char/random.c:599
+> > > > > > >   add_hwgenerator_randomness+0x4ac/0x500 drivers/char/random.c:2319
+> > > > > > >   hwrng_fillfn+0x6ae/0x940 drivers/char/hw_random/core.c:452
+> > > > > > >   kthread+0x51c/0x560 kernel/kthread.c:293
+> > > > > > >   ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:294
+> > > > > > > 
+> > > > > > > Uninit was created at:
+> > > > > > >   kmsan_save_stack_with_flags mm/kmsan/kmsan.c:129 [inline]
+> > > > > > >   kmsan_internal_poison_shadow+0x5c/0xf0 mm/kmsan/kmsan.c:112
+> > > > > > >   kmsan_slab_alloc+0x8d/0xe0 mm/kmsan/kmsan_hooks.c:80
+> > > > > > >   slab_alloc_node mm/slub.c:2903 [inline]
+> > > > > > >   slab_alloc mm/slub.c:2912 [inline]
+> > > > > > >   kmem_cache_alloc_trace+0x61e/0xc90 mm/slub.c:2929
+> > > > > > >   kmalloc include/linux/slab.h:554 [inline]
+> > > > > > >   hwrng_modinit+0x103/0x2ef drivers/char/hw_random/core.c:621
+> > > > > > >   do_one_initcall+0x371/0x9c0 init/main.c:1208
+> > > > > > >   do_initcall_level+0x1e5/0x3c6 init/main.c:1281
+> > > > > > >   do_initcalls+0x127/0x1cb init/main.c:1297
+> > > > > > >   do_basic_setup+0x33/0x36 init/main.c:1317
+> > > > > > >   kernel_init_freeable+0x238/0x38b init/main.c:1517
+> > > > > > >   kernel_init+0x1f/0x840 init/main.c:1406
+> > > > > > >   ret_from_fork+0x1f/0x30 arch/x86/entry/entry_64.S:294
+> > > > > > > =====================================================
+> > > > > > > 
+> > > > > > > Thanks,
+> > > > > > > Alex
+> > > > > > 
+> > > > > > 
+> > > > > > Cc Laurent - I think he said he was going to look at virtio rng.
+> > > > > 
+> > > > > I will have look next week.
+> > > > > 
+> > > > > Thanks,
+> > > > > Laurent
+> > > > > 
+> > > > 
+> > > > 
+> > > 
+> > 
+> > 
 
 _______________________________________________
 Virtualization mailing list
