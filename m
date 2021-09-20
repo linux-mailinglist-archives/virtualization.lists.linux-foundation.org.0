@@ -2,56 +2,56 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C325A411547
-	for <lists.virtualization@lfdr.de>; Mon, 20 Sep 2021 15:07:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 385D7411548
+	for <lists.virtualization@lfdr.de>; Mon, 20 Sep 2021 15:07:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3A62040352;
-	Mon, 20 Sep 2021 13:07:10 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id C84504036D;
+	Mon, 20 Sep 2021 13:07:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GtwzA61wNqf4; Mon, 20 Sep 2021 13:07:08 +0000 (UTC)
+	with ESMTP id CvAdnlDcnVKg; Mon, 20 Sep 2021 13:07:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 6D61940308;
-	Mon, 20 Sep 2021 13:07:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C0C55403C5;
+	Mon, 20 Sep 2021 13:07:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B0BBC001E;
-	Mon, 20 Sep 2021 13:07:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 67AD3C001E;
+	Mon, 20 Sep 2021 13:07:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 030FDC000D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 54406C000D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 13:07:06 +0000 (UTC)
+ Mon, 20 Sep 2021 13:07:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D19B8606A0
+ by smtp3.osuosl.org (Postfix) with ESMTP id 358D6606A0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 13:07:06 +0000 (UTC)
+ Mon, 20 Sep 2021 13:07:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=fail (1024-bit key) reason="fail (message has been altered)"
  header.d=linuxfoundation.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gug1p0ntBRNu
+ with ESMTP id 998kOzmilH1x
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 13:07:05 +0000 (UTC)
+ Mon, 20 Sep 2021 13:07:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C6B79605AD
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4A3CE605AD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 13:07:05 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id A8E546109E;
- Mon, 20 Sep 2021 13:07:04 +0000 (UTC)
+ Mon, 20 Sep 2021 13:07:32 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 5B60C6109E;
+ Mon, 20 Sep 2021 13:07:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1632143225;
- bh=IgTB39+ODK/T3fPhHRFyjuuOtu3NZBKgfcM0qEnSdno=;
+ s=korg; t=1632143252;
+ bh=Eq3xcueqLrRY/llEuBuOtCWyYwgkpnFYt2qPGs8yOoA=;
  h=Subject:To:Cc:From:Date:From;
- b=q9Fs/YvC5GhKJXQplnE0BkfsZoT5Z6zAVr7QzRrhEdBl6VyZKPwvfVMPTQZzuU+XK
- KKGReu4d2h0O7+4hEGU2e2+NAnFybDWIx/IpvAQKg0Fw25QA6FyPzT2zSd2hHrvlxi
- DeL042C3aPzyIHE9G0x5vfqVReXgFarvK0+Bl2tk=
+ b=qQ1r0k5eHC7tW91F1j5QZPfycEZ3nOh5J6KkxjZBNrFd5B4gblzrnY8UaihFVt+8/
+ /moZirgqV64CFfRQPw2TsfRXBBY69sNF+0z6fRVIUaRLMWJgq1vRWtPst993hOB3Cn
+ AIcQ7RReNjNUHsAN9SL4s0GM6Psw0EYId5tczy7A=
 Subject: Patch "mm/memory_hotplug: use "unsigned long" for PFN in
- zone_for_pfn_range()" has been added to the 4.14-stable tree
+ zone_for_pfn_range()" has been added to the 4.19-stable tree
 To: 20210607195430.48228-1-david@redhat.com, akpm@linux-foundation.org,
  aneesh.kumar@linux.ibm.com, anshuman.khandual@arm.com, anton@ozlabs.org,
  ardb@kernel.org, bauerman@linux.ibm.com, benh@kernel.crashing.org,
@@ -73,8 +73,8 @@ To: 20210607195430.48228-1-david@redhat.com, akpm@linux-foundation.org,
  vkuznets@redhat.com, wangkefeng.wang@huawei.com, will@kernel.org,
  ysato@users.sourceforge.jp
 From: <gregkh@linuxfoundation.org>
-Date: Mon, 20 Sep 2021 15:07:03 +0200
-Message-ID: <163214322377202@kroah.com>
+Date: Mon, 20 Sep 2021 15:07:29 +0200
+Message-ID: <1632143249169148@kroah.com>
 MIME-Version: 1.0
 X-stable: commit
 X-Patchwork-Hint: ignore 
@@ -100,12 +100,12 @@ This is a note to let you know that I've just added the patch titled
 
     mm/memory_hotplug: use "unsigned long" for PFN in zone_for_pfn_range()
 
-to the 4.14-stable tree which can be found at:
+to the 4.19-stable tree which can be found at:
     http://www.kernel.org/git/?p=linux/kernel/git/stable/stable-queue.git;a=summary
 
 The filename of the patch is:
      mm-memory_hotplug-use-unsigned-long-for-pfn-in-zone_for_pfn_range.patch
-and it can be found in the queue-4.14 subdirectory.
+and it can be found in the queue-4.19 subdirectory.
 
 If you, or anyone else, feels it should not be added to the stable tree,
 please let <stable@vger.kernel.org> know about it.
@@ -214,7 +214,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/include/linux/memory_hotplug.h
 +++ b/include/linux/memory_hotplug.h
-@@ -332,6 +332,6 @@ extern struct page *sparse_decode_mem_ma
+@@ -344,6 +344,6 @@ extern struct page *sparse_decode_mem_ma
  					  unsigned long pnum);
  extern bool allow_online_pfn_range(int nid, unsigned long pfn, unsigned long nr_pages,
  		int online_type);
@@ -225,7 +225,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  #endif /* __LINUX_MEMORY_HOTPLUG_H */
 --- a/mm/memory_hotplug.c
 +++ b/mm/memory_hotplug.c
-@@ -842,8 +842,8 @@ static inline struct zone *default_zone_
+@@ -783,8 +783,8 @@ static inline struct zone *default_zone_
  	return movable_node_enabled ? movable_zone : kernel_zone;
  }
  
@@ -240,9 +240,9 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 Patches currently in stable-queue which might be from david@redhat.com are
 
-queue-4.14/x86-mm-fix-kern_addr_valid-to-cope-with-existing-but-not-present-entries.patch
-queue-4.14/mm-memory_hotplug-use-unsigned-long-for-pfn-in-zone_for_pfn_range.patch
-queue-4.14/mm-page_alloc-speed-up-the-iteration-of-max_order.patch
+queue-4.19/x86-mm-fix-kern_addr_valid-to-cope-with-existing-but-not-present-entries.patch
+queue-4.19/mm-memory_hotplug-use-unsigned-long-for-pfn-in-zone_for_pfn_range.patch
+queue-4.19/mm-page_alloc-speed-up-the-iteration-of-max_order.patch
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
