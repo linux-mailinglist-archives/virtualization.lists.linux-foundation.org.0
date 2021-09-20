@@ -1,63 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE0CC411E2C
-	for <lists.virtualization@lfdr.de>; Mon, 20 Sep 2021 19:26:33 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id DBACB411D0B
+	for <lists.virtualization@lfdr.de>; Mon, 20 Sep 2021 19:14:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3204182882;
-	Mon, 20 Sep 2021 17:26:32 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 403C980D86;
+	Mon, 20 Sep 2021 17:14:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9MV74iIBmhUg; Mon, 20 Sep 2021 17:26:31 +0000 (UTC)
+	with ESMTP id VR529MKWF-eW; Mon, 20 Sep 2021 17:14:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id D3FEB828A9;
-	Mon, 20 Sep 2021 17:26:30 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id DF87580DC2;
+	Mon, 20 Sep 2021 17:14:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 64E8AC000F;
-	Mon, 20 Sep 2021 17:26:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7C35BC000F;
+	Mon, 20 Sep 2021 17:14:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A8930C000F
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D7454C000F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 17:26:28 +0000 (UTC)
+ Mon, 20 Sep 2021 17:14:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8912560725
+ by smtp2.osuosl.org (Postfix) with ESMTP id C416D400C6
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 17:26:28 +0000 (UTC)
+ Mon, 20 Sep 2021 17:14:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7OD8Q0HlM48j
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 24nvxxGJS8ny
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 17:26:27 +0000 (UTC)
+ Mon, 20 Sep 2021 17:14:16 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6FD016066C
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8D806400C9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Sep 2021 17:26:27 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 05609632DF;
- Mon, 20 Sep 2021 17:26:26 +0000 (UTC)
+ Mon, 20 Sep 2021 17:14:16 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 26C0B619EE;
+ Mon, 20 Sep 2021 17:14:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1632158787;
- bh=ftxornbp7ysvlGlzARJMZTYWT0McZORP/P3/CsBmJY8=;
+ s=korg; t=1632158056;
+ bh=vnDx+FAgvXBGFE4mzB1titc8sw7HkALXbKlAHCbdROk=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GIP9xz9CRXIMFOyCxljitpdcD3x0MkJJYaICpftBX58mxJir4jZSOTbePbGUOPzIe
- 6PhfQPwqpCpj1bTnozddCFWmETFTyb5clCeqhVrQSEvYIIe9UEaYFujc5/3tTjdEk8
- xbKx2TAJfCBcNkR0+ePKycEoLlvkey8qUCuDxpYU=
+ b=jVJJ+E+O+PdZgvujoTqsNmCkQrh2RfUf3exmV0/igodjvKSMs3maOdJusjCLJ3MFd
+ DA0YNspy7PoQMOEvLkTRqv0PSzPeOe/OvCCk8s1nk66zo0I8BoWArrK2f7QgzFiZWI
+ GwSH2QiC7PUsUKPevEhzQuTMsn4qvNNS8bK2uFVQ=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.10 054/122] mm/memory_hotplug: use "unsigned long" for PFN
+Subject: [PATCH 4.19 273/293] mm/memory_hotplug: use "unsigned long" for PFN
  in zone_for_pfn_range()
-Date: Mon, 20 Sep 2021 18:43:46 +0200
-Message-Id: <20210920163917.559777423@linuxfoundation.org>
+Date: Mon, 20 Sep 2021 18:43:55 +0200
+Message-Id: <20210920163942.759283241@linuxfoundation.org>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20210920163915.757887582@linuxfoundation.org>
-References: <20210920163915.757887582@linuxfoundation.org>
+In-Reply-To: <20210920163933.258815435@linuxfoundation.org>
+References: <20210920163933.258815435@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Michel Lespinasse <michel@lespinasse.org>,
@@ -210,20 +210,18 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 
 --- a/include/linux/memory_hotplug.h
 +++ b/include/linux/memory_hotplug.h
-@@ -359,8 +359,8 @@ extern void sparse_remove_section(struct
- 		unsigned long map_offset, struct vmem_altmap *altmap);
- extern struct page *sparse_decode_mem_map(unsigned long coded_mem_map,
+@@ -344,6 +344,6 @@ extern struct page *sparse_decode_mem_ma
  					  unsigned long pnum);
+ extern bool allow_online_pfn_range(int nid, unsigned long pfn, unsigned long nr_pages,
+ 		int online_type);
 -extern struct zone *zone_for_pfn_range(int online_type, int nid, unsigned start_pfn,
 -		unsigned long nr_pages);
 +extern struct zone *zone_for_pfn_range(int online_type, int nid,
 +		unsigned long start_pfn, unsigned long nr_pages);
- #endif /* CONFIG_MEMORY_HOTPLUG */
- 
  #endif /* __LINUX_MEMORY_HOTPLUG_H */
 --- a/mm/memory_hotplug.c
 +++ b/mm/memory_hotplug.c
-@@ -765,8 +765,8 @@ static inline struct zone *default_zone_
+@@ -783,8 +783,8 @@ static inline struct zone *default_zone_
  	return movable_node_enabled ? movable_zone : kernel_zone;
  }
  
