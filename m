@@ -1,172 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 748B6421753
-	for <lists.virtualization@lfdr.de>; Mon,  4 Oct 2021 21:22:24 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 95E85421819
+	for <lists.virtualization@lfdr.de>; Mon,  4 Oct 2021 22:01:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1BDAA405B7;
-	Mon,  4 Oct 2021 19:22:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id DBFFE83C02;
+	Mon,  4 Oct 2021 20:01:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id W_CH8OU1Ce21; Mon,  4 Oct 2021 19:22:22 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id j3BEPvDmkjHA; Mon,  4 Oct 2021 20:01:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D145F405B9;
-	Mon,  4 Oct 2021 19:22:21 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 927ED83C03;
+	Mon,  4 Oct 2021 20:01:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 83EFBC000D;
-	Mon,  4 Oct 2021 19:22:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E777C001E;
+	Mon,  4 Oct 2021 20:01:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6BD54C0011
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F079EC000D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Oct 2021 19:22:17 +0000 (UTC)
+ Mon,  4 Oct 2021 20:01:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4DC45405AF
+ by smtp2.osuosl.org (Postfix) with ESMTP id CD4D940133
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Oct 2021 19:22:17 +0000 (UTC)
+ Mon,  4 Oct 2021 20:01:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GckxnJXGgQIU
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id R1VdvlrrCnnP
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Oct 2021 19:22:16 +0000 (UTC)
+ Mon,  4 Oct 2021 20:01:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 68FDC405B1
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CF01B400ED
  for <virtualization@lists.linux-foundation.org>;
- Mon,  4 Oct 2021 19:22:16 +0000 (UTC)
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 194JD1aU029400; 
- Mon, 4 Oct 2021 19:21:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references :
- content-transfer-encoding : content-type : mime-version;
- s=corp-2021-07-09; bh=qLItirQ7QSOZa72340ploNQ0S2V4Fkh8wiSn/GkVRDo=;
- b=zDnH1Ke+q79roebJ/ZUURUEIZASe23CFH7HXmlNGG/EIU9gYPWsSS/gSxQekxRCCNCWJ
- +bUiWRQSz4u+uVkTIDZm6G3Lhn+/WWBWVue/SrMC7G2w6GVHqGJwygxg8qHyEssNTO9P
- TnLAIT+i5Y2PDYkxxf8jVSQWNTbC+LPBApNNYHfDiIphBB6KouL9X8ehyvqg/+ZHifGE
- B0gNxz7Bqq+2dsK5xVYQu7mYNE2TYfMq2O7FwD/6MrUKQyMzMX94cTLoozBwrOfWQ+C3
- oREYexPJkSwjYcvGNALLek/L1WQjB8DDuJrwH3MY9AfGFNAL4j7zW5uDPXYFI8oPkyuk fg== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
- by mx0b-00069f02.pphosted.com with ESMTP id 3bg42kj161-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 04 Oct 2021 19:21:49 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
- by userp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 194JAbkt095280;
- Mon, 4 Oct 2021 19:21:46 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2103.outbound.protection.outlook.com [104.47.55.103])
- by userp3030.oracle.com with ESMTP id 3bf0s5c7jr-6
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 04 Oct 2021 19:21:46 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=WzJYXZ8Bg3+6PNk2QK23vF/EDlHwa5lskeumhFzSU50yMg/wOfKc2ix+97FQ/aXwbZt24gtYjDsSc+BSiRykfMtkNjb1Jjcp0flpC7PvPZI+Velg7eqHyeYdLy9Yg6AIk6OQK2xt2VaZ/WtHa0rgl2UFHLGxm0l/qLFOlMM8dbGSDlSseb4sk8/hySkDtyPmNG9EM8BHRBTNyJQqhIHfyDTBa/I4EhzKeNYoKpLz9vNGXfjsFz3uj25uDwUR8iBoaJ+Q43fe8IqJdnzEbAPk5n023qByumJeF2SIiyz7DYNbDNYY9kMmFLzR9NgPMo07hD2vLnz6QyYh5RMRo5mU3w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qLItirQ7QSOZa72340ploNQ0S2V4Fkh8wiSn/GkVRDo=;
- b=KhUGV3BL3pHmyLilvgGoXm1ROPwHBez6YFSzTwgLDgx4cBDzj5uxadb4rAcPFRDnJZSBJMdIxG1maA5KdSwMshLhNNDx/CY5Qpe6RISkFSWTJB6lZ2Jn+HTlw4HWQ1X+E7duVDw1KgS+N/wcd7JEVs4eBPkt2BPZ9/N7lhXNfK+9B8c6pMvcgFvELROqhn/JfhfkWwZDQjwaM4bWnGi0JTEQkcEBz55T+XzCjbtSgIzxfwQeDoF6XA6WNyhabZekVxbymQULaNwW5ZWMt/radkfbP3KH7gROknVI6KAWC3mrmCrjRXFJRjhMD4O6FwowxZYJjrXop3rEbeYKCAtiow==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qLItirQ7QSOZa72340ploNQ0S2V4Fkh8wiSn/GkVRDo=;
- b=nwaLorn6f6bIPkQqB10mmmQvONjc09ECuzHMocBnBr7gnSXKue/50HohUvEgCUM8o0NwKMBJcL3leIqdxkVo8dlam9cP0hWxdIMotqkg4KjePYCMFyT4AxGA26Tt5OIzGGKGm/M7Vvu9+uQagesogJ6qJYwJyORUstQHRvXBYkM=
-Authentication-Results: linux-m68k.org; dkim=none (message not signed)
- header.d=none;linux-m68k.org; dmarc=none action=none header.from=oracle.com;
-Received: from DM5PR10MB1466.namprd10.prod.outlook.com (2603:10b6:3:b::7) by
- DM5PR10MB1548.namprd10.prod.outlook.com (2603:10b6:3:13::9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4566.14; Mon, 4 Oct 2021 19:21:44 +0000
-Received: from DM5PR10MB1466.namprd10.prod.outlook.com
- ([fe80::195:7e6b:efcc:f531]) by DM5PR10MB1466.namprd10.prod.outlook.com
- ([fe80::195:7e6b:efcc:f531%5]) with mapi id 15.20.4566.022; Mon, 4 Oct 2021
- 19:21:44 +0000
-From: Mike Christie <michael.christie@oracle.com>
-To: geert@linux-m68k.org, vverma@digitalocean.com, hdanton@sina.com,
- hch@infradead.org, stefanha@redhat.com, jasowang@redhat.com,
- mst@redhat.com, sgarzare@redhat.com,
- virtualization@lists.linux-foundation.org,
- christian.brauner@ubuntu.com, axboe@kernel.dk, linux-kernel@vger.kernel.org
-Subject: [PATCH V3 9/9] vhost: use kernel_worker to check RLIMITs and inherit
- v2 cgroups
-Date: Mon,  4 Oct 2021 14:21:28 -0500
-Message-Id: <20211004192128.381453-10-michael.christie@oracle.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20211004192128.381453-1-michael.christie@oracle.com>
-References: <20211004192128.381453-1-michael.christie@oracle.com>
-X-ClientProxiedBy: DM5PR15CA0034.namprd15.prod.outlook.com
- (2603:10b6:4:4b::20) To DM5PR10MB1466.namprd10.prod.outlook.com
- (2603:10b6:3:b::7)
+ Mon,  4 Oct 2021 20:01:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1633377681;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=KsdJcxDdgTF/zmQf/6TyWls50jhunD8gsTgc9KR7gmk=;
+ b=I5jPMqbV0kwAr7vgIY294MShGNApyLTO5OGdypc8T40AV3COJxjZpqsig53hGTreJ3Biw8
+ uNbPln8GF7WZuE0YF2NvMKNXYmziy+R1xf5KbuLNvbdoWiGy0htushFMYz/YfjBRt8LSqV
+ lPPT2kLYz10GUKjqrzE25VdQ6lOAzik=
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-357-EbWVUY6nPMaNhXUvKAqvEA-1; Mon, 04 Oct 2021 16:01:19 -0400
+X-MC-Unique: EbWVUY6nPMaNhXUvKAqvEA-1
+Received: by mail-ed1-f72.google.com with SMTP id
+ t28-20020a508d5c000000b003dad7fc5caeso8404464edt.11
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 04 Oct 2021 13:01:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=KsdJcxDdgTF/zmQf/6TyWls50jhunD8gsTgc9KR7gmk=;
+ b=eFX7w9usUKv7uRha+CW6H2GOW+UWDGYi/NpkXFCSXcwRmOhQ9+LnnOzpnkfVZcTFpf
+ aWlOMlxtmLafmBsbDR+q+X0XTDoAcN7Hj4U1RJe8atVIql8pkPNotTTDyTkLD1kKH7IJ
+ gHaUCA67OY3M6J6aSZIHVX4aihZjaiXzT9XvDWeItZxBQ2dcpB3vnhd65hGQQBTZnZVR
+ UMFgUPeTYzCtc1KSUXlM9Ihh4RM/QD4Y18y0h++KNMji9ZUStDKYaZnxcKa4YuTYZ1Gs
+ dAq6ni1kBn/AJXNNHISUt/VRTgxJOofTzKJnNu9eb5SdqJxPQ9sEYKJD6o5Gl7nmNsMc
+ gmYw==
+X-Gm-Message-State: AOAM532O6z2xlk4eGIs+MhpW4ud900+Jsg5TPrJYF5U3LQlEV67FyRnF
+ Z3W8daxkrp5EuCjVYTK9+p5ESk54WJo+yB70h0I3w4evfzRHTuAdsZIY4LdjcjBTwy0gsOA2Han
+ Xzkjmh/cB3Oqsm/MT3gkl3aEFad7xG7SIN03WH1FmXw==
+X-Received: by 2002:a05:6402:2906:: with SMTP id
+ ee6mr17966511edb.170.1633377678169; 
+ Mon, 04 Oct 2021 13:01:18 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyuHj3hrys0X5jcvBEKc8g2+iuDhizhWCRoVmy0jn4kkURJJbD11p6ILeMeXQvLwtLsevqp+A==
+X-Received: by 2002:a05:6402:2906:: with SMTP id
+ ee6mr17966483edb.170.1633377677943; 
+ Mon, 04 Oct 2021 13:01:17 -0700 (PDT)
+Received: from redhat.com ([2.55.147.134])
+ by smtp.gmail.com with ESMTPSA id z8sm6874865ejd.94.2021.10.04.13.01.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 04 Oct 2021 13:01:17 -0700 (PDT)
+Date: Mon, 4 Oct 2021 16:01:12 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Cornelia Huck <cohuck@redhat.com>
+Subject: Re: [virtio-dev] Re: [RFC PATCH 1/1] virtio: write back features
+ before verify
+Message-ID: <20211004160005-mutt-send-email-mst@kernel.org>
+References: <87fstm47no.fsf@redhat.com>
+ <20211002141351-mutt-send-email-mst@kernel.org>
+ <20211003070030.658fc94e.pasic@linux.ibm.com>
+ <20211003021027-mutt-send-email-mst@kernel.org>
+ <20211003032253-mutt-send-email-mst@kernel.org>
+ <87ee912e45.fsf@redhat.com>
+ <20211004083455-mutt-send-email-mst@kernel.org>
+ <878rz83lx0.fsf@redhat.com>
+ <20211004110152-mutt-send-email-mst@kernel.org>
+ <87zgro23r1.fsf@redhat.com>
 MIME-Version: 1.0
-Received: from localhost.localdomain (73.88.28.6) by
- DM5PR15CA0034.namprd15.prod.outlook.com (2603:10b6:4:4b::20) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.4566.15 via Frontend Transport; Mon, 4 Oct 2021 19:21:43 +0000
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 296a1422-1bef-4e0b-c6cd-08d9876c3352
-X-MS-TrafficTypeDiagnostic: DM5PR10MB1548:
-X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM5PR10MB15487F3BDD2AC35F246DF0D9F1AE9@DM5PR10MB1548.namprd10.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:187;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Y7bwS+VgAn4GqEIyyFH6/1Oxcs4x7A5dIha4+K1ZgWkdnNKDRD36T4q+MVb0JqB2Q+qoURCGn2daQ3gC1Htxj4KZaHpFP7L1GP5NB9rkhiwTcg1cCc9DkOYR86cJhuvn9MeQIAZ3JZF2HwCrSqYu7qthChDzjA6gFTxjyerpgPBoZZrq6Qyl3RPxWNGirvuQ8L/FPt6kn4veya+oi1360mEbbcH10b1yrsbKXOiPxSDxzqy8JhXwwRKqKTNEKOpIAkFZvF5GgqrPaLDYq/HOwePCoslsAdaiywx7trZVc9TLxnig2/FVH5rkGz90YxKopQgZ15HOAE5ui+8SxN6g3CtG9Z30Vsz1sSl5xbC6hBNSIBIk1244WGnqR1YKAqKCR1pkSC+xjPkYCjIscive5jr8JxaRntI6mPSvMM66eZGJwwykEo30NLGCfgteQ67DKZJfZGfcwLyOWlbEMS3nmGvJO3gj/wwNMHkreMW3pyxoOhTDaaw7uetPCUdoXQY59bFqZsALyFrbv8swWceURWMYcOBljzZ6Fg2ThuN9BAGRkHZoCTSrzfvdRnkknfWicA7hTzd9X1B64POgsY4g99w5y46mJxjoVr8sOBkmpGBxZ0BohHHqCi+DnGCU6xHKxnNzW0zI6yywrsh2xNGIDV3k5RIIKHLRYd0HKHk/IfiKlbXE4TtiZehYvbgJGu2Ltq6Xp+qzdxpmSJMsd6qp1A==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM5PR10MB1466.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(366004)(83380400001)(8676002)(921005)(7416002)(186003)(38100700002)(38350700002)(6506007)(8936002)(4326008)(26005)(508600001)(2906002)(6512007)(6666004)(86362001)(316002)(52116002)(1076003)(36756003)(66476007)(66556008)(66946007)(107886003)(2616005)(956004)(6486002)(5660300002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?WvDzvoGjVbQsD/9JmxAJ1/wPJ68Zp0bIYKxpYNoRwH4cog/jK1xVNKKJv5uG?=
- =?us-ascii?Q?mRur110+Nm/JI48oxB3mbZIicnVsW6soCrZiW3aXhwu1gLrUktYN3CD5Ag99?=
- =?us-ascii?Q?omxLdOsRxMTrf3cBit47umHFO1kLyLspeZdrwVVxc88PnPPxXgzbqI0+LkXm?=
- =?us-ascii?Q?9griTFhI4QduUKT4ucTe7lkO/B5x6KtxkQ7lxTzw1DxM0Fc7qOc13k35DCTZ?=
- =?us-ascii?Q?2LGTLJf8DdHdji4sVE7ygTeLF6C4FcEuWiQWvYYLqvyQx2zSo4s+VV5lthmj?=
- =?us-ascii?Q?Cd6otc3yHcPRpk6vb1gIGpKy4JZlfuG4g2KN2g2jOg+13gnz3EExUYfdu+46?=
- =?us-ascii?Q?V9k/7nWMqXxfhcA0qvdQU9UPrSMiZbUpu7ALC3FDOMx+8xZmQi7J23osDsu+?=
- =?us-ascii?Q?S691r9kLAEYHsDOWNMgJDI5HOgwjeOicOzjSwxu+3Qfjb8bAc0pL03WSf/nD?=
- =?us-ascii?Q?n/Nt9+xhlLORpFnxALB9n7HhKXwqbEW1gFGTYeglkZzb4UlLa/LpKLF7gSeo?=
- =?us-ascii?Q?4h5QTHnAmVypkae22/SCseL/rvfOiLKGGY0EGSe6qYpZivjJHy1MQtuQRMt7?=
- =?us-ascii?Q?FcB+4xWv14kx+dqR9xPKzU9rrMOXS4mtl7A+wI++VBj3/gtOvOLk0FZpL8c+?=
- =?us-ascii?Q?S7kmDEeZyWjHsl+AZZaVP2hOUuFK6MWuB53dfxE3TuY3tnYOteLPIQrLWn5A?=
- =?us-ascii?Q?PeeE1Pi0VW6BK0qi6COxA9QCb34tttEPpCHlZNhrqJzzvUdJqe9FRL6OaBul?=
- =?us-ascii?Q?s8NfbYWZDbxreozWCnuP94mX5/Oz8ivJOjUkQZ1xWHjmu9f1D+FPqFmTnbXw?=
- =?us-ascii?Q?lBuBrsJnJVnbtLmKVNSmkeSx3hBdls2tKjCbjhecVmYSun1QDS8Z2xIYv602?=
- =?us-ascii?Q?EFN7u4Wowa98zvy00FSMKI5tn8cthGavrcXnBeZ6D6xzbDIDIv8+0hDtiU3F?=
- =?us-ascii?Q?w4tljqJfiM/7BMWBfgeyVJJxnDSBuHjPzm4uvQGG14MdHROW6jYt5juRqRM8?=
- =?us-ascii?Q?CUd71M1H8+B4A/KEYeoTHrPmSiwg7t/dAzFNQ6ftclFOAJLIcHZOnT8VMmFj?=
- =?us-ascii?Q?bXApyk3gDEVnEHMuo1JJutplt+859jlcpvzGV0kQupqRX+xrCx8BogmFgVxI?=
- =?us-ascii?Q?+eyJjxcfeUqFk4vXo2yEsKH443PZqHlw+d6YbfS0+20ymLMgvd5xFeLzRYk9?=
- =?us-ascii?Q?hkHLQmYf7IVbY1fNv5bOj+LeE2iBZMDEYZYeOMYkL/FZfiJgZaIDfxnjLUce?=
- =?us-ascii?Q?NM7oR6bKNH9/WeZ/yb58HkcR2piHcAo0lt85pOMDAqWofXGbgeBkTS2tJAlF?=
- =?us-ascii?Q?uIt9YQItZMudNxZrMHBtk988?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 296a1422-1bef-4e0b-c6cd-08d9876c3352
-X-MS-Exchange-CrossTenant-AuthSource: DM5PR10MB1466.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Oct 2021 19:21:44.0774 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 355+a58jbc0bll3fkufnNu9U4X7CsNlDnANnSZpZAcu6XgwpIBmUBDPB8vPAq9HYRDiXM3AgIKUfXF3SS+juPAcEhKfOlTr9QXHETXl/fpc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR10MB1548
-X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10127
- signatures=668683
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- suspectscore=0 adultscore=0
- mlxscore=0 phishscore=0 bulkscore=0 mlxlogscore=999 malwarescore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2109230001
- definitions=main-2110040131
-X-Proofpoint-GUID: CtH34_iRtE1tZcpypDe8msS4ASbXqdls
-X-Proofpoint-ORIG-GUID: CtH34_iRtE1tZcpypDe8msS4ASbXqdls
+In-Reply-To: <87zgro23r1.fsf@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: linux-s390@vger.kernel.org, markver@us.ibm.com,
+ Christian Borntraeger <borntraeger@de.ibm.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Halil Pasic <pasic@linux.ibm.com>,
+ Xie Yongji <xieyongji@bytedance.com>, virtio-dev@lists.oasis-open.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -183,182 +126,94 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-For vhost workers we use the kthread API which inherit's its values from
-and checks against the kthreadd thread. This results in cgroups v2 not
-working and the wrong RLIMITs being checked. This patch has us use the
-kernel_copy_process function which will inherit its values/checks from the
-thread that owns the device.
+On Mon, Oct 04, 2021 at 05:45:06PM +0200, Cornelia Huck wrote:
+> On Mon, Oct 04 2021, "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> 
+> > On Mon, Oct 04, 2021 at 04:27:23PM +0200, Cornelia Huck wrote:
+> >> On Mon, Oct 04 2021, "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> >> 
+> >> > On Mon, Oct 04, 2021 at 02:01:14PM +0200, Cornelia Huck wrote:
+> >> >> On Sun, Oct 03 2021, "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> >> >> > @@ -160,6 +163,33 @@ \subsection{Legacy Interface: A Note on Feature
+> >> >> >  Specification text within these sections generally does not apply
+> >> >> >  to non-transitional devices.
+> >> >> >  
+> >> >> > +\begin{note}
+> >> >> > +The device offers different features when used through
+> >> >> > +the legacy interface and when operated in accordance with this
+> >> >> > +specification.
+> >> >> > +\end{note}
+> >> >> > +
+> >> >> > +Transitional drivers MUST use Devices only through the legacy interface
+> >> >> 
+> >> >> s/Devices only through the legacy interface/devices through the legacy
+> >> >> interface only/
+> >> >> 
+> >> >> ?
+> >> >
+> >> > Both versions are actually confused, since how do you
+> >> > find out that device does not offer VIRTIO_F_VERSION_1?
+> >> >
+> >> > I think what this should really say is
+> >> >
+> >> > Transitional drivers MUST NOT accept VIRTIO_F_VERSION_1 through
+> >> > the legacy interface.
+> >> 
+> >> Ok, that makes sense.
+> >> 
+> >> Would it make sense that transitional drivers MUST accept VERSION_1
+> >> through the non-legacy interface? Or is that redundant?
+> >
+> > We already have:
+> >
+> > A driver MUST accept VIRTIO_F_VERSION_1 if it is offered.
+> 
+> Yep, so it is redundant.
+> 
+> >
+> >
+> >> >
+> >> >
+> >> > Does linux actually satisfy this? Will it accept VIRTIO_F_VERSION_1
+> >> > through the legacy interface if offered?
+> >> 
+> >> I think that the Linux drivers will not operate on feature bit 32+ if
+> >> they are in legacy mode?
+> >
+> >
+> > Well ... with PCI there's no *way* for host to set bit 32 through
+> > legacy. But it might be possible with MMIO/CCW. Can you tell me
+> > what happens then?
+> 
+> ccw does not support accessing bit 32+, either. Not sure about mmio.
+> 
+> >
+> >
+> >> >> 
+> >> >> Generally, looks good to me.
+> >> >
+> >> > Do we want to also add explanation that features can be
+> >> > changed until FEATURES_OK?
+> >> 
+> >> I always considered that to be implict, as feature negotiation is not
+> >> over until we have FEATURES_OK. Not sure whether we need an extra note.
+> >
+> > Well Halil here says once you set a feature bit you can't clear it.
+> > So maybe not ...
+> 
+> Ok, so what about something like
+> 
+> "If FEATURES_OK is not set, the driver MAY change the set of features it
+> accepts."
+> 
+> in the device initialization section?
 
-Signed-off-by: Mike Christie <michael.christie@oracle.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/vhost/vhost.c | 68 ++++++++++++++++---------------------------
- drivers/vhost/vhost.h |  7 ++++-
- 2 files changed, 31 insertions(+), 44 deletions(-)
+Maybe "as long as". However Halil implied that some features are not
+turned off properly if that happens. Halil could you pls provide
+some examples?
 
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index c9a1f706989c..7a5142dcde1b 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -22,7 +22,6 @@
- #include <linux/slab.h>
- #include <linux/vmalloc.h>
- #include <linux/kthread.h>
--#include <linux/cgroup.h>
- #include <linux/module.h>
- #include <linux/sort.h>
- #include <linux/sched/mm.h>
-@@ -344,17 +343,14 @@ static void vhost_vq_reset(struct vhost_dev *dev,
- static int vhost_worker(void *data)
- {
- 	struct vhost_worker *worker = data;
--	struct vhost_dev *dev = worker->dev;
- 	struct vhost_work *work, *work_next;
- 	struct llist_node *node;
- 
--	kthread_use_mm(dev->mm);
--
- 	for (;;) {
- 		/* mb paired w/ kthread_stop */
- 		set_current_state(TASK_INTERRUPTIBLE);
- 
--		if (kthread_should_stop()) {
-+		if (test_bit(VHOST_WORKER_FLAG_STOP, &worker->flags)) {
- 			__set_current_state(TASK_RUNNING);
- 			break;
- 		}
-@@ -376,8 +372,9 @@ static int vhost_worker(void *data)
- 				schedule();
- 		}
- 	}
--	kthread_unuse_mm(dev->mm);
--	return 0;
-+
-+	complete(worker->exit_done);
-+	do_exit(0);
- }
- 
- static void vhost_vq_free_iovecs(struct vhost_virtqueue *vq)
-@@ -517,31 +514,6 @@ long vhost_dev_check_owner(struct vhost_dev *dev)
- }
- EXPORT_SYMBOL_GPL(vhost_dev_check_owner);
- 
--struct vhost_attach_cgroups_struct {
--	struct vhost_work work;
--	struct task_struct *owner;
--	int ret;
--};
--
--static void vhost_attach_cgroups_work(struct vhost_work *work)
--{
--	struct vhost_attach_cgroups_struct *s;
--
--	s = container_of(work, struct vhost_attach_cgroups_struct, work);
--	s->ret = cgroup_attach_task_all(s->owner, current);
--}
--
--static int vhost_attach_cgroups(struct vhost_dev *dev)
--{
--	struct vhost_attach_cgroups_struct attach;
--
--	attach.owner = current;
--	vhost_work_init(&attach.work, vhost_attach_cgroups_work);
--	vhost_work_queue(dev, &attach.work);
--	vhost_work_dev_flush(dev);
--	return attach.ret;
--}
--
- /* Caller should have device mutex */
- bool vhost_dev_has_owner(struct vhost_dev *dev)
- {
-@@ -579,6 +551,16 @@ static void vhost_detach_mm(struct vhost_dev *dev)
- 	dev->mm = NULL;
- }
- 
-+static void vhost_worker_stop(struct vhost_worker *worker)
-+{
-+	DECLARE_COMPLETION_ONSTACK(exit_done);
-+
-+	worker->exit_done = &exit_done;
-+	set_bit(VHOST_WORKER_FLAG_STOP, &worker->flags);
-+	wake_up_process(worker->task);
-+	wait_for_completion(worker->exit_done);
-+}
-+
- static void vhost_worker_free(struct vhost_dev *dev)
- {
- 	struct vhost_worker *worker = dev->worker;
-@@ -588,7 +570,7 @@ static void vhost_worker_free(struct vhost_dev *dev)
- 
- 	dev->worker = NULL;
- 	WARN_ON(!llist_empty(&worker->work_list));
--	kthread_stop(worker->task);
-+	vhost_worker_stop(worker);
- 	kfree(worker);
- }
- 
-@@ -603,27 +585,27 @@ static int vhost_worker_create(struct vhost_dev *dev)
- 		return -ENOMEM;
- 
- 	dev->worker = worker;
--	worker->dev = dev;
- 	worker->kcov_handle = kcov_common_handle();
- 	init_llist_head(&worker->work_list);
- 
--	task = kthread_create(vhost_worker, worker, "vhost-%d", current->pid);
-+	/*
-+	 * vhost used to use the kthread API which ignores all signals by
-+	 * default and the drivers expect this behavior. So we do not want to
-+	 * ineherit the parent's signal handlers and set our worker to ignore
-+	 * everything below.
-+	 */
-+	task = kernel_worker(vhost_worker, worker, NUMA_NO_NODE,
-+			     CLONE_FS | CLONE_CLEAR_SIGHAND,
-+			     KERN_WORKER_NO_FILES | KERN_WORKER_NO_SIGS);
- 	if (IS_ERR(task)) {
- 		ret = PTR_ERR(task);
- 		goto free_worker;
- 	}
- 
- 	worker->task = task;
--	wake_up_process(task); /* avoid contributing to loadavg */
--
--	ret = vhost_attach_cgroups(dev);
--	if (ret)
--		goto stop_worker;
--
-+	kernel_worker_start(task, "vhost-%d", current->pid);
- 	return 0;
- 
--stop_worker:
--	kthread_stop(worker->task);
- free_worker:
- 	kfree(worker);
- 	dev->worker = NULL;
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index 102ce25e4e13..09748694cb66 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -25,11 +25,16 @@ struct vhost_work {
- 	unsigned long		flags;
- };
- 
-+enum {
-+	VHOST_WORKER_FLAG_STOP,
-+};
-+
- struct vhost_worker {
- 	struct task_struct	*task;
-+	struct completion	*exit_done;
- 	struct llist_head	work_list;
--	struct vhost_dev	*dev;
- 	u64			kcov_handle;
-+	unsigned long		flags;
- };
- 
- /* Poll a file (eventfd or socket) */
 -- 
-2.25.1
+MST
 
 _______________________________________________
 Virtualization mailing list
