@@ -2,67 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A1FBC42448F
-	for <lists.virtualization@lfdr.de>; Wed,  6 Oct 2021 19:40:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0CC5F4247EE
+	for <lists.virtualization@lfdr.de>; Wed,  6 Oct 2021 22:29:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 634C883F73;
-	Wed,  6 Oct 2021 17:40:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 252D8837A1;
+	Wed,  6 Oct 2021 20:29:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AqLzwfQKlSO3; Wed,  6 Oct 2021 17:40:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 2282F83E5B;
-	Wed,  6 Oct 2021 17:40:44 +0000 (UTC)
+	with ESMTP id JVDzVAWpcdLo; Wed,  6 Oct 2021 20:29:13 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id EA7F5835A3;
+	Wed,  6 Oct 2021 20:29:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DD292C002A;
-	Wed,  6 Oct 2021 17:40:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7DCE3C0022;
+	Wed,  6 Oct 2021 20:29:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B5BE0C001D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5D839C000D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Oct 2021 17:40:41 +0000 (UTC)
+ Wed,  6 Oct 2021 20:29:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8470683B17
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3FA8C4058D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Oct 2021 17:40:41 +0000 (UTC)
+ Wed,  6 Oct 2021 20:29:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7cQsDxpFKuNB
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Y9Oj_B9TsSNk
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Oct 2021 17:40:40 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from mx01.bbu.dsd.mx.bitdefender.com
- (mx01.bbu.dsd.mx.bitdefender.com [91.199.104.161])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8222983ABC
+ Wed,  6 Oct 2021 20:29:08 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 503E4404F9
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Oct 2021 17:40:40 +0000 (UTC)
-Received: from smtp.bitdefender.com (smtp01.buh.bitdefender.com [10.17.80.75])
- by mx01.bbu.dsd.mx.bitdefender.com (Postfix) with ESMTPS id
- ED5D63086402; Wed,  6 Oct 2021 20:31:25 +0300 (EEST)
-Received: from localhost (unknown [91.199.104.28])
- by smtp.bitdefender.com (Postfix) with ESMTPSA id D6787305FFA0;
- Wed,  6 Oct 2021 20:31:25 +0300 (EEST)
-X-Is-Junk-Enabled: fGZTSsP0qEJE2AIKtlSuFiRRwg9xyHmJ
-From: =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>
-To: kvm@vger.kernel.org
-Subject: [PATCH v12 77/77] KVM: x86: call the page tracking code on emulation
- failure
-Date: Wed,  6 Oct 2021 20:31:13 +0300
-Message-Id: <20211006173113.26445-78-alazar@bitdefender.com>
-In-Reply-To: <20211006173113.26445-1-alazar@bitdefender.com>
-References: <20211006173113.26445-1-alazar@bitdefender.com>
+ Wed,  6 Oct 2021 20:29:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=f+7pNJVIdJVibgfPLSCv/f+yDUP48wbFM1/ma1uhFjg=; b=Ogm6pNPXdME5gAs0wNEr+Wj30b
+ fPTa/NAwwNJQa00AQL9dWyvTpT6FHp2bP2CR8cCdAZp5zsTJarPeZnQae0GxfZaQThA+r4JGZivlF
+ u2az0ImavUx2gGxcv/ny8iialIURoUnmnJqc1EilxOjebsvhwGuu9A8m5VashhfR1j2QHpuDjaNPu
+ pUBjbu9FqrmbQeGsy2zgme6Q2pXc8b1AoaTSOv3jeee6Wcc7luOkpOD7hiKyzWg3DFlILM8vTyHqv
+ gn8mM/QYmX+iIUu9N0Main2nWJU7v/biu1fYPxT83VRiGejnpNQU3mNQ1jUYRa8Zn4QKrhZfbFRw9
+ Qg+77kNA==;
+Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1mYDXF-00FV0W-Ef; Wed, 06 Oct 2021 20:29:05 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH] VDUSE: fix documentation underline warning
+Date: Wed,  6 Oct 2021 13:29:04 -0700
+Message-Id: <20211006202904.30241-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.31.1
 MIME-Version: 1.0
-Cc: Tamas K Lengyel <tamas@tklengyel.com>, Wanpeng Li <wanpengli@tencent.com>,
- Sean Christopherson <seanjc@google.com>, Joerg Roedel <joro@8bytes.org>,
- virtualization@lists.linux-foundation.org,
- =?UTF-8?q?Adalbert=20Laz=C4=83r?= <alazar@bitdefender.com>,
- Mathieu Tarral <mathieu.tarral@protonmail.com>,
- Paolo Bonzini <pbonzini@redhat.com>,
- =?UTF-8?q?Mihai=20Don=C8=9Bu?= <mdontu@bitdefender.com>,
- Jim Mattson <jmattson@google.com>
+Cc: Jonathan Corbet <corbet@lwn.net>, Randy Dunlap <rdunlap@infradead.org>,
+ linux-doc@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Xie Yongji <xieyongji@bytedance.com>, "Michael S . Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -74,63 +75,39 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-RnJvbTogTWloYWkgRG9uyJt1IDxtZG9udHVAYml0ZGVmZW5kZXIuY29tPgoKVGhlIGluZm9ybWF0
-aW9uIHdlIGNhbiBwcm92aWRlIHRoaXMgd2F5IGlzIGluY29tcGxldGUsIGJ1dCBjdXJyZW50IHVz
-ZXJzCm9mIHRoZSBwYWdlIHRyYWNraW5nIGNvZGUgY2FuIHdvcmsgd2l0aCBpdC4KClNpZ25lZC1v
-ZmYtYnk6IE1paGFpIERvbsibdSA8bWRvbnR1QGJpdGRlZmVuZGVyLmNvbT4KU2lnbmVkLW9mZi1i
-eTogQWRhbGJlcnQgTGF6xINyIDxhbGF6YXJAYml0ZGVmZW5kZXIuY29tPgotLS0KIGFyY2gveDg2
-L2t2bS94ODYuYyB8IDQ5ICsrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
-KysrKysKIDEgZmlsZSBjaGFuZ2VkLCA0OSBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEvYXJj
-aC94ODYva3ZtL3g4Ni5jIGIvYXJjaC94ODYva3ZtL3g4Ni5jCmluZGV4IDlhM2ZhYzliMzBiYS4u
-YTljYWFjZWEwMjA3IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9rdm0veDg2LmMKKysrIGIvYXJjaC94
-ODYva3ZtL3g4Ni5jCkBAIC03ODcyLDYgKzc4NzIsNTEgQEAgaW50IHg4Nl9kZWNvZGVfZW11bGF0
-ZWRfaW5zdHJ1Y3Rpb24oc3RydWN0IGt2bV92Y3B1ICp2Y3B1LCBpbnQgZW11bGF0aW9uX3R5cGUs
-CiB9CiBFWFBPUlRfU1lNQk9MX0dQTCh4ODZfZGVjb2RlX2VtdWxhdGVkX2luc3RydWN0aW9uKTsK
-IAorLyoKKyAqIFdpdGggaW50cm9zcGVjdGlvbiBlbmFibGVkLCBlbXVsYXRpb24gZmFpbHVyZXMg
-dHJhbnNsYXRlIGluIGV2ZW50cyBiZWluZworICogbWlzc2VkIGJlY2F1c2UgdGhlIHJlYWQvd3Jp
-dGUgY2FsbGJhY2tzIGFyZSBub3QgaW52b2tlZC4gQWxsIHdlIGhhdmUgaXMKKyAqIHRoZSBmZXRj
-aCBldmVudCAoa3ZtX3BhZ2VfdHJhY2tfcHJlZXhlYykuIEJlbG93IHdlIHVzZSB0aGUgRVBUL05Q
-VCBWTUVYSVQKKyAqIGluZm9ybWF0aW9uIHRvIGdlbmVyYXRlIHRoZSBldmVudHMsIGJ1dCB3aXRo
-b3V0IHByb3ZpZGluZyBhY2N1cmF0ZQorICogZGF0YSBhbmQgc2l6ZSAodGhlIGVtdWxhdG9yIHdv
-dWxkIGhhdmUgY29tcHV0ZWQgdGhvc2UpLiBJZiBhbiBpbnN0cnVjdGlvbgorICogd291bGQgaGFw
-cGVuIHRvIHJlYWQgYW5kIHdyaXRlIGluIHRoZSBzYW1lIHBhZ2UsIHRoZSBzZWNvbmQgZXZlbnQg
-d2lsbAorICogaW5pdGlhbGx5IGJlIG1pc3NlZCBhbmQgd2UgcmVseSBvbiB0aGUgcGFnZSB0cmFj
-a2luZyBtZWNoYW5pc20gdG8gYnJpbmcKKyAqIHVzIGJhY2sgaGVyZSB0byBzZW5kIGl0LgorICov
-CitzdGF0aWMgYm9vbCBrdm1fcGFnZV90cmFja19lbXVsYXRpb25fZmFpbHVyZShzdHJ1Y3Qga3Zt
-X3ZjcHUgKnZjcHUsIGdwYV90IGdwYSkKK3sKKwl1NjQgZXJyb3JfY29kZSA9IHZjcHUtPmFyY2gu
-ZXJyb3JfY29kZTsKKwl1OCBkYXRhID0gMDsKKwlndmFfdCBndmE7CisJYm9vbCByZXQ7CisKKwkv
-KiBNTUlPIGVtdWxhdGlvbiBmYWlsdXJlcyBzaG91bGQgYmUgdHJlYXRlZCB0aGUgbm9ybWFsIHdh
-eSAqLworCWlmICh1bmxpa2VseShlcnJvcl9jb2RlICYgUEZFUlJfUlNWRF9NQVNLKSkKKwkJcmV0
-dXJuIHRydWU7CisKKwkvKiBFUFQvTlRQIG11c3QgYmUgZW5hYmxlZCAqLworCWlmICh1bmxpa2Vs
-eSghdmNwdS0+YXJjaC5tbXUtPmRpcmVjdF9tYXApKQorCQlyZXR1cm4gdHJ1ZTsKKworCS8qCisJ
-ICogVGhlIEEvRCBiaXQgZW11bGF0aW9uIHNob3VsZCBtYWtlIHRoaXMgdGVzdCB1bm5lZWRlZCwg
-YnV0IGp1c3QKKwkgKiBpbiBjYXNlCisJICovCisJaWYgKHVubGlrZWx5KChlcnJvcl9jb2RlICYg
-UEZFUlJfTkVTVEVEX0dVRVNUX1BBR0UpID09CisJCSAgICAgUEZFUlJfTkVTVEVEX0dVRVNUX1BB
-R0UpKQorCQlyZXR1cm4gdHJ1ZTsKKworCWd2YSA9IHN0YXRpY19jYWxsKGt2bV94ODZfZmF1bHRf
-Z2xhKSh2Y3B1KTsKKworCWlmIChlcnJvcl9jb2RlICYgUEZFUlJfV1JJVEVfTUFTSykKKwkJcmV0
-ID0ga3ZtX3BhZ2VfdHJhY2tfcHJld3JpdGUodmNwdSwgZ3BhLCBndmEsICZkYXRhLCAwKTsKKwll
-bHNlIGlmIChlcnJvcl9jb2RlICYgUEZFUlJfVVNFUl9NQVNLKQorCQlyZXQgPSBrdm1fcGFnZV90
-cmFja19wcmVyZWFkKHZjcHUsIGdwYSwgZ3ZhLCAwKTsKKwllbHNlCisJCXJldCA9IHRydWU7CisK
-KwlyZXR1cm4gcmV0OworfQorCiBpbnQgeDg2X2VtdWxhdGVfaW5zdHJ1Y3Rpb24oc3RydWN0IGt2
-bV92Y3B1ICp2Y3B1LCBncGFfdCBjcjJfb3JfZ3BhLAogCQkJICAgIGludCBlbXVsYXRpb25fdHlw
-ZSwgdm9pZCAqaW5zbiwgaW50IGluc25fbGVuKQogewpAQCAtNzkwNSw2ICs3OTUwLDggQEAgaW50
-IHg4Nl9lbXVsYXRlX2luc3RydWN0aW9uKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwgZ3BhX3QgY3Iy
-X29yX2dwYSwKIAkJCQlrdm1fcXVldWVfZXhjZXB0aW9uKHZjcHUsIFVEX1ZFQ1RPUik7CiAJCQkJ
-cmV0dXJuIDE7CiAJCQl9CisJCQlpZiAoIWt2bV9wYWdlX3RyYWNrX2VtdWxhdGlvbl9mYWlsdXJl
-KHZjcHUsIGNyMl9vcl9ncGEpKQorCQkJCXJldHVybiAxOwogCQkJaWYgKHJlZXhlY3V0ZV9pbnN0
-cnVjdGlvbih2Y3B1LCBjcjJfb3JfZ3BhLAogCQkJCQkJICB3cml0ZV9mYXVsdF90b19zcHQsCiAJ
-CQkJCQkgIGVtdWxhdGlvbl90eXBlKSkKQEAgLTc5NzQsNiArODAyMSw4IEBAIGludCB4ODZfZW11
-bGF0ZV9pbnN0cnVjdGlvbihzdHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIGdwYV90IGNyMl9vcl9ncGEs
-CiAJCXJldHVybiAxOwogCiAJaWYgKHIgPT0gRU1VTEFUSU9OX0ZBSUxFRCkgeworCQlpZiAoIWt2
-bV9wYWdlX3RyYWNrX2VtdWxhdGlvbl9mYWlsdXJlKHZjcHUsIGNyMl9vcl9ncGEpKQorCQkJcmV0
-dXJuIDE7CiAJCWlmIChyZWV4ZWN1dGVfaW5zdHJ1Y3Rpb24odmNwdSwgY3IyX29yX2dwYSwgd3Jp
-dGVfZmF1bHRfdG9fc3B0LAogCQkJCQllbXVsYXRpb25fdHlwZSkpCiAJCQlyZXR1cm4gMTsKX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRp
-b24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3Jn
-Cmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1
-YWxpemF0aW9u
+Fix a VDUSE documentation build warning:
+
+Documentation/userspace-api/vduse.rst:21: WARNING: Title underline too short.
+
+Fixes: 7bc7f61897b6 ("Documentation: Add documentation for VDUSE")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Xie Yongji <xieyongji@bytedance.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Michael S. Tsirkin <mst@redhat.com>
+Cc: virtualization@lists.linux-foundation.org
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+---
+ Documentation/userspace-api/vduse.rst |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+--- lnx-515-rc4.orig/Documentation/userspace-api/vduse.rst
++++ lnx-515-rc4/Documentation/userspace-api/vduse.rst
+@@ -18,7 +18,7 @@ types can be added after the security is
+ is clarified or fixed in the future.
+ 
+ Create/Destroy VDUSE devices
+-------------------------
++----------------------------
+ 
+ VDUSE devices are created as follows:
+ 
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
