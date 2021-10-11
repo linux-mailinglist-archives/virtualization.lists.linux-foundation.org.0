@@ -2,68 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 452594295B0
-	for <lists.virtualization@lfdr.de>; Mon, 11 Oct 2021 19:32:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id A6FAA4295C7
+	for <lists.virtualization@lfdr.de>; Mon, 11 Oct 2021 19:35:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D390281045;
-	Mon, 11 Oct 2021 17:32:28 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4842E818C4;
+	Mon, 11 Oct 2021 17:35:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vYHyaq8lKqBw; Mon, 11 Oct 2021 17:32:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id ABB3881046;
-	Mon, 11 Oct 2021 17:32:27 +0000 (UTC)
+	with ESMTP id hWCDNWjkGa6k; Mon, 11 Oct 2021 17:35:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 43177816F5;
+	Mon, 11 Oct 2021 17:35:25 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 54456C000D;
-	Mon, 11 Oct 2021 17:32:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E51CAC001D;
+	Mon, 11 Oct 2021 17:35:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 89154C000D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6565EC000D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 11 Oct 2021 17:32:26 +0000 (UTC)
+ Mon, 11 Oct 2021 17:35:23 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 64FA540457
+ by smtp3.osuosl.org (Postfix) with ESMTP id 4D2DA608A0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 11 Oct 2021 17:32:26 +0000 (UTC)
+ Mon, 11 Oct 2021 17:35:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QD4hQaSUTKaN
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id MSDahu588jWb
  for <virtualization@lists.linux-foundation.org>;
- Mon, 11 Oct 2021 17:32:25 +0000 (UTC)
+ Mon, 11 Oct 2021 17:35:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by smtp4.osuosl.org (Postfix) with ESMTPS id ADDFF40450
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id AD8186063B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 11 Oct 2021 17:32:25 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10134"; a="224341797"
-X-IronPort-AV: E=Sophos;i="5.85,365,1624345200"; d="scan'208";a="224341797"
+ Mon, 11 Oct 2021 17:35:20 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10134"; a="207045113"
+X-IronPort-AV: E=Sophos;i="5.85,365,1624345200"; d="scan'208";a="207045113"
 Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Oct 2021 10:32:25 -0700
-X-IronPort-AV: E=Sophos;i="5.85,365,1624345200"; d="scan'208";a="440884638"
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 11 Oct 2021 10:35:19 -0700
+X-IronPort-AV: E=Sophos;i="5.85,365,1624345200"; d="scan'208";a="440885412"
 Received: from akleen-mobl1.amr.corp.intel.com (HELO [10.255.229.69])
  ([10.255.229.69])
  by orsmga006-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 11 Oct 2021 10:32:23 -0700
-Message-ID: <78766e28-8353-acc8-19e2-033d4bbf3472@linux.intel.com>
-Date: Mon, 11 Oct 2021 10:32:23 -0700
+ 11 Oct 2021 10:35:18 -0700
+Message-ID: <9d0ac556-6a06-0f2e-c4ff-0c3ce742a382@linux.intel.com>
+Date: Mon, 11 Oct 2021 10:35:18 -0700
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v5 12/16] PCI: Add pci_iomap_host_shared(),
- pci_iomap_host_shared_range()
+Subject: Re: [PATCH v5 16/16] x86/tdx: Add cmdline option to force use of
+ ioremap_host_shared
 Content-Language: en-US
 To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20211009003711.1390019-1-sathyanarayanan.kuppuswamy@linux.intel.com>
- <20211009003711.1390019-13-sathyanarayanan.kuppuswamy@linux.intel.com>
- <20211009053103-mutt-send-email-mst@kernel.org>
- <cec62ebb-87d7-d725-1096-2c97c5eedbc3@linux.intel.com>
- <20211011073614-mutt-send-email-mst@kernel.org>
+ <20211009003711.1390019-17-sathyanarayanan.kuppuswamy@linux.intel.com>
+ <20211009070132-mutt-send-email-mst@kernel.org>
+ <8c906de6-5efa-b87a-c800-6f07b98339d0@linux.intel.com>
+ <20211011075945-mutt-send-email-mst@kernel.org>
 From: Andi Kleen <ak@linux.intel.com>
-In-Reply-To: <20211011073614-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20211011075945-mutt-send-email-mst@kernel.org>
 Cc: Kuppuswamy Sathyanarayanan <sathyanarayanan.kuppuswamy@linux.intel.com>,
  Kuppuswamy Sathyanarayanan <knsathya@kernel.org>,
  Peter Zijlstra <peterz@infradead.org>, linux-pci@vger.kernel.org,
@@ -100,81 +100,21 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 
-> Because it does not end with I/O operations, that's a trivial example.
-> module unloading is famous for being racy: I just re-read that part of
-> virtio drivers and sure enough we have bugs there, this is after
-> they have presumably been audited, so a TDX guest is better off
-> just disabling hot-unplug completely, and hotplug isn't far behind.
+> Presumably bios code is in arch/x86 and drivers/acpi, right?
+> Up to 200 calls the majority of which is likely private ...
 
-These all shouldn't matter for a confidential guest. The only way it can 
-be attacked is through IO, everything else is protected by hardware.
+Yes.
 
-
-Also it would all require doing something at the guest level, which we 
-assume is not malicious.
+> I don't have better ideas but the current setup will just
+> result in people making their guests vulnerable whenever they
+> want to allow device pass-through.
 
 
-> Malicious filesystems can exploit many linux systems unless
-> you take pains to limit what is mounted and how.
+Yes that's true. For current TDX our target is virtual devices only. But 
+if pass through usage will be really wide spread we may need to revisit.
 
-That's expected to be handled by authenticated dmcrypt and similar. 
-Hardening at this level has been done for many years.
-
-
-> Networking devices tend to get into the default namespaces and can
-> do more or less whatever CAP_NET_ADMIN can.
-> Etc.
-
-
-Networking should be already hardened, otherwise you would have much 
-worse problems today.
-
-
-
-> hange in your subsystem here.
-> Well I commented on the API patch, not the virtio patch.
-> If it's a way for a driver to say "I am hardened
-> and audited" then I guess it should at least say so.
-
-
-This is handled by the central allow list. We intentionally didn't want 
-each driver to declare itself, but have a central list where changes 
-will get more scrutiny than random driver code.
-
-But then there are the additional opt-ins for the low level firewall. 
-These are in the API. I don't see how it could be done at the driver 
-level, unless you want to pass in a struct device everywhere?
-
->>> How about creating a defconfig that makes sense for TDX then?
->> TDX can be used in many different ways, I don't think a defconfig is
->> practical.
->>
->> In theory you could do some Kconfig dependency (at the pain point of having
->> separate kernel binariees), but why not just do it at run time then if you
->> maintain the list anyways. That's much easier and saner for everyone. In the
->> past we usually always ended up with runtime mechanism for similar things
->> anyways.
->>
->> Also it turns out that the filter mechanisms are needed for some arch
->> drivers which are not even configurable, so alone it's probably not enough,
->
-> I guess they aren't really needed though right, or you won't try to
-> filter them?
-
-We're addressing most of them with the device filter for platform 
-drivers. But since we cannot stop them doing ioremap IO in their init 
-code they also need the low level firewall.
-
-Some others that cannot be addressed have explicit disables.
-
-
-> So make them configurable?
-
-Why not just fix the runtime? It's much saner for everyone. Proposing to 
-do things at build time sounds like we're in Linux 0.99 days.
 
 -Andi
-
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
