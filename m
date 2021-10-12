@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2BCD642AA55
-	for <lists.virtualization@lfdr.de>; Tue, 12 Oct 2021 19:11:42 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id CC2F042AAA3
+	for <lists.virtualization@lfdr.de>; Tue, 12 Oct 2021 19:20:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id BC44540256;
-	Tue, 12 Oct 2021 17:11:40 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5AE2960BB1;
+	Tue, 12 Oct 2021 17:20:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Vn6kUiQ7uVhm; Tue, 12 Oct 2021 17:11:38 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 673C5401CF;
-	Tue, 12 Oct 2021 17:11:38 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id l3nz9tqM4vsW; Tue, 12 Oct 2021 17:20:54 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id A697A60BBF;
+	Tue, 12 Oct 2021 17:20:53 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E76ADC000D;
-	Tue, 12 Oct 2021 17:11:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3DCADC000D;
+	Tue, 12 Oct 2021 17:20:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF0A7C000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2DD18C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 17:11:36 +0000 (UTC)
+ Tue, 12 Oct 2021 17:20:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 937E94070A
+ by smtp4.osuosl.org (Postfix) with ESMTP id 278234070C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 17:11:36 +0000 (UTC)
+ Tue, 12 Oct 2021 17:20:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Hjd9u_YHsn3E
+ with ESMTP id cdewfkSfQnAh
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 17:11:33 +0000 (UTC)
+ Tue, 12 Oct 2021 17:20:50 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
  [IPv6:2a03:f480:1:14::7d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2CF7F40707
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9803D4070A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 17:11:33 +0000 (UTC)
+ Tue, 12 Oct 2021 17:20:49 +0000 (UTC)
 Received: from [83.223.241.183] (helo=LAPTOP-EPOV2LRR)
  by s052d7dde.fastvps-server.com with esmtpsa
  (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <marle@saisti.eu>) id 1maKT7-00055h-Gg
+ (envelope-from <marle@saisti.eu>) id 1maKT9-00055a-Ag
  for virtualization@lists.linux-foundation.org; Tue, 12 Oct 2021 19:17:35 +0300
 From: "IT" <marialemos72@gmail.com>
 Subject: WorldCist'22 - 10th World Conference on Information Systems and
  Technologies | Montenegro
 To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-Date: Tue, 12 Oct 2021 17:17:34 +0100
-Message-ID: <16964102339421@gmail-com>
+Date: Tue, 12 Oct 2021 17:17:35 +0100
+Message-ID: <11940102342062@gmail-com>
 X-Antivirus: AVG (VPS 211012-4, 12/10/2021), Outbound message
 X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -65,18 +65,18 @@ List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=hel
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
 Reply-To: worldcist@gmail.com
-Content-Type: multipart/mixed; boundary="===============3403512540402419062=="
+Content-Type: multipart/mixed; boundary="===============1454554817346951958=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 This is a multi-part message in MIME format
 
---===============3403512540402419062==
-Content-Type: multipart/alternative; charset=utf-8; boundary="tgAiWDwunIkL7If=_6mqtlnWgmd1LpnYUs"
+--===============1454554817346951958==
+Content-Type: multipart/alternative; charset=utf-8; boundary="BZdZVXtVS6cZWgUyysbzvXbrc2aa=_NQGr"
 
 This is a multi-part message in MIME format
 
---tgAiWDwunIkL7If=_6mqtlnWgmd1LpnYUs
+--BZdZVXtVS6cZWgUyysbzvXbrc2aa=_NQGr
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
@@ -280,7 +280,7 @@ WorldCIST'22: http://worldcist.org <http://worldcist.org>
 This email has been checked for viruses by AVG.
 https://www.avg.com
 
---tgAiWDwunIkL7If=_6mqtlnWgmd1LpnYUs
+--BZdZVXtVS6cZWgUyysbzvXbrc2aa=_NQGr
 Content-Type: text/html; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 Content-Disposition: inline
@@ -446,10 +446,10 @@ source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
 t=3D"1"> </a></div></body>
 </html>
 
---tgAiWDwunIkL7If=_6mqtlnWgmd1LpnYUs--
+--BZdZVXtVS6cZWgUyysbzvXbrc2aa=_NQGr--
 
 
---===============3403512540402419062==
+--===============1454554817346951958==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -459,5 +459,5 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============3403512540402419062==--
+--===============1454554817346951958==--
 
