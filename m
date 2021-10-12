@@ -1,83 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A6AA1429E10
-	for <lists.virtualization@lfdr.de>; Tue, 12 Oct 2021 08:53:20 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 932CA429E0E
+	for <lists.virtualization@lfdr.de>; Tue, 12 Oct 2021 08:53:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 36EDE60909;
-	Tue, 12 Oct 2021 06:53:19 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D9295402EC;
+	Tue, 12 Oct 2021 06:53:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 33v6gKjjAidJ; Tue, 12 Oct 2021 06:53:18 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gGXwxbbcj5I3; Tue, 12 Oct 2021 06:53:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 1B16860900;
-	Tue, 12 Oct 2021 06:53:18 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 7DC00402E7;
+	Tue, 12 Oct 2021 06:53:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 023DFC001D;
-	Tue, 12 Oct 2021 06:53:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78F45C0025;
+	Tue, 12 Oct 2021 06:53:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B65B9C001E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8FC8EC000D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 06:53:16 +0000 (UTC)
+ Tue, 12 Oct 2021 06:53:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 8F44C80F82
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7C2AE402DF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 06:53:16 +0000 (UTC)
+ Tue, 12 Oct 2021 06:53:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p8u4xjTO_oSW
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id UbDL_XEIMUY9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 06:53:16 +0000 (UTC)
+ Tue, 12 Oct 2021 06:53:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E428880E5F
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A98CB401B2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Oct 2021 06:53:15 +0000 (UTC)
+ Tue, 12 Oct 2021 06:53:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634021595;
+ s=mimecast20190719; t=1634021590;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=j/QbFmrEsChXEIMzJ7DSys3s2nwcppdzH8aCGPBxMJA=;
- b=dHVdLmp8Mi9yhIk43/VdKE5gRXEerUWQRplJEl1WwuTXAQWfNTukdg04wnU3ZDHzO1/kB+
- ZItABswRRavg6zQfTWrdIYTOEX/o8hHYdfqczxLxtGNniduZvVLIW7FG0wEmrEbGjrifkk
- jN7Vz/5X2Y7ySAwWLkuFfSEAUykzLFk=
+ bh=XtqcK8OBOXRr6ZBw1JH6UfUdpU3S//kleHWjxjhJDLY=;
+ b=OAwCXm1qRw6GzaP0flcKphY0yRAJFPyDA4x40IGwjnoCjosEm0XfOfWvv4vkyd+lgWC+TP
+ pzajgG9OcPVKeWripPEXlQ1FstboBE1NWAZF1/MjJk+bGP6Sw57BHrrc9ulue+ocqLqldv
+ GG1fdWQDMHVPnr98OoEMOvyw20PK25U=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-469-8OP0pBBSOC29e6d-W96EvQ-1; Tue, 12 Oct 2021 02:53:11 -0400
-X-MC-Unique: 8OP0pBBSOC29e6d-W96EvQ-1
+ us-mta-594-sCUko4A5MNODDv_V61Wccw-1; Tue, 12 Oct 2021 02:53:09 -0400
+X-MC-Unique: sCUko4A5MNODDv_V61Wccw-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 0B17210144FB;
- Tue, 12 Oct 2021 06:52:47 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1F15E8031D8;
+ Tue, 12 Oct 2021 06:52:50 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-111.pek2.redhat.com
  [10.72.13.111])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 48BC05F4E0;
- Tue, 12 Oct 2021 06:52:43 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8E5145F4E9;
+ Tue, 12 Oct 2021 06:52:47 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH V2 04/12] virtio_console: validate max_nr_ports before trying
- to use it
-Date: Tue, 12 Oct 2021 14:52:19 +0800
-Message-Id: <20211012065227.9953-5-jasowang@redhat.com>
+Subject: [PATCH V2 05/12] virtio_config: introduce a new ready method
+Date: Tue, 12 Oct 2021 14:52:20 +0800
+Message-Id: <20211012065227.9953-6-jasowang@redhat.com>
 In-Reply-To: <20211012065227.9953-1-jasowang@redhat.com>
 References: <20211012065227.9953-1-jasowang@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: f.hetzelt@tu-berlin.de, david.kaplan@amd.com, Amit Shah <amit@kernel.org>,
- konrad.wilk@oracle.com, linux-kernel@vger.kernel.org,
+Cc: konrad.wilk@oracle.com, f.hetzelt@tu-berlin.de,
+ linux-kernel@vger.kernel.org, david.kaplan@amd.com,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -95,56 +92,42 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We calculate nr_ports based on the max_nr_ports:
-
-nr_queues = use_multiport(portdev) ? (nr_ports + 1) * 2 : 2;
-
-If the device advertises a large max_nr_ports, we will end up with a
-integer overflow. Fixing this by validating the max_nr_ports
-advertised by the device in .validate() and clear the MULTIPORT is
-it's greater than 0x8000 (which is guaranteed be safe).
-
-Cc: Amit Shah <amit@kernel.org>
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/char/virtio_console.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ include/linux/virtio_config.h | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
-index daeed31df622..ef13763699c0 100644
---- a/drivers/char/virtio_console.c
-+++ b/drivers/char/virtio_console.c
-@@ -28,6 +28,7 @@
- #include "../tty/hvc/hvc_console.h"
- 
- #define is_rproc_enabled IS_ENABLED(CONFIG_REMOTEPROC)
-+#define VIRTCONS_MAX_PORTS 0x8000
- 
- /*
-  * This is a global struct for storing common data for all the devices
-@@ -1981,6 +1982,8 @@ static void virtcons_remove(struct virtio_device *vdev)
- 
- static int virtcons_validate(struct virtio_device *vdev)
+diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
+index 8519b3ae5d52..f2891c6221a1 100644
+--- a/include/linux/virtio_config.h
++++ b/include/linux/virtio_config.h
+@@ -23,6 +23,8 @@ struct virtio_shm_region {
+  *       any of @get/@set, @get_status/@set_status, or @get_features/
+  *       @finalize_features are NOT safe to be called from an atomic
+  *       context.
++ * @ready: make the device ready
++ *      vdev: the virtio_device
+  * @get: read the value of a configuration field
+  *	vdev: the virtio_device
+  *	offset: the offset of the configuration field
+@@ -75,6 +77,7 @@ struct virtio_shm_region {
+  */
+ typedef void vq_callback_t(struct virtqueue *);
+ struct virtio_config_ops {
++	void (*ready)(struct virtio_device *vdev);
+ 	void (*get)(struct virtio_device *vdev, unsigned offset,
+ 		    void *buf, unsigned len);
+ 	void (*set)(struct virtio_device *vdev, unsigned offset,
+@@ -229,6 +232,9 @@ void virtio_device_ready(struct virtio_device *dev)
  {
-+	u32 max_nr_ports;
-+
- 	if (is_rproc_serial(vdev)) {
- 		/* Don't test F_SIZE at all if we're rproc: not a
- 		 * valid feature! */
-@@ -1999,6 +2002,13 @@ static int virtcons_validate(struct virtio_device *vdev)
- 		return -EINVAL;
- 	}
+ 	unsigned status = dev->config->get_status(dev);
  
-+	if (virtio_cread_feature(vdev, VIRTIO_CONSOLE_F_MULTIPORT,
-+				 struct virtio_console_config, max_nr_ports,
-+				 &max_nr_ports) == 0) {
-+		if (max_nr_ports == 0 || max_nr_ports > VIRTCONS_MAX_PORTS)
-+			__virtio_clear_bit(vdev, VIRTIO_CONSOLE_F_MULTIPORT);
-+	}
++	if (dev->config->ready)
++                  dev->config->ready(dev);
 +
- 	return 0;
+ 	BUG_ON(status & VIRTIO_CONFIG_S_DRIVER_OK);
+ 	dev->config->set_status(dev, status | VIRTIO_CONFIG_S_DRIVER_OK);
  }
- 
 -- 
 2.25.1
 
