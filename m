@@ -2,94 +2,104 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44E374332B7
-	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 11:42:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F1C24333B0
+	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 12:39:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B26AB83280;
-	Tue, 19 Oct 2021 09:42:10 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1DE2381C0A;
+	Tue, 19 Oct 2021 10:39:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gSg0fq3LgdnM; Tue, 19 Oct 2021 09:42:10 +0000 (UTC)
+	with ESMTP id sgGPnZ6lEoEI; Tue, 19 Oct 2021 10:39:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A9807831A2;
-	Tue, 19 Oct 2021 09:42:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id AD9AD81B72;
+	Tue, 19 Oct 2021 10:39:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 458D0C000D;
-	Tue, 19 Oct 2021 09:42:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 652D9C000D;
+	Tue, 19 Oct 2021 10:39:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CB85C000D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A7294C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 09:42:08 +0000 (UTC)
+ Tue, 19 Oct 2021 10:39:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3786860690
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6C68360B5E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 09:42:08 +0000 (UTC)
+ Tue, 19 Oct 2021 10:37:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=linaro.org
+ dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8WR0jd98wFfU
+ with ESMTP id IsP7jwRemDLz
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 09:42:06 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
- [IPv6:2607:f8b0:4864:20::42b])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4647D60B00
+ Tue, 19 Oct 2021 10:37:08 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A707360B56
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 09:42:06 +0000 (UTC)
-Received: by mail-pf1-x42b.google.com with SMTP id y7so17116980pfg.8
+ Tue, 19 Oct 2021 10:37:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1634639827;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=cAQsBHydgzMjOzRTPF8Ki+usRko1EEMZbSVZpLxCFAA=;
+ b=R1iBhi83wnc43WqZfNW/0KLxVLgKPrrhJi2qjMoOnc+6GQn0TBndRztzZ+SFIOvJuoiygl
+ JQIwy7C6XvpxBKEY3rn+GoYJkUQ63irt69+MvGz5l8piWwi0HjWAnTVwccqZmuiPoZz/ZY
+ /At1OeH6CqDwe3QQO656cAlPINo2OZs=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-102-vaYTwGw9OvWY8u8vNolbBQ-1; Tue, 19 Oct 2021 06:37:06 -0400
+X-MC-Unique: vaYTwGw9OvWY8u8vNolbBQ-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ s18-20020adfbc12000000b00160b2d4d5ebso10045283wrg.7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 02:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
- h=date:from:to:cc:subject:message-id:references:mime-version
- :content-disposition:in-reply-to:user-agent;
- bh=ZObreM2oofTkM3qJIYvGBPc4dPhqrsVSh4sl9pXqX94=;
- b=gvXmPjPnRSNvISobWg1zZ6bO0AluECpeMJn/Wtis+JgxiwNWlke4JGvx/mqVLqczl8
- 4jegSqD2RFGK0e+025gFJmGB8Qvce8i7b/zZvQ5P1o4tLw1CzTJCwwCocqUq7fuHZO+p
- MysEs4HafXErdZiKjnpU0yu+cum9rB5wSlO9OOgu1EapetCEmzj0NnS7gBq21lAK4Hmb
- us2FlYi0wzPlsPFN+EMKrExs6+LEEyUnmsxebLREjpYBNZbdZXV2nC9luLFkNAXb785e
- VKs72+TSrOMuYyZ1MUsqyan//oK3gDLuHtSMWLNH5V4uXwMqvV5oIPkyMVN3VdplB57K
- d2Ig==
+ Tue, 19 Oct 2021 03:37:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to:user-agent;
- bh=ZObreM2oofTkM3qJIYvGBPc4dPhqrsVSh4sl9pXqX94=;
- b=rmCSlTeyVuVQo9yMMbjLB7WcBzUwAVcIazv0Pv2+77Sko9On/E5Hi/0UCLUSeOF676
- q6GDpCaQI07mo69bxhxyllLXj4kzKJV166I5R0rRyd0KEn2JOQfqfbTp8WfAgP+epNoA
- q1wdNg9NYu97MAbOSZAvIWcKo+5a2dqxNvSYR3D+Z49gdttvEepthukKXKLGq+Pn7mA+
- s170Tsq59LTTex1ClXSJwp/aUW953T7w5FTQAflG+apk2V154scflYqhd4oPtDrwh7JR
- vU2TC8BjKe/BB0XXDIZ0D9QcWcoYSxZtSWA1YbiJoQkLrJEzMlDLa8ere+ZZB4iUc4tC
- UrTw==
-X-Gm-Message-State: AOAM531reV6G275qjia70EBrt4g60urgLJf+Ba9ZOpNV0mxa8Z1IZ/t6
- xm5Ae5VDOJKW1dGE2ixqeISeQA==
-X-Google-Smtp-Source: ABdhPJxcbC3OBgUMO+Lzh3jDx/hudBuFmrzaHwnRyTDEgDNQv+z9BMlhRENFVRvc+ZiQhDZAdCws7A==
-X-Received: by 2002:a63:154:: with SMTP id 81mr27360406pgb.38.1634636525679;
- Tue, 19 Oct 2021 02:42:05 -0700 (PDT)
-Received: from localhost ([106.201.113.61])
- by smtp.gmail.com with ESMTPSA id u4sm2037379pjg.54.2021.10.19.02.42.04
+ :mime-version:content-disposition:content-transfer-encoding
+ :in-reply-to;
+ bh=cAQsBHydgzMjOzRTPF8Ki+usRko1EEMZbSVZpLxCFAA=;
+ b=hVIAoWnEssv/cGp8r4yvvtt2StOit8W1Ap/FOeT6MfHckt9IMxtg+6i6wbtkUHHu2z
+ cxYvpQlS4ffLLqyl6jvM6RCgo4Lp+V3I7dJXmYvQ1fFb/2zzuoJSx6KEBiG3qc670LrR
+ 2zxTKnplMEuadsMrom8h/mWCq0kzw8wUG2SKqU73JQ6Ab09Ee055z3ZBBXb/c36rHSzh
+ fw7iu2FpvGPCyVXGzmZ5YPwruSZnvxOgXplGFNDl2kAgLcWcyCV3aLhAcJyxrXlRzg4u
+ OufZ9sqcq23tSIpY/TPfAcGSAE04vcJ1lg2XzNolx680wM8MnbCMphqLlay6OyrZqpcf
+ ssYQ==
+X-Gm-Message-State: AOAM532psbOKhwdw1SptxHz54VtfVGD4aNxrB/zx+EcVxpNVNRatFctW
+ 0UVDcEdWNKqFq2rSAQJefhURbGLWpnG+3gDJYE0csZnFEOJUeSHB2/yeqOydbzbgXuaKYV2IGhS
+ DWcqSjPyBFCD5Wcacv2C584i7ZeLS35bdVdA7wEo07Q==
+X-Received: by 2002:adf:8b84:: with SMTP id o4mr42842557wra.108.1634639825269; 
+ Tue, 19 Oct 2021 03:37:05 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzVLveMMkJNDyTdvIMAyJyBw2e+/NydmNGsn4YI7SpswnHqSAORSosIXakO0U2k13gdqAkzKg==
+X-Received: by 2002:adf:8b84:: with SMTP id o4mr42842521wra.108.1634639824955; 
+ Tue, 19 Oct 2021 03:37:04 -0700 (PDT)
+Received: from redhat.com ([2.55.24.172])
+ by smtp.gmail.com with ESMTPSA id i13sm2152294wmq.41.2021.10.19.03.37.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 02:42:05 -0700 (PDT)
-Date: Tue, 19 Oct 2021 15:12:03 +0530
-From: Viresh Kumar <viresh.kumar@linaro.org>
-To: Greg KH <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH 1/2] i2c: virtio: disable timeout handling
-Message-ID: <20211019094203.3kjzch7ipbdv7peg@vireshk-i7>
-References: <20211019074647.19061-1-vincent.whitchurch@axis.com>
- <20211019074647.19061-2-vincent.whitchurch@axis.com>
- <20211019080913.oajrvr2msz5enzvz@vireshk-i7>
- <YW6Rj/T6dWfMf7lU@kroah.com>
+ Tue, 19 Oct 2021 03:37:03 -0700 (PDT)
+Date: Tue, 19 Oct 2021 06:37:00 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH] virtio: Introduce a new kick interface
+ virtqueue_kick_try()
+Message-ID: <20211019063009-mutt-send-email-mst@kernel.org>
+References: <fdfca0e9-dd2c-13a2-39ed-b360f7bcb881@redhat.com>
+ <1634631199.0198228-1-xuanzhuo@linux.alibaba.com>
 MIME-Version: 1.0
+In-Reply-To: <1634631199.0198228-1-xuanzhuo@linux.alibaba.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <YW6Rj/T6dWfMf7lU@kroah.com>
-User-Agent: NeoMutt/20180716-391-311a52
-Cc: Vincent Whitchurch <vincent.whitchurch@axis.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- wsa@kernel.org, kernel@axis.com, linux-i2c@vger.kernel.org
+Cc: Jakub Kicinski <kuba@kernel.org>, virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>, netdev@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -101,30 +111,153 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 19-10-21, 11:36, Greg KH wrote:
-> What is the "other side" here?  Is it something that you trust or not?
+On Tue, Oct 19, 2021 at 04:13:19PM +0800, Xuan Zhuo wrote:
+> On Mon, 31 May 2021 14:34:16 +0800, Jason Wang <jasowang@redhat.com> wrot=
+e:
+> >
+> > =D4=DA 2021/5/19 =CF=C2=CE=E77:47, Xuan Zhuo =D0=B4=B5=C0:
+> > > Unlike virtqueue_kick(), virtqueue_kick_try() returns true only when =
+the
+> > > kick is successful. In virtio-net, we want to count the number of kic=
+ks.
+> > > So we need an interface that can perceive whether the kick is actually
+> > > executed.
+> > >
+> > > Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+> >
+> >
+> > Acked-by: Jason Wang <jasowang@redhat.com>
+> =
 
-Other side can be a remote processor (for remoteproc over virtio or
-something similar), or traditionally it can be host OS or host
-firmware providing virtualisation to a Guest running Linux (this
-driver). Or something else..
+> Hi, this patch seems to have not been merged, is there something wrong wi=
+th me?
+> =
 
-I would incline towards "we trust the other side" here.
+> Thanks.
 
-> Usually we trust the hardware, but if you do not trust the hardware,
-> then yes, you need to have a timeout here.
+The commit log does not make it clear, but this is just
+code refactoring. Pls make it clearer in the log.
+Also, if we add a new API like this as a cleanup,
+it needs to be documented much better.
 
-The other side is the software that has access to the _Real_ hardware,
-and so we should trust it. So we can have a actually have a completion
-without timeout here, interesting.
 
--- 
-viresh
+> >
+> > Thanks
+> >
+> >
+> > > ---
+> > >   drivers/net/virtio_net.c     |  8 ++++----
+> > >   drivers/virtio/virtio_ring.c | 20 ++++++++++++++++++++
+> > >   include/linux/virtio.h       |  2 ++
+> > >   3 files changed, 26 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> > > index 9b6a4a875c55..167697030cb6 100644
+> > > --- a/drivers/net/virtio_net.c
+> > > +++ b/drivers/net/virtio_net.c
+> > > @@ -617,7 +617,7 @@ static int virtnet_xdp_xmit(struct net_device *de=
+v,
+> > >   	ret =3D nxmit;
+> > >
+> > >   	if (flags & XDP_XMIT_FLUSH) {
+> > > -		if (virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq))
+> > > +		if (virtqueue_kick_try(sq->vq))
+> > >   			kicks =3D 1;
+> > >   	}
+> > >   out:
+> > > @@ -1325,7 +1325,7 @@ static bool try_fill_recv(struct virtnet_info *=
+vi, struct receive_queue *rq,
+> > >   		if (err)
+> > >   			break;
+> > >   	} while (rq->vq->num_free);
+> > > -	if (virtqueue_kick_prepare(rq->vq) && virtqueue_notify(rq->vq)) {
+> > > +	if (virtqueue_kick_try(rq->vq)) {
+> > >   		unsigned long flags;
+> > >
+> > >   		flags =3D u64_stats_update_begin_irqsave(&rq->stats.syncp);
+> > > @@ -1533,7 +1533,7 @@ static int virtnet_poll(struct napi_struct *nap=
+i, int budget)
+> > >
+> > >   	if (xdp_xmit & VIRTIO_XDP_TX) {
+> > >   		sq =3D virtnet_xdp_get_sq(vi);
+> > > -		if (virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq)) {
+> > > +		if (virtqueue_kick_try(sq->vq)) {
+> > >   			u64_stats_update_begin(&sq->stats.syncp);
+> > >   			sq->stats.kicks++;
+> > >   			u64_stats_update_end(&sq->stats.syncp);
+> > > @@ -1710,7 +1710,7 @@ static netdev_tx_t start_xmit(struct sk_buff *s=
+kb, struct net_device *dev)
+> > >   	}
+> > >
+> > >   	if (kick || netif_xmit_stopped(txq)) {
+> > > -		if (virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq)) {
+> > > +		if (virtqueue_kick_try(sq->vq)) {
+> > >   			u64_stats_update_begin(&sq->stats.syncp);
+> > >   			sq->stats.kicks++;
+> > >   			u64_stats_update_end(&sq->stats.syncp);
+> > > diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_rin=
+g.c
+> > > index 71e16b53e9c1..1462be756875 100644
+> > > --- a/drivers/virtio/virtio_ring.c
+> > > +++ b/drivers/virtio/virtio_ring.c
+> > > @@ -1874,6 +1874,26 @@ bool virtqueue_kick(struct virtqueue *vq)
+> > >   }
+> > >   EXPORT_SYMBOL_GPL(virtqueue_kick);
+> > >
+> > > +/**
+> > > + * virtqueue_kick_try - try update after add_buf
+> > > + * @vq: the struct virtqueue
+> > > + *
+> > > + * After one or more virtqueue_add_* calls, invoke this to kick
+> > > + * the other side.
+> > > + *
+> > > + * Caller must ensure we don't call this with other virtqueue
+> > > + * operations at the same time (except where noted).
+> > > + *
+> > > + * Returns true if kick success, otherwise false.
+
+on a successful kick?
+
+> > > + */
+
+I don't really understand what this is doing, the comment
+doesn't seem to explain. Try implies it might fail to update.
+
+virtqueue_kick seems to be documented the same:
+ * Returns false if kick failed, otherwise true.
+
+
+> > > +bool virtqueue_kick_try(struct virtqueue *vq)
+> > > +{
+> > > +	if (virtqueue_kick_prepare(vq) && virtqueue_notify(vq))
+> > > +		return true;
+> > > +	return false;
+> > > +}
+> > > +EXPORT_SYMBOL_GPL(virtqueue_kick_try);
+> > > +
+> > >   /**
+> > >    * virtqueue_get_buf - get the next used buffer
+> > >    * @_vq: the struct virtqueue we're talking about.
+> > > diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+> > > index b1894e0323fa..45cd6a0af24d 100644
+> > > --- a/include/linux/virtio.h
+> > > +++ b/include/linux/virtio.h
+> > > @@ -59,6 +59,8 @@ int virtqueue_add_sgs(struct virtqueue *vq,
+> > >
+> > >   bool virtqueue_kick(struct virtqueue *vq);
+> > >
+> > > +bool virtqueue_kick_try(struct virtqueue *vq);
+> > > +
+> > >   bool virtqueue_kick_prepare(struct virtqueue *vq);
+> > >
+> > >   bool virtqueue_notify(struct virtqueue *vq);
+> >
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
