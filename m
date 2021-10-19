@@ -1,68 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 100E943300F
-	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 09:47:31 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4EEF94330CC
+	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 10:09:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 62D5D60B26;
-	Tue, 19 Oct 2021 07:47:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id B4C6A60B16;
+	Tue, 19 Oct 2021 08:09:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R2lyifWd__EG; Tue, 19 Oct 2021 07:47:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 1344460B22;
-	Tue, 19 Oct 2021 07:47:28 +0000 (UTC)
+	with ESMTP id rZsdZRAPkoZ9; Tue, 19 Oct 2021 08:09:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6E4E360B2A;
+	Tue, 19 Oct 2021 08:09:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 11E53C0027;
-	Tue, 19 Oct 2021 07:47:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 09A2AC0026;
+	Tue, 19 Oct 2021 08:09:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 87CDFC000D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0B9E6C0026
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:47:25 +0000 (UTC)
+ Tue, 19 Oct 2021 08:09:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 69F1D81D2D
+ by smtp2.osuosl.org (Postfix) with ESMTP id EDD42404CC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:47:25 +0000 (UTC)
+ Tue, 19 Oct 2021 08:09:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=axis.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id abZQMLwBwOR9
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=linaro.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 15DI0UjWPkt0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:47:24 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DC11F81AEF
+ Tue, 19 Oct 2021 08:09:16 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DC28C404CF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:47:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=axis.com; q=dns/txt; s=axis-central1; t=1634629643;
- x=1666165643; h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=3iS2Wp/ND5XNFRfvGFe/o/oh4xpyxMXQnejsY854Ups=;
- b=K6eOfVmwvIANOvpwbof5NFI0idkv68sucMyHM1KwJTL0FSgUNVE0+hyb
- UuKEFgp57jV4VPmy22hRgrsaojZTgKdj9WnPhK70iO9MSMF+2aSaIFOoJ
- DvOChXvknA9+VQ9oAFA2gPfBTM8DX6uK0Gk5AVc4rXGOlAqQ911so8+gz
- AbCez1SSvyjTknBgmsSUGzUmHk6wFJCWFEvI2mdBafFkz2qN4ESQvWRQQ
- Y/TU63XQ2braYkJRDMQQ7cV62HP1RqrM/b795sg81AdpaP+ydH0tfHSTl
- TqXNv8+RX5CqDAwnds5aMQENodBKjqBihJb8TcXVNAZgWyi2fzC5Adphf g==;
-From: Vincent Whitchurch <vincent.whitchurch@axis.com>
-To: <wsa@kernel.org>, <jie.deng@intel.com>, <viresh.kumar@linaro.org>
-Subject: [PATCH 2/2] i2c: virtio: fix completion handling
-Date: Tue, 19 Oct 2021 09:46:47 +0200
-Message-ID: <20211019074647.19061-3-vincent.whitchurch@axis.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20211019074647.19061-1-vincent.whitchurch@axis.com>
+ Tue, 19 Oct 2021 08:09:16 +0000 (UTC)
+Received: by mail-pf1-x42f.google.com with SMTP id o133so16932155pfg.7
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 19 Oct 2021 01:09:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+ h=date:from:to:cc:subject:message-id:references:mime-version
+ :content-disposition:in-reply-to:user-agent;
+ bh=gj+IjdwtpSoU7uXOoxinPHHGnAi13nWqEOcSDstepQk=;
+ b=F3ZWHZrZGIo4fL4XNTI5PKIk2fc+8OHzj4mZeLmgAUHn+40G6TRfdl2q2peQ5dX1d0
+ boz4hwjWY4imzL3aipUGIUhwrTsMIoelvjqp2GMEret6+qnUsBIkXhnEFuWfcFViizgr
+ 7gmo1RJcAJPGc4HvDfxxjYTDiGnN79mSlhkSI0gB8HfT5T0rnkZW6STiavTMFf2hAyva
+ u7/ZW8iRALoIpfm2vMxhveqHSO8N9PwWBMnc6k+tc4qEkE8sH4CkhmpF9n1NtgFzDwe6
+ Ms9VJGvhA+4cJ97hJRAHKYgtghKmyVTJD563R2hhbAYD5bhImnMygnxjASZFmIu2niRi
+ a4MQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to:user-agent;
+ bh=gj+IjdwtpSoU7uXOoxinPHHGnAi13nWqEOcSDstepQk=;
+ b=iV5wDAYS+lWDEDL4hZXsx/8bdtAWojEvx0tTJFtS40ZixbKKvCTuMboKKAaIjq+vHe
+ 99U4ZFbleoOETVniydlYkdVdEWZcNZzBfwdI/HUGxHDGg1/mxfgb53TiryIdGN1bBsZz
+ f7AcqOsXHT8ntKlAxoucE39iPMLYu0D4AzqyCIg3YD/Kc2v84SNBa6ZHk7Q4QKhD33e9
+ 1+hOhDarALCsaknr8IE1vHMT7peI29PmjLpx9xVE93Mn5r/215ISvtDEzOeBy7wbz7Pm
+ coPmbUZOh6RQCgBzlSpzkG0ESeVbg/RnKXjbNwYtomWpDybFhImEUKHzVtOjgaczwHhD
+ ISlg==
+X-Gm-Message-State: AOAM530kucjTOHMVceM3P4PEqpIvagzAW7BtN1g6fD9vdivjECHDB+9n
+ YAXV/qngZUnn0WaCJmCl/6Tywg==
+X-Google-Smtp-Source: ABdhPJz5JKUnGVnJdr/vOWsWzz9hNwGVMVhXP2Wre7zIFrVbrX2b84fVwC13u/6EoqaE4W9pCK83xA==
+X-Received: by 2002:a63:7b1e:: with SMTP id w30mr8237662pgc.464.1634630956083; 
+ Tue, 19 Oct 2021 01:09:16 -0700 (PDT)
+Received: from localhost ([106.201.113.61])
+ by smtp.gmail.com with ESMTPSA id ls7sm1831782pjb.16.2021.10.19.01.09.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 19 Oct 2021 01:09:14 -0700 (PDT)
+Date: Tue, 19 Oct 2021 13:39:13 +0530
+From: Viresh Kumar <viresh.kumar@linaro.org>
+To: Vincent Whitchurch <vincent.whitchurch@axis.com>,
+ gregkh@linuxfoundation.org
+Subject: Re: [PATCH 1/2] i2c: virtio: disable timeout handling
+Message-ID: <20211019080913.oajrvr2msz5enzvz@vireshk-i7>
 References: <20211019074647.19061-1-vincent.whitchurch@axis.com>
+ <20211019074647.19061-2-vincent.whitchurch@axis.com>
 MIME-Version: 1.0
-Cc: linux-kernel@vger.kernel.org,
- Vincent Whitchurch <vincent.whitchurch@axis.com>, kernel@axis.com,
- linux-i2c@vger.kernel.org, virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <20211019074647.19061-2-vincent.whitchurch@axis.com>
+User-Agent: NeoMutt/20180716-391-311a52
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ wsa@kernel.org, kernel@axis.com, linux-i2c@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,150 +104,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The driver currently assumes that the notify callback is only received
-when the device is done with all the queued buffers.
++Greg.
 
-However, this is not true, since the notify callback could be called
-without any of the queued buffers being completed (for example, with
-virtio-pci and shared interrupts) or with only some of the buffers being
-completed (since the driver makes them available to the device in
-multiple separate virtqueue_add_sgs() calls).
+On 19-10-21, 09:46, Vincent Whitchurch wrote:
+> If a timeout is hit, it can result is incorrect data on the I2C bus
+> and/or memory corruptions in the guest since the device can still be
+> operating on the buffers it was given while the guest has freed them.
+> 
+> Here is, for example, the start of a slub_debug splat which was
+> triggered on the next transfer after one transfer was forced to timeout
+> by setting a breakpoint in the backend (rust-vmm/vhost-device):
+> 
+>  BUG kmalloc-1k (Not tainted): Poison overwritten
+>  First byte 0x1 instead of 0x6b
+>  Allocated in virtio_i2c_xfer+0x65/0x35c age=350 cpu=0 pid=29
+>  	__kmalloc+0xc2/0x1c9
+>  	virtio_i2c_xfer+0x65/0x35c
+>  	__i2c_transfer+0x429/0x57d
+>  	i2c_transfer+0x115/0x134
+>  	i2cdev_ioctl_rdwr+0x16a/0x1de
+>  	i2cdev_ioctl+0x247/0x2ed
+>  	vfs_ioctl+0x21/0x30
+>  	sys_ioctl+0xb18/0xb41
+>  Freed in virtio_i2c_xfer+0x32e/0x35c age=244 cpu=0 pid=29
+>  	kfree+0x1bd/0x1cc
+>  	virtio_i2c_xfer+0x32e/0x35c
+>  	__i2c_transfer+0x429/0x57d
+>  	i2c_transfer+0x115/0x134
+>  	i2cdev_ioctl_rdwr+0x16a/0x1de
+>  	i2cdev_ioctl+0x247/0x2ed
+>  	vfs_ioctl+0x21/0x30
+>  	sys_ioctl+0xb18/0xb41
+> 
+> There is no simple fix for this (the driver would have to always create
+> bounce buffers and hold on to them until the device eventually returns
+> the buffers), so just disable the timeout support for now.
 
-This can lead to incorrect data on the I2C bus or memory corruption in
-the guest if the device operates on buffers which are have been freed by
-the driver.  (The WARN_ON in the driver is also triggered.)
+That is a very valid problem, and I have faced it too when my QEMU
+setup is very slow :)
 
- BUG kmalloc-128 (Tainted: G        W        ): Poison overwritten
- First byte 0x0 instead of 0x6b
- Allocated in i2cdev_ioctl_rdwr+0x9d/0x1de age=243 cpu=0 pid=28
- 	memdup_user+0x2e/0xbd
- 	i2cdev_ioctl_rdwr+0x9d/0x1de
- 	i2cdev_ioctl+0x247/0x2ed
- 	vfs_ioctl+0x21/0x30
- 	sys_ioctl+0xb18/0xb41
- Freed in i2cdev_ioctl_rdwr+0x1bb/0x1de age=68 cpu=0 pid=28
- 	kfree+0x1bd/0x1cc
- 	i2cdev_ioctl_rdwr+0x1bb/0x1de
- 	i2cdev_ioctl+0x247/0x2ed
- 	vfs_ioctl+0x21/0x30
- 	sys_ioctl+0xb18/0xb41
+> Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
+> ---
+>  drivers/i2c/busses/i2c-virtio.c | 14 +++++---------
+>  1 file changed, 5 insertions(+), 9 deletions(-)
+> 
+> diff --git a/drivers/i2c/busses/i2c-virtio.c b/drivers/i2c/busses/i2c-virtio.c
+> index f10a603b13fb..7b2474e6876f 100644
+> --- a/drivers/i2c/busses/i2c-virtio.c
+> +++ b/drivers/i2c/busses/i2c-virtio.c
+> @@ -106,11 +106,10 @@ static int virtio_i2c_prepare_reqs(struct virtqueue *vq,
+>  
+>  static int virtio_i2c_complete_reqs(struct virtqueue *vq,
+>  				    struct virtio_i2c_req *reqs,
+> -				    struct i2c_msg *msgs, int num,
+> -				    bool timedout)
+> +				    struct i2c_msg *msgs, int num)
+>  {
+>  	struct virtio_i2c_req *req;
+> -	bool failed = timedout;
+> +	bool failed = false;
+>  	unsigned int len;
+>  	int i, j = 0;
+>  
+> @@ -132,7 +131,7 @@ static int virtio_i2c_complete_reqs(struct virtqueue *vq,
+>  			j++;
+>  	}
+>  
+> -	return timedout ? -ETIMEDOUT : j;
+> +	return j;
+>  }
+>  
+>  static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+> @@ -141,7 +140,6 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+>  	struct virtio_i2c *vi = i2c_get_adapdata(adap);
+>  	struct virtqueue *vq = vi->vq;
+>  	struct virtio_i2c_req *reqs;
+> -	unsigned long time_left;
+>  	int count;
+>  
+>  	reqs = kcalloc(num, sizeof(*reqs), GFP_KERNEL);
+> @@ -164,11 +162,9 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+>  	reinit_completion(&vi->completion);
+>  	virtqueue_kick(vq);
+>  
+> -	time_left = wait_for_completion_timeout(&vi->completion, adap->timeout);
+> -	if (!time_left)
+> -		dev_err(&adap->dev, "virtio i2c backend timeout.\n");
+> +	wait_for_completion(&vi->completion);
 
-Fix this by calling virtio_get_buf() from the notify handler like other
-virtio drivers and by actually waiting for all the buffers to be
-completed.
+Doing this may not be a good thing based on the kernel rules I have
+understood until now. Maybe Greg and Wolfram can clarify on this.
 
-Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
----
- drivers/i2c/busses/i2c-virtio.c | 34 +++++++++++++++------------------
- 1 file changed, 15 insertions(+), 19 deletions(-)
+We are waiting here for an external entity (Host kernel) or a firmware
+that uses virtio for transport. If the other side is hacked, it can
+make the kernel hang here for ever. I thought that is something that
+the kernel should never do.
 
-diff --git a/drivers/i2c/busses/i2c-virtio.c b/drivers/i2c/busses/i2c-virtio.c
-index 7b2474e6876f..2d3ae8e238ec 100644
---- a/drivers/i2c/busses/i2c-virtio.c
-+++ b/drivers/i2c/busses/i2c-virtio.c
-@@ -22,24 +22,24 @@
- /**
-  * struct virtio_i2c - virtio I2C data
-  * @vdev: virtio device for this controller
-- * @completion: completion of virtio I2C message
-  * @adap: I2C adapter for this controller
-  * @vq: the virtio virtqueue for communication
-  */
- struct virtio_i2c {
- 	struct virtio_device *vdev;
--	struct completion completion;
- 	struct i2c_adapter adap;
- 	struct virtqueue *vq;
- };
- 
- /**
-  * struct virtio_i2c_req - the virtio I2C request structure
-+ * @completion: completion of virtio I2C message
-  * @out_hdr: the OUT header of the virtio I2C message
-  * @buf: the buffer into which data is read, or from which it's written
-  * @in_hdr: the IN header of the virtio I2C message
-  */
- struct virtio_i2c_req {
-+	struct completion completion;
- 	struct virtio_i2c_out_hdr out_hdr	____cacheline_aligned;
- 	uint8_t *buf				____cacheline_aligned;
- 	struct virtio_i2c_in_hdr in_hdr		____cacheline_aligned;
-@@ -47,9 +47,11 @@ struct virtio_i2c_req {
- 
- static void virtio_i2c_msg_done(struct virtqueue *vq)
- {
--	struct virtio_i2c *vi = vq->vdev->priv;
-+	struct virtio_i2c_req *req;
-+	unsigned int len;
- 
--	complete(&vi->completion);
-+	while ((req = virtqueue_get_buf(vq, &len)))
-+		complete(&req->completion);
- }
- 
- static int virtio_i2c_prepare_reqs(struct virtqueue *vq,
-@@ -69,6 +71,8 @@ static int virtio_i2c_prepare_reqs(struct virtqueue *vq,
- 		if (!msgs[i].len)
- 			break;
- 
-+		init_completion(&reqs[i].completion);
-+
- 		/*
- 		 * Only 7-bit mode supported for this moment. For the address
- 		 * format, Please check the Virtio I2C Specification.
-@@ -108,21 +112,13 @@ static int virtio_i2c_complete_reqs(struct virtqueue *vq,
- 				    struct virtio_i2c_req *reqs,
- 				    struct i2c_msg *msgs, int num)
- {
--	struct virtio_i2c_req *req;
- 	bool failed = false;
--	unsigned int len;
- 	int i, j = 0;
- 
- 	for (i = 0; i < num; i++) {
--		/* Detach the ith request from the vq */
--		req = virtqueue_get_buf(vq, &len);
-+		struct virtio_i2c_req *req = &reqs[i];
- 
--		/*
--		 * Condition req == &reqs[i] should always meet since we have
--		 * total num requests in the vq. reqs[i] can never be NULL here.
--		 */
--		if (!failed && (WARN_ON(req != &reqs[i]) ||
--				req->in_hdr.status != VIRTIO_I2C_MSG_OK))
-+		if (!failed && req->in_hdr.status != VIRTIO_I2C_MSG_OK)
- 			failed = true;
- 
- 		i2c_put_dma_safe_msg_buf(reqs[i].buf, &msgs[i], !failed);
-@@ -158,11 +154,13 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
- 	 * remote here to clear the virtqueue, so we can try another set of
- 	 * messages later on.
- 	 */
--
--	reinit_completion(&vi->completion);
- 	virtqueue_kick(vq);
- 
--	wait_for_completion(&vi->completion);
-+	/*
-+	 * We only need to wait for the last one since the device is required
-+	 * to complete requests in order.
-+	 */
-+	wait_for_completion(&reqs[count - 1].completion);
- 
- 	count = virtio_i2c_complete_reqs(vq, reqs, msgs, count);
- 
-@@ -211,8 +209,6 @@ static int virtio_i2c_probe(struct virtio_device *vdev)
- 	vdev->priv = vi;
- 	vi->vdev = vdev;
- 
--	init_completion(&vi->completion);
--
- 	ret = virtio_i2c_setup_vqs(vi);
- 	if (ret)
- 		return ret;
 -- 
-2.28.0
-
+viresh
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
