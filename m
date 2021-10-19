@@ -1,77 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04539432EE9
-	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 09:04:39 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id D4228432EED
+	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 09:04:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9DD5960B05;
-	Tue, 19 Oct 2021 07:04:37 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 787E1404CC;
+	Tue, 19 Oct 2021 07:04:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id K9gXpoHrk8pU; Tue, 19 Oct 2021 07:04:37 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9neKnFSXdS1R; Tue, 19 Oct 2021 07:04:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id A2D1360B0E;
-	Tue, 19 Oct 2021 07:04:36 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0F8AD404D4;
+	Tue, 19 Oct 2021 07:04:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5A43DC000D;
-	Tue, 19 Oct 2021 07:04:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A18ADC000D;
+	Tue, 19 Oct 2021 07:04:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7CB2FC000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A3AEDC000D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:04:34 +0000 (UTC)
+ Tue, 19 Oct 2021 07:04:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6C22A406FF
+ by smtp4.osuosl.org (Postfix) with ESMTP id 863D5406FF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:04:34 +0000 (UTC)
+ Tue, 19 Oct 2021 07:04:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p2FiSY66DxVa
+ with ESMTP id Bp9W-IkNFPKv
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:04:33 +0000 (UTC)
+ Tue, 19 Oct 2021 07:04:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C1C2E40637
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D2E8D40709
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 07:04:33 +0000 (UTC)
+ Tue, 19 Oct 2021 07:04:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634627072;
+ s=mimecast20190719; t=1634627079;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jDUxMJIQblVWX+exZQfHW/3h1Wf0cvLtDt87iczI3gQ=;
- b=HwTyp898uYtEj2hJF64O47cRrhC9wdePjs8z7j1J8Gem7WJQg82IeSaPChwAbWec0h6VSE
- 71zc4e+/z8LjU+mKgbKoLzT4usQAyV+vXkmwpfuBwDmzIYFWYka3qZ65B+p40UB49X6tXl
- IqMQBGMXn71q3VkYSs0m1Eon+cWw+QA=
+ bh=u4ZEbvg7oEYYUD2ibjTD8FB3m/85lGGvSci9qwvJyJA=;
+ b=SZrj+mjq8XuAX7pS96nR/dsAG72YrPe5V714bxeNyfdh0eWpou4b6uryrTy4JvWHg8xVjs
+ nlNhvJP/IvGJ3AhoZE1bZMbm34jay9DsAC+fNchtDiMobcpP1QkmaJ+CdTatRzFbc2grmT
+ SyZ+rx8p/ohl5z0Spn1d4o/RqKSQMbI=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-386-bjnOU663OTypF7ZNG_xhyg-1; Tue, 19 Oct 2021 03:04:31 -0400
-X-MC-Unique: bjnOU663OTypF7ZNG_xhyg-1
+ us-mta-595-wFVDh-coPbaMyZbphPmAWA-1; Tue, 19 Oct 2021 03:04:34 -0400
+X-MC-Unique: wFVDh-coPbaMyZbphPmAWA-1
 Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com
  [10.5.11.13])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4BC7780A5C4;
- Tue, 19 Oct 2021 07:04:30 +0000 (UTC)
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6A46C18414A7;
+ Tue, 19 Oct 2021 07:04:33 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-12-155.pek2.redhat.com
  [10.72.12.155])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 7B02670956;
- Tue, 19 Oct 2021 07:04:22 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CE3A970886;
+ Tue, 19 Oct 2021 07:04:30 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH V3 09/10] virtio-blk: don't let virtio core to validate used
- length
-Date: Tue, 19 Oct 2021 15:01:51 +0800
-Message-Id: <20211019070152.8236-10-jasowang@redhat.com>
+Subject: [PATCH V3 10/10] virtio-scsi: don't let virtio core to validate used
+ buffer length
+Date: Tue, 19 Oct 2021 15:01:52 +0800
+Message-Id: <20211019070152.8236-11-jasowang@redhat.com>
 In-Reply-To: <20211019070152.8236-1-jasowang@redhat.com>
 References: <20211019070152.8236-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -100,21 +100,21 @@ core from validating used length.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/block/virtio_blk.c | 1 +
+ drivers/scsi/virtio_scsi.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 10bc0879e618..6f19dcb7c3aa 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -1010,6 +1010,7 @@ static struct virtio_driver virtio_blk = {
- 	.feature_table_size		= ARRAY_SIZE(features),
- 	.feature_table_legacy		= features_legacy,
- 	.feature_table_size_legacy	= ARRAY_SIZE(features_legacy),
-+	.suppress_used_validation	= true,
- 	.driver.name			= KBUILD_MODNAME,
- 	.driver.owner			= THIS_MODULE,
- 	.id_table			= id_table,
+diff --git a/drivers/scsi/virtio_scsi.c b/drivers/scsi/virtio_scsi.c
+index c25ce8f0e0af..be7870a092cf 100644
+--- a/drivers/scsi/virtio_scsi.c
++++ b/drivers/scsi/virtio_scsi.c
+@@ -977,6 +977,7 @@ static unsigned int features[] = {
+ static struct virtio_driver virtio_scsi_driver = {
+ 	.feature_table = features,
+ 	.feature_table_size = ARRAY_SIZE(features),
++	.suppress_used_validation = true,
+ 	.driver.name = KBUILD_MODNAME,
+ 	.driver.owner = THIS_MODULE,
+ 	.id_table = id_table,
 -- 
 2.25.1
 
