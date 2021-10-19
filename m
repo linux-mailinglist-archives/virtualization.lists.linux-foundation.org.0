@@ -1,103 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 19D404333AB
-	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 12:38:40 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67C0B433406
+	for <lists.virtualization@lfdr.de>; Tue, 19 Oct 2021 12:57:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A158960B5B;
-	Tue, 19 Oct 2021 10:38:38 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id AD922404EB;
+	Tue, 19 Oct 2021 10:57:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AxtxfvVpthXR; Tue, 19 Oct 2021 10:38:37 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 7B53460B7A;
-	Tue, 19 Oct 2021 10:38:37 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9XmtLlCAv4v0; Tue, 19 Oct 2021 10:57:06 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 349A4404EE;
+	Tue, 19 Oct 2021 10:57:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EC9C2C0024;
-	Tue, 19 Oct 2021 10:38:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C3B42C000D;
+	Tue, 19 Oct 2021 10:57:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C3882C000D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 44C85C000D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 10:38:35 +0000 (UTC)
+ Tue, 19 Oct 2021 10:57:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id A406040117
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2C87640760
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 10:38:35 +0000 (UTC)
+ Tue, 19 Oct 2021 10:57:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YnX8fWfoeQqk
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ZDTiwq0ltLJD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 10:38:34 +0000 (UTC)
+ Tue, 19 Oct 2021 10:57:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A177E4025D
+Received: from out30-42.freemail.mail.aliyun.com
+ (out30-42.freemail.mail.aliyun.com [115.124.30.42])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B62C14075F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 10:38:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1634639913;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Cwc5gH8dqOaYSCVX9S0ahR6ofa7v5M3UCjae7Uj61l8=;
- b=auxq5+enTsvtnB+V5fW+eryvMWnDC8cd6Y9XKFgjIdVQJJIwWUgIKGb1P/mt0tGbyLaluk
- 8sBsiLTBEVmRsSdHalXea9YPc8ahQBTba+0SK2v4H22KAias1NiAZkCU88ARQvz8G40Pc8
- 3Rb2spYiZfLw5ud9Z3U83ZJZM8b4KWM=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-447-mnRJbcoDM_6tFZfxo3971A-1; Tue, 19 Oct 2021 06:38:32 -0400
-X-MC-Unique: mnRJbcoDM_6tFZfxo3971A-1
-Received: by mail-wr1-f71.google.com with SMTP id
- r16-20020adfb1d0000000b00160bf8972ceso9980854wra.13
- for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Oct 2021 03:38:32 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=Cwc5gH8dqOaYSCVX9S0ahR6ofa7v5M3UCjae7Uj61l8=;
- b=r68E9YJsD0fs5tZiBzZlsyfy38OqirBZmi+OlVQuDMuT3Ie+bkrAp5K1LbWjAl+6p0
- GkgB0FXiwdym7oZhTPsgABUfX1j43fVTGSFKMRFuBMUW0/Rb09ApY4GzisEUPnm94fZd
- W/mdNo4MLc76fdnWrs2GdoUHCxgB90PKAoQkhFCAifu30SlVs9qRWF98BW1DKHtLr5Xx
- fqXWxxWV7g5r3C73KaMXXELGkLG/ZOzlT1q+7yOxwQC2AH1ZDkGZ18fj1G74sDMB/cXg
- oi1i/R/lIXRU3YLRgDi9OOLWhlsA5COp8Mb8LfwJZxU8jiX79TsZ+a+h2CIz1d5uZPr0
- 6yug==
-X-Gm-Message-State: AOAM531T0fo1pbNXNfuvXUlOrEzdFsfCKi8SskW6QGKpdb6xfRTl7gE+
- Ccjr3nzFybkqQN85GLS554KklMGQ7Al7A2b6OWjBGaywqnTHlEYo6RFp22AOSgu7MIlGWcMY+EZ
- QN07KUdPl4OolFh6PDb1WwzxTSRcbiT2EiYRtwuY9oA==
-X-Received: by 2002:a1c:9857:: with SMTP id a84mr5030930wme.28.1634639911071; 
- Tue, 19 Oct 2021 03:38:31 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyQQtHoL+g3a4z51tzLIgc/14qDaK1jCyrUhxBQxa1alm68+TkhmzXNHKofzIyIdXCnXMX0VA==
-X-Received: by 2002:a1c:9857:: with SMTP id a84mr5030910wme.28.1634639910847; 
- Tue, 19 Oct 2021 03:38:30 -0700 (PDT)
-Received: from redhat.com ([2.55.24.172])
- by smtp.gmail.com with ESMTPSA id r5sm1810291wmh.28.2021.10.19.03.38.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Oct 2021 03:38:30 -0700 (PDT)
-Date: Tue, 19 Oct 2021 06:38:27 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH v2 1/2] virtio_ring: fix style of
- virtqueue_add_indirect_packed
-Message-ID: <20211019063754-mutt-send-email-mst@kernel.org>
-References: <CACGkMEvA4GjbFyftndGVAWnPWP6pMy4o35xKtVhrjmmNE-uLvA@mail.gmail.com>
- <1634631341.208131-2-xuanzhuo@linux.alibaba.com>
+ Tue, 19 Oct 2021 10:57:02 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R771e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04407; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=5; SR=0; TI=SMTPD_---0UsvUg2k_1634641017; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0UsvUg2k_1634641017) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 19 Oct 2021 18:56:57 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>,
+ virtualization@lists.linux-foundation.org
+Subject: [PATCH v3 0/2] virtio_ring: check desc == NULL when packed and
+ indirect
+Date: Tue, 19 Oct 2021 18:56:55 +0800
+Message-Id: <20211019105657.9108-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-In-Reply-To: <1634631341.208131-2-xuanzhuo@linux.alibaba.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "David S. Miller" <davem@davemloft.net>, Tiwei Bie <tiwei.bie@intel.com>,
- virtualization <virtualization@lists.linux-foundation.org>
+Cc: "David S. Miller" <davem@davemloft.net>, Tiwei Bie <tiwei.bie@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -114,59 +71,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Oct 19, 2021 at 04:15:41PM +0800, Xuan Zhuo wrote:
-> On Tue, 28 Sep 2021 11:14:47 +0800, Jason Wang <jasowang@redhat.com> wrote:
-> > On Mon, Sep 27, 2021 at 6:54 PM Xuan Zhuo <xuanzhuo@linux.alibaba.com> wrote:
-> > >
-> > > Fix the style problem of virtqueue_add_indirect_packed(). The next patch
-> > > involves the modification of this function.
-> > >
-> > > Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-> > > ---
-> > >  drivers/virtio/virtio_ring.c | 12 ++++++------
-> > >  1 file changed, 6 insertions(+), 6 deletions(-)
-> >
-> > Acked-by: Jason Wang <jasowang@redhat.com>
-> 
-> Hi, this patch set seems to have not been merged, is there something wrong with me?
-> 
-> Thanks.
+In the case of packed, use indirect desc, since desc is allocated by
+kmalloc_array(), we should check whether its return value is NULL.
 
-there's no problem as such. something like
+This patch alloc desc inside virtqueue_add_packe(), if desc == NULL,
+fall back to not using indirect.
 
-"align arguments to the open ( to make it look prettier"
-would be more correct.
+v3:
+    Update commit message of the #1 patch.
 
+v2:
+    Separate the style fix into a single patch.
 
-> >
-> > >
-> > > diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-> > > index dd95dfd85e98..91a46c4da87d 100644
-> > > --- a/drivers/virtio/virtio_ring.c
-> > > +++ b/drivers/virtio/virtio_ring.c
-> > > @@ -1050,12 +1050,12 @@ static struct vring_packed_desc *alloc_indirect_packed(unsigned int total_sg,
-> > >  }
-> > >
-> > >  static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
-> > > -                                      struct scatterlist *sgs[],
-> > > -                                      unsigned int total_sg,
-> > > -                                      unsigned int out_sgs,
-> > > -                                      unsigned int in_sgs,
-> > > -                                      void *data,
-> > > -                                      gfp_t gfp)
-> > > +                                        struct scatterlist *sgs[],
-> > > +                                        unsigned int total_sg,
-> > > +                                        unsigned int out_sgs,
-> > > +                                        unsigned int in_sgs,
-> > > +                                        void *data,
-> > > +                                        gfp_t gfp)
-> > >  {
-> > >         struct vring_packed_desc *desc;
-> > >         struct scatterlist *sg;
-> > > --
-> > > 2.31.0
-> > >
-> >
+Xuan Zhuo (2):
+  virtio_ring: fix style of virtqueue_add_indirect_packed
+  virtio_ring: check desc == NULL when packed and indirect
+
+ drivers/virtio/virtio_ring.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
+
+--
+2.31.0
 
 _______________________________________________
 Virtualization mailing list
