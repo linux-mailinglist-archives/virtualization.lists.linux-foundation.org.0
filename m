@@ -1,62 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 42BEB4349B7
-	for <lists.virtualization@lfdr.de>; Wed, 20 Oct 2021 13:06:12 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD8344349D6
+	for <lists.virtualization@lfdr.de>; Wed, 20 Oct 2021 13:11:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 61C516080D;
-	Wed, 20 Oct 2021 11:06:10 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 73A87401AF;
+	Wed, 20 Oct 2021 11:11:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vdmA-OjEJalS; Wed, 20 Oct 2021 11:06:05 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tjH6oK3z1pnr; Wed, 20 Oct 2021 11:11:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 73BAF60C10;
-	Wed, 20 Oct 2021 11:06:05 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id C858440560;
+	Wed, 20 Oct 2021 11:11:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 59CC0C0011;
-	Wed, 20 Oct 2021 11:06:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 57B72C0022;
+	Wed, 20 Oct 2021 11:11:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D8761C000D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2DAB9C000D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Oct 2021 11:06:03 +0000 (UTC)
+ Wed, 20 Oct 2021 11:11:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A739840234
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0CCB54028A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Oct 2021 11:06:03 +0000 (UTC)
+ Wed, 20 Oct 2021 11:11:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xQTr1xMem5aH
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id D5se8YICkQkR
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Oct 2021 11:05:58 +0000 (UTC)
+ Wed, 20 Oct 2021 11:11:04 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7F7F1402C6
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BAE8F401AF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Oct 2021 11:05:58 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04395; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=5; SR=0; TI=SMTPD_---0Ut2BxwF_1634727953; 
+ Wed, 20 Oct 2021 11:11:03 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=5; SR=0; TI=SMTPD_---0Ut2XClz_1634728250; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Ut2BxwF_1634727953) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 20 Oct 2021 19:05:53 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org
-Subject: [PATCH v5 2/2] virtio_ring: check desc == NULL when using indirect
- with packed
-Date: Wed, 20 Oct 2021 19:05:51 +0800
-Message-Id: <20211020110551.37358-3-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20211020110551.37358-1-xuanzhuo@linux.alibaba.com>
-References: <20211020110551.37358-1-xuanzhuo@linux.alibaba.com>
+ fp:SMTPD_---0Ut2XClz_1634728250) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 20 Oct 2021 19:10:50 +0800
 MIME-Version: 1.0
-Cc: "David S. Miller" <davem@davemloft.net>, Tiwei Bie <tiwei.bie@intel.com>
+message-id: <1634728063.4671392-2-xuanzhuo@linux.alibaba.com>
+subject: Re: [PATCH v4 2/2] virtio_ring: check desc == NULL when using
+ indirect with packed
+date: Wed, 20 Oct 2021 19:07:43 +0800
+from: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+to: Michael S. Tsirkin <mst@redhat.com>
+in-reply-to: <20211020042350-mutt-send-email-mst@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>, Tiwei Bie <tiwei.bie@intel.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,57 +71,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When using indirect with packed, we don't check for allocation failures.
-This patch checks that and fall back on direct.
+On Wed, 20 Oct 2021 04:24:33 -0400, Michael S. Tsirkin <mst@redhat.com> wrote:
+> On Wed, Oct 20, 2021 at 10:19:46AM +0800, Xuan Zhuo wrote:
+> > On Tue, 19 Oct 2021 09:21:51 -0400, Michael S. Tsirkin <mst@redhat.com> wrote:
+> > > On Tue, Oct 19, 2021 at 07:52:35PM +0800, Xuan Zhuo wrote:
+> > > > When using indirect with packed, we don't check for allocation failures.
+> > > > This patch checks that and fall back on direct.
+> > > >
+> > > > Fixes: 1ce9e6055fa ("virtio_ring: introduce packed ring support")
+> > > > Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+> > > > ---
+> > > >  drivers/virtio/virtio_ring.c | 13 ++++++++++---
+> > > >  1 file changed, 10 insertions(+), 3 deletions(-)
+> > > >
+> > > > diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> > > > index 91a46c4da87d..44a03b6e4dc4 100644
+> > > > --- a/drivers/virtio/virtio_ring.c
+> > > > +++ b/drivers/virtio/virtio_ring.c
+> > > > @@ -1065,6 +1065,9 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+> > > >
+> > > >  	head = vq->packed.next_avail_idx;
+> > > >  	desc = alloc_indirect_packed(total_sg, gfp);
+> > > > +	if (!desc)
+> > > > +		/* fall back on direct */
+> > >
+> > > this comment belongs in virtqueue_add_packed right after
+> > > return.
+> > >
+> > > > +		return -EAGAIN;
+> > > >
+> > >
+> > > -ENOMEM surely?
+> >
+> > virtqueue_add_indirect_packed() will return -ENOMEM when dma mmap fails, so we
+> > have to choose a different error code.
+> >
+> > Thanks.
+>
+> That's exactly the point.  Why would we want to recover from allocation
+> failure but not DMA map failure?
 
-Fixes: 1ce9e6055fa ("virtio_ring: introduce packed ring support")
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/virtio/virtio_ring.c | 14 +++++++++++---
- 1 file changed, 11 insertions(+), 3 deletions(-)
+From indirect to direct mode, there is no need to allocate memory, so if we
+encounter memory allocation failure, we can fall back from indirect to direct
+mode. Memory allocation failure is a temporary problem.
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 91a46c4da87d..552055157b21 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -1065,6 +1065,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 
- 	head = vq->packed.next_avail_idx;
- 	desc = alloc_indirect_packed(total_sg, gfp);
-+	if (!desc)
-+		return -EAGAIN;
- 
- 	if (unlikely(vq->vq.num_free < 1)) {
- 		pr_debug("Can't add buf len 1 - avail = 0\n");
-@@ -1176,6 +1178,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	unsigned int i, n, c, descs_used, err_idx;
- 	__le16 head_flags, flags;
- 	u16 head, id, prev, curr, avail_used_flags;
-+	int err;
- 
- 	START_USE(vq);
- 
-@@ -1191,9 +1194,14 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 
- 	BUG_ON(total_sg == 0);
- 
--	if (virtqueue_use_indirect(_vq, total_sg))
--		return virtqueue_add_indirect_packed(vq, sgs, total_sg,
--				out_sgs, in_sgs, data, gfp);
-+	if (virtqueue_use_indirect(_vq, total_sg)) {
-+		err = virtqueue_add_indirect_packed(vq, sgs, total_sg, out_sgs,
-+						    in_sgs, data, gfp);
-+		if (err != -EAGAIN)
-+			return err;
-+
-+		/* fall back on direct */
-+	}
- 
- 	head = vq->packed.next_avail_idx;
- 	avail_used_flags = vq->packed.avail_used_flags;
--- 
-2.31.0
+And if you encounter a dma mmap error, this situation should be notified to the
+upper layer.
 
+Thanks.
+
+>
+> > >
+> > > >  	if (unlikely(vq->vq.num_free < 1)) {
+> > > >  		pr_debug("Can't add buf len 1 - avail = 0\n");
+> > > > @@ -1176,6 +1179,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+> > > >  	unsigned int i, n, c, descs_used, err_idx;
+> > > >  	__le16 head_flags, flags;
+> > > >  	u16 head, id, prev, curr, avail_used_flags;
+> > > > +	int err;
+> > > >
+> > > >  	START_USE(vq);
+> > > >
+> > > > @@ -1191,9 +1195,12 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+> > > >
+> > > >  	BUG_ON(total_sg == 0);
+> > > >
+> > > > -	if (virtqueue_use_indirect(_vq, total_sg))
+> > > > -		return virtqueue_add_indirect_packed(vq, sgs, total_sg,
+> > > > -				out_sgs, in_sgs, data, gfp);
+> > > > +	if (virtqueue_use_indirect(_vq, total_sg)) {
+> > > > +		err = virtqueue_add_indirect_packed(vq, sgs, total_sg, out_sgs,
+> > > > +						    in_sgs, data, gfp);
+> > > > +		if (err != -EAGAIN)
+> > > > +			return err;
+> > > > +	}
+> > > >
+> > > >  	head = vq->packed.next_avail_idx;
+> > > >  	avail_used_flags = vq->packed.avail_used_flags;
+> > > > --
+> > > > 2.31.0
+> > >
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
