@@ -1,55 +1,57 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7B896435CA6
-	for <lists.virtualization@lfdr.de>; Thu, 21 Oct 2021 10:08:48 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 50B8F435CA8
+	for <lists.virtualization@lfdr.de>; Thu, 21 Oct 2021 10:08:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AADC760E9B;
-	Thu, 21 Oct 2021 08:08:46 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id A214383852;
+	Thu, 21 Oct 2021 08:08:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vjmahAR3L6Uy; Thu, 21 Oct 2021 08:08:46 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gj0WuIr83ciN; Thu, 21 Oct 2021 08:08:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 9109360E9E;
-	Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 7469183934;
+	Thu, 21 Oct 2021 08:08:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A63DC0036;
-	Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A348C0039;
+	Thu, 21 Oct 2021 08:08:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8D19DC0011
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CC3C0C0011
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 08:08:43 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7657C4058E
+ by smtp2.osuosl.org (Postfix) with ESMTP id AB6344058E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 08:08:43 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SJWafheP5jcW
+ with ESMTP id T37_R7K6vop3
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 08:08:42 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2E5B3400C6
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DCCEB400C6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 08:08:42 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:44 +0000 (UTC)
 Received: from cap.home.8bytes.org (p4ff2b5b0.dip0.t-ipconnect.de
  [79.242.181.176])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id E8E227F;
- Thu, 21 Oct 2021 10:08:36 +0200 (CEST)
+ by theia.8bytes.org (Postfix) with ESMTPSA id 9AFE51F0;
+ Thu, 21 Oct 2021 10:08:37 +0200 (CEST)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH 0/2] x86/sev: Two fixes for SEV-ES VC stack handling
-Date: Thu, 21 Oct 2021 10:08:31 +0200
-Message-Id: <20211021080833.30875-1-joro@8bytes.org>
+Subject: [PATCH 1/2] x86/sev: Fix stack type check in vc_switch_off_ist()
+Date: Thu, 21 Oct 2021 10:08:32 +0200
+Message-Id: <20211021080833.30875-2-joro@8bytes.org>
 X-Mailer: git-send-email 2.33.1
+In-Reply-To: <20211021080833.30875-1-joro@8bytes.org>
+References: <20211021080833.30875-1-joro@8bytes.org>
 MIME-Version: 1.0
 Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
  Dave Hansen <dave.hansen@linux.intel.com>, Xinyang Ge <xing@microsoft.com>,
@@ -83,27 +85,30 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-Hi,
+The value of STACK_TYPE_EXCEPTION_LAST points to the last _valid_
+exception stack. Reflect that in the check done in the
+vc_switch_off_ist() function.
 
-here are two fixes for recently discovered issues in the handling of
-VC handler stack.
+Reported-by: Tom Lendacky <thomas.lendacky@amd.com>
+Fixes: a13644f3a53de ("x86/entry/64: Add entry code for #VC handler")
+Signed-off-by: Joerg Roedel <jroedel@suse.de>
+---
+ arch/x86/kernel/traps.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Please review.
-
-Thanks,
-
-	Joerg
-
-Joerg Roedel (2):
-  x86/sev: Fix stack type check in vc_switch_off_ist()
-  x86/sev: Allow #VC exceptions on the VC2 stack
-
- arch/x86/kernel/sev.c   | 21 +++++++++++++++++----
- arch/x86/kernel/traps.c |  2 +-
- 2 files changed, 18 insertions(+), 5 deletions(-)
-
-
-base-commit: 519d81956ee277b4419c723adfb154603c2565ba
+diff --git a/arch/x86/kernel/traps.c b/arch/x86/kernel/traps.c
+index a58800973aed..f516f2b4797e 100644
+--- a/arch/x86/kernel/traps.c
++++ b/arch/x86/kernel/traps.c
+@@ -709,7 +709,7 @@ asmlinkage __visible noinstr struct pt_regs *vc_switch_off_ist(struct pt_regs *r
+ 	stack = (unsigned long *)sp;
+ 
+ 	if (!get_stack_info_noinstr(stack, current, &info) || info.type == STACK_TYPE_ENTRY ||
+-	    info.type >= STACK_TYPE_EXCEPTION_LAST)
++	    info.type > STACK_TYPE_EXCEPTION_LAST)
+ 		sp = __this_cpu_ist_top_va(VC2);
+ 
+ sync:
 -- 
 2.33.1
 
