@@ -1,77 +1,70 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D4508435E0D
-	for <lists.virtualization@lfdr.de>; Thu, 21 Oct 2021 11:36:20 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7B896435CA6
+	for <lists.virtualization@lfdr.de>; Thu, 21 Oct 2021 10:08:48 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5CFCC83B9F;
-	Thu, 21 Oct 2021 09:36:19 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id AADC760E9B;
+	Thu, 21 Oct 2021 08:08:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id aHTOZxYbJHij; Thu, 21 Oct 2021 09:36:18 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vjmahAR3L6Uy; Thu, 21 Oct 2021 08:08:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 3B70083BA1;
-	Thu, 21 Oct 2021 09:36:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 9109360E9E;
+	Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B512DC0011;
-	Thu, 21 Oct 2021 09:36:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A63DC0036;
+	Thu, 21 Oct 2021 08:08:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8F22AC0011
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8D19DC0011
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 09:36:15 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7118E405D6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7657C4058E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 09:36:15 +0000 (UTC)
+ Thu, 21 Oct 2021 08:08:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oM2vHlOTAaHt
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id SJWafheP5jcW
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 09:36:14 +0000 (UTC)
-X-Greylist: delayed 02:20:00 by SQLgrey-1.8.0
-Received: from smtprelay.hostedemail.com (smtprelay0028.hostedemail.com
- [216.40.44.28])
- by smtp4.osuosl.org (Postfix) with ESMTPS id AB61B405C9
+ Thu, 21 Oct 2021 08:08:42 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from theia.8bytes.org (8bytes.org [81.169.241.247])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2E5B3400C6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 09:36:14 +0000 (UTC)
-Received: from smtprelay.hostedemail.com (10.5.19.251.rfc1918.com
- [10.5.19.251])
- by smtpgrave04.hostedemail.com (Postfix) with ESMTP id 1321F1802C67F
- for <virtualization@lists.linux-foundation.org>;
- Thu, 21 Oct 2021 07:08:31 +0000 (UTC)
-Received: from omf04.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
- by smtprelay07.hostedemail.com (Postfix) with ESMTP id 0533A180E07B8;
- Thu, 21 Oct 2021 07:08:28 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by
- omf04.hostedemail.com (Postfix) with ESMTPA id 95407D1514; 
- Thu, 21 Oct 2021 07:08:24 +0000 (UTC)
-Message-ID: <b85fee5ff20d2b398948a6bccf1bcc5eb22b49ff.camel@perches.com>
-Subject: Re: [PATCH] virtio-blk: fixup coccinelle warnings
-From: Joe Perches <joe@perches.com>
-To: cgel.zte@gmail.com, mst@redhat.com, Denis Efremov <efremov@linux.com>, 
- Julia Lawall <Julia.Lawall@inria.fr>, Gilles Muller
- <Gilles.Muller@inria.fr>, Nicolas Palix <nicolas.palix@imag.fr>, Michal
- Marek <michal.lkml@markovi.net>, cocci@inria.fr
-Date: Thu, 21 Oct 2021 00:08:23 -0700
-In-Reply-To: <20211021065111.1047824-1-ye.guojin@zte.com.cn>
-References: <20211021065111.1047824-1-ye.guojin@zte.com.cn>
-User-Agent: Evolution 3.40.4-1 
+ Thu, 21 Oct 2021 08:08:42 +0000 (UTC)
+Received: from cap.home.8bytes.org (p4ff2b5b0.dip0.t-ipconnect.de
+ [79.242.181.176])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by theia.8bytes.org (Postfix) with ESMTPSA id E8E227F;
+ Thu, 21 Oct 2021 10:08:36 +0200 (CEST)
+From: Joerg Roedel <joro@8bytes.org>
+To: x86@kernel.org
+Subject: [PATCH 0/2] x86/sev: Two fixes for SEV-ES VC stack handling
+Date: Thu, 21 Oct 2021 10:08:31 +0200
+Message-Id: <20211021080833.30875-1-joro@8bytes.org>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-X-Rspamd-Server: rspamout03
-X-Rspamd-Queue-Id: 95407D1514
-X-Stat-Signature: w1k1cs1tg45sjhxa5ai68tet591rgwep
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Session-ID: U2FsdGVkX18GuLItoKjGI2brebfiEvCynGxVYaDHZyo=
-X-HE-Tag: 1634800104-276374
-Cc: axboe@kernel.dk, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- stefanha@redhat.com, Ye Guojin <ye.guojin@zte.com.cn>, pbonzini@redhat.com,
- Zeal Robot <zealci@zte.com.cn>
+Cc: kvm@vger.kernel.org, Peter Zijlstra <peterz@infradead.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Xinyang Ge <xing@microsoft.com>,
+ Arvind Sankar <nivedita@alum.mit.edu>, hpa@zytor.com,
+ Jiri Slaby <jslaby@suse.cz>, Joerg Roedel <joro@8bytes.org>,
+ Marc Orr <marcorr@google.com>, David Rientjes <rientjes@google.com>,
+ Martin Radev <martin.b.radev@gmail.com>,
+ Tom Lendacky <thomas.lendacky@amd.com>, Joerg Roedel <jroedel@suse.de>,
+ Kees Cook <keescook@chromium.org>, Cfir Cohen <cfir@google.com>,
+ linux-coco@lists.linux.dev, Andy Lutomirski <luto@kernel.org>,
+ Dan Williams <dan.j.williams@intel.com>,
+ virtualization@lists.linux-foundation.org, Juergen Gross <jgross@suse.com>,
+ Mike Stunes <mstunes@vmware.com>, Sean Christopherson <seanjc@google.com>,
+ linux-kernel@vger.kernel.org, Masami Hiramatsu <mhiramat@kernel.org>,
+ Erdem Aktas <erdemaktas@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,165 +81,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, 2021-10-21 at 06:51 +0000, cgel.zte@gmail.com wrote:
-> From: Ye Guojin <ye.guojin@zte.com.cn>
-> 
-> coccicheck complains about the use of snprintf() in sysfs show
-> functions:
-> WARNING  use scnprintf or sprintf
-> 
-> Use sysfs_emit instead of scnprintf or sprintf makes more sense.
-[]
-> diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-[]
-> @@ -624,7 +624,7 @@ cache_type_show(struct device *dev, struct device_attribute *attr, char *buf)
-> -	return snprintf(buf, 40, "%s\n", virtblk_cache_types[writeback]);
-> +	return sysfs_emit(buf, "%s\n", virtblk_cache_types[writeback]);
+From: Joerg Roedel <jroedel@suse.de>
 
-Perhaps scripts/coccinelle/api/device_attr_show.cocci should be updated
-to be more like the script used in commit 1c7fd72687d6
+Hi,
 
-@@
-identifier d_show;
-identifier dev, attr, buf;
-@@
+here are two fixes for recently discovered issues in the handling of
+VC handler stack.
 
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	return
--	sprintf(buf,
-+	sysfs_emit(buf,
-	...);
-	...>
-}
+Please review.
 
-@@
-identifier d_show;
-identifier dev, attr, buf;
-@@
+Thanks,
 
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	return
--	snprintf(buf, PAGE_SIZE,
-+	sysfs_emit(buf,
-	...);
-	...>
-}
+	Joerg
 
-@@
-identifier d_show;
-identifier dev, attr, buf;
-@@
+Joerg Roedel (2):
+  x86/sev: Fix stack type check in vc_switch_off_ist()
+  x86/sev: Allow #VC exceptions on the VC2 stack
 
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	return
--	scnprintf(buf, PAGE_SIZE,
-+	sysfs_emit(buf,
-	...);
-	...>
-}
+ arch/x86/kernel/sev.c   | 21 +++++++++++++++++----
+ arch/x86/kernel/traps.c |  2 +-
+ 2 files changed, 18 insertions(+), 5 deletions(-)
 
-@@
-identifier d_show;
-identifier dev, attr, buf;
-expression chr;
-@@
 
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	return
--	strcpy(buf, chr);
-+	sysfs_emit(buf, chr);
-	...>
-}
-
-@@
-identifier d_show;
-identifier dev, attr, buf;
-identifier len;
-@@
-
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	len =
--	sprintf(buf,
-+	sysfs_emit(buf,
-	...);
-	...>
-	return len;
-}
-
-@@
-identifier d_show;
-identifier dev, attr, buf;
-identifier len;
-@@
-
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	len =
--	snprintf(buf, PAGE_SIZE,
-+	sysfs_emit(buf,
-	...);
-	...>
-	return len;
-}
-
-@@
-identifier d_show;
-identifier dev, attr, buf;
-identifier len;
-@@
-
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
-	len =
--	scnprintf(buf, PAGE_SIZE,
-+	sysfs_emit(buf,
-	...);
-	...>
-	return len;
-}
-
-@@
-identifier d_show;
-identifier dev, attr, buf;
-identifier len;
-@@
-
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	<...
--	len += scnprintf(buf + len, PAGE_SIZE - len,
-+	len += sysfs_emit_at(buf, len,
-	...);
-	...>
-	return len;
-}
-
-@@
-identifier d_show;
-identifier dev, attr, buf;
-expression chr;
-@@
-
-ssize_t d_show(struct device *dev, struct device_attribute *attr, char *buf)
-{
-	...
--	strcpy(buf, chr);
--	return strlen(buf);
-+	return sysfs_emit(buf, chr);
-}
-
+base-commit: 519d81956ee277b4419c723adfb154603c2565ba
+-- 
+2.33.1
 
 _______________________________________________
 Virtualization mailing list
