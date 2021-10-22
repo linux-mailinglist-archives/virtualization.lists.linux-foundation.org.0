@@ -2,74 +2,78 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E18E4377EF
-	for <lists.virtualization@lfdr.de>; Fri, 22 Oct 2021 15:28:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7AB444377F2
+	for <lists.virtualization@lfdr.de>; Fri, 22 Oct 2021 15:28:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 8B13F40434;
-	Fri, 22 Oct 2021 13:28:41 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D0E95405FB;
+	Fri, 22 Oct 2021 13:28:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8Ai-kSrc_Z4v; Fri, 22 Oct 2021 13:28:40 +0000 (UTC)
+	with ESMTP id rvdE2tJX3_PD; Fri, 22 Oct 2021 13:28:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E91F84027F;
-	Fri, 22 Oct 2021 13:28:39 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 3B654402C0;
+	Fri, 22 Oct 2021 13:28:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B8EBC0036;
-	Fri, 22 Oct 2021 13:28:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 204AFC0043;
+	Fri, 22 Oct 2021 13:28:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2E2ADC001E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A4518C0040
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Oct 2021 13:28:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1AE6A4027C
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7C75D40032
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Oct 2021 13:28:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id T97jNgHbY0Na
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="oingm/Sw";
+ dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
+ header.d=suse.de header.b="kjNhry8+"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id xGtMxlVFjAle
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Oct 2021 13:28:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4F26F4018A
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BB4CB408D2
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Oct 2021 13:28:35 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 9D26321983;
- Fri, 22 Oct 2021 13:28:33 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 11FAA1FD60;
+ Fri, 22 Oct 2021 13:28:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1634909313; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1634909314; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=R1egcDJYU3bQO2P2QpH+ZMeZ9e+pt8zaA3Pt5lZa8ls=;
- b=hSBIcbJruHpA4UIlg7EC6diAnXO3aPWcYLh+xMSX1NaitCxafBPyKQvlsjfM2paV6yAHIM
- D0nHMRGMOKJ+/nJJhLcvX7RTqmDlcWjQtcOHK+EppwNnuPI35Mdz+p6nMzQWaqCS3OBKvo
- sosFQLwZqT+1srw440ToZtmFbsIggw8=
+ bh=A15WdQC65kq41kCK0mYIBkfPHvThrjPCntu7z8A7dlM=;
+ b=oingm/Sw3lSBkNMXOM31DaedqQeKyTN7tVHimc75URcwFxG/NY5gkHaxnJV+kkzEiRQGQi
+ 1NV4vdrspCEQNoPMTJxtW0zJH5Yj7lTyfaUy4FmBnX9zPAQiZL1tZW+BJAXVYs4wAImT1b
+ 5RR9HDhU/bIQXclJgDa2OfRXZrm/zQ0=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1634909313;
+ s=susede2_ed25519; t=1634909314;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=R1egcDJYU3bQO2P2QpH+ZMeZ9e+pt8zaA3Pt5lZa8ls=;
- b=TnIQYKCMDi9tovcx2dgU+ZB9rxn+RhLETwpHAsnkBshw74ypyAE87NLwiaJ57CahmU3KoO
- nc6U+yEhUHoDQAAA==
+ bh=A15WdQC65kq41kCK0mYIBkfPHvThrjPCntu7z8A7dlM=;
+ b=kjNhry8+KE/CRxyGyECTq6Wf6L2hRGdOsHOqXCr8KNcKtyuYa3J3VaZPNI+hTvs+nJFbZg
+ bwm84hmAX3WaraAA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3AF3913CDA;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A36ED13CDA;
  Fri, 22 Oct 2021 13:28:33 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id KGJjDYG8cmEwXgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id EMrgJoG8cmEwXgAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Fri, 22 Oct 2021 13:28:33 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
@@ -79,9 +83,9 @@ To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
  kernel@amanoeldawod.com, dirty.ice.hu@gmail.com,
  michael+lkml@stapelberg.ch, aros@gmx.com, joshua@stroblindustries.com,
  arnd@arndb.de
-Subject: [PATCH 6/9] drm/fb-helper: Allocate shadow buffer of surface height
-Date: Fri, 22 Oct 2021 15:28:26 +0200
-Message-Id: <20211022132829.7697-7-tzimmermann@suse.de>
+Subject: [PATCH 7/9] drm/simpledrm: Enable FB_DAMAGE_CLIPS property
+Date: Fri, 22 Oct 2021 15:28:27 +0200
+Message-Id: <20211022132829.7697-8-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.33.0
 In-Reply-To: <20211022132829.7697-1-tzimmermann@suse.de>
 References: <20211022132829.7697-1-tzimmermann@suse.de>
@@ -104,27 +108,93 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Allocating a shadow buffer of the height of the buffer object does
-not support fbdev overallocation. Use surface height instead.
+Enable the FB_DAMAGE_CLIPS property to reduce display-update
+overhead. Also fixes a warning in the kernel log.
+
+  simple-framebuffer simple-framebuffer.0: [drm] drm_plane_enable_fb_damage_clips() not called
+
+Fix the computation of the blit rectangle. This wasn't an issue so
+far, as simpledrm always blitted the full framebuffer. The code now
+supports damage clipping and virtual screen sizes.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/drm_fb_helper.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/gpu/drm/tiny/simpledrm.c | 30 ++++++++++++++++++++++--------
+ 1 file changed, 22 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 8e7a124d6c5a..9727a59d35fd 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -2338,7 +2338,7 @@ static int drm_fb_helper_generic_probe(struct drm_fb_helper *fb_helper,
- 		return PTR_ERR(fbi);
+diff --git a/drivers/gpu/drm/tiny/simpledrm.c b/drivers/gpu/drm/tiny/simpledrm.c
+index 571f716ff427..e872121e9fb0 100644
+--- a/drivers/gpu/drm/tiny/simpledrm.c
++++ b/drivers/gpu/drm/tiny/simpledrm.c
+@@ -642,7 +642,7 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
+ 	void *vmap = shadow_plane_state->data[0].vaddr; /* TODO: Use mapping abstraction */
+ 	struct drm_device *dev = &sdev->dev;
+ 	void __iomem *dst = sdev->screen_base;
+-	struct drm_rect clip;
++	struct drm_rect src_clip, dst_clip;
+ 	int idx;
  
- 	fbi->fbops = &drm_fbdev_fb_ops;
--	fbi->screen_size = fb->height * fb->pitches[0];
-+	fbi->screen_size = sizes->surface_height * fb->pitches[0];
- 	fbi->fix.smem_len = fbi->screen_size;
+ 	if (!fb)
+@@ -651,10 +651,14 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
+ 	if (!drm_dev_enter(dev, &idx))
+ 		return;
  
- 	drm_fb_helper_fill_info(fbi, fb_helper, sizes);
+-	drm_rect_init(&clip, 0, 0, fb->width, fb->height);
++	drm_rect_fp_to_int(&src_clip, &plane_state->src);
+ 
+-	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &clip);
+-	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &clip);
++	dst_clip = plane_state->dst;
++	if (!drm_rect_intersect(&dst_clip, &src_clip))
++		return;
++
++	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &dst_clip);
++	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &src_clip);
+ 
+ 	drm_dev_exit(idx);
+ }
+@@ -686,20 +690,28 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
+ 	struct drm_framebuffer *fb = plane_state->fb;
+ 	struct drm_device *dev = &sdev->dev;
+ 	void __iomem *dst = sdev->screen_base;
+-	struct drm_rect clip;
++	struct drm_rect damage_clip, src_clip, dst_clip;
+ 	int idx;
+ 
+ 	if (!fb)
+ 		return;
+ 
+-	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &clip))
++	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &damage_clip))
++		return;
++
++	drm_rect_fp_to_int(&src_clip, &plane_state->src);
++	if (!drm_rect_intersect(&src_clip, &damage_clip))
++		return;
++
++	dst_clip = plane_state->dst;
++	if (!drm_rect_intersect(&dst_clip, &src_clip))
+ 		return;
+ 
+ 	if (!drm_dev_enter(dev, &idx))
+ 		return;
+ 
+-	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &clip);
+-	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &clip);
++	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &dst_clip);
++	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &src_clip);
+ 
+ 	drm_dev_exit(idx);
+ }
+@@ -794,6 +806,8 @@ static int simpledrm_device_init_modeset(struct simpledrm_device *sdev)
+ 	if (ret)
+ 		return ret;
+ 
++	drm_plane_enable_fb_damage_clips(&pipe->plane);
++
+ 	drm_mode_config_reset(dev);
+ 
+ 	return 0;
 -- 
 2.33.0
 
