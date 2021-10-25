@@ -1,155 +1,117 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 28643439518
-	for <lists.virtualization@lfdr.de>; Mon, 25 Oct 2021 13:43:23 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86C204396BD
+	for <lists.virtualization@lfdr.de>; Mon, 25 Oct 2021 14:53:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C1947403CB;
-	Mon, 25 Oct 2021 11:43:21 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EE76D400D9;
+	Mon, 25 Oct 2021 12:53:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Q7Y_1PrnItIR; Mon, 25 Oct 2021 11:43:21 +0000 (UTC)
+	with ESMTP id vTSE0vrwJvG1; Mon, 25 Oct 2021 12:53:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 9F045403CA;
-	Mon, 25 Oct 2021 11:43:20 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 9BA4B40134;
+	Mon, 25 Oct 2021 12:53:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2D0F6C000E;
-	Mon, 25 Oct 2021 11:43:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8FDF1C003C;
+	Mon, 25 Oct 2021 12:53:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5B2ECC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 39F99C0021
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Oct 2021 11:43:19 +0000 (UTC)
+ Mon, 25 Oct 2021 12:53:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 39B79403CA
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8CFE94005C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Oct 2021 11:43:19 +0000 (UTC)
+ Mon, 25 Oct 2021 12:53:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XjrY0A76ZWZr
+ with ESMTP id mxNTvzZlDQ3e
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Oct 2021 11:43:18 +0000 (UTC)
+ Mon, 25 Oct 2021 12:53:35 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20621.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::621])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 60664403C9
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2084.outbound.protection.outlook.com [40.107.220.84])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C067440265
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Oct 2021 11:43:18 +0000 (UTC)
+ Mon, 25 Oct 2021 12:53:35 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YA9oQj5FXb8qgX5dow0JG0O1aSoEHg9DX/pHMcEWhtuiK6tQBfJKqvJI+KiyfWxSClXC/TXmU5dVfxDpv4CgmUIfRARFVZGjDs2hIG2kzuNhmIjgel5BO3hdvOqoSZcVtfxFsAY0WEbXHXXjHFdqBsDv4LIa83c/1wTbui43lMU7S/a+2OFUNL8a4MrxTqeU8yBvzztCqFFz18YpLtMsfryhz/XNtc4tw2zz3r+Npk8lMjN+NXnR8D/eJuVx7uShgq+21v3TZOHs14YsW+RFPKcmGbnAhc23qzrmM5JYZSdHG19oHADmZhgNiqGsn0M5rxbFg8Q9dN5n3QXavLrUPA==
+ b=CSDqNQ7Hm94vh2EgM+HGyE4r3A8O/ybqG88SYDJKrkKkEPelpXiiOh1iORmXd/W7Hl/BvpsPUTjopyNMnl/WkRGLhCkz+87SvNNDkUsMgMSXZRojpsuGyGAPLr/XlPvDo2Z8uv90DgFugTkXwLyoOPFgJaduOfntqJu+GW1rFb0gGzCOvKFPiJd69tNPQjCZoKfP+QHYmpk3wJGZ+u7x7z/Ar8Af3RiN6EZzXCcemZi7QYNDS9Ilap5YKjFYbxYn48rORbD1zoXYNDLcwO9+VCU0N6efOYUS+f6jjAR8sQen1Q9IFOtdM2LpblC2EbGuXK1zkcF0I2W9sPos55QaZg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gVjf1KfmamSw7BwoLk2AEpIP4eK72oc4+h8TC1DNDsM=;
- b=hMW+xUaToySzD3MxDtgm35MKkznAJfvFp6rNKiUCgxIpMvDvuKJ6tZnjH+NdnZQ77f2x3jpE2HtfXfWQJrgebhBs4noyhuBfq7AklXW6+61+LqfryhAmSPvFTp8SRhtt5btgAdZ3rkxBOOWw8QrPrZUefCRcjMaFTUZLAaDmTLSB5v6T2wCOWhX6aTfKVMxSHxgfMAlmgEigwzz4G4PTZPL4yzRhjU6RDAK7qEis1i2RY/+4HK8UrqT07xZyMJX+muBVIZPC7+FLmb+BbX8W3XYM81F5cRA9z+zUoVVqrcCdlbQSPmo7WcYB/AkOJ1CqDSxD9xDkcz7J5egw8Oh05g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
+ bh=a0KDBgvwJSpDdAo0g7rEzVVVIMvw1AoYdY+5mXNLS1E=;
+ b=BY/C1NoYfSNT6YzzDjbr5p0MufXqE8Xxhuyx5TR4EEtyUzENurKJQpDOBmyMO8aKBm89QfoYxJ1aJUctUNefxX+Nh0X/fSpE4/xZLCTVbxgEXgpfFcHkO33R5qhBtUSHqESGLrFTPvYZfMmyiFqzixnYmq/+TYosfOrFiMMOAF7IMUE+KteniY9aojMaymKAf+hKHnp9QMr9Y92Nj3t4lXzxf+rX/MmigamdSiPdPeqA3Xq+RdFF1BGebjCJCXj7mcVpuX/YQJfPgawHKJhIkaAB5rmDBD2ah09peNkmARslPDxvrWrf8L9DnGCk6msjJRnDfl7NoV39H3cOkmmNnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=nvidia.com; dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gVjf1KfmamSw7BwoLk2AEpIP4eK72oc4+h8TC1DNDsM=;
- b=fDzXzFFuUfGVaiH86TNJUvqoItwG+ft1KuOue5N2oZKJvNzpXSY6EyhEZDR+w12235reMrJTUUyvsbbnZUn4M1yK/Q4sebuwjou3e9njgRPA+IIG1GF1HMDstWjdIjcv+KIRFL+PW1dELtPZ3bM+mUk5PR+zDYfp8Rc2Z/Ne5CHWmayh+9m2UgTxt/wsFEw449WofacvnplL/sskoYyAEdXu6r1KE05sBAr1D3i/lBb8RTg5MFTttdF/AgcFfHqwE28Q7NoXFSPK1S6x9QsrRhayCC77qawAbk52lSpnJZkVF4EnCoeucitWR7aHiV+XHpw1S1iFI+iUV7RVu5HADw==
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com (2603:10b6:510:d4::15)
- by PH0PR12MB5451.namprd12.prod.outlook.com (2603:10b6:510:ee::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.16; Mon, 25 Oct
- 2021 11:43:16 +0000
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::e061:9284:b153:e633]) by PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::e061:9284:b153:e633%3]) with mapi id 15.20.4628.020; Mon, 25 Oct 2021
- 11:43:16 +0000
-To: Jason Wang <jasowang@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
-Subject: RE: [PATCH linux-next v4 2/8] vdpa: Introduce query of device config
- layout
-Thread-Topic: [PATCH linux-next v4 2/8] vdpa: Introduce query of device config
- layout
-Thread-Index: AQHXxpmyR8cFa1w650eZ8wWHy5IdYKvjP4OAgABdb4A=
-Date: Mon, 25 Oct 2021 11:43:16 +0000
-Message-ID: <PH0PR12MB5481A041D8FEAEA2AD1F9A37DC839@PH0PR12MB5481.namprd12.prod.outlook.com>
-References: <20211021163509.6978-1-parav@nvidia.com>
- <20211021163509.6978-3-parav@nvidia.com>
- <05bf6f39-66fc-cd9a-83d7-0836caf53239@redhat.com>
-In-Reply-To: <05bf6f39-66fc-cd9a-83d7-0836caf53239@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: redhat.com; dkim=none (message not signed)
- header.d=none;redhat.com; dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: ae6d5f41-e3ed-47e7-8598-08d997aca23b
-x-ms-traffictypediagnostic: PH0PR12MB5451:
-x-microsoft-antispam-prvs: <PH0PR12MB5451E4E5B1A5504F3763FAD4DC839@PH0PR12MB5451.namprd12.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:478;
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: VQGs5tkzDF14uDGhOyl/y8zlevN62n6NbaSJK2iO5PjDqmZysKsHemQ6MM8PygDB3FjIqRuc7B6eSVbKrC00nOYgAho6SsAuSHkAvUbfywNDm01tjXb9v/yGlFw+k43rjf/7aJoF46WNgZK7qB08BAfkZAssZFjYlZ/TL16/2FJU4vlAQvnGQCb9xgwrJLmNVmH+S5smvktJgiK/ziUVntK1wgFOJe+rc99e82PD0J1W9/LKvDCgzBoOHMb/DvlGSN25uFhMVz3vsXhoJ1+FqBALLnRV0rpHZRwwGm/tuqshojSVvFu1OZXPj9Rhu0RqvSbljY+RBTwYNKf5r4ilIjJeETg6+4VCzrsr85od/BS98arcmrxuJLBkuL0QTtCNiu7tAwcIYznJkywkL6nMOpLsA2iX3gah45D1jkidpFCd6tNeCDozCCILOt/OhK48dCwGA/qpIWqqLPxzuPZhi2uRmHocviiM3xzZWr5tneWJs3pxRL4ZNfYwqYEvoPhVIsxF1XBBc+RzsAOh7OszUG5LYZBVEltTB4X+x5YQr/mwvLQhgPF356zlBaLB7DcFwwuQUlqj2rBiVSD2v/3s4C6gyec9TwRRD6xgi3DZV6SekFQ/h1p7UVAvCDpxc5gKh1Mx0klNFE3BdJFAgL40QZTZ3WLWhirACit/aGWOd5DHzWSVYDIjC9WWCGiCh3/qbLd23rFtwqY1AY5XGdRwGQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH0PR12MB5481.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(4636009)(366004)(107886003)(508600001)(8936002)(38070700005)(4326008)(33656002)(316002)(9686003)(2906002)(8676002)(55016002)(54906003)(86362001)(52536014)(4744005)(122000001)(64756008)(66946007)(38100700002)(71200400001)(66476007)(66446008)(7696005)(26005)(186003)(66556008)(5660300002)(110136005)(76116006)(6506007);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-2022-jp?B?em9ObzNnWkNFdzFjUk1QMmtJT1cydVJaU0lhRmNVdVVMbnNRZ1ZlOWdW?=
- =?iso-2022-jp?B?bVVHcHF6RjIvTWRjSG50eXhHSGtkNkxjMGhYelA1NkNKUzZzK0ppTis2?=
- =?iso-2022-jp?B?ZUR0QUNkbHdHQWwrZTlrVXBHa0RuTFozSjF1UE4ydnBJaXYxVGZNaTlB?=
- =?iso-2022-jp?B?YVdrLzhVZnZmempmc2YvVmtDOVpQcEJ3dDRIbTFuWlFqUVJ0Zk5qQytL?=
- =?iso-2022-jp?B?a0ZHL05BNXpSSTVpVmxwV25tUFhXUVhTS1U2aEJkZFNQdlRnQVFjNXBS?=
- =?iso-2022-jp?B?MjFES1lOWjFlK0hCTWtuc2Q2K3Q0TlcyMWZKaE53TzdJVjdRc29ZeXlG?=
- =?iso-2022-jp?B?cGRzZFR1WTdmQXlSVVRZVkUwWXRQZVdBWk50aWpJUkV1Q2ozOHE1TEU0?=
- =?iso-2022-jp?B?WlYzcTd1c0xpazByZjlXQ2lyTENTcXdna0RIcFU1Nk1Pcnl0OWN1bG16?=
- =?iso-2022-jp?B?OHhSakcxMDR4LzB0T2NvS1FVUmZ5QlR2ZU90Nnd2Wkw2ZlRHNUpySUVw?=
- =?iso-2022-jp?B?aFFqa1Z4bXV6bDJzcktBb2NORURLVWd3SVNKTTlSeGxqL2pTYTRwOEN5?=
- =?iso-2022-jp?B?cHRIWVNwWnF3WHZQVE8vMVR1S015aWtHWW83TXV4Q1BwZ2FzblhJd0ZJ?=
- =?iso-2022-jp?B?Ym90STBqb0F5U0dwVXZrZWtXN2pHSVZ2dTcvcGlZNVIzNUNUT2xnYXhI?=
- =?iso-2022-jp?B?WXZidFdYZlpYaGk3YkM1VlJhQnpXYkhObzFHZHZtVGIzMXZpMEFXdGEx?=
- =?iso-2022-jp?B?NlBTR0p6amI0S2szY0daSHRNck9WSlFQb0RHWWJHbG43WG9VL0VYeFZX?=
- =?iso-2022-jp?B?a2xHQW40bkRYLy9VYTYxcERleUpVb0lzRExWeG5FdUJVbWV0M0Y5aGRW?=
- =?iso-2022-jp?B?L21FdnVvZ29MaXJCaG9GOElxZEh1Vk1UMmR6SERjcnFKR0hXTTVHTDNX?=
- =?iso-2022-jp?B?UElFSHpvV3BZTmR2UlFMYUdlNEtsTHJJV3ZvOFp4MVNKcHF0MDVDU2xQ?=
- =?iso-2022-jp?B?SW5BQkhaRVJpL1pZd2VSazFTcEdxZnVwM1JraFYwbUc3cVFJdWpsdHE4?=
- =?iso-2022-jp?B?Yzhaa0F5K2ZaRmF6VHg1c0hYUzRKK0d4WS9OUVJvWUpWQlpZVnB3bVpK?=
- =?iso-2022-jp?B?N0VhKytzd1daMVF0NjdPblVaSXN3QkJ3Y1lmOXhLNG9iaHpHWDBSb2VF?=
- =?iso-2022-jp?B?RFpKVE1TMDY3UGNicDl5WWREWlhaYWdlcmxPajB4MnE1cGdaZkVWcEsy?=
- =?iso-2022-jp?B?YlF6bEJpUjZWQVZCc2hmN3h6Um1xTDViNWhZc2MvMWtmcVQ3NUZQbFJw?=
- =?iso-2022-jp?B?azZIMXpRY2ExcXhrSGJLR0NyOGhtYjlkelk0d0dhTlN6Q05xa3J4Ym9y?=
- =?iso-2022-jp?B?Y0lhUVhudTF3Nm9yc1NoTytPU0FiTjBJdkZyYWhxbVZxQUt1cnA0a0Za?=
- =?iso-2022-jp?B?U3MreitOcnEvNGdhSnNQbVNYMG92UkxOYVZoOURwc2JNazVaODdKVG9V?=
- =?iso-2022-jp?B?blpibHg3dFRpUkZRcHdUS3UySXgyNmVhUmhlU00wSGxGYXVWSlB3enRN?=
- =?iso-2022-jp?B?TE01MzJyUkF1TnlnMWZ2RFQzNzdIQi8rVWg2K3Q1MlJsbzRHbFNaZFEr?=
- =?iso-2022-jp?B?S0o1Rit0U0lxbXpuTVRhS2RTby9EQ2s2eEhZa0VOUjQvTjQ2SXYrRnY4?=
- =?iso-2022-jp?B?TEloSExpUzlsbUVSSEdoRjhOcU45Q01nZVd3bVRUSGtnUVNoMCttZXV3?=
- =?iso-2022-jp?B?UUQ1RUorRzBCL01YU3lkcFJRQ0hGaHV4bS9tQmVtREdPeVdRdThzOUV1?=
- =?iso-2022-jp?B?QlpmYTZwOU5WSWNVclMxZHB2M0QyUGc5ZFpvOGpWWFR1K0hsTGFwNzlT?=
- =?iso-2022-jp?B?QkJiZDBTalRqTmtSVkp5enhyZVZNT0xRTUZ2NUJZRHdqZWZLL0VLbVhp?=
- =?iso-2022-jp?B?ZG1yNnNsb1ZwTUhtaUpCdFl6UzBSZUp2cjMvdXowTWJ3QnVRemJOQVFo?=
- =?iso-2022-jp?B?MGRrVlVZUFQ0SXFRMUY0OFRycHNiSDdiendoSmduWEJscC9oNXhpalNW?=
- =?iso-2022-jp?B?WS8vZlZDZ2M1VURIMlVTeUJ0WHl4d3JuaE51M1dldjRkUmVLa0c1cDIr?=
- =?iso-2022-jp?B?VU9OWHF4TG5VaVUrSnZ5K1hrdU5LUGllQzl5Qm9RQ2YwM2FBbENqRExY?=
- =?iso-2022-jp?B?MDVEK3g3OXNYR2ZPYjZpTXQ3ZTdiNXZaTWtCcmpMOUs2a0wvMEVFanlJ?=
- =?iso-2022-jp?B?RE5nQU5LRERXc2IybHgzWDdRd296OFJrVFlMNFg3RnJxWUg5Y0k1ZFJB?=
- =?iso-2022-jp?B?SzBoY25IYlREUDNyZXlXWmcvcDhQWHJxQnlJL2pxS1dlRDlVUWVBWE1z?=
- =?iso-2022-jp?B?NG1ibHc9?=
+ bh=a0KDBgvwJSpDdAo0g7rEzVVVIMvw1AoYdY+5mXNLS1E=;
+ b=nQkvtD8qBXvn4yWwHBDi550Em37aPSFSjKJ+h2yW4tvGTaA8hk3uUR4ThgAVEJC2KzPkyYRa/G+rPv0Ar60do2scxanm4GCWIUjPo3tg0Dnikw1XKrGAqAZlklOLWBtIbotBmUwccwQpSdZkknN9vYiyWsRd1b4T1W/e1SQUQ+yXsPHo3yWRLHhUnLuVlaXpzXOMgku7eEEBwjmWy6Rr9VPN1qFKN0XcDj6Hx17CvjmMWiAFQNpgQ38h7jFXZgTHqB+2y/Zw+fz2s70WS9xkMP3VgKA6S+x2yxouuWz5lzB5pZJCjVVBHE8tRvL04mINjnjvCKuW7QYDT3wmKRQbEw==
+Received: from MWHPR1701CA0008.namprd17.prod.outlook.com
+ (2603:10b6:301:14::18) by BY5PR12MB5015.namprd12.prod.outlook.com
+ (2603:10b6:a03:1db::20) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.15; Mon, 25 Oct
+ 2021 12:53:31 +0000
+Received: from CO1NAM11FT043.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:301:14:cafe::e8) by MWHPR1701CA0008.outlook.office365.com
+ (2603:10b6:301:14::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.16 via Frontend
+ Transport; Mon, 25 Oct 2021 12:53:31 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ CO1NAM11FT043.mail.protection.outlook.com (10.13.174.193) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.4628.16 via Frontend Transport; Mon, 25 Oct 2021 12:53:31 +0000
+Received: from sw-mtx-036.mtx.labs.mlnx (172.20.187.5) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.18;
+ Mon, 25 Oct 2021 12:53:29 +0000
+To: <virtualization@lists.linux-foundation.org>
+Subject: [PATCH linux-next v5 0/8] vdpa: enable user to set mac, mtu
+Date: Mon, 25 Oct 2021 15:53:08 +0300
+Message-ID: <20211025125316.67664-1-parav@nvidia.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+X-Originating-IP: [172.20.187.5]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8a287a51-3fee-4b77-98a6-08d997b672a6
+X-MS-TrafficTypeDiagnostic: BY5PR12MB5015:
+X-Microsoft-Antispam-PRVS: <BY5PR12MB50156CA3174C001BCC7A9BE3DC839@BY5PR12MB5015.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1775;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: V6ps+gFfEAPa2tN5rWd87o4IzaJPaawqgCyp8EqCT+mTR0EU1nmvayIxksSm8S79JnNcGNNbnLJMME0yuQGPZ+w2s3dPmriIET7lCi3cgcz6ngHEuBXfWMArFz8qh9ZuOHYGhGWUdV15wxrzr+guTHvq8c5rynrDLJpEFPmk3jU+dKft08WX2ueVHI5z5h9Lu6F5J1KBuvIfBh4E7amGGBZ/LSVXGu+ZZLAXGD2w4aAs9wouOiktboNx9Ir9o6XQjjOmztB8ougFpgvgtBjq7+QdRQt3nRv7Bh64PtOCPqn5OmIp2shJDT3yJOQd5V942msrvFz0cCmgEg55InAJR381tgXc2j76xts1ltjlci4zQlcprKlGx1Fp4CkkLd9SRDd6Ie3vmeNhgZHTb1tqVfq6oqMvSyggw1Bo3nqI/LcDIzLAQLgQu2fOdWh1/UeXPhjlcZy3mPxX1joYhbvtyf/xixI0nYXKmN+WO9UE1H63ILCBySG/1xvegBWRbfQQULBSmsq5C3nthQUeTzUEHoZX4oqVZlG16QNLTXCq/ul8jPtHBCLVfBboqSrpU31FTIk8032Ba7MVz7aELheTokB9iGImPejxqIV+mJOgT4zdbddTpJIkKPPPGGkNbjTOiaLVGVH9R5UHXE03fZIqwD5kWP2KONSX9wPdwiiMzwcBx3VVFbhKWQW0e2uBP5euvJQzNUJbNaXTIY7NKFKtPw==
+X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
+ SFS:(4636009)(36840700001)(46966006)(107886003)(2616005)(426003)(336012)(6666004)(2906002)(316002)(54906003)(186003)(5660300002)(1076003)(356005)(86362001)(6916009)(47076005)(508600001)(36756003)(36860700001)(16526019)(8676002)(70206006)(7636003)(4326008)(70586007)(83380400001)(26005)(82310400003)(8936002);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB5481.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ae6d5f41-e3ed-47e7-8598-08d997aca23b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Oct 2021 11:43:16.0390 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: SdRCGHOl65r+Zm5ws84ThMzytBJcZv6NGAcHnPz0b62v5kHaGrX6gIv5jYxxKbVP7Yw75/84uZV8RPx4dnPOYA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5451
-Cc: Eli Cohen <elic@nvidia.com>, "mst@redhat.com" <mst@redhat.com>
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2021 12:53:31.1709 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a287a51-3fee-4b77-98a6-08d997b672a6
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT043.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB5015
+Cc: elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -164,35 +126,117 @@ List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualizati
 From: Parav Pandit via Virtualization
  <virtualization@lists.linux-foundation.org>
 Reply-To: Parav Pandit <parav@nvidia.com>
-Content-Type: text/plain; charset="iso-2022-jp"
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Currently user cannot view the vdpa device config space. Also user
+cannot set the mac address and mtu of the vdpa device.
+This patchset enables users to set the mac address and mtu of the vdpa
+device once the device is created.
+If a vendor driver supports such configuration user can set it otherwise
+user gets unsupported error.
 
-> From: Jason Wang <jasowang@redhat.com>
-> Sent: Monday, October 25, 2021 11:36 AM
-> 
-> 在 2021/10/22 上午12:35, Parav Pandit 写道:
-> > Introduce a command to query a device config layout.
-> >
-> > An example query of network vdpa device:
-> >
-> > $ vdpa dev add name bar mgmtdev vdpasim_net
-> >
-> > $ vdpa dev config show
-> > bar: mac 00:35:09:19:48:05 link up link_announce false mtu 1500
-> 
-> 
-> Nit: it looks to me this patch doesn't expose link_announce but
-> max_virtqueue_pairs.
-> 
-> Other looks good.
+vdpa mac address and mtu are device configuration layout fields.
+To keep interface generic enough for multiple types of vdpa devices, mac
+address and mtu setting is implemented as configuration layout fields.
 
-I recollect now when started working on v5.
-Above commit log example is correct. Max_virtqueue_pairs is not exposed for the vdpa device as this field in the config space is not valid.
-It is not valid because this vdpa net device is single queue.
-So this commit log is accurate.
+An example of query & set of config layout fields for vdpa_sim_net
+driver:
+
+Configuration layout fields are set when a vdpa device is created.
+
+$ vdpa mgmtdev show
+vdpasim_net:
+  supported_classes net
+pci/0000:08:00.2:
+  supported_classes net
+
+Add the device with MAC and MTU:
+$ vdpa dev add name bar mgmtdev vdpasim_net mac 00:11:22:33:44:66 mtu 1500
+
+In above command only mac address or only mtu can also be set.
+
+View the config after setting:
+$ vdpa dev config show
+bar: mac 00:11:22:33:44:66 link up link_announce false mtu 1500
+
+Patch summary:
+Patch-1 introduced and use helpers for get/set config area
+Patch-2 implement query device config layout
+Patch-3 use kernel coding style for structure comment
+Patch-4 enanble user to set mac and mtu in config space
+Patch-5 vdpa_sim_net implements get and set of config layout
+Patch-6 mlx vdpa driver fix to avoid clearing VIRTIO_NET_F_MAC during
+        reset callback
+Patch-7 mlx5 vdpa driver supports user provided mac config
+Patch-8 mlx5 vdpa driver uses user provided mac during rx flow steering
+
+changelog:
+v4->v5:
+ - use vdpa_set_config() API in virtio_vdpa driver
+ - make vdpa_set_config() buffer argument const
+ - added comment for checking process capability
+ - updated commit log example for add command
+v3->v4:
+ - enable setting mac and mtu of the vdpa device using creation time
+ - introduced a patch to fix mlx5 driver to avoid clearing
+   VIRTIO_NET_F_MAC
+ - introduced a patch to use kernel coding style for structure comment
+ - removed config attributes not used by sim and mlx5 net drivers
+v2->v3:
+ - dropped patches which are merged
+ - simplified code to handle non transitional devices
+v1->v2:
+ - new patches to fix kdoc comment to add new kdoc section
+ - new patch to have synchronized access to features and config space
+ - read whole net config layout instead of individual fields
+ - added error extack for unmanaged vdpa device
+ - fixed several endianness issues
+ - introduced vdpa device ops for get config which is synchronized
+   with other get/set features ops and config ops
+ - fixed mtu range checking for max
+ - using NLA_POLICY_ETH_ADDR
+ - set config moved to device ops instead of mgmtdev ops
+ - merged build and set to single routine
+ - ensuring that user has NET_ADMIN capability for configuring network
+   attributes
+ - using updated interface and callbacks for get/set config
+ - following new api for config get/set for mgmt tool in mlx5 vdpa
+   driver
+ - fixes for accessing right SF dma device and bar address
+ - fix for mtu calculation
+ - fix for bit access in features
+ - fix for index restore with suspend/resume operation
+
+Eli Cohen (2):
+  vdpa/mlx5: Support configuration of MAC
+  vdpa/mlx5: Forward only packets with allowed MAC address
+
+Parav Pandit (6):
+  vdpa: Introduce and use vdpa device get, set config helpers
+  vdpa: Introduce query of device config layout
+  vdpa: Use kernel coding style for structure comments
+  vdpa: Enable user to set mac and mtu of vdpa device
+  vdpa_sim_net: Enable user to set mac address and mtu
+  vdpa/mlx5: Fix clearing of VIRTIO_NET_F_MAC feature bit
+
+ drivers/vdpa/ifcvf/ifcvf_main.c      |   3 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c    |  97 ++++++++---
+ drivers/vdpa/vdpa.c                  | 248 ++++++++++++++++++++++++++-
+ drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |   3 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  38 ++--
+ drivers/vdpa/vdpa_user/vduse_dev.c   |   3 +-
+ drivers/vhost/vdpa.c                 |   3 +-
+ drivers/virtio/virtio_vdpa.c         |   3 +-
+ include/linux/vdpa.h                 |  47 +++--
+ include/uapi/linux/vdpa.h            |   6 +
+ 10 files changed, 382 insertions(+), 69 deletions(-)
+
+-- 
+2.25.4
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
