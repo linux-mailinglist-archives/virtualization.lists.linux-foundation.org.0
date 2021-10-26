@@ -1,53 +1,53 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FCC443B8B0
-	for <lists.virtualization@lfdr.de>; Tue, 26 Oct 2021 19:56:10 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0509C43B8B2
+	for <lists.virtualization@lfdr.de>; Tue, 26 Oct 2021 19:56:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0B7D980FF7;
-	Tue, 26 Oct 2021 17:56:09 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9B8F140231;
+	Tue, 26 Oct 2021 17:56:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5Uur8jowkmpe; Tue, 26 Oct 2021 17:56:07 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cR-lrFT14kyf; Tue, 26 Oct 2021 17:56:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id BF4B481021;
-	Tue, 26 Oct 2021 17:56:06 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 2C255403F4;
+	Tue, 26 Oct 2021 17:56:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 39521C000E;
-	Tue, 26 Oct 2021 17:56:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C8F54C000E;
+	Tue, 26 Oct 2021 17:56:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 96924C000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1DBFFC000E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Oct 2021 17:56:04 +0000 (UTC)
+ Tue, 26 Oct 2021 17:56:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7EE57402E1
+ by smtp1.osuosl.org (Postfix) with ESMTP id 00FB781751
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Oct 2021 17:56:04 +0000 (UTC)
+ Tue, 26 Oct 2021 17:56:12 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OkhwDrDLJfec
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id U0Tw5tr3VPNi
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Oct 2021 17:56:03 +0000 (UTC)
+ Tue, 26 Oct 2021 17:56:11 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2040.outbound.protection.outlook.com [40.107.223.40])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6DDB940231
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on2061.outbound.protection.outlook.com [40.107.236.61])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 503E88174C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Oct 2021 17:56:03 +0000 (UTC)
+ Tue, 26 Oct 2021 17:56:11 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Se94eaf7QfWnJ5DA+BZb3/RRSwXI1TKRPzcX3JJsT2BWzZO+/I58G++888BA1yTuYWbASg2GQFCOSOSlayhdsHU5grU8XnbgObifr4ZNanKd0/YnDvl/7AMvgh4v0s04nl1giBnEVEVnA+wRTuP8v7OQquVCe5LqrzX3zn/CktCzTA1a6+dcGwBHn8pfnDR0pUhcyoFmLS0GREKIeX8PEEngaLERQd36JcqU7g4WWgLf1uArxN8AoxoEvj1qNikO4zgY9zmQfhpYeuNDOzrhrUdaRZF7lyhGCdGOpaqhSchHR7gZCdih68vhTdruS4Xfjtfu/dQVgYyBggJZSKLVHw==
+ b=iF/+tDoROER6D4nc+Y/OS+2XrzqixSweNwmaY7oy0X3ONLkO770L0HMrWePSjk0FYBAxboWkij8/VGKJhaYRRarg03HQjwsDyE8n3vG4ls7FKX481G1sto1rcQV1XdDF7d+L1cbQiEpqOUzztGzhefkyQ1eWbyxH9PUCy8rPc+mEm0fhdbin0lQo9Yu+As/5PHICL06OhfYkYOYtcpyhDKrBFuWfQuJ2i/hhhoo3hpIEuMAOz1iKoEuDV5nFL23HgxCG99wMORyzkZP5oIb6hr/ADpF0sX13l+q9apbnkSNUq37UbwjlIhuJIY/GjdeVYgzV4Co330UBwzWDuLUVGg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x6r2H7ofzzmLmCE/UwPQNLz8HnSMsSCl3sEoMTW0SeY=;
- b=iYFkxy/RMVrtXD3MbhWEqYyOnBQqiZQJGGYvFwVQEC24DusKcBocQkzBcjyU58ELWcUualzmI4c1TWpERbSUEuOJ2DYtS8zlVwDKjN3qNNs5u2e7z/A0kEeru3I4sKHLONRa8erixoMPyXdztttUeu/Ky6/JdTl6cWSNsrCd3V+yFq1CKsxxUgTWt/IW66rllfQ3bhZpOYC2qv3VFeklGx/tNpiSmmwhWRwq24oi7WkYtuDbVfirFiRNsDHPNmz35AkrKj3tZ6FIwQ7QLkdkJjMvfryoMUuGtEQmY8v0CCStIHY5FVsf30it8pu4Ix289nFMuq7EQ8/2+sKC+7Gopg==
+ bh=CVNPtT52d8l5qGACCR62hiTHppPAf/x1WsWAiWG3fgY=;
+ b=LcuYV0hrqsL6ACR3KF3MpKYiXvFE1pY3sBBN6z7QR7+9lw6yqbivTrAE3v+7yaxLJck7ffZrccWypzQugttCPdjK33lX2lIkvYNU6KXPnFAFTi0p66HXuf1S2ai9nMdlt+uFk+F/tSt6FR/G2bVFsUax81Aa5afb+7Pzuq2tre73IJl0DveL2mYnETpyzbQZ5T+C/yYdzMvmLTwHLK2guCtSnzvihqRh6ZlJP/kSqEAPH60xPvxKZ/etRIZYbGAL5BZzAMKdgPRE8V8fZ7Dfz2jFIN5dJUddRq8udixQfEMR1N91NFLSaqmomoBtVjk5Junjoq1XpOfH5GMAX8+VAw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
@@ -55,18 +55,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x6r2H7ofzzmLmCE/UwPQNLz8HnSMsSCl3sEoMTW0SeY=;
- b=XLJifXkBrRWAS5TlBg/noie4Xl9OmO6lT/SwD7Vmsj3FlqR/YYNtQeabNrv1Aywlr2+92FYr8X/egcUotAEeJxpCz+k8YmnKFfDsaxDG9vZ2jqnkB92bf2daFgzcTL8F8Qdv0bSXbl/TMYWtOdooK8ANPEpbNQt7sXc4dpFTNmKAEBgzrfnVIUTbZQowX0ipwQ+1jbvoWp3lNwFU70WuE6GSrdTOiiYxV7WgSjeIJGzSo4/RkKeNBB/3+/KxMFN+tIeHDBObbavxtmCBpMfMp9o2OTY7mPS4i4JODQ5n5Xx/i9wP8lPx6nr4kZeRU9Yp8WC4+MEjwW6HUp+Rb/5/+g==
+ bh=CVNPtT52d8l5qGACCR62hiTHppPAf/x1WsWAiWG3fgY=;
+ b=m9ckiOWgQz+BljpMUsBQGjaV2UBiDDjaf62amuMuyz/Y6hwW7xlDW/I8vQ/EdlExCOe10a6F5MW7sS7Q0APw7lGcYyafhCF2mhojaDpX/vp5kYzRBk+pRijjpNdClHZnSE0XoEU01a3HWnmKc505RHxTUzqXU9I3zlVFMbri3JbrGFtuPEAYdpTdRmvf1wfDqkkVc/GxuNatzcGw1Lv92/T20DxAJODHXoYl+k4Aq4afHGIXK0NgrfumXJY99q8TRkk5z01/ACr6iByZlye7HvcImrLjcu7qWELh/hB0ikEyM+Z6xEst8fbyItRLna4yXQsNqTV++JJE+eJTeerXbQ==
 Received: from MW4PR03CA0351.namprd03.prod.outlook.com (2603:10b6:303:dc::26)
- by DM6PR12MB4355.namprd12.prod.outlook.com (2603:10b6:5:2a3::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.18; Tue, 26 Oct
- 2021 17:56:01 +0000
+ by BL1PR12MB5160.namprd12.prod.outlook.com (2603:10b6:208:311::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4649.13; Tue, 26 Oct
+ 2021 17:56:07 +0000
 Received: from CO1NAM11FT017.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:dc:cafe::69) by MW4PR03CA0351.outlook.office365.com
+ (2603:10b6:303:dc:cafe::54) by MW4PR03CA0351.outlook.office365.com
  (2603:10b6:303:dc::26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4628.18 via Frontend
- Transport; Tue, 26 Oct 2021 17:56:01 +0000
+ Transport; Tue, 26 Oct 2021 17:56:07 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
  smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
  header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
@@ -76,15 +76,15 @@ Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
 Received: from mail.nvidia.com (216.228.112.34) by
  CO1NAM11FT017.mail.protection.outlook.com (10.13.175.108) with Microsoft SMTP
  Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4628.16 via Frontend Transport; Tue, 26 Oct 2021 17:56:00 +0000
+ 15.20.4628.16 via Frontend Transport; Tue, 26 Oct 2021 17:56:06 +0000
 Received: from sw-mtx-036.mtx.labs.mlnx (172.20.187.6) by HQMAIL107.nvidia.com
  (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.18;
- Tue, 26 Oct 2021 17:55:53 +0000
+ Tue, 26 Oct 2021 17:55:56 +0000
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH linux-next v7 5/8] vdpa_sim_net: Enable user to set mac
- address and mtu
-Date: Tue, 26 Oct 2021 20:55:16 +0300
-Message-ID: <20211026175519.87795-6-parav@nvidia.com>
+Subject: [PATCH linux-next v7 6/8] vdpa/mlx5: Fix clearing of VIRTIO_NET_F_MAC
+ feature bit
+Date: Tue, 26 Oct 2021 20:55:17 +0300
+Message-ID: <20211026175519.87795-7-parav@nvidia.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20211026175519.87795-1-parav@nvidia.com>
 References: <20211026175519.87795-1-parav@nvidia.com>
@@ -94,28 +94,28 @@ X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
  HQMAIL107.nvidia.com (172.20.187.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: dcb6a7e2-b48f-40f0-7464-08d998a9df30
-X-MS-TrafficTypeDiagnostic: DM6PR12MB4355:
-X-Microsoft-Antispam-PRVS: <DM6PR12MB43554B285EFCA06CA59436C1DC849@DM6PR12MB4355.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:226;
+X-MS-Office365-Filtering-Correlation-Id: 5491de0c-57c6-4fb2-59c4-08d998a9e28b
+X-MS-TrafficTypeDiagnostic: BL1PR12MB5160:
+X-Microsoft-Antispam-PRVS: <BL1PR12MB5160C4E1E8DB27D2692307A2DC849@BL1PR12MB5160.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2043;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fVJYB5+X7lmXCwfwXRkJJLR7UtA+DxFilX7L/84+SbvgIfkpZEhBzkgo/V3lV43YC5J/hoGKuPXlCXW3GVlW+mlw9ljTd+0nmbiFFOXXO220UOokfXCbFryH63erQBlgJV3IlP7IUw8xrtoYhldLYPBKscnN1BPHGXt62lNZIlF+DXuh5D6yaHyCMnFoxef8NHbv5FNwhNw0O84YmX4ModdIej1N/fSvsvU6hXrmY9zNwDORkooajeFsLvsFf0SsIdctR9hEr/Xpu0ZzY68/2bb3FCQRUSFpH0hAztqTR/NL7m2KfAFV+GSOUwfx7BDflDBxqdlsehVaI3cHsUKumaNWZ5CFezKxRIU65dZBFwGSPDBTxFQWOdM4zAfumOqQO2qT60zi7iXyQbpwVdM1RoGLm9q3EpyIJsfAMw1YgO5t20Voi/yG7ocBkMHQMbABnxi7eM8arzXft55zEELUSZ39PRHU8EXXvsZMIkXPH8KQj6mfVnfZqH17xx7Wf2IYtsrDefymhorL4pW9kf1J1gQ87HAESFZGv151NF6Vhpc5D1OeMWhwTcxNdCkhqjG9QYozoKJckvprbGyvhanjubJ7CTDdipVBIO2yF8+IgsJw7O5mYA3YM44qE8YO4crOI4WgKCJDgN7DJTpKQ0QhpO5D7Tk4nRYBpuM9/+fHSqLGS7+Ji6O74C9LhRVukSN9HSQ40fwYz8u9puayECdH2A==
+X-Microsoft-Antispam-Message-Info: VfwHUxngriyhM6YeaGZLmgNlKkzY6whoeX09FcMiFh2fyslBOxmqWLJZU0Eae734i3cJLFAXR1y00AYw+I+anw0Dw9lYcHihrx7lsSsQ8AMq3ErNIz+HBhxJwEQxQ/3qXctYWRW/290Q6GrAEQFSSM96pLUmqBKSGZR4H+FMM/H3r3240HnZHqhkbNIEmQC5vCNnQz7cU4S9qDuCIGwDyDqB5sdF39d8tjYc5e7+ga/RJYUzXZX9968JF9rpJtjCnY0hgGga7iFKOF03KaVo6ueqpMlhjEj9oDuFkQc17OYq5D4SvwjktZ66No0Z9L2nWJrK+uAIdbkhn+eqKC1uZ/ouBhjcZnZZZCpv1xaHJL5JxFEkoK7L4iT+uVtXkgxSIWBY0UzE9E0pYDqSQmtYoDth7EDaZiIK53AJF/rgLlPZummUYQsLewZU9eoSwxOw2z7yS9rhK0WXV71qYeIfm51NTdR11VPfOG1vSpPC3DYqrjslsDWMl0lncZJI4Og5HhkgcvNEy7Cgju/hp5TpTKCDAPZxv21TpPwnWbbvu3jkLwW5L3lKRVe0HZYy0MhGNlQegJmuRbS1GsamU8ljMSz/ADlvkToE1RyW12B0T/Sw9Q//fsTKAm7AOE+6RRIbxu1nL4D0mFyFz9Qq5hvIh1BbmS5prvwuLqf/66vxjDD94EVJPlvMAdrZaIYtPCnxDFpaotrT20a381Aq9LdI9Q==
 X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(36840700001)(46966006)(186003)(2616005)(70206006)(16526019)(70586007)(426003)(47076005)(36860700001)(356005)(508600001)(36756003)(4326008)(1076003)(54906003)(82310400003)(336012)(26005)(83380400001)(6666004)(2906002)(5660300002)(86362001)(7636003)(8676002)(6916009)(8936002)(316002);
+ SFS:(4636009)(46966006)(36840700001)(16526019)(336012)(83380400001)(186003)(82310400003)(107886003)(1076003)(70206006)(70586007)(356005)(36860700001)(86362001)(36756003)(508600001)(7636003)(6916009)(8676002)(5660300002)(316002)(2616005)(54906003)(4326008)(6666004)(426003)(47076005)(8936002)(2906002)(26005);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 17:56:00.5638 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dcb6a7e2-b48f-40f0-7464-08d998a9df30
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2021 17:56:06.1427 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5491de0c-57c6-4fb2-59c4-08d998a9e28b
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
  Helo=[mail.nvidia.com]
 X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT017.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4355
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5160
 Cc: elic@nvidia.com, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -136,114 +136,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Enable user to set the mac address and mtu so that each vdpa device
-can have its own user specified mac address and mtu.
+Cited patch in the fixes tag clears the features bit during reset.
+mlx5 vdpa device feature bits are static decided by device capabilities.
+These feature bits (including VIRTIO_NET_F_MAC) are initialized during
+device addition time.
 
-Now that user is enabled to set the mac address, remove the module
-parameter for same.
+Clearing features bit in reset callback cleared the VIRTIO_NET_F_MAC. Due
+to this, MAC address provided by the device is not honored.
 
-And example of setting mac addr and mtu and view the configuration:
-$ vdpa mgmtdev show
-vdpasim_net:
-  supported_classes net
+Fix it by not clearing the static feature bits during reset.
 
-$ vdpa dev add name bar mgmtdev vdpasim_net mac 00:11:22:33:44:55 mtu 9000
-
-$ vdpa dev config show
-bar: mac 00:11:22:33:44:55 link up link_announce false mtu 9000
-
+Fixes: 0686082dbf7a ("vdpa: Add reset callback in vdpa_config_ops")
 Signed-off-by: Parav Pandit <parav@nvidia.com>
 Reviewed-by: Eli Cohen <elic@nvidia.com>
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
-changelog:
-v4->v5:
- - updated commit log example for add command
----
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 35 +++++++++++++++-------------
- 1 file changed, 19 insertions(+), 16 deletions(-)
+ drivers/vdpa/mlx5/net/mlx5_vnet.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-index d681e423e64f..76dd24abc791 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-@@ -16,6 +16,7 @@
- #include <linux/vringh.h>
- #include <linux/vdpa.h>
- #include <uapi/linux/virtio_net.h>
-+#include <uapi/linux/vdpa.h>
- 
- #include "vdpa_sim.h"
- 
-@@ -29,12 +30,6 @@
- 
- #define VDPASIM_NET_VQ_NUM	2
- 
--static char *macaddr;
--module_param(macaddr, charp, 0);
--MODULE_PARM_DESC(macaddr, "Ethernet MAC address");
--
--static u8 macaddr_buf[ETH_ALEN];
--
- static void vdpasim_net_work(struct work_struct *work)
- {
- 	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
-@@ -112,9 +107,21 @@ static void vdpasim_net_get_config(struct vdpasim *vdpasim, void *config)
- {
- 	struct virtio_net_config *net_config = config;
- 
--	net_config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
- 	net_config->status = cpu_to_vdpasim16(vdpasim, VIRTIO_NET_S_LINK_UP);
--	memcpy(net_config->mac, macaddr_buf, ETH_ALEN);
-+}
-+
-+static void vdpasim_net_setup_config(struct vdpasim *vdpasim,
-+				     const struct vdpa_dev_set_config *config)
-+{
-+	struct virtio_net_config *vio_config = vdpasim->config;
-+
-+	if (config->mask & (1 << VDPA_ATTR_DEV_NET_CFG_MACADDR))
-+		memcpy(vio_config->mac, config->net.mac, ETH_ALEN);
-+	if (config->mask & (1 << VDPA_ATTR_DEV_NET_CFG_MTU))
-+		vio_config->mtu = cpu_to_vdpasim16(vdpasim, config->net.mtu);
-+	else
-+		/* Setup default MTU to be 1500 */
-+		vio_config->mtu = cpu_to_vdpasim16(vdpasim, 1500);
- }
- 
- static void vdpasim_net_mgmtdev_release(struct device *dev)
-@@ -147,6 +154,8 @@ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name,
- 	if (IS_ERR(simdev))
- 		return PTR_ERR(simdev);
- 
-+	vdpasim_net_setup_config(simdev, config);
-+
- 	ret = _vdpa_register_device(&simdev->vdpa, VDPASIM_NET_VQ_NUM);
- 	if (ret)
- 		goto reg_err;
-@@ -180,20 +189,14 @@ static struct vdpa_mgmt_dev mgmt_dev = {
- 	.device = &vdpasim_net_mgmtdev,
- 	.id_table = id_table,
- 	.ops = &vdpasim_net_mgmtdev_ops,
-+	.config_attr_mask = (1 << VDPA_ATTR_DEV_NET_CFG_MACADDR |
-+			     1 << VDPA_ATTR_DEV_NET_CFG_MTU),
- };
- 
- static int __init vdpasim_net_init(void)
- {
- 	int ret;
- 
--	if (macaddr) {
--		mac_pton(macaddr, macaddr_buf);
--		if (!is_valid_ether_addr(macaddr_buf))
--			return -EADDRNOTAVAIL;
--	} else {
--		eth_random_addr(macaddr_buf);
--	}
--
- 	ret = device_register(&vdpasim_net_mgmtdev);
- 	if (ret)
- 		return ret;
+diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+index 6bbdc0ece707..8d1539728a59 100644
+--- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
++++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+@@ -2194,7 +2194,6 @@ static int mlx5_vdpa_reset(struct vdpa_device *vdev)
+ 	clear_vqs_ready(ndev);
+ 	mlx5_vdpa_destroy_mr(&ndev->mvdev);
+ 	ndev->mvdev.status = 0;
+-	ndev->mvdev.mlx_features = 0;
+ 	memset(ndev->event_cbs, 0, sizeof(ndev->event_cbs));
+ 	ndev->mvdev.actual_features = 0;
+ 	++mvdev->generation;
 -- 
 2.25.4
 
