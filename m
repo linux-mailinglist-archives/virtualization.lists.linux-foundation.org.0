@@ -1,81 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 772E543C608
-	for <lists.virtualization@lfdr.de>; Wed, 27 Oct 2021 11:03:58 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C74643C853
+	for <lists.virtualization@lfdr.de>; Wed, 27 Oct 2021 13:12:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D4B7D401D6;
-	Wed, 27 Oct 2021 09:03:56 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id CA8738187F;
+	Wed, 27 Oct 2021 11:12:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ND_Rfkz5umrL; Wed, 27 Oct 2021 09:03:55 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CCrpCTG_Xt71; Wed, 27 Oct 2021 11:12:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 83A4A40238;
-	Wed, 27 Oct 2021 09:03:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 97C74818A2;
+	Wed, 27 Oct 2021 11:12:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 11CC1C0036;
-	Wed, 27 Oct 2021 09:03:55 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 031B2C0036;
+	Wed, 27 Oct 2021 11:12:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4E377C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EFB36C000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 09:03:54 +0000 (UTC)
+ Wed, 27 Oct 2021 11:12:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 31D5C40238
+ by smtp3.osuosl.org (Postfix) with ESMTP id D84F8607B3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 09:03:54 +0000 (UTC)
+ Wed, 27 Oct 2021 11:12:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8t1MiJrTeLUa
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id erKONLHXtV85
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 09:03:53 +0000 (UTC)
+ Wed, 27 Oct 2021 11:12:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 49A5A401D6
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E56A060676
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 09:03:53 +0000 (UTC)
+ Wed, 27 Oct 2021 11:12:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635325432;
+ s=mimecast20190719; t=1635333123;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=HiJPaiuyZPbcdwIA9KdMWyKh2jI2bcomXoBjA/5KsHk=;
- b=JrKZ7qbTv3O/kcTpfaXjaMGfCaXIS97lxYuqpTmBelBoJm8+cJ7opdF8GDhpPe2s1rxnyh
- bRTPSHPaRuENQV2qxZyfKCv11UCekj8/Bh9T8BkW0HfTL/kk946XuUXrSvPZq2xA4PIdZL
- oWEGfOy2XCQT/ZGl+spMoFzZoFXXwu4=
+ bh=58QM51QiB3u8Solaxwp2laDRegtT860kcTO5RWMrF1E=;
+ b=DI416Edes+T7J2WOjlpTthRP+0sJdwJLqpu6sm8eZrOFk541Xx8NFbFRv4C4VwpfA8bAZc
+ PAM3O0lcemugL1SfvDxYhIqmeimRfZTKhuWY2vCfGuOgxNnPqcbcyZX9XAZDwuuBEBDhEK
+ 632Bcg+BWVUJQRVbw3zQsi7NJIxejYU=
 Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
  [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-324-2IE4rjOqM8SdmhK3Pzt2HQ-1; Wed, 27 Oct 2021 05:03:48 -0400
-X-MC-Unique: 2IE4rjOqM8SdmhK3Pzt2HQ-1
+ us-mta-261-EjqkAlj7P9WErJbDSjA96A-1; Wed, 27 Oct 2021 07:12:02 -0400
+X-MC-Unique: EjqkAlj7P9WErJbDSjA96A-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com
  [10.5.11.15])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A90189126B;
- Wed, 27 Oct 2021 09:03:47 +0000 (UTC)
-Received: from localhost (unknown [10.39.195.83])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 6FCDD5F4EE;
- Wed, 27 Oct 2021 09:03:44 +0000 (UTC)
-Date: Wed, 27 Oct 2021 10:03:43 +0100
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: michael.christie@oracle.com
-Subject: Re: [PATCH V3 11/11] vhost: allow userspace to create workers
-Message-ID: <YXkV73jK7fNGzcoX@stefanha-x1.localdomain>
-References: <20211022051911.108383-1-michael.christie@oracle.com>
- <20211022051911.108383-13-michael.christie@oracle.com>
- <8aee8f07-76bd-f111-bc5f-fc5cad46ce56@redhat.com>
- <4d33b7e1-5efb-3729-ee15-98608704f096@oracle.com>
+ by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BEF1C1006AA2;
+ Wed, 27 Oct 2021 11:12:00 +0000 (UTC)
+Received: from sirius.home.kraxel.org (ovpn-112-241.phx2.redhat.com
+ [10.3.112.241])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B83D95F4EE;
+ Wed, 27 Oct 2021 11:11:59 +0000 (UTC)
+Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
+ id DC9521801AA7; Wed, 27 Oct 2021 13:11:57 +0200 (CEST)
+Date: Wed, 27 Oct 2021 13:11:57 +0200
+From: Gerd Hoffmann <kraxel@redhat.com>
+To: Maksym Wezdecki <maksym.wezdecki@collabora.co.uk>
+Subject: Re: drm/virtio: not pin pages on demand
+Message-ID: <20211027111157.m5wppq52jzp3la3s@sirius.home.kraxel.org>
+References: <20211021074445.452309-1-maksym.wezdecki@collabora.com>
+ <20211021092535.ozafsijlakj7ccwc@sirius.home.kraxel.org>
+ <327a5c8a-d82d-f115-27bb-37125affe24b@collabora.co.uk>
+ <20211021115212.dk2kl2vbl6qotjwa@sirius.home.kraxel.org>
+ <CAPaKu7TfEtikdg2HEt2_PH7=zPbk=d9wfosDjNmr1AU6CC6sMw@mail.gmail.com>
+ <d1b610f3-6a73-eda1-a35b-3efc85cbb582@collabora.co.uk>
+ <ff1f2f85-2f14-af01-3f57-ed5abb4e8a49@collabora.co.uk>
 MIME-Version: 1.0
-In-Reply-To: <4d33b7e1-5efb-3729-ee15-98608704f096@oracle.com>
+In-Reply-To: <ff1f2f85-2f14-af01-3f57-ed5abb4e8a49@collabora.co.uk>
 X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
-Cc: linux-scsi@vger.kernel.org, mst@redhat.com,
- virtualization@lists.linux-foundation.org, target-devel@vger.kernel.org,
- pbonzini@redhat.com
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=kraxel@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: David Airlie <airlied@linux.ie>,
+ ML dri-devel <dri-devel@lists.freedesktop.org>, gurchetansingh@chromium.org,
+ "open list:VIRTIO CORE,
+ NET AND BLOCK DRIVERS" <virtualization@lists.linux-foundation.org>,
+ Chia-I Wu <olvaffe@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,82 +102,108 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6082121303299843387=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+[ Cc'ing Gurchetan Singh ]
 
---===============6082121303299843387==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="7VOiUeZYb/rbOPB5"
-Content-Disposition: inline
+> Can we follow up on this issue?
+> 
+> The main pain point with your suggestion is the fact,
+> that it will cause VirGL protocol breakage and we would
+> like to avoid this.
+> 
+> Extending execbuffer ioctl and create_resource ioctl is
+> more convenient than having the protocol broken.
 
+Do you know at resource creation time whenever you need cpu access
+or not?  IOW can we make that a resource property, so we don't have
+pass around lists of objects on each and every execbuffer ioctl?
 
---7VOiUeZYb/rbOPB5
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Blob resources is not a solution, too, because QEMU doesn't
+> support blob resources right now.
+> 
+> In ideal solution when both QEMU and crosvm support blob resources
+> we can switch to blob resources for textures.
 
-On Tue, Oct 26, 2021 at 11:49:37AM -0500, michael.christie@oracle.com wrote:
-> On 10/26/21 12:37 AM, Jason Wang wrote:
-> > Do we need VHOST_VRING_FREE_WORKER? And I wonder if using dedicated ioc=
-tls are better:
-> >=20
-> > VHOST_VRING_NEW/FREE_WORKER
-> > VHOST_VRING_ATTACH_WORKER
->=20
->=20
-> We didn't need a free worker, because the kernel handles it for userspace=
-=2E I
-> tried to make it easy for userspace because in some cases it may not be a=
-ble
-> to do syscalls like close on the device. For example if qemu crashes or f=
-or
-> vhost-scsi we don't do an explicit close during VM shutdown.
->=20
-> So we start off with the default worker thread that's used by all vqs lik=
-e we do
-> today. Userspace can then override it by creating a new worker. That also=
- unbinds/
-> detaches the existing worker and does a put on the workers refcount. We a=
-lso do a
-> put on the worker when we stop using it during device shutdown/closure/re=
-lease.
-> When the worker's refcount goes to zero the kernel deletes it.
+That'll only happen if someone works on it.
+I will not be able to do that though.
 
-Please document the worker (p)id lifetime for the ioctl. Otherwise
-userspace doesn't know whether a previously created worker is still
-alive.
+> I would like to introduce changes gradually and not make a protocol
+> breakage.
 
-SSTefan
+Well, opengl switching to blob resources is a protocol change anyway.
+That doesn't imply things will break though.  We have capsets etc to
+extend the protocol while maintaining backward compatibility.
 
---7VOiUeZYb/rbOPB5
-Content-Type: application/pgp-signature; name="signature.asc"
+> What do you think about that?
 
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmF5Fe8ACgkQnKSrs4Gr
-c8jfMwf/WNxR+7YZbmsVZ+oUXAYb2qAG6sPNc4zPOt3GHye/2a0FuI59d6dKn/R9
-aNuf1C/a5YMTigcqOSnV3pHjLEjQP7hHElDGJJIePNJqHTRf8rgRHX/+ORalRu24
-HH6CkCfGvwKkfztFa1jjwc9e6YNjtSVXBsPcD9EV3WQ7ZO5BaRBL8fiEcoHWmhRJ
-8YUO6TCv+aSZFltkM+9G3DBf90SPrcwixImuesvbP8J455/zAwBg4tYns0YLZvW5
-4PcbVP56MyoThHzbfA7g8FFLct9zDr4cFGYjuq+q8YX2da+dILEY/5PHkjPzWKcp
-ahFfycIxAyGsIcgqEtpcu7WC0HIFVg==
-=87xD
------END PGP SIGNATURE-----
-
---7VOiUeZYb/rbOPB5--
+I still think that switching to blob resources would be the better
+solution.  Yes, it's alot of work and not something which helps
+short-term.  But adding a new API as interim solution isn't great
+either.  So, not sure.  Chia-I Wu?  Gurchetan Singh?
 
 
---===============6082121303299843387==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+While being at it:  Chia-I Wu & Gurchetan Singh, could you help
+reviewing virtio-gpu kernel patches?  I think you both have a better
+view on the big picture (with both mesa and virglrenderer) than I have.
+Also for the crosvm side of things.  The procedure for that would be to
+send a patch adding yourself to the virtio-gpu section of the
+MAINTAINERS file, so scripts/get_maintainer.pl will Cc you on patches
+submitted.
+
+thanks,
+  Gerd
+
+> 
+> Maksym
+> 
+> 
+> On 10/22/21 10:44 AM, Maksym Wezdecki wrote:
+> 
+> > Once again with all lists and receivers. I'm sorry for that.
+> >
+> > On 10/21/21 6:42 PM, Chia-I Wu wrote:
+> >> On Thu, Oct 21, 2021 at 4:52 AM Gerd Hoffmann <kraxel@redhat.com> wrote:
+> >>> On Thu, Oct 21, 2021 at 11:55:47AM +0200, Maksym Wezdecki wrote:
+> >>>> I get your point. However, we need to make resource_create ioctl,
+> >>>> in order to create corresponding resource on the host.
+> >>> That used to be the case but isn't true any more with the new
+> >>> blob resources.  virglrenderer allows to create gpu objects
+> >>> via execbuffer.  Those gpu objects can be linked to a
+> >>> virtio-gpu resources, but it's optional.  In your case you
+> >>> would do that only for your staging buffer.  The other textures
+> >>> (which you fill with a host-side copy from the staging buffer)
+> >>> do not need a virtio-gpu resource in the first place.
+> >> That's however a breaking change to the virgl protocol.  All virgl
+> >> commands expect res ids rather than blob ids.
+> >>
+> >> Using VIRTGPU_BLOB_MEM_HOST3D could in theory work.  But there are a
+> >> few occasions where virglrenderer expects there to be guest storage.
+> >> There are also readbacks that we need to support.  We might end up
+> >> using VIRTGPU_BLOB_MEM_HOST3D_GUEST, where pin-on-demand is still
+> >> desirable.
+> >>
+> >> For this patch, I think the uapi change can be simplified.  It can be
+> >> a new param plus a new field in drm_virtgpu_execbuffer
+> >>
+> >>   __u64 bo_flags; /* pointer to an array of size num_bo_handles, or NULL */
+> >>
+> >> The other changes do not seem needed.
+> > My first approach was the same, as you mentioned. However, having "__u64 bo_flags"
+> > needs a for loop, where only few of the bo-s needs to be pinned - this has
+> > performance implications. I would rather pass bo handles that should be pinned than
+> > having a lot of flags, where only 1-2 bos needs to be pinned.
+> >
+> >>> take care,
+> >>>   Gerd
+> >>>
+
+-- 
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6082121303299843387==--
-
