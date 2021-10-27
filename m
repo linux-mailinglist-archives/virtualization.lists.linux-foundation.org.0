@@ -1,62 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B381A43C2D4
-	for <lists.virtualization@lfdr.de>; Wed, 27 Oct 2021 08:19:26 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7CB3043C3D1
+	for <lists.virtualization@lfdr.de>; Wed, 27 Oct 2021 09:23:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 6460C4013F;
-	Wed, 27 Oct 2021 06:19:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2687B80BB6;
+	Wed, 27 Oct 2021 07:23:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1zM8KJo8226l; Wed, 27 Oct 2021 06:19:24 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id DgID7o4g9c5t; Wed, 27 Oct 2021 07:23:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id B172040275;
-	Wed, 27 Oct 2021 06:19:23 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id DE1A180B79;
+	Wed, 27 Oct 2021 07:23:29 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C888EC0040;
-	Wed, 27 Oct 2021 06:19:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C123C0021;
+	Wed, 27 Oct 2021 07:23:29 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BDC8BC000E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2BD2AC000E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 06:19:20 +0000 (UTC)
+ Wed, 27 Oct 2021 07:23:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id A138680D5A
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0767280B02
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 06:19:20 +0000 (UTC)
+ Wed, 27 Oct 2021 07:23:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Tfbu6-Zu_9te
+ with ESMTP id G6PIdHylHFJV
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 06:19:20 +0000 (UTC)
+ Wed, 27 Oct 2021 07:23:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp1.osuosl.org (Postfix) with ESMTPS id ACB0B80D58
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id ABAEE80AA6
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 06:19:18 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R961e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=6; SR=0; TI=SMTPD_---0Utr84H5_1635315555; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Utr84H5_1635315555) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 27 Oct 2021 14:19:16 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org,
-	netdev@vger.kernel.org
-Subject: [PATCH 3/3] virtio-net: enable virtio indirect cache
-Date: Wed, 27 Oct 2021 14:19:13 +0800
-Message-Id: <20211027061913.76276-4-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20211027061913.76276-1-xuanzhuo@linux.alibaba.com>
-References: <20211027061913.76276-1-xuanzhuo@linux.alibaba.com>
+ Wed, 27 Oct 2021 07:23:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635319405;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=kKwjUWtGswnRMdQI3v9sQff+PJbuXRHpBkdFH8zvQS8=;
+ b=F6zvHl4lCvoz6Gg8+aGK338TZUWYRBv+T3VLq4xaKeLvrwpXiekgZ62dgXmrOW9tEMCGpP
+ 4R7CNJ3hjHFWO64lLBWw1IItkCfHaptcc9QJhX+au7Xnni6dUv4h52L6L/lyvrwlqz+yKW
+ 5w9r57+jLKeVFLF+QpXtFQwTfoZAKGw=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-388-Y3o8YOjnP-OQPdMfujGhPw-1; Wed, 27 Oct 2021 03:23:23 -0400
+X-MC-Unique: Y3o8YOjnP-OQPdMfujGhPw-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ a21-20020a1c7f15000000b0032cd93a2bd7so8134wmd.9
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 27 Oct 2021 00:23:23 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=kKwjUWtGswnRMdQI3v9sQff+PJbuXRHpBkdFH8zvQS8=;
+ b=abPycneKsyj18I0fRZl+ckzdhW3wiXLDt5tFohN7SDvexi3/CQ8Oq6+4dR8q7S3nOY
+ Y17Cp0nS2+DgoLT7BdGoDKzJ89nWcvLSYvAj979kd5NI5NnotODUALAAdBLLzk2aEcVb
+ 8IP7Ofkmro4VGWsI2pd+6S6CUIR6F0FFD9tQHEeb226dmEkwkrrrGexM+LS+v/8OHStq
+ 9g2lj77VL32ooomIqE+mLdw3kWX4J6oMHAMcaaHoWT4jpDyCt7piZEEOspQxGqz/hqTc
+ gi7lY+zUko6fzzPvnvFGR7NwDQ5iRp7uBKfBHqwOax3S2LcAIAKyS8d7RNku0ozaqxSW
+ 2dbA==
+X-Gm-Message-State: AOAM533ZxzqkEeha/aV/raZF9F1hXMRL+n2oBhtj+OPeTtXf+nMzXoQg
+ dlD3SoVLmf2SZkdNNxLX55M/PRuGvF/1AOWcOwkBfRXA7gtzB6xWaER0yOlojmYx11CYKipHKg+
+ a1dgNbjwRDjAWv69+CTKfZWBfeeRQ2Dq25pbn4doiGw==
+X-Received: by 2002:adf:f28f:: with SMTP id k15mr4931504wro.86.1635319402507; 
+ Wed, 27 Oct 2021 00:23:22 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxaV9JBTSXjkf98o2dkjaFTK9GIFBtEjH9xoFyu0KuDhxjriNpKUFW0HQUW6QxBma8zwjt32Q==
+X-Received: by 2002:adf:f28f:: with SMTP id k15mr4931493wro.86.1635319402370; 
+ Wed, 27 Oct 2021 00:23:22 -0700 (PDT)
+Received: from redhat.com ([2a03:c5c0:207e:a543:72f:c4d1:8911:6346])
+ by smtp.gmail.com with ESMTPSA id t12sm2683586wmq.44.2021.10.27.00.23.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Oct 2021 00:23:21 -0700 (PDT)
+Date: Wed, 27 Oct 2021 03:23:17 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Jakub Kicinski <kuba@kernel.org>
+Subject: Re: [PATCH net-next] net: virtio: use eth_hw_addr_set()
+Message-ID: <20211027032113-mutt-send-email-mst@kernel.org>
+References: <20211026175634.3198477-1-kuba@kernel.org>
 MIME-Version: 1.0
-Cc: Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>,
- "Michael S. Tsirkin" <mst@redhat.com>
+In-Reply-To: <20211026175634.3198477-1-kuba@kernel.org>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: netdev@vger.kernel.org, davem@davemloft.net,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,91 +110,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If the VIRTIO_RING_F_INDIRECT_DESC negotiation succeeds, and the number
-of sgs used for sending packets is greater than 1. We must constantly
-call __kmalloc/kfree to allocate/release desc.
+On Tue, Oct 26, 2021 at 10:56:34AM -0700, Jakub Kicinski wrote:
+> Commit 406f42fa0d3c ("net-next: When a bond have a massive amount
+> of VLANs...") introduced a rbtree for faster Ethernet address look
+> up. To maintain netdev->dev_addr in this tree we need to make all
+> the writes to it go through appropriate helpers.
+> 
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 
-In the case of extremely fast package delivery, the overhead cannot be
-ignored:
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
-  27.46%  [kernel]  [k] virtqueue_add
-  16.66%  [kernel]  [k] detach_buf_split
-  16.51%  [kernel]  [k] virtnet_xsk_xmit
-  14.04%  [kernel]  [k] virtqueue_add_outbuf
-   5.18%  [kernel]  [k] __kmalloc
-   4.08%  [kernel]  [k] kfree
-   2.80%  [kernel]  [k] virtqueue_get_buf_ctx
-   2.22%  [kernel]  [k] xsk_tx_peek_desc
-   2.08%  [kernel]  [k] memset_erms
-   0.83%  [kernel]  [k] virtqueue_kick_prepare
-   0.76%  [kernel]  [k] virtnet_xsk_run
-   0.62%  [kernel]  [k] __free_old_xmit_ptr
-   0.60%  [kernel]  [k] vring_map_one_sg
-   0.53%  [kernel]  [k] native_apic_mem_write
-   0.46%  [kernel]  [k] sg_next
-   0.43%  [kernel]  [k] sg_init_table
-   0.41%  [kernel]  [k] kmalloc_slab
+> ---
+> CC: mst@redhat.com
+> CC: jasowang@redhat.com
+> CC: virtualization@lists.linux-foundation.org
+> ---
+>  drivers/net/virtio_net.c | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index c501b5974aee..b7f35aff8e82 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -3177,12 +3177,16 @@ static int virtnet_probe(struct virtio_device *vdev)
+>  	dev->max_mtu = MAX_MTU;
+>  
+>  	/* Configuration may specify what MAC to use.  Otherwise random. */
+> -	if (virtio_has_feature(vdev, VIRTIO_NET_F_MAC))
+> +	if (virtio_has_feature(vdev, VIRTIO_NET_F_MAC)) {
+> +		u8 addr[MAX_ADDR_LEN];
+> +
+>  		virtio_cread_bytes(vdev,
+>  				   offsetof(struct virtio_net_config, mac),
+> -				   dev->dev_addr, dev->addr_len);
+> -	else
+> +				   addr, dev->addr_len);
 
-Compared to not using virtio indirect cache, virtio-net can get a 16%
-performance improvement when using indirect desc cache.
+Maybe BUG_ON(dev->addr_len > sizeof addr);
 
-In the test case, the CPU where the package is sent has reached 100%.
-The following are the PPS in two cases:
+here just to make sure we don't overflow addr silently?
 
-    indirect desc cache  | no cache
-    3074658              | 2685132
-    3111866              | 2666118
-    3152527              | 2653632
-    3125867              | 2669820
-    3027147              | 2644464
-    3069211              | 2669777
-    3038522              | 2675645
-    3034507              | 2671302
-    3102257              | 2685504
-    3083712              | 2692800
-    3051771              | 2676928
-    3080684              | 2695040
-    3147816              | 2720876
-    3123887              | 2705492
-    3180963              | 2699520
-    3191579              | 2676480
-    3161670              | 2686272
-    3189768              | 2692588
-    3174272              | 2686692
-    3143434              | 2682416
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/net/virtio_net.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 4ad25a8b0870..0ec29cf90d0a 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -27,9 +27,11 @@ static int napi_weight = NAPI_POLL_WEIGHT;
- module_param(napi_weight, int, 0444);
- 
- static bool csum = true, gso = true, napi_tx = true;
-+static bool virtio_desc_cache = true;
- module_param(csum, bool, 0444);
- module_param(gso, bool, 0444);
- module_param(napi_tx, bool, 0644);
-+module_param(virtio_desc_cache, bool, 0644);
- 
- /* FIXME: MTU in config. */
- #define GOOD_PACKET_LEN (ETH_HLEN + VLAN_HLEN + ETH_DATA_LEN)
-@@ -3214,6 +3216,8 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		vi->curr_queue_pairs = num_online_cpus();
- 	vi->max_queue_pairs = max_queue_pairs;
- 
-+	virtio_use_desc_cache(vdev, virtio_desc_cache);
-+
- 	/* Allocate/initialize the rx/tx queues, and invoke find_vqs */
- 	err = init_vqs(vi);
- 	if (err)
--- 
-2.31.0
+> +		dev_addr_set(dev, addr);
+> +	} else {
+>  		eth_hw_addr_random(dev);
+> +	}
+>  
+>  	/* Set up our device-specific information */
+>  	vi = netdev_priv(dev);
+> -- 
+> 2.31.1
 
 _______________________________________________
 Virtualization mailing list
