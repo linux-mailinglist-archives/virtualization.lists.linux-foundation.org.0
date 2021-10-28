@@ -1,85 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C86A043D89F
-	for <lists.virtualization@lfdr.de>; Thu, 28 Oct 2021 03:33:17 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id C15AF43D8AC
+	for <lists.virtualization@lfdr.de>; Thu, 28 Oct 2021 03:36:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 331F24010E;
-	Thu, 28 Oct 2021 01:33:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2CF0D60658;
+	Thu, 28 Oct 2021 01:36:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ldgibyqhKlES; Thu, 28 Oct 2021 01:33:15 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1UBQEBPyHoqK; Thu, 28 Oct 2021 01:36:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id B9ECA401C1;
-	Thu, 28 Oct 2021 01:33:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 17B7B6066A;
+	Thu, 28 Oct 2021 01:36:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07C72C000E;
-	Thu, 28 Oct 2021 01:33:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9D900C000E;
+	Thu, 28 Oct 2021 01:36:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 59474C000E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3492FC000E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Oct 2021 01:33:12 +0000 (UTC)
+ Thu, 28 Oct 2021 01:36:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2BC88606DA
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2A2346066A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Oct 2021 01:33:12 +0000 (UTC)
+ Thu, 28 Oct 2021 01:36:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=intel-com.20210112.gappssmtp.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 86KrFZc01lK9
+ with ESMTP id bWnf_IAuBVvv
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Oct 2021 01:33:10 +0000 (UTC)
+ Thu, 28 Oct 2021 01:36:24 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E9BCC60682
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0E3DD60665
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Oct 2021 01:33:10 +0000 (UTC)
-Received: by mail-pj1-x102e.google.com with SMTP id
- oa12-20020a17090b1bcc00b0019f715462a8so3426190pjb.3
+ Thu, 28 Oct 2021 01:36:23 +0000 (UTC)
+Received: by mail-pf1-x42a.google.com with SMTP id l203so4464577pfd.2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Oct 2021 18:33:10 -0700 (PDT)
+ Wed, 27 Oct 2021 18:36:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=intel-com.20210112.gappssmtp.com; s=20210112;
  h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=pAiaBNCk1xnEBH3C9EMpKzrgqAPJnlmXDrtIiJ0dt1I=;
- b=pAV9PI3uqSjbwl4ehA+e1fD0AmJsR9RObZKjbvBijn3hthsC3BOWhi8AwEhKayTbAn
- +kULxKOjbDPkdJvduTRaYnTinwRQ3sTGC3RmXxOu+ZBFQAZP2dCfU0u+xx+MyQD5sCXu
- juQ8/OlFDYxVdxNYORCgy1YjcIYTJ/VbxjTb7UxVpCGr1z8kM8Yws8W6G4x0NWwc6hyB
- NrmNiLX5o2T12KN42PUJoRgcExOicwbK7jy2OCO7u+1RAggFonc1ris6SaZqTakBedPe
- +KiIfancYaA+JSRyfWPQcobeLcn00lylDFmKvFb7FlRzM0bgeIYcMRtTDSe9GGiatzrv
- LAlg==
+ :cc; bh=h7Igm7cptJn/BPiAKOvXNcYjYvau2fVkwbEBPR40Qac=;
+ b=nDN9pMycEij+MvvSNlzKvOXo8vpzX9jkSPwoFJ+o4gm3MZL73HDZVz6xJnzjMcbY/h
+ uxqb8I8SZcSxzyFyBYzX7/LIRnqjurLkxyKCXt7vyn4OmQMNyDT08nPuKyqwzm30Iyl3
+ YY7ptNRp5CFdB0o2rG3ZcydKtS+P5TBWxjp9noe/kCn6hPByhWq1BSGoPPpBqB7Delwx
+ 7OpBf+W0FVyg/SVq09iZbg3g6KwhgjDGpF6ftYJKhyxVAQrctr7Lax8JbvRVtA2fECbQ
+ ljET309ufBhSYyMPecwX45v0eqgX6tTFFZvO7U3Ppi7VtOy0tKDgD/ePUmL2riKDB8uo
+ 7IaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:mime-version:references:in-reply-to:from:date
  :message-id:subject:to:cc;
- bh=pAiaBNCk1xnEBH3C9EMpKzrgqAPJnlmXDrtIiJ0dt1I=;
- b=sH4Ez08L4qhu0AwXpRJvtnozqYhuc0HgDbj36VoD8FJxHQRGetX4vF1OQ3OdLSV3kk
- v+bBiHTpvs+Z5BFqN6mn/ys17S/UfQcZqR+OC66wfTWMa/HI/PNYHL4zIwqqFOzMYJ76
- WgDPVV5D+1qgdz6PesyHAHSF5k5V7p+R74TCLJ3rlqEQYQaQ9pjWPjr+jAm/9x6GJF9C
- LMGcF1aNOO0jazFFDw8j1fXJBYqmi4QmczkOVFAPvg2y3mAyEAmApuObaGljfFofH1T0
- l0Ko/QPQmKXW7mVaQFsr5ZL8UdI0npRTgFDrNhMN5rBCY+8B9mZFfMYZHuHEy8wz2xqM
- +nag==
-X-Gm-Message-State: AOAM53215V/fiA5HU/LhB2GjJVpLJZfji8D6qzjmT8ABOr/obd591v6X
- 49dLmgkvZOi6D/FvcoHGNgkmDu6sbVyLiG98utoBYg==
-X-Google-Smtp-Source: ABdhPJxm6eCpHzum4moJkAnlQxDuj0JlmT3Vix8IBxxMECN3GUzGEt1VHXlaU6FsHMYZFBw/KnWLJLzVXyU36Brr9pk=
-X-Received: by 2002:a17:90b:3b88:: with SMTP id
- pc8mr1221700pjb.93.1635384790364; 
- Wed, 27 Oct 2021 18:33:10 -0700 (PDT)
+ bh=h7Igm7cptJn/BPiAKOvXNcYjYvau2fVkwbEBPR40Qac=;
+ b=ZqLfEsXhxmVW9Qmclflz9J3TwDdnFZK9POkNg3eIbWPYh9xVt5AStQtpRuq4XGqepa
+ aiNavpQytUthhzZ42QNq6HJ/shM5LUDMOtnfIr7Kx4DtjRWL5u8PqdCu0UUCTIp5a7Sx
+ TV94WkMzrBRsQDnYXx3RBCN6dQ6osSYzzGVxaVco0KYwQPB5Sn9m1UKfxc4H8SOWfuZj
+ byib5t9WEad/zKE2oeLxRv0vtQQQYnCUPnJhi08flcOFMDXTmRGFAf7UOMaQcyhlJeLW
+ Y7pZ1e+GDLUvujkCCO9LKrOBX+SP/bkRGF9V+jUJWH+SHM9O/rZvbV/12t9qTJza6xuD
+ G4QA==
+X-Gm-Message-State: AOAM532WIrmy+CyBiM7nD6ZRMoKRN0eueq42AqhisRo+QVZSxpumCdaG
+ vW78fE+qGpxEvkl6PT7NJNs/4HcQxtrABSQlzP8pOw==
+X-Google-Smtp-Source: ABdhPJyDv7rjKjhKzGrFppXBu1eyKYCO/S0EEDW+vfLySK20rv/agORLXNPU8PUP/nGzDZcfnIyFx3qV7wWhC+ogeBA=
+X-Received: by 2002:a05:6a00:140e:b0:444:b077:51ef with SMTP id
+ l14-20020a056a00140e00b00444b07751efmr1317245pfu.61.1635384983516; Wed, 27
+ Oct 2021 18:36:23 -0700 (PDT)
 MIME-Version: 1.0
 References: <20211018044054.1779424-1-hch@lst.de>
- <20211018044054.1779424-9-hch@lst.de>
-In-Reply-To: <20211018044054.1779424-9-hch@lst.de>
+ <20211018044054.1779424-10-hch@lst.de>
+In-Reply-To: <20211018044054.1779424-10-hch@lst.de>
 From: Dan Williams <dan.j.williams@intel.com>
-Date: Wed, 27 Oct 2021 18:32:58 -0700
-Message-ID: <CAPcyv4iK-Op9Nxoq91YLv0aRj6PkGF64UY0Z_kfovF0cpuJ_JQ@mail.gmail.com>
-Subject: Re: [PATCH 08/11] dm-linear: add a linear_dax_pgoff helper
+Date: Wed, 27 Oct 2021 18:36:11 -0700
+Message-ID: <CAPcyv4iaUPEo73+KsBdYhM72WqKqJpshL-YU_iWoujk5jNUhmA@mail.gmail.com>
+Subject: Re: [PATCH 09/11] dm-log-writes: add a log_writes_dax_pgoff helper
 To: Christoph Hellwig <hch@lst.de>, Mike Snitzer <snitzer@redhat.com>
 Cc: Linux NVDIMM <nvdimm@lists.linux.dev>,
  linux-s390 <linux-s390@vger.kernel.org>, linux-erofs@lists.ozlabs.org,
@@ -114,99 +111,6 @@ On Sun, Oct 17, 2021 at 9:41 PM Christoph Hellwig <hch@lst.de> wrote:
 Looks good.
 
 Mike, ack?
-
->
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  drivers/md/dm-linear.c | 49 +++++++++++++-----------------------------
->  1 file changed, 15 insertions(+), 34 deletions(-)
->
-> diff --git a/drivers/md/dm-linear.c b/drivers/md/dm-linear.c
-> index 32fbab11bf90c..bf03f73fd0f36 100644
-> --- a/drivers/md/dm-linear.c
-> +++ b/drivers/md/dm-linear.c
-> @@ -164,63 +164,44 @@ static int linear_iterate_devices(struct dm_target *ti,
->  }
->
->  #if IS_ENABLED(CONFIG_FS_DAX)
-> +static struct dax_device *linear_dax_pgoff(struct dm_target *ti, pgoff_t *pgoff)
-> +{
-> +       struct linear_c *lc = ti->private;
-> +       sector_t sector = linear_map_sector(ti, *pgoff << PAGE_SECTORS_SHIFT);
-> +
-> +       *pgoff = (get_start_sect(lc->dev->bdev) + sector) >> PAGE_SECTORS_SHIFT;
-> +       return lc->dev->dax_dev;
-> +}
-> +
->  static long linear_dax_direct_access(struct dm_target *ti, pgoff_t pgoff,
->                 long nr_pages, void **kaddr, pfn_t *pfn)
->  {
-> -       long ret;
-> -       struct linear_c *lc = ti->private;
-> -       struct block_device *bdev = lc->dev->bdev;
-> -       struct dax_device *dax_dev = lc->dev->dax_dev;
-> -       sector_t dev_sector, sector = pgoff * PAGE_SECTORS;
-> -
-> -       dev_sector = linear_map_sector(ti, sector);
-> -       ret = bdev_dax_pgoff(bdev, dev_sector, nr_pages * PAGE_SIZE, &pgoff);
-> -       if (ret)
-> -               return ret;
-> +       struct dax_device *dax_dev = linear_dax_pgoff(ti, &pgoff);
-> +
->         return dax_direct_access(dax_dev, pgoff, nr_pages, kaddr, pfn);
->  }
->
->  static size_t linear_dax_copy_from_iter(struct dm_target *ti, pgoff_t pgoff,
->                 void *addr, size_t bytes, struct iov_iter *i)
->  {
-> -       struct linear_c *lc = ti->private;
-> -       struct block_device *bdev = lc->dev->bdev;
-> -       struct dax_device *dax_dev = lc->dev->dax_dev;
-> -       sector_t dev_sector, sector = pgoff * PAGE_SECTORS;
-> +       struct dax_device *dax_dev = linear_dax_pgoff(ti, &pgoff);
->
-> -       dev_sector = linear_map_sector(ti, sector);
-> -       if (bdev_dax_pgoff(bdev, dev_sector, ALIGN(bytes, PAGE_SIZE), &pgoff))
-> -               return 0;
->         return dax_copy_from_iter(dax_dev, pgoff, addr, bytes, i);
->  }
->
->  static size_t linear_dax_copy_to_iter(struct dm_target *ti, pgoff_t pgoff,
->                 void *addr, size_t bytes, struct iov_iter *i)
->  {
-> -       struct linear_c *lc = ti->private;
-> -       struct block_device *bdev = lc->dev->bdev;
-> -       struct dax_device *dax_dev = lc->dev->dax_dev;
-> -       sector_t dev_sector, sector = pgoff * PAGE_SECTORS;
-> +       struct dax_device *dax_dev = linear_dax_pgoff(ti, &pgoff);
->
-> -       dev_sector = linear_map_sector(ti, sector);
-> -       if (bdev_dax_pgoff(bdev, dev_sector, ALIGN(bytes, PAGE_SIZE), &pgoff))
-> -               return 0;
->         return dax_copy_to_iter(dax_dev, pgoff, addr, bytes, i);
->  }
->
->  static int linear_dax_zero_page_range(struct dm_target *ti, pgoff_t pgoff,
->                                       size_t nr_pages)
->  {
-> -       int ret;
-> -       struct linear_c *lc = ti->private;
-> -       struct block_device *bdev = lc->dev->bdev;
-> -       struct dax_device *dax_dev = lc->dev->dax_dev;
-> -       sector_t dev_sector, sector = pgoff * PAGE_SECTORS;
-> -
-> -       dev_sector = linear_map_sector(ti, sector);
-> -       ret = bdev_dax_pgoff(bdev, dev_sector, nr_pages << PAGE_SHIFT, &pgoff);
-> -       if (ret)
-> -               return ret;
-> +       struct dax_device *dax_dev = linear_dax_pgoff(ti, &pgoff);
-> +
->         return dax_zero_page_range(dax_dev, pgoff, nr_pages);
->  }
->
-> --
-> 2.30.2
->
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
