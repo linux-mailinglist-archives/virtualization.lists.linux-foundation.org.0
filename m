@@ -1,68 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id AAD1D43F65E
-	for <lists.virtualization@lfdr.de>; Fri, 29 Oct 2021 06:57:45 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5873543F727
+	for <lists.virtualization@lfdr.de>; Fri, 29 Oct 2021 08:28:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8AD4D826D5;
-	Fri, 29 Oct 2021 04:57:43 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id jScBZr9RfshP; Fri, 29 Oct 2021 04:57:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 675EC826C7;
-	Fri, 29 Oct 2021 04:57:42 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D515CC0021;
-	Fri, 29 Oct 2021 04:57:41 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1457FC000E
- for <virtualization@lists.linux-foundation.org>;
- Fri, 29 Oct 2021 04:57:41 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id E23F74000B
- for <virtualization@lists.linux-foundation.org>;
- Fri, 29 Oct 2021 04:57:40 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6796C4047B;
+	Fri, 29 Oct 2021 06:28:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 2fvIKIvl4sL8
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0ppear8ARw5j; Fri, 29 Oct 2021 06:28:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id B9177402AE;
+	Fri, 29 Oct 2021 06:28:24 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 16F20C0040;
+	Fri, 29 Oct 2021 06:28:23 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F876C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 Oct 2021 04:57:39 +0000 (UTC)
+ Fri, 29 Oct 2021 06:28:21 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1456682553
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 29 Oct 2021 06:28:21 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id WSa1KGic4KyU
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 29 Oct 2021 06:28:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9F29640003
+Received: from out30-131.freemail.mail.aliyun.com
+ (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 271618258A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 29 Oct 2021 04:57:39 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10151"; a="230540204"
-X-IronPort-AV: E=Sophos;i="5.87,191,1631602800"; d="scan'208";a="230540204"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Oct 2021 21:57:38 -0700
-X-IronPort-AV: E=Sophos;i="5.87,191,1631602800"; d="scan'208";a="665692765"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
- by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 28 Oct 2021 21:57:38 -0700
-Date: Thu, 28 Oct 2021 21:57:37 -0700
-From: Ira Weiny <ira.weiny@intel.com>
-To: Christoph Hellwig <hch@lst.de>
-Subject: Re: [PATCH 03/11] dax: simplify the dax_device <-> gendisk association
-Message-ID: <20211029045737.GJ3538886@iweiny-DESK2.sc.intel.com>
-References: <20211018044054.1779424-1-hch@lst.de>
- <20211018044054.1779424-4-hch@lst.de>
+ Fri, 29 Oct 2021 06:28:18 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R531e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=6; SR=0; TI=SMTPD_---0Uu6U1Vy_1635488894; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0Uu6U1Vy_1635488894) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 29 Oct 2021 14:28:14 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: virtualization@lists.linux-foundation.org,
+	netdev@vger.kernel.org
+Subject: [PATCH v3 0/3] virtio support cache indirect desc
+Date: Fri, 29 Oct 2021 14:28:11 +0800
+Message-Id: <20211029062814.76594-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20211018044054.1779424-4-hch@lst.de>
-User-Agent: Mutt/1.11.1 (2018-12-01)
-Cc: nvdimm@lists.linux.dev, Mike Snitzer <snitzer@redhat.com>,
- linux-s390@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-xfs@vger.kernel.org, dm-devel@redhat.com, linux-fsdevel@vger.kernel.org,
- Dan Williams <dan.j.williams@intel.com>, linux-ext4@vger.kernel.org,
- linux-erofs@lists.ozlabs.org
+Cc: Jakub Kicinski <kuba@kernel.org>, "David S. Miller" <davem@davemloft.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,42 +71,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Oct 18, 2021 at 06:40:46AM +0200, Christoph Hellwig wrote:
-> Replace the dax_host_hash with an xarray indexed by the pointer value
-> of the gendisk, and require explicitl calls from the block drivers that
-> want to associate their gendisk with a dax_device.
-> 
-> Signed-off-by: Christoph Hellwig <hch@lst.de>
-> ---
->  drivers/dax/bus.c            |   2 +-
->  drivers/dax/super.c          | 106 +++++++++--------------------------
->  drivers/md/dm.c              |   6 +-
->  drivers/nvdimm/pmem.c        |   8 ++-
->  drivers/s390/block/dcssblk.c |  11 +++-
->  fs/fuse/virtio_fs.c          |   2 +-
->  include/linux/dax.h          |  19 +++++--
->  7 files changed, 60 insertions(+), 94 deletions(-)
-> 
-> diff --git a/drivers/dax/bus.c b/drivers/dax/bus.c
-> index 6cc4da4c713d9..6d91b0186e3be 100644
-> --- a/drivers/dax/bus.c
-> +++ b/drivers/dax/bus.c
-> @@ -1326,7 +1326,7 @@ struct dev_dax *devm_create_dev_dax(struct dev_dax_data *data)
->  	 * No 'host' or dax_operations since there is no access to this
->  	 * device outside of mmap of the resulting character device.
->  	 */
+If the VIRTIO_RING_F_INDIRECT_DESC negotiation succeeds, and the number
+of sgs used for sending packets is greater than 1. We must constantly
+call __kmalloc/kfree to allocate/release desc.
 
-NIT: this comment needs to be updated as well.
+In the case of extremely fast package delivery, the overhead cannot be
+ignored:
 
-Ira
+  27.46%  [kernel]  [k] virtqueue_add
+  16.66%  [kernel]  [k] detach_buf_split
+  16.51%  [kernel]  [k] virtnet_xsk_xmit
+  14.04%  [kernel]  [k] virtqueue_add_outbuf
+   5.18%  [kernel]  [k] __kmalloc
+   4.08%  [kernel]  [k] kfree
+   2.80%  [kernel]  [k] virtqueue_get_buf_ctx
+   2.22%  [kernel]  [k] xsk_tx_peek_desc
+   2.08%  [kernel]  [k] memset_erms
+   0.83%  [kernel]  [k] virtqueue_kick_prepare
+   0.76%  [kernel]  [k] virtnet_xsk_run
+   0.62%  [kernel]  [k] __free_old_xmit_ptr
+   0.60%  [kernel]  [k] vring_map_one_sg
+   0.53%  [kernel]  [k] native_apic_mem_write
+   0.46%  [kernel]  [k] sg_next
+   0.43%  [kernel]  [k] sg_init_table
+   0.41%  [kernel]  [k] kmalloc_slab
 
-> -	dax_dev = alloc_dax(dev_dax, NULL, NULL, DAXDEV_F_SYNC);
-> +	dax_dev = alloc_dax(dev_dax, NULL, DAXDEV_F_SYNC);
->  	if (IS_ERR(dax_dev)) {
->  		rc = PTR_ERR(dax_dev);
->  		goto err_alloc_dax;
+This patch adds a cache function to virtio to cache these allocated indirect
+desc instead of constantly allocating and releasing desc.
 
-[snip]
+v3:
+  pre-allocate per buffer indirect descriptors array
+
+v2:
+  use struct list_head to cache the desc
+
+*** BLURB HERE ***
+
+Xuan Zhuo (3):
+  virtio: cache indirect desc for split
+  virtio: cache indirect desc for packed
+  virtio-net: enable virtio desc cache
+
+ drivers/net/virtio_net.c     |  11 +++
+ drivers/virtio/virtio.c      |   6 ++
+ drivers/virtio/virtio_ring.c | 131 ++++++++++++++++++++++++++++++-----
+ include/linux/virtio.h       |  14 ++++
+ 4 files changed, 145 insertions(+), 17 deletions(-)
+
+--
+2.31.0
 
 _______________________________________________
 Virtualization mailing list
