@@ -1,92 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 178FA440CBF
-	for <lists.virtualization@lfdr.de>; Sun, 31 Oct 2021 06:00:20 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 893F8440EE5
+	for <lists.virtualization@lfdr.de>; Sun, 31 Oct 2021 15:46:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 71AE960708;
-	Sun, 31 Oct 2021 05:00:18 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 13A5280CCB;
+	Sun, 31 Oct 2021 14:46:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LNKjHM7PfXKb; Sun, 31 Oct 2021 05:00:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 32FB560785;
-	Sun, 31 Oct 2021 05:00:17 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id i-Tr1XavFK0f; Sun, 31 Oct 2021 14:46:27 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id A188380CC1;
+	Sun, 31 Oct 2021 14:46:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0BEC1C000E;
-	Sun, 31 Oct 2021 05:00:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 20A6BC0021;
+	Sun, 31 Oct 2021 14:46:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A85EBC0021
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C59D9C000E
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 05:00:15 +0000 (UTC)
+ Sun, 31 Oct 2021 14:46:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 9653980CFD
+ by smtp1.osuosl.org (Postfix) with ESMTP id BB9C980CC1
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 05:00:15 +0000 (UTC)
+ Sun, 31 Oct 2021 14:46:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id P8M0uDaC6mX5
+ with ESMTP id zflJffqFHh01
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 05:00:14 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
- [IPv6:2a00:1450:4864:20::132])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 64A9E80CF8
+ Sun, 31 Oct 2021 14:46:23 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6AEB980CC0
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 05:00:14 +0000 (UTC)
-Received: by mail-lf1-x132.google.com with SMTP id u21so29616397lff.8
+ Sun, 31 Oct 2021 14:46:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1635691581;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=Rq0X8V8MWJs5shRIzXsnMCP9VrwCGeQ+1+dswwtKpho=;
+ b=Jh5NbYoA4kyc1ssNQIvQwdEhoWqi8HkeagBSMpC3hJ0IOxHzF8Pp+InH7r1Q6KPoZgEz0p
+ +nV+y06wSxZ4Rh8r5VWEkyNIBSUn2Q49wwzvsQqCgVettuh912fkwZM38u3AwD43xnxOTo
+ A9kkvlhjaHN1vBlim0wOTIQXodO3wfY=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-284-9q7BdDpFOq2jJI7QIn-_xA-1; Sun, 31 Oct 2021 10:46:20 -0400
+X-MC-Unique: 9q7BdDpFOq2jJI7QIn-_xA-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ q7-20020adff507000000b0017d160d35a8so2059781wro.4
  for <virtualization@lists.linux-foundation.org>;
- Sat, 30 Oct 2021 22:00:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20210112.gappssmtp.com; s=20210112;
- h=from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding;
- bh=P85tINO6/x7BoGgJyTZxyTXKyP4RCHrmV1AQKxfeWJE=;
- b=K3GsKwdH/8LPW8YvS2ThbBMjgIpc/wfSPG9So9Q4zUu0FU+hfJJOhK1NNbsVHmyi5o
- caJNoRHkf0TmBl69GASb4UQWBvcpV7xjQUuB00m0dXNn20DIofK3IlhAFFsM9wmRbgjn
- sox3xNvSnqdRk4/O2/EGNoAbRJwaHII35SDF59vigu8C7LPQOuRf6v9FA9itxOnH77IA
- /lp3dabdM/IGyrPUqISmTCkDUPA6Yamg/SFwShMuovNA4tsx7abmIYZ9NNNyhvAnSLRu
- d3w0oPC7G2eIa8Q83Ka9jXzpwOR/QCB0tQoEhmuO88sNcn2axbHUb6z4y32V5s2KSEgn
- WnZg==
+ Sun, 31 Oct 2021 07:46:19 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
- :references:mime-version:content-transfer-encoding;
- bh=P85tINO6/x7BoGgJyTZxyTXKyP4RCHrmV1AQKxfeWJE=;
- b=1+JG8Y5ku9/P2dXmZQeZG/knQNMySUaa9X+rD2FI3bYe8KwJU60ARhX7ta4K/ZtW5x
- l1uejQ58BefOjiPhmpNSs10sdvJ7WbZ+Ygb698LG2R8Op+4TcS5eYvUxv1theMCQ4IsL
- yGt+YE53/R0BysRnNn11nXeS3UkqSFe/vh+xjy3SMm6OyGVQUCcCPTALIuRT87/WkCK5
- oP1roOLxMkQafsVCZRVjZMZEYOUvMC51fR+LgjpobEBgJGzzb86truOieDfEJMGC5uUl
- +9kEq7WQgi6zET8RteAgvx+xmBUHH0dULFhcrx+f3CjMKdvgQFEzyfrs7aQpSkDhWn3Z
- jxKQ==
-X-Gm-Message-State: AOAM5325IohHlDJfmc21frWQLBohpbAD5jiYvTL0PccDN14l+VRnB9Dx
- v6kHgYsmNf4p9jlj72o+w9geGw==
-X-Google-Smtp-Source: ABdhPJy4OWZQTeD5aF2yM3mtFrNa3B26deIualH1okDZv1ZHqVGOWFX7pGvlZQuveOHqVFaEGSlQhA==
-X-Received: by 2002:a05:6512:31d2:: with SMTP id
- j18mr197221lfe.229.1635656411408; 
- Sat, 30 Oct 2021 22:00:11 -0700 (PDT)
-Received: from navi.cosmonova.net.ua ([95.67.24.131])
- by smtp.gmail.com with ESMTPSA id v26sm444766lfo.125.2021.10.30.22.00.10
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=Rq0X8V8MWJs5shRIzXsnMCP9VrwCGeQ+1+dswwtKpho=;
+ b=0UTwvGNBRfufQqkk7kp/A4vB4ZjHM6Ln6gwUPCaat4c8f0YJjCe9JUb/xHMEAfpjqV
+ ST69Acm9uTGNzq+sBGfYRiTR7WeUxOU//2pXT0WAB3KuDmE0LUIqeHt2+EUExr0tIf/U
+ cMrwuepzHNx2+EK93AwnE+Fgyzok26N3HbSnF+NnNFQVQRIZYpmIMhV8k7hgNKilgO7N
+ eSnJJjlEx4XSwOa7nP/M3g9TTqPWPWK0kKjatPp8iM2BOSx4ykoCutyUKq1J/QkhAVVQ
+ FHqz73tNTWdZOw/MAgT+yciqROwYSWhNtjdNkxC+lImscQswhqmwtx6Pwp8enXvSFxCg
+ hDpg==
+X-Gm-Message-State: AOAM533cdsX4HT+JiAF9tsu70au8SktpszKs34wSmhIYiaT4ckZELAwo
+ 76sCVg8urZ7Lzu7FCqE3JYXdxdVo0FjL6X/JTvgExH134+wirB9rzvIprZvGyPO5VRmQ95uUIG/
+ 5i108Ic9J5iYtiGzF5KRh1kdDcWcIaA96UghD0JXgkg==
+X-Received: by 2002:adf:f7d2:: with SMTP id a18mr14447290wrq.354.1635691578880; 
+ Sun, 31 Oct 2021 07:46:18 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJwNW5BMvqYJSwWOrWqsdmGINH6TmxHhfLuxvbRjmfkFm9OfpIDeST3V2IiHP44/RvQQmJQrCw==
+X-Received: by 2002:adf:f7d2:: with SMTP id a18mr14447261wrq.354.1635691578584; 
+ Sun, 31 Oct 2021 07:46:18 -0700 (PDT)
+Received: from redhat.com ([2a03:c5c0:207e:6500:1024:cbd2:401c:e583])
+ by smtp.gmail.com with ESMTPSA id l11sm10869108wrt.49.2021.10.31.07.46.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 Oct 2021 22:00:11 -0700 (PDT)
-From: Andrew Melnychenko <andrew@daynix.com>
-To: mst@redhat.com, jasowang@redhat.com, davem@davemloft.net, kuba@kernel.org
-Subject: [RFC PATCH 4/4] drivers/net/virtio_net: Added RSS hash report control.
-Date: Sun, 31 Oct 2021 06:59:59 +0200
-Message-Id: <20211031045959.143001-5-andrew@daynix.com>
-X-Mailer: git-send-email 2.33.1
-In-Reply-To: <20211031045959.143001-1-andrew@daynix.com>
-References: <20211031045959.143001-1-andrew@daynix.com>
+ Sun, 31 Oct 2021 07:46:17 -0700 (PDT)
+Date: Sun, 31 Oct 2021 10:46:12 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH v2 1/3] virtio: cache indirect desc for split
+Message-ID: <20211031033157-mutt-send-email-mst@kernel.org>
+References: <20211028104919.3393-1-xuanzhuo@linux.alibaba.com>
+ <20211028104919.3393-2-xuanzhuo@linux.alibaba.com>
 MIME-Version: 1.0
-Cc: yan@daynix.com, netdev@vger.kernel.org, yuri.benditovich@daynix.com,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+In-Reply-To: <20211028104919.3393-2-xuanzhuo@linux.alibaba.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
+ Jakub Kicinski <kuba@kernel.org>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,221 +111,254 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added set_hash for skb.
-Also added hashflow set/get callbacks.
-Virtio RSS "IPv6 extensions" hashes disabled.
-Also, disabling RXH_IP_SRC/DST for TCP would disable then for UDP.
-TCP and UDP supports only:
-ethtool -U eth0 rx-flow-hash tcp4 sd
-    RXH_IP_SRC + RXH_IP_DST
-ethtool -U eth0 rx-flow-hash tcp4 sdfn
-    RXH_IP_SRC + RXH_IP_DST + RXH_L4_B_0_1 + RXH_L4_B_2_3
+On Thu, Oct 28, 2021 at 06:49:17PM +0800, Xuan Zhuo wrote:
+> In the case of using indirect, indirect desc must be allocated and
+> released each time, which increases a lot of cpu overhead.
+> 
+> Here, a cache is added for indirect. If the number of indirect desc to be
+> applied for is less than VIRT_QUEUE_CACHE_DESC_NUM, the desc array with
+> the size of VIRT_QUEUE_CACHE_DESC_NUM is fixed and cached for reuse.
+> 
+> Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 
-Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
----
- drivers/net/virtio_net.c | 159 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 159 insertions(+)
+What bothers me here is what happens if cache gets
+filled on one numa node, then used on another?
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index cff7340f40bb..b1ed373d942b 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -232,6 +232,8 @@ struct virtnet_info {
- 	bool has_rss_hash_report;
- 	u8 rss_key_size;
- 	u16 rss_indir_table_size;
-+	u32 rss_hash_types_supported;
-+	u32 rss_hash_types_saved;
- 
- 	/* Has control virtqueue */
- 	bool has_cvq;
-@@ -2272,6 +2274,131 @@ static void virtnet_init_default_rss(struct virtnet_info *vi)
- 	netdev_rss_key_fill(vi->ctrl->rss.key, vi->rss_key_size);
- }
- 
-+static void virtnet_get_hashflow(const struct virtnet_info *vi, struct ethtool_rxnfc *info)
-+{
-+	info->data = 0;
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_TCPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case TCP_V6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_TCPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case UDP_V4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_UDPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case UDP_V6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_UDPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST |
-+						 RXH_L4_B_0_1 | RXH_L4_B_2_3;
-+		} else if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv6) {
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+		}
-+		break;
-+	case IPV4_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4)
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+
-+		break;
-+	case IPV6_FLOW:
-+		if (vi->rss_hash_types_saved & VIRTIO_NET_RSS_HASH_TYPE_IPv4)
-+			info->data = RXH_IP_SRC | RXH_IP_DST;
-+
-+		break;
-+	default:
-+		info->data = 0;
-+		break;
-+	}
-+}
-+
-+static bool virtnet_set_hashflow(struct virtnet_info *vi, struct ethtool_rxnfc *info)
-+{
-+	u64 is_iphash = info->data & (RXH_IP_SRC | RXH_IP_DST);
-+	u64 is_porthash = info->data & (RXH_L4_B_0_1 | RXH_L4_B_2_3);
-+	u32 new_hashtypes = vi->rss_hash_types_saved;
-+
-+	if ((is_iphash && (is_iphash != (RXH_IP_SRC | RXH_IP_DST))) ||
-+	    (is_porthash && (is_porthash != (RXH_L4_B_0_1 | RXH_L4_B_2_3)))) {
-+		return false;
-+	}
-+
-+	if (!is_iphash && is_porthash)
-+		return false;
-+
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+	case UDP_V4_FLOW:
-+	case IPV4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_IPv4;
-+		if (is_iphash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_IPv4;
-+
-+		break;
-+	case TCP_V6_FLOW:
-+	case UDP_V6_FLOW:
-+	case IPV6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_IPv6;
-+		if (is_iphash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_IPv6;
-+
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	switch (info->flow_type) {
-+	case TCP_V4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_TCPv4;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_TCPv4;
-+
-+		break;
-+	case UDP_V4_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_UDPv4;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_UDPv4;
-+
-+		break;
-+	case TCP_V6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_TCPv6;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_TCPv6;
-+
-+		break;
-+	case UDP_V6_FLOW:
-+		new_hashtypes &= ~VIRTIO_NET_RSS_HASH_TYPE_UDPv6;
-+		if (is_porthash)
-+			new_hashtypes |= VIRTIO_NET_RSS_HASH_TYPE_UDPv6;
-+
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	if (new_hashtypes != vi->rss_hash_types_saved) {
-+		vi->rss_hash_types_saved = new_hashtypes;
-+		vi->ctrl->rss.table_info.hash_types = vi->rss_hash_types_saved;
-+		if (vi->dev->features & NETIF_F_RXHASH)
-+			return virtnet_commit_rss_command(vi);
-+	}
-+
-+	return true;
-+}
- 
- static void virtnet_get_drvinfo(struct net_device *dev,
- 				struct ethtool_drvinfo *info)
-@@ -2557,6 +2684,27 @@ static int virtnet_get_rxnfc(struct net_device *dev, struct ethtool_rxnfc *info,
- 	switch (info->cmd) {
- 	case ETHTOOL_GRXRINGS:
- 		info->data = vi->curr_queue_pairs;
-+		break;
-+	case ETHTOOL_GRXFH:
-+		virtnet_get_hashflow(vi, info);
-+		break;
-+	default:
-+		rc = -EOPNOTSUPP;
-+	}
-+
-+	return rc;
-+}
-+
-+static int virtnet_set_rxnfc(struct net_device *dev, struct ethtool_rxnfc *info)
-+{
-+	struct virtnet_info *vi = netdev_priv(dev);
-+	int rc = 0;
-+
-+	switch (info->cmd) {
-+	case ETHTOOL_SRXFH:
-+		if (!virtnet_set_hashflow(vi, info))
-+			rc = -EINVAL;
-+
- 		break;
- 	default:
- 		rc = -EOPNOTSUPP;
-@@ -2585,6 +2733,7 @@ static const struct ethtool_ops virtnet_ethtool_ops = {
- 	.get_rxfh = virtnet_get_rxfh,
- 	.set_rxfh = virtnet_set_rxfh,
- 	.get_rxnfc = virtnet_get_rxnfc,
-+	.set_rxnfc = virtnet_set_rxnfc,
- };
- 
- static void virtnet_freeze_down(struct virtio_device *vdev)
-@@ -2837,6 +2986,16 @@ static int virtnet_set_features(struct net_device *dev,
- 		vi->guest_offloads = offloads;
- 	}
- 
-+	if ((dev->features ^ features) & NETIF_F_RXHASH) {
-+		if (features & NETIF_F_RXHASH)
-+			vi->ctrl->rss.table_info.hash_types = vi->rss_hash_types_saved;
-+		else
-+			vi->ctrl->rss.table_info.hash_types = 0;
-+
-+		if (!virtnet_commit_rss_command(vi))
-+			return -EINVAL;
-+	}
-+
- 	return 0;
- }
- 
--- 
-2.33.1
+
+> ---
+>  drivers/virtio/virtio.c      |  6 +++
+>  drivers/virtio/virtio_ring.c | 77 ++++++++++++++++++++++++++++++++----
+>  include/linux/virtio.h       | 14 +++++++
+>  3 files changed, 89 insertions(+), 8 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+> index 0a5b54034d4b..1047149ac2a4 100644
+> --- a/drivers/virtio/virtio.c
+> +++ b/drivers/virtio/virtio.c
+> @@ -431,6 +431,12 @@ bool is_virtio_device(struct device *dev)
+>  }
+>  EXPORT_SYMBOL_GPL(is_virtio_device);
+>  
+> +void virtio_set_desc_cache(struct virtio_device *dev, u32 thr)
+> +{
+> +	dev->desc_cache_thr = thr;
+> +}
+> +EXPORT_SYMBOL_GPL(virtio_set_desc_cache);
+> +
+>  void unregister_virtio_device(struct virtio_device *dev)
+>  {
+>  	int index = dev->index; /* save for after device release */
+> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+> index dd95dfd85e98..0ebcd4f12d3b 100644
+> --- a/drivers/virtio/virtio_ring.c
+> +++ b/drivers/virtio/virtio_ring.c
+> @@ -117,6 +117,15 @@ struct vring_virtqueue {
+>  	/* Hint for event idx: already triggered no need to disable. */
+>  	bool event_triggered;
+>  
+> +	/* desc cache threshold
+> +	 *    0   - disable desc cache
+> +	 *    > 0 - enable desc cache. As the threshold of the desc cache.
+> +	 */
+> +	u32 desc_cache_thr;
+
+not really descriptive. also pls eschew abbreviation.
+
+> +
+> +	/* desc cache chain */
+> +	struct list_head desc_cache;
+
+hmm this puts extra pressure on cache. you never need to drop
+things in the middle. llist_head would be better I
+think ... no?
+
+
+> +
+>  	union {
+>  		/* Available for split ring */
+>  		struct {
+> @@ -423,7 +432,53 @@ static unsigned int vring_unmap_one_split(const struct vring_virtqueue *vq,
+>  	return extra[i].next;
+>  }
+>  
+> -static struct vring_desc *alloc_indirect_split(struct virtqueue *_vq,
+> +static void desc_cache_free(struct list_head *head)
+> +{
+> +	struct list_head *n, *pos;
+> +
+> +	BUILD_BUG_ON(sizeof(struct list_head) > sizeof(struct vring_desc));
+> +	BUILD_BUG_ON(sizeof(struct list_head) > sizeof(struct vring_packed_desc));
+> +
+> +	list_for_each_prev_safe(pos, n, head)
+> +		kfree(pos);
+> +}
+> +
+> +static void __desc_cache_put(struct vring_virtqueue *vq,
+> +			     struct list_head *node, int n)
+> +{
+> +	if (n <= vq->desc_cache_thr)
+> +		list_add(node, &vq->desc_cache);
+> +	else
+> +		kfree(node);
+
+this bothers me. Do we really need a full VQ's worth of
+indirect descriptors? Can't we set a limit on how many
+are used?
+
+
+> +}
+> +
+> +#define desc_cache_put(vq, desc, n) \
+> +	__desc_cache_put(vq, (struct list_head *)desc, n)
+
+replace with an inline function pls. in fact we dont need
+__desc_cache_put at all.
+
+
+> +
+> +static void *desc_cache_get(struct vring_virtqueue *vq,
+> +			    int size, int n, gfp_t gfp)
+> +{
+> +	struct list_head *node;
+> +
+> +	if (n > vq->desc_cache_thr)
+> +		return kmalloc_array(n, size, gfp);
+> +
+> +	if (!list_empty(&vq->desc_cache)) {
+> +		node = vq->desc_cache.next;
+> +		list_del(node);
+> +		return node;
+> +	}
+> +
+> +	return kmalloc_array(vq->desc_cache_thr, size, gfp);
+> +}
+> +
+> +#define _desc_cache_get(vq, n, gfp, tp) \
+> +	((tp *)desc_cache_get(vq, (sizeof(tp)), n, gfp))
+> +
+> +#define desc_cache_get_split(vq, n, gfp) \
+> +	_desc_cache_get(vq, n, gfp, struct vring_desc)
+> +
+
+same thing here.
+
+> +static struct vring_desc *alloc_indirect_split(struct vring_virtqueue *vq,
+>  					       unsigned int total_sg,
+>  					       gfp_t gfp)
+>  {
+> @@ -437,12 +492,12 @@ static struct vring_desc *alloc_indirect_split(struct virtqueue *_vq,
+>  	 */
+>  	gfp &= ~__GFP_HIGHMEM;
+>  
+> -	desc = kmalloc_array(total_sg, sizeof(struct vring_desc), gfp);
+> +	desc = desc_cache_get_split(vq, total_sg, gfp);
+>  	if (!desc)
+>  		return NULL;
+>  
+>  	for (i = 0; i < total_sg; i++)
+> -		desc[i].next = cpu_to_virtio16(_vq->vdev, i + 1);
+> +		desc[i].next = cpu_to_virtio16(vq->vq.vdev, i + 1);
+>  	return desc;
+>  }
+>  
+> @@ -508,7 +563,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+>  	head = vq->free_head;
+>  
+>  	if (virtqueue_use_indirect(_vq, total_sg))
+> -		desc = alloc_indirect_split(_vq, total_sg, gfp);
+> +		desc = alloc_indirect_split(vq, total_sg, gfp);
+>  	else {
+>  		desc = NULL;
+>  		WARN_ON_ONCE(total_sg > vq->split.vring.num && !vq->indirect);
+> @@ -652,7 +707,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+>  	}
+>  
+>  	if (indirect)
+> -		kfree(desc);
+> +		desc_cache_put(vq, desc, total_sg);
+>  
+>  	END_USE(vq);
+>  	return -ENOMEM;
+> @@ -717,7 +772,7 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
+>  	if (vq->indirect) {
+>  		struct vring_desc *indir_desc =
+>  				vq->split.desc_state[head].indir_desc;
+> -		u32 len;
+> +		u32 len, n;
+>  
+>  		/* Free the indirect table, if any, now that it's unmapped. */
+>  		if (!indir_desc)
+> @@ -729,10 +784,12 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
+>  				VRING_DESC_F_INDIRECT));
+>  		BUG_ON(len == 0 || len % sizeof(struct vring_desc));
+>  
+> -		for (j = 0; j < len / sizeof(struct vring_desc); j++)
+> +		n = len / sizeof(struct vring_desc);
+> +
+> +		for (j = 0; j < n; j++)
+>  			vring_unmap_one_split_indirect(vq, &indir_desc[j]);
+>  
+> -		kfree(indir_desc);
+> +		desc_cache_put(vq, indir_desc, n);
+>  		vq->split.desc_state[head].indir_desc = NULL;
+>  	} else if (ctx) {
+>  		*ctx = vq->split.desc_state[head].indir_desc;
+> @@ -2199,6 +2256,9 @@ struct virtqueue *__vring_new_virtqueue(unsigned int index,
+>  	vq->indirect = virtio_has_feature(vdev, VIRTIO_RING_F_INDIRECT_DESC) &&
+>  		!context;
+>  	vq->event = virtio_has_feature(vdev, VIRTIO_RING_F_EVENT_IDX);
+> +	vq->desc_cache_thr = vdev->desc_cache_thr;
+> +
+> +	INIT_LIST_HEAD(&vq->desc_cache);
+>  
+>  	if (virtio_has_feature(vdev, VIRTIO_F_ORDER_PLATFORM))
+>  		vq->weak_barriers = false;
+
+So e.g. for rx, we are wasting memory since indirect isn't used.
+
+
+> @@ -2329,6 +2389,7 @@ void vring_del_virtqueue(struct virtqueue *_vq)
+>  	if (!vq->packed_ring) {
+>  		kfree(vq->split.desc_state);
+>  		kfree(vq->split.desc_extra);
+> +		desc_cache_free(&vq->desc_cache);
+>  	}
+>  	kfree(vq);
+>  }
+> diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+> index 41edbc01ffa4..bda6f9853e97 100644
+> --- a/include/linux/virtio.h
+> +++ b/include/linux/virtio.h
+> @@ -118,6 +118,7 @@ struct virtio_device {
+>  	struct list_head vqs;
+>  	u64 features;
+>  	void *priv;
+> +	u32 desc_cache_thr;
+>  };
+>  
+>  static inline struct virtio_device *dev_to_virtio(struct device *_dev)
+> @@ -130,6 +131,19 @@ int register_virtio_device(struct virtio_device *dev);
+>  void unregister_virtio_device(struct virtio_device *dev);
+>  bool is_virtio_device(struct device *dev);
+>  
+> +/**
+> + * virtio_set_desc_cache - set virtio ring desc cache threshold
+> + *
+> + * virtio will cache the allocated indirect desc.
+> + *
+> + * This function must be called before find_vqs.
+> + *
+> + * @thr:
+> + *    0   - disable desc cache
+> + *    > 0 - enable desc cache. As the threshold of the desc cache.
+> + */
+> +void virtio_set_desc_cache(struct virtio_device *dev, u32 thr);
+> +
+>  void virtio_break_device(struct virtio_device *dev);
+>  
+>  void virtio_config_changed(struct virtio_device *dev);
+> -- 
+> 2.31.0
 
 _______________________________________________
 Virtualization mailing list
