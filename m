@@ -2,114 +2,99 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB9C9441044
-	for <lists.virtualization@lfdr.de>; Sun, 31 Oct 2021 19:59:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8B567441264
+	for <lists.virtualization@lfdr.de>; Mon,  1 Nov 2021 04:31:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 52F3C400BE;
-	Sun, 31 Oct 2021 18:59:31 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id EB80C4022E;
+	Mon,  1 Nov 2021 03:31:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3adm9-MRAY2K; Sun, 31 Oct 2021 18:59:30 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D5450401E1;
-	Sun, 31 Oct 2021 18:59:29 +0000 (UTC)
+	with ESMTP id iJ3yLULJg5Ks; Mon,  1 Nov 2021 03:31:36 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 8050D4022B;
+	Mon,  1 Nov 2021 03:31:35 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 68829C0036;
-	Sun, 31 Oct 2021 18:59:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AE7DCC0020;
+	Mon,  1 Nov 2021 03:31:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C243FC000E
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 848EEC000E
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 18:59:27 +0000 (UTC)
+ Mon,  1 Nov 2021 03:31:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B13FE606A0
+ by smtp4.osuosl.org (Postfix) with ESMTP id 532F140175
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 18:59:27 +0000 (UTC)
+ Mon,  1 Nov 2021 03:31:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UWIc-aogP7Id
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YaPTxEXJv02E
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 18:59:27 +0000 (UTC)
+ Mon,  1 Nov 2021 03:31:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [216.205.24.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D3DF060616
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1C2D140151
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 18:59:26 +0000 (UTC)
+ Mon,  1 Nov 2021 03:31:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1635706765;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
+ s=mimecast20190719; t=1635737489;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=l/4kG6bMV5loA1A9FHzGwLm47Xc3PteREau0B796BFM=;
- b=epC78ubTusEPrpCxOJzd2Mxv9SFHj4EMP56ansgOPgSlA6aV9sJomD7ZXotofMt1ySzfW5
- I/j2jUruwVk5TDw/93NRMfrHXuA2vxJ6tYzKUJgJlek6IhqGwBnmbRS+bTzhR9t6mgN4bP
- N0KocpDGAuEQkhHqCtVM6fpfQ6gHEL8=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-517-JuTMKQc_OK6eV1kAPoZgRA-1; Sun, 31 Oct 2021 14:59:24 -0400
-X-MC-Unique: JuTMKQc_OK6eV1kAPoZgRA-1
-Received: by mail-wr1-f72.google.com with SMTP id
- d13-20020adf9b8d000000b00160a94c235aso5497223wrc.2
+ bh=4z+r8vmmaZ/XATkk552nndpk1JEP3wPG2o03Q4EEusg=;
+ b=NvZLcYMg8sgcDdyNf6cVhtlMTYTa5x96IDO3rYpC9rj48MS6TUUVwCC6237Owjhl5FE5JK
+ DVNUMXTI69WmSVXqlG2Hq1aREwZZxgmZHwvLK8AgO9WKifzGLj1j4YMZzi/iYvJgiYJoKF
+ DH4G9cX6ti7fOAZ3TiSdVnFpl/HShSw=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-293-oF0c3m5kOliJ_U-C3vM4sQ-1; Sun, 31 Oct 2021 23:31:27 -0400
+X-MC-Unique: oF0c3m5kOliJ_U-C3vM4sQ-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ q6-20020a2e2a06000000b00212c856abc8so2324259ljq.4
  for <virtualization@lists.linux-foundation.org>;
- Sun, 31 Oct 2021 11:59:24 -0700 (PDT)
+ Sun, 31 Oct 2021 20:31:27 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:from:to:cc:subject:in-reply-to:references
- :user-agent:reply-to:date:message-id:mime-version
- :content-transfer-encoding;
- bh=l/4kG6bMV5loA1A9FHzGwLm47Xc3PteREau0B796BFM=;
- b=raEikwfc//BClNBbEbh5ZGTXCGQYQrZSyM2yFZPI+lPzonO/2wBc42qOSAEs0sR1uk
- wnsDY5Olb7wFLKXdLO5kGsOjsfWb4XU5s4W8tAI3MkIhyCfGnNgAPdq2+4gA62pVwKz4
- RHrX4/fM07iYyWdM5Y4ohcxEYVgamrVHbLEiXOnlAyyW4I5QYzb8537ioEjT6v33jogT
- RDvqg1XiMldbR+n05DFg7GNoMCz0MGMZSAe/g64y6rXJLA73rtPELNBnzzUIJChXK4wB
- pRffa2OQWoF+zvl6QjnCmedX9yaQZARanXM13hRMioT5t+bxPwS76S5xCiW2E5Ax+9j+
- 4drw==
-X-Gm-Message-State: AOAM531d5oGJCjKxnvr+9LbOpfHRc5aKpoElepiq8ZZmKV02LcXz5uab
- sqKYroDB2TVpiz2rbovAca1nSWgaLttRDk70PFN7NPrMVAa98SoPAivjqhLDsane4kfE6gXgkSJ
- 6KWHC84hpKIFZflk7IyMsVigP3RF3xRYzNB2NXNFzLA==
-X-Received: by 2002:a05:600c:4a27:: with SMTP id
- c39mr14031021wmp.101.1635706763054; 
- Sun, 31 Oct 2021 11:59:23 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxSuUBBToMZtFRRwyz33tJ9ibJ+rkz4BtRbW3+NAw8h4vD2Zr4BCuLyo4hInMYsaw49tmGyZQ==
-X-Received: by 2002:a05:600c:4a27:: with SMTP id
- c39mr14031002wmp.101.1635706762896; 
- Sun, 31 Oct 2021 11:59:22 -0700 (PDT)
-Received: from localhost ([178.139.231.243])
- by smtp.gmail.com with ESMTPSA id a26sm10170372wmm.46.2021.10.31.11.59.21
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Oct 2021 11:59:22 -0700 (PDT)
-From: Juan Quintela <quintela@redhat.com>
-To: Eugenio =?utf-8?Q?P=C3=A9rez?= <eperezma@redhat.com>
-Subject: Re: [RFC PATCH v5 01/26] util: Make some iova_tree parameters const
-In-Reply-To: <20211029183525.1776416-2-eperezma@redhat.com> ("Eugenio
- =?utf-8?Q?P=C3=A9rez=22's?=
- message of "Fri, 29 Oct 2021 20:35:00 +0200")
-References: <20211029183525.1776416-1-eperezma@redhat.com>
- <20211029183525.1776416-2-eperezma@redhat.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.2 (gnu/linux)
-Date: Sun, 31 Oct 2021 19:59:21 +0100
-Message-ID: <87a6iprpfa.fsf@secure.mitica>
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=4z+r8vmmaZ/XATkk552nndpk1JEP3wPG2o03Q4EEusg=;
+ b=A8rnNeUkZWEmNh/TSgedkBTPuAEfgqKPbgQ85uKh07ayv1irNZk6u36SFsuuyfWpfX
+ 376PnINirw1dhfYNDnltZUAxBUYWUGOx9d4aKZXRk1jZmuktnvovHoUz4ctWwTumwc7R
+ LGqdaliT4L9thuJMiFQUjbeJrsDdHVItO+qlFfj3uZDs3xkwsiZqUnighEanO3WXoQvP
+ ppRaveOjzGBJ03CmW/s8nKxtRvvFP0EBUXObou8Cy11tTZ9GmhrVCEX4Eh70z7d29KW7
+ QYmSBaInXZy5+6o5/caaWI3XA0iHpvVUh3hRRIbSsD69RTaFFClUWFX4/841Mbs9Cbl8
+ 8moQ==
+X-Gm-Message-State: AOAM530MsGVzTEXeFgk15QKbI6lu2cRgZiroAL1jJMbtIUkxlA5j7GYr
+ fa2TgWC/j5koDwVJpDNz1fIl+wV2PVaLs20zQoIb805ceSP3vBppKUCXl+OxzMpj5xWRK0mhCsM
+ YnxiKv8UwLwuJkTFMrdyEw/D5tKrK093DNFYBmSgAzMRl3sQZ8yQV+6jDdg==
+X-Received: by 2002:a05:6512:32c1:: with SMTP id
+ f1mr26163877lfg.498.1635737486321; 
+ Sun, 31 Oct 2021 20:31:26 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJzZWlYpHrxQKnB/mRgYJvPm5oK6xilCclq1C6WxSTBWhrktLxqFq+3etE8VWgYQ6+O+qG2hnOnZIaIV2E/R9cI=
+X-Received: by 2002:a05:6512:32c1:: with SMTP id
+ f1mr26163867lfg.498.1635737486110; 
+ Sun, 31 Oct 2021 20:31:26 -0700 (PDT)
 MIME-Version: 1.0
+References: <cover.1634870456.git.wuzongyong@linux.alibaba.com>
+ <cover.1635493219.git.wuzongyong@linux.alibaba.com>
+In-Reply-To: <cover.1635493219.git.wuzongyong@linux.alibaba.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Mon, 1 Nov 2021 11:31:15 +0800
+Message-ID: <CACGkMEv8+1YMhXfS31CoyFuwJ-toCLXd12ny7b=Ge+3fXWNYUw@mail.gmail.com>
+Subject: Re: [PATCH v7 0/9] vDPA driver for Alibaba ENI
+To: Wu Zongyong <wuzongyong@linux.alibaba.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=quintela@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Cc: Laurent Vivier <lvivier@redhat.com>, Eduardo Habkost <ehabkost@redhat.com>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- Richard Henderson <richard.henderson@linaro.org>, qemu-devel@nongnu.org,
- Markus Armbruster <armbru@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
- Xiao W Wang <xiao.w.wang@intel.com>, Harpreet Singh Anand <hanand@xilinx.com>,
- Eli Cohen <eli@mellanox.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Eric Blake <eblake@redhat.com>, virtualization@lists.linux-foundation.org,
- Parav Pandit <parav@mellanox.com>
+Cc: wei.yang1@linux.alibaba.com, mst <mst@redhat.com>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -121,24 +106,95 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: quintela@redhat.com
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-RXVnZW5pbyBQw6lyZXogPGVwZXJlem1hQHJlZGhhdC5jb20+IHdyb3RlOgo+IEFzIHFlbXUgZ3Vp
-ZGVsaW5lczoKPiBVbmxlc3MgYSBwb2ludGVyIGlzIHVzZWQgdG8gbW9kaWZ5IHRoZSBwb2ludGVk
-LXRvIHN0b3JhZ2UsIGdpdmUgaXQgdGhlCj4gImNvbnN0IiBhdHRyaWJ1dGUuCj4KPiBJbiB0aGUg
-cGFydGljdWxhciBjYXNlIG9mIGlvdmFfdHJlZV9maW5kIGl0IGFsbG93cyB0byBlbmZvcmNlIHdo
-YXQgaXMKPiByZXF1ZXN0ZWQgYnkgaXRzIGNvbW1lbnQsIHNpbmNlIHRoZSBjb21waWxlciB3b3Vs
-ZCBzaG91dCBpbiBjYXNlIG9mCj4gbW9kaWZ5aW5nIG9yIGZyZWVpbmcgdGhlIGNvbnN0LXF1YWxp
-ZmllZCByZXR1cm5lZCBwb2ludGVyLgo+Cj4gU2lnbmVkLW9mZi1ieTogRXVnZW5pbyBQw6lyZXog
-PGVwZXJlem1hQHJlZGhhdC5jb20+Cj4gQWNrZWQtYnk6IFBldGVyIFh1IDxwZXRlcnhAcmVkaGF0
-LmNvbT4KPiBSZXZpZXdlZC1ieTogUGhpbGlwcGUgTWF0aGlldS1EYXVkw6kgPHBoaWxtZEByZWRo
-YXQuY29tPgoKUmV2aWV3ZWQtYnk6IEp1YW4gUXVpbnRlbGEgPHF1aW50ZWxhQHJlZGhhdC5jb20+
-CgpUaGlzIHBhdGNoIGNhbiBnbyBpbiBhbHJlYWR5LCB3aG9zZSB0cmVlIHNob3VsZCB0aGlzIGdv
-IHRocm91Z2g/CgpMYXRlciwgSnVhbi4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlv
-bkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlv
-bi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Fri, Oct 29, 2021 at 5:15 PM Wu Zongyong
+<wuzongyong@linux.alibaba.com> wrote:
+>
+> This series implements the vDPA driver for Alibaba ENI (Elastic Network
+> Interface) which is built based on virtio-pci 0.9.5 specification.
+
+It looks to me Michael has applied the patches, if this is the case,
+we probably need to send patches on top.
+
+Thanks
+
+>
+> Changes since V6:
+> - set default min vq size to 1 intead of 0
+> - enable eni vdpa driver only on X86 hosts
+> - fix some typos
+>
+> Changes since V5:
+> - remove unused codes
+>
+> Changes since V4:
+> - check return values of get_vq_num_{max,min} when probing devices
+> - disable the driver on BE host via Kconfig
+> - add missing commit message
+>
+> Changes since V3:
+> - validate VIRTIO_NET_F_MRG_RXBUF when negotiate features
+> - present F_ORDER_PLATFORM in get_features
+> - remove endian check since ENI always use litter endian
+>
+> Changes since V2:
+> - add new attribute VDPA_ATTR_DEV_MIN_VQ_SIZE instead
+>   VDPA_ATTR_DEV_F_VERSION_1 to guide users to choose correct virtqueue
+>   size as suggested by Jason Wang
+> - present ACCESS_PLATFORM in get_features callback as suggested by Jason
+>   Wang
+> - disable this driver on Big Endian host as suggested by Jason Wang
+> - fix a typo
+>
+> Changes since V1:
+> - add new vdpa attribute VDPA_ATTR_DEV_F_VERSION_1 to indicate whether
+>   the vdpa device is legacy
+> - implement dedicated driver for Alibaba ENI instead a legacy virtio-pci
+>   driver as suggested by Jason Wang
+> - some bugs fixed
+>
+> Wu Zongyong (9):
+>   virtio-pci: introduce legacy device module
+>   vdpa: fix typo
+>   vp_vdpa: add vq irq offloading support
+>   vdpa: add new callback get_vq_num_min in vdpa_config_ops
+>   vdpa: min vq num of vdpa device cannot be greater than max vq num
+>   virtio_vdpa: setup correct vq size with callbacks get_vq_num_{max,min}
+>   vdpa: add new attribute VDPA_ATTR_DEV_MIN_VQ_SIZE
+>   eni_vdpa: add vDPA driver for Alibaba ENI
+>   eni_vdpa: alibaba: fix Kconfig typo
+>
+>  drivers/vdpa/Kconfig                   |   8 +
+>  drivers/vdpa/Makefile                  |   1 +
+>  drivers/vdpa/alibaba/Makefile          |   3 +
+>  drivers/vdpa/alibaba/eni_vdpa.c        | 553 +++++++++++++++++++++++++
+>  drivers/vdpa/vdpa.c                    |  13 +
+>  drivers/vdpa/virtio_pci/vp_vdpa.c      |  12 +
+>  drivers/virtio/Kconfig                 |  10 +
+>  drivers/virtio/Makefile                |   1 +
+>  drivers/virtio/virtio_pci_common.c     |  10 +-
+>  drivers/virtio/virtio_pci_common.h     |   9 +-
+>  drivers/virtio/virtio_pci_legacy.c     | 101 ++---
+>  drivers/virtio/virtio_pci_legacy_dev.c | 220 ++++++++++
+>  drivers/virtio/virtio_vdpa.c           |  16 +-
+>  include/linux/vdpa.h                   |   6 +-
+>  include/linux/virtio_pci_legacy.h      |  42 ++
+>  include/uapi/linux/vdpa.h              |   1 +
+>  16 files changed, 917 insertions(+), 89 deletions(-)
+>  create mode 100644 drivers/vdpa/alibaba/Makefile
+>  create mode 100644 drivers/vdpa/alibaba/eni_vdpa.c
+>  create mode 100644 drivers/virtio/virtio_pci_legacy_dev.c
+>  create mode 100644 include/linux/virtio_pci_legacy.h
+>
+> --
+> 2.31.1
+>
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
