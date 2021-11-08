@@ -1,81 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53F80447CD7
-	for <lists.virtualization@lfdr.de>; Mon,  8 Nov 2021 10:32:03 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id CAA9E447CD3
+	for <lists.virtualization@lfdr.de>; Mon,  8 Nov 2021 10:32:00 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7898140202;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 02BE240249;
 	Mon,  8 Nov 2021 09:31:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id K8njYQWXitlV; Mon,  8 Nov 2021 09:31:58 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 4082B4020A;
-	Mon,  8 Nov 2021 09:31:58 +0000 (UTC)
+	with ESMTP id DVlUSV9bFCHR; Mon,  8 Nov 2021 09:31:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id A552640202;
+	Mon,  8 Nov 2021 09:31:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 40ABFC000E;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 04B75C0021;
 	Mon,  8 Nov 2021 09:31:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 89C94C0012
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6AFDFC000E
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Nov 2021 09:31:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 854C640207
+ by smtp3.osuosl.org (Postfix) with ESMTP id 57C296077D
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Nov 2021 09:31:56 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MR32WeiXuPh7
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="10yYSekU";
+ dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
+ header.d=suse.de header.b="uRBR26mp"
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Te4dcWIJFOa1
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Nov 2021 09:31:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 3E1B64013E
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A7B5F6059A
  for <virtualization@lists.linux-foundation.org>;
  Mon,  8 Nov 2021 09:31:55 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 2D3761FD71;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 653D221AFD;
  Mon,  8 Nov 2021 09:31:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1636363913; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=5XyQx0AR4GPq5hVW1Qc5M0q7dshvnisHzKYMYXuS6aY=;
- b=uAnMa/J74iDjOx7Ds5xZraGMBn6PTJAgRbJ2/op62jbOc/tLXshx+k8a+UETyamy1p1m1f
- Co5F3R9jS80pL63lHYT1dXBBtqh5bZoaoPHa9NjMexlYzevIYqSX5UEXKkyobOSB1p6Zr2
- Kzvv7RDLJW8Ry7c3GCJB1Ysa1dvgj/4=
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=07JoL4bBvlgW7FAbTjLwbLbhqbJPxRNwzr5W+o8JB8E=;
+ b=10yYSekUU4TZrgWNMKqRVO/BJghCmR2I7vqDwV2A4Ml/ZYwIfaaf9gYBdNJ4th/VNl1qYE
+ nJUKxASX3BBSTfkofvCMspVF0xPMULT96/2ONV0DUDSytf4v1Lf+3EYYFEAkCl8tXzdP0y
+ /R4P4CUN9S43cobtpVmGTRLRHPknWGE=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1636363913;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
- bh=5XyQx0AR4GPq5hVW1Qc5M0q7dshvnisHzKYMYXuS6aY=;
- b=m4SuzB/KpGriWkhlzDfl8ta39h56SY9bwdifRsL0AX2d+eki3qIm4xjg1gttOOf2JzOjUA
- pnWd2le0IqHbIgBA==
+ mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=07JoL4bBvlgW7FAbTjLwbLbhqbJPxRNwzr5W+o8JB8E=;
+ b=uRBR26mpU30UTPA5bFqVfBcy5TISNqd6b39cYGCwnr2kfcDYhy2Yt7OLmk56CKZufD1/QN
+ LmnB1W/tGw2ZbtAg==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id F076413B04;
- Mon,  8 Nov 2021 09:31:52 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 328F713B04;
+ Mon,  8 Nov 2021 09:31:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id nQN/OYjuiGFXfAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 08 Nov 2021 09:31:52 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id MNlUC4nuiGFXfAAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Mon, 08 Nov 2021 09:31:53 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
-Subject: [PATCH v2 0/3] drm/shmem-helper: Cleanup public interface
-Date: Mon,  8 Nov 2021 10:31:46 +0100
-Message-Id: <20211108093149.7226-1-tzimmermann@suse.de>
+Subject: [PATCH v2 1/3] drm/shmem-helper: Unexport
+ drm_gem_shmem_create_with_handle()
+Date: Mon,  8 Nov 2021 10:31:47 +0100
+Message-Id: <20211108093149.7226-2-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.33.1
+In-Reply-To: <20211108093149.7226-1-tzimmermann@suse.de>
+References: <20211108093149.7226-1-tzimmermann@suse.de>
 MIME-Version: 1.0
-Cc: Thomas Zimmermann <tzimmermann@suse.de>, lima@lists.freedesktop.org,
+Cc: Daniel Vetter <daniel.vetter@ffwll.ch>,
+ Thomas Zimmermann <tzimmermann@suse.de>, lima@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -93,45 +105,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The interface of GEM SHMEM helpers inconsistently uses either struct
-drm_gem_object or drm_gem_shmem_object for the GEM object. Convert GEM
-SHMEM functions to accept struct drm_gem_shmem_object, provide small
-wrappers for GEM object callbacks and update all users.
+Turn drm_gem_shmem_create_with_handle() into an internal helper
+function. It's not used outside of the compilation unit.
 
-Converting all GEM object functions to use drm_gem_shmem_object enables
-type checking by the C compiler. Previous callers could have passed any
-implementation of drm_gem_object to the GEM SHMEM helpers. It also
-removes upcasting in the GEM functions and simplifies the caller side.
-No functional changes.
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+---
+ drivers/gpu/drm/drm_gem_shmem_helper.c | 3 +--
+ include/drm/drm_gem_shmem_helper.h     | 5 -----
+ 2 files changed, 1 insertion(+), 7 deletions(-)
 
-For GEM object callbacks, the SHMEM helper library now provides a
-number of small wrappers that do the necessary upcasting. Again no
-functional changes.
-
-v2:
-	* documentation fixes and updates (Daniel)
-
-Thomas Zimmermann (3):
-  drm/shmem-helper: Unexport drm_gem_shmem_create_with_handle()
-  drm/shmem-helper: Export dedicated wrappers for GEM object functions
-  drm/shmem-helper: Pass GEM shmem object in public interfaces
-
- drivers/gpu/drm/drm_gem_shmem_helper.c        | 131 ++++++--------
- drivers/gpu/drm/lima/lima_gem.c               |  18 +-
- drivers/gpu/drm/lima/lima_sched.c             |   4 +-
- drivers/gpu/drm/panfrost/panfrost_drv.c       |   2 +-
- drivers/gpu/drm/panfrost/panfrost_gem.c       |  20 ++-
- .../gpu/drm/panfrost/panfrost_gem_shrinker.c  |   2 +-
- drivers/gpu/drm/panfrost/panfrost_mmu.c       |   5 +-
- drivers/gpu/drm/panfrost/panfrost_perfcnt.c   |   6 +-
- drivers/gpu/drm/v3d/v3d_bo.c                  |  22 +--
- drivers/gpu/drm/virtio/virtgpu_object.c       |  27 ++-
- include/drm/drm_gem_shmem_helper.h            | 168 +++++++++++++++---
- 11 files changed, 256 insertions(+), 149 deletions(-)
-
-
-base-commit: 215295e7b0a3deb2015c6d6b343b319e4f6d9a1d
---
+diff --git a/drivers/gpu/drm/drm_gem_shmem_helper.c b/drivers/gpu/drm/drm_gem_shmem_helper.c
+index a5b743a83ce9..cd93e91b3487 100644
+--- a/drivers/gpu/drm/drm_gem_shmem_helper.c
++++ b/drivers/gpu/drm/drm_gem_shmem_helper.c
+@@ -410,7 +410,7 @@ void drm_gem_shmem_vunmap(struct drm_gem_object *obj, struct dma_buf_map *map)
+ }
+ EXPORT_SYMBOL(drm_gem_shmem_vunmap);
+ 
+-struct drm_gem_shmem_object *
++static struct drm_gem_shmem_object *
+ drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
+ 				 struct drm_device *dev, size_t size,
+ 				 uint32_t *handle)
+@@ -434,7 +434,6 @@ drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
+ 
+ 	return shmem;
+ }
+-EXPORT_SYMBOL(drm_gem_shmem_create_with_handle);
+ 
+ /* Update madvise status, returns true if not purged, else
+  * false or -errno.
+diff --git a/include/drm/drm_gem_shmem_helper.h b/include/drm/drm_gem_shmem_helper.h
+index 434328d8a0d9..6b47eb7d9f76 100644
+--- a/include/drm/drm_gem_shmem_helper.h
++++ b/include/drm/drm_gem_shmem_helper.h
+@@ -128,11 +128,6 @@ static inline bool drm_gem_shmem_is_purgeable(struct drm_gem_shmem_object *shmem
+ void drm_gem_shmem_purge_locked(struct drm_gem_object *obj);
+ bool drm_gem_shmem_purge(struct drm_gem_object *obj);
+ 
+-struct drm_gem_shmem_object *
+-drm_gem_shmem_create_with_handle(struct drm_file *file_priv,
+-				 struct drm_device *dev, size_t size,
+-				 uint32_t *handle);
+-
+ int drm_gem_shmem_dumb_create(struct drm_file *file, struct drm_device *dev,
+ 			      struct drm_mode_create_dumb *args);
+ 
+-- 
 2.33.1
 
 _______________________________________________
