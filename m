@@ -2,29 +2,29 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45F1144A88E
-	for <lists.virtualization@lfdr.de>; Tue,  9 Nov 2021 09:33:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0947644A889
+	for <lists.virtualization@lfdr.de>; Tue,  9 Nov 2021 09:33:44 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 04CA480BCD;
-	Tue,  9 Nov 2021 08:33:44 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9642880C85;
+	Tue,  9 Nov 2021 08:33:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GI3yO2ZWyfa1; Tue,  9 Nov 2021 08:33:43 +0000 (UTC)
+	with ESMTP id 1pOIUhQFpfbe; Tue,  9 Nov 2021 08:33:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id C3E5A80BF1;
-	Tue,  9 Nov 2021 08:33:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 6CE7980BF5;
+	Tue,  9 Nov 2021 08:33:41 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 74746C0040;
-	Tue,  9 Nov 2021 08:33:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3CE5FC000E;
+	Tue,  9 Nov 2021 08:33:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4CD6EC000E
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2E794C0012
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Nov 2021 08:33:40 +0000 (UTC)
+ Tue,  9 Nov 2021 08:33:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2A79840394
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0FD9F40395
  for <virtualization@lists.linux-foundation.org>;
  Tue,  9 Nov 2021 08:33:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
@@ -32,34 +32,34 @@ Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lunZQtgaGPQZ
+ with ESMTP id wOLm7XzrnAix
  for <virtualization@lists.linux-foundation.org>;
  Tue,  9 Nov 2021 08:33:38 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5BD2840392
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5F69040394
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 Nov 2021 08:33:38 +0000 (UTC)
+ Tue,  9 Nov 2021 08:33:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=jSKGrxUZLaYd3xMk2S2xH457WrAHkLgVZbJriQpBpNE=; b=D6Qw81O+aGHdSGLIg3S1q7rPKD
- R/sWFABcNQF3AaOMWnHmnIZRzu37fjd2u/pIqQY8s6H/uib2W7f9hKQS2xALeqBy9Z/8wRU+hn1De
- sRX2ZJYcFFNwtq8BoBYJ9YFiXucGevDveM1fubg49CT5eel8Mtzd/y4fMaTvd2rD2T3+SaVC1rcRR
- XnBnxu1DevPWVNoseeq5kimfTYRxWAd2eeCepAKvQcani/qsgLIg3qsH9CAdj6CAXbwBNsVDBSRo7
- yY9ibo9efoKhptJSrdNP1b86IS3i2PjvFiHQMlTkKl4s4rSb2GTwHR7nWpa8ExhI3CSg5fudf2lSm
- XbJXksuw==;
+ bh=PrmU1McI9Lz9rWePxXHiZdW7Le1GN8Zv7TzW7GRRfmk=; b=CuJDt0FnnSJ1eRr3YU30gflIA6
+ 5CCyiEF5PJ92FLWSC5MIrL2oH/HvW4JocKHiNlKk53JCqDzd/ckeXXc2zjfc+Q5VpKYbrY6owJYE1
+ bd4bldr9fdxNNWB/TJ3uOl0qQSqz847WVXvuknaL4G1y9MO7XW5obvlN+sFSF2aPN7NtTYpBfBBCk
+ lCOIJmFMmk2HWX/bA8RoUdDE2LpUM3knxONSKfFdJTzGHFn3Eh/RmVJo4ZhGtXdzyxdB041usXmfr
+ YPoaGNkMnx0dmYe61d55DOrfJlq0O0+WS5XMVD8VYwZ8QNZlI2PRnvOg/51w4Q6RBTR0HukCpwuWF
+ b0zyKNrw==;
 Received: from [2001:4bb8:19a:7ee7:fb46:2fe1:8652:d9d4] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mkMZG-000ryb-Kt; Tue, 09 Nov 2021 08:33:23 +0000
+ id 1mkMZI-000rzk-Aa; Tue, 09 Nov 2021 08:33:25 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Dan Williams <dan.j.williams@intel.com>
-Subject: [PATCH 05/29] dax: remove the pgmap sanity checks in
- generic_fsdax_supported
-Date: Tue,  9 Nov 2021 09:32:45 +0100
-Message-Id: <20211109083309.584081-6-hch@lst.de>
+Subject: [PATCH 06/29] dax: move the partition alignment check into
+ fs_dax_get_by_bdev
+Date: Tue,  9 Nov 2021 09:32:46 +0100
+Message-Id: <20211109083309.584081-7-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211109083309.584081-1-hch@lst.de>
 References: <20211109083309.584081-1-hch@lst.de>
@@ -87,80 +87,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Drivers that register a dax_dev should make sure it works, no need
-to double check from the file system.
+fs_dax_get_by_bdev is the primary interface to find a dax device for a
+block device, so move the partition alignment check there instead of
+wiring it up through ->dax_supported.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/dax/super.c | 49 +--------------------------------------------
- 1 file changed, 1 insertion(+), 48 deletions(-)
+ drivers/dax/super.c | 23 ++++++-----------------
+ 1 file changed, 6 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/dax/super.c b/drivers/dax/super.c
-index 9383c11b21853..04fc680542e8d 100644
+index 04fc680542e8d..482fe775324a4 100644
 --- a/drivers/dax/super.c
 +++ b/drivers/dax/super.c
-@@ -107,13 +107,9 @@ bool generic_fsdax_supported(struct dax_device *dax_dev,
+@@ -93,6 +93,12 @@ struct dax_device *fs_dax_get_by_bdev(struct block_device *bdev)
+ 	if (!blk_queue_dax(bdev->bd_disk->queue))
+ 		return NULL;
+ 
++	if ((get_start_sect(bdev) * SECTOR_SIZE) % PAGE_SIZE ||
++	    (bdev_nr_sectors(bdev) * SECTOR_SIZE) % PAGE_SIZE) {
++		pr_info("%pg: error: unaligned partition for dax\n", bdev);
++		return NULL;
++	}
++
+ 	id = dax_read_lock();
+ 	dax_dev = xa_load(&dax_hosts, (unsigned long)bdev->bd_disk);
+ 	if (!dax_dev || !dax_alive(dax_dev) || !igrab(&dax_dev->inode))
+@@ -107,10 +113,6 @@ bool generic_fsdax_supported(struct dax_device *dax_dev,
  		struct block_device *bdev, int blocksize, sector_t start,
  		sector_t sectors)
  {
--	bool dax_enabled = false;
- 	pgoff_t pgoff, pgoff_end;
--	void *kaddr, *end_kaddr;
--	pfn_t pfn, end_pfn;
- 	sector_t last_page;
--	long len, len2;
--	int err, id;
-+	int err;
- 
+-	pgoff_t pgoff, pgoff_end;
+-	sector_t last_page;
+-	int err;
+-
  	if (blocksize != PAGE_SIZE) {
  		pr_info("%pg: error: unsupported blocksize for dax\n", bdev);
-@@ -138,49 +134,6 @@ bool generic_fsdax_supported(struct dax_device *dax_dev,
+ 		return false;
+@@ -121,19 +123,6 @@ bool generic_fsdax_supported(struct dax_device *dax_dev,
  		return false;
  	}
  
--	id = dax_read_lock();
--	len = dax_direct_access(dax_dev, pgoff, 1, &kaddr, &pfn);
--	len2 = dax_direct_access(dax_dev, pgoff_end, 1, &end_kaddr, &end_pfn);
--
--	if (len < 1 || len2 < 1) {
--		pr_info("%pg: error: dax access failed (%ld)\n",
--				bdev, len < 1 ? len : len2);
--		dax_read_unlock(id);
+-	err = bdev_dax_pgoff(bdev, start, PAGE_SIZE, &pgoff);
+-	if (err) {
+-		pr_info("%pg: error: unaligned partition for dax\n", bdev);
 -		return false;
 -	}
 -
--	if (IS_ENABLED(CONFIG_FS_DAX_LIMITED) && pfn_t_special(pfn)) {
--		/*
--		 * An arch that has enabled the pmem api should also
--		 * have its drivers support pfn_t_devmap()
--		 *
--		 * This is a developer warning and should not trigger in
--		 * production. dax_flush() will crash since it depends
--		 * on being able to do (page_address(pfn_to_page())).
--		 */
--		WARN_ON(IS_ENABLED(CONFIG_ARCH_HAS_PMEM_API));
--		dax_enabled = true;
--	} else if (pfn_t_devmap(pfn) && pfn_t_devmap(end_pfn)) {
--		struct dev_pagemap *pgmap, *end_pgmap;
--
--		pgmap = get_dev_pagemap(pfn_t_to_pfn(pfn), NULL);
--		end_pgmap = get_dev_pagemap(pfn_t_to_pfn(end_pfn), NULL);
--		if (pgmap && pgmap == end_pgmap && pgmap->type == MEMORY_DEVICE_FS_DAX
--				&& pfn_t_to_page(pfn)->pgmap == pgmap
--				&& pfn_t_to_page(end_pfn)->pgmap == pgmap
--				&& pfn_t_to_pfn(pfn) == PHYS_PFN(__pa(kaddr))
--				&& pfn_t_to_pfn(end_pfn) == PHYS_PFN(__pa(end_kaddr)))
--			dax_enabled = true;
--		put_dev_pagemap(pgmap);
--		put_dev_pagemap(end_pgmap);
--
--	}
--	dax_read_unlock(id);
--
--	if (!dax_enabled) {
--		pr_info("%pg: error: dax support not enabled\n", bdev);
+-	last_page = PFN_DOWN((start + sectors - 1) * 512) * PAGE_SIZE / 512;
+-	err = bdev_dax_pgoff(bdev, last_page, PAGE_SIZE, &pgoff_end);
+-	if (err) {
+-		pr_info("%pg: error: unaligned partition for dax\n", bdev);
 -		return false;
 -	}
+-
  	return true;
  }
  EXPORT_SYMBOL_GPL(generic_fsdax_supported);
