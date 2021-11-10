@@ -1,63 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F16A44CA0C
-	for <lists.virtualization@lfdr.de>; Wed, 10 Nov 2021 21:05:08 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 940B3401F8;
-	Wed, 10 Nov 2021 20:05:06 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lloAhDp7Op3z; Wed, 10 Nov 2021 20:05:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 388EA400CE;
-	Wed, 10 Nov 2021 20:05:05 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C35EFC0036;
-	Wed, 10 Nov 2021 20:05:04 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EF761C001E
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 20:05:03 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7914344CA11
+	for <lists.virtualization@lfdr.de>; Wed, 10 Nov 2021 21:05:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id DE76680D26
- for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 20:05:03 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 029ED81852;
+	Wed, 10 Nov 2021 20:05:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qF14unqhhtkb
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cSZP4IGfcbCi; Wed, 10 Nov 2021 20:05:36 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 84D5B80DE3;
+	Wed, 10 Nov 2021 20:05:35 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1C840C0036;
+	Wed, 10 Nov 2021 20:05:35 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 770A3C001E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 20:05:03 +0000 (UTC)
+ Wed, 10 Nov 2021 20:05:34 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5608360AFA
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Nov 2021 20:05:34 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id yWcZXElqugjG
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 10 Nov 2021 20:05:33 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from outgoing-stata.csail.mit.edu (outgoing-stata.csail.mit.edu
  [128.30.2.210])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4125880CF9
+ by smtp3.osuosl.org (Postfix) with ESMTP id D152260775
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 20:05:03 +0000 (UTC)
+ Wed, 10 Nov 2021 20:05:33 +0000 (UTC)
 Received: from [128.177.79.46] (helo=[10.118.101.22])
  by outgoing-stata.csail.mit.edu with esmtpsa
  (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256) (Exim 4.82)
  (envelope-from <srivatsa@csail.mit.edu>)
- id 1mktq9-000YVe-97; Wed, 10 Nov 2021 15:05:01 -0500
-Subject: [PATCH v3 1/3] MAINTAINERS: Update maintainers for paravirt ops and
- VMware hypervisor interface
+ id 1mktqd-000YWI-51; Wed, 10 Nov 2021 15:05:31 -0500
+Subject: [PATCH v3 2/3] MAINTAINERS: Add Zack as maintainer of vmmouse driver
 From: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
 To: jgross@suse.com, x86@kernel.org, pv-drivers@vmware.com
-Date: Wed, 10 Nov 2021 12:08:16 -0800
-Message-ID: <163657487268.84207.5604596767569015608.stgit@srivatsa-dev>
+Date: Wed, 10 Nov 2021 12:08:45 -0800
+Message-ID: <163657490344.84207.11803468380735093749.stgit@srivatsa-dev>
 In-Reply-To: <163657479269.84207.13658789048079672839.stgit@srivatsa-dev>
 References: <163657479269.84207.13658789048079672839.stgit@srivatsa-dev>
 User-Agent: StGit/0.21
 MIME-Version: 1.0
-Cc: anishs@vmware.com, linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+Cc: anishs@vmware.com, linux-input@vger.kernel.org,
+ linux-kernel@vger.kernel.org, rostedt@goodmis.org,
  virtualization@lists.linux-foundation.org, keerthanak@vmware.com,
- namit@vmware.com, rostedt@goodmis.org, amakhalov@vmware.com, joe@perches.com,
- kuba@kernel.org
+ kuba@kernel.org, linux-graphics-maintainer@vmware.com, amakhalov@vmware.com,
+ joe@perches.com, namit@vmware.com, Zack Rusin <zackr@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -76,49 +76,32 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
 
-Deep has decided to transfer maintainership of the VMware hypervisor
-interface to Srivatsa, and the joint-maintainership of paravirt ops in
-the Linux kernel to Srivatsa and Alexey. Update the MAINTAINERS file
-to reflect this change.
+Zack Rusin will be taking over the maintainership of the VMware
+vmmouse driver. Update the MAINTAINERS file to reflect this change.
 
 Signed-off-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
-Acked-by: Alexey Makhalov <amakhalov@vmware.com>
-Acked-by: Deep Shah <sdeep@vmware.com>
-Acked-by: Juergen Gross <jgross@suse.com>
+Acked-by: Zack Rusin <zackr@vmware.com>
+Cc: linux-graphics-maintainer@vmware.com
+Cc: pv-drivers@vmware.com
+Cc: linux-input@vger.kernel.org
 Cc: stable@vger.kernel.org
 ---
 
- MAINTAINERS |    7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ MAINTAINERS |    1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 0ad926ba362f..0329d67c5bcf 100644
+index 0329d67c5bcf..21c0e49b80b9 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -14188,7 +14188,7 @@ F:	include/uapi/linux/ppdev.h
+@@ -20079,6 +20079,7 @@ S:	Maintained
+ F:	drivers/misc/vmw_vmci/
  
- PARAVIRT_OPS INTERFACE
- M:	Juergen Gross <jgross@suse.com>
--M:	Deep Shah <sdeep@vmware.com>
-+M:	Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+ VMWARE VMMOUSE SUBDRIVER
++M:	Zack Rusin <zackr@vmware.com>
+ M:	"VMware Graphics" <linux-graphics-maintainer@vmware.com>
  M:	"VMware, Inc." <pv-drivers@vmware.com>
- L:	virtualization@lists.linux-foundation.org
- L:	x86@kernel.org
-@@ -20038,10 +20038,13 @@ S:	Maintained
- F:	drivers/misc/vmw_balloon.c
- 
- VMWARE HYPERVISOR INTERFACE
--M:	Deep Shah <sdeep@vmware.com>
-+M:	Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
-+M:	Alexey Makhalov <amakhalov@vmware.com>
- M:	"VMware, Inc." <pv-drivers@vmware.com>
- L:	virtualization@lists.linux-foundation.org
-+L:	x86@kernel.org
- S:	Supported
-+T:	git git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git x86/vmware
- F:	arch/x86/include/asm/vmware.h
- F:	arch/x86/kernel/cpu/vmware.c
- 
+ L:	linux-input@vger.kernel.org
 
 _______________________________________________
 Virtualization mailing list
