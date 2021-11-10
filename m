@@ -1,80 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DE1944BEDC
-	for <lists.virtualization@lfdr.de>; Wed, 10 Nov 2021 11:37:18 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id B565744BEDB
+	for <lists.virtualization@lfdr.de>; Wed, 10 Nov 2021 11:37:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7DB8481777;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 25E2560ABF;
 	Wed, 10 Nov 2021 10:37:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rQ4Err7LEUlx; Wed, 10 Nov 2021 10:37:13 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id e5ceON-iiEgq; Wed, 10 Nov 2021 10:37:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 5F52781776;
-	Wed, 10 Nov 2021 10:37:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 46090608FA;
+	Wed, 10 Nov 2021 10:37:12 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2E18AC003E;
-	Wed, 10 Nov 2021 10:37:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BEA9EC0039;
+	Wed, 10 Nov 2021 10:37:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3B34AC0045
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8236AC0041
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 10:37:10 +0000 (UTC)
+ Wed, 10 Nov 2021 10:37:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 74B1F600C6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7B811403E5
  for <virtualization@lists.linux-foundation.org>;
  Wed, 10 Nov 2021 10:37:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="rf8ivSq1";
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="PXRc/+jR";
  dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="OwSyyupu"
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6mJ4hLCycf9y
+ header.d=suse.de header.b="7rI2BNbD"
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id cyUweJtwETU5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 10 Nov 2021 10:37:09 +0000 (UTC)
+ Wed, 10 Nov 2021 10:37:08 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DB3E46059F
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 90E514012E
  for <virtualization@lists.linux-foundation.org>;
  Wed, 10 Nov 2021 10:37:08 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 5EC0B21B1F;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id CB8D11FD74;
  Wed, 10 Nov 2021 10:37:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1636540626; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YBHgiHuqCfBFiBqdtgPNsgJGdnZyaBZsccEznn1hKBw=;
- b=rf8ivSq1SHp46/kL25egK5q5pkVrxXL+tceKviPPSoyaES2RFJrmL5mGFDBHHprb+iJmf3
- GI9sf79+TbExAHaygp7GsZw1lJ7I0jfsmAHPBvzueuJt8jJcXjmbY+GKNRdwiZgscBlCq6
- K7B7T2nJDWfU9fQAjFHSbByHugoO/o0=
+ bh=V4vUWBZxdqpwrdMFvztzjFWu33XEMeIjKvF6p3F68ko=;
+ b=PXRc/+jR/BpRJ2gjWjjT51cThj+CLEDJ6OtRptURPn381jJ9S3hDDW/BoFfZN2uvqkz+YS
+ 9vH67QCNE804kujDuj/2ecnMlXbVe1Eehx1eRgkYlEkVJ7gyAAt6AgZDhTpexNJJctF9qY
+ KVanQ2aJMslDYEl7yY/pFq1k60bXFok=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1636540626;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
+ mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YBHgiHuqCfBFiBqdtgPNsgJGdnZyaBZsccEznn1hKBw=;
- b=OwSyyupumV2ZJysBOrL4DXt/KXdf1kDttRQCcN5VAuKqRlYGS/xxgy0nf5FzO/qyXsiTd9
- crJ3Q8omiqAnaLCQ==
+ bh=V4vUWBZxdqpwrdMFvztzjFWu33XEMeIjKvF6p3F68ko=;
+ b=7rI2BNbDGnFxZ7FvRs81yC0uYD9WxPH6dT6fUNCau7JrTlPrxZdKRqX1LQzhGaQMH1WYJC
+ zNT+tgnfgYR6RUCA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id EE9B113BEA;
- Wed, 10 Nov 2021 10:37:05 +0000 (UTC)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6375713E72;
+ Wed, 10 Nov 2021 10:37:06 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id WM4YOdGgi2EnPAAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Wed, 10 Nov 2021 10:37:05 +0000
+ by imap2.suse-dmz.suse.de with ESMTPSA id gEtZF9Kgi2EnPAAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Wed, 10 Nov 2021 10:37:06 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com, noralf@tronnes.org,
@@ -83,9 +83,9 @@ To: daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
  kernel@amanoeldawod.com, dirty.ice.hu@gmail.com,
  michael+lkml@stapelberg.ch, aros@gmx.com, joshua@stroblindustries.com,
  arnd@arndb.de
-Subject: [PATCH v3 6/9] drm/fb-helper: Allocate shadow buffer of surface height
-Date: Wed, 10 Nov 2021 11:36:59 +0100
-Message-Id: <20211110103702.374-7-tzimmermann@suse.de>
+Subject: [PATCH v3 7/9] drm/simpledrm: Enable FB_DAMAGE_CLIPS property
+Date: Wed, 10 Nov 2021 11:37:00 +0100
+Message-Id: <20211110103702.374-8-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.33.1
 In-Reply-To: <20211110103702.374-1-tzimmermann@suse.de>
 References: <20211110103702.374-1-tzimmermann@suse.de>
@@ -103,27 +103,104 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-QWxsb2NhdGluZyBhIHNoYWRvdyBidWZmZXIgb2YgdGhlIGhlaWdodCBvZiB0aGUgYnVmZmVyIG9i
-amVjdCBkb2VzCm5vdCBzdXBwb3J0IGZiZGV2IG92ZXJhbGxvY2F0aW9uLiBVc2Ugc3VyZmFjZSBo
-ZWlnaHQgaW5zdGVhZC4KClNpZ25lZC1vZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVy
-bWFubkBzdXNlLmRlPgpSZXZpZXdlZC1ieTogTm9yYWxmIFRyw7hubmVzIDxub3JhbGZAdHJvbm5l
-cy5vcmc+Ci0tLQogZHJpdmVycy9ncHUvZHJtL2RybV9mYl9oZWxwZXIuYyB8IDIgKy0KIDEgZmls
-ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxldGlvbigtKQoKZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvZ3B1L2RybS9kcm1fZmJfaGVscGVyLmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2ZiX2hl
-bHBlci5jCmluZGV4IDhlN2ExMjRkNmM1YS4uOTcyN2E1OWQzNWZkIDEwMDY0NAotLS0gYS9kcml2
-ZXJzL2dwdS9kcm0vZHJtX2ZiX2hlbHBlci5jCisrKyBiL2RyaXZlcnMvZ3B1L2RybS9kcm1fZmJf
-aGVscGVyLmMKQEAgLTIzMzgsNyArMjMzOCw3IEBAIHN0YXRpYyBpbnQgZHJtX2ZiX2hlbHBlcl9n
-ZW5lcmljX3Byb2JlKHN0cnVjdCBkcm1fZmJfaGVscGVyICpmYl9oZWxwZXIsCiAJCXJldHVybiBQ
-VFJfRVJSKGZiaSk7CiAKIAlmYmktPmZib3BzID0gJmRybV9mYmRldl9mYl9vcHM7Ci0JZmJpLT5z
-Y3JlZW5fc2l6ZSA9IGZiLT5oZWlnaHQgKiBmYi0+cGl0Y2hlc1swXTsKKwlmYmktPnNjcmVlbl9z
-aXplID0gc2l6ZXMtPnN1cmZhY2VfaGVpZ2h0ICogZmItPnBpdGNoZXNbMF07CiAJZmJpLT5maXgu
-c21lbV9sZW4gPSBmYmktPnNjcmVlbl9zaXplOwogCiAJZHJtX2ZiX2hlbHBlcl9maWxsX2luZm8o
-ZmJpLCBmYl9oZWxwZXIsIHNpemVzKTsKLS0gCjIuMzMuMQoKX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZp
-cnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGlu
-dXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Enable the FB_DAMAGE_CLIPS property to reduce display-update
+overhead. Also fixes a warning in the kernel log.
+
+  simple-framebuffer simple-framebuffer.0: [drm] drm_plane_enable_fb_damage_clips() not called
+
+Fix the computation of the blit rectangle. This wasn't an issue so
+far, as simpledrm always blitted the full framebuffer. The code now
+supports damage clipping and virtual screen sizes.
+
+v3:
+	* fix drm_dev_enter() error path (Noralf)
+	* remove unnecessary clipping from update function (Noralf)
+
+Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+---
+ drivers/gpu/drm/tiny/simpledrm.c | 28 +++++++++++++++++++---------
+ 1 file changed, 19 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/gpu/drm/tiny/simpledrm.c b/drivers/gpu/drm/tiny/simpledrm.c
+index 571f716ff427..7c7d0aca8e31 100644
+--- a/drivers/gpu/drm/tiny/simpledrm.c
++++ b/drivers/gpu/drm/tiny/simpledrm.c
+@@ -642,19 +642,23 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
+ 	void *vmap = shadow_plane_state->data[0].vaddr; /* TODO: Use mapping abstraction */
+ 	struct drm_device *dev = &sdev->dev;
+ 	void __iomem *dst = sdev->screen_base;
+-	struct drm_rect clip;
++	struct drm_rect src_clip, dst_clip;
+ 	int idx;
+ 
+ 	if (!fb)
+ 		return;
+ 
+-	if (!drm_dev_enter(dev, &idx))
++	drm_rect_fp_to_int(&src_clip, &plane_state->src);
++
++	dst_clip = plane_state->dst;
++	if (!drm_rect_intersect(&dst_clip, &src_clip))
+ 		return;
+ 
+-	drm_rect_init(&clip, 0, 0, fb->width, fb->height);
++	if (!drm_dev_enter(dev, &idx))
++		return;
+ 
+-	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &clip);
+-	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &clip);
++	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &dst_clip);
++	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &src_clip);
+ 
+ 	drm_dev_exit(idx);
+ }
+@@ -686,20 +690,24 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
+ 	struct drm_framebuffer *fb = plane_state->fb;
+ 	struct drm_device *dev = &sdev->dev;
+ 	void __iomem *dst = sdev->screen_base;
+-	struct drm_rect clip;
++	struct drm_rect src_clip, dst_clip;
+ 	int idx;
+ 
+ 	if (!fb)
+ 		return;
+ 
+-	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &clip))
++	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &src_clip))
++		return;
++
++	dst_clip = plane_state->dst;
++	if (!drm_rect_intersect(&dst_clip, &src_clip))
+ 		return;
+ 
+ 	if (!drm_dev_enter(dev, &idx))
+ 		return;
+ 
+-	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &clip);
+-	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &clip);
++	dst += drm_fb_clip_offset(sdev->pitch, sdev->format, &dst_clip);
++	drm_fb_blit_toio(dst, sdev->pitch, sdev->format->format, vmap, fb, &src_clip);
+ 
+ 	drm_dev_exit(idx);
+ }
+@@ -794,6 +802,8 @@ static int simpledrm_device_init_modeset(struct simpledrm_device *sdev)
+ 	if (ret)
+ 		return ret;
+ 
++	drm_plane_enable_fb_damage_clips(&pipe->plane);
++
+ 	drm_mode_config_reset(dev);
+ 
+ 	return 0;
+-- 
+2.33.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
