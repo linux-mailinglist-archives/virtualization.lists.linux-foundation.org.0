@@ -2,65 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CF3F44DBBD
-	for <lists.virtualization@lfdr.de>; Thu, 11 Nov 2021 19:45:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 80ADB44DC38
+	for <lists.virtualization@lfdr.de>; Thu, 11 Nov 2021 20:37:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C0B9380DD7;
-	Thu, 11 Nov 2021 18:45:09 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 34B4D81B36;
+	Thu, 11 Nov 2021 19:37:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3QWApSQXgMRJ; Thu, 11 Nov 2021 18:45:09 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id B488280ECC;
-	Thu, 11 Nov 2021 18:45:08 +0000 (UTC)
+	with ESMTP id X0fLszlgsvQb; Thu, 11 Nov 2021 19:37:02 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id EE97F81A24;
+	Thu, 11 Nov 2021 19:37:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 49644C001E;
-	Thu, 11 Nov 2021 18:45:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 716B8C0020;
+	Thu, 11 Nov 2021 19:37:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 816B8C000E
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 02A81C000E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Nov 2021 18:45:06 +0000 (UTC)
+ Thu, 11 Nov 2021 19:37:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6EEC960778
+ by smtp3.osuosl.org (Postfix) with ESMTP id D7F6F60600
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Nov 2021 18:45:06 +0000 (UTC)
+ Thu, 11 Nov 2021 19:36:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=linuxfoundation.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OnNtq9WL_JVr
+ with ESMTP id KqkRdLuPigKr
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Nov 2021 18:45:05 +0000 (UTC)
+ Thu, 11 Nov 2021 19:36:58 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4817C6067A
+Received: from outgoing-stata.csail.mit.edu (outgoing-stata.csail.mit.edu
+ [128.30.2.210])
+ by smtp3.osuosl.org (Postfix) with ESMTP id A9829605F8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 11 Nov 2021 18:45:05 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 54ADF61247;
- Thu, 11 Nov 2021 18:45:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1636656304;
- bh=8RZy03sKFmPQxQGWpXw06dPaHhv2NHWVZwLqTolSEBs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=AgZ16xZyM0xpofvm47bb+5pA7KgECxsSn04+0rcqYZy6FuVFnASXPEEzSyGB6ac06
- lG2CM1rrx0R+mBr7DXTJnczIs3tZwL8SuKJMlszy2YQkB4DJhz6AALtVzgNcJlCsxa
- q/QXVTOEY99q8BKwxL6ikWFdvA2R0qmFstCeSgMI=
-Date: Thu, 11 Nov 2021 19:45:02 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
-To: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+ Thu, 11 Nov 2021 19:36:58 +0000 (UTC)
+Received: from [128.177.79.46] (helo=csail.mit.edu)
+ by outgoing-stata.csail.mit.edu with esmtpsa (TLS1.2:RSA_AES_256_CBC_SHA1:256)
+ (Exim 4.82) (envelope-from <srivatsa@csail.mit.edu>)
+ id 1mlFsU-0003Le-47; Thu, 11 Nov 2021 14:36:54 -0500
+Date: Thu, 11 Nov 2021 11:40:02 -0800
+From: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+To: Greg KH <gregkh@linuxfoundation.org>
 Subject: Re: [PATCH v3 1/3] MAINTAINERS: Update maintainers for paravirt ops
  and VMware hypervisor interface
-Message-ID: <YY1krlfM5R7uEzJF@kroah.com>
+Message-ID: <20211111194002.GA8739@csail.mit.edu>
 References: <163657479269.84207.13658789048079672839.stgit@srivatsa-dev>
  <163657487268.84207.5604596767569015608.stgit@srivatsa-dev>
  <YYy9P7Rjg9hntmm3@kroah.com> <20211111153916.GA7966@csail.mit.edu>
+ <YY1krlfM5R7uEzJF@kroah.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211111153916.GA7966@csail.mit.edu>
+In-Reply-To: <YY1krlfM5R7uEzJF@kroah.com>
 Cc: jgross@suse.com, anishs@vmware.com, pv-drivers@vmware.com, x86@kernel.org,
  linux-kernel@vger.kernel.org, stable@vger.kernel.org,
  virtualization@lists.linux-foundation.org, keerthanak@vmware.com,
@@ -82,46 +77,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Nov 11, 2021 at 07:39:16AM -0800, Srivatsa S. Bhat wrote:
-> On Thu, Nov 11, 2021 at 07:50:39AM +0100, Greg KH wrote:
-> > On Wed, Nov 10, 2021 at 12:08:16PM -0800, Srivatsa S. Bhat wrote:
-> > > From: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+On Thu, Nov 11, 2021 at 07:45:02PM +0100, Greg KH wrote:
+> On Thu, Nov 11, 2021 at 07:39:16AM -0800, Srivatsa S. Bhat wrote:
+> > On Thu, Nov 11, 2021 at 07:50:39AM +0100, Greg KH wrote:
+> > > On Wed, Nov 10, 2021 at 12:08:16PM -0800, Srivatsa S. Bhat wrote:
+> > > > From: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+> > > > 
+> > > > Deep has decided to transfer maintainership of the VMware hypervisor
+> > > > interface to Srivatsa, and the joint-maintainership of paravirt ops in
+> > > > the Linux kernel to Srivatsa and Alexey. Update the MAINTAINERS file
+> > > > to reflect this change.
+> > > > 
+> > > > Signed-off-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+> > > > Acked-by: Alexey Makhalov <amakhalov@vmware.com>
+> > > > Acked-by: Deep Shah <sdeep@vmware.com>
+> > > > Acked-by: Juergen Gross <jgross@suse.com>
+> > > > Cc: stable@vger.kernel.org
 > > > 
-> > > Deep has decided to transfer maintainership of the VMware hypervisor
-> > > interface to Srivatsa, and the joint-maintainership of paravirt ops in
-> > > the Linux kernel to Srivatsa and Alexey. Update the MAINTAINERS file
-> > > to reflect this change.
-> > > 
-> > > Signed-off-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
-> > > Acked-by: Alexey Makhalov <amakhalov@vmware.com>
-> > > Acked-by: Deep Shah <sdeep@vmware.com>
-> > > Acked-by: Juergen Gross <jgross@suse.com>
-> > > Cc: stable@vger.kernel.org
+> > > Why are MAINTAINERS updates needed for stable?  That's not normal :(
 > > 
-> > Why are MAINTAINERS updates needed for stable?  That's not normal :(
+> > So that people posting bug-fixes / backports to these subsystems for
+> > older kernels (stable and LTS releases) will CC the new subsystem
+> > maintainers.
 > 
-> So that people posting bug-fixes / backports to these subsystems for
-> older kernels (stable and LTS releases) will CC the new subsystem
-> maintainers.
+> That's not how stable releases work at all.
+> 
+> > That's why I added CC stable tag only to the first two
+> > patches which add/replace maintainers and not the third patch which is
+> > just a cleanup.
+> 
+> Patches for stable kernels need to go into Linus's tree first, and if
+> you have the MAINTAINERS file updated properly there, then you will be
+> properly cc:ed.  We do not look at the MAINTAINERS file for the older
+> kernel when sending patches out, it's totally ignored as that was the
+> snapshot at a point in time, which is usually no longer the true state.
+> 
 
-That's not how stable releases work at all.
+Sure, but that's the case for patches that get mainlined (and
+subsequently backported to -stable) /after/ this update to the
+MAINTAINERS file gets merged into mainline.
 
-> That's why I added CC stable tag only to the first two
-> patches which add/replace maintainers and not the third patch which is
-> just a cleanup.
+When adding the CC stable tag, the case I was trying to address was
+for patches that are already in mainline but weren't CC'ed to stable,
+and at some later point, somebody decides to backport them to older
+stable kernels. In that case, there is a chance that the contributor
+might run ./get_maintainer.pl against the stable tree (as that's the
+tree they are backporting the upstream commit against) and end up not
+CC'ing the new maintainers. So, I thought it would be good to keep the
+maintainer info updated in the older stable kernels too.
 
-Patches for stable kernels need to go into Linus's tree first, and if
-you have the MAINTAINERS file updated properly there, then you will be
-properly cc:ed.  We do not look at the MAINTAINERS file for the older
-kernel when sending patches out, it's totally ignored as that was the
-snapshot at a point in time, which is usually no longer the true state.
-
-So this would have no affect at all, sorry.  That's why I asked if you
-all really realized what you were doing here :)
-
-thanks,
-
-greg k-h
+Regards,
+Srivatsa
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
