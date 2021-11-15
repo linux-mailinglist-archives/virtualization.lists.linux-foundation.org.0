@@ -1,68 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id CE01444FE96
-	for <lists.virtualization@lfdr.de>; Mon, 15 Nov 2021 07:08:38 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E7D8444FEA7
+	for <lists.virtualization@lfdr.de>; Mon, 15 Nov 2021 07:31:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EDD1D6075A;
-	Mon, 15 Nov 2021 06:08:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6778080DE4;
+	Mon, 15 Nov 2021 06:31:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WGrAM5BNtHxq; Mon, 15 Nov 2021 06:08:35 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id B3Yb1GZ86vVr; Mon, 15 Nov 2021 06:31:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 2E8E260717;
-	Mon, 15 Nov 2021 06:08:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 3B82280DE2;
+	Mon, 15 Nov 2021 06:31:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A2F95C0036;
-	Mon, 15 Nov 2021 06:08:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A6230C0036;
+	Mon, 15 Nov 2021 06:31:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5DFAAC0012
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8ED3C0012
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Nov 2021 06:08:32 +0000 (UTC)
+ Mon, 15 Nov 2021 06:31:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 37DB1402CB
+ by smtp2.osuosl.org (Postfix) with ESMTP id CC6FE40383
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Nov 2021 06:08:32 +0000 (UTC)
+ Mon, 15 Nov 2021 06:31:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yfU4OxXVxQQk
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id POdTpsztnxWz
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Nov 2021 06:08:31 +0000 (UTC)
-X-Greylist: delayed 00:15:56 by SQLgrey-1.8.0
-Received: from baidu.com (mx24.baidu.com [111.206.215.185])
- by smtp4.osuosl.org (Postfix) with ESMTP id DFD44402C8
+ Mon, 15 Nov 2021 06:31:29 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [216.205.24.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 505FF40381
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Nov 2021 06:08:30 +0000 (UTC)
-Received: from BC-Mail-Ex28.internal.baidu.com (unknown [172.31.51.22])
- by Forcepoint Email with ESMTPS id 0881AA0824D8B20B2362;
- Mon, 15 Nov 2021 13:52:25 +0800 (CST)
-Received: from BJHW-MAIL-EX27.internal.baidu.com (10.127.64.42) by
- BC-Mail-Ex28.internal.baidu.com (172.31.51.22) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
- 15.1.2176.2; Mon, 15 Nov 2021 13:52:24 +0800
-Received: from BJHW-MAIL-EX27.internal.baidu.com ([169.254.58.247]) by
- BJHW-MAIL-EX27.internal.baidu.com ([169.254.58.247]) with mapi id
- 15.01.2308.014; Mon, 15 Nov 2021 13:52:24 +0800
-From: "Liu,Feng(INF)" <liufeng32@baidu.com>
-To: "jasowang@redhat.com" <jasowang@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
-Subject: question about vdpa_mgmt_dev
-Thread-Topic: question about vdpa_mgmt_dev
-Thread-Index: AdfZ4sMOlabm7KnAQ6a4Hg+80hubZQ==
-Date: Mon, 15 Nov 2021 05:52:24 +0000
-Message-ID: <10b3825413da4a73ac8cdce9eca5e860@baidu.com>
-Accept-Language: zh-CN, en-US
-Content-Language: zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.22.205.44]
+ Mon, 15 Nov 2021 06:31:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1636957887;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AKw5hh21vSY9tJGq5TQGGMzjeEhb4KZJl3nC+APkHAw=;
+ b=VDBuVpo8hyzJRzWDJ/7l9orbhQsSVaGgu1tLdDqetNPnX7yZXQDCGkZ9SOc7o8155/rV6i
+ mGKtv/77yq6AJ6lOBWVyjlUQzZX3KQY15ggPULykrybOq+1Bnb68BwoMiOnrMtFf5ry+AP
+ oOPUuI5Ey9CPAJW0LbX2xOhsB37FKoY=
+Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
+ [209.85.167.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-467-mmUDxujlMpuPrBqb-G0I4Q-1; Mon, 15 Nov 2021 01:31:26 -0500
+X-MC-Unique: mmUDxujlMpuPrBqb-G0I4Q-1
+Received: by mail-lf1-f72.google.com with SMTP id
+ q26-20020ac2515a000000b0040adfeb8132so495583lfd.9
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 14 Nov 2021 22:31:25 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc:content-transfer-encoding;
+ bh=AKw5hh21vSY9tJGq5TQGGMzjeEhb4KZJl3nC+APkHAw=;
+ b=dQ6BVyL3DKj8EWOLHGw6pKNwjtJoe5h/8Vl5EoL0fHFDsnxugjZHTosSw7ERrPMapA
+ sL3qOKQTSK1PBe87WihmQ+sE+ApBUy0PIo7kY0RgEixLmEvcUQm1WAfVvuWHRR5oFWyn
+ r4UyurAyOBYMD+sjThAZVX1Zs3FJqdsr0+4NZmIKIiiytEbRXxvmXCUlMdMHKtme6p5b
+ 1d3fLEyKr2EGBzhdJbYMnm+3eoTiXbVjAdhmzFtJG/dS1ihvrYYGRLE2SW3CAugE+rQf
+ AF8X2W1npoxuxe3nfhAAYMiU+LmvDLqtO7ZUb6HeSrD+9eznRU9O9XCgwrkDPv9J00nI
+ Y6Mw==
+X-Gm-Message-State: AOAM531KdLB9hIfW4Xfop0///tRtSjq8WDM0mvBUMjPxZRJLSb5Byhvc
+ W/A+ARhZi7DO/EXid3Jp0KmwwPmErNARwuIv2gDTVG3hyFKvsZLXaDsIFNnVSAsAlEmhrbJQ8V0
+ dt3pLeTfpBQo2B6CkKvYy7QVt3pbQSXY6k/sud/mjoaVKPt7N46iOqxpVnQ==
+X-Received: by 2002:a05:6512:3b2b:: with SMTP id
+ f43mr32969015lfv.629.1636957884567; 
+ Sun, 14 Nov 2021 22:31:24 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxhCXpQW+uhN4aZuE7ggmodsT/FOiKVWEhzHk/2/XPeBtXhqIkksYPEHX7bpcV7TL2plaT3nAov0V6oj8aE+vA=
+X-Received: by 2002:a05:6512:3b2b:: with SMTP id
+ f43mr32969003lfv.629.1636957884384; 
+ Sun, 14 Nov 2021 22:31:24 -0800 (PST)
 MIME-Version: 1.0
+References: <10b3825413da4a73ac8cdce9eca5e860@baidu.com>
+In-Reply-To: <10b3825413da4a73ac8cdce9eca5e860@baidu.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Mon, 15 Nov 2021 14:31:13 +0800
+Message-ID: <CACGkMEszkt9w9sbSqT9kAE+t=cm5S48rc6bnvGpYy_rvFEXjhw@mail.gmail.com>
+Subject: Re: question about vdpa_mgmt_dev
+To: "Liu,Feng(INF)" <liufeng32@baidu.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,15 +110,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Experts
-	I have read the upstream code about vdpa, and I notice that there is a new struct vdpa_mgmt_dev have been added.
-	Every driver implements dev_add() interface, such as mlx5 use mlx5_vdpa_dev_add(). This interface completes the creation of the vdpa device, hardware initialization and system registration. And I found that only netlink will call the dev_add() interface, in vdpa_nl_cmd_dev_add_set_doit(). While the probe() function just register vdpa_mgmt_dev without call dev_add()
-	So, my questions are:
-	Does it create a vdpa device only through the netlink interface? The system scans the PCI device and does not automatically create the corresponding vdpa device?
-	
+On Mon, Nov 15, 2021 at 2:08 PM Liu,Feng(INF) <liufeng32@baidu.com> wrote:
+>
+> Hi Experts
+>         I have read the upstream code about vdpa, and I notice that there is a new struct vdpa_mgmt_dev have been added.
+>         Every driver implements dev_add() interface, such as mlx5 use mlx5_vdpa_dev_add(). This interface completes the creation of the vdpa device, hardware initialization and system registration. And I found that only netlink will call the dev_add() interface, in vdpa_nl_cmd_dev_add_set_doit(). While the probe() function just register vdpa_mgmt_dev without call dev_add()
+>         So, my questions are:
+>         Does it create a vdpa device only through the netlink interface?
+
+Yes, this is the plan, and we're working on converting all the drivers
+to support that.
+
+> The system scans the PCI device and does not automatically create the corresponding vdpa device?
+
+It's a choice for the vDPA parent driver but we suggest creating vDPA
+via netlink(), this gives a persistent method for the management
+layer.
 
 Thanks
-Feng
+
+>
+>
+> Thanks
+> Feng
+>
 
 _______________________________________________
 Virtualization mailing list
