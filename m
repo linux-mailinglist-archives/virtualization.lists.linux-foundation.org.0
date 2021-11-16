@@ -1,65 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 23C624539BF
-	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 20:05:10 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F808453A04
+	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 20:18:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8C5A980F53;
-	Tue, 16 Nov 2021 19:05:08 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9842E40111;
+	Tue, 16 Nov 2021 19:18:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TEJdRt1wO2Jv; Tue, 16 Nov 2021 19:05:07 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7477680C92;
-	Tue, 16 Nov 2021 19:05:07 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AXMpk7Mvz3R2; Tue, 16 Nov 2021 19:18:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 46C1240114;
+	Tue, 16 Nov 2021 19:18:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E2568C0032;
-	Tue, 16 Nov 2021 19:05:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BB1F0C0032;
+	Tue, 16 Nov 2021 19:18:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3E85DC0012
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 689B4C0012
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 19:05:06 +0000 (UTC)
+ Tue, 16 Nov 2021 19:18:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 33F6D80F54
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4367480F5D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 19:05:06 +0000 (UTC)
+ Tue, 16 Nov 2021 19:18:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=kernel.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 33aKTSHX3xoF
+ with ESMTP id 6ql074wWJWq2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 19:05:05 +0000 (UTC)
+ Tue, 16 Nov 2021 19:18:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6E56180F4F
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 86C4280F5B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 19:05:05 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 148D56321B;
- Tue, 16 Nov 2021 19:05:03 +0000 (UTC)
+ Tue, 16 Nov 2021 19:18:15 +0000 (UTC)
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 38CD363222;
+ Tue, 16 Nov 2021 19:18:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637089505;
+ s=k20201202; t=1637090295;
  bh=pUC+/2H427L7tAVUY+8YM20rMCV65nBnq4xSfR84FZc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=arWDxm81MhlbXKoc6f9V25if+gxL5Fjf6hKZbroC6mJOnpdJVyv20RJvFA00Jt/aN
- kDsO78F+7Ueg3j1OE3PMDqmexiiaI+ufVrbBt+aPK+jH8roAZf/fU4vdj9hdgkCh5y
- EBFpR9ZT/vHA/tmAs9Hx0tmmx1svYpssTEDLsf+zO0AFpZLlOPJgXwVoJrK5Ux4Fep
- Yn1hmu6kGH6HuVE8E1+CEROqEV2TEV6XS3Bt74abSMp1JHx9FxGS4QpM3oDObylhyX
- YoZ91Z6NsGnqg4ylp+Mx7BTPV9IEqJxMN9lZLhssmFBTu8xyVYy4VOT86FnqHqRDwx
- 9kcz7Dh0DJW1A==
+ b=JCYF0xNMcHupOKf6Hr+F6U5NfWBleIffhW0+44H/V9ffQkJ1IXwiRD0NJ3wUDdxa6
+ XaqtSN9guUF7nX1EvzKRqR9w2PaocSCa6nGd86S77iUjhSS5OONB0XFMY748WxNFO+
+ +RfTCHfU4xVLWjyz9sk+oDOOU2UHNwaBGhak487XgRc56KBg1gf8h/vHcEYxnXJu5u
+ uSc4qqag99QggJWHPGbbw8/KWZygXeHw6uL/rkVm94Qo50Ni7p/lfVY7HBugEAM/Rg
+ 5GxliFPB+HT1EZaG5LG9LQ4AQkFIwvqfQpOM1xi/nq6oSvVWjFKrM//XD2A6D9FO/l
+ SNDzoaDSQ0rLg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
 Subject: [PATCH AUTOSEL 5.15 08/65] drm/virtio: fix the missed
  drm_gem_object_put() in virtio_gpu_user_framebuffer_create()
-Date: Tue, 16 Nov 2021 14:03:28 -0500
-Message-Id: <20211116190443.2418144-8-sashal@kernel.org>
+Date: Tue, 16 Nov 2021 14:16:53 -0500
+Message-Id: <20211116191754.2419097-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211116190443.2418144-1-sashal@kernel.org>
-References: <20211116190443.2418144-1-sashal@kernel.org>
+In-Reply-To: <20211116191754.2419097-1-sashal@kernel.org>
+References: <20211116191754.2419097-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
