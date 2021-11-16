@@ -1,98 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 255FE45343D
-	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 15:33:38 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9C4A8453442
+	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 15:34:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 819B680BCA;
-	Tue, 16 Nov 2021 14:33:36 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id E8D4F4042C;
+	Tue, 16 Nov 2021 14:34:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9BNX8LP-dmV5; Tue, 16 Nov 2021 14:33:35 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id esJ7tSDahQUJ; Tue, 16 Nov 2021 14:34:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 4E3CE80C7D;
-	Tue, 16 Nov 2021 14:33:35 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 6B94B40430;
+	Tue, 16 Nov 2021 14:34:04 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B0DE3C0032;
-	Tue, 16 Nov 2021 14:33:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 03A4DC0012;
+	Tue, 16 Nov 2021 14:34:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 21F4FC0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 62E1DC0012
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 14:33:33 +0000 (UTC)
+ Tue, 16 Nov 2021 14:34:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0106C40412
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5CD72401E0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 14:33:33 +0000 (UTC)
+ Tue, 16 Nov 2021 14:34:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8Z81RVbHvh76
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id NgkFviIKL_o6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 14:33:32 +0000 (UTC)
+ Tue, 16 Nov 2021 14:34:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D2603401B2
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A4D874018F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 14:33:31 +0000 (UTC)
+ Tue, 16 Nov 2021 14:34:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637073210;
+ s=mimecast20190719; t=1637073240;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=e5bI5miZtE31XzDT/uNmoUa6s8KHDiRkZC5V/D8t8c4=;
- b=UOYRE8exzC2Dbx6acKkzgOvYsnzDcRN2RBqllD0V7i/svsQ36DT6kPnDtuuesk6+5GMaRJ
- DjoG1FXPfUc4bnl+dP+1Mmp/J/Uo0JAoPzp7q5vJhA1pNoyyDNm4O0wxiC6HZAGIgKR92u
- AHTGxg4wx/jOnI3fiaM0BeXQXbWKp6U=
+ bh=gw+zT5Bn7Yu9SFxWiKnZNuSsR3PCxJWgrO3fVTViz5U=;
+ b=ce77AcTU4Hg2u6yifc/6AKTrXF6Qwvl7ZhYFQ+PkTRni6x5eq721mwzR2QPUMgdkYMEiwT
+ /ZmGXf3DIrk9BYGq/OxcAi42XZ/13gj4w3pzQZIVMOQ3E/AvbJWjq6Uj8u/hsrtxUcwxxL
+ 7FDQhPFfJCy4FA/rZwAp+xhHYCkYdEw=
 Received: from mail-ed1-f69.google.com (mail-ed1-f69.google.com
  [209.85.208.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-371-WetUyzD4PJS7PQvgLhXWtA-1; Tue, 16 Nov 2021 09:33:28 -0500
-X-MC-Unique: WetUyzD4PJS7PQvgLhXWtA-1
+ us-mta-374---MgUm5ENNOl7keCoOIQgA-1; Tue, 16 Nov 2021 09:33:58 -0500
+X-MC-Unique: --MgUm5ENNOl7keCoOIQgA-1
 Received: by mail-ed1-f69.google.com with SMTP id
- v22-20020a50a456000000b003e7cbfe3dfeso5199672edb.11
+ k7-20020aa7c387000000b003e7ed87fb31so381450edq.3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 06:33:28 -0800 (PST)
+ Tue, 16 Nov 2021 06:33:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=e5bI5miZtE31XzDT/uNmoUa6s8KHDiRkZC5V/D8t8c4=;
- b=AeXMDuYsjW0n7ilRWJ5S90vjmkLxedmpnoYV4tVuAkYvx6stloQcFZ4lVCGdnOAony
- bB/0JBMfPj+gU0qc4n7RgKBFRnjlMndMAQgUZJZ+rWgeMrtZjdsvUtWH1qC6//hBBiJR
- ontAZbus3O5fWiV8tqBYrJc1V31YPF/0g38XAPIjV9wKkN1v39m3g7TmYysqfbjkdea4
- wqk4ccX7qB4N+goo2on3CWwWsE6pwBTGUVTA/tPiKYS06hMRWAdtvFEdzpx+wbUU/G+3
- +y+6uq7OJFXvWJ6GDbXmsKl92Ejh7dU4KDRtWpEmrTLXvKYtBv4ldLSe7qO/icrSf5AK
- ZH8w==
-X-Gm-Message-State: AOAM533TXBmZAmm16oAz5+tpxCWAUi74BrMlHd6XVh7avfgJxtwtLgOO
- 8eZ1E8rvHEstTbmkZ+7pk4c2/M5XU6mOwmLaig/3sOp1rZ1bVIzL+WXKbZktPpYLIo2P8huGtGR
- Rrh+3qmr5o7V6kQHo3N1PNreyuML3za+QgtpT/goPog==
-X-Received: by 2002:a05:6402:4255:: with SMTP id
- g21mr10631422edb.256.1637073207831; 
- Tue, 16 Nov 2021 06:33:27 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwc5owemSfBUpNeotKB3UAbjc+AN7gGsaiauGNpfHdqICsObV5qFX6XIBKC3Eh9ctsxyL6amg==
-X-Received: by 2002:a05:6402:4255:: with SMTP id
- g21mr10631390edb.256.1637073207612; 
- Tue, 16 Nov 2021 06:33:27 -0800 (PST)
+ bh=gw+zT5Bn7Yu9SFxWiKnZNuSsR3PCxJWgrO3fVTViz5U=;
+ b=q4lPt7W7/Zllh3HmkT9IKros6Awy+3xBBpRdsXs4v5o5eTwwXg22jS2N907lTpbUTw
+ i4+o44i7nfHCSZsCdWQthBu793vFz66Sspdg240CTa5wmvKNw985KwrYYxw2+OdOdW/v
+ liv4x099Wi5p+fE6UQDnEsuXTSudlfmv4ATs6IN8BrIjkdtQf9PWUS38G3iM1gD9R2y7
+ MVpQ1n8OYHxlhHhr9cAKClU9vDPwfPSuNi0841LOtOYll+Deyc2bB7gGqj0TOeafBd28
+ nlnvaOEwMlf+V3EpQHxwykfBCa1JMPIvFe7VYewn3q8O7WwcZ6zVRmXH9Ax6d3HEkzmn
+ OTig==
+X-Gm-Message-State: AOAM530Hr34iq8dgbfDHDkrkFGgWhB19DYlTmLUStaNa7+gTl6Dt4v5d
+ 3nGfyUIhUyEaZ2oFIYjz0pa1abeCWYVVMihJmhzxF5NaWUXxRo7c0RKw++DgjG011lUWy9ONuNV
+ WiTNVgUynoOU+vxejm0MDFsVZPt8NTUl+60H1oPYVbw==
+X-Received: by 2002:a17:906:2cd5:: with SMTP id
+ r21mr10866451ejr.435.1637073236969; 
+ Tue, 16 Nov 2021 06:33:56 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzsudr1k0KsGdEMmED92N84TSbVeptPs2C1EJfEE9/7YPC8Go6Zta6pz56XSBZBy8eqwHLpGA==
+X-Received: by 2002:a17:906:2cd5:: with SMTP id
+ r21mr10866430ejr.435.1637073236801; 
+ Tue, 16 Nov 2021 06:33:56 -0800 (PST)
 Received: from steredhat (host-87-10-72-39.retail.telecomitalia.it.
  [87.10.72.39])
- by smtp.gmail.com with ESMTPSA id jx10sm4918812ejc.102.2021.11.16.06.33.26
+ by smtp.gmail.com with ESMTPSA id g15sm8766816ejt.10.2021.11.16.06.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Nov 2021 06:33:27 -0800 (PST)
-Date: Tue, 16 Nov 2021 15:33:23 +0100
+ Tue, 16 Nov 2021 06:33:56 -0800 (PST)
+Date: Tue, 16 Nov 2021 15:33:54 +0100
 From: Stefano Garzarella <sgarzare@redhat.com>
-To: Andrey Ryabinin <arbn@yandex-team.com>,
- Mike Christie <michael.christie@oracle.com>
-Subject: Re: [PATCH 1/6] vhost: get rid of vhost_poll_flush() wrapper
-Message-ID: <20211116143323.g7c27u2ho4vpp4cp@steredhat>
+To: Andrey Ryabinin <arbn@yandex-team.com>
+Subject: Re: [PATCH 2/6] vhost_net: get rid of vhost_net_flush_vq() and extra
+ flush calls
+Message-ID: <20211116143354.exgqcjfbmmbaahs4@steredhat>
 References: <20211115153003.9140-1-arbn@yandex-team.com>
+ <20211115153003.9140-2-arbn@yandex-team.com>
 MIME-Version: 1.0
-In-Reply-To: <20211115153003.9140-1-arbn@yandex-team.com>
+In-Reply-To: <20211115153003.9140-2-arbn@yandex-team.com>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -118,130 +119,66 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Nov 15, 2021 at 06:29:58PM +0300, Andrey Ryabinin wrote:
->vhost_poll_flush() is a simple wrapper around vhost_work_dev_flush().
->It gives wrong impression that we are doing some work over vhost_poll,
->while in fact it flushes vhost_poll->dev.
->It only complicate understanding of the code and leads to mistakes
->like flushing the same vhost_dev several times in a row.
+On Mon, Nov 15, 2021 at 06:29:59PM +0300, Andrey Ryabinin wrote:
+>vhost_net_flush_vq() calls vhost_work_dev_flush() twice passing
+>vhost_dev pointer obtained via 'n->poll[index].dev' and
+>'n->vqs[index].vq.poll.dev'. This is actually the same pointer,
+>initialized in vhost_net_open()/vhost_dev_init()/vhost_poll_init()
 >
->Just remove vhost_poll_flush() and call vhost_work_dev_flush() directly.
+>Remove vhost_net_flush_vq() and call vhost_work_dev_flush() directly.
+>Do the flushes only once instead of several flush calls in a row
+>which seems rather useless.
 >
 >Signed-off-by: Andrey Ryabinin <arbn@yandex-team.com>
 >---
-> drivers/vhost/net.c   |  4 ++--
-> drivers/vhost/test.c  |  2 +-
-> drivers/vhost/vhost.c | 12 ++----------
-> drivers/vhost/vsock.c |  2 +-
-> 4 files changed, 6 insertions(+), 14 deletions(-)
-
-Adding Mike since these changes could be relevant for "[PATCH V4 00/12] 
-vhost: multiple worker support" [1] series.
-
+> drivers/vhost/net.c   | 11 ++---------
+> drivers/vhost/vhost.h |  1 +
+> 2 files changed, 3 insertions(+), 9 deletions(-)
 >
 >diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
->index 28ef323882fb..11221f6d11b8 100644
+>index 11221f6d11b8..b1feb5e0571e 100644
 >--- a/drivers/vhost/net.c
 >+++ b/drivers/vhost/net.c
->@@ -1375,8 +1375,8 @@ static void vhost_net_stop(struct vhost_net *n, struct socket **tx_sock,
->
-> static void vhost_net_flush_vq(struct vhost_net *n, int index)
-> {
->-	vhost_poll_flush(n->poll + index);
->-	vhost_poll_flush(&n->vqs[index].vq.poll);
->+	vhost_work_dev_flush(n->poll[index].dev);
->+	vhost_work_dev_flush(n->vqs[index].vq.poll.dev);
+>@@ -1373,16 +1373,9 @@ static void vhost_net_stop(struct vhost_net *n, struct socket **tx_sock,
+> 	*rx_sock = vhost_net_stop_vq(n, &n->vqs[VHOST_NET_VQ_RX].vq);
 > }
 >
-> static void vhost_net_flush(struct vhost_net *n)
->diff --git a/drivers/vhost/test.c b/drivers/vhost/test.c
->index a09dedc79f68..1a8ab1d8cb1c 100644
->--- a/drivers/vhost/test.c
->+++ b/drivers/vhost/test.c
->@@ -146,7 +146,7 @@ static void vhost_test_stop(struct vhost_test *n, void **privatep)
->
-> static void vhost_test_flush_vq(struct vhost_test *n, int index)
-> {
->-	vhost_poll_flush(&n->vqs[index].poll);
->+	vhost_work_dev_flush(n->vqs[index].poll.dev);
-> }
->
-> static void vhost_test_flush(struct vhost_test *n)
->diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
->index 59edb5a1ffe2..ca088481da0e 100644
->--- a/drivers/vhost/vhost.c
->+++ b/drivers/vhost/vhost.c
->@@ -245,14 +245,6 @@ void vhost_work_dev_flush(struct vhost_dev *dev)
-> }
-> EXPORT_SYMBOL_GPL(vhost_work_dev_flush);
->
->-/* Flush any work that has been scheduled. When calling this, don't hold any
->- * locks that are also used by the callback. */
->-void vhost_poll_flush(struct vhost_poll *poll)
+>-static void vhost_net_flush_vq(struct vhost_net *n, int index)
 >-{
->-	vhost_work_dev_flush(poll->dev);
+>-	vhost_work_dev_flush(n->poll[index].dev);
+>-	vhost_work_dev_flush(n->vqs[index].vq.poll.dev);
 >-}
->-EXPORT_SYMBOL_GPL(vhost_poll_flush);
 >-
-
-We should remove also the declaration in vhost.h:
-
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -45,7 +44,6 @@ void vhost_poll_init(struct vhost_poll *poll, vhost_work_fn_t fn,
-                      __poll_t mask, struct vhost_dev *dev);
-  int vhost_poll_start(struct vhost_poll *poll, struct file *file);
-  void vhost_poll_stop(struct vhost_poll *poll);
--void vhost_poll_flush(struct vhost_poll *poll);
-  void vhost_poll_queue(struct vhost_poll *poll);
-  void vhost_work_dev_flush(struct vhost_dev *dev);
-
-
-> void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
+> static void vhost_net_flush(struct vhost_net *n)
 > {
-> 	if (!dev->worker)
->@@ -663,7 +655,7 @@ void vhost_dev_stop(struct vhost_dev *dev)
-> 	for (i = 0; i < dev->nvqs; ++i) {
-> 		if (dev->vqs[i]->kick && dev->vqs[i]->handle_kick) {
-> 			vhost_poll_stop(&dev->vqs[i]->poll);
->-			vhost_poll_flush(&dev->vqs[i]->poll);
->+			vhost_work_dev_flush(dev->vqs[i]->poll.dev);
-> 		}
+>-	vhost_net_flush_vq(n, VHOST_NET_VQ_TX);
+>-	vhost_net_flush_vq(n, VHOST_NET_VQ_RX);
+>+	vhost_work_dev_flush(&n->dev);
+> 	if (n->vqs[VHOST_NET_VQ_TX].ubufs) {
+> 		mutex_lock(&n->vqs[VHOST_NET_VQ_TX].vq.mutex);
+> 		n->tx_flush = true;
+>@@ -1572,7 +1565,7 @@ static long vhost_net_set_backend(struct vhost_net *n, unsigned index, int fd)
 > 	}
-> }
->@@ -1712,7 +1704,7 @@ long vhost_vring_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *arg
-> 	mutex_unlock(&vq->mutex);
 >
-> 	if (pollstop && vq->handle_kick)
->-		vhost_poll_flush(&vq->poll);
->+		vhost_work_dev_flush(vq->poll.dev);
-> 	return r;
-> }
-> EXPORT_SYMBOL_GPL(vhost_vring_ioctl);
->diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
->index 938aefbc75ec..b0361ebbd695 100644
->--- a/drivers/vhost/vsock.c
->+++ b/drivers/vhost/vsock.c
->@@ -711,7 +711,7 @@ static void vhost_vsock_flush(struct vhost_vsock *vsock)
+> 	if (oldsock) {
+>-		vhost_net_flush_vq(n, index);
+>+		vhost_work_dev_flush(&n->dev);
+> 		sockfd_put(oldsock);
+> 	}
 >
-> 	for (i = 0; i < ARRAY_SIZE(vsock->vqs); i++)
-> 		if (vsock->vqs[i].handle_kick)
->-			vhost_poll_flush(&vsock->vqs[i].poll);
->+			vhost_work_dev_flush(vsock->vqs[i].poll.dev);
-> 	vhost_work_dev_flush(&vsock->dev);
-> }
+>diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
+>index 638bb640d6b4..ecbaa5c6005f 100644
+>--- a/drivers/vhost/vhost.h
+>+++ b/drivers/vhost/vhost.h
+>@@ -15,6 +15,7 @@
+> #include <linux/vhost_iotlb.h>
+> #include <linux/irqbypass.h>
 >
->-- 
->2.32.0
->
+>+struct vhost_dev;
 
-The rest LGTM.
+Is this change needed?
 
-Thanks,
 Stefano
-
-[1] 
-https://lore.kernel.org/virtualization/20211104190502.7053-1-michael.christie@oracle.com/
 
 _______________________________________________
 Virtualization mailing list
