@@ -1,105 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABDCD452954
-	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 06:01:11 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7A98B452967
+	for <lists.virtualization@lfdr.de>; Tue, 16 Nov 2021 06:11:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 06A6D80DE7;
-	Tue, 16 Nov 2021 05:01:10 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BEC9760775;
+	Tue, 16 Nov 2021 05:11:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id C75U3OoZz4HS; Tue, 16 Nov 2021 05:01:09 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id IwdFVsnf0TGf; Tue, 16 Nov 2021 05:11:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A7DDA80E09;
-	Tue, 16 Nov 2021 05:01:08 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 93FD5607C2;
+	Tue, 16 Nov 2021 05:11:30 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F2DAC0032;
-	Tue, 16 Nov 2021 05:01:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1CF69C0032;
+	Tue, 16 Nov 2021 05:11:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AFC86C0012
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AD60AC0012
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 05:01:06 +0000 (UTC)
+ Tue, 16 Nov 2021 05:11:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9DE0D607C0
+ by smtp2.osuosl.org (Postfix) with ESMTP id 873D6401BA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 05:01:06 +0000 (UTC)
+ Tue, 16 Nov 2021 05:11:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id B9ru5w_r0Apc
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5iyNplVhv0Aq
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 05:01:06 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DEC5A60775
+ Tue, 16 Nov 2021 05:11:26 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from smtprelay.hostedemail.com (smtprelay0155.hostedemail.com
+ [216.40.44.155])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2CBED40100
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 05:01:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637038864;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=NZbJVFSsiYxk6JEYO0Xpu55G92qAXMwmH+tm+8XpReU=;
- b=AxtLH/8vHIUJ3uoKaIj3dRD5pDN39ed/qKFYiIYwBVAb3cUlr4n8NreW15bHlprCVzZHuU
- CljWU1dPEkKsUSVmS/DxwZVIAsJXXETChTwCMlHmY7DUhMce5bMEUmaX7Qc6tKt1BJcTh9
- Sju7aCV3M/1JLuBnh/rnWbAfJa/jZ2c=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-230-EU_LTA7VMKuzgvX3iapFHQ-1; Tue, 16 Nov 2021 00:01:02 -0500
-X-MC-Unique: EU_LTA7VMKuzgvX3iapFHQ-1
-Received: by mail-lf1-f69.google.com with SMTP id
- x7-20020a056512130700b003fd1a7424a8so7716997lfu.5
+ Tue, 16 Nov 2021 05:11:26 +0000 (UTC)
+Received: from smtprelay.hostedemail.com (10.5.19.251.rfc1918.com
+ [10.5.19.251])
+ by smtpgrave08.hostedemail.com (Postfix) with ESMTP id 9074D182D3ECD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Nov 2021 21:01:02 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=NZbJVFSsiYxk6JEYO0Xpu55G92qAXMwmH+tm+8XpReU=;
- b=SguQMdPr3+QanGjztFyiOMxOvY/9FBm/lt3L6yv2BljYYIEooOBV82meEfKeMMhdr6
- 0fvrQKNfcr6kU2Ff7ZHj3IgnTA5TdltCrqCtyItSlyWQ4oKO7VMA4jGYsFxQjSEoOu7M
- oEU5ls4PhXxuu7s+w+KF/rx4JjIzAhIkICus527al/uaDPwGeikal/DvTFlI3yd4rD93
- Yxjwg1qLPwfCsVqcNA7HT7KbYzWv+IhS69dkQZPpsleh+18Ly6zxePfSz4lSsDZKUM+5
- aE8hTlQ9smksHk7ofqehn8qvh6cD85f9tIv2B8GcmcII4wUZlq1Xp2cwoXIEjaeZapJa
- /4/Q==
-X-Gm-Message-State: AOAM531xIwdG6JDp5bLj7Rmncqkp6nyAYDeF45OVXr2uUfMgiqGqhuXN
- POXDOya8/HkF3Md1tv9mX9CiOUgwrFuksAuWD8iNOuZ//t7ae5DEYbrKC9mMEL7Cck1YePPUy5w
- MJBq9/DHsujQaVxvyb8yzBFg1aLkVKrkNVirufgQGsh4I2pZll+LVCxzOlg==
-X-Received: by 2002:ac2:518b:: with SMTP id u11mr3980753lfi.498.1637038861041; 
- Mon, 15 Nov 2021 21:01:01 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwmwi8ZBJDwkdhthf+6U7z0+K409Zl2U1G1z4cKoLh4WJGn9JeAOqnszcmQh+p5V5nQXwNj+ySZvlSCNDXcV2U=
-X-Received: by 2002:ac2:518b:: with SMTP id u11mr3980732lfi.498.1637038860836; 
- Mon, 15 Nov 2021 21:01:00 -0800 (PST)
+ Tue, 16 Nov 2021 04:33:48 +0000 (UTC)
+Received: from omf17.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+ by smtprelay02.hostedemail.com (Postfix) with ESMTP id AE6D98479E;
+ Tue, 16 Nov 2021 04:33:45 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: joe@perches.com) by
+ omf17.hostedemail.com (Postfix) with ESMTPA id B1937E00035D; 
+ Tue, 16 Nov 2021 04:33:38 +0000 (UTC)
+Message-ID: <70cd970d6c39a5ea5e88cbf4b86031c22c5d10d4.camel@perches.com>
+Subject: Re: [PATCH v3 1/3] MAINTAINERS: Update maintainers for paravirt ops
+ and VMware hypervisor interface
+From: Joe Perches <joe@perches.com>
+To: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>, Sasha Levin
+ <sashal@kernel.org>
+Date: Mon, 15 Nov 2021 20:33:40 -0800
+In-Reply-To: <20211115223900.GA22267@csail.mit.edu>
+References: <163657479269.84207.13658789048079672839.stgit@srivatsa-dev>
+ <163657487268.84207.5604596767569015608.stgit@srivatsa-dev>
+ <YYy9P7Rjg9hntmm3@kroah.com> <20211111153916.GA7966@csail.mit.edu>
+ <YY1krlfM5R7uEzJF@kroah.com> <20211111194002.GA8739@csail.mit.edu>
+ <YY6hhWtvh+OvOqAl@sashalap> <20211115223900.GA22267@csail.mit.edu>
+User-Agent: Evolution 3.40.4-1 
 MIME-Version: 1.0
-References: <20211115153003.9140-1-arbn@yandex-team.com>
- <20211115153003.9140-6-arbn@yandex-team.com>
-In-Reply-To: <20211115153003.9140-6-arbn@yandex-team.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Tue, 16 Nov 2021 13:00:50 +0800
-Message-ID: <CACGkMEumax9RFVNgWLv5GyoeQAmwo-UgAq=DrUd4yLxPAUUqBw@mail.gmail.com>
-Subject: Re: [PATCH 6/6] vhost_net: use RCU callbacks instead of
- synchronize_rcu()
-To: Andrey Ryabinin <arbn@yandex-team.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev <netdev@vger.kernel.org>, John Fastabend <john.fastabend@gmail.com>,
- Alexei Starovoitov <ast@kernel.org>,
- virtualization <virtualization@lists.linux-foundation.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, kvm <kvm@vger.kernel.org>,
- Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
- "David S. Miller" <davem@davemloft.net>,
- linux-kernel <linux-kernel@vger.kernel.org>
+X-Rspamd-Queue-Id: B1937E00035D
+X-Stat-Signature: f98m33wsx4mfc3t3jhbfctk3bb9t83gn
+X-Rspamd-Server: rspamout01
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Session-ID: U2FsdGVkX187U+B1QyrWtVLRt6ScGYedLRY84IBk+8w=
+X-HE-Tag: 1637037218-641034
+Cc: jgross@suse.com, anishs@vmware.com, pv-drivers@vmware.com,
+ Greg KH <gregkh@linuxfoundation.org>, x86@kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, keerthanak@vmware.com,
+ namit@vmware.com, rostedt@goodmis.org, Alexey Makhalov <amakhalov@vmware.com>,
+ kuba@kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,90 +93,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Nov 15, 2021 at 11:32 PM Andrey Ryabinin <arbn@yandex-team.com> wrote:
->
-> Currently vhost_net_release() uses synchronize_rcu() to synchronize
-> freeing with vhost_zerocopy_callback(). However synchronize_rcu()
-> is quite costly operation. It take more than 10 seconds
-> to shutdown qemu launched with couple net devices like this:
->         -netdev tap,id=tap0,..,vhost=on,queues=80
-> because we end up calling synchronize_rcu() netdev_count*queues times.
->
-> Free vhost net structures in rcu callback instead of using
-> synchronize_rcu() to fix the problem.
+On Mon, 2021-11-15 at 14:39 -0800, Srivatsa S. Bhat wrote:
+> On Fri, Nov 12, 2021 at 12:16:53PM -0500, Sasha Levin wrote:
+> > Maybe we should just remove MAINTAINERS from stable trees to make it
+> > obvious.
+> 
+> I don't think we should go quite that far. Instead, perhaps we can
+> modify get_maintainer.pl (if needed) such that it prints out a warning
+> or reminder to consult the upstream MAINTAINERS file if the script is
+> invoked on an older stable kernel.
 
-I admit the release code is somehow hard to understand. But I wonder
-if the following case can still happen with this:
-
-CPU 0 (vhost_dev_cleanup)   CPU1
-(vhost_net_zerocopy_callback()->vhost_work_queue())
-                                                if (!dev->worker)
-dev->worker = NULL
-
-wake_up_process(dev->worker)
-
-If this is true. It seems the fix is to move RCU synchronization stuff
-in vhost_net_ubuf_put_and_wait()?
-
-Thanks
-
->
-> Signed-off-by: Andrey Ryabinin <arbn@yandex-team.com>
-> ---
->  drivers/vhost/net.c | 22 ++++++++++++++--------
->  1 file changed, 14 insertions(+), 8 deletions(-)
->
-> diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-> index 97a209d6a527..0699d30e83d5 100644
-> --- a/drivers/vhost/net.c
-> +++ b/drivers/vhost/net.c
-> @@ -132,6 +132,7 @@ struct vhost_net {
->         struct vhost_dev dev;
->         struct vhost_net_virtqueue vqs[VHOST_NET_VQ_MAX];
->         struct vhost_poll poll[VHOST_NET_VQ_MAX];
-> +       struct rcu_head rcu;
->         /* Number of TX recently submitted.
->          * Protected by tx vq lock. */
->         unsigned tx_packets;
-> @@ -1389,6 +1390,18 @@ static void vhost_net_flush(struct vhost_net *n)
->         }
->  }
->
-> +static void vhost_net_free(struct rcu_head *rcu_head)
-> +{
-> +       struct vhost_net *n = container_of(rcu_head, struct vhost_net, rcu);
-> +
-> +       kfree(n->vqs[VHOST_NET_VQ_RX].rxq.queue);
-> +       kfree(n->vqs[VHOST_NET_VQ_TX].xdp);
-> +       kfree(n->dev.vqs);
-> +       if (n->page_frag.page)
-> +               __page_frag_cache_drain(n->page_frag.page, n->refcnt_bias);
-> +       kvfree(n);
-> +}
-> +
->  static int vhost_net_release(struct inode *inode, struct file *f)
->  {
->         struct vhost_net *n = f->private_data;
-> @@ -1404,15 +1417,8 @@ static int vhost_net_release(struct inode *inode, struct file *f)
->                 sockfd_put(tx_sock);
->         if (rx_sock)
->                 sockfd_put(rx_sock);
-> -       /* Make sure no callbacks are outstanding */
-> -       synchronize_rcu();
->
-> -       kfree(n->vqs[VHOST_NET_VQ_RX].rxq.queue);
-> -       kfree(n->vqs[VHOST_NET_VQ_TX].xdp);
-> -       kfree(n->dev.vqs);
-> -       if (n->page_frag.page)
-> -               __page_frag_cache_drain(n->page_frag.page, n->refcnt_bias);
-> -       kvfree(n);
-> +       call_rcu(&n->rcu, vhost_net_free);
->         return 0;
->  }
->
-> --
-> 2.32.0
->
+I don't see how that's feasible.
 
 _______________________________________________
 Virtualization mailing list
