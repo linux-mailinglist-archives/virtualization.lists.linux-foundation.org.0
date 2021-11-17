@@ -2,87 +2,86 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6FC43454744
-	for <lists.virtualization@lfdr.de>; Wed, 17 Nov 2021 14:32:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3449B454785
+	for <lists.virtualization@lfdr.de>; Wed, 17 Nov 2021 14:36:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BC756605DE;
-	Wed, 17 Nov 2021 13:32:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id C12AA60615;
+	Wed, 17 Nov 2021 13:36:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vgs57TnteibM; Wed, 17 Nov 2021 13:32:13 +0000 (UTC)
+	with ESMTP id GyyhOPoNPdne; Wed, 17 Nov 2021 13:36:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 60CA660647;
-	Wed, 17 Nov 2021 13:32:13 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 720E860732;
+	Wed, 17 Nov 2021 13:36:38 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C5B04C0036;
-	Wed, 17 Nov 2021 13:32:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AF65C0036;
+	Wed, 17 Nov 2021 13:36:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D7E83C0012
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id ED8DEC0012
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 13:32:11 +0000 (UTC)
+ Wed, 17 Nov 2021 13:36:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B8FB880ECF
+ by smtp3.osuosl.org (Postfix) with ESMTP id CD31B606A9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 13:32:11 +0000 (UTC)
+ Wed, 17 Nov 2021 13:36:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id I4QUzP_qMEOK
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id m1QGyn2Wgnuo
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 13:32:10 +0000 (UTC)
+ Wed, 17 Nov 2021 13:36:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6275780D0B
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0A61760631
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 13:32:10 +0000 (UTC)
+ Wed, 17 Nov 2021 13:36:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637155929;
+ s=mimecast20190719; t=1637156192;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
  bh=SK2TdqbjzxRCpSlP0TvvJit4nEgW8bEodm600zd0IYE=;
- b=GAgUgy9HIINe9D2nTw1nNoM6WEWa/yDHp6tiRHySp3uUHTGRt/9MR2VSat4u0UvFbJFnB1
- s+fgbDV08+XpUdcXadKHrpy8vmwQU5mQPwj+SgtvA5NzN3LgPCt3UZWIpm5q4FG7TumQ6x
- iYtHs91Vr1qXH/FobgGuI0IdOuADOBs=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-240-lc_aPnydPYqyHRz9pLmRnw-1; Wed, 17 Nov 2021 08:32:07 -0500
-X-MC-Unique: lc_aPnydPYqyHRz9pLmRnw-1
-Received: by mail-wm1-f71.google.com with SMTP id
- o18-20020a05600c511200b00332fa17a02eso1472084wms.5
+ b=VZu0PSmTOxJNzpkzKSBDyVM2NUsd1GNodCDAu/I5axo7kaaQ3YI6bIu1LZzMUrJVN6ar8v
+ FndWqvkPvkgLhRTe7BzAx9/v5DDy8R7hbZrLt2xmKOHjqztfPaVxXkvl06qkErfN6GW7tm
+ Qa5YYS282CQEJ9q8olbnqkRmGprPkCU=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-463-jUkCIIuUOKu50c2c93vElg-1; Wed, 17 Nov 2021 08:36:31 -0500
+X-MC-Unique: jUkCIIuUOKu50c2c93vElg-1
+Received: by mail-wr1-f70.google.com with SMTP id
+ r12-20020adfdc8c000000b0017d703c07c0so378515wrj.0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 05:32:07 -0800 (PST)
+ Wed, 17 Nov 2021 05:36:31 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
  bh=SK2TdqbjzxRCpSlP0TvvJit4nEgW8bEodm600zd0IYE=;
- b=IXS02qkPYh6UgGXeAQ4gISPUhCQ6U02iL6wzK/AU63Giqk7pMiBFfWvag1JlEYCWg1
- fmi1PWojtJF2Bq2HBmhpEQuu8otEcd3u7SXGVvoKPPkbrUd8m9ZJLdb+6ZnNlw7+U/hd
- kwJcb9I0Fewebvv1VtLkpCfiPqNemtpQ/BYADj2LVe74qujAAGVB/dxll2/8hhiPCEXK
- fQTQZDRniRXMmL3mPsMU3STueIiDBipRtiZqcCvmAbvgecel+N/6BmrIhz9xIlMRS5nh
- pxd7ZHBnLAatMeayGpsN7qyDfTzCHo5JLYE6GgGaZ38eGzNkHe7fsqGLyj1HGvwTLkW8
- 5b5w==
-X-Gm-Message-State: AOAM5339MLvonO7gWYf/LGvQQKMjZrteOOURhwaGDHoChsKN968ZMdfO
- YF4o8zpD6UiDrswHBswjb+MBmIZzlyEhhwQSeuu8i+svVDGxh2ivl12fxQRGfqWxQFJudPJEG+M
- PP5EkKmjS6EvOzhv+FhCnUF1h/CP44pYXk1FIs5oRew==
-X-Received: by 2002:a7b:cf35:: with SMTP id m21mr17501941wmg.140.1637155926511; 
- Wed, 17 Nov 2021 05:32:06 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxpyMMl3pHx+K7qBcwjnpC3iHrNxaMHZJLFMggkpVQS1pd2IWOCXHaGGS+eke1Xg8FYiu6UgA==
-X-Received: by 2002:a7b:cf35:: with SMTP id m21mr17501889wmg.140.1637155926205; 
- Wed, 17 Nov 2021 05:32:06 -0800 (PST)
+ b=4Bu1py4xblE0JRdKQM8+nzk74g7BUgbsvYVGSoejNNd2+P0KXVV+cave5KLTVGaVB6
+ 2tt3YyGmuefyUkzQk2w/6PQrOW3ttku4pjg0fx1iYp4adxFMl7JVjZ+XHF0UINh01//Y
+ xYkqokYE64A3XLEErd39SaaAOLmVV8RJK3h7sPk7wx21Sa7sT+MKQMKy6kVNyGs/7lhb
+ NiJ9r3glq58LQk3N+Z8wAk0OFImgJyUz6i1sehVWJwwnnrcFsyKINzcW4SFJvwQSQQD8
+ NnewadfoBPA7QuPGKi7J0v7bIBdRsShME2tUGa0o1GQKUg7re1GqGfMKW3woP02yIPFA
+ aCag==
+X-Gm-Message-State: AOAM532zStd3gMO1sBNsuLfMGkWpG6XXOAWG/HrzGnF+jRhtAXUG1nSL
+ K4lfHdj0swngtYDCD/iRrBVg9rPPEJiE51W+Z1htGCTltVMi2F1THne07Imt5hcms8OSypriYHo
+ NK9Z8EdSQHPLQTIqfLyakRWtNrzRvJlqfyw0eLW+/aA==
+X-Received: by 2002:a05:6000:1564:: with SMTP id
+ 4mr20530955wrz.9.1637156190403; 
+ Wed, 17 Nov 2021 05:36:30 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJyZ0sABF1qvuK58kJUnESp+eHxLFzBz00Rb29xHqk2ffbhesVemAQ2ajo4kl9otsuqOenJyaQ==
+X-Received: by 2002:a05:6000:1564:: with SMTP id
+ 4mr20530928wrz.9.1637156190210; 
+ Wed, 17 Nov 2021 05:36:30 -0800 (PST)
 Received: from redhat.com ([2.55.155.110])
- by smtp.gmail.com with ESMTPSA id k187sm5513540wme.0.2021.11.17.05.32.04
+ by smtp.gmail.com with ESMTPSA id m125sm5479396wmm.39.2021.11.17.05.36.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Nov 2021 05:32:05 -0800 (PST)
-Date: Wed, 17 Nov 2021 08:32:01 -0500
+ Wed, 17 Nov 2021 05:36:29 -0800 (PST)
+Date: Wed, 17 Nov 2021 08:36:26 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: David Stevens <stevensd@chromium.org>
 Subject: Re: [RFC PATCH] virtio_balloon: add param to skip adjusting pages
