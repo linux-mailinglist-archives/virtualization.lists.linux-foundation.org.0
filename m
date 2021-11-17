@@ -2,89 +2,102 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 89D58454087
-	for <lists.virtualization@lfdr.de>; Wed, 17 Nov 2021 07:00:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6B349454387
+	for <lists.virtualization@lfdr.de>; Wed, 17 Nov 2021 10:20:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D5ECC40139;
-	Wed, 17 Nov 2021 06:00:08 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 1A84D4044D;
+	Wed, 17 Nov 2021 09:20:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JpiiwcMD1bz8; Wed, 17 Nov 2021 06:00:07 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 5FC1D4053E;
-	Wed, 17 Nov 2021 06:00:07 +0000 (UTC)
+	with ESMTP id OgGAQWKrsstL; Wed, 17 Nov 2021 09:20:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id A6D794044B;
+	Wed, 17 Nov 2021 09:20:24 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C98F8C0032;
-	Wed, 17 Nov 2021 06:00:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2C6F3C0036;
+	Wed, 17 Nov 2021 09:20:24 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E3F5EC0012
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7BC10C0012
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 06:00:04 +0000 (UTC)
+ Wed, 17 Nov 2021 09:20:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C4B99405A6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 68BE540236
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 06:00:04 +0000 (UTC)
+ Wed, 17 Nov 2021 09:20:22 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JXHx4le7TvNW
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id G1dhMt3zElLm
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 06:00:03 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8C400405C1
+ Wed, 17 Nov 2021 09:20:21 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 43937403F7
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 Nov 2021 06:00:03 +0000 (UTC)
-Received: by mail-oi1-x22c.google.com with SMTP id bk14so4004807oib.7
+ Wed, 17 Nov 2021 09:20:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1637140820;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=77rEDu/reg/YJ6amwbhAgjZqXAbfYRFP4sr85cH8gm4=;
+ b=ag+dyQo2AvlxAw6gQe94MJ2D+ZgiT5Ref0HtOjcHpzUQsrwCrMmwRYz/Dg6u6doh/Qfk/c
+ MaKGUCCShVkoXB6a4C6Ir5ZIzIMXaVCk1s4w+NyIMpa/+j11yA3xPAMz4Ffe7miWnq1gUP
+ JYbJQGYtE5h+wztniBqz6QcxnClp2fs=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-433-9G32jFsdPk2QLkL5OnWX_g-1; Wed, 17 Nov 2021 04:20:18 -0500
+X-MC-Unique: 9G32jFsdPk2QLkL5OnWX_g-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ c1-20020aa7c741000000b003e7bf1da4bcso1524889eds.21
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 Nov 2021 22:00:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20210112.gappssmtp.com; s=20210112;
- h=mime-version:references:in-reply-to:from:date:message-id:subject:to
- :cc; bh=kSGc4ZU3kMNV4pDWr3dTCqenmyUswpL++6XUnwpYb58=;
- b=7c7d9HtTbjMh1xMFTx5QGxIrdsXn1JI9YRElbu+ZqHFJsqK2AF17sH/DWoIcAvgO1L
- FUKjZ6HlMNIsRREeVQH86AcW1VL8HH3mT/9F8Fw09xBw1/cNGqBKlV01Zk9PYpIITM/n
- 1PA5O0SPFyvEnx44UPrNPp2GJyX9kB7wvCzdxZpz/V8DwrCAhaa9ixkAWLRYejYpPfoO
- hxxvH37k+OMXfLmA5IKJV5bqUhY2ZXlEQsj0KUYy2nxapOOtl3keoGl6u+6R+amyebt4
- UAdiaraI25ZMwqbwnNvzH+IG/64wWtPcPfRSUuMuePLek4E3SJ+i2cmlWrgQP6M5Hxd1
- bjQg==
+ Wed, 17 Nov 2021 01:20:18 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=kSGc4ZU3kMNV4pDWr3dTCqenmyUswpL++6XUnwpYb58=;
- b=XoThggEt/kw/93SrN4IEvIdWQTJ83lf6X3eWLqEY6LcPK0qVIkbuIHRxpsgsdEkD9y
- VKM/0LIsWdiqNHzLz2ehaPknhT+2sTrD3lhyJxAQ1mvQssfbEqhMRptS2JKoNG7RjvgY
- BoB0rfm9Rr3OcUBOQJAoiITadjjfadQ9o9XUpnd4E/EuQ5cg9lj9hSJC7isBzVsLoNyS
- KQ/h6eUTuw78nwulwWTRKkxEvv52zsH9DSnRkqspvDs0dCuVuQZMBA4Ene1LHRpIzES2
- HMHkFrn3NqvxJlomMWgTBU51TiluAtjVdqcYqYyG882Pl/2IE+xiGc0mRyY1K2nAO0v2
- G+hA==
-X-Gm-Message-State: AOAM532jfcXFyuA7a5WTnFdxru2SirSbxmkGs163/vxFxwVUTEsuYONg
- 61b9dHXY7zpjmzdRe9fQaTLKLNASksVljUqZapgMbA==
-X-Google-Smtp-Source: ABdhPJyY/WqLFoKyV7MDHc0Omfxi30xLTaWZemyxDXwUFuCZxXL/MS1QKFZhNHj9aUUnq4wuTADld82ehMllqGmhACk=
-X-Received: by 2002:a54:4f8f:: with SMTP id g15mr11417825oiy.169.1637128802620; 
- Tue, 16 Nov 2021 22:00:02 -0800 (PST)
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=77rEDu/reg/YJ6amwbhAgjZqXAbfYRFP4sr85cH8gm4=;
+ b=0hAwSi9cF+ndJyv74dgYT1OmNczjzgCmbvSi43nfPi/RBKNNETYpFaD8MwWehFm4i4
+ BP6E1d2JpE9xTs6HQowq6jmQ+7oJsXC+sQV9Xkyk12LMpMbDIyNbrZKmuq2j3tmaU3B3
+ gCT+1tWIwQel0CxyGa/EeISPooZ+3yL9/Tyd2GANXAU4EChGxhYKqAJKrMOJ8uonoNJD
+ AsznZ+DeIsQJC+YkDqhROkUeTKEMiCQSl89AjnFEyw0/MUVWBIYTJ3C4xxVti2RH8Cxs
+ N/DRB9hlVogDDcHHwmKTm86A2Ifva/gyQCrNS6jTENhYmc4iHcziccZtjS5L48m3l6B1
+ l8vg==
+X-Gm-Message-State: AOAM532DykVwkGfgTtzOwTj0K1TpBBXQZdEU2zkmw+dlk6FBVeK+rTA/
+ CkJdsCZKzVLF3IDHmFHeIUlpezQP1O7mOOjVoJAEXAEKK7Fwby+18Fe+U2eJQU6esQ+LGuYGLc5
+ P52c1aiX2guuGkPAeTnx4izIxUmRoFJsZ7zo5JZ+Lhw==
+X-Received: by 2002:aa7:c714:: with SMTP id i20mr19958653edq.180.1637140817840; 
+ Wed, 17 Nov 2021 01:20:17 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwYtu97PwkW2A1yYGpWopI7K1d4sbVlbcdvIekk7lLEy/KSy29AQt851GD79KmBNlKEUMRrUw==
+X-Received: by 2002:aa7:c714:: with SMTP id i20mr19958629edq.180.1637140817719; 
+ Wed, 17 Nov 2021 01:20:17 -0800 (PST)
+Received: from steredhat (host-87-10-72-39.retail.telecomitalia.it.
+ [87.10.72.39])
+ by smtp.gmail.com with ESMTPSA id hw8sm9777163ejc.58.2021.11.17.01.20.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Nov 2021 01:20:17 -0800 (PST)
+Date: Wed, 17 Nov 2021 10:20:14 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: cgel.zte@gmail.com
+Subject: Re: [PATCH] virtio-blk: modify the value type of num in
+ virtio_queue_rq()
+Message-ID: <20211117092014.qyqhtg2y5etoxrqe@steredhat>
+References: <20211117063955.160777-1-ye.guojin@zte.com.cn>
 MIME-Version: 1.0
-References: <20211031045959.143001-1-andrew@daynix.com>
- <20211031045959.143001-3-andrew@daynix.com>
- <20211101044051-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20211101044051-mutt-send-email-mst@kernel.org>
-From: Andrew Melnichenko <andrew@daynix.com>
-Date: Wed, 17 Nov 2021 08:00:00 +0200
-Message-ID: <CABcq3pGuM6tD3P+zfBE6SZ3y7uxV5wYUZZ6GVqRsydtHkeTM2Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 2/4] drivers/net/virtio_net: Changed mergeable buffer
- length calculation.
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Yuri Benditovich <yuri.benditovich@daynix.com>,
- Yan Vugenfirer <yan@daynix.com>, kuba@kernel.org, davem@davemloft.net
+In-Reply-To: <20211117063955.160777-1-ye.guojin@zte.com.cn>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: axboe@kernel.dk, mst@redhat.com, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ stefanha@redhat.com, Ye Guojin <ye.guojin@zte.com.cn>, pbonzini@redhat.com,
+ Zeal Robot <zealci@zte.com.cn>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,74 +109,53 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Nov 1, 2021 at 10:44 AM Michael S. Tsirkin <mst@redhat.com> wrote:
+On Wed, Nov 17, 2021 at 06:39:55AM +0000, cgel.zte@gmail.com wrote:
+>From: Ye Guojin <ye.guojin@zte.com.cn>
 >
-> On Sun, Oct 31, 2021 at 06:59:57AM +0200, Andrew Melnychenko wrote:
-> > Now minimal virtual header length is may include the entire v1 header
-> > if the hash report were populated.
-> >
-> > Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
->
-> subject isn't really descriptive. changed it how?
->
-> And I couldn't really decypher what this log entry means either.
+>This was found by coccicheck:
+>./drivers/block/virtio_blk.c, 334, 14-17, WARNING Unsigned expression
+>compared with zero  num < 0
 >
 
-I'll change it in the next patch.
-So, I've tried to ensure that the v1 header with the hash report will
-be available if required in new patches.
+We should add the Fixes tag:
 
-> > ---
-> >  drivers/net/virtio_net.c | 8 +++++---
-> >  1 file changed, 5 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> > index b72b21ac8ebd..abca2e93355d 100644
-> > --- a/drivers/net/virtio_net.c
-> > +++ b/drivers/net/virtio_net.c
-> > @@ -393,7 +393,9 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
-> >       hdr_p = p;
-> >
-> >       hdr_len = vi->hdr_len;
-> > -     if (vi->mergeable_rx_bufs)
-> > +     if (vi->has_rss_hash_report)
-> > +             hdr_padded_len = sizeof(struct virtio_net_hdr_v1_hash);
-> > +     else if (vi->mergeable_rx_bufs)
-> >               hdr_padded_len = sizeof(*hdr);
-> >       else
-> >               hdr_padded_len = sizeof(struct padded_vnet_hdr);
-> > @@ -1252,7 +1254,7 @@ static unsigned int get_mergeable_buf_len(struct receive_queue *rq,
-> >                                         struct ewma_pkt_len *avg_pkt_len,
-> >                                         unsigned int room)
-> >  {
-> > -     const size_t hdr_len = sizeof(struct virtio_net_hdr_mrg_rxbuf);
-> > +     const size_t hdr_len = ((struct virtnet_info *)(rq->vq->vdev->priv))->hdr_len;
-> >       unsigned int len;
-> >
-> >       if (room)
->
-> Is this pointer chasing the best we can do?
+Fixes: 02746e26c39e ("virtio-blk: avoid preallocating big SGL for data")
 
-I'll change that.
+>Reported-by: Zeal Robot <zealci@zte.com.cn>
+>Signed-off-by: Ye Guojin <ye.guojin@zte.com.cn>
+>---
+> drivers/block/virtio_blk.c | 2 +-
+> 1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
+>index 97bf051a50ce..eed1666eff31 100644
+>--- a/drivers/block/virtio_blk.c
+>+++ b/drivers/block/virtio_blk.c
+>@@ -316,7 +316,7 @@ static blk_status_t virtio_queue_rq(struct 
+>blk_mq_hw_ctx *hctx,
+> 	struct request *req = bd->rq;
+> 	struct virtblk_req *vbr = blk_mq_rq_to_pdu(req);
+> 	unsigned long flags;
+>-	unsigned int num;
+>+	int num;
+> 	int qid = hctx->queue_num;
+> 	bool notify = false;
+> 	blk_status_t status;
+>-- 
+>2.25.1
+>
 
->
-> > @@ -2817,7 +2819,7 @@ static void virtnet_del_vqs(struct virtnet_info *vi)
-> >   */
-> >  static unsigned int mergeable_min_buf_len(struct virtnet_info *vi, struct virtqueue *vq)
-> >  {
-> > -     const unsigned int hdr_len = sizeof(struct virtio_net_hdr_mrg_rxbuf);
-> > +     const unsigned int hdr_len = vi->hdr_len;
-> >       unsigned int rq_size = virtqueue_get_vring_size(vq);
-> >       unsigned int packet_len = vi->big_packets ? IP_MAX_MTU : vi->dev->max_mtu;
-> >       unsigned int buf_len = hdr_len + ETH_HLEN + VLAN_HLEN + packet_len;
-> > --
-> > 2.33.1
->
+The patch LGTM.
+
+With the Fixes tag added:
+
+Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
