@@ -2,55 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7C1B4572E6
-	for <lists.virtualization@lfdr.de>; Fri, 19 Nov 2021 17:27:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8E34845731B
+	for <lists.virtualization@lfdr.de>; Fri, 19 Nov 2021 17:35:51 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 46737606DA;
-	Fri, 19 Nov 2021 16:27:53 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 29685605E7;
+	Fri, 19 Nov 2021 16:35:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id kwLRd8u7rPFr; Fri, 19 Nov 2021 16:27:52 +0000 (UTC)
+	with ESMTP id bhmrf6_TvtxM; Fri, 19 Nov 2021 16:35:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0838661C2B;
-	Fri, 19 Nov 2021 16:27:52 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id E63D7606DA;
+	Fri, 19 Nov 2021 16:35:48 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7A317C0036;
-	Fri, 19 Nov 2021 16:27:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 84964C0036;
+	Fri, 19 Nov 2021 16:35:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2004AC0012
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C06C9C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 16:27:50 +0000 (UTC)
+ Fri, 19 Nov 2021 16:35:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F419741BFC
+ by smtp2.osuosl.org (Postfix) with ESMTP id BA0C040554
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 16:27:49 +0000 (UTC)
+ Fri, 19 Nov 2021 16:35:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GtWW4mIh9Hnm
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id BFeJV2lrvRNI
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 16:27:47 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.17.13])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5AA5741BF9
+ Fri, 19 Nov 2021 16:35:45 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7AB2B400DA
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 16:27:47 +0000 (UTC)
-Received: from mail-wm1-f45.google.com ([209.85.128.45]) by
- mrelayeu.kundenserver.de (mreue107 [213.165.67.113]) with ESMTPSA (Nemesis)
- id 1My3In-1mSB0o1G2h-00zW7a for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 17:27:45 +0100
-Received: by mail-wm1-f45.google.com with SMTP id p18so9013869wmq.5
- for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 08:27:44 -0800 (PST)
-X-Gm-Message-State: AOAM533+GLuvIU2UZXEVfp9vp5yiiZ5sJuzVyLqzigaEL57h5TFrhFlF
- t9Hib6RR4uxlmpJSq2BBEhe3M9ih79b0S7ukxJg=
-X-Google-Smtp-Source: ABdhPJw9pjl15kxNckhoztOwSEHm2BAFAg53rxD/nLG+Vq3q5u2bghokZvEuTw1FbjRLUctINZWvpCeY9JlD3tiwY20=
-X-Received: by 2002:a1c:2382:: with SMTP id j124mr1036531wmj.35.1637339254218; 
- Fri, 19 Nov 2021 08:27:34 -0800 (PST)
-MIME-Version: 1.0
+ Fri, 19 Nov 2021 16:35:45 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10172"; a="234391725"
+X-IronPort-AV: E=Sophos;i="5.87,248,1631602800"; d="scan'208";a="234391725"
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Nov 2021 08:35:44 -0800
+X-IronPort-AV: E=Sophos;i="5.87,248,1631602800"; d="scan'208";a="737108569"
+Received: from smile.fi.intel.com ([10.237.72.184])
+ by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 19 Nov 2021 08:35:35 -0800
+Received: from andy by smile.fi.intel.com with local (Exim 4.95)
+ (envelope-from <andriy.shevchenko@linux.intel.com>)
+ id 1mo6rG-008arp-NU; Fri, 19 Nov 2021 18:35:26 +0200
+Date: Fri, 19 Nov 2021 18:35:26 +0200
+From: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To: "Alejandro Colomar (man-pages)" <alx.manpages@gmail.com>
+Subject: Re: [PATCH 00/17] Add memberof(), split some headers, and slightly
+ simplify code
+Message-ID: <YZfSTrbAr3d2xORr@smile.fi.intel.com>
 References: <20211119113644.1600-1-alx.manpages@gmail.com>
  <CAK8P3a0qT9tAxFkLN_vJYRcocDW2TcBq79WcYKZFyAG0udZx5Q@mail.gmail.com>
  <434296d3-8fe1-f1d2-ee9d-ea25d6c4e43e@gmail.com>
@@ -58,31 +63,10 @@ References: <20211119113644.1600-1-alx.manpages@gmail.com>
  <YZfMXlqvG52ls2TE@smile.fi.intel.com>
  <CAK8P3a06CMzWVj2C3P5v0u8ZVPumXJKrq=TdjSq1NugmeT7-RQ@mail.gmail.com>
  <2d790206-124b-f850-895f-a57a74c55f79@gmail.com>
+MIME-Version: 1.0
+Content-Disposition: inline
 In-Reply-To: <2d790206-124b-f850-895f-a57a74c55f79@gmail.com>
-From: Arnd Bergmann <arnd@arndb.de>
-Date: Fri, 19 Nov 2021 17:27:17 +0100
-X-Gmail-Original-Message-ID: <CAK8P3a3O1KLzxSTn1xqi2HjUVw2Utf6m5PZWd1ns7xsExxbJOA@mail.gmail.com>
-Message-ID: <CAK8P3a3O1KLzxSTn1xqi2HjUVw2Utf6m5PZWd1ns7xsExxbJOA@mail.gmail.com>
-Subject: Re: [PATCH 00/17] Add memberof(), split some headers, and slightly
- simplify code
-To: "Alejandro Colomar (man-pages)" <alx.manpages@gmail.com>
-X-Provags-ID: V03:K1:kTuBT3DG3xbYLf8q2Bg6PF8JP+HMxuB8pqol+eHntlRZcx9shFy
- utNFkqVR3Q2LBY/AOMN2M306zqi8xkYUbd25CYSpA/M1HbW+1HRe47uMDPL8yxV0+xlGMBy
- ZWDja7kYXkj1Z27momajxHueH1aqHsimTmkFUmFm7LCHiSXrFAkckTVVZG2qRmnBNuMpLj5
- OvAIdILMPLtwDt+YK5B3g==
-X-UI-Out-Filterresults: notjunk:1;V03:K0:fJKBzID4iqw=:oWgciDRvJAFjsl9Jgnc+cQ
- xJEHjA4FL+/1BJ6AroSb/B4VLQLWEhR9BMJ5WmW+V5IdKvETt6VbG+1SOHwmbzKvpsGtzC907
- UusCXzfG8B+YypqP9VPWuKACikBn/0YZcXutvMc/alZMPlncL6Ubi0GteqObVatiPordNR1SP
- EFh8F3tF9Q8Ugh0Txfvmc+QpdLIX5+cD618hys9Yb763GR6om5PDPKm6NSW/O2fV1KT0nWmE8
- 2GFjxHpZI29ZUkWWOXFSoHs4PKxSc/hj5Mi/78Tzh8TnNzScYAODkTLbbetAjQpAAXAFT63Is
- bWkzhf/2jyq0e+XQ/nGcWR2gNkw7akPEm6nBogd9h3yupZSjqRWDR95Mdm7y8p9mLVTt7eFnD
- k/UdskrVuWYUAZPXRPK8JluJjBWnDPgAfBVh6M5mhRaI+bqNkjAk3RJ27O3ErgvVLc0eAzrA+
- oMW8Ycoi7MckTZ/La80iDRZq3nMt54xMEfiAP7R9tQV2ghK4ZyiV/xJxqAsfkNjQlDJTAcWil
- 5wzEV6FG6oDOMy0Qqq5ubk2H0x/WlRhbznPVVDtRShuH6V9tII3xop6kxLh+H0RpJtABh6VQP
- gyhOlJ0iKnr2WRrOgyAF+DboGO/djo/rfXAKlkG8cTnSWkIA3PDSgFop1P8ah/dS5nn6YL+jr
- 5lKy9qBx9xlAfFF5trCSeBRSgZRfOmXYxBI/Qh6ceRji6FL/B/MBBs4ds5K4mDe/bSudiRkPW
- eMma7DBXBWT3NUWY4CD+g64w6F7Kzc+dEcGPjHL+itth01OqZoT9KDNZoPxHn4M2v4By9yryL
- 3omEC1tWSLL1NrcPZFg9E3luhpudY6P4V8sCTe/WGlZ76DCM/RAh+akTvdjEBDt2JXVwWtB
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Cc: Corey Minyard <cminyard@mvista.com>,
  Ajit Khaparde <ajit.khaparde@broadcom.com>,
  "Michael S. Tsirkin" <mst@redhat.com>,
@@ -91,7 +75,6 @@ Cc: Corey Minyard <cminyard@mvista.com>,
  Bjorn Andersson <bjorn.andersson@linaro.org>, Chris Mason <clm@fb.com>,
  Christian Brauner <christian.brauner@ubuntu.com>,
  Ketan Mukadam <ketan.mukadam@broadcom.com>,
- Somnath Kotur <somnath.kotur@broadcom.com>,
  linux-scsi <linux-scsi@vger.kernel.org>,
  Subbu Seetharaman <subbu.seetharaman@broadcom.com>,
  "Rafael J. Wysocki" <rafael@kernel.org>, Russell King <linux@armlinux.org.uk>,
@@ -107,8 +90,7 @@ Cc: Corey Minyard <cminyard@mvista.com>,
  Jitendra Bhivare <jitendra.bhivare@broadcom.com>,
  Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Jonathan Cameron <Jonathan.Cameron@huawei.com>,
- David Sterba <dsterba@suse.com>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ David Sterba <dsterba@suse.com>, Somnath Kotur <somnath.kotur@broadcom.com>,
  Linux ARM <linux-arm-kernel@lists.infradead.org>,
  Sriharsha Basavapatna <sriharsha.basavapatna@broadcom.com>,
  Networking <netdev@vger.kernel.org>,
@@ -132,13 +114,14 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Nov 19, 2021 at 5:22 PM Alejandro Colomar (man-pages)
-<alx.manpages@gmail.com> wrote:
+On Fri, Nov 19, 2021 at 05:22:48PM +0100, Alejandro Colomar (man-pages) wrote:
+> 
+> 
 > On 11/19/21 17:18, Arnd Bergmann wrote:
 > > On Fri, Nov 19, 2021 at 5:10 PM Andy Shevchenko
 > > <andriy.shevchenko@linux.intel.com> wrote:
 > >> On Fri, Nov 19, 2021 at 04:57:46PM +0100, Arnd Bergmann wrote:
-> >
+> > 
 > >>> The main problem with this approach is that as soon as you start
 > >>> actually reducing the unneeded indirect includes, you end up with
 > >>> countless .c files that no longer build because they are missing a
@@ -147,25 +130,38 @@ On Fri, Nov 19, 2021 at 5:22 PM Alejandro Colomar (man-pages)
 > >>> direct includes to every .c file.
 > >>
 > >> Can't it be done with cocci support?
-> >
+> > 
 > > There are many ways of doing it, but they all tend to suffer from the
 > > problem of identifying which headers are actually needed based on
 > > the contents of a file, and also figuring out where to put the extra
 > > #include if there are complex #ifdefs.
-> >
+> > 
 > > For reference, see below for the naive pattern matching I tried.
 > > This is obviously incomplete and partially wrong.
->
+> 
 > FYI, if you may not know the tool,
 > theres include-what-you-use(1) (a.k.a. iwyu(1))[1],
 > although it is still not mature,
 > and I'm helping improve it a bit.
 
-Yes, I know that one, I tried using it as well, but it did not really
-scale to the size of the kernel as it requires having all files to use
-the correct set of #include, and to know about all the definitions.
+Yes, I know the tool, but it produces insanity. Jonathan (maintainer
+of IIO subsystem) actually found it useful after manual work applied.
+Perhaps you can chat with him about usage of it in the Linux kernel.
 
-       Arnd
+> If I understood better the kernel Makefiles,
+> I'd try it.
+> 
+> You can try it yourselves.
+> I still can't use it for my own code,
+> since it has a lot of false positives.
+
+> [1]: <https://include-what-you-use.org/>
+
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
