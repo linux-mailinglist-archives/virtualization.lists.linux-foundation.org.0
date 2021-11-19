@@ -1,120 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55274457171
-	for <lists.virtualization@lfdr.de>; Fri, 19 Nov 2021 16:10:26 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 14B234571A0
+	for <lists.virtualization@lfdr.de>; Fri, 19 Nov 2021 16:30:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D6EDE410AB;
-	Fri, 19 Nov 2021 15:10:24 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 52522401E4;
+	Fri, 19 Nov 2021 15:30:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4OTOfa2X2snM; Fri, 19 Nov 2021 15:10:24 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id OBPc6YjoWecE; Fri, 19 Nov 2021 15:30:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 94694410A6;
-	Fri, 19 Nov 2021 15:10:23 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id E3C29408BF;
+	Fri, 19 Nov 2021 15:30:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 22435C0036;
-	Fri, 19 Nov 2021 15:10:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 50582C0036;
+	Fri, 19 Nov 2021 15:30:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 99F42C0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E06D7C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 15:10:21 +0000 (UTC)
+ Fri, 19 Nov 2021 15:30:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7BB5C61C16
+ by smtp4.osuosl.org (Postfix) with ESMTP id BF5AD410AE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 15:10:21 +0000 (UTC)
+ Fri, 19 Nov 2021 15:30:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=ibm.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ssn51gNYRMYI
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=axis.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id K9zCAj3KKz3N
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 15:10:20 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
- [148.163.156.1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2111E61C0E
+ Fri, 19 Nov 2021 15:30:31 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from smtp1.axis.com (smtp1.axis.com [195.60.68.17])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5E3D5410A4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 19 Nov 2021 15:10:19 +0000 (UTC)
-Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1AJEBsuM004293; 
- Fri, 19 Nov 2021 15:10:17 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=date : from : to : cc :
- subject : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=pp1;
- bh=0MP0TcvzjP8SfMirHVdpCIcpMxsE5ZR81uig9gebZSg=;
- b=N3/PYHEZiSUfBuxeuUjtBpqfv4C5w5du1/uSC2hY+4XPbssPtcM8brqBzodE/b4+YxAk
- oQUVOfY3J7YSPO+Io2L4mcQFegw9rlhwz+1e2L34cI2L7a1hUAnlfU0ACtaJDQYup9Ew
- 87ErWNum2KuMpjWbNk8cACpsxecJl7zl/SVy9JmkPzywNtZpijml3gs0FQI6bSuJ7Z4U
- 3V74xieHLPq8RzkvxGhz3Z9oC4zVcugL5TMXk04eT4ydhLdjg3rbwKmUFO3GoqL2q8VD
- YLmwpC+MHGkjWZlr+HuBsiq+KS6CegKQDwLNtW/5SFtkpS8z/oBCiRsY57RSP2UqACij IA== 
-Received: from pps.reinject (localhost [127.0.0.1])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3cec0kk6ts-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Nov 2021 15:10:16 +0000
-Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
- by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 1AJEC34W005179;
- Fri, 19 Nov 2021 15:10:16 GMT
-Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com
- [169.51.49.102])
- by mx0a-001b2d01.pphosted.com with ESMTP id 3cec0kk6ss-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Nov 2021 15:10:16 +0000
-Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
- by ppma06ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 1AJF3VqE012380;
- Fri, 19 Nov 2021 15:10:14 GMT
-Received: from b06avi18878370.portsmouth.uk.ibm.com
- (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
- by ppma06ams.nl.ibm.com with ESMTP id 3ca4mksy31-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Nov 2021 15:10:13 +0000
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
- [9.149.105.62])
- by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP
- id 1AJF38hD60686658
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 19 Nov 2021 15:03:08 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 5BF4FAE068;
- Fri, 19 Nov 2021 15:10:11 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id D0BD0AE055;
- Fri, 19 Nov 2021 15:10:10 +0000 (GMT)
-Received: from li-e979b1cc-23ba-11b2-a85c-dfd230f6cf82 (unknown [9.171.32.96])
- by d06av26.portsmouth.uk.ibm.com (Postfix) with SMTP;
- Fri, 19 Nov 2021 15:10:10 +0000 (GMT)
-Date: Fri, 19 Nov 2021 16:09:51 +0100
-From: Halil Pasic <pasic@linux.ibm.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH V5 1/4] virtio_ring: validate used buffer length
-Message-ID: <20211119160951.5f2294c8.pasic@linux.ibm.com>
-In-Reply-To: <20211027022107.14357-2-jasowang@redhat.com>
-References: <20211027022107.14357-1-jasowang@redhat.com>
- <20211027022107.14357-2-jasowang@redhat.com>
-Organization: IBM
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+ Fri, 19 Nov 2021 15:30:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=axis.com; q=dns/txt; s=axis-central1; t=1637335831;
+ x=1668871831; h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=J0Q2eQn/3bf2Y/52GQfblqSKUvkUXmIj55C006lwxiI=;
+ b=JAVoJWlzLinNsPrm5Iuq3v1fG0JkJw8Z+VxhZdmCpe4V1t5cR4ilU7sV
+ 5UBUqd7mczfTTYpU+m1um+p5fYegc4AxaBLPYtV9iuR5K/nxsMRAaIQnA
+ 6ldUOzAKjoqw0qpXxLSCMqmsAYbd5+vTUJBMdMnUC5z1nRaED8h1Xjeg+
+ tzc4XN149By1aaboRSlZVNhe76qSHgnOaocp6ziEP7WPSUnOIzmyS/TmR
+ j4OvoVEjK7Vo4EbYfkhUyY6wq50GiswBCvkxeqaSt5DJ5rctw0x/ggVN4
+ n88GmE84rbl3LkCXQQEIag+eWnxHmdcFUraw+IxMP5O8MFsVsD43/ZhwX w==;
+Date: Fri, 19 Nov 2021 16:30:27 +0100
+From: Vincent Whitchurch <vincent.whitchurch@axis.com>
+To: Viresh Kumar <viresh.kumar@linaro.org>
+Subject: Re: [PATCH v2 1/2] i2c: virtio: disable timeout handling
+Message-ID: <20211119153025.GA17236@axis.com>
+References: <20211111160412.11980-1-vincent.whitchurch@axis.com>
+ <20211111160412.11980-2-vincent.whitchurch@axis.com>
+ <20211112023529.2nypmrnm6mufcpjt@vireshk-i7>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-X-Proofpoint-ORIG-GUID: W2LqPQDNQ3Yv7uyJXxNO4ROVIPAicV5n
-X-Proofpoint-GUID: XpNAgGaEGisJ6W2H3HhA84DWCLUvvQRA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.790,Hydra:6.0.425,FMLib:17.0.607.475
- definitions=2021-11-19_09,2021-11-17_01,2020-04-07_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0
- priorityscore=1501 bulkscore=0 lowpriorityscore=0 clxscore=1011
- spamscore=0 impostorscore=0 mlxscore=0 mlxlogscore=999 phishscore=0
- malwarescore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2110150000 definitions=main-2111190084
-Cc: david.kaplan@amd.com, konrad.wilk@oracle.com, f.hetzelt@tu-berlin.de,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Halil Pasic <pasic@linux.ibm.com>, mst@redhat.com
+Content-Disposition: inline
+In-Reply-To: <20211112023529.2nypmrnm6mufcpjt@vireshk-i7>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: "mst@redhat.com" <mst@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, "wsa@kernel.org" <wsa@kernel.org>,
+ kernel <kernel@axis.com>,
+ "linux-i2c@vger.kernel.org" <linux-i2c@vger.kernel.org>,
+ "conghui.chen@intel.com" <conghui.chen@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -131,44 +86,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, 27 Oct 2021 10:21:04 +0800
-Jason Wang <jasowang@redhat.com> wrote:
-
-> This patch validate the used buffer length provided by the device
-> before trying to use it. This is done by record the in buffer length
-> in a new field in desc_state structure during virtqueue_add(), then we
-> can fail the virtqueue_get_buf() when we find the device is trying to
-> give us a used buffer length which is greater than the in buffer
-> length.
+On Fri, Nov 12, 2021 at 03:35:29AM +0100, Viresh Kumar wrote:
+> On 11-11-21, 17:04, Vincent Whitchurch wrote:
+> >  static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+> > @@ -141,7 +140,6 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+> >  	struct virtio_i2c *vi = i2c_get_adapdata(adap);
+> >  	struct virtqueue *vq = vi->vq;
+> >  	struct virtio_i2c_req *reqs;
+> > -	unsigned long time_left;
+> >  	int count;
+> >  
+> >  	reqs = kcalloc(num, sizeof(*reqs), GFP_KERNEL);
+> > @@ -164,11 +162,9 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+> >  	reinit_completion(&vi->completion);
+> >  	virtqueue_kick(vq);
+> >  
+> > -	time_left = wait_for_completion_timeout(&vi->completion, adap->timeout);
+> > -	if (!time_left)
+> > -		dev_err(&adap->dev, "virtio i2c backend timeout.\n");
+> > +	wait_for_completion(&vi->completion);
 > 
-> Since some drivers have already done the validation by themselves,
-> this patch tries to makes the core validation optional. For the driver
-> that doesn't want the validation, it can set the
-> suppress_used_validation to be true (which could be overridden by
-> force_used_validation module parameter). To be more efficient, a
-> dedicate array is used for storing the validate used length, this
-> helps to eliminate the cache stress if validation is done by the
-> driver.
-> 
-> Signed-off-by: Jason Wang <jasowang@redhat.com>
+> I thought we decided on making this in insanely high value instead ?
 
-Hi Jason!
+That wasn't my impression from the previous email thread.  Jie was OK
+with doing it either way, and only disabling the timeout entirely makes
+sense to me given the risk for memory corruption otherwise.
 
-Our CI has detected, that virtio-vsock became unusable with this
-patch on s390x. I didn't test on x86 yet. The guest kernel says
-something like:
-vmw_vsock_virtio_transport virtio1: tx: used len 44 is larger than in buflen 0
-
-Did you, or anybody else, see something like this on platforms other that
-s390x?
-
-I had a quick look at this code, and I speculate that it probably
-uncovers a pre-existig bug, rather than introducing a new one.
-
-If somebody is already working on this please reach out to me.
-
-Regards,
-Halil
+What "insanely high" timeout value do you have in mind and why would it
+be acceptable to corrupt kernel memory after that time?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
