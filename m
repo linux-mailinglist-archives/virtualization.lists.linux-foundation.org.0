@@ -1,58 +1,172 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AB45F4584E8
-	for <lists.virtualization@lfdr.de>; Sun, 21 Nov 2021 17:55:34 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 68BF245859C
+	for <lists.virtualization@lfdr.de>; Sun, 21 Nov 2021 18:50:04 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C4E8140201;
-	Sun, 21 Nov 2021 16:55:32 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A54AE40441;
+	Sun, 21 Nov 2021 17:50:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id M9vzYyolKCGE; Sun, 21 Nov 2021 16:55:30 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Jc_fQkmLG16I; Sun, 21 Nov 2021 17:50:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 5818940225;
-	Sun, 21 Nov 2021 16:55:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C323340463;
+	Sun, 21 Nov 2021 17:49:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A2AFDC0032;
-	Sun, 21 Nov 2021 16:55:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B730C003C;
+	Sun, 21 Nov 2021 17:49:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 954D0C0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A93CFC0012
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Nov 2021 16:55:28 +0000 (UTC)
+ Sun, 21 Nov 2021 17:49:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7D53960710
+ by smtp4.osuosl.org (Postfix) with ESMTP id 88B274036E
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Nov 2021 16:55:28 +0000 (UTC)
+ Sun, 21 Nov 2021 17:49:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id biQoNQNFv7jv
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 7vJLtRlo0lkz
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Nov 2021 16:55:26 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
- [IPv6:2a03:f480:1:14::7d])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 53CD560705
+ Sun, 21 Nov 2021 17:49:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4F1F44030F
  for <virtualization@lists.linux-foundation.org>;
- Sun, 21 Nov 2021 16:55:26 +0000 (UTC)
-Received: from [188.251.152.250] (helo=LAPTOP-EPOV2LRR)
- by s052d7dde.fastvps-server.com with esmtpsa
- (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
- (envelope-from <marle@saisti.eu>) id 1mopAb-0007db-Pv
- for virtualization@lists.linux-foundation.org; Sun, 21 Nov 2021 18:54:21 +0300
-From: "WorldCIST" <marialemos72@gmail.com>
-Subject: WorldCist'22 - 10th World Conference on IST | Montenegro | Deadline:
- November 24
-To: virtualization@lists.linux-foundation.org
+ Sun, 21 Nov 2021 17:49:54 +0000 (UTC)
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 1ALF22Vt016503; 
+ Sun, 21 Nov 2021 17:49:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : subject :
+ date : message-id : content-transfer-encoding : content-type :
+ mime-version; s=corp-2021-07-09;
+ bh=ZgMkUmaZ3PqHwuBbGmnLaarBZ9YNdqmIlgKkA8Txa+Q=;
+ b=epboAh2w/NvL9PeGkAG/l1KwCGx8Sa/JbTEEAVgiFu9GJiT+19I8hiulDzFic75j7gEa
+ m3GQOvsmpefz1lG/dXvwoWlcYxgqXBlt2SJiyr7tYIuz7aeDVGomqY2hHolafhmGyE8c
+ WrUuTmQ5hvJ0dVoqJXNhc6nObgYdfo+3PhLO18gwBtbUjWKdVhKXo0URzh+tReGxDZV9
+ k99Ujkqac1AwLktLHRn5o/ozLh3llRvU7U2pojWJKVLirqkilxxG8AHCXlzuVN/ju6fL
+ gqFC5TDMXLeK5FQhbXgDpdbV83AVK0QwDW6KQcUj6OcxmLxREPMJeoPYmh9xA+86pRYz Tg== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+ by mx0b-00069f02.pphosted.com with ESMTP id 3ceqeccjnp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sun, 21 Nov 2021 17:49:45 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+ by aserp3030.oracle.com (8.16.1.2/8.16.1.2) with SMTP id 1ALHkerr100938;
+ Sun, 21 Nov 2021 17:49:45 GMT
+Received: from nam10-dm6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10lp2106.outbound.protection.outlook.com [104.47.58.106])
+ by aserp3030.oracle.com with ESMTP id 3ceq2bnn2j-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sun, 21 Nov 2021 17:49:45 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FnGWU87fskmp+TEE7ZxNIK3KiJrYYrBYPMjwNawkwsjsRKLSc9Gdke86jStjDRFook67CtIJKCUdHdVkYQ7thBSLmHljvpnBbYfkwgpfZJHuI0uLFEJJWsS7nXF/nuWFdn9A5UOT0RJoLx317ZrOyOmGutpQw6j6DS760Ftk0l9brCMLm0I2pG/PjLbAYEOIhivHKjjXSuVCJ7sHp/xni91A505QiGrPHMvQVjIvJET+WJS5ov+kyToO+4PmF+JeV7qyWe7N6UD8mJKPBrS8EqgDItXrrPigalN8sh/nWvxT/Kwxbd5HdX/+GkOwPXnrhTYulFuLKwU4P1S0L0gNhg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZgMkUmaZ3PqHwuBbGmnLaarBZ9YNdqmIlgKkA8Txa+Q=;
+ b=g+rR0PUfbFQFpRJkYUy2uMb+pgEQgB7HxG9FbYUvo541K97NWnQv7gm/JVgEE//MCXNjJJqO92ma2MxGwVkNOuXi328ompjjJO+G8MKqwXo2Px80YtQW4sMVpAC5vNEKWUtwhsp0+W1tg663bNHIIpaP6MFvuSEM2spoiFPHKaTXAD3S0M4kFjD9MxEmkjR92aHNttEaTPx5YNdUJWMQsA3j7H7dz4miJ++8ETPMlFbA0Q3nFY5EXaPX/zm9Gi1FIsoadG8q5VvEF14V+tvAXmg7dgBdFCK6DIUUaQaHfH40+N5W2Srb7mWbS0LfYRdH2HsfVdVVH10U2wolWDidKQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZgMkUmaZ3PqHwuBbGmnLaarBZ9YNdqmIlgKkA8Txa+Q=;
+ b=P38g63ep4/ocSd+C/m8ku7mMaB7W3nA4l68FXgJp+85v5vCzgzZ0NKxqMyPF+u38jts56Npl/YadwKg8Nv06eNpXT7gzh6LcpfdJVRC+obDYZteqFR0osZP6JQ2zTqXQI0P3gf8xIeB5HFfJhY366vDRd3bglUJYw5M6Ip/3DEs=
+Received: from DM5PR10MB1466.namprd10.prod.outlook.com (2603:10b6:3:b::7) by
+ DS7PR10MB5055.namprd10.prod.outlook.com (2603:10b6:5:3a9::17) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4713.19; Sun, 21 Nov 2021 17:49:43 +0000
+Received: from DM5PR10MB1466.namprd10.prod.outlook.com
+ ([fe80::601a:d0f6:b9db:f041]) by DM5PR10MB1466.namprd10.prod.outlook.com
+ ([fe80::601a:d0f6:b9db:f041%11]) with mapi id 15.20.4713.024; Sun, 21 Nov
+ 2021 17:49:43 +0000
+From: Mike Christie <michael.christie@oracle.com>
+To: geert@linux-m68k.org, vverma@digitalocean.com, hdanton@sina.com,
+ hch@infradead.org, stefanha@redhat.com, jasowang@redhat.com,
+ mst@redhat.com, sgarzare@redhat.com,
+ virtualization@lists.linux-foundation.org,
+ christian.brauner@ubuntu.com, axboe@kernel.dk, linux-kernel@vger.kernel.org
+Subject: [PATCH V5 00/10] Use copy_process/create_io_thread in vhost layer
+Date: Sun, 21 Nov 2021 11:49:20 -0600
+Message-Id: <20211121174930.6690-1-michael.christie@oracle.com>
+X-Mailer: git-send-email 2.25.1
+X-ClientProxiedBy: CH0PR03CA0217.namprd03.prod.outlook.com
+ (2603:10b6:610:e7::12) To DM5PR10MB1466.namprd10.prod.outlook.com
+ (2603:10b6:3:b::7)
 MIME-Version: 1.0
-Date: Sun, 21 Nov 2021 15:54:22 +0000
-Message-ID: <17940781602281@gmail-com>
-X-Antivirus: AVG (VPS 211121-2, 21/11/2021), Outbound message
-X-Antivirus-Status: Clean
+Received: from localhost.localdomain (73.88.28.6) by
+ CH0PR03CA0217.namprd03.prod.outlook.com (2603:10b6:610:e7::12) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.4713.19 via Frontend Transport; Sun, 21 Nov 2021 17:49:42 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 8b66d79a-ba80-47a1-fecf-08d9ad174ca2
+X-MS-TrafficTypeDiagnostic: DS7PR10MB5055:
+X-Microsoft-Antispam-PRVS: <DS7PR10MB50557C287BB60671489E615EF19E9@DS7PR10MB5055.namprd10.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: Ako+nKYgI2yBzlk2dcY32r4/dXMgzrNFK0ycG+nL5Pac0Iy1I9H8ksPf4+kwou2rUy2q/CFa7ZmiNH7zVPafqaQ3TmHl8wIR8EgGAvkOxSg5ZVUQJ+9qAKYhv4GAUYj2EoLPU7gViOFDgpdfXqSC3cgsPWr0aPcW93rXSVH0oxd437g5xZYBYnzPUxFZBildD3S/OaNEgD0kkn17WJszy1jhpryvo69wzPd5eJ8WQ+5zubpoCZM13qvRThXBIvaYaYCFSpSIba2Lao/HJKd5cPwxK95SIty7sM3PdSp66kd+ekLu34Y/LjVCgUbxUiKQs/RbUxsbtEDecwCOdzLxuwmg4OQ43ZbynGAkxfj0/23Ka9yY+ywjQ1hPPY2IS6voZY7rBwg8fcRIKhSL127lpnGq+Pxf+H9rm+qKPGRPFGH5QnYNAj9tlEAez1r1LKhqXE+O9vLnFMgarxQFzCIly0+sJ72F2Lu50WM7GMmOF1/tYIoHYWoed1mDNWuJwBNBdC/Ytk1l53QrKxF6k3ehbYWfe3ByESgCUwRsHyjTG47j4TB0OvjP8aiaMZNl7TVHccigWixsHRu5kDmwYHOjk+ecCdItNztDOw2z3FXiOoxVfZtRH0+6BdMEj1ZyrsR4dnaCeYfqb5hOWWQXXEjAylWyEwNVPJusRrJJ+bpIZHWhILRG6hdlMU075ISpF8cRezgCv2Fj7E6xrsZ2FRLHMPTrvuC7ASvtnZjUTwGMeYl1XXWn0b/zvBEEPHCayv8pPHefQJnqTVCVcxJtICWWvMuMnQ0EzXtkgAZN7miVPW/3iXkEs4XzhY9KSiuoJ7bT
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DM5PR10MB1466.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(366004)(8676002)(66476007)(52116002)(38350700002)(5660300002)(8936002)(1076003)(2616005)(6512007)(966005)(6666004)(6506007)(7416002)(66556008)(2906002)(316002)(86362001)(921005)(508600001)(38100700002)(6486002)(83380400001)(26005)(36756003)(66946007)(186003)(956004);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?OST2/KO4G4TgcGRo8473jKG808UinhS1OHheO3LJfbZWx45htTJUIqvpK60+?=
+ =?us-ascii?Q?vYVovnKKj9hYCIDhE+Dy6JdhomjLZ5htt/a27YtLyitYXHABHxTOZ0KJn/kv?=
+ =?us-ascii?Q?VR+0Xk8HqQFnivax9UE20HaQK11OIpPdLkgjosKHiW6QMJnDM7+khiCjgIRi?=
+ =?us-ascii?Q?P5tRAdeytvbGPrNyvHVnEVBIPvroQAEJpaApBaNpjlaqYy1s8NvSGfs3T4fe?=
+ =?us-ascii?Q?sXyTmqbPSAUrdOT+m7i3EkYYumiAa0ZOY0MSSdDXY6Xr1h89hJ/dYjno/oqO?=
+ =?us-ascii?Q?BzXV6Rl4AM3JOTD6bXBdMwntIPnCchGcTY8ueXTS7R5XdwtIdX7Zs8A+5len?=
+ =?us-ascii?Q?xsnGwAaJKka/2i8y3rHHZZKn8BjMWpDAABUO/ay7wcPRfiheyt3+S1mMOqzS?=
+ =?us-ascii?Q?Nqsi13KkjrY89IBl+T6haBlCe3ZPDNftGedYulsqEo2VdrD3YLH2c2PZWj4D?=
+ =?us-ascii?Q?PpHG6cXppJshUQIxHet6Zjtz0gMItaL+ZnacdqwChI6HyuhtCqm+V76jigcU?=
+ =?us-ascii?Q?W+F++yfK/wMOH2KhnWlZjr1eD/T0tSkrWiFo/cAL80C1m+q8AJ++gsHTf9T9?=
+ =?us-ascii?Q?8UqfunzxwXhoeWstsvxe7+cdMC+jMKe2yERPlXd/UEDwp3o56lh4Dw77vvg3?=
+ =?us-ascii?Q?s+HpPF058RREYLwqu3W7yfx57GztssQ+QGwi7FK4IsyFk5I2pgqokaaKVHIj?=
+ =?us-ascii?Q?hkcONFQJA4p2gFo5lAmasxEgKcEhAujSxh+Xc7t//PfI3Ied11s+OQGm8zlP?=
+ =?us-ascii?Q?m0HtjqhTQOdA4Rcsr/BkvdaXd4fKPD8YhWxYrrxCnJUr4tWFPwsHy8KRr+tt?=
+ =?us-ascii?Q?fnSq/kZekoipXbnX048v4rBS036mSoq86sawnzeDQgNpJwF1dvDWDGc8YsIb?=
+ =?us-ascii?Q?YyGucseMKiryBtbjvFjB8rIrMr/oP/SOsXcsBcArPxm9n6JafNFvbdvY60Xs?=
+ =?us-ascii?Q?c9JbxQzaI+m+f+k/TPTuzXUFR7Cx5wAoQKjV0sSlH0P0kjCeOKyP5sF3GAmQ?=
+ =?us-ascii?Q?beRR6L8iIB6gBo9XrLvEft4MKU9P7QPsgPL8sqlXNvVuAb5XNbQZpyCDjrjz?=
+ =?us-ascii?Q?FBAjpewadT3XcbDRgO7GT/6Wdosgm87EzvkidXy4ZKU71DS07QjJBirajKIy?=
+ =?us-ascii?Q?yZTC4+vyjS4yUF1m6rcv2MpnO8qLTr0dEYzIeI0eAmg48ewKFsg/VzDyAEWx?=
+ =?us-ascii?Q?6JbpD+hMSyV6g8cgYcli2Xrr4fM9BncfjWvKj6a9oSN3H7tL/Mb4b5X9cILM?=
+ =?us-ascii?Q?76aAWdxyzyVP+gT6PFeyCN+Un3vM/m8nkH4OqDe9hKQnxAdMuqOxen4dMtQs?=
+ =?us-ascii?Q?K5Yjde9NBEq9+PSfgyV91/ipOEYyJweEIxGyqvRK1gLc6wX8H3k4jsZr4Bsf?=
+ =?us-ascii?Q?mzpujF0qJkW5ay+s+CDsTJlX/z8Oex6zG5ihhw7kdX6kDkSIf5QOYTEfOOOs?=
+ =?us-ascii?Q?kUtQ9mVkOl+LgD3+WYeqAPAS5HuBN5zEFlHHaFVB2Kuugj/NB81gLtBQgVup?=
+ =?us-ascii?Q?A3wm9zkMSYeb1avwCa4cmlX8Z6Zkh2hMzWE9Bq19SfSshc/ihHfKbGqk4sOx?=
+ =?us-ascii?Q?SK9xl5aRjxUgQ8SXmopoWF8YWT7/CnkgR4WjD2ZKApbDjk66DAW7Y/FD8kNX?=
+ =?us-ascii?Q?5xeoBuVclccesnPyWngcz0qNb/uoqrjqzA6hXnxxPsEfNuqxzC8qbu06h7BK?=
+ =?us-ascii?Q?oP136A=3D=3D?=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8b66d79a-ba80-47a1-fecf-08d9ad174ca2
+X-MS-Exchange-CrossTenant-AuthSource: DM5PR10MB1466.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Nov 2021 17:49:43.2928 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jkgG2yu7rR9C/8eN1135/K0N0KhWJo0WFUD7RxEMG3bJaM/sliz47mT/DL2Hz8A21S5qVeUvGbv8FU/I5CKCKhz+27gTQ5eOzkhgHoSNt1I=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5055
+X-Proofpoint-Virus-Version: vendor=nai engine=6300 definitions=10175
+ signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ adultscore=0 spamscore=0
+ bulkscore=0 suspectscore=0 mlxscore=0 mlxlogscore=492 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2110150000
+ definitions=main-2111210110
+X-Proofpoint-ORIG-GUID: yV1ynCrrJg5oHvbU5Ev7N1n-em43Ucdw
+X-Proofpoint-GUID: yV1ynCrrJg5oHvbU5Ev7N1n-em43Ucdw
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -64,517 +178,72 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Reply-To: worldcist@gmail.com
-Content-Type: multipart/mixed; boundary="===============8862582649004632356=="
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is a multi-part message in MIME format
+The following patches made over Linus's tree, allow the vhost layer to do
+a copy_process on the thread that does the VHOST_SET_OWNER ioctl like how
+io_uring does a copy_process against its userspace app. This allows the
+vhost layer's worker threads to inherit cgroups, namespaces, address
+space, etc and this worker thread will also be accounted for against that
+owner/parent process's RLIMIT_NPROC limit.
+
+If you are not familiar with qemu and vhost here is more detailed
+problem description:
+
+Qemu will create vhost devices in the kernel which perform network, SCSI,
+etc IO and management operations from worker threads created by the
+kthread API. Because the kthread API does a copy_process on the kthreadd
+thread, the vhost layer has to use kthread_use_mm to access the Qemu
+thread's memory and cgroup_attach_task_all to add itself to the Qemu
+thread's cgroups.
+
+The problem with this approach is that we then have to add new functions/
+args/functionality for every thing we want to inherit. I started doing
+that here:
+
+https://lkml.org/lkml/2021/6/23/1233
+
+for the RLIMIT_NPROC check, but it seems it might be easier to just
+inherit everything from the beginning, becuase I'd need to do something
+like that patch several times.
+
+V5:
+- Handle kbuild errors by building patchset against current kernel that
+  has all deps merged. Also add patch to remove create_io_thread code as
+  it's not used anymore.
+- Rebase patchset against current kernel and handle a new vm PF_IO_WORKER
+  case added in 5.16-rc1.
+- Add PF_USER_WORKER flag so we can check it later after the initial
+  thread creation for the wake up, vm and singal cses.
+- Added patch to auto reap the worker thread.
+V4:
+- Drop NO_SIG patch and replaced with Christian's SIG_IGN patch.
+- Merged Christian's kernel_worker_flags_valid helpers into patch 5 that
+  added the new kernel worker functions.
+- Fixed extra "i" issue.
+- Added PF_USER_WORKER flag and added check that kernel_worker_start users
+  had that flag set. Also dropped patches that passed worker flags to
+  copy_thread and replaced with PF_USER_WORKER check.
+V3:
+- Add parentheses in p->flag and work_flags check in copy_thread.
+- Fix check in arm/arm64 which was doing the reverse of other archs
+  where it did likely(!flags) instead of unlikely(flags).
+V2:
+- Rename kernel_copy_process to kernel_worker.
+- Instead of exporting functions, make kernel_worker() a proper
+  function/API that does common work for the caller.
+- Instead of adding new fields to kernel_clone_args for each option
+  make it flag based similar to CLONE_*.
+- Drop unused completion struct in vhost.
+- Fix compile warnings by merging vhost cgroup cleanup patch and
+  vhost conversion patch.
 
---===============8862582649004632356==
-Content-Type: multipart/alternative; charset=utf-8; boundary="AKSgTqfASiX=_9qsVlE8GZOYd34gvVPYE8"
 
-This is a multi-part message in MIME format
-
---AKSgTqfASiX=_9qsVlE8GZOYd34gvVPYE8
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-* Conference listed in CORE Ranking
-
-** Google Scholar H5-Index =3D 23
-
-*** Best papers selected for SCI/SSCI journals
-
- 
-
----------------------------------------------------------------------------=
--------------------------------
-
-WorldCIST'22 - 10th World Conference on Information Systems and Technologie=
-s
-
-12-14 April 2022, Budva, Montenegro
-
-http://worldcist.org <http://worldcist.org/>
-
----------------------------------------------------------------------------=
---------------------------------
-
-
-The WorldCist'22 - 10th World Conference on Information Systems and Technol=
-ogies, to be held in Budva, Montenegro, 12-14 April 2022, is a global forum=
- for researchers and practitioners to present and discuss the most recent i=
-nnovations, trends, results, experiences and concerns in the several perspe=
-ctives of Information Systems and Technologies.
-
-We are pleased to invite you to submit your papers to WorldCist'22. All sub=
-missions will be reviewed on the basis of relevance, originality, importanc=
-e and clarity.
-
- 
-
-TOPICS
-
-Submitted papers should be related with one or more of the main themes prop=
-osed for the Conference:
-
-A) Information and Knowledge Management (IKM);
-
-B) Organizational Models and Information Systems (OMIS);
-
-C) Software and Systems Modeling (SSM);
-
-D) Software Systems, Architectures, Applications and Tools (SSAAT);
-
-E) Multimedia Systems and Applications (MSA);
-
-F) Computer Networks, Mobility and Pervasive Systems (CNMPS);
-
-G) Intelligent and Decision Support Systems (IDSS);
-
-H) Big Data Analytics and Applications (BDAA);
-
-I) Human-Computer Interaction (HCI);
-
-J) Ethics, Computers and Security (ECS)
-
-K) Health Informatics (HIS);
-
-L) Information Technologies in Education (ITE);
-
-M) Technologies for Biomedical Applications (TBA)
-
-N) Information Technologies in Radiocommunications (ITR);
-
- 
-
-TYPES of SUBMISSIONS and DECISIONS
-
-Four types of papers can be submitted:
-
-Full paper: Finished or consolidated R&D works, to be included in one of th=
-e Conference themes. These papers are assigned a 10-page limit.
-
-Short paper: Ongoing works with relevant preliminary results, open to discu=
-ssion. These papers are assigned a 7-page limit.
-
-Poster paper: Initial work with relevant ideas, open to discussion. These p=
-apers are assigned to a 4-page limit.
-
-Company paper: Companies' papers that show practical experience, R & D, too=
-ls, etc., focused on some topics of the conference. These papers are assign=
-ed to a 4-page limit.
-
-Submitted papers must comply with the format of Advances in Intelligent Sys=
-tems and Computing Series (see Instructions for Authors at Springer Website=
-), be written in English, must not have been published before, not be under=
- review for any other conference or publication and not include any informa=
-tion leading to the authors=E2=80=99 identification. Therefore, the authors=
-=E2=80=99 names, affiliations and bibliographic references should not be in=
-cluded in the version for evaluation by the Program Committee. This informa=
-tion should only be included in the camera-ready version, saved in Word or =
-Latex format and also in PDF format. These files must be accompanied by the=
- Consent to Publish form filled out, in a ZIP file, and uploaded at the con=
-ference management system.
-
-All papers will be subjected to a =E2=80=9Cdouble-blind review=E2=80=9D by =
-at least two members of the Program Committee.
-
-Based on Program Committee evaluation, a paper can be rejected or accepted =
-by the Conference Chairs. In the later case, it can be accepted as the type=
- originally submitted or as another type. Thus, full papers can be accepted=
- as short papers or poster papers only. Similarly, short papers can be acce=
-pted as poster papers only.
-
-Poster papers and Company papers are not published in the Conference Procee=
-dings, being only presented and discussed. The authors of accepted poster p=
-apers should build and print a poster to be exhibited during the Conference=
-=2E This poster must follow an A1 or A2 vertical format. The Conference inc=
-ludes Work Sessions where these posters are presented and orally discussed,=
- with a 7 minute limit per poster.
-
-The authors of accepted Full papers will have 15 minutes to present their w=
-ork in a Conference Work Session; approximately 5 minutes of discussion wil=
-l follow each presentation. The authors of accepted Short papers and Compan=
-y papers will have 11 minutes to present their work in a Conference Work Se=
-ssion; approximately 4 minutes of discussion will follow each presentation.=
-
-
- 
-
-PUBLICATION & INDEXING
-
-To ensure that a full paper or short paper is published, poster paper or co=
-mpany paper is presented, at least one of the authors must be fully registe=
-red by the 8nd of January 2022, and the paper must comply with the suggeste=
-d layout and page-limit. Additionally, all recommended changes must be addr=
-essed by the authors before they submit the camera-ready version.
-
-No more than one paper per registration will be published. An extra fee mus=
-t be paid for publication of additional papers, with a maximum of one addit=
-ional paper per registration. One registration permits only the participati=
-on of one author in the conference.
-
-Full and Short papers will be published in Proceedings by Springer, in a bo=
-ok of the Lecture Notes in Networks and Systems series, will  be submitted =
-for indexation by SCOPUS, WoS, Google Scholar, SCImago, among others, and w=
-ill be available in the SpringerLink Digital Library. Poster and company pa=
-pers will not be published, just presented in the conference.
-
-The authors of the best selected papers will be invited to extend them for =
-publication in international journals indexed by WoS/SCI, SCOPUS and DBLP, =
-among others, such as:
-
-Computers in Industry <https://mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396=
-ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s3> (IF: 7.635 / Q1)
-
-International Journal of Neural Systems <https://mkt.saisti.eu/go/3d1d194be=
-2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s5> (IF: 5.866 =
-/ Q1)
-
-Neural Computing and Applications <https://mkt.saisti.eu/go/3d1d194be2aacad=
-46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sR> (IF: 5.606 / Q1)
-
-Integrated Computer-Aided Engineering <https://mkt.saisti.eu/go/3d1d194be2a=
-acad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s7> (IF: 4.827 / =
-Q1)
-
-Electronic Markets <https://mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff-=
--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sS> (IF: 4.765 / Q1)
-
-Informatica - An International Journal <https://mkt.saisti.eu/go/3d1d194be2=
-aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s9> (IF: 2.88 / =
-Q1)
-
-Expert Systems - Journal of Knowledge Engineering <https://mkt.saisti.eu/go=
-/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sz> (=
-IF: 2.587 / Q2)
-
-International Journal of Applied Mathematics and Computer Science <https://=
-mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OO=
-TeMxl3e1Ne5sb> (IF: 1.417 / Q2)
-
-Computational and Mathematical Organization Theory <https://mkt.saisti.eu/g=
-o/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sd> =
-(IF: 2.023 / Q3)
-
-Computer Methods In Biomechanics And Biomedical Engineering <https://mkt.sa=
-isti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3=
-e1Ne5sf> (IF: 1.763 / Q4)
-
-Data Technologies and Applications <https://mkt.saisti.eu/go/3d1d194be2aaca=
-d46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sh> (IF: 1.667 / Q4)=
-
-
-Computer Science and Information Systems <https://mkt.saisti.eu/go/3d1d194b=
-e2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sj> (IF: 1.167=
- / Q4)
-
-Journal of Information Science and Engineering <https://mkt.saisti.eu/go/3d=
-1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sl> (IF:=
- 0.541 / Q4): Special Issue on Current Topics in Information Science for a =
-Digital Society
-
-Computer Methods in Biomechanics and Biomedical Engineering - Imaging & Vis=
-ualization <https://mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233=
-765e52f21c3427ede2OOTeMxl3e1Ne5sn> (ESCI & SJR: 0.35 / Q2)
-
-Journal of Information Systems Engineering & Management  <https://mkt.saist=
-i.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1N=
-e5sp>(DOAJ & ProQuest)
-
- 
-
-IMPORTANT DATES
-
-Paper Submission: November 24, 2021
-
-Notification of Acceptance: December 25, 2021
-
-Payment of Registration, to ensure the inclusion of an accepted paper in th=
-e conference proceedings: January 8, 2022.
-
-Camera-ready Submission: January 8, 2022
-
-
-WorldCIST'22: http://worldcist.org <http://worldcist.org/>
-
- 
-
-WorldCIST Team
-
-http://worldcist.org <http://worldcist.org/>
-
-
--- 
-This email has been checked for viruses by AVG.
-https://www.avg.com
-
---AKSgTqfASiX=_9qsVlE8GZOYd34gvVPYE8
-Content-Type: text/html; charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-<html>
-  <head>
-    <title></title>
-    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
-" />
-  </head>
-  <body>
-    <p>* Conference listed in CORE Ranking</p>
-    <p>** Google Scholar H5-Index =3D 23</p>
-    <p>*** Best papers selected for SCI/SSCI journals</p>
-    <p>&nbsp;</p>
-    <p>--------------------------------------------------------------------=
---------------------------------------</p>
-    <p>WorldCIST'22 - 10th World Conference on Information Systems and Tech=
-nologies</p>
-    <p>12-14 April 2022, Budva, Montenegro</p>
-    <p><a href=3D"http://worldcist.org/">http://worldcist.org</a></p>
-    <p>--------------------------------------------------------------------=
----------------------------------------</p>
-    <p><br />The WorldCist'22 - 10th World Conference on Information System=
-s and Technologies, to be held in Budva, Montenegro, 12-14 April 2022, is a=
- global forum for researchers and practitioners to present and discuss the =
-most recent innovations, trends, results, experiences and concerns in the s=
-everal perspectives of Information Systems and Technologies.</p>
-    <p>We are pleased to invite you to submit your papers to WorldCist'22. =
-All submissions will be reviewed on the basis of relevance, originality, im=
-portance and clarity.</p>
-    <p>&nbsp;</p>
-    <p>TOPICS</p>
-    <p>Submitted papers should be related with one or more of the main them=
-es proposed for the Conference:</p>
-    <p>A) Information and Knowledge Management (IKM);</p>
-    <p>B) Organizational Models and Information Systems (OMIS);</p>
-    <p>C) Software and Systems Modeling (SSM);</p>
-    <p>D) Software Systems, Architectures, Applications and Tools (SSAAT);<=
-/p>
-    <p>E) Multimedia Systems and Applications (MSA);</p>
-    <p>F) Computer Networks, Mobility and Pervasive Systems (CNMPS);</p>
-    <p>G) Intelligent and Decision Support Systems (IDSS);</p>
-    <p>H) Big Data Analytics and Applications (BDAA);</p>
-    <p>I) Human-Computer Interaction (HCI);</p>
-    <p>J) Ethics, Computers and Security (ECS)</p>
-    <p>K) Health Informatics (HIS);</p>
-    <p>L) Information Technologies in Education (ITE);</p>
-    <p>M) Technologies for Biomedical Applications (TBA)</p>
-    <p>N) Information Technologies in Radiocommunications (ITR);</p>
-    <p>&nbsp;</p>
-    <p>TYPES of SUBMISSIONS and DECISIONS</p>
-    <p>Four types of papers can be submitted:</p>
-    <p>Full paper: Finished or consolidated R&amp;D works, to be included i=
-n one of the Conference themes. These papers are assigned a 10-page limit.<=
-/p>
-    <p>Short paper: Ongoing works with relevant preliminary results, open t=
-o discussion. These papers are assigned a 7-page limit.</p>
-    <p>Poster paper: Initial work with relevant ideas, open to discussion. =
-These papers are assigned to a 4-page limit.</p>
-    <p>Company paper: Companies' papers that show practical experience, R &=
-amp; D, tools, etc., focused on some topics of the conference. These papers=
- are assigned to a 4-page limit.</p>
-    <p>Submitted papers must comply with the format of Advances in Intellig=
-ent Systems and Computing Series (see Instructions for Authors at Springer =
-Website), be written in English, must not have been published before, not b=
-e under review for any other conference or publication and not include any =
-information leading to the authors&rsquo; identification. Therefore, the au=
-thors&rsquo; names, affiliations and bibliographic references should not be=
- included in the version for evaluation by the Program Committee. This info=
-rmation should only be included in the camera-ready version, saved in Word =
-or Latex format and also in PDF format. These files must be accompanied by =
-the Consent to Publish form filled out, in a ZIP file, and uploaded at the =
-conference management system.</p>
-    <p>All papers will be subjected to a &ldquo;double-blind review&rdquo; =
-by at least two members of the Program Committee.</p>
-    <p>Based on Program Committee evaluation, a paper can be rejected or ac=
-cepted by the Conference Chairs. In the later case, it can be accepted as t=
-he type originally submitted or as another type. Thus, full papers can be a=
-ccepted as short papers or poster papers only. Similarly, short papers can =
-be accepted as poster papers only.</p>
-    <p>Poster papers and Company papers are not published in the Conference=
- Proceedings, being only presented and discussed. The authors of accepted p=
-oster papers should build and print a poster to be exhibited during the Con=
-ference. This poster must follow an A1 or A2 vertical format. The Conferenc=
-e includes Work Sessions where these posters are presented and orally discu=
-ssed, with a 7 minute limit per poster.</p>
-    <p>The authors of accepted Full papers will have 15 minutes to present =
-their work in a Conference Work Session; approximately 5 minutes of discuss=
-ion will follow each presentation. The authors of accepted Short papers and=
- Company papers will have 11 minutes to present their work in a Conference =
-Work Session; approximately 4 minutes of discussion will follow each presen=
-tation.</p>
-    <p>&nbsp;</p>
-    <p>PUBLICATION &amp; INDEXING</p>
-    <p>To ensure that a full paper or short paper is published, poster pape=
-r or company paper is presented, at least one of the authors must be fully =
-registered by the 8nd of January 2022, and the paper must comply with the s=
-uggested layout and page-limit. Additionally, all recommended changes must =
-be addressed by the authors before they submit the camera-ready version.</p=
->
-    <p>No more than one paper per registration will be published. An extra =
-fee must be paid for publication of additional papers, with a maximum of on=
-e additional paper per registration. One registration permits only the part=
-icipation of one author in the conference.</p>
-    <p>Full and Short papers will be published in Proceedings by Springer, =
-in a book of the Lecture Notes in Networks and Systems series, will&nbsp; b=
-e submitted for indexation by SCOPUS, WoS, Google Scholar, SCImago, among o=
-thers, and will be available in the SpringerLink Digital Library. Poster an=
-d company papers will not be published, just presented in the conference.</=
-p>
-    <p>The authors of the best selected papers will be invited to extend th=
-em for publication in international journals indexed by WoS/SCI, SCOPUS and=
- DBLP, among others, such as:</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s3" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5s3&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNEPdPYMar-V=
-3SBizpDpLsTPA-E33w">Computers in Industry</a> (IF: 7.635 / Q1)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s5" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5s5&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNE9aQpRh3Vh=
-h_ZF54tWZrMnMMc--Q">International Journal of Neural Systems</a> (IF: 5.866 =
-/ Q1)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sR" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sR&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNFnMol3XPnE=
-tx_fRK74oaJe6NEPgg">Neural Computing and Applications</a> (IF: 5.606 / Q1)<=
-/p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s7" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5s7&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNHeyBIRBauI=
-2L_qYdTH8Prxd_V6uQ">Integrated Computer-Aided Engineering</a> (IF: 4.827 / =
-Q1)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sS" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sS&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNFh4UoFDAbR=
-zAvpPZoRNMSNM7IcZg">Electronic Markets</a> (IF: 4.765 / Q1)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5s9" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5s9&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNE4cneV3UwS=
-CvU9Kjd4SGTvDBIepA">Informatica - An International Journal</a> (IF: 2.88 / =
-Q1)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sz" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sz&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNEXGrWnh_ZH=
-GI27wLXcX06m9Q3voQ">Expert Systems - Journal of Knowledge Engineering</a> (=
-IF: 2.587 / Q2)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sb" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sb&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNGKNT5fCt_s=
-KmILmlmnFAA59Olkcw">International Journal of Applied Mathematics and Comput=
-er Science</a> (IF: 1.417 / Q2)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sd" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sd&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNEPk2WwQNkY=
-g_r0lkCKafahhRMF7g">Computational and Mathematical Organization Theory</a> =
-(IF: 2.023 / Q3)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sf" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sf&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNFrEtk0WkRW=
-HVAKpviJoUqNJ8sLQg">Computer Methods In Biomechanics And Biomedical Enginee=
-ring</a> (IF: 1.763 / Q4)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sh" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sh&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNGzMPKn4boW=
--8ivQiKPx2G37z-ljQ">Data Technologies and Applications</a> (IF: 1.667 / Q4)=
-</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sj" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sj&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNGfntC3s8Uh=
-Ij1PRcg5Vw5t68pAUg">Computer Science and Information Systems</a> (IF: 1.167=
- / Q4)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sl" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sl&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNG-tD6YoPRS=
-t2LZBnGr4XwPjWWFYw">Journal of Information Science and Engineering</a> (IF:=
- 0.541 / Q4): Special Issue on Current Topics in Information Science for a =
-Digital Society</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sn" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sn&source=3Dgmail&ust=3D1635503008123000&usg=3DAFQjCNEZ1QZaYdfP=
-CF7upfJf3rKJcY2kqA">Computer Methods in Biomechanics and Biomedical Enginee=
-ring - Imaging &amp; Visualization</a> (ESCI &amp; SJR: 0.35 / Q2)</p>
-    <p style=3D"padding-left: 30px"><a href=3D"https://mkt.saisti.eu/go/3d1=
-d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2OOTeMxl3e1Ne5sp" targe=
-t=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=3Dhttps:/=
-/mkt.saisti.eu/go/3d1d194be2aacad46ad8bfd7396ff--ddba233765e52f21c3427ede2O=
-OTeMxl3e1Ne5sp&source=3Dgmail&ust=3D1635503008124000&usg=3DAFQjCNHN4Foq1O42=
-f6F6GlKIS3pfVajstw">Journal of Information Systems Engineering &amp; Manage=
-ment&nbsp;</a><span lang=3D"EN-US">(DOAJ &amp; ProQuest)</span></p>
-    <p>&nbsp;</p>
-    <p>IMPORTANT DATES</p>
-    <p>Paper Submission: November 24, 2021</p>
-    <p>Notification of Acceptance: December 25, 2021</p>
-    <p>Payment of Registration, to ensure the inclusion of an accepted pape=
-r in the conference proceedings: January 8, 2022.</p>
-    <p>Camera-ready Submission: January 8, 2022</p>
-    <p><br />WorldCIST'22: <a href=3D"http://worldcist.org/">http://worldci=
-st.org</a></p>
-    <p>&nbsp;</p>
-    <p>WorldCIST Team</p>
-    <p><a href=3D"http://worldcist.org/">http://worldcist.org</a></p>
-  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br />
-<table style=3D"border-top: 1px solid #D3D4DE;">
-	<tr>
-        <td style=3D"width: 55px; padding-top: 13px;"><a href=3D"http://www=
-=2Eavg.com/email-signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaig=
-n=3Dsig-email&utm_content=3Demailclient" target=3D"_blank"><img src=3D"http=
-s://ipmcdn.avast.com/images/icons/icon-envelope-tick-green-avg-v1.png" alt=
-=3D""  width=3D"46" height=3D"29" style=3D"width: 46px; height: 29px;" /></=
-a></td>
-		<td style=3D"width: 470px; padding-top: 12px; color: #41424e; font-size: =
-13px; font-family: Arial, Helvetica, sans-serif; line-height: 18px;">Virus-=
-free. <a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_=
-source=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D=
-"_blank" style=3D"color: #4453ea;">www.avg.com</a>
-		</td>
-	</tr>
-</table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" width=3D"1" heigh=
-t=3D"1"> </a></div></body>
-</html>
-
---AKSgTqfASiX=_9qsVlE8GZOYd34gvVPYE8--
-
-
---===============8862582649004632356==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8862582649004632356==--
-
