@@ -1,62 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67A3A45B4A0
-	for <lists.virtualization@lfdr.de>; Wed, 24 Nov 2021 07:54:01 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id F229E45B4AC
+	for <lists.virtualization@lfdr.de>; Wed, 24 Nov 2021 07:55:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0797460B00;
-	Wed, 24 Nov 2021 06:54:00 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 62C1A80CC2;
+	Wed, 24 Nov 2021 06:55:08 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7IYThSiorW24; Wed, 24 Nov 2021 06:53:59 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dk9MVR93nqiP; Wed, 24 Nov 2021 06:55:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0078A60B30;
-	Wed, 24 Nov 2021 06:53:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 58C0080D1A;
+	Wed, 24 Nov 2021 06:55:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 69947C0036;
-	Wed, 24 Nov 2021 06:53:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DAD62C0036;
+	Wed, 24 Nov 2021 06:55:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 127D2C0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3657AC0012
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Nov 2021 06:53:57 +0000 (UTC)
+ Wed, 24 Nov 2021 06:55:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0AC9140117
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2461D4024A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Nov 2021 06:53:57 +0000 (UTC)
+ Wed, 24 Nov 2021 06:55:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p1eMs1FQe7ka
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id NwdH8-00Qqv9
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Nov 2021 06:53:56 +0000 (UTC)
+ Wed, 24 Nov 2021 06:55:04 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 68B39400D6
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 918C8401C1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Nov 2021 06:53:56 +0000 (UTC)
+ Wed, 24 Nov 2021 06:55:04 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id 62F3868AFE; Wed, 24 Nov 2021 07:53:53 +0100 (CET)
-Date: Wed, 24 Nov 2021 07:53:53 +0100
+ id 70B4A68AFE; Wed, 24 Nov 2021 07:55:01 +0100 (CET)
+Date: Wed, 24 Nov 2021 07:55:01 +0100
 From: Christoph Hellwig <hch@lst.de>
-To: "Darrick J. Wong" <djwong@kernel.org>
-Subject: Re: [PATCH 20/29] ext4: cleanup the dax handling in ext4_fill_super
-Message-ID: <20211124065353.GD7075@lst.de>
+To: Dan Williams <dan.j.williams@intel.com>
+Subject: Re: [PATCH 21/29] xfs: move dax device handling into
+ xfs_{alloc,free}_buftarg
+Message-ID: <20211124065501.GA7229@lst.de>
 References: <20211109083309.584081-1-hch@lst.de>
- <20211109083309.584081-21-hch@lst.de> <20211123225430.GN266024@magnolia>
+ <20211109083309.584081-22-hch@lst.de>
+ <CAPcyv4hY4g82PrjMPO=1kiM5sL=3=yR66r6LeG8RS3Ha2k1eUw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20211123225430.GN266024@magnolia>
+In-Reply-To: <CAPcyv4hY4g82PrjMPO=1kiM5sL=3=yR66r6LeG8RS3Ha2k1eUw@mail.gmail.com>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-Cc: nvdimm@lists.linux.dev, Mike Snitzer <snitzer@redhat.com>,
- linux-s390@vger.kernel.org, linux-erofs@lists.ozlabs.org,
- virtualization@lists.linux-foundation.org, linux-xfs@vger.kernel.org,
- dm-devel@redhat.com, linux-fsdevel@vger.kernel.org,
- Dan Williams <dan.j.williams@intel.com>, linux-ext4@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>, Christoph Hellwig <hch@lst.de>
+Cc: Linux NVDIMM <nvdimm@lists.linux.dev>, Mike Snitzer <snitzer@redhat.com>,
+ linux-s390 <linux-s390@vger.kernel.org>, linux-erofs@lists.ozlabs.org,
+ virtualization@lists.linux-foundation.org,
+ linux-xfs <linux-xfs@vger.kernel.org>,
+ device-mapper development <dm-devel@redhat.com>,
+ linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+ linux-ext4 <linux-ext4@vger.kernel.org>, Ira Weiny <ira.weiny@intel.com>,
+ Christoph Hellwig <hch@lst.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -73,10 +77,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Nov 23, 2021 at 02:54:30PM -0800, Darrick J. Wong wrote:
-> Nit: no space before the paren  ^ here.
+On Tue, Nov 23, 2021 at 06:40:47PM -0800, Dan Williams wrote:
+> On Tue, Nov 9, 2021 at 12:34 AM Christoph Hellwig <hch@lst.de> wrote:
+> >
+> > Hide the DAX device lookup from the xfs_super.c code.
+> >
+> > Reviewed-by: Christoph Hellwig <hch@lst.de>
+> 
+> That's an interesting spelling of "Signed-off-by", but patch looks
+> good to me too. I would have expected a robot to complain about
+> missing sign-off?
 
-Fixed.
+Hah.  I'll fix it up.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
