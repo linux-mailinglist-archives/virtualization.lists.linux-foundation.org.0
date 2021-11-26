@@ -1,114 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9793C45E3DD
-	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 02:02:57 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90A3745E490
+	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 03:32:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 6C4B5400A4;
-	Fri, 26 Nov 2021 01:02:55 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id F20F8827C5;
+	Fri, 26 Nov 2021 02:32:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id m5K0fy47vYde; Fri, 26 Nov 2021 01:02:54 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id VfntgrKjAA_w; Fri, 26 Nov 2021 02:32:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E857440335;
-	Fri, 26 Nov 2021 01:02:53 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id CA97F827A8;
+	Fri, 26 Nov 2021 02:32:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 34488C002F;
-	Fri, 26 Nov 2021 01:02:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 332DDC003C;
+	Fri, 26 Nov 2021 02:32:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 38B4BC000A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9F76FC000A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 01:02:51 +0000 (UTC)
+ Fri, 26 Nov 2021 02:32:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0C8696068D
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7F39C40335
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 01:02:51 +0000 (UTC)
+ Fri, 26 Nov 2021 02:32:26 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id peKNQ8FQ7blg
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DzFg76Yxi_HV
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 01:02:50 +0000 (UTC)
+ Fri, 26 Nov 2021 02:32:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E6B0560683
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 67AEC40012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 01:02:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1637888568;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=pDyFTKO2QF1JvvfmCS1Hx11I7QAIU5JI9G0dgtPx/uM=;
- b=bdIioipoacUVCdJCYE9QVSVj715Psz18MJCG3D2Rs1paweMXgUDtH+h4izH3LJ8z1MYFCJ
- x5BXFyi83xk+rU2piYlpiYBrIkfc7JbDRNUZFY/GP8gqoD042VecnBPuyM/+9cGCRP7vH6
- jIaaNsBHjL8HCJdw3x205If3HIfbr+U=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-451-cB_wL--cMBGQrtiY5Qkiuw-1; Thu, 25 Nov 2021 20:02:47 -0500
-X-MC-Unique: cB_wL--cMBGQrtiY5Qkiuw-1
-Received: by mail-ed1-f72.google.com with SMTP id
- b15-20020aa7c6cf000000b003e7cf0f73daso6536340eds.22
- for <virtualization@lists.linux-foundation.org>;
- Thu, 25 Nov 2021 17:02:47 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:content-transfer-encoding
- :in-reply-to;
- bh=pDyFTKO2QF1JvvfmCS1Hx11I7QAIU5JI9G0dgtPx/uM=;
- b=xsoHHYYZzW1tsxoDIB4BijF30OaZ6p7QmRsjSN3X1vx90oOIJGfK7vZ+lNkep3Fxgw
- nfTntK90ys9K59l8VRjVP3lpfgOSY/7lk4B6/NZPphx88NmdZ1PEqMXvqRAlepHoI9Mf
- BSRSR0WHWBMGQug7JS2jC50oTpk2Sq/MhKttC7RxHu+A4/nzxtkV+qqi3oGZQ4J7n1Kj
- 1MKWgZDWtl/lzZY6qEGN5H6hSHOh6uwiqlxL/bPErjo9vAVcJffW3CxO9IA3W6GiUOXc
- VXkd3cIXIxK0iyukRoa7q55jswNiKWixN7EegdUKLsQeJkDrRXpd8bkI+fSuAQMmT4Gj
- 8Kpg==
-X-Gm-Message-State: AOAM532FMqridFeVo3g5JNAHIOpVXmS1MTApWm6FxvhdelQScb5KorQL
- m/DJP43FLnc0HZapTO3sutANvk/PQkBBmBuVzYYOl/7tOEmFwy2HaEfsp4SZwrZ1t12l16LRI9W
- 61BKuODtu66Pm6RJpkV85XjqlvuTGpS28sqdInpNDjA==
-X-Received: by 2002:a17:907:3f83:: with SMTP id
- hr3mr36287486ejc.555.1637888566162; 
- Thu, 25 Nov 2021 17:02:46 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwMPqdXsVBsibJBeonfauIqf1MFangHN3wRhjaKDXYfs/2bZGG9BdweRbPr7wODShHNrf11lQ==
-X-Received: by 2002:a17:907:3f83:: with SMTP id
- hr3mr36287466ejc.555.1637888565979; 
- Thu, 25 Nov 2021 17:02:45 -0800 (PST)
-Received: from redhat.com ([2a03:c5c0:207e:e87:2d40:4ed4:5676:5c1a])
- by smtp.gmail.com with ESMTPSA id gs15sm2097648ejc.42.2021.11.25.17.02.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Nov 2021 17:02:44 -0800 (PST)
-Date: Thu, 25 Nov 2021 20:02:39 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Marcel Holtmann <marcel@holtmann.org>
-Subject: Re: [PATCH] Bluetooth: virtio_bt: fix device removal
-Message-ID: <20211125195924-mutt-send-email-mst@kernel.org>
-References: <20211125174200.133230-1-mst@redhat.com>
- <F52F65FE-6A07-486B-8E84-684ED85709E9@holtmann.org>
- <20211125154314-mutt-send-email-mst@kernel.org>
- <C8D84EA4-E9A8-44CC-918F-57640A05C81D@holtmann.org>
- <20211125161434-mutt-send-email-mst@kernel.org>
- <2B9668C9-427B-4D8B-A393-AAB5E50763C5@holtmann.org>
+ Fri, 26 Nov 2021 02:32:24 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10179"; a="216304620"
+X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="216304620"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Nov 2021 18:32:23 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="650866519"
+Received: from devel-wwang.sh.intel.com ([10.239.48.106])
+ by fmsmga001.fm.intel.com with ESMTP; 25 Nov 2021 18:32:21 -0800
+From: Wei Wang <wei.w.wang@intel.com>
+To: mst@redhat.com, stefanha@redhat.com, sgarzare@redhat.com,
+ davem@davemloft.net, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
+Subject: [PATCH v2] virtio/vsock: fix the transport to work with VMADDR_CID_ANY
+Date: Thu, 25 Nov 2021 20:18:23 -0500
+Message-Id: <20211126011823.1760-1-wei.w.wang@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <2B9668C9-427B-4D8B-A393-AAB5E50763C5@holtmann.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: linux-bluetooth <linux-bluetooth@vger.kernel.org>,
- virtualization@lists.linux-foundation.org,
- Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
- Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
- Johan Hedberg <johan.hedberg@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,63 +67,63 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVGh1LCBOb3YgMjUsIDIwMjEgYXQgMTA6NTg6NTZQTSArMDEwMCwgTWFyY2VsIEhvbHRtYW5u
-IHdyb3RlOgo+IEhpIE1pY2hhZWwsCj4gCj4gPj4+Pj4gRGV2aWNlIHJlbW92YWwgaXMgY2xlYXJs
-eSBvdXQgb2YgdmlydGlvIHNwZWM6IGl0IGF0dGVtcHRzIHRvIHJlbW92ZQo+ID4+Pj4+IHVudXNl
-ZCBidWZmZXJzIGZyb20gYSBWUSBiZWZvcmUgaW52b2tpbmcgZGV2aWNlIHJlc2V0LiBUbyBmaXgs
-IG1ha2UKPiA+Pj4+PiBvcGVuL2Nsb3NlIE5PUHMgYW5kIGRvIGFsbCBjbGVhbnVwL3NldHVwIGlu
-IHByb2JlL3JlbW92ZS4KPiA+Pj4+IAo+ID4+Pj4gc28gdGhlIHZpcnRidF97b3BlbixjbG9zZX0g
-YXMgTk9QIGlzIG5vdCByZWFsbHkgd2hhdCBhIGRyaXZlciBpcyBzdXBwb3NlCj4gPj4+PiB0byBi
-ZSBkb2luZy4gVGhlc2UgYXJlIHRyYW5zcG9ydCBlbmFibGUvZGlzYWJsZSBjYWxsYmFja3MgZnJv
-bSB0aGUgQlQKPiA+Pj4+IENvcmUgdG93YXJkcyB0aGUgZHJpdmVyLiBJdCBtYXBzIHRvIGEgZGV2
-aWNlIGJlaW5nIGVuYWJsZWQvZGlzYWJsZWQgYnkKPiA+Pj4+IHNvbWV0aGluZyBsaWtlIGJsdWV0
-b290aGQgZm9yIGV4YW1wbGUuIFNvIGlmIGRpc2FibGVkLCBJIGV4cGVjdCB0aGF0IG5vCj4gPj4+
-PiByZXNvdXJjZXMvcXVldWVzIGFyZSBpbiB1c2UuCj4gPj4+PiAKPiA+Pj4+IE1heWJlIEkgbWlz
-dW5kZXJzdGFuZCB0aGUgdmlydGlvIHNwZWMgaW4gdGhhdCByZWdhcmQsIGJ1dCBJIHdvdWxkIGxp
-a2UKPiA+Pj4+IHRvIGtlZXAgdGhpcyBmdW5kYW1lbnRhbCBjb25jZXB0IG9mIGEgQmx1ZXRvb3Ro
-IGRyaXZlci4gSXQgZG9lcyB3b3JrCj4gPj4+PiB3aXRoIGFsbCBvdGhlciB0cmFuc3BvcnRzIGxp
-a2UgVVNCLCBTRElPLCBVQVJUIGV0Yy4KPiA+Pj4+IAo+ID4+Pj4+IFRoZSBjb3N0IGhlcmUgaXMg
-YSBzaW5nbGUgc2tiIHdhc3RlZCBvbiBhbiB1bnVzZWQgYnQgZGV2aWNlIC0gd2hpY2gKPiA+Pj4+
-PiBzZWVtcyBtb2Rlc3QuCj4gPj4+PiAKPiA+Pj4+IFRoZXJlIHNob3VsZCBiZSBubyBidWZmZXIg
-dXNlZCBpZiB0aGUgZGV2aWNlIGlzIHBvd2VyZWQgb2ZmLiBXZSBhbHNvIGRvbuKAmXQKPiA+Pj4+
-IGhhdmUgYW55IFVTQiBVUkJzIGluLWZsaWdodCBpZiB0aGUgdHJhbnNwb3J0IGlzIG5vdCBhY3Rp
-dmUuCj4gPj4+PiAKPiA+Pj4+PiBOQjogd2l0aCB0aGlzIGZpeCBpbiBwbGFjZSBkcml2ZXIgc3Rp
-bGwgc3VmZmVycyBmcm9tIGEgcmFjZSBjb25kaXRpb24gaWYKPiA+Pj4+PiBhbiBpbnRlcnJ1cHQg
-dHJpZ2dlcnMgd2hpbGUgZGV2aWNlIGlzIGJlaW5nIHJlc2V0LiBXb3JrIG9uIGEgZml4IGZvcgo+
-ID4+Pj4+IHRoYXQgaXNzdWUgaXMgaW4gcHJvZ3Jlc3MuCj4gPj4+PiAKPiA+Pj4+IEluIHRoZSB2
-aXJ0YnRfY2xvc2UoKSBjYWxsYmFjayB3ZSBzaG91bGQgZGVhY3RpdmF0ZSBhbGwgaW50ZXJydXB0
-cy4KPiA+Pj4+IAo+ID4+PiAKPiA+Pj4gSWYgeW91IHdhbnQgdG8gZG8gdGhhdCB0aGVuIGRldmlj
-ZSBoYXMgdG8gYmUgcmVzZXQgb24gY2xvc2UsCj4gPj4+IGFuZCBmdWxseSByZWluaXRpYWxpemVk
-IG9uIG9wZW4uCj4gPj4+IENhbiB5b3Ugd29yayBvbiBhIHBhdGNoIGxpa2UgdGhhdD8KPiA+Pj4g
-R2l2ZW4gSSBkb24ndCBoYXZlIHRoZSBkZXZpY2Ugc3VjaCBhIHJld29yayBpcyBwcm9iYWJseSBt
-b3JlCj4gPj4+IHRoYW4gSSBjYW4gdW5kZXJ0YWtlLgo+ID4+IAo+ID4+IHNvIHlvdSBtZWFuIG1v
-dmUgdmlydGlvX2ZpbmRfdnFzKCkgaW50byB2aXJ0YnRfb3BlbigpIGFuZCBkZWxfdnFzKCkgaW50
-bwo+ID4+IHZpcnRidF9jbG9zZSgpPwo+ID4gCj4gPiBBbmQgcmVzZXQgYmVmb3JlIGRlbF92cXMu
-Cj4gPiAKPiA+PiBPciBpcyB0aGVyZSBhcmUgd2F5IHRvIHNldCB1cCB0aGUgcXVldWVzIHdpdGhv
-dXQgc3RhcnRpbmcgdGhlbT8KPiA+PiAKPiA+PiBIb3dldmVyIEkgYW0gZmFpbGluZyB0byB1bmRl
-cnN0YW5kIHlvdXIgaW5pdGlhbCBjb25jZXJuLCB3ZSBkbyByZXNldCgpCj4gPj4gYmVmb3JlIGRl
-bF92cXMoKSBpbiB2aXJ0YnRfcmVtb3ZlKCkuIFNob3VsZCB3ZSBiZSBkb2luZyBzb21ldGhpbmcg
-ZGlmZmVyZW50Cj4gPj4gaW4gdmlydGJ0X2Nsb3NlKCkgb3RoZXIgdGhhbiB2aXJ0cXVldWVfZGV0
-YWNoX3VudXNlZF9idWYoKS4gV2h5IHdvdWxkIEkKPiA+PiBrZWVwIGJ1ZmZlcnMgYXR0YWNoZWQg
-aWYgdGhleSBhcmUgbm90IHVzZWQuCj4gPj4gCj4gPiAKPiA+IFRoZXkgYXJlIG5vdCB1c2VkIGF0
-IHRoYXQgcG9pbnQgYnV0IHVudGlsIGRldmljZSBpcyByZXNldCBjYW4gdXNlIHRoZW0uCj4gPiBB
-bHNvLCBpZiB5b3UgdGhlbiBwcm9jZWVkIHRvIG9wZW4gd2l0aG91dCBhIHJlc2V0LCBhbmQga2lj
-aywKPiA+IGRldmljZSB3aWxsIHN0YXJ0IGJ5IHByb2Nlc3NpbmcgdGhlIG9yaWdpbmFsIGJ1ZmZl
-cnMsIGNyYXNoaW5nCj4gPiBvciBjb3JydXB0aW5nIG1lbW9yeS4KPiAKPiBzbyB0aGUgb25seSB2
-YWxpZCB1c2FnZSBpcyBsaWtlIHRoaXM6Cj4gCj4gCXZkZXYtPmNvbmZpZy0+cmVzZXQodmRldik7
-Cj4gCj4gCXdoaWxlICgoLi4gPSB2aXJ0cXVldWVfZGV0YWNoX3VudXNlZF9idWYodnEpKSkgewo+
-IAl9Cj4gCj4gCXZkZXYtPmNvbmZpZy0+ZGVsX3Zxcyh2ZGV2KTsKPiAKPiBJZiBJIG1ha2Ugdmly
-dGJ0X3tvcGVuLGNsb3NlfSBhIE5PUCwgdGhlbiBJIGtlZXAgYWRkaW5nIGFuIGV4dHJhIFNLQiB0
-byBpbmJ1ZiBvbgo+IGV2ZXJ5IHBvd2VyIGN5Y2xlIChpZnVwL2lmZG93bikuCgpTbyBtYWtlIHN1
-cmUgeW91IGRvbid0IDopCgo+IEhvdyBkb2VzIG5ldGRldiBoYW5kbGUgdGhpcz8KPiAKPiBSZWdh
-cmRzCj4gCj4gTWFyY2VsCgpGb3IgbmV0LCBvcGVuIGFkZHMgYnVmZmVycyB0byB2cS4gY2xvc2Ug
-ZG9lcyBub3QgZnJlZSB0aGVtIHVwIC0KdGhleSBzdGF5IGluIHRoZSB2cSB1bnRpbCBkZXZpY2Ug
-aXMgcmVtb3ZlZC4KCi0tIApNU1QKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
-aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
-cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+The VMADDR_CID_ANY flag used by a socket means that the socket isn't bound
+to any specific CID. For example, a host vsock server may want to be bound
+with VMADDR_CID_ANY, so that a guest vsock client can connect to the host
+server with CID=VMADDR_CID_HOST (i.e. 2), and meanwhile, a host vsock
+client can connect to the same local server with CID=VMADDR_CID_LOCAL
+(i.e. 1).
+
+The current implementation sets the destination socket's svm_cid to a
+fixed CID value after the first client's connection, which isn't an
+expected operation. For example, if the guest client first connects to the
+host server, the server's svm_cid gets set to VMADDR_CID_HOST, then other
+host clients won't be able to connect to the server anymore.
+
+Reproduce steps:
+1. Run the host server:
+   socat VSOCK-LISTEN:1234,fork -
+2. Run a guest client to connect to the host server:
+   socat - VSOCK-CONNECT:2:1234
+3. Run a host client to connect to the host server:
+   socat - VSOCK-CONNECT:1:1234
+
+Without this patch, step 3. above fails to connect, and socat complains
+"socat[1720] E connect(5, AF=40 cid:1 port:1234, 16): Connection
+reset by peer".
+With this patch, the above works well.
+
+Fixes: c0cfa2d8a788 ("vsock: add multi-transports support")
+Signed-off-by: Wei Wang <wei.w.wang@intel.com>
+---
+ net/vmw_vsock/virtio_transport_common.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
+index 59ee1be5a6dd..ec2c2afbf0d0 100644
+--- a/net/vmw_vsock/virtio_transport_common.c
++++ b/net/vmw_vsock/virtio_transport_common.c
+@@ -1299,7 +1299,8 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
+ 	space_available = virtio_transport_space_update(sk, pkt);
+ 
+ 	/* Update CID in case it has changed after a transport reset event */
+-	vsk->local_addr.svm_cid = dst.svm_cid;
++	if (vsk->local_addr.svm_cid != VMADDR_CID_ANY)
++		vsk->local_addr.svm_cid = dst.svm_cid;
+ 
+ 	if (space_available)
+ 		sk->sk_write_space(sk);
+
+base-commit: 5f53fa508db098c9d372423a6dac31c8a5679cdf
+-- 
+2.25.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
