@@ -1,61 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90A3745E490
-	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 03:32:31 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1334345E448
+	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 03:16:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id F20F8827C5;
-	Fri, 26 Nov 2021 02:32:29 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7611660683;
+	Fri, 26 Nov 2021 02:16:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VfntgrKjAA_w; Fri, 26 Nov 2021 02:32:29 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zumAKFBEpmBE; Fri, 26 Nov 2021 02:16:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id CA97F827A8;
-	Fri, 26 Nov 2021 02:32:28 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 4A7A9606A2;
+	Fri, 26 Nov 2021 02:16:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 332DDC003C;
-	Fri, 26 Nov 2021 02:32:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A1782C003C;
+	Fri, 26 Nov 2021 02:15:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9F76FC000A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 76817C000A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:32:26 +0000 (UTC)
+ Fri, 26 Nov 2021 02:15:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7F39C40335
+ by smtp2.osuosl.org (Postfix) with ESMTP id 54DBA40106
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:32:26 +0000 (UTC)
+ Fri, 26 Nov 2021 02:15:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DzFg76Yxi_HV
+ with ESMTP id ReXQ_J8oHdp4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:32:24 +0000 (UTC)
+ Fri, 26 Nov 2021 02:15:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 67AEC40012
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 61C9340012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:32:24 +0000 (UTC)
-X-IronPort-AV: E=McAfee;i="6200,9189,10179"; a="216304620"
-X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="216304620"
+ Fri, 26 Nov 2021 02:15:57 +0000 (UTC)
+X-IronPort-AV: E=McAfee;i="6200,9189,10179"; a="235533375"
+X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="235533375"
 Received: from fmsmga001.fm.intel.com ([10.253.24.23])
- by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Nov 2021 18:32:23 -0800
+ by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 25 Nov 2021 18:15:56 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="650866519"
-Received: from devel-wwang.sh.intel.com ([10.239.48.106])
- by fmsmga001.fm.intel.com with ESMTP; 25 Nov 2021 18:32:21 -0800
-From: Wei Wang <wei.w.wang@intel.com>
-To: mst@redhat.com, stefanha@redhat.com, sgarzare@redhat.com,
- davem@davemloft.net, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
-Subject: [PATCH v2] virtio/vsock: fix the transport to work with VMADDR_CID_ANY
-Date: Thu, 25 Nov 2021 20:18:23 -0500
-Message-Id: <20211126011823.1760-1-wei.w.wang@intel.com>
-X-Mailer: git-send-email 2.25.1
+X-IronPort-AV: E=Sophos;i="5.87,263,1631602800"; d="scan'208";a="650863628"
+Received: from fmsmsx604.amr.corp.intel.com ([10.18.126.84])
+ by fmsmga001.fm.intel.com with ESMTP; 25 Nov 2021 18:15:53 -0800
+Received: from shsmsx603.ccr.corp.intel.com (10.109.6.143) by
+ fmsmsx604.amr.corp.intel.com (10.18.126.84) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Thu, 25 Nov 2021 18:15:50 -0800
+Received: from shsmsx601.ccr.corp.intel.com (10.109.6.141) by
+ SHSMSX603.ccr.corp.intel.com (10.109.6.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2242.12; Fri, 26 Nov 2021 10:15:48 +0800
+Received: from shsmsx601.ccr.corp.intel.com ([10.109.6.141]) by
+ SHSMSX601.ccr.corp.intel.com ([10.109.6.141]) with mapi id 15.01.2242.012;
+ Fri, 26 Nov 2021 10:15:48 +0800
+From: "Wang, Wei W" <wei.w.wang@intel.com>
+To: Stefano Garzarella <sgarzare@redhat.com>
+Subject: RE: [PATCH] virtio/vsock: fix the transport to work with
+ VMADDR_CID_ANY
+Thread-Topic: [PATCH] virtio/vsock: fix the transport to work with
+ VMADDR_CID_ANY
+Thread-Index: AQHX4daqV2Omz/OJfUqBSDdTk17B0qwT+K9Q//+PVgCAAXxRUA==
+Date: Fri, 26 Nov 2021 02:15:48 +0000
+Message-ID: <97be1440032248a29b5eb75619f8ac4d@intel.com>
+References: <20211125071554.16969-1-wei.w.wang@intel.com>
+ <7992566c682b46dc9ec2502e44a2fb04@intel.com>
+ <20211125104046.wxupkn6uogvohioi@steredhat>
+In-Reply-To: <20211125104046.wxupkn6uogvohioi@steredhat>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-reaction: no-action
+dlp-version: 11.6.200.16
+x-originating-ip: [10.239.127.36]
 MIME-Version: 1.0
+Cc: "mst@redhat.com" <mst@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "stefanha@redhat.com" <stefanha@redhat.com>,
+ "asias@redhat.com" <asias@redhat.com>,
+ "davem@davemloft.net" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,57 +103,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The VMADDR_CID_ANY flag used by a socket means that the socket isn't bound
-to any specific CID. For example, a host vsock server may want to be bound
-with VMADDR_CID_ANY, so that a guest vsock client can connect to the host
-server with CID=VMADDR_CID_HOST (i.e. 2), and meanwhile, a host vsock
-client can connect to the same local server with CID=VMADDR_CID_LOCAL
-(i.e. 1).
+On Thursday, November 25, 2021 6:41 PM, Stefano Garzarella wrote:
+> On Thu, Nov 25, 2021 at 09:27:40AM +0000, Wang, Wei W wrote:
+> >On Thursday, November 25, 2021 3:16 PM, Wang, Wei W wrote:
+> >> -	/* Update CID in case it has changed after a transport reset event */
+> >> -	vsk->local_addr.svm_cid = dst.svm_cid;
+> >> -
+> >>  	if (space_available)
+> >>  		sk->sk_write_space(sk);
+> >>
+> >
+> >Not sure if anybody knows how this affects the transport reset.
+> 
+> I believe the primary use case is when a guest is migrated.
+> 
+> After the migration, the transport gets a reset event from the hypervisor and
+> all connected sockets are closed. The ones in listen remain open though.
+> 
+> Also the guest's CID may have changed after migration. So if an application has
+> open listening sockets, bound to the old CID, this should ensure that the socket
+> continues to be usable.
 
-The current implementation sets the destination socket's svm_cid to a
-fixed CID value after the first client's connection, which isn't an
-expected operation. For example, if the guest client first connects to the
-host server, the server's svm_cid gets set to VMADDR_CID_HOST, then other
-host clients won't be able to connect to the server anymore.
+OK, thanks for sharing the background.
 
-Reproduce steps:
-1. Run the host server:
-   socat VSOCK-LISTEN:1234,fork -
-2. Run a guest client to connect to the host server:
-   socat - VSOCK-CONNECT:2:1234
-3. Run a host client to connect to the host server:
-   socat - VSOCK-CONNECT:1:1234
+> 
+> The patch would then change this behavior.
+> 
+> So maybe to avoid problems, we could update the CID only if it is different
+> from VMADDR_CID_ANY:
+> 
+> 	if (vsk->local_addr.svm_cid != VMADDR_CID_ANY)
+> 		vsk->local_addr.svm_cid = dst.svm_cid;
+> 
+> 
+> When this code was written, a guest only supported a single transport, so it
+> could only have one CID assigned, so that wasn't a problem.
+> For that reason I'll add this Fixes tag:
+> Fixes: c0cfa2d8a788 ("vsock: add multi-transports support")
 
-Without this patch, step 3. above fails to connect, and socat complains
-"socat[1720] E connect(5, AF=40 cid:1 port:1234, 16): Connection
-reset by peer".
-With this patch, the above works well.
+Sounds good to me.
 
-Fixes: c0cfa2d8a788 ("vsock: add multi-transports support")
-Signed-off-by: Wei Wang <wei.w.wang@intel.com>
----
- net/vmw_vsock/virtio_transport_common.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/net/vmw_vsock/virtio_transport_common.c b/net/vmw_vsock/virtio_transport_common.c
-index 59ee1be5a6dd..ec2c2afbf0d0 100644
---- a/net/vmw_vsock/virtio_transport_common.c
-+++ b/net/vmw_vsock/virtio_transport_common.c
-@@ -1299,7 +1299,8 @@ void virtio_transport_recv_pkt(struct virtio_transport *t,
- 	space_available = virtio_transport_space_update(sk, pkt);
- 
- 	/* Update CID in case it has changed after a transport reset event */
--	vsk->local_addr.svm_cid = dst.svm_cid;
-+	if (vsk->local_addr.svm_cid != VMADDR_CID_ANY)
-+		vsk->local_addr.svm_cid = dst.svm_cid;
- 
- 	if (space_available)
- 		sk->sk_write_space(sk);
-
-base-commit: 5f53fa508db098c9d372423a6dac31c8a5679cdf
--- 
-2.25.1
-
+Thanks,
+Wei
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
