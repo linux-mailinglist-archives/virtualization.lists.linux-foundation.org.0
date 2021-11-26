@@ -1,77 +1,103 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 22BB145E485
-	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 03:30:45 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40AAB45E582
+	for <lists.virtualization@lfdr.de>; Fri, 26 Nov 2021 03:48:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 48492403BB;
-	Fri, 26 Nov 2021 02:30:43 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id E191840335;
+	Fri, 26 Nov 2021 02:48:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WKPt46KEhArB; Fri, 26 Nov 2021 02:30:42 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id v3mSvpKlJYud; Fri, 26 Nov 2021 02:48:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 1516A403EA;
-	Fri, 26 Nov 2021 02:30:42 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 9DFEC40336;
+	Fri, 26 Nov 2021 02:48:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A234EC000A;
-	Fri, 26 Nov 2021 02:30:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 11F40C003C;
+	Fri, 26 Nov 2021 02:48:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2F3CBC000A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 24134C000A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:30:41 +0000 (UTC)
+ Fri, 26 Nov 2021 02:48:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1EC00827A5
+ by smtp4.osuosl.org (Postfix) with ESMTP id 12AF0401C4
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:30:41 +0000 (UTC)
+ Fri, 26 Nov 2021 02:48:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SGOxFjyA1g0t
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=redhat.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id UwUQqzHh1HSq
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:30:40 +0000 (UTC)
+ Fri, 26 Nov 2021 02:48:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mail.kernel.org (mail.kernel.org [198.145.29.99])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 74C9082779
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 449B04018D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 Nov 2021 02:30:40 +0000 (UTC)
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 01FDE6115C;
- Fri, 26 Nov 2021 02:30:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1637893840;
- bh=XJ13SsNbvf1d8FdpbFQKVrFqK8TxFEvAgwIr4woQDBo=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WywilHjNtDhNCWvpZukiV5SM/1uc2gRhkd1g1HuhamFXhJgoxaMyFhUwV2k1WIr/Z
- O+pQHM7CJVL5xUiAzV9Egn4kktqW62Ct+wLX0QjH19xJCVE/RYTXzmwZsGLkyF6Uny
- y8CbmWQo+0TbfA5yX7mAqxlFrWGD21MnKckQWNr6aJPJTSXPezXaSYZeUjN/R/CEwO
- ANSSqriHUnKi4rm0RB6NVwru3cAPJruAse7OxWfAjcyXpCJ/RzSRA9gBtNzc3vP7Ud
- z7PpUV/nOPjxnifDLGCxANC1reKTaEI5U/xLYDp4/b+fHVuY+9HOgUpmOtU4b69QKz
- LBXAjEfTuSDNQ==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.10 3/4] virtio-mem: support
- VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE
-Date: Thu, 25 Nov 2021 21:30:33 -0500
-Message-Id: <20211126023034.440961-3-sashal@kernel.org>
-X-Mailer: git-send-email 2.33.0
-In-Reply-To: <20211126023034.440961-1-sashal@kernel.org>
-References: <20211126023034.440961-1-sashal@kernel.org>
+ Fri, 26 Nov 2021 02:48:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1637894908;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=1AXyVs0A0ObEm4/rr2kVWPtvp6eiMo4IEg87ee8zDR4=;
+ b=T7tOyBBXZUGkdbvlS5kTSNxfhNLpAAHd3O6ndPNyW0fLz8ih38wESIOv6oBwDdpynvna8d
+ 6YgyPhDFGGdIEVjW3woyMUWO81qjasrqEBz8EfEefMthUeTy0GZ1alqEqFp70RRLQhbUmq
+ CYZhQ8OEulyV4wXv4+mRquYE+7NGCjc=
+Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
+ [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-551-b8_QcyoYOGqXu1xFO61EZw-1; Thu, 25 Nov 2021 21:48:25 -0500
+X-MC-Unique: b8_QcyoYOGqXu1xFO61EZw-1
+Received: by mail-lf1-f69.google.com with SMTP id
+ y40-20020a0565123f2800b003fded085638so3675151lfa.0
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 25 Nov 2021 18:48:24 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=1AXyVs0A0ObEm4/rr2kVWPtvp6eiMo4IEg87ee8zDR4=;
+ b=GdRZGWDZyERKDjpd9sRTtqa2IpeRkhOi7MqLoacrHltakZ7HZRmaxcy71x2y6Pj09+
+ WbbaBLdS73L7UvuqnYSxi/SJZ7MLiEXwaHvnlzvCiQC0NpzZA0qG7eTSVa/6oW21jw4A
+ AWUw/YMgCXNbwIj8i4mn6kpkHXEZgEYLhx72hFxy8ryfQeUr7p8thBgDamal8o3vFdcM
+ /NfNvGkgtvP2M2Gq9aTff1L9amNo0Vp9LQhdP1TFkOfn5IXLEvsfVC1B9Y00Zn8bWs7L
+ YxGfX/XTEq7KWdX+p3E4u8TLjYnkiiLAgTuslZaqoh1Q8PkWfcUGez2XTfLJ0oS1H5cg
+ qPeA==
+X-Gm-Message-State: AOAM530wJ/ilYiTNzJAsR9tcYiuuQRQnhdlp5jjeerH1Cgj/PiqL85lC
+ DENHgls++PO4dmqbQ10wCPnvCAyWSxhwrMJnHPB3duCrm1y/T9GRbJcOfwJ9i+XrXdgCpMOI5Qr
+ vaXMgrSQJZrOgmjq8hp8FFjYAGQWOCw6FDGdunt/753vvewv1XbObH/26nQ==
+X-Received: by 2002:a05:6512:2081:: with SMTP id
+ t1mr27866804lfr.348.1637894903434; 
+ Thu, 25 Nov 2021 18:48:23 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzVInrCS+HtbEDB7vGucUYDZpOwiMnoy32RNLDJWoYIg9cnS+c91hBLvgITl8C6V/CWJTqhvv6Iuvzw9kt2LJ8=
+X-Received: by 2002:a05:6512:2081:: with SMTP id
+ t1mr27866786lfr.348.1637894903264; 
+ Thu, 25 Nov 2021 18:48:23 -0800 (PST)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>,
- Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- Wei Yang <richard.weiyang@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org,
- Sebastien Boeuf <sebastien.boeuf@intel.com>,
- Marek Kedzierski <mkedzier@redhat.com>, Hui Zhu <teawater@gmail.com>
+References: <20211125180915.649652-1-parav@nvidia.com>
+In-Reply-To: <20211125180915.649652-1-parav@nvidia.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Fri, 26 Nov 2021 10:48:12 +0800
+Message-ID: <CACGkMEtF+kjj_vryxXAo6PqeX3Puk-XxaaQMcu4mhB1WZRXEpw@mail.gmail.com>
+Subject: Re: [PATCH] vdpa: Consider device id larger than 31
+To: Parav Pandit <parav@nvidia.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: kbuild-all@lists.01.org, kernel test robot <lkp@intel.com>,
+ mst <mst@redhat.com>, kbuild@lists.01.org,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization <virtualization@lists.linux-foundation.org>,
+ Eric Dumazet <edumazet@google.com>, Eli Cohen <elic@nvidia.com>,
+ Dan Carpenter <dan.carpenter@oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,90 +114,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: David Hildenbrand <david@redhat.com>
+On Fri, Nov 26, 2021 at 2:09 AM Parav Pandit <parav@nvidia.com> wrote:
+>
+> virtio device id value can be more than 31. Hence, use BIT_ULL in
+> assignment.
+>
+> Fixes: 33b347503f01 ("vdpa: Define vdpa mgmt device, ops and a netlink interface")
+> Reported-by: kernel test robot <lkp@intel.com>
+> Reported-by: Dan Carpenter <dan.carpenter@oracle.com>
+> Signed-off-by: Parav Pandit <parav@nvidia.com>
 
-[ Upstream commit 61082ad6a6e1f999eef7e7e90046486c87933b1e ]
+Acked-by: Jason Wang <jasowang@redhat.com>
 
-The initial virtio-mem spec states that while unplugged memory should not
-be read, the device still has to allow for reading unplugged memory inside
-the usable region. The primary motivation for this default handling was
-to simplify bringup of virtio-mem, because there were corner cases where
-Linux might have accidentially read unplugged memory inside added Linux
-memory blocks.
-
-In the meantime, we:
-1. Removed /dev/kmem in commit bbcd53c96071 ("drivers/char: remove
-   /dev/kmem for good")
-2. Disallowed access to virtio-mem device memory via /dev/mem in
-   commit 2128f4e21aa2 ("virtio-mem: disallow mapping virtio-mem memory via
-   /dev/mem")
-3. Sanitized access to virtio-mem device memory via /proc/kcore in
-   commit 0daa322b8ff9 ("fs/proc/kcore: don't read offline sections,
-   logically offline pages and hwpoisoned pages")
-4. Sanitized access to virtio-mem device memory via /proc/vmcore in
-   commit ce2814622e84 ("virtio-mem: kdump mode to sanitize /proc/vmcore
-   access")
-
-"Accidential" access to unplugged memory is no longer possible; we can
-support the new VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE feature that will be
-required by some hypervisors implementing virtio-mem in the near future.
-
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Marek Kedzierski <mkedzier@redhat.com>
-Cc: Hui Zhu <teawater@gmail.com>
-Cc: Sebastien Boeuf <sebastien.boeuf@intel.com>
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>
-Cc: Wei Yang <richard.weiyang@linux.alibaba.com>
-Signed-off-by: David Hildenbrand <david@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/virtio/virtio_mem.c     | 1 +
- include/uapi/linux/virtio_mem.h | 9 ++++++---
- 2 files changed, 7 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 181e2f18beae5..1afdd8ca00bbb 100644
---- a/drivers/virtio/virtio_mem.c
-+++ b/drivers/virtio/virtio_mem.c
-@@ -1925,6 +1925,7 @@ static unsigned int virtio_mem_features[] = {
- #if defined(CONFIG_NUMA) && defined(CONFIG_ACPI_NUMA)
- 	VIRTIO_MEM_F_ACPI_PXM,
- #endif
-+	VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE,
- };
- 
- static const struct virtio_device_id virtio_mem_id_table[] = {
-diff --git a/include/uapi/linux/virtio_mem.h b/include/uapi/linux/virtio_mem.h
-index 70e01c687d5eb..e9122f1d0e0cb 100644
---- a/include/uapi/linux/virtio_mem.h
-+++ b/include/uapi/linux/virtio_mem.h
-@@ -68,9 +68,10 @@
-  * explicitly triggered (VIRTIO_MEM_REQ_UNPLUG).
-  *
-  * There are no guarantees what will happen if unplugged memory is
-- * read/written. Such memory should, in general, not be touched. E.g.,
-- * even writing might succeed, but the values will simply be discarded at
-- * random points in time.
-+ * read/written. In general, unplugged memory should not be touched, because
-+ * the resulting action is undefined. There is one exception: without
-+ * VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE, unplugged memory inside the usable
-+ * region can be read, to simplify creation of memory dumps.
-  *
-  * It can happen that the device cannot process a request, because it is
-  * busy. The device driver has to retry later.
-@@ -87,6 +88,8 @@
- 
- /* node_id is an ACPI PXM and is valid */
- #define VIRTIO_MEM_F_ACPI_PXM		0
-+/* unplugged memory must not be accessed */
-+#define VIRTIO_MEM_F_UNPLUGGED_INACCESSIBLE	1
- 
- 
- /* --- virtio-mem: guest -> host requests --- */
--- 
-2.33.0
+> ---
+>  drivers/vdpa/vdpa.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+> index 7332a74a4b00..e91c71aeeddf 100644
+> --- a/drivers/vdpa/vdpa.c
+> +++ b/drivers/vdpa/vdpa.c
+> @@ -404,7 +404,7 @@ static int vdpa_mgmtdev_fill(const struct vdpa_mgmt_dev *mdev, struct sk_buff *m
+>                 goto msg_err;
+>
+>         while (mdev->id_table[i].device) {
+> -               supported_classes |= BIT(mdev->id_table[i].device);
+> +               supported_classes |= BIT_ULL(mdev->id_table[i].device);
+>                 i++;
+>         }
+>
+> --
+> 2.26.2
+>
 
 _______________________________________________
 Virtualization mailing list
