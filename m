@@ -1,62 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 444DC461213
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 40649461212
 	for <lists.virtualization@lfdr.de>; Mon, 29 Nov 2021 11:22:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id CE744832FF;
+	by smtp4.osuosl.org (Postfix) with ESMTP id BD2CB41C63;
 	Mon, 29 Nov 2021 10:22:44 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GTDK9lL3Z6in; Mon, 29 Nov 2021 10:22:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 612E4832D4;
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4QIMFL-TpJvJ; Mon, 29 Nov 2021 10:22:43 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id ECA3341C58;
 	Mon, 29 Nov 2021 10:22:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 39383C002E;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 66C60C0043;
 	Mon, 29 Nov 2021 10:22:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 65647C0056
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 72D1DC000A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:35 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4CF22830AB
+ by smtp2.osuosl.org (Postfix) with ESMTP id 227F540429
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:35 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WGA4ASCpwMwm
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id z7mN4-j1bCcs
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:34 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:36 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 6172A83104
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 9C86F40417
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:34 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=gi1oQ1LIPOHgezY8a1Use+Ugz3X8PN4zfCP6Qk0QPHA=; b=IDHUkCDiV4mxQdGnGJMK7gbCId
- 8NxKcIPPtukVc/tbjnDeKxQPu7ezngy7jRJ5hqJJz0ap3P7PrcaqpFE0NamzNWzr+Pc+685JdjvVR
- ooT2KuztWlE3xfP3VUpERzRXtwf7orNLPwYvQPsYOQ8W1xQOQObWtZxCBvRq9waKgaVVY7ly1uMA3
- u97YRVjzSImIM3S+1NtbbiW84p8H4ru9Nioqgt36ayqZ+GsrnNMVS6qgdx29cR0EpTHNIsemu1ya3
- PsYyQjOTv9gHCqiFstjMi3m0SwPqaArDt0edT9JpT3zwqX288xRmWNHDTuziDZQx/YgbUHOzXTNws
- 9RR5EIvA==;
+ bh=pf86FXvjYE/bTvzEEu46xn96m08VDk5UK6+R0139/q0=; b=RQ+KMORrPJ65Mv5hy09H9UjClN
+ I3uP0eSBe5tMJsNfWQa2lWLTUzxyUn4AVQkYkOvXnw3cetyZsa6LMoLo0Xklf61nx4DsxRCU1aMy6
+ WMRkASreGT8iCxB5u5sBUzKW5ZeHRBZ/zpq5OFvyDN6+ULm5ob2R5ZVhD/+tWkHSQldln7JhYdGeZ
+ voaIDGclV5TyMj/UQlIs/RLS1mlFUAgiXNR90rJ23PPnPorbRd8Rub5bCHhK4sjrPNBETsmpAX1eT
+ HB7MVegkmw1tr7Pgf8/W/Ulcl6605xecWLr7ubY/F7WIwaGMn/OGZ6MsTo+ypeNfjZANK2PwFHowl
+ C+7rz5vA==;
 Received: from [2001:4bb8:184:4a23:724a:c057:c7bf:4643] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mrdni-0073PG-Rw; Mon, 29 Nov 2021 10:22:23 +0000
+ id 1mrdnk-0073Pc-3l; Mon, 29 Nov 2021 10:22:25 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Dan Williams <dan.j.williams@intel.com>
-Subject: [PATCH 14/29] fsdax: simplify the pgoff calculation
-Date: Mon, 29 Nov 2021 11:21:48 +0100
-Message-Id: <20211129102203.2243509-15-hch@lst.de>
+Subject: [PATCH 15/29] xfs: add xfs_zero_range and xfs_truncate_page helpers
+Date: Mon, 29 Nov 2021 11:21:49 +0100
+Message-Id: <20211129102203.2243509-16-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211129102203.2243509-1-hch@lst.de>
 References: <20211129102203.2243509-1-hch@lst.de>
@@ -68,7 +70,7 @@ Cc: nvdimm@lists.linux.dev, Mike Snitzer <snitzer@redhat.com>,
  virtualization@lists.linux-foundation.org, linux-xfs@vger.kernel.org,
  dm-devel@redhat.com, "Darrick J . Wong" <djwong@kernel.org>,
  linux-fsdevel@vger.kernel.org, linux-ext4@vger.kernel.org,
- Ira Weiny <ira.weiny@intel.com>
+ Ira Weiny <ira.weiny@intel.com>, Shiyang Ruan <ruansy.fnst@fujitsu.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,157 +87,156 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Replace the two steps of dax_iomap_sector and bdev_dax_pgoff with a
-single dax_iomap_pgoff helper that avoids lots of cumbersome sector
-conversions.
+From: Shiyang Ruan <ruansy.fnst@fujitsu.com>
 
+Add helpers to prepare for using different DAX operations.
+
+Signed-off-by: Shiyang Ruan <ruansy.fnst@fujitsu.com>
+[hch: split from a larger patch + slight cleanups]
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Dan Williams <dan.j.williams@intel.com>
 Reviewed-by: Darrick J. Wong <djwong@kernel.org>
 ---
- drivers/dax/super.c | 14 --------------
- fs/dax.c            | 35 ++++++++++-------------------------
- include/linux/dax.h |  1 -
- 3 files changed, 10 insertions(+), 40 deletions(-)
+ fs/xfs/xfs_bmap_util.c |  7 +++----
+ fs/xfs/xfs_file.c      |  3 +--
+ fs/xfs/xfs_iomap.c     | 25 +++++++++++++++++++++++++
+ fs/xfs/xfs_iomap.h     |  4 ++++
+ fs/xfs/xfs_iops.c      |  7 +++----
+ fs/xfs/xfs_reflink.c   |  3 +--
+ 6 files changed, 37 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/dax/super.c b/drivers/dax/super.c
-index 90b5733f5a709..45d931aefd063 100644
---- a/drivers/dax/super.c
-+++ b/drivers/dax/super.c
-@@ -66,20 +66,6 @@ void dax_remove_host(struct gendisk *disk)
- }
- EXPORT_SYMBOL_GPL(dax_remove_host);
+diff --git a/fs/xfs/xfs_bmap_util.c b/fs/xfs/xfs_bmap_util.c
+index 73a36b7be3bd1..797ea0c8b14e1 100644
+--- a/fs/xfs/xfs_bmap_util.c
++++ b/fs/xfs/xfs_bmap_util.c
+@@ -1001,7 +1001,7 @@ xfs_free_file_space(
  
--int bdev_dax_pgoff(struct block_device *bdev, sector_t sector, size_t size,
--		pgoff_t *pgoff)
--{
--	sector_t start_sect = bdev ? get_start_sect(bdev) : 0;
--	phys_addr_t phys_off = (start_sect + sector) * 512;
--
--	if (pgoff)
--		*pgoff = PHYS_PFN(phys_off);
--	if (phys_off % PAGE_SIZE || size % PAGE_SIZE)
--		return -EINVAL;
--	return 0;
--}
--EXPORT_SYMBOL(bdev_dax_pgoff);
--
- /**
-  * fs_dax_get_by_bdev() - temporary lookup mechanism for filesystem-dax
-  * @bdev: block device to find a dax_device for
-diff --git a/fs/dax.c b/fs/dax.c
-index e51b4129d1b65..5364549d67a48 100644
---- a/fs/dax.c
-+++ b/fs/dax.c
-@@ -709,23 +709,22 @@ int dax_invalidate_mapping_entry_sync(struct address_space *mapping,
- 	return __dax_invalidate_entry(mapping, index, false);
- }
+ 	/*
+ 	 * Now that we've unmap all full blocks we'll have to zero out any
+-	 * partial block at the beginning and/or end.  iomap_zero_range is smart
++	 * partial block at the beginning and/or end.  xfs_zero_range is smart
+ 	 * enough to skip any holes, including those we just created, but we
+ 	 * must take care not to zero beyond EOF and enlarge i_size.
+ 	 */
+@@ -1009,15 +1009,14 @@ xfs_free_file_space(
+ 		return 0;
+ 	if (offset + len > XFS_ISIZE(ip))
+ 		len = XFS_ISIZE(ip) - offset;
+-	error = iomap_zero_range(VFS_I(ip), offset, len, NULL,
+-			&xfs_buffered_write_iomap_ops);
++	error = xfs_zero_range(ip, offset, len, NULL);
+ 	if (error)
+ 		return error;
  
--static sector_t dax_iomap_sector(const struct iomap *iomap, loff_t pos)
-+static pgoff_t dax_iomap_pgoff(const struct iomap *iomap, loff_t pos)
- {
--	return (iomap->addr + (pos & PAGE_MASK) - iomap->offset) >> 9;
-+	phys_addr_t paddr = iomap->addr + (pos & PAGE_MASK) - iomap->offset;
-+
-+	if (iomap->bdev)
-+		paddr += (get_start_sect(iomap->bdev) << SECTOR_SHIFT);
-+	return PHYS_PFN(paddr);
- }
- 
- static int copy_cow_page_dax(struct vm_fault *vmf, const struct iomap_iter *iter)
- {
--	sector_t sector = dax_iomap_sector(&iter->iomap, iter->pos);
-+	pgoff_t pgoff = dax_iomap_pgoff(&iter->iomap, iter->pos);
- 	void *vto, *kaddr;
--	pgoff_t pgoff;
- 	long rc;
- 	int id;
- 
--	rc = bdev_dax_pgoff(iter->iomap.bdev, sector, PAGE_SIZE, &pgoff);
--	if (rc)
--		return rc;
--
- 	id = dax_read_lock();
- 	rc = dax_direct_access(iter->iomap.dax_dev, pgoff, 1, &kaddr, NULL);
- 	if (rc < 0) {
-@@ -1013,14 +1012,10 @@ EXPORT_SYMBOL_GPL(dax_writeback_mapping_range);
- static int dax_iomap_pfn(const struct iomap *iomap, loff_t pos, size_t size,
- 			 pfn_t *pfnp)
- {
--	const sector_t sector = dax_iomap_sector(iomap, pos);
--	pgoff_t pgoff;
-+	pgoff_t pgoff = dax_iomap_pgoff(iomap, pos);
- 	int id, rc;
- 	long length;
- 
--	rc = bdev_dax_pgoff(iomap->bdev, sector, size, &pgoff);
--	if (rc)
--		return rc;
- 	id = dax_read_lock();
- 	length = dax_direct_access(iomap->dax_dev, pgoff, PHYS_PFN(size),
- 				   NULL, pfnp);
-@@ -1129,7 +1124,7 @@ static vm_fault_t dax_pmd_load_hole(struct xa_state *xas, struct vm_fault *vmf,
- s64 dax_iomap_zero(loff_t pos, u64 length, struct iomap *iomap)
- {
- 	sector_t sector = iomap_sector(iomap, pos & PAGE_MASK);
--	pgoff_t pgoff;
-+	pgoff_t pgoff = dax_iomap_pgoff(iomap, pos);
- 	long rc, id;
- 	void *kaddr;
- 	bool page_aligned = false;
-@@ -1140,10 +1135,6 @@ s64 dax_iomap_zero(loff_t pos, u64 length, struct iomap *iomap)
- 	    (size == PAGE_SIZE))
- 		page_aligned = true;
- 
--	rc = bdev_dax_pgoff(iomap->bdev, sector, PAGE_SIZE, &pgoff);
--	if (rc)
--		return rc;
--
- 	id = dax_read_lock();
- 
- 	if (page_aligned)
-@@ -1169,7 +1160,6 @@ static loff_t dax_iomap_iter(const struct iomap_iter *iomi,
- 	const struct iomap *iomap = &iomi->iomap;
- 	loff_t length = iomap_length(iomi);
- 	loff_t pos = iomi->pos;
--	struct block_device *bdev = iomap->bdev;
- 	struct dax_device *dax_dev = iomap->dax_dev;
- 	loff_t end = pos + length, done = 0;
- 	ssize_t ret = 0;
-@@ -1203,9 +1193,8 @@ static loff_t dax_iomap_iter(const struct iomap_iter *iomi,
- 	while (pos < end) {
- 		unsigned offset = pos & (PAGE_SIZE - 1);
- 		const size_t size = ALIGN(length + offset, PAGE_SIZE);
--		const sector_t sector = dax_iomap_sector(iomap, pos);
-+		pgoff_t pgoff = dax_iomap_pgoff(iomap, pos);
- 		ssize_t map_len;
--		pgoff_t pgoff;
- 		void *kaddr;
- 
- 		if (fatal_signal_pending(current)) {
-@@ -1213,10 +1202,6 @@ static loff_t dax_iomap_iter(const struct iomap_iter *iomi,
- 			break;
+ 	/*
+ 	 * If we zeroed right up to EOF and EOF straddles a page boundary we
+ 	 * must make sure that the post-EOF area is also zeroed because the
+-	 * page could be mmap'd and iomap_zero_range doesn't do that for us.
++	 * page could be mmap'd and xfs_zero_range doesn't do that for us.
+ 	 * Writeback of the eof page will do this, albeit clumsily.
+ 	 */
+ 	if (offset + len >= XFS_ISIZE(ip) && offset_in_page(offset + len) > 0) {
+diff --git a/fs/xfs/xfs_file.c b/fs/xfs/xfs_file.c
+index 27594738b0d18..8d4c5ca261bd7 100644
+--- a/fs/xfs/xfs_file.c
++++ b/fs/xfs/xfs_file.c
+@@ -437,8 +437,7 @@ xfs_file_write_checks(
  		}
  
--		ret = bdev_dax_pgoff(bdev, sector, size, &pgoff);
--		if (ret)
--			break;
--
- 		map_len = dax_direct_access(dax_dev, pgoff, PHYS_PFN(size),
- 				&kaddr, NULL);
- 		if (map_len < 0) {
-diff --git a/include/linux/dax.h b/include/linux/dax.h
-index 439c3c70e347b..324363b798ecd 100644
---- a/include/linux/dax.h
-+++ b/include/linux/dax.h
-@@ -107,7 +107,6 @@ static inline bool daxdev_mapping_supported(struct vm_area_struct *vma,
- #endif
+ 		trace_xfs_zero_eof(ip, isize, iocb->ki_pos - isize);
+-		error = iomap_zero_range(inode, isize, iocb->ki_pos - isize,
+-				NULL, &xfs_buffered_write_iomap_ops);
++		error = xfs_zero_range(ip, isize, iocb->ki_pos - isize, NULL);
+ 		if (error)
+ 			return error;
+ 	} else
+diff --git a/fs/xfs/xfs_iomap.c b/fs/xfs/xfs_iomap.c
+index 093758440ad53..d6d71ae9f2ae4 100644
+--- a/fs/xfs/xfs_iomap.c
++++ b/fs/xfs/xfs_iomap.c
+@@ -1311,3 +1311,28 @@ xfs_xattr_iomap_begin(
+ const struct iomap_ops xfs_xattr_iomap_ops = {
+ 	.iomap_begin		= xfs_xattr_iomap_begin,
+ };
++
++int
++xfs_zero_range(
++	struct xfs_inode	*ip,
++	loff_t			pos,
++	loff_t			len,
++	bool			*did_zero)
++{
++	struct inode		*inode = VFS_I(ip);
++
++	return iomap_zero_range(inode, pos, len, did_zero,
++				&xfs_buffered_write_iomap_ops);
++}
++
++int
++xfs_truncate_page(
++	struct xfs_inode	*ip,
++	loff_t			pos,
++	bool			*did_zero)
++{
++	struct inode		*inode = VFS_I(ip);
++
++	return iomap_truncate_page(inode, pos, did_zero,
++				   &xfs_buffered_write_iomap_ops);
++}
+diff --git a/fs/xfs/xfs_iomap.h b/fs/xfs/xfs_iomap.h
+index 7d3703556d0e0..f1a281ab9328c 100644
+--- a/fs/xfs/xfs_iomap.h
++++ b/fs/xfs/xfs_iomap.h
+@@ -20,6 +20,10 @@ xfs_fileoff_t xfs_iomap_eof_align_last_fsb(struct xfs_inode *ip,
+ int xfs_bmbt_to_iomap(struct xfs_inode *, struct iomap *,
+ 		struct xfs_bmbt_irec *, u16);
  
- struct writeback_control;
--int bdev_dax_pgoff(struct block_device *, sector_t, size_t, pgoff_t *pgoff);
- #if IS_ENABLED(CONFIG_FS_DAX)
- int dax_add_host(struct dax_device *dax_dev, struct gendisk *disk);
- void dax_remove_host(struct gendisk *disk);
++int xfs_zero_range(struct xfs_inode *ip, loff_t pos, loff_t len,
++		bool *did_zero);
++int xfs_truncate_page(struct xfs_inode *ip, loff_t pos, bool *did_zero);
++
+ static inline xfs_filblks_t
+ xfs_aligned_fsb_count(
+ 	xfs_fileoff_t		offset_fsb,
+diff --git a/fs/xfs/xfs_iops.c b/fs/xfs/xfs_iops.c
+index a607d6aca5c4d..ab5ef52b2a9ff 100644
+--- a/fs/xfs/xfs_iops.c
++++ b/fs/xfs/xfs_iops.c
+@@ -911,8 +911,8 @@ xfs_setattr_size(
+ 	 */
+ 	if (newsize > oldsize) {
+ 		trace_xfs_zero_eof(ip, oldsize, newsize - oldsize);
+-		error = iomap_zero_range(inode, oldsize, newsize - oldsize,
+-				&did_zeroing, &xfs_buffered_write_iomap_ops);
++		error = xfs_zero_range(ip, oldsize, newsize - oldsize,
++				&did_zeroing);
+ 	} else {
+ 		/*
+ 		 * iomap won't detect a dirty page over an unwritten block (or a
+@@ -924,8 +924,7 @@ xfs_setattr_size(
+ 						     newsize);
+ 		if (error)
+ 			return error;
+-		error = iomap_truncate_page(inode, newsize, &did_zeroing,
+-				&xfs_buffered_write_iomap_ops);
++		error = xfs_truncate_page(ip, newsize, &did_zeroing);
+ 	}
+ 
+ 	if (error)
+diff --git a/fs/xfs/xfs_reflink.c b/fs/xfs/xfs_reflink.c
+index cb0edb1d68ef1..facce5c076d83 100644
+--- a/fs/xfs/xfs_reflink.c
++++ b/fs/xfs/xfs_reflink.c
+@@ -1269,8 +1269,7 @@ xfs_reflink_zero_posteof(
+ 		return 0;
+ 
+ 	trace_xfs_zero_eof(ip, isize, pos - isize);
+-	return iomap_zero_range(VFS_I(ip), isize, pos - isize, NULL,
+-			&xfs_buffered_write_iomap_ops);
++	return xfs_zero_range(ip, isize, pos - isize, NULL);
+ }
+ 
+ /*
 -- 
 2.30.2
 
