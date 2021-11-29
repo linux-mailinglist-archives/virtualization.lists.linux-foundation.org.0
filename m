@@ -1,65 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1B60C461203
-	for <lists.virtualization@lfdr.de>; Mon, 29 Nov 2021 11:22:36 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45E7C461206
+	for <lists.virtualization@lfdr.de>; Mon, 29 Nov 2021 11:22:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5656660A4B;
-	Mon, 29 Nov 2021 10:22:34 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2F945830C1;
+	Mon, 29 Nov 2021 10:22:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id blY-AvKUKJz8; Mon, 29 Nov 2021 10:22:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 1EEFE60A4A;
-	Mon, 29 Nov 2021 10:22:33 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HBLpadw5iKNb; Mon, 29 Nov 2021 10:22:35 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8882B83126;
+	Mon, 29 Nov 2021 10:22:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 76FB2C003E;
-	Mon, 29 Nov 2021 10:22:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3EA5CC002E;
+	Mon, 29 Nov 2021 10:22:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 80294C000A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6532BC000A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:30 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 611E541C16
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5D887401A1
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 29 Nov 2021 10:22:31 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id oU2zUOLj-nGR
  for <virtualization@lists.linux-foundation.org>;
  Mon, 29 Nov 2021 10:22:30 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TuMTTqcScJWo
- for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:28 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A1DD841C12
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 92C7A40134
  for <virtualization@lists.linux-foundation.org>;
- Mon, 29 Nov 2021 10:22:28 +0000 (UTC)
+ Mon, 29 Nov 2021 10:22:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
- Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:Content-ID:
- Content-Description:In-Reply-To:References;
- bh=y+N6T9OX7HOXSR0XwGBs9AqYCmtI5mlyJgGLesZ2HD4=; b=WyDrKe/Bh7nQ7b/8LTVDbNFSYn
- EXxq5n73/ibf7zm6FmAT7XVapvybXUPlIXP78x4LNgdHQjtaVpQbj3XC2X3raEe99lvIRSxOmR7wW
- HiLQFMH92Ia/3oGO/pOBIv+fFbSdLCDdMhrsch/OnvhZd5mpH/29mtxEaEAJmrkCBxOc1wfFWNiM6
- rh/11Uz6PTBjfTQAj6T0jTJTP6rj3K0mpycAiDunQm4hT8eUpq7Ss6q5cooBawGxSohnff0n4TPZ4
- A9BNZkhL6PdqBIQElzxZLhNJAaZpf1SaVpH4aSbq7eHNN5/AkQlQrGoHjmlPCKPlRx4cjrl73Dh/y
- 2ICGPwQA==;
+ References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-Type:Content-ID:Content-Description;
+ bh=Og+Y/LRPMRgZw3tJ8cXpjgwviRJJrJn9nJJ+2xu2tuc=; b=tooSDpcqoQvrM3NLXmSjjO50ZQ
+ 9UtXgS8Bhc9kkeWfQhlUoq3T9ey8lcuv8ncdemQh5KsRP2pvu0PfDhZrdgpyTiKVqNZx6GyKStLHU
+ TaAD+KLUIaflLvjfbJV04HNPduJ6Mu/D8l/kdCHMA3TZWYRPw8OOP2Nv7YS+CzVkyPik0zUGa7JJN
+ H7+OFwwh5010zD43YpZf8N1KPxlt2ij0T/naH7tL/2Ea7g6pF/BMTzbmZJVmzdK8/3vTd+xXjBW7d
+ 4MfbNzP5khcvpQf0UN9SkRifFylostsyI1RqNuYh6bxeDOhCCC+DzvF94M6PYtfh3vMEh+3K7Xeqc
+ fy0SIHBw==;
 Received: from [2001:4bb8:184:4a23:724a:c057:c7bf:4643] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mrdnP-0073IP-RJ; Mon, 29 Nov 2021 10:22:04 +0000
+ id 1mrdnR-0073Ig-7d; Mon, 29 Nov 2021 10:22:06 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Dan Williams <dan.j.williams@intel.com>
-Subject: decouple DAX from block devices v2
-Date: Mon, 29 Nov 2021 11:21:34 +0100
-Message-Id: <20211129102203.2243509-1-hch@lst.de>
+Subject: [PATCH 01/29] dm: fix alloc_dax error handling in alloc_dev
+Date: Mon, 29 Nov 2021 11:21:35 +0100
+Message-Id: <20211129102203.2243509-2-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20211129102203.2243509-1-hch@lst.de>
+References: <20211129102203.2243509-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  casper.infradead.org. See http://www.infradead.org/rpr.html
@@ -84,24 +86,34 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Dan,
+Make sure ->dax_dev is NULL on error so that the cleanup path doesn't
+trip over an ERR_PTR.
 
-this series decouples the DAX from the block layer so that the
-block_device is not needed at all for the DAX I/O path.
+Reported-by: Dan Williams <dan.j.williams@intel.com>
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ drivers/md/dm.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Changes since v1:
- - rebase on latest v5.16-rc
- - ensure the new dax zeroing helpers are always declared
- - fix a dax_dev leak in pmem_attach_disk
- - remove '\n' from an xfs format string
- - fix a pre-existing error handling bug in alloc_dev
- - fix a few whitespace issues
- - tighten an error check
- - use s64/u64 a little more
- - improve a few commit messages
- - add a CONFIG_FS_DAX ifdef to stub out IOMAP_DAX
- - improve how IOMAP_DAX is introduced and better document why it is
-   added
+diff --git a/drivers/md/dm.c b/drivers/md/dm.c
+index 662742a310cbb..acc84dc1bded5 100644
+--- a/drivers/md/dm.c
++++ b/drivers/md/dm.c
+@@ -1786,8 +1786,10 @@ static struct mapped_device *alloc_dev(int minor)
+ 	if (IS_ENABLED(CONFIG_DAX_DRIVER)) {
+ 		md->dax_dev = alloc_dax(md, md->disk->disk_name,
+ 					&dm_dax_ops, 0);
+-		if (IS_ERR(md->dax_dev))
++		if (IS_ERR(md->dax_dev)) {
++			md->dax_dev = NULL;
+ 			goto bad;
++		}
+ 	}
+ 
+ 	format_dev_t(md->name, MKDEV(_major, minor));
+-- 
+2.30.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
