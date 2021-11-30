@@ -1,75 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 21F274630D2
-	for <lists.virtualization@lfdr.de>; Tue, 30 Nov 2021 11:15:40 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 86054463855
+	for <lists.virtualization@lfdr.de>; Tue, 30 Nov 2021 15:57:10 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C823540114;
-	Tue, 30 Nov 2021 10:15:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3904A4042F;
+	Tue, 30 Nov 2021 14:57:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oOBrLlMMCE9W; Tue, 30 Nov 2021 10:15:37 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id TMyE-F0PNHI2; Tue, 30 Nov 2021 14:57:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 52D1A40018;
-	Tue, 30 Nov 2021 10:15:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 0CF7640434;
+	Tue, 30 Nov 2021 14:57:08 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 96E95C0030;
-	Tue, 30 Nov 2021 10:15:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F7DDC0030;
+	Tue, 30 Nov 2021 14:57:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5FCD8C000A
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 027E4C000A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 10:15:34 +0000 (UTC)
+ Tue, 30 Nov 2021 14:57:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3BCB240114
+ by smtp1.osuosl.org (Postfix) with ESMTP id E4A9981842
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 10:15:34 +0000 (UTC)
+ Tue, 30 Nov 2021 14:57:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bXcRY1qVFhas
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=kernel.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id a5-sCDH4zu6h
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 10:15:32 +0000 (UTC)
-X-Greylist: delayed 00:06:34 by SQLgrey-1.8.0
-Received: from outbound-smtp38.blacknight.com (outbound-smtp38.blacknight.com
- [46.22.139.221])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 970AA40018
+ Tue, 30 Nov 2021 14:57:05 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id C0FAC817EB
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 10:15:32 +0000 (UTC)
-Received: from mail.blacknight.com (pemlinmail03.blacknight.ie [81.17.254.16])
- by outbound-smtp38.blacknight.com (Postfix) with ESMTPS id A7AA21E48
- for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 10:08:55 +0000 (GMT)
-Received: (qmail 25169 invoked from network); 30 Nov 2021 10:08:55 -0000
-Received: from unknown (HELO techsingularity.net)
- (mgorman@techsingularity.net@[84.203.17.29])
- by 81.17.254.9 with ESMTPSA (AES256-SHA encrypted, authenticated);
- 30 Nov 2021 10:08:55 -0000
-Date: Tue, 30 Nov 2021 10:08:53 +0000
-From: Mel Gorman <mgorman@techsingularity.net>
-To: Vlastimil Babka <vbabka@suse.cz>
-Subject: Re: [RFC PATCH 0/3] Use pageblock_order for cma and
- alloc_contig_range alignment.
-Message-ID: <20211130100853.GP3366@techsingularity.net>
-References: <20211115193725.737539-1-zi.yan@sent.com>
- <3083463d-978b-fbe6-dadf-670d400ed437@suse.cz>
- <AEFF28CF-0ED8-450F-96A4-A6CD59CB1F3D@nvidia.com>
- <BF8FB68A-6E1D-4465-8A2B-884FC034660B@nvidia.com>
- <52dbf824-76be-cc34-3983-d45510b1b618@suse.cz>
- <35A20739-152A-450E-8535-2236D2B28748@nvidia.com>
- <1c67bb96-24db-f5a6-7520-3d97e54e5192@suse.cz>
+ Tue, 30 Nov 2021 14:57:05 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 209EFB81A34;
+ Tue, 30 Nov 2021 14:50:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id EAD23C53FC1;
+ Tue, 30 Nov 2021 14:50:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1638283807;
+ bh=HNxKbjB96XxCJFowlbjGxNOiW3Tjj8GTqWkuCBB7DGc=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=f7biZn8imblMLA8gd2rqI6G8NZEGuStcPdlox/bQ+uZ1QUE+JO52helIL67wH6Jq+
+ f28CKv7Eq8uwPP51+FGJB15/vHOX5BIFtDNGpDvZRyOtVnqHRpoUiUiOoDoAqNHRek
+ f4e7Db1IWPXIx9Q6d/NWnncSQik9THy2hRA7aP0BlYV9zWiETc5cuRc5BE4QQ5rxPl
+ 2tZGMCFtm31PeROXdyR6XqHoCk+K4VLiBIY2RXXZIeaY/mQ938Yqg1uUw8u1rc/jBA
+ 3fld6Sayg7Ux/CF0IDARBrQwjiGlVpC7xfm3qVxkhMGGcfqEx3GMunt5Zap6A+hqVt
+ 583tNCrf2P9rg==
+From: Sasha Levin <sashal@kernel.org>
+To: linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.15 61/68] vhost-vdpa: clean irqs before reseting
+ vdpa device
+Date: Tue, 30 Nov 2021 09:46:57 -0500
+Message-Id: <20211130144707.944580-61-sashal@kernel.org>
+X-Mailer: git-send-email 2.33.0
+In-Reply-To: <20211130144707.944580-1-sashal@kernel.org>
+References: <20211130144707.944580-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1c67bb96-24db-f5a6-7520-3d97e54e5192@suse.cz>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Michael Ellerman <mpe@ellerman.id.au>, linuxppc-dev@lists.ozlabs.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, iommu@lists.linux-foundation.org, Zi Yan <ziy@nvidia.com>,
- Robin Murphy <robin.murphy@arm.com>, Christoph Hellwig <hch@lst.de>,
- Marek Szyprowski <m.szyprowski@samsung.com>
+X-stable: review
+X-Patchwork-Hint: Ignore
+Cc: Sasha Levin <sashal@kernel.org>, kvm@vger.kernel.org,
+ "Michael S . Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ Wu Zongyong <wuzongyong@linux.alibaba.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,56 +90,46 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Nov 30, 2021 at 10:11:36AM +0100, Vlastimil Babka wrote:
-> >>> I find that two pageblocks with different migratetypes, like MIGRATE_RECLAIMABLE
-> >>> and MIGRATE_MOVABLE can be merged into a single free page after I checked
-> >>> __free_one_page() in detail and printed pageblock information during buddy page
-> >>> merging.
-> >>
-> >> Yes, that can happen.
-> >>
-> >> I am not sure what consequence it will cause. Do you have any idea?
-> >>
-> >> For MIGRATE_RECLAIMABLE or MIGRATE_MOVABLE or even MIGRATE_UNMOVABLE it's
-> >> absolutely fine. As long as these pageblocks are fully free (and they are if
-> >> it's a single free page spanning 2 pageblocks), they can be of any of these
-> >> type, as they can be reused as needed without causing fragmentation.
-> >>
-> >> But in case of MIGRATE_CMA and MIGRATE_ISOLATE, uncontrolled merging would
-> >> break the specifics of those types. That's why the code is careful for
-> >> MIGRATE_ISOLATE, and MIGRATE_CMA was until now done in MAX_ORDER granularity.
-> > 
-> > Thanks for the explanation. Basically migratetypes that can fall back to each
-> > other can be merged into a single free page, right?
-> 
-> Yes.
-> 
-> > How about MIGRATE_HIGHATOMIC? It should not be merged with other migratetypes
-> > from my understanding.
-> 
-> Hmm it shouldn't minimally because it has an accounting that would become
-> broken. So it should prevent merging or make sure the reservations are with
-> MAX_ORDER granularity, but seems that neither is true? CCing Mel.
-> 
+From: Wu Zongyong <wuzongyong@linux.alibaba.com>
 
-MIGRATE_HIGHATOMIC pageblocks can have pages allocated of different
-types, particularly UNMOVABLE and potentially RECLAIMABLE. The
-reserving or releasing MIGRATE_HIGHATOMIC pageblocks should be done with
-reserve_highatomic_pageblock and unreserve_highatomic_pageblock to get
-the accounting right.
+[ Upstream commit ea8f17e44fa7d54fae287ccbe30ce269afb5ee42 ]
 
-However, there does not appear to be any special protection against a
-page in a highatomic pageblock getting merged with a buddy of another
-pageblock type. The pageblock would still have the right setting but on
-allocation, the pages could split to the wrong free list and be lost
-until the pages belonging to MIGRATE_HIGHATOMIC were freed again.
+Vdpa devices should be reset after unseting irqs of virtqueues, or we
+will get errors when killing qemu process:
 
-Not sure how much of a problem that is in practice, it's been a while
-since I've heard of high-order atomic allocation failures.
+>> pi_update_irte: failed to update PI IRTE
+>> irq bypass consumer (token 0000000065102a43) unregistration fails: -22
 
+Signed-off-by: Wu Zongyong <wuzongyong@linux.alibaba.com>
+Link: https://lore.kernel.org/r/a2cb60cf73be9da5c4e6399242117d8818f975ae.1636946171.git.wuzongyong@linux.alibaba.com
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Acked-by: Jason Wang <jasowang@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ drivers/vhost/vdpa.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
+index 39039e0461175..e73bff6fcff98 100644
+--- a/drivers/vhost/vdpa.c
++++ b/drivers/vhost/vdpa.c
+@@ -1015,12 +1015,12 @@ static int vhost_vdpa_release(struct inode *inode, struct file *filep)
+ 
+ 	mutex_lock(&d->mutex);
+ 	filep->private_data = NULL;
++	vhost_vdpa_clean_irq(v);
+ 	vhost_vdpa_reset(v);
+ 	vhost_dev_stop(&v->vdev);
+ 	vhost_vdpa_iotlb_free(v);
+ 	vhost_vdpa_free_domain(v);
+ 	vhost_vdpa_config_put(v);
+-	vhost_vdpa_clean_irq(v);
+ 	vhost_dev_cleanup(&v->vdev);
+ 	kfree(v->vdev.vqs);
+ 	mutex_unlock(&d->mutex);
 -- 
-Mel Gorman
-SUSE Labs
+2.33.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
