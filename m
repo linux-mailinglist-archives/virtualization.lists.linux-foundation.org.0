@@ -1,115 +1,130 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0AB6E463797
-	for <lists.virtualization@lfdr.de>; Tue, 30 Nov 2021 15:51:50 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id BBD3E463B7F
+	for <lists.virtualization@lfdr.de>; Tue, 30 Nov 2021 17:17:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 81AAC80F00;
-	Tue, 30 Nov 2021 14:51:48 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 21712605C5;
+	Tue, 30 Nov 2021 16:17:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sSpIF9iZLj6g; Tue, 30 Nov 2021 14:51:47 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MKDXXB4A9qI6; Tue, 30 Nov 2021 16:17:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 642DC80F0A;
-	Tue, 30 Nov 2021 14:51:47 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D6B8160708;
+	Tue, 30 Nov 2021 16:17:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B4282C0030;
-	Tue, 30 Nov 2021 14:51:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C375C0030;
+	Tue, 30 Nov 2021 16:17:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C2921C000A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27DE7C000A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 14:51:45 +0000 (UTC)
+ Tue, 30 Nov 2021 16:17:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A3A44606BD
+ by smtp3.osuosl.org (Postfix) with ESMTP id 01477605CE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 14:51:45 +0000 (UTC)
+ Tue, 30 Nov 2021 16:17:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id C3V4p5bqF2Y2
+ with ESMTP id vO-Bug8Cg8C8
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 14:51:44 +0000 (UTC)
+ Tue, 30 Nov 2021 16:17:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C7C2E60684
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A0B9C605C5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 14:51:44 +0000 (UTC)
+ Tue, 30 Nov 2021 16:17:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1638283903;
+ s=mimecast20190719; t=1638289049;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=E9Lx9TJJBXg2rHTFjd4QMdkDXGIXIvnZzimFPOne8Kw=;
- b=Re0j07cEVm++Oj9WFLoquFPIoNAfIL7/fvOexGBLywYfg23sBFdm2lqnWm5FLorsdrdQ0P
- Kk0tuFBUslp9ZrDN/Tombxq27KrgEfB7Gl/5vcEQXdXBu8ZcUSngDNZNsxbPGzmxpA1bee
- 0gx9nc3bImfmjN4yfHiO7r+/TDWxp+o=
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=Bh2xH2WYNc1n+eZ6WtfnZ4QpRuO9aH5y18ufnjGl1cA=;
+ b=N1jTE+/R0rhhw2cAe8Q7hFcuv1pxTQwMq+OXkpyc/eTCG9rxbitHH4iyZlIiyRWznVLmA1
+ soUtq2HISlAKvh3Z7HR7kFGG3lJ75SY6FTqiYH79Pr9tPcfrckFsqvgw/uZ5LF6q1crxkR
+ oWFym05dj7kIXwaObPNLOgRHu+2rSJg=
+Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
+ [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-474-5ky127O2PtiDR8mlI4wBgA-1; Tue, 30 Nov 2021 09:51:39 -0500
-X-MC-Unique: 5ky127O2PtiDR8mlI4wBgA-1
-Received: by mail-wr1-f69.google.com with SMTP id
- d3-20020adfa343000000b0018ed6dd4629so3667659wrb.2
+ us-mta-322-1bzRF-bCOwusbw-IXAy4aA-1; Tue, 30 Nov 2021 11:17:27 -0500
+X-MC-Unique: 1bzRF-bCOwusbw-IXAy4aA-1
+Received: by mail-ed1-f70.google.com with SMTP id
+ y9-20020aa7c249000000b003e7bf7a1579so17376450edo.5
  for <virtualization@lists.linux-foundation.org>;
- Tue, 30 Nov 2021 06:51:39 -0800 (PST)
+ Tue, 30 Nov 2021 08:17:27 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:organization:in-reply-to
- :content-transfer-encoding;
- bh=E9Lx9TJJBXg2rHTFjd4QMdkDXGIXIvnZzimFPOne8Kw=;
- b=lk4ellwA24yKryi/4YsbngTcfY7QtKntmLX3FwzmgrFA9HqpLb8ofV7DqFwa2IeSBB
- WmMMy0oDCw3xn35ecrFTbBNdSMViXdohUaOWqHwFnA6NgNDnB9lgC8t+uv8jj6+FqOYE
- muXoYrHsyGHAnvPRqL18/bB0h5QnO5tbxPZw+E3rmq9+R3sq8QE8YoN7Ssw34TRNSI2f
- vDIBJ1btRzWz3V2+s9ItDe/Q604uCAz45Ye8+g9akv4o9zQ+jbthGEOiauwE+6EAvJfC
- Yq+D/vARE11XHG6s4VRGrDXkhq0CEmDVrF23zu84NVok/2+BZxnTQb9vT++qGgD+i4uI
- pLxg==
-X-Gm-Message-State: AOAM530kCXwtnXOO5420MhBkVgb8NQLJfQrOERMFh8kggfJ8GjGJ/wdw
- y3wEQMciyU2v3GNmGuKbFPhHoZZpiD8SID+yvuJNQ0CeU/gxMgwpfh1n3nkg92CEp0wDjIWimwI
- C2NsCV6dSdDRZos17JXgP+ML8lmhkw+lg0iqICdeNwg==
-X-Received: by 2002:a05:600c:b43:: with SMTP id
- k3mr5511849wmr.159.1638283898584; 
- Tue, 30 Nov 2021 06:51:38 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJyKgqfybofwM4ev+7p0oQTgMUxgl8EpmgO9OSaeiHHO8/ElEuvqxrQdaFyWneC5jrZs7Om0zw==
-X-Received: by 2002:a05:600c:b43:: with SMTP id
- k3mr5511825wmr.159.1638283898421; 
- Tue, 30 Nov 2021 06:51:38 -0800 (PST)
-Received: from [192.168.3.132] (p5b0c68ec.dip0.t-ipconnect.de. [91.12.104.236])
- by smtp.gmail.com with ESMTPSA id f15sm3295403wmg.30.2021.11.30.06.51.37
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 30 Nov 2021 06:51:37 -0800 (PST)
-Message-ID: <18472b72-c64f-59b5-f767-d965f0264ef0@redhat.com>
-Date: Tue, 30 Nov 2021 15:51:37 +0100
+ h=x-gm-message-state:from:to:cc:subject:in-reply-to:references:date
+ :message-id:mime-version;
+ bh=Bh2xH2WYNc1n+eZ6WtfnZ4QpRuO9aH5y18ufnjGl1cA=;
+ b=F569Fx4gIsLYWG7sx9uEBtSnkO2CvZHBx+TKrVASoXSy0VlZlawmx/Rc7im1BjgeRt
+ DY0faP7+vOXCZ2qSwmYYaK86BzorZnnWX0pqJFsrg8Udh0oWVgz4UIjw1Xm0BgnfeBG7
+ jd1ru6dkwV1qEdqje/H4HZblrEijQ9+6k7zIfPQhjr2WcbqVjGYC0Kr4atQnF9XN6sAx
+ t2OJjCaQsVAdg5nfICVQTJzYeJySyD3KwJdZgMUob9sLLKVQe3Z/E6LjTIKfUKwrupKy
+ SL6+aVY0sW+adY2FXuc01E0mjZuUBeNtiO1srmlzPB3grZpo4DjBIV/ovX3tR4Hbr60/
+ aGhw==
+X-Gm-Message-State: AOAM533pc7Xv3SetiblIsM03ae8RQaXV6Xmi76vGcNMny4bZTEqT66Cs
+ 8aL+3ibqEisPA/J3Ob9Cun6Ar2w1IMI/+vZf07RYFnj4qgTu3pPdTW+BLOdr4G6mrD2hs8woXh6
+ Ue/uwRL7RiCX5sN9xRjJa0doF2DGzKKD1waziK5VsZg==
+X-Received: by 2002:a17:906:d54d:: with SMTP id
+ cr13mr22673ejc.409.1638289045917; 
+ Tue, 30 Nov 2021 08:17:25 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzm7jXoK2TvSroiJ5tHiLFjrswRyG0q/IaZ6d4NOHuATUVkXigtSnHPZVM/QNjl22FRlNuJYA==
+X-Received: by 2002:a17:906:d54d:: with SMTP id
+ cr13mr22591ejc.409.1638289045383; 
+ Tue, 30 Nov 2021 08:17:25 -0800 (PST)
+Received: from alrua-x1.borgediget.toke.dk ([45.145.92.2])
+ by smtp.gmail.com with ESMTPSA id u23sm11967828edi.88.2021.11.30.08.17.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 30 Nov 2021 08:17:24 -0800 (PST)
+Received: by alrua-x1.borgediget.toke.dk (Postfix, from userid 1000)
+ id 39B381802A0; Tue, 30 Nov 2021 17:17:24 +0100 (CET)
+From: Toke =?utf-8?Q?H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>
+To: Alexander Lobakin <alexandr.lobakin@intel.com>, "David S. Miller"
+ <davem@davemloft.net>, Jakub Kicinski <kuba@kernel.org>
+Subject: Re: [PATCH v2 net-next 00/26] net: introduce and use generic XDP stats
+In-Reply-To: <20211130155612.594688-1-alexandr.lobakin@intel.com>
+References: <20211123163955.154512-1-alexandr.lobakin@intel.com>
+ <20211130155612.594688-1-alexandr.lobakin@intel.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+Date: Tue, 30 Nov 2021 17:17:24 +0100
+Message-ID: <871r2x8vor.fsf@toke.dk>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1 0/2] virtio-mem: prepare for granularity smaller than
- MAX_ORDER - 1
-To: Zi Yan <ziy@nvidia.com>
-References: <20211126134209.17332-1-david@redhat.com>
- <F0D31D41-7843-4313-8264-E1C97979471B@nvidia.com>
-From: David Hildenbrand <david@redhat.com>
-Organization: Red Hat
-In-Reply-To: <F0D31D41-7843-4313-8264-E1C97979471B@nvidia.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=toke@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Cc: Pankaj Gupta <pankaj.gupta.linux@gmail.com>, Gavin Shan <gshan@redhat.com>,
- Wei Yang <richard.weiyang@linux.alibaba.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-mm@kvack.org,
- Sebastien Boeuf <sebastien.boeuf@intel.com>, Eric Ren <renzhengeek@gmail.com>,
- Hui Zhu <teawater@gmail.com>
+Cc: Song Liu <songliubraving@fb.com>, Sergey Ryazanov <ryazanov.s.a@gmail.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ Vladimir Oltean <vladimir.oltean@nxp.com>, Alexei Starovoitov <ast@kernel.org>,
+ Russell King <linux@armlinux.org.uk>, Andrei Vagin <avagin@gmail.com>,
+ Tony Nguyen <anthony.l.nguyen@intel.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Ioana Ciornei <ioana.ciornei@nxp.com>, Noam Dagan <ndagan@amazon.com>,
+ Daniel Borkmann <daniel@iogearbox.net>, Jonathan Corbet <corbet@lwn.net>,
+ linux-rdma@vger.kernel.org, linux-doc@vger.kernel.org,
+ John Fastabend <john.fastabend@gmail.com>,
+ Arthur Kiyanovski <akiyano@amazon.com>, Cong Wang <cong.wang@bytedance.com>,
+ Martin Habets <habetsm.xilinx@gmail.com>,
+ Lorenzo Bianconi <lorenzo@kernel.org>,
+ Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Johannes Berg <johannes.berg@intel.com>, KP Singh <kpsingh@kernel.org>,
+ Andrii Nakryiko <andrii@kernel.org>, Claudiu Manoil <claudiu.manoil@nxp.com>,
+ Alexander Lobakin <alexandr.lobakin@intel.com>, Yonghong Song <yhs@fb.com>,
+ Shay Agroskin <shayagr@amazon.com>, Marcin Wojtas <mw@semihalf.com>,
+ Leon Romanovsky <leon@kernel.org>, David Arinzon <darinzon@amazon.com>,
+ David Ahern <dsahern@kernel.org>, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, Edward Cree <ecree.xilinx@gmail.com>,
+ Yajun Deng <yajun.deng@linux.dev>, netdev@vger.kernel.org,
+ Saeed Bishara <saeedb@amazon.com>,
+ Michal Swiatkowski <michal.swiatkowski@linux.intel.com>, bpf@vger.kernel.org,
+ Saeed Mahameed <saeedm@nvidia.com>, Martin KaFai Lau <kafai@fb.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -126,37 +141,88 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 29.11.21 17:47, Zi Yan wrote:
-> On 26 Nov 2021, at 8:42, David Hildenbrand wrote:
-> 
->> The virtio-mem driver currently supports logical hot(un)plug in
->> MAX_ORDER - 1 granularity (4MiB on x86-64) or bigger. We want to support
->> pageblock granularity (2MiB on x86-64), to make hot(un)plug even more
->> flexible, and to improve hotunplug when using ZONE_NORMAL.
->>
->> With pageblock granularity, we then have a granularity comparable to
->> hugepage ballooning. Further, there are ideas to increase MAX_ORDER, so
->> we really want to decouple it from MAX_ORDER.
->>
->> While ZONE_MOVABLE should mostly work already, alloc_contig_range() still
->> needs work to be able to properly handle pageblock granularity on
->> ZONE_NORMAL. This support is in the works [1], so let's prepare
->> virtio-mem for supporting smaller granularity than MAX_ORDER - 1.
->>
->> Tested with ZONE_MOVABLE after removing the MAX_ORDER - 1 granularity
->> limitation in virtio-mem, and using different device block sizes (2MiB,
->> 4MiB, 8MiB).
->>
->> [1] https://lkml.kernel.org/r/20211115193725.737539-1-zi.yan@sent.com
-> 
-> The patchset looks good to me. Thanks. Reviewed-by: Zi Yan <ziy@nvidia.com>
+Alexander Lobakin <alexandr.lobakin@intel.com> writes:
 
-Thanks a lot!
+> From: Alexander Lobakin <alexandr.lobakin@intel.com>
+> Date: Tue, 23 Nov 2021 17:39:29 +0100
+>
+> Ok, open questions:
+>
+> 1. Channels vs queues vs global.
+>
+> Jakub: no per-channel.
+> David (Ahern): it's worth it to separate as Rx/Tx.
+> Toke is fine with globals at the end I think?
 
--- 
-Thanks,
+Well, I don't like throwing data away, so in that sense I do like
+per-queue stats, but it's not a very strong preference (i.e., I can live
+with either)...
 
-David / dhildenb
+> My point was that for most of the systems we have 1:1 Rx:Tx
+> (usually num_online_cpus()), so asking drivers separately for
+> the number of RQs and then SQs would end up asking for the same
+> number twice.
+> But the main reason TBH was that most of the drivers store stats
+> on a per-channel basis and I didn't want them to regress in
+> functionality. I'm fine with reporting only netdev-wide if
+> everyone are.
+>
+> In case if we keep per-channel: report per-channel only by request
+> and cumulative globals by default to not flood the output?
+
+... however if we do go with per-channel stats I do agree that they
+shouldn't be in the default output. I guess netlink could still split
+them out and iproute2 could just sum them before display?
+
+> 2. Count all errors as "drops" vs separately.
+>
+> Daniel: account everything as drops, plus errors should be
+> reported as exceptions for tracing sub.
+> Jesper: we shouldn't mix drops and errors.
+>
+> My point: we shouldn't, that's why there are patches for 2 drivers
+> to give errors a separate counter.
+> I provided an option either to report all errors together ('errors'
+> in stats structure) or to provide individual counters for each of
+> them (sonamed ctrs), but personally prefer detailed errors. However,
+> they might "go detailed" under trace_xdp_exception() only, sound
+> fine (OTOH in RTNL stats we have both "general" errors and detailed
+> error counters).
+
+I agree it would be nice to have a separate error counter, but a single
+counter is enough when combined with the tracepoints.
+
+> 3. XDP and XSK ctrs separately or not.
+>
+> My PoV is that those are two quite different worlds.
+> However, stats for actions on XSK really make a little sense since
+> 99% of time we have xskmap redirect. So I think it'd be fine to just
+> expand stats structure with xsk_{rx,tx}_{packets,bytes} and count
+> the rest (actions, errors) together with XDP.
+
+A whole set of separate counters for XSK is certainly overkill. No
+strong preference as to whether they need a separate counter at all...
+
+> Rest:
+>  - don't create a separate `ip` command and report under `-s`;
+>  - save some RTNL skb space by skipping zeroed counters.
+>
+> Also, regarding that I count all on the stack and then add to the
+> storage once in a polling cycle -- most drivers don't do that and
+> just increment the values in the storage directly, but this can be
+> less performant for frequently updated stats (or it's just my
+> embedded past).
+> Re u64 vs u64_stats_t -- the latter is more universal and
+> architecture-friendly, the former is used directly in most of the
+> drivers primarily because those drivers and the corresponding HW
+> are being run on 64-bit systems in the vast majority of cases, and
+> Ethtools stats themselves are not so critical to guard them with
+> anti-tearing. Anyways, local64_t is cheap on ARM64/x86_64 I guess?
+
+I'm generally a fan of correctness first, so since you're touching all
+the drivers anyway why I'd say go for u64_stats_t :)
+
+-Toke
 
 _______________________________________________
 Virtualization mailing list
