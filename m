@@ -1,125 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7F741465D5D
-	for <lists.virtualization@lfdr.de>; Thu,  2 Dec 2021 05:23:16 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48B02466680
+	for <lists.virtualization@lfdr.de>; Thu,  2 Dec 2021 16:32:36 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 47E1640374;
-	Thu,  2 Dec 2021 04:23:13 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3F2B141DC1;
+	Thu,  2 Dec 2021 15:32:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fZm29uYg8XWs; Thu,  2 Dec 2021 04:23:12 +0000 (UTC)
+	with ESMTP id ESUoIEBtqCwn; Thu,  2 Dec 2021 15:32:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id C070940423;
-	Thu,  2 Dec 2021 04:23:11 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id D0FD841DC3;
+	Thu,  2 Dec 2021 15:32:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8EA96C000A;
-	Thu,  2 Dec 2021 04:23:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 31182C0030;
+	Thu,  2 Dec 2021 15:32:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57783C0039
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7191EC000A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Dec 2021 04:23:10 +0000 (UTC)
+ Thu,  2 Dec 2021 15:32:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 303B081D47
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5998C6F48D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Dec 2021 04:23:10 +0000 (UTC)
+ Thu,  2 Dec 2021 15:32:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ubniaT4EYH4A
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=axis.com
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Z8NccRjHBg4F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Dec 2021 04:23:09 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on2050.outbound.protection.outlook.com [40.107.223.50])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 37BA382849
+ Thu,  2 Dec 2021 15:32:30 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from smtp2.axis.com (smtp2.axis.com [195.60.68.18])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id DA865606CF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Dec 2021 04:23:09 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=KzdQBZBPzWbUBmO8YXgBkZ5Si10Eludae1ZLTajzMu0EXG/7BLT8hB2eIEcotKu4ePbLDL9zgt78/+O5Te+qDshKdbn9MJMCckRryZ/8OYVqf+AT9h0fA/Me+BXcbrlwnEH1J1BX1U1fSY+nvGZkv/1lDgeWBzMSaTtLemlqTH8ZBc5HkZisYx6/YyqRNb7wp8O8xJp4QPEuHklq5oB+Eg3SgfVB4MdZzI0Of3LiRtKGMmKVAszoK7RQCJiyUpppq1bEy1g9Ms3szyVLRpRjl8lO1W9rOfEARelE3DBvs+M/lMHfIBLSfLhkFRP1BljjuMXqVjN9WHVnoSrkOTxvyA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iFwJE2bkk2IgpSZ0gq5glUFxSafNMdBsTrrHBCrzW5I=;
- b=OcHO3tO2fm4ZFwDRPb1ODMIHRmbJKvTv9bQhMshy3LbmHURK3mer69gpAzNnCXaSsqQtlg1ZPAeYfIOrBbPme3bcv7CPNcyN/mWznqOzJZO73l8g/st+dDopf891Ppge1tc4/Fzj16xy1+N7v5Zy2Cv/qHgfTHSSGsvEkmQD7rLolBqHVd7z+6leduCik5zMuUksBDnK+ce2ZuduDV+BAB6iNbaLKFQodbB3IQTxH3FVHSVaa9TiVnqjdsw1aQQ5jVH3C27MN6dH8+snsex1/UclWIDtzsrTFBhZAkHFOGAfDnTyG+4zX99OuZe25W8vN46FA6NqEbl2WHSWsYLSbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=lists.linux-foundation.org
- smtp.mailfrom=nvidia.com; dmarc=pass (p=quarantine sp=quarantine pct=100)
- action=none header.from=nvidia.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iFwJE2bkk2IgpSZ0gq5glUFxSafNMdBsTrrHBCrzW5I=;
- b=cgjXfO5tnMLID/pAQFuRC8sEoJvAmEchF/llfMmZ2mP7J6qtKBW/uWu0gnSeYvOZnZ7xr2NloYZWNYqeXE7jPsuGykgbm45Iu0unZ1oGAXw9G4A+FVLmUR2oeFaQ+KILv+f1lFrPwMOWPIwWRG9TtZHFKG8+xO8fr6O5vp8KeyFq23k58F1XtnsPJS9dPKr7/w/6v8Pfv7+RlhXxfJoihCRqBHzQx96ShHwXCssmnpPe0Bw7YIbk7qpxfOiLhmwTzmGgY6FTWPRHwPqfta0+55JGqrxoEZkXp7IYAQCgejOviJvnvpWIDsIuzvP1Fm4W3B65T8qFSWDOdxyuUSyflw==
-Received: from DM6PR11CA0026.namprd11.prod.outlook.com (2603:10b6:5:190::39)
- by CH2PR12MB4924.namprd12.prod.outlook.com (2603:10b6:610:6b::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4734.22; Thu, 2 Dec
- 2021 04:23:06 +0000
-Received: from DM6NAM11FT058.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:190:cafe::1e) by DM6PR11CA0026.outlook.office365.com
- (2603:10b6:5:190::39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4755.14 via Frontend
- Transport; Thu, 2 Dec 2021 04:23:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- DM6NAM11FT058.mail.protection.outlook.com (10.13.172.216) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.4755.13 via Frontend Transport; Thu, 2 Dec 2021 04:23:06 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.18; Thu, 2 Dec
- 2021 04:23:05 +0000
-Received: from unicorn01.mtl.labs.mlnx (172.20.187.5) by
- rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.2.986.9; 
- Wed, 1 Dec 2021 20:23:03 -0800
-To: <dsahern@gmail.com>, <stephen@networkplumber.org>, <netdev@vger.kernel.org>
-Subject: [iproute2-next 4/4] vdpa: Enable user to set mtu of the vdpa device
-Date: Thu, 2 Dec 2021 06:22:39 +0200
-Message-ID: <20211202042239.2454-5-parav@nvidia.com>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20211202042239.2454-1-parav@nvidia.com>
-References: <20211202042239.2454-1-parav@nvidia.com>
+ Thu,  2 Dec 2021 15:32:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=axis.com; q=dns/txt; s=axis-central1; t=1638459150;
+ x=1669995150;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=QW6971HeXyxZD+Obc/BuWEJRNHl9yOf9lvXC3G7vFAg=;
+ b=n/Zr8wga9EYAmtyCV7roU+38Wdzj1tSwHP0CMEPWrank/6uUvclbIx3n
+ UStsedP/BxF87OL1eYnfECKfhRZdzAIEJeGxSp8uR8SLadq+YCMhDBsum
+ Y4fcFTuZ2uHVC+7Ewm5kPL6lGKJ7S/h41hqOqmK10OB03bBpInY8kE2+3
+ TJIW+SFrrfUgtd6BQenwdec4Z1LumFJ2DqQYm73YuIzf4NznQxU0m0bla
+ VPijdxRVEJNL0O5/8u5p/ZdpR0++Oyi3yNy2RpttgihitlH7yY5aKz8Qy
+ S5oLgBQUsHHiMU7yEbgKCV/sdJVIMtpUeUrH13xgFfEo2lpohrDl1u7/G w==;
+From: Vincent Whitchurch <vincent.whitchurch@axis.com>
+To: <wsa@kernel.org>, Conghui Chen <conghui.chen@intel.com>, Viresh Kumar
+ <viresh.kumar@linaro.org>
+Subject: [PATCH v3] i2c: virtio: fix completion handling
+Date: Thu, 2 Dec 2021 16:32:14 +0100
+Message-ID: <20211202153215.31796-1-vincent.whitchurch@axis.com>
+X-Mailer: git-send-email 2.33.1
 MIME-Version: 1.0
-X-Originating-IP: [172.20.187.5]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3cb91013-2c77-4b81-ff68-08d9b54b7083
-X-MS-TrafficTypeDiagnostic: CH2PR12MB4924:
-X-Microsoft-Antispam-PRVS: <CH2PR12MB4924ED36C31E2E835280A088DC699@CH2PR12MB4924.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4941;
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: yGNWZnNPnGJj4sGZUwPPZIa4X9Zuc+wC2fF1hc/lqUmTXuJJxM/WhwHnIZzuwP3CsrnhZqCzRHVc9p7hsdtduy/H6aLcbGYMKY1jKcv/Uw7vMpM4AKG3InwH+M/YwxvlqVWW69ycSyWJIF2iDAWg6sRYy4LHRfVRw9yxTKcZMpLxoaYZqKBQfyPngFS8IxFhYUn8vClBwInK/jrEL3maX9a2qMwS8NMgXyyKRjSUoB17g79YL/klgL7rg7SbtayQUd5zA3k82agRVZxMtxgBu0R04dh8QFrRTHMxC2RznsqERND1OZr5R+Nq0CTjeoh1ucd/cM2LHZh3MFgngpALx34DVYpxwl5TO/taQONUs4OeSFIk0Q9dB17SGxJpKf6GVBmNRYWtO9M//C4RVBF3B3og/1Fr2VveqpylKe6660RSNLAAeP3Xxd6axcZQXR77n6+mBr3oYqHplE7jck/KWqDEsD0O+3E0PN5aeoMURvXTbr2nskUFXAWgZ2nMDtdj7emLSszB1jBpU5n/ByzAFBTpXMvYiASmbKvvDy9oK3FI7S2X7naGKrmsmNn8qcmrbwmLQnw/w9/qO3XSMF6EALBRX/X2LV6Cuq8RwzkQaAQ2e3JpXpo3yCNKXn8MefeD1ApOyaXnP2Rn/iUqTubT54pXoNs1DwDMcY6qTB0FZaMukSu1Ur8G97L8vu6P5mqMNQQH8XGzcmzPY/DPYgAe6fVtXbjKs9/WBkq/WtSvZRtc/2UpqWU3Ey4n+hqGu+YPdvB5K2A9PmZuAZYNV5VHLA==
-X-Forefront-Antispam-Report: CIP:216.228.112.34; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:schybrid03.nvidia.com; CAT:NONE;
- SFS:(4636009)(36840700001)(46966006)(40470700001)(426003)(508600001)(16526019)(336012)(86362001)(26005)(8936002)(186003)(7636003)(6666004)(2616005)(47076005)(36756003)(1076003)(82310400004)(83380400001)(2906002)(356005)(40460700001)(8676002)(4326008)(110136005)(316002)(54906003)(107886003)(36860700001)(70586007)(70206006)(5660300002);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Dec 2021 04:23:06.3415 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3cb91013-2c77-4b81-ff68-08d9b54b7083
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.112.34];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT058.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4924
-Cc: mst@redhat.com, virtualization@lists.linux-foundation.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>,
+ Vincent Whitchurch <vincent.whitchurch@axis.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, kernel@axis.com,
+ linux-i2c@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -131,131 +75,159 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Parav Pandit via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Parav Pandit <parav@nvidia.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Implement mtu setting for vdpa device.
+The driver currently assumes that the notify callback is only received
+when the device is done with all the queued buffers.
 
-$ vdpa mgmtdev show
-vdpasim_net:
-  supported_classes net
+However, this is not true, since the notify callback could be called
+without any of the queued buffers being completed (for example, with
+virtio-pci and shared interrupts) or with only some of the buffers being
+completed (since the driver makes them available to the device in
+multiple separate virtqueue_add_sgs() calls).
 
-Add the device with mac address and mtu:
-$ vdpa dev add name bar mgmtdev vdpasim_net mac 00:11:22:33:44:55 mtu 9000
+This can lead to incorrect data on the I2C bus or memory corruption in
+the guest if the device operates on buffers which are have been freed by
+the driver.  (The WARN_ON in the driver is also triggered.)
 
-In above command only mac address or only mtu can also be set.
+ BUG kmalloc-128 (Tainted: G        W        ): Poison overwritten
+ First byte 0x0 instead of 0x6b
+ Allocated in i2cdev_ioctl_rdwr+0x9d/0x1de age=243 cpu=0 pid=28
+ 	memdup_user+0x2e/0xbd
+ 	i2cdev_ioctl_rdwr+0x9d/0x1de
+ 	i2cdev_ioctl+0x247/0x2ed
+ 	vfs_ioctl+0x21/0x30
+ 	sys_ioctl+0xb18/0xb41
+ Freed in i2cdev_ioctl_rdwr+0x1bb/0x1de age=68 cpu=0 pid=28
+ 	kfree+0x1bd/0x1cc
+ 	i2cdev_ioctl_rdwr+0x1bb/0x1de
+ 	i2cdev_ioctl+0x247/0x2ed
+ 	vfs_ioctl+0x21/0x30
+ 	sys_ioctl+0xb18/0xb41
 
-View the config after setting:
-$ vdpa dev config show
-bar: mac 00:11:22:33:44:55 link up link_announce false mtu 9000
+Fix this by calling virtio_get_buf() from the notify handler like other
+virtio drivers and by actually waiting for all the buffers to be
+completed.
 
-Signed-off-by: Parav Pandit <parav@nvidia.com>
+Fixes: 3cfc88380413d20f ("i2c: virtio: add a virtio i2c frontend driver")
+Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+Signed-off-by: Vincent Whitchurch <vincent.whitchurch@axis.com>
 ---
- vdpa/vdpa.c | 42 ++++++++++++++++++++++++++++++++++++++++--
- 1 file changed, 40 insertions(+), 2 deletions(-)
 
-diff --git a/vdpa/vdpa.c b/vdpa/vdpa.c
-index 9d20bdb4..7da2ea7a 100644
---- a/vdpa/vdpa.c
-+++ b/vdpa/vdpa.c
-@@ -22,6 +22,7 @@
- #define VDPA_OPT_VDEV_NAME		BIT(2)
- #define VDPA_OPT_VDEV_HANDLE		BIT(3)
- #define VDPA_OPT_VDEV_MAC		BIT(4)
-+#define VDPA_OPT_VDEV_MTU		BIT(5)
- 
- struct vdpa_opts {
- 	uint64_t present; /* flags of present items */
-@@ -30,6 +31,7 @@ struct vdpa_opts {
- 	const char *vdev_name;
- 	unsigned int device_id;
- 	char mac[ETH_ALEN];
-+	uint16_t mtu;
+Notes:
+    v3: Wait for all completions instead of only the last one.
+    v2: Add Acked-by and Fixes tags.
+
+ drivers/i2c/busses/i2c-virtio.c | 32 ++++++++++++--------------------
+ 1 file changed, 12 insertions(+), 20 deletions(-)
+
+diff --git a/drivers/i2c/busses/i2c-virtio.c b/drivers/i2c/busses/i2c-virtio.c
+index 95378780da6d..41eb0dcc3204 100644
+--- a/drivers/i2c/busses/i2c-virtio.c
++++ b/drivers/i2c/busses/i2c-virtio.c
+@@ -22,24 +22,24 @@
+ /**
+  * struct virtio_i2c - virtio I2C data
+  * @vdev: virtio device for this controller
+- * @completion: completion of virtio I2C message
+  * @adap: I2C adapter for this controller
+  * @vq: the virtio virtqueue for communication
+  */
+ struct virtio_i2c {
+ 	struct virtio_device *vdev;
+-	struct completion completion;
+ 	struct i2c_adapter adap;
+ 	struct virtqueue *vq;
  };
  
- struct vdpa {
-@@ -154,6 +156,31 @@ static int vdpa_argv_mac(struct vdpa *vdpa, int argc, char **argv, char *mac)
- 	return 0;
- }
+ /**
+  * struct virtio_i2c_req - the virtio I2C request structure
++ * @completion: completion of virtio I2C message
+  * @out_hdr: the OUT header of the virtio I2C message
+  * @buf: the buffer into which data is read, or from which it's written
+  * @in_hdr: the IN header of the virtio I2C message
+  */
+ struct virtio_i2c_req {
++	struct completion completion;
+ 	struct virtio_i2c_out_hdr out_hdr	____cacheline_aligned;
+ 	uint8_t *buf				____cacheline_aligned;
+ 	struct virtio_i2c_in_hdr in_hdr		____cacheline_aligned;
+@@ -47,9 +47,11 @@ struct virtio_i2c_req {
  
-+static int strtouint16_t(const char *str, uint16_t *p_val)
-+{
-+	char *endptr;
-+	unsigned long int val;
-+
-+	val = strtoul(str, &endptr, 10);
-+	if (endptr == str || *endptr != '\0')
-+		return -EINVAL;
-+	if (val > USHRT_MAX)
-+		return -ERANGE;
-+	*p_val = val;
-+	return 0;
-+}
-+
-+static int vdpa_argv_u16(struct vdpa *vdpa, int argc, char **argv,
-+			 uint16_t *result)
-+{
-+	if (argc <= 0 || *argv == NULL) {
-+		fprintf(stderr, "number expected\n");
-+		return -EINVAL;
-+	}
-+
-+	return strtouint16_t(*argv, result);
-+}
-+
- struct vdpa_args_metadata {
- 	uint64_t o_flag;
- 	const char *err_msg;
-@@ -204,6 +231,8 @@ static void vdpa_opts_put(struct nlmsghdr *nlh, struct vdpa *vdpa)
- 	if (opts->present & VDPA_OPT_VDEV_MAC)
- 		mnl_attr_put(nlh, VDPA_ATTR_DEV_NET_CFG_MACADDR,
- 			     sizeof(opts->mac), opts->mac);
-+	if (opts->present & VDPA_OPT_VDEV_MTU)
-+		mnl_attr_put_u16(nlh, VDPA_ATTR_DEV_NET_CFG_MTU, opts->mtu);
- }
- 
- static int vdpa_argv_parse(struct vdpa *vdpa, int argc, char **argv,
-@@ -263,6 +292,15 @@ static int vdpa_argv_parse(struct vdpa *vdpa, int argc, char **argv,
- 
- 			NEXT_ARG_FWD();
- 			o_found |= VDPA_OPT_VDEV_MAC;
-+		} else if ((matches(*argv, "mtu")  == 0) &&
-+			   (o_all & VDPA_OPT_VDEV_MTU)) {
-+			NEXT_ARG_FWD();
-+			err = vdpa_argv_u16(vdpa, argc, argv, &opts->mtu);
-+			if (err)
-+				return err;
-+
-+			NEXT_ARG_FWD();
-+			o_found |= VDPA_OPT_VDEV_MTU;
- 		} else {
- 			fprintf(stderr, "Unknown option \"%s\"\n", *argv);
- 			return -EINVAL;
-@@ -443,7 +481,7 @@ static int cmd_mgmtdev(struct vdpa *vdpa, int argc, char **argv)
- static void cmd_dev_help(void)
+ static void virtio_i2c_msg_done(struct virtqueue *vq)
  {
- 	fprintf(stderr, "Usage: vdpa dev show [ DEV ]\n");
--	fprintf(stderr, "       vdpa dev add name NAME mgmtdev MANAGEMENTDEV [ mac MACADDR ]\n");
-+	fprintf(stderr, "       vdpa dev add name NAME mgmtdev MANAGEMENTDEV [ mac MACADDR ] [ mtu MTU ]\n");
- 	fprintf(stderr, "       vdpa dev del DEV\n");
- 	fprintf(stderr, "Usage: vdpa dev config COMMAND [ OPTIONS ]\n");
- }
-@@ -533,7 +571,7 @@ static int cmd_dev_add(struct vdpa *vdpa, int argc, char **argv)
- 					  NLM_F_REQUEST | NLM_F_ACK);
- 	err = vdpa_argv_parse_put(nlh, vdpa, argc, argv,
- 				  VDPA_OPT_VDEV_MGMTDEV_HANDLE | VDPA_OPT_VDEV_NAME,
--				  VDPA_OPT_VDEV_MAC);
-+				  VDPA_OPT_VDEV_MAC | VDPA_OPT_VDEV_MTU);
- 	if (err)
- 		return err;
+-	struct virtio_i2c *vi = vq->vdev->priv;
++	struct virtio_i2c_req *req;
++	unsigned int len;
  
+-	complete(&vi->completion);
++	while ((req = virtqueue_get_buf(vq, &len)))
++		complete(&req->completion);
+ }
+ 
+ static int virtio_i2c_prepare_reqs(struct virtqueue *vq,
+@@ -62,6 +64,8 @@ static int virtio_i2c_prepare_reqs(struct virtqueue *vq,
+ 	for (i = 0; i < num; i++) {
+ 		int outcnt = 0, incnt = 0;
+ 
++		init_completion(&reqs[i].completion);
++
+ 		/*
+ 		 * Only 7-bit mode supported for this moment. For the address
+ 		 * format, Please check the Virtio I2C Specification.
+@@ -106,21 +110,15 @@ static int virtio_i2c_complete_reqs(struct virtqueue *vq,
+ 				    struct virtio_i2c_req *reqs,
+ 				    struct i2c_msg *msgs, int num)
+ {
+-	struct virtio_i2c_req *req;
+ 	bool failed = false;
+-	unsigned int len;
+ 	int i, j = 0;
+ 
+ 	for (i = 0; i < num; i++) {
+-		/* Detach the ith request from the vq */
+-		req = virtqueue_get_buf(vq, &len);
++		struct virtio_i2c_req *req = &reqs[i];
+ 
+-		/*
+-		 * Condition req == &reqs[i] should always meet since we have
+-		 * total num requests in the vq. reqs[i] can never be NULL here.
+-		 */
+-		if (!failed && (WARN_ON(req != &reqs[i]) ||
+-				req->in_hdr.status != VIRTIO_I2C_MSG_OK))
++		wait_for_completion(&req->completion);
++
++		if (!failed && req->in_hdr.status != VIRTIO_I2C_MSG_OK)
+ 			failed = true;
+ 
+ 		i2c_put_dma_safe_msg_buf(reqs[i].buf, &msgs[i], !failed);
+@@ -156,12 +154,8 @@ static int virtio_i2c_xfer(struct i2c_adapter *adap, struct i2c_msg *msgs,
+ 	 * remote here to clear the virtqueue, so we can try another set of
+ 	 * messages later on.
+ 	 */
+-
+-	reinit_completion(&vi->completion);
+ 	virtqueue_kick(vq);
+ 
+-	wait_for_completion(&vi->completion);
+-
+ 	count = virtio_i2c_complete_reqs(vq, reqs, msgs, count);
+ 
+ err_free:
+@@ -210,8 +204,6 @@ static int virtio_i2c_probe(struct virtio_device *vdev)
+ 	vdev->priv = vi;
+ 	vi->vdev = vdev;
+ 
+-	init_completion(&vi->completion);
+-
+ 	ret = virtio_i2c_setup_vqs(vi);
+ 	if (ret)
+ 		return ret;
 -- 
-2.26.2
+2.33.1
 
 _______________________________________________
 Virtualization mailing list
