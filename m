@@ -1,64 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 208EA46E2AB
-	for <lists.virtualization@lfdr.de>; Thu,  9 Dec 2021 07:38:56 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C8A8546E2A8
+	for <lists.virtualization@lfdr.de>; Thu,  9 Dec 2021 07:38:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 777CD6076A;
-	Thu,  9 Dec 2021 06:38:54 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HyUAF-NSsPLJ; Thu,  9 Dec 2021 06:38:53 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 44F8160762;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 5DFE5403B3;
 	Thu,  9 Dec 2021 06:38:53 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AZ5vtgBBXMRX; Thu,  9 Dec 2021 06:38:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D7B11402AA;
+	Thu,  9 Dec 2021 06:38:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E6A1CC007C;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4697DC0071;
 	Thu,  9 Dec 2021 06:38:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8B6B1C0012
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Dec 2021 06:38:50 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 79F056069D
- for <virtualization@lists.linux-foundation.org>;
- Thu,  9 Dec 2021 06:38:50 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xZJgtIl1ECOd
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EF546C0012
  for <virtualization@lists.linux-foundation.org>;
  Thu,  9 Dec 2021 06:38:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id E49C160769
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Dec 2021 06:38:49 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id npl_uNeZ2En3
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Dec 2021 06:38:48 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DD86960762
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A25686069D
  for <virtualization@lists.linux-foundation.org>;
  Thu,  9 Dec 2021 06:38:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=htUwCCtUX9PzaWFdnDFl1fOu5jD7a6JFE1uiwtWNOPg=; b=Ly1440zV0cByQIdm/JOJLcXfce
- Cmkz7+jw/VqfHgFGrbTl71KaS4k2In58H6KfSgRWGaevWPTW2/PS57P45xFxxEIm1B+DgS4RP/0Ex
- 1GLC3yln1HyXJ0i4DAvkQ2nPdKoN4gvO6lDsSMJOR5Mt9+DydbBhkCgm0hrP3FKvNQTNVqvtcRhj3
- xurivO4JuBdw6btE8A7e9MB0JsPavzaTJjDFoFTEupuLEykjGP9jc9vT1jiEAatK7CUqVFomhY+7n
- BopT9SE3KODZGIO/I51SZdjBCswHgu2jGA8iG9++UswyJ4Aq7napF1fMe1n6IeRXyJui7v6Dh9BN3
- aLWpjGRw==;
+ bh=e/I3Z/fVcm8ka4/7bniQ5z4YGZD4AAd7c/qW0XirAZ0=; b=i2hlpPdNZAF/hm4qW1s8FKFDEF
+ 6t7Mpr8ZkJc3YEVm6S/h5xB7Wst5GfUBeGFc+s8+1Uqfls+HOzKeRqeMd1SumX+4QYxwl5N0xpHrB
+ nRSX4gsuF2aEn++FK4s7wqTgBswNC5OcT97Ip3IetmDgJgFwGOMUx8akFcn93DPeZ5z/PBikxKIZu
+ 7Ai7Y6Qf51aB7twOPUE4CWL+s85DVLBRc+gjMbPpmza3WWUlzft52RhVFQYWRG9aXS1BgivWqvYeT
+ W8vJ1lEmo6iVbu2v034XT44vZ7eGoqwicAfgdn0c2ORzD1pawsY0Sd+2w9nTJxnwMQgXmB9srFy0L
+ /SA4MbRw==;
 Received: from [2001:4bb8:180:a1c8:2d0e:135:af53:41f8] (helo=localhost)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1mvD4X-0096hQ-JJ; Thu, 09 Dec 2021 06:38:30 +0000
+ id 1mvD4Y-0096hS-Sr; Thu, 09 Dec 2021 06:38:31 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Dan Williams <dan.j.williams@intel.com>,
  Vishal Verma <vishal.l.verma@intel.com>, Dave Jiang <dave.jiang@intel.com>
-Subject: [PATCH 1/5] uio: remove copy_from_iter_flushcache() and
- copy_mc_to_iter()
-Date: Thu,  9 Dec 2021 07:38:24 +0100
-Message-Id: <20211209063828.18944-2-hch@lst.de>
+Subject: [PATCH 2/5] dax: simplify dax_synchronous and set_dax_synchronous
+Date: Thu,  9 Dec 2021 07:38:25 +0100
+Message-Id: <20211209063828.18944-3-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20211209063828.18944-1-hch@lst.de>
 References: <20211209063828.18944-1-hch@lst.de>
@@ -90,67 +91,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-These two wrappers are never used.
+Remove the pointless wrappers.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/nvdimm/pmem.c |  4 ++--
- include/linux/uio.h   | 20 +-------------------
- 2 files changed, 3 insertions(+), 21 deletions(-)
+ drivers/dax/super.c |  8 ++++----
+ include/linux/dax.h | 12 ++----------
+ 2 files changed, 6 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/nvdimm/pmem.c b/drivers/nvdimm/pmem.c
-index 4190c8c46ca88..8294f1c701baa 100644
---- a/drivers/nvdimm/pmem.c
-+++ b/drivers/nvdimm/pmem.c
-@@ -302,8 +302,8 @@ static long pmem_dax_direct_access(struct dax_device *dax_dev,
+diff --git a/drivers/dax/super.c b/drivers/dax/super.c
+index e7152a6c4cc40..e18155f43a635 100644
+--- a/drivers/dax/super.c
++++ b/drivers/dax/super.c
+@@ -208,17 +208,17 @@ bool dax_write_cache_enabled(struct dax_device *dax_dev)
  }
+ EXPORT_SYMBOL_GPL(dax_write_cache_enabled);
  
- /*
-- * Use the 'no check' versions of copy_from_iter_flushcache() and
-- * copy_mc_to_iter() to bypass HARDENED_USERCOPY overhead. Bounds
-+ * Use the 'no check' versions of _copy_from_iter_flushcache() and
-+ * _copy_mc_to_iter() to bypass HARDENED_USERCOPY overhead. Bounds
-  * checking, both file offset and device offset, is handled by
-  * dax_iomap_actor()
-  */
-diff --git a/include/linux/uio.h b/include/linux/uio.h
-index 6350354f97e90..494d552c1d663 100644
---- a/include/linux/uio.h
-+++ b/include/linux/uio.h
-@@ -196,7 +196,7 @@ bool copy_from_iter_full_nocache(void *addr, size_t bytes, struct iov_iter *i)
- #ifdef CONFIG_ARCH_HAS_UACCESS_FLUSHCACHE
- /*
-  * Note, users like pmem that depend on the stricter semantics of
-- * copy_from_iter_flushcache() than copy_from_iter_nocache() must check for
-+ * _copy_from_iter_flushcache() than _copy_from_iter_nocache() must check for
-  * IS_ENABLED(CONFIG_ARCH_HAS_UACCESS_FLUSHCACHE) before assuming that the
-  * destination is flushed from the cache on return.
-  */
-@@ -211,24 +211,6 @@ size_t _copy_mc_to_iter(const void *addr, size_t bytes, struct iov_iter *i);
- #define _copy_mc_to_iter _copy_to_iter
- #endif
+-bool __dax_synchronous(struct dax_device *dax_dev)
++bool dax_synchronous(struct dax_device *dax_dev)
+ {
+ 	return test_bit(DAXDEV_SYNC, &dax_dev->flags);
+ }
+-EXPORT_SYMBOL_GPL(__dax_synchronous);
++EXPORT_SYMBOL_GPL(dax_synchronous);
  
--static __always_inline __must_check
--size_t copy_from_iter_flushcache(void *addr, size_t bytes, struct iov_iter *i)
+-void __set_dax_synchronous(struct dax_device *dax_dev)
++void set_dax_synchronous(struct dax_device *dax_dev)
+ {
+ 	set_bit(DAXDEV_SYNC, &dax_dev->flags);
+ }
+-EXPORT_SYMBOL_GPL(__set_dax_synchronous);
++EXPORT_SYMBOL_GPL(set_dax_synchronous);
+ 
+ bool dax_alive(struct dax_device *dax_dev)
+ {
+diff --git a/include/linux/dax.h b/include/linux/dax.h
+index 87ae4c9b1d65b..3bd1fdb5d5f4b 100644
+--- a/include/linux/dax.h
++++ b/include/linux/dax.h
+@@ -48,16 +48,8 @@ void put_dax(struct dax_device *dax_dev);
+ void kill_dax(struct dax_device *dax_dev);
+ void dax_write_cache(struct dax_device *dax_dev, bool wc);
+ bool dax_write_cache_enabled(struct dax_device *dax_dev);
+-bool __dax_synchronous(struct dax_device *dax_dev);
+-static inline bool dax_synchronous(struct dax_device *dax_dev)
 -{
--	if (unlikely(!check_copy_size(addr, bytes, false)))
--		return 0;
--	else
--		return _copy_from_iter_flushcache(addr, bytes, i);
+-	return  __dax_synchronous(dax_dev);
 -}
--
--static __always_inline __must_check
--size_t copy_mc_to_iter(void *addr, size_t bytes, struct iov_iter *i)
+-void __set_dax_synchronous(struct dax_device *dax_dev);
+-static inline void set_dax_synchronous(struct dax_device *dax_dev)
 -{
--	if (unlikely(!check_copy_size(addr, bytes, true)))
--		return 0;
--	else
--		return _copy_mc_to_iter(addr, bytes, i);
+-	__set_dax_synchronous(dax_dev);
 -}
--
- size_t iov_iter_zero(size_t bytes, struct iov_iter *);
- unsigned long iov_iter_alignment(const struct iov_iter *i);
- unsigned long iov_iter_gap_alignment(const struct iov_iter *i);
++bool dax_synchronous(struct dax_device *dax_dev);
++void set_dax_synchronous(struct dax_device *dax_dev);
+ /*
+  * Check if given mapping is supported by the file / underlying device.
+  */
 -- 
 2.30.2
 
