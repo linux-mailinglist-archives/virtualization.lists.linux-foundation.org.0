@@ -1,106 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BDBC2470507
-	for <lists.virtualization@lfdr.de>; Fri, 10 Dec 2021 16:57:32 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B561A4708F4
+	for <lists.virtualization@lfdr.de>; Fri, 10 Dec 2021 19:36:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 27DC06147A;
-	Fri, 10 Dec 2021 15:57:31 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 52CE34128E;
+	Fri, 10 Dec 2021 18:36:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CPQFFRiHtGmX; Fri, 10 Dec 2021 15:57:30 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0A00861480;
-	Fri, 10 Dec 2021 15:57:29 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id muSOfMP2N1L6; Fri, 10 Dec 2021 18:36:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D1EF34128A;
+	Fri, 10 Dec 2021 18:36:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 68D8CC006E;
-	Fri, 10 Dec 2021 15:57:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 14377C0071;
+	Fri, 10 Dec 2021 18:36:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D4E71C0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 78D56C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Dec 2021 15:57:27 +0000 (UTC)
+ Fri, 10 Dec 2021 18:36:34 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B43374040A
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5AAAA426C0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Dec 2021 15:57:27 +0000 (UTC)
+ Fri, 10 Dec 2021 18:36:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IZ8qKIOlzMtA
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id THwHu98AtOL3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Dec 2021 15:57:26 +0000 (UTC)
+ Fri, 10 Dec 2021 18:36:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B915E402D0
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 87BC9426BE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Dec 2021 15:57:26 +0000 (UTC)
+ Fri, 10 Dec 2021 18:36:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1639151845;
+ s=mimecast20190719; t=1639161392;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=UjRrEEFV0RnFo1gRn0fkwiU82fcIwIzn2KvghaQzERo=;
- b=Iv7WNOMnD6vHFSu/cFs/pwUTGohq+O8qQwi3ZF6QPJ0OAzM8gmTLnNaTp814s+IJwB2MJP
- Jr6F+XS6yBMwzaUCSaKBhhI9B+MKZs/4iC0RFXUfRPzpGVcTPW6D9OQW20bH+roIVM1ASv
- 4dGumWjGztjFC22duJCtfBJMOpV+U/g=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=UuZMXUxnRYoJ6fczszwwZGhWUdbXILWisTJH5f1GF3o=;
+ b=h6NhXiAshx8h8AMhcEyh3d83NUqUTc3SmcpEn9D/1fotKZTJDAhrUEBFZcmGXn6gJtY7jh
+ 4VQ4adoG4pSeupPe7G/RAT8PRGQgHnzvhDOqQIjGMkSPxM30LQTBlDb7kUrbJpVjbvmEa5
+ 1cTohojE+8jZ45ix+/DCBS4+vG0nGNo=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-584-12XkR4s-PZSUQcrsfBlgYA-1; Fri, 10 Dec 2021 10:57:24 -0500
-X-MC-Unique: 12XkR4s-PZSUQcrsfBlgYA-1
-Received: by mail-qk1-f198.google.com with SMTP id
- u8-20020a05620a454800b00468482aac5dso10614047qkp.18
+ us-mta-445-pklioMshPNixHZwcqleqpA-1; Fri, 10 Dec 2021 13:36:31 -0500
+X-MC-Unique: pklioMshPNixHZwcqleqpA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ l6-20020a05600c4f0600b0033321934a39so4072544wmq.9
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Dec 2021 07:57:24 -0800 (PST)
+ Fri, 10 Dec 2021 10:36:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=UjRrEEFV0RnFo1gRn0fkwiU82fcIwIzn2KvghaQzERo=;
- b=p1VjZegnbJ5p7kNWtbAbpByoD9KJDR++qyNN8XVV3Ecf6sHFfC7ygezhL49aMNPkc+
- k8j4ANbQXmCM8Uj8i/97GLSpZpBowi7IdMuA7QrV8jnMOEdnkBDDuMnnnyXketNnQLEA
- gt5ej6i8BSkg4Ypnl1t6xhj91dnxtMaBUUACKm/9jzPvu8BMRZRxU4UhWmZ5equyJWKR
- 9ZHhuf1/IrW5geDmPULgjcbPUCOQksJSuIKD/a455qTyZz41Oig7kyRYftNjbmDiuksg
- nI1tHKruU4JayYj2WvFMbKGX8yruFnRRJ/sRa+iSFhRRvcAKNaCaMcf4jgd2mMuSfj7r
- mSlw==
-X-Gm-Message-State: AOAM531gxdHlzTkUreByH8EB0pek54BMnuFs0LLNkU/G/FfEJUcwBSGF
- v1lc6U7ErmFvtrzEGveBj/amn4pA3Dqg5NOEJ0i0PPWn8nN6wcv/qtF8i6ztPuBw+1bIloRPacV
- mbdjzorRH/xOh2W/wBeQ8pAhNjUTULR75HaDpUUAjKA==
-X-Received: by 2002:a05:6214:2623:: with SMTP id
- gv3mr26529280qvb.63.1639151844015; 
- Fri, 10 Dec 2021 07:57:24 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzs+LzmUpOama6unBO927f2nSILl4Bmq0c61+mViRdU6k0JP+iu8wBoSgzkRmRq8fOU8h1alQ==
-X-Received: by 2002:a05:6214:2623:: with SMTP id
- gv3mr26529251qvb.63.1639151843813; 
- Fri, 10 Dec 2021 07:57:23 -0800 (PST)
-Received: from steredhat (host-87-21-203-138.retail.telecomitalia.it.
- [87.21.203.138])
- by smtp.gmail.com with ESMTPSA id f1sm2185250qtf.74.2021.12.10.07.57.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 10 Dec 2021 07:57:23 -0800 (PST)
-Date: Fri, 10 Dec 2021 16:57:19 +0100
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Dapeng Mi <dapeng1.mi@intel.com>
-Subject: Re: [PATCH] virtio: fix a typo in function "vp_modern_remove"
- comments.
-Message-ID: <20211210155719.i3men2finfug47ux@steredhat>
-References: <20211210073546.700783-1-dapeng1.mi@intel.com>
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:organization:in-reply-to
+ :content-transfer-encoding;
+ bh=UuZMXUxnRYoJ6fczszwwZGhWUdbXILWisTJH5f1GF3o=;
+ b=5W949eHKcI/ggTsQXT85sQRSdM61BtuLBgYpZoQscQscaXX8DHVCeqgNfJc3EqeZ3l
+ 6Rh+Vhmh99CuBNZ2rnPLN59rumBNyhmTbZIgiOHgoNs2uBBK9M45QPCm/Y2EPeXCN7gC
+ p7XWJvfc6Kqu6jxFIFuYqgavCsN5vgv3UAThtJaKroCYEdg1nd9lE5xrdPmSfdTq5VKr
+ gWAGzngcESZau4/HbxNng42pEdFJBCTRw3NrDgiHX1eeZjlswuB5neHXAjXR2dZanmB2
+ wVQZdP/F4HPh3dIsSEkYb1ZF0Zfv7b8UyfZjDN2sXj8JAhMBq6A91fe+wyrghnKrAtXd
+ osGQ==
+X-Gm-Message-State: AOAM532aiCQdgPo3V5ZJVFOTViFEd1Q/4SP2ZDx+/Eh29QnPO8cO3237
+ l+FseZZq+5OGnrF2uIjJTqgW/GQ9HB6k7mQx/lvSgfSifDFstkdu5eZugBM/a4rSzhoJu1E2SSg
+ lEr4Ruo3aJvS+BoM3aDkHGSSlHiQp8PaoHhrjI8FhiA==
+X-Received: by 2002:a1c:2397:: with SMTP id
+ j145mr18630577wmj.113.1639161389972; 
+ Fri, 10 Dec 2021 10:36:29 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxnE6mECpT6/x+6acEXXbzAagez4dMgCo4uhwD9w2DwYFQ/4FPaugRFXQx4gh8a1gwW+xf9tQ==
+X-Received: by 2002:a1c:2397:: with SMTP id
+ j145mr18630532wmj.113.1639161389702; 
+ Fri, 10 Dec 2021 10:36:29 -0800 (PST)
+Received: from [192.168.3.132] (p5b0c60f8.dip0.t-ipconnect.de. [91.12.96.248])
+ by smtp.gmail.com with ESMTPSA id
+ v8sm3098510wrd.84.2021.12.10.10.36.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 10 Dec 2021 10:36:29 -0800 (PST)
+Message-ID: <19404189-3bee-c02a-a596-2e5564e0f8f5@redhat.com>
+Date: Fri, 10 Dec 2021 19:36:27 +0100
 MIME-Version: 1.0
-In-Reply-To: <20211210073546.700783-1-dapeng1.mi@intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [RFC PATCH v2 0/7] Use pageblock_order for cma and
+ alloc_contig_range alignment.
+To: Zi Yan <ziy@nvidia.com>, linux-mm@kvack.org
+References: <20211209230414.2766515-1-zi.yan@sent.com>
+From: David Hildenbrand <david@redhat.com>
+Organization: Red Hat
+In-Reply-To: <20211209230414.2766515-1-zi.yan@sent.com>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=david@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
- mst@redhat.com
+Content-Language: en-US
+Cc: Mel Gorman <mgorman@techsingularity.net>,
+ Michael Ellerman <mpe@ellerman.id.au>, Robin Murphy <robin.murphy@arm.com>,
+ linux-kernel@vger.kernel.org, iommu@lists.linux-foundation.org,
+ Eric Ren <renzhengeek@gmail.com>, virtualization@lists.linux-foundation.org,
+ linuxppc-dev@lists.ozlabs.org, Christoph Hellwig <hch@lst.de>,
+ Vlastimil Babka <vbabka@suse.cz>, Marek Szyprowski <m.szyprowski@samsung.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,38 +121,69 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Dec 10, 2021 at 03:35:46PM +0800, Dapeng Mi wrote:
->Function name "vp_modern_remove" in comments is written to
->"vp_modern_probe" incorrectly. Change it.
->
->Signed-off-by: Dapeng Mi <dapeng1.mi@intel.com>
->---
-> drivers/virtio/virtio_pci_modern_dev.c | 2 +-
-> 1 file changed, 1 insertion(+), 1 deletion(-)
->
->diff --git a/drivers/virtio/virtio_pci_modern_dev.c b/drivers/virtio/virtio_pci_modern_dev.c
->index e11ed748e661..e8b3ff2b9fbc 100644
->--- a/drivers/virtio/virtio_pci_modern_dev.c
->+++ b/drivers/virtio/virtio_pci_modern_dev.c
->@@ -345,7 +345,7 @@ int vp_modern_probe(struct virtio_pci_modern_device *mdev)
-> EXPORT_SYMBOL_GPL(vp_modern_probe);
->
-> /*
->- * vp_modern_probe: remove and cleanup the modern virtio pci device
->+ * vp_modern_remove: remove and cleanup the modern virtio pci device
->  * @mdev: the modern virtio-pci device
->  */
-> void vp_modern_remove(struct virtio_pci_modern_device *mdev)
->-- 
->2.30.2
->
+On 10.12.21 00:04, Zi Yan wrote:
+> From: Zi Yan <ziy@nvidia.com>
+> 
+> Hi all,
 
-Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+Hi,
+
+thanks for working on that!
+
+> 
+> This patchset tries to remove the MAX_ORDER - 1 alignment requirement for CMA
+> and alloc_contig_range(). It prepares for my upcoming changes to make MAX_ORDER
+> adjustable at boot time[1].
+> 
+> The MAX_ORDER - 1 alignment requirement comes from that alloc_contig_range()
+> isolates pageblocks to remove free memory from buddy allocator but isolating
+> only a subset of pageblocks within a page spanning across multiple pageblocks
+> causes free page accounting issues. Isolated page might not be put into the
+> right free list, since the code assumes the migratetype of the first pageblock
+> as the whole free page migratetype. This is based on the discussion at [2].
+> 
+> To remove the requirement, this patchset:
+> 1. still isolates pageblocks at MAX_ORDER - 1 granularity;
+> 2. but saves the pageblock migratetypes outside the specified range of
+>    alloc_contig_range() and restores them after all pages within the range
+>    become free after __alloc_contig_migrate_range();
+> 3. splits free pages spanning multiple pageblocks at the beginning and the end
+>    of the range and puts the split pages to the right migratetype free lists
+>    based on the pageblock migratetypes;
+> 4. returns pages not in the range as it did before this patch.
+> 
+> Isolation needs to happen at MAX_ORDER - 1 granularity, because otherwise
+> 1) extra code is needed to detect pages (free, PageHuge, THP, or PageCompound)
+> to make sure all pageblocks belonging to a single page are isolated together 
+> and later pageblocks outside the range need to have their migratetypes restored;
+> or 2) extra logic will need to be added during page free time to split a free
+> page with multi-migratetype pageblocks.
+> 
+> Two optimizations might come later:
+> 1. only check unmovable pages within the range instead of MAX_ORDER - 1 aligned
+>    range during isolation to increase successful rate of alloc_contig_range().
+
+The issue with virtio-mem is that we'll need that as soon as we change
+the granularity to pageblocks, because otherwise, you can heavily
+degrade unplug reliably in sane setups:
+
+Previous:
+* Try unplug free 4M range (2 pageblocks): succeeds
+
+Now:
+* Try unplug 2M range (first pageblock): succeeds.
+* Try unplug next 2M range (second pageblock): fails because first
+contains unmovable allcoations.
+
+-- 
+Thanks,
+
+David / dhildenb
 
 _______________________________________________
 Virtualization mailing list
