@@ -1,87 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B610478E41
-	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 15:46:32 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 681E3478E39
+	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 15:46:26 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 688A640BE8;
-	Fri, 17 Dec 2021 14:46:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E901841CAD;
+	Fri, 17 Dec 2021 14:46:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2exgHC0ker8o; Fri, 17 Dec 2021 14:46:29 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id CE0BF40BBE;
-	Fri, 17 Dec 2021 14:46:28 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id yslkdReswFUE; Fri, 17 Dec 2021 14:46:24 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 9F49F41EC4;
+	Fri, 17 Dec 2021 14:46:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AFE1EC0077;
-	Fri, 17 Dec 2021 14:46:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 02EBCC0039;
+	Fri, 17 Dec 2021 14:46:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 40993C0075
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 938D8C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:26 +0000 (UTC)
+ Fri, 17 Dec 2021 14:46:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9F34641EDA
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8EC0E81A3B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:22 +0000 (UTC)
+ Fri, 17 Dec 2021 14:46:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=suse.de header.b="xkKtKtXT";
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="tKRgIWrx";
  dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
- header.d=suse.de header.b="l3EnLGO+"
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oYUjn3djMhMU
+ header.d=suse.de header.b="AkxUWPD9"
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id nM7j7EZdkI2C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:20 +0000 (UTC)
+ Fri, 17 Dec 2021 14:46:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9B79541E88
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 004D784C81
  for <virtualization@lists.linux-foundation.org>;
  Fri, 17 Dec 2021 14:46:20 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id BCDBA1F389;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id F27B92111A;
  Fri, 17 Dec 2021 14:46:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1639752378; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mwLFvs1ocIlsPCaDzUdeMV2EEdP3Utgp0cb19HIBa/M=;
- b=xkKtKtXTM9J4L9gp7lnYF6puomXqYFzy1+QdqHxWgQNIlSQnbup1OxO74rcATyIOn0e0ob
- OMuT1CgIwQTVXPs78PemOQHMLQ3IXG3boxQ4bEGZzCWNJBHJ/O8iwh/VyN+al1yAP4cS1+
- RyAVH+yOpcocp/uEhl9RnlRxWmhPI50=
+ bh=zoDj/q8Rw1f4a3IN2oMjHxIFtzI0titilFSpV1QyTzU=;
+ b=tKRgIWrxWFSSGpufG1TyKLUlZ0ncTOZeoBqqmlxIyac+S7EKTou2FD4iBXX0FX/psHBTy9
+ 891GJP1GfMtJKLFvDTtHdUb4uh4YTZfMUHaKSQcDSsixg62VgX2NJLMiIosxi2LHCsjcHS
+ RmJAdDUC5+aQmSb6Y5wZex4oCf35s5E=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1639752378;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mwLFvs1ocIlsPCaDzUdeMV2EEdP3Utgp0cb19HIBa/M=;
- b=l3EnLGO+vDB8cKbPVo6Lw8QXSYqbCZJCLNC8uSfWQ1la4NAhMlGdan9LLh0DbYlzrs8mY3
- 5l15dvO7q1H+pSCw==
+ bh=zoDj/q8Rw1f4a3IN2oMjHxIFtzI0titilFSpV1QyTzU=;
+ b=AkxUWPD9cUd3SDDIQv7D71C2AKzVBEYqpTojk+bunGXQ9goY9LUN98m6Ms4pppm9C1yyi3
+ AKk6iVJJlICBuuBw==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 8923913E1C;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BF4E413E4E;
  Fri, 17 Dec 2021 14:46:18 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id MIVhILqivGH9KwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id 0CDNLbqivGH9KwAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Fri, 17 Dec 2021 14:46:18 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: javierm@redhat.com, daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com
-Subject: [PATCH 04/10] drm/cirrus: Replace module-init boiler-plate code with
+Subject: [PATCH 05/10] drm/hisilicon/hibmc: Replace module initialization with
  DRM helpers
-Date: Fri, 17 Dec 2021 15:46:09 +0100
-Message-Id: <20211217144615.32733-5-tzimmermann@suse.de>
+Date: Fri, 17 Dec 2021 15:46:10 +0100
+Message-Id: <20211217144615.32733-6-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20211217144615.32733-1-tzimmermann@suse.de>
 References: <20211217144615.32733-1-tzimmermann@suse.de>
@@ -104,49 +104,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Remove custom cirrus_init() and cirrus_exit() functions and initialize
-the module with DRM module helpers.
+Replace module_pci_driver() with drm_module_pci_driver(). The DRM macro
+respects drm_firmware_drivers_only() and fails if the flag has been set.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/tiny/cirrus.c | 17 ++---------------
- 1 file changed, 2 insertions(+), 15 deletions(-)
+ drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-index c95d9ff7d600..ecf2475d0f16 100644
---- a/drivers/gpu/drm/tiny/cirrus.c
-+++ b/drivers/gpu/drm/tiny/cirrus.c
-@@ -39,6 +39,7 @@
- #include <drm/drm_ioctl.h>
+diff --git a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
+index 610fc8e135f9..fe4269c5aa0a 100644
+--- a/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
++++ b/drivers/gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c
+@@ -20,6 +20,7 @@
+ #include <drm/drm_gem_framebuffer_helper.h>
+ #include <drm/drm_gem_vram_helper.h>
  #include <drm/drm_managed.h>
- #include <drm/drm_modeset_helper_vtables.h>
 +#include <drm/drm_module.h>
- #include <drm/drm_probe_helper.h>
- #include <drm/drm_simple_kms_helper.h>
+ #include <drm/drm_vblank.h>
  
-@@ -633,21 +634,7 @@ static struct pci_driver cirrus_pci_driver = {
- 	.remove = cirrus_pci_remove,
+ #include "hibmc_drm_drv.h"
+@@ -379,7 +380,7 @@ static struct pci_driver hibmc_pci_driver = {
+ 	.driver.pm =    &hibmc_pm_ops,
  };
  
--static int __init cirrus_init(void)
--{
--	if (drm_firmware_drivers_only())
--		return -EINVAL;
--
--	return pci_register_driver(&cirrus_pci_driver);
--}
--
--static void __exit cirrus_exit(void)
--{
--	pci_unregister_driver(&cirrus_pci_driver);
--}
--
--module_init(cirrus_init);
--module_exit(cirrus_exit);
-+drm_module_pci_driver(cirrus_pci_driver)
+-module_pci_driver(hibmc_pci_driver);
++drm_module_pci_driver(hibmc_pci_driver);
  
- MODULE_DEVICE_TABLE(pci, pciidlist);
- MODULE_LICENSE("GPL");
+ MODULE_DEVICE_TABLE(pci, hibmc_pci_table);
+ MODULE_AUTHOR("RongrongZou <zourongrong@huawei.com>");
 -- 
 2.34.1
 
