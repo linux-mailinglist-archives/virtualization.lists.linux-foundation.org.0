@@ -1,89 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F3D7478E46
-	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 15:46:35 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B6A047942F
+	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 19:43:52 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 1102641E97;
-	Fri, 17 Dec 2021 14:46:34 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7AF2861153;
+	Fri, 17 Dec 2021 18:43:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wf5ABDqFD-Dg; Fri, 17 Dec 2021 14:46:33 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SjApEpaMdtqo; Fri, 17 Dec 2021 18:43:49 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id E10AF41E9B;
-	Fri, 17 Dec 2021 14:46:32 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6073761158;
+	Fri, 17 Dec 2021 18:43:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7948EC0012;
-	Fri, 17 Dec 2021 14:46:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DABA0C0070;
+	Fri, 17 Dec 2021 18:43:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 10DFAC0012
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E8733C0012
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:29 +0000 (UTC)
+ Fri, 17 Dec 2021 18:43:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3695241CCC
+ by smtp4.osuosl.org (Postfix) with ESMTP id C92A041EB5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:23 +0000 (UTC)
+ Fri, 17 Dec 2021 18:43:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id SI78ZdXVas9o
+ with ESMTP id h9DjoW9pPlNZ
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:22 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8982141ECF
+ Fri, 17 Dec 2021 18:43:46 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from out02.mta.xmission.com (out02.mta.xmission.com [166.70.13.232])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 127F641DE5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 17 Dec 2021 14:46:22 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 210A31F399;
- Fri, 17 Dec 2021 14:46:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1639752380; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9p0b/UO2aAGE+FKoN3E/QTM5Llqovoio+wsWZtcwals=;
- b=j4dQGTKzONv1M/e/tIWgsxfgqtq+q56Il4QZmXzw25l8uZsHoZmktm8McUAFvlT0TVQjvB
- BcUuMQzp/ZRRpVDfUjndAwj2ahICFFynXs71lhYukj7JfC9vWOhgFFrdOynIwGz57zrhn/
- RgY8zE++JKwFB0Atmhtg88Nu/UtOU18=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1639752380;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=9p0b/UO2aAGE+FKoN3E/QTM5Llqovoio+wsWZtcwals=;
- b=qAgRp5VJino9ZjV5gPSc7+KYpkrgTxLK75cIBH+SpQYmITzuFs2/edohXkb4qqtzYDMdHx
- w/uipfWv1bUuUGDg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id E460A13E1C;
- Fri, 17 Dec 2021 14:46:19 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 2HbANruivGH9KwAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Fri, 17 Dec 2021 14:46:19 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: javierm@redhat.com, daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com
-Subject: [PATCH 10/10] drm/vmwgfx: Replace module-init boiler-plate code with
- DRM helpers
-Date: Fri, 17 Dec 2021 15:46:15 +0100
-Message-Id: <20211217144615.32733-11-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20211217144615.32733-1-tzimmermann@suse.de>
-References: <20211217144615.32733-1-tzimmermann@suse.de>
+ Fri, 17 Dec 2021 18:43:45 +0000 (UTC)
+Received: from in02.mta.xmission.com ([166.70.13.52]:58040)
+ by out02.mta.xmission.com with esmtps (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
+ (envelope-from <ebiederm@xmission.com>)
+ id 1myICk-00FEae-88; Fri, 17 Dec 2021 11:43:42 -0700
+Received: from ip68-227-161-49.om.om.cox.net ([68.227.161.49]:42298
+ helo=email.froward.int.ebiederm.org.xmission.com)
+ by in02.mta.xmission.com with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
+ (envelope-from <ebiederm@xmission.com>)
+ id 1myICi-008ieW-3a; Fri, 17 Dec 2021 11:43:41 -0700
+From: ebiederm@xmission.com (Eric W. Biederman)
+To: Mike Christie <michael.christie@oracle.com>
+References: <20211129194707.5863-1-michael.christie@oracle.com>
+ <20211129194707.5863-6-michael.christie@oracle.com>
+Date: Fri, 17 Dec 2021 12:42:54 -0600
+In-Reply-To: <20211129194707.5863-6-michael.christie@oracle.com> (Mike
+ Christie's message of "Mon, 29 Nov 2021 13:47:02 -0600")
+Message-ID: <87lf0jdqdt.fsf@email.froward.int.ebiederm.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
+X-XM-SPF: eid=1myICi-008ieW-3a; ; ;
+ mid=<87lf0jdqdt.fsf@email.froward.int.ebiederm.org>; ; ;
+ hst=in02.mta.xmission.com; ; ; ip=68.227.161.49; ; ; frm=ebiederm@xmission.com;
+ ; ; spf=neutral
+X-XM-AID: U2FsdGVkX1/iGnaVviMxtTKijQlJhSfLXrjW2CoE4/w=
+X-SA-Exim-Connect-IP: 68.227.161.49
+X-SA-Exim-Mail-From: ebiederm@xmission.com
+X-Spam-DCC: XMission; sa07 1397; Body=1 Fuz1=1 Fuz2=1 
+X-Spam-Combo: ;Mike Christie <michael.christie@oracle.com>
+X-Spam-Relay-Country: 
+X-Spam-Timing: total 1554 ms - load_scoreonly_sql: 0.04 (0.0%),
+ signal_user_changed: 11 (0.7%), b_tie_ro: 9 (0.6%), parse: 0.81 (0.1%),
+ extract_message_metadata: 3.1 (0.2%), get_uri_detail_list: 1.26
+ (0.1%), tests_pri_-1000: 3.6 (0.2%), tests_pri_-950: 1.20 (0.1%),
+ tests_pri_-900: 1.01 (0.1%), tests_pri_-90: 76 (4.9%), check_bayes: 74
+ (4.8%), b_tokenize: 7 (0.4%), b_tok_get_all: 8 (0.5%), b_comp_prob:
+ 2.1 (0.1%), b_tok_touch_all: 55 (3.5%), b_finish: 0.80 (0.1%),
+ tests_pri_0: 1424 (91.6%), check_dkim_signature: 0.52 (0.0%),
+ check_dkim_adsp: 2.9 (0.2%), poll_dns_idle: 0.94 (0.1%), tests_pri_10:
+ 4.7 (0.3%), tests_pri_500: 22 (1.4%), rewrite_mail: 0.00 (0.0%)
+Subject: Re: [PATCH V6 05/10] signal: Perfom autoreap for PF_USER_WORKER
+X-SA-Exim-Version: 4.2.1 (built Sat, 08 Feb 2020 21:53:50 +0000)
+X-SA-Exim-Scanned: Yes (on in02.mta.xmission.com)
+Cc: axboe@kernel.dk, hdanton@sina.com, mst@redhat.com,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ hch@infradead.org, vverma@digitalocean.com, geert@linux-m68k.org,
+ stefanha@redhat.com, christian.brauner@ubuntu.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,61 +102,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Remove custom vmwgfx_init() and vmwgfx_exit() functions and initialize
-the module with DRM_module helpers.
+Mike Christie <michael.christie@oracle.com> writes:
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/vmwgfx/vmwgfx_drv.c | 24 +++---------------------
- 1 file changed, 3 insertions(+), 21 deletions(-)
+> Userspace doesn't know about PF_USER_WORKER threads, so it can't do wait
+> to clean them up. For cases like where qemu will do dynamic/hot add/remove
+> of vhost devices, then we need to auto reap the thread like was done for
+> the kthread case, because qemu does not know what API the kernel/vhost
+> layer is using.
+>
+> This has us do autoreaping for these threads similar to when the parent
+> ignores SIGCHLD and for kthreads.
 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-index 2d59bdad0373..0c1ccf174787 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c
-@@ -32,9 +32,10 @@
- 
- #include <drm/drm_aperture.h>
- #include <drm/drm_drv.h>
-+#include <drm/drm_gem_ttm_helper.h>
- #include <drm/drm_ioctl.h>
-+#include <drm/drm_module.h>
- #include <drm/drm_sysfs.h>
--#include <drm/drm_gem_ttm_helper.h>
- #include <drm/ttm/ttm_bo_driver.h>
- #include <drm/ttm/ttm_range_manager.h>
- #include <drm/ttm/ttm_placement.h>
-@@ -1651,26 +1652,7 @@ static int vmw_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
- 	return ret;
- }
- 
--static int __init vmwgfx_init(void)
--{
--	int ret;
--
--	if (drm_firmware_drivers_only())
--		return -EINVAL;
--
--	ret = pci_register_driver(&vmw_pci_driver);
--	if (ret)
--		DRM_ERROR("Failed initializing DRM.\n");
--	return ret;
--}
--
--static void __exit vmwgfx_exit(void)
--{
--	pci_unregister_driver(&vmw_pci_driver);
--}
--
--module_init(vmwgfx_init);
--module_exit(vmwgfx_exit);
-+drm_module_pci_driver(vmw_pci_driver);
- 
- MODULE_AUTHOR("VMware Inc. and others");
- MODULE_DESCRIPTION("Standalone drm driver for the VMware SVGA device");
--- 
-2.34.1
+There is a lot wrong with this change.
+1) you can just set "task->signal = SIGCHLD" to get this
+   behavior so it is unnecessary.
 
+2) This is not the autoreaping you want.  This autoreaping just kicks
+   in when the parents signal handler is SIG_IGN.  Since I presume
+   you are not controlling the parent this is just plain nonsense.
+
+The autoreap you want is the autoreap in exit_notify, and you don't
+want to call do_notify_parent at all.
+
+Eric
+
+> Signed-off-by: Mike Christie <michael.christie@oracle.com>
+> ---
+>  kernel/signal.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/kernel/signal.c b/kernel/signal.c
+> index a629b11bf3e0..4ce2cc195269 100644
+> --- a/kernel/signal.c
+> +++ b/kernel/signal.c
+> @@ -2071,9 +2071,9 @@ bool do_notify_parent(struct task_struct *tsk, int sig)
+>  
+>  	psig = tsk->parent->sighand;
+>  	spin_lock_irqsave(&psig->siglock, flags);
+> -	if (!tsk->ptrace && sig == SIGCHLD &&
+> +	if (!tsk->ptrace && (tsk->flags & PF_USER_WORKER || (sig == SIGCHLD &&
+>  	    (psig->action[SIGCHLD-1].sa.sa_handler == SIG_IGN ||
+> -	     (psig->action[SIGCHLD-1].sa.sa_flags & SA_NOCLDWAIT))) {
+> +	     (psig->action[SIGCHLD-1].sa.sa_flags & SA_NOCLDWAIT))))) {
+>  		/*
+>  		 * We are exiting and our parent doesn't care.  POSIX.1
+>  		 * defines special semantics for setting SIGCHLD to SIG_IGN
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
