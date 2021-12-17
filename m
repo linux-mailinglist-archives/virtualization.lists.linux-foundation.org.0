@@ -1,55 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10267478600
-	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 09:11:22 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B832161086;
-	Fri, 17 Dec 2021 08:11:20 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3p2LpQdeVWWq; Fri, 17 Dec 2021 08:11:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 960C66107D;
-	Fri, 17 Dec 2021 08:11:19 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 06FEBC0039;
-	Fri, 17 Dec 2021 08:11:19 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E5551C0012;
- Fri, 17 Dec 2021 08:11:16 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 69842478E43
+	for <lists.virtualization@lfdr.de>; Fri, 17 Dec 2021 15:46:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C49B284B49;
- Fri, 17 Dec 2021 08:11:16 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4DD8883FBF;
+	Fri, 17 Dec 2021 14:46:28 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MNlR_eAJZbTk; Fri, 17 Dec 2021 08:11:16 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org
- [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E25E183F8D;
- Fri, 17 Dec 2021 08:11:15 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id 02CB836D; Fri, 17 Dec 2021 09:11:13 +0100 (CET)
-Date: Fri, 17 Dec 2021 09:11:12 +0100
-From: Joerg Roedel <joro@8bytes.org>
-To: John Garry <john.garry@huawei.com>
-Subject: Re: [PATCH v2] iova: Move fast alloc size roundup into
- alloc_iova_fast()
-Message-ID: <YbxGIKQDyL4EA3ah@8bytes.org>
-References: <1638875846-23993-1-git-send-email-john.garry@huawei.com>
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id N1UUgBs5E2Dj; Fri, 17 Dec 2021 14:46:27 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id EF02683EFF;
+	Fri, 17 Dec 2021 14:46:26 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B9E8AC0012;
+	Fri, 17 Dec 2021 14:46:26 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2611BC0078
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Dec 2021 14:46:24 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id AF72241E9B
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Dec 2021 14:46:21 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=suse.de header.b="mY+8j3UY";
+ dkim=neutral reason="invalid (unsupported algorithm ed25519-sha256)"
+ header.d=suse.de header.b="mkoxXt/B"
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id WyXQsSHQLybn
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Dec 2021 14:46:20 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id BD4CE41EAC
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 17 Dec 2021 14:46:20 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id DB1F51F392;
+ Fri, 17 Dec 2021 14:46:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1639752377; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=YxB0cqlhvJ91NGi/HsQ7Tt+MPtNzBkQB/o1qvCb8FhQ=;
+ b=mY+8j3UY7NsmFW9c9CrJ5MMWvrUkiZ5g5MIaDMkHsfjsoN0nR+LsjEQ6b41Ax2aP+XjgZL
+ o8L5SXFP6qGHZvEUF75cCObvvG0Y8YEDgTAP72DhSW0vFmoaRBX7MgQX5FuTAFu1KJ969b
+ AIjMp7YVftvGTH6f7KOlg9Eo8rclPTQ=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1639752377;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=YxB0cqlhvJ91NGi/HsQ7Tt+MPtNzBkQB/o1qvCb8FhQ=;
+ b=mkoxXt/BuOC4YLCyTF7Z5ZQ3OSGWVbCVMlPIl2W3/uNq6JhacKmdl9Qu1z25k9UYrJt6nY
+ 0s9veC6qQODue5AA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 9980C13E1C;
+ Fri, 17 Dec 2021 14:46:17 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id CYoCJLmivGH9KwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Fri, 17 Dec 2021 14:46:17 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: javierm@redhat.com, daniel@ffwll.ch, airlied@linux.ie, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com
+Subject: [RFC][PATCH 00/10] drm: Add DRM module helpers for existing PCI
+ drivers
+Date: Fri, 17 Dec 2021 15:46:05 +0100
+Message-Id: <20211217144615.32733-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1638875846-23993-1-git-send-email-john.garry@huawei.com>
-Cc: mst@redhat.com, robin.murphy@arm.com,
- virtualization@lists.linux-foundation.org, xieyongji@bytedance.com,
- iommu@lists.linux-foundation.org, will@kernel.org
+Cc: spice-devel@lists.freedesktop.org, Thomas Zimmermann <tzimmermann@suse.de>,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -66,23 +98,53 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Dec 07, 2021 at 07:17:26PM +0800, John Garry wrote:
-> It really is a property of the IOVA rcache code that we need to alloc a
-> power-of-2 size, so relocate the functionality to resize into
-> alloc_iova_fast(), rather than the callsites.
-> 
-> Signed-off-by: John Garry <john.garry@huawei.com>
-> Acked-by: Will Deacon <will@kernel.org>
-> Reviewed-by: Xie Yongji <xieyongji@bytedance.com>
-> Acked-by: Jason Wang <jasowang@redhat.com>
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
-> ---
-> Differences to v1:
-> - Separate out from original series which conflicts with Robin's IOVA FQ work:
->   https://lore.kernel.org/linux-iommu/1632477717-5254-1-git-send-email-john.garry@huawei.com/
-> - Add tags - thanks!
+This is an RFC patchset to complement the helper macros provided
+in [1]. The module helpers create module init and exit helpers that
+respect the kernel parameters that enable/disable DRM drivers.
 
-Applied, thanks.
+There's one more patch that prepares qxl by moving some code around.
+It's required to make use of the helpers from within qxl.
+
+Javier, please see if you find anything useful here and cherry-pick
+into your patchset. The driver changes should complement the ones
+in your patchset. The module macros are similar to yours and should
+be easily mergable.
+
+I tested the macros with ast.
+
+[1] https://patchwork.freedesktop.org/series/98162/
+
+Thomas Zimmermann (10):
+  drm: Provide PCI module-init macros
+  drm/ast: Replace module-init boiler-plate code with DRM helpers
+  drm/bochs: Replace module-init boiler-plate code with DRM helpers
+  drm/cirrus: Replace module-init boiler-plate code with DRM helpers
+  drm/hisilicon/hibmc: Replace module initialization with DRM helpers
+  drm/mgag200: Replace module-init boiler-plate code with DRM helpers
+  drm/qxl: Move ioctl array next to its only user
+  drm/qxl: Replace module-init boiler-plate code with DRM helpers
+  drm/vboxvideo: Replace module-init boiler-plate code with DRM helpers
+  drm/vmwgfx: Replace module-init boiler-plate code with DRM helpers
+
+ Documentation/gpu/drm-internals.rst           |  6 ++
+ drivers/gpu/drm/ast/ast_drv.c                 | 18 +---
+ .../gpu/drm/hisilicon/hibmc/hibmc_drm_drv.c   |  3 +-
+ drivers/gpu/drm/mgag200/mgag200_drv.c         | 20 +---
+ drivers/gpu/drm/qxl/qxl_drv.c                 | 31 +++---
+ drivers/gpu/drm/qxl/qxl_drv.h                 | 13 ++-
+ drivers/gpu/drm/qxl/qxl_ioctl.c               | 41 ++------
+ drivers/gpu/drm/tiny/bochs.c                  | 20 +---
+ drivers/gpu/drm/tiny/cirrus.c                 | 17 +---
+ drivers/gpu/drm/vboxvideo/vbox_drv.c          | 20 +---
+ drivers/gpu/drm/vmwgfx/vmwgfx_drv.c           | 24 +----
+ include/drm/drm_module.h                      | 95 +++++++++++++++++++
+ 12 files changed, 145 insertions(+), 163 deletions(-)
+ create mode 100644 include/drm/drm_module.h
+
+
+base-commit: 3f422828221d9ceefcddef0be33561b1646a1cbe
+--
+2.34.1
 
 _______________________________________________
 Virtualization mailing list
