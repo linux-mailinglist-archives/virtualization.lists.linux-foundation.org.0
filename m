@@ -1,60 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F60A48731A
-	for <lists.virtualization@lfdr.de>; Fri,  7 Jan 2022 07:33:23 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id C4D91487665
+	for <lists.virtualization@lfdr.de>; Fri,  7 Jan 2022 12:21:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 6A6D542497;
-	Fri,  7 Jan 2022 06:33:19 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id n9elQIc7jJvr; Fri,  7 Jan 2022 06:33:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id B57DC42481;
-	Fri,  7 Jan 2022 06:33:17 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DBB8C006E;
-	Fri,  7 Jan 2022 06:33:17 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D3612C0030
- for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:15 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A8C086FC7B
- for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:15 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id BEC3360E1D;
+	Fri,  7 Jan 2022 11:21:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dSgIhLEioymG
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id c7HjsX6CGhyP; Fri,  7 Jan 2022 11:21:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 76E036FC3D;
+	Fri,  7 Jan 2022 11:21:28 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B987BC0070;
+	Fri,  7 Jan 2022 11:21:27 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AB20BC001E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:15 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-57.freemail.mail.aliyun.com
- (out30-57.freemail.mail.aliyun.com [115.124.30.57])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C5AA26FC77
+ Fri,  7 Jan 2022 11:21:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8BBAD40872
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:14 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04395; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V19hjzR_1641537191; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V19hjzR_1641537191) by smtp.aliyun-inc.com(127.0.0.1);
- Fri, 07 Jan 2022 14:33:11 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH 6/6] virtio: add api virtio_dma_map() for advance dma
-Date: Fri,  7 Jan 2022 14:33:06 +0800
-Message-Id: <20220107063306.23240-7-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20220107063306.23240-1-xuanzhuo@linux.alibaba.com>
-References: <20220107063306.23240-1-xuanzhuo@linux.alibaba.com>
+ Fri,  7 Jan 2022 11:21:25 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (1024-bit key) header.d=linuxfoundation.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XwUwx-mBl-uv
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  7 Jan 2022 11:21:24 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5D37640438
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  7 Jan 2022 11:21:24 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 90631B8239A;
+ Fri,  7 Jan 2022 11:21:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C9D1EC36AE9;
+ Fri,  7 Jan 2022 11:21:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1641554480;
+ bh=TIKtwdLyiyF92hZb62dr30nuCXc4HPQXsYaVnDcJ4x4=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=CuAL9VN6zqyqXY+fhFVSHaJNBpCgh94g7Lt/kLqqYtkizgUYHSKbZ2kfq9Sh7p/3m
+ VZiA7ZPHq5UteS+GtUp7r1oIeHn9pWoweEV9a0PO38smNTdn8lVVLzolRYOc5AGelZ
+ 3nZWnebCr4V+5MeVtKKUwBhZIfUapu3ZX3aYr8yM=
+Date: Fri, 7 Jan 2022 12:21:13 +0100
+From: Greg KH <gregkh@linuxfoundation.org>
+To: Yang Wei <albin.yangwei@alibaba-inc.com>
+Subject: Re: [PATCH 4.9] virtio_pci: Support surprise removal of virtio pci
+ device
+Message-ID: <YdgiKa9YLXrWVfxZ@kroah.com>
+References: <20220107085128.100165-1-albin.yangwei@alibaba-inc.com>
 MIME-Version: 1.0
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20220107085128.100165-1-albin.yangwei@alibaba-inc.com>
+Cc: yang.wei@linux.alibaba.com, virtualization@lists.linux-foundation.org,
+ stable@vger.kernel.org, mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -71,103 +82,86 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added virtio_dma_map() to map DMA addresses for virtual memory in
-advance. The purpose of adding this function is to check
-vring_use_dma_api() for virtio dma operation and get vdev->dev.parent as
-the parameter of dma_map_page().
+On Fri, Jan 07, 2022 at 04:51:28PM +0800, Yang Wei wrote:
+> From: Parav Pandit <parav@nvidia.com>
+> 
+> commit 43bb40c5b92659966bdf4bfe584fde0a3575a049 upstream.
+> 
+> When a virtio pci device undergo surprise removal (aka async removal in
+> PCIe spec), mark the device as broken so that any upper layer drivers can
+> abort any outstanding operation.
+> 
+> When a virtio net pci device undergo surprise removal which is used by a
+> NetworkManager, a below call trace was observed.
+> 
+> kernel:watchdog: BUG: soft lockup - CPU#1 stuck for 26s! [kworker/1:1:27059]
+> watchdog: BUG: soft lockup - CPU#1 stuck for 52s! [kworker/1:1:27059]
+> CPU: 1 PID: 27059 Comm: kworker/1:1 Tainted: G S      W I  L    5.13.0-hotplug+ #8
+> Hardware name: Dell Inc. PowerEdge R640/0H28RR, BIOS 2.9.4 11/06/2020
+> Workqueue: events linkwatch_event
+> RIP: 0010:virtnet_send_command+0xfc/0x150 [virtio_net]
+> Call Trace:
+>  virtnet_set_rx_mode+0xcf/0x2a7 [virtio_net]
+>  ? __hw_addr_create_ex+0x85/0xc0
+>  __dev_mc_add+0x72/0x80
+>  igmp6_group_added+0xa7/0xd0
+>  ipv6_mc_up+0x3c/0x60
+>  ipv6_find_idev+0x36/0x80
+>  addrconf_add_dev+0x1e/0xa0
+>  addrconf_dev_config+0x71/0x130
+>  addrconf_notify+0x1f5/0xb40
+>  ? rtnl_is_locked+0x11/0x20
+>  ? __switch_to_asm+0x42/0x70
+>  ? finish_task_switch+0xaf/0x2c0
+>  ? raw_notifier_call_chain+0x3e/0x50
+>  raw_notifier_call_chain+0x3e/0x50
+>  netdev_state_change+0x67/0x90
+>  linkwatch_do_dev+0x3c/0x50
+>  __linkwatch_run_queue+0xd2/0x220
+>  linkwatch_event+0x21/0x30
+>  process_one_work+0x1c8/0x370
+>  worker_thread+0x30/0x380
+>  ? process_one_work+0x370/0x370
+>  kthread+0x118/0x140
+>  ? set_kthread_struct+0x40/0x40
+>  ret_from_fork+0x1f/0x30
+> 
+> Hence, add the ability to abort the command on surprise removal
+> which prevents infinite loop and system lockup.
+> 
+> Signed-off-by: Parav Pandit <parav@nvidia.com>
+> Link: https://lore.kernel.org/r/20210721142648.1525924-5-parav@nvidia.com
+> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+> Signed-off-by: Yang Wei <yang.wei@linux.alibaba.com>
+> ---
+>  drivers/virtio/virtio_pci_common.c | 7 +++++++
+>  1 file changed, 7 insertions(+)
+> 
+> diff --git a/drivers/virtio/virtio_pci_common.c b/drivers/virtio/virtio_pci_common.c
+> index d9a905827967..37e3ba5dadf6 100644
+> --- a/drivers/virtio/virtio_pci_common.c
+> +++ b/drivers/virtio/virtio_pci_common.c
+> @@ -547,6 +547,13 @@ static void virtio_pci_remove(struct pci_dev *pci_dev)
+>  	struct virtio_pci_device *vp_dev = pci_get_drvdata(pci_dev);
+>  	struct device *dev = get_device(&vp_dev->vdev.dev);
+>  
+> +	/*
+> +	 * Device is marked broken on surprise removal so that virtio upper
+> +	 * layers can abort any ongoing operation.
+> +	 */
+> +	if (!pci_device_is_present(pci_dev))
+> +		virtio_break_device(&vp_dev->vdev);
+> +
+>  	unregister_virtio_device(&vp_dev->vdev);
+>  
+>  	if (vp_dev->ioaddr)
+> -- 
+> 2.19.1.6.gb485710b
+> 
 
-Added virtio_dma_unmap() for unmap DMA address.
+Both patches now queued up, thanks.
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/virtio/virtio_ring.c | 47 ++++++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  9 +++++++
- 2 files changed, 56 insertions(+)
-
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index e165bc2e1344..f4a0fb85df27 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -2472,4 +2472,51 @@ const struct vring *virtqueue_get_vring(struct virtqueue *vq)
- }
- EXPORT_SYMBOL_GPL(virtqueue_get_vring);
- 
-+/**
-+ * virtio_dma_map - get the DMA addr of the memory for virtio device
-+ * @vdev: virtio device
-+ * @page: the page of the memory to DMA
-+ * @offset: the offset of the memory inside page
-+ * @length: memory length
-+ * @dir: DMA direction
-+ *
-+ * Returns the DMA addr. Zero means error.
-+ */
-+dma_addr_t virtio_dma_map(struct virtio_device *vdev,
-+			  struct page *page, size_t offset,
-+			  unsigned int length,
-+			  enum dma_data_direction dir)
-+{
-+	dma_addr_t addr;
-+
-+	if (!vring_use_dma_api(vdev))
-+		return page_to_phys(page) + offset;
-+
-+	addr = dma_map_page(vdev->dev.parent, page, offset, length, dir);
-+
-+	if (dma_mapping_error(vdev->dev.parent, addr))
-+		return 0;
-+
-+	return addr;
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_map);
-+
-+/**
-+ * virtio_dma_unmap - unmap DMA addr
-+ * @vdev: virtio device
-+ * @dma: DMA address
-+ * @length: memory length
-+ * @dir: DMA direction
-+ */
-+void virtio_dma_unmap(struct virtio_device *vdev,
-+		      dma_addr_t dma, unsigned int length,
-+		      enum dma_data_direction dir)
-+{
-+	if (!vring_use_dma_api(vdev))
-+		return;
-+
-+	dma_unmap_page(vdev->dev.parent, dma, length, dir);
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_unmap);
-+
- MODULE_LICENSE("GPL");
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index 41edbc01ffa4..6e6c6e18ecf8 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -9,6 +9,7 @@
- #include <linux/device.h>
- #include <linux/mod_devicetable.h>
- #include <linux/gfp.h>
-+#include <linux/dma-mapping.h>
- 
- /**
-  * virtqueue - a queue to register buffers for sending or receiving.
-@@ -195,4 +196,12 @@ void unregister_virtio_driver(struct virtio_driver *drv);
- #define module_virtio_driver(__virtio_driver) \
- 	module_driver(__virtio_driver, register_virtio_driver, \
- 			unregister_virtio_driver)
-+
-+dma_addr_t virtio_dma_map(struct virtio_device *vdev,
-+			  struct page *page, size_t offset,
-+			  unsigned int length,
-+			  enum dma_data_direction dir);
-+void virtio_dma_unmap(struct virtio_device *vdev,
-+		      dma_addr_t dma, unsigned int length,
-+		      enum dma_data_direction dir);
- #endif /* _LINUX_VIRTIO_H */
--- 
-2.31.0
-
+greg k-h
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
