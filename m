@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2492487318
-	for <lists.virtualization@lfdr.de>; Fri,  7 Jan 2022 07:33:20 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 92C73487319
+	for <lists.virtualization@lfdr.de>; Fri,  7 Jan 2022 07:33:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 198AA4248C;
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8F97D6FC77;
 	Fri,  7 Jan 2022 06:33:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8Vb-lwR3Fs6g; Fri,  7 Jan 2022 06:33:17 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nQwOyTD5M5Bl; Fri,  7 Jan 2022 06:33:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 469B242497;
-	Fri,  7 Jan 2022 06:33:17 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 1DD276FC79;
+	Fri,  7 Jan 2022 06:33:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E3F7BC0074;
-	Fri,  7 Jan 2022 06:33:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CF630C0030;
+	Fri,  7 Jan 2022 06:33:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AC267C001E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 10C6DC001E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:15 +0000 (UTC)
+ Fri,  7 Jan 2022 06:33:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9E0E542958
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2222D4248B
  for <virtualization@lists.linux-foundation.org>;
  Fri,  7 Jan 2022 06:33:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jv-0usPmly95
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DoJUXU9IgK6F
  for <virtualization@lists.linux-foundation.org>;
  Fri,  7 Jan 2022 06:33:14 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-54.freemail.mail.aliyun.com
- (out30-54.freemail.mail.aliyun.com [115.124.30.54])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 667EE42940
+Received: from out30-56.freemail.mail.aliyun.com
+ (out30-56.freemail.mail.aliyun.com [115.124.30.56])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DE4FE42481
  for <virtualization@lists.linux-foundation.org>;
- Fri,  7 Jan 2022 06:33:14 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R861e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04407; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V19LP-k_1641537189; 
+ Fri,  7 Jan 2022 06:33:13 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R691e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V19LP-v_1641537190; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V19LP-k_1641537189) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0V19LP-v_1641537190) by smtp.aliyun-inc.com(127.0.0.1);
  Fri, 07 Jan 2022 14:33:10 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH 4/6] virtio: split: virtqueue_add_split() support dma address
-Date: Fri,  7 Jan 2022 14:33:04 +0800
-Message-Id: <20220107063306.23240-5-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 5/6] virtio: packed: virtqueue_add_packed() support dma address
+Date: Fri,  7 Jan 2022 14:33:05 +0800
+Message-Id: <20220107063306.23240-6-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220107063306.23240-1-xuanzhuo@linux.alibaba.com>
 References: <20220107063306.23240-1-xuanzhuo@linux.alibaba.com>
@@ -71,120 +71,67 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtqueue_add_split() only supports virtual addresses, dma is completed
-in virtqueue_add_split().
+virtqueue_add_packed() only supports virtual addresses, dma is completed
+in virtqueue_add_packed().
 
 In some scenarios (such as the AF_XDP scenario), the memory is allocated
 and DMA is completed in advance, so it is necessary for us to support
-passing the DMA address to virtqueue_add_split().
+passing the DMA address to virtqueue_add_packed().
 
 This patch stipulates that if sg->dma_address is not NULL, use this
 address as the DMA address. And record this information in extra->flags,
 which can be skipped when executing dma unmap.
 
-    extra->flags |= VRING_DESC_F_PREDMA;
+extra->flags |= VRING_DESC_F_PREDMA;
 
 This relies on the previous patch, in the indirect scenario, for each
 desc allocated, an extra is allocated at the same time.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 28 ++++++++++++++++++++++++----
- 1 file changed, 24 insertions(+), 4 deletions(-)
+ drivers/virtio/virtio_ring.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 7420741cb750..add8430d9678 100644
+index add8430d9678..e165bc2e1344 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -66,6 +66,9 @@
- #define LAST_ADD_TIME_INVALID(vq)
- #endif
- 
-+/* This means the buffer dma is pre-alloc. Just used by vring_desc_extra */
-+#define VRING_DESC_F_PREDMA	(1 << 15)
-+
- struct vring_desc_extra {
- 	dma_addr_t addr;		/* Descriptor DMA addr. */
- 	u32 len;			/* Descriptor length. */
-@@ -336,11 +339,19 @@ static inline struct device *vring_dma_dev(const struct vring_virtqueue *vq)
- 	return vq->vq.vdev->dev.parent;
- }
- 
-+static inline bool sg_is_predma(struct scatterlist *sg)
-+{
-+	return !!sg->dma_address;
-+}
-+
- /* Map one sg entry. */
- static dma_addr_t vring_map_one_sg(const struct vring_virtqueue *vq,
- 				   struct scatterlist *sg,
- 				   enum dma_data_direction direction)
- {
-+	if (sg_is_predma(sg))
-+		return sg_dma_address(sg);
-+
- 	if (!vq->use_dma_api)
- 		return (dma_addr_t)sg_phys(sg);
- 
-@@ -396,6 +407,9 @@ static unsigned int vring_unmap_one_split(const struct vring_virtqueue *vq,
+@@ -1010,6 +1010,9 @@ static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
  				 (flags & VRING_DESC_F_WRITE) ?
  				 DMA_FROM_DEVICE : DMA_TO_DEVICE);
  	} else {
 +		if (flags & VRING_DESC_F_PREDMA)
-+			goto out;
++			return;
 +
  		dma_unmap_page(vring_dma_dev(vq),
- 			       extra->addr,
- 			       extra->len,
-@@ -441,7 +455,8 @@ static inline unsigned int virtqueue_add_desc_split(struct virtqueue *vq,
- 						    unsigned int i,
- 						    dma_addr_t addr,
- 						    unsigned int len,
--						    u16 flags)
-+						    u16 flags,
-+						    bool predma)
- {
- 	struct vring_virtqueue *vring = to_vvq(vq);
- 	struct vring_desc_extra *extra;
-@@ -468,6 +483,9 @@ static inline unsigned int virtqueue_add_desc_split(struct virtqueue *vq,
- 	extra->len = len;
- 	extra->flags = flags;
+ 			       extra->addr, extra->len,
+ 			       (flags & VRING_DESC_F_WRITE) ?
+@@ -1092,6 +1095,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 			extra->addr  = addr;
+ 			extra->len   = sg->length;
+ 			extra->flags = flags;
++			if (sg_is_predma(sg))
++				extra->flags |= VRING_DESC_F_PREDMA;
  
-+	if (predma)
-+		extra->flags |= VRING_DESC_F_PREDMA;
+ 			i++;
+ 		}
+@@ -1249,9 +1254,14 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+ 			if (unlikely(vq->use_dma_api)) {
+ 				vq->packed.desc_extra[curr].addr = addr;
+ 				vq->packed.desc_extra[curr].len = sg->length;
+-				vq->packed.desc_extra[curr].flags =
+-					le16_to_cpu(flags);
+ 			}
 +
- 	return next;
- }
++			vq->packed.desc_extra[curr].flags = le16_to_cpu(flags);
++
++			if (sg_is_predma(sg))
++				vq->packed.desc_extra[curr].flags |=
++					VRING_DESC_F_PREDMA;
++
+ 			prev = curr;
+ 			curr = vq->packed.desc_extra[curr].next;
  
-@@ -547,7 +565,8 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 			 * table since it use stream DMA mapping.
- 			 */
- 			i = virtqueue_add_desc_split(_vq, in, i, addr, sg->length,
--						     VRING_DESC_F_NEXT);
-+						     VRING_DESC_F_NEXT,
-+						     sg_is_predma(sg));
- 		}
- 	}
- 	for (; n < (out_sgs + in_sgs); n++) {
-@@ -563,7 +582,8 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 			i = virtqueue_add_desc_split(_vq, in, i, addr,
- 						     sg->length,
- 						     VRING_DESC_F_NEXT |
--						     VRING_DESC_F_WRITE);
-+						     VRING_DESC_F_WRITE,
-+						     sg_is_predma(sg));
- 		}
- 	}
- 	/* Last one doesn't continue. */
-@@ -582,7 +602,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 
- 		virtqueue_add_desc_split(_vq, NULL, head, addr,
- 					 total_sg * sizeof(struct vring_desc),
--					 VRING_DESC_F_INDIRECT);
-+					 VRING_DESC_F_INDIRECT, false);
- 	}
- 
- 	/* We're using some buffers from the free list. */
 -- 
 2.31.0
 
