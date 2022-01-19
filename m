@@ -1,56 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id EC87B4932F8
-	for <lists.virtualization@lfdr.de>; Wed, 19 Jan 2022 03:35:55 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C25794932FE
+	for <lists.virtualization@lfdr.de>; Wed, 19 Jan 2022 03:36:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 35F02410D4;
-	Wed, 19 Jan 2022 02:35:54 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 57F86408EA;
+	Wed, 19 Jan 2022 02:36:02 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MOnTeGrIgF1d; Wed, 19 Jan 2022 02:35:53 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0HitENj7pezY; Wed, 19 Jan 2022 02:36:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id B4E12410E9;
-	Wed, 19 Jan 2022 02:35:52 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 01FB0408E5;
+	Wed, 19 Jan 2022 02:36:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F36AFC0077;
-	Wed, 19 Jan 2022 02:35:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6EB36C002F;
+	Wed, 19 Jan 2022 02:36:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 79B70C002F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1D606C002F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jan 2022 02:35:50 +0000 (UTC)
+ Wed, 19 Jan 2022 02:35:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 60FBF60E3F
+ by smtp3.osuosl.org (Postfix) with ESMTP id F271660E8E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jan 2022 02:35:50 +0000 (UTC)
+ Wed, 19 Jan 2022 02:35:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fIkrMlrp_-tn
+ with ESMTP id ad62-W3nnUXi
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jan 2022 02:35:48 +0000 (UTC)
+ Wed, 19 Jan 2022 02:35:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-131.freemail.mail.aliyun.com
- (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 33BB060E3A
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F1A1460E8C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jan 2022 02:35:47 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R261e4; CH=green; DM=||false|;
+ Wed, 19 Jan 2022 02:35:57 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04407; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V2F6kAN_1642559743; 
+ NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V2EochD_1642559744; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V2F6kAN_1642559743) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 19 Jan 2022 10:35:44 +0800
+ fp:SMTPD_---0V2EochD_1642559744) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 19 Jan 2022 10:35:45 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH 1/6] virtio: pci: struct virtio_pci_common_cfg add
- queue_notify_data
-Date: Wed, 19 Jan 2022 10:35:38 +0800
-Message-Id: <20220119023543.91620-2-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 2/6] virtio: queue_reset: add VIRTIO_F_RING_RESET
+Date: Wed, 19 Jan 2022 10:35:39 +0800
+Message-Id: <20220119023543.91620-3-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220119023543.91620-1-xuanzhuo@linux.alibaba.com>
 References: <20220119023543.91620-1-xuanzhuo@linux.alibaba.com>
@@ -72,28 +71,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add queue_notify_data in struct virtio_pci_common_cfg, which comes from
-here https://github.com/oasis-tcs/virtio-spec/issues/89
-
-Since I want to add queue_reset after it, I submitted this patch first.
+Added VIRTIO_F_RING_RESET, it came from here
+https://github.com/oasis-tcs/virtio-spec/issues/124
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- include/uapi/linux/virtio_pci.h | 1 +
- 1 file changed, 1 insertion(+)
+ include/uapi/linux/virtio_config.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/include/uapi/linux/virtio_pci.h b/include/uapi/linux/virtio_pci.h
-index 3a86f36d7e3d..492c89f56c6a 100644
---- a/include/uapi/linux/virtio_pci.h
-+++ b/include/uapi/linux/virtio_pci.h
-@@ -164,6 +164,7 @@ struct virtio_pci_common_cfg {
- 	__le32 queue_avail_hi;		/* read-write */
- 	__le32 queue_used_lo;		/* read-write */
- 	__le32 queue_used_hi;		/* read-write */
-+	__le16 queue_notify_data;	/* read-write */
- };
+diff --git a/include/uapi/linux/virtio_config.h b/include/uapi/linux/virtio_config.h
+index b5eda06f0d57..0862be802ff8 100644
+--- a/include/uapi/linux/virtio_config.h
++++ b/include/uapi/linux/virtio_config.h
+@@ -52,7 +52,7 @@
+  * rest are per-device feature bits.
+  */
+ #define VIRTIO_TRANSPORT_F_START	28
+-#define VIRTIO_TRANSPORT_F_END		38
++#define VIRTIO_TRANSPORT_F_END		41
  
- /* Fields in VIRTIO_PCI_CAP_PCI_CFG: */
+ #ifndef VIRTIO_CONFIG_NO_LEGACY
+ /* Do we get callbacks when the ring is completely used, even if we've
+@@ -92,4 +92,9 @@
+  * Does the device support Single Root I/O Virtualization?
+  */
+ #define VIRTIO_F_SR_IOV			37
++
++/*
++ * This feature indicates that the driver can reset a queue individually.
++ */
++#define VIRTIO_F_RING_RESET		40
+ #endif /* _UAPI_LINUX_VIRTIO_CONFIG_H */
 -- 
 2.31.0
 
