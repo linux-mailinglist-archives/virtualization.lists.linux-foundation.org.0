@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9ED31494779
-	for <lists.virtualization@lfdr.de>; Thu, 20 Jan 2022 07:43:27 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8205149477C
+	for <lists.virtualization@lfdr.de>; Thu, 20 Jan 2022 07:43:35 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 4DE9C40558;
-	Thu, 20 Jan 2022 06:43:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 14A9541584;
+	Thu, 20 Jan 2022 06:43:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yFZl7kLuqxN7; Thu, 20 Jan 2022 06:43:25 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HTK52ME0DA1Y; Thu, 20 Jan 2022 06:43:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E59B5404AB;
-	Thu, 20 Jan 2022 06:43:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id D88E4410C6;
+	Thu, 20 Jan 2022 06:43:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5F6B7C007A;
-	Thu, 20 Jan 2022 06:43:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4A37CC007A;
+	Thu, 20 Jan 2022 06:43:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 54492C007E
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9E009C002F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jan 2022 06:43:21 +0000 (UTC)
+ Thu, 20 Jan 2022 06:43:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5137160E39
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8CD9282A4E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jan 2022 06:43:21 +0000 (UTC)
+ Thu, 20 Jan 2022 06:43:31 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1BUUzLRk0NfU
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id unI9dlmbTAWc
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jan 2022 06:43:20 +0000 (UTC)
+ Thu, 20 Jan 2022 06:43:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-132.freemail.mail.aliyun.com
- (out30-132.freemail.mail.aliyun.com [115.124.30.132])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 549DE60E35
+Received: from out4436.biz.mail.alibaba.com (out4436.biz.mail.alibaba.com
+ [47.88.44.36])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 948A682978
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jan 2022 06:43:20 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=11; SR=0; TI=SMTPD_---0V2KlUde_1642660994; 
+ Thu, 20 Jan 2022 06:43:30 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=11; SR=0; TI=SMTPD_---0V2KlUdy_1642660995; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V2KlUde_1642660994) by smtp.aliyun-inc.com(127.0.0.1);
- Thu, 20 Jan 2022 14:43:15 +0800
+ fp:SMTPD_---0V2KlUdy_1642660995) by smtp.aliyun-inc.com(127.0.0.1);
+ Thu, 20 Jan 2022 14:43:16 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org,
 	netdev@vger.kernel.org
-Subject: [PATCH v2 10/12] virtio_net: virtnet_tx_timeout() stop ref sq->vq
-Date: Thu, 20 Jan 2022 14:43:01 +0800
-Message-Id: <20220120064303.106639-11-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v2 11/12] virtio_net: split free_unused_bufs()
+Date: Thu, 20 Jan 2022 14:43:02 +0800
+Message-Id: <20220120064303.106639-12-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220120064303.106639-1-xuanzhuo@linux.alibaba.com>
 References: <20220120064303.106639-1-xuanzhuo@linux.alibaba.com>
@@ -76,25 +76,81 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Make virtnet_tx_timeout() no longer refer to vq directly. Because sq->vq
-may be equal to NULL after implementing rx/tx queue disable/enable.
+This patch separates two functions for freeing sq buf and rq buf from
+free_unused_bufs().
+
+When supporting the enable/disable tx/rq queue in the future, it is
+necessary to support separate recovery of a sq buf or a rq buf.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/virtio_net.c | 46 ++++++++++++++++++++++++----------------
+ 1 file changed, 28 insertions(+), 18 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 97eb4dddba1f..2add7fe749b8 100644
+index 2add7fe749b8..ea90a1a57c9e 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -2692,7 +2692,7 @@ static void virtnet_tx_timeout(struct net_device *dev, unsigned int txqueue)
- 	u64_stats_update_end(&sq->stats.syncp);
+@@ -2804,33 +2804,43 @@ static void free_receive_page_frags(struct virtnet_info *vi)
+ 			put_page(vi->rq[i].alloc_frag.page);
+ }
  
- 	netdev_err(dev, "TX timeout on queue: %u, sq: %s, vq: 0x%x, name: %s, %u usecs ago\n",
--		   txqueue, sq->name, sq->vq->index, sq->vq->name,
-+		   txqueue, sq->name, txq2vq(sq - vi->sq), sq->name,
- 		   jiffies_to_usecs(jiffies - READ_ONCE(txq->trans_start)));
++static void virtnet_sq_free_unused_buf(struct virtnet_info *vi,
++				       struct send_queue *sq, void *buf)
++{
++	if (!is_xdp_frame(buf))
++		dev_kfree_skb(buf);
++	else
++		xdp_return_frame(ptr_to_xdp(buf));
++}
++
++static void virtnet_rq_free_unused_buf(struct virtnet_info *vi,
++				       struct receive_queue *rq, void *buf)
++{
++	if (vi->mergeable_rx_bufs)
++		put_page(virt_to_head_page(buf));
++	else if (vi->big_packets)
++		give_pages(rq, buf);
++	else
++		put_page(virt_to_head_page(buf));
++}
++
+ static void free_unused_bufs(struct virtnet_info *vi)
+ {
++	struct receive_queue *rq;
++	struct send_queue *sq;
+ 	void *buf;
+ 	int i;
+ 
+ 	for (i = 0; i < vi->max_queue_pairs; i++) {
+-		struct virtqueue *vq = vi->sq[i].vq;
+-		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL) {
+-			if (!is_xdp_frame(buf))
+-				dev_kfree_skb(buf);
+-			else
+-				xdp_return_frame(ptr_to_xdp(buf));
+-		}
++		sq = &vi->sq[i];
++		while ((buf = virtqueue_detach_unused_buf(sq->vq)) != NULL)
++			virtnet_sq_free_unused_buf(vi, sq, buf);
+ 	}
+ 
+ 	for (i = 0; i < vi->max_queue_pairs; i++) {
+-		struct virtqueue *vq = vi->rq[i].vq;
+-
+-		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL) {
+-			if (vi->mergeable_rx_bufs) {
+-				put_page(virt_to_head_page(buf));
+-			} else if (vi->big_packets) {
+-				give_pages(&vi->rq[i], buf);
+-			} else {
+-				put_page(virt_to_head_page(buf));
+-			}
+-		}
++		rq = &vi->rq[i];
++		while ((buf = virtqueue_detach_unused_buf(rq->vq)) != NULL)
++			virtnet_rq_free_unused_buf(vi, rq, buf);
+ 	}
  }
  
 -- 
