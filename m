@@ -1,73 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 13C48496EC4
-	for <lists.virtualization@lfdr.de>; Sun, 23 Jan 2022 01:14:39 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 594BC496ED7
+	for <lists.virtualization@lfdr.de>; Sun, 23 Jan 2022 01:14:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id BB18A60B6A;
-	Sun, 23 Jan 2022 00:14:37 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 11F8483E07;
+	Sun, 23 Jan 2022 00:14:53 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fPf4FmJQQcLG; Sun, 23 Jan 2022 00:14:37 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8BCC660B31;
-	Sun, 23 Jan 2022 00:14:36 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id yOfDSdtfM8u6; Sun, 23 Jan 2022 00:14:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id F0D5683E60;
+	Sun, 23 Jan 2022 00:14:51 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 014E8C007A;
-	Sun, 23 Jan 2022 00:14:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 78B1EC007A;
+	Sun, 23 Jan 2022 00:14:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20FF6C002F
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 723D2C002F
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Jan 2022 00:14:35 +0000 (UTC)
+ Sun, 23 Jan 2022 00:14:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0FE4840904
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5306660B43
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Jan 2022 00:14:35 +0000 (UTC)
+ Sun, 23 Jan 2022 00:14:49 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id em1EzIyUpiYo
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 7Lxl0iOvOehd
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Jan 2022 00:14:34 +0000 (UTC)
+ Sun, 23 Jan 2022 00:14:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 36DAE408DF
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id A701B60B01
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Jan 2022 00:14:34 +0000 (UTC)
+ Sun, 23 Jan 2022 00:14:48 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id 3AAF5CE0ACB;
- Sun, 23 Jan 2022 00:14:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id F3DA6C340E2;
- Sun, 23 Jan 2022 00:14:30 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 092A960FDF;
+ Sun, 23 Jan 2022 00:14:48 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 905F8C340E2;
+ Sun, 23 Jan 2022 00:14:46 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1642896871;
- bh=B4b/v8rgLAQzM1fDet8n5dlholfeAY0dB3jJ34q97cs=;
+ s=k20201202; t=1642896887;
+ bh=yl0l0j2VPk+eSVZF0zPGiJCcHO4dECQ+JZzfFDsuVDM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=sjzLE2KLkv6R63GH8JvIazeZ33btUg1HyaUncmlDdlbtXoGym9zWGlUmgzt+rID8O
- l2kfeU2o2J0F3PMmwl8ZPVh3csZVjFcEJa/4zahxrfiH1xXsKAkgvTvk0g2sVGxuQt
- kz66hc03lPSdtMwl38d4BWCkXQQCQK/sPY8aj8XV726MKXhFzvsZgQ1ogwW1+02U9F
- qrgFWyGsZrKvfLm3SPd5lbRXcb/7hDJ4wk5dCuzxoNmk55r1oXkT6lHTtVxj6ca81J
- DRYEN9F4u5NnIXhyRIlkLZYh3d0lkn8luoOcBCwhOBSvQlJw8jfvMj+2s8XXZRveiD
- RvjrKyAdRDxDA==
+ b=lqYFGEFnFoXM3qF3pQxDWhdTjzLu+G8/PYlXOOaQrfakgNOO/hmK0YoOdyiZiHs1g
+ GZgOk4IhFjSJZnK5EBWbg8gHp/3hoEFomUc3vTRg9hHwlWeNj/pNMZaH7IyCoUOwWx
+ 26XMxK1A6Rn3o0+Hnc/cfaKUvL4kweOWHkDvqtqGqms28WV/RxP6IkIXx7v/K4+3Dr
+ wvYxuleEigXggmjFo6O8JFzmurrHcv/gQ2A6xxqkch+or2sZRq7Y5WA+cHSp4sYQfw
+ PUzJoCAZ4/O4eFxKmJRT+3l6mFk9Y0EOnq1Ob+onDg/+NCa36Ye/baNQ91n8F3bNKj
+ GMinQP+1hmR2A==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 4/4] vhost/test: fix memory leak of vhost
+Subject: [PATCH AUTOSEL 4.4 3/3] vhost/test: fix memory leak of vhost
  virtqueues
-Date: Sat, 22 Jan 2022 19:14:21 -0500
-Message-Id: <20220123001423.2461009-4-sashal@kernel.org>
+Date: Sat, 22 Jan 2022 19:14:32 -0500
+Message-Id: <20220123001434.2461073-3-sashal@kernel.org>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20220123001423.2461009-1-sashal@kernel.org>
-References: <20220123001423.2461009-1-sashal@kernel.org>
+In-Reply-To: <20220123001434.2461073-1-sashal@kernel.org>
+References: <20220123001434.2461073-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -107,7 +106,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/drivers/vhost/test.c b/drivers/vhost/test.c
-index 682fc58e1f752..3abe6833be88e 100644
+index 6666ca451452a..8a438642255ad 100644
 --- a/drivers/vhost/test.c
 +++ b/drivers/vhost/test.c
 @@ -166,6 +166,7 @@ static int vhost_test_release(struct inode *inode, struct file *f)
