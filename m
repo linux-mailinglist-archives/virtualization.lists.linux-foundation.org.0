@@ -1,109 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E022949A791
-	for <lists.virtualization@lfdr.de>; Tue, 25 Jan 2022 04:13:15 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 346A949AE51
+	for <lists.virtualization@lfdr.de>; Tue, 25 Jan 2022 09:47:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2806C607A4;
-	Tue, 25 Jan 2022 03:13:14 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9E3F060BDC;
+	Tue, 25 Jan 2022 08:47:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9sYgOWZLelhg; Tue, 25 Jan 2022 03:13:13 +0000 (UTC)
+	with ESMTP id MltSONDmrIMy; Tue, 25 Jan 2022 08:47:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id EA3B160B53;
-	Tue, 25 Jan 2022 03:13:12 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 50216607F7;
+	Tue, 25 Jan 2022 08:47:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 43F2EC007A;
-	Tue, 25 Jan 2022 03:13:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3928CC0079;
+	Tue, 25 Jan 2022 08:47:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D3B0DC002F
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D2E07C0031
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jan 2022 03:13:10 +0000 (UTC)
+ Tue, 25 Jan 2022 08:47:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B9B6A84CE2
+ by smtp4.osuosl.org (Postfix) with ESMTP id C239F41768
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jan 2022 03:13:10 +0000 (UTC)
+ Tue, 25 Jan 2022 08:47:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id whYplNvTKTSm
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 0GAbPtKxbbBJ
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jan 2022 03:13:08 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id AF16684CCD
+ Tue, 25 Jan 2022 08:47:22 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com
+ [IPv6:2a00:1450:4864:20::241])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id ADB834175B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jan 2022 03:13:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1643080387;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=86Lwt1ErcZuXDiwduAeDfYRE712HrjflIu9KLfn/+00=;
- b=WVw5MvJxeJdujOvSKb39hCqjh5xyaSR7pqbrh6dUpbVXAwwn7Nfr24bVJE8RNmtTiFvpHh
- fPiLbH9dF6fMIj8tzVnImVfUJI+hCl4IZZkaSCx/Q6sv8a/Qdekf+7RcJcoZ8OUFUmiY78
- 5HbrQDxdD3NtkzPF7VoFjy0KMPYnKZw=
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
- [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-300-HwZE0d_uNMCXhFPvOcDVTQ-1; Mon, 24 Jan 2022 22:13:06 -0500
-X-MC-Unique: HwZE0d_uNMCXhFPvOcDVTQ-1
-Received: by mail-pl1-f197.google.com with SMTP id
- q2-20020a170902f78200b0014b56300928so1800806pln.16
+ Tue, 25 Jan 2022 08:47:22 +0000 (UTC)
+Received: by mail-lj1-x241.google.com with SMTP id q22so6967615ljh.7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Jan 2022 19:13:05 -0800 (PST)
+ Tue, 25 Jan 2022 00:47:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=daynix-com.20210112.gappssmtp.com; s=20210112;
+ h=from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding;
+ bh=oUbvyNj5dnaM8qXXPaaN3calf58RmDrlF6ofRRGF5q8=;
+ b=30zRHP3cawR9fo/gEqHpAmA2Q78/yKunsBnxe6QD4YYv2dV+ZUH16nD9lEUozhnFLi
+ nHYLbBGOmgFfFBCvtZJX7kuVEvBu4m2+9ms9+7pTOTgRtfMzxt9YVEANSGx/w7I4cGpC
+ jw3p/2FY/utquahuDCkPXVf9cP3dMXh1ALo00N0iSNlmm5xLEruBjkjf+/iYCKkWgFNS
+ nstYMxpGvhRqCzKyuj3KxC4h/xGy312OnG1vehytswq716BF3P9bMbZeGDgSYjV9wyX6
+ cy63f40FQeAPdxgeXgEgCLnSMUkFb/BH97zBfi7vKsVuAPm6i8bghcJniZYkJcjOpML/
+ 5gnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
+ h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
  :content-transfer-encoding;
- bh=86Lwt1ErcZuXDiwduAeDfYRE712HrjflIu9KLfn/+00=;
- b=cd7W/4RKho9qdjIjfKKcJp+wYiIDI1bPzE3yJ96FHyNPJmgcrflwMRi/eSzfWwlfKx
- gCPPgwjBS6K4BfRC22qN8qclUAxYRmQMfpNQyrdUh56f+IIGA/y2Xup7qr3niiMXTxV3
- h+1f6shzgRsHqly79ZCKW0McjcbyVvbWj408saonCR4X8oerIcjxrgW0d1XTXWmyXD14
- HInBd0hWgYzuaicJUzZcBypxOT1lq980LsMKeBzG3HIRooIX+PLhmZw3RhfIxh4difWi
- wGKuB0BEYQ0xjBtrbeub9jxuvTXKR4AQKLgfVTNLVtoW1PTuKmKJktim8PLAs+A9M+zd
- W8cw==
-X-Gm-Message-State: AOAM533e2jg9pp31taxk/jIjWbmEpDgfVo5TNs8OHvMzrt9qy8j7MNIU
- UjF/6xC/tCzguh60mwtpSjecZ22naTTd/5LGl+La8DgFjzum8b12aN4U8E2C+IYW6er5c34atCW
- t0Ksuj2t2frAk49qsExHMW3pdIUI4ojlIO+CGk5H/5A==
-X-Received: by 2002:a62:3601:0:b0:4c8:c4e:5a8c with SMTP id
- d1-20020a623601000000b004c80c4e5a8cmr10543978pfa.27.1643080384788; 
- Mon, 24 Jan 2022 19:13:04 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJzh+RWh7k34SLq9+VCEcz6WXv7znNyJTfegmZlOG6x/AvybDpgmQI1bw4OR1Dq1yATJH5DOxw==
-X-Received: by 2002:a62:3601:0:b0:4c8:c4e:5a8c with SMTP id
- d1-20020a623601000000b004c80c4e5a8cmr10543964pfa.27.1643080384572; 
- Mon, 24 Jan 2022 19:13:04 -0800 (PST)
-Received: from [10.72.14.7] ([209.132.188.80])
- by smtp.gmail.com with ESMTPSA id bf23sm664467pjb.52.2022.01.24.19.13.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Jan 2022 19:13:04 -0800 (PST)
-Message-ID: <a0e42103-25bc-5711-fc36-74557c04c901@redhat.com>
-Date: Tue, 25 Jan 2022 11:13:00 +0800
+ bh=oUbvyNj5dnaM8qXXPaaN3calf58RmDrlF6ofRRGF5q8=;
+ b=4D3Db5SDeuBGVxs8do0ABZjXk5a/3tijNtbshlPrgOhTQ2k2EmalXI0l+lxuh5W1BO
+ 5Icv10G+qqfxehTVgIPmhO3Odvbvy3X9Hf7G7913fCOZE7cpCTu0EgO7/0M33tQo5UGF
+ z60AxamLDTAnQcLihv2MRsnQ1heZtlETYdxpluRkXx+wObrd+aYwqU0I0GwbQYbSBSuj
+ aWrDj8OLbWdCUciEsiZO2Kc/ShLdduJHjWkhaXhJpOlQkocaz9L7wer3e7jkyd/6VinE
+ FszdAkgYEIXoQ9LkNwbvsatCOSNXfarrnEDnis3wJM28jESBzLMqffiuTgEqpWXC3IEQ
+ 6BUQ==
+X-Gm-Message-State: AOAM531KhmFyx6gPUUBNSZA+TyJQ1rIXN+4hiBrnSxrLx07m8Cs7b1J+
+ N/RjGBlvtdCwrbewtwOAhXGRAQ==
+X-Google-Smtp-Source: ABdhPJxmuLUFKp9der5dVvy/11NTxMaDlAPxrJvNLiMLIAlXxg1yxjfnkjVt3mTw9T6dl7CBTLbrbA==
+X-Received: by 2002:a05:651c:b2a:: with SMTP id
+ b42mr13381928ljr.168.1643100440664; 
+ Tue, 25 Jan 2022 00:47:20 -0800 (PST)
+Received: from navi.cosmonova.net.ua ([95.67.24.131])
+ by smtp.gmail.com with ESMTPSA id q5sm1418944lfe.279.2022.01.25.00.47.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Jan 2022 00:47:20 -0800 (PST)
+From: Andrew Melnychenko <andrew@daynix.com>
+To: davem@davemloft.net, kuba@kernel.org, mst@redhat.com, jasowang@redhat.com,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
+Subject: [RFC PATCH 0/5] TUN/VirtioNet USO features support.
+Date: Tue, 25 Jan 2022 10:46:57 +0200
+Message-Id: <20220125084702.3636253-1-andrew@daynix.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.5.0
-Subject: Re: [PATCH] vduse: Fix returning wrong type in
- vduse_domain_alloc_iova()
-To: Xie Yongji <xieyongji@bytedance.com>, mst@redhat.com,
- dan.carpenter@oracle.com
-References: <20220121083940.102-1-xieyongji@bytedance.com>
-From: Jason Wang <jasowang@redhat.com>
-In-Reply-To: <20220121083940.102-1-xieyongji@bytedance.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Cc: virtualization@lists.linux-foundation.org
+Cc: yan@daynix.com, yuri.benditovich@daynix.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,31 +97,49 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CuWcqCAyMDIyLzEvMjEg5LiL5Y2INDozOSwgWGllIFlvbmdqaSDlhpnpgZM6Cj4gVGhpcyBmaXhl
-cyB0aGUgZm9sbG93aW5nIHNtYXRjaCB3YXJuaW5nczoKPgo+IGRyaXZlcnMvdmRwYS92ZHBhX3Vz
-ZXIvaW92YV9kb21haW4uYzozMDUgdmR1c2VfZG9tYWluX2FsbG9jX2lvdmEoKSB3YXJuOiBzaG91
-bGQgJ2lvdmFfcGZuIDw8IHNoaWZ0JyBiZSBhIDY0IGJpdCB0eXBlPwo+Cj4gRml4ZXM6IDhjNzcz
-ZDUzZmI3YiAoInZkdXNlOiBJbXBsZW1lbnQgYW4gTU1VLWJhc2VkIHNvZnR3YXJlIElPVExCIikK
-PiBSZXBvcnRlZC1ieToga2VybmVsIHRlc3Qgcm9ib3QgPGxrcEBpbnRlbC5jb20+Cj4gUmVwb3J0
-ZWQtYnk6IERhbiBDYXJwZW50ZXIgPGRhbi5jYXJwZW50ZXJAb3JhY2xlLmNvbT4KPiBTaWduZWQt
-b2ZmLWJ5OiBYaWUgWW9uZ2ppIDx4aWV5b25namlAYnl0ZWRhbmNlLmNvbT4KCgpBY2tlZC1ieTog
-SmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KCgo+IC0tLQo+ICAgZHJpdmVycy92ZHBh
-L3ZkcGFfdXNlci9pb3ZhX2RvbWFpbi5jIHwgMiArLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDEgaW5z
-ZXJ0aW9uKCspLCAxIGRlbGV0aW9uKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92ZHBhL3Zk
-cGFfdXNlci9pb3ZhX2RvbWFpbi5jIGIvZHJpdmVycy92ZHBhL3ZkcGFfdXNlci9pb3ZhX2RvbWFp
-bi5jCj4gaW5kZXggMmIxMTQzZjExZDhmLi4wYTRkOTNlZGM0YzAgMTAwNjQ0Cj4gLS0tIGEvZHJp
-dmVycy92ZHBhL3ZkcGFfdXNlci9pb3ZhX2RvbWFpbi5jCj4gKysrIGIvZHJpdmVycy92ZHBhL3Zk
-cGFfdXNlci9pb3ZhX2RvbWFpbi5jCj4gQEAgLTI5NCw3ICsyOTQsNyBAQCB2ZHVzZV9kb21haW5f
-YWxsb2NfaW92YShzdHJ1Y3QgaW92YV9kb21haW4gKmlvdmFkLAo+ICAgCj4gICAJaW92YV9wZm4g
-PSBhbGxvY19pb3ZhX2Zhc3QoaW92YWQsIGlvdmFfbGVuLCBsaW1pdCA+PiBzaGlmdCwgdHJ1ZSk7
-Cj4gICAKPiAtCXJldHVybiBpb3ZhX3BmbiA8PCBzaGlmdDsKPiArCXJldHVybiAoZG1hX2FkZHJf
-dClpb3ZhX3BmbiA8PCBzaGlmdDsKPiAgIH0KPiAgIAo+ICAgc3RhdGljIHZvaWQgdmR1c2VfZG9t
-YWluX2ZyZWVfaW92YShzdHJ1Y3QgaW92YV9kb21haW4gKmlvdmFkLAoKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
-aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
-dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Added new offloads for TUN devices TUN_F_USO4 and TUN_F_USO6.
+Technically they enable NETIF_F_GSO_UDP_L4
+(and only if USO4 & USO6 are set simultaneously).
+It allows to transmission of large UDP packets.
+
+Different features USO4 and USO6 are required for qemu where Windows guests can
+enable disable USO receives for IPv4 and IPv6 separately.
+On the other side, Linux can't really differentiate USO4 and USO6, for now.
+For now, to enable USO for TUN it requires enabling USO4 and USO6 together.
+In the future, there would be a mechanism to control UDP_L4 GSO separately.
+
+Test it WIP Qemu https://github.com/daynix/qemu/tree/Dev_USOv2
+
+New types for VirtioNet already on mailing:
+https://lists.oasis-open.org/archives/virtio-comment/202110/msg00010.html
+
+Also, there is a known issue with transmitting packages between two guests.
+Without hacks with skb's GSO - packages are still segmented on the host's postrouting.
+
+Andrew Melnychenko (5):
+  uapi/linux/if_tun.h: Added new ioctl for tun/tap.
+  driver/net/tun: Added features for USO.
+  uapi/linux/virtio_net.h: Added USO types.
+  linux/virtio_net.h: Added Support for GSO_UDP_L4 offload.
+  drivers/net/virtio_net.c: Added USO support.
+
+ drivers/net/tap.c               | 18 ++++++++++++++++--
+ drivers/net/tun.c               | 15 ++++++++++++++-
+ drivers/net/virtio_net.c        | 22 ++++++++++++++++++----
+ include/linux/virtio_net.h      | 11 +++++++++++
+ include/uapi/linux/if_tun.h     |  3 +++
+ include/uapi/linux/virtio_net.h |  4 ++++
+ 6 files changed, 66 insertions(+), 7 deletions(-)
+
+-- 
+2.34.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
