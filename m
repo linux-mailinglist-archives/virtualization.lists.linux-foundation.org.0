@@ -1,57 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62DD649C472
-	for <lists.virtualization@lfdr.de>; Wed, 26 Jan 2022 08:35:54 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 02FE360F1D;
-	Wed, 26 Jan 2022 07:35:53 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id doZCd9_1BXuM; Wed, 26 Jan 2022 07:35:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 519C660F0E;
-	Wed, 26 Jan 2022 07:35:51 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 50ABDC007E;
-	Wed, 26 Jan 2022 07:35:50 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 17A5DC002D
- for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Jan 2022 07:35:48 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F1BD49C474
+	for <lists.virtualization@lfdr.de>; Wed, 26 Jan 2022 08:35:55 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 061DE415DF
- for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Jan 2022 07:35:48 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 13411415F7;
+	Wed, 26 Jan 2022 07:35:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id f3uYqplMMH53
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id X1TRMVk3pHgg; Wed, 26 Jan 2022 07:35:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 56825415FB;
+	Wed, 26 Jan 2022 07:35:52 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AAC0C007A;
+	Wed, 26 Jan 2022 07:35:52 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0BE75C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Jan 2022 07:35:47 +0000 (UTC)
+ Wed, 26 Jan 2022 07:35:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id DB8B340183
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 26 Jan 2022 07:35:48 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Hn4DfvK4A8Ez
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 26 Jan 2022 07:35:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from out30-131.freemail.mail.aliyun.com
  (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1F048415EC
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E6C104049A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 26 Jan 2022 07:35:46 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=11; SR=0; TI=SMTPD_---0V2uPGNw_1643182542; 
+ Wed, 26 Jan 2022 07:35:47 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R361e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=11; SR=0; TI=SMTPD_---0V2ubkkx_1643182543; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V2uPGNw_1643182542) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 26 Jan 2022 15:35:42 +0800
+ fp:SMTPD_---0V2ubkkx_1643182543) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 26 Jan 2022 15:35:43 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org,
 	netdev@vger.kernel.org
-Subject: [PATCH v3 08/17] virtio_ring: queue_reset: packed: support enable
- reset queue
-Date: Wed, 26 Jan 2022 15:35:24 +0800
-Message-Id: <20220126073533.44994-9-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v3 09/17] virtio_ring: queue_reset: add vring_reset_virtqueue()
+Date: Wed, 26 Jan 2022 15:35:25 +0800
+Message-Id: <20220126073533.44994-10-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220126073533.44994-1-xuanzhuo@linux.alibaba.com>
 References: <20220126073533.44994-1-xuanzhuo@linux.alibaba.com>
@@ -77,75 +76,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The purpose of this patch is to make vring packed support re-enable reset
-vq.
+Added vring_reset_virtqueue() for reset vring_virtqueue.
 
-The core idea is that when calling vring_create_virtqueue_packed, use the
-existing vq instead of re-allocating vq. vq is passed in through
-function parameters.
+In this process, vq is removed from the vdev->vqs queue. And the memory
+of the ring is released
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+ drivers/virtio/virtio_ring.c | 12 +++++++++++-
+ include/linux/virtio_ring.h  |  5 +++++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index a93a677008ba..4beb7c7127c1 100644
+index 4beb7c7127c1..bba9f3c67b33 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -1680,7 +1680,8 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	bool context,
- 	bool (*notify)(struct virtqueue *),
- 	void (*callback)(struct virtqueue *),
--	const char *name)
-+	const char *name,
-+	struct virtqueue *_vq)
+@@ -2391,11 +2391,21 @@ void vring_del_virtqueue(struct virtqueue *_vq)
  {
- 	struct vring_virtqueue *vq;
- 	struct vring_packed_desc *ring;
-@@ -1710,15 +1711,20 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	if (!device)
- 		goto err_device;
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
  
--	vq = kmalloc(sizeof(*vq), GFP_KERNEL);
--	if (!vq)
--		goto err_vq;
-+	if (_vq) {
-+		vq = to_vvq(_vq);
-+	} else {
-+		vq = kmalloc(sizeof(*vq), GFP_KERNEL);
-+		if (!vq)
-+			goto err_vq;
-+	}
+-	__vring_del_virtqueue(vq);
++	if (!_vq->reset)
++		__vring_del_virtqueue(vq);
+ 	kfree(vq);
+ }
+ EXPORT_SYMBOL_GPL(vring_del_virtqueue);
  
- 	vq->vq.callback = callback;
- 	vq->vq.vdev = vdev;
- 	vq->vq.name = name;
- 	vq->vq.num_free = num;
- 	vq->vq.index = index;
-+	vq->vq.reset = false;
- 	vq->we_own_ring = true;
- 	vq->notify = notify;
- 	vq->weak_barriers = weak_barriers;
-@@ -1789,7 +1795,8 @@ static struct virtqueue *vring_create_virtqueue_packed(
- err_desc_extra:
- 	kfree(vq->packed.desc_state);
- err_desc_state:
--	kfree(vq);
-+	if (!_vq)
-+		kfree(vq);
- err_vq:
- 	vring_free_queue(vdev, event_size_in_bytes, device, device_event_dma_addr);
- err_device:
-@@ -2311,7 +2318,7 @@ struct virtqueue *vring_setup_virtqueue(
- 	if (virtio_has_feature(vdev, VIRTIO_F_RING_PACKED))
- 		return vring_create_virtqueue_packed(index, num, vring_align,
- 				vdev, weak_barriers, may_reduce_num,
--				context, notify, callback, name);
-+				context, notify, callback, name, vq);
++void vring_reset_virtqueue(struct virtqueue *_vq)
++{
++	struct vring_virtqueue *vq = to_vvq(_vq);
++
++	__vring_del_virtqueue(vq);
++	_vq->reset = true;
++}
++EXPORT_SYMBOL_GPL(vring_reset_virtqueue);
++
+ /* Manipulates transport-specific feature bits. */
+ void vring_transport_features(struct virtio_device *vdev)
+ {
+diff --git a/include/linux/virtio_ring.h b/include/linux/virtio_ring.h
+index e90323fce4bf..84b55fb8686d 100644
+--- a/include/linux/virtio_ring.h
++++ b/include/linux/virtio_ring.h
+@@ -124,6 +124,11 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
+  */
+ void vring_del_virtqueue(struct virtqueue *vq);
  
- 	return vring_create_virtqueue_split(index, num, vring_align,
- 			vdev, weak_barriers, may_reduce_num,
++/*
++ * Resets a virtqueue. Just frees the ring, not free vq.
++ */
++void vring_reset_virtqueue(struct virtqueue *vq);
++
+ /* Filter out transport-specific feature bits. */
+ void vring_transport_features(struct virtio_device *vdev);
+ 
 -- 
 2.31.0
 
