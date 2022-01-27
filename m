@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8D88649DED1
-	for <lists.virtualization@lfdr.de>; Thu, 27 Jan 2022 11:11:29 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 09B6784F37;
-	Thu, 27 Jan 2022 10:11:28 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GDkWAF6Y2GBY; Thu, 27 Jan 2022 10:11:27 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 0A08084F03;
-	Thu, 27 Jan 2022 10:11:26 +0000 (UTC)
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B4407C000B;
-	Thu, 27 Jan 2022 10:11:24 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C9E8DC000B
- for <virtualization@lists.linux-foundation.org>;
- Thu, 27 Jan 2022 10:11:23 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 5751B49DED4
+	for <lists.virtualization@lfdr.de>; Thu, 27 Jan 2022 11:11:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B8CC0610B6
- for <virtualization@lists.linux-foundation.org>;
- Thu, 27 Jan 2022 10:11:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2CC91610B8;
+	Thu, 27 Jan 2022 10:11:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lTcUttGFVM_5
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id R0Su0zB6NitX; Thu, 27 Jan 2022 10:11:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id E0C14610BA;
+	Thu, 27 Jan 2022 10:11:27 +0000 (UTC)
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B22ECC000B;
+	Thu, 27 Jan 2022 10:11:27 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CC8DBC007C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 27 Jan 2022 10:11:23 +0000 (UTC)
+ Thu, 27 Jan 2022 10:11:24 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 8ADE284EF9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 27 Jan 2022 10:11:24 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id P9wPjIP7VmCU
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 27 Jan 2022 10:11:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from theia.8bytes.org (8bytes.org
  [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 235F360F3D
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D2FAE84EEB
  for <virtualization@lists.linux-foundation.org>;
  Thu, 27 Jan 2022 10:11:23 +0000 (UTC)
 Received: from cap.home.8bytes.org (p549ad610.dip0.t-ipconnect.de
  [84.154.214.16])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by theia.8bytes.org (Postfix) with ESMTPSA id 3E7E7870;
+ by theia.8bytes.org (Postfix) with ESMTPSA id D545F960;
  Thu, 27 Jan 2022 11:11:20 +0100 (CET)
 From: Joerg Roedel <joro@8bytes.org>
 To: x86@kernel.org
-Subject: [PATCH v3 03/10] x86/sev: Set GHCB data structure version
-Date: Thu, 27 Jan 2022 11:10:37 +0100
-Message-Id: <20220127101044.13803-4-joro@8bytes.org>
+Subject: [PATCH v3 04/10] x86/sev: Cache AP Jump Table Address
+Date: Thu, 27 Jan 2022 11:10:38 +0100
+Message-Id: <20220127101044.13803-5-joro@8bytes.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220127101044.13803-1-joro@8bytes.org>
 References: <20220127101044.13803-1-joro@8bytes.org>
@@ -86,44 +86,93 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 From: Joerg Roedel <jroedel@suse.de>
 
-It turned out that the GHCB->protocol field does not declare the
-version of the guest-hypervisor communication protocol, but rather the
-version of the GHCB data structure. Reflect that in the define used to
-set the protocol field.
+Store the physical address of the AP jump table in kernel memory so
+that it does not need to be fetched from the Hypervisor again.
 
 Signed-off-by: Joerg Roedel <jroedel@suse.de>
 ---
- arch/x86/include/asm/sev.h   | 3 +++
- arch/x86/kernel/sev-shared.c | 2 +-
- 2 files changed, 4 insertions(+), 1 deletion(-)
+ arch/x86/kernel/sev.c | 28 +++++++++++++++-------------
+ 1 file changed, 15 insertions(+), 13 deletions(-)
 
-diff --git a/arch/x86/include/asm/sev.h b/arch/x86/include/asm/sev.h
-index 17b75f6ee11a..09eb2cc6f54f 100644
---- a/arch/x86/include/asm/sev.h
-+++ b/arch/x86/include/asm/sev.h
-@@ -16,6 +16,9 @@
- #define GHCB_PROTOCOL_MAX	2ULL
- #define GHCB_DEFAULT_USAGE	0ULL
+diff --git a/arch/x86/kernel/sev.c b/arch/x86/kernel/sev.c
+index 8a4317fa699a..969ef9855bb5 100644
+--- a/arch/x86/kernel/sev.c
++++ b/arch/x86/kernel/sev.c
+@@ -43,6 +43,9 @@ static struct ghcb boot_ghcb_page __bss_decrypted __aligned(PAGE_SIZE);
+  */
+ static struct ghcb __initdata *boot_ghcb;
  
-+/* Version of the GHCB data structure */
-+#define GHCB_VERSION		1
++/* Cached AP jump table Address */
++static phys_addr_t jump_table_pa;
 +
- #define	VMGEXIT()			{ asm volatile("rep; vmmcall\n\r"); }
+ /* #VC handler runtime per-CPU data */
+ struct sev_es_runtime_data {
+ 	struct ghcb ghcb_page;
+@@ -523,12 +526,14 @@ void noinstr __sev_es_nmi_complete(void)
+ 	__sev_put_ghcb(&state);
+ }
  
- enum es_result {
-diff --git a/arch/x86/kernel/sev-shared.c b/arch/x86/kernel/sev-shared.c
-index 60ca7dd64d64..4468150a42bb 100644
---- a/arch/x86/kernel/sev-shared.c
-+++ b/arch/x86/kernel/sev-shared.c
-@@ -162,7 +162,7 @@ enum es_result sev_es_ghcb_hv_call(struct ghcb *ghcb, bool set_ghcb_msr,
- 				   u64 exit_info_1, u64 exit_info_2)
+-static u64 get_jump_table_addr(void)
++static phys_addr_t get_jump_table_addr(void)
  {
- 	/* Fill in protocol and format specifiers */
--	ghcb->protocol_version = GHCB_PROTOCOL_MAX;
-+	ghcb->protocol_version = GHCB_VERSION;
- 	ghcb->ghcb_usage       = GHCB_DEFAULT_USAGE;
+ 	struct ghcb_state state;
+ 	unsigned long flags;
+ 	struct ghcb *ghcb;
+-	u64 ret = 0;
++
++	if (jump_table_pa)
++		return jump_table_pa;
  
- 	ghcb_set_sw_exit_code(ghcb, exit_code);
+ 	local_irq_save(flags);
+ 
+@@ -544,39 +549,36 @@ static u64 get_jump_table_addr(void)
+ 
+ 	if (ghcb_sw_exit_info_1_is_valid(ghcb) &&
+ 	    ghcb_sw_exit_info_2_is_valid(ghcb))
+-		ret = ghcb->save.sw_exit_info_2;
++		jump_table_pa = (phys_addr_t)ghcb->save.sw_exit_info_2;
+ 
+ 	__sev_put_ghcb(&state);
+ 
+ 	local_irq_restore(flags);
+ 
+-	return ret;
++	return jump_table_pa;
+ }
+ 
+ int sev_es_setup_ap_jump_table(struct real_mode_header *rmh)
+ {
+ 	u16 startup_cs, startup_ip;
+-	phys_addr_t jump_table_pa;
+-	u64 jump_table_addr;
+ 	u16 __iomem *jump_table;
++	phys_addr_t pa;
+ 
+-	jump_table_addr = get_jump_table_addr();
++	pa = get_jump_table_addr();
+ 
+ 	/* On UP guests there is no jump table so this is not a failure */
+-	if (!jump_table_addr)
++	if (!pa)
+ 		return 0;
+ 
+-	/* Check if AP Jump Table is page-aligned */
+-	if (jump_table_addr & ~PAGE_MASK)
++	/* Check if AP jump table is page-aligned */
++	if (pa & ~PAGE_MASK)
+ 		return -EINVAL;
+ 
+-	jump_table_pa = jump_table_addr & PAGE_MASK;
+-
+ 	startup_cs = (u16)(rmh->trampoline_start >> 4);
+ 	startup_ip = (u16)(rmh->sev_es_trampoline_start -
+ 			   rmh->trampoline_start);
+ 
+-	jump_table = ioremap_encrypted(jump_table_pa, PAGE_SIZE);
++	jump_table = ioremap_encrypted(pa, PAGE_SIZE);
+ 	if (!jump_table)
+ 		return -EIO;
+ 
 -- 
 2.34.1
 
