@@ -1,74 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id DB3C44A7517
-	for <lists.virtualization@lfdr.de>; Wed,  2 Feb 2022 16:57:30 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1E3284A75B4
+	for <lists.virtualization@lfdr.de>; Wed,  2 Feb 2022 17:24:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 41DF940533;
-	Wed,  2 Feb 2022 15:57:29 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 47CB54010F;
+	Wed,  2 Feb 2022 16:24:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id v7xYXQ1Sj476; Wed,  2 Feb 2022 15:57:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id AF41A40933;
-	Wed,  2 Feb 2022 15:57:27 +0000 (UTC)
+	with ESMTP id MB5bwfQJmJKp; Wed,  2 Feb 2022 16:24:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id B5C6C405B1;
+	Wed,  2 Feb 2022 16:24:33 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3CBF9C0073;
-	Wed,  2 Feb 2022 15:57:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 22F91C0073;
+	Wed,  2 Feb 2022 16:24:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 93CD9C000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3628BC000B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Feb 2022 15:57:26 +0000 (UTC)
+ Wed,  2 Feb 2022 16:24:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 75D6784035
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3095F4057C
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Feb 2022 15:57:26 +0000 (UTC)
+ Wed,  2 Feb 2022 16:24:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OECMD45FUeqf
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id dCUQEYUCZ0HW
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Feb 2022 15:57:25 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:e::133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CA83984036
+ Wed,  2 Feb 2022 16:24:31 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1DAD24010F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  2 Feb 2022 15:57:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=HHdkFhXzph/YEDr3VFGzAg3QAN/EIa/uRvErt377FsM=; b=Zj43iks2lY7uGLTVhQhG26jwVt
- /c/fJl86wbk1hQIueh3VyoLGJhqM0TPxZvJCtOwRnV9TNbPUFg9RXIoy6zb5NQ4gbCssNdcQ+JGl/
- QA9lXAkaJa93fMw6MAy4wvv61yUzc6p548ShfbTEJDJcqCPPj9+e1aGOBGkZHxzhe4fRTHeS4cFLt
- 03baLPEDFoRJEbTRO83RGAsSV4hURmay40uRmozmbMi7peI9ftIy2oL5JjcKfFSvDRV6dALkz3Ws1
- tTJuG5ohtee3kwwXg+Ei9nj3pRhAoRxIPs4wlF2KbiphOEUB6MAk51QN5em5s8dT9DGZVOeYNbNE8
- +T8hn1Lw==;
-Received: from [2001:4bb8:191:327d:b3e5:1ccd:eaac:6609] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nFI0T-00G6ai-56; Wed, 02 Feb 2022 15:57:17 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 5/5] memstick/mspro_block: simplify refcounting
-Date: Wed,  2 Feb 2022 16:56:59 +0100
-Message-Id: <20220202155659.107895-6-hch@lst.de>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20220202155659.107895-1-hch@lst.de>
-References: <20220202155659.107895-1-hch@lst.de>
+ Wed,  2 Feb 2022 16:24:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1643819071; x=1675355071;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=crIMANMLKBvQD5aO8/SbvlEbfgJkAqaDfeDT9EokKZE=;
+ b=W6PbrRls82RyKfNrTj8/Wy+r3Sc5PPRnHodV8lS4mQoF+/zcXPYQiBpB
+ vitSNo+DLvzbLWLPZPaiX59FXjkEASaFRnFv5CxGPLnvXwD4prskNg2fY
+ 9GUnHTGP9i5vbz1vaobc52JJQppeFQK0zY7QomZh2uI+eQ0mgmcf+S3zF
+ Z2FPQzZA3qMD2QYoWiKJvSz8en/qEY4ROILfb7d/vbSVUv3c6JQNvrkyJ
+ xr4S3tiHAnMevvCItD2cjCpb5tIGS3l0L/wztnypbeKFUARXXt1yRdnki
+ 7rmfsaYssA5usMydX4+tLa+HbPxNbGhrzbfAXBXrq4wvnnu7AZvyMTmpQ Q==;
+X-IronPort-AV: E=McAfee;i="6200,9189,10246"; a="227923535"
+X-IronPort-AV: E=Sophos;i="5.88,337,1635231600"; d="scan'208";a="227923535"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Feb 2022 08:24:11 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.88,337,1635231600"; d="scan'208";a="771489431"
+Received: from lkp-server01.sh.intel.com (HELO 276f1b88eecb) ([10.239.97.150])
+ by fmsmga005.fm.intel.com with ESMTP; 02 Feb 2022 08:24:08 -0800
+Received: from kbuild by 276f1b88eecb with local (Exim 4.92)
+ (envelope-from <lkp@intel.com>)
+ id 1nFIQR-000Uom-R8; Wed, 02 Feb 2022 16:24:07 +0000
+Date: Thu, 3 Feb 2022 00:23:08 +0800
+From: kernel test robot <lkp@intel.com>
+To: Jorgen Hansen <jhansen@vmware.com>, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
+Subject: Re: [PATCH 2/8] VMCI: dma dg: add MMIO access to registers
+Message-ID: <202202030055.O6CyDujA-lkp@intel.com>
+References: <20220202144910.10349-3-jhansen@vmware.com>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: Maxim Levitsky <maximlevitsky@gmail.com>, Alex Dubov <oakad@yahoo.com>,
- "Michael S. Tsirkin" <mst@redhat.com>, linux-mmc@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- Stefan Hajnoczi <stefanha@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>
+Content-Disposition: inline
+In-Reply-To: <20220202144910.10349-3-jhansen@vmware.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: pv-drivers@vmware.com, gregkh@linuxfoundation.org, kbuild-all@lists.01.org,
+ Vishnu Dasa <vdasa@vmware.com>, Jorgen Hansen <jhansen@vmware.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -85,113 +91,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Implement the ->free_disk method to free the msb_data structure only once
-the last gendisk reference goes away instead of keeping a local
-refcount.
+Hi Jorgen,
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on char-misc/char-misc-testing]
+[also build test WARNING on linux/master linus/master v5.17-rc2 next-20220202]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/0day-ci/linux/commits/Jorgen-Hansen/VMCI-dma-dg-Add-support-for-DMA-datagrams/20220202-230034
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git 7ab004dbcbee38b8a70798835d3ffcd97a985a5e
+config: x86_64-allyesconfig (https://download.01.org/0day-ci/archive/20220203/202202030055.O6CyDujA-lkp@intel.com/config)
+compiler: gcc-9 (Debian 9.3.0-22) 9.3.0
+reproduce (this is a W=1 build):
+        # https://github.com/0day-ci/linux/commit/f2afd39bab80c2e42ac789f6d949d779411df928
+        git remote add linux-review https://github.com/0day-ci/linux
+        git fetch --no-tags linux-review Jorgen-Hansen/VMCI-dma-dg-Add-support-for-DMA-datagrams/20220202-230034
+        git checkout f2afd39bab80c2e42ac789f6d949d779411df928
+        # save the config file to linux build tree
+        mkdir build_dir
+        make W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/misc/vmw_vmci/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/misc/vmw_vmci/vmci_guest.c:93:14: warning: no previous prototype for 'vmci_read_reg' [-Wmissing-prototypes]
+      93 | unsigned int vmci_read_reg(struct vmci_guest_device *dev, u32 reg)
+         |              ^~~~~~~~~~~~~
+>> drivers/misc/vmw_vmci/vmci_guest.c:100:6: warning: no previous prototype for 'vmci_write_reg' [-Wmissing-prototypes]
+     100 | void vmci_write_reg(struct vmci_guest_device *dev, u32 val, u32 reg)
+         |      ^~~~~~~~~~~~~~
+
+
+vim +/vmci_read_reg +93 drivers/misc/vmw_vmci/vmci_guest.c
+
+    92	
+  > 93	unsigned int vmci_read_reg(struct vmci_guest_device *dev, u32 reg)
+    94	{
+    95		if (dev->mmio_base != NULL)
+    96			return readl(dev->mmio_base + reg);
+    97		return ioread32(dev->iobase + reg);
+    98	}
+    99	
+ > 100	void vmci_write_reg(struct vmci_guest_device *dev, u32 val, u32 reg)
+   101	{
+   102		if (dev->mmio_base != NULL)
+   103			writel(val, dev->mmio_base + reg);
+   104		else
+   105			iowrite32(val, dev->iobase + reg);
+   106	}
+   107	
+
 ---
- drivers/memstick/core/mspro_block.c | 49 +++++------------------------
- 1 file changed, 7 insertions(+), 42 deletions(-)
-
-diff --git a/drivers/memstick/core/mspro_block.c b/drivers/memstick/core/mspro_block.c
-index 7ea312f0840e0..725ba74ded308 100644
---- a/drivers/memstick/core/mspro_block.c
-+++ b/drivers/memstick/core/mspro_block.c
-@@ -133,7 +133,6 @@ struct mspro_devinfo {
- 
- struct mspro_block_data {
- 	struct memstick_dev   *card;
--	unsigned int          usage_count;
- 	unsigned int          caps;
- 	struct gendisk        *disk;
- 	struct request_queue  *queue;
-@@ -178,48 +177,16 @@ static int mspro_block_complete_req(struct memstick_dev *card, int error);
- 
- /*** Block device ***/
- 
--static int mspro_block_bd_open(struct block_device *bdev, fmode_t mode)
--{
--	struct gendisk *disk = bdev->bd_disk;
--	struct mspro_block_data *msb = disk->private_data;
--	int rc = -ENXIO;
--
--	mutex_lock(&mspro_block_disk_lock);
--
--	if (msb && msb->card)
--		msb->usage_count++;
--
--	mutex_unlock(&mspro_block_disk_lock);
--
--	return rc;
--}
--
--
--static void mspro_block_disk_release(struct gendisk *disk)
-+static void mspro_block_bd_free_disk(struct gendisk *disk)
- {
- 	struct mspro_block_data *msb = disk->private_data;
- 	int disk_id = MINOR(disk_devt(disk)) >> MSPRO_BLOCK_PART_SHIFT;
- 
- 	mutex_lock(&mspro_block_disk_lock);
--
--	if (msb) {
--		if (msb->usage_count)
--			msb->usage_count--;
--
--		if (!msb->usage_count) {
--			kfree(msb);
--			disk->private_data = NULL;
--			idr_remove(&mspro_block_disk_idr, disk_id);
--			put_disk(disk);
--		}
--	}
--
-+	idr_remove(&mspro_block_disk_idr, disk_id);
- 	mutex_unlock(&mspro_block_disk_lock);
--}
- 
--static void mspro_block_bd_release(struct gendisk *disk, fmode_t mode)
--{
--	mspro_block_disk_release(disk);
-+	kfree(msb);
- }
- 
- static int mspro_block_bd_getgeo(struct block_device *bdev,
-@@ -235,10 +202,9 @@ static int mspro_block_bd_getgeo(struct block_device *bdev,
- }
- 
- static const struct block_device_operations ms_block_bdops = {
--	.open    = mspro_block_bd_open,
--	.release = mspro_block_bd_release,
--	.getgeo  = mspro_block_bd_getgeo,
--	.owner   = THIS_MODULE
-+	.owner		= THIS_MODULE,
-+	.getgeo		= mspro_block_bd_getgeo,
-+	.free_disk	= mspro_block_bd_free_disk,
- };
- 
- /*** Information ***/
-@@ -1221,7 +1187,6 @@ static int mspro_block_init_disk(struct memstick_dev *card)
- 	msb->disk->first_minor = disk_id << MSPRO_BLOCK_PART_SHIFT;
- 	msb->disk->minors = 1 << MSPRO_BLOCK_PART_SHIFT;
- 	msb->disk->fops = &ms_block_bdops;
--	msb->usage_count = 1;
- 	msb->disk->private_data = msb;
- 
- 	sprintf(msb->disk->disk_name, "mspblk%d", disk_id);
-@@ -1339,7 +1304,7 @@ static void mspro_block_remove(struct memstick_dev *card)
- 	mspro_block_data_clear(msb);
- 	mutex_unlock(&mspro_block_disk_lock);
- 
--	mspro_block_disk_release(msb->disk);
-+	put_disk(msb->disk);
- 	memstick_set_drvdata(card, NULL);
- }
- 
--- 
-2.30.2
-
+0-DAY CI Kernel Test Service, Intel Corporation
+https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
