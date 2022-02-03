@@ -1,78 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4D5694A8509
-	for <lists.virtualization@lfdr.de>; Thu,  3 Feb 2022 14:18:30 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D03A94A850B
+	for <lists.virtualization@lfdr.de>; Thu,  3 Feb 2022 14:18:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6C13D84092;
-	Thu,  3 Feb 2022 13:18:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6716A416F1;
+	Thu,  3 Feb 2022 13:18:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5Wru_DEvESiC; Thu,  3 Feb 2022 13:18:25 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZAhRMWQJgAji; Thu,  3 Feb 2022 13:18:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id C967084085;
-	Thu,  3 Feb 2022 13:18:24 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C6F61416F3;
+	Thu,  3 Feb 2022 13:18:28 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A58DEC000B;
-	Thu,  3 Feb 2022 13:18:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9A9DCC000B;
+	Thu,  3 Feb 2022 13:18:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28D91C000B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 16BF8C000B
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  3 Feb 2022 13:18:27 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id D09F940229
  for <virtualization@lists.linux-foundation.org>;
  Thu,  3 Feb 2022 13:18:23 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 94743402BA
- for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 13:18:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=vmware.com
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FuI-lS5buxDk
+ with ESMTP id 1qOrXKomDEiX
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 13:18:20 +0000 (UTC)
+ Thu,  3 Feb 2022 13:18:21 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
 Received: from NAM11-DM6-obe.outbound.protection.outlook.com
  (mail-dm6nam11on2056.outbound.protection.outlook.com [40.107.223.56])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A732F402C2
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E71894047D
  for <virtualization@lists.linux-foundation.org>;
  Thu,  3 Feb 2022 13:18:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=gstoB7+jDGPz9/GA0zhfoRIxsF1gAE4Lec6ptYnAuTQHwV5gqhIorskxxg8hcaIKDoMPsQVi5rrZMT30Y7e5B/gyynd2q3xyUe1GjZbV+e0QSEzE2cQjYmzRX2zJ+hVTeSl9YnEAjLmTyyhoS3+6YkuqBfqE2Y5Jgnd3BHCOKbc80zKbfxMzPTqy+uAHYmDtapvSSD1JEfQPc/kr3swHA104DygB2Hr27FKvsqOTZ8TREYA44ZkblAlKiQ3+jFA9ZY1bySpvj6MFcPW4drT/GwVggpaihMknEPDGb0xDyfRtUOqTzz+qMqajgyR1uAR/3jrQQkM7lo0rAClkM96V9w==
+ b=Oc3mWvPnPBEiRJXwzrQ3kDBOBqw4bbm4iRdoPldYyHHMMW1i61ohKkH1GAf1y9BYjtaIHsdrjtabgyxhWeIsdfIXspyp8uqz4xEraota7ktzvULpdVXnmJ4dhzHQSYGXw2ohGzLFVWFswGwoxWur+86HkKC/livI8PW5iTE+RaF8QS/OjvoC1jp+3GMVRS1kSfeF7P+zEN15G8jK7zjNsS2Agt43p28vNvjoEqILY5P8MfeSvYq92qbuTykTdoTiK4+AC+3dESUpg5nG7I/tZ5UGk0WLBYY49OicesovyJ5nj5RNXcCIx7Mh7EFd+Re0l6X+fN5gR+pYPgf0W08UNw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sqaNNrLFEItfAG9TaMhVmhko7hLU/217VuUIGzjMkh4=;
- b=JpCCWW9x95TNiUHtZ20L9H0nsB3YLJkS1PAyNvHPzgnoKORQy04adYcv+RSHDjKpZQ2DAQmGpBoOwX8yh7ZjyefZnPos2Vy+CohuuWpqcj/bdgF7gsKmFudi/AUb4WxGYVwJO+9Hqd31lyJ9M6rrYU+/sy7m/lyHRlFrO+ZCKbZoerxfXe5x+YUrraGYcmVa+ZgatIcGlKkkJboX63Ugo9NvMQZxY9sMIKgGgAHqQqjvJ3LgrtU7LNv4gVMpVjaCLG5rFf9Pu2h2lHH+5OH4nMwVOJBZWvJG9AiIskFqTlJM/QuUjHPSgRkKp6/Ucv1i9ZwxXsnmSPvZuD0Ak5uiUQ==
+ bh=l4JBGf6X90A55/xzGIGCmoZWgEYQdX7TmRGB45StAIc=;
+ b=IdVDZPiqZ6O0J/pqVZsOxQRKtNLI7vq4AtCfcOZgGgaY9nmnOSW4irMs2KipjzpwsFzIp2KTx0MIi3bpbVl31h3FGVcU6YPjUXxfqFoVBwOCWljMb4e+1E0fVxuy3xruVKLasomw/bnUo7WxulRqM9pQDK1do86YIwui+N5igC/iO9dVxPNEON+6hKFWAYsxAipMCxrbgHeEo0BEny8zDmA8+9FXeiNB1yTQyUnmorFWXOtjW//fkmGUOO0V1ZvCuT51sM65ynYjycXtbGa1BGUZSfSDMwfgnYJIv9s1PGPXBJCtmXgARPLFnA14s98MQpgXgWgS9W3LiAbX/9la5A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
  dkim=none; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vmware.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sqaNNrLFEItfAG9TaMhVmhko7hLU/217VuUIGzjMkh4=;
- b=BeZ/EVBtL8yYhu2x9hzW2jWY8zAdqpWmWVN4HhdAcztYKVxencLM2d3DBe2XXWpX/WZmXbEUfhtiCKP8G7U41+ISvuRey+FaT2NnO02Ud/xGy+Mk7l2BzXOvkayMQM9O7+958xMKFqfP7lCFJtYGRagbqkQgYl1GNRb116enS4o=
+ bh=l4JBGf6X90A55/xzGIGCmoZWgEYQdX7TmRGB45StAIc=;
+ b=FhA1d0T1DXP43jMuxRjLI5cHA09TxwQkBqczmkGEI6+JiC0sqE+pOW1M8wrmjG4GrUoC1/2JUnaua/+DrV3EUUD6Nvg7uw89LdF4qZSxsqlkz20F8oiwbrSXmtvCzhF3AC6gxGTy6ymu5V4/XUAUgjYIMfumFCP94tNeyxVRVBI=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=vmware.com;
 Received: from BY3PR05MB8081.namprd05.prod.outlook.com (2603:10b6:a03:366::15)
  by MN2PR05MB7150.namprd05.prod.outlook.com (2603:10b6:208:18b::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4951.5; Thu, 3 Feb
- 2022 13:18:18 +0000
+ 2022 13:18:19 +0000
 Received: from BY3PR05MB8081.namprd05.prod.outlook.com
  ([fe80::304c:2b94:4f26:a581]) by BY3PR05MB8081.namprd05.prod.outlook.com
  ([fe80::304c:2b94:4f26:a581%3]) with mapi id 15.20.4951.012; Thu, 3 Feb 2022
- 13:18:18 +0000
+ 13:18:19 +0000
 From: Jorgen Hansen <jhansen@vmware.com>
 To: linux-kernel@vger.kernel.org,
 	virtualization@lists.linux-foundation.org
-Subject: [PATCH v2 6/8] VMCI: dma dg: allocate send and receive buffers for
- DMA datagrams
-Date: Thu,  3 Feb 2022 05:12:35 -0800
-Message-Id: <20220203131237.3380-7-jhansen@vmware.com>
+Subject: [PATCH v2 7/8] VMCI: dma dg: add support for DMA datagrams sends
+Date: Thu,  3 Feb 2022 05:12:36 -0800
+Message-Id: <20220203131237.3380-8-jhansen@vmware.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20220203131237.3380-1-jhansen@vmware.com>
 References: <20220203131237.3380-1-jhansen@vmware.com>
@@ -81,58 +78,58 @@ X-ClientProxiedBy: BYAPR07CA0068.namprd07.prod.outlook.com
  (2603:10b6:a03:366::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a3b2594c-ae57-40f4-6967-08d9e717a375
+X-MS-Office365-Filtering-Correlation-Id: 34e4edb8-9050-414d-daa4-08d9e717a3a9
 X-MS-TrafficTypeDiagnostic: MN2PR05MB7150:EE_
 X-LD-Processed: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0,ExtAddr
 X-MS-Exchange-AtpMessageProperties: SA|SL
-X-Microsoft-Antispam-PRVS: <MN2PR05MB7150993A0749261B74DAF0BFDA289@MN2PR05MB7150.namprd05.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
+X-Microsoft-Antispam-PRVS: <MN2PR05MB71501F656DB7090C1424F901DA289@MN2PR05MB7150.namprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: rbpInloZBwK040l/54yo9SQr0F5j+CPsY8q5w+q/QN532kyu6tBSV+wxB9LaS9zbmPvAwx9TpCKGh7qmPmqiRwo8xFUh3lTAI4DpwU38Rss3rlVQqlypIvL4UBlN8ZnvdSCEFSDDkgR6Mnu4f5HXhFKBM20WPGyCq6CtjfcrXYrZGexOdkYeak7GH/SQjuKQm+aPTuvQ76AAVdJ3uL84xQlDaD7cH+PgXhZV8Ub+/5rC7ErhR9DVYV3i04TVsQFrwJSH4g51ZywCU/MCJ/LPAMFweQI2+KCxtbmZ/pQWQ3wLwQmWsAUANUQYyvIXGsuV6irAejdDwasYBwnUuEiQtKyk+/80tERoDFYyoaIkJBhOGqECrPnbFBtwMARWUdGAFEFIqIN1Jw5YvE2aAfRizmP83NUs0lkthxpknrDHqjTL8b1kkXILoml3CjKh552jxDXtiMwYulyPARvXgYOJTuXba+LdEbbd16IeNmvUmDcLHJs4LKc0qQv587KbvcZj6oBSlFpfYV2N018VChrlFxrvSYsA6i80JSNfajYhtYRKZt/0r53nqIqjsT1ikAuY69Fzp7mIVjLRF53lvS+SILARmB2f68ap6Sy+QlgxFmhMIs5N6FzKeOVwbd0I0OcJ8I2XWI2O/74lePLbMcw1GAbVmWPuMqk4DtYB1q3czBVqdRjl2SGag3psenwCX7YJT154n3DamxQTVQRgLlAN6Q==
+X-Microsoft-Antispam-Message-Info: QAjL9fTgOKROW3ME4pe8GY8pTZ6Eh9mMXuPWwX8HU2bELOy+wHI1r7Rv5ugeDQGh24Uyq76ECB9LtSVodKWfGxsBR6LFyHA37mE/C/1EfjG/sJnjaNFGCaDx+obPoVEqB/RzoZHGcWfApzJZuy/rDCZ5I1qr7OpMKEgXRmJLQp/aPTYquKuIQkmM6GHmI1DIGvPDSOxuv7Xm4cOzHbnAuBZAsYD6fIZtJAuBChcisbmL4HV3I5hbud0VbTlmB4x6Cmg+Ptew14crDkqvZwZJqR4GlBd2HMlWIppFzTFva7jDkbcBU+h8nGHb4qJQlCWJ5aUEb20vebxaJXiSMyKXtIDtYaOWP44BsCbFEOIUvFq6AhOVlZiUnVpu5nrzxIb9qd+ElqtUV8tWaCN+LfqQSTd8Dh+GGJGlj23bLm0XPB/7clLUQCsyHKKDmpFVrkusi9uwX7CNsCGRbZGP3Z2PIY22hxhSg2vpN369cQICLBGoX17lbYnF8e3u7ngLMCUiPDN/8u40MeoQ3is/Wdru+Ajbaw3BXev7PY6jNmm7gT3Frcb6eSEw9y9zHTgmRH6903ObT9nA8lwi4aK7YSWtf/IpfQPcTHLz+H3DSmVa3CZ6LySE4jEv6meW+sYUWXic6LhQFmu5tG4HkOXgX6CHvE8E3/6U9dv0PUXHG+gCFULHIohNr/4+tQx2Bt/DDs+/1o3b1RETVidnTMekkeftrw==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:BY3PR05MB8081.namprd05.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230001)(4636009)(366004)(6486002)(8936002)(66556008)(8676002)(66476007)(5660300002)(4326008)(38350700002)(2616005)(52116002)(66946007)(36756003)(38100700002)(186003)(6506007)(26005)(2906002)(1076003)(83380400001)(107886003)(316002)(6666004)(54906003)(86362001)(6512007)(508600001);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bA7hjOjBSfPBINrscZ5LxevtCfUd2wfaXSWoF26TV5uiqgKtlYKJem5ha+6V?=
- =?us-ascii?Q?n7u9hk0tFAjjGf582K2BS/EymP0/npQrij51OcDveeUXTHgghEU5tf+W27Ww?=
- =?us-ascii?Q?aEv5mKg/KUivlAE38A64Gqu5XPiDwHKKLWELer/noExfVqghnTLqbYsu+DNY?=
- =?us-ascii?Q?/jb85OmyMUbT55ocnj/t3n1RdLiVSf6V0nwqezAxgS3b0BDBzpuGJQsnoETu?=
- =?us-ascii?Q?uR7KTx8TjRH9NvOyXa+QxsKeFnZDBXd6ruqMx8/OiLv4JsyeNDa7+O6e/1v9?=
- =?us-ascii?Q?OHWTUIoELtzB/nhA4Niywf3MqDilCHharMnTBRFmdAmFh6hV6WcxxeFmxbrr?=
- =?us-ascii?Q?U35B4x+nEwpTP8AHHROlZyMUt3sNc3xCQOSCtoZxu+BTj1+TpnMEeG5gRuvS?=
- =?us-ascii?Q?7r+NrIL+H/GfeJcbnX7te0Ddaf/7+2y2gTDZklDDWII2xfcSdj0UmO7M5ZK/?=
- =?us-ascii?Q?KJEwqySaJV/qjM1PpqTbzO+Rqg2DGlc6cpt4MiP0SzdZ0mEVdb5JqoKj3laM?=
- =?us-ascii?Q?POKlflRN7fZvehe3Xvi9pOhHozZDY59U5tPeLbFhnbkaBMMw+cMC6qX4faTV?=
- =?us-ascii?Q?PQeN+5lOx+4zOaEB9C+ykrozTDfsIY0VrcfDx877ImGtXcF7zrGvrUvy6zpH?=
- =?us-ascii?Q?qNOJdXlX7SDDFTF5lXXNsx+EWZfbiy5sr7zfRg6a7UU+ZBkB2+cpaP00+YTq?=
- =?us-ascii?Q?naOeEFhdiBhGG2HsWC4oIU5qJVAbGVtRE30sjW85Wa4ERc+NAT8hitosBDml?=
- =?us-ascii?Q?lsLE/EKaio6p8LwfwhvdEFLi66a1uQ/Aqb9LY9F/08BZu+MtC1zzyClxL6xa?=
- =?us-ascii?Q?z9oAf8x1UfGcDYHbpFCv+dLpaQ0GPz2sxa2oTCHmAUGBx27x9jPgfAwDB1cV?=
- =?us-ascii?Q?3ir6qAxlvG6KDBkOtGUNlVnqy0FNQJZc2cYWvYbzDkHiGR90ClJKqKpZvSfI?=
- =?us-ascii?Q?i4rQqtWyKJhD3eeu1sLYYMJVDtkMHEYRfgikrFsrrhHuLfdcvpQQiqsE5j5b?=
- =?us-ascii?Q?IF5vq71AMfeb1oj6205zPjv5AKZBN22on2Ti9JI0TNVZmq9MOp8nDNakSAKV?=
- =?us-ascii?Q?4AGxEbq9zdfsIk5cmtwr1CjrT2x+SR2h/zBuNrB6P/3SS1Vjz9B9BGjwXJUW?=
- =?us-ascii?Q?XPmLeYOt1LO2i10KE7DpU7xVaWv59TcKHvd8fYHZ9V76i2Wt7q9JINx8IH+i?=
- =?us-ascii?Q?zr9j4/RVI7pNOFIjPsO+iBtr4VN98yDggyYk+8Xojk33ul00mCPtfw0QFWF/?=
- =?us-ascii?Q?c9jhx0Ch/cYmKoMFS4HbS0AgbV65Tu0nJeVXqWKYXbUYBd+g+JBiYTB2DCRY?=
- =?us-ascii?Q?tyJ9NbdV++sETQ5YKTQz2LIjGIa9mqGyTZHgN0nj+wQqXco0RNw5MgBjHXag?=
- =?us-ascii?Q?fRyo0UF5eTAf0lNP7Qy5snNh7/rdcudUrqrQJq5JqI4lwN1K1gFpKFOSKHWk?=
- =?us-ascii?Q?KAkK5yafeookBHKDYy6hbOLr65iwapHwkI8TcPp8uwMWMh/31AbVr5MglNq6?=
- =?us-ascii?Q?ACP5hHR46spiXd4ynzkyxpOI+5z/yVQ5wSqYrB3SVYT96tfngtcrcvOFtnik?=
- =?us-ascii?Q?8yl+L72kboXRSOX7qGfE2k/tcHb+GR6Kr4YnPMgC+VBCD94PDujgAjiKHwLA?=
- =?us-ascii?Q?rAH4DjhHzTffEULtJblompk=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?pYcdKsqnPOHc12vmvh1LaHIuMM81aPT96DhL5jPtddl6ov4tCNnG+0AHK7Hx?=
+ =?us-ascii?Q?nSZbA/NIlLwfXuc9xDkbrxbx48uQ7XfqEKPSn2ELqnuZJP3zsZ1sWPs5wU6E?=
+ =?us-ascii?Q?u1Rb7JBqT6qXR38ILSMCHFj/yuc2UgUvYfWw7RtAzMXODfsqcC8kUV/xyP5g?=
+ =?us-ascii?Q?HQ2W1aB5v53a+bsoim4rWMViyQKFnqWd21++hhZKn9j+IgCY0rdFXh7InZWf?=
+ =?us-ascii?Q?BHKe5RwS0jrJHGrA831ktd8tbODBkIs8i5d7A729UK9O9EUt6PqWrY+60/A0?=
+ =?us-ascii?Q?MzCi+cp9tXovLYPmZU7jbKcb3yatiQRAoj+BLD4VGG/LznnHalZFJI3ALkrv?=
+ =?us-ascii?Q?ZX+CdN8xe2Niz8LOaKW3kgK0djK8/53spLP5iH72V3w+FXjvyAiZKqQ30EIa?=
+ =?us-ascii?Q?D5CgWorwt5PanAq4Y37jsGYbeAPn88Idk90x5YLG64o18d5R6AOtvkoJFdL/?=
+ =?us-ascii?Q?YWjMGSLz+T9gfrEQE16XCAu6z4CqZyFc7KIbT0E2L1xY6qjrs+82cr/5J3h7?=
+ =?us-ascii?Q?741BS6ZKG6yOLgMwFW8tarB+VhltnB2rZUaYhOKn6sFgXau/wuLJsXOpmQvG?=
+ =?us-ascii?Q?XgJbFyjirUG5/urvfxNUk0B1vA4BTXpvk3v/x8mwuwhFuPcuuYFJyN3o9Rkk?=
+ =?us-ascii?Q?bN5wBd4cchdpJLU9ioOZZ1LjR4y8tdV+i1N2pPPqh1U8RnFS7HWLWoyk8vag?=
+ =?us-ascii?Q?guwsfX6z51vEkVsTYm50aXFfh5zIGRB/U3w5GpmAxdr0prTnn84dLQBpY1Au?=
+ =?us-ascii?Q?De5GQ0skDmCV0iBM7HvcKtgUWGjzO9NPC047xNpVj2OhxgKDmvlIRHJy0F13?=
+ =?us-ascii?Q?7wdfKXxA9k13c0t2c1IzhtStSnzT3V/YYXZICACrmffZjq36GbnPGR2hT8Uw?=
+ =?us-ascii?Q?yHEx3y2/zh3GNZRKPlpJh6h0wqcPzz2aKYhMpz5se1PI9LZv/ex8NTRExccA?=
+ =?us-ascii?Q?Zq2OXNz0iQHsWQhbjGfQ9yQ/6mvj5L62pYhO1jVtG8rBYE0RiBjptrW6RwnH?=
+ =?us-ascii?Q?h69wOzZiN2iy25hVop1J/emUiY9cfgL2GKqthGHccjvo+sEirIyswVG9ykOX?=
+ =?us-ascii?Q?HzeZfB9UhN8OQQB3GtRv9kZwJcQK6lhxteoe0a/lipdzgos+lOdypY6Md2/Q?=
+ =?us-ascii?Q?NU7MUjy4J7Ri+AyuNh+GJKOLn2nU8SO3udvBF5G1yDxADa1k84eHFre9gjJl?=
+ =?us-ascii?Q?sGMg1mEgnfepSvB9CnA6u55x+HvB3KE2UwvHbmaBVfl7gqFVZ5otOMWlUjef?=
+ =?us-ascii?Q?ltHUrOdbDuFbe/BHWXGGJ8+NGRb7hwZH0cPsWJ+uCoTZFWGshPAuJZjBPMQZ?=
+ =?us-ascii?Q?E+1pvchJXfrloePvffEWIZUkAAeG7fYcKnaiYzH3tb65chLBJ5US2QlthRfP?=
+ =?us-ascii?Q?N55UjVXiltg7+U8ekrWoKXmrM8gxnzyVFUSSYLnqIEH9hp7GLV5EyH01VQKV?=
+ =?us-ascii?Q?2UZviwBua5/AlJbCXLZxDKedii1GpAlGUPCUIGq8kkoO/FErpnSFbz1VQ9ux?=
+ =?us-ascii?Q?Lkkk9NliUNsVv1W0OMwwg6qshwA8nRYbpF13G/5w0kZd2sKm9vKj1Q/s/opp?=
+ =?us-ascii?Q?LPp5+wQPcahOVcPFMPlxZBmxRRx8TwsCyb7aQr0gI/L8TTx+/bReCIbPxZcg?=
+ =?us-ascii?Q?Y9Fjm0+anITUqhl4trkZKZs=3D?=
 X-OriginatorOrg: vmware.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a3b2594c-ae57-40f4-6967-08d9e717a375
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34e4edb8-9050-414d-daa4-08d9e717a3a9
 X-MS-Exchange-CrossTenant-AuthSource: BY3PR05MB8081.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2022 13:18:16.4467 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2022 13:18:16.8529 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b39138ca-3cee-4b4a-a4d6-cd83d9dd62f0
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: z4Ni7WW5dcO4/GssJghYl1S1rgxDUtFgqxxLOxF6oObpxz0K1I+n253llO/FpGVYu/v9xAG3lua6CNSbrkiAjA==
+X-MS-Exchange-CrossTenant-UserPrincipalName: S5ZoJfRlUXR404TWQf/HkmLjL53OkMnFKGAPXBfY1cl9AAR8h8BO93Njj335ord7pMVEvDumo7w0XTf4Mpa/nA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR05MB7150
 Cc: pv-drivers@vmware.com, gregkh@linuxfoundation.org,
  Vishnu Dasa <vdasa@vmware.com>, Jorgen Hansen <jhansen@vmware.com>
@@ -152,171 +149,139 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If DMA datagrams are used, allocate send and receive buffers
-in coherent DMA memory.
+Use DMA based send operation from the transmit buffer instead of the
+iowrite8_rep based datagram send when DMA datagrams are supported.
 
-This is done in preparation for the send and receive datagram
-operations, where the buffers are used for the exchange of data
-between driver and device.
+The outgoing datagram is sent as inline data in the VMCI transmit
+buffer. Once the header has been configured, the send is initiated
+by writing the lower 32 bit of the buffer base address to the
+VMCI_DATA_OUT_LOW_ADDR register. Only then will the device process
+the header and the datagram itself. Following that, the driver busy
+waits (it isn't possible to sleep on the send path) for the header
+busy flag to change - indicating that the send is complete.
 
 Reviewed-by: Vishnu Dasa <vdasa@vmware.com>
 Signed-off-by: Jorgen Hansen <jhansen@vmware.com>
 ---
- drivers/misc/vmw_vmci/vmci_guest.c | 66 ++++++++++++++++++++++++++----
- include/linux/vmw_vmci_defs.h      |  4 ++
- 2 files changed, 63 insertions(+), 7 deletions(-)
+ drivers/misc/vmw_vmci/vmci_guest.c | 45 ++++++++++++++++++++++++++++--
+ include/linux/vmw_vmci_defs.h      | 34 ++++++++++++++++++++++
+ 2 files changed, 77 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/misc/vmw_vmci/vmci_guest.c b/drivers/misc/vmw_vmci/vmci_guest.c
-index 0920fbc6b64f..c207ca2ca42e 100644
+index c207ca2ca42e..ae2fd9c791d0 100644
 --- a/drivers/misc/vmw_vmci/vmci_guest.c
 +++ b/drivers/misc/vmw_vmci/vmci_guest.c
-@@ -31,6 +31,12 @@
- 
- #define VMCI_UTIL_NUM_RESOURCES 1
- 
-+/*
-+ * Datagram buffers for DMA send/receive must accommodate at least
-+ * a maximum sized datagram and the header.
-+ */
-+#define VMCI_DMA_DG_BUFFER_SIZE (VMCI_MAX_DG_SIZE + PAGE_SIZE)
-+
- static bool vmci_disable_msi;
- module_param_named(disable_msi, vmci_disable_msi, bool, 0);
- MODULE_PARM_DESC(disable_msi, "Disable MSI use in driver - (default=0)");
-@@ -53,6 +59,9 @@ struct vmci_guest_device {
- 	struct tasklet_struct bm_tasklet;
- 
- 	void *data_buffer;
-+	dma_addr_t data_buffer_base;
-+	void *tx_buffer;
-+	dma_addr_t tx_buffer_base;
- 	void *notification_bitmap;
- 	dma_addr_t notification_base;
- };
-@@ -451,6 +460,24 @@ static irqreturn_t vmci_interrupt_dma_datagram(int irq, void *_dev)
- 	return IRQ_HANDLED;
+@@ -13,6 +13,7 @@
+ #include <linux/kernel.h>
+ #include <linux/mm.h>
+ #include <linux/module.h>
++#include <linux/processor.h>
+ #include <linux/sched.h>
+ #include <linux/slab.h>
+ #include <linux/init.h>
+@@ -114,6 +115,47 @@ static void vmci_write_reg(struct vmci_guest_device *dev, u32 val, u32 reg)
+ 		iowrite32(val, dev->iobase + reg);
  }
  
-+static void vmci_free_dg_buffers(struct vmci_guest_device *vmci_dev)
++static int vmci_write_data(struct vmci_guest_device *dev,
++			   struct vmci_datagram *dg)
 +{
-+	if (vmci_dev->mmio_base != NULL) {
-+		if (vmci_dev->tx_buffer != NULL)
-+			dma_free_coherent(vmci_dev->dev,
-+					  VMCI_DMA_DG_BUFFER_SIZE,
-+					  vmci_dev->tx_buffer,
-+					  vmci_dev->tx_buffer_base);
-+		if (vmci_dev->data_buffer != NULL)
-+			dma_free_coherent(vmci_dev->dev,
-+					  VMCI_DMA_DG_BUFFER_SIZE,
-+					  vmci_dev->data_buffer,
-+					  vmci_dev->data_buffer_base);
++	int result;
++
++	if (dev->mmio_base != NULL) {
++		struct vmci_data_in_out_header *buffer_header = dev->tx_buffer;
++		u8 *dg_out_buffer = (u8 *)(buffer_header + 1);
++
++		if (VMCI_DG_SIZE(dg) > VMCI_MAX_DG_SIZE)
++			return VMCI_ERROR_INVALID_ARGS;
++
++		/*
++		 * Initialize send buffer with outgoing datagram
++		 * and set up header for inline data. Device will
++		 * not access buffer asynchronously - only after
++		 * the write to VMCI_DATA_OUT_LOW_ADDR.
++		 */
++		memcpy(dg_out_buffer, dg, VMCI_DG_SIZE(dg));
++		buffer_header->opcode = 0;
++		buffer_header->size = VMCI_DG_SIZE(dg);
++		buffer_header->busy = 1;
++
++		vmci_write_reg(dev, lower_32_bits(dev->tx_buffer_base),
++			       VMCI_DATA_OUT_LOW_ADDR);
++
++		/* Caller holds a spinlock, so cannot block. */
++		spin_until_cond(buffer_header->busy == 0);
++
++		result = vmci_read_reg(vmci_dev_g, VMCI_RESULT_LOW_ADDR);
++		if (result == VMCI_SUCCESS)
++			result = (int)buffer_header->result;
 +	} else {
-+		vfree(vmci_dev->data_buffer);
++		iowrite8_rep(dev->iobase + VMCI_DATA_OUT_ADDR,
++			     dg, VMCI_DG_SIZE(dg));
++		result = vmci_read_reg(vmci_dev_g, VMCI_RESULT_LOW_ADDR);
 +	}
++
++	return result;
 +}
 +
  /*
-  * Most of the initialization at module load time is done here.
-  */
-@@ -520,11 +547,27 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
- 	tasklet_init(&vmci_dev->bm_tasklet,
- 		     vmci_process_bitmap, (unsigned long)vmci_dev);
+  * VM to hypervisor call mechanism. We use the standard VMware naming
+  * convention since shared code is calling this function as well.
+@@ -139,8 +181,7 @@ int vmci_send_datagram(struct vmci_datagram *dg)
+ 	spin_lock_irqsave(&vmci_dev_spinlock, flags);
  
--	vmci_dev->data_buffer = vmalloc(VMCI_MAX_DG_SIZE);
-+	if (mmio_base != NULL) {
-+		vmci_dev->tx_buffer = dma_alloc_coherent(&pdev->dev, VMCI_DMA_DG_BUFFER_SIZE,
-+							 &vmci_dev->tx_buffer_base,
-+							 GFP_KERNEL);
-+		if (!vmci_dev->tx_buffer) {
-+			dev_err(&pdev->dev,
-+				"Can't allocate memory for datagram tx buffer\n");
-+			return -ENOMEM;
-+		}
-+
-+		vmci_dev->data_buffer = dma_alloc_coherent(&pdev->dev, VMCI_DMA_DG_BUFFER_SIZE,
-+							   &vmci_dev->data_buffer_base,
-+							   GFP_KERNEL);
-+	} else {
-+		vmci_dev->data_buffer = vmalloc(VMCI_MAX_DG_SIZE);
-+	}
- 	if (!vmci_dev->data_buffer) {
- 		dev_err(&pdev->dev,
- 			"Can't allocate memory for datagram buffer\n");
--		return -ENOMEM;
-+		error = -ENOMEM;
-+		goto err_free_data_buffers;
- 	}
- 
- 	pci_set_master(pdev);	/* To enable queue_pair functionality. */
-@@ -542,7 +585,7 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
- 	if (!(capabilities & VMCI_CAPS_DATAGRAM)) {
- 		dev_err(&pdev->dev, "Device does not support datagrams\n");
- 		error = -ENXIO;
--		goto err_free_data_buffer;
-+		goto err_free_data_buffers;
- 	}
- 	caps_in_use = VMCI_CAPS_DATAGRAM;
- 
-@@ -586,7 +629,7 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
- 			dev_err(&pdev->dev,
- 				"Missing capability: VMCI_CAPS_DMA_DATAGRAM\n");
- 			error = -ENXIO;
--			goto err_free_data_buffer;
-+			goto err_free_data_buffers;
- 		}
- 	}
- 
-@@ -602,6 +645,12 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
- 		vmci_write_reg(vmci_dev, PAGE_SHIFT, VMCI_GUEST_PAGE_SHIFT);
- 		page_shift = vmci_read_reg(vmci_dev, VMCI_GUEST_PAGE_SHIFT);
- 		dev_info(&pdev->dev, "Using page shift %d\n", page_shift);
-+
-+		/* Configure the high order parts of the data in/out buffers. */
-+		vmci_write_reg(vmci_dev, upper_32_bits(vmci_dev->data_buffer_base),
-+			       VMCI_DATA_IN_HIGH_ADDR);
-+		vmci_write_reg(vmci_dev, upper_32_bits(vmci_dev->tx_buffer_base),
-+			       VMCI_DATA_OUT_HIGH_ADDR);
- 	}
- 
- 	/* Set up global device so that we can start sending datagrams */
-@@ -755,8 +804,8 @@ static int vmci_guest_probe_device(struct pci_dev *pdev,
- 	vmci_dev_g = NULL;
- 	spin_unlock_irq(&vmci_dev_spinlock);
- 
--err_free_data_buffer:
--	vfree(vmci_dev->data_buffer);
-+err_free_data_buffers:
-+	vmci_free_dg_buffers(vmci_dev);
- 
- 	/* The rest are managed resources and will be freed by PCI core */
- 	return error;
-@@ -814,7 +863,10 @@ static void vmci_guest_remove_device(struct pci_dev *pdev)
- 				  vmci_dev->notification_base);
- 	}
- 
--	vfree(vmci_dev->data_buffer);
-+	vmci_free_dg_buffers(vmci_dev);
-+
-+	if (vmci_dev->mmio_base != NULL)
-+		pci_iounmap(pdev, vmci_dev->mmio_base);
- 
- 	/* The rest are managed resources and will be freed by PCI core */
- }
+ 	if (vmci_dev_g) {
+-		iowrite8_rep(vmci_dev_g->iobase + VMCI_DATA_OUT_ADDR,
+-			     dg, VMCI_DG_SIZE(dg));
++		vmci_write_data(vmci_dev_g, dg);
+ 		result = vmci_read_reg(vmci_dev_g, VMCI_RESULT_LOW_ADDR);
+ 	} else {
+ 		result = VMCI_ERROR_UNAVAILABLE;
 diff --git a/include/linux/vmw_vmci_defs.h b/include/linux/vmw_vmci_defs.h
-index 2b70c024dacb..8bc37d8244a8 100644
+index 8bc37d8244a8..6fb663b36f72 100644
 --- a/include/linux/vmw_vmci_defs.h
 +++ b/include/linux/vmw_vmci_defs.h
-@@ -21,6 +21,10 @@
- #define VMCI_CAPS_ADDR          0x18
- #define VMCI_RESULT_LOW_ADDR    0x1c
- #define VMCI_RESULT_HIGH_ADDR   0x20
-+#define VMCI_DATA_OUT_LOW_ADDR  0x24
-+#define VMCI_DATA_OUT_HIGH_ADDR 0x28
-+#define VMCI_DATA_IN_LOW_ADDR   0x2c
-+#define VMCI_DATA_IN_HIGH_ADDR  0x30
- #define VMCI_GUEST_PAGE_SHIFT   0x34
+@@ -110,6 +110,40 @@ enum {
+ #define VMCI_MMIO_ACCESS_OFFSET        ((size_t)(128 * 1024))
+ #define VMCI_MMIO_ACCESS_SIZE          ((size_t)(64 * 1024))
  
- /* Max number of devices. */
++/*
++ * For VMCI devices supporting the VMCI_CAPS_DMA_DATAGRAM capability, the
++ * sending and receiving of datagrams can be performed using DMA to/from
++ * a driver allocated buffer.
++ * Sending and receiving will be handled as follows:
++ * - when sending datagrams, the driver initializes the buffer where the
++ *   data part will refer to the outgoing VMCI datagram, sets the busy flag
++ *   to 1 and writes the address of the buffer to VMCI_DATA_OUT_HIGH_ADDR
++ *   and VMCI_DATA_OUT_LOW_ADDR. Writing to VMCI_DATA_OUT_LOW_ADDR triggers
++ *   the device processing of the buffer. When the device has processed the
++ *   buffer, it will write the result value to the buffer and then clear the
++ *   busy flag.
++ * - when receiving datagrams, the driver initializes the buffer where the
++ *   data part will describe the receive buffer, clears the busy flag and
++ *   writes the address of the buffer to VMCI_DATA_IN_HIGH_ADDR and
++ *   VMCI_DATA_IN_LOW_ADDR. Writing to VMCI_DATA_IN_LOW_ADDR triggers the
++ *   device processing of the buffer. The device will copy as many available
++ *   datagrams into the buffer as possible, and then sets the busy flag.
++ *   When the busy flag is set, the driver will process the datagrams in the
++ *   buffer.
++ */
++struct vmci_data_in_out_header {
++	uint32_t busy;
++	uint32_t opcode;
++	uint32_t size;
++	uint32_t rsvd;
++	uint64_t result;
++};
++
++struct vmci_sg_elem {
++	uint64_t addr;
++	uint64_t size;
++};
++
+ /*
+  * We have a fixed set of resource IDs available in the VMX.
+  * This allows us to have a very simple implementation since we statically
 -- 
 2.25.1
 
