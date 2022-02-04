@@ -1,84 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A2CBD4A85C3
-	for <lists.virtualization@lfdr.de>; Thu,  3 Feb 2022 15:07:25 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 844724A99E1
+	for <lists.virtualization@lfdr.de>; Fri,  4 Feb 2022 14:24:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4E73660FFE;
-	Thu,  3 Feb 2022 14:07:24 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id A3F9360BAF;
+	Fri,  4 Feb 2022 13:24:48 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vUF1Rux8FnqQ; Thu,  3 Feb 2022 14:07:23 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id BADD761001;
-	Thu,  3 Feb 2022 14:07:22 +0000 (UTC)
+	with ESMTP id M0eVkkK7Nyxp; Fri,  4 Feb 2022 13:24:47 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 5D18260BCC;
+	Fri,  4 Feb 2022 13:24:47 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2C0A0C0039;
-	Thu,  3 Feb 2022 14:07:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BA634C0039;
+	Fri,  4 Feb 2022 13:24:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9B286C000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 38F8EC000B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 14:07:20 +0000 (UTC)
+ Fri,  4 Feb 2022 13:24:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 734D6403C4
+ by smtp2.osuosl.org (Postfix) with ESMTP id 12AB6404E2
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 14:07:20 +0000 (UTC)
+ Fri,  4 Feb 2022 13:24:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=intel.com
+ dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id v4pTTjNMEUNn
+ with ESMTP id dhwrgNA3nTw0
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 14:07:19 +0000 (UTC)
+ Fri,  4 Feb 2022 13:24:43 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 31A78400CB
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 92647404DD
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Feb 2022 14:07:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1643897239; x=1675433239;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=702J7Q3O9MB3N5M5D/Whhr+WZwWT6kJx5OA4E3h5p1E=;
- b=Vefi2q2lfivtiK7eyilzc0UNR55NbfNpvbqZwGmWFV6rhE9I7t5ezxW0
- 5j9/O0i7tMX6AkXHO+SNvThAle/h5sE1lg2EYif9SIndUOfBV4G1nYi4T
- 52lb1gzVjxSA6m/dWdeM1PoJHd89wK6LRpNwix6vHxfDrj+q590tCV+Iz
- +x355CFmCvRclXqAJvhxLY4orM17h8xDydvMHRTbVxEFdYI+IhIb7Yuhb
- oKW/SA4fnCn7AVoO3lSP9FbdM7yzPHBVVZVBoFR9xMOQUu67d6UsWJTew
- dNQQMfL+khYW07VBcYcomdWi9wvlGT6x9fN0tEwsFr7BtQ2k/Dvk6RqgA g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10246"; a="334508479"
-X-IronPort-AV: E=Sophos;i="5.88,340,1635231600"; d="scan'208";a="334508479"
-Received: from orsmga006.jf.intel.com ([10.7.209.51])
- by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 03 Feb 2022 06:07:18 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.88,340,1635231600"; d="scan'208";a="483248171"
-Received: from lkp-server01.sh.intel.com (HELO 276f1b88eecb) ([10.239.97.150])
- by orsmga006.jf.intel.com with ESMTP; 03 Feb 2022 06:07:15 -0800
-Received: from kbuild by 276f1b88eecb with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1nFclW-000WCU-Mi; Thu, 03 Feb 2022 14:07:14 +0000
-Date: Thu, 3 Feb 2022 22:06:53 +0800
-From: kernel test robot <lkp@intel.com>
-To: Mike Christie <michael.christie@oracle.com>, geert@linux-m68k.org,
- hdanton@sina.com, hch@infradead.org, stefanha@redhat.com,
- jasowang@redhat.com, mst@redhat.com, sgarzare@redhat.com,
- virtualization@lists.linux-foundation.org,
- christian.brauner@ubuntu.com, axboe@kernel.dk
-Subject: Re: [PATCH 6/8] vhost_task: Allow vhost layer to use copy_process
-Message-ID: <202202032131.gnmg7b6h-lkp@intel.com>
-References: <20220202210200.5235-7-michael.christie@oracle.com>
+ Fri,  4 Feb 2022 13:24:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1643981082;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=7UKHH0LEkavlxiUm0dlyomqZecTKkmkM1AWd2rdM34w=;
+ b=er9daQp5CYSJk3CPJ0EL3PyFCGa9B/cDCU3xBCDy2TM9HI53V+xVlkcMvIKCTATdJsapxK
+ P3RQZJSQvzviVE6d3EPFVWmzC42ZiadL5DnupR7l66LLwZ+VE4UklocxJht7tL0RF1fIfr
+ Zg7fLyZGLfc5Sp1f66qKpKS2yoqVPzI=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-423-wSDY0lftOGOJ6EG_A-RHdw-1; Fri, 04 Feb 2022 08:24:41 -0500
+X-MC-Unique: wSDY0lftOGOJ6EG_A-RHdw-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ j18-20020a05600c1c1200b0034aeea95dacso7562317wms.8
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 04 Feb 2022 05:24:41 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=7UKHH0LEkavlxiUm0dlyomqZecTKkmkM1AWd2rdM34w=;
+ b=WHUW7MF5rrjOLm7NYiSmOJ4xNl2IWfmCbDsCaWdYdjxycK8Z27HZ2Ar96wkdWS84DM
+ Aeb12M1py1Bg16UtHjEaOZNklyEvsJjbxa85RrVaH/tWbQSB2+wR1LRLAnmYREkTJ9Mj
+ V/7DFtWwc5mVrsyR8P1yZk6nJfYv2o70p1Ff0wNd6TraR+PmrJRKx37OhSLKVusbYy7z
+ ElLRMOoerxFfrNnzwOJGAeYhDcjwZWE0FXjtdBNlXf+k/pA7AO9YcBQJrjB/940fBBQH
+ aBBWenvoJtM8vRDGphjw/s73COQPd2KKr94b7Vk3ZaHivZTWlg3aHk+AeguOnx9iQpf+
+ bSqw==
+X-Gm-Message-State: AOAM530ogL1ofrGoFpjzusvg6yVKzhcy9iaB29jjyS/W3OOflZ7iUB2i
+ p04xhwgKZuGOGOG1ddv1kvCain5nj+3AujxoLl2e/gFf0IqiEb5BrwvpFWA9e2e8SvTnl3zg689
+ U6s8pAJeoQO9A0sGO7IfAQHNQ3P8dsJw9yEHs8jPv2g==
+X-Received: by 2002:a1c:f312:: with SMTP id q18mr2305911wmq.13.1643981080181; 
+ Fri, 04 Feb 2022 05:24:40 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxQbetRZY1dnqYN0HUwFi8p97h3dS54Ma4HeFNpc7P/IL6nCxE60R8MQ6sI+OMp4zgc3hHwlg==
+X-Received: by 2002:a1c:f312:: with SMTP id q18mr2305895wmq.13.1643981080003; 
+ Fri, 04 Feb 2022 05:24:40 -0800 (PST)
+Received: from redhat.com ([2a10:8005:331d:0:5c51:c095:613e:277c])
+ by smtp.gmail.com with ESMTPSA id bh19sm3982968wmb.1.2022.02.04.05.24.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Feb 2022 05:24:37 -0800 (PST)
+Date: Fri, 4 Feb 2022 08:24:34 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: David Hildenbrand <david@redhat.com>
+Subject: Re: [PATCH v3] drivers/virtio: Enable virtio mem for ARM64
+Message-ID: <20220204082351-mutt-send-email-mst@kernel.org>
+References: <20220119010551.181405-1-gshan@redhat.com>
+ <20220119022611-mutt-send-email-mst@kernel.org>
+ <d8cedad1-bbb6-b7ea-57b2-f3832776fe1e@redhat.com>
+ <50422908-1917-bda9-ead5-40b02d57c545@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <50422908-1917-bda9-ead5-40b02d57c545@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20220202210200.5235-7-michael.christie@oracle.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: kbuild-all@lists.01.org
+Cc: Jonathan.Cameron@huawei.com, shan.gavin@gmail.com,
+ linux-arm-kernel@lists.infradead.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,96 +117,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Mike,
+On Wed, Jan 19, 2022 at 09:35:05AM +0100, David Hildenbrand wrote:
+> On 19.01.22 08:46, Gavin Shan wrote:
+> > Hi Michael,
+> > 
+> > On 1/19/22 3:39 PM, Michael S. Tsirkin wrote:
+> >> On Wed, Jan 19, 2022 at 09:05:51AM +0800, Gavin Shan wrote:
+> >>> This enables virtio-mem device support by allowing to enable the
+> >>> corresponding kernel config option (CONFIG_VIRTIO_MEM) on the
+> >>> architecture.
+> >>>
+> >>> Signed-off-by: Gavin Shan <gshan@redhat.com>
+> >>> Acked-by: David Hildenbrand <david@redhat.com>
+> >>> Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> >>> Acked-by: Michael S. Tsirkin <mst@redhat.com>
+> >>> ---
+> >>> v3: Pick ack-by tags from Jonathan and Michael
+> >>> ---
+> >>>   drivers/virtio/Kconfig | 7 ++++---
+> >>>   1 file changed, 4 insertions(+), 3 deletions(-)
+> >>>
+> >>> diff --git a/drivers/virtio/Kconfig b/drivers/virtio/Kconfig
+> >>> index 34f80b7a8a64..74c8b0c7bc33 100644
+> >>> --- a/drivers/virtio/Kconfig
+> >>> +++ b/drivers/virtio/Kconfig
+> >>> @@ -106,7 +106,7 @@ config VIRTIO_BALLOON
+> >>>   config VIRTIO_MEM
+> >>>   	tristate "Virtio mem driver"
+> >>>   	default m
+> >>> -	depends on X86_64
+> >>> +	depends on X86_64 || ARM64
+> >>>   	depends on VIRTIO
+> >>>   	depends on MEMORY_HOTPLUG
+> >>>   	depends on MEMORY_HOTREMOVE
+> >>> @@ -116,8 +116,9 @@ config VIRTIO_MEM
+> >>>   	 This driver provides access to virtio-mem paravirtualized memory
+> >>>   	 devices, allowing to hotplug and hotunplug memory.
+> >>>   
+> >>> -	 This driver was only tested under x86-64, but should theoretically
+> >>> -	 work on all architectures that support memory hotplug and hotremove.
+> >>> +	 This driver was only tested under x86-64 and arm64, but should
+> >>> +	 theoretically work on all architectures that support memory hotplug
+> >>> +	 and hotremove.
+> >>>   
+> >>
+> >> BTW isn't there a symbol saying "memory hotplug" that we can depend on?
+> >>
+> 
+> You mean
+> 
+>  	depends on MEMORY_HOTPLUG
+>  	depends on MEMORY_HOTREMOVE
+> 
+> We still need a manual opt-in from architectures, because devil's in the
+> detail. (e.g., memblock stuff we had to adjust)
 
-Thank you for the patch! Perhaps something to improve:
+Is there any chance of documenting some of this here? The current comment makes it
+look like it's just a question of whitelisting an architecture.
 
-[auto build test WARNING on mst-vhost/linux-next]
-[also build test WARNING on tip/x86/core linus/master v5.17-rc2 next-20220203]
-[cannot apply to davem-sparc/master]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
+> -- 
+> Thanks,
+> 
+> David / dhildenb
 
-url:    https://github.com/0day-ci/linux/commits/Mike-Christie/Use-copy_process-in-vhost-layer/20220203-050454
-base:   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git linux-next
-config: sparc-randconfig-s032-20220130 (https://download.01.org/0day-ci/archive/20220203/202202032131.gnmg7b6h-lkp@intel.com/config)
-compiler: sparc-linux-gcc (GCC) 11.2.0
-reproduce:
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # apt-get install sparse
-        # sparse version: v0.6.4-dirty
-        # https://github.com/0day-ci/linux/commit/2c7380ae8136c224f4c7074027303b97b0a0f84c
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Mike-Christie/Use-copy_process-in-vhost-layer/20220203-050454
-        git checkout 2c7380ae8136c224f4c7074027303b97b0a0f84c
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-11.2.0 make.cross C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=sparc SHELL=/bin/bash
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-
-sparse warnings: (new ones prefixed by >>)
->> kernel/vhost_task.c:85:24: sparse: sparse: incorrect type in argument 1 (different base types) @@     expected unsigned int [usertype] size @@     got restricted gfp_t @@
-   kernel/vhost_task.c:85:24: sparse:     expected unsigned int [usertype] size
-   kernel/vhost_task.c:85:24: sparse:     got restricted gfp_t
->> kernel/vhost_task.c:85:36: sparse: sparse: incorrect type in argument 2 (different base types) @@     expected restricted gfp_t [usertype] flags @@     got unsigned int @@
-   kernel/vhost_task.c:85:36: sparse:     expected restricted gfp_t [usertype] flags
-   kernel/vhost_task.c:85:36: sparse:     got unsigned int
-
-vim +85 kernel/vhost_task.c
-
-    62	
-    63	/**
-    64	 * vhost_task_create - create a copy of a process to be used by the kernel
-    65	 * @fn: thread stack
-    66	 * @arg: data to be passed to fn
-    67	 * @node: numa node to allocate task from
-    68	 *
-    69	 * This returns a specialized task for use by the vhost layer or NULL on
-    70	 * failure. The returned task is inactive, and the caller must fire it up
-    71	 * through vhost_task_start().
-    72	 */
-    73	struct vhost_task *vhost_task_create(int (*fn)(void *), void *arg, int node)
-    74	{
-    75		struct kernel_clone_args args = {
-    76			.flags		= CLONE_FS | CLONE_UNTRACED | CLONE_VM,
-    77			.exit_signal	= 0,
-    78			.stack		= (unsigned long)vhost_task_fn,
-    79			.worker_flags	= USER_WORKER | USER_WORKER_NO_FILES |
-    80					  USER_WORKER_SIG_IGN,
-    81		};
-    82		struct vhost_task *vtsk;
-    83		struct task_struct *tsk;
-    84	
-  > 85		vtsk = kzalloc(GFP_KERNEL, sizeof(*vtsk));
-    86		if (!vtsk)
-    87			return ERR_PTR(-ENOMEM);
-    88	
-    89		init_completion(&vtsk->exited);
-    90		vtsk->data = arg;
-    91		vtsk->fn = fn;
-    92		args.stack_size =  (unsigned long)vtsk;
-    93	
-    94		tsk = copy_process(NULL, 0, node, &args);
-    95		if (IS_ERR(tsk)) {
-    96			kfree(vtsk);
-    97			return NULL;
-    98		}
-    99	
-   100		vtsk->task = tsk;
-   101	
-   102		return vtsk;
-   103	}
-   104	EXPORT_SYMBOL_GPL(vhost_task_create);
-   105	
-
----
-0-DAY CI Kernel Test Service, Intel Corporation
-https://lists.01.org/hyperkitty/list/kbuild-all@lists.01.org
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
