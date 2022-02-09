@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A0284AEC20
-	for <lists.virtualization@lfdr.de>; Wed,  9 Feb 2022 09:21:49 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id F3A884AEC1F
+	for <lists.virtualization@lfdr.de>; Wed,  9 Feb 2022 09:21:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 7D36B40123;
-	Wed,  9 Feb 2022 08:21:46 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9C57540924;
+	Wed,  9 Feb 2022 08:21:45 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GUAUX-PPZnvN; Wed,  9 Feb 2022 08:21:45 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id C9E5840921;
+	with ESMTP id osel5UbyPe6T; Wed,  9 Feb 2022 08:21:44 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 213AE4091F;
 	Wed,  9 Feb 2022 08:21:44 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BB7E0C0079;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 86851C000B;
 	Wed,  9 Feb 2022 08:21:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 882A9C0011
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7D16BC007A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:41 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7542060F97
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6C2B060F93
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:41 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qwUZ3O5EGFWe
+ with ESMTP id yFj3BDXgW0Gq
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D917960F94
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F068060F7F
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=Ilg8MRKs3UhBiK+Mujp47+wrzj58nCf6OMRjMHqSUG8=; b=0HfqCHi/cYkXl1l44ziZ7rH0fD
- Q4o5faCZ0mTKlDobx/Mos2uvSD+rwL7LJ2xFjtWXRf4W+6pPSdvlC2PJEYSvKrtizdXZk8HrRgGpo
- 9LOMTBrvWN6yoWxB/zbA460GhB9azcRUyKtqhGbIy3dSQOK5ezCLIgzA+dYahk2wQM2G05CiSviyO
- 6O9LAWp7c+aheeQqmb41PV4X3J40wdXWHw4zGoGBInziqgjXfZ9z8zd05pl7Nmw257SFvE6jR+993
- WDtmBeiNVtWuHiXMGNWgXkT0zpHq0LG0pdszYL7njlonHr4rShgsi+vIqXeLPh32IDFvbPqP7o1f/
- wtCQJgKw==;
+ bh=QzwLw7j8eTvZsRbJglcJOtBbwWYohx/2fo0FBI/zHLQ=; b=qbb/LvbPae0W4D0XDY2KH6i5fw
+ dJv0VcVaAkIjaEQGX9kfyAJotc73hbJOcdVNLPTfpDK6F/vmR+B/1rzA05qjG9NYhOPcA/GE5oOR1
+ gPhQGJ4/xEWDoM/g9UnM1NbmhmrG6tgdbQHSdx13abiMUlPG5CtDzsiNB7Vwyf3T2pp4Vj67i2rYN
+ Kfs2+waN6YecrlZyF5x7oeSuA44uvdz3CtLALgvr7UOUbDtm9HEGNwtP0RCRKCwD6E4fgy6tBnVcX
+ 9tbJq2T4MZ5UTXB7L5OnO1ItjqFxg7SQcH6gjMH95ehITZJuTEVgb4bWEjf9Fu4i/9M9CdnZOqNUP
+ KQ4qE5dg==;
 Received: from [2001:4bb8:188:3efc:ea2:7599:7eeb:4b5a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nHiEE-00GbB7-5O; Wed, 09 Feb 2022 08:21:30 +0000
+ id 1nHiEG-00GbBT-Vq; Wed, 09 Feb 2022 08:21:33 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 2/5] memstick/ms_block: simplify refcounting
-Date: Wed,  9 Feb 2022 09:21:17 +0100
-Message-Id: <20220209082121.2628452-3-hch@lst.de>
+Subject: [PATCH 3/5] memstick/mspro_block: fix handling of read-only devices
+Date: Wed,  9 Feb 2022 09:21:18 +0100
+Message-Id: <20220209082121.2628452-4-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20220209082121.2628452-1-hch@lst.de>
 References: <20220209082121.2628452-1-hch@lst.de>
@@ -85,137 +85,44 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Implement the ->free_disk method to free the msb_data structure only once
-the last gendisk reference goes away instead of keeping a local refcount.
+Use set_disk_ro to propagate the read-only state to the block layer
+instead of checking for it in ->open and leaking a reference in case
+of a read-only device.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/memstick/core/ms_block.c | 64 ++++++++------------------------
- drivers/memstick/core/ms_block.h |  1 -
- 2 files changed, 15 insertions(+), 50 deletions(-)
+ drivers/memstick/core/mspro_block.c | 10 ++++------
+ 1 file changed, 4 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/memstick/core/ms_block.c b/drivers/memstick/core/ms_block.c
-index 0cda6c6baefc3..3993bdd4b519c 100644
---- a/drivers/memstick/core/ms_block.c
-+++ b/drivers/memstick/core/ms_block.c
-@@ -1943,22 +1943,6 @@ static void msb_io_work(struct work_struct *work)
- static DEFINE_IDR(msb_disk_idr); /*set of used disk numbers */
- static DEFINE_MUTEX(msb_disk_lock); /* protects against races in open/release */
+diff --git a/drivers/memstick/core/mspro_block.c b/drivers/memstick/core/mspro_block.c
+index c0450397b6735..7ea312f0840e0 100644
+--- a/drivers/memstick/core/mspro_block.c
++++ b/drivers/memstick/core/mspro_block.c
+@@ -186,13 +186,8 @@ static int mspro_block_bd_open(struct block_device *bdev, fmode_t mode)
  
--static int msb_bd_open(struct block_device *bdev, fmode_t mode)
--{
--	struct gendisk *disk = bdev->bd_disk;
--	struct msb_data *msb = disk->private_data;
--
--	dbg_verbose("block device open");
--
--	mutex_lock(&msb_disk_lock);
--
--	if (msb && msb->card)
--		msb->usage_count++;
--
--	mutex_unlock(&msb_disk_lock);
--	return 0;
--}
--
- static void msb_data_clear(struct msb_data *msb)
- {
- 	kfree(msb->boot_page);
-@@ -1968,33 +1952,6 @@ static void msb_data_clear(struct msb_data *msb)
- 	msb->card = NULL;
- }
+ 	mutex_lock(&mspro_block_disk_lock);
  
--static int msb_disk_release(struct gendisk *disk)
--{
--	struct msb_data *msb = disk->private_data;
--
--	dbg_verbose("block device release");
--	mutex_lock(&msb_disk_lock);
--
--	if (msb) {
--		if (msb->usage_count)
--			msb->usage_count--;
--
--		if (!msb->usage_count) {
--			disk->private_data = NULL;
--			idr_remove(&msb_disk_idr, msb->disk_id);
--			put_disk(disk);
--			kfree(msb);
--		}
+-	if (msb && msb->card) {
++	if (msb && msb->card)
+ 		msb->usage_count++;
+-		if ((mode & FMODE_WRITE) && msb->read_only)
+-			rc = -EROFS;
+-		else
+-			rc = 0;
 -	}
--	mutex_unlock(&msb_disk_lock);
--	return 0;
--}
--
--static void msb_bd_release(struct gendisk *disk, fmode_t mode)
--{
--	msb_disk_release(disk);
--}
--
- static int msb_bd_getgeo(struct block_device *bdev,
- 				 struct hd_geometry *geo)
- {
-@@ -2003,6 +1960,17 @@ static int msb_bd_getgeo(struct block_device *bdev,
- 	return 0;
- }
  
-+static void msb_bd_free_disk(struct gendisk *disk)
-+{
-+	struct msb_data *msb = disk->private_data;
-+
-+	mutex_lock(&msb_disk_lock);
-+	idr_remove(&msb_disk_idr, msb->disk_id);
-+	mutex_unlock(&msb_disk_lock);
-+
-+	kfree(msb);
-+}
-+
- static blk_status_t msb_queue_rq(struct blk_mq_hw_ctx *hctx,
- 				 const struct blk_mq_queue_data *bd)
- {
-@@ -2096,10 +2064,9 @@ static void msb_start(struct memstick_dev *card)
- }
+ 	mutex_unlock(&mspro_block_disk_lock);
  
- static const struct block_device_operations msb_bdops = {
--	.open    = msb_bd_open,
--	.release = msb_bd_release,
--	.getgeo  = msb_bd_getgeo,
--	.owner   = THIS_MODULE
-+	.owner		= THIS_MODULE,
-+	.getgeo		= msb_bd_getgeo,
-+	.free_disk	= msb_bd_free_disk, 
- };
- 
- static const struct blk_mq_ops msb_mq_ops = {
-@@ -2147,7 +2114,6 @@ static int msb_init_disk(struct memstick_dev *card)
+@@ -1239,6 +1234,9 @@ static int mspro_block_init_disk(struct memstick_dev *card)
  	set_capacity(msb->disk, capacity);
- 	dbg("Set total disk size to %lu sectors", capacity);
+ 	dev_dbg(&card->dev, "capacity set %ld\n", capacity);
  
--	msb->usage_count = 1;
- 	msb->io_queue = alloc_ordered_workqueue("ms_block", WQ_MEM_RECLAIM);
- 	INIT_WORK(&msb->io_work, msb_io_work);
- 	sg_init_table(msb->prealloc_sg, MS_BLOCK_MAX_SEGS+1);
-@@ -2229,7 +2195,7 @@ static void msb_remove(struct memstick_dev *card)
- 	msb_data_clear(msb);
- 	mutex_unlock(&msb_disk_lock);
- 
--	msb_disk_release(msb->disk);
-+	put_disk(msb->disk);
- 	memstick_set_drvdata(card, NULL);
- }
- 
-diff --git a/drivers/memstick/core/ms_block.h b/drivers/memstick/core/ms_block.h
-index 122e1a8a8bd5b..7058f9aefeb92 100644
---- a/drivers/memstick/core/ms_block.h
-+++ b/drivers/memstick/core/ms_block.h
-@@ -143,7 +143,6 @@ struct ms_boot_page {
- } __packed;
- 
- struct msb_data {
--	unsigned int			usage_count;
- 	struct memstick_dev		*card;
- 	struct gendisk			*disk;
- 	struct request_queue		*queue;
++	if (msb->read_only)
++		set_disk_ro(msb->disk, true);
++
+ 	rc = device_add_disk(&card->dev, msb->disk, NULL);
+ 	if (rc)
+ 		goto out_cleanup_disk;
 -- 
 2.30.2
 
