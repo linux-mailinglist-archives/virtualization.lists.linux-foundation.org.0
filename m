@@ -1,63 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2CB244AEC1A
-	for <lists.virtualization@lfdr.de>; Wed,  9 Feb 2022 09:21:44 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64EC64AEC19
+	for <lists.virtualization@lfdr.de>; Wed,  9 Feb 2022 09:21:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C6DF24058A;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 10172415A7;
 	Wed,  9 Feb 2022 08:21:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id mJFUH-6MzVHH; Wed,  9 Feb 2022 08:21:41 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0e9ZbuILzBZ9; Wed,  9 Feb 2022 08:21:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 51F9040917;
-	Wed,  9 Feb 2022 08:21:41 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id A856A415A3;
+	Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4DE52C000B;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A4A9C0073;
 	Wed,  9 Feb 2022 08:21:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B9D75C000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 37B4DC000B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:39 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B380140123
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1702E4090E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:39 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id qhuCUJErewJK
+ with ESMTP id ZHFho3SMFZvq
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:36 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:34 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2EFBF4058A
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 253DD40123
  for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Feb 2022 08:21:36 +0000 (UTC)
+ Wed,  9 Feb 2022 08:21:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
- Content-ID:Content-Description:In-Reply-To:References;
- bh=7lXlvtJia9QHDC+a5JJcKfyPxGmS91rbuQ/+DSnKG8Q=; b=Dcf2viGCk8tLKDlqdp0JE2ecAX
- kuVbF2Rz3tO4iy37+IOQQDOARovx86y0xS4OLur4dSTQy35tgzu/maQ3oerz34bAUICL7b8WySTTl
- TGZtOmo8i9T0oLB2pmsi8YCpzjcOoN8w0xTepnkJF78gggPilmzp0YcR2iuChSaaOEwDkD/pEic2L
- Nkquw7QCWmbxGLRR3XS2Tefv/hoQAiib7q1VFRwmWt7HDj0V7fBJ8qnvWoKeyzC1VAVLEMlpvZDLC
- wAhW9U/ZCWotCiaXLQWZmmbymm4WfkRsHhmXaUrQoiTpVoQYboruaO3OvrZuTa3KMMexy/8Bt3DB2
- P+8fFR6g==;
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=Sw3T8I6YXMWb2jiqB7QUc/okYU5X2+bEkOeoAGfg6Ak=; b=zvIdqvijwOa1CZXt0/IX+bv8Ck
+ FepyGnk9TVxolqz848lYLqSdrWdjoH71qYc4Qrkcg++Hungn2BIXlP4IYQP3xpav/hRyNJlqmsOoH
+ GYu4BK0BNBLyCKJN8Gr/ES9P2pF7lmlkacAStU2MaVHc61n7BzEi1Tz4Kn8SjR9jyJZArJ9cpcuVY
+ g1zOyniqKaE9Aq3WY3MUdK4gWDdTwgJyU5eVVseBYufGL6eRRDV1H1fKp5M0pCWaneJS/+HAgSwLE
+ /gPnJ1eJlPuaqhKAvZ0VYkv8rMYlNIQFXIjgEWqAt4q8KLT0I80W/5dm9nscbzMBUYDYSN+EXuokJ
+ p4GQIpBQ==;
 Received: from [2001:4bb8:188:3efc:ea2:7599:7eeb:4b5a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nHiE8-00GbA2-0s; Wed, 09 Feb 2022 08:21:24 +0000
+ id 1nHiEB-00GbAb-72; Wed, 09 Feb 2022 08:21:27 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: add a ->free_disk block_device_operation v2
-Date: Wed,  9 Feb 2022 09:21:15 +0100
-Message-Id: <20220209082121.2628452-1-hch@lst.de>
+Subject: [PATCH 1/5] block: add a ->free_disk method
+Date: Wed,  9 Feb 2022 09:21:16 +0100
+Message-Id: <20220209082121.2628452-2-hch@lst.de>
 X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20220209082121.2628452-1-hch@lst.de>
+References: <20220209082121.2628452-1-hch@lst.de>
 MIME-Version: 1.0
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
@@ -81,26 +85,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jens,
+Add a method to notify the driver that the gendisk is about to be freed.
+This allows drivers to tie the lifetime of their private data to that of
+the gendisk and thus deal with device removal races without expensive
+synchronization and boilerplate code.
 
-this series adds a ->free_disk method to struct block_device_operation so that
-drivers can defer freeing their disk private data until the gendisk goes away
-and don't need to play games with the validity of ->private_data.
+Signed-off-by: Christoph Hellwig <hch@lst.de>
+---
+ block/genhd.c          | 4 ++++
+ include/linux/blkdev.h | 1 +
+ 2 files changed, 5 insertions(+)
 
-This also converts three simple drivers over as example, but eventually I
-imagine that all drivers with private data will use it.
+diff --git a/block/genhd.c b/block/genhd.c
+index 9589d1d59afab..1a650c55d7626 100644
+--- a/block/genhd.c
++++ b/block/genhd.c
+@@ -1119,6 +1119,10 @@ static void disk_release(struct device *dev)
+ 	xa_destroy(&disk->part_tbl);
+ 	disk->queue->disk = NULL;
+ 	blk_put_queue(disk->queue);
++
++	if (disk->fops->free_disk)
++		disk->fops->free_disk(disk);
++
+ 	iput(disk->part0->bd_inode);	/* frees the disk */
+ }
+ 
+diff --git a/include/linux/blkdev.h b/include/linux/blkdev.h
+index 3bfc75a2a4509..a8f8aa4671037 100644
+--- a/include/linux/blkdev.h
++++ b/include/linux/blkdev.h
+@@ -1464,6 +1464,7 @@ struct block_device_operations {
+ 	void (*unlock_native_capacity) (struct gendisk *);
+ 	int (*getgeo)(struct block_device *, struct hd_geometry *);
+ 	int (*set_read_only)(struct block_device *bdev, bool ro);
++	void (*free_disk)(struct gendisk *disk);
+ 	/* this callback is with swap_lock and sometimes page table lock held */
+ 	void (*swap_slot_free_notify) (struct block_device *, unsigned long);
+ 	int (*report_zones)(struct gendisk *, sector_t sector,
+-- 
+2.30.2
 
-Changes since v1:
- - fix a tag_set use after free in virtio_blk
-
-Diffstat:
- block/genhd.c                       |    4 +
- drivers/block/virtio_blk.c          |   74 ++++++++++--------------------------
- drivers/memstick/core/ms_block.c    |   64 +++++++------------------------
- drivers/memstick/core/ms_block.h    |    1 
- drivers/memstick/core/mspro_block.c |   57 ++++-----------------------
- include/linux/blkdev.h              |    1 
- 6 files changed, 51 insertions(+), 150 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
