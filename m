@@ -1,99 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1AA304B1F05
-	for <lists.virtualization@lfdr.de>; Fri, 11 Feb 2022 08:09:58 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 311504B1F44
+	for <lists.virtualization@lfdr.de>; Fri, 11 Feb 2022 08:25:00 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A8A4541603;
-	Fri, 11 Feb 2022 07:09:56 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id D413760AA0;
+	Fri, 11 Feb 2022 07:24:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ot_fcBJ7uhwK; Fri, 11 Feb 2022 07:09:55 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 70DC7415EF;
-	Fri, 11 Feb 2022 07:09:55 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id w_jNrzv6maC6; Fri, 11 Feb 2022 07:24:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 53D4E61C14;
+	Fri, 11 Feb 2022 07:24:57 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C4772C0039;
-	Fri, 11 Feb 2022 07:09:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BF605C0039;
+	Fri, 11 Feb 2022 07:24:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0881DC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A0898C000B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Feb 2022 07:09:53 +0000 (UTC)
+ Fri, 11 Feb 2022 07:24:54 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EADD860AA0
+ by smtp2.osuosl.org (Postfix) with ESMTP id 8FA93400E6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Feb 2022 07:09:52 +0000 (UTC)
+ Fri, 11 Feb 2022 07:24:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pXCgBLk43_jC
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id oIXTIlmOEABm
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Feb 2022 07:09:52 +0000 (UTC)
+ Fri, 11 Feb 2022 07:24:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 035B660806
+Received: from out30-42.freemail.mail.aliyun.com
+ (out30-42.freemail.mail.aliyun.com [115.124.30.42])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4A6C54002B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Feb 2022 07:09:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1644563391;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=ouvEgmpHPvkcz1CBibgw4xI0LETLRKvIkcsiMvXvtnI=;
- b=Ht9RKTXcRRK8OnBkuVmsyePJmJ0lE2ViP52x/p0DFzxevWPV4fI6Q08FD/um4m3aJUHmIY
- w5fCXdR0M03p8j8g/CF/GesqMLV4b//UM2orv4tT+NKx8jskWCws5TlpXlmRCBUhJ1Ssxq
- Z+AmXcqLq24OnnEigUJQ02CJsCJtwf0=
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-640-_-epXqreOrixF9VBMCf17Q-1; Fri, 11 Feb 2022 02:09:48 -0500
-X-MC-Unique: _-epXqreOrixF9VBMCf17Q-1
-Received: by mail-lj1-f198.google.com with SMTP id
- a13-20020a2eb54d000000b0023f5f64ae4fso3715317ljn.4
- for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Feb 2022 23:09:48 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=ouvEgmpHPvkcz1CBibgw4xI0LETLRKvIkcsiMvXvtnI=;
- b=bKHRRYegl2mSkG6X/jxvcQgV3mGtIQt32mXlBaJcMrf9z12SA/xpIvpUUQyDtyvdoz
- +NXejf//nT+Bh4BXHF02Remh+f9GqgP1fF1IKMfYPxEXpYr/aRz9IVlRHdvxN6yRZ7bP
- vwvsIE9VcAXI8l/bXOAn5st8q4N6f0rw+L3Z1OUXOobkI7kxL8I5prUJypsWvFMs6bu7
- 1mPYYJ9oS1Eb6Dhb8CWgsYhxeicT+51ryX5voaQ2r2lTjlfx6Bl+rMzkD8fOAfrwt8zG
- W+41Op3okP2xRW10OaBWK6IEETjsmmUBExwpSDJrsApy+MHMKh4TFC+SHvzi8hv2P8Rp
- JrDg==
-X-Gm-Message-State: AOAM530M0KC+nonAy2Xpo88DuzLlsav6quuoE04OIvSA3toTFM8g+Cnj
- FLL41mQQAxhLR63nsNX3zEhBiiIbVNa6lJw/jzBv4OOi1YseP0A7I4Sui5CnCYI/aL8QVR7sDaL
- W8ma59LmB1CwQmBc72nL2J/95C/ANIDJcBzRN1N5nJX0gY39Fo/5gLevLaw==
-X-Received: by 2002:a19:610e:: with SMTP id v14mr281130lfb.348.1644563386868; 
- Thu, 10 Feb 2022 23:09:46 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJz7T0pNUkYHnBgdtsf+7u3obLYe2WN2VJUUG3OUT7y/TCDIwEor31Qs1dvfrLHmaIulCGKDS/nysYgDt3PruBA=
-X-Received: by 2002:a19:610e:: with SMTP id v14mr281119lfb.348.1644563386644; 
- Thu, 10 Feb 2022 23:09:46 -0800 (PST)
-MIME-Version: 1.0
+ Fri, 11 Feb 2022 07:24:50 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R541e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0V47qv8-_1644564287; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0V47qv8-_1644564287) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 11 Feb 2022 15:24:47 +0800
+Message-ID: <1644564073.3777697-1-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH v4 14/14] virtio_pci: queue_reset: support
+ VIRTIO_F_RING_RESET
+Date: Fri, 11 Feb 2022 15:21:13 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Jason Wang <jasowang@redhat.com>
 References: <20220209122901.51790-1-xuanzhuo@linux.alibaba.com>
- <CACGkMEs7jR7Y5QKLeSfwJNqOooqe2Pgcm-GeTqb9rgAyawPSrQ@mail.gmail.com>
- <1644560833.8375504-1-xuanzhuo@linux.alibaba.com>
-In-Reply-To: <1644560833.8375504-1-xuanzhuo@linux.alibaba.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Fri, 11 Feb 2022 15:09:35 +0800
-Message-ID: <CACGkMEv0C_y4BDa0UqO_mB90jy_BEftM7QYpZM8yhfPKM0v=Ew@mail.gmail.com>
-Subject: Re: [PATCH v4 00/14] virtio pci support VIRTIO_F_RING_RESET
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: virtualization <virtualization@lists.linux-foundation.org>,
- linux-kernel <linux-kernel@vger.kernel.org>,
+ <20220209122901.51790-15-xuanzhuo@linux.alibaba.com>
+ <8b0b5f06-74eb-d6cb-07e2-38249e4cda92@redhat.com>
+In-Reply-To: <8b0b5f06-74eb-d6cb-07e2-38249e4cda92@redhat.com>
+Cc: virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
  "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -106,122 +68,149 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Feb 11, 2022 at 2:34 PM Xuan Zhuo <xuanzhuo@linux.alibaba.com> wrote:
->
-> On Fri, 11 Feb 2022 13:40:52 +0800, Jason Wang <jasowang@redhat.com> wrote:
-> > On Wed, Feb 9, 2022 at 8:29 PM Xuan Zhuo <xuanzhuo@linux.alibaba.com> wrote:
-> > >
-> > > The virtio spec already supports the virtio queue reset function. This patch set
-> > > is to add this function to the kernel. The relevant virtio spec information is
-> > > here:
-> > >
-> > >     https://github.com/oasis-tcs/virtio-spec/issues/124
-> > >
-> > > Also regarding MMIO support for queue reset, I plan to support it after this
-> > > patch is passed.
-> >
-> > So I had an idea, we can implement ethtool_set_ringparam() in this
-> > series to get one real users.
->
-> I agree, in fact my local test is using this feature.
-
-Right.
-
->
-> >
-> > But this came into another question: it looks to me current virito-net
-> > just uses the maximum ring size, so it basically means we just can
-> > decrease the number from startup, so I wonder how much value if we
-> > don't limit the startup queue size to a dedicated value.
->
-> I also have this consideration, so I want to add a virtio-net module parameter
-> to specify an initial value.
-
-But module parameters are not user friendly. Let it be changed via
-ethtool should be sufficient.
-
->
-> This initial value also has another meaning. In order to achieve high
-> performance, the backend can provide a large ring size capability, but we also
-> hope that the ring size can only be increased through ethtool -G when the user
-> needs it.
->
-> To implement this function, we need to add a new parameter to find_vqs().
->
-> If there is no problem, I will bring this function in the next version.
-
-I think so, and we need to choose a sane default value. I guess
-something up to 1024 should be sufficient.
-
-Thanks
-
->
-> Thannks.
->
->
-> >
-> > Thanks
-> >
-> > >
-> > > Please review. Thanks.
-> > >
-> > > v4:
-> > >   1. just the code of virtio, without virtio-net
-> > >   2. Performing reset on a queue is divided into these steps:
-> > >     1. reset_vq: reset one vq
-> > >     2. recycle the buffer from vq by virtqueue_detach_unused_buf()
-> > >     3. release the ring of the vq by vring_release_virtqueue()
-> > >     4. enable_reset_vq: re-enable the reset queue
-> > >   3. Simplify the parameters of enable_reset_vq()
-> > >   4. add container structures for virtio_pci_common_cfg
-> > >
-> > > v3:
-> > >   1. keep vq, irq unreleased
-> > >
-> > > Xuan Zhuo (14):
-> > >   virtio_pci: struct virtio_pci_common_cfg add queue_notify_data
-> > >   virtio: queue_reset: add VIRTIO_F_RING_RESET
-> > >   virtio_ring: queue_reset: add function vring_setup_virtqueue()
-> > >   virtio_ring: queue_reset: split: add __vring_init_virtqueue()
-> > >   virtio_ring: queue_reset: split: support enable reset queue
-> > >   virtio_ring: queue_reset: packed: support enable reset queue
-> > >   virtio_ring: queue_reset: extract the release function of the vq ring
-> > >   virtio_ring: queue_reset: add vring_release_virtqueue()
-> > >   virtio: queue_reset: struct virtio_config_ops add callbacks for
-> > >     queue_reset
-> > >   virtio_pci: queue_reset: update struct virtio_pci_common_cfg and
-> > >     option functions
-> > >   virtio_pci: queue_reset: release vq by vp_dev->vqs
-> > >   virtio_pci: queue_reset: setup_vq() support vring_setup_virtqueue()
-> > >   virtio_pci: queue_reset: vp_setup_vq() support ring_num
-> > >   virtio_pci: queue_reset: support VIRTIO_F_RING_RESET
-> > >
-> > >  drivers/virtio/virtio_pci_common.c     |  65 +++++++---
-> > >  drivers/virtio/virtio_pci_common.h     |  11 +-
-> > >  drivers/virtio/virtio_pci_legacy.c     |   5 +-
-> > >  drivers/virtio/virtio_pci_modern.c     |  99 ++++++++++++--
-> > >  drivers/virtio/virtio_pci_modern_dev.c |  36 +++++
-> > >  drivers/virtio/virtio_ring.c           | 173 ++++++++++++++++++-------
-> > >  include/linux/virtio.h                 |   6 +
-> > >  include/linux/virtio_config.h          |  13 ++
-> > >  include/linux/virtio_pci_modern.h      |   2 +
-> > >  include/linux/virtio_ring.h            |  37 ++++--
-> > >  include/uapi/linux/virtio_config.h     |   7 +-
-> > >  include/uapi/linux/virtio_pci.h        |  14 ++
-> > >  12 files changed, 375 insertions(+), 93 deletions(-)
-> > >
-> > > --
-> > > 2.31.0
-> > >
-> >
->
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gRnJpLCAxMSBGZWIgMjAyMiAxNTowNTo0MCArMDgwMCwgSmFzb24gV2FuZyA8amFzb3dhbmdA
+cmVkaGF0LmNvbT4gd3JvdGU6Cj4KPiDlnKggMjAyMi8yLzkg5LiL5Y2IODoyOSwgWHVhbiBaaHVv
+IOWGmemBkzoKPiA+IFRoaXMgcGF0Y2ggaW1wbGVtZW50cyB2aXJ0aW8gcGNpIHN1cHBvcnQgZm9y
+IFFVRVVFIFJFU0VULgo+ID4KPiA+IFBlcmZvcm1pbmcgcmVzZXQgb24gYSBxdWV1ZSBpcyBkaXZp
+ZGVkIGludG8gdGhlc2Ugc3RlcHM6Cj4gPgo+ID4gMS4gcmVzZXRfdnE6IHJlc2V0IG9uZSB2cQo+
+ID4gMi4gcmVjeWNsZSB0aGUgYnVmZmVyIGZyb20gdnEgYnkgdmlydHF1ZXVlX2RldGFjaF91bnVz
+ZWRfYnVmKCkKPiA+IDMuIHJlbGVhc2UgdGhlIHJpbmcgb2YgdGhlIHZxIGJ5IHZyaW5nX3JlbGVh
+c2VfdmlydHF1ZXVlKCkKPiA+IDQuIGVuYWJsZV9yZXNldF92cTogcmUtZW5hYmxlIHRoZSByZXNl
+dCBxdWV1ZQo+ID4KPiA+IFRoaXMgcGF0Y2ggaW1wbGVtZW50cyByZXNldF92cSwgZW5hYmxlX3Jl
+c2V0X3ZxIGluIHRoZSBwY2kgc2NlbmFyaW8KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBYdWFuIFpo
+dW8gPHh1YW56aHVvQGxpbnV4LmFsaWJhYmEuY29tPgo+ID4gLS0tCj4gPiAgIGRyaXZlcnMvdmly
+dGlvL3ZpcnRpb19wY2lfY29tbW9uLmMgfCAgOCArLS0KPiA+ICAgZHJpdmVycy92aXJ0aW8vdmly
+dGlvX3BjaV9tb2Rlcm4uYyB8IDgwICsrKysrKysrKysrKysrKysrKysrKysrKysrKystLQo+ID4g
+ICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcmluZy5jICAgICAgIHwgIDIgKwo+ID4gICBpbmNsdWRl
+L2xpbnV4L3ZpcnRpby5oICAgICAgICAgICAgIHwgIDEgKwo+ID4gICA0IGZpbGVzIGNoYW5nZWQs
+IDg1IGluc2VydGlvbnMoKyksIDYgZGVsZXRpb25zKC0pCj4gPgo+ID4gZGlmZiAtLWdpdCBhL2Ry
+aXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfY29tbW9uLmMgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
+cGNpX2NvbW1vbi5jCj4gPiBpbmRleCBjYjAxZWIwY2IyZTQuLjMwMzYzN2FjNDkxNCAxMDA2NDQK
+PiA+IC0tLSBhL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfY29tbW9uLmMKPiA+ICsrKyBiL2Ry
+aXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfY29tbW9uLmMKPiA+IEBAIC0yNTUsOSArMjU1LDExIEBA
+IHN0YXRpYyB2b2lkIHZwX2RlbF92cShzdHJ1Y3QgdmlydHF1ZXVlICp2cSkKPiA+ICAgCXN0cnVj
+dCB2aXJ0aW9fcGNpX3ZxX2luZm8gKmluZm8gPSB2cF9kZXYtPnZxc1t2cS0+aW5kZXhdOwo+ID4g
+ICAJdW5zaWduZWQgbG9uZyBmbGFnczsKPiA+Cj4gPiAtCXNwaW5fbG9ja19pcnFzYXZlKCZ2cF9k
+ZXYtPmxvY2ssIGZsYWdzKTsKPiA+IC0JbGlzdF9kZWwoJmluZm8tPm5vZGUpOwo+ID4gLQlzcGlu
+X3VubG9ja19pcnFyZXN0b3JlKCZ2cF9kZXYtPmxvY2ssIGZsYWdzKTsKPiA+ICsJaWYgKCF2cS0+
+cmVzZXQpIHsKPiA+ICsJCXNwaW5fbG9ja19pcnFzYXZlKCZ2cF9kZXYtPmxvY2ssIGZsYWdzKTsK
+PiA+ICsJCWxpc3RfZGVsKCZpbmZvLT5ub2RlKTsKPiA+ICsJCXNwaW5fdW5sb2NrX2lycXJlc3Rv
+cmUoJnZwX2Rldi0+bG9jaywgZmxhZ3MpOwo+ID4gKwl9Cj4gPgo+ID4gICAJdnBfZGV2LT5kZWxf
+dnEoaW5mbyk7Cj4gPiAgIAlrZnJlZShpbmZvKTsKPiA+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zp
+cnRpby92aXJ0aW9fcGNpX21vZGVybi5jIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3BjaV9tb2Rl
+cm4uYwo+ID4gaW5kZXggZDI5ZDQwYmYwYjQ1Li5jYzQ1NTE1ZWRhNTAgMTAwNjQ0Cj4gPiAtLS0g
+YS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX21vZGVybi5jCj4gPiArKysgYi9kcml2ZXJzL3Zp
+cnRpby92aXJ0aW9fcGNpX21vZGVybi5jCj4gPiBAQCAtMzQsNiArMzQsOSBAQCBzdGF0aWMgdm9p
+ZCB2cF90cmFuc3BvcnRfZmVhdHVyZXMoc3RydWN0IHZpcnRpb19kZXZpY2UgKnZkZXYsIHU2NCBm
+ZWF0dXJlcykKPiA+ICAgCWlmICgoZmVhdHVyZXMgJiBCSVRfVUxMKFZJUlRJT19GX1NSX0lPVikp
+ICYmCj4gPiAgIAkJCXBjaV9maW5kX2V4dF9jYXBhYmlsaXR5KHBjaV9kZXYsIFBDSV9FWFRfQ0FQ
+X0lEX1NSSU9WKSkKPiA+ICAgCQlfX3ZpcnRpb19zZXRfYml0KHZkZXYsIFZJUlRJT19GX1NSX0lP
+Vik7Cj4gPiArCj4gPiArCWlmIChmZWF0dXJlcyAmIEJJVF9VTEwoVklSVElPX0ZfUklOR19SRVNF
+VCkpCj4gPiArCQlfX3ZpcnRpb19zZXRfYml0KHZkZXYsIFZJUlRJT19GX1JJTkdfUkVTRVQpOwo+
+ID4gICB9Cj4gPgo+ID4gICAvKiB2aXJ0aW8gY29uZmlnLT5maW5hbGl6ZV9mZWF0dXJlcygpIGlt
+cGxlbWVudGF0aW9uICovCj4gPiBAQCAtMTc2LDYgKzE3OSw3MCBAQCBzdGF0aWMgdm9pZCB2cF9y
+ZXNldChzdHJ1Y3QgdmlydGlvX2RldmljZSAqdmRldikKPiA+ICAgCXZwX2Rpc2FibGVfY2JzKHZk
+ZXYpOwo+ID4gICB9Cj4gPgo+ID4gK3N0YXRpYyBpbnQgdnBfbW9kZXJuX3Jlc2V0X3ZxKHN0cnVj
+dCB2aXJ0cXVldWUgKnZxKQo+ID4gK3sKPiA+ICsJc3RydWN0IHZpcnRpb19wY2lfZGV2aWNlICp2
+cF9kZXYgPSB0b192cF9kZXZpY2UodnEtPnZkZXYpOwo+ID4gKwlzdHJ1Y3QgdmlydGlvX3BjaV9t
+b2Rlcm5fZGV2aWNlICptZGV2ID0gJnZwX2Rldi0+bWRldjsKPiA+ICsJc3RydWN0IHZpcnRpb19w
+Y2lfdnFfaW5mbyAqaW5mbzsKPiA+ICsJdW5zaWduZWQgbG9uZyBmbGFnczsKPiA+ICsJdTE2IG1z
+aXhfdmVjOwo+ID4gKwo+ID4gKwlpZiAoIXZpcnRpb19oYXNfZmVhdHVyZSh2cS0+dmRldiwgVklS
+VElPX0ZfUklOR19SRVNFVCkpCj4gPiArCQlyZXR1cm4gLUVOT0VOVDsKPiA+ICsKPiA+ICsJdnBf
+bW9kZXJuX3NldF9xdWV1ZV9yZXNldChtZGV2LCB2cS0+aW5kZXgpOwo+ID4gKwo+ID4gKwlpbmZv
+ID0gdnBfZGV2LT52cXNbdnEtPmluZGV4XTsKPiA+ICsJbXNpeF92ZWMgPSBpbmZvLT5tc2l4X3Zl
+Y3RvcjsKPiA+ICsKPiA+ICsJLyogRGlzYWJsZSBWUSBjYWxsYmFjay4gKi8KPiA+ICsJaWYgKHZw
+X2Rldi0+cGVyX3ZxX3ZlY3RvcnMgJiYgbXNpeF92ZWMgIT0gVklSVElPX01TSV9OT19WRUNUT1Ip
+Cj4gPiArCQlkaXNhYmxlX2lycShwY2lfaXJxX3ZlY3Rvcih2cF9kZXYtPnBjaV9kZXYsIG1zaXhf
+dmVjKSk7Cj4KPgo+IEkgdGhpbmsgd2UgbmVlZCBhIGNvbW1lbnQgdG8gZXhwbGFpbiB3aHkgcGVy
+X3ZxX21vZGUgbmVlZHMgdG8gYmUgZGVhbHQKPiB3aXRoIGRpZmZlcmVudGx5LgoKT0suCgo+Cj4K
+PiA+ICsKPiA+ICsJLyogZGVsZXRlIHZxICovCj4gPiArCXNwaW5fbG9ja19pcnFzYXZlKCZ2cF9k
+ZXYtPmxvY2ssIGZsYWdzKTsKPiA+ICsJbGlzdF9kZWwoJmluZm8tPm5vZGUpOwo+ID4gKwlzcGlu
+X3VubG9ja19pcnFyZXN0b3JlKCZ2cF9kZXYtPmxvY2ssIGZsYWdzKTsKPgo+Cj4gU28gSSBkb24n
+dCBzZWUgd2hlcmUgdnJpbmcgaXMgZnJlZWQgYW5kIHZwX3NldHVwX3ZxKCkgbWF5IHRyeSB0bwo+
+IGFsbG9jYXRlIG5ldyBtZW1vcnksIHdvbid0IGl0IGJlIGEgbWVtb3J5IGxlYWsgaW4gdGhpcyBj
+YXNlPwoKMS4gcmVzZXRfdnE6IHJlc2V0IG9uZSB2cQoyLiByZWN5Y2xlIHRoZSBidWZmZXIgZnJv
+bSB2cSBieSB2aXJ0cXVldWVfZGV0YWNoX3VudXNlZF9idWYoKQozLiByZWxlYXNlIHRoZSByaW5n
+IG9mIHRoZSB2cSBieSB2cmluZ19yZWxlYXNlX3ZpcnRxdWV1ZSgpCjQuIGVuYWJsZV9yZXNldF92
+cTogcmUtZW5hYmxlIHRoZSByZXNldCBxdWV1ZQoKdnJpbmdfcmVsZWFzZV92aXJ0cXVldWUoKSAo
+IzggcGF0Y2gpIHdpbGwgcmVsZWFzZSB0aGUgdnJpbmcuClRoYXQgaXMgY2FsbGVkIGJ5IHRoZSBk
+cml2ZXIuCgpJIHRoaW5rIEkgc2hvdWxkIGFkZCBhIGNoZWNrIHRvIHZwX21vZGVybl9lbmFibGVf
+cmVzZXRfdnEoKSB0aGF0CnZyaW5nX3JlbGVhc2VfdmlydHF1ZXVlKCkgaGFzIGFscmVhZHkgYmVl
+biBjYWxsZWQuCgpUaGFua3MKCj4KPiBUaGFua3MKPgo+Cj4gPiArCj4gPiArCXZxLT5yZXNldCA9
+IHRydWU7Cj4gPiArCj4gPiArCUlOSVRfTElTVF9IRUFEKCZpbmZvLT5ub2RlKTsKPiA+ICsKPiA+
+ICsJcmV0dXJuIDA7Cj4gPiArfQo+ID4gKwo+ID4gK3N0YXRpYyBpbnQgdnBfbW9kZXJuX2VuYWJs
+ZV9yZXNldF92cShzdHJ1Y3QgdmlydHF1ZXVlICp2cSwgdTE2IHJpbmdfbnVtKQo+ID4gK3sKPiA+
+ICsJc3RydWN0IHZpcnRpb19wY2lfZGV2aWNlICp2cF9kZXYgPSB0b192cF9kZXZpY2UodnEtPnZk
+ZXYpOwo+ID4gKwlzdHJ1Y3QgdmlydGlvX3BjaV9tb2Rlcm5fZGV2aWNlICptZGV2ID0gJnZwX2Rl
+di0+bWRldjsKPiA+ICsJc3RydWN0IHZpcnRpb19wY2lfdnFfaW5mbyAqaW5mbzsKPiA+ICsJc3Ry
+dWN0IHZpcnRxdWV1ZSAqX3ZxOwo+ID4gKwl1MTYgbXNpeF92ZWM7Cj4gPiArCj4gPiArCWlmICgh
+dnEtPnJlc2V0KQo+ID4gKwkJcmV0dXJuIC1FUEVSTTsKPiA+ICsKPiA+ICsJLyogY2hlY2sgcXVl
+dWUgcmVzZXQgc3RhdHVzICovCj4gPiArCWlmICh2cF9tb2Rlcm5fZ2V0X3F1ZXVlX3Jlc2V0KG1k
+ZXYsIHZxLT5pbmRleCkgIT0gMSkKPiA+ICsJCXJldHVybiAtRUJVU1k7Cj4gPiArCj4gPiArCWlu
+Zm8gPSB2cF9kZXYtPnZxc1t2cS0+aW5kZXhdOwo+ID4gKwlfdnEgPSB2cF9zZXR1cF92cSh2cS0+
+dmRldiwgdnEtPmluZGV4LCBOVUxMLCBOVUxMLCBOVUxMLAo+ID4gKwkJCSBpbmZvLT5tc2l4X3Zl
+Y3RvciwgcmluZ19udW0pOwo+ID4gKwlpZiAoSVNfRVJSKF92cSkpIHsKPiA+ICsJCXZxLT5yZXNl
+dCA9IHRydWU7Cj4gPiArCQlyZXR1cm4gUFRSX0VSUihfdnEpOwo+ID4gKwl9Cj4gPiArCj4gPiAr
+CXZwX21vZGVybl9zZXRfcXVldWVfZW5hYmxlKCZ2cF9kZXYtPm1kZXYsIHZxLT5pbmRleCwgdHJ1
+ZSk7Cj4gPiArCj4gPiArCW1zaXhfdmVjID0gdnBfZGV2LT52cXNbdnEtPmluZGV4XS0+bXNpeF92
+ZWN0b3I7Cj4gPiArCWlmICh2cF9kZXYtPnBlcl92cV92ZWN0b3JzICYmIG1zaXhfdmVjICE9IFZJ
+UlRJT19NU0lfTk9fVkVDVE9SKQo+ID4gKwkJZW5hYmxlX2lycShwY2lfaXJxX3ZlY3Rvcih2cF9k
+ZXYtPnBjaV9kZXYsIG1zaXhfdmVjKSk7Cj4gPiArCj4gPiArCXJldHVybiAwOwo+ID4gK30KPiA+
+ICsKPiA+ICAgc3RhdGljIHUxNiB2cF9jb25maWdfdmVjdG9yKHN0cnVjdCB2aXJ0aW9fcGNpX2Rl
+dmljZSAqdnBfZGV2LCB1MTYgdmVjdG9yKQo+ID4gICB7Cj4gPiAgIAlyZXR1cm4gdnBfbW9kZXJu
+X2NvbmZpZ192ZWN0b3IoJnZwX2Rldi0+bWRldiwgdmVjdG9yKTsKPiA+IEBAIC0yMzEsMTAgKzI5
+OCwxMyBAQCBzdGF0aWMgc3RydWN0IHZpcnRxdWV1ZSAqc2V0dXBfdnEoc3RydWN0IHZpcnRpb19w
+Y2lfZGV2aWNlICp2cF9kZXYsCj4gPiAgIAkJCQl2aXJ0cXVldWVfZ2V0X2F2YWlsX2FkZHIodnEp
+LAo+ID4gICAJCQkJdmlydHF1ZXVlX2dldF91c2VkX2FkZHIodnEpKTsKPiA+Cj4gPiAtCXZxLT5w
+cml2ID0gKHZvaWQgX19mb3JjZSAqKXZwX21vZGVybl9tYXBfdnFfbm90aWZ5KG1kZXYsIGluZGV4
+LCBOVUxMKTsKPiA+ICAgCWlmICghdnEtPnByaXYpIHsKPiA+IC0JCWVyciA9IC1FTk9NRU07Cj4g
+PiAtCQlnb3RvIGVycl9tYXBfbm90aWZ5Owo+ID4gKwkJdnEtPnByaXYgPSAodm9pZCBfX2ZvcmNl
+ICopdnBfbW9kZXJuX21hcF92cV9ub3RpZnkobWRldiwgaW5kZXgsCj4gPiArCQkJCQkJCQkgICBO
+VUxMKTsKPiA+ICsJCWlmICghdnEtPnByaXYpIHsKPiA+ICsJCQllcnIgPSAtRU5PTUVNOwo+ID4g
+KwkJCWdvdG8gZXJyX21hcF9ub3RpZnk7Cj4gPiArCQl9Cj4KPgo+IFRoaXMgc2VlbXMgdW5yZWxh
+dGVkIG9yIGFuIGFydGlmYWN0IG9mIHByZXZpb3VzIHBhdGNoZXM/Cj4KPiBUaGFua3MKPgo+Cj4g
+PiAgIAl9Cj4gPgo+ID4gICAJaWYgKG1zaXhfdmVjICE9IFZJUlRJT19NU0lfTk9fVkVDVE9SKSB7
+Cj4gPiBAQCAtNDAyLDYgKzQ3Miw4IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgdmlydGlvX2NvbmZp
+Z19vcHMgdmlydGlvX3BjaV9jb25maWdfbm9kZXZfb3BzID0gewo+ID4gICAJLnNldF92cV9hZmZp
+bml0eSA9IHZwX3NldF92cV9hZmZpbml0eSwKPiA+ICAgCS5nZXRfdnFfYWZmaW5pdHkgPSB2cF9n
+ZXRfdnFfYWZmaW5pdHksCj4gPiAgIAkuZ2V0X3NobV9yZWdpb24gID0gdnBfZ2V0X3NobV9yZWdp
+b24sCj4gPiArCS5yZXNldF92cQkgPSB2cF9tb2Rlcm5fcmVzZXRfdnEsCj4gPiArCS5lbmFibGVf
+cmVzZXRfdnEgPSB2cF9tb2Rlcm5fZW5hYmxlX3Jlc2V0X3ZxLAo+ID4gICB9Owo+ID4KPiA+ICAg
+c3RhdGljIGNvbnN0IHN0cnVjdCB2aXJ0aW9fY29uZmlnX29wcyB2aXJ0aW9fcGNpX2NvbmZpZ19v
+cHMgPSB7Cj4gPiBAQCAtNDIwLDYgKzQ5Miw4IEBAIHN0YXRpYyBjb25zdCBzdHJ1Y3QgdmlydGlv
+X2NvbmZpZ19vcHMgdmlydGlvX3BjaV9jb25maWdfb3BzID0gewo+ID4gICAJLnNldF92cV9hZmZp
+bml0eSA9IHZwX3NldF92cV9hZmZpbml0eSwKPiA+ICAgCS5nZXRfdnFfYWZmaW5pdHkgPSB2cF9n
+ZXRfdnFfYWZmaW5pdHksCj4gPiAgIAkuZ2V0X3NobV9yZWdpb24gID0gdnBfZ2V0X3NobV9yZWdp
+b24sCj4gPiArCS5yZXNldF92cQkgPSB2cF9tb2Rlcm5fcmVzZXRfdnEsCj4gPiArCS5lbmFibGVf
+cmVzZXRfdnEgPSB2cF9tb2Rlcm5fZW5hYmxlX3Jlc2V0X3ZxLAo+ID4gICB9Owo+ID4KPiA+ICAg
+LyogdGhlIFBDSSBwcm9iaW5nIGZ1bmN0aW9uICovCj4gPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92
+aXJ0aW8vdmlydGlvX3JpbmcuYyBiL2RyaXZlcnMvdmlydGlvL3ZpcnRpb19yaW5nLmMKPiA+IGlu
+ZGV4IGI4NzQ3ZGY4ZGMxZi4uNGY2MDI4ZTFlMmQ5IDEwMDY0NAo+ID4gLS0tIGEvZHJpdmVycy92
+aXJ0aW8vdmlydGlvX3JpbmcuYwo+ID4gKysrIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3Jpbmcu
+Ywo+ID4gQEAgLTE3MzEsNiArMTczMSw3IEBAIHN0YXRpYyBzdHJ1Y3QgdmlydHF1ZXVlICp2cmlu
+Z19jcmVhdGVfdmlydHF1ZXVlX3BhY2tlZCgKPiA+ICAgCXZxLT52cS52ZGV2ID0gdmRldjsKPiA+
+ICAgCXZxLT52cS5udW1fZnJlZSA9IG51bTsKPiA+ICAgCXZxLT52cS5pbmRleCA9IGluZGV4Owo+
+ID4gKwl2cS0+dnEucmVzZXQgPSBmYWxzZTsKPiA+ICAgCXZxLT53ZV9vd25fcmluZyA9IHRydWU7
+Cj4gPiAgIAl2cS0+bm90aWZ5ID0gbm90aWZ5Owo+ID4gICAJdnEtPndlYWtfYmFycmllcnMgPSB3
+ZWFrX2JhcnJpZXJzOwo+ID4gQEAgLTIyMjAsNiArMjIyMSw3IEBAIHN0YXRpYyBpbnQgX192cmlu
+Z19pbml0X3ZpcnRxdWV1ZShzdHJ1Y3QgdmlydHF1ZXVlICpfdnEsCj4gPiAgIAl2cS0+dnEudmRl
+diA9IHZkZXY7Cj4gPiAgIAl2cS0+dnEubnVtX2ZyZWUgPSB2cmluZy5udW07Cj4gPiAgIAl2cS0+
+dnEuaW5kZXggPSBpbmRleDsKPiA+ICsJdnEtPnZxLnJlc2V0ID0gZmFsc2U7Cj4gPiAgIAl2cS0+
+d2Vfb3duX3JpbmcgPSBmYWxzZTsKPiA+ICAgCXZxLT5ub3RpZnkgPSBub3RpZnk7Cj4gPiAgIAl2
+cS0+d2Vha19iYXJyaWVycyA9IHdlYWtfYmFycmllcnM7Cj4gPiBkaWZmIC0tZ2l0IGEvaW5jbHVk
+ZS9saW51eC92aXJ0aW8uaCBiL2luY2x1ZGUvbGludXgvdmlydGlvLmgKPiA+IGluZGV4IGRkMTY1
+N2MzYTQ4OC4uNWQ0ODE3ZDc5ZjNmIDEwMDY0NAo+ID4gLS0tIGEvaW5jbHVkZS9saW51eC92aXJ0
+aW8uaAo+ID4gKysrIGIvaW5jbHVkZS9saW51eC92aXJ0aW8uaAo+ID4gQEAgLTMyLDYgKzMyLDcg
+QEAgc3RydWN0IHZpcnRxdWV1ZSB7Cj4gPiAgIAl1bnNpZ25lZCBpbnQgaW5kZXg7Cj4gPiAgIAl1
+bnNpZ25lZCBpbnQgbnVtX2ZyZWU7Cj4gPiAgIAl2b2lkICpwcml2Owo+ID4gKwlib29sIHJlc2V0
+Owo+ID4gICB9Owo+ID4KPiA+ICAgaW50IHZpcnRxdWV1ZV9hZGRfb3V0YnVmKHN0cnVjdCB2aXJ0
+cXVldWUgKnZxLAo+Cl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51
+eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1h
+bi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
