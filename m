@@ -1,99 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD0CD4B4332
-	for <lists.virtualization@lfdr.de>; Mon, 14 Feb 2022 09:04:18 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67AC34B4366
+	for <lists.virtualization@lfdr.de>; Mon, 14 Feb 2022 09:14:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8FD4760888;
-	Mon, 14 Feb 2022 08:04:17 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 93DB340469;
+	Mon, 14 Feb 2022 08:14:42 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TPcdizSkB3mt; Mon, 14 Feb 2022 08:04:16 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 03841607CA;
-	Mon, 14 Feb 2022 08:04:15 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id aukOS2jagsts; Mon, 14 Feb 2022 08:14:41 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id EB43B4019E;
+	Mon, 14 Feb 2022 08:14:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 76C9CC000B;
-	Mon, 14 Feb 2022 08:04:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9283DC0079;
+	Mon, 14 Feb 2022 08:14:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D1C75C000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32DFCC0011
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Feb 2022 08:04:13 +0000 (UTC)
+ Mon, 14 Feb 2022 08:14:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C049240275
+ by smtp2.osuosl.org (Postfix) with ESMTP id DAB4840370
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Feb 2022 08:04:13 +0000 (UTC)
+ Mon, 14 Feb 2022 08:14:37 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wB-dMCyWJ7V6
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id TSS4jyNwZygu
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Feb 2022 08:04:12 +0000 (UTC)
+ Mon, 14 Feb 2022 08:14:33 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 81146401DC
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4798B401D5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Feb 2022 08:04:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1644825851;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+9mB7uNyqnegYi10/pcQFNz9Pi8L1ZRNJeHqpsdTaWU=;
- b=hDzHacjqVGLf1YwlwR4y/2eGFavj5d1GwH0ICiR7qLEi04QG/Fe6zHBuKM4J04YSpE4F3u
- 4ww6o/Xa7Ncm2xx0zoGctX5OSCQUwYtQTxNgl21CRCWV1F0psEgWGwHh8GH9hpxQhHWx63
- 4ifdJqRCmcMW3UkPOZItmcujbeFUVwY=
-Received: from mail-lf1-f69.google.com (mail-lf1-f69.google.com
- [209.85.167.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-586-FFvGNl4EPJ6C8hCfih2d4A-1; Mon, 14 Feb 2022 03:04:10 -0500
-X-MC-Unique: FFvGNl4EPJ6C8hCfih2d4A-1
-Received: by mail-lf1-f69.google.com with SMTP id
- z37-20020a0565120c2500b004433b7d95d3so1013169lfu.4
- for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Feb 2022 00:04:09 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=+9mB7uNyqnegYi10/pcQFNz9Pi8L1ZRNJeHqpsdTaWU=;
- b=7pe9Desn02z+riucFvdgJW3ADx9BS19a16IBjEGwxjY8sgi0xbh18OpEYobELVhrqB
- H4p7no9Lvj+Avsj1VtRYNydxwlG5t/eu5K/stjRZ3alDrZRJFpEk1ZkSIVMsrQu9vClU
- qBaAEtj9cOZFEDefQ6zWXK4Dqwzhu8qSOavluvf7cc3aVbuT5RMJLlCerI1rzH8rql41
- IgBU4LzzQ67xdcAG7FirPcAhXoEMbxHjDIQ4f6NUVlIrWvGokRU5v4Dwya0k9a4jPfD3
- nghFzCM1oqcjA/+htycMoX9ZtMK672THkO3JIpo5FYdnPpuCYb0dLwqwZjRUXYDG5/KV
- 7mbw==
-X-Gm-Message-State: AOAM533+sNdAdMA/3KZh3i6z4FTe1+Xotniw/THuHVXetUr4popzbFux
- 3tG/As8ektOGIWGpv9roQAbthpKG9rz17CE5pmfXkcHa4XyDqVJ30ERvgf6XtUWNQpK6qban3fE
- Rk34VmHcNA5ybAx3zu7yoHGTqI/l8OtmS/l91wLMu7v6spb+oEuVhUWGWOw==
-X-Received: by 2002:ac2:4437:: with SMTP id w23mr4169952lfl.481.1644825848577; 
- Mon, 14 Feb 2022 00:04:08 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJy6a8w4xDkcfa1Far85E0Da871IiDA7xevpTlA6WfvzX/y5gv97/4+Jdd7s3H3pHZgdTda07PEl6qwJN1/+yGU=
-X-Received: by 2002:ac2:4437:: with SMTP id w23mr4169934lfl.481.1644825848308; 
- Mon, 14 Feb 2022 00:04:08 -0800 (PST)
+ Mon, 14 Feb 2022 08:14:31 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=11; SR=0; TI=SMTPD_---0V4NbDMb_1644826456; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0V4NbDMb_1644826456) by smtp.aliyun-inc.com(127.0.0.1);
+ Mon, 14 Feb 2022 16:14:17 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: virtualization@lists.linux-foundation.org,
+	netdev@vger.kernel.org
+Subject: [PATCH v5 00/22] virtio pci support VIRTIO_F_RING_RESET
+Date: Mon, 14 Feb 2022 16:13:54 +0800
+Message-Id: <20220214081416.117695-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-References: <20220203055633.3677-1-elic@nvidia.com>
- <20220203055633.3677-2-elic@nvidia.com>
-In-Reply-To: <20220203055633.3677-2-elic@nvidia.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 14 Feb 2022 16:03:56 +0800
-Message-ID: <CACGkMEu8d5YbDGTjC5iHMVt+OxB7cSNeZYWjcuy26ATwYSCT6A@mail.gmail.com>
-Subject: Re: [PATCH 1/2] vdpa: Add support for querying vendor statistics
-To: Eli Cohen <elic@nvidia.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Laurent Vivier <lvivier@redhat.com>, mst <mst@redhat.com>,
- virtualization <virtualization@lists.linux-foundation.org>,
- eperezma <eperezma@redhat.com>, Si-Wei Liu <si-wei.liu@oracle.com>
+X-Git-Hash: 24fd8391539b
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,318 +75,89 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Feb 3, 2022 at 1:56 PM Eli Cohen <elic@nvidia.com> wrote:
->
-> Allows to read vendor statistics of vdpa device. The specific statistics
-> data is received by the upstream driver in the form of an attribute
-> name/attribute value pairs.
->
-> An example of statistics for mlx5_vdpa device are:
->
-> received_desc - number of descriptors received by the virtqueue
-> completed_desc - number of descriptors completed by the virtqueue
->
-> A descriptors using indirect buffers is still counted as 1. In addition,
-> N chained descriptors are counted correctly N times as one would expect.
->
-> A new callback was added to vdpa_config_ops which provides the means for
-> the vdpa driver to return statistics results.
->
-> The interface allows for reading all the supported virtqueues, including
-> the control virtqueue if it exists.
->
-> Examples:
-> 1. Read statistics for the virtqueue at index 1
->
-> $ vdpa dev vstats show vdpa-a qidx 1
-> vdpa-a:
-> qtype tx qidx 1 received_desc 4583367 completed_desc 4583367
->
-> 2. Read statistics for the virtqueue at index 32
-> $ vdpa dev vstats show vdpa-a qidx 32
-> vdpa-a:
-> qtype cvq qidx 32 received_desc 0 completed_desc 0
->
-> 3. Read statisitics for the virtqueue at index 0 with json output
-> $ vdpa -j dev vstats show vdpa-a qidx 0
-> {"vstats":{"vdpa-a":{
-> "qtype":"rx","qidx":0,"name":"received_desc","value":490205,"name":"completed_desc","value":489964}}}
->
-> 4. Read statistics for the virtqueue at index 0 with preety json output
-> $ vdpa -jp dev vstats show vdpa-a qidx 0
-> {
->     "vstats": {
->         "vdpa-a": {
->
->             "qtype": "rx",
->             "qidx": 0,
+The virtio spec already supports the virtio queue reset function. This patch set
+is to add this function to the kernel. The relevant virtio spec information is
+here:
 
-I wonder if it's better not to use abbreviations in at least json outputs.
+    https://github.com/oasis-tcs/virtio-spec/issues/124
 
->             "name": "received_desc",
->             "value": 490205,
->             "name": "completed_desc",
->             "value": 489964
+Also regarding MMIO support for queue reset, I plan to support it after this
+patch is passed.
 
-Are those counters going back to zero during a vDPA reset?
+Performing reset on a queue is divided into four steps:
+    1. reset_vq: reset one vq
+    2. recycle the buffer from vq by virtqueue_detach_unused_buf()
+    3. release the ring of the vq by vring_release_virtqueue()
+    4. enable_reset_vq: re-enable the reset queue
 
->         }
->     }
-> }
->
-> Signed-off-by: Eli Cohen <elic@nvidia.com>
-> ---
->  drivers/vdpa/vdpa.c       | 128 ++++++++++++++++++++++++++++++++++++++
->  include/linux/vdpa.h      |  10 +++
->  include/uapi/linux/vdpa.h |   7 +++
->  3 files changed, 145 insertions(+)
->
-> diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-> index 9846c9de4bfa..84c9c488cfcf 100644
-> --- a/drivers/vdpa/vdpa.c
-> +++ b/drivers/vdpa/vdpa.c
-> @@ -909,6 +909,73 @@ vdpa_dev_config_fill(struct vdpa_device *vdev, struct sk_buff *msg, u32 portid,
->         return err;
->  }
+#2-#8  : virtio ring support re-enable reset queue and release vring
+#9-#14 : virtio PCI support reset queue and re-enable
+#15    : add queue reset helper
+#16-#17: virtio-net support rx, tx reset
+#18-#22: virtio-net support set ringparam
 
-Note related to this patch, but I think it's better to split out
-netlink logic into a dedicated c file (e.g netlink.c in drivers/vdpa)
+Please review. Thanks.
 
->
-> +static int vdpa_fill_stats_rec(struct vdpa_device *vdev, struct sk_buff *msg,
-> +                              struct genl_info *info, u16 index)
-> +{
-> +       int err;
-> +
-> +       if (nla_put_u16(msg, VDPA_ATTR_DEV_QUEUE_INDEX, index))
-> +               return -EMSGSIZE;
-> +
-> +       err = vdev->config->get_vq_stats(vdev, index, msg, info->extack);
-> +       if (err)
-> +               return err;
-> +
-> +       return 0;
-> +}
-> +
-> +static int vdpa_dev_net_stats_fill(struct vdpa_device *vdev, struct sk_buff *msg,
-> +                                  struct genl_info *info, u16 index)
+v5:
+  1. add virtio-net support set_ringparam
 
-This function looks not specific to net, I guess other types of device
-can use this as well? (Especially consider we put device id in the
-skb)
+v4:
+  1. just the code of virtio, without virtio-net
+  2. Performing reset on a queue is divided into these steps:
+    1. reset_vq: reset one vq
+    2. recycle the buffer from vq by virtqueue_detach_unused_buf()
+    3. release the ring of the vq by vring_release_virtqueue()
+    4. enable_reset_vq: re-enable the reset queue
+  3. Simplify the parameters of enable_reset_vq()
+  4. add container structures for virtio_pci_common_cfg
 
-> +{
-> +       int err;
-> +
-> +       if (!vdev->config->get_vq_stats)
-> +               return -EOPNOTSUPP;
-> +
-> +       err = vdpa_fill_stats_rec(vdev, msg, info, index);
-> +       if (err)
-> +               return err;
-> +
-> +       return 0;
-> +}
-> +
-> +static int vdpa_dev_stats_fill(struct vdpa_device *vdev, struct sk_buff *msg,
-> +                              struct genl_info *info, u16 index)
-> +{
+v3:
+  1. keep vq, irq unreleased
 
-Considering there will be standard virtio stats to be supported in the
-future, I'd like to name this as vdpa_dev_vendor_stats_fill().
+Xuan Zhuo (22):
+  virtio_pci: struct virtio_pci_common_cfg add queue_notify_data
+  virtio: queue_reset: add VIRTIO_F_RING_RESET
+  virtio_ring: queue_reset: add function vring_setup_virtqueue()
+  virtio_ring: queue_reset: split: add __vring_init_virtqueue()
+  virtio_ring: queue_reset: split: support enable reset queue
+  virtio_ring: queue_reset: packed: support enable reset queue
+  virtio_ring: queue_reset: extract the release function of the vq ring
+  virtio_ring: queue_reset: add vring_release_virtqueue()
+  virtio: queue_reset: struct virtio_config_ops add callbacks for
+    queue_reset
+  virtio_pci: queue_reset: update struct virtio_pci_common_cfg and
+    option functions
+  virtio_pci: queue_reset: release vq by vp_dev->vqs
+  virtio_pci: queue_reset: setup_vq() support vring_setup_virtqueue()
+  virtio_pci: queue_reset: reserve vq->priv for re-enable queue
+  virtio_pci: queue_reset: support VIRTIO_F_RING_RESET
+  virtio: queue_reset: add helper
+  virtio_net: split free_unused_bufs()
+  virtio_net: support rx/tx queue reset
+  virtio: add helper virtqueue_get_vring_max_size()
+  virtio: add helper virtio_set_max_ring_num()
+  virtio_net: set the default max ring num
+  virtio_net: get max ring size by virtqueue_get_vring_max_size()
+  virtio_net: support set_ringparam
 
-> +       u32 device_id;
-> +       void *hdr;
-> +       int err;
-> +       u32 portid = info->snd_portid;
-> +       u32 seq = info->snd_seq;
-> +       u32 flags = 0;
-> +
-> +       hdr = genlmsg_put(msg, portid, seq, &vdpa_nl_family, flags,
-> +                         VDPA_CMD_DEV_VSTATS_GET);
-> +       if (!hdr)
-> +               return -EMSGSIZE;
-> +
-> +       if (nla_put_string(msg, VDPA_ATTR_DEV_NAME, dev_name(&vdev->dev))) {
-> +               err = -EMSGSIZE;
-> +               goto undo_msg;
-> +       }
-> +
-> +       device_id = vdev->config->get_device_id(vdev);
-> +       if (nla_put_u32(msg, VDPA_ATTR_DEV_ID, device_id)) {
-> +               err = -EMSGSIZE;
-> +               goto undo_msg;
-> +       }
-> +
-> +       err = vdpa_dev_net_stats_fill(vdev, msg, info, index);
-> +
-> +       genlmsg_end(msg, hdr);
-> +
-> +       return err;
-> +
-> +undo_msg:
-> +       genlmsg_cancel(msg, hdr);
-> +       return err;
-> +}
-> +
->  static int vdpa_nl_cmd_dev_config_get_doit(struct sk_buff *skb, struct genl_info *info)
->  {
->         struct vdpa_device *vdev;
-> @@ -990,6 +1057,60 @@ vdpa_nl_cmd_dev_config_get_dumpit(struct sk_buff *msg, struct netlink_callback *
->         return msg->len;
->  }
->
-> +static int vdpa_nl_cmd_dev_stats_get_doit(struct sk_buff *skb,
-> +                                         struct genl_info *info)
-> +{
-> +       struct vdpa_device *vdev;
-> +       struct sk_buff *msg;
-> +       const char *devname;
-> +       struct device *dev;
-> +       u16 index = -1;
-> +       int err;
-> +
-> +       if (!info->attrs[VDPA_ATTR_DEV_NAME])
-> +               return -EINVAL;
-> +
-> +       if (!info->attrs[VDPA_ATTR_DEV_QUEUE_INDEX])
-> +               return -EINVAL;
-> +
-> +       devname = nla_data(info->attrs[VDPA_ATTR_DEV_NAME]);
-> +       msg = nlmsg_new(NLMSG_DEFAULT_SIZE, GFP_KERNEL);
-> +       if (!msg)
-> +               return -ENOMEM;
-> +
-> +       index = nla_get_u16(info->attrs[VDPA_ATTR_DEV_QUEUE_INDEX]);
-> +       mutex_lock(&vdpa_dev_mutex);
-> +       dev = bus_find_device(&vdpa_bus, NULL, devname, vdpa_name_match);
-> +       if (!dev) {
-> +               NL_SET_ERR_MSG_MOD(info->extack, "device not found");
-> +               err = -ENODEV;
-> +               goto dev_err;
-> +       }
-> +       vdev = container_of(dev, struct vdpa_device, dev);
-> +       if (!vdev->mdev) {
-> +               NL_SET_ERR_MSG_MOD(info->extack, "unmanaged vdpa device");
-> +               err = -EINVAL;
-> +               goto mdev_err;
-> +       }
-> +       err = vdpa_dev_stats_fill(vdev, msg, info, index);
-> +       if (!err)
-> +               err = genlmsg_reply(msg, info);
-> +
-> +       put_device(dev);
-> +       mutex_unlock(&vdpa_dev_mutex);
-> +
-> +       if (err)
-> +               nlmsg_free(msg);
-> +
-> +       return err;
-> +
-> +mdev_err:
-> +       put_device(dev);
-> +dev_err:
-> +       mutex_unlock(&vdpa_dev_mutex);
-> +       return err;
-> +}
-> +
->  static const struct nla_policy vdpa_nl_policy[VDPA_ATTR_MAX + 1] = {
->         [VDPA_ATTR_MGMTDEV_BUS_NAME] = { .type = NLA_NUL_STRING },
->         [VDPA_ATTR_MGMTDEV_DEV_NAME] = { .type = NLA_STRING },
-> @@ -997,6 +1118,7 @@ static const struct nla_policy vdpa_nl_policy[VDPA_ATTR_MAX + 1] = {
->         [VDPA_ATTR_DEV_NET_CFG_MACADDR] = NLA_POLICY_ETH_ADDR,
->         /* virtio spec 1.1 section 5.1.4.1 for valid MTU range */
->         [VDPA_ATTR_DEV_NET_CFG_MTU] = NLA_POLICY_MIN(NLA_U16, 68),
-> +       [VDPA_ATTR_DEV_QUEUE_INDEX] = NLA_POLICY_RANGE(NLA_U16, 0, 32767),
+ drivers/net/virtio_net.c               | 238 ++++++++++++++++++++++---
+ drivers/virtio/virtio_mmio.c           |   2 +
+ drivers/virtio/virtio_pci_common.c     |  61 +++++--
+ drivers/virtio/virtio_pci_common.h     |  10 +-
+ drivers/virtio/virtio_pci_legacy.c     |   6 +-
+ drivers/virtio/virtio_pci_modern.c     |  82 ++++++++-
+ drivers/virtio/virtio_pci_modern_dev.c |  36 ++++
+ drivers/virtio/virtio_ring.c           | 193 +++++++++++++++-----
+ include/linux/virtio.h                 |  15 ++
+ include/linux/virtio_config.h          |  82 +++++++++
+ include/linux/virtio_pci_modern.h      |   2 +
+ include/linux/virtio_ring.h            |  37 ++--
+ include/uapi/linux/virtio_config.h     |   7 +-
+ include/uapi/linux/virtio_pci.h        |  14 ++
+ 14 files changed, 668 insertions(+), 117 deletions(-)
 
-Any reason for choosing 32767 here, spec allows up to 0-65535 as queue index.
-
->  };
->
->  static const struct genl_ops vdpa_nl_ops[] = {
-> @@ -1030,6 +1152,12 @@ static const struct genl_ops vdpa_nl_ops[] = {
->                 .doit = vdpa_nl_cmd_dev_config_get_doit,
->                 .dumpit = vdpa_nl_cmd_dev_config_get_dumpit,
->         },
-> +       {
-> +               .cmd = VDPA_CMD_DEV_VSTATS_GET,
-> +               .validate = GENL_DONT_VALIDATE_STRICT | GENL_DONT_VALIDATE_DUMP,
-> +               .doit = vdpa_nl_cmd_dev_stats_get_doit,
-> +               .flags = GENL_ADMIN_PERM,
-> +       },
->  };
->
->  static struct genl_family vdpa_nl_family __ro_after_init = {
-> diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-> index 2de442ececae..a9b3d7005f69 100644
-> --- a/include/linux/vdpa.h
-> +++ b/include/linux/vdpa.h
-> @@ -58,6 +58,12 @@ struct vdpa_vq_state {
->         };
->  };
->
-> +struct vdpa_vq_stats {
-> +       u64 received_desc;
-> +       u64 completed_desc;
-> +       bool ctrl_vq;
-> +};
-
-This seems to be a vendor specific stats, any chance to move it to the
-mlx5 directory?
-
-> +
->  struct vdpa_mgmt_dev;
->
->  /**
-> @@ -275,6 +281,8 @@ struct vdpa_config_ops {
->                             const struct vdpa_vq_state *state);
->         int (*get_vq_state)(struct vdpa_device *vdev, u16 idx,
->                             struct vdpa_vq_state *state);
-> +       int (*get_vq_stats)(struct vdpa_device *vdev, u16 idx, struct sk_buff *msg,
-> +                           struct netlink_ext_ack *extack);
-
-I think it's better to rename this as get_vendor_vq_stats().
-
-Thanks
-
->         struct vdpa_notification_area
->         (*get_vq_notification)(struct vdpa_device *vdev, u16 idx);
->         /* vq irq is not expected to be changed once DRIVER_OK is set */
-> @@ -466,4 +474,6 @@ struct vdpa_mgmt_dev {
->  int vdpa_mgmtdev_register(struct vdpa_mgmt_dev *mdev);
->  void vdpa_mgmtdev_unregister(struct vdpa_mgmt_dev *mdev);
->
-> +#define VDPA_INVAL_QUEUE_INDEX 0xffff
-> +
->  #endif /* _LINUX_VDPA_H */
-> diff --git a/include/uapi/linux/vdpa.h b/include/uapi/linux/vdpa.h
-> index 1061d8d2d09d..c5f229a41dc2 100644
-> --- a/include/uapi/linux/vdpa.h
-> +++ b/include/uapi/linux/vdpa.h
-> @@ -18,6 +18,7 @@ enum vdpa_command {
->         VDPA_CMD_DEV_DEL,
->         VDPA_CMD_DEV_GET,               /* can dump */
->         VDPA_CMD_DEV_CONFIG_GET,        /* can dump */
-> +       VDPA_CMD_DEV_VSTATS_GET,
->  };
->
->  enum vdpa_attr {
-> @@ -46,6 +47,12 @@ enum vdpa_attr {
->         VDPA_ATTR_DEV_NEGOTIATED_FEATURES,      /* u64 */
->         VDPA_ATTR_DEV_MGMTDEV_MAX_VQS,          /* u32 */
->         VDPA_ATTR_DEV_SUPPORTED_FEATURES,       /* u64 */
-> +
-> +       VDPA_ATTR_DEV_QUEUE_INDEX,              /* u16 */
-> +       VDPA_ATTR_DEV_QUEUE_TYPE,               /* string */
-> +       VDPA_ATTR_DEV_VENDOR_ATTR_NAME,         /* string */
-> +       VDPA_ATTR_DEV_VENDOR_ATTR_VALUE,        /* u64 */
-> +
->         /* new attributes must be added above here */
->         VDPA_ATTR_MAX,
->  };
-> --
-> 2.34.1
->
+--
+2.31.0
 
 _______________________________________________
 Virtualization mailing list
