@@ -1,57 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 391284D178D
-	for <lists.virtualization@lfdr.de>; Tue,  8 Mar 2022 13:36:00 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 66C784D1791
+	for <lists.virtualization@lfdr.de>; Tue,  8 Mar 2022 13:36:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DE6EB84216;
-	Tue,  8 Mar 2022 12:35:58 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1137184219;
+	Tue,  8 Mar 2022 12:36:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 37EeneDu0v5a; Tue,  8 Mar 2022 12:35:58 +0000 (UTC)
+	with ESMTP id ghg2qju9D8Y0; Tue,  8 Mar 2022 12:35:59 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A04B984214;
-	Tue,  8 Mar 2022 12:35:57 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id B3A0184213;
+	Tue,  8 Mar 2022 12:35:58 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 31217C0073;
-	Tue,  8 Mar 2022 12:35:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A836C0073;
+	Tue,  8 Mar 2022 12:35:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 866DEC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B7E77C000B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:35:55 +0000 (UTC)
+ Tue,  8 Mar 2022 12:35:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 65AC584211
+ by smtp2.osuosl.org (Postfix) with ESMTP id A04D940AB8
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  8 Mar 2022 12:35:56 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id wcDA3hy-qm95
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  8 Mar 2022 12:35:56 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from out30-54.freemail.mail.aliyun.com
+ (out30-54.freemail.mail.aliyun.com [115.124.30.54])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 922BC40AB3
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Mar 2022 12:35:55 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PnC-k2QKn_Gc
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:35:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 823068420E
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:35:54 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R961e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V6ebqW3_1646742946; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R271e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V6eTXck_1646742948; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V6ebqW3_1646742946) by smtp.aliyun-inc.com(127.0.0.1);
- Tue, 08 Mar 2022 20:35:47 +0800
+ fp:SMTPD_---0V6eTXck_1646742948) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 08 Mar 2022 20:35:50 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org,
 	netdev@vger.kernel.org
-Subject: [PATCH v7 13/26] virtio: queue_reset: struct virtio_config_ops add
- callbacks for queue_reset
-Date: Tue,  8 Mar 2022 20:35:05 +0800
-Message-Id: <20220308123518.33800-14-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v7 14/26] virtio: add helper for queue reset
+Date: Tue,  8 Mar 2022 20:35:06 +0800
+Message-Id: <20220308123518.33800-15-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220308123518.33800-1-xuanzhuo@linux.alibaba.com>
 References: <20220308123518.33800-1-xuanzhuo@linux.alibaba.com>
@@ -91,50 +90,67 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Performing reset on a queue is divided into four steps:
+Add helper for virtio queue reset.
 
- 1. reset_vq()                     - notify the device to reset the queue
- 2. virtqueue_detach_unused_buf()  - recycle the buffer submitted
- 3. virtqueue_reset_vring()        - reset the vring (may re-alloc)
- 4. enable_reset_vq()              - mmap vring to device, and enable the queue
-
-So add two callbacks reset_vq, enable_reset_vq to struct
-virtio_config_ops.
+* virtio_reset_vq(): reset a queue individually
+* virtio_enable_resetq(): enable a reset queue
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- include/linux/virtio_config.h | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ include/linux/virtio_config.h | 40 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
 
 diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index 4d107ad31149..d51906b1389f 100644
+index d51906b1389f..0b81fbe17c85 100644
 --- a/include/linux/virtio_config.h
 +++ b/include/linux/virtio_config.h
-@@ -74,6 +74,15 @@ struct virtio_shm_region {
-  * @set_vq_affinity: set the affinity for a virtqueue (optional).
-  * @get_vq_affinity: get the affinity for a virtqueue (optional).
-  * @get_shm_region: get a shared memory region based on the index.
-+ * @reset_vq: reset a queue individually (optional).
-+ *	vq: the virtqueue
-+ *	Returns 0 on success or error status
-+ *	Caller should guarantee that the vring is not accessed by any functions
-+ *	of virtqueue.
-+ * @enable_reset_vq: enable a reset queue
-+ *	vq: the virtqueue
-+ *	Returns 0 on success or error status
-+ *	If reset_vq is set, then enable_reset_vq must also be set.
-  */
- typedef void vq_callback_t(struct virtqueue *);
- struct virtio_config_ops {
-@@ -100,6 +109,8 @@ struct virtio_config_ops {
- 			int index);
- 	bool (*get_shm_region)(struct virtio_device *vdev,
- 			       struct virtio_shm_region *region, u8 id);
-+	int (*reset_vq)(struct virtqueue *vq);
-+	int (*enable_reset_vq)(struct virtqueue *vq);
- };
+@@ -230,6 +230,46 @@ int virtio_find_vqs_ctx(struct virtio_device *vdev, unsigned nvqs,
+ 				      desc);
+ }
  
- /* If driver didn't advertise the feature, it will never appear. */
++/**
++ * virtio_reset_vq - reset a queue individually
++ * @vq: the virtqueue
++ *
++ * returns 0 on success or error status
++ *
++ * The api process of reset under normal circumstances:
++ *	1. virtio_reset_vq()              - notify the device to reset the queue
++ *	2. virtqueue_detach_unused_buf()  - recycle the buffer submitted
++ *	3. virtqueue_reset_vring()        - reset the vring (may re-alloc)
++ *	4. virtio_enable_resetq()         - mmap vring to device, and enable the queue
++ *
++ * Caller should guarantee that the vring is not accessed by any functions
++ * of virtqueue.
++ */
++static inline
++int virtio_reset_vq(struct virtqueue *vq)
++{
++	if (!vq->vdev->config->reset_vq)
++		return -ENOENT;
++
++	return vq->vdev->config->reset_vq(vq);
++}
++
++/**
++ * virtio_enable_resetq - enable a reset queue
++ * @vq: the virtqueue
++ *
++ * returns 0 on success or error status
++ *
++ */
++static inline
++int virtio_enable_resetq(struct virtqueue *vq)
++{
++	if (!vq->vdev->config->enable_reset_vq)
++		return -ENOENT;
++
++	return vq->vdev->config->enable_reset_vq(vq);
++}
++
+ /**
+  * virtio_device_ready - enable vq use in probe function
+  * @vdev: the device
 -- 
 2.31.0
 
