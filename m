@@ -1,57 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 60F0F4D17C9
-	for <lists.virtualization@lfdr.de>; Tue,  8 Mar 2022 13:36:24 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8CA5C4D17CB
+	for <lists.virtualization@lfdr.de>; Tue,  8 Mar 2022 13:36:26 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 031BE8421C;
-	Tue,  8 Mar 2022 12:36:23 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 3A4CC40AC6;
+	Tue,  8 Mar 2022 12:36:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yESTCDRw067P; Tue,  8 Mar 2022 12:36:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A606B8421D;
-	Tue,  8 Mar 2022 12:36:21 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qCcVTWV7y1a5; Tue,  8 Mar 2022 12:36:24 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D914D40ABC;
+	Tue,  8 Mar 2022 12:36:23 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 45EAFC0082;
-	Tue,  8 Mar 2022 12:36:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B04A8C0082;
+	Tue,  8 Mar 2022 12:36:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 23D46C000B
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 30DA4C000B
  for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:36:20 +0000 (UTC)
+ Tue,  8 Mar 2022 12:36:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 05B03417A5
+ by smtp3.osuosl.org (Postfix) with ESMTP id 1FE3660FEE
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  8 Mar 2022 12:36:22 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8K1DIpXBS_Ye
+ for <virtualization@lists.linux-foundation.org>;
+ Tue,  8 Mar 2022 12:36:21 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from out30-130.freemail.mail.aliyun.com
+ (out30-130.freemail.mail.aliyun.com [115.124.30.130])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2665660FCB
  for <virtualization@lists.linux-foundation.org>;
  Tue,  8 Mar 2022 12:36:20 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EtKOdlNdKWEa
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:36:19 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-45.freemail.mail.aliyun.com
- (out30-45.freemail.mail.aliyun.com [115.124.30.45])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0686D417BE
- for <virtualization@lists.linux-foundation.org>;
- Tue,  8 Mar 2022 12:36:18 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04407; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V6eSqDv_1646742973; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V6ebqbY_1646742975; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V6eSqDv_1646742973) by smtp.aliyun-inc.com(127.0.0.1);
- Tue, 08 Mar 2022 20:36:14 +0800
+ fp:SMTPD_---0V6ebqbY_1646742975) by smtp.aliyun-inc.com(127.0.0.1);
+ Tue, 08 Mar 2022 20:36:16 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org,
 	netdev@vger.kernel.org
-Subject: [PATCH v7 25/26] virtio_net: set the default max ring size by
- find_vqs()
-Date: Tue,  8 Mar 2022 20:35:17 +0800
-Message-Id: <20220308123518.33800-26-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v7 26/26] virtio_net: support set_ringparam
+Date: Tue,  8 Mar 2022 20:35:18 +0800
+Message-Id: <20220308123518.33800-27-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220308123518.33800-1-xuanzhuo@linux.alibaba.com>
 References: <20220308123518.33800-1-xuanzhuo@linux.alibaba.com>
@@ -91,122 +90,80 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use virtio_find_vqs_ctx_size() to specify the maximum ring size of tx,
-rx at the same time.
+Support set_ringparam based on virtio queue reset.
 
-                         | rx/tx ring size
--------------------------------------------
-speed == UNKNOWN or < 10G| 1024
-speed < 40G              | 4096
-speed >= 40G             | 8192
-
-Call virtnet_update_settings() once before calling init_vqs() to update
-speed.
+The rx,tx_pending required to be passed must be power of 2.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 42 ++++++++++++++++++++++++++++++++++++----
- 1 file changed, 38 insertions(+), 4 deletions(-)
+ drivers/net/virtio_net.c | 47 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index ffff323dcef0..f1bdc6ce21c3 100644
+index f1bdc6ce21c3..1fa2d632a994 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -2977,6 +2977,29 @@ static unsigned int mergeable_min_buf_len(struct virtnet_info *vi, struct virtqu
- 		   (unsigned int)GOOD_PACKET_LEN);
+@@ -2290,6 +2290,52 @@ static void virtnet_get_ringparam(struct net_device *dev,
+ 	ring->tx_pending = virtqueue_get_vring_size(vi->sq[0].vq);
  }
  
-+static void virtnet_config_sizes(struct virtnet_info *vi, u32 *sizes)
++static int virtnet_set_ringparam(struct net_device *dev,
++				 struct ethtool_ringparam *ring,
++				 struct kernel_ethtool_ringparam *kernel_ring,
++				 struct netlink_ext_ack *extack)
 +{
-+	u32 i, rx_size, tx_size;
++	struct virtnet_info *vi = netdev_priv(dev);
++	u32 rx_pending, tx_pending;
++	struct receive_queue *rq;
++	struct send_queue *sq;
++	int i, err;
 +
-+	if (vi->speed == SPEED_UNKNOWN || vi->speed < SPEED_10000) {
-+		rx_size = 1024;
-+		tx_size = 1024;
++	if (ring->rx_mini_pending || ring->rx_jumbo_pending)
++		return -EINVAL;
 +
-+	} else if (vi->speed < SPEED_40000) {
-+		rx_size = 1024 * 4;
-+		tx_size = 1024 * 4;
++	rx_pending = virtqueue_get_vring_size(vi->rq[0].vq);
++	tx_pending = virtqueue_get_vring_size(vi->sq[0].vq);
 +
-+	} else {
-+		rx_size = 1024 * 8;
-+		tx_size = 1024 * 8;
-+	}
++	if (ring->rx_pending == rx_pending &&
++	    ring->tx_pending == tx_pending)
++		return 0;
++
++	if (ring->rx_pending > virtqueue_get_vring_max_size(vi->rq[0].vq))
++		return -EINVAL;
++
++	if (ring->tx_pending > virtqueue_get_vring_max_size(vi->sq[0].vq))
++		return -EINVAL;
 +
 +	for (i = 0; i < vi->max_queue_pairs; i++) {
-+		sizes[rxq2vq(i)] = rx_size;
-+		sizes[txq2vq(i)] = tx_size;
++		rq = vi->rq + i;
++		sq = vi->sq + i;
++
++		if (ring->tx_pending != tx_pending) {
++			err = virtnet_tx_vq_reset(vi, sq, ring->tx_pending);
++			if (err)
++				return err;
++		}
++
++		if (ring->rx_pending != rx_pending) {
++			err = virtnet_rx_vq_reset(vi, rq, ring->rx_pending);
++			if (err)
++				return err;
++		}
 +	}
++
++	return 0;
 +}
-+
- static int virtnet_find_vqs(struct virtnet_info *vi)
- {
- 	vq_callback_t **callbacks;
-@@ -2984,6 +3007,7 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
- 	int ret = -ENOMEM;
- 	int i, total_vqs;
- 	const char **names;
-+	u32 *sizes;
- 	bool *ctx;
  
- 	/* We expect 1 RX virtqueue followed by 1 TX virtqueue, followed by
-@@ -3011,10 +3035,15 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
- 		ctx = NULL;
- 	}
- 
-+	sizes = kmalloc_array(total_vqs, sizeof(*sizes), GFP_KERNEL);
-+	if (!sizes)
-+		goto err_sizes;
-+
- 	/* Parameters for control virtqueue, if any */
- 	if (vi->has_cvq) {
- 		callbacks[total_vqs - 1] = NULL;
- 		names[total_vqs - 1] = "control";
-+		sizes[total_vqs - 1] = 0;
- 	}
- 
- 	/* Allocate/initialize parameters for send/receive virtqueues */
-@@ -3029,8 +3058,10 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
- 			ctx[rxq2vq(i)] = true;
- 	}
- 
--	ret = virtio_find_vqs_ctx(vi->vdev, total_vqs, vqs, callbacks,
--				  names, ctx, NULL);
-+	virtnet_config_sizes(vi, sizes);
-+
-+	ret = virtio_find_vqs_ctx_size(vi->vdev, total_vqs, vqs, callbacks,
-+				       names, ctx, NULL, sizes);
- 	if (ret)
- 		goto err_find;
- 
-@@ -3050,6 +3081,8 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
- 
- 
- err_find:
-+	kfree(sizes);
-+err_sizes:
- 	kfree(ctx);
- err_ctx:
- 	kfree(names);
-@@ -3368,6 +3401,9 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		vi->curr_queue_pairs = num_online_cpus();
- 	vi->max_queue_pairs = max_queue_pairs;
- 
-+	virtnet_init_settings(dev);
-+	virtnet_update_settings(vi);
-+
- 	/* Allocate/initialize the rx/tx queues, and invoke find_vqs */
- 	err = init_vqs(vi);
- 	if (err)
-@@ -3380,8 +3416,6 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	netif_set_real_num_tx_queues(dev, vi->curr_queue_pairs);
- 	netif_set_real_num_rx_queues(dev, vi->curr_queue_pairs);
- 
--	virtnet_init_settings(dev);
--
- 	if (virtio_has_feature(vdev, VIRTIO_NET_F_STANDBY)) {
- 		vi->failover = net_failover_create(vi->dev);
- 		if (IS_ERR(vi->failover)) {
+ static void virtnet_get_drvinfo(struct net_device *dev,
+ 				struct ethtool_drvinfo *info)
+@@ -2523,6 +2569,7 @@ static const struct ethtool_ops virtnet_ethtool_ops = {
+ 	.get_drvinfo = virtnet_get_drvinfo,
+ 	.get_link = ethtool_op_get_link,
+ 	.get_ringparam = virtnet_get_ringparam,
++	.set_ringparam = virtnet_set_ringparam,
+ 	.get_strings = virtnet_get_strings,
+ 	.get_sset_count = virtnet_get_sset_count,
+ 	.get_ethtool_stats = virtnet_get_ethtool_stats,
 -- 
 2.31.0
 
