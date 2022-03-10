@@ -1,97 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B1B74D4776
-	for <lists.virtualization@lfdr.de>; Thu, 10 Mar 2022 13:58:08 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id BDA184D4783
+	for <lists.virtualization@lfdr.de>; Thu, 10 Mar 2022 13:59:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 0576461218;
-	Thu, 10 Mar 2022 12:58:07 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 55F02418EB;
+	Thu, 10 Mar 2022 12:59:27 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4QxJ8OqT-qCG; Thu, 10 Mar 2022 12:58:06 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BkgsTsQ2ieSM; Thu, 10 Mar 2022 12:59:26 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id BE56F61214;
-	Thu, 10 Mar 2022 12:58:05 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 264B24186A;
+	Thu, 10 Mar 2022 12:59:26 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 42E05C0073;
-	Thu, 10 Mar 2022 12:58:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AE6B3C000B;
+	Thu, 10 Mar 2022 12:59:25 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 92252C000B
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5F6B6C000B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Mar 2022 12:58:03 +0000 (UTC)
+ Thu, 10 Mar 2022 12:59:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 72ACE84382
+ by smtp3.osuosl.org (Postfix) with ESMTP id 40E2D60EBC
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Mar 2022 12:58:03 +0000 (UTC)
+ Thu, 10 Mar 2022 12:59:24 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dAmxyHb4mbJs
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JwR1xBInkQ4h
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Mar 2022 12:58:02 +0000 (UTC)
+ Thu, 10 Mar 2022 12:59:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2D88B8143F
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6AEA360B43
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Mar 2022 12:58:02 +0000 (UTC)
+ Thu, 10 Mar 2022 12:59:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1646917081;
+ s=mimecast20190719; t=1646917162;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=pQET2MPPoFWIolLulpf9vgE2ol9UeRG3d/CiXthk1lc=;
- b=SJ2Wmd88gO6+pKr9vLfPbaeaavTZzgnrNRBi4P7bjptKaY96JzAkFAkZRLXg92ZUe8urX1
- RvRI0w7bWDt5v3NYR3VxbINoVad7RNPsV17p5FUqnNV93si0ufaWGkW5sMc7DUGVDQjKJE
- 2Ip7EZ8iL3vq6+VUUsOsv6aRAnbBbjI=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=hwCuIDSsPjX4AERceBeOtiMJvDAZVLHVVFLuVfFYlm4=;
+ b=BH7O8ZkaqBXBI7e5a3Sg3UozcHA2L49+QDlxMCk/J9NROom0uIwsARykkzgXjmPEmIt11F
+ x4ptZDV896fqck7OOBNx5OC9KIIJpthVmdqbYwMdT0G8mTNs7uihjFnPl+iabfYzPjVYID
+ +56C70l3Qu11nbD9suc/eO/nBxSS8MI=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-351-ybfsP1MeOHq_Kx5CWEowLg-1; Thu, 10 Mar 2022 07:57:59 -0500
-X-MC-Unique: ybfsP1MeOHq_Kx5CWEowLg-1
-Received: by mail-wr1-f71.google.com with SMTP id
- a5-20020adfdd05000000b001f023fe32ffso1658056wrm.18
+ us-mta-482-16VICh3GNT6H1qcPl5Tupg-1; Thu, 10 Mar 2022 07:59:21 -0500
+X-MC-Unique: 16VICh3GNT6H1qcPl5Tupg-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 14-20020a05600c028e00b003897a4056e8so2248290wmk.9
  for <virtualization@lists.linux-foundation.org>;
- Thu, 10 Mar 2022 04:57:59 -0800 (PST)
+ Thu, 10 Mar 2022 04:59:20 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=x-gm-message-state:date:from:to:cc:subject:message-id:references
  :mime-version:content-disposition:in-reply-to;
- bh=pQET2MPPoFWIolLulpf9vgE2ol9UeRG3d/CiXthk1lc=;
- b=XOfaAAdQ4aCOFfqiDQQrsfH32qEBDKLBaOLF9eDT4UVH9qKHRElAwVrwttvfnF+nB4
- XJolamP1seG4yEUtZW+a4wbkKhFxtGXAbxIcH3KrunbP8eAWTvrEuHTyBrpCFk6eZbyk
- ipjDQbZ70mNrNTjKlJaTAoEIYgfvDYVkaZY///4MxQWiHQ/cUnM3czRxNuHo1GTxSm5O
- yNVvyU2fm7nR3HDXG995V6iBGJ7RHdQYOdAAV03v9niFVccbel91X2qhx2X3VsyONCl2
- i5Ok8tHIq+lRQeyz3uR8ZqtOAeEvKodv6r+GXYFJo3ZEbtKtHNgDAqjCajThII2LdPRI
- Cshg==
-X-Gm-Message-State: AOAM530ce7xQki3RkanjqIFBIdAq8txrYuTpAeGsPFzK9Cy8xTgRdkVX
- RRrIv6R2bhhbdafpmqw4dqIoI/g53EKB1Ytain6BsufrX17hRSLZMQXozfXgKaKJ8t3RSG/j7KW
- BOCP5PWiaUqVcv1mZJxO93sbewpkvz4LW6UtoA4eSyQ==
-X-Received: by 2002:a5d:5846:0:b0:203:6b34:37af with SMTP id
- i6-20020a5d5846000000b002036b3437afmr3679526wrf.58.1646917078730; 
- Thu, 10 Mar 2022 04:57:58 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJwNy/izqOOZPKvRpP+GlT6cO3sQtQvas8NEWLfQ+g6cahHLf6mWcq6HAOBus4EAcYOUh56YBg==
-X-Received: by 2002:a5d:5846:0:b0:203:6b34:37af with SMTP id
- i6-20020a5d5846000000b002036b3437afmr3679501wrf.58.1646917078395; 
- Thu, 10 Mar 2022 04:57:58 -0800 (PST)
+ bh=hwCuIDSsPjX4AERceBeOtiMJvDAZVLHVVFLuVfFYlm4=;
+ b=BJMO1e8nXxoyaEjvYQAn6tWVbwdO50dVOKQARCrCD9ir+gUm7a2stlGExqOZmuGGk2
+ Oir8UDR+Yaz/YvL5Rt507AOEp9rK4YbTl5yEQwdfyq/HeMamKCPMrcapPmcJbXxP0dHK
+ ezmDxsK31nxIhrNDyXyl8+kamU1Jt/cIAS1hFfkhQW/QhBZptJ4oWaiubkCuslo5iG49
+ qX0RZp/zBPsJgYG8lv/Hw9alaZwIJIsVyZIHA8wmZBQXb3RUW9FGCM2n/wdBFFUZcdXE
+ 7gAOqC3bcf+VF0TtH/KG41i4K2Fjiih/J8pxTf9in+RkrbuBYGLv7H1ak1qSyIo8YcFf
+ Vh/g==
+X-Gm-Message-State: AOAM531sRDujryJL0kS+FwVXxTwXvxpQxP4iy9EWrrHRdJ93E69nnbKV
+ oYWGHL8Y4JcONe8L4HFSPYz+QOSMo+7TIBZdOL9n+IbxuGamutxt1uhG9jGEU3Zc8yS42jQvZSu
+ eC88jciQmqeeZ3xv4tIatLsHzP+hmKd9ndJUV2T9LQA==
+X-Received: by 2002:adf:e74a:0:b0:1f0:25cb:3ad5 with SMTP id
+ c10-20020adfe74a000000b001f025cb3ad5mr3347338wrn.231.1646917159909; 
+ Thu, 10 Mar 2022 04:59:19 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJy4qf2SKWvXQvwoAB9Gh/FK48f8OJZe69JH0iUoqd3J7EpB6Fi2Yt+tJIwgM/gUJZtaibSlQA==
+X-Received: by 2002:adf:e74a:0:b0:1f0:25cb:3ad5 with SMTP id
+ c10-20020adfe74a000000b001f025cb3ad5mr3347324wrn.231.1646917159674; 
+ Thu, 10 Mar 2022 04:59:19 -0800 (PST)
 Received: from redhat.com ([2.53.27.107]) by smtp.gmail.com with ESMTPSA id
- u4-20020adfed44000000b0020373d356f8sm4119668wro.84.2022.03.10.04.57.56
+ n7-20020a05600c3b8700b00389a6241669sm8676255wms.33.2022.03.10.04.59.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Mar 2022 04:57:57 -0800 (PST)
-Date: Thu, 10 Mar 2022 07:57:54 -0500
+ Thu, 10 Mar 2022 04:59:19 -0800 (PST)
+Date: Thu, 10 Mar 2022 07:59:15 -0500
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Jiyong Park <jiyong@google.com>
 Subject: Re: [PATCH 0/2] vsock: cycle only on its own socket
-Message-ID: <20220310075554-mutt-send-email-mst@kernel.org>
+Message-ID: <20220310075854-mutt-send-email-mst@kernel.org>
 References: <20220310125425.4193879-1-jiyong@google.com>
+ <20220310075554-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20220310125425.4193879-1-jiyong@google.com>
+In-Reply-To: <20220310075554-mutt-send-email-mst@kernel.org>
 Authentication-Results: relay.mimecast.com;
  auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
@@ -116,44 +117,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Mar 10, 2022 at 09:54:23PM +0900, Jiyong Park wrote:
-> Hi Stefano,
+On Thu, Mar 10, 2022 at 07:57:58AM -0500, Michael S. Tsirkin wrote:
+> On Thu, Mar 10, 2022 at 09:54:23PM +0900, Jiyong Park wrote:
+> > Hi Stefano,
+> > 
+> > As suggested [1], I've made two patches for easier backporting without
+> > breaking KMI.
+> > 
+> > PATCH 1 fixes the very issue of cycling all vsocks regardless of the
+> > transport and shall be backported.
+> > 
+> > PATCH 2 is a refactor of PATCH 1 that forces the filtering to all
+> > (including future) uses of vsock_for_each_connected_socket.
+> > 
+> > Thanks,
+> > 
+> > [1] https://lore.kernel.org/lkml/20220310110036.fgy323c4hvk3mziq@sgarzare-redhat/
 > 
-> As suggested [1], I've made two patches for easier backporting without
-> breaking KMI.
 > 
-> PATCH 1 fixes the very issue of cycling all vsocks regardless of the
-> transport and shall be backported.
+> OK that's better. Pls do include changelog in the future.
 > 
-> PATCH 2 is a refactor of PATCH 1 that forces the filtering to all
-> (including future) uses of vsock_for_each_connected_socket.
-> 
-> Thanks,
-> 
-> [1] https://lore.kernel.org/lkml/20220310110036.fgy323c4hvk3mziq@sgarzare-redhat/
+> Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
+Hmm actually I think I have a better idea. Hang on.
 
-OK that's better. Pls do include changelog in the future.
-
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-
-
-
-> Jiyong Park (2):
->   vsock: each transport cycles only on its own sockets
->   vsock: refactor vsock_for_each_connected_socket
-> 
->  drivers/vhost/vsock.c            | 3 ++-
->  include/net/af_vsock.h           | 3 ++-
->  net/vmw_vsock/af_vsock.c         | 9 +++++++--
->  net/vmw_vsock/virtio_transport.c | 7 +++++--
->  net/vmw_vsock/vmci_transport.c   | 3 ++-
->  5 files changed, 18 insertions(+), 7 deletions(-)
 > 
 > 
-> base-commit: 3bf7edc84a9eb4007dd9a0cb8878a7e1d5ec6a3b
-> -- 
-> 2.35.1.723.g4982287a31-goog
+> > Jiyong Park (2):
+> >   vsock: each transport cycles only on its own sockets
+> >   vsock: refactor vsock_for_each_connected_socket
+> > 
+> >  drivers/vhost/vsock.c            | 3 ++-
+> >  include/net/af_vsock.h           | 3 ++-
+> >  net/vmw_vsock/af_vsock.c         | 9 +++++++--
+> >  net/vmw_vsock/virtio_transport.c | 7 +++++--
+> >  net/vmw_vsock/vmci_transport.c   | 3 ++-
+> >  5 files changed, 18 insertions(+), 7 deletions(-)
+> > 
+> > 
+> > base-commit: 3bf7edc84a9eb4007dd9a0cb8878a7e1d5ec6a3b
+> > -- 
+> > 2.35.1.723.g4982287a31-goog
 
 _______________________________________________
 Virtualization mailing list
