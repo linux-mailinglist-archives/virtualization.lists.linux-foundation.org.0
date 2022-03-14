@@ -1,60 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A889F4D7EB6
-	for <lists.virtualization@lfdr.de>; Mon, 14 Mar 2022 10:35:19 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id CD4A74D7EFF
+	for <lists.virtualization@lfdr.de>; Mon, 14 Mar 2022 10:50:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 231DD83E75;
-	Mon, 14 Mar 2022 09:35:18 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 57B2D606EC;
+	Mon, 14 Mar 2022 09:50:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tq6yZbMJTfX8; Mon, 14 Mar 2022 09:35:17 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LhfYYcp0pYsP; Mon, 14 Mar 2022 09:50:16 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A3C0383E4A;
-	Mon, 14 Mar 2022 09:35:16 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 2854960687;
+	Mon, 14 Mar 2022 09:50:16 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 662D5C0085;
-	Mon, 14 Mar 2022 09:35:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 903A2C0084;
+	Mon, 14 Mar 2022 09:50:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 205A3C001D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A8019C000B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Mar 2022 09:35:14 +0000 (UTC)
+ Mon, 14 Mar 2022 09:50:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id F3A834154C
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8E51760669
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Mar 2022 09:35:13 +0000 (UTC)
+ Mon, 14 Mar 2022 09:50:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vTvUDWDn0wx2
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id sXsK3yP5-okD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Mar 2022 09:35:13 +0000 (UTC)
+ Mon, 14 Mar 2022 09:50:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-43.freemail.mail.aliyun.com
- (out30-43.freemail.mail.aliyun.com [115.124.30.43])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0F81041571
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 84C9E600BA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 14 Mar 2022 09:35:12 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R881e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04357; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=3; SR=0; TI=SMTPD_---0V76s62-_1647250509; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V76s62-_1647250509) by smtp.aliyun-inc.com(127.0.0.1);
- Mon, 14 Mar 2022 17:35:10 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v8 16/16] virtio_ring: introduce virtqueue_resize()
-Date: Mon, 14 Mar 2022 17:34:55 +0800
-Message-Id: <20220314093455.34707-17-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.31.0
-In-Reply-To: <20220314093455.34707-1-xuanzhuo@linux.alibaba.com>
+ Mon, 14 Mar 2022 09:50:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1647251411;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GtLbfFoJdTrpJtjuI/aGC/BMVEtxNUcexTJUY7kZ1ag=;
+ b=CMBIC5oGomDfxQZeUE3i7Tt+NbnGqynglOzuNescfTCjYwYgszut41M86kjdQZWy+kOft8
+ 3EfuYU/xwXqYrpbgh9YdcfoKerPoPaoVnsRzDFIdHdzvjpj/qcNqrfeOn1qWHtPCxwH+HV
+ kG81olFDSlJ+NgVC7sIMxdIlMpd5mMU=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-20-u8fFhDHjMhW60s5SNxlmHQ-1; Mon, 14 Mar 2022 05:50:10 -0400
+X-MC-Unique: u8fFhDHjMhW60s5SNxlmHQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.8])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B60E585A5BC;
+ Mon, 14 Mar 2022 09:50:09 +0000 (UTC)
+Received: from localhost (unknown [10.39.194.198])
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 6E6ABC531E3;
+ Mon, 14 Mar 2022 09:50:09 +0000 (UTC)
+From: Cornelia Huck <cohuck@redhat.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ virtualization@lists.linux-foundation.org
+Subject: Re: [PATCH v8 01/16] virtio: add helper virtqueue_get_vring_max_size()
+In-Reply-To: <20220314093455.34707-2-xuanzhuo@linux.alibaba.com>
+Organization: Red Hat GmbH
 References: <20220314093455.34707-1-xuanzhuo@linux.alibaba.com>
+ <20220314093455.34707-2-xuanzhuo@linux.alibaba.com>
+User-Agent: Notmuch/0.34 (https://notmuchmail.org)
+Date: Mon, 14 Mar 2022 10:50:08 +0100
+Message-ID: <87cziohnhr.fsf@redhat.com>
 MIME-Version: 1.0
-X-Git-Hash: d6feaa0fb7e7
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.8
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=cohuck@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Cc: "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -72,120 +96,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce virtqueue_resize() to implement the resize of vring.
-Based on these, the driver can dynamically adjust the size of the vring.
-For example: ethtool -G.
+On Mon, Mar 14 2022, Xuan Zhuo <xuanzhuo@linux.alibaba.com> wrote:
 
-virtqueue_resize() implements resize based on the vq reset function. In
-case of failure to allocate a new vring, it will give up resize and use
-the original vring.
+> Record the maximum queue num supported by the device.
+>
+> virtio-net can display the maximum (supported by hardware) ring size in
+> ethtool -g eth0.
+>
+> When the subsequent patch implements vring reset, it can judge whether
+> the ring size passed by the driver is legal based on this.
+>
+> Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+> Acked-by: Jason Wang <jasowang@redhat.com>
+> ---
+>  drivers/virtio/virtio_mmio.c       |  2 ++
+>  drivers/virtio/virtio_pci_legacy.c |  2 ++
+>  drivers/virtio/virtio_pci_modern.c |  2 ++
+>  drivers/virtio/virtio_ring.c       | 14 ++++++++++++++
+>  include/linux/virtio.h             |  2 ++
+>  5 files changed, 22 insertions(+)
 
-During this process, if the re-enable reset vq fails, the vq can no
-longer be used. Although the probability of this situation is not high.
-
-The parameter recycle is used to recycle the buffer that is no longer
-used.
-
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/virtio/virtio_ring.c | 67 ++++++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  3 ++
- 2 files changed, 70 insertions(+)
-
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index fb0abf9a2f57..b1dde086a8a4 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -2528,6 +2528,73 @@ struct virtqueue *vring_create_virtqueue(
- }
- EXPORT_SYMBOL_GPL(vring_create_virtqueue);
- 
-+/**
-+ * virtqueue_resize - resize the vring of vq
-+ * @vq: the struct virtqueue we're talking about.
-+ * @num: new ring num
-+ * @recycle: callback for recycle the useless buffer
-+ *
-+ * When it is really necessary to create a new vring, it will set the current vq
-+ * into the reset state. Then call the passed cb to recycle the buffer that is
-+ * no longer used. Only after the new vring is successfully created, the old
-+ * vring will be released.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error.
-+ * -ENOMEM: create new vring fail. But vq can still work
-+ * -EBUSY:  reset/re-enable vq fail. vq may cannot work
-+ * -ENOENT: not support resize
-+ * -E2BIG/-EINVAL: param num error
-+ */
-+int virtqueue_resize(struct virtqueue *vq, u32 num,
-+		     void (*recycle)(struct virtqueue *vq, void *buf))
-+{
-+	struct virtio_device *vdev = vq->vdev;
-+	void *buf;
-+	int err;
-+
-+	if (num > vq->num_max)
-+		return -E2BIG;
-+
-+	if (!num)
-+		return -EINVAL;
-+
-+	if (to_vvq(vq)->packed.vring.num == num)
-+		return 0;
-+
-+	if (!vq->vdev->config->reset_vq)
-+		return -ENOENT;
-+
-+	if (!vq->vdev->config->enable_reset_vq)
-+		return -ENOENT;
-+
-+	err = vq->vdev->config->reset_vq(vq);
-+	if (err) {
-+		if (err != -ENOENT)
-+			err = -EBUSY;
-+		return err;
-+	}
-+
-+	while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
-+		recycle(vq, buf);
-+
-+	if (virtio_has_feature(vdev, VIRTIO_F_RING_PACKED))
-+		err = virtqueue_resize_packed(vq, num);
-+	else
-+		err = virtqueue_resize_split(vq, num);
-+
-+	if (err)
-+		err = -ENOMEM;
-+
-+	if (vq->vdev->config->enable_reset_vq(vq))
-+		return -EBUSY;
-+
-+	return err;
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_resize);
-+
- /* Only available for split ring */
- struct virtqueue *vring_new_virtqueue(unsigned int index,
- 				      unsigned int num,
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index d59adc4be068..c86ff02e0ca0 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -91,6 +91,9 @@ dma_addr_t virtqueue_get_desc_addr(struct virtqueue *vq);
- dma_addr_t virtqueue_get_avail_addr(struct virtqueue *vq);
- dma_addr_t virtqueue_get_used_addr(struct virtqueue *vq);
- 
-+int virtqueue_resize(struct virtqueue *vq, u32 num,
-+		     void (*recycle)(struct virtqueue *vq, void *buf));
-+
- /**
-  * virtio_device - representation of a device using virtio
-  * @index: unique position on the virtio bus
--- 
-2.31.0
+Don't you also need to init this for ccw (even though we won't do ring
+reset there), just for completeness? (Any other transports?)
 
 _______________________________________________
 Virtualization mailing list
