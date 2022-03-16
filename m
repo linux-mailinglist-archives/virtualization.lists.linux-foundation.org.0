@@ -1,62 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 80EDE4DB89F
-	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:45 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B8364DB89C
+	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id E439D4017E;
-	Wed, 16 Mar 2022 19:21:43 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id E0868842CF;
+	Wed, 16 Mar 2022 19:21:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XOOhEDMzM9bl; Wed, 16 Mar 2022 19:21:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 69C8540AAD;
-	Wed, 16 Mar 2022 19:21:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CogHjdL6F-CB; Wed, 16 Mar 2022 19:21:23 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8CC51842E6;
+	Wed, 16 Mar 2022 19:21:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DAB2CC0033;
-	Wed, 16 Mar 2022 19:21:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 07FAFC000B;
+	Wed, 16 Mar 2022 19:21:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3E1FEC000B
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 65E44C000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:40 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1D86C4017E
+ by smtp3.osuosl.org (Postfix) with ESMTP id 44B48611C6
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:40 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XY2ViVbYtZqa
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ZIk-JGRsR8WZ
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:39 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id F2934400BA
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 90C3A61213
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:38 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=xtNRe1xty6FQQPFuledRJUXSwUairNMM4kORWxmQYV8=; b=t84D6OIOwke7941Ipke874O+qb
- aGBsnQhRO4EXcylH7PbZ6WwWeCmIP4gE/9nv3vDdhD6Os6XtG70EyG1KDkHTNG6ABB0g9QcjpdI0J
- 6N/hmx6YYf+6oZ/gr4ycnfMFPal+Dige9a+w8PggP2gPGgVIZzFbB96HtwvXzZx0mJE3frVq+3ZoH
- GqAwo3vDUKUFX67ZKegrnZ9P2I9r8/CCabOZh4Q2zU/aeqxkW7pHJ39DGMYNLyBiGPINg7GoFQeGX
- gTQQQGxpmdVzC4R5jza4poDTlmba5GZouKH8tZYaUsEpaWIqAzRdgk4s8ssWMJ1Zj/YQW+S+dYFbZ
- wOWrix6Q==;
+ Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+ To:From:Sender:Reply-To:Content-ID:Content-Description;
+ bh=4Krw3MostSzdRmJotMI0a/aFHrz6hD4Rnz4KlkBsZsY=; b=oMmN0YOyCxbwsqUbjdCoYoeLS5
+ xwOMYvr9c6y0ZD0gLE9DMUnynweLItGGubfTLvG/AFTS8gDdpV6qbKOe2/SN3s2MVuCKG2ip8Mj1T
+ daPYsOGmw7rRzY22M54r0qxbz7gAzmEjzHxFdcWBVn37bavK9d81on5K0p1gEE5WIrLXqWY8/fU6M
+ s5P/mifVEcH7CseJqbey8V+DTjHnfTd9wcLrhUE4NbrJGroreYsn7JZe2n7d0wMy7AotAiFE9ZHGk
+ 8JL0YSuhRL0OVQ5l3GWEQSBBUdGvXVahxlykI44NQpLaQo/Se64NnCywaP3JRAx3A9pSa/0AcvqOF
+ CO5qvuzA==;
 Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nUZC3-00EArp-Q1; Wed, 16 Mar 2022 19:20:23 +0000
+ id 1nUZC5-00EArp-Jb; Wed, 16 Mar 2022 19:20:25 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5/9] virtio-scsi: eliminate anonymous module_init & module_exit
-Date: Wed, 16 Mar 2022 12:20:06 -0700
-Message-Id: <20220316192010.19001-6-rdunlap@infradead.org>
+Subject: [PATCH 6/9] usb: gadget: eliminate anonymous module_init & module_exit
+Date: Wed, 16 Mar 2022 12:20:07 -0700
+Message-Id: <20220316192010.19001-7-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220316192010.19001-1-rdunlap@infradead.org>
 References: <20220316192010.19001-1-rdunlap@infradead.org>
@@ -104,75 +106,80 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Eliminate anonymous module_init() and module_exit(), which can lead to
-confusion or ambiguity when reading System.map, crashes/oops/bugs,
-or an initcall_debug log.
-
-Give each of these init and exit functions unique driver-specific
-names to eliminate the anonymous names.
-
-Example 1: (System.map)
- ffffffff832fc78c t init
- ffffffff832fc79e t init
- ffffffff832fc8f8 t init
-
-Example 2: (initcall_debug log)
- calling  init+0x0/0x12 @ 1
- initcall init+0x0/0x12 returned 0 after 15 usecs
- calling  init+0x0/0x60 @ 1
- initcall init+0x0/0x60 returned 0 after 2 usecs
- calling  init+0x0/0x9a @ 1
- initcall init+0x0/0x9a returned 0 after 74 usecs
-
-Fixes: 4fe74b1cb051 ("[SCSI] virtio-scsi: SCSI driver for QEMU based virtual machines")
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Paolo Bonzini <pbonzini@redhat.com>
-Cc: Stefan Hajnoczi <stefanha@redhat.com>
-Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
-Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
-Cc: linux-scsi@vger.kernel.org
-Cc: virtualization@lists.linux-foundation.org
----
- drivers/scsi/virtio_scsi.c |    8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
---- lnx-517-rc8.orig/drivers/scsi/virtio_scsi.c
-+++ lnx-517-rc8/drivers/scsi/virtio_scsi.c
-@@ -988,7 +988,7 @@ static struct virtio_driver virtio_scsi_
- 	.remove = virtscsi_remove,
- };
- 
--static int __init init(void)
-+static int __init virtio_scsi_init(void)
- {
- 	int ret = -ENOMEM;
- 
-@@ -1020,14 +1020,14 @@ error:
- 	return ret;
- }
- 
--static void __exit fini(void)
-+static void __exit virtio_scsi_fini(void)
- {
- 	unregister_virtio_driver(&virtio_scsi_driver);
- 	mempool_destroy(virtscsi_cmd_pool);
- 	kmem_cache_destroy(virtscsi_cmd_cache);
- }
--module_init(init);
--module_exit(fini);
-+module_init(virtio_scsi_init);
-+module_exit(virtio_scsi_fini);
- 
- MODULE_DEVICE_TABLE(virtio, id_table);
- MODULE_DESCRIPTION("Virtio SCSI HBA driver");
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+RWxpbWluYXRlIGFub255bW91cyBtb2R1bGVfaW5pdCgpIGFuZCBtb2R1bGVfZXhpdCgpLCB3aGlj
+aCBjYW4gbGVhZCB0bwpjb25mdXNpb24gb3IgYW1iaWd1aXR5IHdoZW4gcmVhZGluZyBTeXN0ZW0u
+bWFwLCBjcmFzaGVzL29vcHMvYnVncywKb3IgYW4gaW5pdGNhbGxfZGVidWcgbG9nLgoKR2l2ZSBl
+YWNoIG9mIHRoZXNlIGluaXQgYW5kIGV4aXQgZnVuY3Rpb25zIHVuaXF1ZSBkcml2ZXItc3BlY2lm
+aWMKbmFtZXMgdG8gZWxpbWluYXRlIHRoZSBhbm9ueW1vdXMgbmFtZXMuCgpFeGFtcGxlIDE6IChT
+eXN0ZW0ubWFwKQogZmZmZmZmZmY4MzJmYzc4YyB0IGluaXQKIGZmZmZmZmZmODMyZmM3OWUgdCBp
+bml0CiBmZmZmZmZmZjgzMmZjOGY4IHQgaW5pdAoKRXhhbXBsZSAyOiAoaW5pdGNhbGxfZGVidWcg
+bG9nKQogY2FsbGluZyAgaW5pdCsweDAvMHgxMiBAIDEKIGluaXRjYWxsIGluaXQrMHgwLzB4MTIg
+cmV0dXJuZWQgMCBhZnRlciAxNSB1c2VjcwogY2FsbGluZyAgaW5pdCsweDAvMHg2MCBAIDEKIGlu
+aXRjYWxsIGluaXQrMHgwLzB4NjAgcmV0dXJuZWQgMCBhZnRlciAyIHVzZWNzCiBjYWxsaW5nICBp
+bml0KzB4MC8weDlhIEAgMQogaW5pdGNhbGwgaW5pdCsweDAvMHg5YSByZXR1cm5lZCAwIGFmdGVy
+IDc0IHVzZWNzCgpGaXhlczogYmQyNWExNGVkYjc1ICgidXNiOiBnYWRnZXQ6IGxlZ2FjeS9zZXJp
+YWw6IGFsbG93IGR5bmFtaWMgcmVtb3ZhbCIpCkZpeGVzOiA3YmI1ZWE1NGJlNDcgKCJ1c2IgZ2Fk
+Z2V0IHNlcmlhbDogdXNlIGNvbXBvc2l0ZSBnYWRnZXQgZnJhbWV3b3JrIikKRml4ZXM6IDFkYTE3
+N2U0YzNmNCAoIkxpbnV4LTIuNi4xMi1yYzIiKQpTaWduZWQtb2ZmLWJ5OiBSYW5keSBEdW5sYXAg
+PHJkdW5sYXBAaW5mcmFkZWFkLm9yZz4KQ2M6IEZlbGlwZSBCYWxiaSA8ZmVsaXBlLmJhbGJpQGxp
+bnV4LmludGVsLmNvbT4KQ2M6IE1pY2hhxYIgTWlyb3PFgmF3IDxtaXJxLWxpbnV4QHJlcmUucW1x
+bS5wbD4KQ2M6IEdyZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+
+CkNjOiBTZWJhc3RpYW4gQW5kcnplaiBTaWV3aW9yIDxiaWdlYXN5QGxpbnV0cm9uaXguZGU+CkNj
+OiBsaW51eC11c2JAdmdlci5rZXJuZWwub3JnCi0tLQogZHJpdmVycy91c2IvZ2FkZ2V0L2xlZ2Fj
+eS9pbm9kZS5jICB8ICAgIDggKysrKy0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC9sZWdhY3kvc2Vy
+aWFsLmMgfCAgIDEwICsrKysrLS0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC91ZGMvZHVtbXlfaGNk
+LmMgfCAgICA4ICsrKystLS0tCiAzIGZpbGVzIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDEz
+IGRlbGV0aW9ucygtKQoKLS0tIGxueC01MTctcmM4Lm9yaWcvZHJpdmVycy91c2IvZ2FkZ2V0L2xl
+Z2FjeS9zZXJpYWwuYworKysgbG54LTUxNy1yYzgvZHJpdmVycy91c2IvZ2FkZ2V0L2xlZ2FjeS9z
+ZXJpYWwuYwpAQCAtMjczLDcgKzI3Myw3IEBAIHN0YXRpYyBzdHJ1Y3QgdXNiX2NvbXBvc2l0ZV9k
+cml2ZXIgZ3NlcmkKIHN0YXRpYyBpbnQgc3dpdGNoX2dzZXJpYWxfZW5hYmxlKGJvb2wgZG9fZW5h
+YmxlKQogewogCWlmICghc2VyaWFsX2NvbmZpZ19kcml2ZXIubGFiZWwpCi0JCS8qIGluaXQoKSB3
+YXMgbm90IGNhbGxlZCwgeWV0ICovCisJCS8qIGdzZXJpYWxfaW5pdCgpIHdhcyBub3QgY2FsbGVk
+LCB5ZXQgKi8KIAkJcmV0dXJuIDA7CiAKIAlpZiAoZG9fZW5hYmxlKQpAQCAtMjgzLDcgKzI4Myw3
+IEBAIHN0YXRpYyBpbnQgc3dpdGNoX2dzZXJpYWxfZW5hYmxlKGJvb2wgZG8KIAlyZXR1cm4gMDsK
+IH0KIAotc3RhdGljIGludCBfX2luaXQgaW5pdCh2b2lkKQorc3RhdGljIGludCBfX2luaXQgZ3Nl
+cmlhbF9pbml0KHZvaWQpCiB7CiAJLyogV2UgKmNvdWxkKiBleHBvcnQgdHdvIGNvbmZpZ3M7IHRo
+YXQnZCBiZSBtdWNoIGNsZWFuZXIuLi4KIAkgKiBidXQgbmVpdGhlciBvZiB0aGVzZSBwcm9kdWN0
+IElEcyB3YXMgZGVmaW5lZCB0aGF0IHdheS4KQEAgLTMxNCwxMSArMzE0LDExIEBAIHN0YXRpYyBp
+bnQgX19pbml0IGluaXQodm9pZCkKIAogCXJldHVybiB1c2JfY29tcG9zaXRlX3Byb2JlKCZnc2Vy
+aWFsX2RyaXZlcik7CiB9Ci1tb2R1bGVfaW5pdChpbml0KTsKK21vZHVsZV9pbml0KGdzZXJpYWxf
+aW5pdCk7CiAKLXN0YXRpYyB2b2lkIF9fZXhpdCBjbGVhbnVwKHZvaWQpCitzdGF0aWMgdm9pZCBf
+X2V4aXQgZ3NlcmlhbF9jbGVhbnVwKHZvaWQpCiB7CiAJaWYgKGVuYWJsZSkKIAkJdXNiX2NvbXBv
+c2l0ZV91bnJlZ2lzdGVyKCZnc2VyaWFsX2RyaXZlcik7CiB9Ci1tb2R1bGVfZXhpdChjbGVhbnVw
+KTsKK21vZHVsZV9leGl0KGdzZXJpYWxfY2xlYW51cCk7Ci0tLSBsbngtNTE3LXJjOC5vcmlnL2Ry
+aXZlcnMvdXNiL2dhZGdldC91ZGMvZHVtbXlfaGNkLmMKKysrIGxueC01MTctcmM4L2RyaXZlcnMv
+dXNiL2dhZGdldC91ZGMvZHVtbXlfaGNkLmMKQEAgLTI3NjUsNyArMjc2NSw3IEBAIHN0YXRpYyBz
+dHJ1Y3QgcGxhdGZvcm1fZHJpdmVyIGR1bW15X2hjZF8KIHN0YXRpYyBzdHJ1Y3QgcGxhdGZvcm1f
+ZGV2aWNlICp0aGVfdWRjX3BkZXZbTUFYX05VTV9VRENdOwogc3RhdGljIHN0cnVjdCBwbGF0Zm9y
+bV9kZXZpY2UgKnRoZV9oY2RfcGRldltNQVhfTlVNX1VEQ107CiAKLXN0YXRpYyBpbnQgX19pbml0
+IGluaXQodm9pZCkKK3N0YXRpYyBpbnQgX19pbml0IGR1bW15X2hjZF9pbml0KHZvaWQpCiB7CiAJ
+aW50CXJldHZhbCA9IC1FTk9NRU07CiAJaW50CWk7CkBAIC0yODg3LDkgKzI4ODcsOSBAQCBlcnJf
+YWxsb2NfdWRjOgogCQlwbGF0Zm9ybV9kZXZpY2VfcHV0KHRoZV9oY2RfcGRldltpXSk7CiAJcmV0
+dXJuIHJldHZhbDsKIH0KLW1vZHVsZV9pbml0KGluaXQpOworbW9kdWxlX2luaXQoZHVtbXlfaGNk
+X2luaXQpOwogCi1zdGF0aWMgdm9pZCBfX2V4aXQgY2xlYW51cCh2b2lkKQorc3RhdGljIHZvaWQg
+X19leGl0IGR1bW15X2hjZF9jbGVhbnVwKHZvaWQpCiB7CiAJaW50IGk7CiAKQEAgLTI5MDUsNCAr
+MjkwNSw0IEBAIHN0YXRpYyB2b2lkIF9fZXhpdCBjbGVhbnVwKHZvaWQpCiAJcGxhdGZvcm1fZHJp
+dmVyX3VucmVnaXN0ZXIoJmR1bW15X3VkY19kcml2ZXIpOwogCXBsYXRmb3JtX2RyaXZlcl91bnJl
+Z2lzdGVyKCZkdW1teV9oY2RfZHJpdmVyKTsKIH0KLW1vZHVsZV9leGl0KGNsZWFudXApOworbW9k
+dWxlX2V4aXQoZHVtbXlfaGNkX2NsZWFudXApOwotLS0gbG54LTUxNy1yYzgub3JpZy9kcml2ZXJz
+L3VzYi9nYWRnZXQvbGVnYWN5L2lub2RlLmMKKysrIGxueC01MTctcmM4L2RyaXZlcnMvdXNiL2dh
+ZGdldC9sZWdhY3kvaW5vZGUuYwpAQCAtMjEwMSw3ICsyMTAxLDcgQEAgTU9EVUxFX0FMSUFTX0ZT
+KCJnYWRnZXRmcyIpOwogCiAvKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwogCi1zdGF0aWMgaW50IF9faW5pdCBp
+bml0ICh2b2lkKQorc3RhdGljIGludCBfX2luaXQgZ2FkZ2V0ZnNfaW5pdCAodm9pZCkKIHsKIAlp
+bnQgc3RhdHVzOwogCkBAIC0yMTExLDEyICsyMTExLDEyIEBAIHN0YXRpYyBpbnQgX19pbml0IGlu
+aXQgKHZvaWQpCiAJCQlzaG9ydG5hbWUsIGRyaXZlcl9kZXNjKTsKIAlyZXR1cm4gc3RhdHVzOwog
+fQotbW9kdWxlX2luaXQgKGluaXQpOworbW9kdWxlX2luaXQgKGdhZGdldGZzX2luaXQpOwogCi1z
+dGF0aWMgdm9pZCBfX2V4aXQgY2xlYW51cCAodm9pZCkKK3N0YXRpYyB2b2lkIF9fZXhpdCBnYWRn
+ZXRmc19jbGVhbnVwICh2b2lkKQogewogCXByX2RlYnVnICgidW5yZWdpc3RlciAlc1xuIiwgc2hv
+cnRuYW1lKTsKIAl1bnJlZ2lzdGVyX2ZpbGVzeXN0ZW0gKCZnYWRnZXRmc190eXBlKTsKIH0KLW1v
+ZHVsZV9leGl0IChjbGVhbnVwKTsKK21vZHVsZV9leGl0IChnYWRnZXRmc19jbGVhbnVwKTsKIApf
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
+dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
+cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
+dHVhbGl6YXRpb24=
