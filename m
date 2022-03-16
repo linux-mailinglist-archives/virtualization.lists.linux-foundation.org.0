@@ -1,89 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CFFF4DB589
-	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 17:00:44 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E1DD4DB89E
+	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:40 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DF790611F0;
-	Wed, 16 Mar 2022 16:00:42 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 29D78841DE;
+	Wed, 16 Mar 2022 19:21:39 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id K_tRmsCKW33O; Wed, 16 Mar 2022 16:00:42 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id O3QNC-QxebyC; Wed, 16 Mar 2022 19:21:38 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 90456611ED;
-	Wed, 16 Mar 2022 16:00:41 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id C10D1841B0;
+	Wed, 16 Mar 2022 19:21:37 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 13B49C0033;
-	Wed, 16 Mar 2022 16:00:41 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A3983C001D;
+	Wed, 16 Mar 2022 19:21:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9FED4C000B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A74EC0033
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 16:00:39 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8AFDF401D6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2C681400BA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 16:00:39 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id C6xshIdfTJ0j
+ with ESMTP id QSwDfxeA1IZR
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 16:00:38 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 54D694015A
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:e::133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 09773400AF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 16:00:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1647446437;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LYg8Y6p1xxfeGmLwQhCeeh72s1nQrXUYz7kNYKxV238=;
- b=QHN3mWfI6ZccdxftgBqDbRJNdrKj99EZRaFR6UWW3flkB4RKwaHHaz539KeZ/3xoHwqRbL
- ufMVaNw3/5XUuNzqJMBM1dx74O7ZQth4M+SV0ROUxgZGMloxauuNSDTeIVjIZ0Cq1/Jwk+
- npxshUcDYvlCm/eYWD1PFmwXUiG94Ws=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-673-X9uZG5B1MT6GdCVnylknDA-1; Wed, 16 Mar 2022 12:00:35 -0400
-X-MC-Unique: X9uZG5B1MT6GdCVnylknDA-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4A48F80352D;
- Wed, 16 Mar 2022 16:00:33 +0000 (UTC)
-Received: from localhost (unknown [10.39.193.207])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D542C40E80E2;
- Wed, 16 Mar 2022 16:00:32 +0000 (UTC)
-Date: Wed, 16 Mar 2022 16:00:29 +0000
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Max Gurtovoy <mgurtovoy@nvidia.com>
-Subject: Re: [PATCH] virtio-blk: support polling I/O
-Message-ID: <YjIJnWp/HRYueLtc@stefanha-x1.localdomain>
-References: <20220311152832.17703-1-suwan.kim027@gmail.com>
- <ea838f63-5f63-6f3b-f49e-1107b43f7d1c@redhat.com>
- <Yi82BL9KecQsVfgX@localhost.localdomain>
- <CACGkMEujXYNE-88=m9ohjbeAj2F7CqEUes8gOUmasTNtwn2bUA@mail.gmail.com>
- <YjCmBkjgtQZffiXw@localhost.localdomain>
- <CACGkMEtxadf1+0Db06nE3SuQZhvyELq7ZwvKaH8x_utj91dRdg@mail.gmail.com>
- <YjIDIjUwuwkfRS2d@localhost.localdomain>
- <96836799-8d1f-3865-e2e7-721150445e6a@nvidia.com>
+ Wed, 16 Mar 2022 19:21:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=X2j8KWKH7mPGrGuSOCsj6/Zr05knYdm/d0qKjoRqe/A=; b=bdC3zFz0aD/kHDcjfAyZbfQHBp
+ 7D/NlBM1amLmkH4B4sqKV2ufqUvJD88hTlKpyZ6VqDgekjK4FNGYILRpxkEqmQPADEL6WPYAAzU3c
+ Sgrf+0emCMPKxF4geOisKrAEZIi126v6w7X5ziKEvg+Vo5Kfv7gQeEp68Rya/2NrsCbuCdD1F1eRO
+ BniaXaZDMgIYFHq/3z0YvLS2w5qVtTdqdrrvR04+Nr2xp3obBSzkGzIwryyT9w7ppsZfrvdhEgpU1
+ CvVbeb1+V8VRryF0rtfXsRiz/tX5kbeNaIbViAt6lEitADJHoianGTvyLAizZrpPdjB0SFmWrUO/U
+ gzvEtNsQ==;
+Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nUZBu-00EArp-Lx; Wed, 16 Mar 2022 19:20:14 +0000
+From: Randy Dunlap <rdunlap@infradead.org>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 0/9] treewide: eliminate anonymous module_init & module_exit
+Date: Wed, 16 Mar 2022 12:20:01 -0700
+Message-Id: <20220316192010.19001-1-rdunlap@infradead.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-In-Reply-To: <96836799-8d1f-3865-e2e7-721150445e6a@nvidia.com>
-X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
-Cc: mst <mst@redhat.com>,
- virtualization <virtualization@lists.linux-foundation.org>,
- linux-block@vger.kernel.org, pbonzini <pbonzini@redhat.com>,
- Suwan Kim <suwan.kim027@gmail.com>
+Cc: linux-usb@vger.kernel.org, Andy Lutomirski <luto@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ nouveau@lists.freedesktop.org, Dave Hansen <dave.hansen@linux.intel.com>,
+ Valentina Manea <valentina.manea.m@gmail.com>,
+ virtualization@lists.linux-foundation.org,
+ Krzysztof Opasiak <k.opasiak@samsung.com>, Eli Cohen <eli@mellanox.com>,
+ netdev@vger.kernel.org, Shuah Khan <shuah@kernel.org>,
+ Thomas Gleixner <tglx@linutronix.de>, "H. Peter Anvin" <hpa@zytor.com>,
+ Arnd Bergmann <arnd@arndb.de>, Leon Romanovsky <leon@kernel.org>,
+ linux-rdma@vger.kernel.org, Ingo Molnar <mingo@kernel.org>,
+ Jozsef Kadlecsik <kadlec@netfilter.org>, coreteam@netfilter.org,
+ Jakub Kicinski <kuba@kernel.org>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Pablo Neira Ayuso <pablo@netfilter.org>,
+ Joachim Fritschi <jfritschi@freenet.de>,
+ Felipe Balbi <felipe.balbi@linux.intel.com>, Amit Shah <amit@kernel.org>,
+ "James E.J. Bottomley" <jejb@linux.ibm.com>,
+ Steven Rostedt <rostedt@goodmis.org>,
+ =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
+ linux-block@vger.kernel.org, Pekka Paalanen <ppaalanen@gmail.com>,
+ Borislav Petkov <bp@alien8.de>, Stefan Hajnoczi <stefanha@redhat.com>,
+ Shuah Khan <skhan@linuxfoundation.org>,
+ Jussi Kivilinna <jussi.kivilinna@mbnet.fi>,
+ Herbert Xu <herbert@gondor.apana.org.au>, Jens Axboe <axboe@kernel.dk>,
+ x86@kernel.org, linux-scsi@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Randy Dunlap <rdunlap@infradead.org>, Florian Westphal <fw@strlen.de>,
+ Karol Herbst <karolherbst@gmail.com>, netfilter-devel@vger.kernel.org,
+ linux-crypto@vger.kernel.org, Igor Kotrasinski <i.kotrasinsk@samsung.com>,
+ Paolo Bonzini <pbonzini@redhat.com>, Saeed Mahameed <saeedm@nvidia.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,144 +104,104 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============6687979598207491064=="
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-
---===============6687979598207491064==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="TtnH6To+GCf8zkoh"
-Content-Disposition: inline
-
-
---TtnH6To+GCf8zkoh
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Wed, Mar 16, 2022 at 05:36:20PM +0200, Max Gurtovoy wrote:
->=20
-> On 3/16/2022 5:32 PM, Suwan Kim wrote:
-> > On Wed, Mar 16, 2022 at 10:02:13AM +0800, Jason Wang wrote:
-> > > On Tue, Mar 15, 2022 at 10:43 PM Suwan Kim <suwan.kim027@gmail.com> w=
-rote:
-> > > > On Tue, Mar 15, 2022 at 04:59:23PM +0800, Jason Wang wrote:
-> > > > > On Mon, Mar 14, 2022 at 8:33 PM Suwan Kim <suwan.kim027@gmail.com=
-> wrote:
-> > > > >=20
-> > > > > > On Mon, Mar 14, 2022 at 02:14:53PM +0800, Jason Wang wrote:
-> > > > > > > =E5=9C=A8 2022/3/11 =E4=B8=8B=E5=8D=8811:28, Suwan Kim =E5=86=
-=99=E9=81=93:
-> > > > > > > > diff --git a/include/uapi/linux/virtio_blk.h
-> > > > > > b/include/uapi/linux/virtio_blk.h
-> > > > > > > > index d888f013d9ff..3fcaf937afe1 100644
-> > > > > > > > --- a/include/uapi/linux/virtio_blk.h
-> > > > > > > > +++ b/include/uapi/linux/virtio_blk.h
-> > > > > > > > @@ -119,8 +119,9 @@ struct virtio_blk_config {
-> > > > > > > >       * deallocation of one or more of the sectors.
-> > > > > > > >       */
-> > > > > > > >      __u8 write_zeroes_may_unmap;
-> > > > > > > > +   __u8 unused1;
-> > > > > > > > -   __u8 unused1[3];
-> > > > > > > > +   __virtio16 num_poll_queues;
-> > > > > > > >    } __attribute__((packed));
-> > > > > > >=20
-> > > > > > > This looks like a implementation specific (virtio-blk-pci) op=
-timization,
-> > > > > > how
-> > > > > > > about other implementation like vhost-user-blk?
-> > > > > > I didn=E2=80=99t consider vhost-user-blk yet. But does vhost-us=
-er-blk also
-> > > > > > use vritio_blk_config as kernel-qemu interface?
-> > > > > >=20
-> > > > > Yes, but see below.
-> > > > >=20
-> > > > >=20
-> > > > > > Does vhost-user-blk need additional modification to support pol=
-ling
-> > > > > > in kernel side?
-> > > > > >=20
-> > > > >=20
-> > > > > No, but the issue is, things like polling looks not a good candid=
-ate for
-> > > > > the attributes belonging to the device but the driver. So I have =
-more
-> > > > > questions:
-> > > > >=20
-> > > > > 1) what does it really mean for hardware virtio block devices?
-> > > > > 2) Does driver polling help for the qemu implementation without p=
-olling?
-> > > > > 3) Using blk_config means we can only get the benefit from the ne=
-w device
-> > > > 1) what does it really mean for hardware virtio block devices?
-> > > > 3) Using blk_config means we can only get the benefit from the new =
-device
-> > > >=20
-> > > > This patch adds dedicated HW queue for polling purpose to virtio
-> > > > block device.
-> > > >=20
-> > > > So I think it can be a new hw feature. And it can be a new device
-> > > > that supports hw poll queue.
-> > > One possible issue is that the "poll" looks more like a
-> > > software/driver concept other than the device/hardware.
-> > >=20
-> > > > BTW, I have other idea about it.
-> > > >=20
-> > > > How about adding =E2=80=9Cnum-poll-queues" property as a driver par=
-ameter
-> > > > like NVMe driver, not to QEMU virtio-blk-pci property?
-> > > It should be fine, but we need to listen to others.
-> > To Michael, Stefan, Max
-> >=20
-> > How about using driver parameter instead of virio_blk_config?
->=20
-> Yes. I mentioned that virtio_blk_config shouldn't change.
-
-There are pros and cons to module parameters and configuration space
-fields. Both are valid but feel free to drop the configuration space
-field.
-
-On note about module parameters: if the guest has a virtio-blk device
-with a root file system and another one for benchmarking then it's
-unfortunate that the number of poll queues module parameter affects both
-devices.
-
-Is there a way to set a module parameter for a specific device instance?
-I guess you'd need something else like a sysfs attribute instead but the
-implementation is more complex.
-
-I'm fine with a module parameter.
-
-Stefan
-
---TtnH6To+GCf8zkoh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmIyCZ0ACgkQnKSrs4Gr
-c8is1wgArHpcBp23+y84O9gBKCh5kWW/DmtvaPN0Ok/YGvnCsH4RzmWRD+dlwk7H
-UkDfX4mtvBLyNOOIat+McV41qiopPcrq4ixsK5homQY81gu4LGkKmZ+E0OAdg2Rp
-p3M1LgOB+YsjZbPzeMdhO4sEZA9AxQAkfTLM1+UXi+/QL71hN6ltuFtctHT/mGsp
-HMNRhDodcmqlneilJpkij6ya7BgMTqVGRUOHgn0JLMre6FWwS4ahhGTQmwX6Zi/q
-czXCLsB7aOv8H3hVZ3Ekf/EWQgrWxW/0KNYqxySkatkwHl8n5//iaIZTGAKPvUMS
-J12Y9nonVvC4mrvnPFsbNXrUkmh/Ag==
-=mlLW
------END PGP SIGNATURE-----
-
---TtnH6To+GCf8zkoh--
-
-
---===============6687979598207491064==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============6687979598207491064==--
-
+VGhlcmUgYXJlIGEgbnVtYmVyIG9mIGRyaXZlcnMgdGhhdCB1c2UgIm1vZHVsZV9pbml0KGluaXQp
+IiBhbmQKIm1vZHVsZV9leGl0KGV4aXQpIiwgd2hpY2ggYXJlIGFub255bW91cyBuYW1lcyBhbmQg
+Y2FuIGxlYWQgdG8KY29uZnVzaW9uIG9yIGFtYmlndWl0eSB3aGVuIHJlYWRpbmcgU3lzdGVtLm1h
+cCwgY3Jhc2hlcy9vb3BzL2J1Z3MsCm9yIGFuIGluaXRjYWxsX2RlYnVnIGxvZy4KCkdpdmUgZWFj
+aCBvZiB0aGVzZSBpbml0IGFuZCBleGl0IGZ1bmN0aW9ucyB1bmlxdWUgZHJpdmVyLXNwZWNpZmlj
+Cm5hbWVzIHRvIGVsaW1pbmF0ZSB0aGUgYW5vbnltb3VzIG5hbWVzLgoKRXhhbXBsZSAxOiAoU3lz
+dGVtLm1hcCkKIGZmZmZmZmZmODMyZmM3OGMgdCBpbml0CiBmZmZmZmZmZjgzMmZjNzllIHQgaW5p
+dAogZmZmZmZmZmY4MzJmYzhmOCB0IGluaXQKIGZmZmZmZmZmODMyZmNhMDUgdCBpbml0CiBmZmZm
+ZmZmZjgzMmZjYmQyIHQgaW5pdAogZmZmZmZmZmY4MzMyOGYwZSB0IGluaXQKIGZmZmZmZmZmODMz
+MmM1YjEgdCBpbml0CiBmZmZmZmZmZjgzMzJkOWViIHQgaW5pdAogZmZmZmZmZmY4MzMyZjBhYSB0
+IGluaXQKIGZmZmZmZmZmODMzMzBlMjUgdCBpbml0CiBmZmZmZmZmZjgzMzMxN2E1IHQgaW5pdAog
+ZmZmZmZmZmY4MzMzZGQ2YiB0IGluaXQKCkV4YW1wbGUgMjogKGluaXRjYWxsX2RlYnVnIGxvZykK
+IGNhbGxpbmcgIGluaXQrMHgwLzB4MTIgQCAxCiBpbml0Y2FsbCBpbml0KzB4MC8weDEyIHJldHVy
+bmVkIDAgYWZ0ZXIgMTUgdXNlY3MKIGNhbGxpbmcgIGluaXQrMHgwLzB4NjAgQCAxCiBpbml0Y2Fs
+bCBpbml0KzB4MC8weDYwIHJldHVybmVkIDAgYWZ0ZXIgMiB1c2VjcwogY2FsbGluZyAgaW5pdCsw
+eDAvMHg5YSBAIDEKIGluaXRjYWxsIGluaXQrMHgwLzB4OWEgcmV0dXJuZWQgMCBhZnRlciA3NCB1
+c2VjcwogY2FsbGluZyAgaW5pdCsweDAvMHg3MyBAIDEKIGluaXRjYWxsIGluaXQrMHgwLzB4NzMg
+cmV0dXJuZWQgMCBhZnRlciA2IHVzZWNzCiBjYWxsaW5nICBpbml0KzB4MC8weDczIEAgMQogaW5p
+dGNhbGwgaW5pdCsweDAvMHg3MyByZXR1cm5lZCAwIGFmdGVyIDQgdXNlY3MKIGNhbGxpbmcgIGlu
+aXQrMHgwLzB4ZjUgQCAxCiBpbml0Y2FsbCBpbml0KzB4MC8weGY1IHJldHVybmVkIDAgYWZ0ZXIg
+MjcgdXNlY3MKIGNhbGxpbmcgIGluaXQrMHgwLzB4N2QgQCAxCiBpbml0Y2FsbCBpbml0KzB4MC8w
+eDdkIHJldHVybmVkIDAgYWZ0ZXIgMTEgdXNlY3MKIGNhbGxpbmcgIGluaXQrMHgwLzB4YzkgQCAx
+CiBpbml0Y2FsbCBpbml0KzB4MC8weGM5IHJldHVybmVkIDAgYWZ0ZXIgMTkgdXNlY3MKIGNhbGxp
+bmcgIGluaXQrMHgwLzB4OWQgQCAxCiBpbml0Y2FsbCBpbml0KzB4MC8weDlkIHJldHVybmVkIDAg
+YWZ0ZXIgMzcgdXNlY3MKIGNhbGxpbmcgIGluaXQrMHgwLzB4NjNmIEAgMQogaW5pdGNhbGwgaW5p
+dCsweDAvMHg2M2YgcmV0dXJuZWQgMCBhZnRlciA0MTEgdXNlY3MKIGNhbGxpbmcgIGluaXQrMHgw
+LzB4MTcxIEAgMQogaW5pdGNhbGwgaW5pdCsweDAvMHgxNzEgcmV0dXJuZWQgMCBhZnRlciA2MSB1
+c2VjcwogY2FsbGluZyAgaW5pdCsweDAvMHhlZiBAIDEKIGluaXRjYWxsIGluaXQrMHgwLzB4ZWYg
+cmV0dXJuZWQgMCBhZnRlciAzIHVzZWNzCgpDYzogIk1pY2hhZWwgUy4gVHNpcmtpbiIgPG1zdEBy
+ZWRoYXQuY29tPgpDYzogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNvbT4KQ2M6IFBhb2xv
+IEJvbnppbmkgPHBib256aW5pQHJlZGhhdC5jb20+CkNjOiBTdGVmYW4gSGFqbm9jemkgPHN0ZWZh
+bmhhQHJlZGhhdC5jb20+CkNjOiBKZW5zIEF4Ym9lIDxheGJvZUBrZXJuZWwuZGs+CkNjOiBBbWl0
+IFNoYWggPGFtaXRAa2VybmVsLm9yZz4KQ2M6IEFybmQgQmVyZ21hbm4gPGFybmRAYXJuZGIuZGU+
+CkNjOiBHcmVnIEtyb2FoLUhhcnRtYW4gPGdyZWdraEBsaW51eGZvdW5kYXRpb24ub3JnPgpDYzog
+RWxpIENvaGVuIDxlbGlAbWVsbGFub3guY29tPgpDYzogU2FlZWQgTWFoYW1lZWQgPHNhZWVkbUBu
+dmlkaWEuY29tPgpDYzogTGVvbiBSb21hbm92c2t5IDxsZW9uQGtlcm5lbC5vcmc+CkNjOiBQYWJs
+byBOZWlyYSBBeXVzbyA8cGFibG9AbmV0ZmlsdGVyLm9yZz4KQ2M6IEpvenNlZiBLYWRsZWNzaWsg
+PGthZGxlY0BuZXRmaWx0ZXIub3JnPgpDYzogRmxvcmlhbiBXZXN0cGhhbCA8ZndAc3RybGVuLmRl
+PgpDYzogIkRhdmlkIFMuIE1pbGxlciIgPGRhdmVtQGRhdmVtbG9mdC5uZXQ+CkNjOiBKYWt1YiBL
+aWNpbnNraSA8a3ViYUBrZXJuZWwub3JnPgpDYzogIkphbWVzIEUuSi4gQm90dG9tbGV5IiA8amVq
+YkBsaW51eC5pYm0uY29tPgpDYzogIk1hcnRpbiBLLiBQZXRlcnNlbiIgPG1hcnRpbi5wZXRlcnNl
+bkBvcmFjbGUuY29tPgpDYzogRmVsaXBlIEJhbGJpIDxmZWxpcGUuYmFsYmlAbGludXguaW50ZWwu
+Y29tPgpDYzogTWljaGHFgiBNaXJvc8WCYXcgPG1pcnEtbGludXhAcmVyZS5xbXFtLnBsPgpDYzog
+U2ViYXN0aWFuIEFuZHJ6ZWogU2lld2lvciA8YmlnZWFzeUBsaW51dHJvbml4LmRlPgpDYzogS3J6
+eXN6dG9mIE9wYXNpYWsgPGsub3Bhc2lha0BzYW1zdW5nLmNvbT4KQ2M6IElnb3IgS290cmFzaW5z
+a2kgPGkua290cmFzaW5za0BzYW1zdW5nLmNvbT4KQ2M6IFZhbGVudGluYSBNYW5lYSA8dmFsZW50
+aW5hLm1hbmVhLm1AZ21haWwuY29tPgpDYzogU2h1YWggS2hhbiA8c2h1YWhAa2VybmVsLm9yZz4K
+Q2M6IFNodWFoIEtoYW4gPHNraGFuQGxpbnV4Zm91bmRhdGlvbi5vcmc+CkNjOiBKdXNzaSBLaXZp
+bGlubmEgPGp1c3NpLmtpdmlsaW5uYUBtYm5ldC5maT4KQ2M6IEpvYWNoaW0gRnJpdHNjaGkgPGpm
+cml0c2NoaUBmcmVlbmV0LmRlPgpDYzogSGVyYmVydCBYdSA8aGVyYmVydEBnb25kb3IuYXBhbmEu
+b3JnLmF1PgpDYzogVGhvbWFzIEdsZWl4bmVyIDx0Z2x4QGxpbnV0cm9uaXguZGU+CkNjOiBTdGV2
+ZW4gUm9zdGVkdCA8cm9zdGVkdEBnb29kbWlzLm9yZz4KQ2M6IEluZ28gTW9sbmFyIDxtaW5nb0Br
+ZXJuZWwub3JnPgpDYzogS2Fyb2wgSGVyYnN0IDxrYXJvbGhlcmJzdEBnbWFpbC5jb20+CkNjOiBQ
+ZWtrYSBQYWFsYW5lbiA8cHBhYWxhbmVuQGdtYWlsLmNvbT4KQ2M6IERhdmUgSGFuc2VuIDxkYXZl
+LmhhbnNlbkBsaW51eC5pbnRlbC5jb20+CkNjOiBBbmR5IEx1dG9taXJza2kgPGx1dG9Aa2VybmVs
+Lm9yZz4KQ2M6IFBldGVyIFppamxzdHJhIDxwZXRlcnpAaW5mcmFkZWFkLm9yZz4KQ2M6IEJvcmlz
+bGF2IFBldGtvdiA8YnBAYWxpZW44LmRlPgpDYzogIkguIFBldGVyIEFudmluIiA8aHBhQHp5dG9y
+LmNvbT4KQ2M6IG5ldGZpbHRlci1kZXZlbEB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGNvcmV0ZWFtQG5l
+dGZpbHRlci5vcmcKQ2M6IG5ldGRldkB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbnV4LWJsb2NrQHZn
+ZXIua2VybmVsLm9yZwpDYzogbGludXgtY3J5cHRvQHZnZXIua2VybmVsLm9yZwpDYzogbGludXgt
+cmRtYUB2Z2VyLmtlcm5lbC5vcmcKQ2M6IGxpbnV4LXNjc2lAdmdlci5rZXJuZWwub3JnCkNjOiBs
+aW51eC11c2JAdmdlci5rZXJuZWwub3JnCkNjOiBub3V2ZWF1QGxpc3RzLmZyZWVkZXNrdG9wLm9y
+ZwpDYzogdmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKQ2M6IHg4NkBr
+ZXJuZWwub3JnCgpwYXRjaGVzOgogW1BBVENIIDEvOV0gdmlydGlvX2JsazogZWxpbWluYXRlIGFu
+b255bW91cyBtb2R1bGVfaW5pdCAmIG1vZHVsZV9leGl0CiBbUEFUQ0ggMi85XSB2aXJ0aW9fY29u
+c29sZTogZWxpbWluYXRlIGFub255bW91cyBtb2R1bGVfaW5pdCAmIG1vZHVsZV9leGl0CiBbUEFU
+Q0ggMy85XSBuZXQ6IG1seDU6IGVsaW1pbmF0ZSBhbm9ueW1vdXMgbW9kdWxlX2luaXQgJiBtb2R1
+bGVfZXhpdAogW1BBVENIIDQvOV0gbmV0ZmlsdGVyOiBoMzIzOiBlbGltaW5hdGUgYW5vbnltb3Vz
+IG1vZHVsZV9pbml0ICYgbW9kdWxlX2V4aXQKIFtQQVRDSCA1LzldIHZpcnRpby1zY3NpOiBlbGlt
+aW5hdGUgYW5vbnltb3VzIG1vZHVsZV9pbml0ICYgbW9kdWxlX2V4aXQKIFtQQVRDSCA2LzldIHVz
+YjogZ2FkZ2V0OiBlbGltaW5hdGUgYW5vbnltb3VzIG1vZHVsZV9pbml0ICYgbW9kdWxlX2V4aXQK
+IFtQQVRDSCA3LzldIHVzYjogdXNiaXA6IGVsaW1pbmF0ZSBhbm9ueW1vdXMgbW9kdWxlX2luaXQg
+JiBtb2R1bGVfZXhpdAogW1BBVENIIDgvOV0geDg2L2NyeXB0bzogZWxpbWluYXRlIGFub255bW91
+cyBtb2R1bGVfaW5pdCAmIG1vZHVsZV9leGl0CiBbUEFUQ0ggOS85XSB0ZXN0bW1pb3RyYWNlOiBl
+bGltaW5hdGUgYW5vbnltb3VzIG1vZHVsZV9pbml0ICYgbW9kdWxlX2V4aXQKCmRpZmZzdGF0Ogog
+YXJjaC94ODYvY3J5cHRvL2Jsb3dmaXNoX2dsdWUuYyAgICAgICAgICAgICAgICB8ICAgIDggKysr
+Ky0tLS0KIGFyY2gveDg2L2NyeXB0by9jYW1lbGxpYV9nbHVlLmMgICAgICAgICAgICAgICAgfCAg
+ICA4ICsrKystLS0tCiBhcmNoL3g4Ni9jcnlwdG8vc2VycGVudF9hdngyX2dsdWUuYyAgICAgICAg
+ICAgIHwgICAgOCArKysrLS0tLQogYXJjaC94ODYvY3J5cHRvL3R3b2Zpc2hfZ2x1ZS5jICAgICAg
+ICAgICAgICAgICB8ICAgIDggKysrKy0tLS0KIGFyY2gveDg2L2NyeXB0by90d29maXNoX2dsdWVf
+M3dheS5jICAgICAgICAgICAgfCAgICA4ICsrKystLS0tCiBhcmNoL3g4Ni9tbS90ZXN0bW1pb3Ry
+YWNlLmMgICAgICAgICAgICAgICAgICAgIHwgICAgOCArKysrLS0tLQogZHJpdmVycy9ibG9jay92
+aXJ0aW9fYmxrLmMgICAgICAgICAgICAgICAgICAgICB8ICAgIDggKysrKy0tLS0KIGRyaXZlcnMv
+Y2hhci92aXJ0aW9fY29uc29sZS5jICAgICAgICAgICAgICAgICAgfCAgICA4ICsrKystLS0tCiBk
+cml2ZXJzL25ldC9ldGhlcm5ldC9tZWxsYW5veC9tbHg1L2NvcmUvbWFpbi5jIHwgICAgOCArKysr
+LS0tLQogZHJpdmVycy9zY3NpL3ZpcnRpb19zY3NpLmMgICAgICAgICAgICAgICAgICAgICB8ICAg
+IDggKysrKy0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC9sZWdhY3kvaW5vZGUuYyAgICAgICAgICAg
+ICAgfCAgICA4ICsrKystLS0tCiBkcml2ZXJzL3VzYi9nYWRnZXQvbGVnYWN5L3NlcmlhbC5jICAg
+ICAgICAgICAgIHwgICAxMCArKysrKy0tLS0tCiBkcml2ZXJzL3VzYi9nYWRnZXQvdWRjL2R1bW15
+X2hjZC5jICAgICAgICAgICAgIHwgICAgOCArKysrLS0tLQogZHJpdmVycy91c2IvdXNiaXAvdnVk
+Y19tYWluLmMgICAgICAgICAgICAgICAgICB8ICAgIDggKysrKy0tLS0KIG5ldC9pcHY0L25ldGZp
+bHRlci9uZl9uYXRfaDMyMy5jICAgICAgICAgICAgICAgfCAgICA4ICsrKystLS0tCiAxNSBmaWxl
+cyBjaGFuZ2VkLCA2MSBpbnNlcnRpb25zKCspLCA2MSBkZWxldGlvbnMoLSkKX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGlu
+ZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8v
+bGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
