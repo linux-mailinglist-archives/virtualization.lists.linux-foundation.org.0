@@ -1,64 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4B8364DB89C
-	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:25 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9312F4DB899
+	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E0868842CF;
-	Wed, 16 Mar 2022 19:21:23 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EF9966120D;
+	Wed, 16 Mar 2022 19:21:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CogHjdL6F-CB; Wed, 16 Mar 2022 19:21:23 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 8CC51842E6;
-	Wed, 16 Mar 2022 19:21:22 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UlhTDBWxhAIj; Wed, 16 Mar 2022 19:21:18 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id BF7936121A;
+	Wed, 16 Mar 2022 19:21:17 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07FAFC000B;
-	Wed, 16 Mar 2022 19:21:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 36793C0033;
+	Wed, 16 Mar 2022 19:21:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 65E44C000B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 66C6CC000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:20 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 44B48611C6
+ by smtp4.osuosl.org (Postfix) with ESMTP id 61B75417CF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:20 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:14 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZIk-JGRsR8WZ
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fz2ikEanVO_J
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:19 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:13 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 90C3A61213
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B9D07417D3
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:19 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
- To:From:Sender:Reply-To:Content-ID:Content-Description;
- bh=4Krw3MostSzdRmJotMI0a/aFHrz6hD4Rnz4KlkBsZsY=; b=oMmN0YOyCxbwsqUbjdCoYoeLS5
- xwOMYvr9c6y0ZD0gLE9DMUnynweLItGGubfTLvG/AFTS8gDdpV6qbKOe2/SN3s2MVuCKG2ip8Mj1T
- daPYsOGmw7rRzY22M54r0qxbz7gAzmEjzHxFdcWBVn37bavK9d81on5K0p1gEE5WIrLXqWY8/fU6M
- s5P/mifVEcH7CseJqbey8V+DTjHnfTd9wcLrhUE4NbrJGroreYsn7JZe2n7d0wMy7AotAiFE9ZHGk
- 8JL0YSuhRL0OVQ5l3GWEQSBBUdGvXVahxlykI44NQpLaQo/Se64NnCywaP3JRAx3A9pSa/0AcvqOF
- CO5qvuzA==;
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
+ :Reply-To:Content-Type:Content-ID:Content-Description;
+ bh=I73CgbF6729wI2OMfPa7NCxG3sEoqNqrUxCVuaWYikI=; b=vfQEJC7clJiDCX70jOXFjsAqVr
+ RsHe0lFIEd1MJgFbYE0gt+pK9/bBQ9yr/XHgb6PlXtKVNnE4grHpTSqJXg+QKYQKUpGnsBonJ9U01
+ hDerMUrt6itAF3TL6Llq6sGGjgWz0n599JPSP5lVrYGGZTJrOpKqSEWKxM3DdyX/hO6EDO6WwFV5C
+ SobsjsMQ5TbbMAVQdJlaP8GZyf1U8kWywA8fSEQxcpsaz/Da6CGPqDfObwvZPtq5v+9H3k0mO94hs
+ HAGJyirDT+UWjgACI8PEJ0FufcIHgw7aJb7xm7hWahssEZydzz68UNUu2l9JpqX2qCyCWQXC/V06+
+ cVrWMhgA==;
 Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nUZC5-00EArp-Jb; Wed, 16 Mar 2022 19:20:25 +0000
+ id 1nUZC7-00EArp-Gg; Wed, 16 Mar 2022 19:20:27 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 6/9] usb: gadget: eliminate anonymous module_init & module_exit
-Date: Wed, 16 Mar 2022 12:20:07 -0700
-Message-Id: <20220316192010.19001-7-rdunlap@infradead.org>
+Subject: [PATCH 7/9] usb: usbip: eliminate anonymous module_init & module_exit
+Date: Wed, 16 Mar 2022 12:20:08 -0700
+Message-Id: <20220316192010.19001-8-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220316192010.19001-1-rdunlap@infradead.org>
 References: <20220316192010.19001-1-rdunlap@infradead.org>
@@ -106,80 +106,77 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-RWxpbWluYXRlIGFub255bW91cyBtb2R1bGVfaW5pdCgpIGFuZCBtb2R1bGVfZXhpdCgpLCB3aGlj
-aCBjYW4gbGVhZCB0bwpjb25mdXNpb24gb3IgYW1iaWd1aXR5IHdoZW4gcmVhZGluZyBTeXN0ZW0u
-bWFwLCBjcmFzaGVzL29vcHMvYnVncywKb3IgYW4gaW5pdGNhbGxfZGVidWcgbG9nLgoKR2l2ZSBl
-YWNoIG9mIHRoZXNlIGluaXQgYW5kIGV4aXQgZnVuY3Rpb25zIHVuaXF1ZSBkcml2ZXItc3BlY2lm
-aWMKbmFtZXMgdG8gZWxpbWluYXRlIHRoZSBhbm9ueW1vdXMgbmFtZXMuCgpFeGFtcGxlIDE6IChT
-eXN0ZW0ubWFwKQogZmZmZmZmZmY4MzJmYzc4YyB0IGluaXQKIGZmZmZmZmZmODMyZmM3OWUgdCBp
-bml0CiBmZmZmZmZmZjgzMmZjOGY4IHQgaW5pdAoKRXhhbXBsZSAyOiAoaW5pdGNhbGxfZGVidWcg
-bG9nKQogY2FsbGluZyAgaW5pdCsweDAvMHgxMiBAIDEKIGluaXRjYWxsIGluaXQrMHgwLzB4MTIg
-cmV0dXJuZWQgMCBhZnRlciAxNSB1c2VjcwogY2FsbGluZyAgaW5pdCsweDAvMHg2MCBAIDEKIGlu
-aXRjYWxsIGluaXQrMHgwLzB4NjAgcmV0dXJuZWQgMCBhZnRlciAyIHVzZWNzCiBjYWxsaW5nICBp
-bml0KzB4MC8weDlhIEAgMQogaW5pdGNhbGwgaW5pdCsweDAvMHg5YSByZXR1cm5lZCAwIGFmdGVy
-IDc0IHVzZWNzCgpGaXhlczogYmQyNWExNGVkYjc1ICgidXNiOiBnYWRnZXQ6IGxlZ2FjeS9zZXJp
-YWw6IGFsbG93IGR5bmFtaWMgcmVtb3ZhbCIpCkZpeGVzOiA3YmI1ZWE1NGJlNDcgKCJ1c2IgZ2Fk
-Z2V0IHNlcmlhbDogdXNlIGNvbXBvc2l0ZSBnYWRnZXQgZnJhbWV3b3JrIikKRml4ZXM6IDFkYTE3
-N2U0YzNmNCAoIkxpbnV4LTIuNi4xMi1yYzIiKQpTaWduZWQtb2ZmLWJ5OiBSYW5keSBEdW5sYXAg
-PHJkdW5sYXBAaW5mcmFkZWFkLm9yZz4KQ2M6IEZlbGlwZSBCYWxiaSA8ZmVsaXBlLmJhbGJpQGxp
-bnV4LmludGVsLmNvbT4KQ2M6IE1pY2hhxYIgTWlyb3PFgmF3IDxtaXJxLWxpbnV4QHJlcmUucW1x
-bS5wbD4KQ2M6IEdyZWcgS3JvYWgtSGFydG1hbiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5vcmc+
-CkNjOiBTZWJhc3RpYW4gQW5kcnplaiBTaWV3aW9yIDxiaWdlYXN5QGxpbnV0cm9uaXguZGU+CkNj
-OiBsaW51eC11c2JAdmdlci5rZXJuZWwub3JnCi0tLQogZHJpdmVycy91c2IvZ2FkZ2V0L2xlZ2Fj
-eS9pbm9kZS5jICB8ICAgIDggKysrKy0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC9sZWdhY3kvc2Vy
-aWFsLmMgfCAgIDEwICsrKysrLS0tLS0KIGRyaXZlcnMvdXNiL2dhZGdldC91ZGMvZHVtbXlfaGNk
-LmMgfCAgICA4ICsrKystLS0tCiAzIGZpbGVzIGNoYW5nZWQsIDEzIGluc2VydGlvbnMoKyksIDEz
-IGRlbGV0aW9ucygtKQoKLS0tIGxueC01MTctcmM4Lm9yaWcvZHJpdmVycy91c2IvZ2FkZ2V0L2xl
-Z2FjeS9zZXJpYWwuYworKysgbG54LTUxNy1yYzgvZHJpdmVycy91c2IvZ2FkZ2V0L2xlZ2FjeS9z
-ZXJpYWwuYwpAQCAtMjczLDcgKzI3Myw3IEBAIHN0YXRpYyBzdHJ1Y3QgdXNiX2NvbXBvc2l0ZV9k
-cml2ZXIgZ3NlcmkKIHN0YXRpYyBpbnQgc3dpdGNoX2dzZXJpYWxfZW5hYmxlKGJvb2wgZG9fZW5h
-YmxlKQogewogCWlmICghc2VyaWFsX2NvbmZpZ19kcml2ZXIubGFiZWwpCi0JCS8qIGluaXQoKSB3
-YXMgbm90IGNhbGxlZCwgeWV0ICovCisJCS8qIGdzZXJpYWxfaW5pdCgpIHdhcyBub3QgY2FsbGVk
-LCB5ZXQgKi8KIAkJcmV0dXJuIDA7CiAKIAlpZiAoZG9fZW5hYmxlKQpAQCAtMjgzLDcgKzI4Myw3
-IEBAIHN0YXRpYyBpbnQgc3dpdGNoX2dzZXJpYWxfZW5hYmxlKGJvb2wgZG8KIAlyZXR1cm4gMDsK
-IH0KIAotc3RhdGljIGludCBfX2luaXQgaW5pdCh2b2lkKQorc3RhdGljIGludCBfX2luaXQgZ3Nl
-cmlhbF9pbml0KHZvaWQpCiB7CiAJLyogV2UgKmNvdWxkKiBleHBvcnQgdHdvIGNvbmZpZ3M7IHRo
-YXQnZCBiZSBtdWNoIGNsZWFuZXIuLi4KIAkgKiBidXQgbmVpdGhlciBvZiB0aGVzZSBwcm9kdWN0
-IElEcyB3YXMgZGVmaW5lZCB0aGF0IHdheS4KQEAgLTMxNCwxMSArMzE0LDExIEBAIHN0YXRpYyBp
-bnQgX19pbml0IGluaXQodm9pZCkKIAogCXJldHVybiB1c2JfY29tcG9zaXRlX3Byb2JlKCZnc2Vy
-aWFsX2RyaXZlcik7CiB9Ci1tb2R1bGVfaW5pdChpbml0KTsKK21vZHVsZV9pbml0KGdzZXJpYWxf
-aW5pdCk7CiAKLXN0YXRpYyB2b2lkIF9fZXhpdCBjbGVhbnVwKHZvaWQpCitzdGF0aWMgdm9pZCBf
-X2V4aXQgZ3NlcmlhbF9jbGVhbnVwKHZvaWQpCiB7CiAJaWYgKGVuYWJsZSkKIAkJdXNiX2NvbXBv
-c2l0ZV91bnJlZ2lzdGVyKCZnc2VyaWFsX2RyaXZlcik7CiB9Ci1tb2R1bGVfZXhpdChjbGVhbnVw
-KTsKK21vZHVsZV9leGl0KGdzZXJpYWxfY2xlYW51cCk7Ci0tLSBsbngtNTE3LXJjOC5vcmlnL2Ry
-aXZlcnMvdXNiL2dhZGdldC91ZGMvZHVtbXlfaGNkLmMKKysrIGxueC01MTctcmM4L2RyaXZlcnMv
-dXNiL2dhZGdldC91ZGMvZHVtbXlfaGNkLmMKQEAgLTI3NjUsNyArMjc2NSw3IEBAIHN0YXRpYyBz
-dHJ1Y3QgcGxhdGZvcm1fZHJpdmVyIGR1bW15X2hjZF8KIHN0YXRpYyBzdHJ1Y3QgcGxhdGZvcm1f
-ZGV2aWNlICp0aGVfdWRjX3BkZXZbTUFYX05VTV9VRENdOwogc3RhdGljIHN0cnVjdCBwbGF0Zm9y
-bV9kZXZpY2UgKnRoZV9oY2RfcGRldltNQVhfTlVNX1VEQ107CiAKLXN0YXRpYyBpbnQgX19pbml0
-IGluaXQodm9pZCkKK3N0YXRpYyBpbnQgX19pbml0IGR1bW15X2hjZF9pbml0KHZvaWQpCiB7CiAJ
-aW50CXJldHZhbCA9IC1FTk9NRU07CiAJaW50CWk7CkBAIC0yODg3LDkgKzI4ODcsOSBAQCBlcnJf
-YWxsb2NfdWRjOgogCQlwbGF0Zm9ybV9kZXZpY2VfcHV0KHRoZV9oY2RfcGRldltpXSk7CiAJcmV0
-dXJuIHJldHZhbDsKIH0KLW1vZHVsZV9pbml0KGluaXQpOworbW9kdWxlX2luaXQoZHVtbXlfaGNk
-X2luaXQpOwogCi1zdGF0aWMgdm9pZCBfX2V4aXQgY2xlYW51cCh2b2lkKQorc3RhdGljIHZvaWQg
-X19leGl0IGR1bW15X2hjZF9jbGVhbnVwKHZvaWQpCiB7CiAJaW50IGk7CiAKQEAgLTI5MDUsNCAr
-MjkwNSw0IEBAIHN0YXRpYyB2b2lkIF9fZXhpdCBjbGVhbnVwKHZvaWQpCiAJcGxhdGZvcm1fZHJp
-dmVyX3VucmVnaXN0ZXIoJmR1bW15X3VkY19kcml2ZXIpOwogCXBsYXRmb3JtX2RyaXZlcl91bnJl
-Z2lzdGVyKCZkdW1teV9oY2RfZHJpdmVyKTsKIH0KLW1vZHVsZV9leGl0KGNsZWFudXApOworbW9k
-dWxlX2V4aXQoZHVtbXlfaGNkX2NsZWFudXApOwotLS0gbG54LTUxNy1yYzgub3JpZy9kcml2ZXJz
-L3VzYi9nYWRnZXQvbGVnYWN5L2lub2RlLmMKKysrIGxueC01MTctcmM4L2RyaXZlcnMvdXNiL2dh
-ZGdldC9sZWdhY3kvaW5vZGUuYwpAQCAtMjEwMSw3ICsyMTAxLDcgQEAgTU9EVUxFX0FMSUFTX0ZT
-KCJnYWRnZXRmcyIpOwogCiAvKi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0qLwogCi1zdGF0aWMgaW50IF9faW5pdCBp
-bml0ICh2b2lkKQorc3RhdGljIGludCBfX2luaXQgZ2FkZ2V0ZnNfaW5pdCAodm9pZCkKIHsKIAlp
-bnQgc3RhdHVzOwogCkBAIC0yMTExLDEyICsyMTExLDEyIEBAIHN0YXRpYyBpbnQgX19pbml0IGlu
-aXQgKHZvaWQpCiAJCQlzaG9ydG5hbWUsIGRyaXZlcl9kZXNjKTsKIAlyZXR1cm4gc3RhdHVzOwog
-fQotbW9kdWxlX2luaXQgKGluaXQpOworbW9kdWxlX2luaXQgKGdhZGdldGZzX2luaXQpOwogCi1z
-dGF0aWMgdm9pZCBfX2V4aXQgY2xlYW51cCAodm9pZCkKK3N0YXRpYyB2b2lkIF9fZXhpdCBnYWRn
-ZXRmc19jbGVhbnVwICh2b2lkKQogewogCXByX2RlYnVnICgidW5yZWdpc3RlciAlc1xuIiwgc2hv
-cnRuYW1lKTsKIAl1bnJlZ2lzdGVyX2ZpbGVzeXN0ZW0gKCZnYWRnZXRmc190eXBlKTsKIH0KLW1v
-ZHVsZV9leGl0IChjbGVhbnVwKTsKK21vZHVsZV9leGl0IChnYWRnZXRmc19jbGVhbnVwKTsKIApf
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXph
-dGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5v
-cmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmly
-dHVhbGl6YXRpb24=
+Eliminate anonymous module_init() and module_exit(), which can lead to
+confusion or ambiguity when reading System.map, crashes/oops/bugs,
+or an initcall_debug log.
+
+Give each of these init and exit functions unique driver-specific
+names to eliminate the anonymous names.
+
+Example 1: (System.map)
+ ffffffff832fc78c t init
+ ffffffff832fc79e t init
+ ffffffff832fc8f8 t init
+
+Example 2: (initcall_debug log)
+ calling  init+0x0/0x12 @ 1
+ initcall init+0x0/0x12 returned 0 after 15 usecs
+ calling  init+0x0/0x60 @ 1
+ initcall init+0x0/0x60 returned 0 after 2 usecs
+ calling  init+0x0/0x9a @ 1
+ initcall init+0x0/0x9a returned 0 after 74 usecs
+
+Fixes: 80fd9cd52de6 ("usbip: vudc: Add VUDC main file")
+Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+Cc: Krzysztof Opasiak <k.opasiak@samsung.com>
+Cc: Igor Kotrasinski <i.kotrasinsk@samsung.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Valentina Manea <valentina.manea.m@gmail.com>
+Cc: Shuah Khan <shuah@kernel.org>
+Cc: Shuah Khan <skhan@linuxfoundation.org>
+Cc: linux-usb@vger.kernel.org
+---
+ drivers/usb/usbip/vudc_main.c |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+--- lnx-517-rc8.orig/drivers/usb/usbip/vudc_main.c
++++ lnx-517-rc8/drivers/usb/usbip/vudc_main.c
+@@ -28,7 +28,7 @@ static struct platform_driver vudc_drive
+ 
+ static struct list_head vudc_devices = LIST_HEAD_INIT(vudc_devices);
+ 
+-static int __init init(void)
++static int __init vudc_init(void)
+ {
+ 	int retval = -ENOMEM;
+ 	int i;
+@@ -86,9 +86,9 @@ cleanup:
+ out:
+ 	return retval;
+ }
+-module_init(init);
++module_init(vudc_init);
+ 
+-static void __exit cleanup(void)
++static void __exit vudc_cleanup(void)
+ {
+ 	struct vudc_device *udc_dev = NULL, *udc_dev2 = NULL;
+ 
+@@ -103,7 +103,7 @@ static void __exit cleanup(void)
+ 	}
+ 	platform_driver_unregister(&vudc_driver);
+ }
+-module_exit(cleanup);
++module_exit(vudc_cleanup);
+ 
+ MODULE_DESCRIPTION("USB over IP Device Controller");
+ MODULE_AUTHOR("Krzysztof Opasiak, Karol Kosik, Igor Kotrasinski");
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
