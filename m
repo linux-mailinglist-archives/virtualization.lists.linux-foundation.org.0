@@ -1,65 +1,62 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B250E4DB89B
-	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:21 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 80EDE4DB89F
+	for <lists.virtualization@lfdr.de>; Wed, 16 Mar 2022 20:21:45 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 05E4284268;
-	Wed, 16 Mar 2022 19:21:20 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id E439D4017E;
+	Wed, 16 Mar 2022 19:21:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Cu7s_gTACspk; Wed, 16 Mar 2022 19:21:19 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XOOhEDMzM9bl; Wed, 16 Mar 2022 19:21:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A580D8421C;
-	Wed, 16 Mar 2022 19:21:18 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 69C8540AAD;
+	Wed, 16 Mar 2022 19:21:42 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B82B9C008B;
-	Wed, 16 Mar 2022 19:21:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DAB2CC0033;
+	Wed, 16 Mar 2022 19:21:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BEC6DC000B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3E1FEC000B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:16 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id ADD15417E0
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1D86C4017E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:16 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:40 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZmIcZNpuUlfF
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XY2ViVbYtZqa
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:16 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:e::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 04CA5417D7
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F2934400BA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Mar 2022 19:21:15 +0000 (UTC)
+ Wed, 16 Mar 2022 19:21:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=kkn5nl5PyZ0q8CQgfKlyj74bCk1dDbY3QIroXRJfS3I=; b=L0Bzgh5zuGNbr91N7JyNzX75Kt
- JhMPfxEcrzeOsN+4vC/CQeS/AfZDGU+5ouMlirI/rZlDV6medv70vXqOCpdpetjh/H7ppc9k7YjoQ
- mWVLClmn5iciAIW8GjkzdABLcKRZNG86bC0bj6NdTgJfo5d7UAQvPrCAUQ4FQyQPcgNzA4MmEdng6
- 5M/6nJLSdV4Wjea7de1J5ZEHA4+v3/9Xn2lcAV4IQZkYqUV5mDBeYxRqeKo2F2Nxn6ij2b1jWpj/B
- GJdT5rS8QpS8JY48lBxVds6mh4DtB5qF3Kq7M4maGkcKaJPRzyLnPEgEUUsJZEDdZVKPRbWapcHoH
- tc+kxufg==;
+ bh=xtNRe1xty6FQQPFuledRJUXSwUairNMM4kORWxmQYV8=; b=t84D6OIOwke7941Ipke874O+qb
+ aGBsnQhRO4EXcylH7PbZ6WwWeCmIP4gE/9nv3vDdhD6Os6XtG70EyG1KDkHTNG6ABB0g9QcjpdI0J
+ 6N/hmx6YYf+6oZ/gr4ycnfMFPal+Dige9a+w8PggP2gPGgVIZzFbB96HtwvXzZx0mJE3frVq+3ZoH
+ GqAwo3vDUKUFX67ZKegrnZ9P2I9r8/CCabOZh4Q2zU/aeqxkW7pHJ39DGMYNLyBiGPINg7GoFQeGX
+ gTQQQGxpmdVzC4R5jza4poDTlmba5GZouKH8tZYaUsEpaWIqAzRdgk4s8ssWMJ1Zj/YQW+S+dYFbZ
+ wOWrix6Q==;
 Received: from [2601:1c0:6280:3f0::aa0b] (helo=bombadil.infradead.org)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nUZC2-00EArp-0P; Wed, 16 Mar 2022 19:20:22 +0000
+ id 1nUZC3-00EArp-Q1; Wed, 16 Mar 2022 19:20:23 +0000
 From: Randy Dunlap <rdunlap@infradead.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 4/9] netfilter: h323: eliminate anonymous module_init &
- module_exit
-Date: Wed, 16 Mar 2022 12:20:05 -0700
-Message-Id: <20220316192010.19001-5-rdunlap@infradead.org>
+Subject: [PATCH 5/9] virtio-scsi: eliminate anonymous module_init & module_exit
+Date: Wed, 16 Mar 2022 12:20:06 -0700
+Message-Id: <20220316192010.19001-6-rdunlap@infradead.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20220316192010.19001-1-rdunlap@infradead.org>
 References: <20220316192010.19001-1-rdunlap@infradead.org>
@@ -132,51 +129,49 @@ Example 2: (initcall_debug log)
  calling  init+0x0/0x9a @ 1
  initcall init+0x0/0x9a returned 0 after 74 usecs
 
-Fixes: f587de0e2feb ("[NETFILTER]: nf_conntrack/nf_nat: add H.323 helper port")
+Fixes: 4fe74b1cb051 ("[SCSI] virtio-scsi: SCSI driver for QEMU based virtual machines")
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Pablo Neira Ayuso <pablo@netfilter.org>
-Cc: Jozsef Kadlecsik <kadlec@netfilter.org>
-Cc: Florian Westphal <fw@strlen.de>
-Cc: netfilter-devel@vger.kernel.org
-Cc: coreteam@netfilter.org
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: netdev@vger.kernel.org
+Cc: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Jason Wang <jasowang@redhat.com>
+Cc: Paolo Bonzini <pbonzini@redhat.com>
+Cc: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: "James E.J. Bottomley" <jejb@linux.ibm.com>
+Cc: "Martin K. Petersen" <martin.petersen@oracle.com>
+Cc: linux-scsi@vger.kernel.org
+Cc: virtualization@lists.linux-foundation.org
 ---
- net/ipv4/netfilter/nf_nat_h323.c |    8 ++++----
+ drivers/scsi/virtio_scsi.c |    8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
---- lnx-517-rc8.orig/net/ipv4/netfilter/nf_nat_h323.c
-+++ lnx-517-rc8/net/ipv4/netfilter/nf_nat_h323.c
-@@ -580,7 +580,7 @@ static struct nf_ct_helper_expectfn call
+--- lnx-517-rc8.orig/drivers/scsi/virtio_scsi.c
++++ lnx-517-rc8/drivers/scsi/virtio_scsi.c
+@@ -988,7 +988,7 @@ static struct virtio_driver virtio_scsi_
+ 	.remove = virtscsi_remove,
  };
  
- /****************************************************************************/
 -static int __init init(void)
-+static int __init nf_nat_h323_init(void)
++static int __init virtio_scsi_init(void)
  {
- 	BUG_ON(set_h245_addr_hook != NULL);
- 	BUG_ON(set_h225_addr_hook != NULL);
-@@ -607,7 +607,7 @@ static int __init init(void)
+ 	int ret = -ENOMEM;
+ 
+@@ -1020,14 +1020,14 @@ error:
+ 	return ret;
  }
  
- /****************************************************************************/
 -static void __exit fini(void)
-+static void __exit nf_nat_h323_fini(void)
++static void __exit virtio_scsi_fini(void)
  {
- 	RCU_INIT_POINTER(set_h245_addr_hook, NULL);
- 	RCU_INIT_POINTER(set_h225_addr_hook, NULL);
-@@ -624,8 +624,8 @@ static void __exit fini(void)
+ 	unregister_virtio_driver(&virtio_scsi_driver);
+ 	mempool_destroy(virtscsi_cmd_pool);
+ 	kmem_cache_destroy(virtscsi_cmd_cache);
  }
- 
- /****************************************************************************/
 -module_init(init);
 -module_exit(fini);
-+module_init(nf_nat_h323_init);
-+module_exit(nf_nat_h323_fini);
++module_init(virtio_scsi_init);
++module_exit(virtio_scsi_fini);
  
- MODULE_AUTHOR("Jing Min Zhao <zhaojingmin@users.sourceforge.net>");
- MODULE_DESCRIPTION("H.323 NAT helper");
+ MODULE_DEVICE_TABLE(virtio, id_table);
+ MODULE_DESCRIPTION("Virtio SCSI HBA driver");
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
