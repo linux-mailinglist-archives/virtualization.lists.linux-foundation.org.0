@@ -1,80 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B97C4E3648
-	for <lists.virtualization@lfdr.de>; Tue, 22 Mar 2022 02:56:49 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id DC1084E3656
+	for <lists.virtualization@lfdr.de>; Tue, 22 Mar 2022 02:59:34 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 73B26404DA;
-	Tue, 22 Mar 2022 01:56:47 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 75A9C41550;
+	Tue, 22 Mar 2022 01:59:33 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qllRgprVAZtQ; Tue, 22 Mar 2022 01:56:46 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id C85E240928;
-	Tue, 22 Mar 2022 01:56:45 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id pIxTJX0pfawc; Tue, 22 Mar 2022 01:59:32 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 53D8D41688;
+	Tue, 22 Mar 2022 01:59:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3AF2CC0082;
-	Tue, 22 Mar 2022 01:56:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BC750C0082;
+	Tue, 22 Mar 2022 01:59:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EA07CC000B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1ADDCC000B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Mar 2022 01:56:43 +0000 (UTC)
+ Tue, 22 Mar 2022 01:59:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D135640018
+ by smtp4.osuosl.org (Postfix) with ESMTP id 099A041550
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Mar 2022 01:56:43 +0000 (UTC)
+ Tue, 22 Mar 2022 01:59:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Cqu-DLzN-dYI
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id T1CtYohvqClc
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Mar 2022 01:56:41 +0000 (UTC)
+ Tue, 22 Mar 2022 01:59:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D86DB404B7
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4AF9D41515
  for <virtualization@lists.linux-foundation.org>;
- Tue, 22 Mar 2022 01:56:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1647914200; x=1679450200;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=ulc+oGET9j6DNlpWj/HczbXJfqJE/opE8gnWWtf+C1Y=;
- b=ieJHwQPoeQuko778Bpd9LlEqoOYzy06cZVvNtsc7Vj1JucErs1excKAk
- CVi5LQ296ChTQWZ8tVJvLz4VzV/rgmwxTlBe99Z6f7pt+u9C2cwcfTreS
- A3KmICh3VWYxLyaxuXqlakVfhWiSX2kI4teuVo128u3xjkvRLLmBGCufT
- Xh3K00Sdrhag7JXXl4ijVFEPJwnv9qc1CiQ42qx9EA6jiGbsuQon+g698
- OaPxvwxXvEqXlAawRwj0FjxogLwstZsKML6l75YmEhQ9rWnKeILG4lOB8
- qYCVbvy5o8JRCbfBI9giIP1rPbc0jFS9ptcA6cxOL1Dt1NrgEDiRlvPP3 Q==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10293"; a="257644637"
-X-IronPort-AV: E=Sophos;i="5.90,200,1643702400"; d="scan'208";a="257644637"
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
- by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 21 Mar 2022 18:56:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,200,1643702400"; d="scan'208";a="716723862"
-Received: from lkp-server02.sh.intel.com (HELO 89b41b6ae01c) ([10.239.97.151])
- by orsmga005.jf.intel.com with ESMTP; 21 Mar 2022 18:56:37 -0700
-Received: from kbuild by 89b41b6ae01c with local (Exim 4.92)
- (envelope-from <lkp@intel.com>)
- id 1nWTlE-000ILI-LX; Tue, 22 Mar 2022 01:56:36 +0000
-Date: Tue, 22 Mar 2022 09:56:31 +0800
-From: kernel test robot <lkp@intel.com>
-To: Suwan Kim <suwan.kim027@gmail.com>, mst@redhat.com, jasowang@redhat.com,
- stefanha@redhat.com, pbonzini@redhat.com, mgurtovoy@nvidia.com
-Subject: Re: [PATCH v2 1/2] virtio-blk: support polling I/O
-Message-ID: <202203220946.YKj9GuI8-lkp@intel.com>
-References: <20220321142441.132888-2-suwan.kim027@gmail.com>
+ Tue, 22 Mar 2022 01:59:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1647914368;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=sAk9FMAq7G/qGtP6D8AGvXHRXy5lqx/zoAVECLpUuqk=;
+ b=jPoQOG0yE5h7LZV78z+QMrgB+m73nxoZECWwZJLvdrJ4qI7aoP1Zt4GBmwXApFZskNLYl2
+ k8ZLwHm0muQglKpg+A1jJrIdl1ejNLNQR97Ld5eQRG98ktT5YEyfxmC7P9LAUXLJbtTBkW
+ wdZlFb+7Ggx5qfP7/zyqE1ksM3pUyCU=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-388-nedBd56aOsSQxFSulyHj1g-1; Mon, 21 Mar 2022 21:59:26 -0400
+X-MC-Unique: nedBd56aOsSQxFSulyHj1g-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ z24-20020a056512371800b0043ea4caa07cso4185087lfr.17
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 21 Mar 2022 18:59:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=sAk9FMAq7G/qGtP6D8AGvXHRXy5lqx/zoAVECLpUuqk=;
+ b=0paSx6EIHvkx9H4Oefa4uxYgAUZr0Vl2PYOag1oeL0mIhyeqaneHkFbcLHy+68xH64
+ eiAs5Cgw3gWCms901+YV0xIcJE4Y1iLL+Qvi5DwDwWkkDMPH2mWc+cyvkxqwXJft3Y1w
+ doSSF7zw0Z4f9bzyuArKIIHlhyUPLCcJu2KBHlhbWWZrGLaGZg2nK0aCQWs0q52afaRN
+ Sd4gjkZr8LI2EX7myiRIyWQN16qgvneQRLIqcRgRetZP4vWYIR4ML35hrp5XiHrNSoxx
+ r4s7h7oK63IceGTT68mopX1oBib4mpdYde1v4SduD7MrXNeW7F+nPy0LRKMiBKBx8nyu
+ pUXA==
+X-Gm-Message-State: AOAM533HBJCZ39jvbg2vdrrXsHOArFHrxtSD7W72+I3vVroyc+RRHm6B
+ eE2spTFSBWz/OjoqKuTfzJp3+dyZZyEicM9mynHB2kgMvJxbCCxsFa/aBTEmyTvpa4XimEjp3gx
+ TEYne6k4x/wwO2DEkOt/8yfhLo7Ih+NAfF1CakQ3UWjs4RF/6vo9qGr+e6A==
+X-Received: by 2002:a2e:824e:0:b0:249:7e3d:c862 with SMTP id
+ j14-20020a2e824e000000b002497e3dc862mr8338200ljh.97.1647914365175; 
+ Mon, 21 Mar 2022 18:59:25 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxMrcRoYPcVBF7xK+Ox8ekhMvlc3FPY4gYx4yzyrVWKbXtWn7mI1az1lvn2avR+9/0h4SqQyr0XCODkhTkeqNc=
+X-Received: by 2002:a2e:824e:0:b0:249:7e3d:c862 with SMTP id
+ j14-20020a2e824e000000b002497e3dc862mr8338187ljh.97.1647914364929; Mon, 21
+ Mar 2022 18:59:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220321142441.132888-2-suwan.kim027@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: linux-block@vger.kernel.org, Suwan Kim <suwan.kim027@gmail.com>,
- kbuild-all@lists.01.org, virtualization@lists.linux-foundation.org
+References: <20220321060429.10457-1-jasowang@redhat.com>
+ <20220321085317.3148-1-hdanton@sina.com>
+ <CACGkMEvF80FuU0uD+RZMOrySQ0K2RZVh7Pmn4UhNtz_Exs3c2w@mail.gmail.com>
+ <CACGkMEvLqox3QZxpxeQdrjBnM6zRr_wGfddoN45RUSsZEOe=bQ@mail.gmail.com>
+ <20220321123420.3207-1-hdanton@sina.com>
+In-Reply-To: <20220321123420.3207-1-hdanton@sina.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Tue, 22 Mar 2022 09:59:14 +0800
+Message-ID: <CACGkMEt-PRCsBQ+EJVGeWGikJfLk-0M1dRPMqnp9YC5R4HYAjQ@mail.gmail.com>
+Subject: Re: [PATCH 1/2] vdpa: mlx5: prevent cvq work from hogging CPU
+To: Hillf Danton <hdanton@sina.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: Eli Cohen <elic@nvidia.com>,
+ virtualization <virtualization@lists.linux-foundation.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>, mst <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,72 +113,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Suwan,
+On Mon, Mar 21, 2022 at 8:34 PM Hillf Danton <hdanton@sina.com> wrote:
+>
+> On Mon, 21 Mar 2022 17:00:09 +0800 Jason Wang wrote:
+> >
+> > Ok, speak too fast.
+>
+> Frankly I have fun running faster five days a week.
 
-Thank you for the patch! Perhaps something to improve:
+:)
 
-[auto build test WARNING on v5.17]
-[also build test WARNING on next-20220321]
-[cannot apply to axboe-block/for-next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
+>
+> > So you meant to add a cond_resched() in the loop?
+>
+> Yes, it is one liner.
 
-url:    https://github.com/0day-ci/linux/commits/Suwan-Kim/virtio-blk-support-polling-I-O-and-mq_ops-queue_rqs/20220321-223027
-base:    f443e374ae131c168a065ea1748feac6b2e76613
-config: x86_64-rhel-8.3-kselftests (https://download.01.org/0day-ci/archive/20220322/202203220946.YKj9GuI8-lkp@intel.com/config)
-compiler: gcc-9 (Ubuntu 9.4.0-1ubuntu1~20.04) 9.4.0
-reproduce:
-        # apt-get install sparse
-        # sparse version: v0.6.4-dirty
-        # https://github.com/0day-ci/linux/commit/5388c0729248236712cf865643a2190989dabbb5
-        git remote add linux-review https://github.com/0day-ci/linux
-        git fetch --no-tags linux-review Suwan-Kim/virtio-blk-support-polling-I-O-and-mq_ops-queue_rqs/20220321-223027
-        git checkout 5388c0729248236712cf865643a2190989dabbb5
-        # save the config file to linux build tree
-        mkdir build_dir
-        make W=1 C=1 CF='-fdiagnostic-prefix -D__CHECK_ENDIAN__' O=build_dir ARCH=x86_64 SHELL=/bin/bash drivers/block/
+Yes, there will be no "infinite" loop, but since the loop is triggered
+by userspace. It looks to me it will delay the flush/drain of the
+workqueue forever which is still suboptimal.
 
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
+Thanks
 
+>
+> Hillf
+>
 
-sparse warnings: (new ones prefixed by >>)
->> drivers/block/virtio_blk.c:803:66: sparse: sparse: incorrect type in argument 3 (different base types) @@     expected int ioerror @@     got restricted blk_status_t @@
-   drivers/block/virtio_blk.c:803:66: sparse:     expected int ioerror
-   drivers/block/virtio_blk.c:803:66: sparse:     got restricted blk_status_t
-
-vim +803 drivers/block/virtio_blk.c
-
-   788	
-   789	static int virtblk_poll(struct blk_mq_hw_ctx *hctx, struct io_comp_batch *iob)
-   790	{
-   791		struct virtio_blk_vq *vq = hctx->driver_data;
-   792		struct virtblk_req *vbr;
-   793		unsigned long flags;
-   794		unsigned int len;
-   795		int found = 0;
-   796	
-   797		spin_lock_irqsave(&vq->lock, flags);
-   798	
-   799		while ((vbr = virtqueue_get_buf(vq->vq, &len)) != NULL) {
-   800			struct request *req = blk_mq_rq_from_pdu(vbr);
-   801	
-   802			found++;
- > 803			if (!blk_mq_add_to_batch(req, iob, virtblk_result(vbr),
-   804							virtblk_complete_batch))
-   805				blk_mq_complete_request(req);
-   806		}
-   807	
-   808		spin_unlock_irqrestore(&vq->lock, flags);
-   809	
-   810		return found;
-   811	}
-   812	
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
