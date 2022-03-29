@@ -1,76 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9E7EA4EA642
-	for <lists.virtualization@lfdr.de>; Tue, 29 Mar 2022 06:09:01 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id BECB64EA64F
+	for <lists.virtualization@lfdr.de>; Tue, 29 Mar 2022 06:16:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id DE5BB40363;
-	Tue, 29 Mar 2022 04:08:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id EEC8B6080B;
+	Tue, 29 Mar 2022 04:16:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6jDgSocltFOW; Tue, 29 Mar 2022 04:08:58 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 6A4A140207;
-	Tue, 29 Mar 2022 04:08:58 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id B6l_6Z0TwGJS; Tue, 29 Mar 2022 04:16:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 96B2860B50;
+	Tue, 29 Mar 2022 04:16:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BF7A0C0073;
-	Tue, 29 Mar 2022 04:08:57 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id ED745C0073;
+	Tue, 29 Mar 2022 04:16:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4390FC0012
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5615DC0012
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Mar 2022 04:08:56 +0000 (UTC)
+ Tue, 29 Mar 2022 04:16:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2C037819D6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2E7EA40298
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Mar 2022 04:08:56 +0000 (UTC)
+ Tue, 29 Mar 2022 04:16:17 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oaj7Xg564d3m
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id gS1_ogGHk7ly
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Mar 2022 04:08:53 +0000 (UTC)
+ Tue, 29 Mar 2022 04:16:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id E2C3B81990
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 5DA7D400C6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 29 Mar 2022 04:08:52 +0000 (UTC)
+ Tue, 29 Mar 2022 04:16:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1648526930;
+ s=mimecast20190719; t=1648527374;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=/Fki2qhrqzIn3lkIi3YIPXgrFjahMDx8WQomnumvye4=;
- b=SnMkq8qjn48Eyi+6JSm+CFTPMm1vqfHZlG2yVFSU5bFP9ouweeix25gY0vjrOZn6rr8fBw
- vGyjgZAqeULHVMA/KGlgsYm7DZY/PJGEv+OwNR1wCGRN63y//K5C56RWJYtM5yBtRUz44a
- iMjaeVoG6rfQyJT3ioMs+MtB1Ic/3xI=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=NBrZonGtyPiYVHPrtXOiyOTwxwGC7d31Hs1pwiySqI4=;
+ b=OIW/lRpUOc1jD9GEevClwmf4t9OvGx+FIF8AAvTC/cLYTPtL2nbukngNa7TD3ROL8DHkkC
+ w7XE7wDeC3dYBCbcquYWqwwSx3z416ZUOJgr7HbaC9QThq/NgH6GTs4VIBNxSDrg1XwtR4
+ Kj2BTA8lxHhGDNM07ad8VgmvhVhF+H4=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-361-5Thsb0YPO7ijK_drg2Wv1g-1; Tue, 29 Mar 2022 00:08:45 -0400
-X-MC-Unique: 5Thsb0YPO7ijK_drg2Wv1g-1
+ us-mta-43-59RoqxS8OZ-T4NjDV1YHpg-1; Tue, 29 Mar 2022 00:09:01 -0400
+X-MC-Unique: 59RoqxS8OZ-T4NjDV1YHpg-1
 Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
  [10.11.54.10])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 94741802803;
- Tue, 29 Mar 2022 04:08:45 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B672A1C05ABA;
+ Tue, 29 Mar 2022 04:08:48 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-210.pek2.redhat.com
  [10.72.13.210])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9515C401E64;
- Tue, 29 Mar 2022 04:08:43 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 41400401E64;
+ Tue, 29 Mar 2022 04:08:45 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH V2 1/3] vdpa: mlx5: prevent cvq work from hogging CPU
-Date: Tue, 29 Mar 2022 12:08:38 +0800
-Message-Id: <20220329040840.3419-1-jasowang@redhat.com>
+Subject: [PATCH V2 2/3] vdpa: mlx5: synchronize driver status with CVQ
+Date: Tue, 29 Mar 2022 12:08:39 +0800
+Message-Id: <20220329040840.3419-2-jasowang@redhat.com>
+In-Reply-To: <20220329040840.3419-1-jasowang@redhat.com>
+References: <20220329040840.3419-1-jasowang@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
 Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
@@ -90,94 +93,212 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-A userspace triggerable infinite loop could happen in
-mlx5_cvq_kick_handler() if userspace keeps sending a huge amount of
-cvq requests.
+Currently, CVQ doesn't have any synchronization with the driver
+status. Then CVQ emulation code run in the middle of:
 
-Fixing this by introducing a quota and re-queue the work if we're out
-of the budget (currently the implicit budget is one) . While at it,
-using a per device work struct to avoid on demand memory allocation
-for cvq.
+1) device reset
+2) device status changed
+3) map updating
 
-Fixes: 5262912ef3cfc ("vdpa/mlx5: Add support for control VQ and MAC setting")
+The will lead several unexpected issue like trying to execute CVQ
+command after the driver has been teared down.
+
+Fixing this by using reslock to synchronize CVQ emulation code with
+the driver status changing:
+
+- protect the whole device reset, status changing and set_map()
+  updating with reslock
+- protect the CVQ handler with the reslock and check
+  VIRTIO_CONFIG_S_DRIVER_OK in the CVQ handler
+
+This will guarantee that:
+
+1) CVQ handler won't work if VIRTIO_CONFIG_S_DRIVER_OK is not set
+2) CVQ handler will see a consistent state of the driver instead of
+   the partial one when it is running in the middle of the
+   teardown_driver() or setup_driver().
+
+Cc: 5262912ef3cfc ("vdpa/mlx5: Add support for control VQ and MAC setting")
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
 Changes since V1:
-- Using 1 as the budget
+- document the lock requirement
+- protect the whole .set_map()
 ---
- drivers/vdpa/mlx5/net/mlx5_vnet.c | 21 +++++++++------------
- 1 file changed, 9 insertions(+), 12 deletions(-)
+ drivers/vdpa/mlx5/net/mlx5_vnet.c | 51 ++++++++++++++++++++++---------
+ 1 file changed, 37 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-index d0f91078600e..b2afd2b6fbca 100644
+index b2afd2b6fbca..53b8c1a68f90 100644
 --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
 +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
-@@ -163,6 +163,7 @@ struct mlx5_vdpa_net {
- 	u32 cur_num_vqs;
- 	struct notifier_block nb;
- 	struct vdpa_callback config_cb;
-+	struct mlx5_vdpa_wq_ent cvq_ent;
- };
- 
- static void free_resources(struct mlx5_vdpa_net *ndev);
-@@ -1616,10 +1617,10 @@ static void mlx5_cvq_kick_handler(struct work_struct *work)
+@@ -1616,11 +1616,17 @@ static void mlx5_cvq_kick_handler(struct work_struct *work)
+ 	mvdev = wqent->mvdev;
  	ndev = to_mlx5_vdpa_ndev(mvdev);
  	cvq = &mvdev->cvq;
++
++	mutex_lock(&ndev->reslock);
++
++	if (!(mvdev->status & VIRTIO_CONFIG_S_DRIVER_OK))
++		goto out;
++
  	if (!(ndev->mvdev.actual_features & BIT_ULL(VIRTIO_NET_F_CTRL_VQ)))
--		goto out;
-+		return;
+-		return;
++		goto out;
  
  	if (!cvq->ready)
--		goto out;
-+		return;
+-		return;
++		goto out;
  
  	while (true) {
  		err = vringh_getdesc_iotlb(&cvq->vring, &cvq->riov, &cvq->wiov, &cvq->head,
-@@ -1653,9 +1654,10 @@ static void mlx5_cvq_kick_handler(struct work_struct *work)
- 
- 		if (vringh_need_notify_iotlb(&cvq->vring))
- 			vringh_notify(&cvq->vring);
-+
-+		queue_work(mvdev->wq, &wqent->work);
-+		break;
+@@ -1658,6 +1664,9 @@ static void mlx5_cvq_kick_handler(struct work_struct *work)
+ 		queue_work(mvdev->wq, &wqent->work);
+ 		break;
  	}
--out:
--	kfree(wqent);
++
++out:
++	mutex_unlock(&ndev->reslock);
  }
  
  static void mlx5_vdpa_kick_vq(struct vdpa_device *vdev, u16 idx)
-@@ -1663,7 +1665,6 @@ static void mlx5_vdpa_kick_vq(struct vdpa_device *vdev, u16 idx)
- 	struct mlx5_vdpa_dev *mvdev = to_mvdev(vdev);
- 	struct mlx5_vdpa_net *ndev = to_mlx5_vdpa_ndev(mvdev);
- 	struct mlx5_vdpa_virtqueue *mvq;
--	struct mlx5_vdpa_wq_ent *wqent;
- 
- 	if (!is_index_valid(mvdev, idx))
- 		return;
-@@ -1672,13 +1673,7 @@ static void mlx5_vdpa_kick_vq(struct vdpa_device *vdev, u16 idx)
- 		if (!mvdev->cvq.ready)
- 			return;
- 
--		wqent = kzalloc(sizeof(*wqent), GFP_ATOMIC);
--		if (!wqent)
--			return;
--
--		wqent->mvdev = mvdev;
--		INIT_WORK(&wqent->work, mlx5_cvq_kick_handler);
--		queue_work(mvdev->wq, &wqent->work);
-+		queue_work(mvdev->wq, &ndev->cvq_ent.work);
- 		return;
- 	}
- 
-@@ -2668,6 +2663,8 @@ static int mlx5_vdpa_dev_add(struct vdpa_mgmt_dev *v_mdev, const char *name,
- 	if (err)
+@@ -2132,7 +2141,7 @@ static int mlx5_vdpa_change_map(struct mlx5_vdpa_dev *mvdev, struct vhost_iotlb
  		goto err_mr;
  
-+	ndev->cvq_ent.mvdev = mvdev;
-+	INIT_WORK(&ndev->cvq_ent.work, mlx5_cvq_kick_handler);
- 	mvdev->wq = create_singlethread_workqueue("mlx5_vdpa_wq");
- 	if (!mvdev->wq) {
- 		err = -ENOMEM;
+ 	if (!(mvdev->status & VIRTIO_CONFIG_S_DRIVER_OK))
+-		return 0;
++		goto err_mr;
+ 
+ 	restore_channels_info(ndev);
+ 	err = setup_driver(mvdev);
+@@ -2147,12 +2156,14 @@ static int mlx5_vdpa_change_map(struct mlx5_vdpa_dev *mvdev, struct vhost_iotlb
+ 	return err;
+ }
+ 
++/* reslock must be held for this function */
+ static int setup_driver(struct mlx5_vdpa_dev *mvdev)
+ {
+ 	struct mlx5_vdpa_net *ndev = to_mlx5_vdpa_ndev(mvdev);
+ 	int err;
+ 
+-	mutex_lock(&ndev->reslock);
++	WARN_ON(!mutex_is_locked(&ndev->reslock));
++
+ 	if (ndev->setup) {
+ 		mlx5_vdpa_warn(mvdev, "setup driver called for already setup driver\n");
+ 		err = 0;
+@@ -2182,7 +2193,6 @@ static int setup_driver(struct mlx5_vdpa_dev *mvdev)
+ 		goto err_fwd;
+ 	}
+ 	ndev->setup = true;
+-	mutex_unlock(&ndev->reslock);
+ 
+ 	return 0;
+ 
+@@ -2193,23 +2203,23 @@ static int setup_driver(struct mlx5_vdpa_dev *mvdev)
+ err_rqt:
+ 	teardown_virtqueues(ndev);
+ out:
+-	mutex_unlock(&ndev->reslock);
+ 	return err;
+ }
+ 
++/* reslock must be held for this function */
+ static void teardown_driver(struct mlx5_vdpa_net *ndev)
+ {
+-	mutex_lock(&ndev->reslock);
++
++	WARN_ON(!mutex_is_locked(&ndev->reslock));
++
+ 	if (!ndev->setup)
+-		goto out;
++		return;
+ 
+ 	remove_fwd_to_tir(ndev);
+ 	destroy_tir(ndev);
+ 	destroy_rqt(ndev);
+ 	teardown_virtqueues(ndev);
+ 	ndev->setup = false;
+-out:
+-	mutex_unlock(&ndev->reslock);
+ }
+ 
+ static void clear_vqs_ready(struct mlx5_vdpa_net *ndev)
+@@ -2230,6 +2240,8 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
+ 
+ 	print_status(mvdev, status, true);
+ 
++	mutex_lock(&ndev->reslock);
++
+ 	if ((status ^ ndev->mvdev.status) & VIRTIO_CONFIG_S_DRIVER_OK) {
+ 		if (status & VIRTIO_CONFIG_S_DRIVER_OK) {
+ 			err = setup_driver(mvdev);
+@@ -2239,16 +2251,19 @@ static void mlx5_vdpa_set_status(struct vdpa_device *vdev, u8 status)
+ 			}
+ 		} else {
+ 			mlx5_vdpa_warn(mvdev, "did not expect DRIVER_OK to be cleared\n");
+-			return;
++			goto err_clear;
+ 		}
+ 	}
+ 
+ 	ndev->mvdev.status = status;
++	mutex_unlock(&ndev->reslock);
+ 	return;
+ 
+ err_setup:
+ 	mlx5_vdpa_destroy_mr(&ndev->mvdev);
+ 	ndev->mvdev.status |= VIRTIO_CONFIG_S_FAILED;
++err_clear:
++	mutex_unlock(&ndev->reslock);
+ }
+ 
+ static int mlx5_vdpa_reset(struct vdpa_device *vdev)
+@@ -2258,6 +2273,8 @@ static int mlx5_vdpa_reset(struct vdpa_device *vdev)
+ 
+ 	print_status(mvdev, 0, true);
+ 	mlx5_vdpa_info(mvdev, "performing device reset\n");
++
++	mutex_lock(&ndev->reslock);
+ 	teardown_driver(ndev);
+ 	clear_vqs_ready(ndev);
+ 	mlx5_vdpa_destroy_mr(&ndev->mvdev);
+@@ -2270,6 +2287,7 @@ static int mlx5_vdpa_reset(struct vdpa_device *vdev)
+ 		if (mlx5_vdpa_create_mr(mvdev, NULL))
+ 			mlx5_vdpa_warn(mvdev, "create MR failed\n");
+ 	}
++	mutex_unlock(&ndev->reslock);
+ 
+ 	return 0;
+ }
+@@ -2305,19 +2323,24 @@ static u32 mlx5_vdpa_get_generation(struct vdpa_device *vdev)
+ static int mlx5_vdpa_set_map(struct vdpa_device *vdev, struct vhost_iotlb *iotlb)
+ {
+ 	struct mlx5_vdpa_dev *mvdev = to_mvdev(vdev);
++	struct mlx5_vdpa_net *ndev = to_mlx5_vdpa_ndev(mvdev);
+ 	bool change_map;
+ 	int err;
+ 
++	mutex_lock(&ndev->reslock);
++
+ 	err = mlx5_vdpa_handle_set_map(mvdev, iotlb, &change_map);
+ 	if (err) {
+ 		mlx5_vdpa_warn(mvdev, "set map failed(%d)\n", err);
+-		return err;
++		goto err;
+ 	}
+ 
+ 	if (change_map)
+-		return mlx5_vdpa_change_map(mvdev, iotlb);
++		err = mlx5_vdpa_change_map(mvdev, iotlb);
+ 
+-	return 0;
++err:
++	mutex_unlock(&ndev->reslock);
++	return err;
+ }
+ 
+ static void mlx5_vdpa_free(struct vdpa_device *vdev)
 -- 
 2.18.1
 
