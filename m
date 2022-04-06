@@ -1,188 +1,169 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 67B714F56AD
-	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 09:03:06 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 201FA4F56CE
+	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 09:19:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8C2B34009D;
-	Wed,  6 Apr 2022 07:03:03 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id C807140B2A;
+	Wed,  6 Apr 2022 07:19:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qe4CmAtja7VL; Wed,  6 Apr 2022 07:03:01 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 70C0A40079;
-	Wed,  6 Apr 2022 07:03:00 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BimiNFF6qKx6; Wed,  6 Apr 2022 07:19:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 8BEE5400E4;
+	Wed,  6 Apr 2022 07:19:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 90862C0073;
-	Wed,  6 Apr 2022 07:02:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 119E7C0012;
+	Wed,  6 Apr 2022 07:19:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C89FC0012;
- Wed,  6 Apr 2022 07:02:58 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 25A68C0012
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 Apr 2022 07:19:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 648D6417BF;
- Wed,  6 Apr 2022 07:02:58 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id B2D6540B3C
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 Apr 2022 07:19:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kLpNSO6Q2mIQ; Wed,  6 Apr 2022 07:02:57 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 14934417BE;
- Wed,  6 Apr 2022 07:02:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1649228577; x=1680764577;
- h=from:to:cc:subject:date:message-id:references:
- in-reply-to:content-transfer-encoding:mime-version;
- bh=9yXnWPFaJPcfSAhgXMQM40zFYivmgfvuHZVyoADMm+c=;
- b=dFBg8ot5f6UeudbfGh0hVryuENz8e/s7yn0YN+l/ReHmRuGvvLYOqMDu
- ICmdexfQIdg+TmnJ1GaCbEzyQkm/VnObck0jcJqQSuQE7y+MCNzG3oqE3
- kO+yHRpYC/PBiWeyL1bleStfzSprP6n29unYz46MYLd81M7tt29HrpfrW
- eexuT9N9WU5orqyUQqAwpNArXCA67woAvVbJSqirDglIwYoN0l96hoBdi
- fNJdwtVCR2pJNtXctWFLZmLN7k1C+Px/F33ZnT5zVmsIxMXgUVIexmXL2
- LCOtjsHbHGKQYfQlUIT8nbWn5jVu0V5mleUsfzvDz0LqvkOX2GoBtP86N g==;
-X-IronPort-AV: E=McAfee;i="6200,9189,10308"; a="240902648"
-X-IronPort-AV: E=Sophos;i="5.90,239,1643702400"; d="scan'208";a="240902648"
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
- by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 06 Apr 2022 00:02:38 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,239,1643702400"; d="scan'208";a="549419306"
-Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
- by orsmga007.jf.intel.com with ESMTP; 06 Apr 2022 00:02:38 -0700
-Received: from orsmsx612.amr.corp.intel.com (10.22.229.25) by
- ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 6 Apr 2022 00:02:37 -0700
-Received: from orsmsx611.amr.corp.intel.com (10.22.229.24) by
- ORSMSX612.amr.corp.intel.com (10.22.229.25) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27; Wed, 6 Apr 2022 00:02:37 -0700
-Received: from ORSEDG602.ED.cps.intel.com (10.7.248.7) by
- orsmsx611.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2308.27 via Frontend Transport; Wed, 6 Apr 2022 00:02:37 -0700
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com (104.47.56.175)
- by edgegateway.intel.com (134.134.137.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.1.2308.27; Wed, 6 Apr 2022 00:02:37 -0700
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eBsP97RyNVSYXfzW8F4rHWni1sG/h3uEbWD6PLNUBSygD18SAKz/2QGaWvwkWKOJvIuxtC0TlRXQpImmoftz/2uSqVx3+Ehq8gxCVS6Bf314AcShdPb7pYTcSpmQcbfv3tMnkZ3Xr8f0Qqlc4td0mx6k/JeRDXojsBJz4NDEH3H0NJF0LI2CjMRA14a8ZFLXxHb/3SiyELxUuZVL7S7xq1W/ARyqWTNvXZhKbuVB9su3DqB8Gt9imp80pIbelQDu2HBfhclZTSVEFQ95Gh+uX8IHaDguzDytGDjbyiZKWbDnKY1/F58jeU9hO+TYr7k/jrvRsU3m1ZDF0Ihlm1s0GA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MpZ5rpjZ/323Q4FiP3H6XfuAq/WWbmz2u2b2ATpZRiM=;
- b=I7SefwtHVKGK5w/dzLMRezmQMPcMjak4bDmfbhQOrh9owDU7qceXEvhUx7QP6vTIEl7X3E6wF9kehI3JoQY+9MqI3obUP2+1Ar7gotsixxCrtDuQQdVs055tSrUUgmXSkXeJJ5i9F56+fHIRR4CPi0e+xZF0gIdkjYA6POen9mE23p51vhYiMEcm9qcohDdqIunLz3cF3ev7a/0Sh912/q61+IaM/AK48mtwGcV+8Aci8YqFf5c4LHunoZ6KeDI2W5zqdi6LD5bNC6orRhoSa561uibmqvX0VLUoXnNkyrvTUNl8cozuRWCwqmHO6InLXmo9ebT7NxfMjOSLQb9NJg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
- dkim=pass header.d=intel.com; arc=none
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com (2603:10b6:408:135::18)
- by PH7PR11MB5885.namprd11.prod.outlook.com (2603:10b6:510:134::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5123.30; Wed, 6 Apr
- 2022 07:02:36 +0000
-Received: from BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::c4ea:a404:b70b:e54e]) by BN9PR11MB5276.namprd11.prod.outlook.com
- ([fe80::c4ea:a404:b70b:e54e%7]) with mapi id 15.20.5123.031; Wed, 6 Apr 2022
- 07:02:36 +0000
-From: "Tian, Kevin" <kevin.tian@intel.com>
-To: Jason Gunthorpe <jgg@nvidia.com>, Alex Williamson
- <alex.williamson@redhat.com>
-Subject: RE: [PATCH 2/5] vfio: Require that devices support DMA cache coherence
-Thread-Topic: [PATCH 2/5] vfio: Require that devices support DMA cache
- coherence
-Thread-Index: AQHYSQh+iGQB4aLBFUu6szRllIBFLqzhr6EAgAAFLgCAAMFI0A==
-Date: Wed, 6 Apr 2022 07:02:36 +0000
-Message-ID: <BN9PR11MB52766319F89353256863D41E8CE79@BN9PR11MB5276.namprd11.prod.outlook.com>
-References: <0-v1-ef02c60ddb76+12ca2-intel_no_snoop_jgg@nvidia.com>
- <2-v1-ef02c60ddb76+12ca2-intel_no_snoop_jgg@nvidia.com>
- <20220405131044.23910b77.alex.williamson@redhat.com>
- <20220405192916.GT2120790@nvidia.com>
-In-Reply-To: <20220405192916.GT2120790@nvidia.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=intel.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: dd1d5368-9447-465b-35fd-08da179b6e30
-x-ms-traffictypediagnostic: PH7PR11MB5885:EE_
-x-microsoft-antispam-prvs: <PH7PR11MB58858129DB86C1F60B76C89E8CE79@PH7PR11MB5885.namprd11.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 5Azv5BpEPVMypZ7ZE/68AxddWT9AhaSUULiUIPoVJ43Z/0MKytwAyzwrT8Yrxt5Dp0ZYkFzELg78LbjkYaHMquOq53uKZrUJy+lmTswDcMMmBN5RrXKckYsztRnkdaa/VZWuA+AwRKlgJlFg1ZIDDBLzT0dmUh2RcfBdPFoica0qEeg7hw8dBd0U4jeKHam3gIt1uL0tCJGFvb0lFhehH3qtC83T37r9P8Xokv4xKWU+AwTiKgHf1ft+fi/UNr/U1jPN6Yi7tD+7puHOzL8G/tmS0AbO71A/SVoL1Iew7gA4YaHECbP2FWe9HguZj6UnANprG74YMjjCFcPrr+9NaqKA/qPmwSFDN9QiE2TnHz5ZL0Tr3/HQsaU8fypcKGHtyhLj1LZGavzopgxXAt/RhVtgF2KbJp/m1hZ0xe1IEeSUUc+KNHeMLhjEVjy/7+zSnSVZeskLgwv9e2J/HPH/5rPtcArFwPJDSU+SyeVywNmVYC+tlRUCAD099uQu2LsPLwDEADO60oJTmGLKGKZ+YfdoUho5PgF2aY0Rk3XabBN5HHmPte5iLF76xk5yLYe6C0oEARuyxp2jRv3nuQ33cQdhuXd7bk3btMP60nY2D5i+GqBWYDVTu0KdKJxnsmuA3AlQWBU8ewvOV+wvZd9iGF8n3e8kjFAcIZdrTjy6vShaVMk46DF/w26JYLkrj7TGmkuaV4jyiZINYqWdrhmZIA==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN9PR11MB5276.namprd11.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(366004)(316002)(8676002)(71200400001)(66446008)(4326008)(52536014)(66556008)(6506007)(66946007)(110136005)(66476007)(7696005)(54906003)(508600001)(55016003)(76116006)(8936002)(64756008)(7416002)(5660300002)(33656002)(86362001)(9686003)(186003)(26005)(83380400001)(38070700005)(2906002)(38100700002)(82960400001)(122000001);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Gmd1F0kaSG5OHjvaZPLWx6NVaVyull7bel9d013fcaw/eZO66M3Nlk0keRtl?=
- =?us-ascii?Q?qXKs/c15VLZfQqrjKDz+6NRbKj/s4SC4rGViNbMb+NDxKmd8XfE3JFF2R5WY?=
- =?us-ascii?Q?n0nv4jZg9OFH6soZCsHJDj40gZMxcgWHivfd06apqJE8je4LmIrmlQJ50NER?=
- =?us-ascii?Q?iNheOoO4UGVfbz2onI8JcCEWyD3gIlHk1PTjMNb3hBMnTsCb9h3Y1kmeLoXW?=
- =?us-ascii?Q?W8bsQWFHAf2CR5QP4ru9aqvIhhy7+O8QfqGmv2KFvY/Sa8i6PFyIP2XcrZAn?=
- =?us-ascii?Q?5z7pe3JsIzs6UOOeGWVHdj3nCS0tby7si/rIKV75+ykVgXKL1bQwbMBI/MlI?=
- =?us-ascii?Q?JSqLhRJmRRwbBHlwFYdRCXI0jr83C25hmhNAGDNf5h0MZ2tTCF2k71l5bGWK?=
- =?us-ascii?Q?HCbAMCMpMBNnZAulkP3reD46EIRZ3dvHVB/5ZJtKkkUyoTxDzS/ov72nVDhK?=
- =?us-ascii?Q?2bpHACHXYHosAZGAsGyPboQLRmEzgwRZjsHRNFy2YJSI1YwZXYyuDa90MXqA?=
- =?us-ascii?Q?Y5mnSY79Hz8eZjZJa0KkSxZD0pgwieACaVwmuPPemBYl8y+oQsQU1FirHxCX?=
- =?us-ascii?Q?r+qkTzDgJWTjTEiZCQEmOK/rXxpNImDo3L+1oXW55Plrl2bwooUwjL0XgIG1?=
- =?us-ascii?Q?VjZvEsHaAd2J/s7Esb3cItMM6C2cwnJoCc3VqbGD9F3G3fdGToopNpMcZ3Gi?=
- =?us-ascii?Q?h/HnFNTktk/hoEy5fuL3rpZFbcCxEO8CNXhZX19IVoYuHI4JnCd3bwpTq04d?=
- =?us-ascii?Q?izOz6txSbXP/mv0nKwZlJJTqizYnGvh8/2rYx0OQdQZ4dvWMNZxj1dxsG1P5?=
- =?us-ascii?Q?cNiET/y45qWppgv+SQtmwiB+lgVP2JA8Xb/aJ7BDrDPpL9n2KZ1HUE4mMtoH?=
- =?us-ascii?Q?dlqg+TJCmtEsp1+Qu01XC7lbMLGTiYM5jXJH6dpPeY1opkE7KYm69HzJiH53?=
- =?us-ascii?Q?BpntXw4Xk12maVf5vCLMvSLKxso5p8u25XMOEt+2/SYGXq5OQfbAbAGVeGGA?=
- =?us-ascii?Q?RhEtSFIaE1c9Tc+efkqOVepP6Mx73Fs4Jv0mfHT7kTm9JWRlJVoaQuJ88nm+?=
- =?us-ascii?Q?HotDkb48k5pfBQFSWVKiWoKOBcp8fpuAR8GYKp85RrPaaBY02r4pMlln7dF+?=
- =?us-ascii?Q?dBYR1QPq7T66ZezYi1vT69vW0O3iJQyXEjFn+9f+RdATD1YtqwAfjYq/VSkp?=
- =?us-ascii?Q?HcRqId623/McuWWdEpoUgBrDaQG5YqHsgOLdPevAybSYNFuBK1P9c2T/6uVw?=
- =?us-ascii?Q?1e3J1hBExHlF6giKAJKQB+rfEXsKvRXXmNIpeGkcbOOpyjoipkef8lQIAnKv?=
- =?us-ascii?Q?/9cCV8eIXsvhthRjwQI1VY1LAs5jBhjwiMwYwO1vt2UesnLbubAR245RnSMY?=
- =?us-ascii?Q?jj8ZX4ZxYLod5yLxFgEWVeBZo7NyH9sLp3EAmjWKkzlC3fFaSpK/JudmfxFz?=
- =?us-ascii?Q?KN1v6PhPUxTtOow9q0i4A7Iu/lJnN6dYvlqFYqgxK2xM11g6XghiIp+VzqfS?=
- =?us-ascii?Q?1aYELPMwWCcKAtFpurpawVpA0KVaONCKLph89gy9ndocCfOxTrZKOqJy/NY5?=
- =?us-ascii?Q?fHlvn6vL5ejF6q12tXcVcD9+MuTy4QN/iqfJCgxzLtplTW0k/lsgbk2CQoxG?=
- =?us-ascii?Q?I8YaJ1mgTJgWBE7LfMvHMhKMxdpXcB1uqjK/AQpZfDvlC+8ryk53WArLR8tV?=
- =?us-ascii?Q?SKsaJJO4PHb4mDVcpWdb9FYN4t8iQENqWvya8oejN3H0SagMFpS48o7TXnWK?=
- =?us-ascii?Q?oDDpdNwP7g=3D=3D?=
-MIME-Version: 1.0
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN9PR11MB5276.namprd11.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dd1d5368-9447-465b-35fd-08da179b6e30
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Apr 2022 07:02:36.1106 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bnIj9JeokweneDmdbZpx8OX+uXUvq0hi4EJf212dVk9h+hRopZ0qPTT8ZZAqihWB/l8gdLrsiJoZgLSeSfMKIA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR11MB5885
-X-OriginatorOrg: intel.com
-Cc: Nelson Escobar <neescoba@cisco.com>,
- Matthew Rosato <mjrosato@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id uoGZAoijsfnG
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 Apr 2022 07:19:15 +0000 (UTC)
+X-Greylist: delayed 00:13:58 by SQLgrey-1.8.0
+Received: from mail1.bemta34.messagelabs.com (mail1.bemta34.messagelabs.com
+ [195.245.231.4])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C0A1E400E4
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  6 Apr 2022 07:19:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=fujitsu.com;
+ s=170520fj; t=1649228714; i=@fujitsu.com;
+ bh=05cGtA6yxrBEXr8TsKfNblRw+Bdby9YhP92PsT290U4=;
+ h=Date:To:Cc:Subject:Message-ID:Reply-To:References:MIME-Version:
+ Content-Type:In-Reply-To:From;
+ b=BJDFFQHg7gw8WYACPIsS5IO7QZ2Et0/snRy0O1P7sPcx3klPBjnAcFB0x5vQmkc7B
+ wdj7sgZsarcq07EkkN9Uk7cWaXRM4BHIkDNaIuDnoDW/xdWPN+yfeRQ0VLd0GPd0XX
+ YqbordNSTrdttI2gAjHO+G0BfdXM58RE64W8BbUe7mviFWROX5XjUVwj2GTsNCRtCK
+ 2WJ4V8hKwe8nmUuYA+n39zIapfnu0J3NGApl7UCEEBLyvU7tS2BrmjwMlFpa9b2hDX
+ gUaY7GvBudukN14SBUkBadO1YF+sMHYk2wGdlkRTCLILZZ+pMjV2no6kK1JlP7i/NG
+ hrGSl+X1ARJQg==
+X-Brightmail-Tracker: H4sIAAAAAAAAA1WSf1CTdRzH+T4bzx5hDz38iq9L8ljCH3ibDDW
+ +ilh6lk8nFJfJJVfZgyy2GsjteThnXAdKKIcRKiTHVFDHrwFhB6OIOQ60BDwhGM6BFxWyGU4R
+ kwqMX+1p54/+e3/u9fq8P/98CEFAPS4hlDpOqc1gNFLcR7h5E8HI6mITUqJcB19GDaPFOHowc
+ gJDvQ3jOLLcP+WNxmx1QmRs+BFDg3/kY+jKtzcwZLm5GlnH60SovOJnHFnPb0cXLb1C9Evjkj
+ f6YakYIPOhGhGaL1uHKmucInSksh2gY+fyBOiovQ1HRfXxqH2+TYTmnF9jyDjeiqH2e/0ilF8
+ 9iaHavgoczZhKsFdD6aG+LLr54QkR3VKVQ3/+22GcLhmuBfRESzmgzWenMfryg+tC2jySi9MD
+ Nfdw2vZ3noCe6rDh9HTzi4lksrc6I2Wf7kNv1dRoF5Y56KNrt1zGc8E8UQiWEQGUCcBbV94sB
+ D7ubASwqMMkKASEe8iChp/EvCOkVkFLpRnwOYiSQqerD/C+gGoiYZfTIeL9QCoZLt6O5x2Sio
+ Z/3jJgnv6X4BnbAs77JDVLwuq2CW8PyIZHf50Uehb8YW+5478soCLh8OIdjO8UUC/A2kWCj8u
+ oJJh/XMobkFoB54wzOJ+D3fVNhl7AKzi1BrqKGI8SAW39zYJjIFD/TL/+mX790/6zQFAPNqZo
+ 1WkqLp1Ra2SKqCiZQrFetjZGptggZz6VMXJllmy/kuVk0XJmPytXsqycPZC+V5Mqz1ByzcD9Q
+ qlseGAbKDA+kl8CywlMGkz6KhJSAvxS9qUeUDGsao82S6NkL4EVBCGFZBxyM3+tMk2p+0itcT
+ /iYwwJsTSIrNroxiSbyaSz6jQPugrCJCHkyAY3oHigysp4svb4ha0gVBJIAi8vrwBxplKbrub
+ +z10ghADSQHIHXy9WZ3BP2l3uw5j78P1rb/CHOeYpkuRiOVWl7x8SfveXV2mR5OTzV3PqoheN
+ 8ht3LNyuk9zUZwMLSQn2nG7ZBY2j9fXj4/Xh6J+Y0PeSaktax4Y6d4cFOZ7z//LgrtqvDm/2t
+ W9dWnvb3L/tiNrwdkfbzTDCd94gjg5/95FjbO+gZtI+y5ozcZk43XrBOln9+2vFBZvW567Z9r
+ 1f6qzuA8KkHzrTOXG3xfXJW3si49dl55zK18VVrPzm9FJB8kxZ07XEPMeA3frKF82dFysL5hq
+ Dd6++a1ie0POwZ2DnaGwMN709Qp+4yh63My4WdkU4sod7ulc6TeLr3X51WxpLqKCwyK0maam1
+ qj6pbOGdEGdhiVl3Pu3jc0Nb9JxUyKoYRaRAyzL/Akr/LJA9BAAA
+X-Env-Sender: Alan.Robinson@fujitsu.com
+X-Msg-Ref: server-8.tower-548.messagelabs.com!1649228712!85085!1
+X-Originating-IP: [62.60.8.97]
+X-SYMC-ESS-Client-Auth: outbound-route-from=pass
+X-StarScan-Received: 
+X-StarScan-Version: 9.85.5; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 31866 invoked from network); 6 Apr 2022 07:05:12 -0000
+Received: from unknown (HELO n03ukasimr01.n03.fujitsu.local) (62.60.8.97)
+ by server-8.tower-548.messagelabs.com with ECDHE-RSA-AES256-GCM-SHA384
+ encrypted SMTP; 6 Apr 2022 07:05:12 -0000
+Received: from n03ukasimr01.n03.fujitsu.local (localhost [127.0.0.1])
+ by n03ukasimr01.n03.fujitsu.local (Postfix) with ESMTP id 3681F100190;
+ Wed,  6 Apr 2022 08:05:12 +0100 (BST)
+Received: from nera.osd.abg.fsc.net (unknown [172.17.20.8])
+ by n03ukasimr01.n03.fujitsu.local (Postfix) with SMTP id 07836100181;
+ Wed,  6 Apr 2022 08:05:10 +0100 (BST)
+Received: by nera.osd.abg.fsc.net (Postfix, from userid 5004)
+ id B86E417478B; Wed,  6 Apr 2022 09:04:46 +0200 (CEST)
+Date: Wed, 6 Apr 2022 09:04:46 +0200
+To: Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH 15/27] block: use bdev_alignment_offset in
+ part_alignment_offset_show
+Message-ID: <20220406070446.GA1722@ts.fujitsu.com>
+Mail-Followup-To: Alan.Robinson@fujitsu.com, Christoph Hellwig <hch@lst.de>,
+ Jens Axboe <axboe@kernel.dk>,
+ "jfs-discussion@lists.sourceforge.net" <jfs-discussion@lists.sourceforge.net>, 
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
  "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, Will Deacon <will@kernel.org>,
- Christoph Hellwig <hch@lst.de>,
+ <virtualization@lists.linux-foundation.org>, 
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "dm-devel@redhat.com" <dm-devel@redhat.com>,
+ "target-devel@vger.kernel.org" <target-devel@vger.kernel.org>,
+ "linux-mtd@lists.infradead.org" <linux-mtd@lists.infradead.org>,
+ "drbd-dev@lists.linbit.com" <drbd-dev@lists.linbit.com>,
  "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
- "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "linux-rdma@vger.kernel.org" <linux-rdma@vger.kernel.org>,
- Joerg Roedel <joro@8bytes.org>,
- "iommu@lists.linux-foundation.org" <iommu@lists.linux-foundation.org>,
- Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
- David Woodhouse <dwmw2@infradead.org>,
- "linux-arm-msm@vger.kernel.org" <linux-arm-msm@vger.kernel.org>,
- "linux-arm-kernel@lists.infradead.org" <linux-arm-kernel@lists.infradead.org>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- Cornelia Huck <cohuck@redhat.com>, Rob Clark <robdclark@gmail.com>, Suravee
- Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Christian Benvenuti <benve@cisco.com>, Robin Murphy <robin.murphy@arm.com>,
- Lu Baolu <baolu.lu@linux.intel.com>
+ "linux-nilfs@vger.kernel.org" <linux-nilfs@vger.kernel.org>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ "cluster-devel@redhat.com" <cluster-devel@redhat.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
+ "linux-um@lists.infradead.org" <linux-um@lists.infradead.org>,
+ "nbd@other.debian.org" <nbd@other.debian.org>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "linux-bcache@vger.kernel.org" <linux-bcache@vger.kernel.org>,
+ "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+ "linux-raid@vger.kernel.org" <linux-raid@vger.kernel.org>,
+ "linux-mmc@vger.kernel.org" <linux-mmc@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>, 
+ "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
+ "ocfs2-devel@oss.oracle.com" <ocfs2-devel@oss.oracle.com>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "ntfs3@lists.linux.dev" <ntfs3@lists.linux.dev>,
+ "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>
+References: <20220406060516.409838-1-hch@lst.de>
+ <0b7ae3df301c4fdd8d37f773d8d1eb93@FR3P281MB0843.DEUP281.PROD.OUTLOOK.COM>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <0b7ae3df301c4fdd8d37f773d8d1eb93@FR3P281MB0843.DEUP281.PROD.OUTLOOK.COM>
+X-sent-by-me: robin@sanpedro
+User-Agent: Mutt/1.9.3 (2018-01-21)
+From: Alan.Robinson@fujitsu.com (Alan Robinson)
+X-Virus-Scanned: ClamAV using ClamSMTP
+Cc: "jfs-discussion@lists.sourceforge.net"
+ <jfs-discussion@lists.sourceforge.net>,
+ "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ "linux-mm@kvack.org" <linux-mm@kvack.org>,
+ "dm-devel@redhat.com" <dm-devel@redhat.com>,
+ "target-devel@vger.kernel.org" <target-devel@vger.kernel.org>,
+ "linux-mtd@lists.infradead.org" <linux-mtd@lists.infradead.org>,
+ "drbd-dev@lists.linbit.com" <drbd-dev@lists.linbit.com>,
+ "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+ "linux-nilfs@vger.kernel.org" <linux-nilfs@vger.kernel.org>,
+ "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+ "cluster-devel@redhat.com" <cluster-devel@redhat.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ "linux-ext4@vger.kernel.org" <linux-ext4@vger.kernel.org>,
+ "linux-um@lists.infradead.org" <linux-um@lists.infradead.org>,
+ "nbd@other.debian.org" <nbd@other.debian.org>,
+ "linux-raid@vger.kernel.org" <linux-raid@vger.kernel.org>,
+ "linux-bcache@vger.kernel.org" <linux-bcache@vger.kernel.org>,
+ "ceph-devel@vger.kernel.org" <ceph-devel@vger.kernel.org>,
+ Jens Axboe <axboe@kernel.dk>,
+ "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "linux-mmc@vger.kernel.org" <linux-mmc@vger.kernel.org>,
+ "linux-f2fs-devel@lists.sourceforge.net"
+ <linux-f2fs-devel@lists.sourceforge.net>,
+ "linux-xfs@vger.kernel.org" <linux-xfs@vger.kernel.org>,
+ "linux-btrfs@vger.kernel.org" <linux-btrfs@vger.kernel.org>,
+ "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+ "ntfs3@lists.linux.dev" <ntfs3@lists.linux.dev>,
+ "ocfs2-devel@oss.oracle.com" <ocfs2-devel@oss.oracle.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -194,84 +175,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Reply-To: Alan.Robinson@fujitsu.com
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-> From: Jason Gunthorpe <jgg@nvidia.com>
-> Sent: Wednesday, April 6, 2022 3:29 AM
-> 
-> On Tue, Apr 05, 2022 at 01:10:44PM -0600, Alex Williamson wrote:
-> > On Tue,  5 Apr 2022 13:16:01 -0300
-> > Jason Gunthorpe <jgg@nvidia.com> wrote:
-> >
-> > > dev_is_dma_coherent() is the control to determine if IOMMU_CACHE can
-> be
-> > > supported.
-> > >
-> > > IOMMU_CACHE means that normal DMAs do not require any additional
-> coherency
-> > > mechanism and is the basic uAPI that VFIO exposes to userspace. For
-> > > instance VFIO applications like DPDK will not work if additional coherency
-> > > operations are required.
-> > >
-> > > Therefore check dev_is_dma_coherent() before allowing a device to join
-> a
-> > > domain. This will block device/platform/iommu combinations from using
-> VFIO
-> > > that do not support cache coherent DMA.
-> > >
-> > > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-> > >  drivers/vfio/vfio.c | 6 ++++++
-> > >  1 file changed, 6 insertions(+)
-> > >
-> > > diff --git a/drivers/vfio/vfio.c b/drivers/vfio/vfio.c
-> > > index a4555014bd1e72..2a3aa3e742d943 100644
-> > > +++ b/drivers/vfio/vfio.c
-> > > @@ -32,6 +32,7 @@
-> > >  #include <linux/vfio.h>
-> > >  #include <linux/wait.h>
-> > >  #include <linux/sched/signal.h>
-> > > +#include <linux/dma-map-ops.h>
-> > >  #include "vfio.h"
-> > >
-> > >  #define DRIVER_VERSION	"0.3"
-> > > @@ -1348,6 +1349,11 @@ static int vfio_group_get_device_fd(struct
-> vfio_group *group, char *buf)
-> > >  	if (IS_ERR(device))
-> > >  		return PTR_ERR(device);
-> > >
-> > > +	if (group->type == VFIO_IOMMU && !dev_is_dma_coherent(device-
-> >dev)) {
-> > > +		ret = -ENODEV;
-> > > +		goto err_device_put;
-> > > +	}
-> > > +
-> >
-> > Failing at the point where the user is trying to gain access to the
-> > device seems a little late in the process and opaque, wouldn't we
-> > rather have vfio bus drivers fail to probe such devices?  I'd expect
-> > this to occur in the vfio_register_group_dev() path.  Thanks,
-> 
-> Yes, that is a good point.
-> 
-> So like this:
-> 
->  int vfio_register_group_dev(struct vfio_device *device)
->  {
-> +       if (!dev_is_dma_coherent(device->dev))
-> +               return -EINVAL;
-> +
->         return __vfio_register_dev(device,
->                 vfio_group_find_or_alloc(device->dev));
->  }
-> 
-> I fixed it up.
-> 
+Hi Christoph,
 
-if that is the case should it also apply to usnic and vdpa in the first
-patch (i.e. fail the probe)?
+On Wed, Apr 06, 2022 at 06:05:04AM +0000, Christoph Hellwig wrote:
+> From: Christoph Hellwig <hch@lst.de>
+> Subject: [PATCH 15/27] block: use bdev_alignment_offset in
+>  part_alignment_offset_show
+> 
+> Replace the open coded offset calculation with the proper helper.
+> This is an ABI change in that the -1 for a misaligned partition is
+> properly propagated, which can be considered a bug fix and maches
+
+s/maches/matches/
+
+> what is done on the whole device.
+> 
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  block/partitions/core.c | 6 +-----
+>  1 file changed, 1 insertion(+), 5 deletions(-)
+> 
+> diff --git a/block/partitions/core.c b/block/partitions/core.c
+> index 2ef8dfa1e5c85..240b3fff521e4 100644
+> --- a/block/partitions/core.c
+> +++ b/block/partitions/core.c
+> @@ -200,11 +200,7 @@ static ssize_t part_ro_show(struct device *dev,
+>  static ssize_t part_alignment_offset_show(struct device *dev,
+>  					  struct device_attribute *attr, char *buf)
+>  {
+> -	struct block_device *bdev = dev_to_bdev(dev);
+> -
+> -	return sprintf(buf, "%u\n",
+> -		queue_limit_alignment_offset(&bdev_get_queue(bdev)->limits,
+> -				bdev->bd_start_sect));
+> +	return sprintf(buf, "%u\n", bdev_alignment_offset(dev_to_bdev(dev)));
+
+Should this now be %d instead of %u, there are one or two examples of
+both in the rest of the patch series.
+
+Alan
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
