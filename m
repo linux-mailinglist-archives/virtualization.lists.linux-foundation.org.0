@@ -1,55 +1,55 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5361C4F52F2
-	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 05:44:54 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5F9034F52F3
+	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 05:44:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E34BB610CD;
-	Wed,  6 Apr 2022 03:44:52 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 15124417C3;
+	Wed,  6 Apr 2022 03:44:54 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XM74O7wyuuns; Wed,  6 Apr 2022 03:44:52 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id wJZXqeTqHZJd; Wed,  6 Apr 2022 03:44:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 73332610D1;
-	Wed,  6 Apr 2022 03:44:51 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 9E759417CD;
+	Wed,  6 Apr 2022 03:44:52 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 45ED2C0084;
-	Wed,  6 Apr 2022 03:44:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 75EF1C0084;
+	Wed,  6 Apr 2022 03:44:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0DCC0C0088
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D29D1C002C
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Apr 2022 03:44:50 +0000 (UTC)
+ Wed,  6 Apr 2022 03:44:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id ECED0417C7
+ by smtp4.osuosl.org (Postfix) with ESMTP id AECFC417C2
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Apr 2022 03:44:49 +0000 (UTC)
+ Wed,  6 Apr 2022 03:44:51 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FWe5aLx9VEoZ
+ with ESMTP id RdHhjXioCurA
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Apr 2022 03:44:49 +0000 (UTC)
+ Wed,  6 Apr 2022 03:44:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-45.freemail.mail.aliyun.com
- (out30-45.freemail.mail.aliyun.com [115.124.30.45])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F0B8B4177D
+Received: from out30-43.freemail.mail.aliyun.com
+ (out30-43.freemail.mail.aliyun.com [115.124.30.43])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C2CE7417C5
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Apr 2022 03:44:48 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R771e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04423; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V9JnaVR_1649216682; 
+ Wed,  6 Apr 2022 03:44:50 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04357; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=34; SR=0; TI=SMTPD_---0V9K2XHM_1649216685; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0V9JnaVR_1649216682) by smtp.aliyun-inc.com(127.0.0.1);
- Wed, 06 Apr 2022 11:44:44 +0800
+ fp:SMTPD_---0V9K2XHM_1649216685) by smtp.aliyun-inc.com(127.0.0.1);
+ Wed, 06 Apr 2022 11:44:46 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v9 26/32] virtio_mmio: support the arg sizes of find_vqs()
-Date: Wed,  6 Apr 2022 11:43:40 +0800
-Message-Id: <20220406034346.74409-27-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v9 27/32] virtio: add helper virtio_find_vqs_ctx_size()
+Date: Wed,  6 Apr 2022 11:43:41 +0800
+Message-Id: <20220406034346.74409-28-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220406034346.74409-1-xuanzhuo@linux.alibaba.com>
 References: <20220406034346.74409-1-xuanzhuo@linux.alibaba.com>
@@ -89,47 +89,37 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Virtio MMIO support the new parameter sizes of find_vqs().
+Introduce helper virtio_find_vqs_ctx_size() to call find_vqs and specify
+the maximum size of each vq ring.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_mmio.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ include/linux/virtio_config.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index 9d5a674bdeec..51cf51764a92 100644
---- a/drivers/virtio/virtio_mmio.c
-+++ b/drivers/virtio/virtio_mmio.c
-@@ -347,7 +347,7 @@ static void vm_del_vqs(struct virtio_device *vdev)
+diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
+index 0f7def7ddfd2..22e29c926946 100644
+--- a/include/linux/virtio_config.h
++++ b/include/linux/virtio_config.h
+@@ -235,6 +235,18 @@ int virtio_find_vqs_ctx(struct virtio_device *vdev, unsigned nvqs,
+ 				      ctx, desc);
+ }
  
- static struct virtqueue *vm_setup_vq(struct virtio_device *vdev, unsigned index,
- 				  void (*callback)(struct virtqueue *vq),
--				  const char *name, bool ctx)
-+				  const char *name, u32 size, bool ctx)
- {
- 	struct virtio_mmio_device *vm_dev = to_virtio_mmio_device(vdev);
- 	struct virtio_mmio_vq_info *info;
-@@ -382,8 +382,11 @@ static struct virtqueue *vm_setup_vq(struct virtio_device *vdev, unsigned index,
- 		goto error_new_virtqueue;
- 	}
- 
-+	if (!size || size > num)
-+		size = num;
++static inline
++int virtio_find_vqs_ctx_size(struct virtio_device *vdev, u32 nvqs,
++				 struct virtqueue *vqs[],
++				 vq_callback_t *callbacks[],
++				 const char * const names[],
++				 u32 sizes[],
++				 const bool *ctx, struct irq_affinity *desc)
++{
++	return vdev->config->find_vqs(vdev, nvqs, vqs, callbacks, names, sizes,
++				      ctx, desc);
++}
 +
- 	/* Create the vring */
--	vq = vring_create_virtqueue(index, num, VIRTIO_MMIO_VRING_ALIGN, vdev,
-+	vq = vring_create_virtqueue(index, size, VIRTIO_MMIO_VRING_ALIGN, vdev,
- 				 true, true, ctx, vm_notify, callback, name);
- 	if (!vq) {
- 		err = -ENOMEM;
-@@ -484,6 +487,7 @@ static int vm_find_vqs(struct virtio_device *vdev, unsigned nvqs,
- 		}
- 
- 		vqs[i] = vm_setup_vq(vdev, queue_idx++, callbacks[i], names[i],
-+				     sizes ? sizes[i] : 0,
- 				     ctx ? ctx[i] : false);
- 		if (IS_ERR(vqs[i])) {
- 			vm_del_vqs(vdev);
+ /**
+  * virtio_device_ready - enable vq use in probe function
+  * @vdev: the device
 -- 
 2.31.0
 
