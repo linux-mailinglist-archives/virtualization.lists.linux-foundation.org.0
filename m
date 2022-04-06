@@ -1,70 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2C8D94F63D8
-	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 17:48:43 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 08AA04F63F5
+	for <lists.virtualization@lfdr.de>; Wed,  6 Apr 2022 17:51:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id A9BB8812FE;
-	Wed,  6 Apr 2022 15:48:41 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7B1FE4060F;
+	Wed,  6 Apr 2022 15:51:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GTqX2ugrwm6W; Wed,  6 Apr 2022 15:48:41 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KWThPgCAQo9N; Wed,  6 Apr 2022 15:51:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7B91981302;
-	Wed,  6 Apr 2022 15:48:40 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 3FBD440383;
+	Wed,  6 Apr 2022 15:51:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EEAD5C0082;
-	Wed,  6 Apr 2022 15:48:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3DDE9C0087;
+	Wed,  6 Apr 2022 15:51:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 245F5C0012;
- Wed,  6 Apr 2022 15:48:38 +0000 (UTC)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BD20CC0012;
+ Wed,  6 Apr 2022 15:51:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 015EC41608;
- Wed,  6 Apr 2022 15:48:38 +0000 (UTC)
+ by smtp1.osuosl.org (Postfix) with ESMTP id A50F283396;
+ Wed,  6 Apr 2022 15:51:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GRSVap9QdgR6; Wed,  6 Apr 2022 15:48:36 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by smtp4.osuosl.org (Postfix) with ESMTP id D58E741299;
- Wed,  6 Apr 2022 15:48:36 +0000 (UTC)
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1B11812FC;
- Wed,  6 Apr 2022 08:48:36 -0700 (PDT)
-Received: from [10.57.41.19] (unknown [10.57.41.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 164303F73B;
- Wed,  6 Apr 2022 08:48:30 -0700 (PDT)
-Message-ID: <7455941b-ffc0-3771-7852-36fa685275e1@arm.com>
-Date: Wed, 6 Apr 2022 16:48:25 +0100
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id LvWBEj8G8KsC; Wed,  6 Apr 2022 15:51:02 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9DDFA83386;
+ Wed,  6 Apr 2022 15:51:02 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 207A568AFE; Wed,  6 Apr 2022 17:50:57 +0200 (CEST)
+Date: Wed, 6 Apr 2022 17:50:56 +0200
+From: Christoph Hellwig <hch@lst.de>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Subject: Re: [PATCH 1/5] iommu: Replace uses of IOMMU_CAP_CACHE_COHERENCY
+ with dev_is_dma_coherent()
+Message-ID: <20220406155056.GA30433@lst.de>
+References: <1-v1-ef02c60ddb76+12ca2-intel_no_snoop_jgg@nvidia.com>
+ <db5a6daa-bfe9-744f-7fc5-d5167858bc3e@arm.com>
+ <20220406142432.GF2120790@nvidia.com> <20220406151823.GG2120790@nvidia.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:91.0) Gecko/20100101
- Thunderbird/91.7.0
-Subject: Re: [PATCH 1/5] iommu: Replace uses of IOMMU_CAP_CACHE_COHERENCY with
- dev_is_dma_coherent()
-Content-Language: en-GB
-To: Jason Gunthorpe <jgg@nvidia.com>, Christoph Hellwig <hch@lst.de>
-References: <0-v1-ef02c60ddb76+12ca2-intel_no_snoop_jgg@nvidia.com>
- <1-v1-ef02c60ddb76+12ca2-intel_no_snoop_jgg@nvidia.com>
- <20220406053039.GA10580@lst.de> <20220406120730.GA2120790@nvidia.com>
- <20220406135150.GA21532@lst.de> <20220406141446.GE2120790@nvidia.com>
-From: Robin Murphy <robin.murphy@arm.com>
-In-Reply-To: <20220406141446.GE2120790@nvidia.com>
+Content-Disposition: inline
+In-Reply-To: <20220406151823.GG2120790@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 Cc: Nelson Escobar <neescoba@cisco.com>,
  Matthew Rosato <mjrosato@linux.ibm.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  virtualization@lists.linux-foundation.org, Will Deacon <will@kernel.org>,
- linux-s390@vger.kernel.org, kvm@vger.kernel.org, linux-rdma@vger.kernel.org,
+ Christoph Hellwig <hch@lst.de>, linux-s390@vger.kernel.org,
+ kvm@vger.kernel.org, linux-rdma@vger.kernel.org,
  Joerg Roedel <joro@8bytes.org>, Rob Clark <robdclark@gmail.com>,
- Gerald Schaefer <gerald.schaefer@linux.ibm.com>, linux-arm-msm@vger.kernel.org,
+ Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
+ David Woodhouse <dwmw2@infradead.org>, linux-arm-msm@vger.kernel.org,
  linux-arm-kernel@lists.infradead.org, netdev@vger.kernel.org,
  Cornelia Huck <cohuck@redhat.com>, iommu@lists.linux-foundation.org,
  Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
- Christian Benvenuti <benve@cisco.com>, David Woodhouse <dwmw2@infradead.org>,
+ Christian Benvenuti <benve@cisco.com>, Robin Murphy <robin.murphy@arm.com>,
  Lu Baolu <baolu.lu@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -77,47 +73,15 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 2022-04-06 15:14, Jason Gunthorpe wrote:
-> On Wed, Apr 06, 2022 at 03:51:50PM +0200, Christoph Hellwig wrote:
->> On Wed, Apr 06, 2022 at 09:07:30AM -0300, Jason Gunthorpe wrote:
->>> Didn't see it
->>>
->>> I'll move dev_is_dma_coherent to device.h along with
->>> device_iommu_mapped() and others then
->>
->> No.  It it is internal for a reason.  It also doesn't actually work
->> outside of the dma core.  E.g. for non-swiotlb ARM configs it will
->> not actually work.
-> 
-> Really? It is the only condition that dma_info_to_prot() tests to
-> decide of IOMMU_CACHE is used or not, so you are saying that there is
-> a condition where a device can be attached to an iommu_domain and
-> dev_is_dma_coherent() returns the wrong information? How does
-> dma-iommu.c safely use it then?
+On Wed, Apr 06, 2022 at 12:18:23PM -0300, Jason Gunthorpe wrote:
+> > Oh, I didn't know about device_get_dma_attr()..
 
-The common iommu-dma layer happens to be part of the subset of the DMA 
-core which *does* play the dev->dma_coherent game. 32-bit Arm has its 
-own IOMMU DMA ops which do not. I don't know if the set of PowerPCs with 
-CONFIG_NOT_COHERENT_CACHE intersects the set of PowerPCs that can do 
-VFIO, but that would be another example if so.
-
-> In any case I still need to do something about the places checking
-> IOMMU_CAP_CACHE_COHERENCY and thinking that means IOMMU_CACHE
-> works. Any idea?
-
-Can we improve the IOMMU drivers such that that *can* be the case 
-(within a reasonable margin of error)? That's kind of where I was hoping 
-to head with device_iommu_capable(), e.g. [1].
-
-Robin.
-
-[1] 
-https://gitlab.arm.com/linux-arm/linux-rm/-/commit/53390e9505b3791adedc0974e251e5c7360e402e
+Which is completely broken for any non-OF, non-ACPI plaform.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
