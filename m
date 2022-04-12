@@ -1,127 +1,93 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D75494FD289
-	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:19:28 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 515BB4FD2A2
+	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:26:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5F0C6607C1;
-	Tue, 12 Apr 2022 07:19:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 1BEA941675;
+	Tue, 12 Apr 2022 07:26:29 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id pKJuanysUz72; Tue, 12 Apr 2022 07:19:26 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 1EED560776;
-	Tue, 12 Apr 2022 07:19:26 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Cb5VPLnCnl1I; Tue, 12 Apr 2022 07:26:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 6F97841679;
+	Tue, 12 Apr 2022 07:26:27 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 976E7C0084;
-	Tue, 12 Apr 2022 07:19:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 36CBDC002C;
+	Tue, 12 Apr 2022 07:26:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1A22CC002C
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5361AC002C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:19:24 +0000 (UTC)
+ Tue, 12 Apr 2022 07:26:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id EBF85404A1
+ by smtp4.osuosl.org (Postfix) with ESMTP id 31F1C41675
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:19:23 +0000 (UTC)
+ Tue, 12 Apr 2022 07:26:25 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oWf-QE3EEk3f
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id pzAxn23lA9t7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:19:23 +0000 (UTC)
+ Tue, 12 Apr 2022 07:26:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 3F88F40141
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CA5CD4093A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:19:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1649747962;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Yuz95x1G3zlqb83uNRLz/nX1y2Nb6heM9sreLygHM+8=;
- b=e1xsGA0u6k5ZzQuDGpM/i83UMVxauBVEGYneTs/iMGaPzymbSZYNASxECQTqIKj+fMymyn
- hQVGp5+O8G68QuBNZ2IKDKLnn8meKQ8Xwv60fugrUt09YGE7lpcolO319+B2y3ZIPBxr1i
- eEyc4XLRXjoG3nAHVQQ5E5bxdLYlQ9c=
-Received: from mail-pf1-f198.google.com (mail-pf1-f198.google.com
- [209.85.210.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-504-kI1BGrgvNUGwl9T1327NRw-1; Tue, 12 Apr 2022 03:19:21 -0400
-X-MC-Unique: kI1BGrgvNUGwl9T1327NRw-1
-Received: by mail-pf1-f198.google.com with SMTP id
- j17-20020a62b611000000b004fa6338bd77so10995709pff.10
- for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 00:19:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=Yuz95x1G3zlqb83uNRLz/nX1y2Nb6heM9sreLygHM+8=;
- b=cOwnW50JtcCvOX3ZdWS28ZYr/S9/nExis0hE85YPHhrpcdA6dI2Wm5FJ4QTb61/Y91
- iLTva2jGQIQ7kS5Qrf9IFLOm5DN95TjwZUxRBxyIl6XqL3AqBHoK5IQkPu2P9kdOO0kL
- UOD1jZ9m9TT+dH7UFTsdXZ0j2xw2eTFtyitX4XIvIzc7gclJxepKEMPVw/KqTpCpUvwp
- ZC9fT2hLt8FuSXh/LrmHSMwZpQ6uBQhPhkkhlXAAJWUjTwNrPFO4cDhiedBHaeeO5p+P
- ElFyswEG5jsThj9S/giCmJ7NOIxk9C7KVOVIUiIwZNAF79qupWHwN8q4YsS1BUBp4gK7
- r15Q==
-X-Gm-Message-State: AOAM530StIHXOzdepmoZRgjkGxh+IXLaT3NxipUcbfbHRnDNKLYVfcGr
- JwMRaPRYN4S5Zhv8hHH6tWEBMHDK0R/5MbMnLus3AEMaVeGXoz4xAM13fYAbCia9621VmcxaJ/s
- yvuWRTYsM/kuYzHWUJZm5SiBBI5lNX/98KMIMTjYPCA==
-X-Received: by 2002:a63:ce45:0:b0:399:1124:fbfe with SMTP id
- r5-20020a63ce45000000b003991124fbfemr30142594pgi.542.1649747959984; 
- Tue, 12 Apr 2022 00:19:19 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJybC3H9odgtD5WvWO3Wfz5iznlcc/pnW1u61iazVEqAlovz3OVbp6nLoj0UKzRc5hYeHz5xRQ==
-X-Received: by 2002:a63:ce45:0:b0:399:1124:fbfe with SMTP id
- r5-20020a63ce45000000b003991124fbfemr30142555pgi.542.1649747959749; 
- Tue, 12 Apr 2022 00:19:19 -0700 (PDT)
-Received: from [10.72.14.5] ([209.132.188.80])
- by smtp.gmail.com with ESMTPSA id
- oo16-20020a17090b1c9000b001b89e05e2b2sm1791569pjb.34.2022.04.12.00.19.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 12 Apr 2022 00:19:19 -0700 (PDT)
-Message-ID: <2776b925-1989-40b2-44ed-6964105e22cb@redhat.com>
-Date: Tue, 12 Apr 2022 15:19:08 +0800
+ Tue, 12 Apr 2022 07:26:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1649748383; x=1681284383;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=5OyqKZ2t12lVTvKw/fJWrzDUz4nPfGALPPcWHIJFgN8=;
+ b=O+Qvlm3KUxP6NVMuF9f3Uk8PHtLEqAfxKw7hl4eGYCN5b31hkBJvLS1M
+ aUVFvkSmYbolPm7NkycXFjPBRL3+yPHekPwZ7rEu8+lP3cjWpo7vaGX3m
+ Gixz6Yr6xG4ExcXlWfLWQ37eohuUu/fCETc/hZq1gZNLcd+owgIKhnO14
+ 0VOmEQNTQuAQPWlj0dA2SKe3803QAl3yAgBnsZ+szM3l42GIk1cIrBcre
+ KdVEg7nt/MExsG3DxptHOB9k5174nlPqBG9fQsaetQk69QFeAZjMIQMqJ
+ Jni85dpNPkRsJW0SH29DcVw6BTOamZCtPUZrO9AsI9lbtIJKI1W4aXCPv g==;
+X-IronPort-AV: E=McAfee;i="6400,9594,10314"; a="325210063"
+X-IronPort-AV: E=Sophos;i="5.90,253,1643702400"; d="scan'208";a="325210063"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+ by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 12 Apr 2022 00:26:22 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.90,253,1643702400"; d="scan'208";a="644602157"
+Received: from lkp-server02.sh.intel.com (HELO d3fc50ef50de) ([10.239.97.151])
+ by FMSMGA003.fm.intel.com with ESMTP; 12 Apr 2022 00:26:17 -0700
+Received: from kbuild by d3fc50ef50de with local (Exim 4.95)
+ (envelope-from <lkp@intel.com>) id 1neAun-0002cr-5k;
+ Tue, 12 Apr 2022 07:26:17 +0000
+Date: Tue, 12 Apr 2022 15:25:46 +0800
+From: kernel test robot <lkp@intel.com>
+To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Chia-I Wu <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
+ Daniel Almeida <daniel.almeida@collabora.com>,
+ Gert Wollny <gert.wollny@collabora.com>,
+ Tomeu Vizoso <tomeu.vizoso@collabora.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
+ Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
+ Rob Clark <robdclark@gmail.com>
+Subject: Re: [PATCH v3 11/15] drm/shmem-helper: Add generic memory shrinker
+Message-ID: <202204121523.qVMxOvZg-lkp@intel.com>
+References: <20220411215937.281655-12-dmitry.osipenko@collabora.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.7.0
-Subject: Re: [PATCH v9 29/32] virtio_net: get ringparam by
- virtqueue_get_vring_max_size()
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- virtualization@lists.linux-foundation.org
-References: <20220406034346.74409-1-xuanzhuo@linux.alibaba.com>
- <20220406034346.74409-30-xuanzhuo@linux.alibaba.com>
-From: Jason Wang <jasowang@redhat.com>
-In-Reply-To: <20220406034346.74409-30-xuanzhuo@linux.alibaba.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Cc: Vadim Pasternak <vadimp@nvidia.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-remoteproc@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Alexander Gordeev <agordeev@linux.ibm.com>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>, linux-s390@vger.kernel.org,
- Johannes Berg <johannes.berg@intel.com>,
- Daniel Borkmann <daniel@iogearbox.net>, Richard Weinberger <richard@nod.at>,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- John Fastabend <john.fastabend@gmail.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jakub Kicinski <kuba@kernel.org>, Heiko Carstens <hca@linux.ibm.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>, Vasily Gorbik <gor@linux.ibm.com>,
- Jeff Dike <jdike@addtoit.com>, linux-um@lists.infradead.org,
- Mark Gross <markgross@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- kvm@vger.kernel.org, platform-driver-x86@vger.kernel.org,
- Mathieu Poirier <mathieu.poirier@linaro.org>, netdev@vger.kernel.org,
- Cornelia Huck <cohuck@redhat.com>, Sven Schnelle <svens@linux.ibm.com>,
- bpf@vger.kernel.org, "David S. Miller" <davem@davemloft.net>
+Content-Disposition: inline
+In-Reply-To: <20220411215937.281655-12-dmitry.osipenko@collabora.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+Cc: kbuild-all@lists.01.org, llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
+ Gustavo Padovan <gustavo.padovan@collabora.com>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -133,32 +99,87 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CuWcqCAyMDIyLzQvNiDkuIrljYgxMTo0MywgWHVhbiBaaHVvIOWGmemBkzoKPiBVc2UgdmlydHF1
-ZXVlX2dldF92cmluZ19tYXhfc2l6ZSgpIGluIHZpcnRuZXRfZ2V0X3JpbmdwYXJhbSgpIHRvIHNl
-dAo+IHR4LHJ4X21heF9wZW5kaW5nLgo+Cj4gU2lnbmVkLW9mZi1ieTogWHVhbiBaaHVvIDx4dWFu
-emh1b0BsaW51eC5hbGliYWJhLmNvbT4KPiAtLS0KCgpBY2tlZC1ieTogSmFzb24gV2FuZyA8amFz
-b3dhbmdAcmVkaGF0LmNvbT4KCgo+ICAgZHJpdmVycy9uZXQvdmlydGlvX25ldC5jIHwgOCArKysr
-LS0tLQo+ICAgMSBmaWxlIGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgNCBkZWxldGlvbnMoLSkK
-Pgo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMgYi9kcml2ZXJzL25ldC92
-aXJ0aW9fbmV0LmMKPiBpbmRleCBkYWQ0OTdhNDdiM2EuLjk2ZDk2YzY2NmM4YyAxMDA2NDQKPiAt
-LS0gYS9kcml2ZXJzL25ldC92aXJ0aW9fbmV0LmMKPiArKysgYi9kcml2ZXJzL25ldC92aXJ0aW9f
-bmV0LmMKPiBAQCAtMjE3NywxMCArMjE3NywxMCBAQCBzdGF0aWMgdm9pZCB2aXJ0bmV0X2dldF9y
-aW5ncGFyYW0oc3RydWN0IG5ldF9kZXZpY2UgKmRldiwKPiAgIHsKPiAgIAlzdHJ1Y3QgdmlydG5l
-dF9pbmZvICp2aSA9IG5ldGRldl9wcml2KGRldik7Cj4gICAKPiAtCXJpbmctPnJ4X21heF9wZW5k
-aW5nID0gdmlydHF1ZXVlX2dldF92cmluZ19zaXplKHZpLT5ycVswXS52cSk7Cj4gLQlyaW5nLT50
-eF9tYXhfcGVuZGluZyA9IHZpcnRxdWV1ZV9nZXRfdnJpbmdfc2l6ZSh2aS0+c3FbMF0udnEpOwo+
-IC0JcmluZy0+cnhfcGVuZGluZyA9IHJpbmctPnJ4X21heF9wZW5kaW5nOwo+IC0JcmluZy0+dHhf
-cGVuZGluZyA9IHJpbmctPnR4X21heF9wZW5kaW5nOwo+ICsJcmluZy0+cnhfbWF4X3BlbmRpbmcg
-PSB2aXJ0cXVldWVfZ2V0X3ZyaW5nX21heF9zaXplKHZpLT5ycVswXS52cSk7Cj4gKwlyaW5nLT50
-eF9tYXhfcGVuZGluZyA9IHZpcnRxdWV1ZV9nZXRfdnJpbmdfbWF4X3NpemUodmktPnNxWzBdLnZx
-KTsKPiArCXJpbmctPnJ4X3BlbmRpbmcgPSB2aXJ0cXVldWVfZ2V0X3ZyaW5nX3NpemUodmktPnJx
-WzBdLnZxKTsKPiArCXJpbmctPnR4X3BlbmRpbmcgPSB2aXJ0cXVldWVfZ2V0X3ZyaW5nX3NpemUo
-dmktPnNxWzBdLnZxKTsKPiAgIH0KPiAgIAo+ICAgCgpfX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVh
-bGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZv
-dW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+Hi Dmitry,
+
+I love your patch! Perhaps something to improve:
+
+[auto build test WARNING on next-20220411]
+[cannot apply to drm/drm-next v5.18-rc2 v5.18-rc1 v5.17 v5.18-rc2]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch]
+
+url:    https://github.com/intel-lab-lkp/linux/commits/Dmitry-Osipenko/Add-generic-memory-shrinker-to-VirtIO-GPU-and-Panfrost-DRM-drivers/20220412-060325
+base:    d12d7e1cfe38e0c36d28c7a9fbbc436ad0d17c14
+config: i386-randconfig-a005-20220411 (https://download.01.org/0day-ci/archive/20220412/202204121523.qVMxOvZg-lkp@intel.com/config)
+compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project fe2478d44e4f7f191c43fef629ac7a23d0251e72)
+reproduce (this is a W=1 build):
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/683ba8a9d72ba7770a61a9266a2b33949f3874f2
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Dmitry-Osipenko/Add-generic-memory-shrinker-to-VirtIO-GPU-and-Panfrost-DRM-drivers/20220412-060325
+        git checkout 683ba8a9d72ba7770a61a9266a2b33949f3874f2
+        # save the config file to linux build tree
+        mkdir build_dir
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=i386 SHELL=/bin/bash drivers/gpu/drm/
+
+If you fix the issue, kindly add following tag as appropriate
+Reported-by: kernel test robot <lkp@intel.com>
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/gpu/drm/drm_gem_shmem_helper.c:289:11: warning: variable 'new_state' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
+           else if (shmem->madv < 0)
+                    ^~~~~~~~~~~~~~~
+   drivers/gpu/drm/drm_gem_shmem_helper.c:292:46: note: uninitialized use occurs here
+           drm_gem_shmem_set_pages_state_locked(shmem, new_state);
+                                                       ^~~~~~~~~
+   drivers/gpu/drm/drm_gem_shmem_helper.c:289:7: note: remove the 'if' if its condition is always true
+           else if (shmem->madv < 0)
+                ^~~~~~~~~~~~~~~~~~~~
+   drivers/gpu/drm/drm_gem_shmem_helper.c:278:2: note: variable 'new_state' is declared here
+           enum drm_gem_shmem_pages_state new_state;
+           ^
+   1 warning generated.
+
+
+vim +289 drivers/gpu/drm/drm_gem_shmem_helper.c
+
+   273	
+   274	static void drm_gem_shmem_update_pages_state_locked(struct drm_gem_shmem_object *shmem)
+   275	{
+   276		struct drm_gem_object *obj = &shmem->base;
+   277		struct drm_gem_shmem_shrinker *gem_shrinker = obj->dev->shmem_shrinker;
+   278		enum drm_gem_shmem_pages_state new_state;
+   279	
+   280		if (!gem_shrinker || obj->import_attach)
+   281			return;
+   282	
+   283		mutex_lock(&gem_shrinker->lock);
+   284	
+   285		if (!shmem->madv)
+   286			new_state = DRM_GEM_SHMEM_PAGES_STATE_ACTIVE;
+   287		else if (shmem->madv > 0)
+   288			new_state = DRM_GEM_SHMEM_PAGES_STATE_PURGEABLE;
+ > 289		else if (shmem->madv < 0)
+   290			new_state = DRM_GEM_SHMEM_PAGES_STATE_PURGED;
+   291	
+   292		drm_gem_shmem_set_pages_state_locked(shmem, new_state);
+   293	
+   294		mutex_unlock(&gem_shrinker->lock);
+   295	}
+   296	
+
+-- 
+0-DAY CI Kernel Test Service
+https://01.org/lkp
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
