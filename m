@@ -1,68 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BBA2A4FCFC4
-	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 08:37:00 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 48D1B4FD1B9
+	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:00:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DA34240985;
-	Tue, 12 Apr 2022 06:36:58 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id D14F0408AC;
+	Tue, 12 Apr 2022 07:00:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ol36jgn9tIAw; Tue, 12 Apr 2022 06:36:57 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ma5eC_PH92eh; Tue, 12 Apr 2022 07:00:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 458594098D;
-	Tue, 12 Apr 2022 06:36:57 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 8676A400EF;
+	Tue, 12 Apr 2022 07:00:20 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6FA85C0084;
-	Tue, 12 Apr 2022 06:36:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0CE6EC0084;
+	Tue, 12 Apr 2022 07:00:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B031BC002F
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27B14C002F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:36:54 +0000 (UTC)
+ Tue, 12 Apr 2022 07:00:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 97E2860F04
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2424F60E49
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:36:54 +0000 (UTC)
+ Tue, 12 Apr 2022 07:00:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id z80Oy-mcOSCT
+ with ESMTP id ds-xVqqzFSWE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:36:53 +0000 (UTC)
+ Tue, 12 Apr 2022 07:00:17 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C822C60E43
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4C98E60E36
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:36:53 +0000 (UTC)
+ Tue, 12 Apr 2022 07:00:17 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 981D36190F;
- Tue, 12 Apr 2022 06:36:52 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 15D87C385A6;
- Tue, 12 Apr 2022 06:36:51 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 9250E615A4;
+ Tue, 12 Apr 2022 07:00:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A540CC385A6;
+ Tue, 12 Apr 2022 07:00:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649745412;
- bh=KJYgUB31n0AxiL/a+VNKxdWLRk28DtXuefP3eJWsmmA=;
+ s=korg; t=1649746816;
+ bh=mNb1SKCYTL4DnFguMQR5NjP+fQNQ2HDagZRvTBOyfRQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=mK9XEmR12ljxGTMJhIFEikExKLPz2TYsdMj4Y0I6JBrNv4C/kYWZRS7XLH6Pz2VRO
- 4kadTY+G4hUb1FSVUJr9ylWjU5wj7ZD20BTAEpWWls1btBZE6v+cQiD1cV+mZ1zpZD
- sqwyP0QOvuSGhz5PwkFtz+zp6k9Iz4pD4FwnkY4M=
+ b=TUN1shseJ3o+2a5IEWHumv8W/n5p2501uKS47megrN3zD9KCo0m9RQ+VB32JkfCGp
+ yT88kuOKhrdZkWCtOim1RJuBYpfmMz2bp4zOnC0UHYOHVNuLgxzkTjA/zisrieMqOm
+ GT1kFSalRxFbBx8DSDfba49YpwV2+MEBa61Fh3Zc=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.10 089/171] virtio_console: eliminate anonymous module_init
+Subject: [PATCH 5.16 140/285] virtio_console: eliminate anonymous module_init
  & module_exit
-Date: Tue, 12 Apr 2022 08:29:40 +0200
-Message-Id: <20220412062930.461704101@linuxfoundation.org>
+Date: Tue, 12 Apr 2022 08:29:57 +0200
+Message-Id: <20220412062947.709721342@linuxfoundation.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220412062927.870347203@linuxfoundation.org>
-References: <20220412062927.870347203@linuxfoundation.org>
+In-Reply-To: <20220412062943.670770901@linuxfoundation.org>
+References: <20220412062943.670770901@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Sasha Levin <sashal@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
@@ -121,10 +121,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
-index 3dd4deb60adb..6d361420ffe8 100644
+index f864b17be7e3..35025f283bf6 100644
 --- a/drivers/char/virtio_console.c
 +++ b/drivers/char/virtio_console.c
-@@ -2239,7 +2239,7 @@ static struct virtio_driver virtio_rproc_serial = {
+@@ -2245,7 +2245,7 @@ static struct virtio_driver virtio_rproc_serial = {
  	.remove =	virtcons_remove,
  };
  
@@ -133,7 +133,7 @@ index 3dd4deb60adb..6d361420ffe8 100644
  {
  	int err;
  
-@@ -2276,7 +2276,7 @@ static int __init init(void)
+@@ -2280,7 +2280,7 @@ static int __init init(void)
  	return err;
  }
  
@@ -142,7 +142,7 @@ index 3dd4deb60adb..6d361420ffe8 100644
  {
  	reclaim_dma_bufs();
  
-@@ -2286,8 +2286,8 @@ static void __exit fini(void)
+@@ -2290,8 +2290,8 @@ static void __exit fini(void)
  	class_destroy(pdrvdata.class);
  	debugfs_remove_recursive(pdrvdata.debugfs_dir);
  }
