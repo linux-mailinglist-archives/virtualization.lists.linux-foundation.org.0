@@ -1,68 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48D1B4FD1B9
-	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:00:23 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7E3D94FD27D
+	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:15:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D14F0408AC;
-	Tue, 12 Apr 2022 07:00:21 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 2E02F605A6;
+	Tue, 12 Apr 2022 07:15:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ma5eC_PH92eh; Tue, 12 Apr 2022 07:00:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 8676A400EF;
-	Tue, 12 Apr 2022 07:00:20 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SZaXTUCVvR6u; Tue, 12 Apr 2022 07:15:35 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 0307760E36;
+	Tue, 12 Apr 2022 07:15:34 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0CE6EC0084;
-	Tue, 12 Apr 2022 07:00:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A3A0C0084;
+	Tue, 12 Apr 2022 07:15:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 27B14C002F
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0A29EC002C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:00:18 +0000 (UTC)
+ Tue, 12 Apr 2022 07:15:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2424F60E49
+ by smtp2.osuosl.org (Postfix) with ESMTP id EC76D4011C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:00:18 +0000 (UTC)
+ Tue, 12 Apr 2022 07:15:32 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=linuxfoundation.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ds-xVqqzFSWE
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id mgxG1HN_sFXb
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:00:17 +0000 (UTC)
+ Tue, 12 Apr 2022 07:15:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4C98E60E36
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1FAA4400EF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:00:17 +0000 (UTC)
+ Tue, 12 Apr 2022 07:15:32 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9250E615A4;
- Tue, 12 Apr 2022 07:00:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A540CC385A6;
- Tue, 12 Apr 2022 07:00:15 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 50A7A61708;
+ Tue, 12 Apr 2022 07:15:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6250BC385A1;
+ Tue, 12 Apr 2022 07:15:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649746816;
- bh=mNb1SKCYTL4DnFguMQR5NjP+fQNQ2HDagZRvTBOyfRQ=;
+ s=korg; t=1649747730;
+ bh=nx/TWIU0HuF/BcME479M9j/gXDlBWROJsyjyROKFzQY=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=TUN1shseJ3o+2a5IEWHumv8W/n5p2501uKS47megrN3zD9KCo0m9RQ+VB32JkfCGp
- yT88kuOKhrdZkWCtOim1RJuBYpfmMz2bp4zOnC0UHYOHVNuLgxzkTjA/zisrieMqOm
- GT1kFSalRxFbBx8DSDfba49YpwV2+MEBa61Fh3Zc=
+ b=cl3a6DIvzsGBYIsN5pj4Z+r+0TxRZ5kS9JK3KntZERvGDQHwoBbZHbzlhNjGTsQy6
+ mD3PtMmP8Iae41OkvOEABNl0sQspvfl4E0q9MxEPb3/KFdr2mLQu8IpyWbaK9lenxU
+ D0+y7b9a36ir9OkPlAJNuqJurPV68Xwy0wH4TRFA=
 From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.16 140/285] virtio_console: eliminate anonymous module_init
+Subject: [PATCH 5.17 184/343] virtio_console: eliminate anonymous module_init
  & module_exit
-Date: Tue, 12 Apr 2022 08:29:57 +0200
-Message-Id: <20220412062947.709721342@linuxfoundation.org>
+Date: Tue, 12 Apr 2022 08:30:02 +0200
+Message-Id: <20220412062956.671343374@linuxfoundation.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220412062943.670770901@linuxfoundation.org>
-References: <20220412062943.670770901@linuxfoundation.org>
+In-Reply-To: <20220412062951.095765152@linuxfoundation.org>
+References: <20220412062951.095765152@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Cc: Sasha Levin <sashal@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
@@ -121,7 +122,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
-index f864b17be7e3..35025f283bf6 100644
+index e3c430539a17..9fa3c76a267f 100644
 --- a/drivers/char/virtio_console.c
 +++ b/drivers/char/virtio_console.c
 @@ -2245,7 +2245,7 @@ static struct virtio_driver virtio_rproc_serial = {
