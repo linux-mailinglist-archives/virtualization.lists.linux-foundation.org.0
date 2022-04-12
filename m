@@ -1,127 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C88C24FD040
-	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 08:43:29 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 07C404FD120
+	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 08:56:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 764C640116;
-	Tue, 12 Apr 2022 06:43:28 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id AD3F740141;
+	Tue, 12 Apr 2022 06:56:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id snyuQKbai2uP; Tue, 12 Apr 2022 06:43:27 +0000 (UTC)
+	with ESMTP id PncrDcgbCwB6; Tue, 12 Apr 2022 06:56:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 319FE404DA;
-	Tue, 12 Apr 2022 06:43:27 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 770134011C;
+	Tue, 12 Apr 2022 06:56:06 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 995C3C0084;
-	Tue, 12 Apr 2022 06:43:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C1C38C0084;
+	Tue, 12 Apr 2022 06:56:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 85606C002F
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 00E66C002F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:43:24 +0000 (UTC)
+ Tue, 12 Apr 2022 06:56:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 6B10560F28
+ by smtp3.osuosl.org (Postfix) with ESMTP id D473760F04
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:43:24 +0000 (UTC)
+ Tue, 12 Apr 2022 06:56:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vCOLBvB4KDbG
+ with ESMTP id x6VsSiNRe_Ki
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:43:23 +0000 (UTC)
+ Tue, 12 Apr 2022 06:56:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7BEE660F04
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 8ECDA60E36
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 06:43:23 +0000 (UTC)
+ Tue, 12 Apr 2022 06:56:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1649745802;
+ s=mimecast20190719; t=1649746561;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=YEDFVaHE5LgovQ1qymAwTeM82i08IwmDwRWKJJtG8Gs=;
- b=hZtiyu1RibxHMuY7h+T4iWDINHudDPgb2ZR5a0uRVLmAinztpt7szMhwG8Cb5AaCvZzKpB
- i31bM0L42tyfgAD1T8xK5ECALmcmht7WI1Ozuzk/zYU++zkak025sicxl7OzTw9bVbVnCl
- fejkKsptPps9EH+XNuvKPMdQvP/e+ao=
-Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
- [209.85.216.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=GN5vkjRmgkPNx751McI5DU0rpDoKJKayXCERhKWgOHo=;
+ b=auJ523HLMwOV18ObSx+6XCSN+jPKB1mAccykpXjUAu7wjGgsrlEtZo/72JMWpkKq7WVw+G
+ bYpl2xHKbmo1HVDTIipp3kjuxb+kNpM84r76mQ7lhSSjriUPSL7NjZ4SKLok89NGegs98X
+ 6Cg/NT+tkuYlvoAD8WEXAK27TSTGZec=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-294-mOAYFYopPoKeiUe1BVJeVg-1; Tue, 12 Apr 2022 02:43:21 -0400
-X-MC-Unique: mOAYFYopPoKeiUe1BVJeVg-1
-Received: by mail-pj1-f72.google.com with SMTP id
- v14-20020a17090a0c8e00b001cb778cc439so3413124pja.3
+ us-mta-447-evi6gyzpO3unXxojIu_CKg-1; Tue, 12 Apr 2022 02:55:58 -0400
+X-MC-Unique: evi6gyzpO3unXxojIu_CKg-1
+Received: by mail-ed1-f71.google.com with SMTP id
+ eg29-20020a056402289d00b0041d6db0fbc9so5050602edb.9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 11 Apr 2022 23:43:21 -0700 (PDT)
+ Mon, 11 Apr 2022 23:55:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
- :content-language:to:cc:references:from:in-reply-to
- :content-transfer-encoding;
- bh=YEDFVaHE5LgovQ1qymAwTeM82i08IwmDwRWKJJtG8Gs=;
- b=pu0zVurOZ+yEwc3ltXJW5D5/gHeM3QzPbRZ1FktoMQTHQpNXaoRfI/HYAL3/RPekuu
- mbOrrk9spkThG6bVQjaLlgNusMCB1uu2ZQVh6ZxZXXNHCp7vIgZXiO1obe06F7TgGRXN
- Ys62L7vbXqDz6oEVloNQoqBOmn5NqUgusn2sVcTWq/SV8fvuW03JG1ODe5/65ae6qr3x
- KIanTAtPFJ9yQzBzXi48gSADR/gG7GtsV/SQqraR0YP7cXHu9JIzDQkRq0NGy4FU708I
- A9PeCsV7qucMcMp3rfsbAgXn2TlTno7xdrKXXRho5Vy7od1QeAuNYP2ohjDsczUR1d/e
- TfJA==
-X-Gm-Message-State: AOAM532XLFl5X4/u2NMmC+mTi/YAgMIKO2LwFrwRdV4T3sH7qm49eRAj
- oAqF+e1tJcprKj4FjxLSe4IgSPQI1r1Wg+wbkUebPwmxYVCZ0m+ylWqF68Ug9sgS8gvDhssRqty
- wasCvTlzSMSx3MZ58zokqYds9okPN3cTz1R298imG6g==
-X-Received: by 2002:a65:494b:0:b0:399:28c:614f with SMTP id
- q11-20020a65494b000000b00399028c614fmr28693514pgs.182.1649745800170; 
- Mon, 11 Apr 2022 23:43:20 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzVisGJkqk8SxAqgvhvNH2N8TL+p8/HvB8CALOp5QP1jzqML5w0mYx0kcrqACK75c6WV3bObw==
-X-Received: by 2002:a65:494b:0:b0:399:28c:614f with SMTP id
- q11-20020a65494b000000b00399028c614fmr28693502pgs.182.1649745799938; 
- Mon, 11 Apr 2022 23:43:19 -0700 (PDT)
-Received: from [10.72.14.5] ([209.132.188.80])
- by smtp.gmail.com with ESMTPSA id
- mn18-20020a17090b189200b001cac1781bb4sm1544598pjb.35.2022.04.11.23.43.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 11 Apr 2022 23:43:19 -0700 (PDT)
-Message-ID: <5a4d48e1-aab9-9416-adc7-a07ebb39c84d@redhat.com>
-Date: Tue, 12 Apr 2022 14:43:08 +0800
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+ :mime-version:content-disposition:in-reply-to;
+ bh=GN5vkjRmgkPNx751McI5DU0rpDoKJKayXCERhKWgOHo=;
+ b=BCwF10ZzTXA+wXaE3d+RAxEWbVth/oNdkRWEtjtLeXVBM0MgKAWULniJWmMDoodKaU
+ IXxg2Ww9wLOB1uVfpx9n0Ip/cUe1IlPtBBMGwTUUWv7ZGsCrBG8Yj9NGvoIQQs6dnzly
+ /j2Hum8gMy5OpYnte5iZXrB/GhQ1yaRdn3ARWbl56xEBOZGyJ4RBnm1oI8E+2avKXmgt
+ ltpV0gsM/fyApEB9aeRKLDp0DJLcnc12leXE8vPUyA9ZvjSlZa3XyHtCyFiRs81oq4cZ
+ T+rJeUV9yG7f7VVmPGTwOnKLX7nFmyHs2ZIJFiYLfHXMq0CjlbkRhg3/apIDdfsMAFKO
+ jN/A==
+X-Gm-Message-State: AOAM533mz0BBy5zaOBacIgJCnlXn9UoCXFSK9JdA5LUMUmjYbdAx67t9
+ lu7dqV6Zg/CsD3ux5kS3fy2wbF4w5Vq6Aia3eojD4G3x+VAqItNGwHtGqhF6ICs3dW5D8YOy9w7
+ R8SNeQQ+rL7E1wNmEsIBDkXW3LpOHi6tWyJqOma5VIw==
+X-Received: by 2002:aa7:cc96:0:b0:410:b9ac:241 with SMTP id
+ p22-20020aa7cc96000000b00410b9ac0241mr37641961edt.246.1649746557015; 
+ Mon, 11 Apr 2022 23:55:57 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJxGPxug4QSaPb0hUaH35LBenThin66afliFP6NyNmncmrZUcM1TJgpijjoRwtDcypb/fdXkvA==
+X-Received: by 2002:aa7:cc96:0:b0:410:b9ac:241 with SMTP id
+ p22-20020aa7cc96000000b00410b9ac0241mr37641949edt.246.1649746556825; 
+ Mon, 11 Apr 2022 23:55:56 -0700 (PDT)
+Received: from redhat.com ([2.52.1.156]) by smtp.gmail.com with ESMTPSA id
+ c4-20020a170906340400b006d077e850b5sm12693341ejb.23.2022.04.11.23.55.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 11 Apr 2022 23:55:56 -0700 (PDT)
+Date: Tue, 12 Apr 2022 02:55:52 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Thomas Gleixner <tglx@linutronix.de>
+Subject: Re:
+Message-ID: <20220412025405-mutt-send-email-mst@kernel.org>
+References: <Yj1hkpyUqJE9sQ2p@redhat.com>
+ <CACGkMEunsuWhn+aB2dM7noU257M9JV6jDjkQXLyOA+GjEoz_iw@mail.gmail.com>
+ <20220325050947-mutt-send-email-mst@kernel.org>
+ <CACGkMEvioAVMmB+ab2xXB2YPECtwi1J55u8mRRk9-JAjFSZ8vg@mail.gmail.com>
+ <20220325060659-mutt-send-email-mst@kernel.org>
+ <CACGkMEu4mRfNbJXJtAFzhyd55fD7phUDKnVtYW0aqRnQmT_bYw@mail.gmail.com>
+ <20220328015757-mutt-send-email-mst@kernel.org>
+ <CACGkMEu+fax6YYwhfbc1yoSxv6o1FTQyrOheVTmUfqGvmbAEfA@mail.gmail.com>
+ <20220328062452-mutt-send-email-mst@kernel.org>
+ <87fsn1f96e.ffs@tglx>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
- Gecko/20100101 Thunderbird/91.7.0
-Subject: Re: [PATCH v9 21/32] virtio_pci: queue_reset: update struct
- virtio_pci_common_cfg and option functions
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- virtualization@lists.linux-foundation.org
-References: <20220406034346.74409-1-xuanzhuo@linux.alibaba.com>
- <20220406034346.74409-22-xuanzhuo@linux.alibaba.com>
-From: Jason Wang <jasowang@redhat.com>
-In-Reply-To: <20220406034346.74409-22-xuanzhuo@linux.alibaba.com>
+In-Reply-To: <87fsn1f96e.ffs@tglx>
 Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
-Content-Language: en-US
-Cc: Vadim Pasternak <vadimp@nvidia.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- linux-remoteproc@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
- Bjorn Andersson <bjorn.andersson@linaro.org>,
- Alexander Gordeev <agordeev@linux.ibm.com>,
- Anton Ivanov <anton.ivanov@cambridgegreys.com>, linux-s390@vger.kernel.org,
- Johannes Berg <johannes.berg@intel.com>,
- Daniel Borkmann <daniel@iogearbox.net>, Richard Weinberger <richard@nod.at>,
- Vincent Whitchurch <vincent.whitchurch@axis.com>,
- John Fastabend <john.fastabend@gmail.com>, Halil Pasic <pasic@linux.ibm.com>,
- Jakub Kicinski <kuba@kernel.org>, Heiko Carstens <hca@linux.ibm.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>, Vasily Gorbik <gor@linux.ibm.com>,
- Jeff Dike <jdike@addtoit.com>, linux-um@lists.infradead.org,
- Mark Gross <markgross@kernel.org>, Hans de Goede <hdegoede@redhat.com>,
- kvm@vger.kernel.org, platform-driver-x86@vger.kernel.org,
- Mathieu Poirier <mathieu.poirier@linaro.org>, netdev@vger.kernel.org,
- Cornelia Huck <cohuck@redhat.com>, Sven Schnelle <svens@linux.ibm.com>,
- bpf@vger.kernel.org, "David S. Miller" <davem@davemloft.net>
+Content-Disposition: inline
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
+ Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
+ Keir Fraser <keirf@google.com>, linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -133,75 +121,110 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-CuWcqCAyMDIyLzQvNiDkuIrljYgxMTo0MywgWHVhbiBaaHVvIOWGmemBkzoKPiBBZGQgcXVldWVf
-cmVzZXQgaW4gdmlydGlvX3BjaV9jb21tb25fY2ZnLCBhbmQgYWRkIHJlbGF0ZWQgb3BlcmF0aW9u
-Cj4gZnVuY3Rpb25zLgo+Cj4gRm9yIG5vdCBicmVha3MgdUFCSSwgYWRkIGEgbmV3IHN0cnVjdCB2
-aXJ0aW9fcGNpX2NvbW1vbl9jZmdfcmVzZXQuCj4KPiBTaWduZWQtb2ZmLWJ5OiBYdWFuIFpodW8g
-PHh1YW56aHVvQGxpbnV4LmFsaWJhYmEuY29tPgo+IC0tLQo+ICAgZHJpdmVycy92aXJ0aW8vdmly
-dGlvX3BjaV9tb2Rlcm5fZGV2LmMgfCAzNiArKysrKysrKysrKysrKysrKysrKysrKysrKwo+ICAg
-aW5jbHVkZS9saW51eC92aXJ0aW9fcGNpX21vZGVybi5oICAgICAgfCAgMiArKwo+ICAgaW5jbHVk
-ZS91YXBpL2xpbnV4L3ZpcnRpb19wY2kuaCAgICAgICAgfCAgNyArKysrKwo+ICAgMyBmaWxlcyBj
-aGFuZ2VkLCA0NSBpbnNlcnRpb25zKCspCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aXJ0aW8v
-dmlydGlvX3BjaV9tb2Rlcm5fZGV2LmMgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX21vZGVy
-bl9kZXYuYwo+IGluZGV4IGU4YjNmZjJiOWZiYy4uOGM3NGIwMGJjNTExIDEwMDY0NAo+IC0tLSBh
-L2RyaXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfbW9kZXJuX2Rldi5jCj4gKysrIGIvZHJpdmVycy92
-aXJ0aW8vdmlydGlvX3BjaV9tb2Rlcm5fZGV2LmMKPiBAQCAtMyw2ICszLDcgQEAKPiAgICNpbmNs
-dWRlIDxsaW51eC92aXJ0aW9fcGNpX21vZGVybi5oPgo+ICAgI2luY2x1ZGUgPGxpbnV4L21vZHVs
-ZS5oPgo+ICAgI2luY2x1ZGUgPGxpbnV4L3BjaS5oPgo+ICsjaW5jbHVkZSA8bGludXgvZGVsYXku
-aD4KPiAgIAo+ICAgLyoKPiAgICAqIHZwX21vZGVybl9tYXBfY2FwYWJpbGl0eSAtIG1hcCBhIHBh
-cnQgb2YgdmlydGlvIHBjaSBjYXBhYmlsaXR5Cj4gQEAgLTQ2Myw2ICs0NjQsNDEgQEAgdm9pZCB2
-cF9tb2Rlcm5fc2V0X3N0YXR1cyhzdHJ1Y3QgdmlydGlvX3BjaV9tb2Rlcm5fZGV2aWNlICptZGV2
-LAo+ICAgfQo+ICAgRVhQT1JUX1NZTUJPTF9HUEwodnBfbW9kZXJuX3NldF9zdGF0dXMpOwo+ICAg
-Cj4gKy8qCj4gKyAqIHZwX21vZGVybl9nZXRfcXVldWVfcmVzZXQgLSBnZXQgdGhlIHF1ZXVlIHJl
-c2V0IHN0YXR1cwo+ICsgKiBAbWRldjogdGhlIG1vZGVybiB2aXJ0aW8tcGNpIGRldmljZQo+ICsg
-KiBAaW5kZXg6IHF1ZXVlIGluZGV4Cj4gKyAqLwo+ICtpbnQgdnBfbW9kZXJuX2dldF9xdWV1ZV9y
-ZXNldChzdHJ1Y3QgdmlydGlvX3BjaV9tb2Rlcm5fZGV2aWNlICptZGV2LCB1MTYgaW5kZXgpCj4g
-K3sKPiArCXN0cnVjdCB2aXJ0aW9fcGNpX2NvbW1vbl9jZmdfcmVzZXQgX19pb21lbSAqY2ZnOwo+
-ICsKPiArCWNmZyA9IChzdHJ1Y3QgdmlydGlvX3BjaV9jb21tb25fY2ZnX3Jlc2V0IF9faW9tZW0g
-KiltZGV2LT5jb21tb247Cj4gKwo+ICsJdnBfaW93cml0ZTE2KGluZGV4LCAmY2ZnLT5jZmcucXVl
-dWVfc2VsZWN0KTsKPiArCXJldHVybiB2cF9pb3JlYWQxNigmY2ZnLT5xdWV1ZV9yZXNldCk7Cj4g
-K30KPiArRVhQT1JUX1NZTUJPTF9HUEwodnBfbW9kZXJuX2dldF9xdWV1ZV9yZXNldCk7Cj4gKwo+
-ICsvKgo+ICsgKiB2cF9tb2Rlcm5fc2V0X3F1ZXVlX3Jlc2V0IC0gcmVzZXQgdGhlIHF1ZXVlCj4g
-KyAqIEBtZGV2OiB0aGUgbW9kZXJuIHZpcnRpby1wY2kgZGV2aWNlCj4gKyAqIEBpbmRleDogcXVl
-dWUgaW5kZXgKPiArICovCj4gK3ZvaWQgdnBfbW9kZXJuX3NldF9xdWV1ZV9yZXNldChzdHJ1Y3Qg
-dmlydGlvX3BjaV9tb2Rlcm5fZGV2aWNlICptZGV2LCB1MTYgaW5kZXgpCj4gK3sKPiArCXN0cnVj
-dCB2aXJ0aW9fcGNpX2NvbW1vbl9jZmdfcmVzZXQgX19pb21lbSAqY2ZnOwo+ICsKPiArCWNmZyA9
-IChzdHJ1Y3QgdmlydGlvX3BjaV9jb21tb25fY2ZnX3Jlc2V0IF9faW9tZW0gKiltZGV2LT5jb21t
-b247Cj4gKwo+ICsJdnBfaW93cml0ZTE2KGluZGV4LCAmY2ZnLT5jZmcucXVldWVfc2VsZWN0KTsK
-PiArCXZwX2lvd3JpdGUxNigxLCAmY2ZnLT5xdWV1ZV9yZXNldCk7Cj4gKwo+ICsJd2hpbGUgKHZw
-X2lvcmVhZDE2KCZjZmctPnF1ZXVlX3Jlc2V0KSAhPSAxKQo+ICsJCW1zbGVlcCgxKTsKPiArfQo+
-ICtFWFBPUlRfU1lNQk9MX0dQTCh2cF9tb2Rlcm5fc2V0X3F1ZXVlX3Jlc2V0KTsKPiArCj4gICAv
-Kgo+ICAgICogdnBfbW9kZXJuX3F1ZXVlX3ZlY3RvciAtIHNldCB0aGUgTVNJWCB2ZWN0b3IgZm9y
-IGEgc3BlY2lmaWMgdmlydHF1ZXVlCj4gICAgKiBAbWRldjogdGhlIG1vZGVybiB2aXJ0aW8tcGNp
-IGRldmljZQo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19wY2lfbW9kZXJuLmgg
-Yi9pbmNsdWRlL2xpbnV4L3ZpcnRpb19wY2lfbW9kZXJuLmgKPiBpbmRleCBlYjJiZDliNDA3N2Qu
-LmNjNDE1NGRkN2IyOCAxMDA2NDQKPiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZpcnRpb19wY2lfbW9k
-ZXJuLmgKPiArKysgYi9pbmNsdWRlL2xpbnV4L3ZpcnRpb19wY2lfbW9kZXJuLmgKPiBAQCAtMTA2
-LDQgKzEwNiw2IEBAIHZvaWQgX19pb21lbSAqIHZwX21vZGVybl9tYXBfdnFfbm90aWZ5KHN0cnVj
-dCB2aXJ0aW9fcGNpX21vZGVybl9kZXZpY2UgKm1kZXYsCj4gICAJCQkJICAgICAgIHUxNiBpbmRl
-eCwgcmVzb3VyY2Vfc2l6ZV90ICpwYSk7Cj4gICBpbnQgdnBfbW9kZXJuX3Byb2JlKHN0cnVjdCB2
-aXJ0aW9fcGNpX21vZGVybl9kZXZpY2UgKm1kZXYpOwo+ICAgdm9pZCB2cF9tb2Rlcm5fcmVtb3Zl
-KHN0cnVjdCB2aXJ0aW9fcGNpX21vZGVybl9kZXZpY2UgKm1kZXYpOwo+ICtpbnQgdnBfbW9kZXJu
-X2dldF9xdWV1ZV9yZXNldChzdHJ1Y3QgdmlydGlvX3BjaV9tb2Rlcm5fZGV2aWNlICptZGV2LCB1
-MTYgaW5kZXgpOwo+ICt2b2lkIHZwX21vZGVybl9zZXRfcXVldWVfcmVzZXQoc3RydWN0IHZpcnRp
-b19wY2lfbW9kZXJuX2RldmljZSAqbWRldiwgdTE2IGluZGV4KTsKPiAgICNlbmRpZgo+IGRpZmYg
-LS1naXQgYS9pbmNsdWRlL3VhcGkvbGludXgvdmlydGlvX3BjaS5oIGIvaW5jbHVkZS91YXBpL2xp
-bnV4L3ZpcnRpb19wY2kuaAo+IGluZGV4IDIyYmVjOWJkMGRmYy4uZDk0NjJlZmQ2Y2U4IDEwMDY0
-NAo+IC0tLSBhL2luY2x1ZGUvdWFwaS9saW51eC92aXJ0aW9fcGNpLmgKPiArKysgYi9pbmNsdWRl
-L3VhcGkvbGludXgvdmlydGlvX3BjaS5oCj4gQEAgLTE3Myw2ICsxNzMsMTMgQEAgc3RydWN0IHZp
-cnRpb19wY2lfY29tbW9uX2NmZ19ub3RpZnkgewo+ICAgCV9fbGUxNiBwYWRkaW5nOwo+ICAgfTsK
-PiAgIAo+ICtzdHJ1Y3QgdmlydGlvX3BjaV9jb21tb25fY2ZnX3Jlc2V0IHsKPiArCXN0cnVjdCB2
-aXJ0aW9fcGNpX2NvbW1vbl9jZmcgY2ZnOwo+ICsKPiArCV9fbGUxNiBxdWV1ZV9ub3RpZnlfZGF0
-YTsJLyogcmVhZC13cml0ZSAqLwo+ICsJX19sZTE2IHF1ZXVlX3Jlc2V0OwkJLyogcmVhZC13cml0
-ZSAqLwo+ICt9OwoKCkkgcHJlZmVyIHRvIHVzZSBhIHNlcGFyYXRlIHBhdGNoIGZvciB0aGUgdUFQ
-SSBjaGFuZ2UuCgpPdGhlciBsb29rcyBnb29kLgoKVGhhbmtzCgoKPiArCj4gICAvKiBGaWVsZHMg
-aW4gVklSVElPX1BDSV9DQVBfUENJX0NGRzogKi8KPiAgIHN0cnVjdCB2aXJ0aW9fcGNpX2NmZ19j
-YXAgewo+ICAgCXN0cnVjdCB2aXJ0aW9fcGNpX2NhcCBjYXA7CgpfX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QK
-VmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5s
-aW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRpb24=
+On Tue, Mar 29, 2022 at 10:35:21AM +0200, Thomas Gleixner wrote:
+> On Mon, Mar 28 2022 at 06:40, Michael S. Tsirkin wrote:
+> > On Mon, Mar 28, 2022 at 02:18:22PM +0800, Jason Wang wrote:
+> >> > > So I think we might talk different issues:
+> >> > >
+> >> > > 1) Whether request_irq() commits the previous setups, I think the
+> >> > > answer is yes, since the spin_unlock of desc->lock (release) can
+> >> > > guarantee this though there seems no documentation around
+> >> > > request_irq() to say this.
+> >> > >
+> >> > > And I can see at least drivers/video/fbdev/omap2/omapfb/dss/dispc.c is
+> >> > > using smp_wmb() before the request_irq().
+> 
+> That's a complete bogus example especially as there is not a single
+> smp_rmb() which pairs with the smp_wmb().
+> 
+> >> > > And even if write is ordered we still need read to be ordered to be
+> >> > > paired with that.
+> >
+> > IMO it synchronizes with the CPU to which irq is
+> > delivered. Otherwise basically all drivers would be broken,
+> > wouldn't they be?
+> > I don't know whether it's correct on all platforms, but if not
+> > we need to fix request_irq.
+> 
+> There is nothing to fix:
+> 
+> request_irq()
+>    raw_spin_lock_irq(desc->lock);       // ACQUIRE
+>    ....
+>    raw_spin_unlock_irq(desc->lock);     // RELEASE
+> 
+> interrupt()
+>    raw_spin_lock(desc->lock);           // ACQUIRE
+>    set status to IN_PROGRESS
+>    raw_spin_unlock(desc->lock);         // RELEASE
+>    invoke handler()
+> 
+> So anything which the driver set up _before_ request_irq() is visible to
+> the interrupt handler. No?
+> 
+> >> What happens if an interrupt is raised in the middle like:
+> >> 
+> >> smp_store_release(dev->irq_soft_enabled, true)
+> >> IRQ handler
+> >> synchornize_irq()
+> 
+> This is bogus. The obvious order of things is:
+> 
+>     dev->ok = false;
+>     request_irq();
+> 
+>     moar_setup();
+>     synchronize_irq();  // ACQUIRE + RELEASE
+>     dev->ok = true;
+> 
+> The reverse operation on teardown:
+> 
+>     dev->ok = false;
+>     synchronize_irq();  // ACQUIRE + RELEASE
+> 
+>     teardown();
+> 
+> So in both cases a simple check in the handler is sufficient:
+> 
+> handler()
+>     if (!dev->ok)
+>     	return;
+
+Does this need to be if (!READ_ONCE(dev->ok)) ?
+
+
+
+> I'm not understanding what you folks are trying to "fix" here. If any
+> driver does this in the wrong order, then the driver is broken.
+> 
+> Sure, you can do the same with:
+> 
+>     dev->ok = false;
+>     request_irq();
+>     moar_setup();
+>     smp_wmb();
+>     dev->ok = true;
+> 
+> for the price of a smp_rmb() in the interrupt handler:
+> 
+> handler()
+>     if (!dev->ok)
+>     	return;
+>     smp_rmb();
+> 
+> but that's only working for the setup case correctly and not for
+> teardown.
+> 
+> Thanks,
+> 
+>         tglx
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
