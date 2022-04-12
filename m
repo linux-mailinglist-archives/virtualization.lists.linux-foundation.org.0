@@ -1,95 +1,131 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id AC5FD4FD2A0
-	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:26:29 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BA6E64FD2C4
+	for <lists.virtualization@lfdr.de>; Tue, 12 Apr 2022 09:56:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 51E4A4093A;
-	Tue, 12 Apr 2022 07:26:28 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6838640616;
+	Tue, 12 Apr 2022 07:56:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hv5GjbtY7BPM; Tue, 12 Apr 2022 07:26:27 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uRxOt4DqQe-D; Tue, 12 Apr 2022 07:56:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 7165841675;
-	Tue, 12 Apr 2022 07:26:26 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 18569404A1;
+	Tue, 12 Apr 2022 07:56:15 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D5EB7C0084;
-	Tue, 12 Apr 2022 07:26:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8DB2FC002C;
+	Tue, 12 Apr 2022 07:56:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A0B10C002C
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A1E8C002C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:26:24 +0000 (UTC)
+ Tue, 12 Apr 2022 07:56:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7828E60DFA
+ by smtp4.osuosl.org (Postfix) with ESMTP id 0769B41296
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:26:24 +0000 (UTC)
+ Tue, 12 Apr 2022 07:56:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=intel.com
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id wr4HDcPL2ywi
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=ibm.com
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id MLaz28J45ssj
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:26:23 +0000 (UTC)
+ Tue, 12 Apr 2022 07:56:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6305060687
+Received: from mx0a-001b2d01.pphosted.com (mx0a-001b2d01.pphosted.com
+ [148.163.156.1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8CBEA40926
  for <virtualization@lists.linux-foundation.org>;
- Tue, 12 Apr 2022 07:26:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1649748383; x=1681284383;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=gkhGiepzPyOKcCmGXkN+87sWY6kjgK6MU99iQQlt3gs=;
- b=bYgezipwarSpl1rtElh+SM2Cy7w0gSIOuB4JJFxfS1s473Ycxf7zVELG
- TllL5AtQrbr+51+cYrfKlt6KFJeAG+OwYMMuI+y13j+84879jtqk/9YXg
- puRQTKWGfBO86RuxDZtMg278Jd0cK2xk7pE4D2uJYkEmQw2C+IhNkpiXy
- xHParV5UVORiaWXkaW8+UrX/uLjkiSBAI5jbeq2P421HM5eUx6kAW8GH+
- lBKuk7UToBDaNbgtLYcpp8LTG2SidsYQdlLo6eX0rw+Qr5MGLYjzREPjv
- 8J8ldS+44aZ38XhakIl+DZR6cERHtoW3i3kpnqrHcF+lWFJ8yyw4dmNmS w==;
-X-IronPort-AV: E=McAfee;i="6400,9594,10314"; a="244182267"
-X-IronPort-AV: E=Sophos;i="5.90,253,1643702400"; d="scan'208";a="244182267"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 12 Apr 2022 00:26:22 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.90,253,1643702400"; d="scan'208";a="802118281"
-Received: from lkp-server02.sh.intel.com (HELO d3fc50ef50de) ([10.239.97.151])
- by fmsmga006.fm.intel.com with ESMTP; 12 Apr 2022 00:26:17 -0700
-Received: from kbuild by d3fc50ef50de with local (Exim 4.95)
- (envelope-from <lkp@intel.com>) id 1neAum-0002ci-L0;
- Tue, 12 Apr 2022 07:26:16 +0000
-Date: Tue, 12 Apr 2022 15:25:51 +0800
-From: kernel test robot <lkp@intel.com>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>,
- Chia-I Wu <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>,
- Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>,
- Alyssa Rosenzweig <alyssa.rosenzweig@collabora.com>,
- Rob Clark <robdclark@gmail.com>
-Subject: Re: [PATCH v3 11/15] drm/shmem-helper: Add generic memory shrinker
-Message-ID: <202204121504.gLR3FHQe-lkp@intel.com>
-References: <20220411215937.281655-12-dmitry.osipenko@collabora.com>
+ Tue, 12 Apr 2022 07:56:11 +0000 (UTC)
+Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.16.1.2/8.16.1.2) with SMTP id 23C6ft7Y029349; 
+ Tue, 12 Apr 2022 07:55:46 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
+ h=date : from : to : cc :
+ subject : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=pp1;
+ bh=xBbtpFu+g0M5oAS5qWS81PsG9t3GJIOwiA28DUQVs5g=;
+ b=SVt+WNZtqmPYAF1sZKsrFMSalIkYkLBUKYWFGmso0cvIt6pFOBLJn+hFqCkiGkQZ8QlW
+ Cpm3SrNXmSZI1LyT5UoWIFoLoW9CyJvTSevYp6+23sjOFvnru3bBUx6U5IJKMCjm+YxC
+ 8OU7TpD1xZny6mJvUjc8AESJO7YtKCWqAUUsYG5Ff58UoMrv/Yf8ruq2uH/gTgTiGTAM
+ UdzurUjj7dXdoMLi03n2lbdmhcS1os5jK6pAAjIfs3CPUeuvMF/6AJTPH2AJ0sIbtmBL
+ jTmjME6SO4w33YEUfPIdnSPjVB3nc5vGAhUMtQ1L0UWZC8LvuPx2GvaurSL5+sXxHaxI Lg== 
+Received: from pps.reinject (localhost [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 3fd4cj9e3m-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Apr 2022 07:55:46 +0000
+Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
+ by pps.reinject (8.16.0.43/8.16.0.43) with SMTP id 23C7YZ1Z024509;
+ Tue, 12 Apr 2022 07:55:46 GMT
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com
+ [169.51.49.99])
+ by mx0a-001b2d01.pphosted.com with ESMTP id 3fd4cj9e2v-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Apr 2022 07:55:45 +0000
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+ by ppma04ams.nl.ibm.com (8.16.1.2/8.16.1.2) with SMTP id 23C7sIaW012477;
+ Tue, 12 Apr 2022 07:55:43 GMT
+Received: from b06cxnps3074.portsmouth.uk.ibm.com
+ (d06relay09.portsmouth.uk.ibm.com [9.149.109.194])
+ by ppma04ams.nl.ibm.com with ESMTP id 3fb1s8vd9d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 12 Apr 2022 07:55:43 +0000
+Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com
+ [9.149.105.62])
+ by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 23C7tf9n34013486
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 12 Apr 2022 07:55:41 GMT
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 29C2BAE04D;
+ Tue, 12 Apr 2022 07:55:41 +0000 (GMT)
+Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 776EBAE055;
+ Tue, 12 Apr 2022 07:55:40 +0000 (GMT)
+Received: from li-e979b1cc-23ba-11b2-a85c-dfd230f6cf82 (unknown [9.171.60.83])
+ by d06av26.portsmouth.uk.ibm.com (Postfix) with SMTP;
+ Tue, 12 Apr 2022 07:55:40 +0000 (GMT)
+Date: Tue, 12 Apr 2022 09:55:19 +0200
+From: Halil Pasic <pasic@linux.ibm.com>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH V2 4/5] virtio-pci: implement synchronize_vqs()
+Message-ID: <20220412095519.245cf9f7.pasic@linux.ibm.com>
+In-Reply-To: <CACGkMEvDSv+sZwLYqqfP-jzDzonmon+CxeSXkvyd6F-CbfV3tQ@mail.gmail.com>
+References: <20220406083538.16274-1-jasowang@redhat.com>
+ <20220406083538.16274-5-jasowang@redhat.com>
+ <20220406075952-mutt-send-email-mst@kernel.org>
+ <87wng2e527.fsf@redhat.com>
+ <20220408150307.24b6b99f.pasic@linux.ibm.com>
+ <20220410034556-mutt-send-email-mst@kernel.org>
+ <CACGkMEtarZb6g3ij5=+As17+d9jtdAqNa1EzSuTXc7Pq_som0Q@mail.gmail.com>
+ <877d7vbspu.fsf@redhat.com>
+ <20220412020145.32e26e5a.pasic@linux.ibm.com>
+ <CACGkMEvDSv+sZwLYqqfP-jzDzonmon+CxeSXkvyd6F-CbfV3tQ@mail.gmail.com>
+Organization: IBM
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20220411215937.281655-12-dmitry.osipenko@collabora.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: kbuild-all@lists.01.org, llvm@lists.linux.dev, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Dmitry Osipenko <dmitry.osipenko@collabora.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: CmSVxQ2lgNAuH9PRyaNdXW8BiJbSoWi6
+X-Proofpoint-ORIG-GUID: k8zmRpchgAEYpZ3jEgIZi-3Qw_H2iW3j
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.858,Hydra:6.0.425,FMLib:17.11.64.514
+ definitions=2022-04-12_02,2022-04-11_01,2022-02-23_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ suspectscore=0 mlxscore=0
+ spamscore=0 lowpriorityscore=0 phishscore=0 adultscore=0 malwarescore=0
+ mlxlogscore=814 bulkscore=0 clxscore=1015 impostorscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2202240000 definitions=main-2204120035
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ Marc Zyngier <maz@kernel.org>, Cornelia Huck <cohuck@redhat.com>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization <virtualization@lists.linux-foundation.org>,
+ Halil Pasic <pasic@linux.ibm.com>, Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,81 +142,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Dmitry,
+On Tue, 12 Apr 2022 10:24:35 +0800
+Jason Wang <jasowang@redhat.com> wrote:
 
-I love your patch! Perhaps something to improve:
+> > Regarding the question "are we safe against notifications before
+> > indicators have been registered" I think we really need to think about
+> > something like Secure Execution. We don't have, and we are unlikely
+> > to have in hardware virtio-ccw implementations, and for a malicious hypervisor
+> > that has full access to the guest memory hardening makes no sense.  
+> 
+> Does s390 have something like memory encryption? (I guess yes). In the
+> case of x86 VM encryption, the I/O buffers were now done via software
+> IOTLB, that's why hardening of the virtio driver is needed to prevent
+> the hypervisor to poke the swiotlb etc.
 
-[auto build test WARNING on next-20220411]
-[cannot apply to drm/drm-next v5.18-rc2 v5.18-rc1 v5.17 v5.18-rc2]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch]
+Yep! Secure Execution is a confidential computing solution which is much
+like encrypted guest memory, except for one gets exceptions when trying
+to access private memory instead of ending up with garbage  because of
+the encryption. These improvements are IMHO relevant to us!
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Dmitry-Osipenko/Add-generic-memory-shrinker-to-VirtIO-GPU-and-Panfrost-DRM-drivers/20220412-060325
-base:    d12d7e1cfe38e0c36d28c7a9fbbc436ad0d17c14
-config: hexagon-randconfig-r045-20220411 (https://download.01.org/0day-ci/archive/20220412/202204121504.gLR3FHQe-lkp@intel.com/config)
-compiler: clang version 15.0.0 (https://github.com/llvm/llvm-project fe2478d44e4f7f191c43fef629ac7a23d0251e72)
-reproduce (this is a W=1 build):
-        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
-        chmod +x ~/bin/make.cross
-        # https://github.com/intel-lab-lkp/linux/commit/683ba8a9d72ba7770a61a9266a2b33949f3874f2
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Dmitry-Osipenko/Add-generic-memory-shrinker-to-VirtIO-GPU-and-Panfrost-DRM-drivers/20220412-060325
-        git checkout 683ba8a9d72ba7770a61a9266a2b33949f3874f2
-        # save the config file to linux build tree
-        mkdir build_dir
-        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=clang make.cross W=1 O=build_dir ARCH=hexagon SHELL=/bin/bash drivers/gpu/drm/
-
-If you fix the issue, kindly add following tag as appropriate
-Reported-by: kernel test robot <lkp@intel.com>
-
-All warnings (new ones prefixed by >>):
-
->> drivers/gpu/drm/drm_gem_shmem_helper.c:289:11: warning: variable 'new_state' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]
-           else if (shmem->madv < 0)
-                    ^~~~~~~~~~~~~~~
-   drivers/gpu/drm/drm_gem_shmem_helper.c:292:46: note: uninitialized use occurs here
-           drm_gem_shmem_set_pages_state_locked(shmem, new_state);
-                                                       ^~~~~~~~~
-   drivers/gpu/drm/drm_gem_shmem_helper.c:289:7: note: remove the 'if' if its condition is always true
-           else if (shmem->madv < 0)
-                ^~~~~~~~~~~~~~~~~~~~
-   drivers/gpu/drm/drm_gem_shmem_helper.c:278:2: note: variable 'new_state' is declared here
-           enum drm_gem_shmem_pages_state new_state;
-           ^
-   1 warning generated.
-
-
-vim +289 drivers/gpu/drm/drm_gem_shmem_helper.c
-
-   273	
-   274	static void drm_gem_shmem_update_pages_state_locked(struct drm_gem_shmem_object *shmem)
-   275	{
-   276		struct drm_gem_object *obj = &shmem->base;
-   277		struct drm_gem_shmem_shrinker *gem_shrinker = obj->dev->shmem_shrinker;
-   278		enum drm_gem_shmem_pages_state new_state;
-   279	
-   280		if (!gem_shrinker || obj->import_attach)
-   281			return;
-   282	
-   283		mutex_lock(&gem_shrinker->lock);
-   284	
-   285		if (!shmem->madv)
-   286			new_state = DRM_GEM_SHMEM_PAGES_STATE_ACTIVE;
-   287		else if (shmem->madv > 0)
-   288			new_state = DRM_GEM_SHMEM_PAGES_STATE_PURGEABLE;
- > 289		else if (shmem->madv < 0)
-   290			new_state = DRM_GEM_SHMEM_PAGES_STATE_PURGED;
-   291	
-   292		drm_gem_shmem_set_pages_state_locked(shmem, new_state);
-   293	
-   294		mutex_unlock(&gem_shrinker->lock);
-   295	}
-   296	
-
--- 
-0-DAY CI Kernel Test Service
-https://01.org/lkp
+Regards,
+Halil
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
