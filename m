@@ -1,75 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA011500FC7
-	for <lists.virtualization@lfdr.de>; Thu, 14 Apr 2022 15:55:05 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C524501654
+	for <lists.virtualization@lfdr.de>; Thu, 14 Apr 2022 17:48:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7C40F40883;
-	Thu, 14 Apr 2022 13:55:04 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 925A980C33;
+	Thu, 14 Apr 2022 15:48:50 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5zE86qg5JRg0; Thu, 14 Apr 2022 13:55:03 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 155F140275;
-	Thu, 14 Apr 2022 13:55:03 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id WOMG6NoFRj9M; Thu, 14 Apr 2022 15:48:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 363EE80C1F;
+	Thu, 14 Apr 2022 15:48:49 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 70C15C0085;
-	Thu, 14 Apr 2022 13:55:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 93131C002C;
+	Thu, 14 Apr 2022 15:48:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 335B9C002C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 79195C002C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 Apr 2022 13:55:01 +0000 (UTC)
+ Thu, 14 Apr 2022 15:48:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0B56C40156
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6669B403A5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 Apr 2022 13:55:01 +0000 (UTC)
+ Thu, 14 Apr 2022 15:48:46 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=linuxfoundation.org
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JsvHcxjDXkr3
+ with ESMTP id 458k5OVMHTsn
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 Apr 2022 13:55:00 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1A82D400D6
+ Thu, 14 Apr 2022 15:48:45 +0000 (UTC)
+X-Greylist: delayed 00:27:05 by SQLgrey-1.8.0
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2156D400A8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 14 Apr 2022 13:54:59 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by sin.source.kernel.org (Postfix) with ESMTPS id BEECFCE2997;
- Thu, 14 Apr 2022 13:49:26 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D120FC385A1;
- Thu, 14 Apr 2022 13:49:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1649944165;
- bh=DnAJjDJEcxkz6DSxm8zqmrUyBTDhveM5gDEWMJNeo94=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=duDSroz81vCeS5Nfen8Davrh9Hoc0JaQAcu1nOMtwkcbTxXtQ7rMaTJ3j4tS4rQqE
- z91gbBNiVJs7RF4jHdQ+N6cy2WhI27ALohDLMG3guRHrmj+Y3VzJcxPIGwWvQ3VSuN
- YUEkfZF6ZGAWuZNmpLDIQXXtEXD9TOl9VvhLy3h4=
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH 5.4 417/475] virtio_console: eliminate anonymous module_init &
- module_exit
-Date: Thu, 14 Apr 2022 15:13:22 +0200
-Message-Id: <20220414110906.732567975@linuxfoundation.org>
-X-Mailer: git-send-email 2.35.2
-In-Reply-To: <20220414110855.141582785@linuxfoundation.org>
-References: <20220414110855.141582785@linuxfoundation.org>
-User-Agent: quilt/0.66
+ Thu, 14 Apr 2022 15:48:44 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=+iRSXHQlt9lmhOSBYrvMuVQHw2ElrWncN2mrge5/yQ4=; b=D4UH8lPRYK29ybcCYqOCJLNd3u
+ Q4+bXU/1kTRxIE7w0/mHcMkrSCPJLapr2iCBsE80oGx3aeLmDbXhfKP6Fkzs31vlY0FP+8YSnLnGA
+ psKONhCK8ST+iduJ2Cti5dc3/6xuzu4tUyrIHXDJUf3AQJwRNtqCqg/sZFQdBxJcqgIJGbD60Bxdi
+ oaS0jyseexJ2bmKgeTcR1u426IWL9UnLdxAAKWVNxQBpyvSlDMHvhbL3rxBlCURpBfsccZHjsU40U
+ p/tYya+kBtsh2ywbDnxGs9FU+WwVs7jWaPh4lOoJ1W1BUap47SGA8TWNcD30kSVuVAPp+UnWSnl0A
+ I59pSpRQ==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100]
+ helo=noisy.programming.kicks-ass.net)
+ by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nf1HL-0052yG-BV; Thu, 14 Apr 2022 15:21:03 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 578083002DE;
+ Thu, 14 Apr 2022 17:21:01 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 3B94F2057AAE7; Thu, 14 Apr 2022 17:21:01 +0200 (CEST)
+Date: Thu, 14 Apr 2022 17:21:01 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Christophe de Dinechin <dinechin@redhat.com>
+Subject: Re: [PATCH 1/3] sched/headers: Fix compilation error with GCC 12
+Message-ID: <Ylg73c83AJGwz9UN@hirez.programming.kicks-ass.net>
+References: <20220414150855.2407137-1-dinechin@redhat.com>
+ <20220414150855.2407137-2-dinechin@redhat.com>
 MIME-Version: 1.0
-Cc: Sasha Levin <sashal@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Amit Shah <amit@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>, stable@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <20220414150855.2407137-2-dinechin@redhat.com>
+Cc: Juri Lelli <juri.lelli@redhat.com>, trivial@kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, Zhen Lei <thunder.leizhen@huawei.com>,
+ linux-kernel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
+ virtualization@lists.linux-foundation.org, Ben Segall <bsegall@google.com>,
+ Ingo Molnar <mingo@redhat.com>, Mel Gorman <mgorman@suse.de>,
+ Paolo Bonzini <pbonzini@redhat.com>,
+ Vincent Guittot <vincent.guittot@linaro.org>,
+ Andrew Morton <akpm@linux-foundation.org>,
+ Daniel Bristot de Oliveira <bristot@redhat.com>,
+ Dietmar Eggemann <dietmar.eggemann@arm.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -86,79 +100,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Randy Dunlap <rdunlap@infradead.org>
+On Thu, Apr 14, 2022 at 05:08:53PM +0200, Christophe de Dinechin wrote:
+> With gcc version 12.0.1 20220401 (Red Hat 12.0.1-0) (GCC), the following
+> errors are reported in sched.h when building after `make defconfig`:
 
-[ Upstream commit fefb8a2a941338d871e2d83fbd65fbfa068857bd ]
+<snip tons of noise>
 
-Eliminate anonymous module_init() and module_exit(), which can lead to
-confusion or ambiguity when reading System.map, crashes/oops/bugs,
-or an initcall_debug log.
+> Rewrite the definitions of sched_class_highest and for_class_range to
+> avoid this error as follows:
+> 
+> 1/ The sched_class_highest is rewritten to be relative to
+>   __begin_sched_classes, so that GCC sees it as being part of the
+>   __begin_sched_classes array and not a distinct __end_sched_classes
+>   array.
+> 
+> 2/ The for_class_range macro is modified to replace the comparison with
+>   an out-of-bound pointer __begin_sched_classes - 1 with an equivalent,
+>   but in-bounds comparison.
+> 
+> In that specific case, I believe that the GCC analysis is correct and
+> potentially valuable for other arrays, so it makes sense to keep it
+> enabled.
+> 
+> Signed-off-by: Christophe de Dinechin <christophe@dinechin.org>
+> Signed-off-by: Christophe de Dinechin <dinechin@redhat.com>
+> ---
+>  kernel/sched/sched.h | 11 +++++++++--
+>  1 file changed, 9 insertions(+), 2 deletions(-)
+> 
+> diff --git a/kernel/sched/sched.h b/kernel/sched/sched.h
+> index 8dccb34eb190..6350fbc7418d 100644
+> --- a/kernel/sched/sched.h
+> +++ b/kernel/sched/sched.h
+> @@ -2193,11 +2193,18 @@ const struct sched_class name##_sched_class \
+>  extern struct sched_class __begin_sched_classes[];
+>  extern struct sched_class __end_sched_classes[];
+>  
+> -#define sched_class_highest (__end_sched_classes - 1)
+> +/*
+> + * sched_class_highests is really __end_sched_classes - 1, but written in a way
+> + * that makes it clear that it is within __begin_sched_classes[] and not outside
+> + * of __end_sched_classes[].
+> + */
+> +#define sched_class_highest (__begin_sched_classes + \
+> +			     (__end_sched_classes - __begin_sched_classes - 1))
+>  #define sched_class_lowest  (__begin_sched_classes - 1)
+>  
+> +/* The + 1 below places the pointers within the range of their array */
+>  #define for_class_range(class, _from, _to) \
+> -	for (class = (_from); class != (_to); class--)
+> +	for (class = (_from); class + 1 != (_to) + 1; class--)
 
-Give each of these init and exit functions unique driver-specific
-names to eliminate the anonymous names.
+Urgh, so now we get less readable code, just because GCC is being
+stupid?
 
-Example 1: (System.map)
- ffffffff832fc78c t init
- ffffffff832fc79e t init
- ffffffff832fc8f8 t init
-
-Example 2: (initcall_debug log)
- calling  init+0x0/0x12 @ 1
- initcall init+0x0/0x12 returned 0 after 15 usecs
- calling  init+0x0/0x60 @ 1
- initcall init+0x0/0x60 returned 0 after 2 usecs
- calling  init+0x0/0x9a @ 1
- initcall init+0x0/0x9a returned 0 after 74 usecs
-
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Reviewed-by: Amit Shah <amit@kernel.org>
-Cc: virtualization@lists.linux-foundation.org
-Cc: Arnd Bergmann <arnd@arndb.de>
-Link: https://lore.kernel.org/r/20220316192010.19001-3-rdunlap@infradead.org
-Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/char/virtio_console.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
-index 2660a0c5483a..c736adef9d3c 100644
---- a/drivers/char/virtio_console.c
-+++ b/drivers/char/virtio_console.c
-@@ -2241,7 +2241,7 @@ static struct virtio_driver virtio_rproc_serial = {
- 	.remove =	virtcons_remove,
- };
- 
--static int __init init(void)
-+static int __init virtio_console_init(void)
- {
- 	int err;
- 
-@@ -2278,7 +2278,7 @@ static int __init init(void)
- 	return err;
- }
- 
--static void __exit fini(void)
-+static void __exit virtio_console_fini(void)
- {
- 	reclaim_dma_bufs();
- 
-@@ -2288,8 +2288,8 @@ static void __exit fini(void)
- 	class_destroy(pdrvdata.class);
- 	debugfs_remove_recursive(pdrvdata.debugfs_dir);
- }
--module_init(init);
--module_exit(fini);
-+module_init(virtio_console_init);
-+module_exit(virtio_console_fini);
- 
- MODULE_DESCRIPTION("Virtio console driver");
- MODULE_LICENSE("GPL");
--- 
-2.35.1
-
-
-
+What's wrong with negative array indexes? memory is memory, stuff works.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
