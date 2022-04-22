@@ -1,103 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id AE93050D72C
-	for <lists.virtualization@lfdr.de>; Mon, 25 Apr 2022 04:49:47 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1F94350DAFF
+	for <lists.virtualization@lfdr.de>; Mon, 25 Apr 2022 10:22:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 896AA4099E;
-	Mon, 25 Apr 2022 02:49:45 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9EEA1606C6;
+	Mon, 25 Apr 2022 08:22:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HMt932SkLaL1; Mon, 25 Apr 2022 02:49:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id F25A2409A7;
-	Mon, 25 Apr 2022 02:49:43 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id lSzD2CXgz4Q1; Mon, 25 Apr 2022 08:22:22 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6B186606F5;
+	Mon, 25 Apr 2022 08:22:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 60146C007C;
-	Mon, 25 Apr 2022 02:49:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D2396C007C;
+	Mon, 25 Apr 2022 08:22:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 47E61C002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EDD52C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Apr 2022 02:49:42 +0000 (UTC)
+ Mon, 25 Apr 2022 08:22:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2FF2A4014B
+ by smtp1.osuosl.org (Postfix) with ESMTP id DCA418151E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Apr 2022 02:49:42 +0000 (UTC)
+ Mon, 25 Apr 2022 08:22:19 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ikpAgMgsE5n9
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id gTGo1moWUb7A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Apr 2022 02:49:41 +0000 (UTC)
+ Mon, 25 Apr 2022 08:22:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 6D9DA40112
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9485781501
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Apr 2022 02:49:41 +0000 (UTC)
+ Mon, 25 Apr 2022 08:22:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1650854980;
+ s=mimecast20190719; t=1650874937;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=KCDyepNLXIMjCmD0I9QrPPQw55hA5ANlxUCyUt8honk=;
- b=Stcu18lcAZIvic+2IW01pKjrU6M1mu30qNO5Xt5RH49IFNX3tsSp8kgxryKAmHS+sgQUlt
- VsauHQtzP1s/6mJ2B0UtkIuTxsUpHoE68U/i6ZEr04ThNPm0EvDvpEtIqs5CGT+A/a5I6+
- CyAY+WABAkMDBwk+KtCUa2ItEncd2t0=
-Received: from mail-lf1-f71.google.com (mail-lf1-f71.google.com
- [209.85.167.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=pSx9DFRN+NXzO8KvmEpZt/ZmLB7PjIvaUwAyvIlr/DI=;
+ b=AFspNctmlC1K8DTOPdLk8UpIAqIIym+IAqQfj/xdZydLZgnk0cixVt2/Wkx0aEZjowqjDi
+ QMjU6ShVy/FLc6SQEBUebR/pmbSUk/BUQ25qeM1ZvO23ifTZQ+6bTNRg3JpMVLBsBNAM3U
+ jYbQb2bqQLuF+9nZGIxbQUfOLVwAEF0=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-204-Q_-fsNhVOoG1qLHelyLXlQ-1; Sun, 24 Apr 2022 22:49:39 -0400
-X-MC-Unique: Q_-fsNhVOoG1qLHelyLXlQ-1
-Received: by mail-lf1-f71.google.com with SMTP id
- b16-20020a056512305000b00471effe87f9so2503995lfb.2
- for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 19:49:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=KCDyepNLXIMjCmD0I9QrPPQw55hA5ANlxUCyUt8honk=;
- b=Lv7uoRHJE1XMTdTOQuJbHxA8fZcQQGGy1rmRBBQtJSKTaqWnQnU0K8uS6LIKCmxs8y
- mug2A21BGnbNtXzdOCOhIP/q8E0fTSKv/epsgVvCD8pXAPY/YLVRX/BdhXXplyq8J6Cu
- pKmPfuM5Wy5/YL/G2pk30TSi8De+e8qWV5A8ejIxYsdS46iipGZy1mefeagII26KA98H
- 6fWKQIf/0h4fmuQVhlILWf+lb+zQ8lPseN3tjFiJ5TslhbnlLUm+/UU1Ta9XXTpt7ZSi
- PwIQpzr601vc2WJIcfJ/Z/wpKEwEScX5C0p+62yTmhS1B5VnXDlub5HZE3s3Awzk6f3c
- ywLg==
-X-Gm-Message-State: AOAM531ZEwO8vg5FfYeO2MPSLFSCO7k6ZiAiwgfUfabPoo/8ynCZV4+n
- 7dFKSseG0fCgUHQMB6kBy+rB6M468uwcTJIRvrjH8KqE/rK853jY37axmsdRvWzhKYjCKSHifXh
- 1HyTtkJy7Rr+t97/HahwiQ0gxZ0jsUTXMyGzr8lzrK9iHHhkksAZWT32sAg==
-X-Received: by 2002:a05:6512:33d0:b0:471:a625:fdc0 with SMTP id
- d16-20020a05651233d000b00471a625fdc0mr11800999lfg.98.1650854977602; 
- Sun, 24 Apr 2022 19:49:37 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx1Bvc17jPROA+PgD8i2WHUkLeo7es3ShJCEW8hl7n+TZizuTW12IXBKEaR8K1XNZsBoQg+8eF/ps6c9TnSDWs=
-X-Received: by 2002:a05:6512:33d0:b0:471:a625:fdc0 with SMTP id
- d16-20020a05651233d000b00471a625fdc0mr11800984lfg.98.1650854977394; Sun, 24
- Apr 2022 19:49:37 -0700 (PDT)
+ us-mta-623-cp8a_Ih8M3q73QxAWEZlxg-1; Mon, 25 Apr 2022 04:22:12 -0400
+X-MC-Unique: cp8a_Ih8M3q73QxAWEZlxg-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1993783396B;
+ Mon, 25 Apr 2022 08:22:09 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.194])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A5DFF40314F;
+ Mon, 25 Apr 2022 08:22:08 +0000 (UTC)
+Date: Fri, 22 Apr 2022 15:56:55 +0100
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Chaitanya Kulkarni <chaitanyak@nvidia.com>
+Subject: Re: [PATCH 0/4] virtio-blk: small cleanup
+Message-ID: <YmLCN9EHA9R05xmC@stefanha-x1.localdomain>
+References: <20220420041053.7927-1-kch@nvidia.com>
+ <6c21dd2d-830a-8842-428e-6fc60966b73e@nvidia.com>
 MIME-Version: 1.0
-References: <20220425024418.8415-1-jasowang@redhat.com>
-In-Reply-To: <20220425024418.8415-1-jasowang@redhat.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 25 Apr 2022 10:49:26 +0800
-Message-ID: <CACGkMEu0qSb2o0HM6R2HE2g_fTbEBwPfXk7pO-QYepe3Unk5aw@mail.gmail.com>
-Subject: Re: [PATCH V3 0/9] rework on the IRQ hardening of virtio
-To: jasowang <jasowang@redhat.com>, mst <mst@redhat.com>, 
- linux-kernel <linux-kernel@vger.kernel.org>, 
- virtualization <virtualization@lists.linux-foundation.org>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Cindy Lu <lulu@redhat.com>, "Paul E. McKenney" <paulmck@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
- Cornelia Huck <cohuck@redhat.com>, Halil Pasic <pasic@linux.ibm.com>,
- eperezma <eperezma@redhat.com>, Thomas Gleixner <tglx@linutronix.de>
+In-Reply-To: <6c21dd2d-830a-8842-428e-6fc60966b73e@nvidia.com>
+X-Scanned-By: MIMEDefang 2.85 on 10.11.54.10
+Cc: "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>,
+ "pbonzini@redhat.com" <pbonzini@redhat.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>, "mst@redhat.com" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -109,92 +89,75 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4187189021940388415=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Apr 25, 2022 at 10:44 AM Jason Wang <jasowang@redhat.com> wrote:
->
-> Hi All:
->
 
-Forgot to add Xuan to the series.
+--===============4187189021940388415==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="g0839ppuCZya34th"
+Content-Disposition: inline
 
-Thanks
 
-> This is a rework on the IRQ hardening for virtio which is done
-> previously by the following commits are reverted:
->
-> 9e35276a5344 ("virtio_pci: harden MSI-X interrupts")
-> 080cd7c3ac87 ("virtio-pci: harden INTX interrupts")
->
-> The reason is that it depends on the IRQF_NO_AUTOEN which may conflict
-> with the assumption of the affinity managed IRQ that is used by some
-> virtio drivers. And what's more, it is only done for virtio-pci but
-> not other transports.
->
-> In this rework, I try to implement a general virtio solution which
-> borrows the idea of the INTX hardening by re-using per virtqueue
-> boolean vq->broken and toggle it in virtio_device_ready() and
-> virtio_reset_device(). Then we can simply reuse the existing checks in
-> the vring_interrupt() and return early if the driver is not ready.
->
-> Note that, I only did compile test on ccw and MMIO transport.
->
-> Please review.
->
-> Changes since v1:
->
-> - Use transport specific irq synchronization method when possible
-> - Drop the module parameter and enable the hardening unconditonally
-> - Tweak the barrier/ordering facilities used in the code
-> - Reanme irq_soft_enabled to driver_ready
-> - Avoid unnecssary IRQ synchornization (e.g during boot)
->
-> Changes since V2:
->
-> - add ccw and MMIO support
-> - rename synchronize_vqs() to synchronize_cbs()
-> - switch to re-use vq->broken instead of introducing new device
->   attributes for the future virtqueue reset support
-> - remove unnecssary READ_ONCE()/WRITE_ONCE()
-> - a new patch to remove device triggerable BUG_ON()
-> - more tweaks on the comments
->
-> Jason Wang (8):
->   virtio: use virtio_reset_device() when possible
->   virtio: introduce config op to synchronize vring callbacks
->   virtio-pci: implement synchronize_cbs()
->   virtio-mmio: implement synchronize_cbs()
->   virtio-ccw: implement synchronize_cbs()
->   virtio: allow to unbreak virtqueue
->   virtio: harden vring IRQ
->   virtio: use WARN_ON() to warning illegal status value
->
-> Stefano Garzarella (1):
->   virtio: use virtio_device_ready() in virtio_device_restore()
->
->  drivers/char/virtio_console.c              |  2 +-
->  drivers/crypto/virtio/virtio_crypto_core.c |  2 +-
->  drivers/s390/virtio/virtio_ccw.c           | 31 ++++++++++++++++--
->  drivers/virtio/virtio.c                    | 24 ++++++++++----
->  drivers/virtio/virtio_mmio.c               |  9 +++++
->  drivers/virtio/virtio_pci_common.c         |  2 +-
->  drivers/virtio/virtio_pci_common.h         |  2 ++
->  drivers/virtio/virtio_pci_legacy.c         |  1 +
->  drivers/virtio/virtio_pci_modern.c         |  2 ++
->  drivers/virtio/virtio_ring.c               | 15 +++++----
->  include/linux/virtio.h                     |  2 +-
->  include/linux/virtio_config.h              | 38 +++++++++++++++++++++-
->  12 files changed, 110 insertions(+), 20 deletions(-)
->
-> --
-> 2.25.1
->
->
+--g0839ppuCZya34th
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Thu, Apr 21, 2022 at 09:56:28PM +0000, Chaitanya Kulkarni wrote:
+> On 4/19/22 21:10, Chaitanya Kulkarni wrote:
+> > Hi,
+> >=20
+> > This has some nit fixes and code cleanups along with removing
+> > deprecated API fir ida_simple_XXX().
+> >=20
+> > -ck
+> >=20
+> > Chaitanya Kulkarni (4):
+> >    virtio-blk: remove additional check in fast path
+> >    virtio-blk: don't add a new line
+> >    virtio-blk: avoid function call in the fast path
+> >    virtio-blk: remove deprecated ida_simple_XXX()
+> >=20
+> >   drivers/block/virtio_blk.c | 38 +++++++++++++++++---------------------
+> >   1 file changed, 17 insertions(+), 21 deletions(-)
+> >=20
+>=20
+> Thanks for the review, I'll send out a V2 and drop patches that
+> lacks the quantitative data..
+
+Thank you!
+
+Stefan
+
+--g0839ppuCZya34th
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmJiwjYACgkQnKSrs4Gr
+c8jOhQf+NAjIxbIpz49jBiC5oSMiAQdLKLILSvVFZq0bkyFlj+B7kDypj1S8pyEp
+vlu/io8j5B8VNVZMjxj8s14OnwQ7e2H1rFrlwLh9uxDz4x4JSZ4d2+XpVuxgXzr7
+HZUqWc9nSBbop4XoylU3rr+ASVoUZVi9HRO3cai37kGQrRNt+0L94D1JWWt1UAG5
+qAMoQyHfrWA/wK1tcvvHO0i65OuFFwa6vtzyiiNrhnBWkDjU7s3D6qRrahFN41fv
+2NsBCqS0seVGF+kDmGxADZqGl2p38uPSz4lkZhDBl//iDkPgn+/Ch363laWq0xWi
+gWC1jD+U+9I2/sjh+7jlcnNPKzFTrQ==
+=0s2z
+-----END PGP SIGNATURE-----
+
+--g0839ppuCZya34th--
+
+
+--===============4187189021940388415==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4187189021940388415==--
+
