@@ -1,56 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C275050CE89
-	for <lists.virtualization@lfdr.de>; Sun, 24 Apr 2022 04:41:04 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B8C8C50CE8C
+	for <lists.virtualization@lfdr.de>; Sun, 24 Apr 2022 04:41:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0C53381CAD;
-	Sun, 24 Apr 2022 02:41:03 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 48FCB4171E;
+	Sun, 24 Apr 2022 02:41:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FilJDyziyQAS; Sun, 24 Apr 2022 02:41:02 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id v3_p3jOprX4b; Sun, 24 Apr 2022 02:41:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id B65AA81D5C;
-	Sun, 24 Apr 2022 02:41:01 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 970FB40932;
+	Sun, 24 Apr 2022 02:41:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9450C007A;
-	Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2287AC007C;
+	Sun, 24 Apr 2022 02:41:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3C64AC002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3F62EC0089
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:57 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1AD62403AA
+ by smtp2.osuosl.org (Postfix) with ESMTP id 22250404CC
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:57 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:59 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DjaCs_IBeyzV
+ with ESMTP id TEBSiIc5XXeZ
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-130.freemail.mail.aliyun.com
- (out30-130.freemail.mail.aliyun.com [115.124.30.130])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 41A954049F
+Received: from out30-54.freemail.mail.aliyun.com
+ (out30-54.freemail.mail.aliyun.com [115.124.30.54])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 410DC404A6
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzbmry_1650768053; 
+ Sun, 24 Apr 2022 02:40:57 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzv5F-_1650768054; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VAzbmry_1650768053) by smtp.aliyun-inc.com(127.0.0.1);
- Sun, 24 Apr 2022 10:40:53 +0800
+ fp:SMTPD_---0VAzv5F-_1650768054) by smtp.aliyun-inc.com(127.0.0.1);
+ Sun, 24 Apr 2022 10:40:54 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 10/16] virtio_ring: packed: introduce
- vring_virtqueue_detach_packed()
-Date: Sun, 24 Apr 2022 10:40:38 +0800
-Message-Id: <20220424024044.94749-11-xuanzhuo@linux.alibaba.com>
+Subject: [RFC PATCH 11/16] virtio_ring: packed: extract
+ virtqueue_update_packed()
+Date: Sun, 24 Apr 2022 10:40:39 +0800
+Message-Id: <20220424024044.94749-12-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
 References: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
@@ -74,60 +74,149 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The function vring_virtqueue_detach_packed() is introduced to detach the
-vring of the current vq.
+Separate the logic for updating the vq state from virtqueue_add_packed()
+and virtqueue_add_indirect_packed().
 
-Add two new members. last_used_idx is used to record the position where
-the current vring desc is used, which can be used to obtain buffers from
-the vring in order. Another num_left records how many buffers there are,
-which can be used to check the recovery of buffers completed.
+In this way, when the subsequent patch implements the logic of reusing
+the buffer when resize, we can share this function.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ drivers/virtio/virtio_ring.c | 96 ++++++++++++++++++------------------
+ 1 file changed, 47 insertions(+), 49 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 436b18184dfe..219e008a4633 100644
+index 219e008a4633..5e6bd9a4e648 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -154,6 +154,10 @@ struct vring_virtqueue_packed {
- 	dma_addr_t device_event_dma_addr;
- 	size_t ring_size_in_bytes;
- 	size_t event_size_in_bytes;
-+
-+	/* for vring detach */
-+	u16 last_used_idx;
-+	u32 num_left;
- };
- 
- struct vring_virtqueue {
-@@ -2090,6 +2094,25 @@ static int vring_alloc_state_extra_packed(struct vring_virtqueue_packed *vring)
- 	return -ENOMEM;
+@@ -1403,6 +1403,47 @@ static struct vring_packed_desc *alloc_indirect_packed(unsigned int total_sg,
+ 	return desc;
  }
  
-+static void vring_virtqueue_detach_packed(struct vring_virtqueue *vq,
-+					  struct vring_virtqueue_packed *vring)
++static inline void virtqueue_update_packed(struct vring_virtqueue *vq,
++					   u32 descs_used,
++					   u16 curr,
++					   u16 prev,
++					   u32 idx,
++					   __le16 head_flags,
++					   struct vring_packed_desc *desc,
++					   void *data)
 +{
-+	vring->vring = vq->packed.vring;
++	u16 head, id;
 +
-+	vring->ring_dma_addr         = vq->packed.ring_dma_addr;
-+	vring->driver_event_dma_addr = vq->packed.driver_event_dma_addr;
-+	vring->device_event_dma_addr = vq->packed.device_event_dma_addr;
++	id = vq->free_head;
++	head = vq->packed.next_avail_idx;
 +
-+	vring->ring_size_in_bytes    = vq->packed.ring_size_in_bytes;
-+	vring->event_size_in_bytes   = vq->packed.event_size_in_bytes;
++	if (idx < head)
++		vq->packed.avail_wrap_counter ^= 1;
 +
-+	vring->desc_state = vq->packed.desc_state;
-+	vring->desc_extra = vq->packed.desc_extra;
++	/* We're using some buffers from the free list. */
++	vq->vq.num_free -= descs_used;
 +
-+	vring->last_used_idx = vq->last_used_idx;
-+	vring->num_left = vq->packed.vring.num - vq->vq.num_free;
++	/* Update free pointer */
++	vq->packed.next_avail_idx = idx;
++	vq->free_head = curr;
++
++	/* Store token. */
++	vq->packed.desc_state[id].num = descs_used;
++	vq->packed.desc_state[id].data = data;
++	vq->packed.desc_state[id].indir_desc = desc;
++	vq->packed.desc_state[id].last = prev;
++
++	/*
++	 * A driver MUST NOT make the first descriptor in the list
++	 * available before all subsequent descriptors comprising
++	 * the list are made available.
++	 */
++	virtio_wmb(vq->weak_barriers);
++	vq->packed.vring.desc[head].flags = head_flags;
++	vq->num_added += descs_used;
++
 +}
 +
- static void virtqueue_vring_attach_packed(struct vring_virtqueue *vq,
- 					  struct vring_virtqueue_packed *vring)
- {
+ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 					 struct scatterlist *sgs[],
+ 					 unsigned int total_sg,
+@@ -1414,6 +1455,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	struct vring_packed_desc *desc;
+ 	struct scatterlist *sg;
+ 	unsigned int i, n, err_idx;
++	__le16 head_flags;
+ 	u16 head, id;
+ 	dma_addr_t addr;
+ 
+@@ -1466,34 +1508,13 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	vq->packed.desc_extra[id].flags = VRING_DESC_F_INDIRECT |
+ 		vq->packed.avail_used_flags;
+ 
+-	/*
+-	 * A driver MUST NOT make the first descriptor in the list
+-	 * available before all subsequent descriptors comprising
+-	 * the list are made available.
+-	 */
+-	virtio_wmb(vq->weak_barriers);
+-	vq->packed.vring.desc[head].flags = cpu_to_le16(VRING_DESC_F_INDIRECT |
+-						vq->packed.avail_used_flags);
+-
+-	/* We're using some buffers from the free list. */
+-	vq->vq.num_free -= 1;
++	head_flags = cpu_to_le16(VRING_DESC_F_INDIRECT | vq->packed.avail_used_flags);
+ 
+ 	/* Update free pointer */
+ 	n = next_idx(vq, head);
+ 
+-	if (n < head)
+-		vq->packed.avail_wrap_counter ^= 1;
+-
+-	vq->packed.next_avail_idx = n;
+-	vq->free_head = vq->packed.desc_extra[id].next;
+-
+-	/* Store token and indirect buffer state. */
+-	vq->packed.desc_state[id].num = 1;
+-	vq->packed.desc_state[id].data = data;
+-	vq->packed.desc_state[id].indir_desc = desc;
+-	vq->packed.desc_state[id].last = id;
+-
+-	vq->num_added += 1;
++	virtqueue_update_packed(vq, 1, vq->packed.desc_extra[id].next, id, n,
++				head_flags, desc, data);
+ 
+ 	pr_debug("Added buffer head %i to %p\n", head, vq);
+ 	END_USE(vq);
+@@ -1605,31 +1626,8 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+ 		}
+ 	}
+ 
+-	if (i < head)
+-		vq->packed.avail_wrap_counter ^= 1;
+-
+-	/* We're using some buffers from the free list. */
+-	vq->vq.num_free -= descs_used;
+-
+-	/* Update free pointer */
+-	vq->packed.next_avail_idx = i;
+-	vq->free_head = curr;
+-
+-	/* Store token. */
+-	vq->packed.desc_state[id].num = descs_used;
+-	vq->packed.desc_state[id].data = data;
+-	vq->packed.desc_state[id].indir_desc = ctx;
+-	vq->packed.desc_state[id].last = prev;
+-
+-	/*
+-	 * A driver MUST NOT make the first descriptor in the list
+-	 * available before all subsequent descriptors comprising
+-	 * the list are made available.
+-	 */
+-	virtio_wmb(vq->weak_barriers);
+-	vq->packed.vring.desc[head].flags = head_flags;
+-	vq->num_added += descs_used;
+-
++	virtqueue_update_packed(vq, descs_used, curr, prev, i, head_flags,
++				ctx, data);
+ 	pr_debug("Added buffer head %i to %p\n", head, vq);
+ 	END_USE(vq);
+ 
 -- 
 2.31.0
 
