@@ -1,55 +1,56 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 71F6A50CE88
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C275050CE89
 	for <lists.virtualization@lfdr.de>; Sun, 24 Apr 2022 04:41:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 12F4E4057F;
-	Sun, 24 Apr 2022 02:41:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0C53381CAD;
+	Sun, 24 Apr 2022 02:41:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ogl7s6hhmQbs; Sun, 24 Apr 2022 02:41:01 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id DF02A4057A;
-	Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id FilJDyziyQAS; Sun, 24 Apr 2022 02:41:02 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id B65AA81D5C;
+	Sun, 24 Apr 2022 02:41:01 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2771BC007F;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C9450C007A;
 	Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E7653C002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3C64AC002D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D22CD404AB
+ by smtp2.osuosl.org (Postfix) with ESMTP id 1AD62403AA
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xCL4S3jbhsZM
+ with ESMTP id DjaCs_IBeyzV
  for <virtualization@lists.linux-foundation.org>;
  Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E8DFC403AA
+Received: from out30-130.freemail.mail.aliyun.com
+ (out30-130.freemail.mail.aliyun.com [115.124.30.130])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 41A954049F
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:55 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e01424; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzbmrg_1650768052; 
+ Sun, 24 Apr 2022 02:40:56 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04400; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzbmry_1650768053; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VAzbmrg_1650768052) by smtp.aliyun-inc.com(127.0.0.1);
+ fp:SMTPD_---0VAzbmry_1650768053) by smtp.aliyun-inc.com(127.0.0.1);
  Sun, 24 Apr 2022 10:40:53 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 09/16] virtio_ring: packed: always update desc_extra
-Date: Sun, 24 Apr 2022 10:40:37 +0800
-Message-Id: <20220424024044.94749-10-xuanzhuo@linux.alibaba.com>
+Subject: [RFC PATCH 10/16] virtio_ring: packed: introduce
+ vring_virtqueue_detach_packed()
+Date: Sun, 24 Apr 2022 10:40:38 +0800
+Message-Id: <20220424024044.94749-11-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
 References: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
@@ -73,57 +74,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-No longer determine whether to update desc_extra based on use_dma_api.
+The function vring_virtqueue_detach_packed() is introduced to detach the
+vring of the current vq.
 
-Because desc will be modified by the device, in the process of resize,
-if you want to reuse buffers, you can only get len and flags from
-desc_extra.
+Add two new members. last_used_idx is used to record the position where
+the current vring desc is used, which can be used to obtain buffers from
+the vring in order. Another num_left records how many buffers there are,
+which can be used to check the recovery of buffers completed.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 22 +++++++++-------------
- 1 file changed, 9 insertions(+), 13 deletions(-)
+ drivers/virtio/virtio_ring.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index e3525d92f646..436b18184dfe 100644
+index 436b18184dfe..219e008a4633 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -1456,13 +1456,11 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 				sizeof(struct vring_packed_desc));
- 	vq->packed.vring.desc[head].id = cpu_to_le16(id);
- 
--	if (vq->use_dma_api) {
--		vq->packed.desc_extra[id].addr = addr;
--		vq->packed.desc_extra[id].len = total_sg *
--				sizeof(struct vring_packed_desc);
--		vq->packed.desc_extra[id].flags = VRING_DESC_F_INDIRECT |
--						  vq->packed.avail_used_flags;
--	}
-+	vq->packed.desc_extra[id].addr = addr;
-+	vq->packed.desc_extra[id].len = total_sg *
-+		sizeof(struct vring_packed_desc);
-+	vq->packed.desc_extra[id].flags = VRING_DESC_F_INDIRECT |
-+		vq->packed.avail_used_flags;
- 
- 	/*
- 	 * A driver MUST NOT make the first descriptor in the list
-@@ -1592,12 +1590,10 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 			desc[i].len = cpu_to_le32(sg->length);
- 			desc[i].id = cpu_to_le16(id);
- 
--			if (unlikely(vq->use_dma_api)) {
--				vq->packed.desc_extra[curr].addr = addr;
--				vq->packed.desc_extra[curr].len = sg->length;
--				vq->packed.desc_extra[curr].flags =
--					le16_to_cpu(flags);
--			}
-+			vq->packed.desc_extra[curr].addr = addr;
-+			vq->packed.desc_extra[curr].len = sg->length;
-+			vq->packed.desc_extra[curr].flags = le16_to_cpu(flags);
+@@ -154,6 +154,10 @@ struct vring_virtqueue_packed {
+ 	dma_addr_t device_event_dma_addr;
+ 	size_t ring_size_in_bytes;
+ 	size_t event_size_in_bytes;
 +
- 			prev = curr;
- 			curr = vq->packed.desc_extra[curr].next;
++	/* for vring detach */
++	u16 last_used_idx;
++	u32 num_left;
+ };
  
+ struct vring_virtqueue {
+@@ -2090,6 +2094,25 @@ static int vring_alloc_state_extra_packed(struct vring_virtqueue_packed *vring)
+ 	return -ENOMEM;
+ }
+ 
++static void vring_virtqueue_detach_packed(struct vring_virtqueue *vq,
++					  struct vring_virtqueue_packed *vring)
++{
++	vring->vring = vq->packed.vring;
++
++	vring->ring_dma_addr         = vq->packed.ring_dma_addr;
++	vring->driver_event_dma_addr = vq->packed.driver_event_dma_addr;
++	vring->device_event_dma_addr = vq->packed.device_event_dma_addr;
++
++	vring->ring_size_in_bytes    = vq->packed.ring_size_in_bytes;
++	vring->event_size_in_bytes   = vq->packed.event_size_in_bytes;
++
++	vring->desc_state = vq->packed.desc_state;
++	vring->desc_extra = vq->packed.desc_extra;
++
++	vring->last_used_idx = vq->last_used_idx;
++	vring->num_left = vq->packed.vring.num - vq->vq.num_free;
++}
++
+ static void virtqueue_vring_attach_packed(struct vring_virtqueue *vq,
+ 					  struct vring_virtqueue_packed *vring)
+ {
 -- 
 2.31.0
 
