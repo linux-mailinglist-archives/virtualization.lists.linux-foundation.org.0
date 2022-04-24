@@ -2,54 +2,54 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5192650CE85
-	for <lists.virtualization@lfdr.de>; Sun, 24 Apr 2022 04:41:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 637EE50CE8A
+	for <lists.virtualization@lfdr.de>; Sun, 24 Apr 2022 04:41:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8001060C23;
-	Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7611060E06;
+	Sun, 24 Apr 2022 02:41:01 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IN944FHQ2_TW; Sun, 24 Apr 2022 02:40:59 +0000 (UTC)
+	with ESMTP id QPW_VPrSwFhZ; Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 3703A60B56;
-	Sun, 24 Apr 2022 02:40:59 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 2B61A60BF8;
+	Sun, 24 Apr 2022 02:41:00 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 877FAC007C;
-	Sun, 24 Apr 2022 02:40:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 38441C0088;
+	Sun, 24 Apr 2022 02:40:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BE4B1C0032
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E0117C002D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:54 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 9A6A3403AA
+ by smtp2.osuosl.org (Postfix) with ESMTP id B9E49403BE
  for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:54 +0000 (UTC)
+ Sun, 24 Apr 2022 02:40:55 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id loM7JfyFanrP
+ with ESMTP id tp05Hwlum00y
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 24 Apr 2022 02:40:55 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E651E4016D
  for <virtualization@lists.linux-foundation.org>;
  Sun, 24 Apr 2022 02:40:54 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-57.freemail.mail.aliyun.com
- (out30-57.freemail.mail.aliyun.com [115.124.30.57])
- by smtp2.osuosl.org (Postfix) with ESMTPS id CD49B4016D
- for <virtualization@lists.linux-foundation.org>;
- Sun, 24 Apr 2022 02:40:53 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04394; MF=xuanzhuo@linux.alibaba.com;
- NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzcuZE_1650768050; 
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04357; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=4; SR=0; TI=SMTPD_---0VAzcuZa_1650768051; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VAzcuZE_1650768050) by smtp.aliyun-inc.com(127.0.0.1);
- Sun, 24 Apr 2022 10:40:51 +0800
+ fp:SMTPD_---0VAzcuZa_1650768051) by smtp.aliyun-inc.com(127.0.0.1);
+ Sun, 24 Apr 2022 10:40:52 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: linux-kernel@vger.kernel.org
-Subject: [RFC PATCH 07/16] virtio_ring: split: resize support re-use buffers
-Date: Sun, 24 Apr 2022 10:40:35 +0800
-Message-Id: <20220424024044.94749-8-xuanzhuo@linux.alibaba.com>
+Subject: [RFC PATCH 08/16] virtio_ring: packed: extract next_idx()
+Date: Sun, 24 Apr 2022 10:40:36 +0800
+Message-Id: <20220424024044.94749-9-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
 References: <20220424024044.94749-1-xuanzhuo@linux.alibaba.com>
@@ -73,76 +73,71 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Split vring resize supports reusing the original buffer.
-
-The split vring resize function implemented earlier uses the method
-of letting the upper layer recycle all the buffers. This commit will
-first try to re-put it to the new vring in the order submitted to the
-old vring. The remaining buffers that cannot be submitted to the new
-vring will be called the recycle callback to release.
+Separate the logic of idx growth of packed into a function. It is
+convenient to share in multiple locations. Subsequent patches will also
+use this logic.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 21 +++++++++++++++++----
- 1 file changed, 17 insertions(+), 4 deletions(-)
+ drivers/virtio/virtio_ring.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 02d4ffcc0a3b..fa4270e8c009 100644
+index fa4270e8c009..e3525d92f646 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -1281,11 +1281,13 @@ static struct virtqueue *vring_create_virtqueue_split(
- 	return vq;
- }
+@@ -1330,6 +1330,18 @@ static int virtqueue_resize_split(struct virtqueue *_vq, u32 num,
+  * Packed ring specific functions - *_packed().
+  */
  
--static int virtqueue_resize_split(struct virtqueue *_vq, u32 num)
-+static int virtqueue_resize_split(struct virtqueue *_vq, u32 num,
-+				  void (*recycle)(struct virtqueue *vq, void *buf))
++static u32 next_idx(struct vring_virtqueue *vq, u32 idx)
++{
++	if ((unlikely(++idx >= vq->packed.vring.num))) {
++		idx = 0;
++		vq->packed.avail_used_flags ^=
++			1 << VRING_PACKED_DESC_F_AVAIL |
++			1 << VRING_PACKED_DESC_F_USED;
++	}
++
++	return idx;
++}
++
+ static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
+ 				     struct vring_desc_extra *extra)
  {
-+	struct vring_virtqueue_split vring = {}, vring_old = {};
- 	struct vring_virtqueue *vq = to_vvq(_vq);
--	struct vring_virtqueue_split vring = {};
- 	struct virtio_device *vdev = _vq->vdev;
-+	void *buf;
- 	int err;
+@@ -1465,14 +1477,11 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	vq->vq.num_free -= 1;
  
- 	err = vring_alloc_queue_split(&vring, vdev, num, vq->split.vring_align,
-@@ -1299,15 +1301,26 @@ static int virtqueue_resize_split(struct virtqueue *_vq, u32 num)
- 		goto err;
+ 	/* Update free pointer */
+-	n = head + 1;
+-	if (n >= vq->packed.vring.num) {
+-		n = 0;
++	n = next_idx(vq, head);
++
++	if (n < head)
+ 		vq->packed.avail_wrap_counter ^= 1;
+-		vq->packed.avail_used_flags ^=
+-				1 << VRING_PACKED_DESC_F_AVAIL |
+-				1 << VRING_PACKED_DESC_F_USED;
+-	}
++
+ 	vq->packed.next_avail_idx = n;
+ 	vq->free_head = vq->packed.desc_extra[id].next;
+ 
+@@ -1592,12 +1601,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+ 			prev = curr;
+ 			curr = vq->packed.desc_extra[curr].next;
+ 
+-			if ((unlikely(++i >= vq->packed.vring.num))) {
+-				i = 0;
+-				vq->packed.avail_used_flags ^=
+-					1 << VRING_PACKED_DESC_F_AVAIL |
+-					1 << VRING_PACKED_DESC_F_USED;
+-			}
++			i = next_idx(vq, i);
+ 		}
  	}
  
--	vring_free(&vq->vq);
-+	virtqueue_vring_detach_split(vq, &vring_old);
- 
- 	virtqueue_init(vq, vring.vring.num);
- 	virtqueue_vring_attach_split(vq, &vring);
- 	virtqueue_vring_init_split(vq);
- 
-+	vring_reuse_bufs_split(vq, &vring_old, recycle);
-+	vring_free_split(&vring_old, vdev);
-+
- 	return 0;
- 
- err:
-+	/*
-+	 * In the case of failure to create vring, do not try to reuse the
-+	 * original buffer. Because the probability of this situation is not
-+	 * high, but we have to introduce new logic.
-+	 */
-+	while ((buf = virtqueue_detach_unused_buf(&vq->vq)))
-+		recycle(&vq->vq, buf);
-+
- 	virtqueue_reinit_split(vq);
- 	return -ENOMEM;
- }
-@@ -2747,7 +2760,7 @@ int virtqueue_resize(struct virtqueue *_vq, u32 num,
- 	if (packed)
- 		err = virtqueue_resize_packed(_vq, num);
- 	else
--		err = virtqueue_resize_split(_vq, num);
-+		err = virtqueue_resize_split(_vq, num, recycle);
- 
- 	if (vdev->config->enable_reset_vq(_vq))
- 		return -EBUSY;
 -- 
 2.31.0
 
