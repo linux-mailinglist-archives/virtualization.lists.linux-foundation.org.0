@@ -1,83 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3CD1251A15C
-	for <lists.virtualization@lfdr.de>; Wed,  4 May 2022 15:51:08 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5761151A4B6
+	for <lists.virtualization@lfdr.de>; Wed,  4 May 2022 17:57:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id A1911408B2;
-	Wed,  4 May 2022 13:51:06 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id D3E044023E;
+	Wed,  4 May 2022 15:57:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QbD4Y4_o3ulD; Wed,  4 May 2022 13:51:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 5F43C4091C;
-	Wed,  4 May 2022 13:51:05 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id T89ajw3FDXmD; Wed,  4 May 2022 15:57:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 61DE940259;
+	Wed,  4 May 2022 15:57:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CB6B7C007E;
-	Wed,  4 May 2022 13:51:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CA823C0084;
+	Wed,  4 May 2022 15:57:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 22740C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 86AF4C007E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 May 2022 13:51:03 +0000 (UTC)
+ Wed,  4 May 2022 15:57:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id F0BD361083
+ by smtp4.osuosl.org (Postfix) with ESMTP id 61B8F4023E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 May 2022 13:51:02 +0000 (UTC)
+ Wed,  4 May 2022 15:57:11 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id t0xJdYKCHIDz
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Yr9sOiB9LvTU
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 May 2022 13:51:01 +0000 (UTC)
+ Wed,  4 May 2022 15:57:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B8A8C60AAA
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1083140222
  for <virtualization@lists.linux-foundation.org>;
- Wed,  4 May 2022 13:51:01 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ Wed,  4 May 2022 15:57:09 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id B9303B82416;
- Wed,  4 May 2022 13:50:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1D280C385A4;
- Wed,  4 May 2022 13:50:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1651672257;
- bh=ZHm4zRsrfroy4L8PmGFqSDzG1kyM2WEhmxfXu30nYJ8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=KbD0RzUSQXY1GOpppkVJACC+5dEQ+Oa6BSONKBAqkMFnH24ZxfCh/URltxKrp48hu
- 4ERCzWc5JbR0Dwx1fMhtEe8hFatvMvFPHtXvknO90dVNHnSsAA6DP+s2JitpkPo6At
- OrCGkGJ4vybphxUx+3TNN39kypMQPCjpbDHgxLrLXO0D0uqMGyeAvQTrEorGKltQZv
- wSCJGoHL3Xhr/GKJNCePKYdZcNfU+ev30vTx+iFL2IyW2p3nFudZspWTVwNCmrsAwV
- ZughhxY3oVqmWBH4BVsZrBpYquVzPqjhD+qSdlbeyjbuUILkCdNpx5QMWOQaNicTj7
- E+esIMj4DGfZQ==
-Date: Wed, 4 May 2022 14:50:51 +0100
-From: Will Deacon <will@kernel.org>
-To: Juergen Gross <jgross@suse.com>
-Subject: Re: [PATCH v2] arm64: paravirt: Use RCU read locks to guard
- stolen_time
-Message-ID: <20220504135050.GA20470@willie-the-truck>
-References: <20220428183536.2866667-1-quic_eberman@quicinc.com>
- <20220504094507.GA20305@willie-the-truck>
- <c6689e42-e87c-0c0b-c7ff-40134406e080@suse.com>
+ by smtp-out2.suse.de (Postfix) with ESMTPS id A53991F74B;
+ Wed,  4 May 2022 15:57:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1651679826; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=hG7emcEGn0sS81RKfZEcY3mzY1AE7PXlwENEP7suGv0=;
+ b=g4wY94mvZyO+V+p1H2CBHhX6rOIEgjn6VJaUzqhOuZaZX7Z5w3dZMNr2IaH2+kGxfqve9X
+ r9KOXvqVpM9FnKRs3k6i4MC+Iqp/CQTkqEI1FyzTVZqXo58XoBlTfaY4/FeC40jLvdkqw2
+ cmdfELH/dDTQoTEyFXNI3PahwVKzzWM=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 04953132C4;
+ Wed,  4 May 2022 15:57:05 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id XfVKO1GicmLWPAAAMHmgww
+ (envelope-from <jgross@suse.com>); Wed, 04 May 2022 15:57:05 +0000
+To: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ linux-arch@vger.kernel.org, x86@kernel.org, linux-s390@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
+Subject: [PATCH v3 0/2] kernel: add new infrastructure for platform_has()
+ support
+Date: Wed,  4 May 2022 17:57:01 +0200
+Message-Id: <20220504155703.13336-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <c6689e42-e87c-0c0b-c7ff-40134406e080@suse.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Cc: Murali Nalajala <quic_mnalajal@quicinc.com>,
- Elliot Berman <quic_eberman@quicinc.com>,
- Catalin Marinas <catalin.marinas@arm.com>, x86@kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Alexey Makhalov <amakhalov@vmware.com>,
- Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
- linux-arm-kernel@lists.infradead.org
+Cc: Juergen Gross <jgross@suse.com>, Oleksandr Tyshchenko <olekstysh@gmail.com>,
+ Arnd Bergmann <arnd@arndb.de>, Vasily Gorbik <gor@linux.ibm.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Peter Zijlstra <peterz@infradead.org>,
+ Heiko Carstens <hca@linux.ibm.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ Christoph Hellwig <hch@infradead.org>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, Sven Schnelle <svens@linux.ibm.com>,
+ Andy Lutomirski <luto@kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ Alexander Gordeev <agordeev@linux.ibm.com>,
+ Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,55 +89,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Juergen Gross via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 04, 2022 at 03:38:47PM +0200, Juergen Gross wrote:
-> On 04.05.22 11:45, Will Deacon wrote:
-> > On Thu, Apr 28, 2022 at 11:35:36AM -0700, Elliot Berman wrote:
-> > > diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c
-> > > index 75fed4460407..e724ea3d86f0 100644
-> > > --- a/arch/arm64/kernel/paravirt.c
-> > > +++ b/arch/arm64/kernel/paravirt.c
-> > > @@ -52,7 +52,9 @@ early_param("no-steal-acc", parse_no_stealacc);
-> > >   /* return stolen time in ns by asking the hypervisor */
-> > >   static u64 para_steal_clock(int cpu)
-> > >   {
-> > > +	struct pvclock_vcpu_stolen_time *kaddr = NULL;
-> > >   	struct pv_time_stolen_time_region *reg;
-> > > +	u64 ret = 0;
-> > >   	reg = per_cpu_ptr(&stolen_time_region, cpu);
-> > > @@ -61,28 +63,38 @@ static u64 para_steal_clock(int cpu)
-> > >   	 * online notification callback runs. Until the callback
-> > >   	 * has run we just return zero.
-> > >   	 */
-> > > -	if (!reg->kaddr)
-> > > +	rcu_read_lock();
-> > > +	kaddr = rcu_dereference(reg->kaddr);
-> > > +	if (!kaddr) {
-> > > +		rcu_read_unlock();
-> > >   		return 0;
-> > > +	}
-> > > -	return le64_to_cpu(READ_ONCE(reg->kaddr->stolen_time));
-> > > +	ret = le64_to_cpu(READ_ONCE(kaddr->stolen_time));
-> > 
-> > Is this READ_ONCE() still required now?
-> 
-> Yes, as it might be called for another cpu than the current one.
-> stolen_time might just be updated, so you want to avoid load tearing.
+In another patch series [1] the need has come up to have support for
+a generic feature flag infrastructure.
 
-Ah yes, thanks. The lifetime of the structure is one thing, but the
-stolen time field is updated much more regularly than the kaddr pointer.
+This patch series is introducing that infrastructure and adds the first
+use case.
 
-So:
+I have decided to use a similar interface as the already known x86
+cpu_has() function. As the new infrastructure is meant to be usable for
+general and arch-specific feature flags, the flags are being spread
+between a general bitmap and an arch specific one.
 
-Acked-by: Will Deacon <will@kernel.org>
+The bitmaps start all being zero, single features can be set or reset
+at any time by using the related platform_[re]set_feature() functions.
 
-Cheers,
+The platform_has() function is using a simple test_bit() call for now,
+further optimization might be added when needed.
 
-Will
+[1]: https://lore.kernel.org/lkml/1650646263-22047-1-git-send-email-olekstysh@gmail.com/T/#t
+
+Juergen Gross (2):
+  kernel: add platform_has() infrastructure
+  virtio: replace arch_has_restricted_virtio_memory_access()
+
+ MAINTAINERS                            |  8 ++++++++
+ arch/s390/Kconfig                      |  1 -
+ arch/s390/mm/init.c                    | 13 +++----------
+ arch/x86/Kconfig                       |  1 -
+ arch/x86/mm/mem_encrypt.c              |  7 -------
+ arch/x86/mm/mem_encrypt_amd.c          |  4 ++++
+ drivers/virtio/Kconfig                 |  6 ------
+ drivers/virtio/virtio.c                |  5 ++---
+ include/asm-generic/Kbuild             |  1 +
+ include/asm-generic/platform-feature.h |  8 ++++++++
+ include/linux/platform-feature.h       | 19 ++++++++++++++++++
+ include/linux/virtio_config.h          |  9 ---------
+ kernel/Makefile                        |  2 +-
+ kernel/platform-feature.c              | 27 ++++++++++++++++++++++++++
+ 14 files changed, 73 insertions(+), 38 deletions(-)
+ create mode 100644 include/asm-generic/platform-feature.h
+ create mode 100644 include/linux/platform-feature.h
+ create mode 100644 kernel/platform-feature.c
+
+-- 
+2.35.3
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
