@@ -2,77 +2,76 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAC9951E51C
-	for <lists.virtualization@lfdr.de>; Sat,  7 May 2022 09:20:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id EFB8851E51D
+	for <lists.virtualization@lfdr.de>; Sat,  7 May 2022 09:20:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 690B7415F8;
-	Sat,  7 May 2022 07:20:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 998AC415EA;
+	Sat,  7 May 2022 07:20:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dpY89wZfIrfn; Sat,  7 May 2022 07:20:30 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id CA822415F5;
-	Sat,  7 May 2022 07:20:29 +0000 (UTC)
+	with ESMTP id CjLP-BxDqwm4; Sat,  7 May 2022 07:20:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id EB902415FA;
+	Sat,  7 May 2022 07:20:36 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 54E38C0081;
-	Sat,  7 May 2022 07:20:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 80722C0081;
+	Sat,  7 May 2022 07:20:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BEC0AC002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BB1F7C002D
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 May 2022 07:20:28 +0000 (UTC)
+ Sat,  7 May 2022 07:20:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id AC97140025
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9BD2B405AB
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 May 2022 07:20:28 +0000 (UTC)
+ Sat,  7 May 2022 07:20:35 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kWSsnK8Qg4l9
+ with ESMTP id p9LzOQKv0CiC
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 May 2022 07:20:28 +0000 (UTC)
+ Sat,  7 May 2022 07:20:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id ED974405AB
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DF2894017C
  for <virtualization@lists.linux-foundation.org>;
- Sat,  7 May 2022 07:20:27 +0000 (UTC)
+ Sat,  7 May 2022 07:20:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1651908026;
+ s=mimecast20190719; t=1651908033;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7HQgO42DhiTroM5cVrJbp9LPKhZMQuD4duQmjIjsdyU=;
- b=bYv3SRCj7jtpQlISCP0od8clEw/ewojiqrsZ7ZWD88cNMVMKxm9Q0gbx2wQaxICOlckZpY
- hkypzEe2emQkJ/wL5E60420w8hW/RcW2tEO9k9Wqt9pvN53mfycbJ5+bK4ndBo/spBYg6c
- O05w0ibJDyB3C5yXV4/CyFf0lwFM32o=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=TTmQl8Usk4lIHwNqjtLct6vFueXuJsys04voQFrY8g8=;
+ b=YKIStZAPssIXpiBGsaQo0cDQIr6SWtOuNtLXarMuJMSxB1Y+5CVkl/i4Dd9/LUJg7EeFN9
+ SsBqO8u0vki7eAz/N02W9XUHl5bWdj1Ex4agkqOldfPAuGnSDPNI5vvi8mE7DhQ7eLlEWz
+ C45ORqB9dk1M+k8qOdb1mo9cyijr04A=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-595-CnFIrtpOPsaGTmhdPQbSFw-1; Sat, 07 May 2022 03:20:23 -0400
-X-MC-Unique: CnFIrtpOPsaGTmhdPQbSFw-1
+ us-mta-439-Sp1h1u19OdibYN4FkywOoQ-1; Sat, 07 May 2022 03:20:29 -0400
+X-MC-Unique: Sp1h1u19OdibYN4FkywOoQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 214C9101AA44;
- Sat,  7 May 2022 07:20:23 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4B9B429DD9AE;
+ Sat,  7 May 2022 07:20:29 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-216.pek2.redhat.com
  [10.72.13.216])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 9180940D2971;
- Sat,  7 May 2022 07:20:17 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CFAE940D2971;
+ Sat,  7 May 2022 07:20:23 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: jasowang@redhat.com, mst@redhat.com,
  virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org
-Subject: [PATCH V4 3/9] virtio: introduce config op to synchronize vring
- callbacks
-Date: Sat,  7 May 2022 15:19:48 +0800
-Message-Id: <20220507071954.14455-4-jasowang@redhat.com>
+Subject: [PATCH V4 4/9] virtio-pci: implement synchronize_cbs()
+Date: Sat,  7 May 2022 15:19:49 +0800
+Message-Id: <20220507071954.14455-5-jasowang@redhat.com>
 In-Reply-To: <20220507071954.14455-1-jasowang@redhat.com>
 References: <20220507071954.14455-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -96,12 +95,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduces new virtio config op to vring
-callbacks. Transport specific method is required to make sure the
-write before this function is visible to the vring_interrupt() that is
-called after the return of this function. For the transport that
-doesn't provide synchronize_vqs(), use synchornize_rcu() which
-synchronize with IRQ implicitly as a fallback.
+We can simply reuse vp_synchronize_vectors() for .synchronize_cbs().
 
 Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: Peter Zijlstra <peterz@infradead.org>
@@ -111,59 +105,42 @@ Cc: Halil Pasic <pasic@linux.ibm.com>
 Cc: Cornelia Huck <cohuck@redhat.com>
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- include/linux/virtio_config.h | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ drivers/virtio/virtio_pci_legacy.c | 1 +
+ drivers/virtio/virtio_pci_modern.c | 2 ++
+ 2 files changed, 3 insertions(+)
 
-diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index b341dd62aa4d..d8a2340f928e 100644
---- a/include/linux/virtio_config.h
-+++ b/include/linux/virtio_config.h
-@@ -57,6 +57,11 @@ struct virtio_shm_region {
-  *		include a NULL entry for vqs unused by driver
-  *	Returns 0 on success or error status
-  * @del_vqs: free virtqueues found by find_vqs().
-+ * @synchronize_cbs: synchronize with the virtqueue callbacks (optional)
-+ *      The function guarantees that all memory operations on the
-+ *      queue before it are visible to the vring_interrupt() that is
-+ *      called after it.
-+ *      vdev: the virtio_device
-  * @get_features: get the array of feature bits for this device.
-  *	vdev: the virtio_device
-  *	Returns the first 64 feature bits (all we currently need).
-@@ -89,6 +94,7 @@ struct virtio_config_ops {
- 			const char * const names[], const bool *ctx,
- 			struct irq_affinity *desc);
- 	void (*del_vqs)(struct virtio_device *);
-+	void (*synchronize_cbs)(struct virtio_device *);
- 	u64 (*get_features)(struct virtio_device *vdev);
- 	int (*finalize_features)(struct virtio_device *vdev);
- 	const char *(*bus_name)(struct virtio_device *vdev);
-@@ -217,6 +223,25 @@ int virtio_find_vqs_ctx(struct virtio_device *vdev, unsigned nvqs,
- 				      desc);
- }
- 
-+/**
-+ * virtio_synchronize_cbs - synchronize with virtqueue callbacks
-+ * @vdev: the device
-+ */
-+static inline
-+void virtio_synchronize_cbs(struct virtio_device *dev)
-+{
-+	if (dev->config->synchronize_cbs) {
-+		dev->config->synchronize_cbs(dev);
-+	} else {
-+		/*
-+		 * A best effort fallback to synchronize with
-+		 * interrupts, preemption and softirq. See comment
-+		 * above synchronize_rcu().
-+		 */
-+		synchronize_rcu();
-+	}
-+}
-+
- /**
-  * virtio_device_ready - enable vq use in probe function
-  * @vdev: the device
+diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
+index 6f4e34ce96b8..207985107150 100644
+--- a/drivers/virtio/virtio_pci_legacy.c
++++ b/drivers/virtio/virtio_pci_legacy.c
+@@ -192,6 +192,7 @@ static const struct virtio_config_ops virtio_pci_config_ops = {
+ 	.reset		= vp_reset,
+ 	.find_vqs	= vp_find_vqs,
+ 	.del_vqs	= vp_del_vqs,
++	.synchronize_cbs = vp_synchronize_vectors,
+ 	.get_features	= vp_get_features,
+ 	.finalize_features = vp_finalize_features,
+ 	.bus_name	= vp_bus_name,
+diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
+index a2671a20ef77..18c2190e3059 100644
+--- a/drivers/virtio/virtio_pci_modern.c
++++ b/drivers/virtio/virtio_pci_modern.c
+@@ -394,6 +394,7 @@ static const struct virtio_config_ops virtio_pci_config_nodev_ops = {
+ 	.reset		= vp_reset,
+ 	.find_vqs	= vp_modern_find_vqs,
+ 	.del_vqs	= vp_del_vqs,
++	.synchronize_cbs = vp_synchronize_vectors,
+ 	.get_features	= vp_get_features,
+ 	.finalize_features = vp_finalize_features,
+ 	.bus_name	= vp_bus_name,
+@@ -411,6 +412,7 @@ static const struct virtio_config_ops virtio_pci_config_ops = {
+ 	.reset		= vp_reset,
+ 	.find_vqs	= vp_modern_find_vqs,
+ 	.del_vqs	= vp_del_vqs,
++	.synchronize_cbs = vp_synchronize_vectors,
+ 	.get_features	= vp_get_features,
+ 	.finalize_features = vp_finalize_features,
+ 	.bus_name	= vp_bus_name,
 -- 
 2.25.1
 
