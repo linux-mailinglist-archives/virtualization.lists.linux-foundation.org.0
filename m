@@ -2,82 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8C4D0522E0D
-	for <lists.virtualization@lfdr.de>; Wed, 11 May 2022 10:17:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8EA93522EA3
+	for <lists.virtualization@lfdr.de>; Wed, 11 May 2022 10:44:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 26AD2832B0;
-	Wed, 11 May 2022 08:17:35 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 15658831C1;
+	Wed, 11 May 2022 08:44:34 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HDDjta-sxJYy; Wed, 11 May 2022 08:17:34 +0000 (UTC)
+	with ESMTP id LGpCwP4VyswW; Wed, 11 May 2022 08:44:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id D758583299;
-	Wed, 11 May 2022 08:17:33 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D07DD8329E;
+	Wed, 11 May 2022 08:44:32 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5815AC0081;
-	Wed, 11 May 2022 08:17:33 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 60E81C0081;
+	Wed, 11 May 2022 08:44:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C51AC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E78B8C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 08:17:31 +0000 (UTC)
+ Wed, 11 May 2022 08:44:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5563F4160D
+ by smtp2.osuosl.org (Postfix) with ESMTP id E40CE40135
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 08:17:31 +0000 (UTC)
+ Wed, 11 May 2022 08:44:30 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id o-8dshqerDCK
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id QeoJB_XjUi9c
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 08:17:30 +0000 (UTC)
+ Wed, 11 May 2022 08:44:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 038FC41886
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 15C024011F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 08:17:29 +0000 (UTC)
+ Wed, 11 May 2022 08:44:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652257048;
+ s=mimecast20190719; t=1652258668;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=0WhNG2BFNpm3DlKnvpsKok4cmCLeGV6XphB375cBO7U=;
- b=VGRPrHzB9zM1+Gsk9omPkYIV0xG2XTHx5n5kgEPAN+St1ULf8QdMbOLwsuDeuh1l0vsz2h
- aTHwDAvMnH3bD3yJTU58bY9pIQc51aQSfxvj6k/w0VXSY7zvzyBxQFlsgqclUy9C6tQt/M
- emBn3P9eFahkvss5q09OFiU9QC9plLc=
+ bh=6XAsQFnhrZpWvc7RJwu2raTQ/L5Wv/W+iz3iayoq1a0=;
+ b=bOI0r00DtbBESn/S3NLJa/JzWDvctXresKjKmR1Bu2bPCejHpSaj+kT7/vMJoi3ey9BKs0
+ R0hhKTQUowqJSevZaRtOmUF+J8qtb0+wxz3ccvLOtCxnG+NqJHtOdaxPjoMHK9bImGebqe
+ 1k4zKbArXh12k1EISGK9zYzN7SLiUxg=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-362-naHtCBJcPk6b1wVTF8gDJg-1; Wed, 11 May 2022 04:17:25 -0400
-X-MC-Unique: naHtCBJcPk6b1wVTF8gDJg-1
-Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.rdu2.redhat.com
- [10.11.54.7])
+ us-mta-669-NMVowrerMIai6WqcNK0bPA-1; Wed, 11 May 2022 04:44:27 -0400
+X-MC-Unique: NMVowrerMIai6WqcNK0bPA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 05E3D185A794;
- Wed, 11 May 2022 08:17:25 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B2059801210;
+ Wed, 11 May 2022 08:44:26 +0000 (UTC)
 Received: from localhost (unknown [10.39.193.115])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 73F97145BF03;
- Wed, 11 May 2022 08:17:24 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id 1A9827AD9;
+ Wed, 11 May 2022 08:44:15 +0000 (UTC)
 From: Cornelia Huck <cohuck@redhat.com>
 To: Jason Wang <jasowang@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: [PATCH V4 6/9] virtio-ccw: implement synchronize_cbs()
-In-Reply-To: <CACGkMEvWFyEqeeXYEmbU4TWtnj9Ku6J7jLK_7MueuFvpR7FiGg@mail.gmail.com>
+Subject: Re: [PATCH V4 8/9] virtio: harden vring IRQ
+In-Reply-To: <CACGkMEtBfdhx-9CMKD0F4+536e5ewf6NQJGPTEBX00uby-C8+w@mail.gmail.com>
 Organization: Red Hat GmbH
 References: <20220507071954.14455-1-jasowang@redhat.com>
- <20220507071954.14455-7-jasowang@redhat.com>
- <20220510072451-mutt-send-email-mst@kernel.org>
- <CACGkMEvWFyEqeeXYEmbU4TWtnj9Ku6J7jLK_7MueuFvpR7FiGg@mail.gmail.com>
+ <20220507071954.14455-9-jasowang@redhat.com>
+ <20220510072833-mutt-send-email-mst@kernel.org>
+ <CACGkMEtBfdhx-9CMKD0F4+536e5ewf6NQJGPTEBX00uby-C8+w@mail.gmail.com>
 User-Agent: Notmuch/0.34 (https://notmuchmail.org)
-Date: Wed, 11 May 2022 10:17:22 +0200
-Message-ID: <87r150bi0d.fsf@redhat.com>
+Date: Wed, 11 May 2022 10:44:14 +0200
+Message-ID: <87o804bgrl.fsf@redhat.com>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.85 on 10.11.54.7
+X-Scanned-By: MIMEDefang 2.79 on 10.11.54.5
 Cc: Cindy Lu <lulu@redhat.com>, "Paul E. McKenney" <paulmck@kernel.org>,
  Peter Zijlstra <peterz@infradead.org>, Marc Zyngier <maz@kernel.org>,
  linux-kernel <linux-kernel@vger.kernel.org>,
@@ -102,29 +102,88 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 On Wed, May 11 2022, Jason Wang <jasowang@redhat.com> wrote:
 
-> On Tue, May 10, 2022 at 7:28 PM Michael S. Tsirkin <mst@redhat.com> wrote:
+> On Tue, May 10, 2022 at 7:32 PM Michael S. Tsirkin <mst@redhat.com> wrote:
 >>
->> On Sat, May 07, 2022 at 03:19:51PM +0800, Jason Wang wrote:
->> > @@ -1106,6 +1130,7 @@ static void virtio_ccw_int_handler(struct ccw_device *cdev,
->> >                       vcdev->err = -EIO;
->> >       }
->> >       virtio_ccw_check_activity(vcdev, activity);
->> > +     read_lock_irqsave(&vcdev->irq_lock, flags);
->> >       for_each_set_bit(i, indicators(vcdev),
->> >                        sizeof(*indicators(vcdev)) * BITS_PER_BYTE) {
->> >               /* The bit clear must happen before the vring kick. */
+>> On Sat, May 07, 2022 at 03:19:53PM +0800, Jason Wang wrote:
+>> > diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
+>> > index d8a2340f928e..23f1694cdbd5 100644
+>> > --- a/include/linux/virtio_config.h
+>> > +++ b/include/linux/virtio_config.h
+>> > @@ -256,6 +256,18 @@ void virtio_device_ready(struct virtio_device *dev)
+>> >       unsigned status = dev->config->get_status(dev);
+>> >
+>> >       BUG_ON(status & VIRTIO_CONFIG_S_DRIVER_OK);
+>> > +
+>> > +     /*
+>> > +      * The virtio_synchronize_cbs() makes sure vring_interrupt()
+>> > +      * will see the driver specific setup if it sees vq->broken
+>> > +      * as false.
+>> > +      */
+>> > +     virtio_synchronize_cbs(dev);
 >>
->> Cornelia sent a lockdep trace on this.
->>
->> Basically I think this gets the irqsave/restore logic wrong.
->> It attempts to disable irqs in the handler (which is an interrupt
->> anyway).
+>> since you mention vq->broken above, maybe add
+>>         "set vq->broken to false"
 >
-> The reason I use irqsave/restore is that it can be called from process
-> context (if I was not wrong), e.g from io_subchannel_quiesce().
+> Ok.
+>
+>>
+>> > +     __virtio_unbreak_device(dev);
+>> > +     /*
+>> > +      * The transport is expected ensure the visibility of
+>>
+>> to ensure
+>
+> Will fix.
+>
+>>
+>> > +      * vq->broken
+>>
+>> let's add: "visibility by vq callbacks"
+>
+> Sure.
+>
+>>
+>> > before setting VIRTIO_CONFIG_S_DRIVER_OK.
+>> > +      */
+>>
+>>
+>> Can I see some analysis of existing transports showing
+>> this is actually the case for them?
+>
+> Yes.
+>
+>> And maybe add a comment near set_status to document the
+>> requirement.
+>
+> For PCI and MMIO, we can quote the memory-barriers.txt or explain that
+> wmb() is not needed before the MMIO writel().
+> For CCW, it looks not obvious, it looks to me the IO was submitted via
+> __ssch() which has an inline assembly.  Cornelia and Hali, could you
+> help me to understand if and how did virtio_ccw_set_status() can
+> ensure the visibility of the previous driver setup and vq->broken
+> here?
 
-io_subchannel_quiesce() should disable interrupts, though? Otherwise, it
-would be a bug.
+I'm not sure I completely understand the question here, but let me try:
+
+virtio_ccw_set_status() uses a channel command to set the status, with
+the interesting stuff done inside ccw_io_helper(). That function
+- takes the subchannel lock, disabling interrupts
+- does the ssch; this instruction will fail if there's already another
+  I/O in progress, or an interrupt is pending for the subchannel; on
+  success, it is guaranteed that we'll get an interrupt eventually
+- unlock the subchannel, and wait for the interupt handler to eventually
+  process the interrupt, so I guess it should see the vq->broken value?
+
+If the I/O fails, virtio_ccw_set_status() will revert its internal
+status to the old value.
+
+
+>
+> Thanks
+>
+>>
+>> >       dev->config->set_status(dev, status | VIRTIO_CONFIG_S_DRIVER_OK);
+>> >  }
 
 _______________________________________________
 Virtualization mailing list
