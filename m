@@ -1,107 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E997A52300E
-	for <lists.virtualization@lfdr.de>; Wed, 11 May 2022 11:59:06 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id EB48C52308F
+	for <lists.virtualization@lfdr.de>; Wed, 11 May 2022 12:18:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 912786109C;
-	Wed, 11 May 2022 09:59:05 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9EC3440B53;
+	Wed, 11 May 2022 10:18:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2GbnVJts46dX; Wed, 11 May 2022 09:59:04 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 53EF361096;
-	Wed, 11 May 2022 09:59:04 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cx5dGGpq3B-z; Wed, 11 May 2022 10:18:40 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 6081B40A0F;
+	Wed, 11 May 2022 10:18:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B8DDCC0081;
-	Wed, 11 May 2022 09:59:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D291EC0081;
+	Wed, 11 May 2022 10:18:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 196ECC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 82C09C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 09:59:02 +0000 (UTC)
+ Wed, 11 May 2022 10:18:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 16CFC8338B
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6E7984010C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 09:59:02 +0000 (UTC)
+ Wed, 11 May 2022 10:18:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nDSYKMXHjJo7
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id WMRFfQUdgwLc
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 09:59:01 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 57AF083386
+ Wed, 11 May 2022 10:18:37 +0000 (UTC)
+X-Greylist: delayed 00:05:59 by SQLgrey-1.8.0
+Received: from gandalf.ozlabs.org (mail.ozlabs.org
+ [IPv6:2404:9400:2221:ea00::3])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 53275404CF
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 09:59:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652263139;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=+FfW+5+mV9G3R406B7MYW3KSbtguNpvUzxhTqvODpUM=;
- b=i7AHL28yZF42FbP5jnp01na4mlG8ncfR/3/BLM6D+evLqZX/l8i5w7nu0xchZ/dH/j+SbE
- xgApDytTVi7I/h+1cGJ2xWrZErWvNTZYqVJzzVva6bHaBWq/DeyAk+uKBlxMQkt++przm+
- cg9v8WvxoZyVqKkbohRwhKod1OHdoDs=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-381-vgJd2b6YPDma-taZxIw3vw-1; Wed, 11 May 2022 05:58:56 -0400
-X-MC-Unique: vgJd2b6YPDma-taZxIw3vw-1
-Received: by mail-wm1-f72.google.com with SMTP id
- bi5-20020a05600c3d8500b0039489e1d18dso2604847wmb.5
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 May 2022 02:58:56 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=+FfW+5+mV9G3R406B7MYW3KSbtguNpvUzxhTqvODpUM=;
- b=YjDxNLPvsQzLN0BulauB7sRHkBxN8ob1MA83br6u/ln/HdSP+Qdr3IBXrIHQmX0udI
- k/6PE4FmZn46Uz/1nszbLO2eY/W2+vkddYXfSBR7RfWVhky+ffcumLbZj/ZUb5hnxg4g
- KgSwVNNd8HJz8ImCvhEAHJHDU+EGyIQvWwweqlgrDI3Og/dZpS2+jRH2/jtDaPmh5ooB
- NzaeP7aS0wRr6iRf3mdjzgJd4De/2y+5cMRxgPRYlXmRduXQIopAJq40EC77Cq271tcR
- geFDAzG4nahLRq99BriErZELXcOcgM5EhvPFhmnU1UPCU2DMrjwuJ7Z8kH8OjOOrKw4e
- dbEQ==
-X-Gm-Message-State: AOAM531z2AvAhw14s4PugX7Atqae0yivxFkkbBkqQmHUX6gqmioxuT3k
- d7LFj0/WKfrrO9t6w6mVcr9pbrTkzdb+yPlyRlrmn+AMoDe0rkhlkq0HATxjLxeXFf/GzJvVTab
- jZfBrzhDB5mrJxwzGMEFO+Kqn30N/Syqj9VmwbO4j/w==
-X-Received: by 2002:a5d:4252:0:b0:20c:6ffc:77b1 with SMTP id
- s18-20020a5d4252000000b0020c6ffc77b1mr21611674wrr.483.1652263134983; 
- Wed, 11 May 2022 02:58:54 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJzy4NKG8oWbkw7DrLO4G0kGqLd8SWY59yELzw8BfqPhBBDOczYpic50262Syt6xWWlxXlPvgQ==
-X-Received: by 2002:a5d:4252:0:b0:20c:6ffc:77b1 with SMTP id
- s18-20020a5d4252000000b0020c6ffc77b1mr21611657wrr.483.1652263134635; 
- Wed, 11 May 2022 02:58:54 -0700 (PDT)
-Received: from redhat.com ([2a10:8004:5a99:0:647:dca8:57e:1626])
- by smtp.gmail.com with ESMTPSA id
- j23-20020a05600c1c1700b003942a244f40sm5437292wms.25.2022.05.11.02.58.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 11 May 2022 02:58:54 -0700 (PDT)
-Date: Wed, 11 May 2022 05:58:51 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH] vdpa: Warn if MTU configured is too low
-Message-ID: <20220511055517-mutt-send-email-mst@kernel.org>
-References: <20220511084804.82482-1-elic@nvidia.com>
- <CACGkMEt9h=hGH9cGj=NNLrGtvg2PguS8-pe4trxNUQOxmTRsog@mail.gmail.com>
+ Wed, 11 May 2022 10:18:37 +0000 (UTC)
+Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.ozlabs.org (Postfix) with ESMTPSA id 4KyrLk522xz4xXh;
+ Wed, 11 May 2022 20:12:30 +1000 (AEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
+ s=201909; t=1652263951;
+ bh=AYMaIHm/9FJs7QMQIGjVwHQBqVw7TF+ASqO5SvByvIQ=;
+ h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+ b=lC0i9AXiN8OGFHknnvxL+T1hg1fn/cgusHgj0/KPf0t/otQdhWoP0Z/6icK5/jzPn
+ 6yFaDkgHzwr+deS+AD+tGm7GSOKZIDPTNYhu8XoTdM7zVJOIhbK3tycAVo8HDvFH8f
+ 6Z/+qEsRN4ipbT3AN8LxjBAKXtObESQMWSivIWkKy0R7LSRvxZpLEy4Ps0sUsiIMhW
+ Izpt2mBBj+GmabSb7N6QwFt6dYrzB/VTe4GQqPVD9zuW2wt1zyrCXj3xc8vqtzOf7k
+ z4WEXVtfm/ZD9BY+Q9EG9pqTKwsaPs2G40KK6X93P5tz+IpFl61hCrRJ14e44s5mak
+ blQEwlyz3slZA==
+From: Michael Ellerman <mpe@ellerman.id.au>
+To: Linus Torvalds <torvalds@linux-foundation.org>, "Michael S. Tsirkin"
+ <mst@redhat.com>, Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+Subject: Re: [GIT PULL] virtio: last minute fixup
+In-Reply-To: <CAHk-=wjPR+bj7P1O=MAQWXp0Mx2hHuNQ1acn6gS+mRo_kbo5Lg@mail.gmail.com>
+References: <20220510082351-mutt-send-email-mst@kernel.org>
+ <CAHk-=wjPR+bj7P1O=MAQWXp0Mx2hHuNQ1acn6gS+mRo_kbo5Lg@mail.gmail.com>
+Date: Wed, 11 May 2022 20:12:27 +1000
+Message-ID: <87czgk8jjo.fsf@mpe.ellerman.id.au>
 MIME-Version: 1.0
-In-Reply-To: <CACGkMEt9h=hGH9cGj=NNLrGtvg2PguS8-pe4trxNUQOxmTRsog@mail.gmail.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Si-Wei Liu <si-wei.liu@oracle.com>, Eli Cohen <elic@nvidia.com>,
- linux-kernel <linux-kernel@vger.kernel.org>,
- virtualization <virtualization@lists.linux-foundation.org>
+Cc: Netdev <netdev@vger.kernel.org>, mie@igel.co.jp,
+ Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+ KVM list <kvm@vger.kernel.org>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,70 +84,60 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 11, 2022 at 05:34:25PM +0800, Jason Wang wrote:
-> On Wed, May 11, 2022 at 4:48 PM Eli Cohen <elic@nvidia.com> wrote:
-> >
-> > Following the recommendation in virio spec 1.1, a device offering
-> > VIRTIO_NET_F_MTU should set the mtu to at least 1280 bytes.
-> >
-> > Print a warning if this recommendation is not met.
-> >
-> > Signed-off-by: Eli Cohen <elic@nvidia.com>
-> 
-> I wonder why it's a must?
+Linus Torvalds <torvalds@linux-foundation.org> writes:
+> On Tue, May 10, 2022 at 5:24 AM Michael S. Tsirkin <mst@redhat.com> wrote:
+>>
+>> A last minute fixup of the transitional ID numbers.
+>> Important to get these right - if users start to depend on the
+>> wrong ones they are very hard to fix.
+>
+> Hmm. I've pulled this, but those numbers aren't exactly "new".
+>
+> They've been that way since 5.14, so what makes you think people
+> haven't already started depending on them?
+>
+> And - once again - I want to complain about the "Link:" in that commit.
+>
+> It points to a completely useless patch submission. It doesn't point
+> to anything useful at all.
+>
+> I think it's a disease that likely comes from "b4", and people decided
+> that "hey, I can use the -l parameter to add that Link: field", and it
+> looks better that way.
 
+Some folks have been doing it since the early 2010s.
 
-It's a SHOULD in the spec.  I guess 1280 is to allow IPv6.
+But I think it really took off after the Change-Id discussion a few
+years back:
 
-> > ---
-> >  drivers/vdpa/vdpa.c | 9 ++++++++-
-> >  1 file changed, 8 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-> > index 91f4c13c7c7c..961168fe9094 100644
-> > --- a/drivers/vdpa/vdpa.c
-> > +++ b/drivers/vdpa/vdpa.c
-> > @@ -583,6 +583,9 @@ vdpa_nl_cmd_mgmtdev_get_dumpit(struct sk_buff *msg, struct netlink_callback *cb)
-> >                                  BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MTU)     | \
-> >                                  BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MAX_VQP))
-> >
-> > +/* Recommended virtio spec 1.1 section 5.1.4.1 */
-> > +#define VIRTIO_MIN_PREFERRED_MTU 1280
-> > +
-> >  static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *info)
-> >  {
-> >         struct vdpa_dev_set_config config = {};
-> > @@ -634,6 +637,10 @@ static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *i
-> >                 err = PTR_ERR(mdev);
-> >                 goto err;
-> >         }
-> > +       if ((mdev->supported_features & BIT_ULL(VIRTIO_NET_F_MTU)) &&
-> > +           (config.mask & BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MTU) &&
-> > +           config.net.mtu < VIRTIO_MIN_PREFERRED_MTU))
-> 
-> Should be <= ?
-> 
-> Thanks
+  https://lore.kernel.org/all/CAHk-=whFbgy4RXG11c_=S7O-248oWmwB_aZOcWzWMVh3w7=RCw@mail.gmail.com/
 
+Which I read as you endorsing Link: tags :)
 
+> And then they add it all the time, whether it makes any sense or not.
 
-> > +               pr_warn("MTU is below recommended value\n");
-> >         if ((config.mask & mdev->config_attr_mask) != config.mask) {
-> >                 NL_SET_ERR_MSG_MOD(info->extack,
-> >                                    "All provided attributes are not supported");
-> > @@ -1135,7 +1142,7 @@ static const struct nla_policy vdpa_nl_policy[VDPA_ATTR_MAX + 1] = {
-> >         [VDPA_ATTR_DEV_NAME] = { .type = NLA_STRING },
-> >         [VDPA_ATTR_DEV_NET_CFG_MACADDR] = NLA_POLICY_ETH_ADDR,
-> >         /* virtio spec 1.1 section 5.1.4.1 for valid MTU range */
-> > -       [VDPA_ATTR_DEV_NET_CFG_MTU] = NLA_POLICY_MIN(NLA_U16, 68),
-> > +       [VDPA_ATTR_DEV_NET_CFG_MTU] = NLA_POLICY_MIN(NLA_U16, ETH_MIN_MTU),
-> >  };
-> >
-> >  static const struct genl_ops vdpa_nl_ops[] = {
-> > --
-> > 2.35.1
-> >
+For me it always makes sense, because it means I can easily go from a
+commit back to the original submission. That's useful for automating
+various things like replies and patchwork status updates.
 
+It allows me to find the exact patch I applied, even if what I committed
+is slightly different (due to fuzz or editing), which would be harder
+with a search based approach.
+
+It gives us a way to essentially augment the change log after the fact,
+by replying to the original patch with things we didn't know at the time
+of commit - eg. this patch was reverted because it caused a bug, etc.
+
+If you follow the Link: and there's nothing useful there explaining
+what motivated the change then that's a bug in the patch submission, not
+the Link: tag.
+
+Really important information should be in the change log itself, but the
+space below the "---" is perfect for added context that would be too
+verbose for the committed change log. And anyone can reply to the
+original submission to add even more useful information.
+
+cheers
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
