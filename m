@@ -1,112 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id C584C52A5C7
-	for <lists.virtualization@lfdr.de>; Tue, 17 May 2022 17:14:23 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id D171452A9BF
+	for <lists.virtualization@lfdr.de>; Tue, 17 May 2022 19:59:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3CB4D41A62;
-	Tue, 17 May 2022 15:14:22 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 138C5400E7;
+	Tue, 17 May 2022 17:59:47 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FBP6hAN1_0lE; Tue, 17 May 2022 15:14:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 7DBAA41A54;
-	Tue, 17 May 2022 15:14:20 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5q9sjH8jalcV; Tue, 17 May 2022 17:59:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id DD28A40CDA;
+	Tue, 17 May 2022 17:59:45 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E23DDC0082;
-	Tue, 17 May 2022 15:14:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6508BC0081;
+	Tue, 17 May 2022 17:59:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 036F2C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C0B28C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 15:14:19 +0000 (UTC)
+ Tue, 17 May 2022 17:59:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D7956611AA
+ by smtp3.osuosl.org (Postfix) with ESMTP id 9F9A560A91
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 15:14:18 +0000 (UTC)
+ Tue, 17 May 2022 17:59:43 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=redhat.com
+ dkim=pass (1024-bit key) header.d=linuxfoundation.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NT7cKY4rjnsn
+ with ESMTP id fECq6WzEHH2g
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 15:14:17 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 88CFF61191
+ Tue, 17 May 2022 17:59:42 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5723560A84
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 15:14:17 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1652800456;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=zDg6wjmfUwF9ifzpSYYO2kPnU8cCr2A246HnYdWDqzY=;
- b=QS205yLe0fDlM0CE9B7kpakdjwqWxoWBb/kc6BAfZbGiNfocNyptoxII6sr/+/Yz/rhNc0
- GzTaFwIQVbLb/vYcaXyYoN/IOaeA/yY+WGsJzfB1G+AjbQttOSyOnVupdvoZyfLVlNiSoh
- W+eMi4u5PESKHpSFId2AzdDHK0M0nx0=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-108-kxf4BFXkO9O9hHiey0Iz7A-1; Tue, 17 May 2022 11:14:15 -0400
-X-MC-Unique: kxf4BFXkO9O9hHiey0Iz7A-1
-Received: by mail-qv1-f69.google.com with SMTP id
- w6-20020a05621404a600b00461c740f357so5997165qvz.6
- for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 08:14:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=zDg6wjmfUwF9ifzpSYYO2kPnU8cCr2A246HnYdWDqzY=;
- b=f66iH5SdVJ1kxfB2YQBuOPD0PRzE6oDifoGu71FjwSk9QTtYklbDSCrX4crOrzX+lX
- VgmRR3CxlBXaPPe9mUGm1x58khVn/Q7QChLWAnk9jOIQBz5bD4ammPG/RK5xdyA7A+uI
- LhnKEgrFlmK+2KLKE3q0YCZcuLs5lfj6NtMMOrObQGv4vqAJRx42015oUmz8U5Yiyhun
- aNv3APbsIfdhpRYfcfFJbYCZ/kj5jfd3ybR5cJz6COZLlgKJAm6/+WlBGL+JxZl8aOEa
- yI7miyhBF4Td0Ka55IBiIvuCtMnsrCnEcxee9FW29/6vHaRB6qRU4/DCO4GF54rTkY5m
- 3hGQ==
-X-Gm-Message-State: AOAM533o0yWtHwrivErmOyAVJ9Mlu8CBQ3+S0iu9Yz0yvpqoTFDCdwMQ
- PCMypeRXDFhTz3WRidxBhv96On0z+faDLuEs9NIIqNOmXgCoCfW09wuMPA6v8AWFOhapPm6pJRv
- pvbPkPvkk7DY3RwE+sYZwHvGhRoaYAw7n56gBsKcOjw==
-X-Received: by 2002:a05:6214:2aa6:b0:45b:474:f9d7 with SMTP id
- js6-20020a0562142aa600b0045b0474f9d7mr20456628qvb.75.1652800454674; 
- Tue, 17 May 2022 08:14:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJw/BKkbx8m7APmdAwXMw6SgVlGa68Jz3O00qhGKjVlF/OOrYsrrU0GaJ2fqzzjTz3cD1U+3rg==
-X-Received: by 2002:a05:6214:2aa6:b0:45b:474:f9d7 with SMTP id
- js6-20020a0562142aa600b0045b0474f9d7mr20456598qvb.75.1652800454354; 
- Tue, 17 May 2022 08:14:14 -0700 (PDT)
-Received: from sgarzare-redhat (host-87-12-25-16.business.telecomitalia.it.
- [87.12.25.16]) by smtp.gmail.com with ESMTPSA id
- b21-20020ac85415000000b002f39b99f68asm7817273qtq.36.2022.05.17.08.14.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 17 May 2022 08:14:13 -0700 (PDT)
-Date: Tue, 17 May 2022 17:14:04 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
-Subject: Re: [RFC PATCH v1 0/8] virtio/vsock: experimental zerocopy receive
-Message-ID: <20220517151404.vqse5tampdsaaeji@sgarzare-redhat>
-References: <7cdcb1e1-7c97-c054-19cf-5caeacae981d@sberdevices.ru>
+ Tue, 17 May 2022 17:59:42 +0000 (UTC)
+Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by ams.source.kernel.org (Postfix) with ESMTPS id BB0A0B81B0F;
+ Tue, 17 May 2022 17:59:39 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26906C385B8;
+ Tue, 17 May 2022 17:59:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+ s=korg; t=1652810378;
+ bh=HDN0i/fLgfP0+C3rAigMeFGNTGgmAKAWat0j4l5gfbs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=O/hlZV1lM9b6ssnxzoR2gH1dLdX4TfNazg5eMr5XQb1v5YFeQNY5k0to0SC/yr6MQ
+ N7HcInqvanepvJAnqA8BrBlfWWh8XGybBa2K9zigykejjz3PyIMBXCBwVXTrLXIBf1
+ SE4qsYI7Tv7WsIRU+OhgJJA7+jht1OtRGqxEtQnA=
+Date: Tue, 17 May 2022 15:54:13 +0200
+From: "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>
+To: Parav Pandit <parav@nvidia.com>
+Subject: Re: [PATCH v2 2/3] vdpa: Add a device object for vdpa management
+ device
+Message-ID: <YoOpBaWcaoujWqO7@kroah.com>
+References: <20220516060342.106-1-xieyongji@bytedance.com>
+ <20220516060342.106-2-xieyongji@bytedance.com>
+ <PH0PR12MB54813F96E346D591FBE238C1DCCF9@PH0PR12MB5481.namprd12.prod.outlook.com>
+ <CACycT3sRc4bk+3oq7FLzpBMCG_XRN7tOaeEAtNg69o3h8c3=EA@mail.gmail.com>
+ <PH0PR12MB5481AD3C1517331EAC4EE078DCCE9@PH0PR12MB5481.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-In-Reply-To: <7cdcb1e1-7c97-c054-19cf-5caeacae981d@sberdevices.ru>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=sgarzare@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+In-Reply-To: <PH0PR12MB5481AD3C1517331EAC4EE078DCCE9@PH0PR12MB5481.namprd12.prod.outlook.com>
+Cc: "mst@redhat.com" <mst@redhat.com>,
  "virtualization@lists.linux-foundation.org"
  <virtualization@lists.linux-foundation.org>,
- Stefan Hajnoczi <stefanha@redhat.com>, kernel <kernel@sberdevices.ru>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- "David S. Miller" <davem@davemloft.net>
+ Yongji Xie <xieyongji@bytedance.com>, Eli Cohen <elic@nvidia.com>,
+ "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,177 +84,65 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Arseniy,
+On Tue, May 17, 2022 at 12:21:03PM +0000, Parav Pandit wrote:
+> Hi Greg, Yongji,
+> 
+> > From: Yongji Xie <xieyongji@bytedance.com>
+> > Sent: Tuesday, May 17, 2022 3:25 AM
+> > 
+> > On Tue, May 17, 2022 at 4:06 AM Parav Pandit <parav@nvidia.com> wrote:
+> > >
+> > >
+> > >
+> > > > From: Xie Yongji <xieyongji@bytedance.com>
+> > > > Sent: Monday, May 16, 2022 2:04 AM
+> > > >
+> > > > Introduce a device object for vdpa management device to control its
+> > > > lifecycle.
+> > > Why is this needed?
+> > > What is the limitation of current approach that requires new device for
+> > mgmtdev?
+> > > The primary motivation is missing in the commit log here.
+> > >
+> > 
+> > OK, I will add one. This patch actually comes from the discussion:
+> > 
+> > 
+> > https://www.spinics.net/lists/linux-virtualization/msg56371.html
+> > 
+> > The "vdpa_mgmt_dev" makes things a little confusing. Embedding the
+> > device struct in it to control its lifecycle simplifies the logic and makes the
+> > driver model clear.
+> > 
+> No. it doesn't.
+> 
+> vdpa_mgmt_dev is really the handle for all the netlink socket messages targeted.
+> It is not really a struct device.
 
-On Thu, May 12, 2022 at 05:04:11AM +0000, Arseniy Krasnov wrote:
->                              INTRODUCTION
->
->	Hello, this is experimental implementation of virtio vsock zerocopy
->receive. It was inspired by TCP zerocopy receive by Eric Dumazet. This API uses
->same idea: call 'mmap()' on socket's descriptor, then every 'getsockopt()' will
->fill provided vma area with pages of virtio RX buffers. After received data was
->processed by user, pages must be freed by 'madvise()'  call with MADV_DONTNEED
->flag set(if user won't call 'madvise()', next 'getsockopt()' will fail).
+Why can it not be one?  It has lifetime rules that must be followed, so
+might as well use the built-in code to handle this, right?
 
-Sounds cool, but maybe we would need some socket/net experts here for 
-review.
+What is wrong with it being a struct device?
 
-Could we do something similar for the sending path as well?
+> We can rename it to vdpa_mgmt_handle, if the _dev suffix is confusing.
 
->
->                                 DETAILS
->
->	Here is how mapping with mapped pages looks exactly: first page mapping
->contains array of trimmed virtio vsock packet headers (in contains only length
->of data on the corresponding page and 'flags' field):
->
->	struct virtio_vsock_usr_hdr {
->		uint32_t length;
->		uint32_t flags;
->	};
->
->Field  'length' allows user to know exact size of payload within each sequence
->of pages and 'flags' allows user to handle SOCK_SEQPACKET flags(such as message
->bounds or record bounds). All other pages are data pages from RX queue.
->
->             Page 0      Page 1      Page N
->
->	[ hdr1 .. hdrN ][ data ] .. [ data ]
->           |        |       ^           ^
->           |        |       |           |
->           |        *-------------------*
->           |                |
->           |                |
->           *----------------*
->
->	Of course, single header could represent array of pages (when packet's
->buffer is bigger than one page).So here is example of detailed mapping layout
->for some set of packages. Lets consider that we have the following sequence  of
->packages: 56 bytes, 4096 bytes and 8200 bytes. All pages: 0,1,2,3,4 and 5 will
->be inserted to user's vma(vma is large enough).
->
->	Page 0: [[ hdr0 ][ hdr 1 ][ hdr 2 ][ hdr 3 ] ... ]
->	Page 1: [ 56 ]
->	Page 2: [ 4096 ]
->	Page 3: [ 4096 ]
->	Page 4: [ 4096 ]
->	Page 5: [ 8 ]
->
->	Page 0 contains only array of headers:
->	'hdr0' has 56 in length field.
->	'hdr1' has 4096 in length field.
->	'hdr2' has 8200 in length field.
->	'hdr3' has 0 in length field(this is end of data marker).
->
->	Page 1 corresponds to 'hdr0' and has only 56 bytes of data.
->	Page 2 corresponds to 'hdr1' and filled with data.
->	Page 3 corresponds to 'hdr2' and filled with data.
->	Page 4 corresponds to 'hdr2' and filled with data.
->	Page 5 corresponds to 'hdr2' and has only 8 bytes of data.
->
->	This patchset also changes packets allocation way: today implementation
->uses only 'kmalloc()' to create data buffer. Problem happens when we try to map
->such buffers to user's vma - kernel forbids to map slab pages to user's vma(as
->pages of "not large" 'kmalloc()' allocations are marked with PageSlab flag and
->"not large" could be bigger than one page). So to avoid this, data buffers now
->allocated using 'alloc_pages()' call.
->
->                                   TESTS
->
->	This patchset updates 'vsock_test' utility: two tests for new feature
->were added. First test covers invalid cases. Second checks valid transmission
->case.
+Where is the "management" device if this is not that?
 
-Thanks for adding the test!
+What does "handle" mean here?
 
->
->                                BENCHMARKING
->
->	For benchmakring I've added small utility 'rx_zerocopy'. It works in
->client/server mode. When client connects to server, server starts sending exact
->amount of data to client(amount is set as input argument).Client reads data and
->waits for next portion of it. Client works in two modes: copy and zero-copy. In
->copy mode client uses 'read()' call while in zerocopy mode sequence of 'mmap()'
->/'getsockopt()'/'madvise()' are used. Smaller amount of time for transmission
->is better. For server, we can set size of tx buffer and for client we can set
->size of rx buffer or rx mapping size(in zerocopy mode). Usage of this utility
->is quiet simple:
->
->For client mode:
->
->./rx_zerocopy --mode client [--zerocopy] [--rx]
->
->For server mode:
->
->./rx_zerocopy --mode server [--mb] [--tx]
->
->[--mb] sets number of megabytes to transfer.
->[--rx] sets size of receive buffer/mapping in pages.
->[--tx] sets size of transmit buffer in pages.
->
->I checked for transmission of 4000mb of data. Here are some results:
->
->                           size of rx/tx buffers in pages
->               *---------------------------------------------------*
->               |    8   |    32    |    64   |   256    |   512    |
->*--------------*--------*----------*---------*----------*----------*
->|   zerocopy   |   24   |   10.6   |  12.2   |   23.6   |    21    | secs to
->*--------------*---------------------------------------------------- process
->| non-zerocopy |   13   |   16.4   |  24.7   |   27.2   |   23.9   | 4000 mb
->*--------------*----------------------------------------------------
->
->I think, that results are not so impressive, but at least it is not worse than
->copy mode and there is no need to allocate memory for processing date.
+> And regarding vduse_dev_release() and existing empty release function, they can be dynamically allocated.
+> This is because they are really the struct device.
 
-Why is it twice as slow in the first column?
+I do not understand this statement, sorry.
 
->
->                                 PROBLEMS
->
->	Updated packet's allocation logic creates some problem: when host gets
->data from guest(in vhost-vsock), it allocates at least one page for each packet
->(even if packet has 1 byte payload). I think this could be resolved in several
->ways:
+thanks,
 
-Can we somehow copy the incoming packets into the payload of the already 
-queued packet?
-
-This reminds me that we have yet to fix a similar problem with kmalloc() 
-as well...
-
-https://bugzilla.kernel.org/show_bug.cgi?id=215329
-
->	1) Make zerocopy rx mode disabled by default, so if user didn't enable
->it, current 'kmalloc()' way will be used.
-
-That sounds reasonable to me, I guess also TCP needs a setsockopt() call 
-to enable the feature, right?
-
->	2) Use 'kmalloc()' for "small" packets, else call page allocator. But
->in this case, we have mix of packets, allocated in two different ways thus
->during zerocopying to user(e.g. mapping pages to vma), such small packets will
->be handled in some stupid way: we need to allocate one page for user, copy data
->to it and then insert page to user's vma.
-
-It seems more difficult to me, but at the same time doable. I would go 
-more on option 1, though.
-
->
->P.S: of course this is experimental RFC, so what do You think guys?
-
-It seems cool :-)
-
-But I would like some feedback from the net guys to have some TCP-like 
-things.
-
-Thanks,
-Stefano
-
+greg k-h
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
