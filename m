@@ -2,77 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D171452A9BF
-	for <lists.virtualization@lfdr.de>; Tue, 17 May 2022 19:59:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 7BC6252A88B
+	for <lists.virtualization@lfdr.de>; Tue, 17 May 2022 18:48:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 138C5400E7;
-	Tue, 17 May 2022 17:59:47 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id BE1A540521;
+	Tue, 17 May 2022 16:48:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5q9sjH8jalcV; Tue, 17 May 2022 17:59:46 +0000 (UTC)
+	with ESMTP id VuxSg_CkoK3c; Tue, 17 May 2022 16:48:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id DD28A40CDA;
-	Tue, 17 May 2022 17:59:45 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 90AF940C14;
+	Tue, 17 May 2022 16:48:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6508BC0081;
-	Tue, 17 May 2022 17:59:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F067DC0081;
+	Tue, 17 May 2022 16:48:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C0B28C002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E518BC002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 17:59:43 +0000 (UTC)
+ Tue, 17 May 2022 16:48:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9F9A560A91
+ by smtp1.osuosl.org (Postfix) with ESMTP id E171783E58
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 17:59:43 +0000 (UTC)
+ Tue, 17 May 2022 16:48:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=linuxfoundation.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id fECq6WzEHH2g
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Gu3CQAEDMnlK
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 17:59:42 +0000 (UTC)
+ Tue, 17 May 2022 16:48:16 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 5723560A84
+Received: from outgoing-stata.csail.mit.edu (outgoing-stata.csail.mit.edu
+ [128.30.2.210])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 405AC83DF9
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 May 2022 17:59:42 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id BB0A0B81B0F;
- Tue, 17 May 2022 17:59:39 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 26906C385B8;
- Tue, 17 May 2022 17:59:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
- s=korg; t=1652810378;
- bh=HDN0i/fLgfP0+C3rAigMeFGNTGgmAKAWat0j4l5gfbs=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=O/hlZV1lM9b6ssnxzoR2gH1dLdX4TfNazg5eMr5XQb1v5YFeQNY5k0to0SC/yr6MQ
- N7HcInqvanepvJAnqA8BrBlfWWh8XGybBa2K9zigykejjz3PyIMBXCBwVXTrLXIBf1
- SE4qsYI7Tv7WsIRU+OhgJJA7+jht1OtRGqxEtQnA=
-Date: Tue, 17 May 2022 15:54:13 +0200
-From: "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>
-To: Parav Pandit <parav@nvidia.com>
-Subject: Re: [PATCH v2 2/3] vdpa: Add a device object for vdpa management
- device
-Message-ID: <YoOpBaWcaoujWqO7@kroah.com>
-References: <20220516060342.106-1-xieyongji@bytedance.com>
- <20220516060342.106-2-xieyongji@bytedance.com>
- <PH0PR12MB54813F96E346D591FBE238C1DCCF9@PH0PR12MB5481.namprd12.prod.outlook.com>
- <CACycT3sRc4bk+3oq7FLzpBMCG_XRN7tOaeEAtNg69o3h8c3=EA@mail.gmail.com>
- <PH0PR12MB5481AD3C1517331EAC4EE078DCCE9@PH0PR12MB5481.namprd12.prod.outlook.com>
+ Tue, 17 May 2022 16:48:16 +0000 (UTC)
+Received: from c-24-16-96-21.hsd1.wa.comcast.net ([24.16.96.21]
+ helo=srivatsab-a02.vmware.com)
+ by outgoing-stata.csail.mit.edu with esmtpsa (TLS1.2:RSA_AES_128_CBC_SHA1:128)
+ (Exim 4.82) (envelope-from <srivatsa@csail.mit.edu>)
+ id 1nr0Md-000E5Y-3n; Tue, 17 May 2022 12:48:03 -0400
+Subject: Re: [PATCH v3] arm64: paravirt: Use RCU read locks to guard
+ stolen_time
+To: Will Deacon <will@kernel.org>
+References: <20220513174654.362169-1-quic_eberman@quicinc.com>
+ <c24e405e-b5f9-d2f7-a629-1ee1beab3681@csail.mit.edu>
+ <20220517085418.GA3169@willie-the-truck>
+From: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+Message-ID: <1dc10835-e302-8ae7-c256-efb0c420f35a@csail.mit.edu>
+Date: Tue, 17 May 2022 09:48:00 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
+ Gecko/20100101 Thunderbird/78.12.0
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <PH0PR12MB5481AD3C1517331EAC4EE078DCCE9@PH0PR12MB5481.namprd12.prod.outlook.com>
-Cc: "mst@redhat.com" <mst@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- Yongji Xie <xieyongji@bytedance.com>, Eli Cohen <elic@nvidia.com>,
- "lingshan.zhu@intel.com" <lingshan.zhu@intel.com>
+In-Reply-To: <20220517085418.GA3169@willie-the-truck>
+Content-Language: en-US
+Cc: Juergen Gross <jgross@suse.com>,
+ Murali Nalajala <quic_mnalajal@quicinc.com>,
+ Elliot Berman <quic_eberman@quicinc.com>,
+ Catalin Marinas <catalin.marinas@arm.com>, x86@kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Alexey Makhalov <amakhalov@vmware.com>,
+ Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>,
+ linux-arm-kernel@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,60 +82,44 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, May 17, 2022 at 12:21:03PM +0000, Parav Pandit wrote:
-> Hi Greg, Yongji,
+On 5/17/22 1:54 AM, Will Deacon wrote:
+> On Fri, May 13, 2022 at 04:32:53PM -0700, Srivatsa S. Bhat wrote:
+>> On 5/13/22 10:46 AM, Elliot Berman wrote:
+>>> From: Prakruthi Deepak Heragu <quic_pheragu@quicinc.com>
+>>>
+
+[...]
+
+>>>  static int stolen_time_cpu_down_prepare(unsigned int cpu)
+>>>  {
+>>> +	struct pvclock_vcpu_stolen_time *kaddr = NULL;
+>>>  	struct pv_time_stolen_time_region *reg;
+>>>  
+>>>  	reg = this_cpu_ptr(&stolen_time_region);
+>>>  	if (!reg->kaddr)
+>>>  		return 0;
+>>>  
+>>> -	memunmap(reg->kaddr);
+>>> -	memset(reg, 0, sizeof(*reg));
+>>> +	kaddr = rcu_replace_pointer(reg->kaddr, NULL, true);
+>>> +	synchronize_rcu();
+>>> +	memunmap(kaddr);
+>>>  
+>>
+>> The original code used to memset the stolen time region, but this
+>> patch seems to drop it. Was that change intentional?
 > 
-> > From: Yongji Xie <xieyongji@bytedance.com>
-> > Sent: Tuesday, May 17, 2022 3:25 AM
-> > 
-> > On Tue, May 17, 2022 at 4:06 AM Parav Pandit <parav@nvidia.com> wrote:
-> > >
-> > >
-> > >
-> > > > From: Xie Yongji <xieyongji@bytedance.com>
-> > > > Sent: Monday, May 16, 2022 2:04 AM
-> > > >
-> > > > Introduce a device object for vdpa management device to control its
-> > > > lifecycle.
-> > > Why is this needed?
-> > > What is the limitation of current approach that requires new device for
-> > mgmtdev?
-> > > The primary motivation is missing in the commit log here.
-> > >
-> > 
-> > OK, I will add one. This patch actually comes from the discussion:
-> > 
-> > 
-> > https://www.spinics.net/lists/linux-virtualization/msg56371.html
-> > 
-> > The "vdpa_mgmt_dev" makes things a little confusing. Embedding the
-> > device struct in it to control its lifecycle simplifies the logic and makes the
-> > driver model clear.
-> > 
-> No. it doesn't.
+> 'struct pv_time_stolen_time_region' only has one field ('kaddr'), which
+> we're now clearing with rcu_replace_pointer() so the memset doesn't make
+> sense.
 > 
-> vdpa_mgmt_dev is really the handle for all the netlink socket messages targeted.
-> It is not really a struct device.
 
-Why can it not be one?  It has lifetime rules that must be followed, so
-might as well use the built-in code to handle this, right?
+Ah right, never mind :)
 
-What is wrong with it being a struct device?
+Thank you!
 
-> We can rename it to vdpa_mgmt_handle, if the _dev suffix is confusing.
-
-Where is the "management" device if this is not that?
-
-What does "handle" mean here?
-
-> And regarding vduse_dev_release() and existing empty release function, they can be dynamically allocated.
-> This is because they are really the struct device.
-
-I do not understand this statement, sorry.
-
-thanks,
-
-greg k-h
+Regards,
+Srivatsa
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
