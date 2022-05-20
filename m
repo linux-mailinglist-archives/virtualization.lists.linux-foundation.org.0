@@ -1,66 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C063552EFAD
-	for <lists.virtualization@lfdr.de>; Fri, 20 May 2022 17:48:28 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E694F52F620
+	for <lists.virtualization@lfdr.de>; Sat, 21 May 2022 01:26:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 3434B40A8F;
-	Fri, 20 May 2022 15:48:27 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 57D4F426B9;
+	Fri, 20 May 2022 23:26:07 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IkEQ_TSzkENp; Fri, 20 May 2022 15:48:26 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6MLvGD7qCMoG; Fri, 20 May 2022 23:26:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 13A6A40AA9;
-	Fri, 20 May 2022 15:48:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id EB76F426B8;
+	Fri, 20 May 2022 23:26:05 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 81580C0081;
-	Fri, 20 May 2022 15:48:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5EF4CC002D;
+	Fri, 20 May 2022 23:26:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C7762C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 982C8C002D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 May 2022 15:48:23 +0000 (UTC)
+ Fri, 20 May 2022 23:26:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C3E9A40A9B
+ by smtp4.osuosl.org (Postfix) with ESMTP id 85D27426B8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 May 2022 15:48:23 +0000 (UTC)
+ Fri, 20 May 2022 23:26:04 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id v7XONKkbLqvU
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id qYMgGxeS8E0B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 May 2022 15:48:22 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from theia.8bytes.org (8bytes.org
- [IPv6:2a01:238:4383:600:38bc:a715:4b6d:a889])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 954BE40A8F
+ Fri, 20 May 2022 23:26:02 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 37512426B7
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 May 2022 15:48:22 +0000 (UTC)
-Received: by theia.8bytes.org (Postfix, from userid 1000)
- id C8AF3246; Fri, 20 May 2022 17:48:18 +0200 (CEST)
-Date: Fri, 20 May 2022 17:48:17 +0200
-From: =?iso-8859-1?Q?J=F6rg_R=F6del?= <joro@8bytes.org>
-To: linux-kernel@vger.kernel.org, linux-coco@lists.linux.dev,
- kvm@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-sgx@vger.kernel.org
-Subject: [CFP LPC 2022] Confidential Computing Microconference
-Message-ID: <Yoe4QZr8dqy1hrU1@8bytes.org>
+ Fri, 20 May 2022 23:26:01 +0000 (UTC)
+From: Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1653089158;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GXl2vZK8puszcOApjIRM6ipBqamYF8etYeeQxgi9t5c=;
+ b=Ge1GbYxJiIrzO7+HtjEO7xasn5LCGkqxqYYrM/F0B6gO0Q1SUxnLjfjWJCibrC/MXIpjJ3
+ FtGAkaCTtAnpcrVC9FOp2RZfblScKVBXtToMz61M/KdI9ANzNZN1KlLqVxr9/Wh/2KObhA
+ F3+wyQoA4maHBAATR8GCsrLC0CqxevVL28uEo2xPVafnalKJf2mVcibpqTtokBBR/GjJ0B
+ B7JpFCWXL0NpRkRsB8Yzs+AvESIXQdH9nKyR46Hu8aZxEPX3mt3vyN3VYJjB5JtAvG8uGk
+ JhRvNDjSTse1Q6zy9lhGiIpgNgxSHe5dg9H3URRXB1QJh5dD3uFf0vc3cSXDuA==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1653089158;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=GXl2vZK8puszcOApjIRM6ipBqamYF8etYeeQxgi9t5c=;
+ b=bdrx6T6/OumYHk0OqR+Y8wRLS0Vj5+UqI6uPx0nzpCsD/CVpT6lvt1ijM8c2h+x5jG4zGY
+ SnVBUdez4bhQH/CQ==
+To: Shreenidhi Shedi <yesshedi@gmail.com>, srivatsa@csail.mit.edu,
+ amakhalov@vmware.com, mingo@redhat.com, bp@alien8.de,
+ dave.hansen@linux.intel.com, hpa@zytor.com
+Subject: Re: [PATCH v2] x86/vmware: use unsigned integer for shifting
+In-Reply-To: <20220520140954.597725-1-sshedi@vmware.com>
+References: <20220520140954.597725-1-sshedi@vmware.com>
+Date: Sat, 21 May 2022 01:25:57 +0200
+Message-ID: <87pmk7iy62.ffs@tglx>
 MIME-Version: 1.0
-Content-Disposition: inline
-Cc: Tom Lendacky <thomas.lendacky@amd.com>, Andi Kleen <ak@linux.intel.com>,
- David Kaplan <David.Kaplan@amd.com>, Marc Orr <marcorr@google.com>,
- Sean Christopherson <seanjc@google.com>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- "Dr. David Alan Gilbert" <dgilbert@redhat.com>,
- Sathya Kuppuswamy <sathyanarayanan.kuppuswamy@intel.com>,
- Joerg Roedel <jroedel@suse.de>, Borislav Petkov <bp@alien8.de>,
- Mike Rapoport <rppt@kernel.org>, Andy Lutomirski <luto@kernel.org>,
- David Rientjes <rientjes@google.com>, Paolo Bonzini <pbonzini@redhat.com>,
- Peter Gonda <pgonda@google.com>,
- "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>
+Cc: Shreenidhi Shedi <sshedi@vmware.com>, pv-drivers@vmware.com, x86@kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ yesshedi@gmail.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,54 +86,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi,
+On Fri, May 20 2022 at 19:39, Shreenidhi Shedi wrote:
 
-as already announced by the planning committee, there will be another
+> From: Shreenidhi Shedi <yesshedi@gmail.com>
+>
+> From: Shreenidhi Shedi <sshedi@vmware.com>
 
-	Confidential Computing Microconference
+Can you please decide which of your personalities wrote that patch?
 
-at this years Linux Plumbers Conference (LPC) happening from 12th to
-14th of September in Dublin, Ireland.
+> Shifting signed 32-bit value by 31 bits is implementation-defined
+> behaviour. Using unsigned is better option for this.
 
-In this microconference we want to discuss ongoing developments around
-Linux support for memory encryption and support for Confidential
-Computing in general.
+Better option? There are no options. It's either correct or not. Please
+be precise and technical in your wording.
 
-Suggested topics are:
+> Fixes: 4cca6ea04d31 ("x86/apic: Allow x2apic without IR on VMware platform")
+>
+> Signed-off-by: Shreenidhi Shedi <sshedi@vmware.com>
 
-	* Design and implementation of Intel TDX and AMD SEV-SNP host
-	  support
+Please keep the tags together. This extra new line is pointless and
+makes the maintainer do extra work to remove it.
 
-	* Linux kernel memory management changes for secure execution
-	  environments
+Documentation/process/* has all the relevant directives for
+you. Following them is not an option. It's mandatory.
 
-	* Support of upcoming secure execution hardware extensions
-	  from ARM and RISC-V
+> @@ -476,8 +477,8 @@ static bool __init vmware_legacy_x2apic_available(void)
+>  {
+>  	uint32_t eax, ebx, ecx, edx;
+>  	VMWARE_CMD(GETVCPU_INFO, eax, ebx, ecx, edx);
+> -	return (eax & (1 << VMWARE_CMD_VCPU_RESERVED)) == 0 &&
+> -	       (eax & (1 << VMWARE_CMD_LEGACY_X2APIC)) != 0;
+> +	return !(eax & BIT(VMWARE_CMD_VCPU_RESERVED)) &&
+> +		(eax & BIT(VMWARE_CMD_LEGACY_X2APIC))
 
-	* Pre-launch and runtime attestation workflows
-
-	* Interrupt security for AMD SEV-SNP
-
-	* Debuggability and live migration of encrypted virtual machines
-
-	* Proper testing of confidential computing support code
-
-	* Support for Confidential Containers
-
-	* Or anything else related to Confidential Computing in Linux
-
-Please submit your proposals on the LPC website at:
-
-	https://lpc.events/event/16/abstracts/
-
-Make sure to select "Confidential Computing MC" in the Track pulldown
-menu.
-
-Looking forwart to seeing you all there, either in Dublin or virtual :)
+Testing your changes before submission is not optional either. How is
+this supposed to compile?
 
 Thanks,
 
-	Joerg
+        tglx
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
