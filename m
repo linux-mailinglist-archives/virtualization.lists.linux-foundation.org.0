@@ -1,76 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 315CB53460D
-	for <lists.virtualization@lfdr.de>; Wed, 25 May 2022 23:51:04 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0B34F53465A
+	for <lists.virtualization@lfdr.de>; Thu, 26 May 2022 00:20:18 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C5379843FD;
-	Wed, 25 May 2022 21:51:02 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0165284471;
+	Wed, 25 May 2022 22:20:16 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YDi34-hKd5lj; Wed, 25 May 2022 21:51:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A0DE8843EF;
-	Wed, 25 May 2022 21:51:01 +0000 (UTC)
+	with ESMTP id 7PBWmIy5qSrG; Wed, 25 May 2022 22:20:15 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D00818446F;
+	Wed, 25 May 2022 22:20:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 013D7C0081;
-	Wed, 25 May 2022 21:51:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4386DC002D;
+	Wed, 25 May 2022 22:20:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EE0DBC002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 40641C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 May 2022 21:50:59 +0000 (UTC)
+ Wed, 25 May 2022 22:20:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E5C4D60BC2
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2F5BD8446F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 May 2022 21:50:59 +0000 (UTC)
+ Wed, 25 May 2022 22:20:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp3.osuosl.org (amavisd-new);
- dkim=pass (1024-bit key) header.d=linux-foundation.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zC0gqpCZnlWW
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id hWUCRg8H4HsV
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 May 2022 21:50:59 +0000 (UTC)
+ Wed, 25 May 2022 22:20:12 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1043B606EB
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 72D9A8446D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 25 May 2022 21:50:58 +0000 (UTC)
+ Wed, 25 May 2022 22:20:12 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id EA7F761AB6;
- Wed, 25 May 2022 21:50:57 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id C68EFC385B8;
- Wed, 25 May 2022 21:50:56 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id B9A8BB81EAD;
+ Wed, 25 May 2022 22:20:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0633C385B8;
+ Wed, 25 May 2022 22:20:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
- s=korg; t=1653515457;
- bh=RJBqCEbCNY0ooTTHUDW8T5ccFZ9a+R65ZzhmVt+2S44=;
+ s=korg; t=1653517207;
+ bh=c7KzToDeUqtD99O2hzHK7o5kCE8vnxm1uZ6cI59st/U=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=R8xzes5UjWb8BqqxzRNWgPf7cEHyaAbeSDj+v3F0k3sq8Asguyz6Vmo/uMlX6uzmY
- 8HryaeniW2c258rIiLOGG2MjKsnv6NbBuzhNNsrGT4ET41NSmI5sqMNPKOc8It7ZVv
- QGSPkTQx3i5p9WrHix2LggCVXiwA2BU9p5l/o92c=
-Date: Wed, 25 May 2022 14:50:56 -0700
+ b=lc5Bswn5/mLgrZUzDGaOfcSNR02Mm/oMMFmAsk3PMUUgwWwgJa8zBW3fhkYeoBrs6
+ zULKKPi/KMazKRvfEOpIG5mlq58qHM3l4UzEO0HxQt9EhuXQjV37+aQrktHPNlneq8
+ f2dYK6/dz9JhOi+TYCUG0YZy8hrl37z6cFtGSZlg=
+Date: Wed, 25 May 2022 15:20:06 -0700
 From: Andrew Morton <akpm@linux-foundation.org>
-To: kernel test robot <lkp@intel.com>
+To: Jessica Clarke <jrtc27@jrtc27.com>
 Subject: Re: [linux-next:master] BUILD REGRESSION
  8cb8311e95e3bb58bd84d6350365f14a718faa6d
-Message-Id: <20220525145056.953631743a4c494aabf000dc@linux-foundation.org>
-In-Reply-To: <628ea118.wJYf60YnZco0hs9o%lkp@intel.com>
+Message-Id: <20220525152006.e87d3fa50aca58fdc1b43b6a@linux-foundation.org>
+In-Reply-To: <F0E25DFF-8256-48FF-8B88-C0E3730A3E5E@jrtc27.com>
 References: <628ea118.wJYf60YnZco0hs9o%lkp@intel.com>
+ <20220525145056.953631743a4c494aabf000dc@linux-foundation.org>
+ <F0E25DFF-8256-48FF-8B88-C0E3730A3E5E@jrtc27.com>
 X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-Cc: linux-fbdev@vger.kernel.org, linux-parport@lists.infradead.org,
+Cc: linux-fbdev@vger.kernel.org, kernel test robot <lkp@intel.com>,
  kvm@vger.kernel.org, linux-rdma@vger.kernel.org, netdev@vger.kernel.org,
  linux-staging@lists.linux.dev, alsa-devel@alsa-project.org,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
  linux-mm@kvack.org, amd-gfx@lists.freedesktop.org, linux-pci@vger.kernel.org,
  linux-riscv@lists.infradead.org, linux-omap@vger.kernel.org,
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ linux-parport@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -87,45 +88,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, 26 May 2022 05:35:20 +0800 kernel test robot <lkp@intel.com> wrote:
+On Wed, 25 May 2022 23:07:35 +0100 Jessica Clarke <jrtc27@jrtc27.com> wrote:
 
-> tree/branch: https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git master
-> branch HEAD: 8cb8311e95e3bb58bd84d6350365f14a718faa6d  Add linux-next specific files for 20220525
-> 
-> Error/Warning reports:
-> 
-> ...
->
-> Unverified Error/Warning (likely false positive, please contact us if interested):
+> This is i386, so an unsigned long is 32-bit, but i_blocks is a blkcnt_t
+> i.e. a u64, which makes the shift without a cast of the LHS fishy.
 
-Could be so.
+Ah, of course, thanks.  I remember 32 bits ;)
 
-> mm/shmem.c:1948 shmem_getpage_gfp() warn: should '(((1) << 12) / 512) << folio_order(folio)' be a 64 bit type?
-
-I've been seeing this one for a while.  And from this report I can't
-figure out what tool emitted it.  Clang?
-
->
-> ...
->
-> |-- i386-randconfig-m021
-> |   `-- mm-shmem.c-shmem_getpage_gfp()-warn:should-((()-)-)-folio_order(folio)-be-a-bit-type
-
-If you're going to use randconfig then shouldn't you make the config
-available?  Or maybe quote the KCONFIG_SEED - presumably there's a way
-for others to regenerate.
-
-Anyway, the warning seems wrong to me.
-
-
-#define PAGE_SIZE               (_AC(1,UL) << PAGE_SHIFT)
-
-#define BLOCKS_PER_PAGE  (PAGE_SIZE/512)
-
-	inode->i_blocks += BLOCKS_PER_PAGE << folio_order(folio);
-
-so the RHS here should have unsigned long type.  Being able to generate
-the cpp output would be helpful.  That requires the .config.
+--- a/mm/shmem.c~mm-shmemc-suppress-shift-warning
++++ a/mm/shmem.c
+@@ -1945,7 +1945,7 @@ alloc_nohuge:
+ 
+ 	spin_lock_irq(&info->lock);
+ 	info->alloced += folio_nr_pages(folio);
+-	inode->i_blocks += BLOCKS_PER_PAGE << folio_order(folio);
++	inode->i_blocks += (blkcnt_t)BLOCKS_PER_PAGE << folio_order(folio);
+ 	shmem_recalc_inode(inode);
+ 	spin_unlock_irq(&info->lock);
+ 	alloced = true;
+_
 
 _______________________________________________
 Virtualization mailing list
