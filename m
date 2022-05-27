@@ -1,60 +1,58 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79C81535A5C
-	for <lists.virtualization@lfdr.de>; Fri, 27 May 2022 09:31:01 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4E713535A6D
+	for <lists.virtualization@lfdr.de>; Fri, 27 May 2022 09:32:12 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 38F688494E;
-	Fri, 27 May 2022 07:30:58 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id E8E264253D;
+	Fri, 27 May 2022 07:32:10 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ueB3z0umvS6w; Fri, 27 May 2022 07:30:57 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 17B248494D;
-	Fri, 27 May 2022 07:30:57 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4BRfPxDLBKKa; Fri, 27 May 2022 07:32:09 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 4A34C4191E;
+	Fri, 27 May 2022 07:32:09 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A1EF2C002D;
-	Fri, 27 May 2022 07:30:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4273C007E;
+	Fri, 27 May 2022 07:32:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 41ACBC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B1746C002D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 May 2022 07:30:56 +0000 (UTC)
+ Fri, 27 May 2022 07:32:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2FBE16160F
+ by smtp3.osuosl.org (Postfix) with ESMTP id 90FEB61612
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 May 2022 07:30:56 +0000 (UTC)
+ Fri, 27 May 2022 07:32:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7h-cK57ToWP8
+ with ESMTP id dMDph1YW15zT
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 May 2022 07:30:55 +0000 (UTC)
+ Fri, 27 May 2022 07:32:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from out30-54.freemail.mail.aliyun.com
- (out30-54.freemail.mail.aliyun.com [115.124.30.54])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1135161608
+Received: from out30-56.freemail.mail.aliyun.com
+ (out30-56.freemail.mail.aliyun.com [115.124.30.56])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B012461610
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 May 2022 07:30:54 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=alimailimapcm10staff010182156082;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=16; SR=0;
- TI=SMTPD_---0VEW9CNu_1653636650; 
+ Fri, 27 May 2022 07:32:05 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=e01e04426; MF=xuanzhuo@linux.alibaba.com;
+ NM=1; PH=DS; RN=16; SR=0; TI=SMTPD_---0VEWDhhD_1653636721; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VEW9CNu_1653636650) by smtp.aliyun-inc.com(127.0.0.1);
- Fri, 27 May 2022 15:30:51 +0800
-Message-ID: <1653636641.556474-3-xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH V6 3/9] virtio: introduce config op to synchronize vring
- callbacks
-Date: Fri, 27 May 2022 15:30:41 +0800
+ fp:SMTPD_---0VEWDhhD_1653636721) by smtp.aliyun-inc.com(127.0.0.1);
+ Fri, 27 May 2022 15:32:01 +0800
+Message-ID: <1653636712.2244692-4-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH V6 4/9] virtio-pci: implement synchronize_cbs()
+Date: Fri, 27 May 2022 15:31:52 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: Jason Wang <jasowang@redhat.com>
 References: <20220527060120.20964-1-jasowang@redhat.com>
- <20220527060120.20964-4-jasowang@redhat.com>
-In-Reply-To: <20220527060120.20964-4-jasowang@redhat.com>
+ <20220527060120.20964-5-jasowang@redhat.com>
+In-Reply-To: <20220527060120.20964-5-jasowang@redhat.com>
 Cc: linux-s390@vger.kernel.org, lulu@redhat.com, paulmck@kernel.org,
  mst@redhat.com, peterz@infradead.org, maz@kernel.org, cohuck@redhat.com,
  Peter Oberparleiter <oberpar@linux.ibm.com>,
@@ -78,13 +76,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, 27 May 2022 14:01:14 +0800, Jason Wang <jasowang@redhat.com> wrote:
-> This patch introduces new virtio config op to vring
-> callbacks. Transport specific method is required to make sure the
-> write before this function is visible to the vring_interrupt() that is
-> called after the return of this function. For the transport that
-> doesn't provide synchronize_vqs(), use synchornize_rcu() which
-> synchronize with IRQ implicitly as a fallback.
+On Fri, 27 May 2022 14:01:15 +0800, Jason Wang <jasowang@redhat.com> wrote:
+> We can simply reuse vp_synchronize_vectors() for .synchronize_cbs().
 >
 > Cc: Thomas Gleixner <tglx@linutronix.de>
 > Cc: Peter Zijlstra <peterz@infradead.org>
@@ -101,59 +94,42 @@ On Fri, 27 May 2022 14:01:14 +0800, Jason Wang <jasowang@redhat.com> wrote:
 Reviewed-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 
 > ---
->  include/linux/virtio_config.h | 25 +++++++++++++++++++++++++
->  1 file changed, 25 insertions(+)
+>  drivers/virtio/virtio_pci_legacy.c | 1 +
+>  drivers/virtio/virtio_pci_modern.c | 2 ++
+>  2 files changed, 3 insertions(+)
 >
-> diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-> index b341dd62aa4d..25be018810a7 100644
-> --- a/include/linux/virtio_config.h
-> +++ b/include/linux/virtio_config.h
-> @@ -57,6 +57,11 @@ struct virtio_shm_region {
->   *		include a NULL entry for vqs unused by driver
->   *	Returns 0 on success or error status
->   * @del_vqs: free virtqueues found by find_vqs().
-> + * @synchronize_cbs: synchronize with the virtqueue callbacks (optional)
-> + *      The function guarantees that all memory operations on the
-> + *      queue before it are visible to the vring_interrupt() that is
-> + *      called after it.
-> + *      vdev: the virtio_device
->   * @get_features: get the array of feature bits for this device.
->   *	vdev: the virtio_device
->   *	Returns the first 64 feature bits (all we currently need).
-> @@ -89,6 +94,7 @@ struct virtio_config_ops {
->  			const char * const names[], const bool *ctx,
->  			struct irq_affinity *desc);
->  	void (*del_vqs)(struct virtio_device *);
-> +	void (*synchronize_cbs)(struct virtio_device *);
->  	u64 (*get_features)(struct virtio_device *vdev);
->  	int (*finalize_features)(struct virtio_device *vdev);
->  	const char *(*bus_name)(struct virtio_device *vdev);
-> @@ -217,6 +223,25 @@ int virtio_find_vqs_ctx(struct virtio_device *vdev, unsigned nvqs,
->  				      desc);
->  }
->
-> +/**
-> + * virtio_synchronize_cbs - synchronize with virtqueue callbacks
-> + * @vdev: the device
-> + */
-> +static inline
-> +void virtio_synchronize_cbs(struct virtio_device *dev)
-> +{
-> +	if (dev->config->synchronize_cbs) {
-> +		dev->config->synchronize_cbs(dev);
-> +	} else {
-> +		/*
-> +		 * A best effort fallback to synchronize with
-> +		 * interrupts, preemption and softirq disabled
-> +		 * regions. See comment above synchronize_rcu().
-> +		 */
-> +		synchronize_rcu();
-> +	}
-> +}
-> +
->  /**
->   * virtio_device_ready - enable vq use in probe function
->   * @vdev: the device
+> diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
+> index 7fe4caa4b519..a5e5721145c7 100644
+> --- a/drivers/virtio/virtio_pci_legacy.c
+> +++ b/drivers/virtio/virtio_pci_legacy.c
+> @@ -192,6 +192,7 @@ static const struct virtio_config_ops virtio_pci_config_ops = {
+>  	.reset		= vp_reset,
+>  	.find_vqs	= vp_find_vqs,
+>  	.del_vqs	= vp_del_vqs,
+> +	.synchronize_cbs = vp_synchronize_vectors,
+>  	.get_features	= vp_get_features,
+>  	.finalize_features = vp_finalize_features,
+>  	.bus_name	= vp_bus_name,
+> diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
+> index 4acb34409f0b..623906b4996c 100644
+> --- a/drivers/virtio/virtio_pci_modern.c
+> +++ b/drivers/virtio/virtio_pci_modern.c
+> @@ -394,6 +394,7 @@ static const struct virtio_config_ops virtio_pci_config_nodev_ops = {
+>  	.reset		= vp_reset,
+>  	.find_vqs	= vp_modern_find_vqs,
+>  	.del_vqs	= vp_del_vqs,
+> +	.synchronize_cbs = vp_synchronize_vectors,
+>  	.get_features	= vp_get_features,
+>  	.finalize_features = vp_finalize_features,
+>  	.bus_name	= vp_bus_name,
+> @@ -411,6 +412,7 @@ static const struct virtio_config_ops virtio_pci_config_ops = {
+>  	.reset		= vp_reset,
+>  	.find_vqs	= vp_modern_find_vqs,
+>  	.del_vqs	= vp_del_vqs,
+> +	.synchronize_cbs = vp_synchronize_vectors,
+>  	.get_features	= vp_get_features,
+>  	.finalize_features = vp_finalize_features,
+>  	.bus_name	= vp_bus_name,
 > --
 > 2.25.1
 >
