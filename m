@@ -1,61 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8054C53F040
-	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:39 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55AF253F021
+	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 1CB4041099;
-	Mon,  6 Jun 2022 20:41:38 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 1F854840A1;
+	Mon,  6 Jun 2022 20:41:20 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id z6VLVS58ai6N; Mon,  6 Jun 2022 20:41:37 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ocWloKm24xYw; Mon,  6 Jun 2022 20:41:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E76CE4109F;
-	Mon,  6 Jun 2022 20:41:36 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D108083FA3;
+	Mon,  6 Jun 2022 20:41:18 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 63614C002D;
-	Mon,  6 Jun 2022 20:41:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A2C21C007E;
+	Mon,  6 Jun 2022 20:41:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B1C3C002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 97D5EC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:35 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 53CDA41081
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6AB9D4107E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:35 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AIv66kyXDp9R
+ with ESMTP id 4JLM7tE_MQCh
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:34 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:12 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B3554410AD
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B2BEE4108A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:34 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=sw3xGMu8EIPPhanldW93F5IagC/JMQIeTrByOXSqams=; b=JRGvxIipv7m6v6BYy6Iv5o96an
- NjXbRwZx1kTpdL1gggi3uNnj2ZYHaGoDzYgFT9yWRY6RNrAPmjSRZuyOiiwaQM/1+M4AVwuYk+PBK
- EhpIMqcN0q2USPv0aKU3dVjpSas0DHRDV7v4Cj/0tVzmx9G3IVaaTh1VHsmINPnXLtdg0pn0oK/os
- mZ5HSWwosmZWEQkulkmXHnZdh3UXU16V/nVWQplhy19ME/Fyl4IioqID8E9V19f67diSrjjEsp+Bj
- J6Yy4FA8M6KmTvtuBy+S1CbohBt8Z1KKKPT8ganbhA1EGJjXoSXsZPQfL0++fMRIBpXima3JffJKS
- uzjNM9wQ==;
+ bh=Nbr9wUy4GZu/A9I5fNiEUH8YjHUTRzvYZO3QnrtHfqs=; b=Gd3hSiL+/E0dfHLBarUzOacZ5+
+ RgLt/HR3/LRhEZeLymFVkZyeDV4o45ibioJi0eraHf6ehCGQbtosb1TjID04N286tCzWwDmpddr27
+ H3ByN9G6hK5riWHYLqRkTy3GsEZUgLnYhezqas1+XNq5pmGlpRnM2NevyEDgUXJ8ZYsVlaLiCT3RO
+ 8Ehpw8He8k5yQNPfIvPT9F5a/3yz8jOKKKyGe7pM1yVoqkDKz2YPmFcUn0VPuUW3SPY9tPOvKaZJU
+ 1Vf1NH8uVC9GEQzwQCTJYo35GSSSaLqMV3XH1X1fzAEkojyoaH3wkOkh+Z2rcUydL6L7kLEvUr3mZ
+ LKB+9tpQ==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyJWx-00B19o-Ro; Mon, 06 Jun 2022 20:40:55 +0000
+ Hat Linux)) id 1nyJWx-00B19q-Uf; Mon, 06 Jun 2022 20:40:55 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Subject: [PATCH 16/20] secretmem: Convert to migrate_folio
-Date: Mon,  6 Jun 2022 21:40:46 +0100
-Message-Id: <20220606204050.2625949-17-willy@infradead.org>
+Subject: [PATCH 17/20] z3fold: Convert to migrate_folio
+Date: Mon,  6 Jun 2022 21:40:47 +0100
+Message-Id: <20220606204050.2625949-18-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220606204050.2625949-1-willy@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
@@ -83,36 +85,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This is little more than changing the types over; there's no real work
-being done in this function.
+z3fold doesn't really use folios, but it needs to be called like this
+in order to migrate an individual page.  Convert from a folio back to
+a page until we decide how to handle migration better for z3fold.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- mm/secretmem.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ mm/z3fold.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-diff --git a/mm/secretmem.c b/mm/secretmem.c
-index 206ed6b40c1d..9c7f6e3bf3e1 100644
---- a/mm/secretmem.c
-+++ b/mm/secretmem.c
-@@ -138,8 +138,8 @@ static bool secretmem_isolate_page(struct page *page, isolate_mode_t mode)
+diff --git a/mm/z3fold.c b/mm/z3fold.c
+index f41f8b0d9e9a..5d091c41fb35 100644
+--- a/mm/z3fold.c
++++ b/mm/z3fold.c
+@@ -1554,9 +1554,11 @@ static bool z3fold_page_isolate(struct page *page, isolate_mode_t mode)
  	return false;
  }
  
--static int secretmem_migratepage(struct address_space *mapping,
--				 struct page *newpage, struct page *page,
-+static int secretmem_migrate_folio(struct address_space *mapping,
-+				 struct folio *dst, struct folio *src,
- 				 enum migrate_mode mode)
+-static int z3fold_page_migrate(struct address_space *mapping, struct page *newpage,
+-			       struct page *page, enum migrate_mode mode)
++static int z3fold_migrate_folio(struct address_space *mapping,
++		struct folio *dst, struct folio *src, enum migrate_mode mode)
  {
- 	return -EBUSY;
-@@ -154,7 +154,7 @@ static void secretmem_free_folio(struct folio *folio)
- const struct address_space_operations secretmem_aops = {
- 	.dirty_folio	= noop_dirty_folio,
- 	.free_folio	= secretmem_free_folio,
--	.migratepage	= secretmem_migratepage,
-+	.migrate_folio	= secretmem_migrate_folio,
- 	.isolate_page	= secretmem_isolate_page,
++	struct page *newpage = &dst->page;
++	struct page *page = &src->page;
+ 	struct z3fold_header *zhdr, *new_zhdr;
+ 	struct z3fold_pool *pool;
+ 	struct address_space *new_mapping;
+@@ -1644,7 +1646,7 @@ static void z3fold_page_putback(struct page *page)
+ 
+ static const struct address_space_operations z3fold_aops = {
+ 	.isolate_page = z3fold_page_isolate,
+-	.migratepage = z3fold_page_migrate,
++	.migrate_folio = z3fold_migrate_folio,
+ 	.putback_page = z3fold_page_putback,
  };
  
 -- 
