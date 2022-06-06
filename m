@@ -1,61 +1,63 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9C91A53F036
-	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:32 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A05A53F04A
+	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:43 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4B5FA84099;
-	Mon,  6 Jun 2022 20:41:31 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9465B41C40;
+	Mon,  6 Jun 2022 20:41:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dVckJpGCkf8S; Mon,  6 Jun 2022 20:41:30 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6bHrT_Ld5nDY; Mon,  6 Jun 2022 20:41:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 1E26F840BC;
-	Mon,  6 Jun 2022 20:41:30 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 27AAB41C2B;
+	Mon,  6 Jun 2022 20:41:40 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8B6E5C002D;
-	Mon,  6 Jun 2022 20:41:29 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A450AC002D;
+	Mon,  6 Jun 2022 20:41:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1ED1DC002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 91732C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:28 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id CD64C840B9
+ by smtp1.osuosl.org (Postfix) with ESMTP id 80D36840AA
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:27 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:38 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rhdvMds7IYVP
+ with ESMTP id 7uaIHGzNddnn
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:27 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:38 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2A50A840BC
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D0CFF840FC
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:27 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=qQEq4mdildUXXhXlw26OgbbgbPBpQ0UP7iPop0FGmsk=; b=smk5cZ9QlxWeUzBKWfo86nVrRn
- 486Q4WmG9O8N7FW33RHEsLn1KdnhRCjpYsCnh2VTGHbxlEbEoaGncZWPwo88zaujLhSpvhlFYqZjF
- rT/pg4CkWWNMdWfegFLoYHJvmoFIm1xAxZgu4kmCe6BWjH2QkN1GsU7kYe50wZfva3uEoQHLUVRRU
- edvLwLiCnvO9Xryb+ZR231DA0eGBN7CXz/fAN+xjcrsnTNRjReFVIp2BGCweM6NJZGbCkhTvenoYZ
- cQCh2ENLaKQwbX+uc1wEhsR2j84htsXjEviyNnafZBo9+lFBva15d5sRZGRRozu2cOzqXNQM+sbim
- Zzrgg9gg==;
+ bh=pP2rySBonQba80aJJurpf3Ufu7YzAk6PE/UfFF5JjqU=; b=CVvFIaE3DO4F579aJn2Gv8sjJ1
+ 3s4aun59FYY8/cIm392ktBNn3Yfrt/zZI2FAKlmO4E3xMwJb3V8p0zjyiYNlXYHugx4ESqJjlHfb1
+ QG1qZiDzGvDgU/60lg9IfnGfI2mfaTj+stxEAcrFL6CEOIqb5GzPU9vw1qrk6uFLJAOZ3IkEmbCQE
+ LzelMikinFLOzolvWeyxZFad1TDhzqH1x/JkOTw+Xol4LnPrnKqEGccXqc7eFHbh9ziaHCXeJ+DmM
+ rrw8vPHosmQOe6zaJs4TsqpU+ayfdzgl+HFiB3jtxCoXtL62mYflqoIljhWxTii99IWQIy6G281e+
+ VVfyP2fw==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyJWx-00B19U-0Q; Mon, 06 Jun 2022 20:40:55 +0000
+ Hat Linux)) id 1nyJWx-00B19W-2b; Mon, 06 Jun 2022 20:40:55 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Subject: [PATCH 06/20] btrfs: Convert btree_migratepage to migrate_folio
-Date: Mon,  6 Jun 2022 21:40:36 +0100
-Message-Id: <20220606204050.2625949-7-willy@infradead.org>
+Subject: [PATCH 07/20] nfs: Convert to migrate_folio
+Date: Mon,  6 Jun 2022 21:40:37 +0100
+Message-Id: <20220606204050.2625949-8-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220606204050.2625949-1-willy@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
@@ -88,63 +90,83 @@ later.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/btrfs/disk-io.c | 22 ++++++++++------------
- 1 file changed, 10 insertions(+), 12 deletions(-)
+ fs/nfs/file.c     |  4 +---
+ fs/nfs/internal.h |  6 ++++--
+ fs/nfs/write.c    | 16 ++++++++--------
+ 3 files changed, 13 insertions(+), 13 deletions(-)
 
-diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
-index 12b11e645c14..9ceb73f683af 100644
---- a/fs/btrfs/disk-io.c
-+++ b/fs/btrfs/disk-io.c
-@@ -952,28 +952,28 @@ void btrfs_submit_metadata_bio(struct inode *inode, struct bio *bio, int mirror_
+diff --git a/fs/nfs/file.c b/fs/nfs/file.c
+index 2d72b1b7ed74..549baed76351 100644
+--- a/fs/nfs/file.c
++++ b/fs/nfs/file.c
+@@ -533,9 +533,7 @@ const struct address_space_operations nfs_file_aops = {
+ 	.write_end = nfs_write_end,
+ 	.invalidate_folio = nfs_invalidate_folio,
+ 	.release_folio = nfs_release_folio,
+-#ifdef CONFIG_MIGRATION
+-	.migratepage = nfs_migrate_page,
+-#endif
++	.migrate_folio = nfs_migrate_folio,
+ 	.launder_folio = nfs_launder_folio,
+ 	.is_dirty_writeback = nfs_check_dirty_writeback,
+ 	.error_remove_page = generic_error_remove_page,
+diff --git a/fs/nfs/internal.h b/fs/nfs/internal.h
+index 8f8cd6e2d4db..437ebe544aaf 100644
+--- a/fs/nfs/internal.h
++++ b/fs/nfs/internal.h
+@@ -578,8 +578,10 @@ void nfs_clear_pnfs_ds_commit_verifiers(struct pnfs_ds_commit_info *cinfo)
+ #endif
+ 
+ #ifdef CONFIG_MIGRATION
+-extern int nfs_migrate_page(struct address_space *,
+-		struct page *, struct page *, enum migrate_mode);
++int nfs_migrate_folio(struct address_space *, struct folio *dst,
++		struct folio *src, enum migrate_mode);
++#else
++#define nfs_migrate_folio NULL
+ #endif
+ 
+ static inline int
+diff --git a/fs/nfs/write.c b/fs/nfs/write.c
+index 1c706465d090..649b9e633459 100644
+--- a/fs/nfs/write.c
++++ b/fs/nfs/write.c
+@@ -2119,27 +2119,27 @@ int nfs_wb_page(struct inode *inode, struct page *page)
  }
  
  #ifdef CONFIG_MIGRATION
--static int btree_migratepage(struct address_space *mapping,
--			struct page *newpage, struct page *page,
--			enum migrate_mode mode)
-+static int btree_migrate_folio(struct address_space *mapping,
-+		struct folio *dst, struct folio *src, enum migrate_mode mode)
+-int nfs_migrate_page(struct address_space *mapping, struct page *newpage,
+-		struct page *page, enum migrate_mode mode)
++int nfs_migrate_folio(struct address_space *mapping, struct folio *dst,
++		struct folio *src, enum migrate_mode mode)
  {
  	/*
- 	 * we can't safely write a btree page from here,
- 	 * we haven't done the locking hook
+-	 * If PagePrivate is set, then the page is currently associated with
++	 * If the private flag is set, the folio is currently associated with
+ 	 * an in-progress read or write request. Don't try to migrate it.
+ 	 *
+ 	 * FIXME: we could do this in principle, but we'll need a way to ensure
+ 	 *        that we can safely release the inode reference while holding
+-	 *        the page lock.
++	 *        the folio lock.
  	 */
--	if (PageDirty(page))
-+	if (folio_test_dirty(src))
- 		return -EAGAIN;
- 	/*
- 	 * Buffers may be managed in a filesystem specific way.
- 	 * We must have no buffers or drop them.
- 	 */
--	if (page_has_private(page) &&
--	    !try_to_release_page(page, GFP_KERNEL))
-+	if (folio_get_private(src) &&
-+	    !filemap_release_folio(src, GFP_KERNEL))
- 		return -EAGAIN;
+-	if (PagePrivate(page))
++	if (folio_test_private(src))
+ 		return -EBUSY;
+ 
+-	if (PageFsCache(page)) {
++	if (folio_test_fscache(src)) {
+ 		if (mode == MIGRATE_ASYNC)
+ 			return -EBUSY;
+-		wait_on_page_fscache(page);
++		folio_wait_fscache(src);
+ 	}
+ 
 -	return migrate_page(mapping, newpage, page, mode);
 +	return migrate_page(mapping, &dst->page, &src->page, mode);
  }
-+#else
-+#define btree_migrate_folio NULL
  #endif
  
--
- static int btree_writepages(struct address_space *mapping,
- 			    struct writeback_control *wbc)
- {
-@@ -1073,10 +1073,8 @@ static const struct address_space_operations btree_aops = {
- 	.writepages	= btree_writepages,
- 	.release_folio	= btree_release_folio,
- 	.invalidate_folio = btree_invalidate_folio,
--#ifdef CONFIG_MIGRATION
--	.migratepage	= btree_migratepage,
--#endif
--	.dirty_folio = btree_dirty_folio,
-+	.migrate_folio	= btree_migrate_folio,
-+	.dirty_folio	= btree_dirty_folio,
- };
- 
- struct extent_buffer *btrfs_find_create_tree_block(
 -- 
 2.35.1
 
