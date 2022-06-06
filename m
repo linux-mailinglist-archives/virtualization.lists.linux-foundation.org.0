@@ -2,62 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E5FDA53F02F
-	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 883F853F023
+	for <lists.virtualization@lfdr.de>; Mon,  6 Jun 2022 22:41:22 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7E7FB61275;
-	Mon,  6 Jun 2022 20:41:27 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTP id 1B16F6135F;
+	Mon,  6 Jun 2022 20:41:21 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id W6-MZWpcRPDu; Mon,  6 Jun 2022 20:41:26 +0000 (UTC)
+	with ESMTP id Pj9jxBQkG72y; Mon,  6 Jun 2022 20:41:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 2C8C061075;
-	Mon,  6 Jun 2022 20:41:26 +0000 (UTC)
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 3A219610BE;
+	Mon,  6 Jun 2022 20:41:19 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EE3E6C002D;
-	Mon,  6 Jun 2022 20:41:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D881CC0084;
+	Mon,  6 Jun 2022 20:41:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CC6B4C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0693BC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:23 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:15 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id B3D0E410A1
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5640260DFF
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:23 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:13 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tia0xxE9EWXR
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id CUHtjfCLdveX
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:22 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8932F410A6
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 48AC161196
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Jun 2022 20:41:22 +0000 (UTC)
+ Mon,  6 Jun 2022 20:41:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=MljmBGg5QLNrlXQo2zoqyO/w7uyNryh0JirP0K7S3ag=; b=crx1P1AOzfaVjsIjKFsnW/dRPz
- BXw2ENLZjBS3Tf/K4vlxUvTW65vSWeLe4SK5T0Xn+T+dHDiJg0i+lSt2MU+wL0lJZ5+okWaxAgbc0
- Z/vst7YgLlz94wNZjneO8OUXYrNEJKVSQQicN17cN1YoPQTICS4bXGxyDlnzy9O5ahmISSxp7vpN/
- Hwqq/epOdfS0GN2mfRLkGMDSNsHzoUSO3A1kzb8obP6+oMgROyOVolsUsjhQaeGAY7SVGoFC37P39
- vXEmqMt5KDLiFuVK/vK6EVvywxX227bt9H9wiRu2WVwsFGhB7SVM3X8Mlqtvyz7jItHArnFsZxYgX
- ssmeGojg==;
+ bh=jUHtPvxpwYn/CbCKtCO4gIDrDPVTvyaQoVGtIQShqV8=; b=jSXisP6LX46D6Mw+iXYFF/5dHQ
+ Cq+5Fi0773+cVC4U9ukK6uPnYuWIfkHADg3G9SiZaN1QWdL8Bw8OwfYPT7xfddEiqh5OKP81yWVIY
+ qERnKHNvRO9zfbKpGHImXAVxsBisgmn/CxiCns5EQmSUyg3J6K8R2kkkIDgNoaevsqaLFhC5Wxh52
+ Z38Ws7TQ5Dp7rpDRe4MO4DakZ/+co05qxKtyfgyK3bXqUiSNs9vH9ETqmdeoiAv+unUA3cgwymN9t
+ pq0eOgOppmxZCcU/ekIrK65xO/nlqiG9Pvvr5StvpmfjnqBIWv5xh9xJykbFL+Cw79+wHE0k8kIBA
+ U9JkUfCw==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyJWx-00B19c-AH; Mon, 06 Jun 2022 20:40:55 +0000
+ Hat Linux)) id 1nyJWx-00B19e-EV; Mon, 06 Jun 2022 20:40:55 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Subject: [PATCH 10/20] btrfs: Convert btrfs_migratepage to migrate_folio
-Date: Mon,  6 Jun 2022 21:40:40 +0100
-Message-Id: <20220606204050.2625949-11-willy@infradead.org>
+Subject: [PATCH 11/20] ubifs: Convert to filemap_migrate_folio()
+Date: Mon,  6 Jun 2022 21:40:41 +0100
+Message-Id: <20220606204050.2625949-12-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220606204050.2625949-1-willy@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
@@ -85,68 +83,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use filemap_migrate_folio() to do the bulk of the work, and then copy
-the ordered flag across if needed.
+filemap_migrate_folio() is a little more general than ubifs really needs,
+but it's better to share the code.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 ---
- fs/btrfs/inode.c | 26 +++++++++-----------------
- 1 file changed, 9 insertions(+), 17 deletions(-)
+ fs/ubifs/file.c | 29 ++---------------------------
+ 1 file changed, 2 insertions(+), 27 deletions(-)
 
-diff --git a/fs/btrfs/inode.c b/fs/btrfs/inode.c
-index 81737eff92f3..5f41d869c648 100644
---- a/fs/btrfs/inode.c
-+++ b/fs/btrfs/inode.c
-@@ -8255,30 +8255,24 @@ static bool btrfs_release_folio(struct folio *folio, gfp_t gfp_flags)
+diff --git a/fs/ubifs/file.c b/fs/ubifs/file.c
+index 04ced154960f..f2353dd676ef 100644
+--- a/fs/ubifs/file.c
++++ b/fs/ubifs/file.c
+@@ -1461,29 +1461,6 @@ static bool ubifs_dirty_folio(struct address_space *mapping,
+ 	return ret;
  }
  
- #ifdef CONFIG_MIGRATION
--static int btrfs_migratepage(struct address_space *mapping,
--			     struct page *newpage, struct page *page,
-+static int btrfs_migrate_folio(struct address_space *mapping,
-+			     struct folio *dst, struct folio *src,
- 			     enum migrate_mode mode)
- {
--	int ret;
-+	int ret = filemap_migrate_folio(mapping, dst, src, mode);
- 
--	ret = migrate_page_move_mapping(mapping, newpage, page, 0);
- 	if (ret != MIGRATEPAGE_SUCCESS)
- 		return ret;
- 
--	if (page_has_private(page))
--		attach_page_private(newpage, detach_page_private(page));
+-#ifdef CONFIG_MIGRATION
+-static int ubifs_migrate_page(struct address_space *mapping,
+-		struct page *newpage, struct page *page, enum migrate_mode mode)
+-{
+-	int rc;
 -
--	if (PageOrdered(page)) {
--		ClearPageOrdered(page);
--		SetPageOrdered(newpage);
-+	if (folio_test_ordered(src)) {
-+		folio_clear_ordered(src);
-+		folio_set_ordered(dst);
- 	}
- 
+-	rc = migrate_page_move_mapping(mapping, newpage, page, 0);
+-	if (rc != MIGRATEPAGE_SUCCESS)
+-		return rc;
+-
+-	if (PagePrivate(page)) {
+-		detach_page_private(page);
+-		attach_page_private(newpage, (void *)1);
+-	}
+-
 -	if (mode != MIGRATE_SYNC_NO_COPY)
 -		migrate_page_copy(newpage, page);
 -	else
 -		migrate_page_states(newpage, page);
- 	return MIGRATEPAGE_SUCCESS;
- }
-+#else
-+#define btrfs_migrate_folio NULL
- #endif
- 
- static void btrfs_invalidate_folio(struct folio *folio, size_t offset,
-@@ -11422,9 +11416,7 @@ static const struct address_space_operations btrfs_aops = {
- 	.direct_IO	= noop_direct_IO,
- 	.invalidate_folio = btrfs_invalidate_folio,
- 	.release_folio	= btrfs_release_folio,
--#ifdef CONFIG_MIGRATION
--	.migratepage	= btrfs_migratepage,
+-	return MIGRATEPAGE_SUCCESS;
+-}
 -#endif
-+	.migrate_folio	= btrfs_migrate_folio,
- 	.dirty_folio	= filemap_dirty_folio,
- 	.error_remove_page = generic_error_remove_page,
- 	.swap_activate	= btrfs_swap_activate,
+-
+ static bool ubifs_release_folio(struct folio *folio, gfp_t unused_gfp_flags)
+ {
+ 	struct inode *inode = folio->mapping->host;
+@@ -1649,10 +1626,8 @@ const struct address_space_operations ubifs_file_address_operations = {
+ 	.write_end      = ubifs_write_end,
+ 	.invalidate_folio = ubifs_invalidate_folio,
+ 	.dirty_folio	= ubifs_dirty_folio,
+-#ifdef CONFIG_MIGRATION
+-	.migratepage	= ubifs_migrate_page,
+-#endif
+-	.release_folio    = ubifs_release_folio,
++	.migrate_folio	= filemap_migrate_folio,
++	.release_folio	= ubifs_release_folio,
+ };
+ 
+ const struct inode_operations ubifs_file_inode_operations = {
 -- 
 2.35.1
 
