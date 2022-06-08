@@ -1,75 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 807BE54330C
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:15 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 523C15432FA
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 24E786143A;
-	Wed,  8 Jun 2022 14:47:14 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id A6ECC418CB;
+	Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SCOY-iADWAgg; Wed,  8 Jun 2022 14:47:13 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xzHnvWXs36bk; Wed,  8 Jun 2022 14:47:04 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id D887A60F74;
-	Wed,  8 Jun 2022 14:47:12 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id D1A024194B;
+	Wed,  8 Jun 2022 14:47:03 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 15F31C0082;
-	Wed,  8 Jun 2022 14:47:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5E627C0081;
+	Wed,  8 Jun 2022 14:47:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5A159C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 135D3C0082
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:06 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 37C6B408E8
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8FB6A41894
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:06 +0000 (UTC)
+ Wed,  8 Jun 2022 14:46:58 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Arnw5R4qvvrv
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id khX5RzY2ji3i
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
+ Wed,  8 Jun 2022 14:46:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2E8FF41165
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 7AF3441928
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
+ Wed,  8 Jun 2022 14:46:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=pxqjaMyXYMAIciLaWxKe0qnmRXZim+cyW3iOuZrk594=; b=npWDxkQdpsP/KSbB8UVk7cSTfR
- iAvH2EDMYqweSjq8GVWChqEcX/9BIHnt+/9Lh2o73ASUuV3YGe0N1gseF/G3NKGkJrIf+0It9dNyi
- FAvR8qXc2Wg9XRPiJtu0ItkxyceEVaw/05Yp7Ekb/y4g2aezSDA4pvjQ6wKPUVatsqaVeKHbB2bcq
- mZiZTyBSaEWIyApTNtwFIeiNSKagNK4BMp9uLK4X+ZDckF4tkdR4/twee7LOTtORPxdg1htlaoW41
- LiZVginb/4mTy1FluTeIqpvVDv2MTNtlL+Aa4yxsbdvio0znFSvZKUdNiAQUmElpo3cRSF9a3DUwX
- Ck0o5LKQ==;
+ bh=/sqr2RkpmWV4/QsFh9IpMWbDQxRkD/xb8LFsX6prmG0=; b=PMRi03XWoXclDviRUqbE/MtOjq
+ BctQuAYPZxOMxsfOMiyem28bAW8AVWTyoJEScncE3ewsqlmC44gesqRRvD3B8d2x2o6Oa3YKdgS6F
+ N/lpBgDl9rG8Y87zQ9aXv0X/K3/i3SOyjl709wqIh2P8wY30DT3oxZsmJJDGR2d7YpL64XTDbtm0N
+ 5k00Y596qRpvXjB0UkiaqAr3svE1BP55qX4/b4iH3/3A6gQNxBZUjoJBg6kVeAr1y4s/o8S9iW+rn
+ f/uMfy6If6inoLAxZq0GFvTDrpfPEwMlmkj+swzSpz+tgCObUk3HyahRZMsXvA5vHVxaf8AvbHklN
+ HHoVukvQ==;
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywx4-00ChYj-7G; Wed, 08 Jun 2022 14:46:30 +0000
+ id 1nywx4-00ChZ5-S9; Wed, 08 Jun 2022 14:46:30 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id CC219302F27;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id CF56C302F2D;
  Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id A74D220C119A3; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
-Message-ID: <20220608144517.633293983@infradead.org>
+ id ACED020C119A6; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+Message-ID: <20220608144517.696962976@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:50 +0200
+Date: Wed, 08 Jun 2022 16:27:51 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH 27/36] cpuidle,mwait: Make noinstr clean
+Subject: [PATCH 28/36] cpuidle,tdx: Make tdx noinstr clean
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, benh@kernel.crashing.org,
@@ -135,77 +133,48 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vmlinux.o: warning: objtool: intel_idle_s2idle+0x6e: call to __monitor.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0x8c: call to __monitor.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle+0x73: call to __monitor.constprop.0() leaves .noinstr.text section
-
-vmlinux.o: warning: objtool: mwait_idle+0x88: call to clflush() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __halt+0x2c: call to hcall_func.constprop.0() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __halt+0x3f: call to __tdx_hypercall() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __tdx_hypercall+0x66: call to __tdx_hypercall_failed() leaves .noinstr.text section
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/include/asm/mwait.h         |   12 ++++++------
- arch/x86/include/asm/special_insns.h |    2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ arch/x86/coco/tdx/tdcall.S |    2 ++
+ arch/x86/coco/tdx/tdx.c    |    5 +++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
 
---- a/arch/x86/include/asm/mwait.h
-+++ b/arch/x86/include/asm/mwait.h
-@@ -25,7 +25,7 @@
- #define TPAUSE_C01_STATE		1
- #define TPAUSE_C02_STATE		0
+--- a/arch/x86/coco/tdx/tdcall.S
++++ b/arch/x86/coco/tdx/tdcall.S
+@@ -31,6 +31,8 @@
+ 					  TDX_R12 | TDX_R13 | \
+ 					  TDX_R14 | TDX_R15 )
  
--static inline void __monitor(const void *eax, unsigned long ecx,
-+static __always_inline void __monitor(const void *eax, unsigned long ecx,
- 			     unsigned long edx)
- {
- 	/* "monitor %eax, %ecx, %edx;" */
-@@ -33,7 +33,7 @@ static inline void __monitor(const void
- 		     :: "a" (eax), "c" (ecx), "d"(edx));
++.section .noinstr.text, "ax"
++
+ /*
+  * __tdx_module_call()  - Used by TDX guests to request services from
+  * the TDX module (does not include VMM services) using TDCALL instruction.
+--- a/arch/x86/coco/tdx/tdx.c
++++ b/arch/x86/coco/tdx/tdx.c
+@@ -53,8 +53,9 @@ static inline u64 _tdx_hypercall(u64 fn,
  }
  
--static inline void __monitorx(const void *eax, unsigned long ecx,
-+static __always_inline void __monitorx(const void *eax, unsigned long ecx,
- 			      unsigned long edx)
+ /* Called from __tdx_hypercall() for unrecoverable failure */
+-void __tdx_hypercall_failed(void)
++noinstr void __tdx_hypercall_failed(void)
  {
- 	/* "monitorx %eax, %ecx, %edx;" */
-@@ -41,7 +41,7 @@ static inline void __monitorx(const void
- 		     :: "a" (eax), "c" (ecx), "d"(edx));
++	instrumentation_begin();
+ 	panic("TDVMCALL failed. TDX module bug?");
  }
  
--static inline void __mwait(unsigned long eax, unsigned long ecx)
-+static __always_inline void __mwait(unsigned long eax, unsigned long ecx)
- {
- 	mds_idle_clear_cpu_buffers();
- 
-@@ -76,8 +76,8 @@ static inline void __mwait(unsigned long
-  * EAX                     (logical) address to monitor
-  * ECX                     #GP if not zero
+@@ -64,7 +65,7 @@ void __tdx_hypercall_failed(void)
+  * Reusing the KVM EXIT_REASON macros makes it easier to connect the host and
+  * guest sides of these calls.
   */
--static inline void __mwaitx(unsigned long eax, unsigned long ebx,
--			    unsigned long ecx)
-+static __always_inline void __mwaitx(unsigned long eax, unsigned long ebx,
-+				     unsigned long ecx)
+-static u64 hcall_func(u64 exit_reason)
++static __always_inline u64 hcall_func(u64 exit_reason)
  {
- 	/* No MDS buffer clear as this is AMD/HYGON only */
- 
-@@ -86,7 +86,7 @@ static inline void __mwaitx(unsigned lon
- 		     :: "a" (eax), "b" (ebx), "c" (ecx));
- }
- 
--static inline void __sti_mwait(unsigned long eax, unsigned long ecx)
-+static __always_inline void __sti_mwait(unsigned long eax, unsigned long ecx)
- {
- 	mds_idle_clear_cpu_buffers();
- 	/* "mwait %eax, %ecx;" */
---- a/arch/x86/include/asm/special_insns.h
-+++ b/arch/x86/include/asm/special_insns.h
-@@ -196,7 +196,7 @@ static inline void load_gs_index(unsigne
- 
- #endif /* CONFIG_PARAVIRT_XXL */
- 
--static inline void clflush(volatile void *__p)
-+static __always_inline void clflush(volatile void *__p)
- {
- 	asm volatile("clflush %0" : "+m" (*(volatile char __force *)__p));
+ 	return exit_reason;
  }
 
 
