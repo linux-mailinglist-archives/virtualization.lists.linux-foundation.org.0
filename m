@@ -1,73 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4C2CC543358
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:33 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46150543302
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5AD1F42538;
-	Wed,  8 Jun 2022 14:47:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id D020583F3A;
+	Wed,  8 Jun 2022 14:47:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LHXTEiCnwnra; Wed,  8 Jun 2022 14:47:22 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ss50h3RqTPn7; Wed,  8 Jun 2022 14:47:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 61C3942513;
-	Wed,  8 Jun 2022 14:47:20 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 0852F83F54;
+	Wed,  8 Jun 2022 14:47:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0D067C0039;
-	Wed,  8 Jun 2022 14:47:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 83747C0081;
+	Wed,  8 Jun 2022 14:47:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 18C29C0088
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3D4B5C0084
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:13 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E081D41B35
+ by smtp4.osuosl.org (Postfix) with ESMTP id C3E9A419B8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:11 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:03 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
+Authentication-Results: smtp4.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3tnr2m8CZmzG
+ with ESMTP id EinTl6m34ccH
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:10 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0E325419F6
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A14114194B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:09 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=T8wRwm6eLEEe+d6prOVCLJdHQ0FxyXLfs5ZoW8qxROY=; b=qz2/QcW+8oRBpx5oORnEf+GtM8
- q1YrQyf1tmyPcNQqEPrXFmduaozueI1j9rg8SJ6zBna7Uz8lvnEwB+B+wyKCf5pGe3lOvB4F+TeAD
- F9tyHNLVtk1V2IJAmR3uomZgujNpMa70W2bEyEOoERgoVaups+pxLymddoQIwXqrmFio0yWVivIGv
- IsqY6h6gyND3FQXvxxlKKrgtcZk2R0bnOmFFyBY0qQH0BnYniwDC01FuURzwOyZMFoXutRSidDScS
- SGPdVyuHTbrYBEgBLfjjxHu+bvwr+Z2Livrdq6BQDnc77vplqPh7z9gL7QwK+/3eqINZJiDgrTyxM
- zjRENbJA==;
+ bh=HzY3jBvKRSGcnvMJEPYny4/0n/oTUbqDiv/WYyIgET0=; b=sA+18VAK88SPXdLOpMza+rOEfP
+ LIZ49BFC7l9BHr/9lFK8wXWo46KZqkiByud1HSMZeZ+BUYAV1ia+Yhjd7ltAYMQ5wWfxb2f6aW9XN
+ LaYbqONFU5epqLIj3qUQtYBecrUdqqZByYp3TXTApbtEn9PG18xAyF+bW9M0QZ0Hl1P3HfTU4flDJ
+ /60dHZ76Xt7rMxgX4MVdhQrPOIHu7jlHBXo6lM/0rE/s1QqIBAAOq4lIO8uNFmK6Mus0AzeHFEaFf
+ 95DVCFKqB4yKLaIMK8VXS/RFhvqO+ARWFtTz41dKNkpurhwu+bIx/YcQ0H56dkcHsKj/6fk/1/KoL
+ 4ucMtSnA==;
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywx6-0066Da-9x; Wed, 08 Jun 2022 14:46:33 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nywx6-00ChZr-Mr; Wed, 08 Jun 2022 14:46:32 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 0452B302F4F;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 0C581302F55;
  Wed,  8 Jun 2022 16:46:24 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id C421820C119B8; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
-Message-ID: <20220608144518.073801916@infradead.org>
+ id C77CE20C119BA; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+Message-ID: <20220608144518.136731332@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:57 +0200
+Date: Wed, 08 Jun 2022 16:27:58 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH 34/36] cpuidle,omap3: Push RCU-idle into omap_sram_idle()
+Subject: [PATCH 35/36] cpuidle,powerdomain: Remove trace_.*_rcuidle()
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, benh@kernel.crashing.org,
@@ -133,90 +135,150 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-OMAP3 uses full SoC suspend modes as idle states, as such it needs the
-whole power-domain and clock-domain code from the idle path.
-
-All that code is not suitable to run with RCU disabled, as such push
-RCU-idle deeper still.
+OMAP was the one and only user.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/arm/mach-omap2/cpuidle34xx.c |    4 +---
- arch/arm/mach-omap2/pm.h          |    2 +-
- arch/arm/mach-omap2/pm34xx.c      |   12 ++++++++++--
- 3 files changed, 12 insertions(+), 6 deletions(-)
+ arch/arm/mach-omap2/powerdomain.c |   10 +++++-----
+ drivers/base/power/runtime.c      |   24 ++++++++++++------------
+ 2 files changed, 17 insertions(+), 17 deletions(-)
 
---- a/arch/arm/mach-omap2/cpuidle34xx.c
-+++ b/arch/arm/mach-omap2/cpuidle34xx.c
-@@ -133,9 +133,7 @@ static int omap3_enter_idle(struct cpuid
+--- a/arch/arm/mach-omap2/powerdomain.c
++++ b/arch/arm/mach-omap2/powerdomain.c
+@@ -187,9 +187,9 @@ static int _pwrdm_state_switch(struct po
+ 			trace_state = (PWRDM_TRACE_STATES_FLAG |
+ 				       ((next & OMAP_POWERSTATE_MASK) << 8) |
+ 				       ((prev & OMAP_POWERSTATE_MASK) << 0));
+-			trace_power_domain_target_rcuidle(pwrdm->name,
+-							  trace_state,
+-							  raw_smp_processor_id());
++			trace_power_domain_target(pwrdm->name,
++						  trace_state,
++						  raw_smp_processor_id());
+ 		}
+ 		break;
+ 	default:
+@@ -541,8 +541,8 @@ int pwrdm_set_next_pwrst(struct powerdom
+ 
+ 	if (arch_pwrdm && arch_pwrdm->pwrdm_set_next_pwrst) {
+ 		/* Trace the pwrdm desired target state */
+-		trace_power_domain_target_rcuidle(pwrdm->name, pwrst,
+-						  raw_smp_processor_id());
++		trace_power_domain_target(pwrdm->name, pwrst,
++					  raw_smp_processor_id());
+ 		/* Program the pwrdm desired target state */
+ 		ret = arch_pwrdm->pwrdm_set_next_pwrst(pwrdm, pwrst);
+ 	}
+--- a/drivers/base/power/runtime.c
++++ b/drivers/base/power/runtime.c
+@@ -442,7 +442,7 @@ static int rpm_idle(struct device *dev,
+ 	int (*callback)(struct device *);
+ 	int retval;
+ 
+-	trace_rpm_idle_rcuidle(dev, rpmflags);
++	trace_rpm_idle(dev, rpmflags);
+ 	retval = rpm_check_suspend_allowed(dev);
+ 	if (retval < 0)
+ 		;	/* Conditions are wrong. */
+@@ -481,7 +481,7 @@ static int rpm_idle(struct device *dev,
+ 			dev->power.request_pending = true;
+ 			queue_work(pm_wq, &dev->power.work);
+ 		}
+-		trace_rpm_return_int_rcuidle(dev, _THIS_IP_, 0);
++		trace_rpm_return_int(dev, _THIS_IP_, 0);
+ 		return 0;
  	}
  
- 	/* Execute ARM wfi */
--	cpuidle_rcu_enter();
--	omap_sram_idle();
--	cpuidle_rcu_exit();
-+	omap_sram_idle(true);
+@@ -493,7 +493,7 @@ static int rpm_idle(struct device *dev,
+ 	wake_up_all(&dev->power.wait_queue);
  
- 	/*
- 	 * Call idle CPU PM enter notifier chain to restore
---- a/arch/arm/mach-omap2/pm.h
-+++ b/arch/arm/mach-omap2/pm.h
-@@ -29,7 +29,7 @@ static inline int omap4_idle_init(void)
- 
- extern void *omap3_secure_ram_storage;
- extern void omap3_pm_off_mode_enable(int);
--extern void omap_sram_idle(void);
-+extern void omap_sram_idle(bool rcuidle);
- extern int omap_pm_clkdms_setup(struct clockdomain *clkdm, void *unused);
- 
- #if defined(CONFIG_PM_OPP)
---- a/arch/arm/mach-omap2/pm34xx.c
-+++ b/arch/arm/mach-omap2/pm34xx.c
-@@ -26,6 +26,7 @@
- #include <linux/delay.h>
- #include <linux/slab.h>
- #include <linux/of.h>
-+#include <linux/cpuidle.h>
- 
- #include <trace/events/power.h>
- 
-@@ -174,7 +175,7 @@ static int omap34xx_do_sram_idle(unsigne
- 	return 0;
+  out:
+-	trace_rpm_return_int_rcuidle(dev, _THIS_IP_, retval);
++	trace_rpm_return_int(dev, _THIS_IP_, retval);
+ 	return retval ? retval : rpm_suspend(dev, rpmflags | RPM_AUTO);
  }
  
--void omap_sram_idle(void)
-+void omap_sram_idle(bool rcuidle)
- {
- 	/* Variable to tell what needs to be saved and restored
- 	 * in omap_sram_idle*/
-@@ -254,11 +255,18 @@ void omap_sram_idle(void)
- 	 */
- 	if (save_state)
- 		omap34xx_save_context(omap3_arm_context);
-+
-+	if (rcuidle)
-+		cpuidle_rcu_enter();
-+
- 	if (save_state == 1 || save_state == 3)
- 		cpu_suspend(save_state, omap34xx_do_sram_idle);
- 	else
- 		omap34xx_do_sram_idle(save_state);
+@@ -557,7 +557,7 @@ static int rpm_suspend(struct device *de
+ 	struct device *parent = NULL;
+ 	int retval;
  
-+	if (rcuidle)
-+		rcuidle_rcu_exit();
-+
- 	/* Restore normal SDRC POWER settings */
- 	if (cpu_is_omap3430() && omap_rev() >= OMAP3430_REV_ES3_0 &&
- 	    (omap_type() == OMAP2_DEVICE_TYPE_EMU ||
-@@ -316,7 +324,7 @@ static int omap3_pm_suspend(void)
+-	trace_rpm_suspend_rcuidle(dev, rpmflags);
++	trace_rpm_suspend(dev, rpmflags);
  
- 	omap3_intc_suspend();
+  repeat:
+ 	retval = rpm_check_suspend_allowed(dev);
+@@ -708,7 +708,7 @@ static int rpm_suspend(struct device *de
+ 	}
  
--	omap_sram_idle();
-+	omap_sram_idle(false);
+  out:
+-	trace_rpm_return_int_rcuidle(dev, _THIS_IP_, retval);
++	trace_rpm_return_int(dev, _THIS_IP_, retval);
  
- restore:
- 	/* Restore next_pwrsts */
+ 	return retval;
+ 
+@@ -760,7 +760,7 @@ static int rpm_resume(struct device *dev
+ 	struct device *parent = NULL;
+ 	int retval = 0;
+ 
+-	trace_rpm_resume_rcuidle(dev, rpmflags);
++	trace_rpm_resume(dev, rpmflags);
+ 
+  repeat:
+ 	if (dev->power.runtime_error) {
+@@ -925,7 +925,7 @@ static int rpm_resume(struct device *dev
+ 		spin_lock_irq(&dev->power.lock);
+ 	}
+ 
+-	trace_rpm_return_int_rcuidle(dev, _THIS_IP_, retval);
++	trace_rpm_return_int(dev, _THIS_IP_, retval);
+ 
+ 	return retval;
+ }
+@@ -1081,7 +1081,7 @@ int __pm_runtime_idle(struct device *dev
+ 		if (retval < 0) {
+ 			return retval;
+ 		} else if (retval > 0) {
+-			trace_rpm_usage_rcuidle(dev, rpmflags);
++			trace_rpm_usage(dev, rpmflags);
+ 			return 0;
+ 		}
+ 	}
+@@ -1119,7 +1119,7 @@ int __pm_runtime_suspend(struct device *
+ 		if (retval < 0) {
+ 			return retval;
+ 		} else if (retval > 0) {
+-			trace_rpm_usage_rcuidle(dev, rpmflags);
++			trace_rpm_usage(dev, rpmflags);
+ 			return 0;
+ 		}
+ 	}
+@@ -1202,7 +1202,7 @@ int pm_runtime_get_if_active(struct devi
+ 	} else {
+ 		retval = atomic_inc_not_zero(&dev->power.usage_count);
+ 	}
+-	trace_rpm_usage_rcuidle(dev, 0);
++	trace_rpm_usage(dev, 0);
+ 	spin_unlock_irqrestore(&dev->power.lock, flags);
+ 
+ 	return retval;
+@@ -1566,7 +1566,7 @@ void pm_runtime_allow(struct device *dev
+ 	if (ret == 0)
+ 		rpm_idle(dev, RPM_AUTO | RPM_ASYNC);
+ 	else if (ret > 0)
+-		trace_rpm_usage_rcuidle(dev, RPM_AUTO | RPM_ASYNC);
++		trace_rpm_usage(dev, RPM_AUTO | RPM_ASYNC);
+ 
+  out:
+ 	spin_unlock_irq(&dev->power.lock);
+@@ -1635,7 +1635,7 @@ static void update_autosuspend(struct de
+ 			atomic_inc(&dev->power.usage_count);
+ 			rpm_resume(dev, 0);
+ 		} else {
+-			trace_rpm_usage_rcuidle(dev, 0);
++			trace_rpm_usage(dev, 0);
+ 		}
+ 	}
+ 
 
 
 _______________________________________________
