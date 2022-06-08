@@ -1,73 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 523C15432FA
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:10 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E832543313
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id A6ECC418CB;
-	Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6153341172;
+	Wed,  8 Jun 2022 14:47:15 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xzHnvWXs36bk; Wed,  8 Jun 2022 14:47:04 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4nwpgDIayKEK; Wed,  8 Jun 2022 14:47:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D1A024194B;
-	Wed,  8 Jun 2022 14:47:03 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id DCFB141165;
+	Wed,  8 Jun 2022 14:47:13 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5E627C0081;
-	Wed,  8 Jun 2022 14:47:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E5725C0039;
+	Wed,  8 Jun 2022 14:47:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 135D3C0082
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0EBDFC0081
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:47:01 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 8FB6A41894
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7D654408E8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:46:58 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id khX5RzY2ji3i
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Ogy6RNxdMPJq
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:46:57 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7AF3441928
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6D5EF4116A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 14:46:57 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=/sqr2RkpmWV4/QsFh9IpMWbDQxRkD/xb8LFsX6prmG0=; b=PMRi03XWoXclDviRUqbE/MtOjq
- BctQuAYPZxOMxsfOMiyem28bAW8AVWTyoJEScncE3ewsqlmC44gesqRRvD3B8d2x2o6Oa3YKdgS6F
- N/lpBgDl9rG8Y87zQ9aXv0X/K3/i3SOyjl709wqIh2P8wY30DT3oxZsmJJDGR2d7YpL64XTDbtm0N
- 5k00Y596qRpvXjB0UkiaqAr3svE1BP55qX4/b4iH3/3A6gQNxBZUjoJBg6kVeAr1y4s/o8S9iW+rn
- f/uMfy6If6inoLAxZq0GFvTDrpfPEwMlmkj+swzSpz+tgCObUk3HyahRZMsXvA5vHVxaf8AvbHklN
- HHoVukvQ==;
+ bh=nZ3sIP+AfjwnKNI5o4cLuwY0yE/41XdF+GjWsz9OuTg=; b=rY0rNdiivLzvGTKxHIjKArJtGv
+ JQMkawTJj8SQEqtEJ3xPCf08PRNkIpqEuLBTMQig+GuhSmxqEeLxY3bBYBSL1InjLeSRd7FuiBfFT
+ ff8s0zfY7cn4ya1+C/p5LG6pommI01eYjXpKZ5a0O8ke3WwQmE3MEvmTU5SP1xjU/1b8dlkt8zdBB
+ dfl1YfdLv5JzxR/V9IHBzV1JRXdilUsvPgqYGue8e4FFC4bu+f9F4ROYoUtE/n02AU4fyepgF1L3B
+ VBo784ESh/4eySw45ErTG5Vm1/QFi4Ovz8KTGnWPg9jP5ZuBq92Wq48RzyoKTm6W2zDIfJ6TRHldf
+ 0pxIbpdQ==;
 Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
  helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1nywx4-00ChZ5-S9; Wed, 08 Jun 2022 14:46:30 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nywx6-0066DZ-9s; Wed, 08 Jun 2022 14:46:33 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id CF56C302F2D;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id D3AE2302F39;
  Wed,  8 Jun 2022 16:46:23 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id ACED020C119A6; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
-Message-ID: <20220608144517.696962976@infradead.org>
+ id B05F720C119A8; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+Message-ID: <20220608144517.759631860@infradead.org>
 User-Agent: quilt/0.66
-Date: Wed, 08 Jun 2022 16:27:51 +0200
+Date: Wed, 08 Jun 2022 16:27:52 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH 28/36] cpuidle,tdx: Make tdx noinstr clean
+Subject: [PATCH 29/36] cpuidle,xenpv: Make more PARAVIRT_XXL noinstr clean
 References: <20220608142723.103523089@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, benh@kernel.crashing.org,
@@ -133,49 +133,139 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vmlinux.o: warning: objtool: __halt+0x2c: call to hcall_func.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: __halt+0x3f: call to __tdx_hypercall() leaves .noinstr.text section
-vmlinux.o: warning: objtool: __tdx_hypercall+0x66: call to __tdx_hypercall_failed() leaves .noinstr.text section
+vmlinux.o: warning: objtool: acpi_idle_enter_s2idle+0xde: call to wbinvd() leaves .noinstr.text section
+vmlinux.o: warning: objtool: default_idle+0x4: call to arch_safe_halt() leaves .noinstr.text section
+vmlinux.o: warning: objtool: xen_safe_halt+0xa: call to HYPERVISOR_sched_op.constprop.0() leaves .noinstr.text section
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/coco/tdx/tdcall.S |    2 ++
- arch/x86/coco/tdx/tdx.c    |    5 +++--
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ arch/x86/include/asm/paravirt.h      |    6 ++++--
+ arch/x86/include/asm/special_insns.h |    4 ++--
+ arch/x86/include/asm/xen/hypercall.h |    2 +-
+ arch/x86/kernel/paravirt.c           |   14 ++++++++++++--
+ arch/x86/xen/enlighten_pv.c          |    2 +-
+ arch/x86/xen/irq.c                   |    2 +-
+ 6 files changed, 21 insertions(+), 9 deletions(-)
 
---- a/arch/x86/coco/tdx/tdcall.S
-+++ b/arch/x86/coco/tdx/tdcall.S
-@@ -31,6 +31,8 @@
- 					  TDX_R12 | TDX_R13 | \
- 					  TDX_R14 | TDX_R15 )
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -168,7 +168,7 @@ static inline void __write_cr4(unsigned
+ 	PVOP_VCALL1(cpu.write_cr4, x);
+ }
  
-+.section .noinstr.text, "ax"
+-static inline void arch_safe_halt(void)
++static __always_inline void arch_safe_halt(void)
+ {
+ 	PVOP_VCALL0(irq.safe_halt);
+ }
+@@ -178,7 +178,9 @@ static inline void halt(void)
+ 	PVOP_VCALL0(irq.halt);
+ }
+ 
+-static inline void wbinvd(void)
++extern noinstr void pv_native_wbinvd(void);
 +
- /*
-  * __tdx_module_call()  - Used by TDX guests to request services from
-  * the TDX module (does not include VMM services) using TDCALL instruction.
---- a/arch/x86/coco/tdx/tdx.c
-+++ b/arch/x86/coco/tdx/tdx.c
-@@ -53,8 +53,9 @@ static inline u64 _tdx_hypercall(u64 fn,
++static __always_inline void wbinvd(void)
+ {
+ 	PVOP_ALT_VCALL0(cpu.wbinvd, "wbinvd", ALT_NOT(X86_FEATURE_XENPV));
+ }
+--- a/arch/x86/include/asm/special_insns.h
++++ b/arch/x86/include/asm/special_insns.h
+@@ -115,7 +115,7 @@ static inline void wrpkru(u32 pkru)
+ }
+ #endif
+ 
+-static inline void native_wbinvd(void)
++static __always_inline void native_wbinvd(void)
+ {
+ 	asm volatile("wbinvd": : :"memory");
+ }
+@@ -179,7 +179,7 @@ static inline void __write_cr4(unsigned
+ 	native_write_cr4(x);
  }
  
- /* Called from __tdx_hypercall() for unrecoverable failure */
--void __tdx_hypercall_failed(void)
-+noinstr void __tdx_hypercall_failed(void)
+-static inline void wbinvd(void)
++static __always_inline void wbinvd(void)
  {
-+	instrumentation_begin();
- 	panic("TDVMCALL failed. TDX module bug?");
+ 	native_wbinvd();
+ }
+--- a/arch/x86/include/asm/xen/hypercall.h
++++ b/arch/x86/include/asm/xen/hypercall.h
+@@ -382,7 +382,7 @@ MULTI_stack_switch(struct multicall_entr
+ }
+ #endif
+ 
+-static inline int
++static __always_inline int
+ HYPERVISOR_sched_op(int cmd, void *arg)
+ {
+ 	return _hypercall2(int, sched_op, cmd, arg);
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -233,6 +233,11 @@ static noinstr void pv_native_set_debugr
+ 	native_set_debugreg(regno, val);
  }
  
-@@ -64,7 +65,7 @@ void __tdx_hypercall_failed(void)
-  * Reusing the KVM EXIT_REASON macros makes it easier to connect the host and
-  * guest sides of these calls.
-  */
--static u64 hcall_func(u64 exit_reason)
-+static __always_inline u64 hcall_func(u64 exit_reason)
++noinstr void pv_native_wbinvd(void)
++{
++	native_wbinvd();
++}
++
+ static noinstr void pv_native_irq_enable(void)
  {
- 	return exit_reason;
+ 	native_irq_enable();
+@@ -242,6 +247,11 @@ static noinstr void pv_native_irq_disabl
+ {
+ 	native_irq_disable();
  }
++
++static noinstr void pv_native_safe_halt(void)
++{
++	native_safe_halt();
++}
+ #endif
+ 
+ enum paravirt_lazy_mode paravirt_get_lazy_mode(void)
+@@ -273,7 +283,7 @@ struct paravirt_patch_template pv_ops =
+ 	.cpu.read_cr0		= native_read_cr0,
+ 	.cpu.write_cr0		= native_write_cr0,
+ 	.cpu.write_cr4		= native_write_cr4,
+-	.cpu.wbinvd		= native_wbinvd,
++	.cpu.wbinvd		= pv_native_wbinvd,
+ 	.cpu.read_msr		= native_read_msr,
+ 	.cpu.write_msr		= native_write_msr,
+ 	.cpu.read_msr_safe	= native_read_msr_safe,
+@@ -307,7 +317,7 @@ struct paravirt_patch_template pv_ops =
+ 	.irq.save_fl		= __PV_IS_CALLEE_SAVE(native_save_fl),
+ 	.irq.irq_disable	= __PV_IS_CALLEE_SAVE(pv_native_irq_disable),
+ 	.irq.irq_enable		= __PV_IS_CALLEE_SAVE(pv_native_irq_enable),
+-	.irq.safe_halt		= native_safe_halt,
++	.irq.safe_halt		= pv_native_safe_halt,
+ 	.irq.halt		= native_halt,
+ #endif /* CONFIG_PARAVIRT_XXL */
+ 
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1019,7 +1019,7 @@ static const typeof(pv_ops) xen_cpu_ops
+ 
+ 		.write_cr4 = xen_write_cr4,
+ 
+-		.wbinvd = native_wbinvd,
++		.wbinvd = pv_native_wbinvd,
+ 
+ 		.read_msr = xen_read_msr,
+ 		.write_msr = xen_write_msr,
+--- a/arch/x86/xen/irq.c
++++ b/arch/x86/xen/irq.c
+@@ -24,7 +24,7 @@ noinstr void xen_force_evtchn_callback(v
+ 	(void)HYPERVISOR_xen_version(0, NULL);
+ }
+ 
+-static void xen_safe_halt(void)
++static noinstr void xen_safe_halt(void)
+ {
+ 	/* Blocking includes an implicit local_irq_enable(). */
+ 	if (HYPERVISOR_sched_op(SCHEDOP_block, NULL) != 0)
 
 
 _______________________________________________
