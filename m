@@ -1,158 +1,122 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 483B654314A
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 15:26:31 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 607F8543337
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 16:47:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 444B583EA2;
-	Wed,  8 Jun 2022 13:26:28 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id EED6742529;
+	Wed,  8 Jun 2022 14:47:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HEK-XdfK9m1q; Wed,  8 Jun 2022 13:26:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9KOv_tNw5iJx; Wed,  8 Jun 2022 14:47:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id C719A83EA0;
-	Wed,  8 Jun 2022 13:26:26 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 3CAB7424F6;
+	Wed,  8 Jun 2022 14:47:14 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1A79BC0081;
-	Wed,  8 Jun 2022 13:26:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D24F8C0081;
+	Wed,  8 Jun 2022 14:47:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E63BEC002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A884C0083
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 13:26:24 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D45A440587
+ by smtp1.osuosl.org (Postfix) with ESMTP id 456A083EEC
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 13:26:24 +0000 (UTC)
+ Wed,  8 Jun 2022 14:47:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=nvidia.com
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id d2ltElOkV21U
+Authentication-Results: smtp1.osuosl.org (amavisd-new);
+ dkim=pass (2048-bit key) header.d=infradead.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id FeMsO4JUdhyg
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 13:26:23 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20609.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8d::609])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4966D40002
+ Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 16CF283EE9
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 13:26:23 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZkP7iVMiewZz6BJn/+gY1IvScfduoofPihvvIOzRn4oeI3kCLVM9o8FD5UW+hd43Ayu+d+V/qbraKZApfLfgtqJxZb+gWdVHmh1INwEBtQ/Oj9fpEZqhNTQvYCHa2/QWxl1YmLoE4+LYzLE2Wi8ocWfE0xJ192mvmJQi4HV7JxxNfPKBpDZBkzLCGZub7mLImfPZVFQv9vMKpfbSDfD2Uvzm8ehmWo0xQcDhxJjagPIlYlUFz13HOtyUVBetpwrP0hBxlPn5xAJNXPaAtMcSJUQ/FzNPyJw52UQ4V6URCFu54eotDBy7xrYMLSzD4+UXkvJef5OrGIAWFLjDQtwoRg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=E3kok6TwRkWS7bXZfismBpqbuYV1+qfsbHmGIBcn+0Y=;
- b=a+crId1WG20XYlokEyXwhWKFG6t9QH42a9A8JLsf1b6jb1MNxuOiiaGWCHsidrZT/7aTD+ozBGarkOhohAdisfOM6k804zE879rSPVQLJwQqGCrnX3q3ea/4LkJGFoBu7b6psSMdByS/5lOCVDsUhBzR6Pjv4hLfjOuNx3pUy0esJ+B1pI1iwL9iGTHvtWCeUVfGa+HWONGcuUq+l58iajQKh6594950kakinBPmxzG91XP59HtvXyK2tyqls+7VEUcXGnz1LIYs2idbHdSleEg/brja78IYfc1Mu2lAN/sxMYeo+uYEQDQCpZAvCuQsxrUFF87p8+52gCI432cokw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=E3kok6TwRkWS7bXZfismBpqbuYV1+qfsbHmGIBcn+0Y=;
- b=eFFYj7LxR3JnfPlWYBKCcrv6r02n3FsQniULnDUj2jn5QlVBaH7PEhjYZMqRQ01nf7H6mXy6AkRodczRmmdqbTPLSHvkj630EXeoY7g4D/CQ1jfFrUpS46xnzsUaB835dzIBfE8RCeb3hbFMRsZd1COokHBRYIN3OqIWdBJ9BSgxASZu2SCnWwj7/4uA0FYGMxwhMkufHagL1qFhCpEheI46N9SCW84NHLQUJayNGZJubm32Hg6JFXoaZaEyc9cN2wwgMj9gc5xZ2IslOoH/rkQbsmfRivMDPG/nUo33/U4M7okokEVSZ/9U5rPBOk0phI52JnaovMfv5riwakWtqw==
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com (2603:10b6:510:d4::15)
- by DM4PR12MB5296.namprd12.prod.outlook.com (2603:10b6:5:39d::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.13; Wed, 8 Jun
- 2022 13:26:19 +0000
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::489d:7d33:3194:b854]) by PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::489d:7d33:3194:b854%3]) with mapi id 15.20.5314.019; Wed, 8 Jun 2022
- 13:26:19 +0000
-To: Yongji Xie <xieyongji@bytedance.com>, "Michael S. Tsirkin" <mst@redhat.com>
-Subject: RE: [PATCH v2] vduse: Fix NULL pointer dereference on sysfs access
-Thread-Topic: [PATCH v2] vduse: Fix NULL pointer dereference on sysfs access
-Thread-Index: AQHYWUS8lMTRd/0/2UqI8h//G1UzZa1FuoAAgAAJcAD////o4A==
-Date: Wed, 8 Jun 2022 13:26:19 +0000
-Message-ID: <PH0PR12MB54811B8F17B8964A53947465DCA49@PH0PR12MB5481.namprd12.prod.outlook.com>
-References: <20220426073656.229-1-xieyongji@bytedance.com>
- <YmeoSuMfsdVxuGlf@kroah.com> <20220608085133-mutt-send-email-mst@kernel.org>
- <CACycT3vjNwESmoAy14+NCGxHaXJtFq6ykHTkqcpm8nvb0=sbog@mail.gmail.com>
-In-Reply-To: <CACycT3vjNwESmoAy14+NCGxHaXJtFq6ykHTkqcpm8nvb0=sbog@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 1595ffb5-5f6c-44af-dd15-08da49527909
-x-ms-traffictypediagnostic: DM4PR12MB5296:EE_
-x-microsoft-antispam-prvs: <DM4PR12MB52969E74A42D0CE04289A9CADCA49@DM4PR12MB5296.namprd12.prod.outlook.com>
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 9uLIRkz8kIw9DqXFBgqMVM5DLGmPNegUHaPQ/vLUcz/z7yraIcx5U/RuUj1D59IwV9wjAYZDizUZeqP5RZzsnmMuII/gGRqG01ywNaP4vAvN5A0mYOKV60DWHlV5xM4LPL+Tw/EtmOe2mLEKIQ8A6DS2CVHsINUiq/0gBebNVBF66sIpzvIuTkt8UjyhbJjsWRidflP+wGcgqMeFmgFUQetzjXvY2CTJnWhIeOJ6k3MoSvgkfFWeJDKxvZiUKib5Ts5hsYI06wy2CPaYrTnnaFssOH+2vgQkCD5LPtHa3H3fZcWuHlnsuc/6zdNhvS+deaSRhF71oUZMJTIWV0DEOrOBr8zG9yESzFvbUHzXzY9XDnfbDas7pdj5mKAohNGnO9Z7HwbmKlWW1JzPHkh4DKVKWO4ltDzAHzAlCbCp9dPo3ykbloCh3tIOLUvlcyCoAweuu8FUk23z/XsnY1oLryW7Tju5BFiOecB/hFAzqr4EJUfU1RWE6U6a7WTZNcPzyKPU4dV2Lo8FF8UCL+rakFheCY+OKwn7n9c0Bfruv9KxekWc0CsdqsqCDElEqNpHFtnaVSau+9uys97uysN61UAq7dxJEzh2V9G1q/B/OLGwIKAEy9PC7k4AK8I9uKVnvWgYseP3xUTVdGFE3as75f2tNcExI9afgesd0lCI081xNDgGAL9swF2NsH3p8M3/p0BFZy4nG/kcua2kIaK43yX7Rtk8x4SNtxr0WObJVpcy5iqb88knbRSNkbc76EEoKFymZrtE7FNPbeLR0GC+LvIkt5aww+RppeBzLaecKSv0+bwedz1wfVnUqprtYPaBMWXaLaUfZ64zQIxb7YCZxQ==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH0PR12MB5481.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(4636009)(366004)(508600001)(52536014)(55016003)(66556008)(66946007)(66446008)(186003)(316002)(122000001)(8936002)(38070700005)(83380400001)(110136005)(9686003)(66476007)(54906003)(8676002)(38100700002)(33656002)(5660300002)(64756008)(2906002)(53546011)(6506007)(7696005)(86362001)(4326008)(76116006)(966005)(71200400001);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 2
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?NzF1TzdtSUp2UWFEM1lZZGNBWnJUOUUrSzJxT3VWZlFISFhUNEErRlVMK2ZF?=
- =?utf-8?B?NSsrWjEwRGNwc2FrMHdsUGxmeTk3N3ZIV1Vtcml4bmZBelZzUzZSQVVBM3dG?=
- =?utf-8?B?a1BKUWl5RlpSSXdpamRlUXByMjhqK2h0UE85S2lOcTQ1dlViMlQzUEo4TDBs?=
- =?utf-8?B?Z0FiMVZBZTUvQTZjVlhZL0xFRnZIdnZrTnREbURqd1NndXR6ck9CYmR6QkZU?=
- =?utf-8?B?M3ZSRVpweERyS1BTdXlkRWhrWTdwc2k1cjI5RmhqNkpZSXpLRXp6bGJKTW92?=
- =?utf-8?B?UlF4Tk05RWc1a3JNeDNiQ3FyZEtQM01SSnhUWXMxeEZ3NmZqTEg3bjRORVB4?=
- =?utf-8?B?VDVYUzRSVUxMbFpVK1NnbjBqVmpYeXAramtobVppSXNxcHdtUHVSNUNsSTlC?=
- =?utf-8?B?cWNYVEhXWUpUU3VjVDVYTkRYaWlBUHZVazVGeHk5bFZMZVZEa0VOYTNZcUdG?=
- =?utf-8?B?cXR0bURQVkJwYTl4Y2tSMEhUVWRVMHFxdjVmWnVvQ0huQ1VEQ3hjY3JsSTAz?=
- =?utf-8?B?bkVoRFhaV0ZKNTJhUVZJVkFlSHhNUjNUZ3FHTkF0R3BCZzgwWWkwb1hsbjV6?=
- =?utf-8?B?SUZrYnk2SEhycUdDL1UxV3Y3MjYvdjhIcnFpRzVrOGoyNU51Q0JIOW8wZlN4?=
- =?utf-8?B?U0dRSVZZbWUvTlRtL2NhWlY2Z0c1RHpRV212OWhqYm5XUjQ3emZ3K3hKZDBQ?=
- =?utf-8?B?aVNVSi84bHY1QWFyUUxZRmJzdjFKOFZEbXAvOFBKOVpGRTFxZ1RYU0kvckds?=
- =?utf-8?B?ZTl4M09GR0tHcWlVNHpYOFNIQlJPR1FSazR0ZlhpVGsrbkZROUp2NHNpSTF4?=
- =?utf-8?B?TWIrYjRtemhsM2gyb0tFdmFZakNCcTB6ZWMrcXRac2xJWklheUkwbHBRbUdy?=
- =?utf-8?B?dFM1aHN3ZFhpQk4yMzdFNzdRR0FlLzVrVjlmb1p3ekFLUHVFQnNpeGY5OWlq?=
- =?utf-8?B?YW1qZE1zcGlwbFAvb2JCVUVzZWkxVC9XT2hwWFNsS0FySU5FT1hBWlBUSVdi?=
- =?utf-8?B?azNPV0VsajBzMnIydTI5K1hPVkRKb2JwQVU1SHlNdSt3YmR4dVFBSmEySGJW?=
- =?utf-8?B?M1k5VG5lUEkxdWJERnFNcVc2eWpwNE53WHRvaDNMQnB3YklpODZoL0hBaWZi?=
- =?utf-8?B?VitQSVFTaFZRSFowSUIxZjl1UGlMNysyNW9MbzRtUlRzR2FqYzU1b29mNUx2?=
- =?utf-8?B?dVhUNW5DbzdzcTdoT3hhelFOR3pHSEF2eHNRK3B1OTM4dWEwTE5Wbm5BRUht?=
- =?utf-8?B?WVd4ODdCckFvZVlGcmwxWUVDZWNEam1wcnluZmlsZnprRmpnY0xhZE5pVlRq?=
- =?utf-8?B?aENMeFJIdDVaQXVsbFNOWUk3Y2xxNnlzdEtxRU15dnErb2JHckozRUZ0bkZo?=
- =?utf-8?B?MzEzWkJ3UlpFSlVGbktFZ2lMeW5QMVJ0Y3VoZWcvV21KRCs0V1FxYTgyVGZI?=
- =?utf-8?B?ZkowZThLbjBINkFBQVN5bzErUld4YklDc0RZTE5yR2ZVSlBJd3FvY2ZSU1M4?=
- =?utf-8?B?NVl0dUc4cmtGT0ZVOXZGNlBINkY5UDFsSkluS1ZFUlh5bmJoM1oyVEVJNTFj?=
- =?utf-8?B?OVdTYWdzSWx4RTVONmhSc2RvQzRSZWdtS0VaWjJ1T21xNWFSS2E5cWdvaXlP?=
- =?utf-8?B?amtmTlBIZmhpc1UzSXltUzVTMEsrVVN3cW14dFJVNnFlZklWbDFicnpRbjY4?=
- =?utf-8?B?Nkhta0kveGJhN3RUVERkNmJaM295RzZWOFgzemZnNUFGVnhvZ0krM2puM3Iz?=
- =?utf-8?B?YzlmZTdDWkJrWU5JS21wa29YZzE2SWZpcW1jaXpKYWs2NklUS3VJMVFGRVho?=
- =?utf-8?B?cDlBZzdkWVdTTXRSRmg1S1dNNDRTYTlSWWxuOG5PR0tZcG9RaU8xQk14N056?=
- =?utf-8?B?MFprUVZjSVlzR1lWaVhBZURGbEdHZXkwVER6TkhtRmRKdmVCaVdEN1ZadjRF?=
- =?utf-8?B?M3dwTnpmdnYrRFpHNlVjK0hIZFlPMDBJUjJHRW5sK0pTb3Z1YktCcllVRjhY?=
- =?utf-8?B?Y3F6K3RNenNqZFFtTU9tWm45MXhVall0QnZBNTZvSmh1TkcvNTZYeTdRTllx?=
- =?utf-8?B?OUlEcHZKR0ZSUHR5bkVsNkRtcEwwbkkrT3pyNVlPSGJZdHN5aHhuNkJUZXdZ?=
- =?utf-8?B?TzRuTmd0a01EaDVqOWJDVzViQnh5MThUVkx5UW9LUUVERTA2RFVqU3k5Vng3?=
- =?utf-8?B?amlub0E4b1dKcU1IT1Q2a2tDL0ZhVVdaZlJOU2p5NmRmWkcxbVhMS1dUTUxU?=
- =?utf-8?B?L0dYQ2d3ZjV6TE02TU1TWWNpMnhoZ2h2U1crcDc3QlRyeDgrNjE4Z0NNai9D?=
- =?utf-8?B?czF3OTV0K0hvdXBJQVE5TnFFb1JWSmxnUm9QY0xDcVBKa0YxcTVxKzhDcnBG?=
- =?utf-8?Q?3rD7zvwMggy9yemmD8sQ88wzXssL0y08lyXm/PpeWfvef?=
-x-ms-exchange-antispam-messagedata-1: dDB5sQX7FuXa4g==
-MIME-Version: 1.0
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB5481.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1595ffb5-5f6c-44af-dd15-08da49527909
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Jun 2022 13:26:19.3019 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 0N9k57MYZPN4QRQclaONxEFR/SIlExWCVS/1oGFWodOz7n8mhHF+7d/3IUCRr6tUZVEZ2+bn6qX3pyODyzyOVQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5296
-Cc: Greg KH <gregkh@linuxfoundation.org>,
- "stable@vger.kernel.org" <stable@vger.kernel.org>,
- virtualization <virtualization@lists.linux-foundation.org>,
- Luis Chamberlain <mcgrof@kernel.org>,
- kernel test robot <oliver.sang@intel.com>,
- Andrew Morton <akpm@linux-foundation.org>
+ Wed,  8 Jun 2022 14:47:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Subject:Cc:To:From:Date:Message-ID:
+ Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=p3ITF8gI2GW93+lJzbbS6NFG2q6U7tMgsXybvfaCekw=; b=IZXaFH74aF36MwDA0OcR+zpVbA
+ fK18DkOhaaN9C1eG5s1+L4J5X2rdyrZWtHWtryVrvRYiz9kbVuWHWIVzgsfJfxFZ8UgI4eMrcfFM5
+ ly+cYznO6PhU6shFXLnvDd0b/G1PXNb75sy24LC6bprnB0FmxiDeLgilEva9+AdZsD25bPgSLsRpe
+ GUlfX77jG3iIxErkRylfvAiLV5VrXlgN4oApJfGBzUS+eVMlY/iFt5TC7UePOXm4aRWTFo8vVwc5V
+ N9prIiiaKfHEwyVF5x1V2xztOpfeiRRaQZej2V9pcRWXnMPtP3IswDsfj7t5zg4WvO1/IMs6PKgfh
+ Vu2f1Ucw==;
+Received: from dhcp-077-249-017-003.chello.nl ([77.249.17.3]
+ helo=noisy.programming.kicks-ass.net)
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1nywww-00ChVo-B5; Wed, 08 Jun 2022 14:46:22 +0000
+Received: from hirez.programming.kicks-ass.net
+ (hirez.programming.kicks-ass.net [192.168.1.225])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (Client did not present a certificate)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 58CC930008D;
+ Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
+ id 3237720C0F991; Wed,  8 Jun 2022 16:46:18 +0200 (CEST)
+Message-ID: <20220608142723.103523089@infradead.org>
+User-Agent: quilt/0.66
+Date: Wed, 08 Jun 2022 16:27:23 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: peterz@infradead.org
+Subject: [PATCH 00/36] cpuidle,rcu: Cleanup the mess
+Cc: juri.lelli@redhat.com, rafael@kernel.org, benh@kernel.crashing.org,
+ linus.walleij@linaro.org, bsegall@google.com, guoren@kernel.org, pavel@ucw.cz,
+ agordeev@linux.ibm.com, linux-arch@vger.kernel.org, vincent.guittot@linaro.org,
+ mpe@ellerman.id.au, chenhuacai@kernel.org, linux-acpi@vger.kernel.org,
+ agross@kernel.org, geert@linux-m68k.org, linux-imx@nxp.com,
+ catalin.marinas@arm.com, xen-devel@lists.xenproject.org, mattst88@gmail.com,
+ mturquette@baylibre.com, sammy@sammy.net, pmladek@suse.com,
+ linux-pm@vger.kernel.org, jiangshanlai@gmail.com,
+ Sascha Hauer <s.hauer@pengutronix.de>, linux-um@lists.infradead.org,
+ acme@kernel.org, tglx@linutronix.de, linux-omap@vger.kernel.org,
+ dietmar.eggemann@arm.com, rth@twiddle.net, gregkh@linuxfoundation.org,
+ linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
+ senozhatsky@chromium.org, svens@linux.ibm.com, jolsa@kernel.org,
+ paulus@samba.org, mark.rutland@arm.com, linux-ia64@vger.kernel.org,
+ dave.hansen@linux.intel.com, virtualization@lists.linux-foundation.org,
+ James.Bottomley@HansenPartnership.com, jcmvbkbc@gmail.com,
+ thierry.reding@gmail.com, kernel@xen0n.name, quic_neeraju@quicinc.com,
+ linux-s390@vger.kernel.org, vschneid@redhat.com, john.ogness@linutronix.de,
+ ysato@users.sourceforge.jp, linux-sh@vger.kernel.org, festevam@gmail.com,
+ deller@gmx.de, daniel.lezcano@linaro.org, jonathanh@nvidia.com,
+ mathieu.desnoyers@efficios.com, frederic@kernel.org, lenb@kernel.org,
+ linux-xtensa@linux-xtensa.org, kernel@pengutronix.de, gor@linux.ibm.com,
+ linux-arm-msm@vger.kernel.org, linux-alpha@vger.kernel.org,
+ linux-m68k@lists.linux-m68k.org, shorne@gmail.com,
+ linux-arm-kernel@lists.infradead.org, chris@zankel.net, sboyd@kernel.org,
+ dinguyen@kernel.org, bristot@redhat.com, alexander.shishkin@linux.intel.com,
+ lpieralisi@kernel.org, linux@rasmusvillemoes.dk, joel@joelfernandes.org,
+ will@kernel.org, boris.ostrovsky@oracle.com, khilman@kernel.org,
+ linux-csky@vger.kernel.org, pv-drivers@vmware.com,
+ linux-snps-arc@lists.infradead.org, mgorman@suse.de,
+ jacob.jun.pan@linux.intel.com, Arnd Bergmann <arnd@arndb.de>,
+ ulli.kroll@googlemail.com, vgupta@kernel.org, linux-clk@vger.kernel.org,
+ josh@joshtriplett.org, rostedt@goodmis.org, rcu@vger.kernel.org, bp@alien8.de,
+ bcain@quicinc.com, tsbogend@alpha.franken.de, linux-parisc@vger.kernel.org,
+ sudeep.holla@arm.com, shawnguo@kernel.org, davem@davemloft.net,
+ dalias@libc.org, tony@atomide.com, amakhalov@vmware.com,
+ bjorn.andersson@linaro.org, hpa@zytor.com, sparclinux@vger.kernel.org,
+ linux-hexagon@vger.kernel.org, linux-riscv@lists.infradead.org,
+ anton.ivanov@cambridgegreys.com, jonas@southpole.se, yury.norov@gmail.com,
+ richard@nod.at, x86@kernel.org, linux@armlinux.org.uk, mingo@redhat.com,
+ aou@eecs.berkeley.edu, paulmck@kernel.org, hca@linux.ibm.com,
+ stefan.kristiansson@saunalahti.fi, openrisc@lists.librecores.org,
+ paul.walmsley@sifive.com, linux-tegra@vger.kernel.org, namhyung@kernel.org,
+ andriy.shevchenko@linux.intel.com, jpoimboe@kernel.org, jgross@suse.com,
+ monstr@monstr.eu, linux-mips@vger.kernel.org, palmer@dabbelt.com,
+ anup@brainfault.org, ink@jurassic.park.msu.ru, johannes@sipsolutions.net,
+ linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -164,127 +128,149 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Parav Pandit via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Parav Pandit <parav@nvidia.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Hi All! (omg so many)
 
+These here few patches mostly clear out the utter mess that is cpuidle vs rcuidle.
 
-> From: Yongji Xie <xieyongji@bytedance.com>
-> Sent: Wednesday, June 8, 2022 9:26 AM
-> 
-> On Wed, Jun 8, 2022 at 8:52 PM Michael S. Tsirkin <mst@redhat.com> wrote:
-> >
-> > On Tue, Apr 26, 2022 at 10:07:38AM +0200, Greg KH wrote:
-> > > On Tue, Apr 26, 2022 at 03:36:56PM +0800, Xie Yongji wrote:
-> > > > The control device has no drvdata. So we will get a NULL pointer
-> > > > dereference when accessing control device's msg_timeout attribute
-> > > > via sysfs:
-> > > >
-> > > > [ 132.841881][ T3644] BUG: kernel NULL pointer dereference,
-> > > > address: 00000000000000f8 [ 132.850619][ T3644] RIP:
-> > > > 0010:msg_timeout_show (drivers/vdpa/vdpa_user/vduse_dev.c:1271)
-> > > > [ 132.869447][ T3644] dev_attr_show (drivers/base/core.c:2094) [
-> > > > 132.870215][ T3644] sysfs_kf_seq_show (fs/sysfs/file.c:59) [
-> > > > 132.871164][ T3644] ? device_remove_bin_file
-> > > > (drivers/base/core.c:2088) [ 132.872082][ T3644] kernfs_seq_show
-> > > > (fs/kernfs/file.c:164) [ 132.872838][ T3644] seq_read_iter
-> > > > (fs/seq_file.c:230) [ 132.873578][ T3644] ? __vmalloc_area_node
-> > > > (mm/vmalloc.c:3041) [ 132.874532][ T3644] kernfs_fop_read_iter
-> > > > (fs/kernfs/file.c:238) [ 132.875513][ T3644] __kernel_read
-> > > > (fs/read_write.c:440 (discriminator 1)) [ 132.876319][ T3644]
-> > > > kernel_read (fs/read_write.c:459) [ 132.877129][ T3644]
-> > > > kernel_read_file (fs/kernel_read_file.c:94) [ 132.877978][ T3644]
-> > > > kernel_read_file_from_fd (include/linux/file.h:45
-> > > > fs/kernel_read_file.c:186) [ 132.879019][ T3644]
-> > > > __do_sys_finit_module (kernel/module.c:4207) [ 132.879930][ T3644]
-> > > > __ia32_sys_finit_module (kernel/module.c:4189) [ 132.880930][
-> > > > T3644] do_int80_syscall_32 (arch/x86/entry/common.c:112
-> > > > arch/x86/entry/common.c:132) [ 132.881847][ T3644]
-> > > > entry_INT80_compat (arch/x86/entry/entry_64_compat.S:419)
-> > > >
-> > > > To fix it, don't create the unneeded attribute for control device
-> > > > anymore.
-> > > >
-> > > > Fixes: c8a6153b6c59 ("vduse: Introduce VDUSE - vDPA Device in
-> > > > Userspace")
-> > > > Reported-by: kernel test robot <oliver.sang@intel.com>
-> > > > Cc: stable@vger.kernel.org
-> > > > Signed-off-by: Xie Yongji <xieyongji@bytedance.com>
-> > > > ---
-> > > >  drivers/vdpa/vdpa_user/vduse_dev.c | 7 +++----
-> > > >  1 file changed, 3 insertions(+), 4 deletions(-)
-> > > >
-> > > > diff --git a/drivers/vdpa/vdpa_user/vduse_dev.c
-> > > > b/drivers/vdpa/vdpa_user/vduse_dev.c
-> > > > index f85d1a08ed87..160e40d03084 100644
-> > > > --- a/drivers/vdpa/vdpa_user/vduse_dev.c
-> > > > +++ b/drivers/vdpa/vdpa_user/vduse_dev.c
-> > > > @@ -1344,9 +1344,9 @@ static int vduse_create_dev(struct
-> > > > vduse_dev_config *config,
-> > > >
-> > > >     dev->minor = ret;
-> > > >     dev->msg_timeout = VDUSE_MSG_DEFAULT_TIMEOUT;
-> > > > -   dev->dev = device_create(vduse_class, NULL,
-> > > > -                            MKDEV(MAJOR(vduse_major), dev->minor),
-> > > > -                            dev, "%s", config->name);
-> > > > +   dev->dev = device_create_with_groups(vduse_class, NULL,
-> > > > +                           MKDEV(MAJOR(vduse_major), dev->minor),
-> > > > +                           dev, vduse_dev_groups, "%s",
-> > > > + config->name);
-> > > >     if (IS_ERR(dev->dev)) {
-> > > >             ret = PTR_ERR(dev->dev);
-> > > >             goto err_dev;
-> > > > @@ -1595,7 +1595,6 @@ static int vduse_init(void)
-> > > >             return PTR_ERR(vduse_class);
-> > > >
-> > > >     vduse_class->devnode = vduse_devnode;
-> > > > -   vduse_class->dev_groups = vduse_dev_groups;
-> > >
-> > > Ok, this looks much better.
-> > >
-> > > But wow, there are some problems in this code overall.  I see a
-> > > number of flat-out-wrong things in there that should have been
-> > > caught by code reviews.  Some examples:
-> > >       - empty release() callbacks.  That is a huge sign the code
-> > >         design is wrong and broken and you are just trying to make the
-> > >         driver core quiet for some reason.  The documentation in the
-> > >         kernel explains why this is not ok.
-> > >       - __module_get(THIS_MODULE);  That's racy, buggy, and doesn't do
-> > >         what you think it does.  Please never ever ever do that.  It
-> > >         too is a sign of a broken design.
-> > >       - no Documentation/ABI/ entries for the sysfs files here.  I
-> > >         think it's burried in some other documentation file but that's
-> > >         not the correct place for it and if you run scripts/get_abi.pl
-> > >         with the code loaded it will rightly complain about this.
-> > >
-> > > Do you want to address these, or do you want patches for them?
-> > >
-> > > thanks,
-> > >
-> > > greg k-h
-> >
-> > So, any patches?
-> >
-> 
-> For empty release() callbacks, I think Parav is working on it based on the
-> discussion [1]. I can help test and send the patch if Parav wants.
-> 
-As there are no more comments, I will send the patch for vduse this week based on [1] which was previously in email form.
+At the end of the ride there's only 2 real RCU_NONIDLE() users left
 
-> For Documentation, I have sent a patch [2].
-> 
-> [1] https://www.spinics.net/lists/linux-virtualization/msg56518.html
-> [2]
-> https://lore.kernel.org/all/CACGkMEuJeU6c1z8+_FqGtovbF+Sq8w_eQUcG8
-> SHm_GXV5q7yNA@mail.gmail.com/
-> 
-> Thanks,
-> Yongji
+  arch/arm64/kernel/suspend.c:            RCU_NONIDLE(__cpu_suspend_exit());
+  drivers/perf/arm_pmu.c:                 RCU_NONIDLE(armpmu_start(event, PERF_EF_RELOAD));
+  kernel/cfi.c:   RCU_NONIDLE({
+
+(the CFI one is likely dead in the kCFI rewrite) and there's only a hand full
+of trace_.*_rcuidle() left:
+
+  kernel/trace/trace_preemptirq.c:                        trace_irq_enable_rcuidle(CALLER_ADDR0, CALLER_ADDR1);
+  kernel/trace/trace_preemptirq.c:                        trace_irq_disable_rcuidle(CALLER_ADDR0, CALLER_ADDR1);
+  kernel/trace/trace_preemptirq.c:                        trace_irq_enable_rcuidle(CALLER_ADDR0, caller_addr);
+  kernel/trace/trace_preemptirq.c:                        trace_irq_disable_rcuidle(CALLER_ADDR0, caller_addr);
+  kernel/trace/trace_preemptirq.c:                trace_preempt_enable_rcuidle(a0, a1);
+  kernel/trace/trace_preemptirq.c:                trace_preempt_disable_rcuidle(a0, a1);
+
+All of them are in 'deprecated' code that is unused for GENERIC_ENTRY.
+
+I've touched a _lot_ of code that I can't test and likely broken some of it :/
+In particular, the whole ARM cpuidle stuff was quite involved with OMAP being
+the absolute 'winner'.
+
+I'm hoping Mark can help me sort the remaining ARM64 bits as he moves that to
+GENERIC_ENTRY. I've also got a note that says ARM64 can probably do a WFE based
+idle state and employ TIF_POLLING_NRFLAG to avoid some IPIs.
+
+---
+ arch/alpha/kernel/process.c          |    1 
+ arch/alpha/kernel/vmlinux.lds.S      |    1 
+ arch/arc/kernel/process.c            |    3 +
+ arch/arc/kernel/vmlinux.lds.S        |    1 
+ arch/arm/include/asm/vmlinux.lds.h   |    1 
+ arch/arm/kernel/process.c            |    1 
+ arch/arm/kernel/smp.c                |    6 +--
+ arch/arm/mach-gemini/board-dt.c      |    3 +
+ arch/arm/mach-imx/cpuidle-imx6q.c    |    4 +-
+ arch/arm/mach-imx/cpuidle-imx6sx.c   |    5 ++
+ arch/arm/mach-omap2/cpuidle34xx.c    |   16 ++++++++
+ arch/arm/mach-omap2/cpuidle44xx.c    |   29 +++++++++------
+ arch/arm/mach-omap2/pm.h             |    2 -
+ arch/arm/mach-omap2/pm34xx.c         |   14 +++++--
+ arch/arm/mach-omap2/powerdomain.c    |   10 ++---
+ arch/arm64/kernel/idle.c             |    1 
+ arch/arm64/kernel/smp.c              |    4 +-
+ arch/arm64/kernel/vmlinux.lds.S      |    1 
+ arch/csky/kernel/process.c           |    1 
+ arch/csky/kernel/smp.c               |    2 -
+ arch/csky/kernel/vmlinux.lds.S       |    1 
+ arch/hexagon/kernel/process.c        |    1 
+ arch/hexagon/kernel/vmlinux.lds.S    |    1 
+ arch/ia64/kernel/process.c           |    1 
+ arch/ia64/kernel/vmlinux.lds.S       |    1 
+ arch/loongarch/kernel/vmlinux.lds.S  |    1 
+ arch/m68k/kernel/vmlinux-nommu.lds   |    1 
+ arch/m68k/kernel/vmlinux-std.lds     |    1 
+ arch/m68k/kernel/vmlinux-sun3.lds    |    1 
+ arch/microblaze/kernel/process.c     |    1 
+ arch/microblaze/kernel/vmlinux.lds.S |    1 
+ arch/mips/kernel/idle.c              |    8 +---
+ arch/mips/kernel/vmlinux.lds.S       |    1 
+ arch/nios2/kernel/process.c          |    1 
+ arch/nios2/kernel/vmlinux.lds.S      |    1 
+ arch/openrisc/kernel/process.c       |    1 
+ arch/openrisc/kernel/vmlinux.lds.S   |    1 
+ arch/parisc/kernel/process.c         |    2 -
+ arch/parisc/kernel/vmlinux.lds.S     |    1 
+ arch/powerpc/kernel/idle.c           |    5 +-
+ arch/powerpc/kernel/vmlinux.lds.S    |    1 
+ arch/riscv/kernel/process.c          |    1 
+ arch/riscv/kernel/vmlinux-xip.lds.S  |    1 
+ arch/riscv/kernel/vmlinux.lds.S      |    1 
+ arch/s390/kernel/idle.c              |    1 
+ arch/s390/kernel/vmlinux.lds.S       |    1 
+ arch/sh/kernel/idle.c                |    1 
+ arch/sh/kernel/vmlinux.lds.S         |    1 
+ arch/sparc/kernel/leon_pmc.c         |    4 ++
+ arch/sparc/kernel/process_32.c       |    1 
+ arch/sparc/kernel/process_64.c       |    3 +
+ arch/sparc/kernel/vmlinux.lds.S      |    1 
+ arch/um/kernel/dyn.lds.S             |    1 
+ arch/um/kernel/process.c             |    1 
+ arch/um/kernel/uml.lds.S             |    1 
+ arch/x86/coco/tdx/tdcall.S           |   15 +-------
+ arch/x86/coco/tdx/tdx.c              |   25 +++----------
+ arch/x86/events/amd/brs.c            |   13 ++-----
+ arch/x86/include/asm/irqflags.h      |   11 ++---
+ arch/x86/include/asm/mwait.h         |   14 +++----
+ arch/x86/include/asm/nospec-branch.h |    2 -
+ arch/x86/include/asm/paravirt.h      |    6 ++-
+ arch/x86/include/asm/perf_event.h    |    2 -
+ arch/x86/include/asm/shared/io.h     |    4 +-
+ arch/x86/include/asm/shared/tdx.h    |    1 
+ arch/x86/include/asm/special_insns.h |    6 +--
+ arch/x86/include/asm/xen/hypercall.h |    2 -
+ arch/x86/kernel/paravirt.c           |   14 ++++++-
+ arch/x86/kernel/process.c            |   65 +++++++++++++++++------------------
+ arch/x86/kernel/vmlinux.lds.S        |    1 
+ arch/x86/xen/enlighten_pv.c          |    2 -
+ arch/x86/xen/irq.c                   |    2 -
+ arch/xtensa/kernel/process.c         |    1 
+ arch/xtensa/kernel/vmlinux.lds.S     |    1 
+ drivers/acpi/processor_idle.c        |   46 ++++++++++++++----------
+ drivers/base/power/runtime.c         |   24 ++++++------
+ drivers/clk/clk.c                    |    8 ++--
+ drivers/cpuidle/cpuidle-arm.c        |    1 
+ drivers/cpuidle/cpuidle-big_little.c |    8 +++-
+ drivers/cpuidle/cpuidle-mvebu-v7.c   |    7 +++
+ drivers/cpuidle/cpuidle-psci.c       |   10 +++--
+ drivers/cpuidle/cpuidle-qcom-spm.c   |    1 
+ drivers/cpuidle/cpuidle-riscv-sbi.c  |   10 +++--
+ drivers/cpuidle/cpuidle-tegra.c      |   21 ++++++++---
+ drivers/cpuidle/cpuidle.c            |   21 +++++------
+ drivers/cpuidle/dt_idle_states.c     |    2 -
+ drivers/cpuidle/poll_state.c         |   10 ++++-
+ drivers/idle/intel_idle.c            |   29 ++++++++++++---
+ include/asm-generic/vmlinux.lds.h    |    9 +---
+ include/linux/compiler_types.h       |    8 +++-
+ include/linux/cpu.h                  |    3 -
+ include/linux/cpuidle.h              |   33 +++++++++++++++++
+ include/linux/cpumask.h              |    4 +-
+ include/linux/sched/idle.h           |   40 ++++++++++++++++-----
+ include/linux/thread_info.h          |   18 +++++++++
+ include/linux/tracepoint.h           |   13 ++++++-
+ kernel/cpu_pm.c                      |    9 ----
+ kernel/printk/printk.c               |    2 -
+ kernel/rcu/tree.c                    |    9 +---
+ kernel/sched/idle.c                  |   47 +++++++------------------
+ kernel/time/tick-broadcast-hrtimer.c |   29 ++++++---------
+ kernel/time/tick-broadcast.c         |    6 ++-
+ kernel/trace/trace.c                 |    3 +
+ tools/objtool/check.c                |   15 +++++++-
+ 104 files changed, 449 insertions(+), 342 deletions(-)
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
