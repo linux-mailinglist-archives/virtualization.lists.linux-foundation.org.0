@@ -2,67 +2,65 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9344854293D
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 10:20:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 91EBA542940
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 10:22:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 343C340B0F;
-	Wed,  8 Jun 2022 08:20:30 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 2ADB54115A;
+	Wed,  8 Jun 2022 08:22:09 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6lGaE9Ae29fz; Wed,  8 Jun 2022 08:20:29 +0000 (UTC)
+	with ESMTP id OqLLvnaIwGdM; Wed,  8 Jun 2022 08:22:08 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 0A12540B79;
-	Wed,  8 Jun 2022 08:20:28 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0197541146;
+	Wed,  8 Jun 2022 08:22:07 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 751B4C0081;
-	Wed,  8 Jun 2022 08:20:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6E5AEC0081;
+	Wed,  8 Jun 2022 08:22:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0B1EAC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BF8F6C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 08:20:27 +0000 (UTC)
+ Wed,  8 Jun 2022 08:22:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E0F0C83F06
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9F91440B91
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 08:20:26 +0000 (UTC)
+ Wed,  8 Jun 2022 08:22:06 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp1.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0tCh91Dgaz_R
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8wGqWfAbjW90
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 08:20:26 +0000 (UTC)
+ Wed,  8 Jun 2022 08:22:06 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7F95383EA0
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3B2A140B79
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 08:20:26 +0000 (UTC)
+ Wed,  8 Jun 2022 08:22:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=iB9dmVG9Ng3F2WTe/9TMxSCMuj
- ja0RHUmc9eQ5DhMz/J/4DLElaK1jbZ2WgebeBsycUKTpSk4XXZFan+9M4VKyV244r+9vrHLxfSXLu
- 1Den0nhP5oq1v1RsBXC4KWrnFQR1GBOy5k4TDdPwCR83x4wgMBUgNlNfVHjeNnQFCqIK9FnubxtMN
- zWdv+oBD2Y2+ygzsJQKEKOjolNrf5KkOYpEfdDkwHbNa6JfEvO7NvQ802MWmg938HniKikRrHTl/j
- MGOjmrWcaz3uDl43QgwvycXByY5WxieHX6UmoFYrw/Hv+/92Pu6qHF8ifergHW1d73fV9QIISQE8n
- +Y5c58cg==;
+ bh=M7NmYC/Iylm9myghHwqILim55SAUt9QrM+UZYk0eJlw=; b=G4WdJHR4rUdV+xfGTH8rNFATll
+ 6h9Wcm2Dwl8hR0NA92iZAcMlUMq+fthpaItE/7jMYpDJ/PEVN5DQislISlxrB8/9qWLalvAyYsnuD
+ iwsJdJaso586Ks1Q8kQXgtZey6Z0ln60+WlxtMSBFvzr/YfproiEFU/UwfOLlrcseqEwqSScH5Ktc
+ /QiqmdbpVT+hAZ+PLajNvn/OMgQnAMelcQPcc2JSBA5lPYEeIF8hHk6ZUkukScqJxECoQ0pnPavj1
+ UOyR1jVlo+1xfDeSJaFtQ38waU7bL998Q7LLOeVCevQ/PMA7GM8xCX0+/5U+lqDyqEbrJvp13qzWx
+ uv4hyWtg==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyqvL-00BuLl-NH; Wed, 08 Jun 2022 08:20:19 +0000
-Date: Wed, 8 Jun 2022 01:20:19 -0700
+ Hat Linux)) id 1nyqww-00BvCB-Ee; Wed, 08 Jun 2022 08:21:58 +0000
+Date: Wed, 8 Jun 2022 01:21:58 -0700
 From: Christoph Hellwig <hch@infradead.org>
 To: "Matthew Wilcox (Oracle)" <willy@infradead.org>
-Subject: Re: [PATCH 13/20] aio: Convert to migrate_folio
-Message-ID: <YqBbwx5MhNRpqou/@infradead.org>
+Subject: Re: [PATCH 19/20] fs: Remove aops->migratepage()
+Message-ID: <YqBcJooz2AHLC9VK@infradead.org>
 References: <20220606204050.2625949-1-willy@infradead.org>
- <20220606204050.2625949-14-willy@infradead.org>
+ <20220606204050.2625949-20-willy@infradead.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220606204050.2625949-14-willy@infradead.org>
+In-Reply-To: <20220606204050.2625949-20-willy@infradead.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
