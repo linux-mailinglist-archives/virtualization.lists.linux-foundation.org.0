@@ -2,69 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 411675435E1
-	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 17:03:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id E54FA5435F3
+	for <lists.virtualization@lfdr.de>; Wed,  8 Jun 2022 17:03:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D2DD583F31;
-	Wed,  8 Jun 2022 15:03:25 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7367A82849;
+	Wed,  8 Jun 2022 15:03:41 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 2V7zFdms7oZa; Wed,  8 Jun 2022 15:03:25 +0000 (UTC)
+	with ESMTP id NjWYZwFjWAep; Wed,  8 Jun 2022 15:03:40 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7D87D83F36;
-	Wed,  8 Jun 2022 15:03:24 +0000 (UTC)
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D2DD482909;
+	Wed,  8 Jun 2022 15:03:39 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 07569C002D;
-	Wed,  8 Jun 2022 15:03:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 273E8C0089;
+	Wed,  8 Jun 2022 15:03:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 44BF3C002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 12E32C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 15:03:22 +0000 (UTC)
+ Wed,  8 Jun 2022 15:03:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 261EC40993
+ by smtp2.osuosl.org (Postfix) with ESMTP id E7BED40B9E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 15:03:22 +0000 (UTC)
+ Wed,  8 Jun 2022 15:03:36 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp2.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=infradead.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EniRERVMpW5C
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id bdtTpv9u3SgY
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 15:03:21 +0000 (UTC)
+ Wed,  8 Jun 2022 15:03:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 060C340928
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 28F324097E
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Jun 2022 15:03:20 +0000 (UTC)
+ Wed,  8 Jun 2022 15:03:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
  References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
  Content-Type:Content-ID:Content-Description;
- bh=WUpG8Ni861ynrjDUWCnLTkzTIfxUJKXosLuHAm7Cnl4=; b=TZRY1wF8ksrrIs1o9KbjlHWauY
- 4i3hvUjlM2cIjRUnhetVv8G6jMyi14dv6mXReUhlvxDOk++478UFLwnOTQRcW2OAzYRGsNtgSvdbm
- rzbNL4L83yv6t9VuZB7jb2fZTbAOWlo5a8uudsYH/7aOxtrNzw8CLlAmsabS+HdXV4gWCKA8QRNjP
- TEB2Mf9KWDrGrK8TMAo35J12l2+xg69zacyrBtimmMBqI0hEgYTGk5qIEXSbuwxPZt8S1FzoWckM/
- zJjg6W8idqpi/4VI0InsOV4Q7s8MeTv9rUBHDNK/kOpKOuF3YHJ2V9jmVvRttDYxzg4YE4S5tdNTF
- ViZ46uBg==;
+ bh=GbYk6WOt1dmTqgVV6yE5r+zIsB4v0sAfl69wEExYZVA=; b=Avm4ohsfCHV3ITlqMqf2jpVpw0
+ IMOZj7fyZbC5iV7nTa3UiJKE6MY3T5i/uCrkDUsFF4AHwZozCQI/jezfAirc4Rt7lV10DpHdXgpVv
+ HwvO3PQ82Ljpfj+bVRM9nX+FqP5at4G8638Lf/Y23JZBOfbCSUVhSfGzlTCXeJ412NWBXtTRK4tPV
+ l5nw5SoD+S2LeVACUshYo3NXuTXLJgcnVCt8pC7bTFlOs1hz2JEx+tlk60ClyMU/daGv1TEYDSIYc
+ 3CGKxaOONIbpGJeCBheEf/lTy+OxqCrdvV8s5fcYLlnAxJzahzGG9Rz01UBxjf+ktT1m08pyVoDQI
+ fQR1vsVA==;
 Received: from willy by casper.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1nyxCv-00CjFi-3n; Wed, 08 Jun 2022 15:02:53 +0000
+ Hat Linux)) id 1nyxCv-00CjFk-6D; Wed, 08 Jun 2022 15:02:53 +0000
 From: "Matthew Wilcox (Oracle)" <willy@infradead.org>
 To: linux-fsdevel@vger.kernel.org
-Subject: [PATCH v2 15/19] aio: Convert to migrate_folio
-Date: Wed,  8 Jun 2022 16:02:45 +0100
-Message-Id: <20220608150249.3033815-16-willy@infradead.org>
+Subject: [PATCH v2 16/19] hugetlb: Convert to migrate_folio
+Date: Wed,  8 Jun 2022 16:02:46 +0100
+Message-Id: <20220608150249.3033815-17-willy@infradead.org>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20220608150249.3033815-1-willy@infradead.org>
 References: <20220608150249.3033815-1-willy@infradead.org>
 MIME-Version: 1.0
 Cc: linux-aio@kvack.org, linux-nfs@vger.kernel.org, cluster-devel@redhat.com,
- linux-ntfs-dev@lists.sourceforge.net, Christoph Hellwig <hch@lst.de>,
- linux-kernel@vger.kernel.org,
+ linux-ntfs-dev@lists.sourceforge.net, linux-kernel@vger.kernel.org,
  "Matthew Wilcox \(Oracle\)" <willy@infradead.org>,
  linux-f2fs-devel@lists.sourceforge.net, linux-block@vger.kernel.org,
  linux-mm@kvack.org, linux-mtd@lists.infradead.org, ocfs2-devel@oss.oracle.com,
@@ -86,98 +85,135 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use a folio throughout this function.
+This involves converting migrate_huge_page_move_mapping().  We also need a
+folio variant of hugetlb_set_page_subpool(), but that's for a later patch.
 
 Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/aio.c | 36 ++++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+ fs/hugetlbfs/inode.c    | 23 ++++++++++++++---------
+ include/linux/migrate.h |  6 +++---
+ mm/migrate.c            | 18 +++++++++---------
+ 3 files changed, 26 insertions(+), 21 deletions(-)
 
-diff --git a/fs/aio.c b/fs/aio.c
-index 3c249b938632..a1911e86859c 100644
---- a/fs/aio.c
-+++ b/fs/aio.c
-@@ -400,8 +400,8 @@ static const struct file_operations aio_ring_fops = {
- };
+diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
+index 14d33f725e05..eca1d0fabd7e 100644
+--- a/fs/hugetlbfs/inode.c
++++ b/fs/hugetlbfs/inode.c
+@@ -954,28 +954,33 @@ static int hugetlbfs_symlink(struct user_namespace *mnt_userns,
+ 	return error;
+ }
  
- #if IS_ENABLED(CONFIG_MIGRATION)
--static int aio_migratepage(struct address_space *mapping, struct page *new,
--			struct page *old, enum migrate_mode mode)
-+static int aio_migrate_folio(struct address_space *mapping, struct folio *dst,
-+			struct folio *src, enum migrate_mode mode)
+-static int hugetlbfs_migrate_page(struct address_space *mapping,
+-				struct page *newpage, struct page *page,
++#ifdef CONFIG_MIGRATION
++static int hugetlbfs_migrate_folio(struct address_space *mapping,
++				struct folio *dst, struct folio *src,
+ 				enum migrate_mode mode)
  {
- 	struct kioctx *ctx;
- 	unsigned long flags;
-@@ -435,10 +435,10 @@ static int aio_migratepage(struct address_space *mapping, struct page *new,
- 		goto out;
+ 	int rc;
+ 
+-	rc = migrate_huge_page_move_mapping(mapping, newpage, page);
++	rc = migrate_huge_page_move_mapping(mapping, dst, src);
+ 	if (rc != MIGRATEPAGE_SUCCESS)
+ 		return rc;
+ 
+-	if (hugetlb_page_subpool(page)) {
+-		hugetlb_set_page_subpool(newpage, hugetlb_page_subpool(page));
+-		hugetlb_set_page_subpool(page, NULL);
++	if (hugetlb_page_subpool(&src->page)) {
++		hugetlb_set_page_subpool(&dst->page,
++					hugetlb_page_subpool(&src->page));
++		hugetlb_set_page_subpool(&src->page, NULL);
  	}
  
--	idx = old->index;
-+	idx = src->index;
- 	if (idx < (pgoff_t)ctx->nr_pages) {
--		/* Make sure the old page hasn't already been changed */
--		if (ctx->ring_pages[idx] != old)
-+		/* Make sure the old folio hasn't already been changed */
-+		if (ctx->ring_pages[idx] != &src->page)
- 			rc = -EAGAIN;
- 	} else
- 		rc = -EINVAL;
-@@ -447,27 +447,27 @@ static int aio_migratepage(struct address_space *mapping, struct page *new,
- 		goto out_unlock;
+ 	if (mode != MIGRATE_SYNC_NO_COPY)
+-		migrate_page_copy(newpage, page);
++		folio_migrate_copy(dst, src);
+ 	else
+-		migrate_page_states(newpage, page);
++		folio_migrate_flags(dst, src);
  
- 	/* Writeback must be complete */
--	BUG_ON(PageWriteback(old));
--	get_page(new);
-+	BUG_ON(folio_test_writeback(src));
-+	folio_get(dst);
- 
--	rc = migrate_page_move_mapping(mapping, new, old, 1);
-+	rc = folio_migrate_mapping(mapping, dst, src, 1);
- 	if (rc != MIGRATEPAGE_SUCCESS) {
--		put_page(new);
-+		folio_put(dst);
- 		goto out_unlock;
- 	}
- 
- 	/* Take completion_lock to prevent other writes to the ring buffer
--	 * while the old page is copied to the new.  This prevents new
-+	 * while the old folio is copied to the new.  This prevents new
- 	 * events from being lost.
- 	 */
- 	spin_lock_irqsave(&ctx->completion_lock, flags);
--	migrate_page_copy(new, old);
--	BUG_ON(ctx->ring_pages[idx] != old);
--	ctx->ring_pages[idx] = new;
-+	folio_migrate_copy(dst, src);
-+	BUG_ON(ctx->ring_pages[idx] != &src->page);
-+	ctx->ring_pages[idx] = &dst->page;
- 	spin_unlock_irqrestore(&ctx->completion_lock, flags);
- 
--	/* The old page is no longer accessible. */
--	put_page(old);
-+	/* The old folio is no longer accessible. */
-+	folio_put(src);
- 
- out_unlock:
- 	mutex_unlock(&ctx->ring_lock);
-@@ -475,13 +475,13 @@ static int aio_migratepage(struct address_space *mapping, struct page *new,
- 	spin_unlock(&mapping->private_lock);
- 	return rc;
+ 	return MIGRATEPAGE_SUCCESS;
  }
 +#else
-+#define aio_migrate_folio NULL
- #endif
++#define hugetlbfs_migrate_folio NULL
++#endif
  
- static const struct address_space_operations aio_ctx_aops = {
+ static int hugetlbfs_error_remove_page(struct address_space *mapping,
+ 				struct page *page)
+@@ -1142,7 +1147,7 @@ static const struct address_space_operations hugetlbfs_aops = {
+ 	.write_begin	= hugetlbfs_write_begin,
+ 	.write_end	= hugetlbfs_write_end,
  	.dirty_folio	= noop_dirty_folio,
--#if IS_ENABLED(CONFIG_MIGRATION)
--	.migratepage	= aio_migratepage,
--#endif
-+	.migrate_folio	= aio_migrate_folio,
+-	.migratepage    = hugetlbfs_migrate_page,
++	.migrate_folio  = hugetlbfs_migrate_folio,
+ 	.error_remove_page	= hugetlbfs_error_remove_page,
  };
  
- static int aio_setup_ring(struct kioctx *ctx, unsigned int nr_events)
+diff --git a/include/linux/migrate.h b/include/linux/migrate.h
+index 82f00ad69a54..59d64a1e6b4b 100644
+--- a/include/linux/migrate.h
++++ b/include/linux/migrate.h
+@@ -42,8 +42,8 @@ extern int isolate_movable_page(struct page *page, isolate_mode_t mode);
+ 
+ extern void migrate_page_states(struct page *newpage, struct page *page);
+ extern void migrate_page_copy(struct page *newpage, struct page *page);
+-extern int migrate_huge_page_move_mapping(struct address_space *mapping,
+-				  struct page *newpage, struct page *page);
++int migrate_huge_page_move_mapping(struct address_space *mapping,
++		struct folio *dst, struct folio *src);
+ extern int migrate_page_move_mapping(struct address_space *mapping,
+ 		struct page *newpage, struct page *page, int extra_count);
+ void migration_entry_wait_on_locked(swp_entry_t entry, pte_t *ptep,
+@@ -74,7 +74,7 @@ static inline void migrate_page_copy(struct page *newpage,
+ 				     struct page *page) {}
+ 
+ static inline int migrate_huge_page_move_mapping(struct address_space *mapping,
+-				  struct page *newpage, struct page *page)
++				  struct folio *dst, struct folio *src)
+ {
+ 	return -ENOSYS;
+ }
+diff --git a/mm/migrate.c b/mm/migrate.c
+index 4d8115ca93bb..bed0de86f3ae 100644
+--- a/mm/migrate.c
++++ b/mm/migrate.c
+@@ -474,26 +474,26 @@ EXPORT_SYMBOL(folio_migrate_mapping);
+  * of folio_migrate_mapping().
+  */
+ int migrate_huge_page_move_mapping(struct address_space *mapping,
+-				   struct page *newpage, struct page *page)
++				   struct folio *dst, struct folio *src)
+ {
+-	XA_STATE(xas, &mapping->i_pages, page_index(page));
++	XA_STATE(xas, &mapping->i_pages, folio_index(src));
+ 	int expected_count;
+ 
+ 	xas_lock_irq(&xas);
+-	expected_count = 2 + page_has_private(page);
+-	if (!page_ref_freeze(page, expected_count)) {
++	expected_count = 2 + folio_has_private(src);
++	if (!folio_ref_freeze(src, expected_count)) {
+ 		xas_unlock_irq(&xas);
+ 		return -EAGAIN;
+ 	}
+ 
+-	newpage->index = page->index;
+-	newpage->mapping = page->mapping;
++	dst->index = src->index;
++	dst->mapping = src->mapping;
+ 
+-	get_page(newpage);
++	folio_get(dst);
+ 
+-	xas_store(&xas, newpage);
++	xas_store(&xas, dst);
+ 
+-	page_ref_unfreeze(page, expected_count - 1);
++	folio_ref_unfreeze(src, expected_count - 1);
+ 
+ 	xas_unlock_irq(&xas);
+ 
 -- 
 2.35.1
 
