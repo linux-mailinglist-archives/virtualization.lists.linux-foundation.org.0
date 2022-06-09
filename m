@@ -1,177 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 66B6D5440C1
-	for <lists.virtualization@lfdr.de>; Thu,  9 Jun 2022 02:59:43 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B3EF5440DA
+	for <lists.virtualization@lfdr.de>; Thu,  9 Jun 2022 03:02:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id B359B610BA;
-	Thu,  9 Jun 2022 00:59:38 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTP id F0EA3415CC;
+	Thu,  9 Jun 2022 01:02:23 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Te1zewjBK_Q6; Thu,  9 Jun 2022 00:59:38 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fMtkmZopVGxk; Thu,  9 Jun 2022 01:02:22 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8AF36610B4;
-	Thu,  9 Jun 2022 00:59:37 +0000 (UTC)
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 78F94415DB;
+	Thu,  9 Jun 2022 01:02:22 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D79E4C0081;
-	Thu,  9 Jun 2022 00:59:36 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CC682C0081;
+	Thu,  9 Jun 2022 01:02:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6B0DEC0039;
- Thu,  9 Jun 2022 00:59:35 +0000 (UTC)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6B840C002D
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Jun 2022 01:02:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4D72640BCF;
- Thu,  9 Jun 2022 00:59:35 +0000 (UTC)
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4A61B40AF9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Jun 2022 01:02:18 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Authentication-Results: smtp2.osuosl.org (amavisd-new);
- dkim=pass (2048-bit key) header.d=oracle.com header.b="t6xvKWaU";
- dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com
- header.b="Vfuabbv9"
+ dkim=pass (2048-bit key) header.d=bytedance-com.20210112.gappssmtp.com
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7KvnbV6O4-Rd; Thu,  9 Jun 2022 00:59:34 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7BE9640AE2;
- Thu,  9 Jun 2022 00:59:34 +0000 (UTC)
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 258LSC3N017882;
- Thu, 9 Jun 2022 00:58:50 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references : content-type :
- mime-version; s=corp-2021-07-09;
- bh=6xdMcHGrZJvq1N3Xs9DS/AuUbrlxyN/JsBYOw/WhJRg=;
- b=t6xvKWaUO1Cb0ACv7O02JNBKWpGQyRAYaff/9fxmix1NDt/jq8NGujUtmuPavqtyrum3
- 61g0bZzyTMIaO6JROS9hBKDXKiWJ89lItnvbssDhRA1WibklKPZ+xDd/uGbAQQq8nPgq
- LDnvShp5gIqP7Vs1eXsbyphCOE5Hslnk8GjOwUeOLRpnuIfBlBgo9jyAm0ksr3bBYIAc
- jVindzTJHJGCX2KArbxTZU6+GjOlC8eoyXJFRWv5QvsJnmFfNt7HPikFhYLDIZ5S1Bgk
- oENEGNVWEyoCic4H+Uk/AWeRDyXxOJh6plef058kgU1srT3p1UUIKPzyRuQZA2OsnIdj IQ== 
-Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3ghexefa63-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 09 Jun 2022 00:58:50 +0000
-Received: from pps.filterd
- (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.16.1.2/8.16.1.2)
- with SMTP id 2590ub33032517; Thu, 9 Jun 2022 00:58:49 GMT
-Received: from nam12-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam12lp2049.outbound.protection.outlook.com [104.47.66.49])
- by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com with ESMTP id
- 3gfwu433k8-7
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 09 Jun 2022 00:58:49 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=juVTivBgEKe7m9kue76MVZTdZz5I+lX5bC3X1Dwiev8pMdPfD/lPoPq7i70s+l2AiDQkGz4jutHa87Y98v2KjGfj2ICGGe2cZUN3KssJmb21PVOjoCxiMRyjXawcpQxN2M+eX5Jv6VYQzbC3xTmWXUMMrljq6QFxUbKEK1oBg1WbZ36hxudQ5hmNmJ5k01wRx3/zNQ7DEgud31mJFWTUtlMy1W5j5tA3WoqwaDFuL5ERuc8swc23L2YE+XVChddl31WEi1Kb8xlqZAUjWnhCLaHxXBaf64JXPHcn3SjE1/+dU41gZ7a+SpklOOZy44jh+P/YtaJgfWWHd1jRak2ukQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6xdMcHGrZJvq1N3Xs9DS/AuUbrlxyN/JsBYOw/WhJRg=;
- b=UOrm/8bzwY6vzTqms06n9LxCxUm0IvSQYGX2ohMKLoNGTkS8yIBhn99g9T/kEhZUL/+TeOTRi7vRKX1AMwXT2WN7HsbNEGEyEhx/gVMFok24s1PivrEdEISEgjOIYzadq9UtDy7lXf9X4XWgdVFha/4jMUof/EBgmOr+ABUopPGxZtWV0JIF+hfh/WZ3s3593D2PmASjJh5uAnFxm4DpMmWLtSIVDp28OoF3sMeZBaTARFIPKMrLdB5rTK6mc9jZtDdECKJwLxIbWOXJ6jlOs5Izh3WQKQm7sFKmxTRsluEWeIm9X90+3mzzFUWttyG7GIsmZeBWV0DedinpoJ/0rw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
+ with ESMTP id u8hyRSuTRrRN
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Jun 2022 01:02:17 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 549A740AE2
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  9 Jun 2022 01:02:17 +0000 (UTC)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ d12-20020a17090abf8c00b001e2eb431ce4so19804300pjs.1
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 08 Jun 2022 18:02:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6xdMcHGrZJvq1N3Xs9DS/AuUbrlxyN/JsBYOw/WhJRg=;
- b=Vfuabbv9gyNMxOOTQHPlq6zEnEPwT/NoDVlapjk4vEFzTw/JUnh7f1GLHNZaytGKdDZx8OAutG2dw4e6wW7apwMY9kJ2t2NGyQF+yyhzoTnNvYR0kAtBc06IYVVmAPOEqCs4TvGvcFEHnNiKYubHeKcYFue+ifvEXq9OhXGauig=
-Received: from BYAPR10MB2663.namprd10.prod.outlook.com (2603:10b6:a02:a9::20)
- by BN0PR10MB5126.namprd10.prod.outlook.com (2603:10b6:408:129::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5314.13; Thu, 9 Jun
- 2022 00:58:46 +0000
-Received: from BYAPR10MB2663.namprd10.prod.outlook.com
- ([fe80::7081:e264:cc58:37b9]) by BYAPR10MB2663.namprd10.prod.outlook.com
- ([fe80::7081:e264:cc58:37b9%3]) with mapi id 15.20.5314.019; Thu, 9 Jun 2022
- 00:58:46 +0000
-From: Dongli Zhang <dongli.zhang@oracle.com>
-To: iommu@lists.linux-foundation.org, xen-devel@lists.xenproject.org,
- x86@kernel.org, linuxppc-dev@lists.ozlabs.org,
- virtualization@lists.linux-foundation.org
-Subject: [PATCH RFC v1 7/7] swiotlb: fix the slot_addr() overflow
-Date: Wed,  8 Jun 2022 17:55:53 -0700
-Message-Id: <20220609005553.30954-8-dongli.zhang@oracle.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20220609005553.30954-1-dongli.zhang@oracle.com>
-References: <20220609005553.30954-1-dongli.zhang@oracle.com>
-X-ClientProxiedBy: SJ0PR05CA0075.namprd05.prod.outlook.com
- (2603:10b6:a03:332::20) To BYAPR10MB2663.namprd10.prod.outlook.com
- (2603:10b6:a02:a9::20)
+ d=bytedance-com.20210112.gappssmtp.com; s=20210112;
+ h=message-id:date:mime-version:user-agent:subject:content-language:to
+ :cc:references:from:in-reply-to:content-transfer-encoding;
+ bh=VhCSI4/82p7maI+6hlpm39k7fZXsdvnmQOl9zbSCHak=;
+ b=Kx2ZWz/2O8/FyqkIAzfWB3nPuVCn1WoKkcUfxzFGZUaAomsE01EcPN5ZWNlFJcLOT2
+ 2D74wXTyQCgqGl4cL+LMwuTPgsj1g0zkvTpZV/7jSSDf1eBJaGvycPwUrcpOzs1mbxnE
+ aQfgbRwexqw5Jl2Meuqwh99hihxeNWN4kIJ0vS88GlpNPDigi8Gk+FcOnQoTQmmi/ebo
+ Yeg9BjYAm87Zf8UPkbGs67JgX2Nc9vkucKujrU950le5hWcSOtp6nb5ZqMcOBpGgLXH6
+ L77Rvf4Gmo1fKKC/Gl5DLfVgbAPCSKK0A/+MnXP++8RWgc6dbxRzlAHJyuNyl+i8Fc3N
+ Si+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:message-id:date:mime-version:user-agent:subject
+ :content-language:to:cc:references:from:in-reply-to
+ :content-transfer-encoding;
+ bh=VhCSI4/82p7maI+6hlpm39k7fZXsdvnmQOl9zbSCHak=;
+ b=FmnLmOA8DB6D2vsivB4krax1zft6akn++/Vej9MjW8JrxjC8ME8dbhF2s8MSobG4YD
+ qATABVECcLIBe6ZPXruA4jzNHaAX5R/hRP1nQi1oqdDrXnPqjZ/qfTM5+PdJm8nBT1EI
+ B2gwYksGWVcNUDTuqeCtSP6qwNuEc3WDYS4Wed8pwMswG1gppmvzvtMSKIsX2pQPvFeG
+ j0ph0mJFGCtFUDSqj8flpZd9Ztz2nVoiEKoZjXM69szXTrccNvUquUdsS1Qo7maGXPdv
+ u6mFSlJBTCewjKB5VrVTRAWBTsHAe8QjbPGgxvKvDNqNz8LWKFsqJmMC4FROJzfTUAxZ
+ xrPQ==
+X-Gm-Message-State: AOAM531/Uw4y8sH5R8Eplrz9FV7YjeLRSzMsbTDtjhXj706EFI5xXdsb
+ XkYQ8+v9GMe+Jak8BI8vK4zQiA==
+X-Google-Smtp-Source: ABdhPJzPbYlu81kIpByG9BMXMf41AW8Z/E2L0Wt/v+mXSqWzgIZA4Diie6fnPh+SLJDwLNhS0n6FpQ==
+X-Received: by 2002:a17:903:230e:b0:166:3781:1e50 with SMTP id
+ d14-20020a170903230e00b0016637811e50mr36887944plh.20.1654736536513; 
+ Wed, 08 Jun 2022 18:02:16 -0700 (PDT)
+Received: from [10.76.15.169] ([61.120.150.70])
+ by smtp.gmail.com with ESMTPSA id
+ x193-20020a6286ca000000b0051ceaa47cbdsm484753pfd.79.2022.06.08.18.02.13
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 08 Jun 2022 18:02:15 -0700 (PDT)
+Message-ID: <e1a2af04-ef33-60df-0ada-a17a7d508344@bytedance.com>
+Date: Thu, 9 Jun 2022 08:57:34 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 3528f4e0-24bd-4d9d-6194-08da49b3341f
-X-MS-TrafficTypeDiagnostic: BN0PR10MB5126:EE_
-X-Microsoft-Antispam-PRVS: <BN0PR10MB51262F3B4A18265C2FB742C3F0A79@BN0PR10MB5126.namprd10.prod.outlook.com>
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Hw2XOLWs69rmJbKaYgjiBO5Ff1axa/FesU6+5saE+jEdk3I74upd15GtORLYL8fmC50GmuHG9nOetokT4cjgZAgGn1rkVA33D0Mf5/CL90JvOF5E6RQe0ExgKWAqo8uweE60/DNKne5LGZ30/rHKxAWBWfTgVym+o3q64Zp1N8iS4NGMgggat0AWtvPKD4hAkwDjAVAGdFY7TBXmNtKU9RGpDvOQ7Cuc8S9Dxuw6XKrcRpNMg/oOKJ9PRlsVJaC9p1vzOU3VxsR0EmX3+lnFWrmitbTnRYC4Xvy9oSwopXdRdti2DV1VQ88QO9rAUw7ZEr1+X8IOxoIBtfZX/x3z8wPls5hf6CrsvGIBGB+jSbxXQvF+o9/uUUTJpODDlOnpe3tcUq09H5Nvl8UO6O6/HhwFkUgWzm2j32+kcOXTRNTQ7JJZv+71KmNvsS+aUjpy03/IfU+zPFWFp1D6jPZbEygyvIygUTx5nVtQL66Iir/5rPg+COv+6rHy0tSwqqTQmxrtTTD0uSRLLFGLbkTUGz5RLGa90ro+ato+ohXuvOu0FiDKcIvfSJSYkZ64e++x/Uq2RcMvUvKmtGqAIK5TXaJtWYdsWbH8f0W8gj1QbuGspqX0oyVln3auTvRGBxhTE4fNO8ytQqLrrlA2GDRmbGt7HqZVCmzVAAsenohRhczDmkoaRg9ewjasXNESP02CNHhN9TaRwXlkNZ+HBl/YGQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR10MB2663.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230001)(366004)(8936002)(6486002)(5660300002)(186003)(66556008)(508600001)(4326008)(66946007)(7416002)(66476007)(2616005)(8676002)(107886003)(1076003)(2906002)(38100700002)(38350700002)(26005)(6666004)(316002)(6512007)(36756003)(83380400001)(86362001)(44832011)(6506007)(52116002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?dO7j1OhcZpj0eBaof3FrgXcevtMQyym3E7YKNGKux9JDsaueQyGsMMZvtMVQ?=
- =?us-ascii?Q?aU7V5UaNG28P4P1grx+GwcIR6OTDHrTFqPvn87xipS3mABbVgAzpexuF0Cuo?=
- =?us-ascii?Q?6O9a8qmN0d1UTbMobhkZZaxlkrNzGrVrhMXco28+DS6c9p4M4CVeyiLC8Pnj?=
- =?us-ascii?Q?tsPZ7skYRxxrEzfeH5e5IHBiSXMGJKh8Muu2jjSj01e2YH+1tyq8u7Ci2Cdz?=
- =?us-ascii?Q?k3ISjZeCyA0k4YP/ywgUi2fmGKJFxWQB+jcJUl9gZudTmi6wBBv0A4D+h+ux?=
- =?us-ascii?Q?JR9AlRc4SbGda4kP5Gy1RsBAurPLyQm8IvCRUZLeW37nPezImK0ZDPXd0GgS?=
- =?us-ascii?Q?CKUPPteMHlH4cOxVLHu5UIeBkLdbnJ6CwBtPWyK1US/pm6Bu5Up4+HRm4ZJI?=
- =?us-ascii?Q?hOP0vqMyuY0q9T0WqjOHnNPwXteClHBPxXej2NinuXC4oAd4AKUDHkdDlvJo?=
- =?us-ascii?Q?SXJLpptiUtnv99bdYuJceuCPURjKeoxDIb2zUOvG3zwziLbWgbDONCMciorQ?=
- =?us-ascii?Q?DBxZt0VfT+T0stcAbwoOtdMUlYdOdLPMJoa2WX++yra+/fdSSKUmBPZcdc+1?=
- =?us-ascii?Q?MbIi0aQYSDPBOzTQEBPWbEuhBWDBSGk/uCv/pcjnBuA9FvnVbPdoPtO5ynav?=
- =?us-ascii?Q?lXOpo9GDBeBElYoHEL6lBvp184CH9FubB97hC82DnQdHLery5QAI4iJ6AQO3?=
- =?us-ascii?Q?UdtRAWCVOyMuSEONOPMuZNtHZ2JkCSQtWPsPafi2r1bagIbZMzongwcn0G4z?=
- =?us-ascii?Q?WJM3MJM5Dz3OMC70Bjivn9V0eiapGoytm0z563HChmYEh/mVaalzRr+bBMZj?=
- =?us-ascii?Q?CWdDbZAZjXPqJlY8vXFFjZYVRq0ru/ZS3BY7i2AReDNtcF0BfMgzHFRlOwVU?=
- =?us-ascii?Q?i8a+qeHg0jBS3+8HpXlJe+reA0tOBBn1aoaiKwY3nC64lY1+626KDkWB1w/C?=
- =?us-ascii?Q?FU8ad/7Eu44zwTeRw2OYOOE3yLgvHj8++Q5VstgOPu2+e//pWEFUl/TcVIwX?=
- =?us-ascii?Q?hiKMDf0RGOXPjMfwMyWZXxn9ks3wm8qpAEHV388EfOKabGWnCO7PhWsUKicB?=
- =?us-ascii?Q?8Vo0jNvFRM4lEYA6sKoWdyG6UnSyB4DuBN12s7waou5XGDRh5KSW6Akmuius?=
- =?us-ascii?Q?wo0NGzsGMFHl4UYAZki63ChGSIrWnVjSXyBKmHpMeIGLCaMluxhB4ZdIwmi1?=
- =?us-ascii?Q?Y+ay7ALFja1b7XdncJS+/t6evV/Yoj98/C0yeO21K7k7MQ28gMJsW4Fe1Yvp?=
- =?us-ascii?Q?AsWmRJZ9UJHPA/IQowgSPWHPqVAqUY+Zm4k+WcUUw+4sac7e4oKMfyMouC2n?=
- =?us-ascii?Q?GkiCgY2hMwPVdbnXVgwSHToHHanzkmWvA2AYN5Ffp0MkFEiIrhC6hREgg7SO?=
- =?us-ascii?Q?NEMhsxQqsWw00MnYzlFThWZfkDh6IuESZSACZV+fl6qOWvptaz1pCrjhq8Tb?=
- =?us-ascii?Q?viSLey238jUqMRamaJGvXgUb7VzV6T+R67t7OS3ptLiGzWbYJxqHMFPfTJBa?=
- =?us-ascii?Q?iFyrlHubVuuehP0EKsn/rsAtZDutPjzJrc+95Ly2Oa9MBZNeeJferjb2urGr?=
- =?us-ascii?Q?mG4tQNtBHkCEdIRMoD2CfyMYM5F3FU02bps13LwACyiHw3nVJy6zsG1BGN3V?=
- =?us-ascii?Q?Aiu6gyzI0JyUanedCBbJWCWGUYVcJGrepWi4z/ImP6sx2N2+hjOTJ0wTXDIh?=
- =?us-ascii?Q?YJU2weah4Mdf6YGVAsvS2y2Vyqi/aK8LWcvZE8KL07+X3bdjOXAq07jEanhO?=
- =?us-ascii?Q?f0WS05q6ebjMtvkXLMgE6WkRKs0/boI=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3528f4e0-24bd-4d9d-6194-08da49b3341f
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB2663.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Jun 2022 00:58:45.0198 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fsHhpKgQMAFV5IQe9XonvZ6LuEuKA2pc/dZM/yLoQf3ZVc0AGoosmfav76kRqOvKRnjd5EMw+vsDJQK2bGEACw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR10MB5126
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.517, 18.0.874
- definitions=2022-06-08_04:2022-06-07,
- 2022-06-08 signatures=0
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999
- spamscore=0
- adultscore=0 suspectscore=0 malwarescore=0 phishscore=0 bulkscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2204290000 definitions=main-2206090001
-X-Proofpoint-GUID: UjsT3auR4N1lgfozhTWirii4iLwJ428y
-X-Proofpoint-ORIG-GUID: UjsT3auR4N1lgfozhTWirii4iLwJ428y
-Cc: jgross@suse.com, sstabellini@kernel.org, mst@redhat.com,
- konrad.wilk@oracle.com, mpe@ellerman.id.au, dave.hansen@linux.intel.com,
- joe.jin@oracle.com, linux-kernel@vger.kernel.org, hch@infradead.org,
- mingo@redhat.com, bp@alien8.de, tglx@linutronix.de, m.szyprowski@samsung.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.9.1
+Subject: PING: RE: RE: [PATCH v8 1/1] crypto: Introduce RSA algorithm
+Content-Language: en-US
+To: "mst@redhat.com" <mst@redhat.com>
+References: <20220527084734.2649594-1-pizhenwei@bytedance.com>
+ <20220527084734.2649594-2-pizhenwei@bytedance.com>
+ <848d579e2c504ba493cd57510a7ff3b0@huawei.com>
+ <b2ee77ae-2044-32b4-20c5-43fa78e8213c@bytedance.com>
+ <39f884dbc25d4b0cbec510ab090e6778@huawei.com>
+From: zhenwei pi <pizhenwei@bytedance.com>
+In-Reply-To: <39f884dbc25d4b0cbec510ab090e6778@huawei.com>
+Cc: "helei.sig11@bytedance.com" <helei.sig11@bytedance.com>,
+ "berrange@redhat.com" <berrange@redhat.com>,
+ "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -183,43 +110,136 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Since the type of swiotlb slot index is a signed integer, the
-"((idx) << IO_TLB_SHIFT)" will returns incorrect value. As a result, the
-slot_addr() returns a value which is smaller than the expected one.
+Hi, Michael
 
-E.g., the 'tlb_addr' generated in swiotlb_tbl_map_single() may return a
-value smaller than the expected one. As a result, the swiotlb_bounce()
-will access a wrong swiotlb slot.
+QEMU side was reviewed by Gonglei a week ago. To avoid this to be 
+ignored, PING!
 
-Cc: Konrad Wilk <konrad.wilk@oracle.com>
-Cc: Joe Jin <joe.jin@oracle.com>
-Signed-off-by: Dongli Zhang <dongli.zhang@oracle.com>
----
- kernel/dma/swiotlb.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On 5/31/22 20:08, Gonglei (Arei) wrote:
+> 
+> 
+>> -----Original Message-----
+>> From: zhenwei pi [mailto:pizhenwei@bytedance.com]
+>> Sent: Tuesday, May 31, 2022 9:48 AM
+>> To: Gonglei (Arei) <arei.gonglei@huawei.com>
+>> Cc: qemu-devel@nongnu.org; mst@redhat.com;
+>> virtualization@lists.linux-foundation.org; helei.sig11@bytedance.com;
+>> berrange@redhat.com
+>> Subject: Re: RE: [PATCH v8 1/1] crypto: Introduce RSA algorithm
+>>
+>> On 5/30/22 21:31, Gonglei (Arei) wrote:
+>>>
+>>>
+>>>> -----Original Message-----
+>>>> From: zhenwei pi [mailto:pizhenwei@bytedance.com]
+>>>> Sent: Friday, May 27, 2022 4:48 PM
+>>>> To: mst@redhat.com; Gonglei (Arei) <arei.gonglei@huawei.com>
+>>>> Cc: qemu-devel@nongnu.org; virtualization@lists.linux-foundation.org;
+>>>> helei.sig11@bytedance.com; berrange@redhat.com; zhenwei pi
+>>>> <pizhenwei@bytedance.com>
+>>>> Subject: [PATCH v8 1/1] crypto: Introduce RSA algorithm
+>>>>
+>>>>
+>>> Skip...
+>>>
+>>>> +static int64_t
+>>>> +virtio_crypto_create_asym_session(VirtIOCrypto *vcrypto,
+>>>> +               struct virtio_crypto_akcipher_create_session_req
+>>>> *sess_req,
+>>>> +               uint32_t queue_id, uint32_t opcode,
+>>>> +               struct iovec *iov, unsigned int out_num) {
+>>>> +    VirtIODevice *vdev = VIRTIO_DEVICE(vcrypto);
+>>>> +    CryptoDevBackendSessionInfo info = {0};
+>>>> +    CryptoDevBackendAsymSessionInfo *asym_info;
+>>>> +    int64_t session_id;
+>>>> +    int queue_index;
+>>>> +    uint32_t algo, keytype, keylen;
+>>>> +    g_autofree uint8_t *key = NULL;
+>>>> +    Error *local_err = NULL;
+>>>> +
+>>>> +    algo = ldl_le_p(&sess_req->para.algo);
+>>>> +    keytype = ldl_le_p(&sess_req->para.keytype);
+>>>> +    keylen = ldl_le_p(&sess_req->para.keylen);
+>>>> +
+>>>> +    if ((keytype != VIRTIO_CRYPTO_AKCIPHER_KEY_TYPE_PUBLIC)
+>>>> +         && (keytype !=
+>> VIRTIO_CRYPTO_AKCIPHER_KEY_TYPE_PRIVATE)) {
+>>>> +        error_report("unsupported asym keytype: %d", keytype);
+>>>> +        return -VIRTIO_CRYPTO_NOTSUPP;
+>>>> +    }
+>>>> +
+>>>> +    if (keylen) {
+>>>> +        key = g_malloc(keylen);
+>>>> +        if (iov_to_buf(iov, out_num, 0, key, keylen) != keylen) {
+>>>> +            virtio_error(vdev, "virtio-crypto asym key incorrect");
+>>>> +            return -EFAULT;
+>>>
+>>> Memory leak.
+>>>
+>>>> +        }
+>>>> +        iov_discard_front(&iov, &out_num, keylen);
+>>>> +    }
+>>>> +
+>>>> +    info.op_code = opcode;
+>>>> +    asym_info = &info.u.asym_sess_info;
+>>>> +    asym_info->algo = algo;
+>>>> +    asym_info->keytype = keytype;
+>>>> +    asym_info->keylen = keylen;
+>>>> +    asym_info->key = key;
+>>>> +    switch (asym_info->algo) {
+>>>> +    case VIRTIO_CRYPTO_AKCIPHER_RSA:
+>>>> +        asym_info->u.rsa.padding_algo =
+>>>> +            ldl_le_p(&sess_req->para.u.rsa.padding_algo);
+>>>> +        asym_info->u.rsa.hash_algo =
+>>>> +            ldl_le_p(&sess_req->para.u.rsa.hash_algo);
+>>>> +        break;
+>>>> +
+>>>> +    /* TODO DSA&ECDSA handling */
+>>>> +
+>>>> +    default:
+>>>> +        return -VIRTIO_CRYPTO_ERR;
+>>>> +    }
+>>>> +
+>>>> +    queue_index = virtio_crypto_vq2q(queue_id);
+>>>> +    session_id =
+>>>> + cryptodev_backend_create_session(vcrypto->cryptodev,
+>>>> &info,
+>>>> +                     queue_index, &local_err);
+>>>> +    if (session_id < 0) {
+>>>> +        if (local_err) {
+>>>> +            error_report_err(local_err);
+>>>> +        }
+>>>> +        return -VIRTIO_CRYPTO_ERR;
+>>>> +    }
+>>>> +
+>>>> +    return session_id;
+>>>
+>>> Where to free the key at both normal and exceptional paths?
+>>>
+>>
+>> Hi, Lei
+>>
+>> The key is declared with g_autofree:
+>> g_autofree uint8_t *key = NULL;
+>>
+> 
+> OK. For the patch:
+> 
+> Reviewed-by: Gonglei <arei.gonglei@huawei.com>
+> 
+> 
+> Regards,
+> -Gonglei
+>      
+> 
 
-diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-index 0dcdd25ea95d..c64e557de55c 100644
---- a/kernel/dma/swiotlb.c
-+++ b/kernel/dma/swiotlb.c
-@@ -531,7 +531,8 @@ static void swiotlb_bounce(struct device *dev, phys_addr_t tlb_addr, size_t size
- 	}
- }
- 
--#define slot_addr(start, idx)	((start) + ((idx) << IO_TLB_SHIFT))
-+#define slot_addr(start, idx)	((start) + \
-+				(((unsigned long)idx) << IO_TLB_SHIFT))
- 
- /*
-  * Carefully handle integer overflow which can occur when boundary_mask == ~0UL.
 -- 
-2.17.1
-
+zhenwei pi
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
