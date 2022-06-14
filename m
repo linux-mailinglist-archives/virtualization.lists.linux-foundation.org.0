@@ -2,71 +2,72 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8F3C654A4B3
-	for <lists.virtualization@lfdr.de>; Tue, 14 Jun 2022 04:10:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC4EA54A4B5
+	for <lists.virtualization@lfdr.de>; Tue, 14 Jun 2022 04:11:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 43ECE40A12;
-	Tue, 14 Jun 2022 02:10:40 +0000 (UTC)
+	by smtp2.osuosl.org (Postfix) with ESMTP id 80EF440A18;
+	Tue, 14 Jun 2022 02:11:00 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6MS3Q67J8qCI; Tue, 14 Jun 2022 02:10:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 11A084053E;
-	Tue, 14 Jun 2022 02:10:39 +0000 (UTC)
+	with ESMTP id N0NlR_4n03Ty; Tue, 14 Jun 2022 02:10:59 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 4553D40A16;
+	Tue, 14 Jun 2022 02:10:59 +0000 (UTC)
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 81A63C002D;
-	Tue, 14 Jun 2022 02:10:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C2AF6C007A;
+	Tue, 14 Jun 2022 02:10:58 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BF98BC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BEC02C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jun 2022 02:10:37 +0000 (UTC)
+ Tue, 14 Jun 2022 02:10:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id BBA9A41697
+ by smtp3.osuosl.org (Postfix) with ESMTP id 9E8F160E03
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jun 2022 02:10:37 +0000 (UTC)
+ Tue, 14 Jun 2022 02:10:57 +0000 (UTC)
 X-Virus-Scanned: amavisd-new at osuosl.org
-Authentication-Results: smtp4.osuosl.org (amavisd-new);
+Authentication-Results: smtp3.osuosl.org (amavisd-new);
  dkim=pass (2048-bit key) header.d=kernel.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UIL-8OqFdAHp
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id U_nWT2-H44kw
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jun 2022 02:10:37 +0000 (UTC)
+ Tue, 14 Jun 2022 02:10:57 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 07C2641677
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 20E6560C0F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Jun 2022 02:10:36 +0000 (UTC)
+ Tue, 14 Jun 2022 02:10:57 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 420066114C;
- Tue, 14 Jun 2022 02:10:36 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 01113C341C0;
- Tue, 14 Jun 2022 02:10:34 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 695F660C15;
+ Tue, 14 Jun 2022 02:10:56 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DEAAC341C4;
+ Tue, 14 Jun 2022 02:10:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1655172635;
- bh=9ua7Tv8ngKzIg90avnelbsiLM5arPoUfgpVVXD8P87k=;
+ s=k20201202; t=1655172656;
+ bh=o/jyu2ROdm31y2b8cgGf9XEmM2oEVHame+hPgu7jdd4=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=SgNm+QWjOjt1WrrO8MasWHbZ8nXrI6GlP6x211ZSPnHMSxTGSb8tRxsmXo6RUZ2qp
- uGq6t+YPD0EBfwJkdvlQt4z3NZZnRBkFlLurVvN3IuN7VZQ//q/rJQmN7wxO4iWq4k
- a7Jav1oyyogQcFlTsrjhbkqYgvzFUovX5ni8Y3Da0aOj4urz19fs8Kb92Z7RBNS5Lk
- jsupxFQM/C/HollDZcg2j2cLexPBMU+cv3QTsQi50S+a5TOe/nKA2AVL53YIIOLpRM
- 45nQeTAIXkCUC7pxAJluZSxr0INmng1Je19B+SSaoGae5OfgOL/ujPRevK8DVGHRVT
- pejbjHVgbY99A==
+ b=URndEBjW5YScMKRngGXuXPQEkDmSxmdxM8wES0Nk5nZjlnQNywW6RUm8ybwtL2ydn
+ BeO+Bhy8t5asb1V3V8TUMUp4EX8qMlGAjtKceWYZdTM0669DhkXtrmRe4pDwTCgOu+
+ n8BkoRHQ42W+tJhufkRpBh/BsiK8dniO2DKJQxnAz4Mh3Pky1GwELd7YlAp4Wuqr7s
+ TdGlFyWTKXb/a7bfv+OCFOei+vyS9z/oQkPATcq/RsYKj3hXuUrqA+E6rIGYh/rSlF
+ kd0TrkPOyfRl+T7DBUwO+SUwd2Cf6uhpn6wcqsGhO1KuKc9r1xzNlKnuI8bOLbz3vG
+ aR9iJ9ypgUz/g==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.14 11/14] virtio-mmio: fix missing put_device() when
+Subject: [PATCH AUTOSEL 4.9 09/12] virtio-mmio: fix missing put_device() when
  vm_cmdline_parent registration failed
-Date: Mon, 13 Jun 2022 22:10:16 -0400
-Message-Id: <20220614021019.1100929-11-sashal@kernel.org>
+Date: Mon, 13 Jun 2022 22:10:37 -0400
+Message-Id: <20220614021040.1101131-9-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220614021019.1100929-1-sashal@kernel.org>
-References: <20220614021019.1100929-1-sashal@kernel.org>
+In-Reply-To: <20220614021040.1101131-1-sashal@kernel.org>
+References: <20220614021040.1101131-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -105,10 +106,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 1 insertion(+)
 
 diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index 74dc7170fd35..181386e06cb7 100644
+index 50840984fbfa..f62da3b7c27b 100644
 --- a/drivers/virtio/virtio_mmio.c
 +++ b/drivers/virtio/virtio_mmio.c
-@@ -635,6 +635,7 @@ static int vm_cmdline_set(const char *device,
+@@ -630,6 +630,7 @@ static int vm_cmdline_set(const char *device,
  	if (!vm_cmdline_parent_registered) {
  		err = device_register(&vm_cmdline_parent);
  		if (err) {
