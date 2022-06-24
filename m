@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 79B51558D9D
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jun 2022 04:56:54 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 3869A558D9B
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jun 2022 04:56:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id BCBBA40C5C;
-	Fri, 24 Jun 2022 02:56:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BCBBA40C5C
+	by smtp3.osuosl.org (Postfix) with ESMTP id 985706128C;
+	Fri, 24 Jun 2022 02:56:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 985706128C
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FKlEFDzQO9eK; Fri, 24 Jun 2022 02:56:52 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 8A55F40C41;
-	Fri, 24 Jun 2022 02:56:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8A55F40C41
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8q2l7jXk2kby; Fri, 24 Jun 2022 02:56:50 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 2A5D061162;
+	Fri, 24 Jun 2022 02:56:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2A5D061162
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 02FDEC0084;
-	Fri, 24 Jun 2022 02:56:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 744A5C0081;
+	Fri, 24 Jun 2022 02:56:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2CA2CC002D
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:56:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 067838483A
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:56:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 067838483A
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FRk8A10srD64
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:56:48 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EB3308482F
-Received: from out30-44.freemail.mail.aliyun.com
- (out30-44.freemail.mail.aliyun.com [115.124.30.44])
- by smtp1.osuosl.org (Postfix) with ESMTPS id EB3308482F
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F0242C002D
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Jun 2022 02:56:47 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R251e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id D110F42535
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jun 2022 02:56:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D110F42535
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JV3o0xM_hD4d
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jun 2022 02:56:46 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B4A0140998
+Received: from out30-130.freemail.mail.aliyun.com
+ (out30-130.freemail.mail.aliyun.com [115.124.30.130])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id B4A0140998
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Jun 2022 02:56:45 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R821e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VHF1U8u_1656039395; 
+ TI=SMTPD_---0VHEuVuB_1656039397; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VHF1U8u_1656039395) by smtp.aliyun-inc.com;
- Fri, 24 Jun 2022 10:56:36 +0800
+ fp:SMTPD_---0VHEuVuB_1656039397) by smtp.aliyun-inc.com;
+ Fri, 24 Jun 2022 10:56:38 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v10 06/41] virtio_ring: extract the logic of freeing vring
-Date: Fri, 24 Jun 2022 10:55:46 +0800
-Message-Id: <20220624025621.128843-7-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v10 07/41] virtio_ring: split vring_virtqueue
+Date: Fri, 24 Jun 2022 10:55:47 +0800
+Message-Id: <20220624025621.128843-8-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220624025621.128843-1-xuanzhuo@linux.alibaba.com>
 References: <20220624025621.128843-1-xuanzhuo@linux.alibaba.com>
@@ -95,55 +95,159 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce vring_free() to free the vring of vq.
+Separate the two inline structures(split and packed) from the structure
+vring_virtqueue.
 
-Subsequent patches will use vring_free() alone.
+In this way, we can use these two structures later to pass parameters
+and retain temporary variables.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 18 +++++++++++++-----
- 1 file changed, 13 insertions(+), 5 deletions(-)
+ drivers/virtio/virtio_ring.c | 122 ++++++++++++++++++-----------------
+ 1 file changed, 63 insertions(+), 59 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 1376956040d9..9338c01df1bf 100644
+index 9338c01df1bf..973892606144 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2285,14 +2285,10 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
- }
- EXPORT_SYMBOL_GPL(vring_new_virtqueue);
+@@ -85,6 +85,67 @@ struct vring_desc_extra {
+ 	u16 next;			/* The next desc state in a list. */
+ };
  
--void vring_del_virtqueue(struct virtqueue *_vq)
-+static void vring_free(struct virtqueue *_vq)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
++struct vring_virtqueue_split {
++	/* Actual memory layout for this queue. */
++	struct vring vring;
++
++	/* Last written value to avail->flags */
++	u16 avail_flags_shadow;
++
++	/*
++	 * Last written value to avail->idx in
++	 * guest byte order.
++	 */
++	u16 avail_idx_shadow;
++
++	/* Per-descriptor state. */
++	struct vring_desc_state_split *desc_state;
++	struct vring_desc_extra *desc_extra;
++
++	/* DMA address and size information */
++	dma_addr_t queue_dma_addr;
++	size_t queue_size_in_bytes;
++};
++
++struct vring_virtqueue_packed {
++	/* Actual memory layout for this queue. */
++	struct {
++		unsigned int num;
++		struct vring_packed_desc *desc;
++		struct vring_packed_desc_event *driver;
++		struct vring_packed_desc_event *device;
++	} vring;
++
++	/* Driver ring wrap counter. */
++	bool avail_wrap_counter;
++
++	/* Device ring wrap counter. */
++	bool used_wrap_counter;
++
++	/* Avail used flags. */
++	u16 avail_used_flags;
++
++	/* Index of the next avail descriptor. */
++	u16 next_avail_idx;
++
++	/*
++	 * Last written value to driver->flags in
++	 * guest byte order.
++	 */
++	u16 event_flags_shadow;
++
++	/* Per-descriptor state. */
++	struct vring_desc_state_packed *desc_state;
++	struct vring_desc_extra *desc_extra;
++
++	/* DMA address and size information */
++	dma_addr_t ring_dma_addr;
++	dma_addr_t driver_event_dma_addr;
++	dma_addr_t device_event_dma_addr;
++	size_t ring_size_in_bytes;
++	size_t event_size_in_bytes;
++};
++
+ struct vring_virtqueue {
+ 	struct virtqueue vq;
  
--	spin_lock(&vq->vq.vdev->vqs_list_lock);
--	list_del(&_vq->list);
--	spin_unlock(&vq->vq.vdev->vqs_list_lock);
+@@ -119,67 +180,10 @@ struct vring_virtqueue {
+ 
+ 	union {
+ 		/* Available for split ring */
+-		struct {
+-			/* Actual memory layout for this queue. */
+-			struct vring vring;
 -
- 	if (vq->we_own_ring) {
- 		if (vq->packed_ring) {
- 			vring_free_queue(vq->vq.vdev,
-@@ -2323,6 +2319,18 @@ void vring_del_virtqueue(struct virtqueue *_vq)
- 		kfree(vq->split.desc_state);
- 		kfree(vq->split.desc_extra);
- 	}
-+}
-+
-+void vring_del_virtqueue(struct virtqueue *_vq)
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+
-+	spin_lock(&vq->vq.vdev->vqs_list_lock);
-+	list_del(&_vq->list);
-+	spin_unlock(&vq->vq.vdev->vqs_list_lock);
-+
-+	vring_free(_vq);
-+
- 	kfree(vq);
- }
- EXPORT_SYMBOL_GPL(vring_del_virtqueue);
+-			/* Last written value to avail->flags */
+-			u16 avail_flags_shadow;
+-
+-			/*
+-			 * Last written value to avail->idx in
+-			 * guest byte order.
+-			 */
+-			u16 avail_idx_shadow;
+-
+-			/* Per-descriptor state. */
+-			struct vring_desc_state_split *desc_state;
+-			struct vring_desc_extra *desc_extra;
+-
+-			/* DMA address and size information */
+-			dma_addr_t queue_dma_addr;
+-			size_t queue_size_in_bytes;
+-		} split;
++		struct vring_virtqueue_split split;
+ 
+ 		/* Available for packed ring */
+-		struct {
+-			/* Actual memory layout for this queue. */
+-			struct {
+-				unsigned int num;
+-				struct vring_packed_desc *desc;
+-				struct vring_packed_desc_event *driver;
+-				struct vring_packed_desc_event *device;
+-			} vring;
+-
+-			/* Driver ring wrap counter. */
+-			bool avail_wrap_counter;
+-
+-			/* Device ring wrap counter. */
+-			bool used_wrap_counter;
+-
+-			/* Avail used flags. */
+-			u16 avail_used_flags;
+-
+-			/* Index of the next avail descriptor. */
+-			u16 next_avail_idx;
+-
+-			/*
+-			 * Last written value to driver->flags in
+-			 * guest byte order.
+-			 */
+-			u16 event_flags_shadow;
+-
+-			/* Per-descriptor state. */
+-			struct vring_desc_state_packed *desc_state;
+-			struct vring_desc_extra *desc_extra;
+-
+-			/* DMA address and size information */
+-			dma_addr_t ring_dma_addr;
+-			dma_addr_t driver_event_dma_addr;
+-			dma_addr_t device_event_dma_addr;
+-			size_t ring_size_in_bytes;
+-			size_t event_size_in_bytes;
+-		} packed;
++		struct vring_virtqueue_packed packed;
+ 	};
+ 
+ 	/* How to notify other side. FIXME: commonalize hcalls! */
 -- 
 2.31.0
 
