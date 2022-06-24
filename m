@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 144E2558DB0
-	for <lists.virtualization@lfdr.de>; Fri, 24 Jun 2022 04:57:28 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56489558DB5
+	for <lists.virtualization@lfdr.de>; Fri, 24 Jun 2022 04:57:29 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 881B5405D2;
-	Fri, 24 Jun 2022 02:57:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 881B5405D2
+	by smtp1.osuosl.org (Postfix) with ESMTP id E245982FA9;
+	Fri, 24 Jun 2022 02:57:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E245982FA9
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wlKP2d864GoT; Fri, 24 Jun 2022 02:57:25 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id d3LQUfPhiwBl; Fri, 24 Jun 2022 02:57:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 351BD40CB5;
-	Fri, 24 Jun 2022 02:57:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 351BD40CB5
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 864C0829AF;
+	Fri, 24 Jun 2022 02:57:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 864C0829AF
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E0BEC0084;
-	Fri, 24 Jun 2022 02:57:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C107C0081;
+	Fri, 24 Jun 2022 02:57:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7E777C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A4D5C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:57:22 +0000 (UTC)
+ Fri, 24 Jun 2022 02:57:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 482454256B
+ by smtp4.osuosl.org (Postfix) with ESMTP id E9AFA4257F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:57:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 482454256B
+ Fri, 24 Jun 2022 02:57:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E9AFA4257F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FvZXe-zbTWHU
+ with ESMTP id h2Y0HbXHGNKH
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:57:21 +0000 (UTC)
+ Fri, 24 Jun 2022 02:57:24 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F193E42578
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6C0824254F
 Received: from out30-42.freemail.mail.aliyun.com
  (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp4.osuosl.org (Postfix) with ESMTPS id F193E42578
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 6C0824254F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Jun 2022 02:57:20 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ Fri, 24 Jun 2022 02:57:23 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VHEuW2C_1656039433; 
+ TI=SMTPD_---0VHEuW2z_1656039436; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VHEuW2C_1656039433) by smtp.aliyun-inc.com;
- Fri, 24 Jun 2022 10:57:14 +0800
+ fp:SMTPD_---0VHEuW2z_1656039436) by smtp.aliyun-inc.com;
+ Fri, 24 Jun 2022 10:57:17 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v10 23/41] virtio_ring: packed: introduce
- virtqueue_resize_packed()
-Date: Fri, 24 Jun 2022 10:56:03 +0800
-Message-Id: <20220624025621.128843-24-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v10 24/41] virtio_ring: introduce virtqueue_resize()
+Date: Fri, 24 Jun 2022 10:56:04 +0800
+Message-Id: <20220624025621.128843-25-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220624025621.128843-1-xuanzhuo@linux.alibaba.com>
 References: <20220624025621.128843-1-xuanzhuo@linux.alibaba.com>
@@ -96,60 +95,123 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtio ring packed supports resize.
+Introduce virtqueue_resize() to implement the resize of vring.
+Based on these, the driver can dynamically adjust the size of the vring.
+For example: ethtool -G.
 
-Only after the new vring is successfully allocated based on the new num,
-we will release the old vring. In any case, an error is returned,
-indicating that the vring still points to the old vring.
+virtqueue_resize() implements resize based on the vq reset function. In
+case of failure to allocate a new vring, it will give up resize and use
+the original vring.
 
-In the case of an error, re-initialize(by virtqueue_reinit_packed()) the
-virtqueue to ensure that the vring can be used.
+During this process, if the re-enable reset vq fails, the vq can no
+longer be used. Although the probability of this situation is not high.
+
+The parameter recycle is used to recycle the buffer that is no longer
+used.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 29 +++++++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
+ drivers/virtio/virtio_ring.c | 72 ++++++++++++++++++++++++++++++++++++
+ include/linux/virtio.h       |  3 ++
+ 2 files changed, 75 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 740b17550df5..d3b2139200fa 100644
+index d3b2139200fa..6ba6519c264b 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2016,6 +2016,35 @@ static struct virtqueue *vring_create_virtqueue_packed(
- 	return NULL;
+@@ -2507,6 +2507,78 @@ struct virtqueue *vring_create_virtqueue(
  }
+ EXPORT_SYMBOL_GPL(vring_create_virtqueue);
  
-+static int virtqueue_resize_packed(struct virtqueue *_vq, u32 num)
++/**
++ * virtqueue_resize - resize the vring of vq
++ * @_vq: the struct virtqueue we're talking about.
++ * @num: new ring num
++ * @recycle: callback for recycle the useless buffer
++ *
++ * When it is really necessary to create a new vring, it will set the current vq
++ * into the reset state. Then call the passed callback to recycle the buffer
++ * that is no longer used. Only after the new vring is successfully created, the
++ * old vring will be released.
++ *
++ * Caller must ensure we don't call this with other virtqueue operations
++ * at the same time (except where noted).
++ *
++ * Returns zero or a negative error.
++ * 0: success.
++ * -ENOMEM: Failed to allocate a new ring, fall back to the original ring size.
++ *  vq can still work normally
++ * -EBUSY: Failed to sync with device, vq may not work properly
++ * -ENOENT: Transport or device not supported
++ * -E2BIG/-EINVAL: num error
++ * -EPERM: Operation not permitted
++ *
++ */
++int virtqueue_resize(struct virtqueue *_vq, u32 num,
++		     void (*recycle)(struct virtqueue *vq, void *buf))
 +{
-+	struct vring_virtqueue_packed vring = {};
 +	struct vring_virtqueue *vq = to_vvq(_vq);
-+	struct virtio_device *vdev = _vq->vdev;
++	struct virtio_device *vdev = vq->vq.vdev;
++	bool packed;
++	void *buf;
 +	int err;
 +
-+	if (vring_alloc_queue_packed(&vring, vdev, num))
-+		goto err_ring;
++	if (!vq->we_own_ring)
++		return -EPERM;
 +
-+	err = vring_alloc_state_extra_packed(&vring);
++	if (num > vq->vq.num_max)
++		return -E2BIG;
++
++	if (!num)
++		return -EINVAL;
++
++	packed = virtio_has_feature(vdev, VIRTIO_F_RING_PACKED) ? true : false;
++
++	if ((packed ? vq->packed.vring.num : vq->split.vring.num) == num)
++		return 0;
++
++	if (!vdev->config->reset_vq)
++		return -ENOENT;
++
++	if (!vdev->config->enable_reset_vq)
++		return -ENOENT;
++
++	err = vdev->config->reset_vq(_vq);
 +	if (err)
-+		goto err_state_extra;
++		return err;
 +
-+	vring_free(&vq->vq);
++	while ((buf = virtqueue_detach_unused_buf(_vq)) != NULL)
++		recycle(_vq, buf);
 +
-+	virtqueue_init(vq, vring.vring.num);
-+	virtqueue_vring_attach_packed(vq, &vring);
-+	virtqueue_vring_init_packed(vq);
++	if (packed)
++		err = virtqueue_resize_packed(_vq, num);
++	else
++		err = virtqueue_resize_split(_vq, num);
 +
-+	return 0;
++	if (vdev->config->enable_reset_vq(_vq))
++		return -EBUSY;
 +
-+err_state_extra:
-+	vring_free_packed(&vring, vdev);
-+err_ring:
-+	virtqueue_reinit_packed(vq);
-+	return -ENOMEM;
++	return err;
 +}
++EXPORT_SYMBOL_GPL(virtqueue_resize);
 +
+ /* Only available for split ring */
+ struct virtqueue *vring_new_virtqueue(unsigned int index,
+ 				      unsigned int num,
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index a82620032e43..1272566adec6 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -91,6 +91,9 @@ dma_addr_t virtqueue_get_desc_addr(struct virtqueue *vq);
+ dma_addr_t virtqueue_get_avail_addr(struct virtqueue *vq);
+ dma_addr_t virtqueue_get_used_addr(struct virtqueue *vq);
  
- /*
-  * Generic functions and exported symbols.
++int virtqueue_resize(struct virtqueue *vq, u32 num,
++		     void (*recycle)(struct virtqueue *vq, void *buf));
++
+ /**
+  * virtio_device - representation of a device using virtio
+  * @index: unique position on the virtio bus
 -- 
 2.31.0
 
