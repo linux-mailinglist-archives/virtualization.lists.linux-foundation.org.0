@@ -1,106 +1,86 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id B741A55B883
-	for <lists.virtualization@lfdr.de>; Mon, 27 Jun 2022 10:18:16 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E255755B89E
+	for <lists.virtualization@lfdr.de>; Mon, 27 Jun 2022 10:30:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 01DDA415DA;
-	Mon, 27 Jun 2022 08:18:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 01DDA415DA
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=R3U8/Evm
+	by smtp1.osuosl.org (Postfix) with ESMTP id 16E0382B9F;
+	Mon, 27 Jun 2022 08:30:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 16E0382B9F
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=VkSWy9FF
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id odVvrXhS7Pl8; Mon, 27 Jun 2022 08:18:14 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 5620C415D2;
-	Mon, 27 Jun 2022 08:18:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5620C415D2
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1oFuYOG3Xh1d; Mon, 27 Jun 2022 08:30:54 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id CDCD782F6C;
+	Mon, 27 Jun 2022 08:30:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CDCD782F6C
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 746D4C007E;
-	Mon, 27 Jun 2022 08:18:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 16259C002D;
+	Mon, 27 Jun 2022 08:30:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04C31C002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E2B6CC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Jun 2022 08:18:11 +0000 (UTC)
+ Mon, 27 Jun 2022 08:30:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CC2B4415BA
+ by smtp4.osuosl.org (Postfix) with ESMTP id BD2C5415BA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Jun 2022 08:18:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CC2B4415BA
+ Mon, 27 Jun 2022 08:30:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BD2C5415BA
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=VkSWy9FF
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EOvNpmbj1J7k
+ with ESMTP id YQEAs0WnD3IT
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Jun 2022 08:18:10 +0000 (UTC)
+ Mon, 27 Jun 2022 08:30:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BD49D4094C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF5F34154F
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id BD49D4094C
+ by smtp4.osuosl.org (Postfix) with ESMTPS id CF5F34154F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Jun 2022 08:18:09 +0000 (UTC)
+ Mon, 27 Jun 2022 08:30:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1656317888;
+ s=mimecast20190719; t=1656318649;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=OPtn4J82OzWsDsVXNRibX7f2Ro4efWlqotHQQJeFEvk=;
- b=R3U8/EvmMWizRkCBzv/ew+E1T7qmsPuOSukCFtmGQp0u8AE0tVCrxgqkaZgGB80YDbBGCq
- +wrwISe4GqvCt+UxhhPxwle60jLTflfnPZulwCpMk4rG+QjVY5MmvTfxwiZC2LtYk36zkG
- toGD4Zk2ll5uZiNv0weiSmWOC+wQRRQ=
-Received: from mail-lf1-f72.google.com (mail-lf1-f72.google.com
- [209.85.167.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ content-transfer-encoding:content-transfer-encoding;
+ bh=0FSrYIRiRp+sdnJ8v9p7qdMvB+z2KusLGHkelIoJIOQ=;
+ b=VkSWy9FFNnZRxds4y1MfXxZh2gHJZKzAY2a+1m15sD+L0eO788ju60NM7lqLHBZr+pmbpq
+ Xgr8RT4aWdXEhIPwMztQXce4JBjg7mDAEzzPwEHa6JU6NPTwqT4xnOzhv6uwCVDAwEfhUl
+ OHwl0o4eTE66179BWWgtg5Ze/HY4x1I=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-532-gHNBwLfZP_KyzJ2Zz0wlkQ-1; Mon, 27 Jun 2022 04:18:07 -0400
-X-MC-Unique: gHNBwLfZP_KyzJ2Zz0wlkQ-1
-Received: by mail-lf1-f72.google.com with SMTP id
- be18-20020a056512251200b0048120ff434dso554156lfb.19
- for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Jun 2022 01:18:06 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:mime-version:references:in-reply-to:from:date
- :message-id:subject:to:cc;
- bh=OPtn4J82OzWsDsVXNRibX7f2Ro4efWlqotHQQJeFEvk=;
- b=JqLI7Hm7tjTqEuxVDM9BYeo3O78w/3l8TN+ljDJ13oi1KbWKlI8JzmiSrcFtuQqiyq
- V729bWsriptJmKxcEti42uGjXmFOJIDofCQ8Wxh6FuhB8JPaBOhMvD+x7gA67hnczhdA
- b+iDw+SelG0reR+IGKCbYPtBD67c22mMC+bYAHM0FcRno1Db71ArYajKadmgUqmZM/Uk
- mNeBPx9yJUfNwSmrgKlJ7+P4Kc23045AsqzrZHDqQmhvRENLSKQyOmJxA9bxA9NmRNUi
- J0llSQMJUbJTEsADl11sHvDclb4YOgjo6kzrwm+rvskQ8rLy1dAgd012TkZmaMGMc9/L
- 6UGQ==
-X-Gm-Message-State: AJIora94v+ayalkqGzhcqUlEibl32tcGZoSEfAVRQKiAoPr0hMNT5qtA
- zms2Ydnd8G874Ok+50nwUlVjTEHOnnxGn2Cz2ICdP3XYCtbWC8hSZCKeW/GDk8WUttFQo+LSUJM
- 3DUZ/zIoz96Jn5QOaAyFdACrf575SzRfifWoDlXM1hcc/i/I6yQmzkHgF3g==
-X-Received: by 2002:ac2:51a5:0:b0:47f:79a1:5c02 with SMTP id
- f5-20020ac251a5000000b0047f79a15c02mr7378511lfk.575.1656317885573; 
- Mon, 27 Jun 2022 01:18:05 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1ud5rlcp28+Fmhb5gpV7n5UDaClclIIoV1luhzWBK2LZrI8iuHqy4DEqfW17VF71T1X3oIofm19Bk+5PrzQAPI=
-X-Received: by 2002:ac2:51a5:0:b0:47f:79a1:5c02 with SMTP id
- f5-20020ac251a5000000b0047f79a15c02mr7378505lfk.575.1656317885391; Mon, 27
- Jun 2022 01:18:05 -0700 (PDT)
-MIME-Version: 1.0
-References: <20220627063656.52397-1-jasowang@redhat.com>
- <20220627033422-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20220627033422-mutt-send-email-mst@kernel.org>
+ us-mta-588-p16YOYOeNWW67BUH3RUEzQ-1; Mon, 27 Jun 2022 04:30:47 -0400
+X-MC-Unique: p16YOYOeNWW67BUH3RUEzQ-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.3])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 71D43803B22;
+ Mon, 27 Jun 2022 08:30:47 +0000 (UTC)
+Received: from localhost.localdomain (ovpn-12-66.pek2.redhat.com [10.72.12.66])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 857091121314;
+ Mon, 27 Jun 2022 08:30:44 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 27 Jun 2022 16:17:54 +0800
-Message-ID: <CACGkMEvhk1UmcMNhYFb8dceoLnNs5Jr4WmKaQ++ZVgR2sOu1QQ@mail.gmail.com>
-Subject: Re: [PATCH net] virtio-net: fix race between ndo_open() and
+To: mst@redhat.com, jasowang@redhat.com, davem@davemloft.net, kuba@kernel.org
+Subject: [PATCH net V2] virtio-net: fix race between ndo_open() and
  virtio_device_ready()
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Jakub Kicinski <kuba@kernel.org>, netdev <netdev@vger.kernel.org>,
- davem <davem@davemloft.net>, linux-kernel <linux-kernel@vger.kernel.org>,
- virtualization <virtualization@lists.linux-foundation.org>
+Date: Mon, 27 Jun 2022 16:30:40 +0800
+Message-Id: <20220627083040.53506-1-jasowang@redhat.com>
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 2.78 on 10.11.54.3
+Cc: netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,84 +97,51 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jun 27, 2022 at 3:44 PM Michael S. Tsirkin <mst@redhat.com> wrote:
->
-> On Mon, Jun 27, 2022 at 02:36:56PM +0800, Jason Wang wrote:
-> > We used to call virtio_device_ready() after netdev registration.
->
-> s/used to call/currently call/
->
-> > This
-> > cause
->
-> s/This cause/Since ndo_open can be called immediately
-> after register_netdev, this means there exists/
->
-> > a race between ndo_open() and virtio_device_ready(): if
-> > ndo_open() is called before virtio_device_ready(), the driver may
-> > start to use the device before DRIVER_OK which violates the spec.
-> >
-> > Fixing
->
-> s/Fixing/Fix/
->
-> > this by switching to use register_netdevice() and protect the
-> > virtio_device_ready() with rtnl_lock() to make sure ndo_open() can
-> > only be called after virtio_device_ready().
-> >
-> > Fixes: 4baf1e33d0842 ("virtio_net: enable VQs early")
->
-> it's an unusual use of Fixes - the patch in question does not
-> introduce the problem, it just does not fix it completely.
+We currently call virtio_device_ready() after netdev
+registration. Since ndo_open() can be called immediately
+after register_netdev, this means there exists a race between
+ndo_open() and virtio_device_ready(): the driver may start to use the
+device before DRIVER_OK which violates the spec.
 
-Yes, but I couldn't find a better commit.
+Fix this by switching to use register_netdevice() and protect the
+virtio_device_ready() with rtnl_lock() to make sure ndo_open() can
+only be called after virtio_device_ready().
 
-> But OK I guess.
->
-> > Signed-off-by: Jason Wang <jasowang@redhat.com>
->
-> With commit log changes:
+Fixes: 4baf1e33d0842 ("virtio_net: enable VQs early")
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Jason Wang <jasowang@redhat.com>
+---
+ drivers/net/virtio_net.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-Will post a new version with the above fixed.
-
-Thanks
-
->
-> Acked-by: Michael S. Tsirkin <mst@redhat.com>
->
-> > ---
-> >  drivers/net/virtio_net.c | 8 +++++++-
-> >  1 file changed, 7 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> > index db05b5e930be..8a5810bcb839 100644
-> > --- a/drivers/net/virtio_net.c
-> > +++ b/drivers/net/virtio_net.c
-> > @@ -3655,14 +3655,20 @@ static int virtnet_probe(struct virtio_device *vdev)
-> >       if (vi->has_rss || vi->has_rss_hash_report)
-> >               virtnet_init_default_rss(vi);
-> >
-> > -     err = register_netdev(dev);
-> > +     /* serialize netdev register + virtio_device_ready() with ndo_open() */
-> > +     rtnl_lock();
-> > +
-> > +     err = register_netdevice(dev);
-> >       if (err) {
-> >               pr_debug("virtio_net: registering device failed\n");
-> > +             rtnl_unlock();
-> >               goto free_failover;
-> >       }
-> >
-> >       virtio_device_ready(vdev);
-> >
-> > +     rtnl_unlock();
-> > +
-> >       err = virtnet_cpu_notif_add(vi);
-> >       if (err) {
-> >               pr_debug("virtio_net: registering cpu notifier failed\n");
-> > --
-> > 2.25.1
->
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index db05b5e930be..8a5810bcb839 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -3655,14 +3655,20 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 	if (vi->has_rss || vi->has_rss_hash_report)
+ 		virtnet_init_default_rss(vi);
+ 
+-	err = register_netdev(dev);
++	/* serialize netdev register + virtio_device_ready() with ndo_open() */
++	rtnl_lock();
++
++	err = register_netdevice(dev);
+ 	if (err) {
+ 		pr_debug("virtio_net: registering device failed\n");
++		rtnl_unlock();
+ 		goto free_failover;
+ 	}
+ 
+ 	virtio_device_ready(vdev);
+ 
++	rtnl_unlock();
++
+ 	err = virtnet_cpu_notif_add(vi);
+ 	if (err) {
+ 		pr_debug("virtio_net: registering cpu notifier failed\n");
+-- 
+2.25.1
 
 _______________________________________________
 Virtualization mailing list
