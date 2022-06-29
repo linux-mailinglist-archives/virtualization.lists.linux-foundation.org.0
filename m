@@ -1,61 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6316155F75F
-	for <lists.virtualization@lfdr.de>; Wed, 29 Jun 2022 08:58:02 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1B93055F760
+	for <lists.virtualization@lfdr.de>; Wed, 29 Jun 2022 08:58:07 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B006E83EE8;
-	Wed, 29 Jun 2022 06:58:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B006E83EE8
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RJke5ScGLy7k; Wed, 29 Jun 2022 06:58:00 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 69F078344C;
-	Wed, 29 Jun 2022 06:57:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 69F078344C
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3E3A5C002D;
-	Wed, 29 Jun 2022 06:57:59 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 32B0AC0032
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:58 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0A21040CD4
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0A21040CD4
+	by smtp2.osuosl.org (Postfix) with ESMTP id B1C1940CDA;
+	Wed, 29 Jun 2022 06:58:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B1C1940CDA
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rR9OCW0GNdzK
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kc0yD0NerKhC; Wed, 29 Jun 2022 06:58:04 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 716D740CD5;
+	Wed, 29 Jun 2022 06:58:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 716D740CD5
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DB7B7C002D;
+	Wed, 29 Jun 2022 06:58:03 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8D540C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:57 +0000 (UTC)
+ Wed, 29 Jun 2022 06:58:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 67D8E41A39
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Jun 2022 06:58:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 67D8E41A39
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Gl-LiG284ZGm
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Jun 2022 06:57:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9A66140BEB
-Received: from out30-56.freemail.mail.aliyun.com
- (out30-56.freemail.mail.aliyun.com [115.124.30.56])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9A66140BEB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 092CA41A30
+Received: from out199-7.us.a.mail.aliyun.com (out199-7.us.a.mail.aliyun.com
+ [47.90.199.7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 092CA41A30
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:56 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ Wed, 29 Jun 2022 06:57:58 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R701e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VHmjewn_1656485868; 
+ TI=SMTPD_---0VHmddpj_1656485870; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VHmjewn_1656485868) by smtp.aliyun-inc.com;
- Wed, 29 Jun 2022 14:57:49 +0800
+ fp:SMTPD_---0VHmddpj_1656485870) by smtp.aliyun-inc.com;
+ Wed, 29 Jun 2022 14:57:51 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v11 24/40] virtio_pci: struct virtio_pci_common_cfg add
- queue_notify_data
-Date: Wed, 29 Jun 2022 14:56:40 +0800
-Message-Id: <20220629065656.54420-25-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v11 25/40] virtio: allow to unbreak/break virtqueue
+ individually
+Date: Wed, 29 Jun 2022 14:56:41 +0800
+Message-Id: <20220629065656.54420-26-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220629065656.54420-1-xuanzhuo@linux.alibaba.com>
 References: <20220629065656.54420-1-xuanzhuo@linux.alibaba.com>
@@ -96,44 +96,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add queue_notify_data in struct virtio_pci_common_cfg, which comes from
-here https://github.com/oasis-tcs/virtio-spec/issues/89
-
-Since I want to add queue_reset after queue_notify_data, I submitted
-this patch first.
+This patch allows the new introduced
+__virtqueue_break()/__virtqueue_unbreak() to break/unbreak the
+virtqueue.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- include/linux/virtio_pci_modern.h | 2 ++
- include/uapi/linux/virtio_pci.h   | 1 +
- 2 files changed, 3 insertions(+)
+ drivers/virtio/virtio_ring.c | 24 ++++++++++++++++++++++++
+ include/linux/virtio.h       |  3 +++
+ 2 files changed, 27 insertions(+)
 
-diff --git a/include/linux/virtio_pci_modern.h b/include/linux/virtio_pci_modern.h
-index c4f7ffbacb4e..9f31dde46f57 100644
---- a/include/linux/virtio_pci_modern.h
-+++ b/include/linux/virtio_pci_modern.h
-@@ -29,6 +29,8 @@ struct virtio_pci_common_cfg {
- 	__le32 queue_avail_hi;		/* read-write */
- 	__le32 queue_used_lo;		/* read-write */
- 	__le32 queue_used_hi;		/* read-write */
-+	__le16 queue_notify_data;	/* read-write */
-+	__le16 padding;
- };
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index 5ec43607cc15..7b02be7fce67 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -2744,6 +2744,30 @@ unsigned int virtqueue_get_vring_size(struct virtqueue *_vq)
+ }
+ EXPORT_SYMBOL_GPL(virtqueue_get_vring_size);
  
- struct virtio_pci_modern_device {
-diff --git a/include/uapi/linux/virtio_pci.h b/include/uapi/linux/virtio_pci.h
-index 247ec42af2c8..748b3eb62d2f 100644
---- a/include/uapi/linux/virtio_pci.h
-+++ b/include/uapi/linux/virtio_pci.h
-@@ -176,6 +176,7 @@ struct virtio_pci_cfg_cap {
- #define VIRTIO_PCI_COMMON_Q_AVAILHI	44
- #define VIRTIO_PCI_COMMON_Q_USEDLO	48
- #define VIRTIO_PCI_COMMON_Q_USEDHI	52
-+#define VIRTIO_PCI_COMMON_Q_NDATA	56
++/*
++ * This function should only be called by the core, not directly by the driver.
++ */
++void __virtqueue_break(struct virtqueue *_vq)
++{
++	struct vring_virtqueue *vq = to_vvq(_vq);
++
++	/* Pairs with READ_ONCE() in virtqueue_is_broken(). */
++	WRITE_ONCE(vq->broken, true);
++}
++EXPORT_SYMBOL_GPL(__virtqueue_break);
++
++/*
++ * This function should only be called by the core, not directly by the driver.
++ */
++void __virtqueue_unbreak(struct virtqueue *_vq)
++{
++	struct vring_virtqueue *vq = to_vvq(_vq);
++
++	/* Pairs with READ_ONCE() in virtqueue_is_broken(). */
++	WRITE_ONCE(vq->broken, false);
++}
++EXPORT_SYMBOL_GPL(__virtqueue_unbreak);
++
+ bool virtqueue_is_broken(struct virtqueue *_vq)
+ {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index 1272566adec6..dc474a0d48d1 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -138,6 +138,9 @@ bool is_virtio_device(struct device *dev);
+ void virtio_break_device(struct virtio_device *dev);
+ void __virtio_unbreak_device(struct virtio_device *dev);
  
- #endif /* VIRTIO_PCI_NO_MODERN */
- 
++void __virtqueue_break(struct virtqueue *_vq);
++void __virtqueue_unbreak(struct virtqueue *_vq);
++
+ void virtio_config_changed(struct virtio_device *dev);
+ #ifdef CONFIG_PM_SLEEP
+ int virtio_device_freeze(struct virtio_device *dev);
 -- 
 2.31.0
 
