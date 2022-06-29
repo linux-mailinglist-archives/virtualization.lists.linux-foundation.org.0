@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CD7055F747
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 41E6A55F748
 	for <lists.virtualization@lfdr.de>; Wed, 29 Jun 2022 08:57:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7A11E41A17;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 42DCC40423;
 	Wed, 29 Jun 2022 06:57:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7A11E41A17
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 42DCC40423
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gMoip8TGgHHq; Wed, 29 Jun 2022 06:57:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id B31DF41A0A;
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id f9o5jirlh5qt; Wed, 29 Jun 2022 06:57:17 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id F1F3A40BEB;
 	Wed, 29 Jun 2022 06:57:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B31DF41A0A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F1F3A40BEB
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7E3F1C0084;
-	Wed, 29 Jun 2022 06:57:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B10B6C007E;
+	Wed, 29 Jun 2022 06:57:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ED7D0C0080
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E1C4EC002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:13 +0000 (UTC)
+ Wed, 29 Jun 2022 06:57:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 57D2141A03
+ by smtp4.osuosl.org (Postfix) with ESMTP id AE039417AA
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 57D2141A03
+ Wed, 29 Jun 2022 06:57:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AE039417AA
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id umzOVx4sJTQG
+ with ESMTP id gVoQ35MNTy5a
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 29 Jun 2022 06:57:13 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0E47F419FC
+Received: from out199-7.us.a.mail.aliyun.com (out199-7.us.a.mail.aliyun.com
+ [47.90.199.7])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0E47F419FC
  for <virtualization@lists.linux-foundation.org>;
  Wed, 29 Jun 2022 06:57:12 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C25EC4198C
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C25EC4198C
- for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Jun 2022 06:57:10 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VHmjehy_1656485823; 
+ TI=SMTPD_---0VHml7su_1656485825; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VHmjehy_1656485823) by smtp.aliyun-inc.com;
- Wed, 29 Jun 2022 14:57:04 +0800
+ fp:SMTPD_---0VHml7su_1656485825) by smtp.aliyun-inc.com;
+ Wed, 29 Jun 2022 14:57:06 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v11 03/40] virtio_ring: update the document of the
- virtqueue_detach_unused_buf for queue reset
-Date: Wed, 29 Jun 2022 14:56:19 +0800
-Message-Id: <20220629065656.54420-4-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v11 04/40] virtio_ring: extract the logic of freeing vring
+Date: Wed, 29 Jun 2022 14:56:20 +0800
+Message-Id: <20220629065656.54420-5-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220629065656.54420-1-xuanzhuo@linux.alibaba.com>
 References: <20220629065656.54420-1-xuanzhuo@linux.alibaba.com>
@@ -96,30 +95,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added documentation for virtqueue_detach_unused_buf, allowing it to be
-called on queue reset.
+Introduce vring_free() to free the vring of vq.
+
+Subsequent patches will use vring_free() alone.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/virtio/virtio_ring.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 4cac600856ad..4ed51bc05a51 100644
+index 4ed51bc05a51..bb4e8ae09c9b 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2130,8 +2130,8 @@ EXPORT_SYMBOL_GPL(virtqueue_enable_cb_delayed);
-  * @_vq: the struct virtqueue we're talking about.
-  *
-  * Returns NULL or the "data" token handed to virtqueue_add_*().
-- * This is not valid on an active queue; it is useful only for device
-- * shutdown.
-+ * This is not valid on an active queue; it is useful for device
-+ * shutdown or the reset queue.
-  */
- void *virtqueue_detach_unused_buf(struct virtqueue *_vq)
+@@ -2316,14 +2316,10 @@ struct virtqueue *vring_new_virtqueue(unsigned int index,
+ }
+ EXPORT_SYMBOL_GPL(vring_new_virtqueue);
+ 
+-void vring_del_virtqueue(struct virtqueue *_vq)
++static void vring_free(struct virtqueue *_vq)
  {
+ 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 
+-	spin_lock(&vq->vq.vdev->vqs_list_lock);
+-	list_del(&_vq->list);
+-	spin_unlock(&vq->vq.vdev->vqs_list_lock);
+-
+ 	if (vq->we_own_ring) {
+ 		if (vq->packed_ring) {
+ 			vring_free_queue(vq->vq.vdev,
+@@ -2354,6 +2350,18 @@ void vring_del_virtqueue(struct virtqueue *_vq)
+ 		kfree(vq->split.desc_state);
+ 		kfree(vq->split.desc_extra);
+ 	}
++}
++
++void vring_del_virtqueue(struct virtqueue *_vq)
++{
++	struct vring_virtqueue *vq = to_vvq(_vq);
++
++	spin_lock(&vq->vq.vdev->vqs_list_lock);
++	list_del(&_vq->list);
++	spin_unlock(&vq->vq.vdev->vqs_list_lock);
++
++	vring_free(_vq);
++
+ 	kfree(vq);
+ }
+ EXPORT_SYMBOL_GPL(vring_del_virtqueue);
 -- 
 2.31.0
 
