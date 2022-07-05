@@ -2,93 +2,96 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 549E9566FEE
-	for <lists.virtualization@lfdr.de>; Tue,  5 Jul 2022 15:53:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6BE195672F9
+	for <lists.virtualization@lfdr.de>; Tue,  5 Jul 2022 17:45:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 5463140A49;
-	Tue,  5 Jul 2022 13:53:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5463140A49
+	by smtp2.osuosl.org (Postfix) with ESMTP id 65BF040AA8;
+	Tue,  5 Jul 2022 15:45:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 65BF040AA8
 Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=AeGafMIC
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aKiwEJKZ
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7kbrp-GoNsTQ; Tue,  5 Jul 2022 13:53:36 +0000 (UTC)
+	with ESMTP id pEyxDa_8_3we; Tue,  5 Jul 2022 15:45:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 274714017A;
-	Tue,  5 Jul 2022 13:53:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 274714017A
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 393A540AA9;
+	Tue,  5 Jul 2022 15:45:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 393A540AA9
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 621BDC007C;
-	Tue,  5 Jul 2022 13:53:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4D655C007E;
+	Tue,  5 Jul 2022 15:45:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 88BDCC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D82F5C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue,  5 Jul 2022 13:53:33 +0000 (UTC)
+ Tue,  5 Jul 2022 15:45:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 62A3340363
+ by smtp3.osuosl.org (Postfix) with ESMTP id BE34360EE6
  for <virtualization@lists.linux-foundation.org>;
- Tue,  5 Jul 2022 13:53:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 62A3340363
+ Tue,  5 Jul 2022 15:45:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BE34360EE6
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=aKiwEJKZ
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nbzi06bEX54f
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id la728t3VZb4F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  5 Jul 2022 13:53:32 +0000 (UTC)
+ Tue,  5 Jul 2022 15:45:16 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A38444017A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org F103B60F07
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A38444017A
+ by smtp3.osuosl.org (Postfix) with ESMTPS id F103B60F07
  for <virtualization@lists.linux-foundation.org>;
- Tue,  5 Jul 2022 13:53:32 +0000 (UTC)
+ Tue,  5 Jul 2022 15:45:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657029211;
+ s=mimecast20190719; t=1657035914;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=uN5nWEVYHc9xedfrm0KeXe0ON9wRefPaICdww0TrCno=;
- b=AeGafMICjmED/i1zaNsSPzrGY65itn3bq4x+Cth9gD9jHUAWVfnMiZO3EKkoR0sIP91pMt
- sd7sQyVJsGkX3dutpCJMHsYEhDeKTfPD3hdYLpaVjTpXBFDoPaOGgOk7QHhuA/G0ZOuqLC
- E0VPGiO54Jk5KPniP4gRkWzaQg8QCTo=
+ bh=8LevNv3Hf68ZwMaX/GpqTB2JxrZ9cDDvu+Nb0ET+5is=;
+ b=aKiwEJKZ6hFS9eh3P4p9zXfvrYMxGf5sfnWYBWcx78Kosaszg7Ah/USTPW39nf7AffOOv/
+ LY4hMJDXzQnULvLq0rYm9iqAW4elaQPDi0qtMfuySa4+cmgYXNFLsKSXAoq3lsmmbkuqoD
+ OcZSUyVL0iYgZrRYmRAOrIWc873LHfU=
 Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
  [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-665-j0eypEIsNi2bMMFTdSfFTw-1; Tue, 05 Jul 2022 09:53:26 -0400
-X-MC-Unique: j0eypEIsNi2bMMFTdSfFTw-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
+ us-mta-543-loLCFY4GMoicMdzRKYlMbQ-1; Tue, 05 Jul 2022 11:45:13 -0400
+X-MC-Unique: loLCFY4GMoicMdzRKYlMbQ-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CD78580D41A;
- Tue,  5 Jul 2022 13:53:25 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 1A3B1185A7B2;
+ Tue,  5 Jul 2022 15:45:12 +0000 (UTC)
 Received: from sirius.home.kraxel.org (unknown [10.39.192.27])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6B6FB2166B26;
- Tue,  5 Jul 2022 13:53:25 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTPS id B75ED404E4DC;
+ Tue,  5 Jul 2022 15:45:11 +0000 (UTC)
 Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id EEDB81800083; Tue,  5 Jul 2022 15:53:23 +0200 (CEST)
-Date: Tue, 5 Jul 2022 15:53:23 +0200
+ id 173C31800083; Tue,  5 Jul 2022 17:45:07 +0200 (CEST)
+Date: Tue, 5 Jul 2022 17:45:07 +0200
 From: Gerd Hoffmann <kraxel@redhat.com>
 To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
 Subject: Re: [PATCH v7 7/9] drm/virtio: Improve DMA API usage for shmem BOs
-Message-ID: <20220705135323.emr4gdbcxoisdcxe@sirius.home.kraxel.org>
+Message-ID: <20220705154507.67ovlun4m26xzppn@sirius.home.kraxel.org>
 References: <20220630200726.1884320-1-dmitry.osipenko@collabora.com>
  <20220630200726.1884320-8-dmitry.osipenko@collabora.com>
+ <20220705135323.emr4gdbcxoisdcxe@sirius.home.kraxel.org>
+ <d2c64d09-c4bb-9aed-069d-a9b4d07a1f66@collabora.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220630200726.1884320-8-dmitry.osipenko@collabora.com>
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
-Cc: kernel@collabora.com, Daniel Vetter <daniel@ffwll.ch>,
- David Airlie <airlied@linux.ie>,
+In-Reply-To: <d2c64d09-c4bb-9aed-069d-a9b4d07a1f66@collabora.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.11.54.2
+Cc: David Airlie <airlied@linux.ie>, Robin Murphy <robin.murphy@arm.com>,
  Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
  Emil Velikov <emil.l.velikov@gmail.com>, linux-kernel@vger.kernel.org,
  dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
  Thomas Zimmermann <tzimmermann@suse.de>, Dmitry Osipenko <digetx@gmail.com>,
- virtualization@lists.linux-foundation.org, Robin Murphy <robin.murphy@arm.com>,
- Chia-I Wu <olvaffe@gmail.com>
+ kernel@collabora.com, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,17 +110,20 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
   Hi,
 
-> -	 * So for the moment keep things as-is, with a bulky comment
-> -	 * for the next person who feels like removing this
-> -	 * drm_dev_set_unique() quirk.
+> > Also note that pci is not the only virtio transport we have.
+> 
+> The VirtIO indeed has other transports, but only PCI is really supported
+> in case of the VirtIO-GPU in kernel and in Qemu/crosvm, AFAICT. Hence
+> only the PCI transport was tested.
 
-Dragons lurking here.  It's not the first attempt to ditch this, and so
-far all have been rolled back due to regressions.  Specifically Xorg is
-notoriously picky if it doesn't find its expectations fulfilled.
+qemu -M microvm \
+  -global virtio-mmio.force-legacy=false \
+  -device virtio-gpu-device
 
-Also note that pci is not the only virtio transport we have.
+Gives you a functional virtio-gpu device on virtio-mmio.
 
-What kind of testing has this patch seen?
+aarch64 virt machines support both pci and mmio too.
+s390x has virtio-gpu-ccw ...
 
 take care,
   Gerd
