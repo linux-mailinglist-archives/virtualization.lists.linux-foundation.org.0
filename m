@@ -1,81 +1,124 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id DE28E568D46
-	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 17:34:18 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5DB275690D8
+	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 19:42:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6D92860FF5;
-	Wed,  6 Jul 2022 15:34:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6D92860FF5
+	by smtp3.osuosl.org (Postfix) with ESMTP id 4DF0A600C5;
+	Wed,  6 Jul 2022 17:42:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4DF0A600C5
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=QUEPFA1e
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=VS/bX/+V
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LEImwafy3RHt; Wed,  6 Jul 2022 15:34:16 +0000 (UTC)
+	with ESMTP id AlScPduuB9OD; Wed,  6 Jul 2022 17:42:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 344C161015;
-	Wed,  6 Jul 2022 15:34:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 344C161015
+	by smtp3.osuosl.org (Postfix) with ESMTPS id ED1E860B47;
+	Wed,  6 Jul 2022 17:42:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ED1E860B47
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 63E74C0077;
-	Wed,  6 Jul 2022 15:34:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3E5FAC0077;
+	Wed,  6 Jul 2022 17:42:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A5C8EC002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 97589C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:34:13 +0000 (UTC)
+ Wed,  6 Jul 2022 17:42:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7046360FFB
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6F12381310
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:34:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7046360FFB
+ Wed,  6 Jul 2022 17:42:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6F12381310
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=VS/bX/+V
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xlfHQkZ6CXzb
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JsZZG6ckRoNA
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:34:12 +0000 (UTC)
+ Wed,  6 Jul 2022 17:42:29 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BD47060FF5
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BD47060FF5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 470088129B
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 470088129B
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:34:12 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 2F94661FF6;
- Wed,  6 Jul 2022 15:34:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1A1AC385A5;
- Wed,  6 Jul 2022 15:34:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1657121651;
- bh=KtcIH+E3c9VLP7E/93kgfkyPI4Y4Eqggbw0U3c+oQjc=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=QUEPFA1ecu6tzN5W0ylPYRMXmwq2wrBy0sI/G8FWhrXDfM2mccmZfMfITFQjBtU8V
- piSUZt5jm+C9BPn6/ZUPqYuA5ySZ65Bw/8T4z+scrbB4aWRw4comTwfoHOJ+qZ6ERm
- Yp0e2gPPVjidvWI4X8dCarEyZQHSqUeLuy0FpQcCrDD2HA5kF2373MeX7cnQF/B1Si
- h3mA9R/56QNshkUSykdPSPe2WIffH99Bw87h9yh4m9Qv9wx5pWgOG6/Jk9fWRRIyAd
- qMNIId8b/w/NUsQ6gEFkr5TKIUcBXfOvTp8KKCq6QW+Rs7EDVaWaTzW1xlJsgcGGie
- naW8ZJ6siWPug==
-From: Sasha Levin <sashal@kernel.org>
-To: linux-kernel@vger.kernel.org,
-	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.9 2/5] virtio_mmio: Restore guest page size on resume
-Date: Wed,  6 Jul 2022 11:34:04 -0400
-Message-Id: <20220706153407.1598915-2-sashal@kernel.org>
-X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20220706153407.1598915-1-sashal@kernel.org>
-References: <20220706153407.1598915-1-sashal@kernel.org>
+ Wed,  6 Jul 2022 17:42:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1657129347;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Bm6ni0e0Z3ZqDaHM6VmzfCaa2VxT43x1YW4zQJliK1o=;
+ b=VS/bX/+Vu38g2mUxNvCNUsYi17HjwgN8SRmc+JnmdM7re6LxWiqGk7rhSleVvXi/+l5hN6
+ uNoqlbyiFY+o+RAEQ3Ms6M4vImPHhoDeAWCLsLTo2TVNt8iM5zW09HflITezqzBsQDOVZE
+ xouIWArAtAVjSpROPLGEbHU3UQKGZyU=
+Received: from mail-il1-f197.google.com (mail-il1-f197.google.com
+ [209.85.166.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-646-JIoS-3CMNK2O9Rqs_sOxkA-1; Wed, 06 Jul 2022 13:42:21 -0400
+X-MC-Unique: JIoS-3CMNK2O9Rqs_sOxkA-1
+Received: by mail-il1-f197.google.com with SMTP id
+ o9-20020a056e0214c900b002dc29c288bfso2728367ilk.3
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 06 Jul 2022 10:42:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+ :references:organization:mime-version:content-transfer-encoding;
+ bh=Bm6ni0e0Z3ZqDaHM6VmzfCaa2VxT43x1YW4zQJliK1o=;
+ b=cJ6Wb0PL1fnpjwfGqvO1P3zU3X73RDjqQ7i1Ei4xQ7FZT0hkHiBvyfj1F9f8N/+Kx5
+ oe9LlPF1NTxv8+p4IlxBCgVtXJRmMG/qReWG2In32I+mVLPPusEesFf5NyLK5Dw9XBiD
+ Ixl9doZjwUmudXonBO8PFOTnleHvYcR0QhKQIB692J+F0XcUx280BX4kJCoyIHGRCxdn
+ NIbof/2Q0U5vSu1T+yQSynnctXNYTqLXjhIwn51ZRqTgodmTxr2LWJh1eL27WVVCueiU
+ 0516XxE4HxPMTEJIQ+F+Kk+yWX6jndSET1CoVpwafE7Mq4er6H9G4fjmyI5awc3MS01y
+ /KLw==
+X-Gm-Message-State: AJIora/Snb+nMjkzDB1yjxqvay8VMoVqGDT1RmcfwBZ+IjbuJbJrTeZP
+ W1Fjz3KKnXIKm3IhLOLbDNZcDwwsMnXDjHnNITC0WweD61bp1gd7hcmub3nkVgWBG7JXwxIYzQs
+ jKdwjXxoMe6mxvYLRxu29ibo10B6wXuPowPTL4MolCA==
+X-Received: by 2002:a05:6e02:1be6:b0:2db:ea7f:10c4 with SMTP id
+ y6-20020a056e021be600b002dbea7f10c4mr17220913ilv.248.1657129340275; 
+ Wed, 06 Jul 2022 10:42:20 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1tKW5hHrIbN8D8MKAPlov0FsaTgJJCZrivyPi82ikNP5NQmibHb26OWtdHiMispm5nOi3tbJA==
+X-Received: by 2002:a05:6e02:1be6:b0:2db:ea7f:10c4 with SMTP id
+ y6-20020a056e021be600b002dbea7f10c4mr17220872ilv.248.1657129339926; 
+ Wed, 06 Jul 2022 10:42:19 -0700 (PDT)
+Received: from redhat.com ([38.15.36.239]) by smtp.gmail.com with ESMTPSA id
+ i83-20020a6bb856000000b0065a47e16f53sm17005663iof.37.2022.07.06.10.42.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 06 Jul 2022 10:42:19 -0700 (PDT)
+Date: Wed, 6 Jul 2022 11:42:17 -0600
+From: Alex Williamson <alex.williamson@redhat.com>
+To: Nicolin Chen <nicolinc@nvidia.com>
+Subject: Re: [PATCH v5 0/5] cover-letter: Simplify vfio_iommu_type1
+ attach/detach routine
+Message-ID: <20220706114217.105f4f61.alex.williamson@redhat.com>
+In-Reply-To: <20220701214455.14992-1-nicolinc@nvidia.com>
+References: <20220701214455.14992-1-nicolinc@nvidia.com>
+Organization: Red Hat
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, virtualization@lists.linux-foundation.org,
- Stephan Gerhold <stephan.gerhold@kernkonzept.com>,
- "Michael S . Tsirkin" <mst@redhat.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=alex.williamson@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: linux-s390@vger.kernel.org, marcan@marcan.st, mjrosato@linux.ibm.com,
+ virtualization@lists.linux-foundation.org, thierry.reding@gmail.com,
+ will@kernel.org, alyssa@rosenzweig.io, jean-philippe@linaro.org,
+ kvm@vger.kernel.org, zhang.lyra@gmail.com, joro@8bytes.org,
+ jonathanh@nvidia.com, iommu@lists.linux.dev, jgg@nvidia.com,
+ yangyingliang@huawei.com, orsonzhai@gmail.com, gerald.schaefer@linux.ibm.com,
+ sven@svenpeter.dev, linux-arm-msm@vger.kernel.org, john.garry@huawei.com,
+ vdumpa@nvidia.com, christophe.jaillet@wanadoo.fr, thunder.leizhen@huawei.com,
+ linux-tegra@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ chenxiang66@hisilicon.com, dwmw2@infradead.org, cohuck@redhat.com,
+ linux-kernel@vger.kernel.org, robdclark@gmail.com,
+ suravee.suthikulpanit@amd.com, baolin.wang7@gmail.com, robin.murphy@arm.com,
+ baolu.lu@linux.intel.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -92,44 +135,89 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Stephan Gerhold <stephan.gerhold@kernkonzept.com>
+On Fri, 1 Jul 2022 14:44:50 -0700
+Nicolin Chen <nicolinc@nvidia.com> wrote:
 
-[ Upstream commit e0c2ce8217955537dd5434baeba061f209797119 ]
+> This is a preparatory series for IOMMUFD v2 patches. It enforces error
+> code -EMEDIUMTYPE in iommu_attach_device() and iommu_attach_group() when
+> an IOMMU domain and a device/group are incompatible. It also drops the
+> useless domain->ops check since it won't fail in current environment.
+> 
+> These allow VFIO iommu code to simplify its group attachment routine, by
+> avoiding the extra IOMMU domain allocations and attach/detach sequences
+> of the old code.
+> 
+> Worths mentioning the exact match for enforce_cache_coherency is removed
+> with this series, since there's very less value in doing that as KVM will
+> not be able to take advantage of it -- this just wastes domain memory.
+> Instead, we rely on Intel IOMMU driver taking care of that internally.
+> 
+> This is on github:
+> https://github.com/nicolinc/iommufd/commits/vfio_iommu_attach
 
-Virtio devices might lose their state when the VMM is restarted
-after a suspend to disk (hibernation) cycle. This means that the
-guest page size register must be restored for the virtio_mmio legacy
-interface, since otherwise the virtio queues are not functional.
+How do you foresee this going in, I'm imagining Joerg would merge the
+first patch via the IOMMU tree and provide a topic branch that I'd
+merge into the vfio tree along with the remaining patches.  Sound
+right?  Thanks,
 
-This is particularly problematic for QEMU that currently still defaults
-to using the legacy interface for virtio_mmio. Write the guest page
-size register again in virtio_mmio_restore() to make legacy virtio_mmio
-devices work correctly after hibernation.
+Alex
 
-Signed-off-by: Stephan Gerhold <stephan.gerhold@kernkonzept.com>
-Message-Id: <20220621110621.3638025-3-stephan.gerhold@kernkonzept.com>
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- drivers/virtio/virtio_mmio.c | 3 +++
- 1 file changed, 3 insertions(+)
-
-diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
-index d69f0c5135ff..413f6af4d132 100644
---- a/drivers/virtio/virtio_mmio.c
-+++ b/drivers/virtio/virtio_mmio.c
-@@ -502,6 +502,9 @@ static int virtio_mmio_restore(struct device *dev)
- {
- 	struct virtio_mmio_device *vm_dev = dev_get_drvdata(dev);
  
-+	if (vm_dev->version == 1)
-+		writel(PAGE_SIZE, vm_dev->base + VIRTIO_MMIO_GUEST_PAGE_SIZE);
-+
- 	return virtio_device_restore(&vm_dev->vdev);
- }
- 
--- 
-2.35.1
+> Changelog
+> v5:
+>  * Rebased on top of Robin's "Simplify bus_type determination".
+>  * Fixed a wrong change returning -EMEDIUMTYPE in arm-smmu driver.
+>  * Added Baolu's "Reviewed-by".
+> v4:
+>  * Dropped -EMEDIUMTYPE change in mtk_v1 driver per Robin's input
+>  * Added Baolu's and Kevin's Reviewed-by lines
+> v3: https://lore.kernel.org/kvm/20220623200029.26007-1-nicolinc@nvidia.com/
+>  * Dropped all dev_err since -EMEDIUMTYPE clearly indicates what error.
+>  * Updated commit message of enforce_cache_coherency removing patch.
+>  * Updated commit message of domain->ops removing patch.
+>  * Replaced "goto out_unlock" with simply mutex_unlock() and return.
+>  * Added a line of comments for -EMEDIUMTYPE return check.
+>  * Moved iommu_get_msi_cookie() into alloc_attach_domain() as a cookie
+>    should be logically tied to the lifetime of a domain itself.
+>  * Added Kevin's "Reviewed-by".
+> v2: https://lore.kernel.org/kvm/20220616000304.23890-1-nicolinc@nvidia.com/
+>  * Added -EMEDIUMTYPE to more IOMMU drivers that fit the category.
+>  * Changed dev_err to dev_dbg for -EMEDIUMTYPE to avoid kernel log spam.
+>  * Dropped iommu_ops patch, and removed domain->ops in VFIO directly,
+>    since there's no mixed-driver use case that would fail the sanity.
+>  * Updated commit log of the patch removing enforce_cache_coherency.
+>  * Fixed a misplace of "num_non_pinned_groups--" in detach_group patch.
+>  * Moved "num_non_pinned_groups++" in PATCH-5 to the common path between
+>    domain-reusing and new-domain pathways, like the code previously did.
+>  * Fixed a typo in EMEDIUMTYPE patch.
+> v1: https://lore.kernel.org/kvm/20220606061927.26049-1-nicolinc@nvidia.com/
+> 
+> Jason Gunthorpe (1):
+>   vfio/iommu_type1: Prefer to reuse domains vs match enforced cache
+>     coherency
+> 
+> Nicolin Chen (4):
+>   iommu: Return -EMEDIUMTYPE for incompatible domain and device/group
+>   vfio/iommu_type1: Remove the domain->ops comparison
+>   vfio/iommu_type1: Clean up update_dirty_scope in detach_group()
+>   vfio/iommu_type1: Simplify group attachment
+> 
+>  drivers/iommu/amd/iommu.c                   |   2 +-
+>  drivers/iommu/apple-dart.c                  |   4 +-
+>  drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3.c |  15 +-
+>  drivers/iommu/arm/arm-smmu/arm-smmu.c       |   5 +-
+>  drivers/iommu/arm/arm-smmu/qcom_iommu.c     |   9 +-
+>  drivers/iommu/intel/iommu.c                 |  10 +-
+>  drivers/iommu/iommu.c                       |  28 ++
+>  drivers/iommu/ipmmu-vmsa.c                  |   4 +-
+>  drivers/iommu/omap-iommu.c                  |   3 +-
+>  drivers/iommu/s390-iommu.c                  |   2 +-
+>  drivers/iommu/sprd-iommu.c                  |   6 +-
+>  drivers/iommu/tegra-gart.c                  |   2 +-
+>  drivers/iommu/virtio-iommu.c                |   3 +-
+>  drivers/vfio/vfio_iommu_type1.c             | 352 ++++++++++----------
+>  14 files changed, 229 insertions(+), 216 deletions(-)
+> 
 
 _______________________________________________
 Virtualization mailing list
