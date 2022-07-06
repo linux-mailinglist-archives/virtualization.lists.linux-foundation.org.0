@@ -2,98 +2,109 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 575C1567F99
-	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 09:13:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3901C56837B
+	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 11:30:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A6FB660F90;
-	Wed,  6 Jul 2022 07:13:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A6FB660F90
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8A41660FCA;
+	Wed,  6 Jul 2022 09:30:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8A41660FCA
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=T4vWfTfP
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bkfKoBfR
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rBrthu2S5VmE; Wed,  6 Jul 2022 07:13:16 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 43E2760F7A;
-	Wed,  6 Jul 2022 07:13:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 43E2760F7A
+	with ESMTP id 1umMycyMl_fJ; Wed,  6 Jul 2022 09:30:55 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 30B7D60FC0;
+	Wed,  6 Jul 2022 09:30:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 30B7D60FC0
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6B224C007D;
-	Wed,  6 Jul 2022 07:13:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5BB18C0077;
+	Wed,  6 Jul 2022 09:30:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C9FC3C0070
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CCE65C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 07:13:14 +0000 (UTC)
+ Wed,  6 Jul 2022 09:30:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9DD37417A8
+ by smtp4.osuosl.org (Postfix) with ESMTP id 979E441706
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 07:13:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9DD37417A8
+ Wed,  6 Jul 2022 09:30:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 979E441706
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=T4vWfTfP
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=bkfKoBfR
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8NVgEYgw1XIi
+ with ESMTP id BijC3ap2Mn_w
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 07:13:10 +0000 (UTC)
+ Wed,  6 Jul 2022 09:30:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ACF7540931
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 38A92416F1
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id ACF7540931
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 38A92416F1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 07:13:10 +0000 (UTC)
+ Wed,  6 Jul 2022 09:30:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1657091589;
+ s=mimecast20190719; t=1657099849;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=xC/tPIV26dzWDx6JEF57ktxGrZ/+tVkL24+pBomvNqw=;
- b=T4vWfTfPBHb2vDDsGGGTOQyAKaVRPjMABUB+OXSZSuXTvRc7benvK6rMf9x6gny/nCo54Q
- Hmv3LKvSp6mpi17mYsls+QTr1NIsPAURjS3tQpCphXJlAGn6OAY6ghvmDLnSGEb31QME0P
- Yiya2M1+UX+HkpbPPtwGgax+2X9Ts3E=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=y8BzlNPid17ZYuPXy7wyRvGnmNT9ou7kXgjhlij1C/I=;
+ b=bkfKoBfRdKX0XI0LjukPw+8+J1ylQvQUuRzdAM7zAwNd7NzBDkRsahXrXaufHJU0sdPSAr
+ x1Sqx1djIdeWjRnmRJqefTx34VH1ojr7KQDkbZB2oF/pkkPBFfz8sfsgdwBagdaASXs0l9
+ oOjzYby5iI4KcOZp0BWKPPnAX8mDzqg=
+Received: from mail-lf1-f70.google.com (mail-lf1-f70.google.com
+ [209.85.167.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-47-JJgkedS7NV2rpdhWsPVb4Q-1; Wed, 06 Jul 2022 03:13:03 -0400
-X-MC-Unique: JJgkedS7NV2rpdhWsPVb4Q-1
-Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
- [10.11.54.6])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B51461C08969;
- Wed,  6 Jul 2022 07:13:02 +0000 (UTC)
-Received: from sirius.home.kraxel.org (unknown [10.39.192.27])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 6E1E42166B26;
- Wed,  6 Jul 2022 07:13:02 +0000 (UTC)
-Received: by sirius.home.kraxel.org (Postfix, from userid 1000)
- id 10D1518003AA; Wed,  6 Jul 2022 09:13:01 +0200 (CEST)
-Date: Wed, 6 Jul 2022 09:13:01 +0200
-From: Gerd Hoffmann <kraxel@redhat.com>
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Subject: Re: [PATCH v7 7/9] drm/virtio: Improve DMA API usage for shmem BOs
-Message-ID: <20220706071301.43fvbioka4iksqup@sirius.home.kraxel.org>
-References: <20220630200726.1884320-1-dmitry.osipenko@collabora.com>
- <20220630200726.1884320-8-dmitry.osipenko@collabora.com>
- <20220705135323.emr4gdbcxoisdcxe@sirius.home.kraxel.org>
- <d2c64d09-c4bb-9aed-069d-a9b4d07a1f66@collabora.com>
- <20220705154507.67ovlun4m26xzppn@sirius.home.kraxel.org>
- <1380526d-17fb-6eb2-0fd5-5cddbdf0a92e@collabora.com>
+ us-mta-574-ufisG7fcO76VmfFm771JKg-1; Wed, 06 Jul 2022 05:30:42 -0400
+X-MC-Unique: ufisG7fcO76VmfFm771JKg-1
+Received: by mail-lf1-f70.google.com with SMTP id
+ e8-20020ac24e08000000b0047fad5770d2so4943696lfr.17
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 06 Jul 2022 02:30:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+ :message-id:subject:to:cc;
+ bh=y8BzlNPid17ZYuPXy7wyRvGnmNT9ou7kXgjhlij1C/I=;
+ b=aLAxfJnwqXHujBEU8ycLMN0h1+2dNhCiQYyEzk+FlMrcPXKXPubafaVwOLqSGemwor
+ 1mFZRNw2n8jVjGBKJ8h+wEpYkKxaZwPspDPXEknyYqvVrDMDNiuzRI35E/j+qd/jnHDW
+ wIX7qGFcON66gkreN7hYvEXBUzrB3DnFBJlmaZylyrCzYqq/cx3RkJqXrT5AxtGLBADN
+ jUYJXMh7j4cjW9hAoeSTcp/pPrlC1BFMbEelBTMuKEPOKh5i8J36LANFmnXFKoRlC91D
+ tXsrGZYLCvXIfoMWTdgplxeBLXLTpUA9xPlrParz8l/NLXGZmgqy5S5bcKejAlVToHoM
+ JrQQ==
+X-Gm-Message-State: AJIora8nATuaLdUQBBALvUQo+LRWJsrFl0VCAuIvlsbkgKLTjTgj5UI/
+ uxA7EyDqvlfhAg2zwJeWcLmI0CVh9jMQJZAHHqoDBrmVZiJvOHJ7VIVQ5snqIhW8MuOl2SZx5u3
+ OKtVVmyZjKwAuWISSQKvnP5Qq46NcNUGxl3y2vqLb6hELnrR8Mbdt8GSQJg==
+X-Received: by 2002:a2e:b703:0:b0:25a:93d0:8a57 with SMTP id
+ j3-20020a2eb703000000b0025a93d08a57mr23082267ljo.487.1657099840602; 
+ Wed, 06 Jul 2022 02:30:40 -0700 (PDT)
+X-Google-Smtp-Source: AGRyM1tn0VU/qJOnX+Quc4LHX2cHJ7O69wBObrlpOxDCHrDTbs96CxnRYeB35+e+oNw3fz0M5H2a3q0J32a2k7fi8g0=
+X-Received: by 2002:a2e:b703:0:b0:25a:93d0:8a57 with SMTP id
+ j3-20020a2eb703000000b0025a93d08a57mr23082245ljo.487.1657099840240; Wed, 06
+ Jul 2022 02:30:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1380526d-17fb-6eb2-0fd5-5cddbdf0a92e@collabora.com>
-X-Scanned-By: MIMEDefang 2.78 on 10.11.54.6
-Cc: David Airlie <airlied@linux.ie>, Robin Murphy <robin.murphy@arm.com>,
- Thomas =?utf-8?Q?Hellstr=C3=B6m?= <thomas_os@shipmail.org>,
- Emil Velikov <emil.l.velikov@gmail.com>, linux-kernel@vger.kernel.org,
- dri-devel@lists.freedesktop.org, Gurchetan Singh <gurchetansingh@chromium.org>,
- Thomas Zimmermann <tzimmermann@suse.de>, Dmitry Osipenko <digetx@gmail.com>,
- kernel@collabora.com, virtualization@lists.linux-foundation.org
+References: <20220706050503.171-1-xieyongji@bytedance.com>
+In-Reply-To: <20220706050503.171-1-xieyongji@bytedance.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Wed, 6 Jul 2022 17:30:29 +0800
+Message-ID: <CACGkMEv1tzenaGSUvYXEuxdmXyaZxQ24QspXRRA_95mMp4PWSg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/5] VDUSE: Support registering userspace memory as
+ bounce buffer
+To: Xie Yongji <xieyongji@bytedance.com>
+Authentication-Results: relay.mimecast.com;
+ auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=jasowang@redhat.com
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: mst <mst@redhat.com>, Liu Xiaodong <xiaodong.liu@intel.com>,
+ linux-kernel <linux-kernel@vger.kernel.org>,
+ virtualization <virtualization@lists.linux-foundation.org>,
+ Maxime Coquelin <maxime.coquelin@redhat.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, songmuchun@bytedance.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -110,26 +121,79 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-  Hi,
+On Wed, Jul 6, 2022 at 1:05 PM Xie Yongji <xieyongji@bytedance.com> wrote:
+>
+> Hi all,
+>
+> This series introduces some new ioctls: VDUSE_IOTLB_GET_INFO,
+> VDUSE_IOTLB_REG_UMEM and VDUSE_IOTLB_DEREG_UMEM to support
+> registering and de-registering userspace memory for IOTLB
+> as bounce buffer in virtio-vdpa case.
+>
+> The VDUSE_IOTLB_GET_INFO ioctl can help user to query IOLTB
+> information such as bounce buffer size. Then user can use
+> those information on VDUSE_IOTLB_REG_UMEM and
+> VDUSE_IOTLB_DEREG_UMEM ioctls to register and de-register
+> userspace memory for IOTLB.
+>
+> During registering and de-registering, the DMA data in use
+> would be copied from kernel bounce pages to userspace bounce
+> pages and back.
+>
+> With this feature, some existing application such as SPDK
+> and DPDK can leverage the datapath of VDUSE directly and
+> efficiently as discussed before [1][2]. They can register
+> some preallocated hugepages to VDUSE to avoid an extra
+> memcpy from bounce-buffer to hugepages.
 
-> Gerd, thank you very much! It's was indeed unclear to me how to test the
-> MMIO GPU, but yours variant with microvm works! I was looking for trying
-> aarch64 in the past, but it also was unclear how to do it since there is
-> no DT support for the VirtIO-GPU, AFAICS.
+This is really interesting.
 
-aarch64 uses acpi by default (can be disabled via 'qemu -no-acpi').
-Not fully sure about arm(v7).
+But a small concern on uAPI is that this seems to expose the VDUSE
+internal implementation (bounce buffer) to userspace. We tried hard to
+hide it via the GET_FD before. Anyway can we keep it?
 
-Even with DT it should work because DT only describes the virtio-mmio
-'slots', not the actual virtio devices.
+Thanks
 
-> There is no virgl support because it's a virtio-gpu-device and not
-> virtio-gpu-device-gl that is PCI-only in Qemu. Hence everything seems good.
-
-It's named 'virtio-gpu-gl-device'
-
-take care,
-  Gerd
+>
+> The kernel and userspace codes could be found in github:
+>
+> https://github.com/bytedance/linux/tree/vduse-umem
+> https://github.com/bytedance/qemu/tree/vduse-umem
+>
+> To test it with qemu-storage-daemon:
+>
+> $ qemu-storage-daemon \
+>     --chardev socket,id=charmonitor,path=/tmp/qmp.sock,server=on,wait=off \
+>     --monitor chardev=charmonitor \
+>     --blockdev driver=host_device,cache.direct=on,aio=native,filename=/dev/nullb0,node-name=disk0 \
+>     --export type=vduse-blk,id=vduse-test,name=vduse-test,node-name=disk0,writable=on
+>
+> [1] https://lkml.org/lkml/2021/6/27/318
+> [2] https://lkml.org/lkml/2022/7/4/246
+>
+> Please review, thanks!
+>
+> V1 to V2:
+> - Drop the patch that updating API version [MST]
+> - Replace unpin_user_pages() with unpin_user_pages_dirty_lock() [MST]
+> - Use __vmalloc(__GFP_ACCOUNT) for memory accounting [MST]
+>
+> Xie Yongji (5):
+>   vduse: Remove unnecessary spin lock protection
+>   vduse: Use memcpy_{to,from}_page() in do_bounce()
+>   vduse: Support using userspace pages as bounce buffer
+>   vduse: Support querying IOLTB information
+>   vduse: Support registering userspace memory for IOTLB
+>
+>  drivers/vdpa/vdpa_user/iova_domain.c | 134 ++++++++++++++++++++---
+>  drivers/vdpa/vdpa_user/iova_domain.h |   9 ++
+>  drivers/vdpa/vdpa_user/vduse_dev.c   | 152 +++++++++++++++++++++++++++
+>  include/uapi/linux/vduse.h           |  45 ++++++++
+>  4 files changed, 327 insertions(+), 13 deletions(-)
+>
+> --
+> 2.20.1
+>
 
 _______________________________________________
 Virtualization mailing list
