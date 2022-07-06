@@ -1,87 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D14DF568CD2
-	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 17:31:11 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4D65F568CD4
+	for <lists.virtualization@lfdr.de>; Wed,  6 Jul 2022 17:31:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5C69460FF7;
-	Wed,  6 Jul 2022 15:31:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5C69460FF7
+	by smtp3.osuosl.org (Postfix) with ESMTP id E430261002;
+	Wed,  6 Jul 2022 15:31:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E430261002
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=oG2W8kgW
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=j7kpuC+F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KujIewMl_pxT; Wed,  6 Jul 2022 15:31:07 +0000 (UTC)
+	with ESMTP id mZTiglcjIFsj; Wed,  6 Jul 2022 15:31:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id ED55B60FE1;
-	Wed,  6 Jul 2022 15:31:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org ED55B60FE1
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 026A36100D;
+	Wed,  6 Jul 2022 15:31:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 026A36100D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 36E25C0077;
-	Wed,  6 Jul 2022 15:31:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C93FFC0077;
+	Wed,  6 Jul 2022 15:31:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28F84C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 27839C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:31:05 +0000 (UTC)
+ Wed,  6 Jul 2022 15:31:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0355A4156E
+ by smtp4.osuosl.org (Postfix) with ESMTP id DDBF6415CB
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:31:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0355A4156E
+ Wed,  6 Jul 2022 15:31:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DDBF6415CB
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=oG2W8kgW
+ header.a=rsa-sha256 header.s=k20201202 header.b=j7kpuC+F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8AffN_sYVANV
+ with ESMTP id FbYkNJn5J0nv
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:31:03 +0000 (UTC)
+ Wed,  6 Jul 2022 15:31:06 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7E8C7403D8
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 7E8C7403D8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AB9B3403D8
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id AB9B3403D8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  6 Jul 2022 15:31:03 +0000 (UTC)
+ Wed,  6 Jul 2022 15:31:06 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id ACF25B81D99;
- Wed,  6 Jul 2022 15:31:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 224F1C3411C;
- Wed,  6 Jul 2022 15:31:00 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 14F5E61FE7;
+ Wed,  6 Jul 2022 15:31:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6982AC341CA;
+ Wed,  6 Jul 2022 15:31:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1657121461;
- bh=8ZHzkmLK7hTG93tf9ENQrj40e40dnzUne2DsY5NsBh4=;
+ s=k20201202; t=1657121464;
+ bh=03dBgzcmkR/ZZgI2wyRT32ne7whuWwal3v7bzdM0djc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=oG2W8kgW99ZnDqaJ98QlDpQeKFEqCj96WlBnYF6lfMvTxE0CBi1X9sGNEM9rJ2/C7
- 7Ik3Bn0PYKz+CKjFWVepdH1QjivKonWBpWBecbbrCcxwXPOqfmGHKL5JFVdZeutEqx
- WRHboCsX+qBDZ6xfXMLJLg1cvlm7N/vwp2bahB943l44EXKd7laP7659U7zSc9+ASU
- hX7sJR3Rr8xNDpvLVHxa6Ie5wN0Ox+N4XpzUOFJLqPDppefq/hJKTRKTMYsqEPc3Py
- 296lVjW9RUIng+rU/hwpzYwSfPMnGOL5B6/mWPwQaqGMrZgqPaHhNoO9fW4JX5JB9h
- Ylaz+Y4Z7e+WQ==
+ b=j7kpuC+FhD8Xa0Ynm/5jkVP0ft7AewUnaSHpIPuoigcEbpI4Eks7LhjcWePGeHViH
+ pVNfnPPTuoaxu7rWIhVLo5sE8oYqrbPM8RUOL5ngo1Q/9Eyot1cwrBf2viPOYcgj1r
+ AlvOmWkKYXmBjnC9ctVTTDOYwbT0YtJFnK4Bu6Xon8StmbVPOj8V4CUS5rZxCRWwZh
+ MLu77tLZksUs1cd6DM4m1Vl2Ly5MPLBNMxaRWrm92qLbfBulaUYyPq8WWyITuC/eGp
+ Zi8h57yhC/EQWtMY/cS3BZSABi1/2vg0sjLfIQf4ktWBw/e9H9NSldYTAwT6FJyltJ
+ ZcjeNHaomYTQQ==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.18 04/22] vduse: Tie vduse mgmtdev and its device
-Date: Wed,  6 Jul 2022 11:30:22 -0400
-Message-Id: <20220706153041.1597639-4-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.18 06/22] virtio_mmio: Add missing PM calls to
+ freeze/restore
+Date: Wed,  6 Jul 2022 11:30:24 -0400
+Message-Id: <20220706153041.1597639-6-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
 In-Reply-To: <20220706153041.1597639-1-sashal@kernel.org>
 References: <20220706153041.1597639-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
-Cc: Sasha Levin <sashal@kernel.org>, guanjun@linux.alibaba.com,
- "Michael S . Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org,
- Xie Yongji <xieyongji@bytedance.com>, elic@nvidia.com, gautam.dawar@xilinx.com,
- dan.carpenter@oracle.com
+Cc: Sasha Levin <sashal@kernel.org>, virtualization@lists.linux-foundation.org,
+ Stephan Gerhold <stephan.gerhold@kernkonzept.com>,
+ "Michael S . Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,132 +96,79 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-From: Parav Pandit <parav@nvidia.com>
+From: Stephan Gerhold <stephan.gerhold@kernkonzept.com>
 
-[ Upstream commit 0e0348ac3f0a6e6606f1aa5acb1803ada913aa3d ]
+[ Upstream commit ed7ac37fde33ccd84e4bd2b9363c191f925364c7 ]
 
-vduse devices are not backed by any real devices such as PCI. Hence it
-doesn't have any parent device linked to it.
+Most virtio drivers provide freeze/restore callbacks to finish up
+device usage before suspend and to reinitialize the virtio device after
+resume. However, these callbacks are currently only called when using
+virtio_pci. virtio_mmio does not have any PM ops defined.
 
-Kernel driver model in [1] suggests to avoid an empty device
-release callback.
+This causes problems for example after suspend to disk (hibernation),
+since the virtio devices might lose their state after the VMM is
+restarted. Calling virtio_device_freeze()/restore() ensures that
+the virtio devices are re-initialized correctly.
 
-Hence tie the mgmtdevice object's life cycle to an allocate dummy struct
-device instead of static one.
+Fix this by implementing the dev_pm_ops for virtio_mmio,
+similar to virtio_pci_common.
 
-[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/core-api/kobject.rst?h=v5.18-rc7#n284
-
-Signed-off-by: Parav Pandit <parav@nvidia.com>
-Message-Id: <20220613195223.473966-1-parav@nvidia.com>
+Signed-off-by: Stephan Gerhold <stephan.gerhold@kernkonzept.com>
+Message-Id: <20220621110621.3638025-2-stephan.gerhold@kernkonzept.com>
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Xie Yongji <xieyongji@bytedance.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- drivers/vdpa/vdpa_user/vduse_dev.c | 60 ++++++++++++++++++------------
- 1 file changed, 37 insertions(+), 23 deletions(-)
+ drivers/virtio/virtio_mmio.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
-diff --git a/drivers/vdpa/vdpa_user/vduse_dev.c b/drivers/vdpa/vdpa_user/vduse_dev.c
-index 160e40d03084..02709f8a78bd 100644
---- a/drivers/vdpa/vdpa_user/vduse_dev.c
-+++ b/drivers/vdpa/vdpa_user/vduse_dev.c
-@@ -1475,16 +1475,12 @@ static char *vduse_devnode(struct device *dev, umode_t *mode)
- 	return kasprintf(GFP_KERNEL, "vduse/%s", dev_name(dev));
- }
- 
--static void vduse_mgmtdev_release(struct device *dev)
--{
--}
--
--static struct device vduse_mgmtdev = {
--	.init_name = "vduse",
--	.release = vduse_mgmtdev_release,
-+struct vduse_mgmt_dev {
-+	struct vdpa_mgmt_dev mgmt_dev;
-+	struct device dev;
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index 1dd396d4bebb..7522832529dd 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -62,6 +62,7 @@
+ #include <linux/list.h>
+ #include <linux/module.h>
+ #include <linux/platform_device.h>
++#include <linux/pm.h>
+ #include <linux/slab.h>
+ #include <linux/spinlock.h>
+ #include <linux/virtio.h>
+@@ -543,6 +544,25 @@ static const struct virtio_config_ops virtio_mmio_config_ops = {
+ 	.get_shm_region = vm_get_shm_region,
  };
  
--static struct vdpa_mgmt_dev mgmt_dev;
-+static struct vduse_mgmt_dev *vduse_mgmt;
- 
- static int vduse_dev_init_vdpa(struct vduse_dev *dev, const char *name)
- {
-@@ -1509,7 +1505,7 @@ static int vduse_dev_init_vdpa(struct vduse_dev *dev, const char *name)
- 	}
- 	set_dma_ops(&vdev->vdpa.dev, &vduse_dev_dma_ops);
- 	vdev->vdpa.dma_dev = &vdev->vdpa.dev;
--	vdev->vdpa.mdev = &mgmt_dev;
-+	vdev->vdpa.mdev = &vduse_mgmt->mgmt_dev;
- 
- 	return 0;
- }
-@@ -1555,34 +1551,52 @@ static struct virtio_device_id id_table[] = {
- 	{ 0 },
- };
- 
--static struct vdpa_mgmt_dev mgmt_dev = {
--	.device = &vduse_mgmtdev,
--	.id_table = id_table,
--	.ops = &vdpa_dev_mgmtdev_ops,
--};
-+static void vduse_mgmtdev_release(struct device *dev)
++#ifdef CONFIG_PM_SLEEP
++static int virtio_mmio_freeze(struct device *dev)
 +{
-+	struct vduse_mgmt_dev *mgmt_dev;
++	struct virtio_mmio_device *vm_dev = dev_get_drvdata(dev);
 +
-+	mgmt_dev = container_of(dev, struct vduse_mgmt_dev, dev);
-+	kfree(mgmt_dev);
++	return virtio_device_freeze(&vm_dev->vdev);
 +}
++
++static int virtio_mmio_restore(struct device *dev)
++{
++	struct virtio_mmio_device *vm_dev = dev_get_drvdata(dev);
++
++	return virtio_device_restore(&vm_dev->vdev);
++}
++
++static const struct dev_pm_ops virtio_mmio_pm_ops = {
++	SET_SYSTEM_SLEEP_PM_OPS(virtio_mmio_freeze, virtio_mmio_restore)
++};
++#endif
  
- static int vduse_mgmtdev_init(void)
+ static void virtio_mmio_release_dev(struct device *_d)
  {
- 	int ret;
+@@ -786,6 +806,9 @@ static struct platform_driver virtio_mmio_driver = {
+ 		.name	= "virtio-mmio",
+ 		.of_match_table	= virtio_mmio_match,
+ 		.acpi_match_table = ACPI_PTR(virtio_mmio_acpi_match),
++#ifdef CONFIG_PM_SLEEP
++		.pm	= &virtio_mmio_pm_ops,
++#endif
+ 	},
+ };
  
--	ret = device_register(&vduse_mgmtdev);
--	if (ret)
-+	vduse_mgmt = kzalloc(sizeof(*vduse_mgmt), GFP_KERNEL);
-+	if (!vduse_mgmt)
-+		return -ENOMEM;
-+
-+	ret = dev_set_name(&vduse_mgmt->dev, "vduse");
-+	if (ret) {
-+		kfree(vduse_mgmt);
- 		return ret;
-+	}
- 
--	ret = vdpa_mgmtdev_register(&mgmt_dev);
-+	vduse_mgmt->dev.release = vduse_mgmtdev_release;
-+
-+	ret = device_register(&vduse_mgmt->dev);
- 	if (ret)
--		goto err;
-+		goto dev_reg_err;
- 
--	return 0;
--err:
--	device_unregister(&vduse_mgmtdev);
-+	vduse_mgmt->mgmt_dev.id_table = id_table;
-+	vduse_mgmt->mgmt_dev.ops = &vdpa_dev_mgmtdev_ops;
-+	vduse_mgmt->mgmt_dev.device = &vduse_mgmt->dev;
-+	ret = vdpa_mgmtdev_register(&vduse_mgmt->mgmt_dev);
-+	if (ret)
-+		device_unregister(&vduse_mgmt->dev);
-+
-+	return ret;
-+
-+dev_reg_err:
-+	put_device(&vduse_mgmt->dev);
- 	return ret;
- }
- 
- static void vduse_mgmtdev_exit(void)
- {
--	vdpa_mgmtdev_unregister(&mgmt_dev);
--	device_unregister(&vduse_mgmtdev);
-+	vdpa_mgmtdev_unregister(&vduse_mgmt->mgmt_dev);
-+	device_unregister(&vduse_mgmt->dev);
- }
- 
- static int vduse_init(void)
 -- 
 2.35.1
 
