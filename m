@@ -1,112 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 945A8579FDB
-	for <lists.virtualization@lfdr.de>; Tue, 19 Jul 2022 15:40:50 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1EB2457A2E1
+	for <lists.virtualization@lfdr.de>; Tue, 19 Jul 2022 17:23:46 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AE49082640;
-	Tue, 19 Jul 2022 13:40:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AE49082640
+	by smtp1.osuosl.org (Postfix) with ESMTP id C159782D57;
+	Tue, 19 Jul 2022 15:23:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C159782D57
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=gkhulk5u
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=RMLFIG0A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sQ62FDr4ExCY; Tue, 19 Jul 2022 13:40:47 +0000 (UTC)
+	with ESMTP id hZcgdXdw-Y8C; Tue, 19 Jul 2022 15:23:44 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7588583083;
-	Tue, 19 Jul 2022 13:40:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7588583083
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 98CDB82D45;
+	Tue, 19 Jul 2022 15:23:43 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 98CDB82D45
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B311DC0078;
-	Tue, 19 Jul 2022 13:40:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A7E6EC0078;
+	Tue, 19 Jul 2022 15:23:42 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 395BAC002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6AB4BC002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Jul 2022 13:40:44 +0000 (UTC)
+ Tue, 19 Jul 2022 15:23:41 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 0464A400F6
+ by smtp4.osuosl.org (Postfix) with ESMTP id 434F5409BA
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Jul 2022 13:40:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0464A400F6
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=gkhulk5u
+ Tue, 19 Jul 2022 15:23:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 434F5409BA
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=RMLFIG0A
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7CpmW_Jhh_cv
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 229M2F7wLA2k
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Jul 2022 13:40:43 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4DF9740C38
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 4DF9740C38
+ Tue, 19 Jul 2022 15:23:39 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0C2BF409A7
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 0C2BF409A7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Jul 2022 13:40:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1658238042;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=zYKWxov5b3QhOWHv5mWiGxofQbQJXiKRAzRsuTWa0is=;
- b=gkhulk5uLdiWloSqboxVyaSzGOKEIuq2VtKSjXVtmMjNcV8wEO9KYEsRaWo0ikVyXPjgZh
- 7+4FNNbjyhRo5lMVwxN+VtS3UlEkW/psn9j2VaXYw4r8Gi1eprIXqM6CaNVk81rRObeoWf
- VH22UbCdyrFNuJ/zYMIreNQAu7g2/pY=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-373-cEALKG79P6qNmIGtxqqDkw-1; Tue, 19 Jul 2022 09:40:40 -0400
-X-MC-Unique: cEALKG79P6qNmIGtxqqDkw-1
-Received: by mail-wm1-f72.google.com with SMTP id
- r82-20020a1c4455000000b003a300020352so6215289wma.5
- for <virtualization@lists.linux-foundation.org>;
- Tue, 19 Jul 2022 06:40:40 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=x-gm-message-state:date:from:to:cc:subject:message-id:references
- :mime-version:content-disposition:in-reply-to;
- bh=zYKWxov5b3QhOWHv5mWiGxofQbQJXiKRAzRsuTWa0is=;
- b=wrezsovr4rzS/V4RfHzCb1mP5DDRrunCEYvB6BKXASushveSyadYHG/nYvk5RSMHpY
- sAcZ8yhSa7gGPP8bsPT6lzJsC33xXmP6m8lMRJUtwtBY/StTeULtbZR3jIRJ3XhPr4v/
- 8j+DytN6HcjGg/lPoIdjnIRAyrDGkBE2D7kkJoF8eBqU5OY287/pp2ptJuJCh9nWVO+B
- qYvds4h/db7dNo4ERkP4K9VDKiGOnHcXH6iZnYEdGRMV7oiSYTmfVu3rfzBSJcEaaNGt
- di6/l708P6xFIqvk/zSVemoAicIqryIONEbzUnxs/yEuOE/PSv/yue308K83WKcSgXqq
- 0pwQ==
-X-Gm-Message-State: AJIora8OXQvulqsaVwgT6zIedpzASl9raM8Zpt7CDgbNemczC13+b6U/
- KfJ5mrJ1Mz4tbvU/Mmf56LJ1hIAkV/rkWo8og9hrLrSTWmtnJs8LqGioGNSdWTJA8cPtR0xDeJg
- G523pN5Ls5+oalRkssIAs2xA6wkfRiodgfrb6tin1cQ==
-X-Received: by 2002:a05:600c:3b07:b0:3a3:1433:10b5 with SMTP id
- m7-20020a05600c3b0700b003a3143310b5mr14065395wms.129.1658238039446; 
- Tue, 19 Jul 2022 06:40:39 -0700 (PDT)
-X-Google-Smtp-Source: AGRyM1v5erLzTfjOBvJQouov2nBt7L0W19mj8+lVBMG7iwgHU4osFcrDq0b7eXXIN4e1QauTIS8b1g==
-X-Received: by 2002:a05:600c:3b07:b0:3a3:1433:10b5 with SMTP id
- m7-20020a05600c3b0700b003a3143310b5mr14065381wms.129.1658238039249; 
- Tue, 19 Jul 2022 06:40:39 -0700 (PDT)
-Received: from redhat.com ([2.55.25.63]) by smtp.gmail.com with ESMTPSA id
- v6-20020adfe4c6000000b0021e0147da47sm7987791wrm.96.2022.07.19.06.40.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 19 Jul 2022 06:40:38 -0700 (PDT)
-Date: Tue, 19 Jul 2022 09:40:35 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Eli Cohen <elic@nvidia.com>
-Subject: Re: VIRTIO_NET_F_MTU not negotiated
-Message-ID: <20220719093841-mutt-send-email-mst@kernel.org>
-References: <DM8PR12MB5400869D5921E28CE2DC7263AB8F9@DM8PR12MB5400.namprd12.prod.outlook.com>
+ Tue, 19 Jul 2022 15:23:37 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=c9bLWd1eIP+e4V5D1L4BG6lCv4UzYp1WNkQVrUUxNW0=; b=RMLFIG0AqZXLjeQwLqkcXNb0qJ
+ X6tACYuh+4mKivWUps4p4RGwGu0Mgs8veAIrTkj2Ze4/1pQo18woBvGs9Ab4AI2sdOCg2lFCu0un6
+ XiwkE8I3jERQ8TegAfLi3XSXK6QV3diM8bjGLUH71lcpa2dLyGW3ZVbWHNKBwZtt1Un4bx/kZvAS5
+ Fb5FIjWiHAKlhGV/iUkidpojD1JnjeuE+5GRao5XmcnQbQUP+f6PGqWujTbGjFx2WfcZGopgxan9L
+ N6+ZVaPUjPRMFf2VrzBe2cws5YOB9dChn2p3OZcNDucQnEpQOHKuGbem3FGHIj5n9WTdr4qftrhGw
+ wdorwe4Q==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
+ Hat Linux)) id 1oDp4L-00A0JV-0I; Tue, 19 Jul 2022 15:23:29 +0000
+Date: Tue, 19 Jul 2022 08:23:28 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Keir Fraser <keirf@google.com>
+Subject: Re: [PATCH] virtio: Force DMA restricted devices through DMA API
+Message-ID: <YtbMcBw4l0LAFn9+@infradead.org>
+References: <20220719100256.419780-1-keirf@google.com>
 MIME-Version: 1.0
-In-Reply-To: <DM8PR12MB5400869D5921E28CE2DC7263AB8F9@DM8PR12MB5400.namprd12.prod.outlook.com>
-Authentication-Results: relay.mimecast.com;
- auth=pass smtp.auth=CUSA124A263 smtp.mailfrom=mst@redhat.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Eugenio Perez Martin <eperezma@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+In-Reply-To: <20220719100256.419780-1-keirf@google.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: virtualization@lists.linux-foundation.org, kernel-team@android.com,
+ linux-kernel@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,49 +89,11 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jul 19, 2022 at 01:25:42PM +0000, Eli Cohen wrote:
-> Hi,
-> 
->  
-> 
-> mlx5_vdpa is offering VIRTIO_NET_F_MTU. However the driver (is it qemu
-> responsibility?) does not accept and it ends up not negotiated.
+On Tue, Jul 19, 2022 at 10:02:56AM +0000, Keir Fraser wrote:
+> +#include <linux/swiotlb.h>
 
-qemu is responsible for passing features to driver.
-
->  
-> 
-> I don't see how can the driver refuse to negotiate this. What if the hardware
-> has a limitation with respect to mtu?
-
-Then it can fail FEATURES_OK
-
->  
-> 
-> I noticed this when I created the device with mtu of 1000. I expected the
-> netdev at the vm to have mtu of 1000 and any attempt to go beyond should fail
-> but that's not the case.
-> 
->  
-> 
-> Comments?
-
-
-Any chance mtu is too small?
-
-        if (virtio_has_feature(vdev, VIRTIO_NET_F_MTU)) {
-                int mtu = virtio_cread16(vdev,
-                                         offsetof(struct virtio_net_config,
-                                                  mtu));
-                if (mtu < MIN_MTU)
-                        __virtio_clear_bit(vdev, VIRTIO_NET_F_MTU);
-        }
-
-any chance it's on power or another BE system?
-
--- 
-MST
-
+Drivers must never use this header.  We have a few pre-existing abuses
+in the drm code, but they will go away.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
