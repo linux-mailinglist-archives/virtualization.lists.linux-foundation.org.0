@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 49A1157AE9F
-	for <lists.virtualization@lfdr.de>; Wed, 20 Jul 2022 05:06:21 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A836357AEA0
+	for <lists.virtualization@lfdr.de>; Wed, 20 Jul 2022 05:06:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id D0FE083F52;
-	Wed, 20 Jul 2022 03:06:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D0FE083F52
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3EEF6419F2;
+	Wed, 20 Jul 2022 03:06:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3EEF6419F2
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Svp4MCNtOYl5; Wed, 20 Jul 2022 03:06:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7650683F4B;
-	Wed, 20 Jul 2022 03:06:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7650683F4B
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HuNp1qoyFgu1; Wed, 20 Jul 2022 03:06:21 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C37F7419CC;
+	Wed, 20 Jul 2022 03:06:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C37F7419CC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D0535C0078;
-	Wed, 20 Jul 2022 03:06:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 117A2C0078;
+	Wed, 20 Jul 2022 03:06:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3E3FEC002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BD4D7C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jul 2022 03:06:17 +0000 (UTC)
+ Wed, 20 Jul 2022 03:06:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 0ACE261261
+ by smtp1.osuosl.org (Postfix) with ESMTP id A687C83F4F
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 20 Jul 2022 03:06:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A687C83F4F
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id NUGcUtpNcEiH
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 20 Jul 2022 03:06:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 809FE83F49
+Received: from out30-54.freemail.mail.aliyun.com
+ (out30-54.freemail.mail.aliyun.com [115.124.30.54])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 809FE83F49
  for <virtualization@lists.linux-foundation.org>;
  Wed, 20 Jul 2022 03:06:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0ACE261261
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7gFLxN1TMKU7
- for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jul 2022 03:06:16 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E913A6126A
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E913A6126A
- for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Jul 2022 03:06:15 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VJuvIvC_1658286367; 
+ TI=SMTPD_---0VJuw0kQ_1658286369; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VJuvIvC_1658286367) by smtp.aliyun-inc.com;
- Wed, 20 Jul 2022 11:06:08 +0800
+ fp:SMTPD_---0VJuw0kQ_1658286369) by smtp.aliyun-inc.com;
+ Wed, 20 Jul 2022 11:06:10 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v12 38/40] virtio_net: support rx queue resize
-Date: Wed, 20 Jul 2022 11:04:34 +0800
-Message-Id: <20220720030436.79520-39-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v12 39/40] virtio_net: support tx queue resize
+Date: Wed, 20 Jul 2022 11:04:35 +0800
+Message-Id: <20220720030436.79520-40-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220720030436.79520-1-xuanzhuo@linux.alibaba.com>
 References: <20220720030436.79520-1-xuanzhuo@linux.alibaba.com>
@@ -95,49 +95,88 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch implements the resize function of the rx queues.
+This patch implements the resize function of the tx queues.
 Based on this function, it is possible to modify the ring num of the
 queue.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ drivers/net/virtio_net.c | 47 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index fe4dc43c05a1..1115a8b59a08 100644
+index 1115a8b59a08..d1e6940b46d8 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -278,6 +278,8 @@ struct padded_vnet_hdr {
- 	char padding[12];
+@@ -135,6 +135,9 @@ struct send_queue {
+ 	struct virtnet_sq_stats stats;
+ 
+ 	struct napi_struct napi;
++
++	/* Record whether sq is in reset state. */
++	bool reset;
  };
  
-+static void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf);
-+
+ /* Internal representation of a receive virtqueue */
+@@ -279,6 +282,7 @@ struct padded_vnet_hdr {
+ };
+ 
+ static void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf);
++static void virtnet_sq_free_unused_buf(struct virtqueue *vq, void *buf);
+ 
  static bool is_xdp_frame(void *ptr)
  {
- 	return (unsigned long)ptr & VIRTIO_XDP_FLAG;
-@@ -1846,6 +1848,26 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
- 	return NETDEV_TX_OK;
+@@ -1603,6 +1607,11 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
+ 		return;
+ 
+ 	if (__netif_tx_trylock(txq)) {
++		if (sq->reset) {
++			__netif_tx_unlock(txq);
++			return;
++		}
++
+ 		do {
+ 			virtqueue_disable_cb(sq->vq);
+ 			free_old_xmit_skbs(sq, true);
+@@ -1868,6 +1877,44 @@ static int virtnet_rx_resize(struct virtnet_info *vi,
+ 	return err;
  }
  
-+static int virtnet_rx_resize(struct virtnet_info *vi,
-+			     struct receive_queue *rq, u32 ring_num)
++static int virtnet_tx_resize(struct virtnet_info *vi,
++			     struct send_queue *sq, u32 ring_num)
 +{
++	struct netdev_queue *txq;
 +	int err, qindex;
 +
-+	qindex = rq - vi->rq;
++	qindex = sq - vi->sq;
 +
-+	napi_disable(&rq->napi);
++	virtnet_napi_tx_disable(&sq->napi);
 +
-+	err = virtqueue_resize(rq->vq, ring_num, virtnet_rq_free_unused_buf);
++	txq = netdev_get_tx_queue(vi->dev, qindex);
++
++	/* 1. wait all ximt complete
++	 * 2. fix the race of netif_stop_subqueue() vs netif_start_subqueue()
++	 */
++	__netif_tx_lock_bh(txq);
++
++	/* Prevent rx poll from accessing sq. */
++	sq->reset = true;
++
++	/* Prevent the upper layer from trying to send packets. */
++	netif_stop_subqueue(vi->dev, qindex);
++
++	__netif_tx_unlock_bh(txq);
++
++	err = virtqueue_resize(sq->vq, ring_num, virtnet_sq_free_unused_buf);
 +	if (err)
-+		netdev_err(vi->dev, "resize rx fail: rx queue index: %d err: %d\n", qindex, err);
++		netdev_err(vi->dev, "resize tx fail: tx queue index: %d err: %d\n", qindex, err);
 +
-+	if (!try_fill_recv(vi, rq, GFP_KERNEL))
-+		schedule_delayed_work(&vi->refill, 0);
++	__netif_tx_lock_bh(txq);
++	sq->reset = false;
++	netif_tx_wake_queue(txq);
++	__netif_tx_unlock_bh(txq);
 +
-+	virtnet_napi_enable(rq->vq, &rq->napi);
++	virtnet_napi_tx_enable(vi, sq->vq, &sq->napi);
 +	return err;
 +}
 +
