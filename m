@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 44AF1580CA7
-	for <lists.virtualization@lfdr.de>; Tue, 26 Jul 2022 09:23:39 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E1834580C94
+	for <lists.virtualization@lfdr.de>; Tue, 26 Jul 2022 09:23:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8A7DA42538;
-	Tue, 26 Jul 2022 07:23:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8A7DA42538
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7D2634171D;
+	Tue, 26 Jul 2022 07:23:31 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7D2634171D
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Q3mG5rCzBP3Q; Tue, 26 Jul 2022 07:23:35 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ErKFUImlUUCY; Tue, 26 Jul 2022 07:23:30 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 0208F418FA;
-	Tue, 26 Jul 2022 07:23:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0208F418FA
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 4510D41722;
+	Tue, 26 Jul 2022 07:23:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4510D41722
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 660E5C007E;
-	Tue, 26 Jul 2022 07:23:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 07313C007F;
+	Tue, 26 Jul 2022 07:23:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1B82AC0033
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8132AC002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Jul 2022 07:23:32 +0000 (UTC)
+ Tue, 26 Jul 2022 07:23:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E0583612E9
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4E18241717
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Jul 2022 07:23:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E0583612E9
+ Tue, 26 Jul 2022 07:23:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4E18241717
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8H33bly6h_Ik
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id luNRXrb2_oEF
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Jul 2022 07:23:31 +0000 (UTC)
+ Tue, 26 Jul 2022 07:23:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 83C21612E7
-Received: from out30-42.freemail.mail.aliyun.com
- (out30-42.freemail.mail.aliyun.com [115.124.30.42])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 83C21612E7
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F1E0241712
+Received: from out199-12.us.a.mail.aliyun.com (out199-12.us.a.mail.aliyun.com
+ [47.90.199.12])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id F1E0241712
  for <virtualization@lists.linux-foundation.org>;
- Tue, 26 Jul 2022 07:23:30 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R941e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
+ Tue, 26 Jul 2022 07:23:26 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VKUOEzR_1658820197; 
+ TI=SMTPD_---0VKUIJzm_1658820199; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VKUOEzR_1658820197) by smtp.aliyun-inc.com;
- Tue, 26 Jul 2022 15:23:18 +0800
+ fp:SMTPD_---0VKUIJzm_1658820199) by smtp.aliyun-inc.com;
+ Tue, 26 Jul 2022 15:23:20 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v13 27/42] virtio: queue_reset: add VIRTIO_F_RING_RESET
-Date: Tue, 26 Jul 2022 15:22:10 +0800
-Message-Id: <20220726072225.19884-28-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v13 28/42] virtio_ring: struct virtqueue introduce reset
+Date: Tue, 26 Jul 2022 15:22:11 +0800
+Message-Id: <20220726072225.19884-29-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220726072225.19884-1-xuanzhuo@linux.alibaba.com>
 References: <20220726072225.19884-1-xuanzhuo@linux.alibaba.com>
@@ -95,42 +95,57 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added VIRTIO_F_RING_RESET, it came from here
-
-https://github.com/oasis-tcs/virtio-spec/issues/124
-https://github.com/oasis-tcs/virtio-spec/issues/139
-
-This feature indicates that the driver can reset a queue individually.
+Introduce a new member reset to the structure virtqueue to determine
+whether the current vq is in the reset state. Subsequent patches will
+use it.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- include/uapi/linux/virtio_config.h | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/virtio/virtio_ring.c | 2 ++
+ include/linux/virtio.h       | 2 ++
+ 2 files changed, 4 insertions(+)
 
-diff --git a/include/uapi/linux/virtio_config.h b/include/uapi/linux/virtio_config.h
-index f0fb0ae021c0..3c05162bc988 100644
---- a/include/uapi/linux/virtio_config.h
-+++ b/include/uapi/linux/virtio_config.h
-@@ -52,7 +52,7 @@
-  * rest are per-device feature bits.
-  */
- #define VIRTIO_TRANSPORT_F_START	28
--#define VIRTIO_TRANSPORT_F_END		38
-+#define VIRTIO_TRANSPORT_F_END		41
+diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
+index a62e46df6865..df37b6ba0e2f 100644
+--- a/drivers/virtio/virtio_ring.c
++++ b/drivers/virtio/virtio_ring.c
+@@ -2005,6 +2005,7 @@ static struct virtqueue *vring_create_virtqueue_packed(
+ 	vq->vq.vdev = vdev;
+ 	vq->vq.name = name;
+ 	vq->vq.index = index;
++	vq->vq.reset = false;
+ 	vq->we_own_ring = true;
+ 	vq->notify = notify;
+ 	vq->weak_barriers = weak_barriers;
+@@ -2485,6 +2486,7 @@ static struct virtqueue *__vring_new_virtqueue(unsigned int index,
+ 	vq->vq.vdev = vdev;
+ 	vq->vq.name = name;
+ 	vq->vq.index = index;
++	vq->vq.reset = false;
+ 	vq->we_own_ring = false;
+ 	vq->notify = notify;
+ 	vq->weak_barriers = weak_barriers;
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index d45ee82a4470..a3f73bb6733e 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -20,6 +20,7 @@
+  * @index: the zero-based ordinal number for this queue.
+  * @num_free: number of elements we expect to be able to fit.
+  * @num_max: the maximum number of elements supported by the device.
++ * @reset: vq is in reset state or not.
+  *
+  * A note on @num_free: with indirect buffers, each buffer needs one
+  * element in the queue, otherwise a buffer will need one element per
+@@ -34,6 +35,7 @@ struct virtqueue {
+ 	unsigned int num_free;
+ 	unsigned int num_max;
+ 	void *priv;
++	bool reset;
+ };
  
- #ifndef VIRTIO_CONFIG_NO_LEGACY
- /* Do we get callbacks when the ring is completely used, even if we've
-@@ -98,4 +98,9 @@
-  * Does the device support Single Root I/O Virtualization?
-  */
- #define VIRTIO_F_SR_IOV			37
-+
-+/*
-+ * This feature indicates that the driver can reset a queue individually.
-+ */
-+#define VIRTIO_F_RING_RESET		40
- #endif /* _UAPI_LINUX_VIRTIO_CONFIG_H */
+ int virtqueue_add_outbuf(struct virtqueue *vq,
 -- 
 2.31.0
 
