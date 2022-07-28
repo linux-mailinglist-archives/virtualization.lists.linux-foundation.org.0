@@ -1,210 +1,99 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58CB7583963
-	for <lists.virtualization@lfdr.de>; Thu, 28 Jul 2022 09:23:10 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 81CA1583980
+	for <lists.virtualization@lfdr.de>; Thu, 28 Jul 2022 09:28:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 50F3C401EC;
-	Thu, 28 Jul 2022 07:23:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 50F3C401EC
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=OvP+xePI;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-oracle-onmicrosoft-com header.b=Oi8xt7tI
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7760060F26;
+	Thu, 28 Jul 2022 07:28:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7760060F26
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=i1jGwnIx;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=rGYpwh4r
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rs3FFdlFirXN; Thu, 28 Jul 2022 07:23:04 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id JYeqfcp4Cxs2; Thu, 28 Jul 2022 07:28:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D4BAA419BC;
-	Thu, 28 Jul 2022 07:23:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D4BAA419BC
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 130E160F1F;
+	Thu, 28 Jul 2022 07:28:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 130E160F1F
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 08111C0078;
-	Thu, 28 Jul 2022 07:23:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 35A3DC0078;
+	Thu, 28 Jul 2022 07:28:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 89501C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 29A04C002D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Jul 2022 07:23:01 +0000 (UTC)
+ Thu, 28 Jul 2022 07:27:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 56831832D1
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0471460F1B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Jul 2022 07:23:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 56831832D1
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=OvP+xePI; 
- dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com
- header.i=@oracle.onmicrosoft.com header.a=rsa-sha256
- header.s=selector2-oracle-onmicrosoft-com header.b=Oi8xt7tI
+ Thu, 28 Jul 2022 07:27:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0471460F1B
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MKqtfMVOfjJv
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id XcvXkqbmYyO3
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Jul 2022 07:23:00 +0000 (UTC)
+ Thu, 28 Jul 2022 07:27:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F289483299
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F289483299
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0BC89605A4
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0BC89605A4
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Jul 2022 07:22:59 +0000 (UTC)
-Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 26S5vu6n009662;
- Thu, 28 Jul 2022 07:22:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=content-type :
- message-id : date : subject : to : cc : references : from : in-reply-to :
- mime-version; s=corp-2022-7-12;
- bh=21XNGYZkSraMmOQEGzNsFoMfhtKisyM+GvCZkxkA278=;
- b=OvP+xePIXmjs9Y8gywGeJG/YD0BLwe4jeHFX74HzL8TGG3fxYAdfnWyCGCA2Sv7QvZAB
- /IsStri+TJ+7sPk7rU6qpV1Q4ei3YJGprWh74n4Nq7IxE5pJMEnN5gqV4F3dXzpbcZem
- dqnwhkLn55NQPCO/FfpOAh/tQNf/avUy9uDwMQf8emqKeMnSrb8JiTPoa3vGRsoINqcA
- q/NZKvj5O/+9DCCjefN1WRno13RC8rDTsoVczrOyFN+zPdw5BuwOgXE0tOzF48Hzdmwu
- cEv7B80nuq64dtQUSd7Mr77FRRcc4SGe6CV3gJGB8I8Ox3UG4UqDGUOP9R11RLC9KbqD Cw== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3hg9a4uv8p-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 28 Jul 2022 07:22:47 +0000
-Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 26S4JfHb034538; Thu, 28 Jul 2022 07:22:47 GMT
-Received: from nam11-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam11lp2176.outbound.protection.outlook.com [104.47.57.176])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3hh6358rx9-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 28 Jul 2022 07:22:47 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=QUmLRMJwjPIbvnwOesvN8u9LY/wlPFFcSITMgSfiH7mJAWp7I87X34chUkDWNh8/ige07UYzjDcJRAhECbrGwTNv7Wqyx90l0Ua1/VhONAcKiW9VmKyUohU7o4OJFEItD3opY9PQA9c/v33bmDc7cyho79NWJOH7h63dOANethMNOytfXrGaMXj/y4psqgRwCqC51dxnJh8UD4Vvae/N2eTE4tdGbwWj4RwEzKpF5bMmPn8UD8YOefmf75v+wKYJLEXcPPmNWXGJBSbSXoECt5FLFTS9DDpk55S6pGa5ar/9pcRZ56YEjzOhQPPIc9bACvce74CLEvgWBCJoCcSpMw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=21XNGYZkSraMmOQEGzNsFoMfhtKisyM+GvCZkxkA278=;
- b=BOy+rgYnZ+zbLVkoBXukKtdFlyZ2rdvJDwHFJ+k96BA8w4Xe7NJA/knn+cYuJG6wqxe4ZGLvE7nxjlisGygvm6qiT4J8q/xYPFEFqcpv6+ZRR7VfCZL0e9WfU/njIYpbOQTRI4056aTHAo10JS/bR4ge6BXgNlScyxViH4bkJtoR8Y4cxxXr8Jwt0MZeilXH/KbB32o8i3uHJplF8OSrbbY2FDcurXMwwrYmHGfeBSELSPZhXgWkVYfSefZC7yDpr/oEP8WRtn7qz5k2MPgq2wQOxSHzdz1TUbY23UMExONtA9XSvO6GenSupAkWb7yBku4CNskb0SneXcWTIIjTSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=21XNGYZkSraMmOQEGzNsFoMfhtKisyM+GvCZkxkA278=;
- b=Oi8xt7tIv/+DE5qfwrTxEbNBGljZfYGY9mlYnpXz+lFbFj1HKxXDHUUtAmalB1ZU8PIosyy9zdULp/arPZQU8+el5e6r9pwbj5fOxmIWEDmrpOxN2TpfsfC+g+Op/rFhlc81m9Nl6r4aDMIYiLlaJpEMx1oc4KTFhzNIj2FfXQc=
-Received: from BYAPR10MB3287.namprd10.prod.outlook.com (2603:10b6:a03:15c::11)
- by CY4PR10MB1462.namprd10.prod.outlook.com (2603:10b6:903:28::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5458.20; Thu, 28 Jul
- 2022 07:22:44 +0000
-Received: from BYAPR10MB3287.namprd10.prod.outlook.com
- ([fe80::c846:d8e4:8631:9803]) by BYAPR10MB3287.namprd10.prod.outlook.com
- ([fe80::c846:d8e4:8631:9803%4]) with mapi id 15.20.5458.026; Thu, 28 Jul 2022
- 07:22:44 +0000
-Message-ID: <535306b8-b33e-b65e-af50-5b1c562aec63@oracle.com>
-Date: Thu, 28 Jul 2022 00:22:39 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH V3 5/6] vDPA: answer num of queue pairs = 1 to userspace
- when VIRTIO_NET_F_MQ == 0
-Content-Language: en-US
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <1246d2f1-2822-0edb-cd57-efc4015f05a2@intel.com>
- <PH0PR12MB54815985C202E81122459DFFDC949@PH0PR12MB5481.namprd12.prod.outlook.com>
- <19681358-fc81-be5b-c20b-7394a549f0be@intel.com>
- <PH0PR12MB54818158D4F7F9F556022857DC979@PH0PR12MB5481.namprd12.prod.outlook.com>
- <e98fc062-021b-848b-5cf4-15bd63a11c5c@intel.com>
- <PH0PR12MB54815AD7D0674FEB1D63EB61DC979@PH0PR12MB5481.namprd12.prod.outlook.com>
- <20220727015626-mutt-send-email-mst@kernel.org>
- <66291287-fcb3-be8d-2c1b-dd44533ed8b3@oracle.com>
- <20220727050102-mutt-send-email-mst@kernel.org>
- <6d5b03ee-5362-8534-5881-a34c9ea626f0@oracle.com>
- <20220727114602-mutt-send-email-mst@kernel.org>
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-Organization: Oracle Corporation
-In-Reply-To: <20220727114602-mutt-send-email-mst@kernel.org>
-X-ClientProxiedBy: SA9PR13CA0037.namprd13.prod.outlook.com
- (2603:10b6:806:22::12) To BYAPR10MB3287.namprd10.prod.outlook.com
- (2603:10b6:a03:15c::11)
+ Thu, 28 Jul 2022 07:27:55 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 8666434B0F;
+ Thu, 28 Jul 2022 07:27:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1658993273; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=MjLZWdiD5mNypfZ8WQHGTKPQ5o9MhVT+Q6UcblJEPvU=;
+ b=i1jGwnIxyH3QhHAg9qTkXFjx85+wynKMSD8pj5qWcAxamD+8qLNLy7a2oIo80I+P2DPuo+
+ SFobdo/EENf6m3k7PZ6UbMnMZgJefcqe9WkiVA8Eq+Gxt57wSmhN+ZZM3oki5m+IkKrY8C
+ ONvR6oubabawpG3GlPj21UrnJ6hwAdU=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1658993273;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=MjLZWdiD5mNypfZ8WQHGTKPQ5o9MhVT+Q6UcblJEPvU=;
+ b=rGYpwh4rVYqF465KZkHwG4ObbaRCwhO22FSJLHixdZr2LPQXCkbAnsxMe8ZvzjEhJzlS73
+ HcYRAxS5J1sB+zBA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3D30813A7E;
+ Thu, 28 Jul 2022 07:27:53 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id K8YHDXk64mJAEwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Thu, 28 Jul 2022 07:27:53 +0000
+Message-ID: <4ba57f80-5025-c3a0-5f65-ec52643f0122@suse.de>
+Date: Thu, 28 Jul 2022 09:27:52 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 1dd03e47-9e7b-4c17-6053-08da7069f6ca
-X-MS-TrafficTypeDiagnostic: CY4PR10MB1462:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: fbTIAHB4nSxKbTaO4w3hYABLl7y3oYw9uZIag+DMYXHKHFhBLqUFvpLbDsPbue4A38WwZHO4xlAJW3vfEsw85lYUZWaXP3MkEa12PiBmSb9B3WJ44ijgsbDl06Oehyv27Bld3tCYXFZUamXGVo2Yb4l/FbocCrSwDFk+GKag87EUreoGD3vu2gzYnDmOeWUnh3pjQblSq93IfV2Uz0P95P9/7ZBYEg9utsmVgY49ekKFY1SvvR8ed7yJZx5MSlUz3h6JPOPpme0jdRCDccm4qTeiAR0Lu2vV7PE9gpQmNlUWT80T2UAj/IbgPBZAMHSBkUuPeDp1na9r0yQJic3Glv4NAUoK04qMVPagd1ZgK2+48qzjw1p/IH1h545FiGJqhOTzFSLfaQ5yHW2qKjAjDyy+1/sF79V+aCPMLF+ht1Rh3IQpftnemwriz2pcMyh6omurPjhcl/EOQyjmejRAVD4iX93lhOtR2utFWK1AQIUy68jKfNReQ24+BMDLDTf63fbNN7fivr9/l5YYvYddjRmdkYTg8IAZ4r2VodaWmCmGx8jG3g6wG2FGs/5ajUD+5GTbZMWHFTR2wy/keemYn7uzJXSlHeTshTvUvySwH8lVyW1ZdAhMBcOQ0s2nG4OHpIy0SnPnUqwBfjd3/0dyeOnZ8aikZ0HcW4oTiABVMFN8Rcw29p9RylTvFbj5hw8J79oKJvb3ktRzXv5EyADvsuNgjV1rrH/JG0ZOnfA2z8NoOKX9McUbOIzmUuGQBZADCx9YEoVx1tZt00C9siG4GIba7bz9FjnTsfoL9X6sKwQYZzPmEjTEadFgM3Ra2q6VdVa1+4vo+TxAhJPxadaniA==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BYAPR10MB3287.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230016)(396003)(366004)(346002)(39860400002)(136003)(376002)(2616005)(316002)(86362001)(38100700002)(8936002)(6486002)(31686004)(41300700001)(36756003)(2906002)(478600001)(31696002)(5660300002)(83380400001)(6916009)(33964004)(26005)(6512007)(54906003)(6666004)(4326008)(66946007)(66476007)(186003)(53546011)(36916002)(8676002)(66556008)(6506007)(45980500001)(43740500002);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VG1EMEREV2h5ZjVucGdGOTFPU0tvVWJZZGdCejIzYm9YY0xQaXdPMjFtVW1m?=
- =?utf-8?B?dkNjRVBuK2xpNytDc3M2eTRwUWQxUnV4dlRvaHNIa2JwR1F5NmJWVEZyWVA5?=
- =?utf-8?B?Q3BsdGtDaGtuT254SkRzUHg1Sk4zSUNMYWUra0ZTbk1LRTJ4YXM0Skd3SSs3?=
- =?utf-8?B?QjhOVGE4S0NmUVYzWldhNWxybEFDSmxKTjJFbGJJRDZCc0oyRy94djNlalBi?=
- =?utf-8?B?S1Y1WURCd1VJdnhUczRlNjkzRjErbEtTeWpLSmVEcWFGNjZSdURjSFBKMXMv?=
- =?utf-8?B?b3ozemJqZ0ZxWDErOUFweEwyZnlya1hicDVramFZRUY5NXFybmw1WjMrbDJB?=
- =?utf-8?B?U0tlZU5CSUJvUnMwNS9NR04vTVdyUmZxbFlXS0ZWSmtGNVh6dU5zcGxyQTJT?=
- =?utf-8?B?aGxHUHc2YW1ocWFDQ2hsSENIbVkrN2ZzMEVWTExMR1Erdmx2R1dhZWZkNVFt?=
- =?utf-8?B?ZXVZZU5ZY3JrcjVmbGUycDM2aFA3RmpWYWcxUGd1M2lCdGpkSkg3TWxPQlp3?=
- =?utf-8?B?S0hpTE85K0FXUXQ1RDNCcXd5U2l6M3prUVBOcjVaYzlGVldjUGN1bGEwRU1v?=
- =?utf-8?B?cSt1bmY3NUNZM2svRkRobkd1T2JlWHhTQndzekw3emxuYmFFeW91a2NSWGdt?=
- =?utf-8?B?cjNZVU9iRVQxUlNtMFp6T29FdWowVXgrV3F2WHpwQ1VQNG1jK1NwNGo3UjJG?=
- =?utf-8?B?ckxQU0tvOExUZnlXSGU5YXVIRXZLMkpBOWhITFduU0dWYkg0V2liOGZDeEhI?=
- =?utf-8?B?RTRCSDZ1V3Vxd2RtNnNsQmVWcVdhWStLNWhDYzFiUE4xQlV1RmgxZG4rOVlN?=
- =?utf-8?B?dXk5NW9GQ1JuT1pjUXIvQ05Bcm9Pb0ZrSHM5enN6Vi9NcjJWK1JwZGJQLzVZ?=
- =?utf-8?B?bnhIa0taMFpHZTlEKzVPdmEwb2c5YVVFSEFEUDF3SFRlVVkwbzh4K2dLa3BW?=
- =?utf-8?B?YmlNL3NNWnNMUTd5MVA3ZGMvVlF2eGJJaysyc0d3R2Q0Ym1hajVHSmVzUGoy?=
- =?utf-8?B?djU3c2MyTTdIRXNaU2ZtZW91UTRQTEpvdmVEQzk2aTI0THViTmlZOXlzeXNF?=
- =?utf-8?B?NGRFREVSMEpidWFuRWNGYVZaTWZER0dRYmh1Zk9OajV1ZVBlR3RGUVpKT1NW?=
- =?utf-8?B?Qm9jdDQ1QnZYSno0THQ0aUtQNDc5T3BKYXhDRHp2K1dhUVVtMi81Z1NhbGJN?=
- =?utf-8?B?QmRSU3hmU1c2VmNkcnF4bUJRS2piSHArSXZwU3hja0FtcVIzRStiK24yMDFh?=
- =?utf-8?B?cHpjR0xHVlJGNHk3U2VLdnpoNWlRTkoxRlk1WjNhNFJoWnEvOGdSaVFiazU2?=
- =?utf-8?B?N3ZYdXB3YWF5UTFxSWhseUludWpSUG10S202S1ZCdUhhNDQzbFRNdno5ZGZG?=
- =?utf-8?B?R2kvdzloc1NyWjRVK0hZQ0ZCMkhxYWtRM2FLZ0tWVnJUbks2bVE5emZhWGxI?=
- =?utf-8?B?QkRjK0JyTW5Lamd1amFXbjkra2J5Y1ZxMDF2MTRhanJleGpxUkZBWEMxMVli?=
- =?utf-8?B?QXFDdEYwNFBYbzA3QnVwS0JRd3ZaUHlmd2prOTBaTlJWUVkvRkpZWXdneGly?=
- =?utf-8?B?OEZFRUx6RjJwYXJjU2dqRW0zWW5OdFFpQXRWSnEreHl4RkZPRzVzdE80Q3hk?=
- =?utf-8?B?SWlVRlBUcnN5VERWRnJFSERPQ1lvK1pCVTdqZDhzYXhlYW9oY0VONDBkZFNP?=
- =?utf-8?B?TkJveG5hUE9tS05rTDMwSVJOVzFpSmVNK3JsL0lRQ3I5N2gwN0EvVy8ybFkv?=
- =?utf-8?B?M3B4ZmM5aVpqUlZpb2xUVmhYcGt0elRFN1cwanJHajN1SmphamxoMVBqZEI2?=
- =?utf-8?B?S08rWW0zNXZMUXAydTIwYkFVeGN1ZUsrK281NVpzOU9MVnJDV0JpNG9DeTA0?=
- =?utf-8?B?ZkdvSTZkUGdSc2ZlTmhOWHA5K3lJRUk1eU5FSVRTV1BkR2RFeVM5VWdXbnFB?=
- =?utf-8?B?WHJLRzhDQ0hrQXhGcXVWNTZMRDl6eGtvcWZmRTgvWVVZWVZPcEt5d0h0SitC?=
- =?utf-8?B?Zld4M2ZsMFRXTnNJenhVL0VndlZTM1lhYUVRbmx2eW1hYk5UZUhWZnF0bjhn?=
- =?utf-8?B?WGdCcG1BTFl3L0dSTStXRDFWeUticDJsZHJIcmdTRTNoQ3lZU0tCOU81Z0Mx?=
- =?utf-8?B?S0QrL1JhQVE3UlVtYVJMYno3SWZTc2RCNFUzVVUybmEyMTVHU29qNjUyeXB2?=
- =?utf-8?B?ZGc9PQ==?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1dd03e47-9e7b-4c17-6053-08da7069f6ca
-X-MS-Exchange-CrossTenant-AuthSource: BYAPR10MB3287.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Jul 2022 07:22:44.2400 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: m9JOd3++QT+NQ92N40G7hHKEARTb4iL3JoS1Hbl3zGuRwtd7YJIlNC2VF8SprsLcyOiLI0YGZzWzPKlirzt0KQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR10MB1462
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.883,Hydra:6.0.517,FMLib:17.11.122.1
- definitions=2022-07-28_01,2022-07-28_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- bulkscore=0 malwarescore=0
- adultscore=0 mlxscore=0 mlxlogscore=999 suspectscore=0 spamscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2206140000
- definitions=main-2207280029
-X-Proofpoint-ORIG-GUID: J37dbAgAfnUYJ4XZocx6DJlmcGPEu1xi
-X-Proofpoint-GUID: J37dbAgAfnUYJ4XZocx6DJlmcGPEu1xi
-Cc: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "xieyongji@bytedance.com" <xieyongji@bytedance.com>,
- "gautam.dawar@amd.com" <gautam.dawar@amd.com>, "Zhu,
- Lingshan" <lingshan.zhu@intel.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: [PATCH 04/12] drm/format-helper: Rework XRGB8888-to-RGBG332
+ conversion
+Content-Language: en-US
+To: =?UTF-8?B?Sm9zw6kgRXhww7NzaXRv?= <jose.exposito89@gmail.com>
+References: <20220727113312.22407-1-tzimmermann@suse.de>
+ <20220727113312.22407-5-tzimmermann@suse.de>
+ <20220728071353.GA56421@elementary>
+From: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <20220728071353.GA56421@elementary>
+Cc: linux-hyperv@vger.kernel.org, david@lechnology.com, airlied@linux.ie,
+ javierm@redhat.com, dri-devel@lists.freedesktop.org,
+ virtualization@lists.linux-foundation.org, drawat.floss@gmail.com,
+ noralf@tronnes.org, airlied@redhat.com, sam@ravnborg.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -216,358 +105,198 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============8147000425820472179=="
+Content-Type: multipart/mixed; boundary="===============1289755195621547163=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============8147000425820472179==
-Content-Type: multipart/alternative;
- boundary="------------VKm9Wwb7oxdrUsJ69c6ObYFi"
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============1289755195621547163==
 Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------TnFD3M0YVl0sdOjGfA0JYtYh"
 
---------------VKm9Wwb7oxdrUsJ69c6ObYFi
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------TnFD3M0YVl0sdOjGfA0JYtYh
+Content-Type: multipart/mixed; boundary="------------G4EHYJqHOXnYBINd6xgRgzva";
+ protected-headers="v1"
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: =?UTF-8?B?Sm9zw6kgRXhww7NzaXRv?= <jose.exposito89@gmail.com>
+Cc: linux-hyperv@vger.kernel.org, david@lechnology.com, airlied@linux.ie,
+ dri-devel@lists.freedesktop.org, javierm@redhat.com,
+ virtualization@lists.linux-foundation.org, drawat.floss@gmail.com,
+ noralf@tronnes.org, kraxel@redhat.com, airlied@redhat.com, sam@ravnborg.org
+Message-ID: <4ba57f80-5025-c3a0-5f65-ec52643f0122@suse.de>
+Subject: Re: [PATCH 04/12] drm/format-helper: Rework XRGB8888-to-RGBG332
+ conversion
+References: <20220727113312.22407-1-tzimmermann@suse.de>
+ <20220727113312.22407-5-tzimmermann@suse.de>
+ <20220728071353.GA56421@elementary>
+In-Reply-To: <20220728071353.GA56421@elementary>
+
+--------------G4EHYJqHOXnYBINd6xgRgzva
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: base64
 
+SGkNCg0KQW0gMjguMDcuMjIgdW0gMDk6MTMgc2NocmllYiBKb3PDqSBFeHDDs3NpdG86DQo+
+IEhpIFRob21hcywNCj4gDQo+IE9uIFdlZCwgSnVsIDI3LCAyMDIyIGF0IDAxOjMzOjA0UE0g
+KzAyMDAsIFRob21hcyBaaW1tZXJtYW5uIHdyb3RlOg0KPj4gVXBkYXRlIFhSR0I4ODg4LXRv
+LVJHQjMzMiBjb252ZXJzaW9uIHRvIHN1cHBvcnQgc3RydWN0IGlvc3lzX21hcA0KPj4gYW5k
+IGNvbnZlcnQgYWxsIHVzZXJzLiBBbHRob3VnaCB0aGVzZSBhcmUgc2luZ2xlLXBsYW5lIGNv
+bG9yIGZvcm1hdHMsDQo+PiB0aGUgbmV3IGludGVyZmFjZSBzdXBwb3J0cyBtdWx0aS1wbGFu
+ZSBmb3JtYXRzIGZvciBjb25zaXN0ZW5jeSB3aXRoDQo+PiBkcm1fZmJfYmxpdCgpLg0KPj4N
+Cj4+IFNpZ25lZC1vZmYtYnk6IFRob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNl
+LmRlPg0KPiANCj4gVGVzdGVkLWJ5OiBKb3PDqSBFeHDDs3NpdG8gPGpvc2UuZXhwb3NpdG84
+OUBnbWFpbC5jb20+DQo+IFJldmlld2VkLWJ5OiBKb3PDqSBFeHDDs3NpdG8gPGpvc2UuZXhw
+b3NpdG84OUBnbWFpbC5jb20+DQo+IA0KPiBJIGp1c3QgcmFuIHRoZSB0ZXN0cyBpbiB4ODZf
+NjQgYW5kIFVNTCBhbmQgdGhleSB3b3JrIGFzIGV4cGVjdGVkLg0KPiBJIG5lZWQgdG8gZmlu
+ZCBzb21lIHRpbWUgdG8gcmV2aWV3IGFsbCBwYXRjaGVzLCBidXQgdGhpcyBvbmUgTEdUTS4N
+Cg0KVGhhbmtzIGEgbG90Lg0KDQo+IA0KPiBUaGlzIHNlcmllcyB3aWxsIGNhdXNlIGNvbmZs
+aWN0cyB3aXRoIFsxXS4gRGVwZW5kaW5nIG9uIHdoaWNoIHBhdGNoc2V0DQo+IGdldHMgbWVy
+Z2VkIGVhcmxpZXIsIHdlIHdpbGwgaGF2ZSB0byByZXNvbHZlIHRoZSBjb25mbGljdHMgaW4g
+b25lDQo+IHNlcmllcyBvciB0aGUgb3RoZXIuDQoNCkkndmUgc2VlbiB0aGlzLiBHbyBhaGVh
+ZCBhbmQgY29tbWl0IHlvdXIgcGF0Y2hlcyBpZiB0aGV5IGFyZSByZWFkeS4gSSANCmNhbiBl
+YXNpbHkgcmViYXNlIG9uIHRvcC4NCg0KQmVzdCByZWFyZHMNClRob21hcw0KDQo+IA0KPiBC
+ZXN0IHdpc2hlcywNCj4gSm9zZQ0KPiANCj4gWzFdIGh0dHBzOi8vcGF0Y2h3b3JrLmtlcm5l
+bC5vcmcvcHJvamVjdC9kcmktZGV2ZWwvbGlzdC8/c2VyaWVzPTY2MzI2Ng0KPiANCj4+IC0t
+LQ0KPj4gICBkcml2ZXJzL2dwdS9kcm0vZHJtX2Zvcm1hdF9oZWxwZXIuYyAgICAgICAgICAg
+fCAyNSArKysrKysrKysrKysrKy0tLS0tDQo+PiAgIGRyaXZlcnMvZ3B1L2RybS9ndWQvZ3Vk
+X3BpcGUuYyAgICAgICAgICAgICAgICB8ICAyICstDQo+PiAgIC4uLi9ncHUvZHJtL3Rlc3Rz
+L2RybV9mb3JtYXRfaGVscGVyX3Rlc3QuYyAgICB8IDE0ICsrKysrKy0tLS0tDQo+PiAgIGlu
+Y2x1ZGUvZHJtL2RybV9mb3JtYXRfaGVscGVyLmggICAgICAgICAgICAgICB8ICA1ICsrLS0N
+Cj4+ICAgNCBmaWxlcyBjaGFuZ2VkLCAzMSBpbnNlcnRpb25zKCspLCAxNSBkZWxldGlvbnMo
+LSkNCj4+DQo+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9ncHUvZHJtL2RybV9mb3JtYXRfaGVs
+cGVyLmMgYi9kcml2ZXJzL2dwdS9kcm0vZHJtX2Zvcm1hdF9oZWxwZXIuYw0KPj4gaW5kZXgg
+ZmEyMmQzY2IxMWU4Li4yYjVjMzc0NmZmNGEgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJzL2dw
+dS9kcm0vZHJtX2Zvcm1hdF9oZWxwZXIuYw0KPj4gKysrIGIvZHJpdmVycy9ncHUvZHJtL2Ry
+bV9mb3JtYXRfaGVscGVyLmMNCj4+IEBAIC0yNjUsMTggKzI2NSwzMSBAQCBzdGF0aWMgdm9p
+ZCBkcm1fZmJfeHJnYjg4ODhfdG9fcmdiMzMyX2xpbmUodm9pZCAqZGJ1ZiwgY29uc3Qgdm9p
+ZCAqc2J1ZiwgdW5zaWduZQ0KPj4gICANCj4+ICAgLyoqDQo+PiAgICAqIGRybV9mYl94cmdi
+ODg4OF90b19yZ2IzMzIgLSBDb252ZXJ0IFhSR0I4ODg4IHRvIFJHQjMzMiBjbGlwIGJ1ZmZl
+cg0KPj4gLSAqIEBkc3Q6IFJHQjMzMiBkZXN0aW5hdGlvbiBidWZmZXINCj4+IC0gKiBAZHN0
+X3BpdGNoOiBOdW1iZXIgb2YgYnl0ZXMgYmV0d2VlbiB0d28gY29uc2VjdXRpdmUgc2Nhbmxp
+bmVzIHdpdGhpbiBkc3QNCj4+IC0gKiBAc3JjOiBYUkdCODg4OCBzb3VyY2UgYnVmZmVyDQo+
+PiArICogQGRzdDogQXJyYXkgb2YgUkdCMzMyIGRlc3RpbmF0aW9uIGJ1ZmZlcnMNCj4+ICsg
+KiBAZHN0X3BpdGNoOiBBcnJheSBvZiBudW1iZXJzIG9mIGJ5dGVzIGJldHdlZW4gdHdvIGNv
+bnNlY3V0aXZlIHNjYW5saW5lcyB3aXRoaW4gZHN0DQo+PiArICogQHZtYXA6IEFycmF5IG9m
+IFhSR0I4ODg4IHNvdXJjZSBidWZmZXJzDQo+PiAgICAqIEBmYjogRFJNIGZyYW1lYnVmZmVy
+DQo+PiAgICAqIEBjbGlwOiBDbGlwIHJlY3RhbmdsZSBhcmVhIHRvIGNvcHkNCj4+ICAgICoN
+Cj4+ICAgICogRHJpdmVycyBjYW4gdXNlIHRoaXMgZnVuY3Rpb24gZm9yIFJHQjMzMiBkZXZp
+Y2VzIHRoYXQgZG9uJ3QgbmF0aXZlbHkgc3VwcG9ydCBYUkdCODg4OC4NCj4+ICAgICovDQo+
+PiAtdm9pZCBkcm1fZmJfeHJnYjg4ODhfdG9fcmdiMzMyKHZvaWQgKmRzdCwgdW5zaWduZWQg
+aW50IGRzdF9waXRjaCwgY29uc3Qgdm9pZCAqc3JjLA0KPj4gLQkJCSAgICAgICBjb25zdCBz
+dHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYiwgY29uc3Qgc3RydWN0IGRybV9yZWN0ICpjbGlw
+KQ0KPj4gK3ZvaWQgZHJtX2ZiX3hyZ2I4ODg4X3RvX3JnYjMzMihzdHJ1Y3QgaW9zeXNfbWFw
+ICpkc3QsIGNvbnN0IHVuc2lnbmVkIGludCAqZHN0X3BpdGNoLA0KPj4gKwkJCSAgICAgICBj
+b25zdCBzdHJ1Y3QgaW9zeXNfbWFwICp2bWFwLCBjb25zdCBzdHJ1Y3QgZHJtX2ZyYW1lYnVm
+ZmVyICpmYiwNCj4+ICsJCQkgICAgICAgY29uc3Qgc3RydWN0IGRybV9yZWN0ICpjbGlwKQ0K
+Pj4gICB7DQo+PiAtCWRybV9mYl94ZnJtKGRzdCwgZHN0X3BpdGNoLCAxLCBzcmMsIGZiLCBj
+bGlwLCBmYWxzZSwgZHJtX2ZiX3hyZ2I4ODg4X3RvX3JnYjMzMl9saW5lKTsNCj4+ICsJc3Rh
+dGljIGNvbnN0IHVuc2lnbmVkIGludCBkZWZhdWx0X2RzdF9waXRjaFtEUk1fRk9STUFUX01B
+WF9QTEFORVNdID0gew0KPj4gKwkJMCwgMCwgMCwgMA0KPj4gKwl9Ow0KPj4gKw0KPj4gKwlp
+ZiAoIWRzdF9waXRjaCkNCj4+ICsJCWRzdF9waXRjaCA9IGRlZmF1bHRfZHN0X3BpdGNoOw0K
+Pj4gKw0KPj4gKwlpZiAoZHN0WzBdLmlzX2lvbWVtKQ0KPj4gKwkJZHJtX2ZiX3hmcm1fdG9p
+byhkc3RbMF0udmFkZHJfaW9tZW0sIGRzdF9waXRjaFswXSwgMSwgdm1hcFswXS52YWRkciwg
+ZmIsIGNsaXAsDQo+PiArCQkJCSBmYWxzZSwgZHJtX2ZiX3hyZ2I4ODg4X3RvX3JnYjMzMl9s
+aW5lKTsNCj4+ICsJZWxzZQ0KPj4gKwkJZHJtX2ZiX3hmcm0oZHN0WzBdLnZhZGRyLCBkc3Rf
+cGl0Y2hbMF0sIDEsIHZtYXBbMF0udmFkZHIsIGZiLCBjbGlwLA0KPj4gKwkJCSAgICBmYWxz
+ZSwgZHJtX2ZiX3hyZ2I4ODg4X3RvX3JnYjMzMl9saW5lKTsNCj4+ICAgfQ0KPj4gICBFWFBP
+UlRfU1lNQk9MKGRybV9mYl94cmdiODg4OF90b19yZ2IzMzIpOw0KPj4gICANCj4+IGRpZmYg
+LS1naXQgYS9kcml2ZXJzL2dwdS9kcm0vZ3VkL2d1ZF9waXBlLmMgYi9kcml2ZXJzL2dwdS9k
+cm0vZ3VkL2d1ZF9waXBlLmMNCj4+IGluZGV4IGExNWNkYTliYTA1OC4uNDI2YTNhZTZjYzUw
+IDEwMDY0NA0KPj4gLS0tIGEvZHJpdmVycy9ncHUvZHJtL2d1ZC9ndWRfcGlwZS5jDQo+PiAr
+KysgYi9kcml2ZXJzL2dwdS9kcm0vZ3VkL2d1ZF9waXBlLmMNCj4+IEBAIC0xOTYsNyArMTk2
+LDcgQEAgc3RhdGljIGludCBndWRfcHJlcF9mbHVzaChzdHJ1Y3QgZ3VkX2RldmljZSAqZ2Ry
+bSwgc3RydWN0IGRybV9mcmFtZWJ1ZmZlciAqZmIsDQo+PiAgIAkJfSBlbHNlIGlmIChmb3Jt
+YXQtPmZvcm1hdCA9PSBEUk1fRk9STUFUX1I4KSB7DQo+PiAgIAkJCWRybV9mYl94cmdiODg4
+OF90b19ncmF5OChidWYsIDAsIHZhZGRyLCBmYiwgcmVjdCk7DQo+PiAgIAkJfSBlbHNlIGlm
+IChmb3JtYXQtPmZvcm1hdCA9PSBEUk1fRk9STUFUX1JHQjMzMikgew0KPj4gLQkJCWRybV9m
+Yl94cmdiODg4OF90b19yZ2IzMzIoYnVmLCAwLCB2YWRkciwgZmIsIHJlY3QpOw0KPj4gKwkJ
+CWRybV9mYl94cmdiODg4OF90b19yZ2IzMzIoJmRzdCwgTlVMTCwgbWFwX2RhdGEsIGZiLCBy
+ZWN0KTsNCj4+ICAgCQl9IGVsc2UgaWYgKGZvcm1hdC0+Zm9ybWF0ID09IERSTV9GT1JNQVRf
+UkdCNTY1KSB7DQo+PiAgIAkJCWRybV9mYl94cmdiODg4OF90b19yZ2I1NjUoYnVmLCAwLCB2
+YWRkciwgZmIsIHJlY3QsIGd1ZF9pc19iaWdfZW5kaWFuKCkpOw0KPj4gICAJCX0gZWxzZSBp
+ZiAoZm9ybWF0LT5mb3JtYXQgPT0gRFJNX0ZPUk1BVF9SR0I4ODgpIHsNCj4+IGRpZmYgLS1n
+aXQgYS9kcml2ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2Zvcm1hdF9oZWxwZXJfdGVzdC5jIGIv
+ZHJpdmVycy9ncHUvZHJtL3Rlc3RzL2RybV9mb3JtYXRfaGVscGVyX3Rlc3QuYw0KPj4gaW5k
+ZXggOTg1ODNiZjU2MDQ0Li5iNzRkYmEwNmY3MDQgMTAwNjQ0DQo+PiAtLS0gYS9kcml2ZXJz
+L2dwdS9kcm0vdGVzdHMvZHJtX2Zvcm1hdF9oZWxwZXJfdGVzdC5jDQo+PiArKysgYi9kcml2
+ZXJzL2dwdS9kcm0vdGVzdHMvZHJtX2Zvcm1hdF9oZWxwZXJfdGVzdC5jDQo+PiBAQCAtMTI0
+LDcgKzEyNCw4IEBAIHN0YXRpYyB2b2lkIHhyZ2I4ODg4X3RvX3JnYjMzMl90ZXN0KHN0cnVj
+dCBrdW5pdCAqdGVzdCkNCj4+ICAgew0KPj4gICAJY29uc3Qgc3RydWN0IHhyZ2I4ODg4X3Rv
+X3JnYjMzMl9jYXNlICpwYXJhbXMgPSB0ZXN0LT5wYXJhbV92YWx1ZTsNCj4+ICAgCXNpemVf
+dCBkc3Rfc2l6ZTsNCj4+IC0JX191OCAqZHN0ID0gTlVMTDsNCj4+ICsJc3RydWN0IGlvc3lz
+X21hcCBkc3QsIHhyZ2I4ODg4Ow0KPj4gKwlfX3U4ICpidWYgPSBOVUxMOw0KPj4gICANCj4+
+ICAgCXN0cnVjdCBkcm1fZnJhbWVidWZmZXIgZmIgPSB7DQo+PiAgIAkJLmZvcm1hdCA9IGRy
+bV9mb3JtYXRfaW5mbyhEUk1fRk9STUFUX1hSR0I4ODg4KSwNCj4+IEBAIC0xMzUsMTIgKzEz
+NiwxMyBAQCBzdGF0aWMgdm9pZCB4cmdiODg4OF90b19yZ2IzMzJfdGVzdChzdHJ1Y3Qga3Vu
+aXQgKnRlc3QpDQo+PiAgIAkJCQkgICAgICAgJnBhcmFtcy0+Y2xpcCk7DQo+PiAgIAlLVU5J
+VF9BU1NFUlRfR1QodGVzdCwgZHN0X3NpemUsIDApOw0KPj4gICANCj4+IC0JZHN0ID0ga3Vu
+aXRfa3phbGxvYyh0ZXN0LCBkc3Rfc2l6ZSwgR0ZQX0tFUk5FTCk7DQo+PiAtCUtVTklUX0FT
+U0VSVF9OT1RfRVJSX09SX05VTEwodGVzdCwgZHN0KTsNCj4+ICsJYnVmID0ga3VuaXRfa3ph
+bGxvYyh0ZXN0LCBkc3Rfc2l6ZSwgR0ZQX0tFUk5FTCk7DQo+PiArCUtVTklUX0FTU0VSVF9O
+T1RfRVJSX09SX05VTEwodGVzdCwgYnVmKTsNCj4+ICAgDQo+PiAtCWRybV9mYl94cmdiODg4
+OF90b19yZ2IzMzIoZHN0LCBwYXJhbXMtPmRzdF9waXRjaCwgcGFyYW1zLT54cmdiODg4OCwN
+Cj4+IC0JCQkJICAmZmIsICZwYXJhbXMtPmNsaXApOw0KPj4gLQlLVU5JVF9FWFBFQ1RfRVEo
+dGVzdCwgbWVtY21wKGRzdCwgcGFyYW1zLT5leHBlY3RlZCwgZHN0X3NpemUpLCAwKTsNCj4+
+ICsJaW9zeXNfbWFwX3NldF92YWRkcigmZHN0LCBidWYpOw0KPj4gKwlpb3N5c19tYXBfc2V0
+X3ZhZGRyKCZ4cmdiODg4OCwgKHZvaWQgX19mb3JjZSAqKXBhcmFtcy0+eHJnYjg4ODgpOw0K
+Pj4gKwlkcm1fZmJfeHJnYjg4ODhfdG9fcmdiMzMyKCZkc3QsICZwYXJhbXMtPmRzdF9waXRj
+aCwgJnhyZ2I4ODg4LCAmZmIsICZwYXJhbXMtPmNsaXApOw0KPj4gKwlLVU5JVF9FWFBFQ1Rf
+RVEodGVzdCwgbWVtY21wKGJ1ZiwgcGFyYW1zLT5leHBlY3RlZCwgZHN0X3NpemUpLCAwKTsN
+Cj4+ICAgfQ0KPj4gICANCj4+ICAgc3RhdGljIHN0cnVjdCBrdW5pdF9jYXNlIGRybV9mb3Jt
+YXRfaGVscGVyX3Rlc3RfY2FzZXNbXSA9IHsNCj4+IGRpZmYgLS1naXQgYS9pbmNsdWRlL2Ry
+bS9kcm1fZm9ybWF0X2hlbHBlci5oIGIvaW5jbHVkZS9kcm0vZHJtX2Zvcm1hdF9oZWxwZXIu
+aA0KPj4gaW5kZXggNjA5NDRmZWFhOTM2Li4zYzI4ZjA5OWUzZWQgMTAwNjQ0DQo+PiAtLS0g
+YS9pbmNsdWRlL2RybS9kcm1fZm9ybWF0X2hlbHBlci5oDQo+PiArKysgYi9pbmNsdWRlL2Ry
+bS9kcm1fZm9ybWF0X2hlbHBlci5oDQo+PiBAQCAtMjAsOCArMjAsOSBAQCB2b2lkIGRybV9m
+Yl9tZW1jcHkoc3RydWN0IGlvc3lzX21hcCAqZHN0LCBjb25zdCB1bnNpZ25lZCBpbnQgKmRz
+dF9waXRjaCwNCj4+ICAgdm9pZCBkcm1fZmJfc3dhYihzdHJ1Y3QgaW9zeXNfbWFwICpkc3Qs
+IGNvbnN0IHVuc2lnbmVkIGludCAqZHN0X3BpdGNoLA0KPj4gICAJCSBjb25zdCBzdHJ1Y3Qg
+aW9zeXNfbWFwICp2bWFwLCBjb25zdCBzdHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYiwNCj4+
+ICAgCQkgY29uc3Qgc3RydWN0IGRybV9yZWN0ICpjbGlwLCBib29sIGNhY2hlZCk7DQo+PiAt
+dm9pZCBkcm1fZmJfeHJnYjg4ODhfdG9fcmdiMzMyKHZvaWQgKmRzdCwgdW5zaWduZWQgaW50
+IGRzdF9waXRjaCwgY29uc3Qgdm9pZCAqdmFkZHIsDQo+PiAtCQkJICAgICAgIGNvbnN0IHN0
+cnVjdCBkcm1fZnJhbWVidWZmZXIgKmZiLCBjb25zdCBzdHJ1Y3QgZHJtX3JlY3QgKmNsaXAp
+Ow0KPj4gK3ZvaWQgZHJtX2ZiX3hyZ2I4ODg4X3RvX3JnYjMzMihzdHJ1Y3QgaW9zeXNfbWFw
+ICpkc3QsIGNvbnN0IHVuc2lnbmVkIGludCAqZHN0X3BpdGNoLA0KPj4gKwkJCSAgICAgICBj
+b25zdCBzdHJ1Y3QgaW9zeXNfbWFwICp2bWFwLCBjb25zdCBzdHJ1Y3QgZHJtX2ZyYW1lYnVm
+ZmVyICpmYiwNCj4+ICsJCQkgICAgICAgY29uc3Qgc3RydWN0IGRybV9yZWN0ICpjbGlwKTsN
+Cj4+ICAgdm9pZCBkcm1fZmJfeHJnYjg4ODhfdG9fcmdiNTY1KHZvaWQgKmRzdCwgdW5zaWdu
+ZWQgaW50IGRzdF9waXRjaCwgY29uc3Qgdm9pZCAqdmFkZHIsDQo+PiAgIAkJCSAgICAgICBj
+b25zdCBzdHJ1Y3QgZHJtX2ZyYW1lYnVmZmVyICpmYiwgY29uc3Qgc3RydWN0IGRybV9yZWN0
+ICpjbGlwLA0KPj4gICAJCQkgICAgICAgYm9vbCBzd2FiKTsNCj4+IC0tIA0KPj4gMi4zNy4x
+DQo+Pg0KDQotLSANClRob21hcyBaaW1tZXJtYW5uDQpHcmFwaGljcyBEcml2ZXIgRGV2ZWxv
+cGVyDQpTVVNFIFNvZnR3YXJlIFNvbHV0aW9ucyBHZXJtYW55IEdtYkgNCk1heGZlbGRzdHIu
+IDUsIDkwNDA5IE7DvHJuYmVyZywgR2VybWFueQ0KKEhSQiAzNjgwOSwgQUcgTsO8cm5iZXJn
+KQ0KR2VzY2jDpGZ0c2bDvGhyZXI6IEl2byBUb3Rldg0K
 
+--------------G4EHYJqHOXnYBINd6xgRgzva--
 
-On 7/27/2022 8:48 AM, Michael S. Tsirkin wrote:
-> On Wed, Jul 27, 2022 at 03:09:43AM -0700, Si-Wei Liu wrote:
->>
->> On 7/27/2022 2:01 AM, Michael S. Tsirkin wrote:
->>> On Wed, Jul 27, 2022 at 12:50:33AM -0700, Si-Wei Liu wrote:
->>>> On 7/26/2022 11:01 PM, Michael S. Tsirkin wrote:
->>>>> On Wed, Jul 27, 2022 at 03:47:35AM +0000, Parav Pandit wrote:
->>>>>>> From: Zhu, Lingshan<lingshan.zhu@intel.com>
->>>>>>> Sent: Tuesday, July 26, 2022 10:53 PM
->>>>>>>
->>>>>>> On 7/27/2022 10:17 AM, Parav Pandit wrote:
->>>>>>>>> From: Zhu, Lingshan<lingshan.zhu@intel.com>
->>>>>>>>> Sent: Tuesday, July 26, 2022 10:15 PM
->>>>>>>>>
->>>>>>>>> On 7/26/2022 11:56 PM, Parav Pandit wrote:
->>>>>>>>>>> From: Zhu, Lingshan<lingshan.zhu@intel.com>
->>>>>>>>>>> Sent: Tuesday, July 12, 2022 11:46 PM
->>>>>>>>>>>> When the user space which invokes netlink commands, detects that
->>>>>>>>> _MQ
->>>>>>>>>>> is not supported, hence it takes max_queue_pair = 1 by itself.
->>>>>>>>>>> I think the kernel module have all necessary information and it is
->>>>>>>>>>> the only one which have precise information of a device, so it
->>>>>>>>>>> should answer precisely than let the user space guess. The kernel
->>>>>>>>>>> module should be reliable than stay silent, leave the question to
->>>>>>>>>>> the user space
->>>>>>>>> tool.
->>>>>>>>>> Kernel is reliable. It doesn’t expose a config space field if the
->>>>>>>>>> field doesn’t
->>>>>>>>> exist regardless of field should have default or no default.
->>>>>>>>> so when you know it is one queue pair, you should answer one, not try
->>>>>>>>> to guess.
->>>>>>>>>> User space should not guess either. User space gets to see if _MQ
->>>>>>>>> present/not present. If _MQ present than get reliable data from kernel.
->>>>>>>>>> If _MQ not present, it means this device has one VQ pair.
->>>>>>>>> it is still a guess, right? And all user space tools implemented this
->>>>>>>>> feature need to guess
->>>>>>>> No. it is not a guess.
->>>>>>>> It is explicitly checking the _MQ feature and deriving the value.
->>>>>>>> The code you proposed will be present in the user space.
->>>>>>>> It will be uniform for _MQ and 10 other features that are present now and
->>>>>>> in the future.
->>>>>>> MQ and other features like RSS are different. If there is no _RSS_XX, there
->>>>>>> are no attributes like max_rss_key_size, and there is not a default value.
->>>>>>> But for MQ, we know it has to be 1 wihtout _MQ.
->>>>>> "we" = user space.
->>>>>> To keep the consistency among all the config space fields.
->>>>> Actually I looked and the code some more and I'm puzzled:
->>>>>
->>>>>
->>>>> 	struct virtio_net_config config = {};
->>>>> 	u64 features;
->>>>> 	u16 val_u16;
->>>>>
->>>>> 	vdpa_get_config_unlocked(vdev, 0, &config, sizeof(config));
->>>>>
->>>>> 	if (nla_put(msg, VDPA_ATTR_DEV_NET_CFG_MACADDR, sizeof(config.mac),
->>>>> 		    config.mac))
->>>>> 		return -EMSGSIZE;
->>>>>
->>>>>
->>>>> Mac returned even without VIRTIO_NET_F_MAC
->>>>>
->>>>>
->>>>> 	val_u16 = le16_to_cpu(config.status);
->>>>> 	if (nla_put_u16(msg, VDPA_ATTR_DEV_NET_STATUS, val_u16))
->>>>> 		return -EMSGSIZE;
->>>>>
->>>>>
->>>>> status returned even without VIRTIO_NET_F_STATUS
->>>>>
->>>>> 	val_u16 = le16_to_cpu(config.mtu);
->>>>> 	if (nla_put_u16(msg, VDPA_ATTR_DEV_NET_CFG_MTU, val_u16))
->>>>> 		return -EMSGSIZE;
->>>>>
->>>>>
->>>>> MTU returned even without VIRTIO_NET_F_MTU
->>>>>
->>>>>
->>>>> What's going on here?
->>>>>
->>>>>
->>>> I guess this is spec thing (historical debt), I vaguely recall these fields
->>>> are always present in config space regardless the existence of corresponding
->>>> feature bit.
->>>>
->>>> -Siwei
->>> Nope:
->>>
->>> 2.5.1  Driver Requirements: Device Configuration Space
->>>
->>> ...
->>>
->>> For optional configuration space fields, the driver MUST check that the corresponding feature is offered
->>> before accessing that part of the configuration space.
->> Well, this is driver side of requirement.
->
-> Well driver and device are the only two entities in the spec.
-We should mostly concern with device side requirement as this is what 
-the vdpa admin tool is targeted for. Please refer to my earlier 
-email//addressed to Jason.
+--------------TnFD3M0YVl0sdOjGfA0JYtYh
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
 
->
->> As this interface is for host
->> admin tool to query or configure vdpa device, we don't have to wait until
->> feature negotiation is done on guest driver to extract vdpa
->> attributes/parameters, say if we want to replicate another vdpa device with
->> the same config on migration destination. I think what may need to be fix is
->> to move off from using .vdpa_get_config_unlocked() which depends on feature
->> negotiation. And/or expose config space register values through another set
->> of attributes.
->>
->> -Siwei
->>
->>
-> Sounds like something that might use the proposed admin queue maybe.
-> Hope that makes progress ...
-Well it doesn't need to be that complex. Depending on need we may 
-extract device configs pre-negotiation from vendor's vdpa device via 
-some other op, but I doubt worth doing so. I don't quite understand the 
-use case why we need to expose those values.
+-----BEGIN PGP SIGNATURE-----
 
--Siwei
+wsF5BAABCAAjFiEExndm/fpuMUdwYFFolh/E3EQov+AFAmLiOngFAwAAAAAACgkQlh/E3EQov+A0
+XQ/+MyPF+cJhNB86rBsCfInbLE0lJ9TxCOI9Rka2sIxC/lEJWPxpTXQB4ER/B628DG31u3YVSYl1
+XCNtd0IxiJESE1SC3g8qi4pFCY+Jb1Y9t3O4RXW2LG4BkIi+PfJlSD0OGpoIlDo2zAz2rcCuWape
+3Xgf3wZJeB2iA1RA7Crdz4LLifAViIdSMtrWylEpVtDaar2WT1EhrEgob37QKXBQ7qd78ycdlW68
+gRdYr6CnWOusuMP5X3FNkwUYuYQivfVkJAOF+l6ayz+4RSfbTK7yBezSIb8nGViy8jZaK7We9D4J
+uMmYRd5mM4xbSIjspV8ziIvF1AxkH+yC/AdDVguFa59QVWmf2kYAAEjdEvNV3CwZYWjGTRHVSwhH
+EOMZfx8EnwdJf9TXFgnenh/eAowVP+mLlX8wmNgebm70rddsSOskXohpp3ZiyNqDJ0shPqDrUMyr
+3usFwyXfhaUSxO8UHxXCysPMKlG3IAdozmxODhaIeDPxGuJpEupfTVVkr07lI2Ha3sCsoXXIb6/h
+41xNu1H2fTZW86i1gaXBgIT8qCJGH2suuj0bavkIWIOoaGIFFziFTSsiWtwYNYy0czzPIRnK6ZFq
+saT7bIAFegSqBfq9Kw63BkXOkFcWYMxzYfnfUMGAdND5j9M3VFA4PCN19IdQf3Tu1yPaKlt3kRbv
+ka4=
+=vaBw
+-----END PGP SIGNATURE-----
 
+--------------TnFD3M0YVl0sdOjGfA0JYtYh--
 
---------------VKm9Wwb7oxdrUsJ69c6ObYFi
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 7/27/2022 8:48 AM, Michael S.
-      Tsirkin wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:20220727114602-mutt-send-email-mst@kernel.org">
-      <pre class="moz-quote-pre" wrap="">On Wed, Jul 27, 2022 at 03:09:43AM -0700, Si-Wei Liu wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-
-On 7/27/2022 2:01 AM, Michael S. Tsirkin wrote:
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">On Wed, Jul 27, 2022 at 12:50:33AM -0700, Si-Wei Liu wrote:
-</pre>
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">
-On 7/26/2022 11:01 PM, Michael S. Tsirkin wrote:
-</pre>
-            <blockquote type="cite">
-              <pre class="moz-quote-pre" wrap="">On Wed, Jul 27, 2022 at 03:47:35AM +0000, Parav Pandit wrote:
-</pre>
-              <blockquote type="cite">
-                <blockquote type="cite">
-                  <pre class="moz-quote-pre" wrap="">From: Zhu, Lingshan <a class="moz-txt-link-rfc2396E" href="mailto:lingshan.zhu@intel.com">&lt;lingshan.zhu@intel.com&gt;</a>
-Sent: Tuesday, July 26, 2022 10:53 PM
-
-On 7/27/2022 10:17 AM, Parav Pandit wrote:
-</pre>
-                  <blockquote type="cite">
-                    <blockquote type="cite">
-                      <pre class="moz-quote-pre" wrap="">From: Zhu, Lingshan <a class="moz-txt-link-rfc2396E" href="mailto:lingshan.zhu@intel.com">&lt;lingshan.zhu@intel.com&gt;</a>
-Sent: Tuesday, July 26, 2022 10:15 PM
-
-On 7/26/2022 11:56 PM, Parav Pandit wrote:
-</pre>
-                      <blockquote type="cite">
-                        <blockquote type="cite">
-                          <pre class="moz-quote-pre" wrap="">From: Zhu, Lingshan <a class="moz-txt-link-rfc2396E" href="mailto:lingshan.zhu@intel.com">&lt;lingshan.zhu@intel.com&gt;</a>
-Sent: Tuesday, July 12, 2022 11:46 PM
-</pre>
-                          <blockquote type="cite">
-                            <pre class="moz-quote-pre" wrap="">When the user space which invokes netlink commands, detects that
-</pre>
-                          </blockquote>
-                        </blockquote>
-                      </blockquote>
-                      <pre class="moz-quote-pre" wrap="">_MQ
-</pre>
-                      <blockquote type="cite">
-                        <blockquote type="cite">
-                          <pre class="moz-quote-pre" wrap="">is not supported, hence it takes max_queue_pair = 1 by itself.
-I think the kernel module have all necessary information and it is
-the only one which have precise information of a device, so it
-should answer precisely than let the user space guess. The kernel
-module should be reliable than stay silent, leave the question to
-the user space
-</pre>
-                        </blockquote>
-                      </blockquote>
-                      <pre class="moz-quote-pre" wrap="">tool.
-</pre>
-                      <blockquote type="cite">
-                        <pre class="moz-quote-pre" wrap="">Kernel is reliable. It doesn’t expose a config space field if the
-field doesn’t
-</pre>
-                      </blockquote>
-                      <pre class="moz-quote-pre" wrap="">exist regardless of field should have default or no default.
-so when you know it is one queue pair, you should answer one, not try
-to guess.
-</pre>
-                      <blockquote type="cite">
-                        <pre class="moz-quote-pre" wrap="">User space should not guess either. User space gets to see if _MQ
-</pre>
-                      </blockquote>
-                      <pre class="moz-quote-pre" wrap="">present/not present. If _MQ present than get reliable data from kernel.
-</pre>
-                      <blockquote type="cite">
-                        <pre class="moz-quote-pre" wrap="">If _MQ not present, it means this device has one VQ pair.
-</pre>
-                      </blockquote>
-                      <pre class="moz-quote-pre" wrap="">it is still a guess, right? And all user space tools implemented this
-feature need to guess
-</pre>
-                    </blockquote>
-                    <pre class="moz-quote-pre" wrap="">No. it is not a guess.
-It is explicitly checking the _MQ feature and deriving the value.
-The code you proposed will be present in the user space.
-It will be uniform for _MQ and 10 other features that are present now and
-</pre>
-                  </blockquote>
-                  <pre class="moz-quote-pre" wrap="">in the future.
-MQ and other features like RSS are different. If there is no _RSS_XX, there
-are no attributes like max_rss_key_size, and there is not a default value.
-But for MQ, we know it has to be 1 wihtout _MQ.
-</pre>
-                </blockquote>
-                <pre class="moz-quote-pre" wrap="">&quot;we&quot; = user space.
-To keep the consistency among all the config space fields.
-</pre>
-              </blockquote>
-              <pre class="moz-quote-pre" wrap="">Actually I looked and the code some more and I'm puzzled:
-
-
-	struct virtio_net_config config = {};
-	u64 features;
-	u16 val_u16;
-
-	vdpa_get_config_unlocked(vdev, 0, &amp;config, sizeof(config));
-
-	if (nla_put(msg, VDPA_ATTR_DEV_NET_CFG_MACADDR, sizeof(config.mac),
-		    config.mac))
-		return -EMSGSIZE;
-
-
-Mac returned even without VIRTIO_NET_F_MAC
-
-
-	val_u16 = le16_to_cpu(config.status);
-	if (nla_put_u16(msg, VDPA_ATTR_DEV_NET_STATUS, val_u16))
-		return -EMSGSIZE;
-
-
-status returned even without VIRTIO_NET_F_STATUS
-
-	val_u16 = le16_to_cpu(config.mtu);
-	if (nla_put_u16(msg, VDPA_ATTR_DEV_NET_CFG_MTU, val_u16))
-		return -EMSGSIZE;
-
-
-MTU returned even without VIRTIO_NET_F_MTU
-
-
-What's going on here?
-
-
-</pre>
-            </blockquote>
-            <pre class="moz-quote-pre" wrap="">I guess this is spec thing (historical debt), I vaguely recall these fields
-are always present in config space regardless the existence of corresponding
-feature bit.
-
--Siwei
-</pre>
-          </blockquote>
-          <pre class="moz-quote-pre" wrap="">Nope:
-
-2.5.1  Driver Requirements: Device Configuration Space
-
-...
-
-For optional configuration space fields, the driver MUST check that the corresponding feature is offered
-before accessing that part of the configuration space.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">Well, this is driver side of requirement.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-
-Well driver and device are the only two entities in the spec.</pre>
-    </blockquote>
-    We should mostly concern with device side requirement as this is
-    what the vdpa admin tool is targeted for. Please refer to my earlier
-    email<i> </i>addressed to Jason.<br>
-    <br>
-    <blockquote type="cite" cite="mid:20220727114602-mutt-send-email-mst@kernel.org">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">As this interface is for host
-admin tool to query or configure vdpa device, we don't have to wait until
-feature negotiation is done on guest driver to extract vdpa
-attributes/parameters, say if we want to replicate another vdpa device with
-the same config on migration destination. I think what may need to be fix is
-to move off from using .vdpa_get_config_unlocked() which depends on feature
-negotiation. And/or expose config space register values through another set
-of attributes.
-
--Siwei
-
-
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Sounds like something that might use the proposed admin queue maybe.
-Hope that makes progress ...
-</pre>
-    </blockquote>
-    Well it doesn't need to be that complex. Depending on need we may
-    extract device configs pre-negotiation from vendor's vdpa device via
-    some other op, but I doubt worth doing so. I don't quite understand
-    the use case why we need to expose those values.<br>
-    <br>
-    -Siwei<br>
-    <br>
-    <br>
-  </body>
-</html>
-
---------------VKm9Wwb7oxdrUsJ69c6ObYFi--
-
---===============8147000425820472179==
+--===============1289755195621547163==
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -577,4 +306,4 @@ _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============8147000425820472179==--
+--===============1289755195621547163==--
