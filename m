@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F94D586449
-	for <lists.virtualization@lfdr.de>; Mon,  1 Aug 2022 08:39:51 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 62F0B58644A
+	for <lists.virtualization@lfdr.de>; Mon,  1 Aug 2022 08:39:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 89C7241BA8;
-	Mon,  1 Aug 2022 06:39:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 89C7241BA8
+	by smtp4.osuosl.org (Postfix) with ESMTP id 73F3741BAB;
+	Mon,  1 Aug 2022 06:39:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 73F3741BAB
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AY6UnNYNz9-n; Mon,  1 Aug 2022 06:39:47 +0000 (UTC)
+	with ESMTP id D84ko8QFDya8; Mon,  1 Aug 2022 06:39:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id F348641BAB;
-	Mon,  1 Aug 2022 06:39:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F348641BAB
+	by smtp4.osuosl.org (Postfix) with ESMTPS id E507C41BBC;
+	Mon,  1 Aug 2022 06:39:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E507C41BBC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BA1A9C002D;
-	Mon,  1 Aug 2022 06:39:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AAA33C002D;
+	Mon,  1 Aug 2022 06:39:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 30E3BC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 350FAC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Aug 2022 06:39:45 +0000 (UTC)
+ Mon,  1 Aug 2022 06:39:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id ED2E7840FE
+ by smtp3.osuosl.org (Postfix) with ESMTP id 663A0611CA
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Aug 2022 06:39:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org ED2E7840FE
+ Mon,  1 Aug 2022 06:39:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 663A0611CA
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id htUElSwu2tbo
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YuKMyilH3Is4
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Aug 2022 06:39:44 +0000 (UTC)
+ Mon,  1 Aug 2022 06:39:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D24798408B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3A605611CE
 Received: from out30-130.freemail.mail.aliyun.com
  (out30-130.freemail.mail.aliyun.com [115.124.30.130])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D24798408B
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3A605611CE
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 Aug 2022 06:39:43 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R361e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ Mon,  1 Aug 2022 06:39:45 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R861e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=37; SR=0;
- TI=SMTPD_---0VL1cCXM_1659335973; 
+ TI=SMTPD_---0VL1vShV_1659335975; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VL1cCXM_1659335973) by smtp.aliyun-inc.com;
- Mon, 01 Aug 2022 14:39:35 +0800
+ fp:SMTPD_---0VL1vShV_1659335975) by smtp.aliyun-inc.com;
+ Mon, 01 Aug 2022 14:39:36 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v14 16/42] virtio_ring: split: introduce
- virtqueue_resize_split()
-Date: Mon,  1 Aug 2022 14:38:36 +0800
-Message-Id: <20220801063902.129329-17-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH v14 17/42] virtio_ring: packed: introduce vring_free_packed
+Date: Mon,  1 Aug 2022 14:38:37 +0800
+Message-Id: <20220801063902.129329-18-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.31.0
 In-Reply-To: <20220801063902.129329-1-xuanzhuo@linux.alibaba.com>
 References: <20220801063902.129329-1-xuanzhuo@linux.alibaba.com>
@@ -96,73 +95,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtio ring split supports resize.
+Free the structure struct vring_vritqueue_packed.
 
-Only after the new vring is successfully allocated based on the new num,
-we will release the old vring. In any case, an error is returned,
-indicating that the vring still points to the old vring.
-
-In the case of an error, re-initialize(virtqueue_reinit_split()) the
-virtqueue to ensure that the vring can be used.
+Subsequent patches require it.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 34 ++++++++++++++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
+ drivers/virtio/virtio_ring.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 8cbb19cdb1ce..1852912d711e 100644
+index 1852912d711e..2993d817871a 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -220,6 +220,7 @@ static struct virtqueue *__vring_new_virtqueue(unsigned int index,
- 					       void (*callback)(struct virtqueue *),
- 					       const char *name);
- static struct vring_desc_extra *vring_alloc_desc_extra(unsigned int num);
-+static void vring_free(struct virtqueue *_vq);
- 
- /*
-  * Helpers.
-@@ -1114,6 +1115,39 @@ static struct virtqueue *vring_create_virtqueue_split(
- 	return vq;
+@@ -1832,6 +1832,28 @@ static struct vring_desc_extra *vring_alloc_desc_extra(unsigned int num)
+ 	return desc_extra;
  }
  
-+static int virtqueue_resize_split(struct virtqueue *_vq, u32 num)
++static void vring_free_packed(struct vring_virtqueue_packed *vring_packed,
++			      struct virtio_device *vdev)
 +{
-+	struct vring_virtqueue_split vring_split = {};
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+	struct virtio_device *vdev = _vq->vdev;
-+	int err;
++	if (vring_packed->vring.desc)
++		vring_free_queue(vdev, vring_packed->ring_size_in_bytes,
++				 vring_packed->vring.desc,
++				 vring_packed->ring_dma_addr);
 +
-+	err = vring_alloc_queue_split(&vring_split, vdev, num,
-+				      vq->split.vring_align,
-+				      vq->split.may_reduce_num);
-+	if (err)
-+		goto err;
++	if (vring_packed->vring.driver)
++		vring_free_queue(vdev, vring_packed->event_size_in_bytes,
++				 vring_packed->vring.driver,
++				 vring_packed->driver_event_dma_addr);
 +
-+	err = vring_alloc_state_extra_split(&vring_split);
-+	if (err)
-+		goto err_state_extra;
++	if (vring_packed->vring.device)
++		vring_free_queue(vdev, vring_packed->event_size_in_bytes,
++				 vring_packed->vring.device,
++				 vring_packed->device_event_dma_addr);
 +
-+	vring_free(&vq->vq);
-+
-+	virtqueue_vring_init_split(&vring_split, vq);
-+
-+	virtqueue_init(vq, vring_split.vring.num);
-+	virtqueue_vring_attach_split(vq, &vring_split);
-+
-+	return 0;
-+
-+err_state_extra:
-+	vring_free_split(&vring_split, vdev);
-+err:
-+	virtqueue_reinit_split(vq);
-+	return -ENOMEM;
++	kfree(vring_packed->desc_state);
++	kfree(vring_packed->desc_extra);
 +}
 +
- 
- /*
-  * Packed ring specific functions - *_packed().
+ static struct virtqueue *vring_create_virtqueue_packed(
+ 	unsigned int index,
+ 	unsigned int num,
 -- 
 2.31.0
 
