@@ -1,90 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7CC6258A1C8
-	for <lists.virtualization@lfdr.de>; Thu,  4 Aug 2022 22:15:27 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 64EEC58A1CD
+	for <lists.virtualization@lfdr.de>; Thu,  4 Aug 2022 22:16:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DF4598321B;
-	Thu,  4 Aug 2022 20:15:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DF4598321B
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=ravnborg.org header.i=@ravnborg.org header.a=rsa-sha256 header.s=rsa1 header.b=TCfgUXEU;
-	dkim=fail reason="signature verification failed" header.d=ravnborg.org header.i=@ravnborg.org header.a=ed25519-sha256 header.s=ed1 header.b=VhXfE8Bp
+	by smtp2.osuosl.org (Postfix) with ESMTP id B32664032E;
+	Thu,  4 Aug 2022 20:16:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B32664032E
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=ravnborg.org header.i=@ravnborg.org header.a=rsa-sha256 header.s=rsa1 header.b=H696l484;
+	dkim=fail reason="signature verification failed" header.d=ravnborg.org header.i=@ravnborg.org header.a=ed25519-sha256 header.s=ed1 header.b=/1067wmZ
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5Hsd_pzakOEP; Thu,  4 Aug 2022 20:15:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A1387831F5;
-	Thu,  4 Aug 2022 20:15:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A1387831F5
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id P0u-eBoEj3zS; Thu,  4 Aug 2022 20:16:36 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 4AF8B40332;
+	Thu,  4 Aug 2022 20:16:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4AF8B40332
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BEE36C0078;
-	Thu,  4 Aug 2022 20:15:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 71A5CC0078;
+	Thu,  4 Aug 2022 20:16:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 38F76C002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B3A1AC002D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Aug 2022 20:15:22 +0000 (UTC)
+ Thu,  4 Aug 2022 20:16:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EB3DB41CF4
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7394840147
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Aug 2022 20:15:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB3DB41CF4
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=ravnborg.org
- header.i=@ravnborg.org header.a=rsa-sha256 header.s=rsa1 header.b=TCfgUXEU; 
- dkim=pass header.d=ravnborg.org header.i=@ravnborg.org header.a=ed25519-sha256
- header.s=ed1 header.b=VhXfE8Bp
+ Thu,  4 Aug 2022 20:16:33 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7394840147
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HZyLXgzUyvhm
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id lcrTwTGRjImG
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Aug 2022 20:15:21 +0000 (UTC)
+ Thu,  4 Aug 2022 20:16:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AB6B641CF3
-Received: from mailrelay3-1.pub.mailoutpod1-cph3.one.com
- (mailrelay3-1.pub.mailoutpod1-cph3.one.com [46.30.210.184])
- by smtp4.osuosl.org (Postfix) with ESMTPS id AB6B641CF3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 84B494013D
+Received: from mailrelay2-1.pub.mailoutpod1-cph3.one.com
+ (mailrelay2-1.pub.mailoutpod1-cph3.one.com [46.30.210.183])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 84B494013D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  4 Aug 2022 20:15:20 +0000 (UTC)
+ Thu,  4 Aug 2022 20:16:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ravnborg.org; s=rsa1;
  h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
  from:date:from;
- bh=XQ+kkmE4Ic07chp0AfJlC9OlFc9+61+pKDSgSKBxebA=;
- b=TCfgUXEUFJ19oq7/funrOIu+L7gd0wRcTbgHqf94s6fkDRsfnewHHvJoJhxjDiQodMJYBQdv3C3Gs
- eOAs2tRs9ZBZW8lL4wuITmNLY2/GMUe7h+njBD7+VFraadwdCqckGxWKKF8JX/j2nokaCxNTLUmgyw
- SjRJ75B2AsoPK6GmyuaZHyvQTdQyvl52QNJlWgP1RYBFT1MtjNftSXfjnWPYZCczDLbBUqSqqK5I5T
- vz9FIjJPJaFoqerWaV24w9wznrXWNpmHXudIDI057U+ZQFrn52zUgWKSgQygYt7ZlZ14n9hZnw1uIO
- DMSR9j4pcXUhJuHsrThRjLK7OpPG9Zw==
+ bh=LVncPQXIZVvjSfd4GM0AAxotgY9J9oMnM/NO6XDb2GY=;
+ b=H696l484/nQn59x89uR1DGFRId9zm1G9ToGQvVlcWBJbPRVoDYOudr9b+3OEoq9tUXVfnoaSKc8Ie
+ vIinjs9ySCuJobittjlf9lTHuRGN8qnKIn1nTmkus7RhhYnUEmBBZ30RcDYOC9xEEkV2Zk2RXRll11
+ oc43PH1BA4JvP8hLb+HyI8VrdZbBIIaI1ZS8bDtQaext+h2e7vF1PrDEQqPgEFiEcrj83oB29RENFt
+ uJTyMNwMfsnSwgUdS/MuBYpHTQBPb3JTPjwKYrCBNxkpOLZbJjbCVDwD8O4901pHMsbrt2PmCrlpow
+ S227EK0+/WGADAz6+3FWn6qpEWBhc/A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed;
  d=ravnborg.org; s=ed1;
  h=in-reply-to:content-type:mime-version:references:message-id:subject:cc:to:
  from:date:from;
- bh=XQ+kkmE4Ic07chp0AfJlC9OlFc9+61+pKDSgSKBxebA=;
- b=VhXfE8BpE6rR/ibzr7tFyWrYtPx5VN1SNhRdc2dXgDRyRcO2Mjs/ydHMboQMt6ffH6Vw+fgb/XTG0
- o3QMju0Cg==
-X-HalOne-Cookie: 9aca289c7c13756da8167dac35c4f69f9101c708
-X-HalOne-ID: 28663d94-1432-11ed-be81-d0431ea8bb03
-Received: from mailproxy4.cst.dirpod3-cph3.one.com
+ bh=LVncPQXIZVvjSfd4GM0AAxotgY9J9oMnM/NO6XDb2GY=;
+ b=/1067wmZlwYm2a+CpkHk59xt5O93iYIO4qG9XslvEGMlf8a4jGjr51FzUKQsuCW7T9VOM1onWK2YL
+ F4AP1XjDQ==
+X-HalOne-Cookie: b1085953002d688f6251e9593a9590aff04e2dbf
+X-HalOne-ID: 533de0be-1432-11ed-a91b-d0431ea8a290
+Received: from mailproxy1.cst.dirpod4-cph3.one.com
  (2-105-2-98-cable.dk.customer.tdc.net [2.105.2.98])
- by mailrelay3.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
- id 28663d94-1432-11ed-be81-d0431ea8bb03;
- Thu, 04 Aug 2022 20:15:18 +0000 (UTC)
-Date: Thu, 4 Aug 2022 22:15:16 +0200
+ by mailrelay2.pub.mailoutpod1-cph3.one.com (Halon) with ESMTPSA
+ id 533de0be-1432-11ed-a91b-d0431ea8a290;
+ Thu, 04 Aug 2022 20:16:29 +0000 (UTC)
+Date: Thu, 4 Aug 2022 22:16:28 +0200
 From: Sam Ravnborg <sam@ravnborg.org>
 To: Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 07/12] drm/format-helper: Rework RGB565-to-XRGB8888
+Subject: Re: [PATCH 08/12] drm/format-helper: Rework RGB888-to-XRGB8888
  conversion
-Message-ID: <Yuwo1J6UPEDBirQC@ravnborg.org>
+Message-ID: <YuwpHAK0kx1FltlK@ravnborg.org>
 References: <20220727113312.22407-1-tzimmermann@suse.de>
- <20220727113312.22407-8-tzimmermann@suse.de>
+ <20220727113312.22407-9-tzimmermann@suse.de>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220727113312.22407-8-tzimmermann@suse.de>
+In-Reply-To: <20220727113312.22407-9-tzimmermann@suse.de>
 Cc: linux-hyperv@vger.kernel.org, david@lechnology.com, airlied@linux.ie,
  dri-devel@lists.freedesktop.org, maarten.lankhorst@linux.intel.com,
  javierm@redhat.com, mripard@kernel.org,
@@ -107,8 +102,8 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Jul 27, 2022 at 01:33:07PM +0200, Thomas Zimmermann wrote:
-> Update RGB565-to-XRGB8888 conversion to support struct iosys_map
+On Wed, Jul 27, 2022 at 01:33:08PM +0200, Thomas Zimmermann wrote:
+> Update RGB888-to-XRGB8888 conversion to support struct iosys_map
 > and convert all users. Although these are single-plane color formats,
 > the new interface supports multi-plane formats for consistency with
 > drm_fb_blit().
@@ -120,23 +115,23 @@ Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 >  1 file changed, 18 insertions(+), 7 deletions(-)
 > 
 > diff --git a/drivers/gpu/drm/drm_format_helper.c b/drivers/gpu/drm/drm_format_helper.c
-> index 4edab44336d8..5ef06f696657 100644
+> index 5ef06f696657..155827eebe99 100644
 > --- a/drivers/gpu/drm/drm_format_helper.c
 > +++ b/drivers/gpu/drm/drm_format_helper.c
-> @@ -430,12 +430,24 @@ static void drm_fb_rgb565_to_xrgb8888_line(void *dbuf, const void *sbuf, unsigne
+> @@ -465,12 +465,24 @@ static void drm_fb_rgb888_to_xrgb8888_line(void *dbuf, const void *sbuf, unsigne
 >  	}
 >  }
 >  
-> -static void drm_fb_rgb565_to_xrgb8888_toio(void __iomem *dst, unsigned int dst_pitch,
+> -static void drm_fb_rgb888_to_xrgb8888_toio(void __iomem *dst, unsigned int dst_pitch,
 > -					   const void *vaddr, const struct drm_framebuffer *fb,
 > -					   const struct drm_rect *clip)
-> +static void drm_fb_rgb565_to_xrgb8888(struct iosys_map *dst, const unsigned int *dst_pitch,
+> +static void drm_fb_rgb888_to_xrgb8888(struct iosys_map *dst, const unsigned int *dst_pitch,
 > +				      const struct iosys_map *vmap,
 > +				      const struct drm_framebuffer *fb,
 > +				      const struct drm_rect *clip)
 >  {
 > -	drm_fb_xfrm_toio(dst, dst_pitch, 4, vaddr, fb, clip, false,
-> -			 drm_fb_rgb565_to_xrgb8888_line);
+> -			 drm_fb_rgb888_to_xrgb8888_line);
 > +	static const unsigned int default_dst_pitch[DRM_FORMAT_MAX_PLANES] = {
 > +		0, 0, 0, 0
 > +	};
@@ -146,23 +141,23 @@ Reviewed-by: Sam Ravnborg <sam@ravnborg.org>
 > +
 > +	if (dst[0].is_iomem)
 > +		drm_fb_xfrm_toio(dst[0].vaddr_iomem, dst_pitch[0], 4, vmap[0].vaddr, fb,
-> +				 clip, false, drm_fb_rgb565_to_xrgb8888_line);
+> +				 clip, false, drm_fb_rgb888_to_xrgb8888_line);
 > +	else
 > +		drm_fb_xfrm(dst[0].vaddr, dst_pitch[0], 4, vmap[0].vaddr, fb,
-> +			    clip, false, drm_fb_rgb565_to_xrgb8888_line);
+> +			    clip, false, drm_fb_rgb888_to_xrgb8888_line);
 >  }
 >  
->  static void drm_fb_rgb888_to_xrgb8888_line(void *dbuf, const void *sbuf, unsigned int pixels)
-> @@ -600,8 +612,7 @@ int drm_fb_blit(struct iosys_map *dst, const unsigned int *dst_pitch, uint32_t d
->  						       vmap[0].vaddr, fb, clip);
+>  static void drm_fb_xrgb8888_to_xrgb2101010_line(void *dbuf, const void *sbuf, unsigned int pixels)
+> @@ -608,8 +620,7 @@ int drm_fb_blit(struct iosys_map *dst, const unsigned int *dst_pitch, uint32_t d
+>  		}
+>  	} else if (dst_format == DRM_FORMAT_XRGB8888) {
+>  		if (fb_format == DRM_FORMAT_RGB888) {
+> -			drm_fb_rgb888_to_xrgb8888_toio(dst[0].vaddr_iomem, dst_pitch[0],
+> -						       vmap[0].vaddr, fb, clip);
+> +			drm_fb_rgb888_to_xrgb8888(dst, dst_pitch, vmap, fb, clip);
 >  			return 0;
 >  		} else if (fb_format == DRM_FORMAT_RGB565) {
-> -			drm_fb_rgb565_to_xrgb8888_toio(dst[0].vaddr_iomem, dst_pitch[0],
-> -						       vmap[0].vaddr, fb, clip);
-> +			drm_fb_rgb565_to_xrgb8888(dst, dst_pitch, vmap, fb, clip);
->  			return 0;
->  		}
->  	} else if (dst_format == DRM_FORMAT_XRGB2101010) {
+>  			drm_fb_rgb565_to_xrgb8888(dst, dst_pitch, vmap, fb, clip);
 > -- 
 > 2.37.1
 _______________________________________________
