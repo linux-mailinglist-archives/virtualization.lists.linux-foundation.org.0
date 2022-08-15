@@ -1,99 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A2735942B4
-	for <lists.virtualization@lfdr.de>; Mon, 15 Aug 2022 23:54:06 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35B775942B2
+	for <lists.virtualization@lfdr.de>; Mon, 15 Aug 2022 23:53:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 21E4040420;
-	Mon, 15 Aug 2022 21:54:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 21E4040420
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=NGpLmSbR
+	by smtp4.osuosl.org (Postfix) with ESMTP id AC27B40359;
+	Mon, 15 Aug 2022 21:53:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AC27B40359
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=EIO8t93P
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GIzwCt4uNT53; Mon, 15 Aug 2022 21:54:04 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2N2VYzooihIm; Mon, 15 Aug 2022 21:53:54 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D41C4403FF;
-	Mon, 15 Aug 2022 21:54:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D41C4403FF
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 2302F403ED;
+	Mon, 15 Aug 2022 21:53:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2302F403ED
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1D2EEC0078;
-	Mon, 15 Aug 2022 21:54:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 638AAC0078;
+	Mon, 15 Aug 2022 21:53:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 853D3C002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4B4FCC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:54:01 +0000 (UTC)
+ Mon, 15 Aug 2022 21:53:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 630DC403FF
+ by smtp1.osuosl.org (Postfix) with ESMTP id 2601B817B5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:54:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 630DC403FF
+ Mon, 15 Aug 2022 21:53:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2601B817B5
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=EIO8t93P
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UfYOskCxqY_f
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id pKFlWva-ISlO
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:54:00 +0000 (UTC)
+ Mon, 15 Aug 2022 21:53:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9CBC6403E5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 758E2814A9
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 9CBC6403E5
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 758E2814A9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:54:00 +0000 (UTC)
+ Mon, 15 Aug 2022 21:53:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1660600439;
+ s=mimecast20190719; t=1660600429;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=bnInJhTNmcRkk5WIZQp/adh2w/55qWjBovtngHxo1PM=;
- b=NGpLmSbRi18KNpyxpmPcyFRF5dIAl0h7RdZnmyFBegf9yCyAdqsIAP2BSrvsYjAYkbCzKK
- vizdjwbfZ9edzW1kTfEdysyzARqmOa33Feg2WE3hDYtBt5RYyclKYF9D++KXjRtRtimAQI
- ia67PLMtYP7rLskkFnhEiundvJ3JiRc=
+ bh=0Woc1p74LnDMz9TXkvyQIlZ2BlUNGXfNgs76Y3D9lgg=;
+ b=EIO8t93P3kfXNAsBT/04iFY8+UDi+h+6Ja1sB+Codqfa5HvX60m5BJW3l34R0YGtIlKVfo
+ 44LMM2lM2id6AiARmVEC3OasTe27qqsrgbCNthiCQDJRhv6zJbP+ktaWxKBaQkphe6vzex
+ OsckFOLEsycEeA64aaZafE+LqOVi64w=
 Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
  [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-93-Wn1U8_OYNCGtoHN1LYWreA-1; Mon, 15 Aug 2022 17:53:43 -0400
-X-MC-Unique: Wn1U8_OYNCGtoHN1LYWreA-1
+ us-mta-649-_cXPTyshN6ueq7NdgP2M-w-1; Mon, 15 Aug 2022 17:53:48 -0400
+X-MC-Unique: _cXPTyshN6ueq7NdgP2M-w-1
 Received: by mail-wm1-f70.google.com with SMTP id
- b16-20020a05600c4e1000b003a5a47762c3so4046421wmq.9
+ c17-20020a7bc011000000b003a2bfaf8d3dso4076904wmb.0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 14:53:43 -0700 (PDT)
+ Mon, 15 Aug 2022 14:53:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc;
- bh=bnInJhTNmcRkk5WIZQp/adh2w/55qWjBovtngHxo1PM=;
- b=UUiDiFcgS8JciIpWytPbYBKDZypvtrLiRDbgteYrA2BfbIQelylVNs94EJzF22yShR
- z33CR7eDXvpy7SzS+m3V8l91nFNh5Z14M9fLTAK3JPqTmraB4aYg99zAn9a2ftpTWbvx
- 6PF3C69jpTD9CbwkIaUDr+4ztc+fFfxqOR3sEckrlqfkU4EiDW6kufY10IKGqzoWAOZh
- 1eh1esnbThv1tSSmpy1cVLK7B+GmbOoczJcQOzD8lYM3YsJ8ghsQfCqzi1nkMeVRSyZt
- NYVU0gxfO3Bqk+hi8lGFTBkoXXRUgTu3keselvuyIxhFH7f36gc2WjtpSAGHkfbGDU0M
- 6d2Q==
-X-Gm-Message-State: ACgBeo0UUKsK3z1qKA3sb+AjFazWhKH7jNVvnA/glfd/B79ORWKjFc4n
- DqWXCB7MAdMfaTg3msGatZJQ4VMoMK8IRgagmr4N2jrjTONGJcMcMF1o79AB08oyRaRcomwbSg9
- 1MfEDpQxuIP9M4I6MkzMHTJbm3am61DfJaM6FPSBpyw==
-X-Received: by 2002:adf:eb8e:0:b0:223:a1f6:26b2 with SMTP id
- t14-20020adfeb8e000000b00223a1f626b2mr9621597wrn.216.1660600422332; 
- Mon, 15 Aug 2022 14:53:42 -0700 (PDT)
-X-Google-Smtp-Source: AA6agR4jlIHrGyk0NQDFhbHw+XilfZD0zV7zttfZd98h/WsQfsn3+HtdmVcfipmuVvb8Tr8KPbBRvA==
-X-Received: by 2002:adf:eb8e:0:b0:223:a1f6:26b2 with SMTP id
- t14-20020adfeb8e000000b00223a1f626b2mr9621582wrn.216.1660600422078; 
- Mon, 15 Aug 2022 14:53:42 -0700 (PDT)
+ bh=0Woc1p74LnDMz9TXkvyQIlZ2BlUNGXfNgs76Y3D9lgg=;
+ b=RJ+FhD9IpK4jy5sHjSwllCafAuMoUd2RqypVDjpZ9KO6zTuWu3MFcJtQrUxr0wWKnQ
+ ZGNWDPqj5TmCUtUzZC0JXgrqU/N0BRYHQekVTxLlYSRanAO/HZKx0wwtTQQlEMHSGsOI
+ c/OXOgSWsEC2eXil+Tlq1zJuSSW4q5MyGBu0PgTE5hnQfrE2NuKVH70eoMcP6C+7gTx/
+ UJ11eeeUTcWic6spduk1KjH9pZMZcTgmdRUCbPqAtDLLix7wXlcAjDl3S9giiZcSVA+n
+ NlE4b+Q7mujaGlIbIIwxtpvZgPwuiQ+2hxXiOznVbAE3Wiy+/CjIWqhA0F707iSXepoT
+ 5XfA==
+X-Gm-Message-State: ACgBeo2gvKIal1dNHHZK1g4OmkUpwQthmcP5kmtioAAQ4lfNNJ+02/oO
+ UhOps9S8PwUfs3nA4Hc/wMpapKXOMX7+jnJG9HKiJX2gNH09Xa4YYRoUs8aU3auxds1hBBy6kE0
+ DP8pzWOJcVzG3mvsrIMj4Y7zcaKdBBtdufEmDxcEcIg==
+X-Received: by 2002:a05:600c:ad4:b0:3a5:50b2:f991 with SMTP id
+ c20-20020a05600c0ad400b003a550b2f991mr16731033wmr.146.1660600426184; 
+ Mon, 15 Aug 2022 14:53:46 -0700 (PDT)
+X-Google-Smtp-Source: AA6agR7WhVEK8u+bWBQ+vsIP1p2ogF6bjbQsW8dmESOECqvboXglS7PHGAZ3CszZnuGHypllX9oYGw==
+X-Received: by 2002:a05:600c:ad4:b0:3a5:50b2:f991 with SMTP id
+ c20-20020a05600c0ad400b003a550b2f991mr16731025wmr.146.1660600425942; 
+ Mon, 15 Aug 2022 14:53:45 -0700 (PDT)
 Received: from redhat.com ([2.55.4.37]) by smtp.gmail.com with ESMTPSA id
- b3-20020a05600010c300b002217339ce90sm8455090wrx.8.2022.08.15.14.53.39
+ n32-20020a05600c502000b003a2d47d3051sm13154371wmr.41.2022.08.15.14.53.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Aug 2022 14:53:41 -0700 (PDT)
-Date: Mon, 15 Aug 2022 17:53:38 -0400
+ Mon, 15 Aug 2022 14:53:45 -0700 (PDT)
+Date: Mon, 15 Aug 2022 17:53:42 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/5] virtio: Revert "virtio: add helper
- virtio_find_vqs_ctx_size()"
-Message-ID: <20220815215251.154451-5-mst@redhat.com>
+Subject: [PATCH v2 3/5] virtio-mmio: Revert "virtio_mmio: support the arg
+ sizes of find_vqs()"
+Message-ID: <20220815215251.154451-6-mst@redhat.com>
 References: <20220815215251.154451-1-mst@redhat.com>
 MIME-Version: 1.0
 In-Reply-To: <20220815215251.154451-1-mst@redhat.com>
@@ -126,40 +129,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This reverts commit fe3dc04e31aa51f91dc7f741a5f76cc4817eb5b4: the
-API is now unused and in fact can't be implemented on top of a legacy
-device.
+This reverts commit fbed86abba6e0472d98079790e58060e4332608a.
+The API is now unused, let's not carry dead code around.
 
-Fixes: fe3dc04e31aa ("virtio: add helper virtio_find_vqs_ctx_size()")
-Cc: "Xuan Zhuo" <xuanzhuo@linux.alibaba.com>
+Fixes: fbed86abba6e ("virtio_mmio: support the arg sizes of find_vqs()")
 Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
 ---
- include/linux/virtio_config.h | 12 ------------
- 1 file changed, 12 deletions(-)
+ drivers/virtio/virtio_mmio.c | 8 ++------
+ 1 file changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/include/linux/virtio_config.h b/include/linux/virtio_config.h
-index 6adff09f7170..888f7e96f0c7 100644
---- a/include/linux/virtio_config.h
-+++ b/include/linux/virtio_config.h
-@@ -241,18 +241,6 @@ int virtio_find_vqs_ctx(struct virtio_device *vdev, unsigned nvqs,
- 				      ctx, desc);
- }
+diff --git a/drivers/virtio/virtio_mmio.c b/drivers/virtio/virtio_mmio.c
+index c492a57531c6..dfcecfd7aba1 100644
+--- a/drivers/virtio/virtio_mmio.c
++++ b/drivers/virtio/virtio_mmio.c
+@@ -360,7 +360,7 @@ static void vm_synchronize_cbs(struct virtio_device *vdev)
  
--static inline
--int virtio_find_vqs_ctx_size(struct virtio_device *vdev, u32 nvqs,
--			     struct virtqueue *vqs[],
--			     vq_callback_t *callbacks[],
--			     const char * const names[],
--			     u32 sizes[],
--			     const bool *ctx, struct irq_affinity *desc)
--{
--	return vdev->config->find_vqs(vdev, nvqs, vqs, callbacks, names, sizes,
--				      ctx, desc);
--}
+ static struct virtqueue *vm_setup_vq(struct virtio_device *vdev, unsigned int index,
+ 				  void (*callback)(struct virtqueue *vq),
+-				  const char *name, u32 size, bool ctx)
++				  const char *name, bool ctx)
+ {
+ 	struct virtio_mmio_device *vm_dev = to_virtio_mmio_device(vdev);
+ 	struct virtio_mmio_vq_info *info;
+@@ -395,11 +395,8 @@ static struct virtqueue *vm_setup_vq(struct virtio_device *vdev, unsigned int in
+ 		goto error_new_virtqueue;
+ 	}
+ 
+-	if (!size || size > num)
+-		size = num;
 -
- /**
-  * virtio_synchronize_cbs - synchronize with virtqueue callbacks
-  * @vdev: the device
+ 	/* Create the vring */
+-	vq = vring_create_virtqueue(index, size, VIRTIO_MMIO_VRING_ALIGN, vdev,
++	vq = vring_create_virtqueue(index, num, VIRTIO_MMIO_VRING_ALIGN, vdev,
+ 				 true, true, ctx, vm_notify, callback, name);
+ 	if (!vq) {
+ 		err = -ENOMEM;
+@@ -503,7 +500,6 @@ static int vm_find_vqs(struct virtio_device *vdev, unsigned int nvqs,
+ 		}
+ 
+ 		vqs[i] = vm_setup_vq(vdev, queue_idx++, callbacks[i], names[i],
+-				     sizes ? sizes[i] : 0,
+ 				     ctx ? ctx[i] : false);
+ 		if (IS_ERR(vqs[i])) {
+ 			vm_del_vqs(vdev);
 -- 
 MST
 
