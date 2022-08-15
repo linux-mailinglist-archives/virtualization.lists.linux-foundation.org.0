@@ -1,89 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id ABF8A593E9E
-	for <lists.virtualization@lfdr.de>; Mon, 15 Aug 2022 23:10:46 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C63B76058D;
-	Mon, 15 Aug 2022 21:10:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C63B76058D
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=anarazel.de header.i=@anarazel.de header.a=rsa-sha256 header.s=fm1 header.b=Sw2GBTR4;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm1 header.b=KOJlnqL0
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id U2OBpIDZvEeD; Mon, 15 Aug 2022 21:10:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8B73B60BB8;
-	Mon, 15 Aug 2022 21:10:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8B73B60BB8
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD683C007E;
-	Mon, 15 Aug 2022 21:10:42 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 63489C0035
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:10:41 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8C073593EAF
+	for <lists.virtualization@lfdr.de>; Mon, 15 Aug 2022 23:28:50 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2D59040277
- for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:10:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2D59040277
+	by smtp4.osuosl.org (Postfix) with ESMTP id EA4A54058C;
+	Mon, 15 Aug 2022 21:28:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EA4A54058C
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key, unprotected) header.d=anarazel.de
- header.i=@anarazel.de header.a=rsa-sha256 header.s=fm1 header.b=Sw2GBTR4; 
- dkim=pass (2048-bit key,
- unprotected) header.d=messagingengine.com header.i=@messagingengine.com
- header.a=rsa-sha256 header.s=fm1 header.b=KOJlnqL0
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=anarazel.de header.i=@anarazel.de header.a=rsa-sha256 header.s=fm1 header.b=yvn6DXBf;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm1 header.b=aL+giPBM
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7LHzO6_OlDIb
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Vs875VXE2gPA; Mon, 15 Aug 2022 21:28:48 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 64CCF4050F;
+	Mon, 15 Aug 2022 21:28:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 64CCF4050F
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D6B2C0078;
+	Mon, 15 Aug 2022 21:28:46 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 04EDBC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:10:40 +0000 (UTC)
+ Mon, 15 Aug 2022 21:28:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id B7AD281364
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 15 Aug 2022 21:28:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B7AD281364
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key, unprotected) header.d=anarazel.de
+ header.i=@anarazel.de header.a=rsa-sha256 header.s=fm1 header.b=yvn6DXBf; 
+ dkim=pass (2048-bit key,
+ unprotected) header.d=messagingengine.com header.i=@messagingengine.com
+ header.a=rsa-sha256 header.s=fm1 header.b=aL+giPBM
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id gjoppYaH46YN
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 15 Aug 2022 21:28:44 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 56C354025F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 262DA81351
 Received: from wout1-smtp.messagingengine.com (wout1-smtp.messagingengine.com
  [64.147.123.24])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 56C354025F
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 262DA81351
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 Aug 2022 21:10:40 +0000 (UTC)
+ Mon, 15 Aug 2022 21:28:44 +0000 (UTC)
 Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailout.west.internal (Postfix) with ESMTP id 12D0C32002D8;
- Mon, 15 Aug 2022 17:10:37 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Mon, 15 Aug 2022 17:10:39 -0400
+ by mailout.west.internal (Postfix) with ESMTP id CFB323200488;
+ Mon, 15 Aug 2022 17:28:41 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+ by compute5.internal (MEProxy); Mon, 15 Aug 2022 17:28:43 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=anarazel.de; h=
  cc:cc:content-type:date:date:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:sender:subject
- :subject:to:to; s=fm1; t=1660597837; x=1660684237; bh=9d7dhCe3Fq
- d/bfA8yD544NDBFEKnJIxJgepP6HupnHc=; b=Sw2GBTR4vuywnmfbU2VucVwN4b
- efRwLx92+SeVxu9DpYiM9sS9H38X+M9nmB2XpzhNvOxxb5JoJDbTxawwkLvyk2c3
- buevRKZhBacx0DwC2+uAC/LsFPKBO76ez0raPhNZoceUAslgZH4W2rO7xZmFFmtt
- NV3qcTcxQFLYsWMFvy4tzaHbZYJ6Vt2/wj/Sta4FHeb65rISF4i+p9Tv4zpDkP8A
- NK+lS5/hOGiOxGACwReToCSic0km/wxhPXT7vfwCUeCdbIMCQ8wgCnkZn78PLK9o
- +pcAZ9QUkGDWP5Mvnob0xP2ktcIZkVN7CKZAoof0l396WC6OVXZHaU/q840Q==
+ :subject:to:to; s=fm1; t=1660598921; x=1660685321; bh=TG6h01Br37
+ C4F3jMCzgHNyxb/LAU3CF9cYEYzRCIsQI=; b=yvn6DXBfwxjXrtC+Te4D/kWHmC
+ 8tpQP1Oy6qo8wuY0MkPzKpaF7EClUYOUG59BtsYm9ZfRvBSquvXdy5mfZHcYhbmZ
+ dP6H7EkjwhjI6HakI4aJmwyyc9vuDFCKPp3yQwLJbhvTR6BhjHIDdcIcNpxVbSyn
+ 0JNdwCzxF2sFLbKdcBtr/yHOSgOmVMVhE43sTlhYdEMAdz6Y3M03RmOJ2I1VUs3e
+ oTWR8JQxIMFyIK5Ksn7hSfygYEwXjhcbrHkXQQ/n+IREXnT6LDfA6hqL3xuf8SHY
+ +vHBwry8olWA8pGFxTPSq7htrRf4309y7TiZbBg5oqkJXhp1suGpdKndWyPg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:date:date:feedback-id
  :feedback-id:from:from:in-reply-to:in-reply-to:message-id
  :mime-version:references:reply-to:sender:subject:subject:to:to
  :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm1; t=1660597837; x=1660684237; bh=9d7dhCe3Fqd/bfA8yD544NDBFEKn
- JIxJgepP6HupnHc=; b=KOJlnqL03kLLyaO/0NB3mk/dJoirnU68Nx7JTKUpj8rf
- vVe7p792KJXBC1XDT+m4D2XgZDLPBhNoR4xTIgMVHlR6yfvZ3QIQsgWhIqzQ44V8
- PUSEk7w8PQAn/cFwQq+u3nktOgacR/uZ+f/6/FbpnfDILGqmlI1I8po77UZvWuG2
- wg6vQMgkdVeECgU1fuw5SKVQh+x1HHTMdqhw/Ae0XBcAIi4nLfb24x4PrqZt2H83
- JWa0oWlIGniGkDoc2Y1SnLtkyK6JXlFGoKLWA1QB5a6CrDmNS4mJ6vX5P2Yl+I/+
- v5EOExxCTEDkGcg3t8qDwfwwukD2UeOcM6FCEGo6gw==
-X-ME-Sender: <xms:Tbb6YsEkABtzc4Y_Sr5ZmBvRzpXaR81ZHU6DEjuFqNDIQ7DddIR32Q>
- <xme:Tbb6YlUo9yf4_vq38Q77-Pqh-fUecSXPT9kPCwk_4dwcTRVZ6cjmnG3_mhiJYyVdr
- ExyPbqT2Mr-TXcCrw>
-X-ME-Received: <xmr:Tbb6YmLiNO647ITbjg7f3pxHrktTjd2oV97wWdqgBttIN1JFZ6hpd8R7e3DQspRulyGm4oFVin6wjfrn2XsFjodZ_NB5Ro5q8XVBweAnnRwfunOFBtiP70Fp5OH4>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdehvddgudeitdcutefuodetggdotefrod
+ fm1; t=1660598921; x=1660685321; bh=TG6h01Br37C4F3jMCzgHNyxb/LAU
+ 3CF9cYEYzRCIsQI=; b=aL+giPBMZwPuKrh+P+nNenINh0up9FTNUwrC7DJ+9PoQ
+ MY1M4lduN925t5IqjR1tllocqr3tgPgU2k8W1s//wroofSSjFq7moupvxizJ6R2k
+ tZ+ZOSlm+Bb0E8xvjVx+FsicYw8+GtNNNpkKCfU/NSmxuvA0w/arFA8pMS5JZHZI
+ FNG8FzBvE9Md5MJDSloBFcjrY7GSgttKQ01G4TLUNKtFFclR35+4LtvwLntizBb7
+ PP3fWCE+T/x+JgvYCvWqdjY6NH/WLrNoQ2U8MD/J6cxUy7j2JJkzX67dCYURTtWc
+ uYtxpCx6mvy2LSmxrsD5EZCCdFbQ69TD5nYgRhX5aQ==
+X-ME-Sender: <xms:iLr6Yg2uEn8EOWZu5l2Bn_cu_LbsPMC8ffavd88zftdvJb_yoF5vxQ>
+ <xme:iLr6YrHlReUxZmOT2ApQD-MciDV-BpW6pIASajOYBuLPd54kSv_-iBV91pYPjqU8B
+ _w2mK2MBeI12BkWhA>
+X-ME-Received: <xmr:iLr6Yo4qrJ88Us5p4mkQflTVPm7FxxgbW646IEXYOWWXCRq0rwTHc_yGYIfYaNnmdKKww-45Pfbgc7IsU3RtPf_p4_fbAxQx6iAWoxoW4JeB9HyCeEV58aiTCLuO>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdehvddgudeifecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpeetnhgu
@@ -91,31 +91,27 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvfedrvdehvddgudeitdcutefuodetgg
  frrghtthgvrhhnpedvffefvefhteevffegieetfefhtddvffejvefhueetgeeludehteev
  udeitedtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhlfhhroh
  hmpegrnhgurhgvshesrghnrghrrgiivghlrdguvg
-X-ME-Proxy: <xmx:Tbb6YuHbI-M3grPW61plMNzu61m3zkee0ETlUw9gk4q6sbJlWg6vNA>
- <xmx:Tbb6YiWJgPtSuMItQui8RNHoixxsOw7S2ug5QkWCOHSulPe9czixag>
- <xmx:Tbb6YhM_9JVkTmRQZblFmAZ_kM-EIsBAgpimesyVUEvFlNzP29ao8Q>
- <xmx:Tbb6YvWGsb5k3UxdvkK7WVOFDAxucBDvrXXvFRG-6dadihdmb0CvaQ>
+X-ME-Proxy: <xmx:iLr6Yp0eVU7NJnUaOkwKOG7xyKFFsYMmfMCXZCuua0Az-YFL6n-8vw>
+ <xmx:iLr6YjHbvm6TWLpU6LIOqcwtEt2dTTPvg5uBsCyjcQXJo6KmPEZagQ>
+ <xmx:iLr6Yi_2Q7BtpolFX4o5wGQD6pwhUfS-dotaJo39PY8Ln9UfYRRKnQ>
+ <xmx:ibr6YtECLURIjGEkwZ2IMpYCf9iR1YGYoQninic5ysNhbiJCLqT8Bg>
 Feedback-ID: id4a34324:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 15 Aug 2022 17:10:36 -0400 (EDT)
-Date: Mon, 15 Aug 2022 14:10:35 -0700
+ 15 Aug 2022 17:28:40 -0400 (EDT)
+Date: Mon, 15 Aug 2022 14:28:39 -0700
 From: Andres Freund <andres@anarazel.de>
 To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: upstream kernel crashes
-Message-ID: <20220815211035.r2ojxkilwsbxyewu@awork3.anarazel.de>
-References: <20220815081527.soikyi365azh5qpu@awork3.anarazel.de>
- <20220815042623-mutt-send-email-mst@kernel.org>
- <FCDC5DDE-3CDD-4B8A-916F-CA7D87B547CE@anarazel.de>
- <20220815113729-mutt-send-email-mst@kernel.org>
- <20220815164503.jsoezxcm6q4u2b6j@awork3.anarazel.de>
- <20220815124748-mutt-send-email-mst@kernel.org>
- <20220815174617.z4chnftzcbv6frqr@awork3.anarazel.de>
- <20220815161423-mutt-send-email-mst@kernel.org>
- <20220815205330.m54g7vcs77r6owd6@awork3.anarazel.de>
- <20220815210437.saptyw6clr7datun@awork3.anarazel.de>
+Subject: Re: [PATCH] virtio_net: Revert "virtio_net: set the default max ring
+ size by find_vqs()"
+Message-ID: <20220815212839.aop6wwx4fkngihbf@awork3.anarazel.de>
+References: <20220815090521.127607-1-mst@redhat.com>
+ <20220815203426.GA509309@roeck-us.net>
+ <20220815164013-mutt-send-email-mst@kernel.org>
+ <20220815205053.GD509309@roeck-us.net>
+ <20220815165608-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20220815210437.saptyw6clr7datun@awork3.anarazel.de>
+In-Reply-To: <20220815165608-mutt-send-email-mst@kernel.org>
 Cc: Jens Axboe <axboe@kernel.dk>,
  "Martin K. Petersen" <martin.petersen@oracle.com>, netdev@vger.kernel.org,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
@@ -143,22 +139,25 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 Hi,
 
-On 2022-08-15 14:04:37 -0700, Andres Freund wrote:
-> Booting with the equivalent change, atop 5.19, in the legacy setup_vq()
-> reliably causes boot to hang:
+On 2022-08-15 17:04:10 -0400, Michael S. Tsirkin wrote:
+> So virtio has a queue_size register. When read, it will give you
+> originally the maximum queue size. Normally we just read it and
+> use it as queue size.
+> 
+> However, when queue memory allocation fails, and unconditionally with a
+> network device with the problematic patch, driver is asking the
+> hypervisor to make the ring smaller by writing a smaller value into this
+> register.
+> 
+> I suspect that what happens is hypervisor still uses the original value
+> somewhere.
 
-I don't know much virtio, so take this with a rock of salt:
+It looks more like the host is never told about the changed size for legacy
+devices...
 
-Legacy setup_vq() doesn't tell the host about the queue size. The modern one
-does:
-	vp_modern_set_queue_size(mdev, index, virtqueue_get_vring_size(vq));
-but the legacy one doesn't.
-
-I assume this means the host will assume the queue is of the size suggested by
-vp_legacy_get_queue_size(). If the host continues to write into the space
-after the "assumed end" of the queue, but the guest puts other stuff in that
-space, well, I'd expect fun roughly like the stuff we've been seeing in this
-and related threads.
+Indeed, adding a vp_legacy_set_queue_size() & call to it to setup_vq(), makes
+5.19 + restricting queue sizes to 1024 boot again.  I'd bet that it also would
+fix 6.0rc1, but I'm running out of time to test that.
 
 Greetings,
 
