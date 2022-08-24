@@ -2,128 +2,60 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2325759FE36
-	for <lists.virtualization@lfdr.de>; Wed, 24 Aug 2022 17:25:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 70EAB5A0084
+	for <lists.virtualization@lfdr.de>; Wed, 24 Aug 2022 19:38:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A5DCE60FB2;
-	Wed, 24 Aug 2022 15:25:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A5DCE60FB2
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=STBN0JJg
+	by smtp3.osuosl.org (Postfix) with ESMTP id DD53161017;
+	Wed, 24 Aug 2022 17:38:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DD53161017
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wEFhOQ0GaNEl; Wed, 24 Aug 2022 15:25:00 +0000 (UTC)
+	with ESMTP id GJTUty73He1U; Wed, 24 Aug 2022 17:38:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id D1C7F60FA3;
-	Wed, 24 Aug 2022 15:24:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D1C7F60FA3
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 0518060FE4;
+	Wed, 24 Aug 2022 17:38:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0518060FE4
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A7E2C002D;
-	Wed, 24 Aug 2022 15:24:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B228C0078;
+	Wed, 24 Aug 2022 17:38:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 55E6EC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 877C6C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 15:24:56 +0000 (UTC)
+ Wed, 24 Aug 2022 17:38:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2183060F95
+ by smtp3.osuosl.org (Postfix) with ESMTP id 54F6660FDE
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 15:24:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2183060F95
+ Wed, 24 Aug 2022 17:38:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 54F6660FDE
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oKB8DyKBkNeX
+ with ESMTP id V2mcV368o9LY
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 15:24:54 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 667DD60BFA
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 667DD60BFA
+ Wed, 24 Aug 2022 17:38:09 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3FBD960C26
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [IPv6:2a03:f480:1:14::7d])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3FBD960C26
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 15:24:54 +0000 (UTC)
-Received: by mail-ej1-x632.google.com with SMTP id n7so16033814ejh.2
- for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 08:24:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc; bh=9U4CYfoKFbj/AbZbuQemN6t37DkLSjqF7Rv/8Cv5uYU=;
- b=STBN0JJgkuT3Ub+zYNS6zXzJzUof3fSvR5hRMgMDAP9LbKzaTA+MK+TD1Iu+aZIyF+
- dPLXPApvrqDjAwDRySZ2fJKiO9PGndETwtfPLVzBT5LerqrNC/Be6i+lMALU0K108vbd
- VMJmSTgAFNY/28eY9lJfUXAaUTenkpB1N206PZf+6DmSTDGPlaoOf4b0iz9mIoQfeZQh
- GYv2v+ZA5XTaibilAf2aJJKPDFaNmL+I5g6VwE005y++27gyMKOa36tO264DTvYaPjQ4
- /8S4W7w+D1jYkRNzi+JbYmqm5H7HHOBLVJ5oz4nyJsRPIaXxO+rsnrd4YpgVCqZX3bUO
- Hfbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc;
- bh=9U4CYfoKFbj/AbZbuQemN6t37DkLSjqF7Rv/8Cv5uYU=;
- b=AechLSRTn2S8Jv13RgBfrBHAYRhTzPEk3d4A+2r1FYAxAcbjWsKmP+k2JW+a/9qQcP
- 9o9BXIUgjbCeE/Gyqobca+w3cVkPdpcIPD6NE/M1PWgDyxwgjL83gjvmVpikFGu35BDK
- Az9zQwUlyY3jcMaiYELIx3eAwdBkfslfZSs/OKtxExg+/6SRKmV9ByXj8Na1ev09XItc
- PBhNQn1T8ilCUu60aaRT13lmwvnwIaQqHjbWSzirK7ZPj1VCgtFtYQeKji7+oq2AaFR2
- rG502xTwowotSexkJOW+IiN3CkqmhfXBylOPCI0M9smlat9wHe+O8cQGPr/9PFtlxaAp
- fI7w==
-X-Gm-Message-State: ACgBeo1twJBLu+DvzXoHAj26MiuPtjypvA/ljkLygdOMCuQJ3AdfgNW4
- fzVr0IbybBfF7EhBvgoP/QA=
-X-Google-Smtp-Source: AA6agR6JZHUpcJdflHSbU0zmzoCMtOWs6CQCJkWREoFWqr/qdr1+zI9s3gboxNWeA+opNqBc+NbqAA==
-X-Received: by 2002:a17:907:2816:b0:73d:7884:a399 with SMTP id
- eb22-20020a170907281600b0073d7884a399mr3187172ejc.125.1661354692356; 
- Wed, 24 Aug 2022 08:24:52 -0700 (PDT)
-Received: from ?IPV6:2a02:908:1256:79a0:53f0:102e:8337:712f?
- ([2a02:908:1256:79a0:53f0:102e:8337:712f])
- by smtp.gmail.com with ESMTPSA id
- c8-20020a170906924800b0073d05a03347sm1272698ejx.89.2022.08.24.08.24.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Aug 2022 08:24:51 -0700 (PDT)
-Message-ID: <055c3c05-ac4c-430e-f2b9-08f000acf435@gmail.com>
-Date: Wed, 24 Aug 2022 17:24:48 +0200
+ Wed, 24 Aug 2022 17:38:09 +0000 (UTC)
+Received: from 157.81.37.188.rev.vodafone.pt ([188.37.81.157]
+ helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpa (Exim 4.89)
+ (envelope-from <marle@saisti.eu>) id 1oQtVx-00048L-Ul
+ for virtualization@lists.linux-foundation.org; Wed, 24 Aug 2022 19:46:02 +0300
+From: "ICITS-2023" <marialemos72@gmail.com>
+Subject: Call for papers - ICITS'2023 | Cusco, Peru | Deadline: September 11
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [Linaro-mm-sig] [PATCH v3 6/9] dma-buf: Move dma-buf attachment
- to dynamic locking specification
-Content-Language: en-US
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>,
- David Airlie <airlied@linux.ie>, Gerd Hoffmann <kraxel@redhat.com>,
- Gurchetan Singh <gurchetansingh@chromium.org>, Chia-I Wu
- <olvaffe@gmail.com>, Daniel Vetter <daniel@ffwll.ch>,
- Daniel Almeida <daniel.almeida@collabora.com>,
- Gert Wollny <gert.wollny@collabora.com>,
- Gustavo Padovan <gustavo.padovan@collabora.com>,
- Daniel Stone <daniel@fooishbar.org>,
- Tomeu Vizoso <tomeu.vizoso@collabora.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Clark <robdclark@gmail.com>, Sumit Semwal <sumit.semwal@linaro.org>,
- =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>,
- "Pan, Xinhui" <Xinhui.Pan@amd.com>, Thierry Reding
- <thierry.reding@gmail.com>, Tomasz Figa <tfiga@chromium.org>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Alex Deucher <alexander.deucher@amd.com>,
- Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>,
- Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
- =?UTF-8?Q?Thomas_Hellstr=c3=b6m?= <thomas_os@shipmail.org>,
- Qiang Yu <yuq825@gmail.com>
-References: <20220824102248.91964-1-dmitry.osipenko@collabora.com>
- <20220824102248.91964-7-dmitry.osipenko@collabora.com>
-From: =?UTF-8?Q?Christian_K=c3=b6nig?= <ckoenig.leichtzumerken@gmail.com>
-In-Reply-To: <20220824102248.91964-7-dmitry.osipenko@collabora.com>
-Cc: lima@lists.freedesktop.org, linux-rdma@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, intel-gfx@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, amd-gfx@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, linaro-mm-sig@lists.linaro.org,
- dri-devel@lists.freedesktop.org, Dmitry Osipenko <digetx@gmail.com>,
- kernel@collabora.com, linux-media@vger.kernel.org
+Date: Wed, 24 Aug 2022 17:46:01 +0100
+Message-ID: <22728454486640@gmail-com>
+X-Antivirus: AVG (VPS 220824-0, 24/8/2022), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -135,428 +67,441 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Reply-To: intercits@gmail.com
+Content-Type: multipart/mixed; boundary="===============5992422987029611878=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Am 24.08.22 um 12:22 schrieb Dmitry Osipenko:
-> Move dma-buf attachment API functions to the dynamic locking specification.
-> The strict locking convention prevents deadlock situations for dma-buf
-> importers and exporters.
+This is a multi-part message in MIME format
+
+--===============5992422987029611878==
+Content-Type: multipart/alternative; charset=utf-8; boundary="ZOw9I1p0vjWenkMe37XcE7fStqAvqM=_2i"
+
+This is a multi-part message in MIME format
+
+--ZOw9I1p0vjWenkMe37XcE7fStqAvqM=_2i
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+* Indexed in Scopus, WoS, DBLP, etc.
+ 
+* Google Scholar H5-Index =3D 15
+ 
+ 
+---------------------------------------------------------------------------=
+-----------------------------------------
+ICITS'23 - The 6th International Conference on Information Technology & Sys=
+tems
+Cusco, Peru, 8 - 10 February 2023
+http://icits.me <http://icits.me/>
+---------------------------------------------------------------------------=
+-----------------------------------------
+ 
+ 
+Scope
+
+ICITS'23 - The 6th International Conference on Information Technology & Sys=
+tems, to be held at Universidad Nacional de San Antonio Abad del Cusco, in =
+Cusco, Peru, between the 8th and the 10th of February 2023, is an internati=
+onal forum for researchers and practitioners to present and discuss the mos=
+t recent innovations, trends, results, experiences and concerns in the seve=
+ral perspectives of Information Technology & Systems.
+
+We are pleased to invite you to submit your papers to ICITS'23. They can be=
+ written in English, Spanish or Portuguese. All submissions will be reviewe=
+d on the basis of relevance, originality, importance and clarity.
+
+ 
+
+Topics
+
+Submitted papers should be related with one or more of the main themes prop=
+osed for the Conference:
+
+A) Information and Knowledge Management (IKM);
+
+B) Organizational Models and Information Systems (OMIS);
+
+C) Software and Systems Modeling (SSM);
+
+D) Software Systems, Architectures, Applications and Tools (SSAAT);
+
+E) Multimedia Systems and Applications (MSA);
+
+F) Computer Networks, Mobility and Pervasive Systems (CNMPS);
+
+G) Intelligent and Decision Support Systems (IDSS);
+
+H) Big Data Analytics and Applications (BDAA);
+
+I) Human-Computer Interaction (HCI);
+
+J) Ethics, Computers and Security (ECS)
+
+K) Health Informatics (HIS);
+
+L) Information Technologies in Education (ITE);
+
+M) Media, Applied Technology and Communication (MATC).
+
+ 
+
+Submission and Decision
+
+Submitted papers written in English (until 10-page limit) must comply with =
+the format of the Lecture Notes in Networks and Systems series (see Instruc=
+tions for Authors at Springer Website <https://www.springer.com/us/authors-=
+editors/conference-proceedings/conference-proceedings-guidelines>), must no=
+t have been published before, not be under review for any other conference =
+or publication and not include any information leading to the authors=E2=80=
+=99 identification. Therefore, the authors=E2=80=99 names and affiliations =
+should not be included in the version for evaluation by the Scientific Comm=
+ittee. This information should only be included in the camera-ready version=
+, saved in Word or Latex format and also in PDF format. These files must be=
+ accompanied by the Consent to Publish form <http://www.icits.me/copyright.=
+docx> filled out, in a ZIP file, and uploaded at the conference management =
+system.
+
+Submitted papers written in Spanish or Portuguese (until 15-page limit) mus=
+t comply with the format of RISTI <http://www.risti.xyz/> - Revista Ib=C3=
+=A9rica de Sistemas e Tecnologias de Informa=C3=A7=C3=A3o (download instruc=
+tions/template for authors in Spanish <http://www.risti.xyz/formato-es.doc>=
+ or Portuguese <http://www.risti.xyz/formato-pt.doc>), must not have been p=
+ublished before, not be under review for any other conference or publicatio=
+n and not include any information leading to the authors=E2=80=99 identific=
+ation. Therefore, the authors=E2=80=99 names and affiliations should not be=
+ included in the version for evaluation by the Scientific Committee. This i=
+nformation should only be included in the camera-ready version, saved in Wo=
+rd. These files must be uploaded at the conference management system in a Z=
+IP file.
+
+All papers will be subjected to a =E2=80=9Cdouble-blind review=E2=80=9D by =
+at least two members of the Scientific Committee.
+
+Based on Scientific Committee evaluation, a paper can be rejected or accept=
+ed by the Conference Chairs. In the later case, it can be accepted as paper=
+ or poster.
+
+The authors of papers accepted as posters must build and print a poster to =
+be exhibited during the Conference. This poster must follow an A1 or A2 ver=
+tical format. The Conference can include Work Sessions where these posters =
+are presented and orally discussed, with a 7 minute limit per poster.
+
+The authors of accepted papers will have 15 minutes to present their work i=
+n a Conference Work Session; approximately 5 minutes of discussion will fol=
+low each presentation.
+
+ 
+
+Publication and Indexing
+
+Papers accepted as posters are not published; they are only exhibited, pres=
+ented and discussed during the conference.
+
+To ensure that a paper accepted as paper is published, at least one of the =
+authors must be fully registered by the 4th of November 2022, and the paper=
+ must comply with the suggested layout and page-limit. Additionally, all re=
+commended changes must be addressed by the authors before they submit the c=
+amera-ready version.
+
+No more than one paper per registration will be published. An extra fee mus=
+t be paid for publication of additional papers, with a maximum of one addit=
+ional paper per registration. One registration permits only the participati=
+on of one author in the conference.
+
+Papers written in English and accepted and registered will be published in =
+Proceedings by Springer, in a book of the Lecture Notes in Networks and Sys=
+tems series, will  be submitted for indexation by Scopus, WoS, DBLP, Google=
+ Scholar, among others, and will be available in the SpringerLink Digital L=
+ibrary <http://link.springer.com/>.
+
+Papers written in Spanish or Portuguese and accepted and registered will be=
+ published in a Special Issue of RISTI <http://www.risti.xyz/> and will be =
+submitted for indexation by Scopus, among others.
+
+ 
+
+Important Dates
+
+Paper Submission: September 11, 2022
+
+Notification of Acceptance: October 16, 2022
+
+Payment of Registration, to ensure the inclusion of an accepted paper in th=
+e conference proceedings: November 4, 2022.
+
+Camera-ready Submission: November 4, 2022
+
+
+ 
+Website of ICITS'23: http://icits.me <http://icits.me/>
+ 
+ 
+ICITS'23 Team
+http://icits.me <http://icits.me/>
+
+
+-- 
+This email has been checked for viruses by AVG antivirus software.
+ww=
+w.avg.com
+--ZOw9I1p0vjWenkMe37XcE7fStqAvqM=_2i
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <div class=3D"adn ads" data-message-id=3D"#msg-a:r-1499474762405574081"=
+ data-legacy-message-id=3D"17a812a84db16fcf">
+      <div class=3D"gs">
+        <div>
+          <div id=3D":19a" class=3D"ii gt"><span style=3D"font-family: verd=
+ana, geneva, sans-serif">
+              <div class=3D"a3s aiL " align=3D"left"><font face=3D"Times Ne=
+w Roman">* Indexed in Scopus, WoS, DBLP, etc.</font></div>
+              <div class=3D"a3s aiL " align=3D"left"><font face=3D"Times Ne=
+w Roman">&nbsp;</font></div>
+              <div class=3D"a3s aiL " align=3D"left">
+                <div class=3D"a3s aiL " align=3D"left"><font face=3D"Times =
+New Roman">* Google Scholar H5-Index =3D 15</font></div>
+              </div>
+              <div class=3D"a3s aiL " align=3D"left"><font face=3D"Times Ne=
+w Roman">&nbsp;</font></div></span>
+            <div class=3D"a3s aiL " align=3D"center">&nbsp;</div>
+            <div class=3D"a3s aiL " align=3D"left">------------------------=
+---------------------------------------------------------------------------=
+-----------------</div>
+            <div class=3D"a3s aiL " align=3D"left"><strong>ICITS'23 - The&n=
+bsp;6th International Conference on Information Technology &amp; Systems</s=
+trong></div>
+            <div class=3D"a3s aiL " align=3D"left"><strong>Cusco, Peru,&nbs=
+p;8 - 10 February 2023</strong></div>
+            <div class=3D"a3s aiL " align=3D"left"><a href=3D"http://icits.=
+me/"><strong>http://icits.me</strong></a><br />----------------------------=
+---------------------------------------------------------------------------=
+-------------<br />&nbsp;</div>
+            <div class=3D"a3s aiL " align=3D"left">&nbsp;</div>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman"><strong>Scope</strong></font=
+></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">ICITS'23 - The 6th Internati=
+onal Conference on Information Technology &amp; Systems, to be held at Univ=
+ersidad Nacional de San Antonio Abad del Cusco, in Cusco, Peru, between the=
+ 8th and the 10th of February 2023, is an international forum for researche=
+rs and practitioners to present and discuss the most recent innovations, tr=
+ends, results, experiences and concerns in the several perspectives of Info=
+rmation Technology &amp; Systems.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">We are pleased to invite you=
+ to submit your papers to ICITS'23. They can be written in English, Spanish=
+ or Portuguese. All submissions will be reviewed on the basis of relevance,=
+ originality, importance and clarity.</font></span></p>
+            <p class=3D"a3s aiL ">&nbsp;</p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><strong><font face=3D"Times New Roman">Topics</font></stron=
+g></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Submitted papers should be r=
+elated with one or more of the main themes proposed for the Conference:</fo=
+nt></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">A) Information and Knowledge=
+ Management (IKM);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">B) Organizational Models and=
+ Information Systems (OMIS);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">C) Software and Systems Mode=
+ling (SSM);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">D) Software Systems, Archite=
+ctures, Applications and Tools (SSAAT);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">E) Multimedia Systems and Ap=
+plications (MSA);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">F) Computer Networks, Mobili=
+ty and Pervasive Systems (CNMPS);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">G) Intelligent and Decision =
+Support Systems (IDSS);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">H) Big Data Analytics and Ap=
+plications (BDAA);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">I) Human-Computer Interactio=
+n (HCI);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">J) Ethics, Computers and Sec=
+urity (ECS)</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">K) Health Informatics (HIS);=
+</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">L) Information Technologies =
+in Education (ITE);</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">M) Media, Applied Technology=
+ and Communication (MATC).</font></span></p>
+            <p class=3D"a3s aiL ">&nbsp;</p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><strong><font face=3D"Times New Roman">Submission and Decis=
+ion</font></strong></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Submitted papers written in =
+English (until 10-page limit) must comply with the format of the Lecture No=
+tes in Networks and Systems series (see&nbsp;</font><a href=3D"https://www.=
+springer.com/us/authors-editors/conference-proceedings/conference-proceedin=
+gs-guidelines" rel=3D"noopener" target=3D"_blank"><font face=3D"Times New R=
+oman">Instructions for Authors at Springer Website</font></a><font face=3D"=
+Times New Roman">), must not have been published before, not be under revie=
+w for any other conference or publication and not include any information l=
+eading to the authors&rsquo; identification. Therefore, the authors&rsquo; =
+names and affiliations should not be included in the version for evaluation=
+ by the Scientific Committee. This information should only be included in t=
+he camera-ready version, saved in Word or Latex format and also in PDF form=
+at.&nbsp;<span lang=3D"en" id=3D"result_box">These files&nbsp;must&nbsp;be =
+accompanied by the&nbsp;<a href=3D"http://www.icits.me/copyright.docx" rel=
+=3D"noopener" target=3D"_blank">Consent to Publish form</a>&nbsp;filled out=
+,&nbsp;</span><span lang=3D"en" id=3D"result_box">in a ZIP file, and upload=
+ed at the conference management system.</span></font></span></p>
+            <p class=3D"a3s aiL "><span lang=3D"en" style=3D"font-family: v=
+erdana, geneva, sans-serif"><font face=3D"Times New Roman">Submitted papers=
+ written in Spanish or Portuguese (until 15-page limit) must comply with th=
+e format of&nbsp;</font><a href=3D"http://www.risti.xyz/" rel=3D"noopener" =
+target=3D"_blank"><font face=3D"Times New Roman">RISTI</font></a><font face=
+=3D"Times New Roman">&nbsp;- Revista Ib&eacute;rica de Sistemas e Tecnologi=
+as de Informa&ccedil;&atilde;o (download instructions/template for authors =
+in&nbsp;</font><a href=3D"http://www.risti.xyz/formato-es.doc" rel=3D"noope=
+ner" target=3D"_blank"><font face=3D"Times New Roman">Spanish</font></a><fo=
+nt face=3D"Times New Roman">&nbsp;or&nbsp;</font><a href=3D"http://www.rist=
+i.xyz/formato-pt.doc" rel=3D"noopener" target=3D"_blank"><font face=3D"Time=
+s New Roman">Portuguese</font></a><font face=3D"Times New Roman">), must no=
+t have been published before, not be under review for any other conference =
+or publication and not include any information leading to the authors&rsquo=
+; identification. Therefore, the authors&rsquo; names and affiliations shou=
+ld not be included in the version for evaluation by the Scientific Committe=
+e. This information should only be included in the camera-ready version, sa=
+ved in Word.&nbsp;<span lang=3D"en" id=3D"result_box">These files must&nbsp=
+;be&nbsp;</span><span lang=3D"en" id=3D"result_box">uploaded at the confere=
+nce management system in a ZIP file.</span></font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">All papers will be subjected=
+ to a &ldquo;double-blind review&rdquo; by at least two members of the Scie=
+ntific Committee.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Based on Scientific Committe=
+e evaluation, a paper can be rejected or accepted by the Conference Chairs.=
+ In the later case, it can be accepted as paper or poster.</font></span></p=
 >
-> Previously, the "unlocked" versions of the attachment API functions
-> weren't taking the reservation lock and this patch makes them to take
-> the lock.
->
-> Intel and AMD GPU drivers already were mapping the attached dma-bufs under
-> the held lock during attachment, hence these drivers are updated to use
-> the locked functions.
->
-> Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-> ---
->   drivers/dma-buf/dma-buf.c                  | 115 ++++++++++++++-------
->   drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c    |   4 +-
->   drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c |   8 +-
->   drivers/gpu/drm/i915/gem/i915_gem_object.c |  12 +++
->   include/linux/dma-buf.h                    |  20 ++--
->   5 files changed, 110 insertions(+), 49 deletions(-)
->
-> diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-> index 4556a12bd741..f2a5a122da4a 100644
-> --- a/drivers/dma-buf/dma-buf.c
-> +++ b/drivers/dma-buf/dma-buf.c
-> @@ -559,7 +559,7 @@ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
->    * 2. Userspace passes this file-descriptors to all drivers it wants this buffer
->    *    to share with: First the file descriptor is converted to a &dma_buf using
->    *    dma_buf_get(). Then the buffer is attached to the device using
-> - *    dma_buf_attach().
-> + *    dma_buf_attach_unlocked().
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">The authors of papers accept=
+ed as posters must build and print a poster to be exhibited during the Conf=
+erence. This poster must follow an A1 or A2 vertical format. The Conference=
+ can include Work Sessions where these posters are presented and orally dis=
+cussed, with a 7 minute limit per poster.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">The authors of accepted pape=
+rs will have 15 minutes to present their work in a Conference Work Session;=
+ approximately 5 minutes of discussion will follow each presentation.</font=
+></span></p>
+            <p class=3D"a3s aiL ">&nbsp;</p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><strong><font face=3D"Times New Roman">Publication and Inde=
+xing</font></strong></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Papers accepted as posters a=
+re not published; they are only exhibited, presented and discussed during t=
+he conference.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">To ensure that a paper accep=
+ted as paper is published, at least one of the authors must be fully regist=
+ered by the 4th of November 2022, and the paper must comply with the sugges=
+ted layout and page-limit. Additionally, all recommended changes must be ad=
+dressed by the authors before they submit the camera-ready version.</font><=
+/span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">No more than one paper per r=
+egistration will be published. An extra fee must be paid for publication of=
+ additional papers, with a maximum of one additional paper per registration=
+=2E One registration permits only the participation of one author in the co=
+nference.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Papers written in English an=
+d accepted and registered will be published in Proceedings by Springer, in =
+a book of the Lecture Notes in Networks and Systems series, will&nbsp; be s=
+ubmitted for indexation by Scopus, WoS, DBLP, Google Scholar, among others,=
+ and will be available in the </font><a href=3D"http://link.springer.com/" =
+rel=3D"noopener" target=3D"_blank"><font face=3D"Times New Roman">SpringerL=
+ink Digital Library</font></a><font face=3D"Times New Roman">.</font></span=
+></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Papers written in Spanish or=
+ Portuguese and accepted and registered will be published in a Special Issu=
+e of&nbsp;</font><a href=3D"http://www.risti.xyz/" rel=3D"noopener" target=
+=3D"_blank"><font face=3D"Times New Roman">RISTI</font></a><font face=3D"Ti=
+mes New Roman"> and will be submitted for indexation by Scopus, among other=
+s.</font></span></p>
+            <p class=3D"a3s aiL ">&nbsp;</p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><strong><font face=3D"Times New Roman">Important Dates</fon=
+t></strong></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Paper Submission: September =
+11, 2022</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Notification of Acceptance: =
+October 16, 2022</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Payment of Registration, to =
+ensure the inclusion of an accepted paper in the conference proceedings: No=
+vember 4, 2022.</font></span></p>
+            <p class=3D"a3s aiL "><span style=3D"font-family: verdana, gene=
+va, sans-serif"><font face=3D"Times New Roman">Camera-ready Submission: Nov=
+ember 4, 2022</font></span></p>
+            <div class=3D"a3s aiL "><br />&nbsp;<br /><strong>Website of IC=
+ITS'23</strong>: <a href=3D"http://icits.me/">http://icits.me</a><br />&nbs=
+p;<br />&nbsp;<br />ICITS'23 Team<br /><a href=3D"http://icits.me/">http://=
+icits.me</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br /><table style=3D"bo=
+rder-top: 1px solid #D3D4DE;"><tr><td style=3D"width: 55px; padding-top: 13=
+px;"><a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_s=
+ource=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D"=
+_blank"><img src=3D"https://s-install.avcdn.net/ipm/preview/icons/icon-enve=
+lope-tick-green-avg-v1.png" alt=3D" width=3D"46" height=3D"29" style=3D"wid=
+th: 46px; height: 29px;"/></a></td><td style=3D"width: 470px; padding-top: =
+12px; color: #41424e; font-size: 13px; font-family: Arial, Helvetica, sans-=
+serif; line-height: 18px;">Virus-free.<a href=3D"http://www.avg.com/email-s=
+ignature?utm_medium=3Demail&utm_source=3Dlink&utm_campaign=3Dsig-email&utm_=
+content=3Demailclient" target=3D"_blank" style=3D"color: #4453ea;">www.avg.=
+com</a></td></tr></table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2" =
+width=3D"1" height=3D"1"> </a></div></body>
+</html>
 
-Now I get why this is confusing me so much.
+--ZOw9I1p0vjWenkMe37XcE7fStqAvqM=_2i--
 
-The _unlocked postfix implies that there is another function which 
-should be called with the locks already held, but this is not the case 
-for attach/detach (because they always need to grab the lock themselves).
 
-So I suggest to drop the _unlocked postfix for the attach/detach 
-functions. Another step would then be to unify attach/detach with 
-dynamic_attach/dynamic_detach when both have the same locking convention 
-anyway.
-
-Sorry that this is going so much back and forth, it's really complicated 
-to keep all the stuff in my head at the moment :)
-
-Thanks a lot for looking into this,
-Christian.
-
->    *
->    *    Up to this stage the exporter is still free to migrate or reallocate the
->    *    backing storage.
-> @@ -569,8 +569,8 @@ static struct file *dma_buf_getfile(struct dma_buf *dmabuf, int flags)
->    *    dma_buf_map_attachment() and dma_buf_unmap_attachment().
->    *
->    * 4. Once a driver is done with a shared buffer it needs to call
-> - *    dma_buf_detach() (after cleaning up any mappings) and then release the
-> - *    reference acquired with dma_buf_get() by calling dma_buf_put().
-> + *    dma_buf_detach_unlocked() (after cleaning up any mappings) and then
-> + *    release the reference acquired with dma_buf_get() by calling dma_buf_put().
->    *
->    * For the detailed semantics exporters are expected to implement see
->    * &dma_buf_ops.
-> @@ -802,7 +802,7 @@ static struct sg_table * __map_dma_buf(struct dma_buf_attachment *attach,
->    * @importer_priv:	[in]	importer private pointer for the attachment
->    *
->    * Returns struct dma_buf_attachment pointer for this attachment. Attachments
-> - * must be cleaned up by calling dma_buf_detach().
-> + * must be cleaned up by calling dma_buf_detach_unlocked().
->    *
->    * Optionally this calls &dma_buf_ops.attach to allow device-specific attach
->    * functionality.
-> @@ -858,8 +858,8 @@ dma_buf_dynamic_attach_unlocked(struct dma_buf *dmabuf, struct device *dev,
->   	    dma_buf_is_dynamic(dmabuf)) {
->   		struct sg_table *sgt;
->   
-> +		dma_resv_lock(attach->dmabuf->resv, NULL);
->   		if (dma_buf_is_dynamic(attach->dmabuf)) {
-> -			dma_resv_lock(attach->dmabuf->resv, NULL);
->   			ret = dmabuf->ops->pin(attach);
->   			if (ret)
->   				goto err_unlock;
-> @@ -872,8 +872,7 @@ dma_buf_dynamic_attach_unlocked(struct dma_buf *dmabuf, struct device *dev,
->   			ret = PTR_ERR(sgt);
->   			goto err_unpin;
->   		}
-> -		if (dma_buf_is_dynamic(attach->dmabuf))
-> -			dma_resv_unlock(attach->dmabuf->resv);
-> +		dma_resv_unlock(attach->dmabuf->resv);
->   		attach->sgt = sgt;
->   		attach->dir = DMA_BIDIRECTIONAL;
->   	}
-> @@ -889,8 +888,7 @@ dma_buf_dynamic_attach_unlocked(struct dma_buf *dmabuf, struct device *dev,
->   		dmabuf->ops->unpin(attach);
->   
->   err_unlock:
-> -	if (dma_buf_is_dynamic(attach->dmabuf))
-> -		dma_resv_unlock(attach->dmabuf->resv);
-> +	dma_resv_unlock(attach->dmabuf->resv);
->   
->   	dma_buf_detach_unlocked(dmabuf, attach);
->   	return ERR_PTR(ret);
-> @@ -927,7 +925,7 @@ static void __unmap_dma_buf(struct dma_buf_attachment *attach,
->    * @dmabuf:	[in]	buffer to detach from.
->    * @attach:	[in]	attachment to be detached; is free'd after this call.
->    *
-> - * Clean up a device attachment obtained by calling dma_buf_attach().
-> + * Clean up a device attachment obtained by calling dma_buf_attach_unlocked().
->    *
->    * Optionally this calls &dma_buf_ops.detach for device-specific detach.
->    */
-> @@ -937,21 +935,19 @@ void dma_buf_detach_unlocked(struct dma_buf *dmabuf,
->   	if (WARN_ON(!dmabuf || !attach))
->   		return;
->   
-> +	dma_resv_lock(attach->dmabuf->resv, NULL);
-> +
->   	if (attach->sgt) {
-> -		if (dma_buf_is_dynamic(attach->dmabuf))
-> -			dma_resv_lock(attach->dmabuf->resv, NULL);
->   
->   		__unmap_dma_buf(attach, attach->sgt, attach->dir);
->   
-> -		if (dma_buf_is_dynamic(attach->dmabuf)) {
-> +		if (dma_buf_is_dynamic(attach->dmabuf))
->   			dmabuf->ops->unpin(attach);
-> -			dma_resv_unlock(attach->dmabuf->resv);
-> -		}
->   	}
-> -
-> -	dma_resv_lock(dmabuf->resv, NULL);
->   	list_del(&attach->node);
-> +
->   	dma_resv_unlock(dmabuf->resv);
-> +
->   	if (dmabuf->ops->detach)
->   		dmabuf->ops->detach(dmabuf, attach);
->   
-> @@ -1011,7 +1007,7 @@ void dma_buf_unpin(struct dma_buf_attachment *attach)
->   EXPORT_SYMBOL_NS_GPL(dma_buf_unpin, DMA_BUF);
->   
->   /**
-> - * dma_buf_map_attachment_unlocked - Returns the scatterlist table of the attachment;
-> + * dma_buf_map_attachment - Returns the scatterlist table of the attachment;
->    * mapped into _device_ address space. Is a wrapper for map_dma_buf() of the
->    * dma_buf_ops.
->    * @attach:	[in]	attachment whose scatterlist is to be returned
-> @@ -1030,10 +1026,11 @@ EXPORT_SYMBOL_NS_GPL(dma_buf_unpin, DMA_BUF);
->    *
->    * Important: Dynamic importers must wait for the exclusive fence of the struct
->    * dma_resv attached to the DMA-BUF first.
-> + *
-> + * Importer is responsible for holding dmabuf's reservation lock.
->    */
-> -struct sg_table *
-> -dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
-> -				enum dma_data_direction direction)
-> +struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *attach,
-> +					enum dma_data_direction direction)
->   {
->   	struct sg_table *sg_table;
->   	int r;
-> @@ -1043,8 +1040,7 @@ dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
->   	if (WARN_ON(!attach || !attach->dmabuf))
->   		return ERR_PTR(-EINVAL);
->   
-> -	if (dma_buf_attachment_is_dynamic(attach))
-> -		dma_resv_assert_held(attach->dmabuf->resv);
-> +	dma_resv_assert_held(attach->dmabuf->resv);
->   
->   	if (attach->sgt) {
->   		/*
-> @@ -1059,7 +1055,6 @@ dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
->   	}
->   
->   	if (dma_buf_is_dynamic(attach->dmabuf)) {
-> -		dma_resv_assert_held(attach->dmabuf->resv);
->   		if (!IS_ENABLED(CONFIG_DMABUF_MOVE_NOTIFY)) {
->   			r = attach->dmabuf->ops->pin(attach);
->   			if (r)
-> @@ -1099,10 +1094,38 @@ dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
->   #endif /* CONFIG_DMA_API_DEBUG */
->   	return sg_table;
->   }
-> +EXPORT_SYMBOL_NS_GPL(dma_buf_map_attachment, DMA_BUF);
-> +
-> +/**
-> + * dma_buf_map_attachment_unlocked - Returns the scatterlist table of the attachment;
-> + * mapped into _device_ address space. Is a wrapper for map_dma_buf() of the
-> + * dma_buf_ops.
-> + * @attach:	[in]	attachment whose scatterlist is to be returned
-> + * @direction:	[in]	direction of DMA transfer
-> + *
-> + * Unlocked variant of dma_buf_map_attachment().
-> + */
-> +struct sg_table *
-> +dma_buf_map_attachment_unlocked(struct dma_buf_attachment *attach,
-> +				enum dma_data_direction direction)
-> +{
-> +	struct sg_table *sg_table;
-> +
-> +	might_sleep();
-> +
-> +	if (WARN_ON(!attach || !attach->dmabuf))
-> +		return ERR_PTR(-EINVAL);
-> +
-> +	dma_resv_lock(attach->dmabuf->resv, NULL);
-> +	sg_table = dma_buf_map_attachment(attach, direction);
-> +	dma_resv_unlock(attach->dmabuf->resv);
-> +
-> +	return sg_table;
-> +}
->   EXPORT_SYMBOL_NS_GPL(dma_buf_map_attachment_unlocked, DMA_BUF);
->   
->   /**
-> - * dma_buf_unmap_attachment_unlocked - unmaps and decreases usecount of the buffer;might
-> + * dma_buf_unmap_attachment - unmaps and decreases usecount of the buffer;might
->    * deallocate the scatterlist associated. Is a wrapper for unmap_dma_buf() of
->    * dma_buf_ops.
->    * @attach:	[in]	attachment to unmap buffer from
-> @@ -1110,31 +1133,51 @@ EXPORT_SYMBOL_NS_GPL(dma_buf_map_attachment_unlocked, DMA_BUF);
->    * @direction:  [in]    direction of DMA transfer
->    *
->    * This unmaps a DMA mapping for @attached obtained by dma_buf_map_attachment().
-> + *
-> + * Importer is responsible for holding dmabuf's reservation lock.
->    */
-> -void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *attach,
-> -				       struct sg_table *sg_table,
-> -				       enum dma_data_direction direction)
-> +void dma_buf_unmap_attachment(struct dma_buf_attachment *attach,
-> +			      struct sg_table *sg_table,
-> +			      enum dma_data_direction direction)
->   {
->   	might_sleep();
->   
-> -	if (WARN_ON(!attach || !attach->dmabuf || !sg_table))
-> -		return;
-> -
-> -	if (dma_buf_attachment_is_dynamic(attach))
-> -		dma_resv_assert_held(attach->dmabuf->resv);
-> +	dma_resv_assert_held(attach->dmabuf->resv);
->   
->   	if (attach->sgt == sg_table)
->   		return;
->   
-> -	if (dma_buf_is_dynamic(attach->dmabuf))
-> -		dma_resv_assert_held(attach->dmabuf->resv);
-> -
->   	__unmap_dma_buf(attach, sg_table, direction);
->   
->   	if (dma_buf_is_dynamic(attach->dmabuf) &&
->   	    !IS_ENABLED(CONFIG_DMABUF_MOVE_NOTIFY))
->   		dma_buf_unpin(attach);
->   }
-> +EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_attachment, DMA_BUF);
-> +
-> +/**
-> + * dma_buf_unmap_attachment_unlocked - unmaps and decreases usecount of the buffer;might
-> + * deallocate the scatterlist associated. Is a wrapper for unmap_dma_buf() of
-> + * dma_buf_ops.
-> + * @attach:	[in]	attachment to unmap buffer from
-> + * @sg_table:	[in]	scatterlist info of the buffer to unmap
-> + * @direction:	[in]	direction of DMA transfer
-> + *
-> + * Unlocked variant of dma_buf_unmap_attachment().
-> + */
-> +void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *attach,
-> +				       struct sg_table *sg_table,
-> +				       enum dma_data_direction direction)
-> +{
-> +	might_sleep();
-> +
-> +	if (WARN_ON(!attach || !attach->dmabuf || !sg_table))
-> +		return;
-> +
-> +	dma_resv_lock(attach->dmabuf->resv, NULL);
-> +	dma_buf_unmap_attachment(attach, sg_table, direction);
-> +	dma_resv_unlock(attach->dmabuf->resv);
-> +}
->   EXPORT_SYMBOL_NS_GPL(dma_buf_unmap_attachment_unlocked, DMA_BUF);
->   
->   /**
-> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> index ac1e2911b727..b1c455329023 100644
-> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_ttm.c
-> @@ -885,7 +885,7 @@ static int amdgpu_ttm_backend_bind(struct ttm_device *bdev,
->   			struct sg_table *sgt;
->   
->   			attach = gtt->gobj->import_attach;
-> -			sgt = dma_buf_map_attachment_unlocked(attach, DMA_BIDIRECTIONAL);
-> +			sgt = dma_buf_map_attachment(attach, DMA_BIDIRECTIONAL);
->   			if (IS_ERR(sgt))
->   				return PTR_ERR(sgt);
->   
-> @@ -1010,7 +1010,7 @@ static void amdgpu_ttm_backend_unbind(struct ttm_device *bdev,
->   		struct dma_buf_attachment *attach;
->   
->   		attach = gtt->gobj->import_attach;
-> -		dma_buf_unmap_attachment_unlocked(attach, ttm->sg, DMA_BIDIRECTIONAL);
-> +		dma_buf_unmap_attachment(attach, ttm->sg, DMA_BIDIRECTIONAL);
->   		ttm->sg = NULL;
->   	}
->   
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> index cc54a5b1d6ae..276a74bc7fd1 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_dmabuf.c
-> @@ -241,8 +241,8 @@ static int i915_gem_object_get_pages_dmabuf(struct drm_i915_gem_object *obj)
->   
->   	assert_object_held(obj);
->   
-> -	pages = dma_buf_map_attachment_unlocked(obj->base.import_attach,
-> -						DMA_BIDIRECTIONAL);
-> +	pages = dma_buf_map_attachment(obj->base.import_attach,
-> +				       DMA_BIDIRECTIONAL);
->   	if (IS_ERR(pages))
->   		return PTR_ERR(pages);
->   
-> @@ -270,8 +270,8 @@ static int i915_gem_object_get_pages_dmabuf(struct drm_i915_gem_object *obj)
->   static void i915_gem_object_put_pages_dmabuf(struct drm_i915_gem_object *obj,
->   					     struct sg_table *pages)
->   {
-> -	dma_buf_unmap_attachment_unlocked(obj->base.import_attach, pages,
-> -					  DMA_BIDIRECTIONAL);
-> +	dma_buf_unmap_attachment(obj->base.import_attach, pages,
-> +				 DMA_BIDIRECTIONAL);
->   }
->   
->   static const struct drm_i915_gem_object_ops i915_gem_object_dmabuf_ops = {
-> diff --git a/drivers/gpu/drm/i915/gem/i915_gem_object.c b/drivers/gpu/drm/i915/gem/i915_gem_object.c
-> index 389e9f157ca5..9fbef3aea7b1 100644
-> --- a/drivers/gpu/drm/i915/gem/i915_gem_object.c
-> +++ b/drivers/gpu/drm/i915/gem/i915_gem_object.c
-> @@ -331,7 +331,19 @@ static void __i915_gem_free_objects(struct drm_i915_private *i915,
->   			continue;
->   		}
->   
-> +		/*
-> +		 * dma_buf_unmap_attachment() requires reservation to be
-> +		 * locked. The imported GEM should share reservation lock,
-> +		 * so it's safe to take the lock.
-> +		 */
-> +		if (obj->base.import_attach)
-> +			i915_gem_object_lock(obj, NULL);
-> +
->   		__i915_gem_object_pages_fini(obj);
-> +
-> +		if (obj->base.import_attach)
-> +			i915_gem_object_unlock(obj);
-> +
->   		__i915_gem_free_object(obj);
->   
->   		/* But keep the pointer alive for RCU-protected lookups */
-> diff --git a/include/linux/dma-buf.h b/include/linux/dma-buf.h
-> index da2057569101..d48d534dc55c 100644
-> --- a/include/linux/dma-buf.h
-> +++ b/include/linux/dma-buf.h
-> @@ -46,7 +46,7 @@ struct dma_buf_ops {
->   	/**
->   	 * @attach:
->   	 *
-> -	 * This is called from dma_buf_attach() to make sure that a given
-> +	 * This is called from dma_buf_attach_unlocked() to make sure that a given
->   	 * &dma_buf_attachment.dev can access the provided &dma_buf. Exporters
->   	 * which support buffer objects in special locations like VRAM or
->   	 * device-specific carveout areas should check whether the buffer could
-> @@ -74,7 +74,7 @@ struct dma_buf_ops {
->   	/**
->   	 * @detach:
->   	 *
-> -	 * This is called by dma_buf_detach() to release a &dma_buf_attachment.
-> +	 * This is called by dma_buf_detach_unlocked() to release a &dma_buf_attachment.
->   	 * Provided so that exporters can clean up any housekeeping for an
->   	 * &dma_buf_attachment.
->   	 *
-> @@ -94,7 +94,7 @@ struct dma_buf_ops {
->   	 * exclusive with @cache_sgt_mapping.
->   	 *
->   	 * This is called automatically for non-dynamic importers from
-> -	 * dma_buf_attach().
-> +	 * dma_buf_attach_unlocked().
->   	 *
->   	 * Note that similar to non-dynamic exporters in their @map_dma_buf
->   	 * callback the driver must guarantee that the memory is available for
-> @@ -509,10 +509,10 @@ struct dma_buf_attach_ops {
->    * and its user device(s). The list contains one attachment struct per device
->    * attached to the buffer.
->    *
-> - * An attachment is created by calling dma_buf_attach(), and released again by
-> - * calling dma_buf_detach(). The DMA mapping itself needed to initiate a
-> - * transfer is created by dma_buf_map_attachment() and freed again by calling
-> - * dma_buf_unmap_attachment().
-> + * An attachment is created by calling dma_buf_attach_unlocked(), and released
-> + * again by calling dma_buf_detach_unlocked(). The DMA mapping itself needed to
-> + * initiate a transfer is created by dma_buf_map_attachment() and freed
-> + * again by calling dma_buf_unmap_attachment().
->    */
->   struct dma_buf_attachment {
->   	struct dma_buf *dmabuf;
-> @@ -626,6 +626,12 @@ void dma_buf_unmap_attachment_unlocked(struct dma_buf_attachment *,
->   				       struct sg_table *,
->   				       enum dma_data_direction);
->   
-> +struct sg_table *dma_buf_map_attachment(struct dma_buf_attachment *,
-> +					enum dma_data_direction);
-> +void dma_buf_unmap_attachment(struct dma_buf_attachment *attach,
-> +			      struct sg_table *sg_table,
-> +			      enum dma_data_direction direction);
-> +
->   void dma_buf_move_notify(struct dma_buf *dma_buf);
->   int dma_buf_begin_cpu_access(struct dma_buf *dma_buf,
->   			     enum dma_data_direction dir);
+--===============5992422987029611878==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============5992422987029611878==--
+
