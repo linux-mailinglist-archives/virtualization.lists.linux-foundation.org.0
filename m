@@ -1,101 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 414FB59F622
-	for <lists.virtualization@lfdr.de>; Wed, 24 Aug 2022 11:25:04 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D9A659F698
+	for <lists.virtualization@lfdr.de>; Wed, 24 Aug 2022 11:43:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 6737E81342;
-	Wed, 24 Aug 2022 09:25:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6737E81342
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=0wXMhZdc;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=Zsk/A+0+
+	by smtp4.osuosl.org (Postfix) with ESMTP id 892214030B;
+	Wed, 24 Aug 2022 09:43:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 892214030B
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=dMe2Wb8z
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zKy6jJeZkEcD; Wed, 24 Aug 2022 09:25:01 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id msFl_P06eDSp; Wed, 24 Aug 2022 09:43:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 129DE81341;
-	Wed, 24 Aug 2022 09:25:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 129DE81341
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 7504240352;
+	Wed, 24 Aug 2022 09:43:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7504240352
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 52CFEC0078;
-	Wed, 24 Aug 2022 09:25:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 81F05C0078;
+	Wed, 24 Aug 2022 09:43:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2E248C002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 30093C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 09:24:58 +0000 (UTC)
+ Wed, 24 Aug 2022 09:43:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EFC4D60E2A
+ by smtp1.osuosl.org (Postfix) with ESMTP id F2C0E8139B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 09:24:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EFC4D60E2A
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=0wXMhZdc; 
- dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=Zsk/A+0+
+ Wed, 24 Aug 2022 09:43:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F2C0E8139B
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com
+ header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256
+ header.s=20210112 header.b=dMe2Wb8z
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MyzaI4UXrl8p
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JQP3eJU7Cll6
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 09:24:56 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 83060605EC
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 83060605EC
+ Wed, 24 Aug 2022 09:43:28 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD1EC81397
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id BD1EC81397
  for <virtualization@lists.linux-foundation.org>;
- Wed, 24 Aug 2022 09:24:56 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 1E76F33F96;
- Wed, 24 Aug 2022 09:24:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1661333094; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GosGyRasfLQTI37/Gv5JZWHz1qn+5JXZ3XDF3rQAl4s=;
- b=0wXMhZdckbicGFiSNBKweAJwgIzJrX5WkI52wa2lJJbbnrE10IEo1yTa3phaQQWdpiHAzc
- FHt8FEePw8y7z/PsFsytsTDn/c5lUaW4QOVts205MKFmHCvh+RnDgbB9BPfc18YzIewpvc
- tAmrCJHt32W4Hs99Rk28vCn2zX65Peo=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1661333094;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=GosGyRasfLQTI37/Gv5JZWHz1qn+5JXZ3XDF3rQAl4s=;
- b=Zsk/A+0+Vk/t4D5SGTNwbTNWvI7dgkvtV2oBCvrYFhdIgqxGDSV6e8lp4erXJv72ErpLpN
- +o8yFVrxs8SiZ1Cg==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 0211513780;
- Wed, 24 Aug 2022 09:24:53 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id DRHFOmXuBWNOfwAAMHmgww
- (envelope-from <hare@suse.de>); Wed, 24 Aug 2022 09:24:53 +0000
-Message-ID: <bedae890-80e6-9777-caff-98749d46ba3b@suse.de>
-Date: Wed, 24 Aug 2022 11:24:53 +0200
+ Wed, 24 Aug 2022 09:43:28 +0000 (UTC)
+Received: by mail-pg1-x534.google.com with SMTP id q63so311419pga.9
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 24 Aug 2022 02:43:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=solid-run-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc;
+ bh=XWeclXyitpRwhvwK4pjPy6mQN7N6nAEKqi+NnMqcPrg=;
+ b=dMe2Wb8z4CxtBWJ/5vvEnv2watWjknN3QIo5LYDWlYQYMn3QJbOD7LbPe6yYbcEK2z
+ 1gRuGDaJaOgd4Ga1nnGpihxAJl3ig4fEfD/VjDlPAd/l7KZDanQRH4OllgnVd/1ffPOg
+ ND7I/qmzy+n7hevHMaUd/sTkgZq/nezKDkVprCDSGmqIww/vtEiQPTXaipzAmPjiiFR1
+ uw7IqGO9OwvI3ZSHa/Qgal/Y3EEmZTVqYUYVBQKjzSXmyng3yOiFkMDpeBncb0+iLasw
+ 7PpAYeTvnR1pzKxCGh56Ec8aGMgAvoXut9+wY5id1JcURDAwLVDy38PdgnRODr2ZFjci
+ 5ozw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc;
+ bh=XWeclXyitpRwhvwK4pjPy6mQN7N6nAEKqi+NnMqcPrg=;
+ b=fP48HQgAgeOwqxyBhLxZOhYymTr80XklZakbnUyy4oZ3TzNK/MQ+aLFC6glOG0MX0T
+ 09RWoYAvDBnBgFuytSLHyPN3/55pvTV2npk53VxW3iakJXF/s8r5IM6WDgz5k8Z0dh1y
+ T94CBBDnVb2qLMa8jovXVSAn7QBb/T5jSLt6K4pCl+slNRT9veYfErhQN5ws8rn00Qc+
+ eSf6KgCIbJL/piFZoijTHi2Vjdn4IRc3YoG4YK4KSwJhoeLhnzgaR5HXo01F+IeoqNwR
+ /q9GR099pKOWTuNcELCL2ykN5mf0yJCChX25VeoBHyKNH44kaA8IzgmlVHRFavLkpW83
+ +Lxw==
+X-Gm-Message-State: ACgBeo3xk70ceLHUWKXgk5uufTPngccPPXwUy/Q8QdNu3VILCATg2ra/
+ GXY+2jmeMibH0Ld/+TLOHlQg8Utv1HdDykQqPPhJkA==
+X-Google-Smtp-Source: AA6agR4bEnrQMis06dgNydG28g7G7UYGlg1MWcW+7Y18aeEK5tgOzvE1xmHD5ycbY98e7Nry4ocYNTlBs8OaqNSsYok=
+X-Received: by 2002:a63:6804:0:b0:422:1689:ed05 with SMTP id
+ d4-20020a636804000000b004221689ed05mr23148290pgc.289.1661334208119; Wed, 24
+ Aug 2022 02:43:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.12.0
-Subject: Re: Virtio-net - add timeouts to control commands
-Content-Language: en-US
-To: Alvaro Karsz <alvaro.karsz@solid-run.com>, Jason Wang <jasowang@redhat.com>
 References: <CAJs=3_DJ8x5h98WBbXhzxVx+D6pqpBkCrBHXa_7ApqYO4vGDpQ@mail.gmail.com>
  <CACGkMEuQBLpaW6-tD3oqR90ya5=js6DJ=pHiOJmG2SOt-6ycpA@mail.gmail.com>
- <CAJs=3_Cnf29Om2yB=JkdASuu=YBPRmZ4i7ncFfTzrftTkYZVmQ@mail.gmail.com>
-From: Hannes Reinecke <hare@suse.de>
-In-Reply-To: <CAJs=3_Cnf29Om2yB=JkdASuu=YBPRmZ4i7ncFfTzrftTkYZVmQ@mail.gmail.com>
+ <2ff3d36b-f044-71cc-8001-d7f4073282c1@suse.de>
+In-Reply-To: <2ff3d36b-f044-71cc-8001-d7f4073282c1@suse.de>
+From: Alvaro Karsz <alvaro.karsz@solid-run.com>
+Date: Wed, 24 Aug 2022 12:42:52 +0300
+Message-ID: <CAJs=3_AUiaDtyRTMcDd_DGuiKZVKuMUSZRUosQa7wU=5UZwtqw@mail.gmail.com>
+Subject: Re: Virtio-net - add timeouts to control commands
+To: Hannes Reinecke <hare@suse.de>
 Cc: virtualization <virtualization@lists.linux-foundation.org>,
  "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
@@ -109,30 +103,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: base64
-Content-Type: text/plain; charset="utf-8"; Format="flowed"
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gOC8yNC8yMiAxMToxNiwgQWx2YXJvIEthcnN6IHdyb3RlOgo+IEhpIEphc29uLAo+IAo+PiBP
-ciByZXNldCBidXQgY2FuIHdlIHNpbXBseSB1c2UgaW50ZXJydXB0IGluc3RlYWQgb2YgdGhlIGJ1
-c3kgd2FpdGluZz8KPiAKPiBJIGFncmVlIHRoYXQgdGltZW91dHMgYXJlIG5vdCBuZWVkZWQgdXNp
-bmcgaW50ZXJydXB0cy4KClF1aXRlIHRoZSBjb250cmFyeS4KVGhlcmUgaXMgbm8gZ3VhcmFudGVl
-IHRoYXQgYSBjb21wbGV0aW9uIGZvciBhIGdpdmVuIGNvbW1hbmQgd2lsbCBiZSAKc2lnbmFsZWQg
-YXQgYWxsOyBpZiB0aGUgY29tcGxldGlvbiBpcyBuZXZlciBwb3N0ZWQgdG8gdGhlIHZpcnRpbyBx
-dWV1ZSAKdGhlIFZNIHdpbGwgc3BpbiBmb3JldmVyLgoKPiBUaGlzIGNhbiBiZSBkb25lLCBidXQg
-c2VlbXMgbGlrZSBhIGJpZyBjaGFuZ2UuCj4gQWxsIGZ1bmN0aW9ucyBjYWxsaW5nIHZpcnRuZXRf
-c2VuZF9jb21tYW5kIGV4cGVjdCB0byBnZXQgYSByZXNwb25zZSBpbW1lZGlhdGVseS4KPiBUaGlz
-IG1heSBiZSBkaWZmaWN1bHQsIHNpbmNlIHNvbWUgb2YgdGhlIGNvbW1hbmRzIGFyZSBzZW50IGlu
-IHRoZQo+IHByb2JlIGZ1bmN0aW9uLgoKVGhpcyBpcyBhIHNpbXBsaXN0aWMgYXBwcm9hY2guIF9B
-bnlfIGNvbW1hbmQgc2VudCB2aWEgdmlydGlvIHdpbGwgaGF2ZSAKdG8gaGF2ZSBzb21lIHNvcnQg
-b2YgaGFuZGxpbmcgaW4gdGhlIGhvc3QsIHNvIGFuIGltbWVkaWF0ZSByZXNwb25zZSBpcyAKbm90
-IGd1YXJhbnRlZWQuCkVzcGVjaWFsbHkgdmlydGlvLWJsb2NrIGNvbW1hbmQgd2lsbCBfbm90XyBi
-ZSBoYW5kbGVkIGltbWVkaWF0ZWx5LgoKQ2hlZXJzLAoKSGFubmVzCi0tIApEci4gSGFubmVzIFJl
-aW5lY2tlCQkgICAgICAgICAgIEtlcm5lbCBTdG9yYWdlIEFyY2hpdGVjdApoYXJlQHN1c2UuZGUJ
-CQkgICAgICAgICAgICAgICAgICArNDkgOTExIDc0MDUzIDY4OApTVVNFIFNvZnR3YXJlIFNvbHV0
-aW9ucyBHZXJtYW55IEdtYkgsIE1heGZlbGRzdHIuIDUsIDkwNDA5IE7DvHJuYmVyZwpIUkIgMzY4
-MDkgKEFHIE7DvHJuYmVyZyksIEdGOiBGZWxpeCBJbWVuZMO2cmZmZXIKX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBs
-aXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlz
-dHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFuL2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
+Hi Hannes,
+
+> a) let the device do the timeout: pass in a timeout value with the
+> command, and allow the device to return an ETIMEDOUT error when the
+> timeout expires. Then it's up to the device to do the necessary timeout
+> handling; the server won't be involved at all (except for handling an
+> ETIMEDOUT error)
+
+
+This won't work if the device crashes.
+
+>
+> b) implement an 'abort' command. With that the server controls the
+> timeout, and is allowed to send an 'abort' command when the timeout
+> expires. That requires the device to be able to abort commands (which
+> not all devices are able to), but avoids having to implement a timeout
+> handling in the device.
+
+
+I actually thought about this idea.
+This may work, but you'll still have a few moments when the server
+assumes that the command failed, and the network device assumes that
+it succeeded.
+So the server may still receive packets in an unexpected queue.
+
+
+>
+> I am very much in favour of having timeouts for virtio commands; we've
+> had several massive customer escalations which could have been solved if
+> we were able to set the command timeout in the VM.
+> As this was for virtio-scsi/virtio-block I would advocate to have a
+> generic virtio command timeout, not a protocol-specific one.
+
+This may be difficult to implement.
+Especially when multiple commands may be queued at the same time, and
+the device can handle the commands in any order.
+We'll need to add identifiers for every command.
+
+I'm actually referring here to the Linux kernel implementation of
+virtnet control commands, in which the server spins for a response.
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
