@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CD225BC6E8
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:12 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 585EF5BC6A6
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:17:57 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B8A1E425A1;
-	Mon, 19 Sep 2022 10:18:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B8A1E425A1
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=pJappe5z
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CQdWYWmuQMKP; Mon, 19 Sep 2022 10:18:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 337A2425DE;
-	Mon, 19 Sep 2022 10:18:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 337A2425DE
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9AAAAC0081;
-	Mon, 19 Sep 2022 10:18:04 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 17420C0032
- for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:02 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2058483F95
- for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2058483F95
+	by smtp1.osuosl.org (Postfix) with ESMTP id C111184141;
+	Mon, 19 Sep 2022 10:17:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C111184141
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=pJappe5z
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=ocGTItbn
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 30UlmlV3-lHp
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4pFJKcaQVORM; Mon, 19 Sep 2022 10:17:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 14EB584059;
+	Mon, 19 Sep 2022 10:17:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 14EB584059
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 91DC1C007F;
+	Mon, 19 Sep 2022 10:17:49 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1DB63C0085
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4CC948410A
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4CC948410A
+ Mon, 19 Sep 2022 10:17:47 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7CE2740B7B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
+ Mon, 19 Sep 2022 10:17:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7CE2740B7B
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=casper.20170209 header.b=ocGTItbn
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id QljeJ2FD46jw
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 19 Sep 2022 10:17:43 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1B305416DC
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1B305416DC
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 19 Sep 2022 10:17:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=pxqjaMyXYMAIciLaWxKe0qnmRXZim+cyW3iOuZrk594=; b=pJappe5zW7K5a0uM2up4iM5Wnb
- /MjE8rbu9WAnugdJ3vNctbRmg6M6msdadl7GrRu8gtVBhdKcEL1q01gUbAuGRo0F0P7TCfvPJh4j2
- OEm2Vu3lZCTKtlIjZJSadch35O1K0Zbwq+z8RJTY6sDBfrl7cZthsF+xPgMYt5cDvWZZf4P4AlFVc
- zdM/BHKKGCIjNj47BoFPAVho93RY3tnAP/cuTaLSHb+Kf058fSlXO4SLAuEKfsIyz0WEgg5U4frRu
- X+6ypv7mNDlcFlPVnLutEGlC5ervzvG7OJqcv/JCTvTdx7I88hj7iNzDWL0LLFMDZwMu/BFg/DVkL
- /eEjmWnw==;
+ bh=5J6w0/E9GHUuxcPhak3+lKL/wLFktsWBVlnujWsvOEE=; b=ocGTItbnHMCSlaYiyMpchOEOtx
+ veHzmEQdt1SePnsivQdcNeIJIOJZndJ7oHl64ZVy4viIjqO5KfL7b2Wf5bz98R8lyCJd2nm9U3tjz
+ /9zwY2YzIzcGpJXNLPKlakxz0YTThM6NGt6sYMHo9YdgO/p77zXJwy4mzj8pJoWIiP3Mbe7DI6Jbt
+ 2AMc2nOm8r1Lr/VZ+Ls7ftZ6POJ0PEiFVy9OSbCKzFB2aKH4z9eBrdwrOthgJzOSji5xIKlx+miPC
+ kBrvhjwCHv1vWywPAOk0NStNCu/l3FpOGhyXrqsfN8NmBRF3aeNbEK1vsmnay3e97r1v8JSs2JEc6
+ a9exIuTw==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDq5-00E2B6-Tl; Mon, 19 Sep 2022 10:17:23 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1oaDq8-004b9u-AO; Mon, 19 Sep 2022 10:17:24 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 4659D302F3C;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 490C4302F41;
  Mon, 19 Sep 2022 12:16:25 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 6042A2BA49034; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
-Message-ID: <20220919101522.224759912@infradead.org>
+ id 646262BAC75A6; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
+Message-ID: <20220919101522.291054325@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 12:00:07 +0200
+Date: Mon, 19 Sep 2022 12:00:08 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 28/44] cpuidle,mwait: Make noinstr clean
+Subject: [PATCH v2 29/44] cpuidle,tdx: Make tdx noinstr clean
 References: <20220919095939.761690562@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
@@ -144,77 +144,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vmlinux.o: warning: objtool: intel_idle_s2idle+0x6e: call to __monitor.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle_irq+0x8c: call to __monitor.constprop.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: intel_idle+0x73: call to __monitor.constprop.0() leaves .noinstr.text section
-
-vmlinux.o: warning: objtool: mwait_idle+0x88: call to clflush() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __halt+0x2c: call to hcall_func.constprop.0() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __halt+0x3f: call to __tdx_hypercall() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __tdx_hypercall+0x66: call to __tdx_hypercall_failed() leaves .noinstr.text section
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/x86/include/asm/mwait.h         |   12 ++++++------
- arch/x86/include/asm/special_insns.h |    2 +-
- 2 files changed, 7 insertions(+), 7 deletions(-)
+ arch/x86/boot/compressed/vmlinux.lds.S |    1 +
+ arch/x86/coco/tdx/tdcall.S             |    2 ++
+ arch/x86/coco/tdx/tdx.c                |    5 +++--
+ 3 files changed, 6 insertions(+), 2 deletions(-)
 
---- a/arch/x86/include/asm/mwait.h
-+++ b/arch/x86/include/asm/mwait.h
-@@ -25,7 +25,7 @@
- #define TPAUSE_C01_STATE		1
- #define TPAUSE_C02_STATE		0
+--- a/arch/x86/boot/compressed/vmlinux.lds.S
++++ b/arch/x86/boot/compressed/vmlinux.lds.S
+@@ -34,6 +34,7 @@ SECTIONS
+ 		_text = .; 	/* Text */
+ 		*(.text)
+ 		*(.text.*)
++		*(.noinstr.text)
+ 		_etext = . ;
+ 	}
+ 	.rodata : {
+--- a/arch/x86/coco/tdx/tdcall.S
++++ b/arch/x86/coco/tdx/tdcall.S
+@@ -31,6 +31,8 @@
+ 					  TDX_R12 | TDX_R13 | \
+ 					  TDX_R14 | TDX_R15 )
  
--static inline void __monitor(const void *eax, unsigned long ecx,
-+static __always_inline void __monitor(const void *eax, unsigned long ecx,
- 			     unsigned long edx)
- {
- 	/* "monitor %eax, %ecx, %edx;" */
-@@ -33,7 +33,7 @@ static inline void __monitor(const void
- 		     :: "a" (eax), "c" (ecx), "d"(edx));
++.section .noinstr.text, "ax"
++
+ /*
+  * __tdx_module_call()  - Used by TDX guests to request services from
+  * the TDX module (does not include VMM services) using TDCALL instruction.
+--- a/arch/x86/coco/tdx/tdx.c
++++ b/arch/x86/coco/tdx/tdx.c
+@@ -53,8 +53,9 @@ static inline u64 _tdx_hypercall(u64 fn,
  }
  
--static inline void __monitorx(const void *eax, unsigned long ecx,
-+static __always_inline void __monitorx(const void *eax, unsigned long ecx,
- 			      unsigned long edx)
+ /* Called from __tdx_hypercall() for unrecoverable failure */
+-void __tdx_hypercall_failed(void)
++noinstr void __tdx_hypercall_failed(void)
  {
- 	/* "monitorx %eax, %ecx, %edx;" */
-@@ -41,7 +41,7 @@ static inline void __monitorx(const void
- 		     :: "a" (eax), "c" (ecx), "d"(edx));
++	instrumentation_begin();
+ 	panic("TDVMCALL failed. TDX module bug?");
  }
  
--static inline void __mwait(unsigned long eax, unsigned long ecx)
-+static __always_inline void __mwait(unsigned long eax, unsigned long ecx)
- {
- 	mds_idle_clear_cpu_buffers();
- 
-@@ -76,8 +76,8 @@ static inline void __mwait(unsigned long
-  * EAX                     (logical) address to monitor
-  * ECX                     #GP if not zero
+@@ -64,7 +65,7 @@ void __tdx_hypercall_failed(void)
+  * Reusing the KVM EXIT_REASON macros makes it easier to connect the host and
+  * guest sides of these calls.
   */
--static inline void __mwaitx(unsigned long eax, unsigned long ebx,
--			    unsigned long ecx)
-+static __always_inline void __mwaitx(unsigned long eax, unsigned long ebx,
-+				     unsigned long ecx)
+-static u64 hcall_func(u64 exit_reason)
++static __always_inline u64 hcall_func(u64 exit_reason)
  {
- 	/* No MDS buffer clear as this is AMD/HYGON only */
- 
-@@ -86,7 +86,7 @@ static inline void __mwaitx(unsigned lon
- 		     :: "a" (eax), "b" (ebx), "c" (ecx));
- }
- 
--static inline void __sti_mwait(unsigned long eax, unsigned long ecx)
-+static __always_inline void __sti_mwait(unsigned long eax, unsigned long ecx)
- {
- 	mds_idle_clear_cpu_buffers();
- 	/* "mwait %eax, %ecx;" */
---- a/arch/x86/include/asm/special_insns.h
-+++ b/arch/x86/include/asm/special_insns.h
-@@ -196,7 +196,7 @@ static inline void load_gs_index(unsigne
- 
- #endif /* CONFIG_PARAVIRT_XXL */
- 
--static inline void clflush(volatile void *__p)
-+static __always_inline void clflush(volatile void *__p)
- {
- 	asm volatile("clflush %0" : "+m" (*(volatile char __force *)__p));
+ 	return exit_reason;
  }
 
 
