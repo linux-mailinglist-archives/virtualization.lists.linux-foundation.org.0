@@ -1,91 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E99F5BC6D6
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:09 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2F5F75BC66E
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:17:28 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8FF158438E;
-	Mon, 19 Sep 2022 10:18:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8FF158438E
+	by smtp1.osuosl.org (Postfix) with ESMTP id 46CFF82D12;
+	Mon, 19 Sep 2022 10:17:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 46CFF82D12
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=AlyUL2n2
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=Pu2ax4C+
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AJ7gDtM5GTzK; Mon, 19 Sep 2022 10:18:05 +0000 (UTC)
+	with ESMTP id g_Ygzx6EZoNN; Mon, 19 Sep 2022 10:17:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id DB08884068;
-	Mon, 19 Sep 2022 10:18:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DB08884068
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D931B83267;
+	Mon, 19 Sep 2022 10:17:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D931B83267
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 43415C002D;
-	Mon, 19 Sep 2022 10:18:04 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C39D6C0070;
+	Mon, 19 Sep 2022 10:17:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B7B58C007C
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 069E4C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
+ Mon, 19 Sep 2022 10:17:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7FD68425CE
+ by smtp1.osuosl.org (Postfix) with ESMTP id C6F4382D12
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7FD68425CE
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=AlyUL2n2
+ Mon, 19 Sep 2022 10:17:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C6F4382D12
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id g4v6HIeIE_ND
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id j5TUzNeShmZB
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5B6F9425D3
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5B6F9425D3
+ Mon, 19 Sep 2022 10:17:14 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B98E682C91
+Received: from casper.infradead.org (casper.infradead.org
+ [IPv6:2001:8b0:10b:1236::1])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B98E682C91
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
+ Mon, 19 Sep 2022 10:17:12 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=YOWU43M4IjsvcmJXQwOIFJh+WuCbnSytdcIdnv65DkY=; b=AlyUL2n21Ay/eo4jzhxLVHbjtT
- UQyURrUAFbSeZXMu+qSEhGh5tsE0SavJsEpBS1K1IB5BR2w0cqpFKFUfHSoscIwaG1ohk66JX0VfJ
- mLJwvAXSiH7Gt28S3XByOnqo3uEOTiM0P9sWLADHW7udnoML9bRxDpBpb3wcuoeOVqMcXphlfL21A
- my5k9xukM3nRKLIX0+tEddJpYBIiN6NUySN7jnWjWc6oY49Xk2EEzfYF2TBITi40qvcU6x6hpac+t
- 3G1ys0gAkcnegE95WH6F0JTlIbD+ZqauWXPqFE9mdWImdtoBd2u5kmXCBlZVlWagaRZnaojLqXDwM
- xgmg5ltg==;
+ bh=t0hoKUhhRPcpNA2sMhDiSnk+WMkt/R0zO6loPF3PH9w=; b=Pu2ax4C+q2gikvdKh53kb5LQaq
+ 1icXVAPPb5rTxmDMICtYx2G9B9yrHKvYB27SoYQJT/Juj9Z0e/ciHJ7RnfVuY0UEjWNyVpkpns/fy
+ /NILdltY1jI6makeZnfd6Ue64JSOcginNFswX+VLat0o+YrsIuhjqYP8sxzm+/aHtz2+5+wAVzwMQ
+ Z6tx/N/mzW2m5hIYqNNQHq8hVqXusyw1qoanShE7Uh/Lm8p05qkgyTLMAP6KM2PwHkRt1IYSrnHns
+ bdeqefliBxf1GDAvIiKTpMroNoGSw6cOFgqeoY/+lppO/2cDzth/JGUAVVk19kUUcCVXxh2cgXBOx
+ JuF2Xc/w==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDpA-00E28l-Ry; Mon, 19 Sep 2022 10:17:17 +0000
+ by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1oaDpE-004ahX-Bw; Mon, 19 Sep 2022 10:16:28 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id ED9F430067B;
- Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 71529300BBA;
+ Mon, 19 Sep 2022 12:16:24 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id C4C3D2BA49036; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
-Message-ID: <20220919101520.399971897@infradead.org>
+ id C99462BA49037; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
+Message-ID: <20220919101520.466971769@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 11:59:40 +0200
+Date: Mon, 19 Sep 2022 11:59:41 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 01/44] x86/perf/amd: Remove tracing from perf_lopwr_cb()
+Subject: [PATCH v2 02/44] x86/idle: Replace x86_idle with a static_call
 References: <20220919095939.761690562@infradead.org>
 MIME-Version: 1.0
-Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
- linus.walleij@linaro.org, bsegall@google.com, guoren@kernel.org, pavel@ucw.cz,
- agordeev@linux.ibm.com, linux-arch@vger.kernel.org, vincent.guittot@linaro.org,
- mpe@ellerman.id.au, chenhuacai@kernel.org, christophe.leroy@csgroup.eu,
- linux-acpi@vger.kernel.org, agross@kernel.org, geert@linux-m68k.org,
- linux-imx@nxp.com, vgupta@kernel.org, mattst88@gmail.com,
- mturquette@baylibre.com, sammy@sammy.net, pmladek@suse.com,
+Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+ rafael@kernel.org, catalin.marinas@arm.com, linus.walleij@linaro.org,
+ bsegall@google.com, guoren@kernel.org, pavel@ucw.cz, agordeev@linux.ibm.com,
+ linux-arch@vger.kernel.org, vincent.guittot@linaro.org, mpe@ellerman.id.au,
+ chenhuacai@kernel.org, christophe.leroy@csgroup.eu, linux-acpi@vger.kernel.org,
+ agross@kernel.org, geert@linux-m68k.org, linux-imx@nxp.com, vgupta@kernel.org,
+ mattst88@gmail.com, mturquette@baylibre.com, sammy@sammy.net, pmladek@suse.com,
  linux-pm@vger.kernel.org, Sascha Hauer <s.hauer@pengutronix.de>,
  linux-um@lists.infradead.org, npiggin@gmail.com, tglx@linutronix.de,
  linux-omap@vger.kernel.org, dietmar.eggemann@arm.com, andreyknvl@gmail.com,
@@ -100,11 +97,11 @@ Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
  linux-s390@vger.kernel.org, vschneid@redhat.com, john.ogness@linutronix.de,
  ysato@users.sourceforge.jp, linux-sh@vger.kernel.org, festevam@gmail.com,
  deller@gmx.de, daniel.lezcano@linaro.org, jonathanh@nvidia.com,
- dennis@kernel.org, lenb@kernel.org, linux-xtensa@linux-xtensa.org,
- kernel@pengutronix.de, gor@linux.ibm.com, linux-arm-msm@vger.kernel.org,
- linux-alpha@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
- loongarch@lists.linux.dev, shorne@gmail.com, chris@zankel.net,
- sboyd@kernel.org, dinguyen@kernel.org, bristot@redhat.com,
+ dennis@kernel.org, Frederic Weisbecker <frederic@kernel.org>, lenb@kernel.org,
+ linux-xtensa@linux-xtensa.org, kernel@pengutronix.de, gor@linux.ibm.com,
+ linux-arm-msm@vger.kernel.org, linux-alpha@vger.kernel.org,
+ linux-m68k@lists.linux-m68k.org, loongarch@lists.linux.dev, shorne@gmail.com,
+ chris@zankel.net, sboyd@kernel.org, dinguyen@kernel.org, bristot@redhat.com,
  alexander.shishkin@linux.intel.com, fweisbec@gmail.com, lpieralisi@kernel.org,
  atishp@atishpatra.org, linux@rasmusvillemoes.dk, kasan-dev@googlegroups.com,
  will@kernel.org, boris.ostrovsky@oracle.com, khilman@kernel.org,
@@ -144,60 +141,118 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The perf_lopwr_cb() is called from the idle routines; there is no RCU
-there, we must not enter tracing.
+Typical boot time setup; no need to suffer an indirect call for that.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Reviewed-by: Frederic Weisbecker <frederic@kernel.org>
+Reviewed-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 ---
- arch/x86/events/amd/brs.c         |   13 +++++--------
- arch/x86/include/asm/perf_event.h |    2 +-
- 2 files changed, 6 insertions(+), 9 deletions(-)
+ arch/x86/kernel/process.c |   50 +++++++++++++++++++++++++---------------------
+ 1 file changed, 28 insertions(+), 22 deletions(-)
 
---- a/arch/x86/events/amd/brs.c
-+++ b/arch/x86/events/amd/brs.c
-@@ -41,18 +41,15 @@ static inline unsigned int brs_to(int id
- 	return MSR_AMD_SAMP_BR_FROM + 2 * idx + 1;
- }
+--- a/arch/x86/kernel/process.c
++++ b/arch/x86/kernel/process.c
+@@ -24,6 +24,7 @@
+ #include <linux/cpuidle.h>
+ #include <linux/acpi.h>
+ #include <linux/elf-randomize.h>
++#include <linux/static_call.h>
+ #include <trace/events/power.h>
+ #include <linux/hw_breakpoint.h>
+ #include <asm/cpu.h>
+@@ -692,7 +693,23 @@ void __switch_to_xtra(struct task_struct
+ unsigned long boot_option_idle_override = IDLE_NO_OVERRIDE;
+ EXPORT_SYMBOL(boot_option_idle_override);
  
--static inline void set_debug_extn_cfg(u64 val)
-+static __always_inline void set_debug_extn_cfg(u64 val)
- {
- 	/* bits[4:3] must always be set to 11b */
--	wrmsrl(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3);
-+	__wrmsr(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3, val >> 32);
- }
+-static void (*x86_idle)(void);
++/*
++ * We use this if we don't have any better idle routine..
++ */
++void __cpuidle default_idle(void)
++{
++	raw_safe_halt();
++}
++#if defined(CONFIG_APM_MODULE) || defined(CONFIG_HALTPOLL_CPUIDLE_MODULE)
++EXPORT_SYMBOL(default_idle);
++#endif
++
++DEFINE_STATIC_CALL_NULL(x86_idle, default_idle);
++
++static bool x86_idle_set(void)
++{
++	return !!static_call_query(x86_idle);
++}
  
--static inline u64 get_debug_extn_cfg(void)
-+static __always_inline u64 get_debug_extn_cfg(void)
- {
--	u64 val;
--
--	rdmsrl(MSR_AMD_DBG_EXTN_CFG, val);
--	return val;
-+	return __rdmsr(MSR_AMD_DBG_EXTN_CFG);
- }
- 
- static bool __init amd_brs_detect(void)
-@@ -338,7 +335,7 @@ void amd_pmu_brs_sched_task(struct perf_
-  * called from ACPI processor_idle.c or acpi_pad.c
-  * with interrupts disabled
+ #ifndef CONFIG_SMP
+ static inline void play_dead(void)
+@@ -715,28 +732,17 @@ void arch_cpu_idle_dead(void)
+ /*
+  * Called from the generic idle code.
   */
--void perf_amd_brs_lopwr_cb(bool lopwr_in)
-+void noinstr perf_amd_brs_lopwr_cb(bool lopwr_in)
+-void arch_cpu_idle(void)
+-{
+-	x86_idle();
+-}
+-
+-/*
+- * We use this if we don't have any better idle routine..
+- */
+-void __cpuidle default_idle(void)
++void __cpuidle arch_cpu_idle(void)
  {
- 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
- 	union amd_debug_extn_cfg cfg;
---- a/arch/x86/include/asm/perf_event.h
-+++ b/arch/x86/include/asm/perf_event.h
-@@ -554,7 +554,7 @@ extern void perf_amd_brs_lopwr_cb(bool l
- 
- DECLARE_STATIC_CALL(perf_lopwr_cb, perf_amd_brs_lopwr_cb);
- 
--static inline void perf_lopwr_cb(bool lopwr_in)
-+static __always_inline void perf_lopwr_cb(bool lopwr_in)
- {
- 	static_call_mod(perf_lopwr_cb)(lopwr_in);
+-	raw_safe_halt();
++	static_call(x86_idle)();
  }
+-#if defined(CONFIG_APM_MODULE) || defined(CONFIG_HALTPOLL_CPUIDLE_MODULE)
+-EXPORT_SYMBOL(default_idle);
+-#endif
+ 
+ #ifdef CONFIG_XEN
+ bool xen_set_default_idle(void)
+ {
+-	bool ret = !!x86_idle;
++	bool ret = x86_idle_set();
+ 
+-	x86_idle = default_idle;
++	static_call_update(x86_idle, default_idle);
+ 
+ 	return ret;
+ }
+@@ -859,20 +865,20 @@ void select_idle_routine(const struct cp
+ 	if (boot_option_idle_override == IDLE_POLL && smp_num_siblings > 1)
+ 		pr_warn_once("WARNING: polling idle and HT enabled, performance may degrade\n");
+ #endif
+-	if (x86_idle || boot_option_idle_override == IDLE_POLL)
++	if (x86_idle_set() || boot_option_idle_override == IDLE_POLL)
+ 		return;
+ 
+ 	if (boot_cpu_has_bug(X86_BUG_AMD_E400)) {
+ 		pr_info("using AMD E400 aware idle routine\n");
+-		x86_idle = amd_e400_idle;
++		static_call_update(x86_idle, amd_e400_idle);
+ 	} else if (prefer_mwait_c1_over_halt(c)) {
+ 		pr_info("using mwait in idle threads\n");
+-		x86_idle = mwait_idle;
++		static_call_update(x86_idle, mwait_idle);
+ 	} else if (cpu_feature_enabled(X86_FEATURE_TDX_GUEST)) {
+ 		pr_info("using TDX aware idle routine\n");
+-		x86_idle = tdx_safe_halt;
++		static_call_update(x86_idle, tdx_safe_halt);
+ 	} else
+-		x86_idle = default_idle;
++		static_call_update(x86_idle, default_idle);
+ }
+ 
+ void amd_e400_c1e_apic_setup(void)
+@@ -925,7 +931,7 @@ static int __init idle_setup(char *str)
+ 		 * To continue to load the CPU idle driver, don't touch
+ 		 * the boot_option_idle_override.
+ 		 */
+-		x86_idle = default_idle;
++		static_call_update(x86_idle, default_idle);
+ 		boot_option_idle_override = IDLE_HALT;
+ 	} else if (!strcmp(str, "nomwait")) {
+ 		/*
 
 
 _______________________________________________
