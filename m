@@ -1,82 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 557625BC6BF
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:05 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 55A7C5BC6EC
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id D474D6FB99;
-	Mon, 19 Sep 2022 10:18:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D474D6FB99
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=I0EhwdPm
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9D27F41720;
+	Mon, 19 Sep 2022 10:18:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9D27F41720
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=cAtb8qUk
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FmPK1_el173k; Mon, 19 Sep 2022 10:18:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id C47546FB82;
-	Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C47546FB82
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id V6AUQDQgV3b7; Mon, 19 Sep 2022 10:18:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0B14441719;
+	Mon, 19 Sep 2022 10:18:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B14441719
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F2FAC007E;
-	Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id DDE8DC007F;
+	Mon, 19 Sep 2022 10:18:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E731EC007E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0CBABC007E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:59 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B5F9C83FC8
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9228341701
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B5F9C83FC8
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=I0EhwdPm
+ Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9228341701
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 33ag7MIy_l6n
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Arg9d4sfg012
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:59 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F163084068
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AC01D416F2
 Received: from desiato.infradead.org (desiato.infradead.org
  [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp1.osuosl.org (Postfix) with ESMTPS id F163084068
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AC01D416F2
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:58 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=Jv9RVwj6ep0TNO3s8uQfW2HtHTmBFm30lOC4tMkhMhE=; b=I0EhwdPmpjSZk5ja964YpGAeCk
- C45fO8EM2mFiC3DqJ/DLybVkyafkKHKl3HVER9ZEbihKzLYNqVeFyddpeJHRtyR3Hqt6oLKSGVGjW
- vqS2M9zIsxV8gsOfD7+XCbU9PTw5axIq4H/pb8qDwFBvMyaPepi+uWsHsWNlsWS7xrTM/BPK4YgD3
- Dc5KuCRzAzK3XGO0qZfcsXuFfFJ9wq6bMfse+Cfxnca5S5lUCl4E/cwiPRmLCQSUW7X2HmRLeBpql
- t7ZytyFf5zRqKJC9wJ/YYZXZRdxRenNHmV2zQCP0YUncXkY5SvjZeThv7pYpsP5HwzDFYicMtgcd9
- GoTez4OA==;
+ bh=rkOK81skpZJ6vGDiywjg6par8UEvxeO3DasZhSxIJok=; b=cAtb8qUkHNlc5NRJ9JhqfpYpkn
+ vuGqBiBbBfBDjT2LpWfT687vM9h60iKW1aFAzXLhiA55bEnFFazjOCOZ2LysiecNhReuLF7QGNGpm
+ bzlj5HhCACK1SPU9CGBmX0kVTQxmSOgA2VEHrUS5Zw0AWdTeCjOVaZgBAFczN3aAogfzhug/dGmAa
+ TuYKGdlO4Bb9tZNMzEoEouJaWwKcP8yxVH/TIXCLPgfyPJnI9nMLJwB6LaKCKaliv9Au2vUMIrdV6
+ XeVwgwhuo6jK3GAqFqvfOIumRDVFnEjf6RD+aYYchbD6DtuvbFxNOd3LvzzaJc4svxhha3MC/xoUW
+ Q9y4Oczg==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDq6-00E2Bh-MF; Mon, 19 Sep 2022 10:17:23 +0000
+ id 1oaDq6-00E2Bk-NN; Mon, 19 Sep 2022 10:17:23 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 6F16B302F58;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 74E54302F5C;
  Mon, 19 Sep 2022 12:16:25 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 7C6A32BAC75B2; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
-Message-ID: <20220919101522.640861846@infradead.org>
+ id 822FD2BAC75B3; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
+Message-ID: <20220919101522.707997632@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 12:00:13 +0200
+Date: Mon, 19 Sep 2022 12:00:14 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 34/44] cpuidle,omap3: Use WFI for omap3_pm_idle()
+Subject: [PATCH v2 35/44] cpuidle,omap3: Push RCU-idle into omap_sram_idle()
 References: <20220919095939.761690562@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
@@ -144,31 +141,92 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-arch_cpu_idle() is a very simple idle interface and exposes only a
-single idle state and is expected to not require RCU and not do any
-tracing/instrumentation.
+OMAP3 uses full SoC suspend modes as idle states, as such it needs the
+whole power-domain and clock-domain code from the idle path.
 
-As such, omap_sram_idle() is not a valid implementation. Replace it
-with the simple (shallow) omap3_do_wfi() call. Leaving the more
-complicated idle states for the cpuidle driver.
+All that code is not suitable to run with RCU disabled, as such push
+RCU-idle deeper still.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Acked-by: Tony Lindgren <tony@atomide.com>
+Reviewed-by: Tony Lindgren <tony@atomide.com>
+Tested-by: Tony Lindgren <tony@atomide.com>
 ---
- arch/arm/mach-omap2/pm34xx.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-omap2/cpuidle34xx.c |    4 +---
+ arch/arm/mach-omap2/pm.h          |    2 +-
+ arch/arm/mach-omap2/pm34xx.c      |   12 ++++++++++--
+ 3 files changed, 12 insertions(+), 6 deletions(-)
 
+--- a/arch/arm/mach-omap2/cpuidle34xx.c
++++ b/arch/arm/mach-omap2/cpuidle34xx.c
+@@ -133,9 +133,7 @@ static int omap3_enter_idle(struct cpuid
+ 	}
+ 
+ 	/* Execute ARM wfi */
+-	ct_cpuidle_enter();
+-	omap_sram_idle();
+-	ct_cpuidle_exit();
++	omap_sram_idle(true);
+ 
+ 	/*
+ 	 * Call idle CPU PM enter notifier chain to restore
+--- a/arch/arm/mach-omap2/pm.h
++++ b/arch/arm/mach-omap2/pm.h
+@@ -29,7 +29,7 @@ static inline int omap4_idle_init(void)
+ 
+ extern void *omap3_secure_ram_storage;
+ extern void omap3_pm_off_mode_enable(int);
+-extern void omap_sram_idle(void);
++extern void omap_sram_idle(bool rcuidle);
+ extern int omap_pm_clkdms_setup(struct clockdomain *clkdm, void *unused);
+ 
+ #if defined(CONFIG_PM_OPP)
 --- a/arch/arm/mach-omap2/pm34xx.c
 +++ b/arch/arm/mach-omap2/pm34xx.c
-@@ -294,7 +294,7 @@ static void omap3_pm_idle(void)
- 	if (omap_irq_pending())
- 		return;
+@@ -26,6 +26,7 @@
+ #include <linux/delay.h>
+ #include <linux/slab.h>
+ #include <linux/of.h>
++#include <linux/cpuidle.h>
  
--	omap_sram_idle();
-+	omap3_do_wfi();
+ #include <trace/events/power.h>
+ 
+@@ -174,7 +175,7 @@ static int omap34xx_do_sram_idle(unsigne
+ 	return 0;
  }
  
- #ifdef CONFIG_SUSPEND
+-void omap_sram_idle(void)
++void omap_sram_idle(bool rcuidle)
+ {
+ 	/* Variable to tell what needs to be saved and restored
+ 	 * in omap_sram_idle*/
+@@ -254,11 +255,18 @@ void omap_sram_idle(void)
+ 	 */
+ 	if (save_state)
+ 		omap34xx_save_context(omap3_arm_context);
++
++	if (rcuidle)
++		ct_cpuidle_enter();
++
+ 	if (save_state == 1 || save_state == 3)
+ 		cpu_suspend(save_state, omap34xx_do_sram_idle);
+ 	else
+ 		omap34xx_do_sram_idle(save_state);
+ 
++	if (rcuidle)
++		ct_cpuidle_exit();
++
+ 	/* Restore normal SDRC POWER settings */
+ 	if (cpu_is_omap3430() && omap_rev() >= OMAP3430_REV_ES3_0 &&
+ 	    (omap_type() == OMAP2_DEVICE_TYPE_EMU ||
+@@ -316,7 +324,7 @@ static int omap3_pm_suspend(void)
+ 
+ 	omap3_intc_suspend();
+ 
+-	omap_sram_idle();
++	omap_sram_idle(false);
+ 
+ restore:
+ 	/* Restore next_pwrsts */
 
 
 _______________________________________________
