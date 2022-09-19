@@ -1,79 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9FAFE5BC69A
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:17:54 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4B1FC5BC6FF
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7974642594;
-	Mon, 19 Sep 2022 10:17:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7974642594
+	by smtp4.osuosl.org (Postfix) with ESMTP id C5E46409EA;
+	Mon, 19 Sep 2022 10:18:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C5E46409EA
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=Ar3SSe6j
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=EFx7B8LZ
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ztHAR4GZwEu2; Mon, 19 Sep 2022 10:17:51 +0000 (UTC)
+	with ESMTP id wOOK9eTzuEhf; Mon, 19 Sep 2022 10:18:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 1D002425B4;
-	Mon, 19 Sep 2022 10:17:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1D002425B4
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 4CC45408C9;
+	Mon, 19 Sep 2022 10:18:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4CC45408C9
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DFDF7C008F;
-	Mon, 19 Sep 2022 10:17:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8777AC0077;
+	Mon, 19 Sep 2022 10:18:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 15277C0032
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 549C9C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:46 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 71DDA41679
+ by smtp2.osuosl.org (Postfix) with ESMTP id 21970416FD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 71DDA41679
+ Mon, 19 Sep 2022 10:18:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 21970416FD
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=EFx7B8LZ
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id H0V803-iakDs
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id vQgXZicJS6Sc
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:44 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6DC5F4170E
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6DC5F4170E
+ Mon, 19 Sep 2022 10:18:11 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CA2D441712
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CA2D441712
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:44 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=lz2MUgDITA4yYb0U+PMz5bsqmEWyVbYbLXt1grP5wdc=; b=Ar3SSe6jGzhlo51swtos76SPi5
- KuXiRdUWOAjPO/7yHktzfu7OKsDupFAe1VyTEvf67R959dkaj3lnutywtrGNQ0FzD/kNFsrr509Ol
- zCeztFFINukgQV77MStFwTBM6NB5gODfSAMQV0ab4J8PYg50wlMVVWpd1kiGu7U8DRaIp+zHcs+RC
- PjkRcfkfDYWB0AK6OHFlYRr5i/D8rJ2O9Fn8FR5c9e91JSkQQbvYD04el9uJ6G/zT187YlaZEV6+6
- ydgW5aWT5A6QsIVhzK5tAMASoG08AhjIZeNftBw/Sz9H57WdXd5ra4ngtoCCTH6Mr/DQhofJt1LqB
- c7+wxSkw==;
+ bh=G+s8KeYPo3DKU8KAsFzI9EuTHpElgTPxlXfQAuxRCYE=; b=EFx7B8LZTc83Pl4WaazbOvooxh
+ m5ZH43lt/bUlEN9jEiueLap+B4d87w5iLtoW12OfYwc57bGORzfANspx7UladbBmGSWc1xIqbuqIn
+ FOYYsmRFy+hGwvwvJke8Fb32oGMOnwwKJRBjXTd62rAreByaRoia5cby7KftFCJ5X/Ml7ELcrwj5J
+ eiKKDdHS7VBR9PkXXj1rPKGhThK0lQvF5JDGcSZD67Indcxu2z2DcH6Nt3bnOKQDsnf0QQZKS0PCq
+ ltrSo2MfjxxanO8+19FzwsNyRAZqAIM7DEPtfJ6dxj7PDwKMiZ9L9kurxNJZpN7RIUHFgemSiXBCp
+ JnN7XVag==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDq9-004bCZ-RO; Mon, 19 Sep 2022 10:17:26 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1oaDq7-00E2Bp-Tq; Mon, 19 Sep 2022 10:17:24 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 80174302F6C;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 8401E302F6E;
  Mon, 19 Sep 2022 12:16:25 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 96B742BA49032; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
-Message-ID: <20220919101522.975285117@infradead.org>
+ id 9D3F72BA49047; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
+Message-ID: <20220919101523.043382530@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 12:00:18 +0200
+Date: Mon, 19 Sep 2022 12:00:19 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 39/44] cpuidle,clk: Remove trace_.*_rcuidle()
+Subject: [PATCH v2 40/44] ubsan: Fix objtool UACCESS warns
 References: <20220919095939.761690562@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
@@ -141,45 +144,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-OMAP was the one and only user.
+clang-14 allyesconfig gives:
+
+vmlinux.o: warning: objtool: emulator_cmpxchg_emulated+0x705: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
+vmlinux.o: warning: objtool: paging64_update_accessed_dirty_bits+0x39e: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
+vmlinux.o: warning: objtool: paging32_update_accessed_dirty_bits+0x390: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
+vmlinux.o: warning: objtool: ept_update_accessed_dirty_bits+0x43f: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
+
+Add the required eflags save/restore and whitelist the thing.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- drivers/clk/clk.c |    8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+ lib/ubsan.c           |    5 ++++-
+ tools/objtool/check.c |    1 +
+ 2 files changed, 5 insertions(+), 1 deletion(-)
 
---- a/drivers/clk/clk.c
-+++ b/drivers/clk/clk.c
-@@ -978,12 +978,12 @@ static void clk_core_disable(struct clk_
- 	if (--core->enable_count > 0)
- 		return;
+--- a/lib/ubsan.c
++++ b/lib/ubsan.c
+@@ -340,9 +340,10 @@ void __ubsan_handle_load_invalid_value(v
+ {
+ 	struct invalid_value_data *data = _data;
+ 	char val_str[VALUE_LENGTH];
++	unsigned long ua_flags = user_access_save();
  
--	trace_clk_disable_rcuidle(core);
-+	trace_clk_disable(core);
+ 	if (suppress_report(&data->location))
+-		return;
++		goto out;
  
- 	if (core->ops->disable)
- 		core->ops->disable(core->hw);
+ 	ubsan_prologue(&data->location, "invalid-load");
  
--	trace_clk_disable_complete_rcuidle(core);
-+	trace_clk_disable_complete(core);
+@@ -352,6 +353,8 @@ void __ubsan_handle_load_invalid_value(v
+ 		val_str, data->type->type_name);
  
- 	clk_core_disable(core->parent);
+ 	ubsan_epilogue();
++out:
++	user_access_restore(ua_flags);
  }
-@@ -1037,12 +1037,12 @@ static int clk_core_enable(struct clk_co
- 		if (ret)
- 			return ret;
+ EXPORT_SYMBOL(__ubsan_handle_load_invalid_value);
  
--		trace_clk_enable_rcuidle(core);
-+		trace_clk_enable(core);
- 
- 		if (core->ops->enable)
- 			ret = core->ops->enable(core->hw);
- 
--		trace_clk_enable_complete_rcuidle(core);
-+		trace_clk_enable_complete(core);
- 
- 		if (ret) {
- 			clk_core_disable(core->parent);
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -1068,6 +1068,7 @@ static const char *uaccess_safe_builtin[
+ 	"__ubsan_handle_type_mismatch",
+ 	"__ubsan_handle_type_mismatch_v1",
+ 	"__ubsan_handle_shift_out_of_bounds",
++	"__ubsan_handle_load_invalid_value",
+ 	/* misc */
+ 	"csum_partial_copy_generic",
+ 	"copy_mc_fragile",
 
 
 _______________________________________________
