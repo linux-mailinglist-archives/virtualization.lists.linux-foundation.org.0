@@ -1,82 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BE9635BC6EF
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:13 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E99F5BC6D6
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 41F496FB94;
-	Mon, 19 Sep 2022 10:18:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 41F496FB94
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=UQsvU8nl
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8FF158438E;
+	Mon, 19 Sep 2022 10:18:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8FF158438E
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=AlyUL2n2
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bEzIRO3QMIhp; Mon, 19 Sep 2022 10:18:09 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 7132060BDA;
-	Mon, 19 Sep 2022 10:18:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7132060BDA
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AJ7gDtM5GTzK; Mon, 19 Sep 2022 10:18:05 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id DB08884068;
+	Mon, 19 Sep 2022 10:18:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DB08884068
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9D967C0077;
-	Mon, 19 Sep 2022 10:18:08 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 43415C002D;
+	Mon, 19 Sep 2022 10:18:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7D366C002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B7B58C007C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:02 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 457EF424D6
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7FD68425CE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 457EF424D6
+ Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7FD68425CE
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=UQsvU8nl
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=AlyUL2n2
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id LvDSybUFcAQA
+ with ESMTP id g4v6HIeIE_ND
  for <virtualization@lists.linux-foundation.org>;
  Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DFD3E4259C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5B6F9425D3
 Received: from desiato.infradead.org (desiato.infradead.org
  [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DFD3E4259C
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 5B6F9425D3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:59 +0000 (UTC)
+ Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Subject:Cc:To:From:Date:Message-ID:
- Sender:Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding:
- Content-ID:Content-Description:In-Reply-To:References;
- bh=D+MsKiHRvmSvqyjrleqvhdKjdXvjkJhvT05d1tF3TYc=; b=UQsvU8nlB76xZeTRu6KbAZ5g4A
- v21ezpBG4aDzfKkxxCb9GpmlADJppCf+KVyodO/TEoyudKbqBLCyLdtwrbFAxb0aJ5fwHbEPQQ1N5
- EmuvzVJrRo7TykFnlJ+oN15NWd2VLfXjixEytfV45kWCvhMnssNkUfZVmK3eHsT83TmhrkAy+1rWL
- dSaGj0mA5cA9DiUGq8Uf3dsk4uEicB4ZuKl7D0T57Yf0eK8IdpHZoEAhNRMLiW4K3HehEHlB8w53i
- worbn3yXyIb3FqjM/nTkOkRImrnF50v+k8ux+BswwsADI0NLv4ntoM+CNvwAF6XnPH12b3dM+N70J
- YkBwTAqw==;
+ d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
+ Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
+ Content-ID:Content-Description:In-Reply-To;
+ bh=YOWU43M4IjsvcmJXQwOIFJh+WuCbnSytdcIdnv65DkY=; b=AlyUL2n21Ay/eo4jzhxLVHbjtT
+ UQyURrUAFbSeZXMu+qSEhGh5tsE0SavJsEpBS1K1IB5BR2w0cqpFKFUfHSoscIwaG1ohk66JX0VfJ
+ mLJwvAXSiH7Gt28S3XByOnqo3uEOTiM0P9sWLADHW7udnoML9bRxDpBpb3wcuoeOVqMcXphlfL21A
+ my5k9xukM3nRKLIX0+tEddJpYBIiN6NUySN7jnWjWc6oY49Xk2EEzfYF2TBITi40qvcU6x6hpac+t
+ 3G1ys0gAkcnegE95WH6F0JTlIbD+ZqauWXPqFE9mdWImdtoBd2u5kmXCBlZVlWagaRZnaojLqXDwM
+ xgmg5ltg==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDpA-00E28m-SP; Mon, 19 Sep 2022 10:17:17 +0000
+ id 1oaDpA-00E28l-Ry; Mon, 19 Sep 2022 10:17:17 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E11F930035F;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id ED9F430067B;
  Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id BF8DF2BA49033; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
-Message-ID: <20220919095939.761690562@infradead.org>
+ id C4C3D2BA49036; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
+Message-ID: <20220919101520.399971897@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 11:59:39 +0200
+Date: Mon, 19 Sep 2022 11:59:40 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 00/44] cpuidle,rcu: Clean up the mess
+Subject: [PATCH v2 01/44] x86/perf/amd: Remove tracing from perf_lopwr_cb()
+References: <20220919095939.761690562@infradead.org>
+MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
  linus.walleij@linaro.org, bsegall@google.com, guoren@kernel.org, pavel@ucw.cz,
  agordeev@linux.ibm.com, linux-arch@vger.kernel.org, vincent.guittot@linaro.org,
@@ -137,173 +139,66 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi All!
+The perf_lopwr_cb() is called from the idle routines; there is no RCU
+there, we must not enter tracing.
 
-At long last, a respin of the cpuidle vs rcu cleanup patches.
-
-v1: https://lkml.kernel.org/r/20220608142723.103523089@infradead.org
-
-These here patches clean up the mess that is cpuidle vs rcuidle.
-
-At the end of the ride there's only on RCU_NONIDLE user left:
-
-  arch/arm64/kernel/suspend.c:            RCU_NONIDLE(__cpu_suspend_exit());
-
-and 'one' trace_*_rcuidle() user:
-
-  kernel/trace/trace_preemptirq.c:                        trace_irq_enable_rcuidle(CALLER_ADDR0, CALLER_ADDR1);
-  kernel/trace/trace_preemptirq.c:                        trace_irq_disable_rcuidle(CALLER_ADDR0, CALLER_ADDR1);
-  kernel/trace/trace_preemptirq.c:                        trace_irq_enable_rcuidle(CALLER_ADDR0, caller_addr);
-  kernel/trace/trace_preemptirq.c:                        trace_irq_disable_rcuidle(CALLER_ADDR0, caller_addr);
-  kernel/trace/trace_preemptirq.c:                trace_preempt_enable_rcuidle(a0, a1);
-  kernel/trace/trace_preemptirq.c:                trace_preempt_disable_rcuidle(a0, a1);
-
-However this last is all in deprecated code that should be unused for GENERIC_ENTRY.
-
-I've touched a lot of code that I can't test and I might've broken something by
-accident. In particular the whole ARM cpuidle stuff was quite involved.
-
-Please all; have a look where you haven't already.
-
-
-New since v1:
-
- - rebase on top of Frederic's rcu-context-tracking rename fest
- - more omap goodness as per the last discusion (thanks Tony!)
- - removed one more RCU_NONIDLE() from arm64/risc-v perf code
- - ubsan/kasan fixes
- - intel_idle module-param for testing
- - a bunch of extra __always_inline, because compilers are silly.
-
+Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 ---
- arch/alpha/kernel/process.c               |  1 -
- arch/alpha/kernel/vmlinux.lds.S           |  1 -
- arch/arc/kernel/process.c                 |  3 ++
- arch/arc/kernel/vmlinux.lds.S             |  1 -
- arch/arm/include/asm/vmlinux.lds.h        |  1 -
- arch/arm/kernel/process.c                 |  1 -
- arch/arm/kernel/smp.c                     |  6 +--
- arch/arm/mach-gemini/board-dt.c           |  3 +-
- arch/arm/mach-imx/cpuidle-imx6q.c         |  4 +-
- arch/arm/mach-imx/cpuidle-imx6sx.c        |  5 ++-
- arch/arm/mach-omap2/common.h              |  6 ++-
- arch/arm/mach-omap2/cpuidle34xx.c         | 16 +++++++-
- arch/arm/mach-omap2/cpuidle44xx.c         | 29 +++++++-------
- arch/arm/mach-omap2/omap-mpuss-lowpower.c | 12 +++++-
- arch/arm/mach-omap2/pm.h                  |  2 +-
- arch/arm/mach-omap2/pm24xx.c              | 51 +-----------------------
- arch/arm/mach-omap2/pm34xx.c              | 14 +++++--
- arch/arm/mach-omap2/pm44xx.c              |  2 +-
- arch/arm/mach-omap2/powerdomain.c         | 10 ++---
- arch/arm64/kernel/idle.c                  |  1 -
- arch/arm64/kernel/smp.c                   |  4 +-
- arch/arm64/kernel/vmlinux.lds.S           |  1 -
- arch/csky/kernel/process.c                |  1 -
- arch/csky/kernel/smp.c                    |  2 +-
- arch/csky/kernel/vmlinux.lds.S            |  1 -
- arch/hexagon/kernel/process.c             |  1 -
- arch/hexagon/kernel/vmlinux.lds.S         |  1 -
- arch/ia64/kernel/process.c                |  1 +
- arch/ia64/kernel/vmlinux.lds.S            |  1 -
- arch/loongarch/kernel/idle.c              |  1 +
- arch/loongarch/kernel/vmlinux.lds.S       |  1 -
- arch/m68k/kernel/vmlinux-nommu.lds        |  1 -
- arch/m68k/kernel/vmlinux-std.lds          |  1 -
- arch/m68k/kernel/vmlinux-sun3.lds         |  1 -
- arch/microblaze/kernel/process.c          |  1 -
- arch/microblaze/kernel/vmlinux.lds.S      |  1 -
- arch/mips/kernel/idle.c                   |  8 ++--
- arch/mips/kernel/vmlinux.lds.S            |  1 -
- arch/nios2/kernel/process.c               |  1 -
- arch/nios2/kernel/vmlinux.lds.S           |  1 -
- arch/openrisc/kernel/process.c            |  1 +
- arch/openrisc/kernel/vmlinux.lds.S        |  1 -
- arch/parisc/kernel/process.c              |  2 -
- arch/parisc/kernel/vmlinux.lds.S          |  1 -
- arch/powerpc/kernel/idle.c                |  5 +--
- arch/powerpc/kernel/vmlinux.lds.S         |  1 -
- arch/riscv/kernel/process.c               |  1 -
- arch/riscv/kernel/vmlinux-xip.lds.S       |  1 -
- arch/riscv/kernel/vmlinux.lds.S           |  1 -
- arch/s390/kernel/idle.c                   |  1 -
- arch/s390/kernel/vmlinux.lds.S            |  1 -
- arch/sh/kernel/idle.c                     |  1 +
- arch/sh/kernel/vmlinux.lds.S              |  1 -
- arch/sparc/kernel/leon_pmc.c              |  4 ++
- arch/sparc/kernel/process_32.c            |  1 -
- arch/sparc/kernel/process_64.c            |  3 +-
- arch/sparc/kernel/vmlinux.lds.S           |  1 -
- arch/um/kernel/dyn.lds.S                  |  1 -
- arch/um/kernel/process.c                  |  1 -
- arch/um/kernel/uml.lds.S                  |  1 -
- arch/x86/boot/compressed/vmlinux.lds.S    |  1 +
- arch/x86/coco/tdx/tdcall.S                | 15 +------
- arch/x86/coco/tdx/tdx.c                   | 25 ++++--------
- arch/x86/events/amd/brs.c                 | 13 +++----
- arch/x86/include/asm/fpu/xcr.h            |  4 +-
- arch/x86/include/asm/irqflags.h           | 11 ++----
- arch/x86/include/asm/mwait.h              | 14 +++----
- arch/x86/include/asm/nospec-branch.h      |  2 +-
- arch/x86/include/asm/paravirt.h           |  6 ++-
- arch/x86/include/asm/perf_event.h         |  2 +-
- arch/x86/include/asm/shared/io.h          |  4 +-
- arch/x86/include/asm/shared/tdx.h         |  1 -
- arch/x86/include/asm/special_insns.h      |  8 ++--
- arch/x86/include/asm/xen/hypercall.h      |  2 +-
- arch/x86/kernel/cpu/bugs.c                |  2 +-
- arch/x86/kernel/fpu/core.c                |  4 +-
- arch/x86/kernel/paravirt.c                | 14 ++++++-
- arch/x86/kernel/process.c                 | 65 +++++++++++++++----------------
- arch/x86/kernel/vmlinux.lds.S             |  1 -
- arch/x86/lib/memcpy_64.S                  |  5 +--
- arch/x86/lib/memmove_64.S                 |  4 +-
- arch/x86/lib/memset_64.S                  |  4 +-
- arch/x86/xen/enlighten_pv.c               |  2 +-
- arch/x86/xen/irq.c                        |  2 +-
- arch/xtensa/kernel/process.c              |  1 +
- arch/xtensa/kernel/vmlinux.lds.S          |  1 -
- drivers/acpi/processor_idle.c             | 36 ++++++++++-------
- drivers/base/power/runtime.c              | 24 ++++++------
- drivers/clk/clk.c                         |  8 ++--
- drivers/cpuidle/cpuidle-arm.c             |  1 +
- drivers/cpuidle/cpuidle-big_little.c      |  8 +++-
- drivers/cpuidle/cpuidle-mvebu-v7.c        |  7 ++++
- drivers/cpuidle/cpuidle-psci.c            | 10 +++--
- drivers/cpuidle/cpuidle-qcom-spm.c        |  1 +
- drivers/cpuidle/cpuidle-riscv-sbi.c       | 10 +++--
- drivers/cpuidle/cpuidle-tegra.c           | 21 +++++++---
- drivers/cpuidle/cpuidle.c                 | 21 +++++-----
- drivers/cpuidle/dt_idle_states.c          |  2 +-
- drivers/cpuidle/poll_state.c              | 10 ++++-
- drivers/idle/intel_idle.c                 | 19 +++++----
- drivers/perf/arm_pmu.c                    | 11 +-----
- drivers/perf/riscv_pmu_sbi.c              |  8 +---
- include/asm-generic/vmlinux.lds.h         |  9 ++---
- include/linux/compiler_types.h            |  8 +++-
- include/linux/cpu.h                       |  3 --
- include/linux/cpuidle.h                   | 34 ++++++++++++++++
- include/linux/cpumask.h                   |  4 +-
- include/linux/percpu-defs.h               |  2 +-
- include/linux/sched/idle.h                | 40 ++++++++++++++-----
- include/linux/thread_info.h               | 18 ++++++++-
- include/linux/tracepoint.h                | 13 ++++++-
- kernel/cpu_pm.c                           |  9 -----
- kernel/printk/printk.c                    |  2 +-
- kernel/sched/idle.c                       | 47 +++++++---------------
- kernel/time/tick-broadcast-hrtimer.c      | 29 ++++++--------
- kernel/time/tick-broadcast.c              |  6 ++-
- kernel/trace/trace.c                      |  3 ++
- lib/ubsan.c                               |  5 ++-
- mm/kasan/kasan.h                          |  4 ++
- mm/kasan/shadow.c                         | 38 ++++++++++++++++++
- tools/objtool/check.c                     | 17 ++++++++
- 121 files changed, 511 insertions(+), 420 deletions(-)
+ arch/x86/events/amd/brs.c         |   13 +++++--------
+ arch/x86/include/asm/perf_event.h |    2 +-
+ 2 files changed, 6 insertions(+), 9 deletions(-)
+
+--- a/arch/x86/events/amd/brs.c
++++ b/arch/x86/events/amd/brs.c
+@@ -41,18 +41,15 @@ static inline unsigned int brs_to(int id
+ 	return MSR_AMD_SAMP_BR_FROM + 2 * idx + 1;
+ }
+ 
+-static inline void set_debug_extn_cfg(u64 val)
++static __always_inline void set_debug_extn_cfg(u64 val)
+ {
+ 	/* bits[4:3] must always be set to 11b */
+-	wrmsrl(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3);
++	__wrmsr(MSR_AMD_DBG_EXTN_CFG, val | 3ULL << 3, val >> 32);
+ }
+ 
+-static inline u64 get_debug_extn_cfg(void)
++static __always_inline u64 get_debug_extn_cfg(void)
+ {
+-	u64 val;
+-
+-	rdmsrl(MSR_AMD_DBG_EXTN_CFG, val);
+-	return val;
++	return __rdmsr(MSR_AMD_DBG_EXTN_CFG);
+ }
+ 
+ static bool __init amd_brs_detect(void)
+@@ -338,7 +335,7 @@ void amd_pmu_brs_sched_task(struct perf_
+  * called from ACPI processor_idle.c or acpi_pad.c
+  * with interrupts disabled
+  */
+-void perf_amd_brs_lopwr_cb(bool lopwr_in)
++void noinstr perf_amd_brs_lopwr_cb(bool lopwr_in)
+ {
+ 	struct cpu_hw_events *cpuc = this_cpu_ptr(&cpu_hw_events);
+ 	union amd_debug_extn_cfg cfg;
+--- a/arch/x86/include/asm/perf_event.h
++++ b/arch/x86/include/asm/perf_event.h
+@@ -554,7 +554,7 @@ extern void perf_amd_brs_lopwr_cb(bool l
+ 
+ DECLARE_STATIC_CALL(perf_lopwr_cb, perf_amd_brs_lopwr_cb);
+ 
+-static inline void perf_lopwr_cb(bool lopwr_in)
++static __always_inline void perf_lopwr_cb(bool lopwr_in)
+ {
+ 	static_call_mod(perf_lopwr_cb)(lopwr_in);
+ }
+
 
 _______________________________________________
 Virtualization mailing list
