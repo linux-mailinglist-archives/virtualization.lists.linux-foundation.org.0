@@ -1,84 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 783795BC6F5
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:15 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 20D6E5BC9B4
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:46:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D2C9A41717;
-	Mon, 19 Sep 2022 10:18:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D2C9A41717
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=WLGHjeKc
+	by smtp1.osuosl.org (Postfix) with ESMTP id F1052831DA;
+	Mon, 19 Sep 2022 10:46:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F1052831DA
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=pcs8WC6C
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id srKOjBCkDiny; Mon, 19 Sep 2022 10:18:11 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 3yziTvZ8j8SI; Mon, 19 Sep 2022 10:46:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 6300B41721;
-	Mon, 19 Sep 2022 10:18:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6300B41721
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 9440D83267;
+	Mon, 19 Sep 2022 10:46:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9440D83267
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2775AC0084;
-	Mon, 19 Sep 2022 10:18:09 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C5F15C0077;
+	Mon, 19 Sep 2022 10:45:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2EF0EC0081
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CE6CDC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:03 +0000 (UTC)
+ Mon, 19 Sep 2022 10:45:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CA09A6FB97
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9971A40B54
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CA09A6FB97
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=WLGHjeKc
+ Mon, 19 Sep 2022 10:45:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9971A40B54
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com
+ header.a=rsa-sha256 header.s=susede1 header.b=pcs8WC6C
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hEUt8TAvetJF
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id pT1WHq_xuT0u
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4D93B6FB8C
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4D93B6FB8C
+ Mon, 19 Sep 2022 10:45:58 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 98C0F400C4
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 98C0F400C4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
- Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
- Content-ID:Content-Description:In-Reply-To;
- bh=QoMAr3LApQWawpgafmfgLtjlo5s7sxEjoowggy+JX/o=; b=WLGHjeKc/BMYqns1qUsWRZUaSt
- Tofg6rifY75OG/LDEJW9VOB+NIgkufdCrkbxq1v+SrRaHNBJMpyCyEfxqhfG01AmqVvJ1AB34pydJ
- jWmfba2WKyUMYvUchvTu0KMuRygDJE7MoDyNt3XpDo4R3j4+68w/YWPJcAFfvyqT7zdUozhlp2VrJ
- ev7eU0mOg+ggSNPE92jTJlv4fbP8+GL0CErpKOVSRb9V9MrPPgJyG1Trd4TiJLfKRmfnCYIBHcKhB
- kheMCWNvDAUtvFyllnDb0Kx9l5NNdUV4tdE5x4BcQVEDblgVOaGiHd3SJlMcsNl4SfP41J7i2TeFx
- M9uI0mbQ==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84]
- helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDq8-00E2C5-Kw; Mon, 19 Sep 2022 10:17:25 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
+ Mon, 19 Sep 2022 10:45:57 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits))
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A6CEE302F91;
- Mon, 19 Sep 2022 12:16:25 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id AFEB12BABC0C7; Mon, 19 Sep 2022 12:16:22 +0200 (CEST)
-Message-ID: <20220919101523.312333837@infradead.org>
-User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 12:00:23 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: peterz@infradead.org
-Subject: [PATCH v2 44/44] arm64,riscv,perf: Remove RCU_NONIDLE() usage
-References: <20220919095939.761690562@infradead.org>
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 41D951F897;
+ Mon, 19 Sep 2022 10:45:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1663584353; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=TPY7EEFMWVrZdYCxqqnTs3va11awHySIxzPGii1FR0M=;
+ b=pcs8WC6C8N5NT2mpr02B5yJH+LTCvsIeYhCodeQGG/gLeD9Ve1ZmOFpkpwgw4V+wtja7aY
+ RddPku1MGLIpjFQcO9qKlpCVJhYCWu9Pg3CcPENFblbq3F4iOpEH9QM9LSmS5Ghy2jXKlf
+ wzEuCcR+PKVNegczAeY+9+l4n3MbDsI=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 85A4E13A96;
+ Mon, 19 Sep 2022 10:45:48 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id T0GyHlxIKGNkeAAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 19 Sep 2022 10:45:48 +0000
+Message-ID: <41916640-cf05-c00d-95fa-1e0099741f4c@suse.com>
+Date: Mon, 19 Sep 2022 12:45:47 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.2.2
+Subject: Re: [PATCH v2 30/44] cpuidle,xenpv: Make more PARAVIRT_XXL noinstr
+ clean
+Content-Language: en-US
+To: Peter Zijlstra <peterz@infradead.org>
+References: <20220919095939.761690562@infradead.org>
+ <20220919101522.358582588@infradead.org>
+In-Reply-To: <20220919101522.358582588@infradead.org>
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
  linus.walleij@linaro.org, bsegall@google.com, guoren@kernel.org, pavel@ucw.cz,
  agordeev@linux.ibm.com, linux-arch@vger.kernel.org, vincent.guittot@linaro.org,
@@ -125,9 +128,9 @@ Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
  openrisc@lists.librecores.org, acme@kernel.org, paul.walmsley@sifive.com,
  linux-tegra@vger.kernel.org, namhyung@kernel.org,
  andriy.shevchenko@linux.intel.com, jpoimboe@kernel.org, dvyukov@google.com,
- jgross@suse.com, monstr@monstr.eu, linux-mips@vger.kernel.org,
- palmer@dabbelt.com, anup@brainfault.org, bp@alien8.de,
- johannes@sipsolutions.net, linuxppc-dev@lists.ozlabs.org
+ monstr@monstr.eu, linux-mips@vger.kernel.org, palmer@dabbelt.com,
+ anup@brainfault.org, bp@alien8.de, johannes@sipsolutions.net,
+ linuxppc-dev@lists.ozlabs.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -139,62 +142,190 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+From: Juergen Gross via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Juergen Gross <jgross@suse.com>
+Content-Type: multipart/mixed; boundary="===============2868798432301250412=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The PM notifiers should no longer be ran with RCU disabled (per the
-previous patches), as such this hack is no longer required either.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--===============2868798432301250412==
+Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------uN7TNqTnDntgyCDMTfJPdXrr"
 
-Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
----
- drivers/perf/arm_pmu.c       |   11 +----------
- drivers/perf/riscv_pmu_sbi.c |    8 +-------
- 2 files changed, 2 insertions(+), 17 deletions(-)
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------uN7TNqTnDntgyCDMTfJPdXrr
+Content-Type: multipart/mixed; boundary="------------bVxl0sFTg1HlWc0dYJ02yXYs";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Peter Zijlstra <peterz@infradead.org>
+Cc: richard.henderson@linaro.org, ink@jurassic.park.msu.ru,
+ mattst88@gmail.com, vgupta@kernel.org, linux@armlinux.org.uk,
+ ulli.kroll@googlemail.com, linus.walleij@linaro.org, shawnguo@kernel.org,
+ Sascha Hauer <s.hauer@pengutronix.de>, kernel@pengutronix.de,
+ festevam@gmail.com, linux-imx@nxp.com, tony@atomide.com, khilman@kernel.org,
+ catalin.marinas@arm.com, will@kernel.org, guoren@kernel.org,
+ bcain@quicinc.com, chenhuacai@kernel.org, kernel@xen0n.name,
+ geert@linux-m68k.org, sammy@sammy.net, monstr@monstr.eu,
+ tsbogend@alpha.franken.de, dinguyen@kernel.org, jonas@southpole.se,
+ stefan.kristiansson@saunalahti.fi, shorne@gmail.com,
+ James.Bottomley@HansenPartnership.com, deller@gmx.de, mpe@ellerman.id.au,
+ npiggin@gmail.com, christophe.leroy@csgroup.eu, paul.walmsley@sifive.com,
+ palmer@dabbelt.com, aou@eecs.berkeley.edu, hca@linux.ibm.com,
+ gor@linux.ibm.com, agordeev@linux.ibm.com, borntraeger@linux.ibm.com,
+ svens@linux.ibm.com, ysato@users.sourceforge.jp, dalias@libc.org,
+ davem@davemloft.net, richard@nod.at, anton.ivanov@cambridgegreys.com,
+ johannes@sipsolutions.net, tglx@linutronix.de, mingo@redhat.com,
+ bp@alien8.de, dave.hansen@linux.intel.com, x86@kernel.org, hpa@zytor.com,
+ acme@kernel.org, mark.rutland@arm.com, alexander.shishkin@linux.intel.com,
+ jolsa@kernel.org, namhyung@kernel.org, srivatsa@csail.mit.edu,
+ amakhalov@vmware.com, pv-drivers@vmware.com, boris.ostrovsky@oracle.com,
+ chris@zankel.net, jcmvbkbc@gmail.com, rafael@kernel.org, lenb@kernel.org,
+ pavel@ucw.cz, gregkh@linuxfoundation.org, mturquette@baylibre.com,
+ sboyd@kernel.org, daniel.lezcano@linaro.org, lpieralisi@kernel.org,
+ sudeep.holla@arm.com, agross@kernel.org, bjorn.andersson@linaro.org,
+ konrad.dybcio@somainline.org, anup@brainfault.org, thierry.reding@gmail.com,
+ jonathanh@nvidia.com, jacob.jun.pan@linux.intel.com, atishp@atishpatra.org,
+ Arnd Bergmann <arnd@arndb.de>, yury.norov@gmail.com,
+ andriy.shevchenko@linux.intel.com, linux@rasmusvillemoes.dk,
+ dennis@kernel.org, tj@kernel.org, cl@linux.com, rostedt@goodmis.org,
+ pmladek@suse.com, senozhatsky@chromium.org, john.ogness@linutronix.de,
+ juri.lelli@redhat.com, vincent.guittot@linaro.org, dietmar.eggemann@arm.com,
+ bsegall@google.com, mgorman@suse.de, bristot@redhat.com,
+ vschneid@redhat.com, fweisbec@gmail.com, ryabinin.a.a@gmail.com,
+ glider@google.com, andreyknvl@gmail.com, dvyukov@google.com,
+ vincenzo.frascino@arm.com, Andrew Morton <akpm@linux-foundation.org>,
+ jpoimboe@kernel.org, linux-alpha@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-snps-arc@lists.infradead.org,
+ linux-omap@vger.kernel.org, linux-csky@vger.kernel.org,
+ linux-hexagon@vger.kernel.org, linux-ia64@vger.kernel.org,
+ loongarch@lists.linux.dev, linux-m68k@lists.linux-m68k.org,
+ linux-mips@vger.kernel.org, openrisc@lists.librecores.org,
+ linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+ linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
+ linux-sh@vger.kernel.org, sparclinux@vger.kernel.org,
+ linux-um@lists.infradead.org, linux-perf-users@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-xtensa@linux-xtensa.org,
+ linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
+ linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-tegra@vger.kernel.org, linux-arch@vger.kernel.org,
+ kasan-dev@googlegroups.com
+Message-ID: <41916640-cf05-c00d-95fa-1e0099741f4c@suse.com>
+Subject: Re: [PATCH v2 30/44] cpuidle,xenpv: Make more PARAVIRT_XXL noinstr
+ clean
+References: <20220919095939.761690562@infradead.org>
+ <20220919101522.358582588@infradead.org>
+In-Reply-To: <20220919101522.358582588@infradead.org>
 
---- a/drivers/perf/arm_pmu.c
-+++ b/drivers/perf/arm_pmu.c
-@@ -762,17 +762,8 @@ static void cpu_pm_pmu_setup(struct arm_
- 		case CPU_PM_ENTER_FAILED:
- 			 /*
- 			  * Restore and enable the counter.
--			  * armpmu_start() indirectly calls
--			  *
--			  * perf_event_update_userpage()
--			  *
--			  * that requires RCU read locking to be functional,
--			  * wrap the call within RCU_NONIDLE to make the
--			  * RCU subsystem aware this cpu is not idle from
--			  * an RCU perspective for the armpmu_start() call
--			  * duration.
- 			  */
--			RCU_NONIDLE(armpmu_start(event, PERF_EF_RELOAD));
-+			armpmu_start(event, PERF_EF_RELOAD);
- 			break;
- 		default:
- 			break;
---- a/drivers/perf/riscv_pmu_sbi.c
-+++ b/drivers/perf/riscv_pmu_sbi.c
-@@ -747,14 +747,8 @@ static int riscv_pm_pmu_notify(struct no
- 		case CPU_PM_ENTER_FAILED:
- 			/*
- 			 * Restore and enable the counter.
--			 *
--			 * Requires RCU read locking to be functional,
--			 * wrap the call within RCU_NONIDLE to make the
--			 * RCU subsystem aware this cpu is not idle from
--			 * an RCU perspective for the riscv_pmu_start() call
--			 * duration.
- 			 */
--			RCU_NONIDLE(riscv_pmu_start(event, PERF_EF_RELOAD));
-+			riscv_pmu_start(event, PERF_EF_RELOAD);
- 			break;
- 		default:
- 			break;
+--------------bVxl0sFTg1HlWc0dYJ02yXYs
+Content-Type: multipart/mixed; boundary="------------DqMcUwZmmixeMRf078SIWWNm"
 
+--------------DqMcUwZmmixeMRf078SIWWNm
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+T24gMTkuMDkuMjIgMTI6MDAsIFBldGVyIFppamxzdHJhIHdyb3RlOg0KPiB2bWxpbnV4Lm86
+IHdhcm5pbmc6IG9ianRvb2w6IGFjcGlfaWRsZV9lbnRlcl9zMmlkbGUrMHhkZTogY2FsbCB0
+byB3YmludmQoKSBsZWF2ZXMgLm5vaW5zdHIudGV4dCBzZWN0aW9uDQo+IHZtbGludXgubzog
+d2FybmluZzogb2JqdG9vbDogZGVmYXVsdF9pZGxlKzB4NDogY2FsbCB0byBhcmNoX3NhZmVf
+aGFsdCgpIGxlYXZlcyAubm9pbnN0ci50ZXh0IHNlY3Rpb24NCj4gdm1saW51eC5vOiB3YXJu
+aW5nOiBvYmp0b29sOiB4ZW5fc2FmZV9oYWx0KzB4YTogY2FsbCB0byBIWVBFUlZJU09SX3Nj
+aGVkX29wLmNvbnN0cHJvcC4wKCkgbGVhdmVzIC5ub2luc3RyLnRleHQgc2VjdGlvbg0KPiAN
+Cj4gU2lnbmVkLW9mZi1ieTogUGV0ZXIgWmlqbHN0cmEgKEludGVsKSA8cGV0ZXJ6QGluZnJh
+ZGVhZC5vcmc+DQo+IFJldmlld2VkLWJ5OiBTcml2YXRzYSBTLiBCaGF0IChWTXdhcmUpIDxz
+cml2YXRzYUBjc2FpbC5taXQuZWR1Pg0KDQpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8
+amdyb3NzQHN1c2UuY29tPg0KDQoNCkp1ZXJnZW4NCg0K
+--------------DqMcUwZmmixeMRf078SIWWNm
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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
+jR/i1DG86lem3iBDXzXsZDn8R38=3D
+=3D2wuH
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------DqMcUwZmmixeMRf078SIWWNm--
+
+--------------bVxl0sFTg1HlWc0dYJ02yXYs--
+
+--------------uN7TNqTnDntgyCDMTfJPdXrr
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmMoSFwFAwAAAAAACgkQsN6d1ii/Ey/T
+hwf/eGOkDCDy7F9Ra0L0GOLdv4GeCljWmcvbdITwnsuB7hQz/+M0V2k7PvSN/ISQ4Vf6Jn+jdWqe
+BIXXQbgSPEGvf145/zXXKI4Z/CR603o4j00ul4vrymonw4oMQfSU6XSgHQPxxoPF3hdqavHf2w48
+1DJPJ8whPxq8qCNOIZt3O0NWTtIKi2fdc7Gpw4aouzNtdCNdCQKzLjhN1LpTcokA22BVdYBG2wMF
+ZkBuZgDmH0auDXsstAEU8aSublQibxzVadACIUCRvtXxxTSXCujB3IoT9CgcYyav5uxi9nNvOEsp
+f9YTwuEzNv1IhRffytywrjyBDZdbHXFDZM0kU7zKkA==
+=9mzX
+-----END PGP SIGNATURE-----
+
+--------------uN7TNqTnDntgyCDMTfJPdXrr--
+
+--===============2868798432301250412==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============2868798432301250412==--
