@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id DAF165BC660
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:17:23 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 316CA5BC6B7
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 12:18:03 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 22DE9424AA;
-	Mon, 19 Sep 2022 10:17:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 22DE9424AA
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=ivBskP0a
+	by smtp1.osuosl.org (Postfix) with ESMTP id A867884079;
+	Mon, 19 Sep 2022 10:18:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A867884079
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=fh6jTDX0
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fv20yWoHY28r; Mon, 19 Sep 2022 10:17:18 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PO7dZJyKAwS2; Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 6890E416DE;
-	Mon, 19 Sep 2022 10:17:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6890E416DE
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 1AB4884089;
+	Mon, 19 Sep 2022 10:18:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1AB4884089
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B23FAC0084;
-	Mon, 19 Sep 2022 10:17:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E7F82C007F;
+	Mon, 19 Sep 2022 10:17:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3EBA0C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 294FAC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:14 +0000 (UTC)
+ Mon, 19 Sep 2022 10:17:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 24728402E8
+ by smtp4.osuosl.org (Postfix) with ESMTP id E79434259C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 24728402E8
-Authentication-Results: smtp2.osuosl.org;
+ Mon, 19 Sep 2022 10:17:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E79434259C
+Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=casper.20170209 header.b=ivBskP0a
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=fh6jTDX0
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id kvvICWGpIPID
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id dRbaVpM0AnGx
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:13 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 16125400C4
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 16125400C4
+ Mon, 19 Sep 2022 10:17:56 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2CDE8425D1
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2CDE8425D1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 10:17:13 +0000 (UTC)
+ Mon, 19 Sep 2022 10:17:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=WVCZz4VCnGePSihfWXfUVWek2uxL69eYF/NrdeQus6U=; b=ivBskP0aWQgi9l0mKK9jTzFXqc
- ZaruQT1GQRrgEFzxRyDZun0oUQSETW6STOVGluWDi3qyaP4sssJsMWlDUZ3GA9Pz0X87ahb90byEQ
- bhOXfPvW2zvD6yBkUDxk8BE+7zJhSnLWDPFkAW6QGLcPYNbWGozjqGe7xhepdJzb53dFBO7ECLGwt
- QO1KrbQvccpeuYnZb9ZuwYEgH2WsFobCaskTraK3wrmMGpyKyUxInAVIxF2jY4xcbgzeGmq/omTnx
- ORL3apzPH+JFJPdVDrr6iVZccffw6jLJlq1Lm1Hgq/35itx04lz+am6dEV+G+6PLGd2kSPpHIcEpd
- Ptxwcg6w==;
+ bh=6o9qTJ/QjCltP+zmu0PkeSqB0nVcTaPJ8iw1lVGI/YI=; b=fh6jTDX0iTAQBch3m1E8OK/teW
+ GEjpiaTGkYRg8vW/aNBRkADkEkRImQUbzpta6LI3AmhS4mLdaW44WlTemKQQHS4Rib2Jfagk+JvNt
+ 68yaJmGcdY82ZdDz3uA87H5wQgt/XUMfWTG9ArE4FLvW/Q1KIsjvg4XIJz1Peh9lF2VNg15j8v85Y
+ 4WT3iEDs4Y+JCcmg6XLoixnFygR6J3BhKqIRZKs+QG8Lg6WzUGeQtqQJvH/MYkNqMTCc25mz62Mdv
+ 1r8UW5CvdoSFJxq4HftoO38anvP9uEWdLAZrJvn5BWoV7b0HiT7bN+lsCpQ1+FWS29ScGWW8uBlG+
+ r0yDTsUA==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1oaDpH-004aiK-82; Mon, 19 Sep 2022 10:16:31 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1oaDpF-00E293-Ay; Mon, 19 Sep 2022 10:17:17 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id DB7B8302EA5;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id E0605302EB1;
  Mon, 19 Sep 2022 12:16:24 +0200 (CEST)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 002B62BA49041; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
-Message-ID: <20220919101521.072508494@infradead.org>
+ id 052C92BA49043; Mon, 19 Sep 2022 12:16:21 +0200 (CEST)
+Message-ID: <20220919101521.139727471@infradead.org>
 User-Agent: quilt/0.66
-Date: Mon, 19 Sep 2022 11:59:50 +0200
+Date: Mon, 19 Sep 2022 11:59:51 +0200
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v2 11/44] cpuidle,omap4: Push RCU-idle into driver
+Subject: [PATCH v2 12/44] cpuidle,dt: Push RCU-idle into driver
 References: <20220919095939.761690562@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
@@ -145,119 +145,143 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 Doing RCU-idle outside the driver, only to then temporarily enable it
-again, some *four* times, before going idle is daft.
+again before going idle is daft.
+
+Notably: this converts all dt_init_idle_driver() and
+__CPU_PM_CPU_IDLE_ENTER() users for they are inextrably intertwined.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Reviewed-by: Tony Lindgren <tony@atomide.com>
-Tested-by: Tony Lindgren <tony@atomide.com>
 ---
- arch/arm/mach-omap2/cpuidle44xx.c |   29 ++++++++++++++++++-----------
- 1 file changed, 18 insertions(+), 11 deletions(-)
+ arch/arm/mach-omap2/cpuidle34xx.c    |    4 ++--
+ drivers/acpi/processor_idle.c        |    2 ++
+ drivers/cpuidle/cpuidle-arm.c        |    1 +
+ drivers/cpuidle/cpuidle-big_little.c |    8 ++++++--
+ drivers/cpuidle/cpuidle-psci.c       |    1 +
+ drivers/cpuidle/cpuidle-qcom-spm.c   |    1 +
+ drivers/cpuidle/cpuidle-riscv-sbi.c  |    1 +
+ drivers/cpuidle/dt_idle_states.c     |    2 +-
+ include/linux/cpuidle.h              |    4 ++++
+ 9 files changed, 19 insertions(+), 5 deletions(-)
 
---- a/arch/arm/mach-omap2/cpuidle44xx.c
-+++ b/arch/arm/mach-omap2/cpuidle44xx.c
-@@ -105,7 +105,9 @@ static int omap_enter_idle_smp(struct cp
+--- a/drivers/acpi/processor_idle.c
++++ b/drivers/acpi/processor_idle.c
+@@ -1200,6 +1200,8 @@ static int acpi_processor_setup_lpi_stat
+ 		state->target_residency = lpi->min_residency;
+ 		if (lpi->arch_flags)
+ 			state->flags |= CPUIDLE_FLAG_TIMER_STOP;
++		if (lpi->entry_method == ACPI_CSTATE_FFH)
++			state->flags |= CPUIDLE_FLAG_RCU_IDLE;
+ 		state->enter = acpi_idle_lpi_enter;
+ 		drv->safe_state_index = i;
  	}
- 	raw_spin_unlock_irqrestore(&mpu_lock, flag);
- 
+--- a/drivers/cpuidle/cpuidle-arm.c
++++ b/drivers/cpuidle/cpuidle-arm.c
+@@ -53,6 +53,7 @@ static struct cpuidle_driver arm_idle_dr
+ 	 * handler for idle state index 0.
+ 	 */
+ 	.states[0] = {
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.enter                  = arm_enter_idle_state,
+ 		.exit_latency           = 1,
+ 		.target_residency       = 1,
+--- a/drivers/cpuidle/cpuidle-big_little.c
++++ b/drivers/cpuidle/cpuidle-big_little.c
+@@ -64,7 +64,8 @@ static struct cpuidle_driver bl_idle_lit
+ 		.enter			= bl_enter_powerdown,
+ 		.exit_latency		= 700,
+ 		.target_residency	= 2500,
+-		.flags			= CPUIDLE_FLAG_TIMER_STOP,
++		.flags			= CPUIDLE_FLAG_TIMER_STOP |
++					  CPUIDLE_FLAG_RCU_IDLE,
+ 		.name			= "C1",
+ 		.desc			= "ARM little-cluster power down",
+ 	},
+@@ -85,7 +86,8 @@ static struct cpuidle_driver bl_idle_big
+ 		.enter			= bl_enter_powerdown,
+ 		.exit_latency		= 500,
+ 		.target_residency	= 2000,
+-		.flags			= CPUIDLE_FLAG_TIMER_STOP,
++		.flags			= CPUIDLE_FLAG_TIMER_STOP |
++					  CPUIDLE_FLAG_RCU_IDLE,
+ 		.name			= "C1",
+ 		.desc			= "ARM big-cluster power down",
+ 	},
+@@ -124,11 +126,13 @@ static int bl_enter_powerdown(struct cpu
+ 				struct cpuidle_driver *drv, int idx)
+ {
+ 	cpu_pm_enter();
 +	ct_idle_enter();
- 	omap4_enter_lowpower(dev->cpu, cx->cpu_state);
+ 
+ 	cpu_suspend(0, bl_powerdown_finisher);
+ 
+ 	/* signals the MCPM core that CPU is out of low power state */
+ 	mcpm_cpu_powered_up();
 +	ct_idle_exit();
  
- 	raw_spin_lock_irqsave(&mpu_lock, flag);
- 	if (cx->mpu_state_vote == num_online_cpus())
-@@ -151,10 +153,10 @@ static int omap_enter_idle_coupled(struc
- 				 (cx->mpu_logic_state == PWRDM_POWER_OFF);
- 
- 	/* Enter broadcast mode for periodic timers */
--	RCU_NONIDLE(tick_broadcast_enable());
-+	tick_broadcast_enable();
- 
- 	/* Enter broadcast mode for one-shot timers */
--	RCU_NONIDLE(tick_broadcast_enter());
-+	tick_broadcast_enter();
- 
- 	/*
- 	 * Call idle CPU PM enter notifier chain so that
-@@ -166,7 +168,7 @@ static int omap_enter_idle_coupled(struc
- 
- 	if (dev->cpu == 0) {
- 		pwrdm_set_logic_retst(mpu_pd, cx->mpu_logic_state);
--		RCU_NONIDLE(omap_set_pwrdm_state(mpu_pd, cx->mpu_state));
-+		omap_set_pwrdm_state(mpu_pd, cx->mpu_state);
- 
- 		/*
- 		 * Call idle CPU cluster PM enter notifier chain
-@@ -178,14 +180,16 @@ static int omap_enter_idle_coupled(struc
- 				index = 0;
- 				cx = state_ptr + index;
- 				pwrdm_set_logic_retst(mpu_pd, cx->mpu_logic_state);
--				RCU_NONIDLE(omap_set_pwrdm_state(mpu_pd, cx->mpu_state));
-+				omap_set_pwrdm_state(mpu_pd, cx->mpu_state);
- 				mpuss_can_lose_context = 0;
- 			}
- 		}
- 	}
- 
-+	ct_idle_enter();
- 	omap4_enter_lowpower(dev->cpu, cx->cpu_state);
- 	cpu_done[dev->cpu] = true;
-+	ct_idle_exit();
- 
- 	/* Wakeup CPU1 only if it is not offlined */
- 	if (dev->cpu == 0 && cpumask_test_cpu(1, cpu_online_mask)) {
-@@ -194,9 +198,9 @@ static int omap_enter_idle_coupled(struc
- 		    mpuss_can_lose_context)
- 			gic_dist_disable();
- 
--		RCU_NONIDLE(clkdm_deny_idle(cpu_clkdm[1]));
--		RCU_NONIDLE(omap_set_pwrdm_state(cpu_pd[1], PWRDM_POWER_ON));
--		RCU_NONIDLE(clkdm_allow_idle(cpu_clkdm[1]));
-+		clkdm_deny_idle(cpu_clkdm[1]);
-+		omap_set_pwrdm_state(cpu_pd[1], PWRDM_POWER_ON);
-+		clkdm_allow_idle(cpu_clkdm[1]);
- 
- 		if (IS_PM44XX_ERRATUM(PM_OMAP4_ROM_SMP_BOOT_ERRATUM_GICD) &&
- 		    mpuss_can_lose_context) {
-@@ -222,7 +226,7 @@ static int omap_enter_idle_coupled(struc
  	cpu_pm_exit();
  
- cpu_pm_out:
--	RCU_NONIDLE(tick_broadcast_exit());
-+	tick_broadcast_exit();
+--- a/drivers/cpuidle/cpuidle-psci.c
++++ b/drivers/cpuidle/cpuidle-psci.c
+@@ -357,6 +357,7 @@ static int psci_idle_init_cpu(struct dev
+ 	 * PSCI idle states relies on architectural WFI to be represented as
+ 	 * state index 0.
+ 	 */
++	drv->states[0].flags = CPUIDLE_FLAG_RCU_IDLE;
+ 	drv->states[0].enter = psci_enter_idle_state;
+ 	drv->states[0].exit_latency = 1;
+ 	drv->states[0].target_residency = 1;
+--- a/drivers/cpuidle/cpuidle-qcom-spm.c
++++ b/drivers/cpuidle/cpuidle-qcom-spm.c
+@@ -72,6 +72,7 @@ static struct cpuidle_driver qcom_spm_id
+ 	.owner = THIS_MODULE,
+ 	.states[0] = {
+ 		.enter			= spm_enter_idle_state,
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.exit_latency		= 1,
+ 		.target_residency	= 1,
+ 		.power_usage		= UINT_MAX,
+--- a/drivers/cpuidle/cpuidle-riscv-sbi.c
++++ b/drivers/cpuidle/cpuidle-riscv-sbi.c
+@@ -332,6 +332,7 @@ static int sbi_cpuidle_init_cpu(struct d
+ 	drv->cpumask = (struct cpumask *)cpumask_of(cpu);
  
- fail:
- 	cpuidle_coupled_parallel_barrier(dev, &abort_barrier);
-@@ -247,7 +251,8 @@ static struct cpuidle_driver omap4_idle_
- 			/* C2 - CPU0 OFF + CPU1 OFF + MPU CSWR */
- 			.exit_latency = 328 + 440,
- 			.target_residency = 960,
--			.flags = CPUIDLE_FLAG_COUPLED,
-+			.flags = CPUIDLE_FLAG_COUPLED |
-+				 CPUIDLE_FLAG_RCU_IDLE,
- 			.enter = omap_enter_idle_coupled,
- 			.name = "C2",
- 			.desc = "CPUx OFF, MPUSS CSWR",
-@@ -256,7 +261,8 @@ static struct cpuidle_driver omap4_idle_
- 			/* C3 - CPU0 OFF + CPU1 OFF + MPU OSWR */
- 			.exit_latency = 460 + 518,
- 			.target_residency = 1100,
--			.flags = CPUIDLE_FLAG_COUPLED,
-+			.flags = CPUIDLE_FLAG_COUPLED |
-+				 CPUIDLE_FLAG_RCU_IDLE,
- 			.enter = omap_enter_idle_coupled,
- 			.name = "C3",
- 			.desc = "CPUx OFF, MPUSS OSWR",
-@@ -282,7 +288,8 @@ static struct cpuidle_driver omap5_idle_
- 			/* C2 - CPU0 RET + CPU1 RET + MPU CSWR */
- 			.exit_latency = 48 + 60,
- 			.target_residency = 100,
--			.flags = CPUIDLE_FLAG_TIMER_STOP,
-+			.flags = CPUIDLE_FLAG_TIMER_STOP |
-+				 CPUIDLE_FLAG_RCU_IDLE,
- 			.enter = omap_enter_idle_smp,
- 			.name = "C2",
- 			.desc = "CPUx CSWR, MPUSS CSWR",
+ 	/* RISC-V architectural WFI to be represented as state index 0. */
++	drv->states[0].flags = CPUIDLE_FLAG_RCU_IDLE;
+ 	drv->states[0].enter = sbi_cpuidle_enter_state;
+ 	drv->states[0].exit_latency = 1;
+ 	drv->states[0].target_residency = 1;
+--- a/drivers/cpuidle/dt_idle_states.c
++++ b/drivers/cpuidle/dt_idle_states.c
+@@ -77,7 +77,7 @@ static int init_state_node(struct cpuidl
+ 	if (err)
+ 		desc = state_node->name;
+ 
+-	idle_state->flags = 0;
++	idle_state->flags = CPUIDLE_FLAG_RCU_IDLE;
+ 	if (of_property_read_bool(state_node, "local-timer-stop"))
+ 		idle_state->flags |= CPUIDLE_FLAG_TIMER_STOP;
+ 	/*
+--- a/include/linux/cpuidle.h
++++ b/include/linux/cpuidle.h
+@@ -282,14 +282,18 @@ extern s64 cpuidle_governor_latency_req(
+ 	int __ret = 0;							\
+ 									\
+ 	if (!idx) {							\
++		ct_idle_enter();					\
+ 		cpu_do_idle();						\
++		ct_idle_exit();						\
+ 		return idx;						\
+ 	}								\
+ 									\
+ 	if (!is_retention)						\
+ 		__ret =  cpu_pm_enter();				\
+ 	if (!__ret) {							\
++		ct_idle_enter();					\
+ 		__ret = low_level_idle_enter(state);			\
++		ct_idle_exit();						\
+ 		if (!is_retention)					\
+ 			cpu_pm_exit();					\
+ 	}								\
 
 
 _______________________________________________
