@@ -1,83 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4857D5BD3E6
-	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 19:36:51 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 947EE5BD488
+	for <lists.virtualization@lfdr.de>; Mon, 19 Sep 2022 20:09:49 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C74B0400BF;
-	Mon, 19 Sep 2022 17:36:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C74B0400BF
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=Ewlo5IFi
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6749C416FF;
+	Mon, 19 Sep 2022 18:09:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6749C416FF
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=wqxxFmhS
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 243dSmYgITeU; Mon, 19 Sep 2022 17:36:48 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D8B2C400AB;
-	Mon, 19 Sep 2022 17:36:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D8B2C400AB
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id udO4jDoNzrbr; Mon, 19 Sep 2022 18:09:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id C83ED41704;
+	Mon, 19 Sep 2022 18:09:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C83ED41704
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 24FC1C0077;
-	Mon, 19 Sep 2022 17:36:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E00ACC0077;
+	Mon, 19 Sep 2022 18:09:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 23C41C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EB9F9C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 17:36:46 +0000 (UTC)
+ Mon, 19 Sep 2022 18:09:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id F206F81451
+ by smtp3.osuosl.org (Postfix) with ESMTP id C6D89600D4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 17:36:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F206F81451
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
- header.a=rsa-sha256 header.s=k20201202 header.b=Ewlo5IFi
+ Mon, 19 Sep 2022 18:09:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C6D89600D4
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com
+ header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256
+ header.s=20210112 header.b=wqxxFmhS
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NoC_rq0Km_zz
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id oOg0DVKaJqoS
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 17:36:45 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 18F6280894
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 18F6280894
+ Mon, 19 Sep 2022 18:09:42 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 142E76005E
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 142E76005E
  for <virtualization@lists.linux-foundation.org>;
- Mon, 19 Sep 2022 17:36:44 +0000 (UTC)
-Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id D966861C16;
- Mon, 19 Sep 2022 17:36:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19C2AC433D6;
- Mon, 19 Sep 2022 17:36:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1663609003;
- bh=jkG4891B6GGZ69slhjyKEIVhWBcQm0wrOpbVVV9al2I=;
- h=Date:From:To:Cc:Subject:In-Reply-To:From;
- b=Ewlo5IFi+88Flt1dhLw8XuNbkGXLKNgaWtJC2D9VSc6zsRz4ZYKdziHPscpKaN4ab
- QjyVNbY/FmT61DQlTP03v4eaqZSD1Y+yCghSA26b8qMgwReuQST8H2rC+DRJRG+Jgb
- mH78puWJ/B7CxX3k4fVZoM9TdF6hu7NNlVpNlkg85uKvmMh8w/JAKM7CL2YcXjLhHK
- nQxM/J1veU7fxTHRU2YLggaomJ+v907QRAJ4SyNATa7BT2pCKlPr4qShEyhdvlE6o6
- 6rRrAkVq2r574bbKYGoOuhpS7dAE7CSUojWuVIoNhea0ZKdUsLXfQDOz6xPbRnweRj
- 2UjVOAvnqy/xw==
-Date: Mon, 19 Sep 2022 12:36:41 -0500
-From: Bjorn Helgaas <helgaas@kernel.org>
-To: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
-Subject: Re: [PATCH v2] jailhouse: Hold reference returned from of_find_xxx API
-Message-ID: <20220919173641.GA1014673@bhelgaas>
+ Mon, 19 Sep 2022 18:09:41 +0000 (UTC)
+Received: by mail-pl1-x62f.google.com with SMTP id d24so5456506pls.4
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 19 Sep 2022 11:09:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=solid-run-com.20210112.gappssmtp.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date;
+ bh=0n3dqQKi715wNloeaeLut1fbW/bmUW/d2NRCHWM/Sco=;
+ b=wqxxFmhSHSWrw23fziDeyMiz/gB7kemkSAojiOwrLspxovaQGkoNxijjmeWzClLcj7
+ I29qtcaw2gGRH1HiKoPBFg7ADZLHf87tE/CP4OrEcJTiwS9j59VRumT97ggw3+wNZv9t
+ TZMqfFn2l66sYnjfrft71tntbx1xPicZMtuGzS9OAIi3S4AxGI3Zmg6Bcuw3ukYntxPN
+ OXrmn5/+mAzGTjvqfEhyBhBYu5nCY4Bk+gaO7TT/oQa75hk41tcq+iuFSfM+6vdOHOAL
+ XHitT9TvfOa6Ayjvp6uhA3NXJUyx/nb8I5j72cbSo8meIWaQkK1b2tx6MF68+dKbIva6
+ BA8w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date;
+ bh=0n3dqQKi715wNloeaeLut1fbW/bmUW/d2NRCHWM/Sco=;
+ b=1OeR0XogsxAnQVxFevQ0/xlgM/xnPXcdkvp3s4OOQRbcTbJSJBhEgeBHKXrHWcg1U1
+ O107ZB9TWyuFsRvfZCmMCxvfFtTKIPIAryeBWarhr/wnPxuR4zPQQqzi9dmTSBxAAyDc
+ WNLpJgG+oV723PiAJEIUYW6ckHOUiYK6Lk3IzK/0ujzLjeKvVPEjo/SsgcRMMe9+kfCZ
+ xppL7vTSarAlEav/hIx/WJg31Cy0WgTf4O32QPD/+OCPk1pweYuuyfP2nNBCsl5iJ2/h
+ 06H1waNEzuzW71BTfwFHXNA0UcYGOJt2vuWyUaP5rVWQPQVcAGLZVYC4v9UG0PtSDQr3
+ 42Kw==
+X-Gm-Message-State: ACrzQf0fRN4lnfm8esqtgsSYvE+GuXb/2SsqpXhJNQJyXk4pZ8P9QV4g
+ ZO6B5Mvu+b/qvWS3P1ttdvyPUsQOrJaJax6Y9FnZ5Q==
+X-Google-Smtp-Source: AMsMyM5HSyB93TyarUcKWpDfiRojuSbpalpCS0ID1PQ2irSEw4AalccyWb8lc0fqi9PPj9KtwTzwHZzIAhyMTMvLyys=
+X-Received: by 2002:a17:903:1c5:b0:178:44cd:e9c with SMTP id
+ e5-20020a17090301c500b0017844cd0e9cmr1005986plh.132.1663610981460; Mon, 19
+ Sep 2022 11:09:41 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <0069849b-e6c7-5c9b-4b52-5aa6e4a328e4@csail.mit.edu>
-Cc: jgross@suse.com, jailhouse-dev@googlegroups.com, jan.kiszka@siemens.com,
- virtualization@lists.linux-foundation.org, andy.shevchenko@gmail.com,
- robh+dt@kernel.org, wangkelin2023@163.com,
- "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
- "bhelgaas@google.com" <bhelgaas@google.com>, mark.rutland@arm.com,
- Liang He <windhl@126.com>, Thomas Gleixner <tglx@linutronix.de>
+References: <20220829082313.419220-1-alvaro.karsz@solid-run.com>
+ <Yyin8zSKJb3GPFno@fedora>
+In-Reply-To: <Yyin8zSKJb3GPFno@fedora>
+From: Alvaro Karsz <alvaro.karsz@solid-run.com>
+Date: Mon, 19 Sep 2022 21:09:05 +0300
+Message-ID: <CAJs=3_ASjr0DF9MTvS=P-ZeJpC4nAH+2vkTjWROzQbS+mvLU4Q@mail.gmail.com>
+Subject: Re: [PATCH v2] virtio_blk: add SECURE ERASE command support
+To: Stefan Hajnoczi <stefanha@redhat.com>
+Cc: Jens Axboe <axboe@kernel.dk>, Paolo Bonzini <pbonzini@redhat.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -94,29 +108,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Sep 16, 2022 at 10:25:31PM -0700, Srivatsa S. Bhat wrote:
-> [ Adding author and reviewers of commit 63338a38db95 again ]
-> 
-> On 9/16/22 2:00 AM, Liang He wrote:
-> > In jailhouse_paravirt(), we should hold the reference returned from
-> > of_find_compatible_node() which has increased the refcount and then
-> > call of_node_put() with it when done.
-> > 
-> > Fixes: 63338a38db95 ("jailhouse: Provide detection for non-x86 systems")
-> > Signed-off-by: Liang He <windhl@126.com>
-> > Co-developed-by: Kelin Wang <wangkelin2023@163.com>
-> > Signed-off-by: Kelin Wang <wangkelin2023@163.com>
-> 
-> Reviewed-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+Thanks for the reply.
 
-The message to which you are responding didn't make it to the mailing
-list, so it's unlikely that anybody will pick it up.  See the archive:
-https://lore.kernel.org/all/0069849b-e6c7-5c9b-4b52-5aa6e4a328e4@csail.mit.edu/
+> This can be simplified with min_not_zero().
 
-Maybe it was a multipart message or was HTML, which the mailing lists
-reject: http://vger.kernel.org/majordomo-info.html
+Ok, I will do it in the next version.
 
-Bjorn
+> It's worth including a comment here that the discard and secure erase
+> limits are combined because the Linux block layer only has one limit
+> value. If the block layer supported independent limit values we wouldn't
+> need to do this.
+
+Ok.
+
+I'll send a new version once we agree on the max_secure_erase_seg = 0 scenario.
+Do you have an opinion on that?
+Do you think that using sg_elems as the number of secure erase/discard
+segments when the value in the virtio config is 0 is good enough?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
