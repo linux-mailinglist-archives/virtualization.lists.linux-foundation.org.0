@@ -1,94 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 187CA5EA699
-	for <lists.virtualization@lfdr.de>; Mon, 26 Sep 2022 14:56:06 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 012D25EA6F0
+	for <lists.virtualization@lfdr.de>; Mon, 26 Sep 2022 15:18:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6E64C60F6F;
-	Mon, 26 Sep 2022 12:56:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6E64C60F6F
+	by smtp3.osuosl.org (Postfix) with ESMTP id C66FA60FAB;
+	Mon, 26 Sep 2022 13:18:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C66FA60FAB
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=MyO0V+ZR
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bfAofHbQ
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id np72yjcBniiC; Mon, 26 Sep 2022 12:56:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 2C44D60F72;
-	Mon, 26 Sep 2022 12:56:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2C44D60F72
+	with ESMTP id CpxF0JcqLKh8; Mon, 26 Sep 2022 13:18:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 8875960F9B;
+	Mon, 26 Sep 2022 13:18:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8875960F9B
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5BC77C0078;
-	Mon, 26 Sep 2022 12:56:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C0F29C0078;
+	Mon, 26 Sep 2022 13:18:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B2B78C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0A04DC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Sep 2022 12:55:58 +0000 (UTC)
+ Mon, 26 Sep 2022 13:18:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8C65A60F6F
+ by smtp3.osuosl.org (Postfix) with ESMTP id B53F560F72
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Sep 2022 12:55:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8C65A60F6F
+ Mon, 26 Sep 2022 13:18:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B53F560F72
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id iBVUhaG0BmNg
+ with ESMTP id bmUtGBwUSmFl
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Sep 2022 12:55:58 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D6B6960A7E
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D6B6960A7E
+ Mon, 26 Sep 2022 13:18:04 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B367260672
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B367260672
  for <virtualization@lists.linux-foundation.org>;
- Mon, 26 Sep 2022 12:55:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
- References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=9e5ZsFmEwqFgQJJWTznPDZKlyACAw4+tFf2Fsk0YUI4=; b=MyO0V+ZRwmf429N2b3uG/HRVUh
- FT5vAkpKajidvb0yBrBvav/7E/0A20CN8bVWgICAaTqQtNX3M8w2++EEM1w+AV8V4KZpD3u5LETB8
- wHHldUhL/DnmDs4jn8B64LZwWM8EnRZ2ehf6HeYgcZhMCeqAyRkJrUekYf6IMyC4SWSYA3xaQo3BS
- Flvo4KDvCNoigiGhtR7SgmyP+Enhx5IsagftIHKfY3Faeb5y4Ip31VVGCFZGq1FHanbOtjXgodBFY
- Cv+ChVWrwug/70b3LpgCiWq8NzRA3G3iiy85a7UTGOKTvgDNf0AajL0tFUixgqu9L0sPdfwSJZcYx
- QIfupF4Q==;
-Received: from j130084.upc-j.chello.nl ([24.132.130.84]
- helo=noisy.programming.kicks-ass.net)
- by desiato.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1ocneF-00G1fp-8A; Mon, 26 Sep 2022 12:55:47 +0000
-Received: from hirez.programming.kicks-ass.net
- (hirez.programming.kicks-ass.net [192.168.1.225])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 306A7300A72;
- Mon, 26 Sep 2022 14:55:46 +0200 (CEST)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
- id 11B5D201E09E7; Mon, 26 Sep 2022 14:55:46 +0200 (CEST)
-Date: Mon, 26 Sep 2022 14:55:45 +0200
-From: Peter Zijlstra <peterz@infradead.org>
-To: Christian Borntraeger <borntraeger@linux.ibm.com>
-Subject: Re: [PATCH v3 6/6] freezer,sched: Rewrite core freezer logic
-Message-ID: <YzGhUZJKV3pKJL3Z@hirez.programming.kicks-ass.net>
-References: <20220822114649.055452969@infradead.org>
- <20220923072104.2013212-1-borntraeger@linux.ibm.com>
- <56576c3c-fe9b-59cf-95b8-158734320f24@linux.ibm.com>
- <b1d41989-7f4f-eb1d-db35-07a6f6b7a7f5@linux.ibm.com>
- <436fa401-e113-0393-f47a-ed23890364d7@linux.ibm.com>
- <39dfc425-deff-2469-7bcb-4a0e177b31d1@linux.ibm.com>
+ Mon, 26 Sep 2022 13:18:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1664198283;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=LtpLVF78yaQ8akL0eEAs7+Z0svwvAfFmddP3iRQwkjc=;
+ b=bfAofHbQn9pOaAefG1DJxnTqxuPKTeraNDC2ZWVQsRiCROA7pygeF2QdKMw5TbfgjJs7se
+ qlXjOOXr/V2Bffpe36bwP+HN53Uv8J48CykC8h0Zc8fmc9xMYKYBY5JUxIYwZEIdeNgZzN
+ dFr2q5mHMLlFD3VEQ+oTPlsum8j28z0=
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com
+ [209.85.219.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-533-UUr-YTmPNei0Za-Nczg1ng-1; Mon, 26 Sep 2022 09:18:02 -0400
+X-MC-Unique: UUr-YTmPNei0Za-Nczg1ng-1
+Received: by mail-qv1-f71.google.com with SMTP id
+ nn9-20020a056214358900b004ac7136c9a3so3781636qvb.16
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 26 Sep 2022 06:18:02 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date;
+ bh=LtpLVF78yaQ8akL0eEAs7+Z0svwvAfFmddP3iRQwkjc=;
+ b=OBVEHpN+MHuVovr9ylw7K9QWThsWwXwEDJtchS0cmM8peXSNz0Q2LphA5ff+haFwum
+ fXkuaw7ClfI5RvfgBlqpolMEGRWWhdvz+ZWL4utXJQHivh6HEbDuzRttpdioaA2wuAtV
+ bC8JnVHsNATlqGWk2C2N5SowbzuV68sTBHHs0MtySBmzkeH19cBEtsIqVh440FWN3/J4
+ 67qbO2/vhs3246L112G5n+dklPN/DSrCuJWVL3mjYlFQbEvYlhC9q/I6b5ALd71t9E3E
+ 9Mr5kFRhvQCbXySug8vBkTojYnniFafRwIyzvpaldMAlFEV5hK0ZN3syY798R0Vbd4hi
+ 1PrQ==
+X-Gm-Message-State: ACrzQf1rFxmn5gFZQBeMuMOXlzz7ZdWgOunvhULSfeaOh/a0ol1H2+ai
+ 0yMQA+7EXhJzn7fN+P4wErxrAgHhM9eydBEPnbAVefBG+e1TLsCcEcHMMQ3J3aZRTPOVqTrcho5
+ MUWo/s2oj7BepyantnjxdlSxiza4ykWvZq1n0nDBHeA==
+X-Received: by 2002:a05:622a:654:b0:35c:f6e6:76b7 with SMTP id
+ a20-20020a05622a065400b0035cf6e676b7mr17820464qtb.365.1664198278781; 
+ Mon, 26 Sep 2022 06:17:58 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM4X2VsELTxq8A6XavJEjjHhj8YKH3iZ07B183UX0OdOkc1HRRewWyFvSFtXrHzQS3LMX97ORg==
+X-Received: by 2002:a05:622a:654:b0:35c:f6e6:76b7 with SMTP id
+ a20-20020a05622a065400b0035cf6e676b7mr17820441qtb.365.1664198278498; 
+ Mon, 26 Sep 2022 06:17:58 -0700 (PDT)
+Received: from sgarzare-redhat (host-79-46-200-222.retail.telecomitalia.it.
+ [79.46.200.222]) by smtp.gmail.com with ESMTPSA id
+ bm17-20020a05620a199100b006c73c3d288esm11765046qkb.131.2022.09.26.06.17.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 26 Sep 2022 06:17:57 -0700 (PDT)
+Date: Mon, 26 Sep 2022 15:17:51 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Bobby Eshleman <bobby.eshleman@gmail.com>
+Subject: Re: [PATCH 4/6] virtio/vsock: add VIRTIO_VSOCK_F_DGRAM feature bit
+Message-ID: <20220926131751.pdlc5mbx6gxqlmkx@sgarzare-redhat>
+References: <cover.1660362668.git.bobby.eshleman@bytedance.com>
+ <3d1f32c4da81f8a0870e126369ba12bc8c4ad048.1660362668.git.bobby.eshleman@bytedance.com>
 MIME-Version: 1.0
+In-Reply-To: <3d1f32c4da81f8a0870e126369ba12bc8c4ad048.1660362668.git.bobby.eshleman@bytedance.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <39dfc425-deff-2469-7bcb-4a0e177b31d1@linux.ibm.com>
-Cc: vincent.guittot@linaro.org, linux-pm@vger.kernel.org, bigeasy@linutronix.de,
- Amit Shah <amit@kernel.org>, rjw@rjwysocki.net, linux-kernel@vger.kernel.org,
- rostedt@goodmis.org, mingo@kernel.org, Marc Hartmayer <mhartmay@linux.ibm.com>,
- mgorman@suse.de, oleg@redhat.com, tj@kernel.org,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>, will@kernel.org,
- dietmar.eggemann@arm.com, ebiederm@xmission.com
+Cc: Bobby Eshleman <bobbyeshleman@gmail.com>,
+ Cong Wang <cong.wang@bytedance.com>,
+ Bobby Eshleman <bobby.eshleman@bytedance.com>,
+ Jiang Wang <jiang.wang@bytedance.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, kvm@vger.kernel.org,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,47 +121,109 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Sep 26, 2022 at 02:32:24PM +0200, Christian Borntraeger wrote:
-> diff --git a/drivers/char/virtio_console.c b/drivers/char/virtio_console.c
-> index 9fa3c76a267f..e93df4f735fe 100644
-> --- a/drivers/char/virtio_console.c
-> +++ b/drivers/char/virtio_console.c
-> @@ -790,7 +790,7 @@ static int wait_port_writable(struct port *port, bool nonblock)
->                 if (nonblock)
->                         return -EAGAIN;
-> -               ret = wait_event_freezable(port->waitqueue,
-> +               ret = wait_event_interruptible(port->waitqueue,
->                                            !will_write_block(port));
->                 if (ret < 0)
->                         return ret;
-> 
-> Does fix the problem.
+On Mon, Aug 15, 2022 at 10:56:07AM -0700, Bobby Eshleman wrote:
+>This commit adds a feature bit for virtio vsock to support datagrams.
+>
+>Signed-off-by: Jiang Wang <jiang.wang@bytedance.com>
+>Signed-off-by: Bobby Eshleman <bobby.eshleman@bytedance.com>
+>---
+> drivers/vhost/vsock.c             | 3 ++-
+> include/uapi/linux/virtio_vsock.h | 1 +
+> net/vmw_vsock/virtio_transport.c  | 8 ++++++--
+> 3 files changed, 9 insertions(+), 3 deletions(-)
+>
+>diff --git a/drivers/vhost/vsock.c b/drivers/vhost/vsock.c
+>index b20ddec2664b..a5d1bdb786fe 100644
+>--- a/drivers/vhost/vsock.c
+>+++ b/drivers/vhost/vsock.c
+>@@ -32,7 +32,8 @@
+> enum {
+> 	VHOST_VSOCK_FEATURES = VHOST_FEATURES |
+> 			       (1ULL << VIRTIO_F_ACCESS_PLATFORM) |
+>-			       (1ULL << VIRTIO_VSOCK_F_SEQPACKET)
+>+			       (1ULL << VIRTIO_VSOCK_F_SEQPACKET) |
+>+			       (1ULL << VIRTIO_VSOCK_F_DGRAM)
+> };
+>
+> enum {
+>diff --git a/include/uapi/linux/virtio_vsock.h b/include/uapi/linux/virtio_vsock.h
+>index 64738838bee5..857df3a3a70d 100644
+>--- a/include/uapi/linux/virtio_vsock.h
+>+++ b/include/uapi/linux/virtio_vsock.h
+>@@ -40,6 +40,7 @@
+>
+> /* The feature bitmap for virtio vsock */
+> #define VIRTIO_VSOCK_F_SEQPACKET	1	/* SOCK_SEQPACKET supported */
+>+#define VIRTIO_VSOCK_F_DGRAM		2	/* Host support dgram vsock */
 
-It's almost as if someone does try_to_wake_up(.state = TASK_FREEZABLE)
--- which would be quite insane.
+We already allocated bit 2 for F_NO_IMPLIED_STREAM , so we should use 3:
+https://github.com/oasis-tcs/virtio-spec/blob/26ed30ccb049fd51d6e20aad3de2807d678edb3a/virtio-vsock.tex#L22
+(I'll send patches to implement F_STREAM and F_NO_IMPLIED_STREAM 
+negotiation soon).
 
-Could you please test with something like the below on? I can boot that
-with KVM, but obviously I didn't suffer any weirdness to begin with :/
+As long as it's RFC it's fine to introduce F_DGRAM, but we should first 
+change virtio-spec before merging this series.
 
----
-diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 4e6a6417211f..ef9ccfc3a8c0 100644
---- a/kernel/sched/core.c
-+++ b/kernel/sched/core.c
-@@ -4051,6 +4051,8 @@ try_to_wake_up(struct task_struct *p, unsigned int state, int wake_flags)
- 	unsigned long flags;
- 	int cpu, success = 0;
- 
-+	WARN_ON_ONCE(state & TASK_FREEZABLE);
-+
- 	preempt_disable();
- 	if (p == current) {
- 		/*
+About the patch, we should only negotiate the new feature when we really 
+have DGRAM support. So, it's better to move this patch after adding 
+support for datagram.
+
+Thanks,
+Stefano
+
+>
+> struct virtio_vsock_config {
+> 	__le64 guest_cid;
+>diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+>index c6212eb38d3c..073314312683 100644
+>--- a/net/vmw_vsock/virtio_transport.c
+>+++ b/net/vmw_vsock/virtio_transport.c
+>@@ -35,6 +35,7 @@ static struct virtio_transport virtio_transport; /* 
+>forward declaration */
+> struct virtio_vsock {
+> 	struct virtio_device *vdev;
+> 	struct virtqueue *vqs[VSOCK_VQ_MAX];
+>+	bool has_dgram;
+>
+> 	/* Virtqueue processing is deferred to a workqueue */
+> 	struct work_struct tx_work;
+>@@ -709,7 +710,6 @@ static int virtio_vsock_probe(struct virtio_device *vdev)
+> 	}
+>
+> 	vsock->vdev = vdev;
+>-
+> 	vsock->rx_buf_nr = 0;
+> 	vsock->rx_buf_max_nr = 0;
+> 	atomic_set(&vsock->queued_replies, 0);
+>@@ -726,6 +726,9 @@ static int virtio_vsock_probe(struct virtio_device *vdev)
+> 	if (virtio_has_feature(vdev, VIRTIO_VSOCK_F_SEQPACKET))
+> 		vsock->seqpacket_allow = true;
+>
+>+	if (virtio_has_feature(vdev, VIRTIO_VSOCK_F_DGRAM))
+>+		vsock->has_dgram = true;
+>+
+> 	vdev->priv = vsock;
+>
+> 	ret = virtio_vsock_vqs_init(vsock);
+>@@ -820,7 +823,8 @@ static struct virtio_device_id id_table[] = {
+> };
+>
+> static unsigned int features[] = {
+>-	VIRTIO_VSOCK_F_SEQPACKET
+>+	VIRTIO_VSOCK_F_SEQPACKET,
+>+	VIRTIO_VSOCK_F_DGRAM
+> };
+>
+> static struct virtio_driver virtio_vsock_driver = {
+>-- 
+>2.35.1
+>
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
