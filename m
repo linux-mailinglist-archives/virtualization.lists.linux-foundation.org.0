@@ -1,94 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 630025FF7D8
-	for <lists.virtualization@lfdr.de>; Sat, 15 Oct 2022 03:34:02 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAE545FFBCB
+	for <lists.virtualization@lfdr.de>; Sat, 15 Oct 2022 21:50:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 6BC0360D6C;
-	Sat, 15 Oct 2022 01:33:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6BC0360D6C
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=1m9moB44
+	by smtp2.osuosl.org (Postfix) with ESMTP id ADA39400A6;
+	Sat, 15 Oct 2022 19:50:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org ADA39400A6
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=IO8WJ3hL
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XpkI_E5OXE7G; Sat, 15 Oct 2022 01:33:58 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 2400B60D5F;
-	Sat, 15 Oct 2022 01:33:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2400B60D5F
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id vK_ZF80GCyzZ; Sat, 15 Oct 2022 19:50:07 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 3D4E0405E8;
+	Sat, 15 Oct 2022 19:50:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3D4E0405E8
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A57D8C0033;
-	Sat, 15 Oct 2022 01:33:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C7C2C0078;
+	Sat, 15 Oct 2022 19:50:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 34212C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 84724C002D
  for <virtualization@lists.linux-foundation.org>;
- Sat, 15 Oct 2022 01:33:54 +0000 (UTC)
+ Sat, 15 Oct 2022 19:50:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B3373607F0
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5087E60BAC
  for <virtualization@lists.linux-foundation.org>;
- Sat, 15 Oct 2022 01:33:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3373607F0
+ Sat, 15 Oct 2022 19:50:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5087E60BAC
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20210112 header.b=IO8WJ3hL
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3CEF5cfi_vz8
+ with ESMTP id HqBmng08IiP9
  for <virtualization@lists.linux-foundation.org>;
- Sat, 15 Oct 2022 01:33:53 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C3D6860A88
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C3D6860A88
+ Sat, 15 Oct 2022 19:50:03 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0922960B96
+Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
+ [IPv6:2607:f8b0:4864:20::736])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0922960B96
  for <virtualization@lists.linux-foundation.org>;
- Sat, 15 Oct 2022 01:33:52 +0000 (UTC)
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29F0pCq1025287;
- Sat, 15 Oct 2022 01:33:51 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2022-7-12;
- bh=9ktHFLbxiHPNJk8/uwRXopWzYH45YEFFBA2qhx+h77s=;
- b=1m9moB4422aQ164SIfPyuWnegpRz2XJHvejcaSNzAu+8os4lbQYlKIwZXLwQ5iMLBwMM
- g+qqzvZBlED0wAb4d1jmtfmRoJ1vlGTUzfYPNUmPVabsVvYUggjQNOjSA9K8mVlxqrNI
- KcyWgVbP/UeH2PcP3t/ulD2QNPZ3ft63mWmgS8my/wHV6qtiTSjjT0/yWKSKxkF3J+px
- 91iLgoKhFFXeUoscOvdCFOeKySCYFUdb7hjJhJAmjL3vQOSBbQVLU47MAKYuipOhYOtQ
- 1PM4NauP5Gg9wpBk5R9qhXKQWDdbsc+UmMVxb5nXv7W3HSlYqM4BA6Wf85ESlt9HceCi cQ== 
-Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k79sg17d0-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 15 Oct 2022 01:33:51 +0000
-Received: from pps.filterd
- (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 29F1X47A008564; Sat, 15 Oct 2022 01:33:50 GMT
-Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
- [10.153.73.24])
- by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 3k7ka180am-5; Sat, 15 Oct 2022 01:33:50 +0000
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: mst@redhat.com, jasowang@redhat.com
-Subject: [PATCH 4/4] vdpa: fix improper error message when adding vdpa dev
-Date: Fri, 14 Oct 2022 17:28:10 -0700
-Message-Id: <1665793690-28120-5-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1665793690-28120-1-git-send-email-si-wei.liu@oracle.com>
-References: <1665793690-28120-1-git-send-email-si-wei.liu@oracle.com>
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-14_13,2022-10-14_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
- suspectscore=0
- adultscore=0 mlxscore=0 malwarescore=0 bulkscore=0 spamscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2210150007
-X-Proofpoint-GUID: EdPlJR4y-Udb6aZ_Vf42AaiPUyLPzCvj
-X-Proofpoint-ORIG-GUID: EdPlJR4y-Udb6aZ_Vf42AaiPUyLPzCvj
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+ Sat, 15 Oct 2022 19:50:02 +0000 (UTC)
+Received: by mail-qk1-x736.google.com with SMTP id a18so4573042qko.0
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 15 Oct 2022 12:50:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=6oLVdw0cZuqaOKT9ROptKn3b8uDN0aCnLROazMdgeqk=;
+ b=IO8WJ3hL5rwlhfbeUVUH8LrBsTDdTLyDy0tbu+HxxYzzKbU6/o7MukfZBWR0sztSP2
+ H8myo6VAwPy5/zjB89Oq4p3oFHZKf+k/Fre09M6Zbnr25hz7BTtM825B/OAZJISKyGqz
+ OvrWFaHBZmy8r34Ctve6/4mm6EV+2+2f64TETcoujZ/EkbLGxYFlDzpQEgdn5bx89351
+ w5p60sX/z9TtaKq1x/o3RvIBaZYl9GuiV0Tpgu6BfTbPxekuzW5Kn4AOGtf7/XQ0HVDb
+ fds/gbOHOXqEMtApIUz8AAV/R7IwqijrBPBH3h+zK1WOMWz4cLOE80nxV3KZWDUZAGdb
+ npzA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=6oLVdw0cZuqaOKT9ROptKn3b8uDN0aCnLROazMdgeqk=;
+ b=YNgACkeCru2qHTnus7PLVxjh5gVl/7y/CISF7fdQNkF/uZvZSlzDLjT6+cWtI734ts
+ 9MvUB1QsFMtNTaM7LwKLK23amNE5BFY+ryLDdzjbBYHf1VMH3fH0E7F394EIkdWOfmtM
+ 8wjojnVkUtHJftsLAmEKEJPhEf9pAXmcwmiFHMadPFQcOGrJw58JjJMrxuFXba+8CEEQ
+ ngcjWrWLE5ngMSvaKgOHE0mLVzVjeJA/4ldgxEXzei35V0ZAGAdLgxCOC0wOXfwKMMVA
+ Jv9uE+/hRZwPa02eYw5sCKj8Wou8/j6sZp+onB5LXN5T4rDT9AsDtdXiyXGJjf3yIqPN
+ Nd4Q==
+X-Gm-Message-State: ACrzQf3S39x12PV8sntq64kRu8BRfuMjD6rUkcVQGtJIGzf5MKZ6S85M
+ 83WVAm454Qfp/NnXT+YHbwY=
+X-Google-Smtp-Source: AMsMyM4WwiQfxwMrAO85WbcfHaH/QaOsu71JLPtcGxIY6207P2zl2kaMFx3KXXR9kW58X0SS0BrtGw==
+X-Received: by 2002:a05:620a:1519:b0:6ee:af9e:9048 with SMTP id
+ i25-20020a05620a151900b006eeaf9e9048mr2825542qkk.601.1665863401804; 
+ Sat, 15 Oct 2022 12:50:01 -0700 (PDT)
+Received: from localhost ([2600:1700:65a0:ab60:b8b9:b1cd:e6fc:2d50])
+ by smtp.gmail.com with ESMTPSA id
+ a20-20020a05622a065400b0039853b7b771sm4707455qtb.80.2022.10.15.12.50.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Oct 2022 12:50:00 -0700 (PDT)
+Date: Sat, 15 Oct 2022 12:49:59 -0700
+From: Cong Wang <xiyou.wangcong@gmail.com>
+To: Bobby Eshleman <bobbyeshleman@gmail.com>
+Subject: Re: [PATCH v2] vsock: replace virtio_vsock_pkt with sk_buff
+Message-ID: <Y0sO5yNqQkFQucjb@pop-os.localdomain>
+References: <20221006011946.85130-1-bobby.eshleman@bytedance.com>
+ <20221006025956-mutt-send-email-mst@kernel.org>
+ <20221006073410.ahhqhlhah4lo47o7@sgarzare-redhat>
+ <Yzoou4UwOv5lh0hE@bullseye>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <Yzoou4UwOv5lh0hE@bullseye>
+Cc: Cong Wang <cong.wang@bytedance.com>,
+ Bobby Eshleman <bobby.eshleman@bytedance.com>,
+ Jiang Wang <jiang.wang@bytedance.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, Bobby Eshleman <bobby.eshleman@gmail.com>,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Eric Dumazet <edumazet@google.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ kvm@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,70 +115,78 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In below example, before the fix, mtu attribute is supported
-by the parent mgmtdev, but the error message showing "All
-provided are not supported" is just misleading.
+On Mon, Oct 03, 2022 at 12:11:39AM +0000, Bobby Eshleman wrote:
+> On Thu, Oct 06, 2022 at 09:34:10AM +0200, Stefano Garzarella wrote:
+> > On Thu, Oct 06, 2022 at 03:08:12AM -0400, Michael S. Tsirkin wrote:
+> > > On Wed, Oct 05, 2022 at 06:19:44PM -0700, Bobby Eshleman wrote:
+> > > > This patch replaces the struct virtio_vsock_pkt with struct sk_buff.
+> > > > 
+> > > > Using sk_buff in vsock benefits it by a) allowing vsock to be extended
+> > > > for socket-related features like sockmap, b) vsock may in the future
+> > > > use other sk_buff-dependent kernel capabilities, and c) vsock shares
+> > > > commonality with other socket types.
+> > > > 
+> > > > This patch is taken from the original series found here:
+> > > > https://lore.kernel.org/all/cover.1660362668.git.bobby.eshleman@bytedance.com/
+> > > > 
+> > > > Small-sized packet throughput improved by ~5% (from 18.53 Mb/s to 19.51
+> > > > Mb/s). Tested using uperf, 16B payloads, 64 threads, 100s, averaged from
+> > > > 10 test runs (n=10). This improvement is likely due to packet merging.
+> > > > 
+> > > > Large-sized packet throughput decreases ~9% (from 27.25 Gb/s to 25.04
+> > > > Gb/s). Tested using uperf, 64KB payloads, 64 threads, 100s, averaged
+> > > > from 10 test runs (n=10).
+> > > > 
+> > > > Medium-sized packet throughput decreases ~5% (from 4.0 Gb/s to 3.81
+> > > > Gb/s). Tested using uperf, 4k to 8k payload sizes picked randomly
+> > > > according to normal distribution, 64 threads, 100s, averaged from 10
+> > > > test runs (n=10).
+> > > 
+> > > It is surprizing to me that the original vsock code managed to outperform
+> > > the new one, given that to my knowledge we did not focus on optimizing it.
+> > 
+> > Yeah mee to.
+> > 
+> 
+> Indeed.
+> 
+> > From this numbers maybe the allocation cost has been reduced as it performs
+> > better with small packets. But with medium to large packets we perform
+> > worse, perhaps because previously we were allocating a contiguous buffer up
+> > to 64k?
+> > Instead alloc_skb() could allocate non-contiguous pages ? (which would solve
+> > the problems we saw a few days ago)
+> > 
+> 
+> I think this would be the case with alloc_skb_with_frags(), but
+> internally alloc_skb() uses kmalloc() for the payload and sk_buff_head
+> slab allocations for the sk_buff itself (all the more confusing to me,
+> as the prior allocator also uses two separate allocations per packet).
 
-$ vdpa mgmtdev show
-vdpasim_net:
-  supported_classes net
-  max_supported_vqs 3
-  dev_features MTU MAC CTRL_VQ CTRL_MAC_ADDR ANY_LAYOUT VERSION_1 ACCESS_PLATFORM
+I think it is related to your implementation of
+virtio_transport_add_to_queue(), where you introduced much more
+complicated logic than before:
 
-$ vdpa dev add mgmtdev vdpasim_net name vdpasim0 mtu 5000 max_vqp 2
-Error: vdpa: All provided attributes are not supported.
-kernel answers: Operation not supported
+-	spin_lock_bh(&vsock->send_pkt_list_lock);
+-	list_add_tail(&pkt->list, &vsock->send_pkt_list);
+-	spin_unlock_bh(&vsock->send_pkt_list_lock);
+-
++	virtio_transport_add_to_queue(&vsock->send_pkt_queue, skb);
 
-After fix, the relevant error message will be like:
+A simple list_add_tail() is definitely faster than your
+virtio_transport_skbs_can_merge() check. So, why do you have to merge
+skb while we don't merge virtio_vsock_pkt?
 
-$ vdpa dev add mgmtdev vdpasim_net name vdpasim0 mtu 5000 max_vqp 2
-Error: vdpa: Some provided attributes are not supported.
-kernel answers: Operation not supported
+_If_ you are trying to mimic TCP, I think you are doing it wrong, it can
+be much more efficient if you could do the merge in sendmsg() before skb
+is even allocated, see tcp_sendmsg_locked().
 
-$ vdpa dev add mgmtdev vdpasim_net name vdpasim0 max_vqp 2
-Error: vdpa: All provided attributes are not supported.
-kernel answers: Operation not supported
-
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
----
- drivers/vdpa/vdpa.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 91eca6d..ff15e0a 100644
---- a/drivers/vdpa/vdpa.c
-+++ b/drivers/vdpa/vdpa.c
-@@ -629,13 +629,20 @@ static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *i
- 		err = PTR_ERR(mdev);
- 		goto err;
- 	}
--	if ((config.mask & mdev->config_attr_mask) != config.mask) {
-+	if (config.mask && (config.mask & mdev->config_attr_mask) == 0) {
- 		NL_SET_ERR_MSG_MOD(info->extack,
- 				   "All provided attributes are not supported");
- 		err = -EOPNOTSUPP;
- 		goto err;
- 	}
- 
-+	if ((config.mask & mdev->config_attr_mask) != config.mask) {
-+		NL_SET_ERR_MSG_MOD(info->extack,
-+				   "Some provided attributes are not supported");
-+		err = -EOPNOTSUPP;
-+		goto err;
-+	}
-+
- 	err = mdev->ops->dev_add(mdev, name, &config);
- err:
- 	up_write(&vdpa_dev_lock);
--- 
-1.8.3.1
-
+Thanks.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
