@@ -1,121 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 90FE75FF029
-	for <lists.virtualization@lfdr.de>; Fri, 14 Oct 2022 16:19:30 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0C13F4060E;
-	Fri, 14 Oct 2022 14:19:29 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0C13F4060E
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=cJvxm59O
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MR7BHJO_-iqU; Fri, 14 Oct 2022 14:19:28 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D94B4411A8;
-	Fri, 14 Oct 2022 14:19:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D94B4411A8
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 183F5C007C;
-	Fri, 14 Oct 2022 14:19:27 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DFD23C002D
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Oct 2022 14:19:25 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4AE235FF7DA
+	for <lists.virtualization@lfdr.de>; Sat, 15 Oct 2022 03:34:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id AC452410E0
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Oct 2022 14:19:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AC452410E0
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7B5F9416CC;
+	Sat, 15 Oct 2022 01:33:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7B5F9416CC
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=cJvxm59O
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=qC1trwwU
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id THVNahXJDFjS
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Sx8tDbK_25wW; Sat, 15 Oct 2022 01:33:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id BC291416B6;
+	Sat, 15 Oct 2022 01:33:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BC291416B6
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 51175C0084;
+	Sat, 15 Oct 2022 01:33:56 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D764EC0035
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Oct 2022 14:19:23 +0000 (UTC)
+ Sat, 15 Oct 2022 01:33:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id A5DCA812EC
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 15 Oct 2022 01:33:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A5DCA812EC
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
+ header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=qC1trwwU
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5AWchWYyBsnj
+ for <virtualization@lists.linux-foundation.org>;
+ Sat, 15 Oct 2022 01:33:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8D66F4098B
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 8D66F4098B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D9FF2812CF
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D9FF2812CF
  for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Oct 2022 14:19:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1665757162;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LPuKJ60cBEpeR02PEA015wmZlw2SVkGuGapsHTI2RRE=;
- b=cJvxm59OzWe4w97onAYEbzcjDpfTUt4BKBWp0nTtGlwPKLS+BDGYs30olMzK2lGMhhMpP2
- 3xfov3hJuq8LL7AI5B6S2c4cghYXdQhyzvvVq7aUYZlkhjcvlVGcGxvDxnBeYpjkQrAm16
- YJNJ4vSJDk/NjqACme7VNRA5DUvmT0w=
-Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
- [209.85.218.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-455-R174DJWLMAmJDDkAf219Cw-1; Fri, 14 Oct 2022 10:19:21 -0400
-X-MC-Unique: R174DJWLMAmJDDkAf219Cw-1
-Received: by mail-ej1-f72.google.com with SMTP id
- ho8-20020a1709070e8800b0078db5e53032so2481588ejc.9
- for <virtualization@lists.linux-foundation.org>;
- Fri, 14 Oct 2022 07:19:20 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LPuKJ60cBEpeR02PEA015wmZlw2SVkGuGapsHTI2RRE=;
- b=s9aN5IBrKv5NZLzB6AWo7ojrD6L8B1PCxYVPZjGW0dQXNRsHB8C3F6mEomCSzPQ8k5
- atpG4IXPmCjk5wqyGjyEwBbmE6fHa7db3iM6PylllvWTbdmIiPaxKTnzCTPh7u4We9/Z
- Zv5XbkKQZMkIq/XYfXKSnESE2zvFsUDXYTCLdJC9ZescW/SX4a3bplNUZtebEa565pbc
- faOE7uVsSqPYikPMrraj+JDteWzmoU7oKxeesLYi4jNYNOQQoM/DNDI9q59Cu1GCIQQs
- Z/BgEdG4P6VwS4ZTiXiwf/UrYTzlf/StDLOt1wUBgNmCInOZ4+Olgj4rgXlcV2VPk97e
- CZLg==
-X-Gm-Message-State: ACrzQf2jyc2cvD5XHOZrHuq8W9vPuzLbjZDwgolCkNH0eEdQJ5Nqwbhe
- HTMk8h+ASHruKIYE6x5xfi3Lrv4umn7T6D3h591rBgTG8AP9GoLitiO5Ptcvbe5DAv/GchFsM1Z
- I3cfrhLNmauTDs0nn6hAO5vrB6RMwk6lM1p/1bDYdRw==
-X-Received: by 2002:a17:906:7304:b0:6ff:a76:5b09 with SMTP id
- di4-20020a170906730400b006ff0a765b09mr3600283ejc.193.1665757159967; 
- Fri, 14 Oct 2022 07:19:19 -0700 (PDT)
-X-Google-Smtp-Source: AMsMyM6th+u5AZexbhw7H+ue9OBwy7Sl7MLFHR6h7JcJtbzIfWC+7wpBdE6JaQrJnklJf3BLx4FaDw==
-X-Received: by 2002:a17:906:7304:b0:6ff:a76:5b09 with SMTP id
- di4-20020a170906730400b006ff0a765b09mr3600268ejc.193.1665757159737; 
- Fri, 14 Oct 2022 07:19:19 -0700 (PDT)
-Received: from redhat.com ([2a06:c701:73e3:3300:b7f8:ebb0:9b02:7d37])
- by smtp.gmail.com with ESMTPSA id
- cq6-20020a056402220600b00458cc5f802asm1882063edb.73.2022.10.14.07.19.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Oct 2022 07:19:18 -0700 (PDT)
-Date: Fri, 14 Oct 2022 10:19:15 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: "Boeuf, Sebastien" <sebastien.boeuf@intel.com>
-Subject: Re: [PATCH 2/4] vhost-vdpa: Introduce RESUME backend feature bit
-Message-ID: <20221014101858-mutt-send-email-mst@kernel.org>
-References: <72bdc9ae91ca4ed8a2c9ea2aab53f8e04d4512f6.1665674878.git.sebastien.boeuf@intel.com>
- <CACGkMEt7cEocQp70MgtwWjb0yNv_08qq-aKp8ZTbFbTkW6hxbw@mail.gmail.com>
- <20221014020447-mutt-send-email-mst@kernel.org>
- <CACGkMEtSAbO8U4reoAupuixv4KQw-xutCVt6ZXVSsXgM962eJw@mail.gmail.com>
- <20221014021012-mutt-send-email-mst@kernel.org>
- <14fc89d250788d7bdbd6b522197efc2c19ff6db8.camel@intel.com>
- <20221014053617-mutt-send-email-mst@kernel.org>
- <fb0d70a095a26a8f8adf4d7659787596d2763ef6.camel@intel.com>
- <20221014054201-mutt-send-email-mst@kernel.org>
- <129e9d73551e53c3704a1dcdb3626c0e712eed99.camel@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <129e9d73551e53c3704a1dcdb3626c0e712eed99.camel@intel.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: "eperezma@redhat.com" <eperezma@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+ Sat, 15 Oct 2022 01:33:49 +0000 (UTC)
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29F0u44G027651;
+ Sat, 15 Oct 2022 01:33:48 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id; s=corp-2022-7-12;
+ bh=vOlMpke++4HaarffVuvB9eDntnkJMsC3YKO9uDP3n5M=;
+ b=qC1trwwUuMN/SXSDnqqSRS2GOdeB0onnfl8IZO8rtYIGw4wzZjvmF6ZPOlCw5SYraZnI
+ 9cTCXgG1X7zwhlzP7gCR78jFdJDy4vQ51ClnDRJBWGtOTzq76kisy+VYaZVpmI7jTT6l
+ sIjBKKewQdwImQZclOzmcQucL8mOxahnakThe4lgy5JPgVAz8B57h4p/z4/5gEkadX13
+ JBuHWJ2J7b/+OMODwYBcKzxz9fvcVIaxJngkOAbX59g3omdGZ2/wjIIKFPs81uYgGFzz
+ fHMFJ4qgJvkC7o+MRGwZ9wC1UscwBVhP3ePmCBMIPikoKmglbohTWRdRElqCX0+WgryK Tg== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k7acvh0yg-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Sat, 15 Oct 2022 01:33:48 +0000
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 29F1X476008564; Sat, 15 Oct 2022 01:33:47 GMT
+Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
+ [10.153.73.24])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 3k7ka180am-1; Sat, 15 Oct 2022 01:33:47 +0000
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+To: mst@redhat.com, jasowang@redhat.com
+Subject: [PATCH 0/4] vDPA: dev config export via "vdpa dev show" command
+Date: Fri, 14 Oct 2022 17:28:06 -0700
+Message-Id: <1665793690-28120-1-git-send-email-si-wei.liu@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-10-14_13,2022-10-14_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0
+ suspectscore=0
+ adultscore=0 mlxscore=0 malwarescore=0 bulkscore=0 spamscore=0
+ mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2209130000 definitions=main-2210150007
+X-Proofpoint-GUID: iEyrSUJukol4q0K70kZ5zIxNTIl28BYJ
+X-Proofpoint-ORIG-GUID: iEyrSUJukol4q0K70kZ5zIxNTIl28BYJ
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -127,21 +101,92 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Oct 14, 2022 at 09:48:57AM +0000, Boeuf, Sebastien wrote:
-> Ok thanks for the clarification. So I can remove this piece of
-> validation from the code, and ultimately, each backend implementation
-> could decide to complain (or not) if the userspace calls resume() when
-> suspend() isn't supported. Is that a fair summary?
+Live migration of vdpa would typically require re-instate vdpa
+device with an idential set of configs on the destination node,
+same way as how source node created the device in the first place. 
 
-that's my opinion, yes.
+In order to allow live migration orchestration software to export the
+initial set of vdpa attributes with which the device was created, it
+will be useful if the vdpa tool can report the config on demand with
+simple query. This will ease the orchestration software implementation
+so that it doesn't have to keep track of vdpa config change, or have
+to persist vdpa attributes across failure and recovery, in fear of
+being killed due to accidental software error.
+
+In this series, the initial device config for vdpa creation will be
+exported via the "vdpa dev show" command. This is unlike the "vdpa
+dev config show" command that usually goes with the live value in
+the device config space, which is not reliable subject to the dynamics
+of feature negotiation and possible change in device config space.
+
+Examples:
+
+1) Create vDPA by default without any config attribute
+
+$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0
+$ vdpa dev show vdpa0
+vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
+$ vdpa dev -jp show vdpa0
+{
+    "dev": {
+        "vdpa0": {
+            "type": "network",
+            "mgmtdev": "pci/0000:41:04.2",
+            "vendor_id": 5555,
+            "max_vqs": 9,
+            "max_vq_size": 256,
+        }
+    }
+}
+
+2) Create vDPA with config attribute(s) specified
+
+$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0 \
+    mac e4:11:c6:d3:45:f0 max_vq_pairs 4
+$ vdpa dev show
+vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
+  mac e4:11:c6:d3:45:f0 max_vq_pairs 4
+$ vdpa dev -jp show
+{
+    "dev": {
+        "vdpa0": {
+            "type": "network",
+            "mgmtdev": "pci/0000:41:04.2",
+            "vendor_id": 5555,
+            "max_vqs": 9,
+            "max_vq_size": 256,
+            "mac": "e4:11:c6:d3:45:f0",
+            "max_vq_pairs": 4
+        }
+    }
+}
+
+---
+
+Si-Wei Liu (4):
+  vdpa: save vdpa_dev_set_config in struct vdpa_device
+  vdpa: pass initial config to _vdpa_register_device()
+  vdpa: show dev config as-is in "vdpa dev show" output
+  vdpa: fix improper error message when adding vdpa dev
+
+ drivers/vdpa/ifcvf/ifcvf_main.c      |  2 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c    |  2 +-
+ drivers/vdpa/vdpa.c                  | 63 +++++++++++++++++++++++++++++++++---
+ drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  2 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  2 +-
+ drivers/vdpa/vdpa_user/vduse_dev.c   |  2 +-
+ drivers/vdpa/virtio_pci/vp_vdpa.c    |  3 +-
+ include/linux/vdpa.h                 | 26 ++++++++-------
+ 8 files changed, 80 insertions(+), 22 deletions(-)
 
 -- 
-MST
+1.8.3.1
 
 _______________________________________________
 Virtualization mailing list
