@@ -1,77 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 10EA7601E73
-	for <lists.virtualization@lfdr.de>; Tue, 18 Oct 2022 02:10:39 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id AF952601E83
+	for <lists.virtualization@lfdr.de>; Tue, 18 Oct 2022 02:11:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7CD0482F11;
-	Tue, 18 Oct 2022 00:10:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7CD0482F11
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=boaGwSxB
+	by smtp4.osuosl.org (Postfix) with ESMTP id 35ADD41874;
+	Tue, 18 Oct 2022 00:11:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 35ADD41874
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=VhXILYP4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xai7KwdVpUPP; Tue, 18 Oct 2022 00:10:36 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5U4C41QTnWEZ; Tue, 18 Oct 2022 00:11:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 3082382F13;
-	Tue, 18 Oct 2022 00:10:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3082382F13
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 9CDFB4186D;
+	Tue, 18 Oct 2022 00:11:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9CDFB4186D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6159AC007C;
-	Tue, 18 Oct 2022 00:10:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F0432C002D;
+	Tue, 18 Oct 2022 00:11:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 26064C002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 32E83C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Oct 2022 00:10:34 +0000 (UTC)
+ Tue, 18 Oct 2022 00:11:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E7E5C82EC7
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0BF8D40576
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Oct 2022 00:10:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E7E5C82EC7
+ Tue, 18 Oct 2022 00:11:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0BF8D40576
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20201202 header.b=VhXILYP4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WNqospLsdrKZ
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id m2RP_tAsSbAx
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Oct 2022 00:10:33 +0000 (UTC)
+ Tue, 18 Oct 2022 00:11:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DDAF282EB6
-Received: from ams.source.kernel.org (ams.source.kernel.org
- [IPv6:2604:1380:4601:e00::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id DDAF282EB6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C97E24056D
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C97E24056D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Oct 2022 00:10:32 +0000 (UTC)
+ Tue, 18 Oct 2022 00:11:02 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by ams.source.kernel.org (Postfix) with ESMTPS id 0E944B81C04;
- Tue, 18 Oct 2022 00:10:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E4432C4347C;
- Tue, 18 Oct 2022 00:10:27 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTPS id 1E6AB6134C;
+ Tue, 18 Oct 2022 00:11:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B4342C433C1;
+ Tue, 18 Oct 2022 00:11:00 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1666051828;
+ s=k20201202; t=1666051861;
  bh=mKb3LAjLh61nv88wsoVeVjj2pYy9qA3Vi19/A3aGjaA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=boaGwSxBoXeBRSpNoIRtoYUXG/z+s8sYX0AVUn70p7sQCaYBOuevOpTqJyPfpf9fj
- kp/6X82uQtHkO5zhIvSb3M7CWDxBcGukRC60Cf/lNi9pHtN87WOwDcfCnaNWNpSkDB
- j5B9M+QYraxAT7hkj8AcJG7d2o/vdbKeFoTBKZc6Sn2MuVwp7crfv4nWLcq5SVObpH
- vaEV6jEfqR1xFua+pM8YK4n7yxrzZ9DDXp6bZjL8I9H4gMLsk3W1zurhTMC/3yNGoC
- SDBahgjJ6qyupEg3d4tQQsnzocrVt6gOeo+1nM24RO8CWG6WdU5kwcwBMfCg5l93T2
- iF43UEV7PJyag==
+ b=VhXILYP4PuymEJoJjkQRLI0e78R1SaDKHb6BcKvvZsF4IjOD7fZsjFDM58WbLAIyd
+ StzXcpZCjbJmuWn5StLFwsGLF4p+1UwU436h2FAPBN77fGAsPZCesrKoYP34Z5GCVX
+ lo0eQ/oAMuTs0psaNeg6YV9DXal7GaHbNrdGBK5kvMY7su883i1zTHM+UiH7skJTFF
+ quaMMzhqj6Jj+oxSEuhcrzvX7meBd/QJLw1Iqknp1fAN+JoH9lxFkkuex/Dp+EmCbe
+ Syd1CYC9oVNTcVvpMRSefTddUspkzIlUsG5/veM5H4Mth+GVlfX0aa+V58JZGUE/fK
+ 8w5NEX6U3z0sg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.15 21/21] virtio_pci: don't try to use intxif pin is
+Subject: [PATCH AUTOSEL 5.10 16/16] virtio_pci: don't try to use intxif pin is
  zero
-Date: Mon, 17 Oct 2022 20:09:40 -0400
-Message-Id: <20221018000940.2731329-21-sashal@kernel.org>
+Date: Mon, 17 Oct 2022 20:10:29 -0400
+Message-Id: <20221018001029.2731620-16-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221018000940.2731329-1-sashal@kernel.org>
-References: <20221018000940.2731329-1-sashal@kernel.org>
+In-Reply-To: <20221018001029.2731620-1-sashal@kernel.org>
+References: <20221018001029.2731620-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
