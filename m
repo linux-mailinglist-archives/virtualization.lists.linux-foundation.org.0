@@ -1,192 +1,115 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D88A1603735
-	for <lists.virtualization@lfdr.de>; Wed, 19 Oct 2022 02:40:21 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4DEDE60391A
+	for <lists.virtualization@lfdr.de>; Wed, 19 Oct 2022 07:14:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 674EA83E7D;
-	Wed, 19 Oct 2022 00:40:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 674EA83E7D
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=QLO/hS5+;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-oracle-onmicrosoft-com header.b=sG3b3lv/
+	by smtp4.osuosl.org (Postfix) with ESMTP id ADC1F410D5;
+	Wed, 19 Oct 2022 05:14:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ADC1F410D5
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=OAQdNWnt
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id x1bRNIMLIvZh; Wed, 19 Oct 2022 00:40:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 9493583E82;
-	Wed, 19 Oct 2022 00:40:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9493583E82
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id B2sJdwaqyTfh; Wed, 19 Oct 2022 05:14:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 032EF41923;
+	Wed, 19 Oct 2022 05:14:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 032EF41923
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CCF3DC007C;
-	Wed, 19 Oct 2022 00:40:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2B492C007C;
+	Wed, 19 Oct 2022 05:14:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B627EC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id ADCA6C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Oct 2022 00:40:16 +0000 (UTC)
+ Wed, 19 Oct 2022 05:14:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 7BB1783E80
+ by smtp2.osuosl.org (Postfix) with ESMTP id 73DB54025F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Oct 2022 00:40:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7BB1783E80
+ Wed, 19 Oct 2022 05:14:31 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 73DB54025F
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=OAQdNWnt
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oSYWy-nRAOY6
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JKp2ouTBTl8z
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Oct 2022 00:40:13 +0000 (UTC)
+ Wed, 19 Oct 2022 05:14:28 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 94D9983E7D
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 94D9983E7D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7EF0F40111
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7EF0F40111
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Oct 2022 00:40:13 +0000 (UTC)
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29INiTra025375;
- Wed, 19 Oct 2022 00:40:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=content-type :
- message-id : date : subject : to : cc : references : from : in-reply-to :
- mime-version; s=corp-2022-7-12;
- bh=tpa19C/Y+CSf5NzFcvN5waLvC7pbfqYjnLSm/qij2dI=;
- b=QLO/hS5+GJ8c2128yz0x/lSWN2bQD0RwQ7eny1RsfMt1y+9vMSQo1h0UouvcBh/2BUYg
- x++fWHsCn0ZQoYKWMse8t+yvHWhIRYWtGvqTPzbGQiN0cmZFZElA61C3HB3tGtYMyEHp
- XGkoRdO9ReNM1msx5y7gRwxtAccWb+H0r7DiFErz1wULJy+/5q6rmm081z1ialJgkZ35
- 0vGkylvTFTPSPE5/GqNg+ECtd+OPfnp3WhWlO9xAd9AC+S+nd85RRRKq0NLg25H7qF02
- pPXLh7ucL1qInWXjDGBNB3vIw4GRSTo/fUfTIvHtnkNFpLAMYXV2DiIZ3KJnFNqhpZ64 oQ== 
-Received: from phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta03.appoci.oracle.com [138.1.37.129])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k9aww41td-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Oct 2022 00:40:12 +0000
-Received: from pps.filterd
- (phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 29ILr9tL024452; Wed, 19 Oct 2022 00:40:12 GMT
-Received: from nam12-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam12lp2044.outbound.protection.outlook.com [104.47.66.44])
- by phxpaimrmta03.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
- 3k8hu6y7n7-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Oct 2022 00:40:11 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bzpFDDwbNY20NBmtkhLJmesq2qdU4xabI6GITUX+b7ZPPzs6QKQnuEi2LNPkDSWwSMB509wYbDYoUNxxS/+C2U/RSt2q+9kkNRGuEHRL55a0rFwrKJGYNJqDP5ACSBgbtw1y8wGNLGWkwRAWmIlhIbYcfFOWurWQBHAXabQoJxBfroCValJR+hChAW8gT1aLK9JK3DLPeJxBtzmis48MTyuYGDHS/5Vip0ElRXjxEkH9dOBnugqUYRaRHcb7Lcl3tTzuqu0fBN106805zbIBSCoBe9XE2r1KdE71gHoPZ8kH3hNOpK7PmxuUV1mruTHhiqCM7ZklqHaqera9jgURHA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tpa19C/Y+CSf5NzFcvN5waLvC7pbfqYjnLSm/qij2dI=;
- b=avMGuKFcBvNJakaC01BL9piAAvmqtbc3soWPJvbSxwaY6pk0y8STHwrje8rj7IihQqfaNPGctTf2zZq49dpLg6dORDk1lM/0oag9UsjyWRoM89P4v+SBFM9ZlnpbYljmF9WLNyaibMh7rIeiFnUtagkcaPuP/U1wfoDwNckVdp2+TW0nksBv1X0tCRa9txhItdjfMqOGrva2AuGGPT26ZAUzHKoZpVkH0kFl219JYP7YVmkCwonEwjMrGsFCJubfwksMrj4XCu4TiiDRa5ldhnSt2s2N6Kyp2jC2zZBNzw44dXQqwxGFMwk9qSHUe4Pi5SSG27AWcIJghPFbZJn/DA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tpa19C/Y+CSf5NzFcvN5waLvC7pbfqYjnLSm/qij2dI=;
- b=sG3b3lv/N67gyr4dHVA/D6ZtBN72A5SXI7K7N7Yfp2uQLotBPoVZnn7/p8eixprYTmnbRn1CevhGTs+prdJ3S3UfxWvDhyS4Lqu0NER5BBA+Sn7O15sJmSluRBSb6BAlVsY3G0GdU5SnHwSxtLMJ2RrDFfM/DVNknKq036mo+u8=
-Received: from MW4PR10MB6535.namprd10.prod.outlook.com (2603:10b6:303:225::12)
- by CY8PR10MB6490.namprd10.prod.outlook.com (2603:10b6:930:5e::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.33; Wed, 19 Oct
- 2022 00:40:10 +0000
-Received: from MW4PR10MB6535.namprd10.prod.outlook.com
- ([fe80::9830:ae4d:f10c:c30a]) by MW4PR10MB6535.namprd10.prod.outlook.com
- ([fe80::9830:ae4d:f10c:c30a%5]) with mapi id 15.20.5723.032; Wed, 19 Oct 2022
- 00:40:09 +0000
-Message-ID: <5c0691e8-fbf4-c77f-918b-c7fef91e850b@oracle.com>
-Date: Tue, 18 Oct 2022 17:40:05 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
- Thunderbird/102.3.3
-Subject: Re: [PATCH 0/4] vDPA: dev config export via "vdpa dev show" command
-Content-Language: en-US
-To: Jason Wang <jasowang@redhat.com>
-References: <1665793690-28120-1-git-send-email-si-wei.liu@oracle.com>
- <CACGkMEvaKnqS-0p7iqyHP_Wbbj1YdmPFA7ABfKK_8FbXMsZEkg@mail.gmail.com>
- <4f76d968-3086-0280-48fc-fcf250f11c67@oracle.com>
- <CACGkMEs6tsPUsoP1TmEB3metqCHQF-i95G+oP3koJGAOS_5PWQ@mail.gmail.com>
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-Organization: Oracle Corporation
-In-Reply-To: <CACGkMEs6tsPUsoP1TmEB3metqCHQF-i95G+oP3koJGAOS_5PWQ@mail.gmail.com>
-X-ClientProxiedBy: DS7PR03CA0106.namprd03.prod.outlook.com
- (2603:10b6:5:3b7::21) To MW4PR10MB6535.namprd10.prod.outlook.com
- (2603:10b6:303:225::12)
+ Wed, 19 Oct 2022 05:14:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1666156467;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=elWLeuJKIZ4oJu/GVv8j/7xLvrjS+NMtbQ72eCBOoSw=;
+ b=OAQdNWntr4p2soM4FgyyFDLQyWknN1WVvvFzlKSlvvW1DlK+AjciXmPQKUHOczAORAjcb1
+ 1T8j2n4jCCZw9wYdx4XL4c23FP6aIHDUEbxpaA5oLKER3IXklObvmqv6haQIreuzYMjIOD
+ rFIymAf5dZk9WI+5W9qjrzJFwqDZGaw=
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-171-QbfPgJOyO-Kcy8YbN_4Cow-1; Wed, 19 Oct 2022 01:14:26 -0400
+X-MC-Unique: QbfPgJOyO-Kcy8YbN_4Cow-1
+Received: by mail-pl1-f200.google.com with SMTP id
+ f18-20020a170902ce9200b0017f9ac4cfb5so11183780plg.22
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Oct 2022 22:14:26 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=elWLeuJKIZ4oJu/GVv8j/7xLvrjS+NMtbQ72eCBOoSw=;
+ b=dbC8/JwciVcoc1TcUewgALB5q3s4z+y4TArr+zeqRLeUFdiIN69NJmp+Npdo0Kj0jo
+ wrCZRgIbw0lIf2sJG+b6kT9qwT2Iv/yEJGBhIpFy2ptY79D8z8N3JbyX19BZWUFp6Wl2
+ rjrv/0i5ZI+m5JRhZGT1J9OJWF4P4h8YTVQW7Bk1NHiMvKYqHHdNgoTWhYYSAPdr6QV6
+ cyAXQR1SFfjSk1uHCsmwBMeBoqxAfP5LTb2Hw3g3HPHYmM+ICybwpi4vK8SFmYmY5lSW
+ npNWBkKkUb88bJTCQnCJlyYqTffz74adACjY1tYSmn2fyGf2Vyw0rGS3kUDvnVngqnaF
+ FCMw==
+X-Gm-Message-State: ACrzQf0AMw6jHdsCwp5keuqTx999+lVFRMfEDt3gQc9UBYCRO5UUbhiy
+ 0GnLhNTrtxCkalFNPzMpsnSXHl1LdAs09wxIxHKn7iyyWn5DhNzSfa4BTTKQhRYlwtMWzta+KyL
+ Yvr99D2dPjV12hzH/dPTzoPjz6cGzSCzIaU5MagSPmg==
+X-Received: by 2002:a17:903:32cd:b0:185:5421:a5d6 with SMTP id
+ i13-20020a17090332cd00b001855421a5d6mr6563119plr.99.1666156464794; 
+ Tue, 18 Oct 2022 22:14:24 -0700 (PDT)
+X-Google-Smtp-Source: AMsMyM5Hvcr/I9EH7SdGoInjE6Qebm/YSK0Gmhj8yliMC/8ZMVpkTInJy4XKE5CCKWujd1Hid7apSg==
+X-Received: by 2002:a17:902:ce91:b0:183:610c:1df3 with SMTP id
+ f17-20020a170902ce9100b00183610c1df3mr6401359plg.51.1666156453588; 
+ Tue, 18 Oct 2022 22:14:13 -0700 (PDT)
+Received: from [10.72.12.164] ([43.228.180.230])
+ by smtp.gmail.com with ESMTPSA id
+ n19-20020a170902d0d300b0018658badef3sm45961pln.232.2022.10.18.22.14.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Oct 2022 22:14:12 -0700 (PDT)
+Message-ID: <33449319-b984-a60b-50e2-a0080a62f1c1@redhat.com>
+Date: Wed, 19 Oct 2022 13:14:08 +0800
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW4PR10MB6535:EE_|CY8PR10MB6490:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9acd01da-76ad-454f-a98c-08dab16a79de
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: l1mDMMSsdpfP2XlyyQ2zged2dm0444r8/sXUOlslX61HX9sJpvalgL/I5TUl8JrRaW2o/w7uZFwBrs+RF5FhOvKOv4dIGG6dAecHijDlxZtdGNEnf3tL5HVFGHhF/8Glqfq932QosRiXqFVK67aQeti1TxUO87gBADpgvdldnZSmaUzcXYTrLbQFjK8vgN10hS8A3W8h0pRASSq+coI2qupuwLf1qpOTt4SjA6+9xTNhHWBOE9tzwteobuUK9vlGPc2md90/Noq3/IWdpYwBx0DmNfsnEWFyhBxlhsb0cDbWdMpggNtiMXRaFYF2citFksDcyZ3eXwuUpsx1x+4HXhfYzMxgwAf5L5N2nRy9hz0AOk/SKqb39rrj73sf03AfeRMBi4zpaS2gmCCPFVsNuxCssoHvNMe2wauv5O4ChcRFDRhcJt2A138wCJ9xc+/+udEVzYSMfq3wgiFbshL7i5NK8k829XWzMK0Gi7Q7QN16Oy4Ms7M9Hn1nH4R2XFrqQ+8BH9S9EmGg8aFVXGdR1dxws3TT0a046T8qIFL2HDqMqxZ8za2D3m1NzdzXHvFd7txK+wu5+K+dww6qjMHfhoF386PyfV3g0YzbfgLzJLEB2SoyTEZkQ1DCjeU+I7rl9phOdNC4vekGRKzJTgZ4ljzFywHw6luyqcla3111Hu+wW29nThtRLLu6Ttv4U77XaAxtC0MIJiYd0gocb9EUlXGtN6Ig0Qnmn7rYGbvZ2T1Pn8QbkosZ/iMKbqjMKK4ekTmxav9oSuCl4squtWkIj8QUpFihXVqquG+9QLOMbI8=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MW4PR10MB6535.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(39860400002)(346002)(376002)(396003)(136003)(366004)(451199015)(31686004)(6486002)(478600001)(83380400001)(54906003)(6916009)(316002)(33964004)(186003)(36916002)(6506007)(38100700002)(8676002)(4326008)(30864003)(66946007)(66556008)(66476007)(86362001)(36756003)(2906002)(6512007)(8936002)(2616005)(26005)(41300700001)(53546011)(5660300002)(6666004)(31696002)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RmdNQ0FFTTJITWlUVmNuYTZRSVBPUUtBT1h4cTUwcmI3WWVMbUZoc0ZJYkdE?=
- =?utf-8?B?akVYMUFPdkVkdkFYWWZ2UU1FMGc1WlJncHRndExzVlhYZnVQOW9TTGczRzEv?=
- =?utf-8?B?Q2lYanNVaUZOOUhaTDJ4R3VJZW1NaHVaSVo3YTdncm9rWmFieWV1RXdmL04w?=
- =?utf-8?B?SGhrZitDTVZZV3Y5ZlNJdGtOVWhmTUpTcWZkcDMxbC9FYzZQVmRhWFZQYWJS?=
- =?utf-8?B?SjVRQmptdmlkMENrZ01KdVozUWluTHhBeWVZa1k0TGFRSWlZZHVXR1NhWWRo?=
- =?utf-8?B?RTRmNytTVnhhdmVrS0tsUGF6WkU5M2NGcGxIeWt6RE1IZlFjTDRpZEYzN081?=
- =?utf-8?B?TDU0SmFCVFpsZFA1aFlFTzY0N1B1WEIwVjJZLzFnYUg4dnFXNjJEYkxHbGFN?=
- =?utf-8?B?RnhabDR1NXpKVzVaeTI3NTZwT2pwQWNtWktJWEd2aGpNbVhaRlBJRGtEOEJn?=
- =?utf-8?B?cEE1ak41NzhzOTRRN0xBSjZkbnpUZ1pobTRuWHdXV0J6d2V1eTBQc0orK2tI?=
- =?utf-8?B?NlBDMSszZEJCcnZzWlo5UmMxTmNST3lkMUpYdEVyckZIbGZQOVhwdHFXMnR1?=
- =?utf-8?B?Zmdmam9HSnBwN0dlTEtBeXBpS1Nxa1FBWFBRMHM3Y2t6dmZER0VQSG1YN0Ex?=
- =?utf-8?B?V0h6d1I3WDVFVVhBc21EcmdsSTRHcW5xaWljbkZXaWRsMzFkWmZtckl5eFls?=
- =?utf-8?B?cU90cmxGTFlrT3ljdlA1dzkrSFRzdTN5cWZWUUJrc2FUcUNOMm5UR016RUdG?=
- =?utf-8?B?NmhhRmRJTkUyRnRjbGd2QTB6OTA0U0xOZEdrVzRBOVkwUjJYRTdHMU9BSG90?=
- =?utf-8?B?eUV5clhsSnhRYkIzVGJnTmJrMkVJVmgzcE94T3VHY2s4MklSdEpWNXI5ODJE?=
- =?utf-8?B?QjN0NmZRRGwxdndEbDIrcUdsSDNhSExydDh5VitDdnpDUXVxSDQyZDFXWGZI?=
- =?utf-8?B?SzFJN1dUTFBvaVlsUWFyU0kyclJCdU5jekhWNitxSUQxeFgwNXZOaXhkKzBU?=
- =?utf-8?B?UU4rL25TNjZMM1laU1BDQ3dxc3lvY3dTelFhRGl2bXFyaENnZDJLVEdIUlFW?=
- =?utf-8?B?RGxHcmpQVElPSUVOQmlPQjBhUzkzNFRJM2pKYWZWMWNKZjBxMFBISVlQejVy?=
- =?utf-8?B?eWZ3d1hWQVNWMERIWko0ZEhWT0JqTkM2dHVybDBCT1pZdmVlZ3RFTUkwLzF5?=
- =?utf-8?B?V0JGOUl0Q1V4N2RIZzhKVGppOGRqd1lHUThudEtobkRjWW91NWxFdWxtWUVE?=
- =?utf-8?B?RVprcnVtcnl6c3VZVWVFWi9PR2phWUs1TVlSN0VZSjFmTUd1RVpkUGpxQ0F0?=
- =?utf-8?B?RWZQREhhNUI0bmp6TXlqd1hSNTlsNHVVdm1KQmM5WC93NTBhWVVQVitJc3JR?=
- =?utf-8?B?a2N5VXFBWC96bVFTRHhJNllSUG41WmR4dFV3TGUyRTBteFptbU02dS83VHQx?=
- =?utf-8?B?Q2RyNWZxWTljS3pvdjE1UmVqdWdzSjQvZFFTd3FyQjJIbzFZREkvV3VEMTFn?=
- =?utf-8?B?VXdIMEU4QlFwbFIrZHpVaktTdmpid3doMnBtd3pLTGM5S1Q2RUxFVWdBRnIv?=
- =?utf-8?B?ejhKd2xYQkczV1g4U1RNcEE5ZGNSb0ViYkUvZ1ZpaGhMT3NmMWJibHdibDJS?=
- =?utf-8?B?K0RhZUp1WmVOcE1ZUURsdUFUeS9GMER5TXd0OXc3VEgySHFmS2hMTmQxNVdi?=
- =?utf-8?B?ckg3NGpXTUoxSDlVdlRBWnZJTlFncSsxT21DT2ovV2JJRGV6SlhsSEhCbmtD?=
- =?utf-8?B?aDlpUGEzeDdmcE80N09uOWNreGp2MllIREs0bXRrQ0YvRXkwYjdpUkkxTExY?=
- =?utf-8?B?TWJnU1I0R1ZvRWtxbnFPWGxnUy9YeTY0WHk1UWExSmhIeTViZG5tMjlKWS83?=
- =?utf-8?B?UHo5b3RmMjMyTFpXU1pzR3M4SzFTb3hPRDFjbkpOQ0JyR1VnWlZzUzhzS0cw?=
- =?utf-8?B?NVlXTk5xZmx6ckJmOG83WVNFRk1UdDRZR3hqUnVqWXpxWEpCZlBlUGRQZmUy?=
- =?utf-8?B?czJWVTR5dDZCOUNha3JRMklDYnlCUG93N21yVU1EVGtqSUoxRis1SndHUmtQ?=
- =?utf-8?B?eUhkc1MzdTV6OWZxVmZ1Z2NwNXpLNDlydm5Rb1c3ZG4zQXE3VHFwNmpEZ0Yw?=
- =?utf-8?Q?8vU/aoYDQCiVMHojNCn6gjIMC?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9acd01da-76ad-454f-a98c-08dab16a79de
-X-MS-Exchange-CrossTenant-AuthSource: MW4PR10MB6535.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2022 00:40:09.7505 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ztjoI9jIMvvdhDTNpVJ8lKRO+F1eqKoNbPtgWSOduacWvBjd0Uib3pIKCXtiBLDaXBg8SNeWTn4b7zVqmGO60w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR10MB6490
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-18_09,2022-10-18_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
- mlxlogscore=999
- malwarescore=0 spamscore=0 suspectscore=0 phishscore=0 adultscore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2209130000 definitions=main-2210190001
-X-Proofpoint-GUID: -Vb-dW7y1VRIBm_MFrmVw-eOXKkZCYQX
-X-Proofpoint-ORIG-GUID: -Vb-dW7y1VRIBm_MFrmVw-eOXKkZCYQX
-Cc: Sean Mooney <smooney@redhat.com>, virtualization@lists.linux-foundation.org,
- Daniel Berrange <berrange@redhat.com>, linux-kernel@vger.kernel.org,
- mst@redhat.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:91.0)
+ Gecko/20100101 Thunderbird/91.13.1
+Subject: Re: [PATCH 3/4] vdpa/mlx5: Add debugfs subtree
+To: Eli Cohen <elic@nvidia.com>, mst@redhat.com,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+References: <20221018111232.4021-1-elic@nvidia.com>
+ <20221018111232.4021-4-elic@nvidia.com>
+From: Jason Wang <jasowang@redhat.com>
+In-Reply-To: <20221018111232.4021-4-elic@nvidia.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Cc: eperezma@redhat.com, lulu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -198,388 +121,126 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============4251433472337724457=="
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============4251433472337724457==
-Content-Type: multipart/alternative;
- boundary="------------20NUoKN2kV3a7sQquPSiawrv"
-Content-Language: en-US
-
---------------20NUoKN2kV3a7sQquPSiawrv
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-
-
-
-On 10/18/2022 1:41 AM, Jason Wang wrote:
-> On Tue, Oct 18, 2022 at 6:58 AM Si-Wei Liu<si-wei.liu@oracle.com>  wrote:
->>
->>
->> On 10/17/2022 12:08 AM, Jason Wang wrote:
->>> Adding Sean and Daniel for more thoughts.
->>>
->>> On Sat, Oct 15, 2022 at 9:33 AM Si-Wei Liu<si-wei.liu@oracle.com>  wrote:
->>>> Live migration of vdpa would typically require re-instate vdpa
->>>> device with an idential set of configs on the destination node,
->>>> same way as how source node created the device in the first place.
->>>>
->>>> In order to allow live migration orchestration software to export the
->>>> initial set of vdpa attributes with which the device was created, it
->>>> will be useful if the vdpa tool can report the config on demand with
->>>> simple query.
->>> For live migration, I think the management layer should have this
->>> knowledge and they can communicate directly without bothering the vdpa
->>> tool on the source. If I was not wrong this is the way libvirt is
->>> doing now.
->> I think this series doesn't conflict with what libvirt is doing now. For
->> example it can still remember the supported features for the parent
->> mgmtdev, and mtu and mac properties for vdpa creation, and use them to
->> replicate vdpa device on  destination node. The extra benefit is - the
->> management software (for live migration) doesn't need to care those
->> mgmtdev specifics - such as what features the parent mgmtdev supports,
->> whether some features are mandatory, and what are the default values for
->> those, whether there's enough system or hardware resource available to
->> create vdpa with requested features et al. This kind of process can be
->> simplified by just getting a vdpa created with the exact same features
->> and configus exposed via the 'vdpa dev show' command. Essentially this
->> export facility just provides the layer of abstraction needed for virtio
->> related device configuration and for the very core need of vdpa live
->> migration. For e.g. what're exported can even be useful to facilitate
->> live migration from vdpa to software virtio. Basically, it doesn't
->> prevent libvirt from implementing another layer on top to manage vdpa
->> between mgmtdev devices and vdpa creation, and on the other hand, would
->> benefit light-weighted mgmt software implementation with device
->> management and live migration orchestration decoupled in the upper level.
-> Ok, I think this is fine.
->
->>>> This will ease the orchestration software implementation
->>>> so that it doesn't have to keep track of vdpa config change, or have
->>>> to persist vdpa attributes across failure and recovery, in fear of
->>>> being killed due to accidental software error.
->>>>
->>>> In this series, the initial device config for vdpa creation will be
->>>> exported via the "vdpa dev show" command.
->>>> This is unlike the "vdpa
->>>> dev config show" command that usually goes with the live value in
->>>> the device config space, which is not reliable subject to the dynamics
->>>> of feature negotiation and possible change in device config space.
->>>>
->>>> Examples:
->>>>
->>>> 1) Create vDPA by default without any config attribute
->>>>
->>>> $ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0
->>>> $ vdpa dev show vdpa0
->>>> vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
->>>> $ vdpa dev -jp show vdpa0
->>>> {
->>>>       "dev": {
->>>>           "vdpa0": {
->>>>               "type": "network",
->>>>               "mgmtdev": "pci/0000:41:04.2",
->>>>               "vendor_id": 5555,
->>>>               "max_vqs": 9,
->>>>               "max_vq_size": 256,
->>>>           }
->>>>       }
->>>> }
->>>>
->>>> 2) Create vDPA with config attribute(s) specified
->>>>
->>>> $ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0 \
->>>>       mac e4:11:c6:d3:45:f0 max_vq_pairs 4
->>>> $ vdpa dev show
->>>> vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
->>>>     mac e4:11:c6:d3:45:f0 max_vq_pairs 4
->>>> $ vdpa dev -jp show
->>>> {
->>>>       "dev": {
->>>>           "vdpa0": {
->>>>               "type": "network",
->>>>               "mgmtdev": "pci/0000:41:04.2",
->>> So "mgmtdev" looks not necessary for live migration.
->> Right, so once the resulting device_features is exposed to the 'vdpa dev
->> show' output, the mgmt software could infer the set of config options to
->> recreate vdpa with, and filter out those unwanted attributes (or pick
->> what it really wants).
-> Ok,  so I wonder if it is this better to have a new command instead of
-> mixing it with "dev show"?
->
-> Or at least have separated key for virtio like
->
-> "vdpa0": {
->       "mgmtdev": "vdpasim_net",
->       "virtio config: {
->            ....
->        }
-> }
-Yep I can put it under a separate key "virtio_config". I slightly prefer 
-not introducing a separate command as there could be other dev related 
-info (such as type and mgmtdev) needed for identification or reference 
-purpose in a single inquiry.
-
-Thanks,
--Siwei
->
-> Thanks
->
->> -Siwei
->>
->>> Thanks
->>>
->>>>               "vendor_id": 5555,
->>>>               "max_vqs": 9,
->>>>               "max_vq_size": 256,
->>>>               "mac": "e4:11:c6:d3:45:f0",
->>>>               "max_vq_pairs": 4
->>>>           }
->>>>       }
->>>> }
->>>>
->>>> ---
->>>>
->>>> Si-Wei Liu (4):
->>>>     vdpa: save vdpa_dev_set_config in struct vdpa_device
->>>>     vdpa: pass initial config to _vdpa_register_device()
->>>>     vdpa: show dev config as-is in "vdpa dev show" output
->>>>     vdpa: fix improper error message when adding vdpa dev
->>>>
->>>>    drivers/vdpa/ifcvf/ifcvf_main.c      |  2 +-
->>>>    drivers/vdpa/mlx5/net/mlx5_vnet.c    |  2 +-
->>>>    drivers/vdpa/vdpa.c                  | 63 +++++++++++++++++++++++++++++++++---
->>>>    drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  2 +-
->>>>    drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  2 +-
->>>>    drivers/vdpa/vdpa_user/vduse_dev.c   |  2 +-
->>>>    drivers/vdpa/virtio_pci/vp_vdpa.c    |  3 +-
->>>>    include/linux/vdpa.h                 | 26 ++++++++-------
->>>>    8 files changed, 80 insertions(+), 22 deletions(-)
->>>>
->>>> --
->>>> 1.8.3.1
->>>>
-
---------------20NUoKN2kV3a7sQquPSiawrv
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 10/18/2022 1:41 AM, Jason Wang
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:CACGkMEs6tsPUsoP1TmEB3metqCHQF-i95G+oP3koJGAOS_5PWQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">On Tue, Oct 18, 2022 at 6:58 AM Si-Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:si-wei.liu@oracle.com">&lt;si-wei.liu@oracle.com&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-
-
-On 10/17/2022 12:08 AM, Jason Wang wrote:
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">Adding Sean and Daniel for more thoughts.
-
-On Sat, Oct 15, 2022 at 9:33 AM Si-Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:si-wei.liu@oracle.com">&lt;si-wei.liu@oracle.com&gt;</a> wrote:
-</pre>
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">Live migration of vdpa would typically require re-instate vdpa
-device with an idential set of configs on the destination node,
-same way as how source node created the device in the first place.
-
-In order to allow live migration orchestration software to export the
-initial set of vdpa attributes with which the device was created, it
-will be useful if the vdpa tool can report the config on demand with
-simple query.
-</pre>
-          </blockquote>
-          <pre class="moz-quote-pre" wrap="">For live migration, I think the management layer should have this
-knowledge and they can communicate directly without bothering the vdpa
-tool on the source. If I was not wrong this is the way libvirt is
-doing now.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">I think this series doesn't conflict with what libvirt is doing now. For
-example it can still remember the supported features for the parent
-mgmtdev, and mtu and mac properties for vdpa creation, and use them to
-replicate vdpa device on  destination node. The extra benefit is - the
-management software (for live migration) doesn't need to care those
-mgmtdev specifics - such as what features the parent mgmtdev supports,
-whether some features are mandatory, and what are the default values for
-those, whether there's enough system or hardware resource available to
-create vdpa with requested features et al. This kind of process can be
-simplified by just getting a vdpa created with the exact same features
-and configus exposed via the 'vdpa dev show' command. Essentially this
-export facility just provides the layer of abstraction needed for virtio
-related device configuration and for the very core need of vdpa live
-migration. For e.g. what're exported can even be useful to facilitate
-live migration from vdpa to software virtio. Basically, it doesn't
-prevent libvirt from implementing another layer on top to manage vdpa
-between mgmtdev devices and vdpa creation, and on the other hand, would
-benefit light-weighted mgmt software implementation with device
-management and live migration orchestration decoupled in the upper level.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Ok, I think this is fine.
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-</pre>
-        <blockquote type="cite">
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">This will ease the orchestration software implementation
-so that it doesn't have to keep track of vdpa config change, or have
-to persist vdpa attributes across failure and recovery, in fear of
-being killed due to accidental software error.
-
-In this series, the initial device config for vdpa creation will be
-exported via the &quot;vdpa dev show&quot; command.
-This is unlike the &quot;vdpa
-dev config show&quot; command that usually goes with the live value in
-the device config space, which is not reliable subject to the dynamics
-of feature negotiation and possible change in device config space.
-
-Examples:
-
-1) Create vDPA by default without any config attribute
-
-$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0
-$ vdpa dev show vdpa0
-vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
-$ vdpa dev -jp show vdpa0
-{
-     &quot;dev&quot;: {
-         &quot;vdpa0&quot;: {
-             &quot;type&quot;: &quot;network&quot;,
-             &quot;mgmtdev&quot;: &quot;pci/0000:41:04.2&quot;,
-             &quot;vendor_id&quot;: 5555,
-             &quot;max_vqs&quot;: 9,
-             &quot;max_vq_size&quot;: 256,
-         }
-     }
-}
-
-2) Create vDPA with config attribute(s) specified
-
-$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0 \
-     mac e4:11:c6:d3:45:f0 max_vq_pairs 4
-$ vdpa dev show
-vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
-   mac e4:11:c6:d3:45:f0 max_vq_pairs 4
-$ vdpa dev -jp show
-{
-     &quot;dev&quot;: {
-         &quot;vdpa0&quot;: {
-             &quot;type&quot;: &quot;network&quot;,
-             &quot;mgmtdev&quot;: &quot;pci/0000:41:04.2&quot;,
-</pre>
-          </blockquote>
-          <pre class="moz-quote-pre" wrap="">So &quot;mgmtdev&quot; looks not necessary for live migration.
-</pre>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">Right, so once the resulting device_features is exposed to the 'vdpa dev
-show' output, the mgmt software could infer the set of config options to
-recreate vdpa with, and filter out those unwanted attributes (or pick
-what it really wants).
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Ok,  so I wonder if it is this better to have a new command instead of
-mixing it with &quot;dev show&quot;?
-
-Or at least have separated key for virtio like
-
-&quot;vdpa0&quot;: {
-     &quot;mgmtdev&quot;: &quot;vdpasim_net&quot;,
-     &quot;virtio config: {
-          ....
-      }
-}</pre>
-    </blockquote>
-    Yep I can put it under a separate key &quot;virtio_config&quot;. I slightly
-    prefer not introducing a separate command as there could be other
-    dev related info (such as type and mgmtdev) needed for
-    identification or reference purpose in a single inquiry.<br>
-    <br>
-    Thanks,<br>
-    -Siwei<br>
-    <blockquote type="cite" cite="mid:CACGkMEs6tsPUsoP1TmEB3metqCHQF-i95G+oP3koJGAOS_5PWQ@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-Thanks
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
--Siwei
-
-</pre>
-        <blockquote type="cite">
-          <pre class="moz-quote-pre" wrap="">
-Thanks
-
-</pre>
-          <blockquote type="cite">
-            <pre class="moz-quote-pre" wrap="">             &quot;vendor_id&quot;: 5555,
-             &quot;max_vqs&quot;: 9,
-             &quot;max_vq_size&quot;: 256,
-             &quot;mac&quot;: &quot;e4:11:c6:d3:45:f0&quot;,
-             &quot;max_vq_pairs&quot;: 4
-         }
-     }
-}
-
----
-
-Si-Wei Liu (4):
-   vdpa: save vdpa_dev_set_config in struct vdpa_device
-   vdpa: pass initial config to _vdpa_register_device()
-   vdpa: show dev config as-is in &quot;vdpa dev show&quot; output
-   vdpa: fix improper error message when adding vdpa dev
-
-  drivers/vdpa/ifcvf/ifcvf_main.c      |  2 +-
-  drivers/vdpa/mlx5/net/mlx5_vnet.c    |  2 +-
-  drivers/vdpa/vdpa.c                  | 63 +++++++++++++++++++++++++++++++++---
-  drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  2 +-
-  drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  2 +-
-  drivers/vdpa/vdpa_user/vduse_dev.c   |  2 +-
-  drivers/vdpa/virtio_pci/vp_vdpa.c    |  3 +-
-  include/linux/vdpa.h                 | 26 ++++++++-------
-  8 files changed, 80 insertions(+), 22 deletions(-)
-
---
-1.8.3.1
-
-</pre>
-          </blockquote>
-        </blockquote>
-        <pre class="moz-quote-pre" wrap="">
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------20NUoKN2kV3a7sQquPSiawrv--
-
---===============4251433472337724457==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============4251433472337724457==--
+CuWcqCAyMDIyLzEwLzE4IDE5OjEyLCBFbGkgQ29oZW4g5YaZ6YGTOgo+IEFkZCBkZWJ1Z2ZzIHN1
+YnRyZWUgYW5kIGV4cG9zZSBmbG93IHRhYmxlIElEIGFuZCBUSVIgbnVtYmVyLiBUaGlzCj4gaW5m
+b3JtYXRpb24gY2FuIGJlIHVzZWQgYnkgZXh0ZXJuYWwgdG9vbHMgdG8gZG8gZXh0ZW5kZWQKPiB0
+cm91Ymxlc2hvb3RpbmcuCj4KPiBUaGUgaW5mb3JtYXRpb24gY2FuIGJlIHJldHJpZXZlZCBsaWtl
+IHNvOgo+ICQgY2F0IC9zeXMva2VybmVsL2RlYnVnL21seDUvbWx4NV9jb3JlLnNmLjEvdmRwYS0w
+L3J4L3RhYmxlX2lkCj4gJCBjYXQgL3N5cy9rZXJuZWwvZGVidWcvbWx4NS9tbHg1X2NvcmUuc2Yu
+MS92ZHBhLTAvcngvdGlybgoKCkkgd29uZGVyIGlmIHdlIG5lZWQgYSBjb25maWcgb3B0aW9uIGZv
+ciB0aGlzLgoKQW5kIGlmIGl0J3MgYmV0dGVyIHRvIHVzZSB2ZW5kb3Igc3RhdHMuCgpUaGFua3MK
+Cgo+Cj4gU2lnbmVkLW9mZi1ieTogRWxpIENvaGVuIDxlbGljQG52aWRpYS5jb20+Cj4gLS0tCj4g
+ICBkcml2ZXJzL3ZkcGEvbWx4NS9NYWtlZmlsZSAgICAgICAgfCAgMiArLQo+ICAgZHJpdmVycy92
+ZHBhL21seDUvbmV0L2RlYnVnLmMgICAgIHwgNjYgKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKwo+ICAgZHJpdmVycy92ZHBhL21seDUvbmV0L21seDVfdm5ldC5jIHwgMTEgKysrKysrCj4g
+ICBkcml2ZXJzL3ZkcGEvbWx4NS9uZXQvbWx4NV92bmV0LmggfCAgOSArKysrKwo+ICAgNCBmaWxl
+cyBjaGFuZ2VkLCA4NyBpbnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pCj4gICBjcmVhdGUgbW9k
+ZSAxMDA2NDQgZHJpdmVycy92ZHBhL21seDUvbmV0L2RlYnVnLmMKPgo+IGRpZmYgLS1naXQgYS9k
+cml2ZXJzL3ZkcGEvbWx4NS9NYWtlZmlsZSBiL2RyaXZlcnMvdmRwYS9tbHg1L01ha2VmaWxlCj4g
+aW5kZXggZjcxNzk3OGM4M2JmLi5lNzkxMzk0YzMzZTMgMTAwNjQ0Cj4gLS0tIGEvZHJpdmVycy92
+ZHBhL21seDUvTWFrZWZpbGUKPiArKysgYi9kcml2ZXJzL3ZkcGEvbWx4NS9NYWtlZmlsZQo+IEBA
+IC0xLDQgKzEsNCBAQAo+ICAgc3ViZGlyLWNjZmxhZ3MteSArPSAtSSQoc3JjdHJlZSkvZHJpdmVy
+cy92ZHBhL21seDUvY29yZQo+ICAgCj4gICBvYmotJChDT05GSUdfTUxYNV9WRFBBX05FVCkgKz0g
+bWx4NV92ZHBhLm8KPiAtbWx4NV92ZHBhLSQoQ09ORklHX01MWDVfVkRQQV9ORVQpICs9IG5ldC9t
+bHg1X3ZuZXQubyBjb3JlL3Jlc291cmNlcy5vIGNvcmUvbXIubwo+ICttbHg1X3ZkcGEtJChDT05G
+SUdfTUxYNV9WRFBBX05FVCkgKz0gbmV0L21seDVfdm5ldC5vIGNvcmUvcmVzb3VyY2VzLm8gY29y
+ZS9tci5vIG5ldC9kZWJ1Zy5vCj4gZGlmZiAtLWdpdCBhL2RyaXZlcnMvdmRwYS9tbHg1L25ldC9k
+ZWJ1Zy5jIGIvZHJpdmVycy92ZHBhL21seDUvbmV0L2RlYnVnLmMKPiBuZXcgZmlsZSBtb2RlIDEw
+MDY0NAo+IGluZGV4IDAwMDAwMDAwMDAwMC4uOTVlNDgwMWRmMjExCj4gLS0tIC9kZXYvbnVsbAo+
+ICsrKyBiL2RyaXZlcnMvdmRwYS9tbHg1L25ldC9kZWJ1Zy5jCj4gQEAgLTAsMCArMSw2NiBAQAo+
+ICsvLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIuMCBPUiBMaW51eC1PcGVuSUIKPiAr
+LyogQ29weXJpZ2h0IChjKSAyMDIyLCBOVklESUEgQ09SUE9SQVRJT04gJiBBRkZJTElBVEVTLiBB
+bGwgcmlnaHRzIHJlc2VydmVkLiAqLwo+ICsKPiArI2luY2x1ZGUgPGxpbnV4L2RlYnVnZnMuaD4K
+PiArI2luY2x1ZGUgPGxpbnV4L21seDUvZnMuaD4KPiArI2luY2x1ZGUgIm1seDVfdm5ldC5oIgo+
+ICsKPiArc3RhdGljIGludCB0aXJuX3Nob3coc3RydWN0IHNlcV9maWxlICpmaWxlLCB2b2lkICpw
+cml2KQo+ICt7Cj4gKwlzdHJ1Y3QgbWx4NV92ZHBhX25ldCAqbmRldiA9IGZpbGUtPnByaXZhdGU7
+Cj4gKwo+ICsJc2VxX3ByaW50ZihmaWxlLCAiMHgleFxuIiwgbmRldi0+cmVzLnRpcm4pOwo+ICsJ
+cmV0dXJuIDA7Cj4gK30KPiArCj4gK0RFRklORV9TSE9XX0FUVFJJQlVURSh0aXJuKTsKPiArCj4g
+K3ZvaWQgbWx4NV92ZHBhX3JlbW92ZV90aXJuKHN0cnVjdCBtbHg1X3ZkcGFfbmV0ICpuZGV2KQo+
+ICt7Cj4gKwlpZiAobmRldi0+ZGVidWdmcykKPiArCQlkZWJ1Z2ZzX3JlbW92ZShuZGV2LT5yZXMu
+dGlybl9kZW50KTsKPiArfQo+ICsKPiArdm9pZCBtbHg1X3ZkcGFfYWRkX3Rpcm4oc3RydWN0IG1s
+eDVfdmRwYV9uZXQgKm5kZXYpCj4gK3sKPiArCW5kZXYtPnJlcy50aXJuX2RlbnQgPSBkZWJ1Z2Zz
+X2NyZWF0ZV9maWxlKCJ0aXJuIiwgMDQ0NCwgbmRldi0+cnhfZGVudCwKPiArCQkJCQkJICBuZGV2
+LCAmdGlybl9mb3BzKTsKPiArfQo+ICsKPiArc3RhdGljIGludCByeF9mbG93X3RhYmxlX3Nob3co
+c3RydWN0IHNlcV9maWxlICpmaWxlLCB2b2lkICpwcml2KQo+ICt7Cj4gKwlzdHJ1Y3QgbWx4NV92
+ZHBhX25ldCAqbmRldiA9IGZpbGUtPnByaXZhdGU7Cj4gKwo+ICsJc2VxX3ByaW50ZihmaWxlLCAi
+MHgleFxuIiwgbWx4NV9mbG93X3RhYmxlX2lkKG5kZXYtPnJ4ZnQpKTsKPiArCXJldHVybiAwOwo+
+ICt9Cj4gKwo+ICtERUZJTkVfU0hPV19BVFRSSUJVVEUocnhfZmxvd190YWJsZSk7Cj4gKwo+ICt2
+b2lkIG1seDVfdmRwYV9yZW1vdmVfcnhfZmxvd190YWJsZShzdHJ1Y3QgbWx4NV92ZHBhX25ldCAq
+bmRldikKPiArewo+ICsJaWYgKG5kZXYtPmRlYnVnZnMpCj4gKwkJZGVidWdmc19yZW1vdmUobmRl
+di0+cnhfdGFibGVfZGVudCk7Cj4gK30KPiArCj4gK3ZvaWQgbWx4NV92ZHBhX2FkZF9yeF9mbG93
+X3RhYmxlKHN0cnVjdCBtbHg1X3ZkcGFfbmV0ICpuZGV2KQo+ICt7Cj4gKwluZGV2LT5yeF90YWJs
+ZV9kZW50ID0gZGVidWdmc19jcmVhdGVfZmlsZSgidGFibGVfaWQiLCAwNDQ0LCBuZGV2LT5yeF9k
+ZW50LAo+ICsJCQkJCQkgIG5kZXYsICZyeF9mbG93X3RhYmxlX2ZvcHMpOwo+ICt9Cj4gKwo+ICt2
+b2lkIG1seDVfdmRwYV9hZGRfZGVidWdmcyhzdHJ1Y3QgbWx4NV92ZHBhX25ldCAqbmRldikKPiAr
+ewo+ICsJc3RydWN0IG1seDVfY29yZV9kZXYgKm1kZXY7Cj4gKwo+ICsJbWRldiA9IG5kZXYtPm12
+ZGV2Lm1kZXY7Cj4gKwluZGV2LT5kZWJ1Z2ZzID0gZGVidWdmc19jcmVhdGVfZGlyKGRldl9uYW1l
+KCZuZGV2LT5tdmRldi52ZGV2LmRldiksCj4gKwkJCQkJICAgbWx4NV9kZWJ1Z2ZzX2dldF9kZXZf
+cm9vdChtZGV2KSk7Cj4gKwlpZiAoIUlTX0VSUihuZGV2LT5kZWJ1Z2ZzKSkKPiArCQluZGV2LT5y
+eF9kZW50ID0gZGVidWdmc19jcmVhdGVfZGlyKCJyeCIsIG5kZXYtPmRlYnVnZnMpOwo+ICt9Cj4g
+Kwo+ICt2b2lkIG1seDVfdmRwYV9yZW1vdmVfZGVidWdmcyhzdHJ1Y3QgZGVudHJ5ICpkYmcpCj4g
+K3sKPiArCWRlYnVnZnNfcmVtb3ZlX3JlY3Vyc2l2ZShkYmcpOwo+ICt9Cj4gZGlmZiAtLWdpdCBh
+L2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuYyBiL2RyaXZlcnMvdmRwYS9tbHg1L25l
+dC9tbHg1X3ZuZXQuYwo+IGluZGV4IDY0ZmRiOTQwMzgwZi4uZWU1MGRhMzNlMjViIDEwMDY0NAo+
+IC0tLSBhL2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuYwo+ICsrKyBiL2RyaXZlcnMv
+dmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuYwo+IEBAIC0xMzg4LDExICsxMzg4LDE2IEBAIHN0YXRp
+YyBpbnQgY3JlYXRlX3RpcihzdHJ1Y3QgbWx4NV92ZHBhX25ldCAqbmRldikKPiAgIAo+ICAgCWVy
+ciA9IG1seDVfdmRwYV9jcmVhdGVfdGlyKCZuZGV2LT5tdmRldiwgaW4sICZuZGV2LT5yZXMudGly
+bik7Cj4gICAJa2ZyZWUoaW4pOwo+ICsJaWYgKGVycikKPiArCQlyZXR1cm4gZXJyOwo+ICsKPiAr
+CW1seDVfdmRwYV9hZGRfdGlybihuZGV2KTsKPiAgIAlyZXR1cm4gZXJyOwo+ICAgfQo+ICAgCj4g
+ICBzdGF0aWMgdm9pZCBkZXN0cm95X3RpcihzdHJ1Y3QgbWx4NV92ZHBhX25ldCAqbmRldikKPiAg
+IHsKPiArCW1seDVfdmRwYV9yZW1vdmVfdGlybihuZGV2KTsKPiAgIAltbHg1X3ZkcGFfZGVzdHJv
+eV90aXIoJm5kZXYtPm12ZGV2LCBuZGV2LT5yZXMudGlybik7Cj4gICB9Cj4gICAKPiBAQCAtMTU3
+Niw2ICsxNTgxLDcgQEAgc3RhdGljIGludCBzZXR1cF9zdGVlcmluZyhzdHJ1Y3QgbWx4NV92ZHBh
+X25ldCAqbmRldikKPiAgIAkJbWx4NV92ZHBhX3dhcm4oJm5kZXYtPm12ZGV2LCAiZmFpbGVkIHRv
+IGNyZWF0ZSBmbG93IHRhYmxlXG4iKTsKPiAgIAkJcmV0dXJuIFBUUl9FUlIobmRldi0+cnhmdCk7
+Cj4gICAJfQo+ICsJbWx4NV92ZHBhX2FkZF9yeF9mbG93X3RhYmxlKG5kZXYpOwo+ICAgCj4gICAJ
+ZXJyID0gbWFjX3ZsYW5fYWRkKG5kZXYsIG5kZXYtPmNvbmZpZy5tYWMsIDAsIGZhbHNlKTsKPiAg
+IAlpZiAoZXJyKQo+IEBAIC0xNTg0LDYgKzE1OTAsNyBAQCBzdGF0aWMgaW50IHNldHVwX3N0ZWVy
+aW5nKHN0cnVjdCBtbHg1X3ZkcGFfbmV0ICpuZGV2KQo+ICAgCXJldHVybiAwOwo+ICAgCj4gICBl
+cnJfYWRkOgo+ICsJbWx4NV92ZHBhX3JlbW92ZV9yeF9mbG93X3RhYmxlKG5kZXYpOwo+ICAgCW1s
+eDVfZGVzdHJveV9mbG93X3RhYmxlKG5kZXYtPnJ4ZnQpOwo+ICAgCXJldHVybiBlcnI7Cj4gICB9
+Cj4gQEAgLTE1OTEsNiArMTU5OCw3IEBAIHN0YXRpYyBpbnQgc2V0dXBfc3RlZXJpbmcoc3RydWN0
+IG1seDVfdmRwYV9uZXQgKm5kZXYpCj4gICBzdGF0aWMgdm9pZCB0ZWFyZG93bl9zdGVlcmluZyhz
+dHJ1Y3QgbWx4NV92ZHBhX25ldCAqbmRldikKPiAgIHsKPiAgIAljbGVhcl9tYWNfdmxhbl90YWJs
+ZShuZGV2KTsKPiArCW1seDVfdmRwYV9yZW1vdmVfcnhfZmxvd190YWJsZShuZGV2KTsKPiAgIAlt
+bHg1X2Rlc3Ryb3lfZmxvd190YWJsZShuZGV2LT5yeGZ0KTsKPiAgIH0KPiAgIAo+IEBAIC0zMTY3
+LDYgKzMxNzUsNyBAQCBzdGF0aWMgaW50IG1seDVfdmRwYV9kZXZfYWRkKHN0cnVjdCB2ZHBhX21n
+bXRfZGV2ICp2X21kZXYsIGNvbnN0IGNoYXIgKm5hbWUsCj4gICAJaWYgKGVycikKPiAgIAkJZ290
+byBlcnJfcmVnOwo+ICAgCj4gKwltbHg1X3ZkcGFfYWRkX2RlYnVnZnMobmRldik7Cj4gICAJbWd0
+ZGV2LT5uZGV2ID0gbmRldjsKPiAgIAlyZXR1cm4gMDsKPiAgIAo+IEBAIC0zMTkzLDYgKzMyMDIs
+OCBAQCBzdGF0aWMgdm9pZCBtbHg1X3ZkcGFfZGV2X2RlbChzdHJ1Y3QgdmRwYV9tZ210X2RldiAq
+dl9tZGV2LCBzdHJ1Y3QgdmRwYV9kZXZpY2UgKgo+ICAgCXN0cnVjdCBtbHg1X3ZkcGFfbmV0ICpu
+ZGV2ID0gdG9fbWx4NV92ZHBhX25kZXYobXZkZXYpOwo+ICAgCXN0cnVjdCB3b3JrcXVldWVfc3Ry
+dWN0ICp3cTsKPiAgIAo+ICsJbWx4NV92ZHBhX3JlbW92ZV9kZWJ1Z2ZzKG5kZXYtPmRlYnVnZnMp
+Owo+ICsJbmRldi0+ZGVidWdmcyA9IE5VTEw7Cj4gICAJaWYgKG5kZXYtPm5iX3JlZ2lzdGVyZWQp
+IHsKPiAgIAkJbWx4NV9ub3RpZmllcl91bnJlZ2lzdGVyKG12ZGV2LT5tZGV2LCAmbmRldi0+bmIp
+Owo+ICAgCQluZGV2LT5uYl9yZWdpc3RlcmVkID0gZmFsc2U7Cj4gZGlmZiAtLWdpdCBhL2RyaXZl
+cnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuaCBiL2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1
+X3ZuZXQuaAo+IGluZGV4IDY2OTFjODc5YTZjYS4uZjJjZWYzOTI1ZTViIDEwMDY0NAo+IC0tLSBh
+L2RyaXZlcnMvdmRwYS9tbHg1L25ldC9tbHg1X3ZuZXQuaAo+ICsrKyBiL2RyaXZlcnMvdmRwYS9t
+bHg1L25ldC9tbHg1X3ZuZXQuaAo+IEBAIC0xNiw2ICsxNiw3IEBAIHN0cnVjdCBtbHg1X3ZkcGFf
+bmV0X3Jlc291cmNlcyB7Cj4gICAJdTMyIHRpcm47Cj4gICAJdTMyIHJxdG47Cj4gICAJYm9vbCB2
+YWxpZDsKPiArCXN0cnVjdCBkZW50cnkgKnRpcm5fZGVudDsKPiAgIH07Cj4gICAKPiAgICNkZWZp
+bmUgTUxYNVZfTUFDVkxBTl9TSVpFIDI1Ngo+IEBAIC00Myw2ICs0NCw3IEBAIHN0cnVjdCBtbHg1
+X3ZkcGFfbmV0IHsKPiAgIAlzdHJ1Y3QgdmRwYV9jYWxsYmFjayBjb25maWdfY2I7Cj4gICAJc3Ry
+dWN0IG1seDVfdmRwYV93cV9lbnQgY3ZxX2VudDsKPiAgIAlzdHJ1Y3QgaGxpc3RfaGVhZCBtYWN2
+bGFuX2hhc2hbTUxYNVZfTUFDVkxBTl9TSVpFXTsKPiArCXN0cnVjdCBkZW50cnkgKmRlYnVnZnM7
+Cj4gICB9Owo+ICAgCj4gICBzdHJ1Y3QgbWFjdmxhbl9ub2RlIHsKPiBAQCAtNTIsNCArNTQsMTEg
+QEAgc3RydWN0IG1hY3ZsYW5fbm9kZSB7Cj4gICAJdTY0IG1hY3ZsYW47Cj4gICB9Owo+ICAgCj4g
+K3ZvaWQgbWx4NV92ZHBhX2FkZF9kZWJ1Z2ZzKHN0cnVjdCBtbHg1X3ZkcGFfbmV0ICpuZGV2KTsK
+PiArdm9pZCBtbHg1X3ZkcGFfcmVtb3ZlX2RlYnVnZnMoc3RydWN0IGRlbnRyeSAqZGJnKTsKPiAr
+dm9pZCBtbHg1X3ZkcGFfYWRkX3J4X2Zsb3dfdGFibGUoc3RydWN0IG1seDVfdmRwYV9uZXQgKm5k
+ZXYpOwo+ICt2b2lkIG1seDVfdmRwYV9yZW1vdmVfcnhfZmxvd190YWJsZShzdHJ1Y3QgbWx4NV92
+ZHBhX25ldCAqbmRldik7Cj4gK3ZvaWQgbWx4NV92ZHBhX2FkZF90aXJuKHN0cnVjdCBtbHg1X3Zk
+cGFfbmV0ICpuZGV2KTsKPiArdm9pZCBtbHg1X3ZkcGFfcmVtb3ZlX3Rpcm4oc3RydWN0IG1seDVf
+dmRwYV9uZXQgKm5kZXYpOwo+ICsKPiAgICNlbmRpZiAvKiBfX01MWDVfVk5FVF9IX18gKi8KCl9f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0
+aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9y
+ZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0
+dWFsaXphdGlvbg==
