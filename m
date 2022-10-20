@@ -1,196 +1,197 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6EDC96066EC
-	for <lists.virtualization@lfdr.de>; Thu, 20 Oct 2022 19:20:20 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E41B7606860
+	for <lists.virtualization@lfdr.de>; Thu, 20 Oct 2022 20:45:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E427642245;
-	Thu, 20 Oct 2022 17:20:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E427642245
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=Uy9yZCNy;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-oracle-onmicrosoft-com header.b=q8Ru6zjC
+	by smtp3.osuosl.org (Postfix) with ESMTP id 56F9160C13;
+	Thu, 20 Oct 2022 18:45:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 56F9160C13
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=vdbgE9v6;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-oracle-onmicrosoft-com header.b=HmWjwFnR
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XPauecTiFaLe; Thu, 20 Oct 2022 17:20:17 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id DFF914223E;
-	Thu, 20 Oct 2022 17:20:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DFF914223E
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MjWHWYI4yjSj; Thu, 20 Oct 2022 18:45:13 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6739E60D5E;
+	Thu, 20 Oct 2022 18:45:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6739E60D5E
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F0118C0078;
-	Thu, 20 Oct 2022 17:20:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 71502C0078;
+	Thu, 20 Oct 2022 18:45:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 00E0AC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DE91C002D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 17:20:14 +0000 (UTC)
+ Thu, 20 Oct 2022 18:45:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C00EC8434A
+ by smtp2.osuosl.org (Postfix) with ESMTP id 45B04401DF
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 17:20:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C00EC8434A
-Authentication-Results: smtp1.osuosl.org;
+ Thu, 20 Oct 2022 18:45:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 45B04401DF
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=Uy9yZCNy; 
+ header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=vdbgE9v6; 
  dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com
  header.i=@oracle.onmicrosoft.com header.a=rsa-sha256
- header.s=selector2-oracle-onmicrosoft-com header.b=q8Ru6zjC
+ header.s=selector2-oracle-onmicrosoft-com header.b=HmWjwFnR
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id n4yYaD0OijWH
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id euWVdJPVpJvI
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 17:20:10 +0000 (UTC)
+ Thu, 20 Oct 2022 18:45:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2AC408405E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D14BD40101
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
  [205.220.177.32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2AC408405E
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D14BD40101
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 17:20:10 +0000 (UTC)
+ Thu, 20 Oct 2022 18:45:06 +0000 (UTC)
 Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29KGwubu020010;
- Thu, 20 Oct 2022 17:20:09 GMT
+ by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29KGwujn020010;
+ Thu, 20 Oct 2022 17:43:02 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=content-type :
- message-id : date : subject : to : cc : references : from : in-reply-to :
- mime-version; s=corp-2022-7-12;
- bh=/x3StfwZMIvEIHaO04n2q1rAtEe15UA3sySrnOVV/Jk=;
- b=Uy9yZCNytAOVifwqlAf9bBue2aW0gLgSaLCUGJPJ2JmD8CyYCy89zRQBjyD/PletCvHY
- QIMS8iOY8SVOxvzq//QQIOQvQYq1fAVnrm1NG1V71qH1sSjduh2uHjz423c6U0lZtKjL
- kktGzOkN+yhQZuTho65/WwpOc1SODQZ6dEvrkn3EeXEoPswEulw+kR39Fx3y3avBjl61
- C8Y717uEM/YpDyszHbUL4mAkjeCgRbqQtzpzxxK7FbiHz2gGeVPHGPC+5V71jX3P+KCL
- UEBeNdkq4h6qGNjl+fZU+eth3qd7sV05Aj3ZwdZ3WSvrWB3JZY98OKGcs95j5/GUMY0f 0g== 
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k7mw3p04a-1
+ h=message-id : date :
+ subject : to : cc : references : from : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=corp-2022-7-12;
+ bh=/ZWYIC87U4q9SvWUzFlM7DWudYp9MAoZiFUlCiZunzY=;
+ b=vdbgE9v69MMGHHWPGAOIy8OjhidRltMYnq2PfUCSgjtfthhnNWTJ3JrFYB6j6jk4cZee
+ o5riHgjicoWicT/q21BDDMJEbeSHGv3l630Oa3fENp52nd8Qqq4H7jhCxM68q9ZIr7TZ
+ UNEFV3doIsq9nKuvNrit5kwfXA3VT4nY2MZuVZvax8asIYPrDvchioGP8iwILPjv6MTL
+ LC0Edik/q34jwx51EId9uxeQU4kbTcWfbgqnm/79tGiDyHlvHPPkX6JX9FHRDmJ0c67t
+ O0S6+6hYpxYG0VOBGcMj5s41f+mgI6g55d9x9HBPbwVIIbR/bx2LMCKUki2f3RVoiOBX Gw== 
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k7mw3p250-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 20 Oct 2022 17:20:07 +0000
+ Thu, 20 Oct 2022 17:43:02 +0000
 Received: from pps.filterd
- (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 29KFNvhA007128; Thu, 20 Oct 2022 17:20:07 GMT
-Received: from nam10-mw2-obe.outbound.protection.outlook.com
- (mail-mw2nam10lp2103.outbound.protection.outlook.com [104.47.55.103])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3k8hrd16ek-1
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 29KFVScu018212; Thu, 20 Oct 2022 17:43:01 GMT
+Received: from nam11-bn8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11lp2168.outbound.protection.outlook.com [104.47.58.168])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTPS id
+ 3k8j0t6nw6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 20 Oct 2022 17:19:42 +0000
+ Thu, 20 Oct 2022 17:43:00 +0000
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=dquQnsXuCwQ8nEiK2kV/Sh3gqDmQP6JSDbXWid+fWLsZL/tG7sjphGU8GQ0RtaOlFdnxB81Qjl9KLDwPakQXratIeOLBrP0daXWfOiOMjsYpUrrrhDJ2PT3WmIkXksiuBY1AeQv+4Raw+XuIbli7E+er30nlFq2VKqPxI4n0ZzJ8HCgv8plQ1OXp8AlEDJEnTTD3lJGG0ST1gDEc+8ir2LOBbNRhhfa8NamnUY89oh2jTf7P0ApnvT/wsdnuQThRyJxdOmVV/qjgnPl8S4NwH3NvTem/7EkX3LUZET9emEStlKX6C8yPzbJ4Sr9cNZz2e1J8iG6UiyQ5Ow86jREReQ==
+ b=TJ0T/A0sS9LoAijUDA1C48Jrc49B5EhNtXmpQb+xY7RukCBOO4PTX7R+SW0oUOEq7QnTdER5/tX604Kxfngnaj+aeePK4AMqMLZOlGgCh3Tf/BnSo55mvPafIiCLQp/1PRVGO5He/RPvxFYCMvsD38nyUYWKGL5nfSOUJr66lZWSMo5mOivEXzDY7oUfg6Z02ZL5EL2jUHpl1klWFhI3zzmfDAReKtIW+9T1Aqj8KVtSZSysHHfxZkaj5mVQxkXHmQ8At8UQ2ok+DhcR77dLaRsKkXXEmWx+LcR6TqsjRqbfybsZ7XB2zWSijteJbW62dQ00rRmW9GVcT2g+9yb2rw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/x3StfwZMIvEIHaO04n2q1rAtEe15UA3sySrnOVV/Jk=;
- b=aYjVlsrkdPcXCUuGDFHKxS1fRHisIHxCzLx1BkcGHJeEdsG6kCuNpYvz1jeXKx7pPcBwvYod2thencTN3ZYIthnmBKd2vQG8QOwTtwBlnvHuyn3GgS557mf6ut8GEVjcOyVgYqkN/QVz3qCv/scyXiEZ63W1rfVR5V6E/Gq6CvhrfDeZUnvWGoE6j0rXtBvhnAdKXsQylgfGyGSYo4jS4OjLeQRQcllQTQNPiht5InlDaZW8uxVzl4s30gIOKWd3BN0N9JrnvLuYZdO57DD4vRpOe4UiDG7E7t9yy59tF0VQD2ov46YRdoIyaenHCVvQWq29gRYR5l8nutg+G5qttg==
+ bh=/ZWYIC87U4q9SvWUzFlM7DWudYp9MAoZiFUlCiZunzY=;
+ b=Q+3hoZX8X8KjdgywvdqR6svU0aLMnu5UaAe10pSiFcCzLCH2FWO/W7iRmuSl0BZnWVHFMlnzwHkpcxSvjmJ4vp/Cm72Er6YSPDPmTT1KHG7PwQsmy6Ql2iuCEQ0pty5WozJeXCQ62u5za1f9swCWXpb6tQASD8swDn8AyGKrzPNGbNAAkdbeVEaCqvYgFVnQgK7Moh1hRipN4cmKOY17Gl6vmIuIcpB4PpCB6tf45Hw3wVM4uPqVTXUuLo/zz/NFQ6xG4m79F220FMFRSMZwPyaam8PeDwZtU18Z6OydLsz6JydVLXfNn2+AOPO/+U2En5xEfUcNn9wn5vVXqrHgEw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
  dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/x3StfwZMIvEIHaO04n2q1rAtEe15UA3sySrnOVV/Jk=;
- b=q8Ru6zjCmQ9NtDzVJCHiQTL2IYmtBS4fe69o4lx/iwaOT95EdBpyDPosNT9Eg2fstWZNjtVGzv1lEs899bImNF5WIWw9WXciQvjWFpTOd5hquk3EKiDpyQDr0WNLGE40eao3Ki367EnWP63SD8BO+Nv+tGu2bojJKnX6/CHIQOk=
+ bh=/ZWYIC87U4q9SvWUzFlM7DWudYp9MAoZiFUlCiZunzY=;
+ b=HmWjwFnRGGy3ukaiKZcNeAiPvBi7ONqeP9crmQeGNBr1XWjvhfOnEWRrFXFUiaRkdy9FYlHmDPb9XOvVtj1fBRcwVHkf1U0ROMCCpOgODYD6rThlX3XLL3i3uVQoGXm+YsR11P/ktZqZwd+C05gNRR8Kef0CSGXD/dFdquvIf2o=
 Received: from MW4PR10MB6535.namprd10.prod.outlook.com (2603:10b6:303:225::12)
- by IA1PR10MB5921.namprd10.prod.outlook.com (2603:10b6:208:3d7::11)
+ by MN0PR10MB5983.namprd10.prod.outlook.com (2603:10b6:208:3c9::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.34; Thu, 20 Oct
- 2022 17:19:40 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.5723.33; Thu, 20 Oct
+ 2022 17:42:54 +0000
 Received: from MW4PR10MB6535.namprd10.prod.outlook.com
  ([fe80::9830:ae4d:f10c:c30a]) by MW4PR10MB6535.namprd10.prod.outlook.com
  ([fe80::9830:ae4d:f10c:c30a%5]) with mapi id 15.20.5723.032; Thu, 20 Oct 2022
- 17:19:39 +0000
-Message-ID: <4fc4c99e-083e-e72f-64dd-b64c35b93516@oracle.com>
-Date: Thu, 20 Oct 2022 10:19:34 -0700
+ 17:42:54 +0000
+Message-ID: <68312622-0206-f456-146e-e242e36be04d@oracle.com>
+Date: Thu, 20 Oct 2022 10:42:48 -0700
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
  Thunderbird/102.3.3
-Subject: Re: [PATCH v2 1/4] vdpa: save vdpa_dev_set_config in struct
- vdpa_device
+Subject: Re: [PATCH v2 2/4] vdpa: pass initial config to
+ _vdpa_register_device()
 Content-Language: en-US
 To: Jason Wang <jasowang@redhat.com>
 References: <1666137032-28192-1-git-send-email-si-wei.liu@oracle.com>
- <1666137032-28192-2-git-send-email-si-wei.liu@oracle.com>
- <CACGkMEv_fKZa9qN+ytnViCdvcR4Cbr8KyT71UnWzWjrtsFMyBg@mail.gmail.com>
+ <1666137032-28192-3-git-send-email-si-wei.liu@oracle.com>
+ <CACGkMEuT7O1xLrB9=eYHAtuHYdwbNXxqtC+Mh4qkWSkLM+QTjg@mail.gmail.com>
 From: Si-Wei Liu <si-wei.liu@oracle.com>
 Organization: Oracle Corporation
-In-Reply-To: <CACGkMEv_fKZa9qN+ytnViCdvcR4Cbr8KyT71UnWzWjrtsFMyBg@mail.gmail.com>
-X-ClientProxiedBy: SJ0PR05CA0119.namprd05.prod.outlook.com
- (2603:10b6:a03:334::34) To MW4PR10MB6535.namprd10.prod.outlook.com
+In-Reply-To: <CACGkMEuT7O1xLrB9=eYHAtuHYdwbNXxqtC+Mh4qkWSkLM+QTjg@mail.gmail.com>
+X-ClientProxiedBy: SJ0PR05CA0048.namprd05.prod.outlook.com
+ (2603:10b6:a03:33f::23) To MW4PR10MB6535.namprd10.prod.outlook.com
  (2603:10b6:303:225::12)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MW4PR10MB6535:EE_|IA1PR10MB5921:EE_
-X-MS-Office365-Filtering-Correlation-Id: 259a3261-8a15-43ad-6b5f-08dab2bf4530
+X-MS-TrafficTypeDiagnostic: MW4PR10MB6535:EE_|MN0PR10MB5983:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8178d179-d474-4520-00a4-08dab2c28431
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: lvEFAZtonMSWUEgrpnZ+kTBZws4BBu9F2mXt+b/o8FFf2lZtQR3OsqxoFLeJwWD4WDfU62Kk5dreou9mnFniusQOtslX6QloUkYCouHaX8871bBrvUwdEgF8P6Z/L4yYjsU3rFGaHJo7xJzb+UpXndH3s7J5iJChl/BgbxOySdVOjWwXX/VjiYL11ti57dvBD+Hc2qdZfdoCUpE6yKf7JneWFvu1jTycm5JOz+53uMT0OR2QFt7EKrfL+xcxiL9DG9X1GVt7Rh+3YK1LUtADJlmT8ai3jcVUZcX33OMLnht7526DBtELyv6cpeBz2Xr9hJEnQZa9L0jjzvQEXRNjqebB1T13GtcSVrhpMsyOpOTGuP5Ujb3WbkRRVDOmqKbC6y/neGubFm2WYe3dlSBfk3sXzQpaDPpGysS5UcmZHB2359v5MwX1nih0PF7BxGS1+yN3j4EpktOPuA9EjdaUf38JYNiERS8B/2O92Xf7AFmW2v7VbXi1HfDTkJeyQfJTg8wi89qd+heMbssLpvGH9Jz9X+u+6ORNQXxi+AQ2RaEnOJx5Vz3sOEZ+A9v+mBrGgbc9gooJAzIiZ4liOwHc50wLLflj/2QvEhNTMhMm1AJuQxvHzUqtFeJfLm6oI0ujlk7RGSWTt3EN/uHsVeglJlo4CeMTf7rmSVOmwzJyk1rtbMKTgNlCZN7eMVEmog78Cx6ozxbW+eTPcY9WT/VLCnCGrZtmg5NaQDfTgDyfH34fGOxtRUStMl26MkdQGa20ayKOyEVP48IB+3/kcpRGtxvuXwkV6E9IQJygSZmHSHw=
+X-Microsoft-Antispam-Message-Info: Pv/+Ktb3c78rg1TXt/zQqJb7OiX8lGJwqthO47JO6uu86ePqDGpjr+HMmE2e5a01tN2UEv0z4UC/CXAqtQTkIjEDDnzj7JZCXsTyt7++bESuAR+2/fqe9FIOBvByqxcdPjY28Ia8Chjc8BFsTkamxLJvcfxLhQCMHSTBnOZyyZFfXYuhF/xRT0gTqBseSEaKlh6CVkKFryN8oRjn4Y7GG2v35iYf6i1K95Makep4p2ostRvEAmCxvDv1wImtt3l3VItakCXKig3Xmaz8mv1Y16FPXUYCyNbUPrrqXz0X/ZhfjQmgrnfNZG9aJwKPatouR2hilweLClDYV/R4fVPNSLyb2ZopjYV4AZDRDyWsnexFB0ahV5Mp+UcwmesoSL3esB5Hpisg1btMzBPu/SEHt7J8CeS3XZRZ1hmfyTB1xVdgaQMjkXDzvIBESLzhxkuv+DHCt5V0CVwDUlpSujXKIxfOxWgySkM1OIl1rkpirHAJy/AW12Co045BGsug0MgD/nxZDFg2D4qo10xzGEaBg+d15cdDNRcJpjy/Cpp4F81gn+GHg66D9jAbh3HP4dAts3IZG8JDBtgYDBb8k9ssHB6pvCj48d/knrxu+hJeSNsssxsMEKxQF/NWtBqZ4uumhEjdc0lZ8xT51yFxuvMzKa7duJe8dJQAnSQKi+Riq0P/CP1SvrN92kKLo+uMDrMffvpcMormnINr9B+EaA+SDSDRJU6OdRpwK5n07zT3NiEFSjpR2G0R01C/XtXRIuuRS2TmDELh2W3h3nD/qBzJ0gmp5FzmHngS7xADhA+cLnU=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:MW4PR10MB6535.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230022)(366004)(346002)(376002)(39860400002)(136003)(396003)(451199015)(36756003)(31696002)(86362001)(31686004)(38100700002)(2906002)(5660300002)(26005)(6512007)(6666004)(2616005)(186003)(53546011)(83380400001)(36916002)(6506007)(33964004)(8936002)(478600001)(6486002)(6916009)(8676002)(316002)(66556008)(4326008)(66946007)(66476007)(41300700001)(43740500002)(45980500001);
+ SFS:(13230022)(376002)(396003)(366004)(346002)(136003)(39860400002)(451199015)(6666004)(8676002)(36756003)(66476007)(6486002)(66946007)(66556008)(4326008)(316002)(186003)(38100700002)(478600001)(83380400001)(2906002)(2616005)(8936002)(6512007)(36916002)(41300700001)(53546011)(31696002)(6506007)(86362001)(5660300002)(26005)(31686004)(6916009)(45980500001)(43740500002);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T1BpTGg0YTNKcWx0SUZzSURHY0hSa2lzQzcyd1VYRm5MTW1vNkN4VDREUzgr?=
- =?utf-8?B?b2hGbjdlaWJzZXJCcGxKOWI5TG91VG1iVThVODdWNHpDa0RoMDN5Uy9pNjc5?=
- =?utf-8?B?WHJRLzlvdHhMVG5zQmFmQXZsT1VsVCszUXMxbmhWRzBiV1lxUE8xeDNPbDdT?=
- =?utf-8?B?YzUyRlVWL0t1VUwwVnlYZFFYVlhrWFpMN3h4SFc3b09iL0d6L08wd0dCVlll?=
- =?utf-8?B?Mm9SRHQ4dENHb043S201YklZU0ZJVGlQZWZScEVuQzlDa21McTA4MXdqN1ZP?=
- =?utf-8?B?T1J1UTJQV2Y2elFCbm5DWVFoTGpFdm9NaVYvaUpTeWpGRFBtbFgzV2dkRUIv?=
- =?utf-8?B?RTgxcldPNkczbjRmR2VwWi9wRTFMSVo3eDlnZm90ZHFsTlBJOVlkODZTaVRq?=
- =?utf-8?B?NUx4V29mdy8vVnZ3OWpLU0pJWnVGL1dmYXo1bGlTSUtBd28vK2UydmJ2eWQr?=
- =?utf-8?B?cGtqMmkvc2JnekV6UDRuZzFIUWR2bXg0eldhelJvb1hGTlhHd1dQZ2N4bzNv?=
- =?utf-8?B?NGpKeVk2eS82eFVqM0hDM1RhWVJpMHZFRTc4NnhmRGlpVXMwcHJzODMrZ0l0?=
- =?utf-8?B?NkQzd1RjS29ZaHpnVExYWXBXL3JqWnpGREhVcnVtNklBdCtmLzVma08zK3Yr?=
- =?utf-8?B?Q0E4TFdKWWhtaHF6R0F4UWJEcXhoL0k3eWJuQUFyK2FCNVhOenkvUTZLMW41?=
- =?utf-8?B?Yk12RHZOdXFBc24xSVVEYkpZUFMwbXRmK0hQZURNMWJTVUlacUhEM3NyTkVy?=
- =?utf-8?B?V0xRVitWbGdVbGt6czc4cnpSaXdFc2M3SWFkbjEvSWpsd2RqUjZQWHplM081?=
- =?utf-8?B?SFNuNmtaSkFyWElxanNzby8ramlZZnB1QWNGais3S2owcmQxczAxMWJDUUtn?=
- =?utf-8?B?d2hScnBqNHNwclVJcHh6alVMTHlqR3ZjWmZybUNEeWJBNGI5Ujd5b1hBODVj?=
- =?utf-8?B?bCtHT2hzR0lzVkQwQm5lYVczTlRFVWR6cVVIRU9DWE9Lb1BCdW1jL2xQWTlO?=
- =?utf-8?B?V3lRTE41U2FWZ040cWdsZ0h2NlV6Rmd5ZzE0cG90aU1MdFE3UURHdTh2Vnho?=
- =?utf-8?B?UUlQZVhwVVo0bWFZbHQ4ZFN0VkZzcEN6RGZkcnJoZEp4MURvYmd4R3hXdk5m?=
- =?utf-8?B?L1pMdGp2ZDBIOTZQNnF0QmxTWlhBMmpud0IxT2hqY3N0NnRzdy9yYmhpM1BX?=
- =?utf-8?B?b1lHTUpoU3NmbHhrQlJtNlpXcFNGb1Zib1NzQUFEem50VFByV1Y4UkpOYnRo?=
- =?utf-8?B?K3oyTnlCLzVRMndsZmdRbStMa0tTMXY2RCs4NXVjN2JwajZBVDdxV2tYcklT?=
- =?utf-8?B?V1Mzd0F0ZVlvR1FNSXhRd0srN25SUUZxRk5ZVTd2TDYrTE5ST1ZnYXQvU3BJ?=
- =?utf-8?B?OTFwdXpYWmdSMStKT3hVZUErZUhsa0piRVdrTDVXTU5GNHk1Y0tVMDlhMFk0?=
- =?utf-8?B?bmNZRnNWMXZIWFVzUHNhdEd3WUF3TU9EQVdEUkNqMzFqWjVoTFVCczBlbXNY?=
- =?utf-8?B?S0xpZFY2TGZVMUxGbXRRUkNKV2xtOFdIYUExdU9wREpmc1FFaHFpUzY0QS91?=
- =?utf-8?B?VGtDcVY2OTRzZ2xEQ3laVXF0WEtZVGtNZlRpSmNETXI4UlBFRGJ4WTVocEMr?=
- =?utf-8?B?aDI2R3A2K0NmQm1DcXFRa0NnRnpmUnYyR2w5K0doY0pvbXNBMlhBTnJNZVpD?=
- =?utf-8?B?bE95Q1RiQzZVSVVEWXJFdWJrQVJrMy9zNjVTWThsZDFSN1BEU0dORExCcG9O?=
- =?utf-8?B?SFNBazV4dTFPdEFCUjl2VGRXekpFSkd2L0owMnRkRm1ITnVCUWdHQ05PYzlk?=
- =?utf-8?B?TGxETmwxYld1aXVDd2tOTVZhY0RLWEhCeElYOE82UnJ0K1I0TTBVbHc1R014?=
- =?utf-8?B?eDFndk5weGtxcjVPRWhlM2ZmaW05WkhEa1U4R1lQL3d2OFRzMXluYkw5dzkx?=
- =?utf-8?B?bmc4WjE5Z1pXcXJ6bTRJMlBEbmszS2dUTjl2R2R1UU9OdUtZTjBGMnpsanhl?=
- =?utf-8?B?dDlOcGdsb1lIdmN5VXI4aHp4V0dMdlBnWk9IMWVGbmdRSUQyRUNoL1NkN3di?=
- =?utf-8?B?TVVyUTlWYjZaM2NXWTFSKzBCd0V1VjBZa2d0QmVGNUlJNWtnYnErMXdVQU5T?=
- =?utf-8?Q?ZMqT9WYDoBx8xseKxcg1FVes2?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Z1ZRMVU0dUJqQnB1RWhXM29VUTlCWUM2MHk1QU1ER2srMTB6TVZTbWJOMEJu?=
+ =?utf-8?B?cVpNU3QwcTJVRUtFWXZnRUQ4QTYzOFVab3ZWMzVJMG5nNUNvK3BGNmh5RmZC?=
+ =?utf-8?B?LzVPMHJXNTdmeUFnUTdMaTV1VHN2VlZjWUhpNElVNnpINjVjdlpkZXF4SWJT?=
+ =?utf-8?B?d3YyY0hhWVh2MGRZb0dkczFCZVYxQmRhWG0wazl1RGRUS08xeHhkUmN1UVpz?=
+ =?utf-8?B?RlBxK3ZtcWpHTG16T0U4WVFRNU5KQkhoNTdZWkZ5SWpZNXd3QkJMSHg1Z2p3?=
+ =?utf-8?B?Um41MGNJQTEyU3dyYmI3Y21QSm9TU2QyOFJqZU54cUZwdk9rK0YxbDNkaDNo?=
+ =?utf-8?B?WmU5Sm8xK2NrdkplRi9EemRpbE0wWGV5bkVHYTdidUpMRHMrNmZhd2hFZmZp?=
+ =?utf-8?B?UTJucWZVTEYzeWxSbGorekYweEl6TElzaDFYaG1HUVBTb3UxS0VNODEyL0RU?=
+ =?utf-8?B?MVBjNlVPTUpzUURPL2hzU0x3ZnFjcFByanlJb0FTK1U4VXVCQ0d3aE8yZzJi?=
+ =?utf-8?B?R1kycWFRSmU0R05BWlNkYlN3bkxqSncyRGF0V0I2aWx6dlVpdG5BcFdwSTg3?=
+ =?utf-8?B?WVNxdVM3M2ZqTkhiNGYrQlV3aUdoSkRTR21GelBXZ3lZRHR4dkZOZFc2dExx?=
+ =?utf-8?B?cnRYdklLQWMvTUR3d3kxb1AvWXVUZC9HUmsyNXhtNnhCS0NDMDh0MTVvSzBB?=
+ =?utf-8?B?VUY1ajVIVDhjeW9WM1ZvY1V4UjJ5VEM3VDBnMlF2aVhDN1FSVzQ5VXhoa2Rq?=
+ =?utf-8?B?TG1jeStSUUpTai8yYUU5Qi9zZE9zd2cyYmdmUzU1enYwd3VUSlVQQmxZcFRD?=
+ =?utf-8?B?RER0ZGRjemtTcEJsUndHRms3Z1hUNDlTQTVSWHVQRjdmVEl3Y0oyMmJhN0Y1?=
+ =?utf-8?B?MUNNSFhJZVRiSVl1MzJWMGFpQnpMN3lwTnF0d1pPanZ5cURuSHRiUk0xSElm?=
+ =?utf-8?B?SFNkdDRwRnAwTlJ0U3pLZXZpeEJPK0ppNHlVVHkzT2MvcVZTZW1tNmxGUTZ1?=
+ =?utf-8?B?U1J3dFpRWjJkVDZ5UFU2WEovZkpaeXVaUEhRU0ZJbEcrWExCdVRNUmZoMi9B?=
+ =?utf-8?B?RlhYVDU0b2xMdmQxRmhFSnRDdU1xMU9UNkd3T0ZxNXNIM0NBOVFYNFNmaEZJ?=
+ =?utf-8?B?Slh2MEZ5L095YmRQR3RBMnY5cXZ1YWIxRFdCTk5BZTNUUmhZSTMrTUVoZXhR?=
+ =?utf-8?B?ejljK3puKzBCWjRHcmJpbFBBb2Q1TnZISkpKeGViM1JTaGlscm9ibmRzNEdD?=
+ =?utf-8?B?bVZLK0lQN0lLdE9KK1JwSVNGRkI1eDAxWnJFQW5OMUkyUk5mYk9DRncyd0FR?=
+ =?utf-8?B?Mmhhd3RNQ3lQZU5ISmFaOFlZcUhqWktGM0xJTUYwZGpQZlJaam9KN0ZnWS9V?=
+ =?utf-8?B?dEJBV3o5cG54Zlo4U3BCcjBIZjdVSTlOaTh2bm1Yc0hDUS9WcmZ5b2tIN3h3?=
+ =?utf-8?B?Ym85eENONEFrczFudEFDSWpnRDYyOEVZdE1lV3dQakZBWjRkQTAzL0RUT1Jr?=
+ =?utf-8?B?dGVkc1FEWXQ1WDFnWk5WRUVGb1dBcGpsUDlzMTJ6bWx5Y0w3bFdPa0ZjS1ds?=
+ =?utf-8?B?Y0sxTmNQUkQ4UzBUdDhWMm1xazhBaGFZWklTM1NOWjV1S2hTMVZlZEwvZkgy?=
+ =?utf-8?B?S3FtNDRiQWVzRmRzM1k4STJFVTBpdEhQREQ1dGF3azVxY09ZUmxITk1PclF2?=
+ =?utf-8?B?Zm9BVjV5UmJEYUNYNjlwUDhtcUZWZVBRQzNyVnhVU3BPZmN3ZDVETlBPa2NU?=
+ =?utf-8?B?WnBsbW1TVldYT1M3V3FhMU9Ka0Z0cTJITnFTWlZoeWx3WEpNODZvaFZUdVVz?=
+ =?utf-8?B?OEllN0NrZFh3NTdoM05GSTFZR21ydEY3SThPaUdqTkx5OTczblRjc2d5NlZ5?=
+ =?utf-8?B?dzdienhyeUI1bDFiZ2JhUjdyZTI3NFpmTVlJQlZTV1N6MVlUV3l5RWk4aFhw?=
+ =?utf-8?B?dGt0WHZOdTRoMC9SSzFFOGtOZENuODlQUmxuenNGSzMvNnRBekhsRkx3eG1p?=
+ =?utf-8?B?UGo1ZjMyZlJjY0FaR3VQejRBd3Z2bXFrV1UxNWhiYjJYcjZaUGtBbDIzcm52?=
+ =?utf-8?B?dUNuK3M5NlAySGdQclVicDZyVUczc2JEYjkxYldMU3ZncGpJZGFhUkcrSjhw?=
+ =?utf-8?Q?ry2wERSF0MdLdxJ1wRSuSZrRm?=
 X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 259a3261-8a15-43ad-6b5f-08dab2bf4530
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8178d179-d474-4520-00a4-08dab2c28431
 X-MS-Exchange-CrossTenant-AuthSource: MW4PR10MB6535.namprd10.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2022 17:19:39.7988 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2022 17:42:54.4111 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Im5J1NHfuEFEBIrQ7TNXkp0d4iJbMABTWKWysUkVb0tqcqbtLQoubjJ3AmVj9bjhON3t6KWhP9fbJfOO4KWZbw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB5921
+X-MS-Exchange-CrossTenant-UserPrincipalName: UogaEl1YvHa+HIkCgtTw2+KF8jKKy2MHNvwFBX6J8SpPq+mWkQbwUxibfQLypMi0p6dynpaB3hG3CFqnGzUG+g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR10MB5983
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
- definitions=2022-10-20_08,2022-10-20_01,2022-06-22_01
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- spamscore=0 bulkscore=0
- mlxscore=0 phishscore=0 suspectscore=0 adultscore=0 mlxlogscore=999
+ definitions=2022-10-20_09,2022-10-20_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ bulkscore=0 mlxscore=0
+ suspectscore=0 mlxlogscore=999 phishscore=0 malwarescore=0 adultscore=0
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2209130000
- definitions=main-2210200103
-X-Proofpoint-ORIG-GUID: uPKWXADQ384DXxvsw_K1HX79KaAuOSHt
-X-Proofpoint-GUID: uPKWXADQ384DXxvsw_K1HX79KaAuOSHt
-Cc: virtualization@lists.linux-foundation.org, linux-kernel@vger.kernel.org,
+ definitions=main-2210200106
+X-Proofpoint-ORIG-GUID: JRM_4OJSqNQQhjPEaU-hni0ohoYf3Fo5
+X-Proofpoint-GUID: JRM_4OJSqNQQhjPEaU-hni0ohoYf3Fo5
+Cc: virtualization@lists.linux-foundation.org,
+ Wu Zongyong <wuzongyong@linux.alibaba.com>, linux-kernel@vger.kernel.org,
  mst@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -203,254 +204,104 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============7814416230304833771=="
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============7814416230304833771==
-Content-Type: multipart/alternative;
- boundary="------------zGSZqRKBPAAkXzFdCEKJR0TH"
-Content-Language: en-US
-
---------------zGSZqRKBPAAkXzFdCEKJR0TH
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
 
 
-
-On 10/19/2022 9:38 PM, Jason Wang wrote:
-> On Wed, Oct 19, 2022 at 8:56 AM Si-Wei Liu<si-wei.liu@oracle.com>  wrote:
->> In order to allow live migration orchestration software to export the
->> initial set of vdpa attributes with which the device was created, it
->> will be useful if the vdpa tool can report the config on demand with
->> simple query. This will ease the orchestration software implementation
->> so that it doesn't have to keep track of vdpa config change, or have
->> to persist vdpa attributes across failure and recovery, in fear of
->> being killed due to accidental software error.
->>
->> This commit attempts to make struct vdpa_device contain the struct
->> vdpa_dev_set_config, where all config attributes upon vdpa creation
->> are carried over. Which will be used in subsequent commits.
->>
->> Signed-off-by: Si-Wei Liu<si-wei.liu@oracle.com>
->> ---
->>   include/linux/vdpa.h | 23 +++++++++++++----------
->>   1 file changed, 13 insertions(+), 10 deletions(-)
->>
->> diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
->> index 6d0f5e4..f1838f5 100644
->> --- a/include/linux/vdpa.h
->> +++ b/include/linux/vdpa.h
->> @@ -58,6 +58,16 @@ struct vdpa_vq_state {
->>          };
->>   };
->>
->> +struct vdpa_dev_set_config {
->> +       u64 device_features;
->> +       struct {
->> +               u8 mac[ETH_ALEN];
->> +               u16 mtu;
->> +               u16 max_vq_pairs;
->> +       } net;
-> Not for this patch but I think there should be a union container for
-> this structure to make it usable for other types of devices.
-Yes, once another type of device comes around for adding device specific 
-config option, then the union container can be added naturally.
+On 10/19/2022 10:20 PM, Jason Wang wrote:
+> On Wed, Oct 19, 2022 at 8:56 AM Si-Wei Liu <si-wei.liu@oracle.com> wrote:
+>> Just as _vdpa_register_device taking @nvqs as the number of queues
+> I wonder if it's better to embed nvqs in the config structure.
+Hmmm, the config structure is mostly for containing the configurables 
+specified in the 'vdpa dev add' command, while each field is 
+conditionally set and guarded by a corresponding mask bit. If @nvqs 
+needs to be folded into a structure, I feel it might be better to use 
+another struct for holding the informational fields (i.e. those are 
+read-only and always exist). But doing this would make @nvqs a weird 
+solo member in that struct with no extra benefit, and all the other 
+informational fields shown in the 'vdpa dev show' command would be 
+gotten from the device through config_ops directly. Maybe do this until 
+another read-only field comes around?
 
 >
->> +       u64 mask;
->> +};
->> +
->>   struct vdpa_mgmt_dev;
+>> to feed userspace inquery via vdpa_dev_fill(), we can follow the
+>> same to stash config attributes in struct vdpa_device at the time
+>> of vdpa registration.
 >>
->>   /**
->> @@ -77,6 +87,8 @@ struct vdpa_vq_state {
->>    * @nvqs: maximum number of supported virtqueues
->>    * @mdev: management device pointer; caller must setup when registering device as part
->>    *       of dev_add() mgmtdev ops callback before invoking _vdpa_register_device().
->> + * @vdev_cfg: initial device config on vdpa creation; useful when instantiate with
->> + *            the exact same config is needed.
-> Not a native speaker, but I guess it should be better named as "init_cfg"?
-OK I will rename.
+>> Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
+>> ---
+>>   drivers/vdpa/ifcvf/ifcvf_main.c      |  2 +-
+>>   drivers/vdpa/mlx5/net/mlx5_vnet.c    |  2 +-
+>>   drivers/vdpa/vdpa.c                  | 15 +++++++++++----
+>>   drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  2 +-
+>>   drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  2 +-
+>>   drivers/vdpa/vdpa_user/vduse_dev.c   |  2 +-
+>>   drivers/vdpa/virtio_pci/vp_vdpa.c    |  3 ++-
+>>   include/linux/vdpa.h                 |  3 ++-
+>>   8 files changed, 20 insertions(+), 11 deletions(-)
+>>
+>> diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
+>> index f9c0044..c54ab2c 100644
+>> --- a/drivers/vdpa/ifcvf/ifcvf_main.c
+>> +++ b/drivers/vdpa/ifcvf/ifcvf_main.c
+>> @@ -771,7 +771,7 @@ static int ifcvf_vdpa_dev_add(struct vdpa_mgmt_dev *mdev, const char *name,
+>>          else
+>>                  ret = dev_set_name(&vdpa_dev->dev, "vdpa%u", vdpa_dev->index);
+>>
+>> -       ret = _vdpa_register_device(&adapter->vdpa, vf->nr_vring);
+>> +       ret = _vdpa_register_device(&adapter->vdpa, vf->nr_vring, config);
+>>          if (ret) {
+>>                  put_device(&adapter->vdpa.dev);
+>>                  IFCVF_ERR(pdev, "Failed to register to vDPA bus");
+>> diff --git a/drivers/vdpa/mlx5/net/mlx5_vnet.c b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>> index 9091336..376082e 100644
+>> --- a/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>> +++ b/drivers/vdpa/mlx5/net/mlx5_vnet.c
+>> @@ -3206,7 +3206,7 @@ static int mlx5_vdpa_dev_add(struct vdpa_mgmt_dev *v_mdev, const char *name,
+>>          mlx5_notifier_register(mdev, &ndev->nb);
+>>          ndev->nb_registered = true;
+>>          mvdev->vdev.mdev = &mgtdev->mgtdev;
+>> -       err = _vdpa_register_device(&mvdev->vdev, max_vqs + 1);
+>> +       err = _vdpa_register_device(&mvdev->vdev, max_vqs + 1, add_config);
+>>          if (err)
+>>                  goto err_reg;
+>>
+>> diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+>> index febdc99..566c1c6 100644
+>> --- a/drivers/vdpa/vdpa.c
+>> +++ b/drivers/vdpa/vdpa.c
+>> @@ -215,11 +215,16 @@ static int vdpa_name_match(struct device *dev, const void *data)
+>>          return (strcmp(dev_name(&vdev->dev), data) == 0);
+>>   }
+>>
+>> -static int __vdpa_register_device(struct vdpa_device *vdev, u32 nvqs)
+>> +static int __vdpa_register_device(struct vdpa_device *vdev, u32 nvqs,
+>> +                                 const struct vdpa_dev_set_config *cfg)
+>>   {
+>>          struct device *dev;
+>>
+>>          vdev->nvqs = nvqs;
+>> +       if (cfg)
+>> +               vdev->vdev_cfg = *cfg;
+>> +       else
+>> +               vdev->vdev_cfg.mask = 0ULL;
+> I think it would be nice if we can convert eni to use netlink then we
+> don't need any workaround like this.
+Yes, Alibaba ENI is the only consumer of the old vdpa_register_device() 
+API without being ported to the netlink API. Not sure what is needed but 
+it seems another work to make netlink API committed to support a legacy 
+compatible model?
 
 -Siwei
+
 >
 > Thanks
 >
->>    */
->>   struct vdpa_device {
->>          struct device dev;
->> @@ -91,6 +103,7 @@ struct vdpa_device {
->>          struct vdpa_mgmt_dev *mdev;
->>          unsigned int ngroups;
->>          unsigned int nas;
->> +       struct vdpa_dev_set_config vdev_cfg;
->>   };
->>
->>   /**
->> @@ -103,16 +116,6 @@ struct vdpa_iova_range {
->>          u64 last;
->>   };
->>
->> -struct vdpa_dev_set_config {
->> -       u64 device_features;
->> -       struct {
->> -               u8 mac[ETH_ALEN];
->> -               u16 mtu;
->> -               u16 max_vq_pairs;
->> -       } net;
->> -       u64 mask;
->> -};
->> -
->>   /**
->>    * Corresponding file area for device memory mapping
->>    * @file: vma->vm_file for the mapping
->> --
->> 1.8.3.1
->>
-
---------------zGSZqRKBPAAkXzFdCEKJR0TH
-Content-Type: text/html; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-
-<html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  </head>
-  <body>
-    <br>
-    <br>
-    <div class="moz-cite-prefix">On 10/19/2022 9:38 PM, Jason Wang
-      wrote:<br>
-    </div>
-    <blockquote type="cite" cite="mid:CACGkMEv_fKZa9qN+ytnViCdvcR4Cbr8KyT71UnWzWjrtsFMyBg@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">On Wed, Oct 19, 2022 at 8:56 AM Si-Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:si-wei.liu@oracle.com">&lt;si-wei.liu@oracle.com&gt;</a> wrote:
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">
-In order to allow live migration orchestration software to export the
-initial set of vdpa attributes with which the device was created, it
-will be useful if the vdpa tool can report the config on demand with
-simple query. This will ease the orchestration software implementation
-so that it doesn't have to keep track of vdpa config change, or have
-to persist vdpa attributes across failure and recovery, in fear of
-being killed due to accidental software error.
-
-This commit attempts to make struct vdpa_device contain the struct
-vdpa_dev_set_config, where all config attributes upon vdpa creation
-are carried over. Which will be used in subsequent commits.
-
-Signed-off-by: Si-Wei Liu <a class="moz-txt-link-rfc2396E" href="mailto:si-wei.liu@oracle.com">&lt;si-wei.liu@oracle.com&gt;</a>
----
- include/linux/vdpa.h | 23 +++++++++++++----------
- 1 file changed, 13 insertions(+), 10 deletions(-)
-
-diff --git a/include/linux/vdpa.h b/include/linux/vdpa.h
-index 6d0f5e4..f1838f5 100644
---- a/include/linux/vdpa.h
-+++ b/include/linux/vdpa.h
-@@ -58,6 +58,16 @@ struct vdpa_vq_state {
-        };
- };
-
-+struct vdpa_dev_set_config {
-+       u64 device_features;
-+       struct {
-+               u8 mac[ETH_ALEN];
-+               u16 mtu;
-+               u16 max_vq_pairs;
-+       } net;
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Not for this patch but I think there should be a union container for
-this structure to make it usable for other types of devices.</pre>
-    </blockquote>
-    Yes, once another type of device comes around for adding device
-    specific config option, then the union container can be added
-    naturally. <br>
-    <br>
-    <blockquote type="cite" cite="mid:CACGkMEv_fKZa9qN+ytnViCdvcR4Cbr8KyT71UnWzWjrtsFMyBg@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">+       u64 mask;
-+};
-+
- struct vdpa_mgmt_dev;
-
- /**
-@@ -77,6 +87,8 @@ struct vdpa_vq_state {
-  * @nvqs: maximum number of supported virtqueues
-  * @mdev: management device pointer; caller must setup when registering device as part
-  *       of dev_add() mgmtdev ops callback before invoking _vdpa_register_device().
-+ * @vdev_cfg: initial device config on vdpa creation; useful when instantiate with
-+ *            the exact same config is needed.
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-Not a native speaker, but I guess it should be better named as &quot;init_cfg&quot;?</pre>
-    </blockquote>
-    OK I will rename.<br>
-    <br>
-    -Siwei<br>
-    <blockquote type="cite" cite="mid:CACGkMEv_fKZa9qN+ytnViCdvcR4Cbr8KyT71UnWzWjrtsFMyBg@mail.gmail.com">
-      <pre class="moz-quote-pre" wrap="">
-
-Thanks
-
-</pre>
-      <blockquote type="cite">
-        <pre class="moz-quote-pre" wrap="">  */
- struct vdpa_device {
-        struct device dev;
-@@ -91,6 +103,7 @@ struct vdpa_device {
-        struct vdpa_mgmt_dev *mdev;
-        unsigned int ngroups;
-        unsigned int nas;
-+       struct vdpa_dev_set_config vdev_cfg;
- };
-
- /**
-@@ -103,16 +116,6 @@ struct vdpa_iova_range {
-        u64 last;
- };
-
--struct vdpa_dev_set_config {
--       u64 device_features;
--       struct {
--               u8 mac[ETH_ALEN];
--               u16 mtu;
--               u16 max_vq_pairs;
--       } net;
--       u64 mask;
--};
--
- /**
-  * Corresponding file area for device memory mapping
-  * @file: vma-&gt;vm_file for the mapping
---
-1.8.3.1
-
-</pre>
-      </blockquote>
-      <pre class="moz-quote-pre" wrap="">
-</pre>
-    </blockquote>
-    <br>
-  </body>
-</html>
-
---------------zGSZqRKBPAAkXzFdCEKJR0TH--
-
---===============7814416230304833771==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============7814416230304833771==--
