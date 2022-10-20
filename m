@@ -1,94 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 97E3C605CCC
-	for <lists.virtualization@lfdr.de>; Thu, 20 Oct 2022 12:38:15 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 56B54605CD4
+	for <lists.virtualization@lfdr.de>; Thu, 20 Oct 2022 12:38:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 236896FADB;
+	by smtp4.osuosl.org (Postfix) with ESMTP id 6DFC341E1A;
 	Thu, 20 Oct 2022 10:38:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 236896FADB
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=Ejd78jRS;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=9Bhly1S2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6DFC341E1A
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=tXd3IWYp;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=hfPPG9Ho
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XhHo-bo6zk3n; Thu, 20 Oct 2022 10:38:13 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0A48F6FADD;
-	Thu, 20 Oct 2022 10:38:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0A48F6FADD
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id XnmG4v9ekPPB; Thu, 20 Oct 2022 10:38:13 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id EA21F41E18;
+	Thu, 20 Oct 2022 10:38:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EA21F41E18
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EA13FC0080;
-	Thu, 20 Oct 2022 10:38:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BB706C0086;
+	Thu, 20 Oct 2022 10:38:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6A0DBC0082
+ by lists.linuxfoundation.org (Postfix) with ESMTP id ABB17C0089
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 10:38:03 +0000 (UTC)
+ Thu, 20 Oct 2022 10:38:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3F75340494
+ by smtp2.osuosl.org (Postfix) with ESMTP id B59F34013A
  for <virtualization@lists.linux-foundation.org>;
  Thu, 20 Oct 2022 10:38:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3F75340494
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B59F34013A
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=Ejd78jRS; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=tXd3IWYp; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=9Bhly1S2
+ header.s=susede2_ed25519 header.b=hfPPG9Ho
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id F7G3KqAFniXM
+ with ESMTP id NtE26fsBaHpp
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 10:38:02 +0000 (UTC)
+ Thu, 20 Oct 2022 10:38:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8B0ED4013A
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8B0ED4013A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1233C40289
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 1233C40289
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Oct 2022 10:38:02 +0000 (UTC)
+ Thu, 20 Oct 2022 10:38:03 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id D2CAA22B47;
- Thu, 20 Oct 2022 10:38:00 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 5A5941FA44;
+ Thu, 20 Oct 2022 10:38:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1666262280; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1666262281; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jWFK76GZFYsgYwc+6vxSArga9uMmZ2Tc8oMprbqiqw0=;
- b=Ejd78jRSYmwnBxX2aipwC3Ox8skiLUbjtMay59sDp649DdHDOhbUxuiSAsJXDe59jzY039
- 7m8t3LalhptMXwLVTrzVkCxp54leuuDcxIxewQ+X5Z1wJw/nYtKJ6C9nQ6NwMv8FXkTkGO
- 3RqSYtiMQc/Rly3XWIlnJ+uGnR6kSNM=
+ bh=4LfKpOswsnembvGTw5A10DEjilDnUQNy6bx3ya4350M=;
+ b=tXd3IWYpE+AANm0xpi3Q23Tyutj9Sdq9yA9FR/7DcSNXy96WtXWQGzMt9IwfCYTCBAQamd
+ THr8pj7rjAn9jU+HaO5SQiMq017TXsYjJcjNLQX83/LJmys2bmCNMCVnK78mXNtDMQ+1z2
+ WEXzB3SfIEWpTepTzbB9H+x+1MnkEYc=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1666262280;
+ s=susede2_ed25519; t=1666262281;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=jWFK76GZFYsgYwc+6vxSArga9uMmZ2Tc8oMprbqiqw0=;
- b=9Bhly1S29cGBzEZtlHvw8BUo8sDLPZ+WqFVhjceEyB7ynwh+OKfDst1qZxL/12nJNg8l+J
- LjNHGoN0NcLl8OAw==
+ bh=4LfKpOswsnembvGTw5A10DEjilDnUQNy6bx3ya4350M=;
+ b=hfPPG9Hoyh//3cunThx+JTGWBet+d79xGzcyxY6nrUqT7snss1g85BmKsTMqO7P/1BTPnG
+ RJfDSRgygYZyKVBw==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 598D613AF5;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id D649613B72;
  Thu, 20 Oct 2022 10:38:00 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id UMn+FAglUWPPYwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id eOpuMwglUWPPYwAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Thu, 20 Oct 2022 10:38:00 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@gmail.com, sam@ravnborg.org, javierm@redhat.com,
  mripard@kernel.org, maarten.lankhorst@linux.intel.com
-Subject: [PATCH 07/21] drm/rockchip: Don't set struct drm_driver.lastclose
-Date: Thu, 20 Oct 2022 12:37:41 +0200
-Message-Id: <20221020103755.24058-8-tzimmermann@suse.de>
+Subject: [PATCH 08/21] drm/vboxvideo: Don't set struct drm_driver.lastclose
+Date: Thu, 20 Oct 2022 12:37:42 +0200
+Message-Id: <20221020103755.24058-9-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.0
 In-Reply-To: <20221020103755.24058-1-tzimmermann@suse.de>
 References: <20221020103755.24058-1-tzimmermann@suse.de>
@@ -122,35 +122,28 @@ Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
 Don't set struct drm_driver.lastclose. It's used to restore the
-fbdev console. But as rockchip uses generic fbdev emulation, the
+fbdev console. But as vboxvideo uses generic fbdev emulation, the
 console is being restored by the DRM client helpers already. See
 the call to drm_client_dev_restore() in drm_lastclose().
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/rockchip/rockchip_drm_fb.c | 2 --
+ drivers/gpu/drm/vboxvideo/vbox_drv.c | 2 --
  1 file changed, 2 deletions(-)
 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-index 092bf863110b7..7de64b0ad047f 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-@@ -9,7 +9,6 @@
- #include <drm/drm.h>
- #include <drm/drm_atomic.h>
- #include <drm/drm_damage_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-@@ -101,7 +100,6 @@ rockchip_fb_create(struct drm_device *dev, struct drm_file *file,
+diff --git a/drivers/gpu/drm/vboxvideo/vbox_drv.c b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+index f4f2bd79a7cb6..1cd716eb17a1c 100644
+--- a/drivers/gpu/drm/vboxvideo/vbox_drv.c
++++ b/drivers/gpu/drm/vboxvideo/vbox_drv.c
+@@ -178,8 +178,6 @@ static const struct drm_driver driver = {
+ 	.driver_features =
+ 	    DRIVER_MODESET | DRIVER_GEM | DRIVER_ATOMIC,
  
- static const struct drm_mode_config_funcs rockchip_drm_mode_config_funcs = {
- 	.fb_create = rockchip_fb_create,
--	.output_poll_changed = drm_fb_helper_output_poll_changed,
- 	.atomic_check = drm_atomic_helper_check,
- 	.atomic_commit = drm_atomic_helper_commit,
- };
+-	.lastclose = drm_fb_helper_lastclose,
+-
+ 	.fops = &vbox_fops,
+ 	.name = DRIVER_NAME,
+ 	.desc = DRIVER_DESC,
 -- 
 2.38.0
 
