@@ -1,91 +1,92 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id D523F607A65
-	for <lists.virtualization@lfdr.de>; Fri, 21 Oct 2022 17:23:00 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D80060823C
+	for <lists.virtualization@lfdr.de>; Sat, 22 Oct 2022 01:49:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9E7538406D;
-	Fri, 21 Oct 2022 15:22:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9E7538406D
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SETnlhzY
+	by smtp4.osuosl.org (Postfix) with ESMTP id 17E23418DD;
+	Fri, 21 Oct 2022 23:49:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 17E23418DD
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=eyCN+sxy
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5LBREQxUxTfs; Fri, 21 Oct 2022 15:22:56 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Mw3Bkvb1Q9Lm; Fri, 21 Oct 2022 23:49:48 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 4611A83FF1;
-	Fri, 21 Oct 2022 15:22:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4611A83FF1
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 35B2841859;
+	Fri, 21 Oct 2022 23:49:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 35B2841859
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EA8D5C007C;
-	Fri, 21 Oct 2022 15:22:54 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 739C5C0083;
+	Fri, 21 Oct 2022 23:49:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 28121C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AEF36C007E
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Oct 2022 15:22:54 +0000 (UTC)
+ Fri, 21 Oct 2022 23:49:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E89FB419E0
+ by smtp4.osuosl.org (Postfix) with ESMTP id 7DA5D4184D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Oct 2022 15:22:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E89FB419E0
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=SETnlhzY
+ Fri, 21 Oct 2022 23:49:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7DA5D4184D
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZhKT42IRwaZC
+ with ESMTP id o7jLHu_RfVMb
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Oct 2022 15:22:53 +0000 (UTC)
+ Fri, 21 Oct 2022 23:49:40 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ED3F04196C
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id ED3F04196C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 24C574184B
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 24C574184B
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Oct 2022 15:22:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1666365769;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=rNUtD0qOkGMlGUgfA5NfPqgJZTck3/7w6b9qm8JJosE=;
- b=SETnlhzYfM9hj1A2CPkQYzzisU9d4zmSSpkqPgqC2IDMd6+lcjaV99Puszheja7nY+MjSr
- bAKiH45s/qkCHWCaBtxReF3q5mT1HMqG+ydTS4Rc5FdAVpxMGJ1uEeJ2r/9TGaJDkOZEfL
- Nds6g42IELURwQW/73ASEqaSqZceq6I=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-617-1BqXFHcOPbm4uh747QbAzg-1; Fri, 21 Oct 2022 11:22:47 -0400
-X-MC-Unique: 1BqXFHcOPbm4uh747QbAzg-1
-Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
- [10.11.54.10])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id E03D92823821;
- Fri, 21 Oct 2022 15:22:45 +0000 (UTC)
-Received: from T590 (ovpn-8-20.pek2.redhat.com [10.72.8.20])
- by smtp.corp.redhat.com (Postfix) with ESMTPS id 27AEE401E5C;
- Fri, 21 Oct 2022 15:22:39 +0000 (UTC)
-Date: Fri, 21 Oct 2022 23:22:34 +0800
-From: Ming Lei <ming.lei@redhat.com>
-To: Keith Busch <kbusch@kernel.org>
-Subject: Re: [Bug] double ->queue_rq() because of timeout in ->queue_rq()
-Message-ID: <Y1K5Oo7bIRlVTDnb@T590>
-References: <Y1EQdafQlKNAsutk@T590>
- <Y1Ktf2jRTlPMQwJR@kbusch-mbp.dhcp.thefacebook.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <Y1Ktf2jRTlPMQwJR@kbusch-mbp.dhcp.thefacebook.com>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
-Cc: Jens Axboe <axboe@kernel.dk>, djeffery@redhat.com,
- Bart Van Assche <bvanassche@acm.org>, linux-scsi@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
- stefanha@redhat.com, Christoph Hellwig <hch@lst.de>
+ Fri, 21 Oct 2022 23:49:39 +0000 (UTC)
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.5/8.17.1.5) with ESMTP id 29LLDZas029908;
+ Fri, 21 Oct 2022 23:49:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id; s=corp-2022-7-12;
+ bh=xWjxZS84AK3m+Nv1TeUgp0dkNSgQgpfhujBF90NCAuI=;
+ b=eyCN+sxyBDMbgoYp73XvaMlOIQgPMVwJx7WNoU2qBO5Rsds/dYEgPOHh7g7YfqXDlC/V
+ FAsZqwIlksu3t5eLnc/9O5/WNx0sDCsjylU0LYXfh9lHb1WZhqAl/Sq9Uk6HWNIrp+Ah
+ M2P/3dPhOH28ED5R2jQ6gfc78wgvRPWxymeozhF2ZBf1HF4qgulsVsQHG/CRJ1I/QFpi
+ X6My4upxGCY2oJEi/cdXNawiJlCEVe58Ng0LDc3RS5RrBt3NIxl0PUdHgp8Btccldm+O
+ +gypmHOozu7kWs4heCK3CCbQ1qKsSGFzEyOKiv8r/63zfC6ChAERL76ZrseeIcEJqvGA ag== 
+Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3k7mw3tea0-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 21 Oct 2022 23:49:38 +0000
+Received: from pps.filterd
+ (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 29LMgIQR007144; Fri, 21 Oct 2022 23:49:38 GMT
+Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
+ [10.153.73.24])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
+ 3k8hre9a3b-1; Fri, 21 Oct 2022 23:49:38 +0000
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+To: mst@redhat.com, jasowang@redhat.com, parav@nvidia.com
+Subject: [PATCH v3 0/4] vDPA: initial config export via "vdpa dev show"
+Date: Fri, 21 Oct 2022 15:43:53 -0700
+Message-Id: <1666392237-4042-1-git-send-email-si-wei.liu@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.205,Aquarius:18.0.895,Hydra:6.0.545,FMLib:17.11.122.1
+ definitions=2022-10-21_04,2022-10-21_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
+ spamscore=0 bulkscore=0
+ mlxscore=0 phishscore=0 suspectscore=0 adultscore=0 mlxlogscore=999
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2209130000
+ definitions=main-2210210139
+X-Proofpoint-ORIG-GUID: 6x2boUmJJDAYbf8289-RDc91KbkPPpew
+X-Proofpoint-GUID: 6x2boUmJJDAYbf8289-RDc91KbkPPpew
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -97,69 +98,105 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Oct 21, 2022 at 08:32:31AM -0600, Keith Busch wrote:
-> On Thu, Oct 20, 2022 at 05:10:13PM +0800, Ming Lei wrote:
-> > @@ -1593,10 +1598,17 @@ static void blk_mq_timeout_work(struct work_struct *work)
-> >  	if (!percpu_ref_tryget(&q->q_usage_counter))
-> >  		return;
-> >  
-> > -	blk_mq_queue_tag_busy_iter(q, blk_mq_check_expired, &next);
-> > +	/* Before walking tags, we must ensure any submit started before the
-> > +	 * current time has finished. Since the submit uses srcu or rcu, wait
-> > +	 * for a synchronization point to ensure all running submits have
-> > +	 * finished
-> > +	 */
-> > +	blk_mq_wait_quiesce_done(q);
-> > +
-> > +	blk_mq_queue_tag_busy_iter(q, blk_mq_check_expired, &expired);
-> 
-> The blk_mq_wait_quiesce_done() will only wait for tasks that entered
-> just before calling that function. It will not wait for tasks that
-> entered immediately after.
+Live migration of vdpa would typically require re-instate vdpa
+device with an idential set of configs on the destination node,
+same way as how source node created the device in the first place. 
 
-Yeah, but the patch records the jiffies before calling
-blk_mq_wait_quiesce_done, and only time out requests which are timed out
-before the recorded time, so it is fine to use blk_mq_wait_quiesce_done
-in this way.
+In order to allow live migration orchestration software to export the
+initial set of vdpa attributes with which the device was created, it
+will be useful if the vdpa tool can report the config on demand with
+simple query. This will ease the orchestration software implementation
+so that it doesn't have to keep track of vdpa config change, or have
+to persist vdpa attributes across failure and recovery, in fear of
+being killed due to accidental software error.
 
-> 
-> If I correctly understand the problem you're describing, the hypervisor
-> may prevent any guest process from running. If so, the timeout work may
-> be stalled after the quiesce, and if a queue_rq() process also stalled
-> after starting quiesce_done(), then we're in the same situation you're
-> trying to prevent, right?
+In this series, the initial device config for vdpa creation will be
+exported via the "vdpa dev show" command. This is unlike the "vdpa
+dev config show" command that usually goes with the live value in
+the device config space, and is not reliable subject to the dynamics
+of feature negotiation or possible change by driver to the config
+space.
 
-No, the stall just happens on one vCPU, and other vCPUs may run smoothly.
+Examples:
 
-1) vmexit, which only stalls one vCPU, some vmexit could come anytime,
-such as external interrupt
+1) Create vDPA by default without any config attribute
 
-2) vCPU is emulated by pthread usually, and the pthread is just one
-normal host userspace pthread, which can be preempted anytime, and
-the preempt latency could be long enough when the system load is
-heavy.
+$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0
+$ vdpa dev show vdpa0
+vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
+$ vdpa dev -jp show vdpa0
+{
+    "dev": {
+        "vdpa0": {
+            "type": "network",
+            "mgmtdev": "pci/0000:41:04.2",
+            "vendor_id": 5555,
+            "max_vqs": 9,
+            "max_vq_size": 256,
+        }
+    }
+}
 
-And it is like random stall added when running any instruction of
-VM kernel code.
+2) Create vDPA with config attribute(s) specified
 
-> 
-> I agree with your idea that this is a lower level driver responsibility:
-> it should reclaim all started requests before allowing new queuing.
-> Perhaps the block layer should also raise a clear warning if it's
-> queueing a request that's already started.
+$ vdpa dev add mgmtdev pci/0000:41:04.2 name vdpa0 \
+    mac e4:11:c6:d3:45:f0 max_vq_pairs 4
+$ vdpa dev show
+vdpa0: type network mgmtdev pci/0000:41:04.2 vendor_id 5555 max_vqs 9 max_vq_size 256
+  initial_config: mac e4:11:c6:d3:45:f0 max_vq_pairs 4
+$ vdpa dev -jp show
+{
+    "dev": {
+        "vdpa0": {
+            "type": "network",
+            "mgmtdev": "pci/0000:41:04.2",
+            "vendor_id": 5555,
+            "max_vqs": 9,
+            "max_vq_size": 256,
+            "initial_config": {
+                "mac": "e4:11:c6:d3:45:f0",
+                "max_vq_pairs": 4
+            }
+        }
+    }
+}
 
-The thing is that it is one generic issue, lots of VM drivers could be
-affected, and it may not be easy for drivers to handle the race too.
+---
+v2 -> v3:
+  - Rename vdev_cfg to init_cfg and also related function (Jason)
+  - Change "virtio_config" to "initial_config" in command example
+    output (Parav)
 
+v1 -> v2:
+  - Revised example output to export all config attributes under a
+    json object (Jason)
 
+---
 
-Thanks,
-Ming
+Si-Wei Liu (4):
+  vdpa: save vdpa_dev_set_config in struct vdpa_device
+  vdpa: pass initial config to _vdpa_register_device()
+  vdpa: show dev config as-is in "vdpa dev show" output
+  vdpa: fix improper error message when adding vdpa dev
+
+ drivers/vdpa/ifcvf/ifcvf_main.c      |  2 +-
+ drivers/vdpa/mlx5/net/mlx5_vnet.c    |  2 +-
+ drivers/vdpa/vdpa.c                  | 63 +++++++++++++++++++++++++++++++++---
+ drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  2 +-
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  2 +-
+ drivers/vdpa/vdpa_user/vduse_dev.c   |  2 +-
+ drivers/vdpa/virtio_pci/vp_vdpa.c    |  3 +-
+ include/linux/vdpa.h                 | 26 ++++++++-------
+ 8 files changed, 80 insertions(+), 22 deletions(-)
+
+-- 
+1.8.3.1
 
 _______________________________________________
 Virtualization mailing list
