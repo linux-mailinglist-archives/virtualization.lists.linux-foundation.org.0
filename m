@@ -1,132 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3789960AAD3
-	for <lists.virtualization@lfdr.de>; Mon, 24 Oct 2022 15:41:15 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7156E60AF15
+	for <lists.virtualization@lfdr.de>; Mon, 24 Oct 2022 17:30:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EB3BD813BB;
-	Mon, 24 Oct 2022 13:41:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EB3BD813BB
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=opensynergy.com header.i=@opensynergy.com header.a=rsa-sha256 header.s=TM-DKIM-20210503141657 header.b=05Tmzxa6
+	by smtp2.osuosl.org (Postfix) with ESMTP id F294F40591;
+	Mon, 24 Oct 2022 15:30:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F294F40591
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hCvoD1Xh
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id FZ-7B5mgLXWV; Mon, 24 Oct 2022 13:41:12 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id B635E8138C;
-	Mon, 24 Oct 2022 13:41:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B635E8138C
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EUj6rpwOzUCq; Mon, 24 Oct 2022 15:30:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id A8D81405AF;
+	Mon, 24 Oct 2022 15:30:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A8D81405AF
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E04B2C007C;
-	Mon, 24 Oct 2022 13:41:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B5475C007C;
+	Mon, 24 Oct 2022 15:30:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E0C74C002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F27C5C002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Oct 2022 13:41:09 +0000 (UTC)
+ Mon, 24 Oct 2022 15:30:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BA37581392
+ by smtp3.osuosl.org (Postfix) with ESMTP id C011F60BD4
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Oct 2022 13:41:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BA37581392
+ Mon, 24 Oct 2022 15:30:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C011F60BD4
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=hCvoD1Xh
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CAWoO1SE0F7v
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5towWRU3J6On
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Oct 2022 13:41:06 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 853558138C
-Received: from repost01.tmes.trendmicro.eu (repost01.tmes.trendmicro.eu
- [18.185.115.3])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 853558138C
+ Mon, 24 Oct 2022 15:30:48 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0D0AC60AE8
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 0D0AC60AE8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 24 Oct 2022 13:41:06 +0000 (UTC)
-Received: from 104.47.18.112_.trendmicro.com (unknown [172.21.205.29])
- by repost01.tmes.trendmicro.eu (Postfix) with SMTP id DEAFD10001789;
- Mon, 24 Oct 2022 13:41:03 +0000 (UTC)
-X-TM-MAIL-RECEIVED-TIME: 1666618863.214000
-X-TM-MAIL-UUID: b0f190fd-d9eb-42e2-b2cc-fdc8da235882
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com (unknown
- [104.47.18.112])
- by repre01.tmes.trendmicro.eu (Trend Micro Email Security) with ESMTPS id
- 346EE10000E35; Mon, 24 Oct 2022 13:41:03 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TmAjHzIOjCk7vkFLcdP+StSRCeKMCP4gQ9a0DHpHwRXfV2NESGqPWT+dvTH3eneznNPzvfzVDAyLT2RM/pVVnQmluoG3dA7oRK0WkHSTxtYOYuR/OJhzQbyrOPJEHaDCGiBbK3siGLvdnDVLxmI4JLETm6tZaWZm0LQXD7HFcGZk7r6K/+XzIMNRTGJecVW15Q9Ydm0jr3zSWx4hOkV22lElDYp8pKDFcJTw2iKDSkTA2DuOG2iQ+aftnDa/5ryBCPbaCFlQYVKRspGpmJQkCBmQk8wVFiSGUIVRprUotBdzy0CWZk9OtTJPeIIfDylraDMc/M98D/wiirXzwJYAzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MYKgG0LMSWdFCkFBvpgRCf6xvkpxbpR1Y/IhJK8NIQk=;
- b=KUDmAjpsAKrf/05H0kiQHxB/yMjL3LKhmMghZ/7dTPaffFkCSe5h/BKx1kE+Q9h9eDH5hZFR4UZuHUR8Q+pvsMSv2lkl/UdOeo4Ja9gz8dxpRxp78OlWeBnQNZWfvFlfRnY23FsL8Y0T+xOAhRFyP1tsvjTbEid0NA13HgCoPNMxwL4VVpdSH5oqO35r/Jho+h6j8jotMBcUxGxNapXqSAMX2ZSC9PtaBYNH/suhvdAYlgaJTchgaVolu1dxyPHD6xZCQZCZV/QlhFMHmnJLw1E+q7J0y3Jm0rferFXFUmG4XVT9FTsvP2XnSSt4pdXvYl30o3A5MOYkP0hzveif+Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 217.66.60.4) smtp.rcpttodomain=gmail.com smtp.mailfrom=opensynergy.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=opensynergy.com;
- dkim=none (message not signed); arc=none
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 217.66.60.4)
- smtp.mailfrom=opensynergy.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=opensynergy.com;
-Received-SPF: Pass (protection.outlook.com: domain of opensynergy.com
- designates 217.66.60.4 as permitted sender) receiver=protection.outlook.com;
- client-ip=217.66.60.4; helo=SR-MAIL-03.open-synergy.com; pr=C
-From: Igor Skalkin <Igor.Skalkin@opensynergy.com>
-To: virtualization@lists.linux-foundation.org, luiz.dentz@gmail.com,
- mst@redhat.com
-Subject: [PATCH v4 1/1] virtio_bt: Fix alignment in configuration struct
-Date: Mon, 24 Oct 2022 15:40:33 +0200
-Message-Id: <20221024134033.30142-2-Igor.Skalkin@opensynergy.com>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20221024134033.30142-1-Igor.Skalkin@opensynergy.com>
-References: <20221018191911.589564-1-Igor.Skalkin@opensynergy.com>
- <20221024134033.30142-1-Igor.Skalkin@opensynergy.com>
+ Mon, 24 Oct 2022 15:30:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1666625447;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=t/jSO0lqWHSQcHiF6BRMSRgd7XZaU/RYEhuGiGA3W4o=;
+ b=hCvoD1XheifSit65JiSHg6/Gm6qngDcD6hPPo9GarSp7J7YWcjF8JAyiXpUReOynLbZp8w
+ UXPR+596Y5TqSBBh/jnw4BoPkWlewJKDNPziMMoX6DH+hiAKTlnp/A0ZoUf1yFrBtDNdX2
+ zw8mEmF1FsewbRZIV1u3jIiBvgSPUw8=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-656-BD8qyXrmOD2Ly-xXM2Yriw-1; Mon, 24 Oct 2022 11:30:43 -0400
+X-MC-Unique: BD8qyXrmOD2Ly-xXM2Yriw-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id BEA24811E87;
+ Mon, 24 Oct 2022 15:30:41 +0000 (UTC)
+Received: from localhost (unknown [10.39.194.177])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 28818492CA2;
+ Mon, 24 Oct 2022 15:30:40 +0000 (UTC)
+Date: Mon, 24 Oct 2022 11:30:39 -0400
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Ming Lei <ming.lei@redhat.com>
+Subject: Re: [Bug] double ->queue_rq() because of timeout in ->queue_rq()
+Message-ID: <Y1avnzv01gevnmXz@fedora>
+References: <Y1EQdafQlKNAsutk@T590> <Y1GpB6Gpm7GglwO3@fedora>
+ <Y1ICvUwglbxkqE+v@T590>
 MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: VI1EUR05FT022:EE_|DB9PR04MB9402:EE_
-X-MS-Office365-Filtering-Correlation-Id: c75e319a-f447-456e-2f51-08dab5c56392
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: wA0se/z6o7k6ZL3OJlKvuK0BDNeTJT9ccRZ/Qu9TyzboRfef8em0w+Wz4tKdORuVKS1sWurI+zsjN8UTMAVQTciCR3c4DaLKxG8ZRPjbDKTiyiDH/Q38WOT5nMkkemNBMGKd6OR7a6MYE+B/c1h3fAeWXTkg2WVCjZXbreuNIBf2QpJQkg+nu8vrdjA/f7rmsaLvi+bGxCqW5wOs/2992caERdvm1GavuC0hArs5HFG7c+kbOoimouBFrSXiy0atdFKQkUOmI5sxqIfcnkO2xfsFTK9ue5qZ5BHa5e37x3y2btu8+PQ0I2xfhDfWK04joXx4tG0hv0m3sdJ5frEZuoS8ihnywbP7L4lV5QomLqBWmKKOSLdjsaD8r43sVxT6LD5cRxuCD1yEjUoyH8Juxrz8dUc10FAiwV12FIf26vMzX81GCNORLo16L2YKhLm+4Gx2oHKDaustT/7UrItF3rwISsYWJvGxbjevvT7GOYNx1D4FdNZnIL1w83ppzuujwcALMavnois9kFYxZ8xppEu2yKzQQ4WslzRDdfLccNFKGD90HmAhXH/LZ+OuInPc/kkx9QdU48vQneyf6tXb0iLXBBUBTwXqOgzE+4dHnfAGcnTWFsZyq6xZaY9/ppZti7DU9PG61F/1/CO07dLV+YncRUaHsaM3iOaKS/ogVa4jyzh9xVhkQ+1wDsrXlM6naK2sU0MS0TlqqeBNK5lhiHGJA1/nuHHj3zL6bWV0rfEBtm2H6KP0tN7PXWvNHpE3KqpfyCr6JUKyjtjdNmrAKi4aB71DlQwiPQOeBC9b5HQ=
-X-Forefront-Antispam-Report: CIP:217.66.60.4; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SR-MAIL-03.open-synergy.com; PTR:InfoDomainNonexistent;
- CAT:NONE;
- SFS:(13230022)(376002)(396003)(39840400004)(346002)(136003)(451199015)(46966006)(36840700001)(5660300002)(36756003)(2906002)(478600001)(316002)(42186006)(4326008)(70586007)(70206006)(8676002)(41300700001)(8936002)(966005)(83380400001)(81166007)(40480700001)(36860700001)(107886003)(86362001)(47076005)(1076003)(26005)(336012)(186003)(2616005)(82310400005)(36900700001);
- DIR:OUT; SFP:1102; 
-X-OriginatorOrg: opensynergy.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2022 13:41:00.9118 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: c75e319a-f447-456e-2f51-08dab5c56392
-X-MS-Exchange-CrossTenant-Id: 800fae25-9b1b-4edc-993d-c939c4e84a64
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=800fae25-9b1b-4edc-993d-c939c4e84a64; Ip=[217.66.60.4];
- Helo=[SR-MAIL-03.open-synergy.com]
-X-MS-Exchange-CrossTenant-AuthSource: VI1EUR05FT022.eop-eur05.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9402
-X-TM-AS-ERS: 104.47.18.112-0.0.0.0
-X-TMASE-Version: StarCloud-1.3-9.0.1006-27220.007
-X-TMASE-Result: 10--2.074400-4.000000
-X-TMASE-MatchedRID: HLZKLD98mswxZoNWTqFxuUXBhxFdFgcQBXngI6jFvpeueqlDxh8ToXMW
- fmr8UEU8gRXUy3f9jsQW+rN4H33dkdyU5e20qrzVuce7gFxhKa3BOVz0Jwcxl6vCrG0TnfVUilv
- Ab18i4hOxIT6WtCo5I1cnoO4Nx+loO4kcA8kjsz9kiLB9qoJwH0pO/ORUaZ3FmyiLZetSf8m2Ie
- O/ulJw0egL5WVEeE7IO+2BPnSgMUYgBwKKRHe+r/ruL7dkRPghkqsE8rtkLcxTSZ4Q3ZLFG9HYN
- coLyNp5fTcDEEc/mG4=
-X-TMASE-XGENCLOUD: f6ff373a-9dcd-4842-ba0d-9f3476168479-0-0-200-0
-X-TM-Deliver-Signature: 79B49BEBBC56D98A64CE6F581C975E27
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=opensynergy.com;
- s=TM-DKIM-20210503141657; t=1666618863;
- bh=KtfCxF3VhIYx3CXyDTo5AKzO6JYre2ypx27bbgcYq2k=; l=2894;
- h=From:To:Date;
- b=05Tmzxa60CNLJ3rU94Y7O0bxToQZJTwCTyplR+bJt75UYGHfp/y18c/wRNTOMJ34m
- MMu0uGUzeAbxw1VpvYUqfmPhsLsCAuN78r99FEYARTUij4UDO1d7X0PczxLSaubD9v
- o6A8au7V3pfdB4RVn9IigKwEPyIJ58Rz2Eyq+sqtu3HyqlW4w97oYSYP/1h5SFRMgV
- Qy065aJ31GFl66l63YHtgfkirGgCa1ODcYWODzFPNOfuqfBYdJiDq8Dq8VxmLykek1
- mfiI2FVNshSUaaiJtyI5K5waqNAyzBGy3Kmgywi6QaZuN8ZzjoqCo8WZdIjyt8aYnN
- uYR4XxxhrJZXA==
-Cc: johan.hedberg@gmail.com, linux-kernel@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, marcel@holtmann.org
+In-Reply-To: <Y1ICvUwglbxkqE+v@T590>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
+Cc: Jens Axboe <axboe@kernel.dk>, djeffery@redhat.com,
+ Bart Van Assche <bvanassche@acm.org>, linux-scsi@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-block@vger.kernel.org,
+ Christoph Hellwig <hch@lst.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -138,95 +96,112 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============4138128205470796275=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The current version of the configuration structure has unaligned
-16-bit fields, but according to the specification [1], access to
-the configuration space must be aligned.
 
-Add a second, aligned  version of the configuration structure
-and a new feature bit indicating that this version is being used.
+--===============4138128205470796275==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="p/CIZd9qse9A1PsE"
+Content-Disposition: inline
 
-[1] https://docs.oasis-open.org/virtio/virtio/v1.1/virtio-v1.1.pdf
 
-Signed-off-by: Igor Skalkin <Igor.Skalkin@opensynergy.com>
----
- drivers/bluetooth/virtio_bt.c  | 16 +++++++++++++---
- include/uapi/linux/virtio_bt.h |  8 ++++++++
- 2 files changed, 21 insertions(+), 3 deletions(-)
+--p/CIZd9qse9A1PsE
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/bluetooth/virtio_bt.c b/drivers/bluetooth/virtio_bt.c
-index 67c21263f9e0..35f8041722c8 100644
---- a/drivers/bluetooth/virtio_bt.c
-+++ b/drivers/bluetooth/virtio_bt.c
-@@ -306,7 +306,12 @@ static int virtbt_probe(struct virtio_device *vdev)
- 	if (virtio_has_feature(vdev, VIRTIO_BT_F_VND_HCI)) {
- 		__u16 vendor;
- 
--		virtio_cread(vdev, struct virtio_bt_config, vendor, &vendor);
-+		if (virtio_has_feature(vdev, VIRTIO_BT_F_CONFIG_V2))
-+			virtio_cread(vdev, struct virtio_bt_config_v2,
-+				     vendor, &vendor);
-+		else
-+			virtio_cread(vdev, struct virtio_bt_config,
-+				     vendor, &vendor);
- 
- 		switch (vendor) {
- 		case VIRTIO_BT_CONFIG_VENDOR_ZEPHYR:
-@@ -339,8 +344,12 @@ static int virtbt_probe(struct virtio_device *vdev)
- 	if (virtio_has_feature(vdev, VIRTIO_BT_F_MSFT_EXT)) {
- 		__u16 msft_opcode;
- 
--		virtio_cread(vdev, struct virtio_bt_config,
--			     msft_opcode, &msft_opcode);
-+		if (virtio_has_feature(vdev, VIRTIO_BT_F_CONFIG_V2))
-+			virtio_cread(vdev, struct virtio_bt_config_v2,
-+				     msft_opcode, &msft_opcode);
-+		else
-+			virtio_cread(vdev, struct virtio_bt_config,
-+				     msft_opcode, &msft_opcode);
- 
- 		hci_set_msft_opcode(hdev, msft_opcode);
- 	}
-@@ -387,6 +396,7 @@ static const unsigned int virtbt_features[] = {
- 	VIRTIO_BT_F_VND_HCI,
- 	VIRTIO_BT_F_MSFT_EXT,
- 	VIRTIO_BT_F_AOSP_EXT,
-+	VIRTIO_BT_F_CONFIG_V2,
- };
- 
- static struct virtio_driver virtbt_driver = {
-diff --git a/include/uapi/linux/virtio_bt.h b/include/uapi/linux/virtio_bt.h
-index a7bd48daa9a9..af798f4c9680 100644
---- a/include/uapi/linux/virtio_bt.h
-+++ b/include/uapi/linux/virtio_bt.h
-@@ -9,6 +9,7 @@
- #define VIRTIO_BT_F_VND_HCI	0	/* Indicates vendor command support */
- #define VIRTIO_BT_F_MSFT_EXT	1	/* Indicates MSFT vendor support */
- #define VIRTIO_BT_F_AOSP_EXT	2	/* Indicates AOSP vendor support */
-+#define VIRTIO_BT_F_CONFIG_V2	3	/* Use second version configuration */
- 
- enum virtio_bt_config_type {
- 	VIRTIO_BT_CONFIG_TYPE_PRIMARY	= 0,
-@@ -28,4 +29,11 @@ struct virtio_bt_config {
- 	__u16 msft_opcode;
- } __attribute__((packed));
- 
-+struct virtio_bt_config_v2 {
-+	__u8  type;
-+	__u8  alignment;
-+	__u16 vendor;
-+	__u16 msft_opcode;
-+};
-+
- #endif /* _UAPI_LINUX_VIRTIO_BT_H */
--- 
-2.37.2
+On Fri, Oct 21, 2022 at 10:23:57AM +0800, Ming Lei wrote:
+> On Thu, Oct 20, 2022 at 04:01:11PM -0400, Stefan Hajnoczi wrote:
+> > On Thu, Oct 20, 2022 at 05:10:13PM +0800, Ming Lei wrote:
+> > > Hi,
+> > >=20
+> > > David Jeffery found one double ->queue_rq() issue, so far it can
+> > > be triggered in the following two cases:
+> > >=20
+> > > 1) scsi driver in guest kernel
+> > >=20
+> > > - the story could be long vmexit latency or long preempt latency of
+> > > vCPU pthread, then IO req is timed out before queuing the request
+> > > to hardware but after calling blk_mq_start_request() during ->queue_r=
+q(),
+> > > then timeout handler handles it by requeue, then double ->queue_rq() =
+is
+> > > caused, and kernel panic
+> > >=20
+> > > 2) burst of kernel messages from irq handler=20
+> > >=20
+> > > For 1), I think it is one reasonable case, given latency from host si=
+de
+> > > can come anytime in theory because vCPU is emulated by one normal host
+> > > pthread which can be preempted anywhere. For 2), I guess kernel messa=
+ge is
+> > > supposed to be rate limited.
+> > >=20
+> > > Firstly, is this kind of so long(30sec) random latency when running k=
+ernel
+> > > code something normal? Or do we need to take care of it? IMO, it looks
+> > > reasonable in case of VM, but our VM experts may have better idea abo=
+ut this
+> > > situation. Also the default 30sec timeout could be reduced via sysfs =
+or
+> > > drivers.
+> >=20
+> > 30 seconds is a long latency that does not occur during normal
+> > operation, but unfortunately does happen on occasion.
+>=20
+> Thanks for the confirmation!
+>=20
+> >=20
+> > I think there's an interest in understanding the root cause and solving
+> > long latencies (if possible) in the QEMU/KVM communities. We can
+> > investigate specific cases on kvm@vger.kernel.org and/or
+> > qemu-devel@nongnu.org.
+>=20
+> The issue was original reported on VMware VM, but maybe David can figure
+> out how to trigger it on QEMU/KVM.
+
+A very basic question:
+
+The virtio_blk driver has no q->mq_ops->timeout() callback. Why does the
+block layer still enable the timeout mechanism when the driver doesn't
+implement ->timeout()?
+
+I saw there was some "idle" hctx logic and I guess the requests are
+resubmitted (although it wasn't obvious to me how that happens in the
+code)? Maybe that's why the timer is still used if the driver doesn't
+care about timeouts...
+
+Stefan
+
+--p/CIZd9qse9A1PsE
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmNWr58ACgkQnKSrs4Gr
+c8hlugf/Zm8Eno2AVQxjiXkuaB/DSkHQ20Y/6eP+D5toFYHpxDXd1VEVRNbRuM6S
+kZoO6p8BAojnvB3V1nEIXX0zEtzT7Si8rwL5vN2ygFUB8zam0H/pI/JHqFRuXdqc
+vJ606Eg3QBpQeNCH6hoN1z0uxth4LJdAAhiHFIGSFtz32vi9b/pAE1NgX6Ah74cP
+sg1Y/PXajKux/H4nm0NZnh2I89PX3Lw1pVDccbShlbNIk3+UQvXZRRkLj8YVVk6v
+TBxKmOuFMzh7iCjBRR5ruZoI+ULwodiJLYF057O8H1gMO0oGdUthqLU1YAQ8Ej0d
+t9QCP3hK5W+1RYwJfEYGBFgr31CEEQ==
+=+6cb
+-----END PGP SIGNATURE-----
+
+--p/CIZd9qse9A1PsE--
+
+
+--===============4138128205470796275==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============4138128205470796275==--
+
