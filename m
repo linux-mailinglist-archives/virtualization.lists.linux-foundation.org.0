@@ -2,94 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6846E61812D
-	for <lists.virtualization@lfdr.de>; Thu,  3 Nov 2022 16:15:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id AC660618110
+	for <lists.virtualization@lfdr.de>; Thu,  3 Nov 2022 16:15:05 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 8372440BD6;
-	Thu,  3 Nov 2022 15:15:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8372440BD6
+	by smtp2.osuosl.org (Postfix) with ESMTP id 1F8BE40BCF;
+	Thu,  3 Nov 2022 15:15:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1F8BE40BCF
 Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=f492smjE;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=0OWWqS/A
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=zCzHweR6;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=paKS2cvR
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id RX_bkgu5ddqV; Thu,  3 Nov 2022 15:15:04 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 159A840BCE;
-	Thu,  3 Nov 2022 15:15:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 159A840BCE
+	with ESMTP id 7thHdr6O4pBQ; Thu,  3 Nov 2022 15:15:03 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id CA41640BC6;
+	Thu,  3 Nov 2022 15:15:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CA41640BC6
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DD59BC007D;
-	Thu,  3 Nov 2022 15:15:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 464F9C0084;
+	Thu,  3 Nov 2022 15:15:02 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 24908C0083
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 10E06C002D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Nov 2022 15:15:02 +0000 (UTC)
+ Thu,  3 Nov 2022 15:15:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 224CC61004
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6FF296077D
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Nov 2022 15:14:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 224CC61004
+ Thu,  3 Nov 2022 15:14:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6FF296077D
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=f492smjE; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=zCzHweR6; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=0OWWqS/A
+ header.s=susede2_ed25519 header.b=paKS2cvR
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id saLzgXS8wnlf
+ with ESMTP id nUAx_LdRsk3n
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Nov 2022 15:14:57 +0000 (UTC)
+ Thu,  3 Nov 2022 15:14:55 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4517B61008
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4517B61008
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B887861005
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B887861005
  for <virtualization@lists.linux-foundation.org>;
- Thu,  3 Nov 2022 15:14:57 +0000 (UTC)
+ Thu,  3 Nov 2022 15:14:55 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id A05411F8D0;
- Thu,  3 Nov 2022 15:14:53 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 181AB21DE2;
+ Thu,  3 Nov 2022 15:14:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1667488493; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1667488494; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EFk8gpKJydjM+fwMWE9ut0kHu5wwTQClJK0OS12MSKc=;
- b=f492smjEQCmdi3Dsdo/Ey7rUqRWTZBazpiRCvsxccZ5pk+IqU+l2jP98mg2AqAYsY5OZTH
- 8ttUnMBMm/YowH8elwLoezAB7lpvKQ54XusD4G4OcwJ2iELNOvf/SxuYt7k6QYTnrzPaED
- WV2jr0n8+23t8XnbHwfNYnL1NGwTmHg=
+ bh=DAeMCwRCJM5hznGIXRhbDEzf9LOpLMgsqs12CnL2W3Y=;
+ b=zCzHweR6BnCedpkcTlfiK+JVAZLFhSUtaTciouOpNU3CvL1HPp1mHw+SNd0AEa0gpfc8Gd
+ dqd9mR7dMx4wPMwRBpSTBK10OvAW4U7cYCgkIYFln0/pKqhd/lWyqNF9/xv44+znJcgDcf
+ 770aUvTU8jbIsmPqWEKZYQzdJNhMfds=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1667488493;
+ s=susede2_ed25519; t=1667488494;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=EFk8gpKJydjM+fwMWE9ut0kHu5wwTQClJK0OS12MSKc=;
- b=0OWWqS/ATSchqMJpxB8R5mVbqv+v1fCQwAfHIS01vRBK3a4fqcoXlsoRnFSrw0ImmQXMSP
- PwwNXJaQDMGj2WAg==
+ bh=DAeMCwRCJM5hznGIXRhbDEzf9LOpLMgsqs12CnL2W3Y=;
+ b=paKS2cvRRwa0Vi1ztoK9HitUEgaOXprUJdSvgtBEQ8sBWSJSo8uFGwcFxNSL6ZS1xGodf8
+ 3VE/OD++GHQfnYCQ==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 3137313AAF;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A1AEE13ADB;
  Thu,  3 Nov 2022 15:14:53 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id 0CU2C+3aY2PBGgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id UCGuJu3aY2PBGgAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Thu, 03 Nov 2022 15:14:53 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@gmail.com, sam@ravnborg.org, javierm@redhat.com,
  mripard@kernel.org, maarten.lankhorst@linux.intel.com
-Subject: [PATCH v3 08/23] drm/rockchip: Don't set struct
- drm_driver.output_poll_changed
-Date: Thu,  3 Nov 2022 16:14:31 +0100
-Message-Id: <20221103151446.2638-9-tzimmermann@suse.de>
+Subject: [PATCH v3 09/23] drm/panel-ili9341: Include <linux/backlight.h>
+Date: Thu,  3 Nov 2022 16:14:32 +0100
+Message-Id: <20221103151446.2638-10-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.0
 In-Reply-To: <20221103151446.2638-1-tzimmermann@suse.de>
 References: <20221103151446.2638-1-tzimmermann@suse.de>
@@ -122,41 +121,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Don't set struct drm_driver.output_poll_changed. It's used to restore
-the fbdev console. But as rockchip uses generic fbdev emulation, the
-console is being restored by the DRM client helpers already. See the
-functions drm_kms_helper_hotplug_event() and
-drm_kms_helper_connector_hotplug_event() in drm_probe_helper.c.
-
-v2:
-	* fix commit description (Christian)
+Include <linux/backlight.h> for devm_of_find_backlight().
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
 ---
- drivers/gpu/drm/rockchip/rockchip_drm_fb.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/gpu/drm/panel/panel-ilitek-ili9341.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-index 092bf863110b7..7de64b0ad047f 100644
---- a/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-+++ b/drivers/gpu/drm/rockchip/rockchip_drm_fb.c
-@@ -9,7 +9,6 @@
- #include <drm/drm.h>
- #include <drm/drm_atomic.h>
- #include <drm/drm_damage_helper.h>
--#include <drm/drm_fb_helper.h>
- #include <drm/drm_fourcc.h>
- #include <drm/drm_framebuffer.h>
- #include <drm/drm_gem_framebuffer_helper.h>
-@@ -101,7 +100,6 @@ rockchip_fb_create(struct drm_device *dev, struct drm_file *file,
+diff --git a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+index 39dc40cf681f0..b59472c29a40d 100644
+--- a/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
++++ b/drivers/gpu/drm/panel/panel-ilitek-ili9341.c
+@@ -18,6 +18,7 @@
+  * Copyright 2018 David Lechner <david@lechnology.com>
+  */
  
- static const struct drm_mode_config_funcs rockchip_drm_mode_config_funcs = {
- 	.fb_create = rockchip_fb_create,
--	.output_poll_changed = drm_fb_helper_output_poll_changed,
- 	.atomic_check = drm_atomic_helper_check,
- 	.atomic_commit = drm_atomic_helper_commit,
- };
++#include <linux/backlight.h>
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
+ #include <linux/gpio/consumer.h>
 -- 
 2.38.0
 
