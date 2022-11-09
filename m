@@ -1,105 +1,105 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2FA54622864
-	for <lists.virtualization@lfdr.de>; Wed,  9 Nov 2022 11:25:21 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 38DB1622865
+	for <lists.virtualization@lfdr.de>; Wed,  9 Nov 2022 11:25:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 501E460E82;
-	Wed,  9 Nov 2022 10:25:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 501E460E82
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Cubzxsp/
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7DFFF81A3B;
+	Wed,  9 Nov 2022 10:25:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7DFFF81A3B
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Zm66+uF3
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id D0VzekVI5dhn; Wed,  9 Nov 2022 10:25:18 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dZLzNIOAf21y; Wed,  9 Nov 2022 10:25:20 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 1C7A660AFE;
-	Wed,  9 Nov 2022 10:25:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1C7A660AFE
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 45460818D7;
+	Wed,  9 Nov 2022 10:25:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 45460818D7
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 56968C0077;
-	Wed,  9 Nov 2022 10:25:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 85D1DC0077;
+	Wed,  9 Nov 2022 10:25:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 032C9C002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F32F5C002D
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Nov 2022 10:25:17 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id C9F0A401EA
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Nov 2022 10:25:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C9F0A401EA
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=Zm66+uF3
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Qw0AvDli4m67
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Nov 2022 10:25:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D84EC401BD
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id D84EC401BD
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Nov 2022 10:25:16 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D29A540B42
- for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Nov 2022 10:25:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D29A540B42
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=Cubzxsp/
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lTt7Xljk2FGv
- for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Nov 2022 10:25:13 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B1D8C4019D
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B1D8C4019D
- for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Nov 2022 10:25:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1667989512;
+ s=mimecast20190719; t=1667989515;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=yog0hcuy+DRZPETd9YkKxOoct4jxmNsATV6V9Xx3MWc=;
- b=Cubzxsp/FhdnicGCbhVeu3i8DFdv7sJKe48wsnkZMoQp7Hvgc1+gTA+spZ+aO3T13aChYp
- XCqZeEC9QcOT8MOzop+Pwni7Qv2zkK7Cpq4grURXR2I38IACB64iJgShINi3+0gf+4AT3X
- seVrIsp9h3SN0sk9trc1CdPCY0fFV7g=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=XonZz/B2W6BqtiPIn1XQ7dqlSI0WP9PGZyzmQRe2lsc=;
+ b=Zm66+uF3sVBCczxY4QxIbu3wMYa/qP6OSuU8ZFH1AP6Sme9s+jaSiD39xcrO+9WL9OUvQv
+ v8Jn2hIMwxR336G358pkdYyN8yL/7YfJ5a0wZSliEdHUYkAKhZeuHG40C69es8/KywTNO3
+ Xdkz0fFz26filpd0q8dEbaNnwFwVxK8=
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
+ [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-583-642g7PYwP-SWBcsTYHJT-A-1; Wed, 09 Nov 2022 05:25:11 -0500
-X-MC-Unique: 642g7PYwP-SWBcsTYHJT-A-1
-Received: by mail-qk1-f198.google.com with SMTP id
- bl21-20020a05620a1a9500b006fa35db066aso15381185qkb.19
+ us-mta-670-HIR9sv_qPK-XVhyAHEn3Iw-1; Wed, 09 Nov 2022 05:25:14 -0500
+X-MC-Unique: HIR9sv_qPK-XVhyAHEn3Iw-1
+Received: by mail-qv1-f69.google.com with SMTP id
+ g1-20020ad45101000000b004bb5eb9913fso11455255qvp.16
  for <virtualization@lists.linux-foundation.org>;
- Wed, 09 Nov 2022 02:25:11 -0800 (PST)
+ Wed, 09 Nov 2022 02:25:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yog0hcuy+DRZPETd9YkKxOoct4jxmNsATV6V9Xx3MWc=;
- b=wdUK/xhqsQYUQMxLPBwVzQEuHacSmAWym/EhNatF2UPj+g8xnIHE85sjZjxiGLqFnT
- lQWCt7iHF2xwWPk/3L+Yqw8H7o848Ka+K9h7crM+aHKkUZLLqQawOEQCTqI2s9b0PhHh
- F0dS9x3NI60zQNXkU7Wh3nE8R/HAZRls7qVyL5aWVuydJirGxfKFX3uFsQJvZgi+9Ga3
- SMnIaUa1w/J8GfCQw/YzkiQmUQ90rdFCfMIoxskkVaLjOMjzRPdA8+/gM+GatJrES8Sb
- jsEG7jqHlTWzeLZlSGWh0/3KZWX1pAe2RZT7dro00oWztAaOZ7OG+TOePf7UH9QOwbhS
- 6Y5Q==
-X-Gm-Message-State: ACrzQf3UqU39yTbmDpuX4pcxTSD99rB6Kk9SdPgXA4aId0EeIblw8n2n
- 6QJ4zetz+4vsegQYNfBdjQkuXeTSzbFforqUfQzr+BGNxc89rZ09X+wLjMhKk2m9liJ9rKWZQ5x
- lkT4Cy9y9LPwjWelAvOpIdZZZl5UQ2UBdMnh0ucKVlpji/59KKQyxLH4GPOSwixAHcJpDxCxhap
- qyNqBksNffNo0WGCeJsQ==
-X-Received: by 2002:a05:622a:12:b0:3a5:6899:5add with SMTP id
- x18-20020a05622a001200b003a568995addmr20183673qtw.629.1667989510838; 
- Wed, 09 Nov 2022 02:25:10 -0800 (PST)
-X-Google-Smtp-Source: AMsMyM7dHRvHahxNPyxd5cXNPDwYDthvEkrvK4CouVYmtTTQjEql4SHBFw0gbhGAtAaO5z7i7a0AnQ==
-X-Received: by 2002:a05:622a:12:b0:3a5:6899:5add with SMTP id
- x18-20020a05622a001200b003a568995addmr20183656qtw.629.1667989510546; 
- Wed, 09 Nov 2022 02:25:10 -0800 (PST)
+ bh=XonZz/B2W6BqtiPIn1XQ7dqlSI0WP9PGZyzmQRe2lsc=;
+ b=jSAvfwmkkp36tpdU1TJOCN9Xn3nIx+PRRpGqB6suw3zaN4MHbZKqlvxnEoayx4RlIc
+ fOS9CM8GcdgF0tKU3cZZ5AlXQXA9CIjsNIyKPY/3OTRPVNDKD3MvgHsSK6+E2dp3BvCJ
+ HNAjlFl/jnYmbYcGrx19MoMw3PSRiOL8pp3sgTj7ki56aNBYLhPKV6YpwFro5E41PHzG
+ vWRyowCAnpFayTSTE5HZURnzOmWZA22lCndKhnSDnJtstv0ys6fHJBllxczP8KDInNhb
+ JtENd/jVuQE+t6t8vOHCxVgQxeqsCYywoSux575kpvRqC+a4YLNy4RPmaA85fCWdEHoP
+ 7EFw==
+X-Gm-Message-State: ACrzQf0PZiwCsk566YN4fbOmWA6Jhwvr1wBSWQOUT/mr7RDMbxPCWzIm
+ Fs3J0FLmAZGvwOTTfuEPCTS2giO2QQxW3ck3PVtxcebr5cP/szMfIwF8JijMacWaQzuPmsMu7Tk
+ fyPGzrQUcpYcqWYN8gcGKQWaS84CSJrhqC92Y7OkqZDRpIp4+x5Cd/STboZOm3/9ZZj7a3yEnVp
+ AzcGAHDhx6YIm9V8KUoQ==
+X-Received: by 2002:a37:8943:0:b0:6fa:a454:c8d2 with SMTP id
+ l64-20020a378943000000b006faa454c8d2mr16840226qkd.534.1667989513434; 
+ Wed, 09 Nov 2022 02:25:13 -0800 (PST)
+X-Google-Smtp-Source: AMsMyM7bgS44r6yW8TpTmUka6iM1lFnyLysINGmhFPYaKUR8f+8FNUgnbq7sR8Utx2EfXdQOWtRelQ==
+X-Received: by 2002:a37:8943:0:b0:6fa:a454:c8d2 with SMTP id
+ l64-20020a378943000000b006faa454c8d2mr16840207qkd.534.1667989513122; 
+ Wed, 09 Nov 2022 02:25:13 -0800 (PST)
 Received: from step1.redhat.com (host-82-53-134-234.retail.telecomitalia.it.
  [82.53.134.234]) by smtp.gmail.com with ESMTPSA id
- bj10-20020a05620a190a00b006fa313bf185sm10827522qkb.8.2022.11.09.02.25.08
+ bj10-20020a05620a190a00b006fa313bf185sm10827522qkb.8.2022.11.09.02.25.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Nov 2022 02:25:09 -0800 (PST)
+ Wed, 09 Nov 2022 02:25:12 -0800 (PST)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH v2 1/2] vringh: fix range used in iotlb_translate()
-Date: Wed,  9 Nov 2022 11:25:02 +0100
-Message-Id: <20221109102503.18816-2-sgarzare@redhat.com>
+Subject: [PATCH v2 2/2] vhost: fix range used in translate_desc()
+Date: Wed,  9 Nov 2022 11:25:03 +0100
+Message-Id: <20221109102503.18816-3-sgarzare@redhat.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221109102503.18816-1-sgarzare@redhat.com>
 References: <20221109102503.18816-1-sgarzare@redhat.com>
@@ -127,7 +127,7 @@ Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 vhost_iotlb_itree_first() requires `start` and `last` parameters
 to search for a mapping that overlaps the range.
 
-In iotlb_translate() we cyclically call vhost_iotlb_itree_first(),
+In translate_desc() we cyclically call vhost_iotlb_itree_first(),
 incrementing `addr` by the amount already translated, so rightly
 we move the `start` parameter passed to vhost_iotlb_itree_first(),
 but we should hold the `last` parameter constant.
@@ -135,36 +135,38 @@ but we should hold the `last` parameter constant.
 Let's fix it by saving the `last` parameter value before incrementing
 `addr` in the loop.
 
-Fixes: 9ad9c49cfe97 ("vringh: IOTLB support")
+Fixes: a9709d6874d5 ("vhost: convert pre sorted vhost memory array to interval tree")
 Acked-by: Jason Wang <jasowang@redhat.com>
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- drivers/vhost/vringh.c | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+v2:
+- Replaced Fixes tag with the right one [Jason]
+---
+ drivers/vhost/vhost.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
-index 11f59dd06a74..828c29306565 100644
---- a/drivers/vhost/vringh.c
-+++ b/drivers/vhost/vringh.c
-@@ -1102,7 +1102,7 @@ static int iotlb_translate(const struct vringh *vrh,
- 	struct vhost_iotlb_map *map;
- 	struct vhost_iotlb *iotlb = vrh->iotlb;
- 	int ret = 0;
+diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
+index 40097826cff0..3c2359570df9 100644
+--- a/drivers/vhost/vhost.c
++++ b/drivers/vhost/vhost.c
+@@ -2053,7 +2053,7 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
+ 	struct vhost_dev *dev = vq->dev;
+ 	struct vhost_iotlb *umem = dev->iotlb ? dev->iotlb : dev->umem;
+ 	struct iovec *_iov;
 -	u64 s = 0;
 +	u64 s = 0, last = addr + len - 1;
+ 	int ret = 0;
  
- 	spin_lock(vrh->iotlb_lock);
- 
-@@ -1114,8 +1114,7 @@ static int iotlb_translate(const struct vringh *vrh,
+ 	while ((u64)len > s) {
+@@ -2063,7 +2063,7 @@ static int translate_desc(struct vhost_virtqueue *vq, u64 addr, u32 len,
  			break;
  		}
  
--		map = vhost_iotlb_itree_first(iotlb, addr,
--					      addr + len - 1);
-+		map = vhost_iotlb_itree_first(iotlb, addr, last);
- 		if (!map || map->start > addr) {
- 			ret = -EINVAL;
- 			break;
+-		map = vhost_iotlb_itree_first(umem, addr, addr + len - 1);
++		map = vhost_iotlb_itree_first(umem, addr, last);
+ 		if (map == NULL || map->start > addr) {
+ 			if (umem != dev->iotlb) {
+ 				ret = -EFAULT;
 -- 
 2.38.1
 
