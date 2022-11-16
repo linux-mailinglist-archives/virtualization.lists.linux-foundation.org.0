@@ -1,87 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3A7D962C37E
-	for <lists.virtualization@lfdr.de>; Wed, 16 Nov 2022 17:09:28 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63CE062C384
+	for <lists.virtualization@lfdr.de>; Wed, 16 Nov 2022 17:09:33 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 9C3D840BF2;
-	Wed, 16 Nov 2022 16:09:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9C3D840BF2
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=xbTx6S29;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=YyAmPt1Z
+	by smtp3.osuosl.org (Postfix) with ESMTP id DCA4060FA7;
+	Wed, 16 Nov 2022 16:09:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DCA4060FA7
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=K3BADT4L;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=JxkRIlzX
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id p5clZx6vmjmh; Wed, 16 Nov 2022 16:09:25 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 0nf2gpBqpVrA; Wed, 16 Nov 2022 16:09:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 3C0E740BE4;
-	Wed, 16 Nov 2022 16:09:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3C0E740BE4
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 60CC360F9F;
+	Wed, 16 Nov 2022 16:09:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 60CC360F9F
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1E4B7C0032;
-	Wed, 16 Nov 2022 16:09:24 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B1A3C007C;
+	Wed, 16 Nov 2022 16:09:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EB412C0032
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2E9B0C0083
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Nov 2022 16:09:22 +0000 (UTC)
+ Wed, 16 Nov 2022 16:09:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C4E3A41717
+ by smtp2.osuosl.org (Postfix) with ESMTP id 040EE40181
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Nov 2022 16:09:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C4E3A41717
-Authentication-Results: smtp4.osuosl.org;
+ Wed, 16 Nov 2022 16:09:23 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 040EE40181
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=xbTx6S29; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=K3BADT4L; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=YyAmPt1Z
+ header.s=susede2_ed25519 header.b=JxkRIlzX
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oNatzKYxsV2f
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GQ41aO0qeYza
  for <virtualization@lists.linux-foundation.org>;
  Wed, 16 Nov 2022 16:09:22 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D044541704
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D044541704
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 542D240B39
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 542D240B39
  for <virtualization@lists.linux-foundation.org>;
- Wed, 16 Nov 2022 16:09:21 +0000 (UTC)
+ Wed, 16 Nov 2022 16:09:22 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id A0ECE22007;
- Wed, 16 Nov 2022 16:09:19 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 0034C1F94F;
+ Wed, 16 Nov 2022 16:09:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1668614959; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1668614960; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JvpkM/izKLg/21KkJFaBuVIiv7yNiLWLCJaB7tUbxI0=;
- b=xbTx6S29otT1wtF2RG9cfNoIzfujQI6ujaxR/9+/Njcjf+yoU2kRZHIMR0EUdcnWqgZPZV
- gT8MPo5Bsr6ll+53UmMqOxWFyVVtEWZpB7JyBfx9Mz4g07Lpv2/KW2xys67icn7ytk46Hw
- Amvyad/1evaS0bYphGRBnYbhPp2Njd4=
+ bh=w+CVsM8IcVIq9LFB38VqRwgplmFsK7UilN7VFKCV7Vg=;
+ b=K3BADT4LZSK8jR3mKvHhDkdIw3ObCJ7iAdRAp9yQqr9RrFqVvzqRxQLgdBiKcKK7nG6AzJ
+ S0S+SNL0KJRKNDyDxEpIiqFRXjzT8c51EXv1fTbO5cKkGQ0i4Q12DvFB5VKr49tqjeSHOk
+ 9Z0/VD5CoaLRkRIwHjdbmO9TvvzOLD8=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1668614959;
+ s=susede2_ed25519; t=1668614960;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=JvpkM/izKLg/21KkJFaBuVIiv7yNiLWLCJaB7tUbxI0=;
- b=YyAmPt1ZTKalg7VqwIV/Trb17TsX9k3iCqlxIO0LJLaf/bx2KUStm2PgDeRerQga+c5IjG
- vcYNwfnnkTh0A5Bw==
+ bh=w+CVsM8IcVIq9LFB38VqRwgplmFsK7UilN7VFKCV7Vg=;
+ b=JxkRIlzXylt0EmNh0D3Scskb4zPHcR0KObCv5cTls99UL0cxDXHZrBWoToGjkdMj9ysE/N
+ Lm6fqsazNtdKVpBg==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 5815D134CE;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id A3A1313AC7;
  Wed, 16 Nov 2022 16:09:19 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id yE6nFC8LdWP/fwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id 0N0WJy8LdWP/fwAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Wed, 16 Nov 2022 16:09:19 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
@@ -89,9 +89,9 @@ To: daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
  tiantao6@hisilicon.com, jstultz@google.com, kong.kongxinwei@hisilicon.com,
  puck.chen@hisilicon.com, paul.kocialkowski@bootlin.com, javierm@redhat.com,
  airlied@redhat.com, kraxel@redhat.com
-Subject: [PATCH 2/7] drm/logicvc: Fix preferred fbdev cpp
-Date: Wed, 16 Nov 2022 17:09:12 +0100
-Message-Id: <20221116160917.26342-3-tzimmermann@suse.de>
+Subject: [PATCH 3/7] drm/cirrus: Decouple fbdev bpp value from color depth
+Date: Wed, 16 Nov 2022 17:09:13 +0100
+Message-Id: <20221116160917.26342-4-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221116160917.26342-1-tzimmermann@suse.de>
 References: <20221116160917.26342-1-tzimmermann@suse.de>
@@ -114,45 +114,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Logicvc can have different values for the preferred color depth. Set
-the fbdev bpp value depending on the runtime value.
+Cirrus has a preferred color depth of 16 bit; also use it as fbdev
+bpp value. Don't use the color depth directly. It has a different
+meaning than bpp and both cannot be used interchangeably.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/logicvc/logicvc_drm.c | 14 +++++++++++++-
- 1 file changed, 13 insertions(+), 1 deletion(-)
+ drivers/gpu/drm/tiny/cirrus.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/logicvc/logicvc_drm.c b/drivers/gpu/drm/logicvc/logicvc_drm.c
-index 9de24d9f0c963..d9cd5d967e31f 100644
---- a/drivers/gpu/drm/logicvc/logicvc_drm.c
-+++ b/drivers/gpu/drm/logicvc/logicvc_drm.c
-@@ -301,6 +301,7 @@ static int logicvc_drm_probe(struct platform_device *pdev)
- 	struct regmap *regmap = NULL;
- 	struct resource res;
- 	void __iomem *base;
-+	unsigned int preferred_bpp;
- 	int irq;
- 	int ret;
+diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
+index 678c2ef1cae70..cf35b60905032 100644
+--- a/drivers/gpu/drm/tiny/cirrus.c
++++ b/drivers/gpu/drm/tiny/cirrus.c
+@@ -604,7 +604,7 @@ static int cirrus_pci_probe(struct pci_dev *pdev,
+ 	if (ret)
+ 		return ret;
  
-@@ -438,7 +439,18 @@ static int logicvc_drm_probe(struct platform_device *pdev)
- 		goto error_mode;
- 	}
- 
--	drm_fbdev_generic_setup(drm_dev, drm_dev->mode_config.preferred_depth);
-+	switch (drm_dev->mode_config.preferred_depth) {
-+	case 15:
-+	case 16:
-+		preferred_bpp = 16;
-+		break;
-+	case 24:
-+	case 32:
-+	default:
-+		preferred_bpp = 32;
-+		break;
-+	}
-+	drm_fbdev_generic_setup(drm_dev, preferred_bpp);
- 
+-	drm_fbdev_generic_setup(dev, dev->mode_config.preferred_depth);
++	drm_fbdev_generic_setup(dev, 16);
  	return 0;
+ }
  
 -- 
 2.38.1
