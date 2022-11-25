@@ -1,82 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id B478D638CFA
-	for <lists.virtualization@lfdr.de>; Fri, 25 Nov 2022 16:06:47 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35E52638CFE
+	for <lists.virtualization@lfdr.de>; Fri, 25 Nov 2022 16:06:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 386F8611CB;
-	Fri, 25 Nov 2022 15:06:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 386F8611CB
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=Kum0WM8T
+	by smtp4.osuosl.org (Postfix) with ESMTP id ABD2D41970;
+	Fri, 25 Nov 2022 15:06:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ABD2D41970
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=JdzEef9Z
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hWqwhaHtYuJU; Fri, 25 Nov 2022 15:06:45 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cfGSUJjX5f_a; Fri, 25 Nov 2022 15:06:47 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id F3531611C9;
-	Fri, 25 Nov 2022 15:06:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org F3531611C9
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 3558D41D43;
+	Fri, 25 Nov 2022 15:06:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3558D41D43
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 38FD0C007C;
-	Fri, 25 Nov 2022 15:06:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 740A3C007C;
+	Fri, 25 Nov 2022 15:06:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 58B62C002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BF0FDC002D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 25 Nov 2022 15:06:42 +0000 (UTC)
+ Fri, 25 Nov 2022 15:06:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 277998216B
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9A5B082162
  for <virtualization@lists.linux-foundation.org>;
- Fri, 25 Nov 2022 15:06:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 277998216B
+ Fri, 25 Nov 2022 15:06:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9A5B082162
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=Kum0WM8T
+ header.a=rsa-sha256 header.s=Intel header.b=JdzEef9Z
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oTdwShG17Lq6
+ with ESMTP id AK6glcq0HRO2
  for <virtualization@lists.linux-foundation.org>;
- Fri, 25 Nov 2022 15:06:41 +0000 (UTC)
+ Fri, 25 Nov 2022 15:06:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 80F4482159
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 016D382156
 Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 80F4482159
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 016D382156
  for <virtualization@lists.linux-foundation.org>;
- Fri, 25 Nov 2022 15:06:41 +0000 (UTC)
+ Fri, 25 Nov 2022 15:06:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1669388801; x=1700924801;
+ t=1669388804; x=1700924804;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=lRb74Ed4w5JOXpI/O/j8nJXYHPcznwfk4WiJ395xlf8=;
- b=Kum0WM8T6nGfGp57UqNYDr78n3lszXN0TPQFEuuhljQCBtnln2ntl1t6
- EgclUiXBg7n7gWO0A1DZWvDP6kujPrMe2BXLYrP5e49jIpZjhH9GNQ19H
- ZjuXDJtuCsRimsXkUC2ZmbxCd0pXzM9/Mj7hw01SbdPMJrgAa/5RXbCHu
- E9oSOzMWL5SVCfeA1VKeFTdN47KCM0j9fuojge2ZITyV6YCsbzKT6N4Gx
- lgvJ0kRKqCtZJT06MVvnyxpk0XU9fV7Q3g8ytRIXwgVmPGEF9F+Fnbi8v
- HQd2UK84WOgfHF7KQ9o/YD+mlyCy2MQPOYxDwXa85w9MUnA8HFX9oPMp7 w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10542"; a="400787417"
-X-IronPort-AV: E=Sophos;i="5.96,193,1665471600"; d="scan'208";a="400787417"
+ bh=sc7yv6l7w+mdzUT7XAZNvCklCr0OubkKRD1No7y/EJw=;
+ b=JdzEef9Z5lk8f56+IqKrKbTrqBbJAOI4a527ZjtErzdh2z+8SK0IMtbr
+ Lmwho+QLhBdd5DN/GK86BFgo+SK/JtD/XJ2UQnXiukdUtJJlsvFwpdOU3
+ BGmQpeOx2oDpV9Q0on3hBUBKAjMBFzRY2l97aJKiBxOD24mC54GkaRLeF
+ wnTAItdbx7TMCaS7DUuOQ+myFb3ilPFusdcPEUsZCf3nGv3rzwDMUqpMp
+ 3tP7pkAC4+DOq9YfxpK1MIF12hXbfgpZqlcUOonNX4SRawg6nLrUe0a8g
+ /5ieuBe/EHbud1CUJfH2jgpbBpB8JTk0PsCcwrzPTzXB+bGTP22dmO63Z A==;
+X-IronPort-AV: E=McAfee;i="6500,9779,10542"; a="400787437"
+X-IronPort-AV: E=Sophos;i="5.96,193,1665471600"; d="scan'208";a="400787437"
 Received: from orsmga003.jf.intel.com ([10.7.209.27])
  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Nov 2022 07:06:41 -0800
-X-IronPort-AV: E=McAfee;i="6500,9779,10542"; a="593240281"
-X-IronPort-AV: E=Sophos;i="5.96,193,1665471600"; d="scan'208";a="593240281"
+ 25 Nov 2022 07:06:43 -0800
+X-IronPort-AV: E=McAfee;i="6500,9779,10542"; a="593240289"
+X-IronPort-AV: E=Sophos;i="5.96,193,1665471600"; d="scan'208";a="593240289"
 Received: from unknown (HELO localhost.localdomain.bj.intel.com)
  ([10.240.193.73])
  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 Nov 2022 07:06:38 -0800
+ 25 Nov 2022 07:06:41 -0800
 From: Zhu Lingshan <lingshan.zhu@intel.com>
 To: jasowang@redhat.com,
 	mst@redhat.com
-Subject: [PATCH V2 07/12] vDPA/ifcvf: decouple config/dev IRQ requester and
- vectors allocator from the adapter
-Date: Fri, 25 Nov 2022 22:57:19 +0800
-Message-Id: <20221125145724.1129962-8-lingshan.zhu@intel.com>
+Subject: [PATCH V2 08/12] vDPA/ifcvf: ifcvf_request_irq works on ifcvf_hw
+Date: Fri, 25 Nov 2022 22:57:20 +0800
+Message-Id: <20221125145724.1129962-9-lingshan.zhu@intel.com>
 X-Mailer: git-send-email 2.31.1
 In-Reply-To: <20221125145724.1129962-1-lingshan.zhu@intel.com>
 References: <20221125145724.1129962-1-lingshan.zhu@intel.com>
@@ -99,87 +98,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This commit decouples the config irq requester, the device
-shared irq requester and the MSI vectors allocator from
-the adapter. So they can be safely invoked since probe
-before the adapter is allocated.
+All ifcvf_request_irq's callees are refactored
+to work on ifcvf_hw, so it should be decoupled
+from the adapter as well
 
 Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
 Cc: stable@vger.kernel.org
 ---
- drivers/vdpa/ifcvf/ifcvf_main.c | 21 +++++++++------------
- 1 file changed, 9 insertions(+), 12 deletions(-)
+ drivers/vdpa/ifcvf/ifcvf_main.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
-index ee9c22975119..8320bdacace8 100644
+index 8320bdacace8..cb3df395d3fb 100644
 --- a/drivers/vdpa/ifcvf/ifcvf_main.c
 +++ b/drivers/vdpa/ifcvf/ifcvf_main.c
-@@ -132,10 +132,9 @@ static void ifcvf_free_irq(struct ifcvf_hw *vf)
-  * It returns the number of allocated vectors, negative
-  * return value when fails.
-  */
--static int ifcvf_alloc_vectors(struct ifcvf_adapter *adapter)
-+static int ifcvf_alloc_vectors(struct ifcvf_hw *vf)
- {
--	struct pci_dev *pdev = adapter->pdev;
--	struct ifcvf_hw *vf = &adapter->vf;
-+	struct pci_dev *pdev = vf->pdev;
- 	int max_intr, ret;
- 
- 	/* all queues and config interrupt  */
-@@ -222,10 +221,9 @@ static int ifcvf_request_vqs_reused_irq(struct ifcvf_hw *vf)
+@@ -314,9 +314,8 @@ static int ifcvf_request_config_irq(struct ifcvf_hw *vf)
  	return -EFAULT;
  }
  
--static int ifcvf_request_dev_irq(struct ifcvf_adapter *adapter)
-+static int ifcvf_request_dev_irq(struct ifcvf_hw *vf)
+-static int ifcvf_request_irq(struct ifcvf_adapter *adapter)
++static int ifcvf_request_irq(struct ifcvf_hw *vf)
  {
--	struct pci_dev *pdev = adapter->pdev;
 -	struct ifcvf_hw *vf = &adapter->vf;
-+	struct pci_dev *pdev = vf->pdev;
- 	int i, vector, ret, irq;
- 
- 	vector = 0;
-@@ -276,10 +274,9 @@ static int ifcvf_request_vq_irq(struct ifcvf_hw *vf)
- 	return ret;
- }
- 
--static int ifcvf_request_config_irq(struct ifcvf_adapter *adapter)
-+static int ifcvf_request_config_irq(struct ifcvf_hw *vf)
- {
--	struct pci_dev *pdev = adapter->pdev;
--	struct ifcvf_hw *vf = &adapter->vf;
-+	struct pci_dev *pdev = vf->pdev;
- 	int config_vector, ret;
- 
- 	if (vf->msix_vector_status == MSIX_VECTOR_PER_VQ_AND_CONFIG)
-@@ -322,7 +319,7 @@ static int ifcvf_request_irq(struct ifcvf_adapter *adapter)
- 	struct ifcvf_hw *vf = &adapter->vf;
  	int nvectors, ret, max_intr;
  
--	nvectors = ifcvf_alloc_vectors(adapter);
-+	nvectors = ifcvf_alloc_vectors(vf);
- 	if (nvectors <= 0)
- 		return -EFAULT;
+ 	nvectors = ifcvf_alloc_vectors(vf);
+@@ -468,7 +467,7 @@ static void ifcvf_vdpa_set_status(struct vdpa_device *vdpa_dev, u8 status)
  
-@@ -333,7 +330,7 @@ static int ifcvf_request_irq(struct ifcvf_adapter *adapter)
- 
- 	if (nvectors == 1) {
- 		vf->msix_vector_status = MSIX_VECTOR_DEV_SHARED;
--		ret = ifcvf_request_dev_irq(adapter);
-+		ret = ifcvf_request_dev_irq(vf);
- 
- 		return ret;
- 	}
-@@ -342,7 +339,7 @@ static int ifcvf_request_irq(struct ifcvf_adapter *adapter)
- 	if (ret)
- 		return ret;
- 
--	ret = ifcvf_request_config_irq(adapter);
-+	ret = ifcvf_request_config_irq(vf);
- 
- 	if (ret)
- 		return ret;
+ 	if ((status & VIRTIO_CONFIG_S_DRIVER_OK) &&
+ 	    !(status_old & VIRTIO_CONFIG_S_DRIVER_OK)) {
+-		ret = ifcvf_request_irq(adapter);
++		ret = ifcvf_request_irq(vf);
+ 		if (ret) {
+ 			status = ifcvf_get_status(vf);
+ 			status |= VIRTIO_CONFIG_S_FAILED;
 -- 
 2.31.1
 
