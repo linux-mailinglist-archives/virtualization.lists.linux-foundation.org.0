@@ -1,96 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1478564A335
-	for <lists.virtualization@lfdr.de>; Mon, 12 Dec 2022 15:25:19 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id C50F364A339
+	for <lists.virtualization@lfdr.de>; Mon, 12 Dec 2022 15:25:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7FE7F40255;
-	Mon, 12 Dec 2022 14:25:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7FE7F40255
+	by smtp4.osuosl.org (Postfix) with ESMTP id 87E7340246;
+	Mon, 12 Dec 2022 14:25:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 87E7340246
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=MdCDSlAe
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=0aCBUTRz
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4nS_9jwfptFv; Mon, 12 Dec 2022 14:25:16 +0000 (UTC)
+	with ESMTP id 0K5rjetMPhjE; Mon, 12 Dec 2022 14:25:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 24E6540246;
-	Mon, 12 Dec 2022 14:25:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 24E6540246
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 523484091F;
+	Mon, 12 Dec 2022 14:25:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 523484091F
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4D2E5C0078;
-	Mon, 12 Dec 2022 14:25:15 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 91EB4C002D;
+	Mon, 12 Dec 2022 14:25:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7BE30C002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6EBBFC002D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Dec 2022 14:25:14 +0000 (UTC)
+ Mon, 12 Dec 2022 14:25:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 5415F40255
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3CDD3812C7
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Dec 2022 14:25:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5415F40255
+ Mon, 12 Dec 2022 14:25:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3CDD3812C7
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com
+ header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256
+ header.s=20210112 header.b=0aCBUTRz
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id f8EFzCRd0EjE
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VK_LHWXxInrm
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Dec 2022 14:25:13 +0000 (UTC)
+ Mon, 12 Dec 2022 14:25:17 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 51C6140246
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 51C6140246
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E058C812CD
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E058C812CD
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Dec 2022 14:25:13 +0000 (UTC)
-Received: by mail-wm1-x331.google.com with SMTP id v7so5561844wmn.0
+ Mon, 12 Dec 2022 14:25:16 +0000 (UTC)
+Received: by mail-wm1-x334.google.com with SMTP id
+ v124-20020a1cac82000000b003cf7a4ea2caso5295173wme.5
  for <virtualization@lists.linux-foundation.org>;
- Mon, 12 Dec 2022 06:25:13 -0800 (PST)
+ Mon, 12 Dec 2022 06:25:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=solid-run-com.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/VkX0ZgY+XC31wIVV7Rqaaa4AmLATaZui7Ah2xDnRSU=;
- b=MdCDSlAeAfE4xBO1BOBln/d6leue6jP5BSnNKVUzPvIhMKjGAv7wKNJv/OAHnPXBao
- tGYmgfldh4pDjjPrKgSKb8HVfwT2UuzpDyWNh79KuzcHfVXdIcSgelPCCy7gwylvcLCh
- LheOd6KbTJJauO0qnbhXZNszNkBr66U0iwtWGwDJy5bQpmccdm3zHEy/e8S5GP86BBCr
- c+AnJa8I7jiLTnbYEvOg7D4p4D4BmFbXctugQYWUxRgDrIXY9q78fcbz3/NOz7IJFqJk
- +rvhTT0OpVqGmoHVD1Xn50CG693w0KEyhwL5Ysd/3hV6soqUN7d2JAFgbIZaNBllokOl
- pJsw==
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eqrrdFR0yGu0+OvA2xJ/WZwnDOsQc12K4sxW6RZEG+U=;
+ b=0aCBUTRzSEqtv3war4tiQjO8gLQAecP3Rq+FM+pk8d6ahiKZ/FRiP6hTfXwhcl4wAC
+ DNePOiV3bh+FLaQ9qn0fFJ4SPqT6V9FMf52UoOfOQaWIzgwmvzMhHuEDivWhA49AS2QM
+ DNfioG+QVP42HUOI8tG2ELcZCgxj4CtR74Bad7/v7xG5tuC98+ahRq879AupJtpOGLsa
+ FKB3e74lv1OOgSZRl+vl5ipNVco8u0GUCY8HbSpkQmQeXBMQIkyC6DZiaSZtIiLD0/rJ
+ 0MQotRjVQL2QD3hV6/j2nMaeE7IcCua3rsZgKl6vQx20JhtmcZGzb8UYq3iSLw1mzS86
+ VlBg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/VkX0ZgY+XC31wIVV7Rqaaa4AmLATaZui7Ah2xDnRSU=;
- b=DO7MDhxj83Zh+FXKLixairGKcFz7wHOK3OWptf4RIiWinbq5UhsuQ+5FauEk3phIpX
- gx6uZ3s+YBqdtcFtDhzG7IicbmUV7QR9hPuHxDinOlauXTjwpAXTwWsccaL7n1toVfyb
- qbqfcqOXJHxTV6BBXpEYNmVwxMv8odtYOH5o2NB/3tqDKUZvlgrSyEwIxSbTTkZ0V0CN
- bUFi4z5+gYxzZBjNjAti6lOdZ5r/9mILjneXrysW77E8sDtzaWzzBSTqhZLMog1nG4Aw
- 6wZL7wUZKxSx50pbScq5r0/HPazpCL6Na5ds013EGOMzgJ66TzRo0erxSVxyywc/mujm
- 3IXQ==
-X-Gm-Message-State: ANoB5plulmfcsHGd0g36DbnmvgKpHG1b4ra6wt4MTwFm6r0FQfv/Frum
- sWsEbKgS6MApruuSOVsnkss9/tkkTArEg+li
-X-Google-Smtp-Source: AA0mqf7azZI79xLlzzwTkKfotuoktvz3SBud6DANHCbaRb2o6qqS5Mj0Ewhu77XzNgU4ftL3DIW7eQ==
-X-Received: by 2002:a05:600c:3ac7:b0:3d0:7fee:8a70 with SMTP id
- d7-20020a05600c3ac700b003d07fee8a70mr12761565wms.19.1670855110537; 
- Mon, 12 Dec 2022 06:25:10 -0800 (PST)
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eqrrdFR0yGu0+OvA2xJ/WZwnDOsQc12K4sxW6RZEG+U=;
+ b=zPeyvpcuurt0rfJ5xQbXAsg+5Wj3QigRjPV1meyDbJ5/b9hORFOQs05YUyjISwonKd
+ Rx/OywBNyIf1/U1PIVr7cKo5k/L9PBk3QhF/LrnKxj/5/z0eK4PcyjcUwWe9X1fIdzD3
+ 8wrC+ph5g09pcSetkCAhv20uIfmJMV8Y2YjBXceNZd7Jx5Z3IWQaXHO5GkFPUCHnM81n
+ LQUJwPrPlLV2/cbmeU5L1CCq4DbO2rRfEDb1vXHVkgd/LSZTg4y1WLZjCLQuaUhZmBUv
+ KNCuP19VqE+au6RMz3N9qJbb0+GXVk6iFoULAKm2QtDCyAiWyC4rzebbTZARNZRinza6
+ cAsQ==
+X-Gm-Message-State: ANoB5pmCqkwkmIJs2ilsjU6rXxQWEtxTGFw75Tra04NBedHHP2Yji9xx
+ Ujeba5S3wh+U5Gb2UaV0wOjYvMGjlMXDbRPi
+X-Google-Smtp-Source: AA0mqf4lHJ54ollxf7pUgiXEQKYXLDUubLj+Mrtu+pwLBBEIh7QSTP3lZwqAmg8AxTu8TUfvl2l33g==
+X-Received: by 2002:a05:600c:1da2:b0:3cf:5fd2:87a0 with SMTP id
+ p34-20020a05600c1da200b003cf5fd287a0mr12010376wms.40.1670855114403; 
+ Mon, 12 Dec 2022 06:25:14 -0800 (PST)
 Received: from localhost.localdomain
  (bzq-84-110-153-254.static-ip.bezeqint.net. [84.110.153.254])
  by smtp.gmail.com with ESMTPSA id
- c1-20020a05600c0a4100b003d1e3b1624dsm10662692wmq.2.2022.12.12.06.25.09
+ c1-20020a05600c0a4100b003d1e3b1624dsm10662692wmq.2.2022.12.12.06.25.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 12 Dec 2022 06:25:09 -0800 (PST)
+ Mon, 12 Dec 2022 06:25:13 -0800 (PST)
 From: Alvaro Karsz <alvaro.karsz@solid-run.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH 0/3] virtio: vdpa: new SolidNET DPU driver
-Date: Mon, 12 Dec 2022 16:24:51 +0200
-Message-Id: <20221212142454.3225177-1-alvaro.karsz@solid-run.com>
+Subject: [PATCH 1/3] Add SolidRun vendor id
+Date: Mon, 12 Dec 2022 16:24:52 +0200
+Message-Id: <20221212142454.3225177-2-alvaro.karsz@solid-run.com>
 X-Mailer: git-send-email 2.32.0
+In-Reply-To: <20221212142454.3225177-1-alvaro.karsz@solid-run.com>
+References: <20221212142454.3225177-1-alvaro.karsz@solid-run.com>
 MIME-Version: 1.0
-Cc: linux-pci@vger.kernel.org
+Cc: linux-pci@vger.kernel.org, Bjorn Helgaas <bhelgaas@google.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,34 +115,25 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This series adds a vDPA driver for SolidNET DPU.
+The vendor id is used in 2 differrent source files,
+the SNET vdpa driver and pci quirks.
 
-Patch 1 adds SolidRun vendor id to pci_ids.
-Patch 2 adds a pci quirk needed by the DPU.
-Patch 3 has the driver source code.
+Signed-off-by: Alvaro Karsz <alvaro.karsz@solid-run.com>
+---
+ include/linux/pci_ids.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Patch 1 is prerequisite for both patch 2 and patch 3.
-
-Alvaro Karsz (3):
-  Add SolidRun vendor id
-  New PCI quirk for SolidRun SNET DPU.
-  virtio: vdpa: new SolidNET DPU driver.
-
- MAINTAINERS                        |    4 +
- drivers/pci/quirks.c               |    8 +
- drivers/vdpa/Kconfig               |   11 +
- drivers/vdpa/Makefile              |    1 +
- drivers/vdpa/solidrun/Makefile     |    3 +
- drivers/vdpa/solidrun/snet_hwmon.c |  191 +++++
- drivers/vdpa/solidrun/snet_main.c  | 1114 ++++++++++++++++++++++++++++
- drivers/vdpa/solidrun/snet_vdpa.h  |  192 +++++
- include/linux/pci_ids.h            |    2 +
- 9 files changed, 1526 insertions(+)
- create mode 100644 drivers/vdpa/solidrun/Makefile
- create mode 100644 drivers/vdpa/solidrun/snet_hwmon.c
- create mode 100644 drivers/vdpa/solidrun/snet_main.c
- create mode 100644 drivers/vdpa/solidrun/snet_vdpa.h
-
+diff --git a/include/linux/pci_ids.h b/include/linux/pci_ids.h
+index b362d90eb9b..33bbe3160b4 100644
+--- a/include/linux/pci_ids.h
++++ b/include/linux/pci_ids.h
+@@ -3115,4 +3115,6 @@
+ 
+ #define PCI_VENDOR_ID_NCUBE		0x10ff
+ 
++#define PCI_VENDOR_ID_SOLIDRUN		0xd063
++
+ #endif /* _LINUX_PCI_IDS_H */
 -- 
 2.32.0
 
