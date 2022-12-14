@@ -1,51 +1,48 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9D3B364CE05
-	for <lists.virtualization@lfdr.de>; Wed, 14 Dec 2022 17:31:14 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 532EE64CE03
+	for <lists.virtualization@lfdr.de>; Wed, 14 Dec 2022 17:31:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2537F41831;
-	Wed, 14 Dec 2022 16:31:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2537F41831
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TBApN3X7
+	by smtp1.osuosl.org (Postfix) with ESMTP id C218281F18;
+	Wed, 14 Dec 2022 16:31:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C218281F18
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=cDCSKc3s
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id APRfc0RB85NX; Wed, 14 Dec 2022 16:31:11 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id A82D541850;
-	Wed, 14 Dec 2022 16:31:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A82D541850
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id an1f45CsIXF9; Wed, 14 Dec 2022 16:31:09 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 4A3D281F5E;
+	Wed, 14 Dec 2022 16:31:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4A3D281F5E
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 38C25C007D;
-	Wed, 14 Dec 2022 16:31:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7F85AC007C;
+	Wed, 14 Dec 2022 16:31:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 14F48C002D
- for <virtualization@lists.linux-foundation.org>;
- Wed, 14 Dec 2022 16:31:08 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3321081EFA
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3CCE2C002D
  for <virtualization@lists.linux-foundation.org>;
  Wed, 14 Dec 2022 16:31:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3321081EFA
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=TBApN3X7
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 128BF81F39
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 14 Dec 2022 16:31:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 128BF81F39
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cfeyb8i0qiQg
+ with ESMTP id 9FfzYSebCB4i
  for <virtualization@lists.linux-foundation.org>;
  Wed, 14 Dec 2022 16:31:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BF02481F18
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7AB1181EFA
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BF02481F18
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7AB1181EFA
  for <virtualization@lists.linux-foundation.org>;
  Wed, 14 Dec 2022 16:31:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
@@ -54,52 +51,52 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=M+wOP66zSvRhQYDjszQYz+C5vn4h5BGATu0cy0bUORc=;
- b=TBApN3X70e48JNCw5FWm6xr4iHVTKQAuAKzczQUTPCtN1lJwfkrSpFRsND3gDMl/23Yxc3
- yaVx0TqoVbTY1ZuUkQj087OQjBYUjmc6sVgooRbDmewT/QEkgImKz809j9/CvSfwamfK0l
- EFYPgBMskvBun1YwMrMh0bcIarPTHek=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=eNeRnQ41YTwI7Dv9IlQ//H1saK0wcCg2ACIcfcXrP3k=;
+ b=cDCSKc3sQC42VbblfYFB+8h0Oo49GJokUm+GB7G/amdu6Ej31FqXHAQAzPIrChp2QMfRxu
+ C2IY8PunIKtaetdkTRT3Wt4haz0idtwJtMjm8eqX9FRuelEGB39uuTsXFLabOtEz7MMrp4
+ Q9Io9N9N4ygMH+zxxo1c9SCRPPw3phA=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-437-2g1DlRD1O8ee8jWldi_rMw-1; Wed, 14 Dec 2022 11:30:58 -0500
-X-MC-Unique: 2g1DlRD1O8ee8jWldi_rMw-1
-Received: by mail-wm1-f69.google.com with SMTP id
- p14-20020a05600c204e00b003cf4cce4da5so4399993wmg.0
+ us-mta-633-CuTxhJ5QMk6pCmeXDkmClw-1; Wed, 14 Dec 2022 11:31:00 -0500
+X-MC-Unique: CuTxhJ5QMk6pCmeXDkmClw-1
+Received: by mail-wr1-f69.google.com with SMTP id
+ o8-20020adfba08000000b00241e80f08e0so60509wrg.12
  for <virtualization@lists.linux-foundation.org>;
- Wed, 14 Dec 2022 08:30:58 -0800 (PST)
+ Wed, 14 Dec 2022 08:30:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=M+wOP66zSvRhQYDjszQYz+C5vn4h5BGATu0cy0bUORc=;
- b=bWCo3Ls4NEUmEuyGQ+mQGAdtdctppUSRpugy2sLSDQhYJGilZKsOdYXwG97yHXvOUJ
- LMrdKkGa9ctMXlPQktpLTrgiTiLXQp0K408jjvW5femJYZMImO8MX8kkQlVks1GlsxA8
- eSf3Ei0LlGoq9pSOdnft915PS6qBor7eCrURLmduv7rZVS0FAWGFrmV+WgTl1sO7qVpF
- vqr/wGbIx5jHj8DEdZ1cfS6ulKGMoMRn7H+yIB1uwkXT2TM28M6nGeuSeI9QUZ5AnFCX
- KUy25PedS6CGuXo6hlO0XkGCCWJLN9gXEXzy+g0ys/NSNqhV6QOcyUQEdAcK311siH0F
- fgmw==
-X-Gm-Message-State: ANoB5plmCJuO9R+lK6bKRUTNWIGoS72iRzIFU9+JLH1tLoMXQy8BRXrP
- mW/56AwYZboUi+CyGW0wWOVLNNocr0K7S4YQYz0Hbz/XDe5wmahFbhE+sPs9P0PvLtlBDDt2sOC
- 6KGO3E4vLzHg8IP+parZovWcj7u2b4hcD7rSuqsoi2m2yWrtBpFZLOA1BHnIRDyhvNewPQNQdjN
- xst7uV3Tf12uhZEMCimw==
-X-Received: by 2002:a05:600c:3c95:b0:3d0:4af1:a36e with SMTP id
- bg21-20020a05600c3c9500b003d04af1a36emr19162751wmb.26.1671035456810; 
- Wed, 14 Dec 2022 08:30:56 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf60WGqYgsSKb75OsCZF9FEfxsX89v9hIf3pvnwfZ9ScHyDYE49t9+hNy2gQ3Yhy/2cfcsbUgg==
-X-Received: by 2002:a05:600c:3c95:b0:3d0:4af1:a36e with SMTP id
- bg21-20020a05600c3c9500b003d04af1a36emr19162723wmb.26.1671035456529; 
- Wed, 14 Dec 2022 08:30:56 -0800 (PST)
+ bh=eNeRnQ41YTwI7Dv9IlQ//H1saK0wcCg2ACIcfcXrP3k=;
+ b=4GPCcB0vYsqTgD8d5M/L3+Fqw++rkLxUzK0vmCYcED+3eJv6ynfcARb4lPAWn0r430
+ t/CHbwQIWYU1+fYdlMfBznzYU6nId8Gi+s1TQZAwccSmsFqSrpLdUhAeUWocC5DZyvdA
+ dtFF9DRdQjKCnXCsmaukWWncbqo1/sajx7aZkvxNbbwhl7T+yCr9qpxUbZZ39ffBrNSh
+ A6+fe3BbPsGTKqFoOrkh7Msh7LYY8GXrW/ZVEH3TwUjzuDhwp5QkNdvdEjHCxO6OiVof
+ cCALU+TVmX/8O9z8XQMDx7X3RAFD9xl7hBH4I/OCFwGiGtOye5p5NWpT6aRnAn+AHYRw
+ 4REw==
+X-Gm-Message-State: ANoB5pnaGjGxmFnb5jbftL9vHEGKgQiCey1KYS13aaXdl0s+1hpgGuWN
+ Pqa5xbUDLKf8jFbqKhYXMKDDLdIAR8ifXL/HKVm21DA00BeZCp+ZWZpigc2h2NraKJwUSG5RjqB
+ jaoeMA/cePXaXM0+TDvzLl1gWeaAdA3OxVUuxekERNkX2MBbaguxiK79KOm5gy81f7KZS5P3xs0
+ FX4Wn5pwO9O+r06LIN8w==
+X-Received: by 2002:a05:600c:3b15:b0:3d0:d177:cac1 with SMTP id
+ m21-20020a05600c3b1500b003d0d177cac1mr19372606wms.36.1671035458617; 
+ Wed, 14 Dec 2022 08:30:58 -0800 (PST)
+X-Google-Smtp-Source: AA0mqf41TbDFZYAxyeY/6/VgR7BHHW22n4sdvEUddOO8zMQQsvGDfuNF6JjoQjUcHxV0WQ+cml5BAg==
+X-Received: by 2002:a05:600c:3b15:b0:3d0:d177:cac1 with SMTP id
+ m21-20020a05600c3b1500b003d0d177cac1mr19372586wms.36.1671035458429; 
+ Wed, 14 Dec 2022 08:30:58 -0800 (PST)
 Received: from step1.redhat.com (host-87-11-6-51.retail.telecomitalia.it.
  [87.11.6.51]) by smtp.gmail.com with ESMTPSA id
- c6-20020a05600c0a4600b003d1e3b1624dsm3850323wmq.2.2022.12.14.08.30.55
+ c6-20020a05600c0a4600b003d1e3b1624dsm3850323wmq.2.2022.12.14.08.30.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 14 Dec 2022 08:30:55 -0800 (PST)
+ Wed, 14 Dec 2022 08:30:57 -0800 (PST)
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [RFC PATCH 4/6] vdpa_sim: make devices agnostic for work management
-Date: Wed, 14 Dec 2022 17:30:23 +0100
-Message-Id: <20221214163025.103075-5-sgarzare@redhat.com>
+Subject: [RFC PATCH 5/6] vdpa_sim: use kthread worker
+Date: Wed, 14 Dec 2022 17:30:24 +0100
+Message-Id: <20221214163025.103075-6-sgarzare@redhat.com>
 X-Mailer: git-send-email 2.38.1
 In-Reply-To: <20221214163025.103075-1-sgarzare@redhat.com>
 References: <20221214163025.103075-1-sgarzare@redhat.com>
@@ -125,152 +122,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's move work management inside the vdpa_sim core.
-This way we can easily change how we manage the works, without
-having to change the devices each time.
+Let's use our own kthread to run device jobs.
+This allows us more flexibility, especially we can attach the kthread
+to the user address space when vDPA uses user's VA.
 
 Signed-off-by: Stefano Garzarella <sgarzare@redhat.com>
 ---
- drivers/vdpa/vdpa_sim/vdpa_sim.h     |  3 ++-
- drivers/vdpa/vdpa_sim/vdpa_sim.c     | 17 +++++++++++++++--
- drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |  6 ++----
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  6 ++----
- 4 files changed, 21 insertions(+), 11 deletions(-)
+ drivers/vdpa/vdpa_sim/vdpa_sim.h |  3 ++-
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 17 ++++++++++++-----
+ 2 files changed, 14 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.h b/drivers/vdpa/vdpa_sim/vdpa_sim.h
-index 0e78737dcc16..7e6dd366856f 100644
+index 7e6dd366856f..07ef53ea375e 100644
 --- a/drivers/vdpa/vdpa_sim/vdpa_sim.h
 +++ b/drivers/vdpa/vdpa_sim/vdpa_sim.h
-@@ -44,7 +44,7 @@ struct vdpasim_dev_attr {
- 	u32 ngroups;
- 	u32 nas;
- 
--	work_func_t work_fn;
-+	void (*work_fn)(struct vdpasim *vdpasim);
- 	void (*get_config)(struct vdpasim *vdpasim, void *config);
- 	void (*set_config)(struct vdpasim *vdpasim, const void *config);
- };
-@@ -73,6 +73,7 @@ struct vdpasim {
- 
- struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *attr,
- 			       const struct vdpa_dev_set_config *config);
-+void vdpasim_schedule_work(struct vdpasim *vdpasim);
- 
- /* TODO: cross-endian support */
- static inline bool vdpasim_is_little_endian(struct vdpasim *vdpasim)
+@@ -53,7 +53,8 @@ struct vdpasim_dev_attr {
+ struct vdpasim {
+ 	struct vdpa_device vdpa;
+ 	struct vdpasim_virtqueue *vqs;
+-	struct work_struct work;
++	struct kthread_worker *worker;
++	struct kthread_work work;
+ 	struct vdpasim_dev_attr dev_attr;
+ 	/* spinlock to synchronize virtqueue state */
+ 	spinlock_t lock;
 diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 2e0ee7280aa8..9bde33e38e27 100644
+index 9bde33e38e27..36a1d2e0a6ba 100644
 --- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
 +++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -245,6 +245,13 @@ static const struct dma_map_ops vdpasim_dma_ops = {
+@@ -11,8 +11,8 @@
+ #include <linux/module.h>
+ #include <linux/device.h>
+ #include <linux/kernel.h>
++#include <linux/kthread.h>
+ #include <linux/slab.h>
+-#include <linux/sched.h>
+ #include <linux/dma-map-ops.h>
+ #include <linux/vringh.h>
+ #include <linux/vdpa.h>
+@@ -245,7 +245,7 @@ static const struct dma_map_ops vdpasim_dma_ops = {
  static const struct vdpa_config_ops vdpasim_config_ops;
  static const struct vdpa_config_ops vdpasim_batch_config_ops;
  
-+static void vdpasim_work_fn(struct work_struct *work)
-+{
-+	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
-+
-+	vdpasim->dev_attr.work_fn(vdpasim);
-+}
-+
- struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
- 			       const struct vdpa_dev_set_config *config)
+-static void vdpasim_work_fn(struct work_struct *work)
++static void vdpasim_work_fn(struct kthread_work *work)
  {
-@@ -275,7 +282,7 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
+ 	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
+ 
+@@ -282,7 +282,13 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
  	}
  
  	vdpasim->dev_attr = *dev_attr;
--	INIT_WORK(&vdpasim->work, dev_attr->work_fn);
-+	INIT_WORK(&vdpasim->work, vdpasim_work_fn);
+-	INIT_WORK(&vdpasim->work, vdpasim_work_fn);
++
++	kthread_init_work(&vdpasim->work, vdpasim_work_fn);
++	vdpasim->worker = kthread_create_worker(0, "vDPA sim worker: %s",
++						dev_attr->name);
++	if (IS_ERR(vdpasim->worker))
++		goto err_iommu;
++
  	spin_lock_init(&vdpasim->lock);
  	spin_lock_init(&vdpasim->iommu_lock);
  
-@@ -329,6 +336,12 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
- }
- EXPORT_SYMBOL_GPL(vdpasim_create);
+@@ -338,7 +344,7 @@ EXPORT_SYMBOL_GPL(vdpasim_create);
  
-+void vdpasim_schedule_work(struct vdpasim *vdpasim)
-+{
-+	schedule_work(&vdpasim->work);
-+}
-+EXPORT_SYMBOL_GPL(vdpasim_schedule_work);
-+
- static int vdpasim_set_vq_address(struct vdpa_device *vdpa, u16 idx,
- 				  u64 desc_area, u64 driver_area,
- 				  u64 device_area)
-@@ -357,7 +370,7 @@ static void vdpasim_kick_vq(struct vdpa_device *vdpa, u16 idx)
- 	struct vdpasim_virtqueue *vq = &vdpasim->vqs[idx];
- 
- 	if (vq->ready)
--		schedule_work(&vdpasim->work);
-+		vdpasim_schedule_work(vdpasim);
- }
- 
- static void vdpasim_set_vq_cb(struct vdpa_device *vdpa, u16 idx,
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_blk.c b/drivers/vdpa/vdpa_sim/vdpa_sim_blk.c
-index c6db1a1baf76..ae2309411acd 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim_blk.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim_blk.c
-@@ -11,7 +11,6 @@
- #include <linux/module.h>
- #include <linux/device.h>
- #include <linux/kernel.h>
--#include <linux/sched.h>
- #include <linux/blkdev.h>
- #include <linux/vringh.h>
- #include <linux/vdpa.h>
-@@ -286,9 +285,8 @@ static bool vdpasim_blk_handle_req(struct vdpasim *vdpasim,
- 	return handled;
- }
- 
--static void vdpasim_blk_work(struct work_struct *work)
-+static void vdpasim_blk_work(struct vdpasim *vdpasim)
+ void vdpasim_schedule_work(struct vdpasim *vdpasim)
  {
--	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
- 	bool reschedule = false;
+-	schedule_work(&vdpasim->work);
++	kthread_queue_work(vdpasim->worker, &vdpasim->work);
+ }
+ EXPORT_SYMBOL_GPL(vdpasim_schedule_work);
+ 
+@@ -689,7 +695,8 @@ static void vdpasim_free(struct vdpa_device *vdpa)
+ 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
  	int i;
  
-@@ -326,7 +324,7 @@ static void vdpasim_blk_work(struct work_struct *work)
- 	spin_unlock(&vdpasim->lock);
+-	cancel_work_sync(&vdpasim->work);
++	kthread_cancel_work_sync(&vdpasim->work);
++	kthread_destroy_worker(vdpasim->worker);
  
- 	if (reschedule)
--		schedule_work(&vdpasim->work);
-+		vdpasim_schedule_work(vdpasim);
- }
- 
- static void vdpasim_blk_get_config(struct vdpasim *vdpasim, void *config)
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-index c3cb225ea469..a209df365158 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-@@ -11,7 +11,6 @@
- #include <linux/module.h>
- #include <linux/device.h>
- #include <linux/kernel.h>
--#include <linux/sched.h>
- #include <linux/etherdevice.h>
- #include <linux/vringh.h>
- #include <linux/vdpa.h>
-@@ -143,9 +142,8 @@ static void vdpasim_handle_cvq(struct vdpasim *vdpasim)
- 	}
- }
- 
--static void vdpasim_net_work(struct work_struct *work)
-+static void vdpasim_net_work(struct vdpasim *vdpasim)
- {
--	struct vdpasim *vdpasim = container_of(work, struct vdpasim, work);
- 	struct vdpasim_virtqueue *txq = &vdpasim->vqs[1];
- 	struct vdpasim_virtqueue *rxq = &vdpasim->vqs[0];
- 	ssize_t read, write;
-@@ -196,7 +194,7 @@ static void vdpasim_net_work(struct work_struct *work)
- 		vdpasim_net_complete(rxq, write);
- 
- 		if (++pkts > 4) {
--			schedule_work(&vdpasim->work);
-+			vdpasim_schedule_work(vdpasim);
- 			goto out;
- 		}
- 	}
+ 	for (i = 0; i < vdpasim->dev_attr.nvqs; i++) {
+ 		vringh_kiov_cleanup(&vdpasim->vqs[i].out_iov);
 -- 
 2.38.1
 
