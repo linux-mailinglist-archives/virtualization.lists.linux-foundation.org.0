@@ -1,77 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E247264FF7A
-	for <lists.virtualization@lfdr.de>; Sun, 18 Dec 2022 17:03:11 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 063FB650008
+	for <lists.virtualization@lfdr.de>; Sun, 18 Dec 2022 17:08:57 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 02B75400D3;
-	Sun, 18 Dec 2022 16:03:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 02B75400D3
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=GdhAhFW0
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8B830607E3;
+	Sun, 18 Dec 2022 16:08:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8B830607E3
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=REum8Spx
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hB5CT9KQT4X2; Sun, 18 Dec 2022 16:03:09 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 9A359402E5;
-	Sun, 18 Dec 2022 16:03:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9A359402E5
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id xcL3pRtc0eAz; Sun, 18 Dec 2022 16:08:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6CE1960A81;
+	Sun, 18 Dec 2022 16:08:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6CE1960A81
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D19F6C0078;
-	Sun, 18 Dec 2022 16:03:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 935B7C0078;
+	Sun, 18 Dec 2022 16:08:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A56CEC0033
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6B655C002D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Dec 2022 16:03:05 +0000 (UTC)
+ Sun, 18 Dec 2022 16:08:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 232984034B
+ by smtp4.osuosl.org (Postfix) with ESMTP id 42C95408F4
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Dec 2022 16:03:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 232984034B
+ Sun, 18 Dec 2022 16:08:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 42C95408F4
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20201202 header.b=REum8Spx
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id GQjvBeJnbPgd
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id n8iup4_zvbiz
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Dec 2022 16:03:02 +0000 (UTC)
+ Sun, 18 Dec 2022 16:08:50 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 13F21400D3
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 13F21400D3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9FC28400D0
+Received: from ams.source.kernel.org (ams.source.kernel.org
+ [IPv6:2604:1380:4601:e00::1])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9FC28400D0
  for <virtualization@lists.linux-foundation.org>;
- Sun, 18 Dec 2022 16:03:02 +0000 (UTC)
+ Sun, 18 Dec 2022 16:08:49 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 9348F60DD3;
- Sun, 18 Dec 2022 16:03:00 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id E2C5EC433F2;
- Sun, 18 Dec 2022 16:02:58 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 9AD5EB80BA7;
+ Sun, 18 Dec 2022 16:08:46 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 41DB6C433EF;
+ Sun, 18 Dec 2022 16:08:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1671379380;
- bh=3gsHSt0wuiY6019cjs5JAUJmceQVZDeXBuBdLOIk2KA=;
+ s=k20201202; t=1671379725;
+ bh=kP1ODcle7cl+j0fYMC+sUTP2LRY6lVqeTfHQaN893tc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=GdhAhFW0DSZ5cRwAf7SAtKN5ym00m9QDvGQ0taH/cFRQac8AdyeScIsYuLl8NhOTs
- NdTJCHEyknCAkaoigvcCkras8zQpr3zsXa4G4rrfkcAzdxoXOZ6E28XtCXgFudKVEt
- 0yvG+nkeqlJ8NegOpE36NX6kYPmDVxW46VRTMPVyLOkF1rw+OJ7iRrJCddeJWZ9J/I
- Uq//4hwm2E88qELqJg+PH8eXoaXT+6ZAyjH/mv0jkw/sSoc4cckJbi78ypcxAtyIJ9
- 6dUSrOBECPV28dhqDVsQskfNJqSvADzb8Y9ivjiLG1ZssKLsX2ca0n6RkZL7K92k0b
- DDSAqHeEyhQKA==
+ b=REum8SpxKxO3WPlJ5pRoVj3s7GOo1ApT44CVVVWr4xJ/ictc5IWA7G2oClBnHpzpA
+ Y5qh6FNgk/mUDTwLtir9DyeB3oX8X65jTlO2arM8p3D/XxQrR/3tMJsDoZc6Y27jUL
+ vk9IhvzSGQLqCzwcs4TDQOCurb3OkM1vnVOJhDgbw9rhagPMsJyIaPjRW3YjzGXc5Q
+ AWWKm2K36GWyXjwSensOBmerJVq9DVbtxTBDqfJVlQslzlD9zjoVBgm9Xs15M8yNyE
+ 3NaZa3id+UlK8Ztn/xyMJV6aS2MaRoL2/9BWvb4LVFsU1MhwgRvFfRRBf3iXgwAuOV
+ uznxZMyaBbA7A==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.1 17/85] blk-mq: avoid double ->queue_rq() because
+Subject: [PATCH AUTOSEL 6.0 14/73] blk-mq: avoid double ->queue_rq() because
  of early timeout
-Date: Sun, 18 Dec 2022 11:00:34 -0500
-Message-Id: <20221218160142.925394-17-sashal@kernel.org>
+Date: Sun, 18 Dec 2022 11:06:42 -0500
+Message-Id: <20221218160741.927862-14-sashal@kernel.org>
 X-Mailer: git-send-email 2.35.1
-In-Reply-To: <20221218160142.925394-1-sashal@kernel.org>
-References: <20221218160142.925394-1-sashal@kernel.org>
+In-Reply-To: <20221218160741.927862-1-sashal@kernel.org>
+References: <20221218160741.927862-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -132,10 +135,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  1 file changed, 44 insertions(+), 12 deletions(-)
 
 diff --git a/block/blk-mq.c b/block/blk-mq.c
-index 228a6696d835..0b855e033a83 100644
+index 3f1f5e3e0951..1a30f6580274 100644
 --- a/block/blk-mq.c
 +++ b/block/blk-mq.c
-@@ -1529,7 +1529,13 @@ static void blk_mq_rq_timed_out(struct request *req)
+@@ -1442,7 +1442,13 @@ static void blk_mq_rq_timed_out(struct request *req)
  	blk_add_timer(req);
  }
  
@@ -150,7 +153,7 @@ index 228a6696d835..0b855e033a83 100644
  {
  	unsigned long deadline;
  
-@@ -1539,13 +1545,13 @@ static bool blk_mq_req_expired(struct request *rq, unsigned long *next)
+@@ -1452,13 +1458,13 @@ static bool blk_mq_req_expired(struct request *rq, unsigned long *next)
  		return false;
  
  	deadline = READ_ONCE(rq->deadline);
@@ -169,7 +172,7 @@ index 228a6696d835..0b855e033a83 100644
  	return false;
  }
  
-@@ -1561,7 +1567,7 @@ void blk_mq_put_rq_ref(struct request *rq)
+@@ -1472,7 +1478,7 @@ void blk_mq_put_rq_ref(struct request *rq)
  
  static bool blk_mq_check_expired(struct request *rq, void *priv)
  {
@@ -178,7 +181,7 @@ index 228a6696d835..0b855e033a83 100644
  
  	/*
  	 * blk_mq_queue_tag_busy_iter() has locked the request, so it cannot
-@@ -1570,7 +1576,18 @@ static bool blk_mq_check_expired(struct request *rq, void *priv)
+@@ -1481,7 +1487,18 @@ static bool blk_mq_check_expired(struct request *rq, void *priv)
  	 * it was completed and reallocated as a new request after returning
  	 * from blk_mq_check_expired().
  	 */
@@ -198,7 +201,7 @@ index 228a6696d835..0b855e033a83 100644
  		blk_mq_rq_timed_out(rq);
  	return true;
  }
-@@ -1579,7 +1596,9 @@ static void blk_mq_timeout_work(struct work_struct *work)
+@@ -1490,7 +1507,9 @@ static void blk_mq_timeout_work(struct work_struct *work)
  {
  	struct request_queue *q =
  		container_of(work, struct request_queue, timeout_work);
@@ -209,7 +212,7 @@ index 228a6696d835..0b855e033a83 100644
  	struct blk_mq_hw_ctx *hctx;
  	unsigned long i;
  
-@@ -1599,10 +1618,23 @@ static void blk_mq_timeout_work(struct work_struct *work)
+@@ -1510,10 +1529,23 @@ static void blk_mq_timeout_work(struct work_struct *work)
  	if (!percpu_ref_tryget(&q->q_usage_counter))
  		return;
  
