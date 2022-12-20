@@ -1,96 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48693652631
-	for <lists.virtualization@lfdr.de>; Tue, 20 Dec 2022 19:28:08 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 7A64760F6B;
-	Tue, 20 Dec 2022 18:28:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7A64760F6B
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=P6hHUtJo
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EQYfd6cDVNdS; Tue, 20 Dec 2022 18:28:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 28A3160A79;
-	Tue, 20 Dec 2022 18:28:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 28A3160A79
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5457FC002D;
-	Tue, 20 Dec 2022 18:28:04 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1B3BFC002D
- for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 18:28:02 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 434416527B5
+	for <lists.virtualization@lfdr.de>; Tue, 20 Dec 2022 21:17:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CF8074047D
- for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 18:28:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF8074047D
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
- header.a=rsa-sha256 header.s=20210112 header.b=P6hHUtJo
+	by smtp4.osuosl.org (Postfix) with ESMTP id AEB7C4161F;
+	Tue, 20 Dec 2022 20:17:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AEB7C4161F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sZY1a80NG2jW
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id TUZOQm2TxlYj; Tue, 20 Dec 2022 20:17:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id D2F2A40083;
+	Tue, 20 Dec 2022 20:17:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D2F2A40083
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B8E8C0077;
+	Tue, 20 Dec 2022 20:17:50 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 786B4C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 18:28:01 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C9945403F5
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
- by smtp4.osuosl.org (Postfix) with ESMTPS id C9945403F5
+ Tue, 20 Dec 2022 20:17:47 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 525E9403E2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 18:28:00 +0000 (UTC)
-Received: by mail-ua1-x931.google.com with SMTP id p9so3050820uam.12
+ Tue, 20 Dec 2022 20:17:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 525E9403E2
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id qwmDexwDeqRf
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 10:28:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jIT6fF5gjfLCiNasKGkoBaNWOPI0QJSFqW2RO835jA4=;
- b=P6hHUtJo+wZUfhtWkXLr7H5eONR4z7bhH+Dd2Pu6drAyozwW4Rmg8/cKU8uE2blr6B
- LBqB/IA5soQBF/NJC9w1ZoA1WTNThXvPrSBXhGDO5adDpwfZTyNvBRcpxLR44EaKQAXr
- LMTe8WU4WxF9iwSS+ufRzydfXNyS1eqTqceEBQNsua9BdPYWt0iDRDpDuAVR6WqHtHk4
- HbBSpxSx7hz7S0VBS+iwOpnwzVKP48t2fYpiesyaxy9JLSIx9Y+JwQ1i+hwehk66oVlU
- bTFOivWkCoswK20RW4abWK/USW+wBBXiemserv92pOLn7FwgXN86lUPfCSqDOnYC81lC
- NZaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jIT6fF5gjfLCiNasKGkoBaNWOPI0QJSFqW2RO835jA4=;
- b=q4VZn4XLNpyMbEKryQFIvavg6x9JmkJDOWQUtvtxlYuB0/WvzZ2OcfO3skwe+V0GEM
- 8bangxv5DwP5R0IHsPS6XHqENTmkFP2hJRTvGcYb4lMOCR01N3tgXuNZtzYmvPlwAWra
- Bw9VXIoMR8FS84TzJYDYscYG/Uey4WffjDrodG55lBFMy6iBb9sOsBrCOODJuhgPDeEN
- xxoXH61PA/taBEZ+n9cFam/LmLIr3F8XyIGviLi4DhDajIt/PgaVoyH5CfDsg9spPWM/
- P2w3pupgKDQum2i29TmDWjSQaOYAUB27q8VIItBNGLrsefJeedniNBe578fvFv4PZXB5
- DnxA==
-X-Gm-Message-State: ANoB5pkjk/uRHZJuPe6BFTb7BXlEx7/ZsippolVRIjMBWHAn5OU0N4h6
- z5toesn+ADnEjjp9QScNpGqQb2Y4gxDq42TRzqY=
-X-Google-Smtp-Source: AA0mqf4cCuDAam2bj0nbK1acGmhmPmCV5Sx0C10cMjh7B1N9LbnOouKDGjfvDFI1xq5STO7LuL2meHifp9VbWAhqqPs=
-X-Received: by 2002:ab0:3194:0:b0:418:f8f7:d9d7 with SMTP id
- d20-20020ab03194000000b00418f8f7d9d7mr41242563uan.116.1671560879538; Tue, 20
- Dec 2022 10:27:59 -0800 (PST)
+ Tue, 20 Dec 2022 20:17:43 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6631040195
+Received: from s052d7dde.fastvps-server.com (s052d7dde.fastvps-server.com
+ [IPv6:2a03:f480:1:14::7d])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6631040195
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Dec 2022 20:17:42 +0000 (UTC)
+Received: from 157.81.37.188.rev.vodafone.pt ([188.37.81.157]
+ helo=LAPTOP-EPOV2LRR)
+ by s052d7dde.fastvps-server.com with esmtpa (Exim 4.89)
+ (envelope-from <cisti@saisti.eu>) id 1p7iDu-000069-Q1
+ for virtualization@lists.linux-foundation.org; Tue, 20 Dec 2022 22:24:22 +0300
+From: "CISTI-2023" <marialemos72@gmail.com>
+Subject: CISTI'2023 - Doctoral Symposium |Aveiro, Portugal
+To: virtualization@lists.linux-foundation.org
 MIME-Version: 1.0
-References: <82b18028-7246-9af9-c992-528a0e77f6ba@linaro.org>
-In-Reply-To: <82b18028-7246-9af9-c992-528a0e77f6ba@linaro.org>
-From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
-Date: Tue, 20 Dec 2022 13:27:22 -0500
-Message-ID: <CAF=yD-KEwVnH6PRyxbJZt4iGfKasadYwU_6_V+hHW2s+ZqFNcw@mail.gmail.com>
-Subject: Re: kernel BUG in __skb_gso_segment
-To: Tudor Ambarus <tudor.ambarus@linaro.org>
-Cc: willemb@google.com, mst@redhat.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- edumazet@google.com, syzkaller@googlegroups.com, liuhangbin@gmail.com,
- joneslee@google.com, kuba@kernel.org, pabeni@redhat.com, davem@davemloft.net
+Date: Tue, 20 Dec 2022 19:24:22 +0000
+Message-ID: <23884517071031@gmail-com>
+X-Antivirus: AVG (VPS 221220-8, 20/12/2022), Outbound message
+X-Antivirus-Status: Clean
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,51 +67,388 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Reply-To: cistiforever@gmail.com
+Content-Type: multipart/mixed; boundary="===============2104372947895404378=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Dec 20, 2022 at 8:21 AM Tudor Ambarus <tudor.ambarus@linaro.org> wrote:
->
-> Hi,
->
-> There's a bug [1] reported by syzkaller in linux-5.15.y that I'd like
-> to squash. The commit in stable that introduces the bug is:
-> b99c71f90978 net: skip virtio_net_hdr_set_proto if protocol already set
-> The upstream commit for this is:
-> 1ed1d592113959f00cc552c3b9f47ca2d157768f
->
-> I discovered that in mainline this bug was squashed by the following
-> commits:
-> e9d3f80935b6 ("net/af_packet: make sure to pull mac header")
-> dfed913e8b55 ("net/af_packet: add VLAN support for AF_PACKET SOCK_RAW GSO")
->
-> I'm seeking for some guidance on how to fix linux-5.15.y. From what I
-> understand, the bug in stable is triggered because we end up with a
-> header offset of 18, that eventually triggers the GSO crash in
-> __skb_pull. If I revert the commit in culprit from linux-5.15.y, we'll
-> end up with a header offset of 14, the bug is not hit and the packet is
-> dropped at validate_xmit_skb() time. I'm wondering if reverting it is
-> the right thing to do, as the commit is marked as a fix. Backporting the
-> 2 commits from mainline is not an option as they introduce new support.
-> Would such a patch be better than reverting the offending commit?
+This is a multi-part message in MIME format
 
-If both patches can be backported without conflicts, in this case I
-think that is the preferred solution.
+--===============2104372947895404378==
+Content-Type: multipart/alternative; charset=utf-8; boundary="srF=_8V6XoujBCV9xC7oxH9gQDAyTqeHxJ"
 
-If the fix were obvious that would be an option. But the history for
-this code indicates that it isn't. It has a history of fixes for edge
-cases.
+This is a multi-part message in MIME format
 
-Backporting the two avoids a fork that would make backporting
-additional fixes harder. The first of the two is technically not a
-fix, but evidently together they are for this case. And the additional
-logic and risk backported seems manageable.
+--srF=_8V6XoujBCV9xC7oxH9gQDAyTqeHxJ
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Admittedly that is subjective. I can help take a closer look at a
-custom fix if consensus is that is preferable.
+* Published in IEEE Xplore
+
+* Google Scholar H5-Index =3D 22
+
+
+
+
+------------------------------  ---- Doctoral Symposium of CISTI'2023 -----=
+-------------------------  ------------ 
+CISTI'2023 - 18th Iberian Conference on Information Systems and Technologie=
+s
+
+20 - 23 of June 2023, University of Aveiro, Aveiro, Portugal
+
+http://cisti.eu/ <https://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf5=
+3ffa2--36ec7f8491211eje2OOTeVVtFe2ne5sK>
+
+------------------------------  ------------------------------  -----------=
+-------------------  ------------------------------  ---- 
+
+
+
+The purpose of CISTI'2022=E2=80=99s Doctoral Symposium is to provide gradua=
+te students a setting where they can, informally, expose and discuss their =
+work, collecting valuable expert opinions and sharing new ideas, methods an=
+d applications. The Doctoral Symposium is an excellent opportunity for PhD =
+students to present and discuss their work in a Workshop format. Each prese=
+ntation will be evaluated by a panel composed by at least three Information=
+ Systems and Technologies experts.
+
+ 
+
+Contributions Submission
+
+The Doctoral Symposium is opened to PhD students whose research area includ=
+es the themes proposed for this Conference. Submissions must include an ext=
+ended abstract (maximum 4 pages), following the Conference style guide <htt=
+ps://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211e=
+je2OOTeVVtFe2ne5tY>. All selected contributions will be published with the =
+Conference Proceedings in electronic format with ISBN. These contributions =
+will be available in the IEEE Xplore <https://mkt.saisti.eu/go/a734bbd1e6d8=
+440a14a7986b82b0-bf53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5tZ> Digital Librar=
+y and will be sent for indexing in ISI, Scopus, EI-Compendex, INSPEC and Go=
+ogle Scholar.
+
+Submissions must include the field, the PhD institution and the number of m=
+onths devoted to the development of the work. Additionally, they should inc=
+lude in a clear and succinct manner:
+
+    =E2=80=A2    The problem approached and its significance or relevance
+    =E2=80=A2    The research objectives and related investigation topics
+    =E2=80=A2    A brief display of what is already known
+    =E2=80=A2    A proposed solution methodology for the problem
+    =E2=80=A2    Expected results
+
+
+
+
+Important Dates
+
+Paper submission: February 12, 2023
+
+Notification of acceptance: March 26, 2023
+
+Submission of accepted papers: April 9, 2023
+
+Payment of registration, to ensure the inclusion of an accepted paper in th=
+e conference proceedings: April 9, 2023
+
+ 
+
+Organizing Committee
+
+
+=C3=81lvaro Rocha, ISEG, Universidade de Lisboa
+
+Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca
+
+ 
+
+Scientific Committee
+
+Francisco Garc=C3=ADa-Pe=C3=B1alvo, Universidad de Salamanca (Presidente)
+
+Augusto Sousa, FEUP, Universidade do Porto
+
+Adolfo Lozano Tello, Universidad de Extremadura
+
+=C3=81lvaro Rocha, ISEG, Universidade de Lisboa
+
+Ana Am=C3=A9lia Carvalho, Universidade de Coimbra
+
+Ant=C3=B3nio Coelho, FEUP, Universidade do Porto
+
+Antonio Garcia Loureiro, Universidade de Santiago de Compostela
+
+Ant=C3=B3nio Palma do Reis, ISEG, Universidade de Lisboa
+
+Arnaldo Martins, Universidade de Aveiro
+
+Borja Bordel, Universidad Polit=C3=A9cnica de Madrid
+
+Carlos Costa, ISEG, Universidade de Lisboa
+
+Carlos Ferr=C3=A1s Sexto, Universidad de Santiago de Compostela
+
+Carlos Montenegro, Universidad Distrital Francisco Jos=C3=A9 de Caldas
+
+Cesar Collazos, Universidad del Cauca
+
+David Fonseca, La Salle, Universitat Ramon Llull
+
+Fernando Moreira, Universidade Portucalense
+
+Gon=C3=A7alo Paiva Dias, Universidade de Aveiro
+
+Jeimy Cano, Universidad de los Andes
+
+Jezreel Mejia, CIMAT
+
+Jo=C3=A3o Manuel R.S. Tavares, FEUP, Universidade do Porto
+
+Jo=C3=A3o Pascoal Faria, FEUP, Universidade do Porto~
+
+Jo=C3=A3o Paulo Costa, Universidade de Coimbra
+
+Jos=C3=A9 Machado, Universidade do Minho
+
+Luis Camarinha-Matos, Universidade NOVA de Lisboa
+
+Manuel Tupia, Pontifica Universidad Cat=C3=B3lica del Per=C3=BA
+
+Marcelo Marciszack, Universidad Tecnol=C3=B3gica Nacional
+
+Marco Painho, Nova Information Management School, Universidade Nova de Lisb=
+oa
+
+Mar=C3=ADa J Lado, Universidade de Vigo
+
+Maria Jos=C3=A9 Sousa, ISCTE - Instituto Universit=C3=A1rio de Lisboa
+
+M=C3=A1rio Piattini, Universidad de Castilla-La Mancha
+
+Maristela Holanda, Universidade de Bras=C3=ADlia
+
+Mercedes Ruiz, Universidad de C=C3=A1diz
+
+Miguel Casquilho, Universidade de Lisboa
+
+Miguel de Castro Neto, NOVA IMS
+
+Miguel Ram=C3=B3n Gonzalez Castro, Centro Tecnol=C3=B3gico Aimen
+
+Mirna Mu=C3=B1oz, Centro de Investigaci=C3=B3n en Matem=C3=A1ticas A.C.- Un=
+idad Zacatecas
+
+Nelson Rocha, Universidade de Aveiro  
+
+=C3=93scar Mealha, Universidade de Aveiro
+
+Paulo Pinto, FC, Universidade Nova de Lisboa
+
+Ramiro Gon=C3=A7alves, Universidade de Tr=C3=A1s-os-Montes e Alto Douro
+
+Rui Cruz, IST, Universidade de Lisboa
+
+Victor Hugo Medina Garcia, Universidad Distrital Francisco Jos=C3=A9 de Cal=
+das
+
+V=C3=ADtor Santos, NOVA IMS
+
+
+
+
+
+
+
+Website of CISTI'2023: http://cisti.eu/ <https://mkt.saisti.eu/go/a734bbd1e=
+6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5sK>
+
+
+-- 
+This email has been checked for viruses by AVG antivirus software.
+www.avg.com
+--srF=_8V6XoujBCV9xC7oxH9gQDAyTqeHxJ
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
+
+<html>
+  <head>
+    <title></title>
+    <meta content=3D"text/html; charset=3Dutf-8" http-equiv=3D"Content-Type=
+" />
+  </head>
+  <body>
+    <p>* Published in IEEE Xplore</p>
+    <p>* Google Scholar H5-Index =3D 22</p>
+    <p><br /></p>
+    <p>------------------------------
+      <wbr>&nbsp;</wbr>---- <strong>Doctoral Symposium of <span class=3D"il=
+">CISTI</span>'<span class=3D"il">2023</span></strong> --------------------=
+----------
+      <wbr>&nbsp;</wbr>------------
+    </p>
+    <p><span class=3D"il">CISTI</span>'<span class=3D"il">2023</span> - 18t=
+h Iberian Conference on Information Systems and Technologies</p>
+    <p>20 - 23 of June <span class=3D"il">2023</span>, University of Aveiro=
+, Aveiro, Portugal</p>
+    <p><a id=3D"m_7038599259805203993isPasted" href=3D"https://mkt.saisti.e=
+u/go/a734bbd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5s=
+K" target=3D"_blank" data-saferedirecturl=3D"https://www.google.com/url?q=
+=3Dhttps://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f84=
+91211eje2OOTeVVtFe2ne5sK&source=3Dgmail&ust=3D1670254950595000&usg=3DAOvVaw=
+183p_fgzR3prG_I7T4EHJu">http://<span class=3D"il">cisti</span>.eu/</a></p>
+    <p>------------------------------
+      <wbr>&nbsp;</wbr>------------------------------
+      <wbr>&nbsp;</wbr>------------------------------
+      <wbr>&nbsp;</wbr>------------------------------
+      <wbr>&nbsp;</wbr>----
+    </p>
+    <p><br /></p>
+    <p id=3D"m_7038599259805203993isPasted">The purpose of <span class=3D"i=
+l">CISTI</span>'2022&rsquo;s Doctoral Symposium is to provide graduate stud=
+ents a setting where they can, informally, expose and discuss their work, c=
+ollecting valuable expert opinions and sharing new ideas, methods and appli=
+cations. The Doctoral Symposium is an excellent opportunity for PhD student=
+s to present and discuss their work in a Workshop format. Each presentation=
+ will be evaluated by a panel composed by at least three Information System=
+s and Technologies experts.</p>
+    <p>&nbsp;</p>
+    <p><strong>Contributions Submission</strong></p>
+    <p>The Doctoral Symposium is opened to PhD students whose research area=
+ includes the themes proposed for this Conference. Submissions must include=
+ an extended abstract (maximum 4 pages), following the Conference <a href=
+=3D"https://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f8=
+491211eje2OOTeVVtFe2ne5tY" rel=3D"noopener" target=3D"_blank" data-saferedi=
+recturl=3D"https://www.google.com/url?q=3Dhttps://mkt.saisti.eu/go/a734bbd1=
+e6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5tY&source=3Dgm=
+ail&ust=3D1670254950595000&usg=3DAOvVaw2gsc6egoXhvCsFrcEX5Dhe"><strong>styl=
+e guide</strong></a>. All selected contributions will be published with the=
+ Conference Proceedings in electronic format with ISBN. These contributions=
+ will be available in the <strong><a href=3D"https://mkt.saisti.eu/go/a734b=
+bd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5tZ" rel=3D"=
+noopener noreferrer" target=3D"_blank" data-saferedirecturl=3D"https://www.=
+google.com/url?q=3Dhttps://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf=
+53ffa2--36ec7f8491211eje2OOTeVVtFe2ne5tZ&source=3Dgmail&ust=3D1670254950595=
+000&usg=3DAOvVaw3nPnaMZIStyq0l3Nlld10l">IEEE Xplore</a></strong> Digital Li=
+brary and will be sent for indexing in ISI, Scopus, EI-Compendex, INSPEC an=
+d Google Scholar.</p>
+    <p>Submissions must include the field, the PhD institution and the numb=
+er of months devoted to the development of the work. Additionally, they sho=
+uld include in a clear and succinct manner:</p>
+    <p>&nbsp; &nbsp; &bull; &nbsp; &nbsp;The problem approached and its sig=
+nificance or relevance<br />&nbsp; &nbsp; &bull; &nbsp; &nbsp;The research =
+objectives and related investigation topics<br />&nbsp; &nbsp; &bull; &nbsp=
+; &nbsp;A brief display of what is already known<br />&nbsp; &nbsp; &bull; =
+&nbsp; &nbsp;A proposed solution methodology for the problem<br />&nbsp; &n=
+bsp; &bull; &nbsp; &nbsp;Expected results</p>
+    <p><br /></p>
+    <p id=3D"m_7038599259805203993isPasted"><strong>Important Dates</strong=
+></p>
+    <p>Paper submission: February 12, <span class=3D"il">2023</span><br /><=
+br />Notification of acceptance: March 26, <span class=3D"il">2023</span><b=
+r /><br />Submission of accepted papers: April 9, <span class=3D"il">2023</=
+span><br /><br />Payment of registration, to ensure the inclusion of an acc=
+epted paper in the&nbsp;conference proceedings: April 9, <span class=3D"il"=
+>2023</span></p>
+    <p>&nbsp;</p>
+    <p><strong>Organizing Committee<br /></strong></p>
+    <p>&Aacute;lvaro Rocha, ISEG, Universidade de Lisboa</p>
+    <p>Francisco Garc&iacute;a-Pe&ntilde;alvo, Universidad de Salamanca</p>=
+
+    <p>&nbsp;</p>
+    <p><strong>Scientific Committee</strong></p>
+    <p>Francisco Garc&iacute;a-Pe&ntilde;alvo, Universidad de Salamanca (Pr=
+esidente)</p>
+    <p>Augusto Sousa, FEUP, Universidade do Porto</p>
+    <p>Adolfo Lozano Tello, Universidad de Extremadura</p>
+    <p>&Aacute;lvaro Rocha, ISEG, Universidade de Lisboa</p>
+    <p>Ana Am&eacute;lia Carvalho, Universidade de Coimbra</p>
+    <p>Ant&oacute;nio Coelho, FEUP, Universidade do Porto</p>
+    <p>Antonio Garcia Loureiro, Universidade de Santiago de Compostela</p>
+    <p>Ant&oacute;nio Palma do Reis, ISEG, Universidade de Lisboa</p>
+    <p>Arnaldo Martins, Universidade de Aveiro</p>
+    <p>Borja Bordel, Universidad Polit&eacute;cnica de Madrid</p>
+    <p>Carlos Costa, ISEG, Universidade de Lisboa</p>
+    <p>Carlos Ferr&aacute;s Sexto, Universidad de Santiago de Compostela</p=
+>
+    <p>Carlos Montenegro, Universidad Distrital Francisco Jos&eacute; de Ca=
+ldas</p>
+    <p>Cesar Collazos, Universidad del Cauca</p>
+    <p>David Fonseca, La Salle, Universitat Ramon Llull</p>
+    <p>Fernando Moreira, Universidade Portucalense</p>
+    <p>Gon&ccedil;alo Paiva Dias, Universidade de Aveiro</p>
+    <p>Jeimy Cano, Universidad de los Andes</p>
+    <p>Jezreel Mejia, CIMAT</p>
+    <p>Jo&atilde;o Manuel R.S. Tavares, FEUP, Universidade do Porto</p>
+    <p>Jo&atilde;o Pascoal Faria, FEUP, Universidade do Porto~</p>
+    <p>Jo&atilde;o Paulo Costa, Universidade de Coimbra</p>
+    <p>Jos&eacute; Machado, Universidade do Minho</p>
+    <p>Luis Camarinha-Matos, Universidade NOVA de Lisboa</p>
+    <p>Manuel Tupia, Pontifica Universidad Cat&oacute;lica del Per&uacute;<=
+/p>
+    <p>Marcelo Marciszack, Universidad Tecnol&oacute;gica Nacional</p>
+    <p>Marco Painho, Nova Information Management School, Universidade Nova =
+de Lisboa</p>
+    <p>Mar&iacute;a J Lado, Universidade de Vigo</p>
+    <p>Maria Jos&eacute; Sousa, ISCTE - Instituto Universit&aacute;rio de L=
+isboa</p>
+    <p>M&aacute;rio Piattini, Universidad de Castilla-La Mancha</p>
+    <p>Maristela Holanda, Universidade de Bras&iacute;lia</p>
+    <p>Mercedes Ruiz, Universidad de C&aacute;diz</p>
+    <p>Miguel Casquilho, Universidade de Lisboa</p>
+    <p>Miguel de Castro Neto, NOVA IMS</p>
+    <p>Miguel Ram&oacute;n Gonzalez Castro, Centro Tecnol&oacute;gico Aimen=
+</p>
+    <p>Mirna Mu&ntilde;oz, Centro de Investigaci&oacute;n en Matem&aacute;t=
+icas A.C.- Unidad Zacatecas</p>
+    <p>Nelson Rocha, Universidade de Aveiro &nbsp;</p>
+    <p>&Oacute;scar Mealha, Universidade de Aveiro</p>
+    <p>Paulo Pinto, FC, Universidade Nova de Lisboa</p>
+    <p>Ramiro Gon&ccedil;alves, Universidade de Tr&aacute;s-os-Montes e Alt=
+o Douro</p>
+    <p>Rui Cruz, IST, Universidade de Lisboa</p>
+    <p>Victor Hugo Medina Garcia, Universidad Distrital Francisco Jos&eacut=
+e; de Caldas</p>
+    <p>V&iacute;tor Santos, NOVA IMS</p>
+    <p><br /></p>
+    <p><br /></p>
+    <p><strong>Website of <span class=3D"il">CISTI</span>'<span class=3D"il=
+">2023</span></strong>: <a id=3D"m_7038599259805203993isPasted" href=3D"htt=
+ps://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf53ffa2--36ec7f8491211e=
+je2OOTeVVtFe2ne5sK" target=3D"_blank" data-saferedirecturl=3D"https://www.g=
+oogle.com/url?q=3Dhttps://mkt.saisti.eu/go/a734bbd1e6d8440a14a7986b82b0-bf5=
+3ffa2--36ec7f8491211eje2OOTeVVtFe2ne5sK&source=3Dgmail&ust=3D16702549505950=
+00&usg=3DAOvVaw183p_fgzR3prG_I7T4EHJu">http://<span class=3D"il">cisti</spa=
+n>.eu/</a></p>
+  <div id=3D"DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF2"><br /><table style=3D"bo=
+rder-top: 1px solid #D3D4DE;"><tr><td style=3D"width: 55px; padding-top: 13=
+px;"><a href=3D"http://www.avg.com/email-signature?utm_medium=3Demail&utm_s=
+ource=3Dlink&utm_campaign=3Dsig-email&utm_content=3Demailclient" target=3D"=
+_blank"><img src=3D"https://s-install.avcdn.net/ipm/preview/icons/icon-enve=
+lope-tick-green-avg-v1.png" alt=3D"" width=3D"46" height=3D"29" style=3D"wi=
+dth: 46px; height: 29px;"/></a></td><td style=3D"width: 470px; padding-top:=
+ 12px; color: #41424e; font-size: 13px; font-family: Arial, Helvetica, sans=
+-serif; line-height: 18px;">Virus-free.<a href=3D"http://www.avg.com/email-=
+signature?utm_medium=3Demail&utm_source=3Dlink&utm_campaign=3Dsig-email&utm=
+_content=3Demailclient" target=3D"_blank" style=3D"color: #4453ea;">www.avg=
+=2Ecom</a></td></tr></table><a href=3D"#DAB4FAD8-2DD7-40BB-A1B8-4E2AA1F9FDF=
+2" width=3D"1" height=3D"1"> </a></div></body>
+</html>
+
+--srF=_8V6XoujBCV9xC7oxH9gQDAyTqeHxJ--
+
+
+--===============2104372947895404378==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============2104372947895404378==--
+
