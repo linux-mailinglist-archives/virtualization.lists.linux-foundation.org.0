@@ -1,108 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DCF9651ED3
-	for <lists.virtualization@lfdr.de>; Tue, 20 Dec 2022 11:31:27 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A1CA651EE7
+	for <lists.virtualization@lfdr.de>; Tue, 20 Dec 2022 11:36:00 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EFFFD60B93;
-	Tue, 20 Dec 2022 10:31:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EFFFD60B93
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ZNMOnTgf
+	by smtp4.osuosl.org (Postfix) with ESMTP id 986034067C;
+	Tue, 20 Dec 2022 10:35:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 986034067C
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JSZk8AE/
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 26c_DGKUVrHX; Tue, 20 Dec 2022 10:31:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id B3A3460BC6;
-	Tue, 20 Dec 2022 10:31:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3A3460BC6
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gJ_G1IHBWLBL; Tue, 20 Dec 2022 10:35:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 10F9A403C8;
+	Tue, 20 Dec 2022 10:35:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 10F9A403C8
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C9240C0077;
-	Tue, 20 Dec 2022 10:31:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E9D87C0035;
+	Tue, 20 Dec 2022 10:35:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 41C4FC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9836DC002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 10:31:22 +0000 (UTC)
+ Tue, 20 Dec 2022 10:35:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 14AAB81985
+ by smtp3.osuosl.org (Postfix) with ESMTP id 6889460BC3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 10:31:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 14AAB81985
-Authentication-Results: smtp1.osuosl.org;
+ Tue, 20 Dec 2022 10:35:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6889460BC3
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=ZNMOnTgf
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=JSZk8AE/
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dEWnl1yL4DDc
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id TXVjLQ9q99_Z
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 10:31:20 +0000 (UTC)
+ Tue, 20 Dec 2022 10:35:49 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org ADC66818C2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5ED7A60A9E
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id ADC66818C2
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5ED7A60A9E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 10:31:20 +0000 (UTC)
+ Tue, 20 Dec 2022 10:35:49 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1671532279;
+ s=mimecast20190719; t=1671532548;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=Ymr7dvYm0bPIMGfQN+EFR1KRA6011TA++6Gv0jSwMRI=;
- b=ZNMOnTgftsysAiTrYdiH5JR6qEJIYBpnUqyO6xKrzw/iIjpMiHDKqVOeDnvIuEo6a/K9CV
- t103u8FEFZjIww08ksHmP6kt1Ng0JQNjIYSq90BNWq7MEuF62X6IlctnW3ResRrdB/ms9l
- d2U6ievO0DIy2fViYtFcW37GwZmcOVg=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=0xIE948N+OVyD9RxTPjKQ11q6Fjch6dgm41Al2E4iz0=;
+ b=JSZk8AE/mOLR2CGX4/TuEHPjPlHK8NPTw1FzAg6Yl9M69ThYWWQKEUQXE1vadI2RhepvmT
+ xl+TqflenIT2eq0eEnqTdPKmqB2CWv0NHqPsa3kVK6pkKFKK3vNoHuabaCi8SNi/n+zaLg
+ afyEqCaZFqEpwIbpc3lFLa7BzJzzW98=
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-653-8uh2UEfjMfy-GpV9rM-JZQ-1; Tue, 20 Dec 2022 05:31:18 -0500
-X-MC-Unique: 8uh2UEfjMfy-GpV9rM-JZQ-1
-Received: by mail-wm1-f72.google.com with SMTP id
- i187-20020a1c3bc4000000b003d634aca337so213986wma.1
+ us-mta-111-Y64rYBORMpKrqnpKMiN6nQ-1; Tue, 20 Dec 2022 05:35:45 -0500
+X-MC-Unique: Y64rYBORMpKrqnpKMiN6nQ-1
+Received: by mail-wm1-f71.google.com with SMTP id
+ c1-20020a7bc001000000b003cfe40fca79so2459494wmb.6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Dec 2022 02:31:17 -0800 (PST)
+ Tue, 20 Dec 2022 02:35:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ymr7dvYm0bPIMGfQN+EFR1KRA6011TA++6Gv0jSwMRI=;
- b=HQ5IW/rf8JFbY+wemXOWPSVow586TzUPBjBPXh0rsMQcR+OQjAOLW+zl33R41XKlma
- mGbVaBBNHVk+/B6+1swpM6tHK3+5gHZ1L8SvO9WZ6YpxHl8cJ/Rwsg8Z4KXrevQuXPsK
- hv3HH1d+WqN5gnpfhTlcVzsdaixbLuNNEqIIiumPORkCbKLD1OGqc4JlKqvODOGrBDBg
- HtFmAIGqci8X6EyDRHiTPy2pelK2bA/v2vnt0jrRnwTJ14OwgbyPY2/ElQu5AtCqXhVf
- tWqZ0nlIN2sqRN4EurwCmuL9gwGUV6eK6CmBub00E6R60pTvjZEcDB4rlZLyAKDI/iV3
- AtIQ==
-X-Gm-Message-State: ANoB5pkTWo3r7Zh6ihvgUfy5zK1W6jsi2Y/7hlQncZtuunbHT2AoImUc
- t+yfjJjgCyd+9o5gH+otQW5s41Wjell/Xwq4lb7nHyx7PlHyhtBJpzZk+m9tc4BqxdAMrlK5w+Z
- TMLnHIBFU3BbMRDNKeQlZgxt5Gk20p+EU7Kqmx709Fg==
-X-Received: by 2002:a05:600c:6549:b0:3c7:1359:783b with SMTP id
- dn9-20020a05600c654900b003c71359783bmr37201624wmb.1.1671532276955; 
- Tue, 20 Dec 2022 02:31:16 -0800 (PST)
-X-Google-Smtp-Source: AA0mqf5x1TeapVDCTlsoX2XzG7CqIUw11/Yk6M+YURbcyrD4F7TcwGxHCWM4JyoUR/l0n84xqNGPTg==
-X-Received: by 2002:a05:600c:6549:b0:3c7:1359:783b with SMTP id
- dn9-20020a05600c654900b003c71359783bmr37201614wmb.1.1671532276748; 
- Tue, 20 Dec 2022 02:31:16 -0800 (PST)
+ bh=0xIE948N+OVyD9RxTPjKQ11q6Fjch6dgm41Al2E4iz0=;
+ b=pSut5DCi8ww60bxzPLLQxuqDCi+cfilzp5SU2bSBKj3ZtUFWf+2jYPMrTZka+7vE7d
+ yybrRlAlZIjMKmQCHi6XYOP0n+N7mt+63M8v7TfleVlniNzt4E8KbKnwK5GStTeKYlUA
+ Nh+Bq+skRn7gO0DH7YNjPtChJSUSul/9T6226ICK1HhwHgWpOithNOPz+D5Uyu7qprZo
+ Bb7wwqYLJwuUmhTGxsKNTNBgFo+Jp6a5LcSax8kfmGK2PKfB8ojPS7GPo2z/xhS+cnWI
+ 8jFIKF/LdG4yJjnncZuP8y3pyrXt5Ikqyif6MMmnWwl+6gTjXgVIs/x+6W3kZb3B5Rai
+ qrVA==
+X-Gm-Message-State: AFqh2kpP4PSf1U8C2f20S22JCnsVavPyLcgpEjthx+/jQTE3kbcGICbg
+ 5qS1Vj8xTCEuFr20xAajxndoKUQmjWqkviPS3WloNLcOLb0cGH1azN39UCvjKeRE0F0tGnt/PY0
+ so6CnN6rQ22+R1suBIwwB9XmRnR5yc1nsvt0F/DSDhw==
+X-Received: by 2002:a05:600c:3b08:b0:3d3:4a47:52e9 with SMTP id
+ m8-20020a05600c3b0800b003d34a4752e9mr8998382wms.15.1671532544034; 
+ Tue, 20 Dec 2022 02:35:44 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXswZvLV6vC3rUs9MMkLlnmeQY6d+pmClDori0caDrXbfFSl7htQYg5vZB4m7wOx5HQXfo1nIg==
+X-Received: by 2002:a05:600c:3b08:b0:3d3:4a47:52e9 with SMTP id
+ m8-20020a05600c3b0800b003d34a4752e9mr8998362wms.15.1671532543832; 
+ Tue, 20 Dec 2022 02:35:43 -0800 (PST)
 Received: from sgarzare-redhat (host-87-11-6-51.retail.telecomitalia.it.
  [87.11.6.51]) by smtp.gmail.com with ESMTPSA id
- r8-20020a05600c35c800b003a2f2bb72d5sm30909143wmq.45.2022.12.20.02.31.15
+ 1-20020a05600c228100b003d23928b654sm21773342wmf.11.2022.12.20.02.35.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Dec 2022 02:31:16 -0800 (PST)
-Date: Tue, 20 Dec 2022 11:31:05 +0100
+ Tue, 20 Dec 2022 02:35:43 -0800 (PST)
+Date: Tue, 20 Dec 2022 11:35:38 +0100
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
-Subject: Re: [RFC PATCH v5 1/4] vsock: return errors other than -ENOMEM to
- socket
-Message-ID: <20221220103105.njugghpvvjusfjrs@sgarzare-redhat>
+Subject: Re: [RFC PATCH v5 4/4] test/vsock: vsock_perf utility
+Message-ID: <20221220103538.msrgcwsolmzoc2r4@sgarzare-redhat>
 References: <e04f749e-f1a7-9a1d-8213-c633ffcc0a69@sberdevices.ru>
- <c22a2ad3-1670-169b-7184-8f4a6d90ba06@sberdevices.ru>
+ <d92184cd-e79b-80ae-4f89-92dfd43d1e92@sberdevices.ru>
 MIME-Version: 1.0
-In-Reply-To: <c22a2ad3-1670-169b-7184-8f4a6d90ba06@sberdevices.ru>
+In-Reply-To: <d92184cd-e79b-80ae-4f89-92dfd43d1e92@sberdevices.ru>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -131,38 +130,87 @@ Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Dec 20, 2022 at 07:18:48AM +0000, Arseniy Krasnov wrote:
->This removes behaviour, where error code returned from any transport
->was always switched to ENOMEM. For example when user tries to send too
->big message via SEQPACKET socket, transport layers return EMSGSIZE, but
->this error code was always replaced with ENOMEM and returned to user.
+On Tue, Dec 20, 2022 at 07:23:46AM +0000, Arseniy Krasnov wrote:
+>This adds utility to check vsock rx/tx performance.
 >
->Signed-off-by: Bobby Eshleman <bobby.eshleman@bytedance.com>
+>Usage as sender:
+>./vsock_perf --sender <cid> --port <port> --bytes <bytes to send>
+>Usage as receiver:
+>./vsock_perf --port <port> --rcvlowat <SO_RCVLOWAT>
+>
 >Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
 >---
-> net/vmw_vsock/af_vsock.c | 3 ++-
-> 1 file changed, 2 insertions(+), 1 deletion(-)
+> tools/testing/vsock/Makefile     |   3 +-
+> tools/testing/vsock/README       |  34 +++
+> tools/testing/vsock/vsock_perf.c | 441 +++++++++++++++++++++++++++++++
+> 3 files changed, 477 insertions(+), 1 deletion(-)
+> create mode 100644 tools/testing/vsock/vsock_perf.c
+>
+>diff --git a/tools/testing/vsock/Makefile b/tools/testing/vsock/Makefile
+>index f8293c6910c9..43a254f0e14d 100644
+>--- a/tools/testing/vsock/Makefile
+>+++ b/tools/testing/vsock/Makefile
+>@@ -1,8 +1,9 @@
+> # SPDX-License-Identifier: GPL-2.0-only
+>-all: test
+>+all: test vsock_perf
+> test: vsock_test vsock_diag_test
+> vsock_test: vsock_test.o timeout.o control.o util.o
+> vsock_diag_test: vsock_diag_test.o timeout.o control.o util.o
+>+vsock_perf: vsock_perf.o
+>
+> CFLAGS += -g -O2 -Werror -Wall -I. -I../../include -I../../../usr/include -Wno-pointer-sign -fno-strict-overflow -fno-strict-aliasing -fno-common -MMD -U_FORTIFY_SOURCE -D_GNU_SOURCE
+> .PHONY: all test clean
+>diff --git a/tools/testing/vsock/README b/tools/testing/vsock/README
+>index 4d5045e7d2c3..e6f6735bba05 100644
+>--- a/tools/testing/vsock/README
+>+++ b/tools/testing/vsock/README
+>@@ -35,3 +35,37 @@ Invoke test binaries in both directions as follows:
+>                        --control-port=$GUEST_IP \
+>                        --control-port=1234 \
+>                        --peer-cid=3
+>+
+>+vsock_perf utility
+>+-------------------
+>+'vsock_perf' is a simple tool to measure vsock performance. It works in
+>+sender/receiver modes: sender connect to peer at the specified port and
+>+starts data transmission to the receiver. After data processing is done,
+>+it prints several metrics(see below).
+>+
+>+Usage:
+>+# run as sender
+>+# connect to CID 2, port 1234, send 1G of data, tx buf size is 1M
+>+./vsock_perf --sender 2 --port 1234 --bytes 1G --buf-size 1M
+>+
+>+Output:
+>+tx performance: A Gb/s
+>+
+>+Output explanation:
+>+A is calculated as "number of bytes to send" / "time in tx loop"
+>+
+>+# run as receiver
+>+# listen port 1234, rx buf size is 1M, socket buf size is 1G, SO_RCVLOWAT is 64K
+>+./vsock_perf --port 1234 --buf-size 1M --vsk-size 1G --rcvlowat 64K
+>+
+>+Output:
+>+rx performance: A Gb/s
+>+total in 'read()': B sec
+>+POLLIN wakeups: C
+>+average in 'read()': D ns
+>+
+>+Output explanation:
+>+A is calculated as "number of received bytes" / "time in rx loop".
+>+B is time, spent in 'read()' system call(excluding 'poll()')
+>+C is number of 'poll()' wake ups with POLLIN bit set.
+>+D is B / C, e.g. average amount of time, spent in single 'read()'.
+
+Since now we prints Gbits/s I think we should update the previous lines.
+But the rest looks good to me. So with the updated README:
 
 Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
 
->
->diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
->index d593d5b6d4b1..19aea7cba26e 100644
->--- a/net/vmw_vsock/af_vsock.c
->+++ b/net/vmw_vsock/af_vsock.c
->@@ -1861,8 +1861,9 @@ static int vsock_connectible_sendmsg(struct socket *sock, struct msghdr *msg,
-> 			written = transport->stream_enqueue(vsk,
-> 					msg, len - total_written);
-> 		}
->+
-> 		if (written < 0) {
->-			err = -ENOMEM;
->+			err = written;
-> 			goto out_err;
-> 		}
->
->-- 
->2.25.1
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
