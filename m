@@ -1,79 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50E09653B77
-	for <lists.virtualization@lfdr.de>; Thu, 22 Dec 2022 06:01:20 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0C6F8653B74
+	for <lists.virtualization@lfdr.de>; Thu, 22 Dec 2022 06:01:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 61D7440153;
-	Thu, 22 Dec 2022 05:01:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 61D7440153
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=amz0S+3f
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id MwF9PRvp7wt0; Thu, 22 Dec 2022 05:01:15 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 1C96C403C2;
-	Thu, 22 Dec 2022 05:01:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1C96C403C2
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 65D59C007C;
+	by smtp1.osuosl.org (Postfix) with ESMTP id 58ACB81F5F;
 	Thu, 22 Dec 2022 05:01:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 58ACB81F5F
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=fzB0Rbx3
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nnAS3hJ6eMmf; Thu, 22 Dec 2022 05:01:13 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id F334981FD6;
+	Thu, 22 Dec 2022 05:01:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F334981FD6
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2627DC007C;
+	Thu, 22 Dec 2022 05:01:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 808E6C0070
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8BA30C0070
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Dec 2022 05:01:11 +0000 (UTC)
+ Thu, 22 Dec 2022 05:01:10 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 68F5B40153
+ by smtp3.osuosl.org (Postfix) with ESMTP id 512566104E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Dec 2022 05:01:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 68F5B40153
+ Thu, 22 Dec 2022 05:01:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 512566104E
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=fzB0Rbx3
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id a6ukAup2z0tU
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5AvwenxKO5uY
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Dec 2022 05:01:10 +0000 (UTC)
+ Thu, 22 Dec 2022 05:01:07 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AC48E40141
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2CF0960AD5
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AC48E40141
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2CF0960AD5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 22 Dec 2022 05:01:10 +0000 (UTC)
+ Thu, 22 Dec 2022 05:01:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1671685269;
+ s=mimecast20190719; t=1671685265;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=9cfksyyN802rhXnNAv/0J7MXVcDFI/OT76q+tAGfEdA=;
- b=amz0S+3fX6h3xA+ouD+2O2C2bMiaBZQvU7vcrvxvInowAVs8fKtXgf79ah169iTX86YxUx
- JN9HNJIr5iXW8xZMvv7YR59SZeLGZFM86VZGvoBvC/NDgvsw1UfBSs8bR35Xn2hOUByqp+
- AUFYDTB+xgIBqdjlpStgVd8x8WPEdP4=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=SXqwCh6Com8aJFlTus6HXtifGXM4NjpzjtHRW5NKksM=;
+ b=fzB0Rbx3J7h5kGdaRjYOXJ0RVyUQn6DbPtOu/Ic/4nacGIutQxCfmt0zeAK6iaIX0MpPr9
+ BokDoyH8Z50U8NMSbMpjn2Kc1jCHGiW5koHlcGKklea1M8tm5bvRjLSW2MtiNrVuN3lOpj
+ tvxkhOHgBM7VB0PsexJHo/dSxLDPlD4=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-161-cBFe4bMDPSy0StRvkpFsOg-1; Thu, 22 Dec 2022 00:01:00 -0500
-X-MC-Unique: cBFe4bMDPSy0StRvkpFsOg-1
+ us-mta-92-4ktcipsVNAeTGD5_fUBrBQ-1; Thu, 22 Dec 2022 00:01:03 -0500
+X-MC-Unique: 4ktcipsVNAeTGD5_fUBrBQ-1
 Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.rdu2.redhat.com
  [10.11.54.1])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 2CB6E3C02B74;
- Thu, 22 Dec 2022 05:01:00 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 698953C02B7B;
+ Thu, 22 Dec 2022 05:01:03 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-15.pek2.redhat.com [10.72.13.15])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 8AE3440C2064;
- Thu, 22 Dec 2022 05:00:57 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id CCE7340C2064;
+ Thu, 22 Dec 2022 05:01:00 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH V2 0/4] Vendor stats support in vdpasim_net
-Date: Thu, 22 Dec 2022 13:00:48 +0800
-Message-Id: <20221222050052.20785-1-jasowang@redhat.com>
+Subject: [PATCH V2 1/4] vdpa_sim: switch to use __vdpa_alloc_device()
+Date: Thu, 22 Dec 2022 13:00:49 +0800
+Message-Id: <20221222050052.20785-2-jasowang@redhat.com>
+In-Reply-To: <20221222050052.20785-1-jasowang@redhat.com>
+References: <20221222050052.20785-1-jasowang@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.1
 Cc: eperezma@redhat.com, virtualization@lists.linux-foundation.org,
@@ -94,32 +100,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi All:
+This allows us to control the allocation size of the structure.
 
-This series implements vendor stats in vdpasim_net. Please review.
+Signed-off-by: Jason Wang <jasowang@redhat.com>
+---
+ drivers/vdpa/vdpa_sim/vdpa_sim.c | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
 
-Thanks
-
-Changes since V1:
-- typo fixes
-- move the duplicated get_vendor_vq_stats() in
-  vdpasim_batch_config_ops to vdpa_sim_config_ops
-- use -EOPNOTSUPP instead of -EINVAL in vdpasim_get_vq_stats
-- introdce a dedicated variable to record the successful cvq request
-  and track the number of requests correctly
-
-Jason Wang (4):
-  vdpa_sim: switch to use __vdpa_alloc_device()
-  vdpasim: customize allocation size
-  vdpa_sim: support vendor statistics
-  vdpa_sim_net: vendor satistics
-
- drivers/vdpa/vdpa_sim/vdpa_sim.c     |  33 +++-
- drivers/vdpa/vdpa_sim/vdpa_sim.h     |   4 +
- drivers/vdpa/vdpa_sim/vdpa_sim_blk.c |   1 +
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 221 ++++++++++++++++++++++++++-
- 4 files changed, 248 insertions(+), 11 deletions(-)
-
+diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+index b071f0d842fb..757afef86ba0 100644
+--- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
++++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
+@@ -250,6 +250,7 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
+ 			       const struct vdpa_dev_set_config *config)
+ {
+ 	const struct vdpa_config_ops *ops;
++	struct vdpa_device *vdpa;
+ 	struct vdpasim *vdpasim;
+ 	struct device *dev;
+ 	int i, ret = -ENOMEM;
+@@ -267,14 +268,16 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
+ 	else
+ 		ops = &vdpasim_config_ops;
+ 
+-	vdpasim = vdpa_alloc_device(struct vdpasim, vdpa, NULL, ops,
+-				    dev_attr->ngroups, dev_attr->nas,
+-				    dev_attr->name, false);
+-	if (IS_ERR(vdpasim)) {
+-		ret = PTR_ERR(vdpasim);
++	vdpa = __vdpa_alloc_device(NULL, ops,
++				   dev_attr->ngroups, dev_attr->nas,
++				   sizeof(struct vdpasim),
++				   dev_attr->name, false);
++	if (IS_ERR(vdpa)) {
++		ret = PTR_ERR(vdpa);
+ 		goto err_alloc;
+ 	}
+ 
++	vdpasim = vdpa_to_sim(vdpa);
+ 	vdpasim->dev_attr = *dev_attr;
+ 	INIT_WORK(&vdpasim->work, dev_attr->work_fn);
+ 	spin_lock_init(&vdpasim->lock);
 -- 
 2.25.1
 
