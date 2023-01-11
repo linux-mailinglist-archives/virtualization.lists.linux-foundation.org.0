@@ -1,84 +1,84 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id D0726665492
-	for <lists.virtualization@lfdr.de>; Wed, 11 Jan 2023 07:28:38 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6953B40576;
-	Wed, 11 Jan 2023 06:28:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6953B40576
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=LuPlvOY0
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P-rHGi2EWFsR; Wed, 11 Jan 2023 06:28:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 183E040919;
-	Wed, 11 Jan 2023 06:28:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 183E040919
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 475EAC007B;
-	Wed, 11 Jan 2023 06:28:35 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8CF60C002D
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Jan 2023 06:28:33 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id AE7B5665493
+	for <lists.virtualization@lfdr.de>; Wed, 11 Jan 2023 07:28:39 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5B75960769
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Jan 2023 06:28:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5B75960769
+	by smtp3.osuosl.org (Postfix) with ESMTP id DEDFF60769;
+	Wed, 11 Jan 2023 06:28:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DEDFF60769
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=LuPlvOY0
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JnM9I9pg
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MHRw7edJNGrA
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MmLrATbBr2nD; Wed, 11 Jan 2023 06:28:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 9C4E96079D;
+	Wed, 11 Jan 2023 06:28:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9C4E96079D
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6FC3DC007F;
+	Wed, 11 Jan 2023 06:28:36 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0DD81C002D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Jan 2023 06:28:32 +0000 (UTC)
+ Wed, 11 Jan 2023 06:28:36 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id D07E380DC0
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 11 Jan 2023 06:28:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D07E380DC0
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=JnM9I9pg
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id RWcuqnMYhsMn
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 11 Jan 2023 06:28:35 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AD089605B5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3315E80C67
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id AD089605B5
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 3315E80C67
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Jan 2023 06:28:32 +0000 (UTC)
+ Wed, 11 Jan 2023 06:28:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1673418511;
+ s=mimecast20190719; t=1673418514;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=hZckiIF9GKaRv3ubvyyEtlLgDTx5PNnpA2vEzhFHbOU=;
- b=LuPlvOY0KuHe/Vt3AEb7etGK1dFN1k0m5nOX4eBUbH5bUYXL7LhjgHYlAz1zOUzD7TXNm3
- Hz21ZiF/hx5Cbd3rCXpynQsm6av74XxT85BY9s7YbxpHWAadb3Ti265xzt7r4gyokeAAsi
- GpIjywyKoaxHBPjvXTZNu5ftobA214k=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=5+4wcK32yTG8RIPffsWit0AM8U7mssDeI6INzJz2GeQ=;
+ b=JnM9I9pgJVzW+jG3yMgt8Gi21WUsINU0uZb9nhc3o8sS78kxwP/OcyZ65q16XtITK994fa
+ S+QmvdzO4I4j+B4uAmQIW7WawyvmYgxJbc7BVs6fsAmT2ByKdqamnztpuj9cxKPUaF6bSn
+ DMVSZuzGY83HhUtYzFBqhDaKgpa3DP8=
+Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
+ [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-64-KCRmC12MPgyLAFenQKKLJw-1; Wed, 11 Jan 2023 01:28:28 -0500
-X-MC-Unique: KCRmC12MPgyLAFenQKKLJw-1
+ us-mta-352-_n38zNkSN4y1z_p4rB0FMQ-1; Wed, 11 Jan 2023 01:28:31 -0500
+X-MC-Unique: _n38zNkSN4y1z_p4rB0FMQ-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 9DCD187B2A0;
- Wed, 11 Jan 2023 06:28:27 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 4B89D2A59557;
+ Wed, 11 Jan 2023 06:28:31 +0000 (UTC)
 Received: from localhost.localdomain (ovpn-13-175.pek2.redhat.com
  [10.72.13.175])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 90A174078903;
- Wed, 11 Jan 2023 06:28:22 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 4E61B4078903;
+ Wed, 11 Jan 2023 06:28:27 +0000 (UTC)
 From: Jason Wang <jasowang@redhat.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH 3/5] virtio-vdpa: support per vq dma device
-Date: Wed, 11 Jan 2023 14:28:07 +0800
-Message-Id: <20230111062809.25020-4-jasowang@redhat.com>
+Subject: [PATCH 4/5] vdpa: set dma mask for vDPA device
+Date: Wed, 11 Jan 2023 14:28:08 +0800
+Message-Id: <20230111062809.25020-5-jasowang@redhat.com>
 In-Reply-To: <20230111062809.25020-1-jasowang@redhat.com>
 References: <20230111062809.25020-1-jasowang@redhat.com>
 MIME-Version: 1.0
@@ -101,46 +101,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch adds the support of per vq dma device for virito-vDPA. vDPA
-parents then are allowed to use different DMA devices. This is useful
-for the parents that have software or emulated virtqueues.
+Setting DMA mask for vDPA device in case that there are virtqueue that
+is not backed by DMA so the vDPA device could be advertised as the DMA
+device that is used by DMA API for software emulated virtqueues.
 
 Signed-off-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_vdpa.c | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
+ drivers/vdpa/vdpa.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/drivers/virtio/virtio_vdpa.c b/drivers/virtio/virtio_vdpa.c
-index 9670cc79371d..d7f5af62ddaa 100644
---- a/drivers/virtio/virtio_vdpa.c
-+++ b/drivers/virtio/virtio_vdpa.c
-@@ -135,6 +135,7 @@ virtio_vdpa_setup_vq(struct virtio_device *vdev, unsigned int index,
- {
- 	struct virtio_vdpa_device *vd_dev = to_virtio_vdpa_device(vdev);
- 	struct vdpa_device *vdpa = vd_get_vdpa(vdev);
-+	struct device *dma_dev;
- 	const struct vdpa_config_ops *ops = vdpa->config;
- 	struct virtio_vdpa_vq_info *info;
- 	struct vdpa_callback cb;
-@@ -175,9 +176,15 @@ virtio_vdpa_setup_vq(struct virtio_device *vdev, unsigned int index,
+diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
+index 8ef7aa1365cc..6821b2850bbb 100644
+--- a/drivers/vdpa/vdpa.c
++++ b/drivers/vdpa/vdpa.c
+@@ -39,6 +39,11 @@ static int vdpa_dev_probe(struct device *d)
+ 	u32 max_num, min_num = 1;
+ 	int ret = 0;
  
- 	/* Create the vring */
- 	align = ops->get_vq_align(vdpa);
--	vq = vring_create_virtqueue(index, max_num, align, vdev,
--				    true, may_reduce_num, ctx,
--				    virtio_vdpa_notify, callback, name);
++	d->dma_mask = &d->coherent_dma_mask;
++	ret = dma_set_mask_and_coherent(d, DMA_BIT_MASK(64));
++	if (ret)
++		return ret;
 +
-+	if (ops->get_vq_dma_dev)
-+		dma_dev = ops->get_vq_dma_dev(vdpa, index);
-+	else
-+		dma_dev = vdpa_get_dma_dev(vdpa);
-+	vq = vring_create_virtqueue_dma(index, max_num, align, vdev,
-+					true, may_reduce_num, ctx,
-+					virtio_vdpa_notify, callback,
-+					name, dma_dev);
- 	if (!vq) {
- 		err = -ENOMEM;
- 		goto error_new_virtqueue;
+ 	max_num = ops->get_vq_num_max(vdev);
+ 	if (ops->get_vq_num_min)
+ 		min_num = ops->get_vq_num_min(vdev);
 -- 
 2.25.1
 
