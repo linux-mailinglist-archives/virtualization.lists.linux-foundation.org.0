@@ -2,81 +2,81 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9086E667FD1
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 68428667FC7
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:15 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D2F604159A;
-	Thu, 12 Jan 2023 19:58:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D2F604159A
+	by smtp2.osuosl.org (Postfix) with ESMTP id 516534119E;
+	Thu, 12 Jan 2023 19:58:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 516534119E
 Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=Y8LFyBFl
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=EbqGBmO2
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id veR1QymtO_-Q; Thu, 12 Jan 2023 19:58:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 1646F4158F;
-	Thu, 12 Jan 2023 19:58:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1646F4158F
+	with ESMTP id tuHgUiMz5__g; Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 8217241193;
+	Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8217241193
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 172EBC0078;
-	Thu, 12 Jan 2023 19:58:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 08164C002D;
+	Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 0FA00C007D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 107DFC0033
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:08 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D85EB60E96
+ by smtp3.osuosl.org (Postfix) with ESMTP id 008B760EA5
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D85EB60E96
+ Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 008B760EA5
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=Y8LFyBFl
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=EbqGBmO2
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 4vcQLLsGlqaQ
+ with ESMTP id ufnqtCLIyfFI
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:07 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CF09360E00
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D067860E7F
 Received: from desiato.infradead.org (desiato.infradead.org
  [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CF09360E00
+ by smtp3.osuosl.org (Postfix) with ESMTPS id D067860E7F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:06 +0000 (UTC)
+ Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=RrpmTujnodPvC1LE/jXScgO4ZKUrxiQVlZ4+SEf4m04=; b=Y8LFyBFl3JbIwtnCWjFL/hhR5y
- twnVLexiBK1ooMbeDatb6RWwBocZW13sf5pirkWAWAH1nsW2rgd7ecx2Gc/qOdtvY6YZxKvumRcTm
- amulB5kgeQbRdQF87cEBBGyv4iJlugiK9kXbD+c92ulURa+BZ+6IgO0Q1qr4EELRq9g05K3UaslzX
- AWK5oxOOelmKqL4CSrymA461jkib6Q12hrzk8J/XFrR76pcWqThQ8X70scSBkUeWz1SP2e4AHdemR
- 4sJ92NwETWbqsv5J5iWtGkWZGwcWClLra0VFFumQGPO8rMb8BpC/UsbZk6Ohp1wUq3mHnYc2/nqyR
- 7VPa7mnA==;
+ bh=OSWUMoytbsEQ8xUnxginHGtpoSP0fDdQQe/5yHesCdA=; b=EbqGBmO2wjgONt8zgzM18NDs6m
+ XSWXjuSHyAYdiczaj+SJdJ6JCpVDm/NyZ+W/ITNEt0wXRBeG9hGdRw+d4O542oF24V6eJCK+fKZou
+ SGXhIpMWcAbse4OnUNvbO3E1vIfOuhg7+w93HdalOv6aag+omVC7au9s3kunWey9tQ97c6CWePXAO
+ 5BTGUz3tx6DtcAcaWZ5k9rjHOYh03mIN2x7Rh3M214NeVXNnk7uO3z2bxkuAlGuy3QDwJPMZAA0LE
+ fyJM6A93BOFEwAW+IZ7u/HQbXA13lwllIkLHXwDwMG3xu8F6p14ZDs8SqHu0RES4bZ0rnbC6FKmCr
+ pHO74mxg==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pG3hD-0045oB-09; Thu, 12 Jan 2023 19:57:08 +0000
+ id 1pG3hD-0045oD-0M; Thu, 12 Jan 2023 19:57:08 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 117A63033FB;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 16EAB3033FE;
  Thu, 12 Jan 2023 20:57:13 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id B27F62CCF1F50; Thu, 12 Jan 2023 20:57:07 +0100 (CET)
-Message-ID: <20230112195539.883561913@infradead.org>
+ id B69572CCF1F52; Thu, 12 Jan 2023 20:57:07 +0100 (CET)
+Message-ID: <20230112195539.946630819@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:23 +0100
+Date: Thu, 12 Jan 2023 20:43:24 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 09/51] cpuidle,omap3: Push RCU-idle into driver
+Subject: [PATCH v3 10/51] cpuidle,armada: Push RCU-idle into driver
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -147,145 +147,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Doing RCU-idle outside the driver, only to then teporarily enable it
+Doing RCU-idle outside the driver, only to then temporarily enable it
 again before going idle is daft.
 
 Notably the cpu_pm_*() calls implicitly re-enable RCU for a bit.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Reviewed-by: Frederic Weisbecker <frederic@kernel.org>
-Reviewed-by: Tony Lindgren <tony@atomide.com>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- arch/arm/mach-omap2/cpuidle34xx.c |   16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/cpuidle/cpuidle-mvebu-v7.c |    7 +++++++
+ 1 file changed, 7 insertions(+)
 
---- a/arch/arm/mach-omap2/cpuidle34xx.c
-+++ b/arch/arm/mach-omap2/cpuidle34xx.c
-@@ -133,7 +133,9 @@ static int omap3_enter_idle(struct cpuid
- 	}
+--- a/drivers/cpuidle/cpuidle-mvebu-v7.c
++++ b/drivers/cpuidle/cpuidle-mvebu-v7.c
+@@ -36,7 +36,10 @@ static int mvebu_v7_enter_idle(struct cp
+ 	if (drv->states[index].flags & MVEBU_V7_FLAG_DEEP_IDLE)
+ 		deepidle = true;
  
- 	/* Execute ARM wfi */
 +	ct_idle_enter();
- 	omap_sram_idle();
+ 	ret = mvebu_v7_cpu_suspend(deepidle);
 +	ct_idle_exit();
++
+ 	cpu_pm_exit();
  
- 	/*
- 	 * Call idle CPU PM enter notifier chain to restore
-@@ -265,6 +267,7 @@ static struct cpuidle_driver omap3_idle_
- 	.owner            = THIS_MODULE,
- 	.states = {
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 2 + 2,
- 			.target_residency = 5,
-@@ -272,6 +275,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU ON + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 10 + 10,
- 			.target_residency = 30,
-@@ -279,6 +283,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU ON + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 50 + 50,
- 			.target_residency = 300,
-@@ -286,6 +291,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU RET + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 1500 + 1800,
- 			.target_residency = 4000,
-@@ -293,6 +299,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU OFF + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 2500 + 7500,
- 			.target_residency = 12000,
-@@ -300,6 +307,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU RET + CORE RET",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 3000 + 8500,
- 			.target_residency = 15000,
-@@ -307,6 +315,7 @@ static struct cpuidle_driver omap3_idle_
- 			.desc		  = "MPU OFF + CORE RET",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 10000 + 30000,
- 			.target_residency = 30000,
-@@ -328,6 +337,7 @@ static struct cpuidle_driver omap3430_id
- 	.owner            = THIS_MODULE,
- 	.states = {
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 110 + 162,
- 			.target_residency = 5,
-@@ -335,6 +345,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU ON + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 106 + 180,
- 			.target_residency = 309,
-@@ -342,6 +353,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU ON + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 107 + 410,
- 			.target_residency = 46057,
-@@ -349,6 +361,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU RET + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 121 + 3374,
- 			.target_residency = 46057,
-@@ -356,6 +369,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU OFF + CORE ON",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 855 + 1146,
- 			.target_residency = 46057,
-@@ -363,6 +377,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU RET + CORE RET",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 7580 + 4134,
- 			.target_residency = 484329,
-@@ -370,6 +385,7 @@ static struct cpuidle_driver omap3430_id
- 			.desc		  = "MPU OFF + CORE RET",
- 		},
- 		{
-+			.flags		  = CPUIDLE_FLAG_RCU_IDLE,
- 			.enter		  = omap3_enter_idle_bm,
- 			.exit_latency	  = 7505 + 15274,
- 			.target_residency = 484329,
+ 	if (ret)
+@@ -49,6 +52,7 @@ static struct cpuidle_driver armadaxp_id
+ 	.name			= "armada_xp_idle",
+ 	.states[0]		= ARM_CPUIDLE_WFI_STATE,
+ 	.states[1]		= {
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.enter			= mvebu_v7_enter_idle,
+ 		.exit_latency		= 100,
+ 		.power_usage		= 50,
+@@ -57,6 +61,7 @@ static struct cpuidle_driver armadaxp_id
+ 		.desc			= "CPU power down",
+ 	},
+ 	.states[2]		= {
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.enter			= mvebu_v7_enter_idle,
+ 		.exit_latency		= 1000,
+ 		.power_usage		= 5,
+@@ -72,6 +77,7 @@ static struct cpuidle_driver armada370_i
+ 	.name			= "armada_370_idle",
+ 	.states[0]		= ARM_CPUIDLE_WFI_STATE,
+ 	.states[1]		= {
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.enter			= mvebu_v7_enter_idle,
+ 		.exit_latency		= 100,
+ 		.power_usage		= 5,
+@@ -87,6 +93,7 @@ static struct cpuidle_driver armada38x_i
+ 	.name			= "armada_38x_idle",
+ 	.states[0]		= ARM_CPUIDLE_WFI_STATE,
+ 	.states[1]		= {
++		.flags			= CPUIDLE_FLAG_RCU_IDLE,
+ 		.enter			= mvebu_v7_enter_idle,
+ 		.exit_latency		= 10,
+ 		.power_usage		= 5,
 
 
 _______________________________________________
