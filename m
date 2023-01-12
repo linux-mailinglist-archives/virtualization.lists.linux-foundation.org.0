@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C344667FCF
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:21 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67469667FD4
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9185281E5C;
-	Thu, 12 Jan 2023 19:58:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9185281E5C
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=kYTEx0rz
+	by smtp3.osuosl.org (Postfix) with ESMTP id E949E60F42;
+	Thu, 12 Jan 2023 19:58:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E949E60F42
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=CDjE30SH
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tsH82zviGGgN; Thu, 12 Jan 2023 19:58:14 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Z9TnyLXfLKEA; Thu, 12 Jan 2023 19:58:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 195A78202D;
-	Thu, 12 Jan 2023 19:58:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 195A78202D
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 2C65460F25;
+	Thu, 12 Jan 2023 19:58:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2C65460F25
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 326E0C0088;
-	Thu, 12 Jan 2023 19:58:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9435FC007E;
+	Thu, 12 Jan 2023 19:58:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56FF4C0033
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 05DF6C0070
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:06 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:08 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 32606417B3
+ by smtp1.osuosl.org (Postfix) with ESMTP id 501D381FEA
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Jan 2023 19:58:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 32606417B3
-Authentication-Results: smtp4.osuosl.org;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 501D381FEA
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=kYTEx0rz
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=CDjE30SH
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rWemMboohWU0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id HB7gqZELYAqN
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Jan 2023 19:58:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0BE8541799
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D056981DF6
 Received: from desiato.infradead.org (desiato.infradead.org
  [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 0BE8541799
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D056981DF6
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
+ Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=mHHfLn3ZXDs7+W84iYI4l64Hgzvzv2j66VWrzu7dGbw=; b=kYTEx0rzU1SllruehA0y8yHATb
- IJE4wnYq/dRbQHRcZnpN0OXGHrGk0U7J3N0VBj+JSbpdQwQu+8TKRK5iCmxygpxvyweDkZe5UIvKY
- MwOlwaQnkBOYRnYTKRZAqS1YnWNOV444ewGH4wdgTge715r6fQsvhW/ij5f47Qprmcr4wA7JNnstB
- e/bXihOVRgcSCgn0rMMHufr9/fNUf4QdhZFePtfdiRCc6x7c+0SOJjOnT1sc/ENafw33wlDFA9nsH
- 0IaR/32BenV0BuTP4t5UZWueg7KT2qaj1MvjhfzmYn2Z4T4bkLiG8Dkn01Xo2lHx6f+yFLnWfJon6
- ooD7L92g==;
+ bh=nPi2VaSnukDemWiv4/ra3+urtWJi7QCVP16nY4QbOXo=; b=CDjE30SHxh/MHeshq7LcxCyRnB
+ pAloIyE5xsjlMTbeKB6u/sxCgYnoL1p+OYgspBL5pFU5mK2BmQ486B/NcumbPG/RDRvRocqku+/+w
+ 9uMl5zfVPVAo7sN1COzJFktYLeZ5aZ36fFLW3kVxdMQ9rGWvI/TrmA4iM2REwC6E89NJG4BtwXdYh
+ Cf3lKWPZyztC126H0PkFylComcCFMahDJ0ywksznJkEyMohG+lfLKIpWv0CU/+S3YKvbiUVd/D8wg
+ UbT7ahOD8OTpISXQDxoK1saIUM6+KxGwdAqH9AqOxzOt3IA8iSNroHtgP/sEIC13R1sHdOMtNIcT9
+ tVhxTauA==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pG3hG-0045ox-1D; Thu, 12 Jan 2023 19:57:11 +0000
+ id 1pG3hG-0045oz-1Q; Thu, 12 Jan 2023 19:57:12 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 862C3303434;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 8DF5D303438;
  Thu, 12 Jan 2023 20:57:13 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 11A262CCF62AB; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
-Message-ID: <20230112195540.865735001@infradead.org>
+ id 156E92CCF62AD; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
+Message-ID: <20230112195540.927904612@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:39 +0100
+Date: Thu, 12 Jan 2023 20:43:40 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 25/51] printk: Remove trace_.*_rcuidle() usage
+Subject: [PATCH v3 26/51] time/tick-broadcast: Remove RCU_NONIDLE usage
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -147,34 +147,58 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The problem, per commit fc98c3c8c9dc ("printk: use rcuidle console
-tracepoint"), was printk usage from the cpuidle path where RCU was
-already disabled.
-
-Per the patches earlier in this series, this is no longer the case.
+No callers left that have already disabled RCU.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Reviewed-by: Sergey Senozhatsky <senozhatsky@chromium.org>
-Acked-by: Petr Mladek <pmladek@suse.com>
+Acked-by: Mark Rutland <mark.rutland@arm.com>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 Acked-by: Frederic Weisbecker <frederic@kernel.org>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- kernel/printk/printk.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ kernel/time/tick-broadcast-hrtimer.c |   29 ++++++++++++-----------------
+ 1 file changed, 12 insertions(+), 17 deletions(-)
 
---- a/kernel/printk/printk.c
-+++ b/kernel/printk/printk.c
-@@ -2238,7 +2238,7 @@ static u16 printk_sprint(char *text, u16
- 		}
- 	}
- 
--	trace_console_rcuidle(text, text_len);
-+	trace_console(text, text_len);
- 
- 	return text_len;
+--- a/kernel/time/tick-broadcast-hrtimer.c
++++ b/kernel/time/tick-broadcast-hrtimer.c
+@@ -56,25 +56,20 @@ static int bc_set_next(ktime_t expires,
+ 	 * hrtimer callback function is currently running, then
+ 	 * hrtimer_start() cannot move it and the timer stays on the CPU on
+ 	 * which it is assigned at the moment.
++	 */
++	hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
++	/*
++	 * The core tick broadcast mode expects bc->bound_on to be set
++	 * correctly to prevent a CPU which has the broadcast hrtimer
++	 * armed from going deep idle.
+ 	 *
+-	 * As this can be called from idle code, the hrtimer_start()
+-	 * invocation has to be wrapped with RCU_NONIDLE() as
+-	 * hrtimer_start() can call into tracing.
++	 * As tick_broadcast_lock is held, nothing can change the cpu
++	 * base which was just established in hrtimer_start() above. So
++	 * the below access is safe even without holding the hrtimer
++	 * base lock.
+ 	 */
+-	RCU_NONIDLE( {
+-		hrtimer_start(&bctimer, expires, HRTIMER_MODE_ABS_PINNED_HARD);
+-		/*
+-		 * The core tick broadcast mode expects bc->bound_on to be set
+-		 * correctly to prevent a CPU which has the broadcast hrtimer
+-		 * armed from going deep idle.
+-		 *
+-		 * As tick_broadcast_lock is held, nothing can change the cpu
+-		 * base which was just established in hrtimer_start() above. So
+-		 * the below access is safe even without holding the hrtimer
+-		 * base lock.
+-		 */
+-		bc->bound_on = bctimer.base->cpu_base->cpu;
+-	} );
++	bc->bound_on = bctimer.base->cpu_base->cpu;
++
+ 	return 0;
  }
+ 
 
 
 _______________________________________________
