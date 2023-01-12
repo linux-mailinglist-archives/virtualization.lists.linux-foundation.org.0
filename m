@@ -1,92 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6ED33667FBD
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:09 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E5A0667FC0
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:11 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 39D55417B9;
-	Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 39D55417B9
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=lU+pE8XR
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5B6AD60E8D;
+	Thu, 12 Jan 2023 19:58:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5B6AD60E8D
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=AQVbLNGL
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qCaAPFEYKHwr; Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id To2cJDkJZei7; Thu, 12 Jan 2023 19:58:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id DA76A417B7;
-	Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DA76A417B7
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 1AF8660E48;
+	Thu, 12 Jan 2023 19:58:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1AF8660E48
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B0C0C0078;
-	Thu, 12 Jan 2023 19:58:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 53029C007E;
+	Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 37BDCC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1FB52C0091
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 10A3B81DF6
+ by smtp2.osuosl.org (Postfix) with ESMTP id 4BD86405F3
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 10A3B81DF6
-Authentication-Results: smtp1.osuosl.org;
+ Thu, 12 Jan 2023 19:58:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4BD86405F3
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=casper.20170209 header.b=lU+pE8XR
+ header.a=rsa-sha256 header.s=casper.20170209 header.b=AQVbLNGL
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oDVAalNNHEUm
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id u7jyGtKJZ5BD
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:54 +0000 (UTC)
+ Thu, 12 Jan 2023 19:57:59 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D7BEF81E0D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7C58E4114F
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D7BEF81E0D
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7C58E4114F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:53 +0000 (UTC)
+ Thu, 12 Jan 2023 19:57:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=DVmthOBTi8Yd+1hoz4bpY0hqbVL72Y+E2XHDdN1zqxc=; b=lU+pE8XRxUW4+CC8OuM7xeVx/M
- 53AZChJydAaQiNNNgWeQoTlIIugCKq8amTsHlJecasU3dF9bLGhfr0XD7p0zfc1xhqPVI6iQEDfqX
- qXF+EpD9Bp4SVnDyAwq5dbL9yLZztXpLXKAoIh2CWTXdxqClmYRsHpA8pyl5FRdBgommZULZLIE56
- PjEu9hkifrrqxkSQ/X13tLWCHGM51XCgnnXTbVlw1+fjNdVPnZOIYRsxn6+jcprBZ1YbkjynCuAGB
- phuV4qtrZKPyDS35nlAPD+Rz3SJqOYDompFJbF1wWA90cXW8tptoQc6+aDjXQIUUftFrnUPYliwFp
- nHblH0EQ==;
+ bh=cMg3ptdf90ideilc5ESAExVXsDzvqUAUHPnoGLTznE4=; b=AQVbLNGLAYLI5glCIBdfN2BTr/
+ Gz/Reu1wlylo5D1rPRX3tYfuclMb30JqVrgGLY+i8h5Xf4OY4kfQXs65r/W3Q+cYwmERZwJKdYyGu
+ dOIJbUu55LP0s2WpAnsehl0pUa57AJ3Lq0DpQp5D7jIwVSFDXKmJmnOiTcPJuwyIZF8b0FkqntpIC
+ b8LadvLyxjnkWpOvABXtsz53rhvZOuGgIQLV6FRFQ1goVxCxypfG444hWrorgBNhddOaBK6ge/aAD
+ GocMGlGGl5ycw4gr25/L6Jb+p3aQyhRh2wg9Sdn3uYmPp24GCT0nLRuVL3vNNcZ0HKYejgio/4ncJ
+ cUAaLzFw==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pG3hd-005Ofl-Eu; Thu, 12 Jan 2023 19:57:33 +0000
+ id 1pG3hd-005Ofr-QW; Thu, 12 Jan 2023 19:57:33 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id B80A430344D;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id BFB59303450;
  Thu, 12 Jan 2023 20:57:13 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 2D82F2CCF62B9; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
-Message-ID: <20230112195541.294846301@infradead.org>
+ id 31AC02CCF62BB; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
+Message-ID: <20230112195541.355283994@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:46 +0100
+Date: Thu, 12 Jan 2023 20:43:47 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 32/51] cpuidle,acpi: Make noinstr clean
+Subject: [PATCH v3 33/51] trace: Remove trace_hardirqs_{on,off}_caller()
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
-Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
- rafael@kernel.org, catalin.marinas@arm.com, linus.walleij@linaro.org,
- nsekhar@ti.com, bsegall@google.com, guoren@kernel.org, pavel@ucw.cz,
- agordeev@linux.ibm.com, linux-arch@vger.kernel.org,
- linux-samsung-soc@vger.kernel.org, vincent.guittot@linaro.org,
- mpe@ellerman.id.au, chenhuacai@kernel.org, christophe.leroy@csgroup.eu,
- linux-acpi@vger.kernel.org, agross@kernel.org, geert@linux-m68k.org,
- linux-imx@nxp.com, vgupta@kernel.org, mattst88@gmail.com,
+Cc: juri.lelli@redhat.com, rafael@kernel.org, catalin.marinas@arm.com,
+ linus.walleij@linaro.org, nsekhar@ti.com, bsegall@google.com,
+ guoren@kernel.org, pavel@ucw.cz, agordeev@linux.ibm.com,
+ linux-arch@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
+ vincent.guittot@linaro.org, mpe@ellerman.id.au, chenhuacai@kernel.org,
+ christophe.leroy@csgroup.eu, linux-acpi@vger.kernel.org, agross@kernel.org,
+ geert@linux-m68k.org, linux-imx@nxp.com, vgupta@kernel.org, mattst88@gmail.com,
  mturquette@baylibre.com, sammy@sammy.net, pmladek@suse.com,
  linux-pm@vger.kernel.org, Sascha Hauer <s.hauer@pengutronix.de>,
  linux-um@lists.infradead.org, npiggin@gmail.com, tglx@linutronix.de,
@@ -147,64 +146,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-vmlinux.o: warning: objtool: io_idle+0xc: call to __inb.isra.0() leaves .noinstr.text section
-vmlinux.o: warning: objtool: acpi_idle_enter+0xfe: call to num_online_cpus() leaves .noinstr.text section
-vmlinux.o: warning: objtool: acpi_idle_enter+0x115: call to acpi_idle_fallback_to_c1.isra.0() leaves .noinstr.text section
+Per commit 56e62a737028 ("s390: convert to generic entry") the last
+and only callers of trace_hardirqs_{on,off}_caller() went away, clean
+up.
 
+Cc: Sven Schnelle <svens@linux.ibm.com>
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-Acked-by: Frederic Weisbecker <frederic@kernel.org>
-Tested-by: Tony Lindgren <tony@atomide.com>
-Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- arch/x86/include/asm/shared/io.h |    4 ++--
- drivers/acpi/processor_idle.c    |    2 +-
- include/linux/cpumask.h          |    4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ kernel/trace/trace_preemptirq.c |   29 -----------------------------
+ 1 file changed, 29 deletions(-)
 
---- a/arch/x86/include/asm/shared/io.h
-+++ b/arch/x86/include/asm/shared/io.h
-@@ -5,13 +5,13 @@
- #include <linux/types.h>
- 
- #define BUILDIO(bwl, bw, type)						\
--static inline void __out##bwl(type value, u16 port)			\
-+static __always_inline void __out##bwl(type value, u16 port)		\
- {									\
- 	asm volatile("out" #bwl " %" #bw "0, %w1"			\
- 		     : : "a"(value), "Nd"(port));			\
- }									\
- 									\
--static inline type __in##bwl(u16 port)					\
-+static __always_inline type __in##bwl(u16 port)				\
- {									\
- 	type value;							\
- 	asm volatile("in" #bwl " %w1, %" #bw "0"			\
---- a/drivers/acpi/processor_idle.c
-+++ b/drivers/acpi/processor_idle.c
-@@ -593,7 +593,7 @@ static int acpi_idle_play_dead(struct cp
- 	return 0;
+--- a/kernel/trace/trace_preemptirq.c
++++ b/kernel/trace/trace_preemptirq.c
+@@ -84,35 +84,6 @@ void trace_hardirqs_off(void)
  }
+ EXPORT_SYMBOL(trace_hardirqs_off);
+ NOKPROBE_SYMBOL(trace_hardirqs_off);
+-
+-__visible void trace_hardirqs_on_caller(unsigned long caller_addr)
+-{
+-	if (this_cpu_read(tracing_irq_cpu)) {
+-		if (!in_nmi())
+-			trace_irq_enable_rcuidle(CALLER_ADDR0, caller_addr);
+-		tracer_hardirqs_on(CALLER_ADDR0, caller_addr);
+-		this_cpu_write(tracing_irq_cpu, 0);
+-	}
+-
+-	lockdep_hardirqs_on_prepare();
+-	lockdep_hardirqs_on(caller_addr);
+-}
+-EXPORT_SYMBOL(trace_hardirqs_on_caller);
+-NOKPROBE_SYMBOL(trace_hardirqs_on_caller);
+-
+-__visible void trace_hardirqs_off_caller(unsigned long caller_addr)
+-{
+-	lockdep_hardirqs_off(caller_addr);
+-
+-	if (!this_cpu_read(tracing_irq_cpu)) {
+-		this_cpu_write(tracing_irq_cpu, 1);
+-		tracer_hardirqs_off(CALLER_ADDR0, caller_addr);
+-		if (!in_nmi())
+-			trace_irq_disable_rcuidle(CALLER_ADDR0, caller_addr);
+-	}
+-}
+-EXPORT_SYMBOL(trace_hardirqs_off_caller);
+-NOKPROBE_SYMBOL(trace_hardirqs_off_caller);
+ #endif /* CONFIG_TRACE_IRQFLAGS */
  
--static bool acpi_idle_fallback_to_c1(struct acpi_processor *pr)
-+static __always_inline bool acpi_idle_fallback_to_c1(struct acpi_processor *pr)
- {
- 	return IS_ENABLED(CONFIG_HOTPLUG_CPU) && !pr->flags.has_cst &&
- 		!(acpi_gbl_FADT.flags & ACPI_FADT_C2_MP_SUPPORTED);
---- a/include/linux/cpumask.h
-+++ b/include/linux/cpumask.h
-@@ -908,9 +908,9 @@ static inline const struct cpumask *get_
-  * concurrent CPU hotplug operations unless invoked from a cpuhp_lock held
-  * region.
-  */
--static inline unsigned int num_online_cpus(void)
-+static __always_inline unsigned int num_online_cpus(void)
- {
--	return atomic_read(&__num_online_cpus);
-+	return arch_atomic_read(&__num_online_cpus);
- }
- #define num_possible_cpus()	cpumask_weight(cpu_possible_mask)
- #define num_present_cpus()	cpumask_weight(cpu_present_mask)
+ #ifdef CONFIG_TRACE_PREEMPT_TOGGLE
 
 
 _______________________________________________
