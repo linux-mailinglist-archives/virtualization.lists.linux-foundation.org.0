@@ -1,80 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54E73667FCE
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:21 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5EF2D667FE2
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C5D3F4183B;
-	Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C5D3F4183B
+	by smtp4.osuosl.org (Postfix) with ESMTP id 781BC41527;
+	Thu, 12 Jan 2023 19:58:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 781BC41527
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=g8GqpZrZ
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=SlXzMGW6
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id WcvId43_kuDi; Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
+	with ESMTP id 6wbjAiCTKt1m; Thu, 12 Jan 2023 19:58:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 360E041861;
-	Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 360E041861
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 0833040057;
+	Thu, 12 Jan 2023 19:58:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0833040057
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 31FD7C007D;
-	Thu, 12 Jan 2023 19:58:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 363A7C0086;
+	Thu, 12 Jan 2023 19:58:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8B460C008E
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 11A7EC0086
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 02463417C8
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6B18F41186
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 02463417C8
+ Thu, 12 Jan 2023 19:58:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6B18F41186
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=SlXzMGW6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YCcp7jAb4xT4
- for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:02 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DD7F941775
-Received: from desiato.infradead.org (desiato.infradead.org
- [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DD7F941775
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 0BzAEYDmnG1G
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B2E441057
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0B2E441057
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=jJDEZOhAk9N+ZSaOA6QuB1P1t6S4a5Fqf3eoW7G5up4=; b=g8GqpZrZBs/6V7ZcEBgPwjcdfx
- RzN5EIQzgwhnINnCaYfY2n9e8ruxberdgD9oVXDNG7YtbZJuFTb45S/H+fPvltC8GZOopId40GcrW
- AjA8r3rpj2n0SPUYiyps5TjYIQhFAuCcVOx3q73tbMUmUmsFJOFjnQHKvLFlGE+QPNhh8ljdxL4dF
- uEhNEMsDP/u8xa4UcCmCa7nRPM/4jBKkN20B1meW0t5Yl0NahpjdmysonPb3YGsPg97sJdxjUBn+s
- lGjWVSdxy2Ny8UJn3s4WanbpIOQXXuMwg2JoVT798bOv9N9iHlojnH9paqJ/CUzQBNz9ShA6pr1w+
- Y7bXuV8w==;
+ bh=Pd5LzlqFWhoOW/IghE5YxUytF5dcFo0PCwRqcxBfbik=; b=SlXzMGW647wjdHfeIxA3BURo/L
+ V57eNszB4X9M2Aw7LuPxwmPByIMO6ZKJ+B9QS4/L40MIuNzW7LoV2ieaE68bBcSd3vNab1fb0CJg0
+ QIScqqs4INqipCz162dj8G6WADgGw/yyJX1KvXDDp9KvqhFFRcEFT/UBl+i0lGVjxQCePgE7wrcjD
+ zg1nhaAwVcqC0aWlZyNbqIQdvsg//4TbBOPEGhSkO9DKH/bfCQcGFEEufPy7Ul19FcRzSlIK8yvAr
+ +j/SelXlIya73f2ebWEWnXnVBv+DvQiepu+aP4ZuJNc4l00+RAhCrFLr4FHOiR17EpRimSqj9p8nr
+ 1gOjKv7g==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pG3hF-0045oZ-0H; Thu, 12 Jan 2023 19:57:09 +0000
+ id 1pG3hF-0045og-1H; Thu, 12 Jan 2023 19:57:10 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 5187F30341E;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 595AC303423;
  Thu, 12 Jan 2023 20:57:13 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id E64E52CCF1F79; Thu, 12 Jan 2023 20:57:07 +0100 (CET)
-Message-ID: <20230112195540.434302128@infradead.org>
+ id EBA4A2CCF1F77; Thu, 12 Jan 2023 20:57:07 +0100 (CET)
+Message-ID: <20230112195540.494977795@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:32 +0100
+Date: Thu, 12 Jan 2023 20:43:33 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 18/51] cpuidle,
- intel_idle: Fix CPUIDLE_FLAG_IRQ_ENABLE *again*
+Subject: [PATCH v3 19/51] cpuidle,intel_idle: Fix CPUIDLE_FLAG_INIT_XSTATE
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -145,46 +147,68 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-  vmlinux.o: warning: objtool: intel_idle_irq+0x10c: call to trace_hardirqs_off() leaves .noinstr.text section
+vmlinux.o: warning: objtool: intel_idle_s2idle+0xd5: call to fpu_idle_fpregs() leaves .noinstr.text section
+vmlinux.o: warning: objtool: intel_idle_xstate+0x11: call to fpu_idle_fpregs() leaves .noinstr.text section
+vmlinux.o: warning: objtool: fpu_idle_fpregs+0x9: call to xfeatures_in_use() leaves .noinstr.text section
 
-As per commit 32d4fd5751ea ("cpuidle,intel_idle: Fix
-CPUIDLE_FLAG_IRQ_ENABLE"):
-
-  "must not have tracing in idle functions"
-
-Clearly people can't read and tinker along until splat dissapears.
-This straight up reverts commit d295ad34f236 ("intel_idle: Fix false
-positive RCU splats due to incorrect hardirqs state").
-
-It doesn't re-introduce the problem because preceding patches fixed it
-properly.
-
-Fixes: d295ad34f236 ("intel_idle: Fix false positive RCU splats due to incorrect hardirqs state")
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 Acked-by: Frederic Weisbecker <frederic@kernel.org>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- drivers/idle/intel_idle.c |    8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ arch/x86/include/asm/fpu/xcr.h       |    4 ++--
+ arch/x86/include/asm/special_insns.h |    2 +-
+ arch/x86/kernel/fpu/core.c           |    4 ++--
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
---- a/drivers/idle/intel_idle.c
-+++ b/drivers/idle/intel_idle.c
-@@ -168,13 +168,7 @@ static __cpuidle int intel_idle_irq(stru
+--- a/arch/x86/include/asm/fpu/xcr.h
++++ b/arch/x86/include/asm/fpu/xcr.h
+@@ -5,7 +5,7 @@
+ #define XCR_XFEATURE_ENABLED_MASK	0x00000000
+ #define XCR_XFEATURE_IN_USE_MASK	0x00000001
  
- 	raw_local_irq_enable();
- 	ret = __intel_idle(dev, drv, index);
--
--	/*
--	 * The lockdep hardirqs state may be changed to 'on' with timer
--	 * tick interrupt followed by __do_softirq(). Use local_irq_disable()
--	 * to keep the hardirqs state correct.
--	 */
--	local_irq_disable();
-+	raw_local_irq_disable();
+-static inline u64 xgetbv(u32 index)
++static __always_inline u64 xgetbv(u32 index)
+ {
+ 	u32 eax, edx;
  
- 	return ret;
+@@ -27,7 +27,7 @@ static inline void xsetbv(u32 index, u64
+  *
+  * Callers should check X86_FEATURE_XGETBV1.
+  */
+-static inline u64 xfeatures_in_use(void)
++static __always_inline u64 xfeatures_in_use(void)
+ {
+ 	return xgetbv(XCR_XFEATURE_IN_USE_MASK);
+ }
+--- a/arch/x86/include/asm/special_insns.h
++++ b/arch/x86/include/asm/special_insns.h
+@@ -295,7 +295,7 @@ static inline int enqcmds(void __iomem *
+ 	return 0;
+ }
+ 
+-static inline void tile_release(void)
++static __always_inline void tile_release(void)
+ {
+ 	/*
+ 	 * Instruction opcode for TILERELEASE; supported in binutils
+--- a/arch/x86/kernel/fpu/core.c
++++ b/arch/x86/kernel/fpu/core.c
+@@ -856,12 +856,12 @@ int fpu__exception_code(struct fpu *fpu,
+  * Initialize register state that may prevent from entering low-power idle.
+  * This function will be invoked from the cpuidle driver only when needed.
+  */
+-void fpu_idle_fpregs(void)
++noinstr void fpu_idle_fpregs(void)
+ {
+ 	/* Note: AMX_TILE being enabled implies XGETBV1 support */
+ 	if (cpu_feature_enabled(X86_FEATURE_AMX_TILE) &&
+ 	    (xfeatures_in_use() & XFEATURE_MASK_XTILE)) {
+ 		tile_release();
+-		fpregs_deactivate(&current->thread.fpu);
++		__this_cpu_write(fpu_fpregs_owner_ctx, NULL);
+ 	}
  }
 
 
