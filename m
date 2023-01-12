@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4F5D6667FC3
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:13 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 76C5E667FB9
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:07 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 0E18C41827;
-	Thu, 12 Jan 2023 19:58:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0E18C41827
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=gQ7Q9Sfc
+	by smtp1.osuosl.org (Postfix) with ESMTP id 54FD381ECD;
+	Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 54FD381ECD
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=YePyvi42
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id emJ4Q5AnFVDy; Thu, 12 Jan 2023 19:58:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id AEEB2417C8;
-	Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AEEB2417C8
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Gb7GWJz9B6Gf; Thu, 12 Jan 2023 19:58:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id BB22181E5C;
+	Thu, 12 Jan 2023 19:57:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BB22181E5C
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5040AC00A0;
-	Thu, 12 Jan 2023 19:58:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 03D49C0078;
+	Thu, 12 Jan 2023 19:57:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3DB25C008D
- for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:00 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 17C6F41151
- for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 17C6F41151
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=casper.20170209 header.b=gQ7Q9Sfc
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XVYAUh3UOd85
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6BC86C002D
  for <virtualization@lists.linux-foundation.org>;
  Thu, 12 Jan 2023 19:57:56 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 3F79F416F9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 12 Jan 2023 19:57:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3F79F416F9
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=casper.20170209 header.b=YePyvi42
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GkYTWtpUiXMP
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 12 Jan 2023 19:57:51 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E8661405F3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 585D34163E
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp2.osuosl.org (Postfix) with ESMTPS id E8661405F3
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 585D34163E
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:55 +0000 (UTC)
+ Thu, 12 Jan 2023 19:57:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=Hsr5V6aaf/kVSU2t73jNDRAWfLY8tgaZMY/8xmM8jWo=; b=gQ7Q9SfcfOCGLlvaFWMPSlQDV4
- uKjocE/2Y34Nr3Jz761/H3K8ref7D/RHB23EoGkYYy1xOk3Feint61cmEzrTeJs9pKFsRiW2qqfOc
- a15g0aXUVDz0ZDo2MzRyxqBDaXdm6wfbxfKkhacFzf0dnqhRTBbnGYC0Ol79TQuuLMUcvUsmgrQsq
- Yw8OLwDnAiMOrgLy6Ivt5nddQwxIy8BHKaVFy+WqtLrCrntFsEUj0zjrnvFhZolV0YjTu4WNDYy9/
- lDKMy9PbKPpnqJnECPubZ+WdVv92KEL7klGQq9pXFCJdS/Q4cXnTA6nMiHYLM5YqQGCUzlZ7euq5h
- XbhFNewA==;
+ bh=H++Izq9gHCigzm3jyfqVQx/OXXHHURXAPu4rHKpriQs=; b=YePyvi42dN2KCMqq+7e1S609eb
+ WFxHWtO/jgyjZzxARHvRjE2QrtZo1Ma5mkqruZXU5/PO7FUvyR8sUawTrYfaBeVEfspiuaIFkKVMc
+ fyMuNWmG8G5expNMvK0etyhW9olX8plthocE0oVEpGxCtTn6UmUf8Ek1AzD8jqegIKasUbqvSUmau
+ 3vbOWKtb6/qLR7kaj8lgimVeDrMvfjUeqa93YM+gDqx28KwMHAgMewjhNVOm9uQNY0kOI6Nucsz6S
+ xTgwD42zZEFhgWLXGdgI1gSnPYNpoj0eZ2X3XkoE4AXqCgGkP9dJYVs+mDKvgVqwc5CylK2jrIKRn
+ P/TbqzeQ==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pG3ha-005OeK-VA; Thu, 12 Jan 2023 19:57:31 +0000
+ id 1pG3hb-005OeQ-9k; Thu, 12 Jan 2023 19:57:31 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 7A97530342E;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 8136B303431;
  Thu, 12 Jan 2023 20:57:13 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 09BA02CCF1F7F; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
-Message-ID: <20230112195540.743432118@infradead.org>
+ id 0D9AD2CCF62A9; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
+Message-ID: <20230112195540.804410487@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:37 +0100
+Date: Thu, 12 Jan 2023 20:43:38 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 23/51] arm,smp: Remove trace_.*_rcuidle() usage
+Subject: [PATCH v3 24/51] arm64,smp: Remove trace_.*_rcuidle() usage
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -121,13 +121,14 @@ Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
  glider@google.com, hpa@zytor.com, sparclinux@vger.kernel.org,
  linux-hexagon@vger.kernel.org, linux-riscv@lists.infradead.org,
  vincenzo.frascino@arm.com, anton.ivanov@cambridgegreys.com, jonas@southpole.se,
- yury.norov@gmail.com, richard@nod.at, x86@kernel.org, linux@armlinux.org.uk,
- mingo@redhat.com, mhiramat@kernel.org, aou@eecs.berkeley.edu,
- paulmck@kernel.org, hca@linux.ibm.com, richard.henderson@linaro.org,
- stefan.kristiansson@saunalahti.fi, openrisc@lists.librecores.org,
- acme@kernel.org, paul.walmsley@sifive.com, linux-tegra@vger.kernel.org,
- namhyung@kernel.org, andriy.shevchenko@linux.intel.com, jpoimboe@kernel.org,
- dvyukov@google.com, jgross@suse.com, monstr@monstr.eu, andersson@kernel.org,
+ Marc Zyngier <maz@kernel.org>, yury.norov@gmail.com, richard@nod.at,
+ x86@kernel.org, linux@armlinux.org.uk, mingo@redhat.com, mhiramat@kernel.org,
+ aou@eecs.berkeley.edu, paulmck@kernel.org, hca@linux.ibm.com,
+ richard.henderson@linaro.org, stefan.kristiansson@saunalahti.fi,
+ openrisc@lists.librecores.org, acme@kernel.org, paul.walmsley@sifive.com,
+ linux-tegra@vger.kernel.org, namhyung@kernel.org,
+ andriy.shevchenko@linux.intel.com, jpoimboe@kernel.org, dvyukov@google.com,
+ jgross@suse.com, monstr@monstr.eu, andersson@kernel.org,
  linux-mips@vger.kernel.org, krzysztof.kozlowski@linaro.org, palmer@dabbelt.com,
  anup@brainfault.org, bp@alien8.de, johannes@sipsolutions.net,
  linuxppc-dev@lists.ozlabs.org, deller@gmx.de
@@ -147,30 +148,23 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-None of these functions should ever be ran with RCU disabled anymore.
-
-Specifically, do_handle_IPI() is only called from handle_IPI() which
-explicitly does irq_enter()/irq_exit() which ensures RCU is watching.
-
-The problem with smp_cross_call() was, per commit 7c64cc0531fa ("arm: Use
-_rcuidle for smp_cross_call() tracepoints"), that
-cpuidle_enter_state_coupled() already had RCU disabled, but that's
-long been fixed by commit 1098582a0f6c ("sched,idle,rcu: Push rcu_idle
-deeper into the idle path").
+Ever since commit d3afc7f12987 ("arm64: Allow IPIs to be handled as
+normal interrupts") this function is called in regular IRQ context.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
-Reviewed-by: Ulf Hansson <ulf.hansson@linaro.org>
+Acked-by: Mark Rutland <mark.rutland@arm.com>
+Acked-by: Marc Zyngier <maz@kernel.org>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 Acked-by: Frederic Weisbecker <frederic@kernel.org>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- arch/arm/kernel/smp.c |    6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ arch/arm64/kernel/smp.c |    4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---- a/arch/arm/kernel/smp.c
-+++ b/arch/arm/kernel/smp.c
-@@ -639,7 +639,7 @@ static void do_handle_IPI(int ipinr)
+--- a/arch/arm64/kernel/smp.c
++++ b/arch/arm64/kernel/smp.c
+@@ -865,7 +865,7 @@ static void do_handle_IPI(int ipinr)
  	unsigned int cpu = smp_processor_id();
  
  	if ((unsigned)ipinr < NR_IPI)
@@ -178,8 +172,8 @@ Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 +		trace_ipi_entry(ipi_types[ipinr]);
  
  	switch (ipinr) {
- 	case IPI_WAKEUP:
-@@ -686,7 +686,7 @@ static void do_handle_IPI(int ipinr)
+ 	case IPI_RESCHEDULE:
+@@ -914,7 +914,7 @@ static void do_handle_IPI(int ipinr)
  	}
  
  	if ((unsigned)ipinr < NR_IPI)
@@ -187,16 +181,7 @@ Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 +		trace_ipi_exit(ipi_types[ipinr]);
  }
  
- /* Legacy version, should go away once all irqchips have been converted */
-@@ -709,7 +709,7 @@ static irqreturn_t ipi_handler(int irq,
- 
- static void smp_cross_call(const struct cpumask *target, unsigned int ipinr)
- {
--	trace_ipi_raise_rcuidle(target, ipi_types[ipinr]);
-+	trace_ipi_raise(target, ipi_types[ipinr]);
- 	__ipi_send_mask(ipi_desc[ipinr], target);
- }
- 
+ static irqreturn_t ipi_handler(int irq, void *data)
 
 
 _______________________________________________
