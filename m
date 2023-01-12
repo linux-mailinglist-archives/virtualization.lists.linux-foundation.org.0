@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 62FC4667FBC
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:09 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5CEBD667FCC
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 53A4681F85;
-	Thu, 12 Jan 2023 19:58:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 53A4681F85
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=BJ9XJoRA
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9D6A660F0F;
+	Thu, 12 Jan 2023 19:58:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9D6A660F0F
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=QLxqheLQ
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UOMHpi95KhOX; Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id DXCZRdxWAaRq; Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A08B481FCE;
-	Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A08B481FCE
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 09C4A60F25;
+	Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 09C4A60F25
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AEC37C0083;
-	Thu, 12 Jan 2023 19:58:01 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F6CDC0033;
+	Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E8DB1C008B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4CF98C0033
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:59 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 099AA4168A
+ by smtp1.osuosl.org (Postfix) with ESMTP id E60A981E8C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 099AA4168A
-Authentication-Results: smtp4.osuosl.org;
+ Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E60A981E8C
+Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=casper.20170209 header.b=BJ9XJoRA
+ header.a=rsa-sha256 header.s=casper.20170209 header.b=QLxqheLQ
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id tqZsAj5jyATy
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id LrAb011eTbHM
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:54 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E28394168B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 33BBA81F84
 Received: from casper.infradead.org (casper.infradead.org
  [IPv6:2001:8b0:10b:1236::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id E28394168B
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 33BBA81F84
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:57:53 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=tM6S3oZ3zLjQ2zmmTNKitB7HqpfpXnjxYwChM2FqbVs=; b=BJ9XJoRA5PVXo6NmK1y1j4mgxX
- DGfe1Ta896F3qkk57KxqOit856Whx7pXr9WTIch0khohftRzZ6nkeSuCiqiAyMa3qg2JMRqTwkdcK
- SZHkiVrlqToqnjdTi1BQtMwas89d1b41aRk7eR9kktg5N/gi7TNwV9TPbfoKKOtW1UuX+e5CZ4VVW
- USTGfBuu27oryL5tL5ug+EeZMBWzLYDuLZxBl37/OJYoY11N2gX+VEM60a0w4sEUZTi5GdGd5oNiD
- v4tH8MxJ/EqxydLuQw6fRM3cmCP9pHy61QtCS2aoYs8Sik/mr9QPx70CAPy2SGTADTK3V7C39icf4
- nbFCLrEQ==;
+ bh=JTqeKYECYSubBnJX/J9QEXdDkgA0NkIECFSZWgBtZ5c=; b=QLxqheLQZUqNb4ar6Mg/ZNYb8D
+ KRXignWHOdRNYAZm1cWdi/oPzQSARGwohBPicdntdXc+jUrRsNN0/8D5g40oSZToLbikwu1cLT8Yq
+ DGxNRPTtijYeX370Unaju4jHsAmBpKk4CtqN4rzPT0XsWknfadHdAv5RZqCyX7svpkdfdNo2Iy+X2
+ deUTui/Bqe2X+k6Xu+YE1rX06haCXJkDpEbwkwuRoA1QmH69jGtF95HxJnRzgOZzuAinpm8tbEcEr
+ TteyBVyGlHJftS/ry2M8MUzehKE9YMacr/muMS965kyZZf+vOtAukwARx8+SxhX8sDlxjf8Sr0LdM
+ JiM9bSsw==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pG3hh-005Okk-PF; Thu, 12 Jan 2023 19:57:37 +0000
+ id 1pG3hr-005P30-66; Thu, 12 Jan 2023 19:57:47 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 0B5C030346C;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 19D3D302D4A;
  Thu, 12 Jan 2023 20:57:14 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 573AE2CD066CC; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
-Message-ID: <20230112195541.906007455@infradead.org>
+ id 5B5522CD066C2; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
+Message-ID: <20230112195541.967699392@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:56 +0100
+Date: Thu, 12 Jan 2023 20:43:57 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 42/51] ubsan: Fix objtool UACCESS warns
+Subject: [PATCH v3 43/51] intel_idle: Add force_irq_on module param
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -147,14 +147,7 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-clang-14 allyesconfig gives:
-
-vmlinux.o: warning: objtool: emulator_cmpxchg_emulated+0x705: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
-vmlinux.o: warning: objtool: paging64_update_accessed_dirty_bits+0x39e: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
-vmlinux.o: warning: objtool: paging32_update_accessed_dirty_bits+0x390: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
-vmlinux.o: warning: objtool: ept_update_accessed_dirty_bits+0x43f: call to __ubsan_handle_load_invalid_value() with UACCESS enabled
-
-Add the required eflags save/restore and whitelist the thing.
+For testing purposes.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
@@ -162,43 +155,33 @@ Acked-by: Frederic Weisbecker <frederic@kernel.org>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- lib/ubsan.c           |    5 ++++-
- tools/objtool/check.c |    1 +
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ drivers/idle/intel_idle.c |    7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
---- a/lib/ubsan.c
-+++ b/lib/ubsan.c
-@@ -340,9 +340,10 @@ void __ubsan_handle_load_invalid_value(v
- {
- 	struct invalid_value_data *data = _data;
- 	char val_str[VALUE_LENGTH];
-+	unsigned long ua_flags = user_access_save();
- 
- 	if (suppress_report(&data->location))
--		return;
-+		goto out;
- 
- 	ubsan_prologue(&data->location, "invalid-load");
- 
-@@ -352,6 +353,8 @@ void __ubsan_handle_load_invalid_value(v
- 		val_str, data->type->type_name);
- 
- 	ubsan_epilogue();
-+out:
-+	user_access_restore(ua_flags);
+--- a/drivers/idle/intel_idle.c
++++ b/drivers/idle/intel_idle.c
+@@ -1787,6 +1787,9 @@ static bool __init intel_idle_verify_cst
+ 	return true;
  }
- EXPORT_SYMBOL(__ubsan_handle_load_invalid_value);
  
---- a/tools/objtool/check.c
-+++ b/tools/objtool/check.c
-@@ -1068,6 +1068,7 @@ static const char *uaccess_safe_builtin[
- 	"__ubsan_handle_type_mismatch",
- 	"__ubsan_handle_type_mismatch_v1",
- 	"__ubsan_handle_shift_out_of_bounds",
-+	"__ubsan_handle_load_invalid_value",
- 	/* misc */
- 	"csum_partial_copy_generic",
- 	"copy_mc_fragile",
++static bool force_irq_on __read_mostly;
++module_param(force_irq_on, bool, 0444);
++
+ static void __init intel_idle_init_cstates_icpu(struct cpuidle_driver *drv)
+ {
+ 	int cstate;
+@@ -1838,8 +1841,10 @@ static void __init intel_idle_init_cstat
+ 		/* Structure copy. */
+ 		drv->states[drv->state_count] = cpuidle_state_table[cstate];
+ 
+-		if (cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IRQ_ENABLE)
++		if ((cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IRQ_ENABLE) || force_irq_on) {
++			printk("intel_idle: forced intel_idle_irq for state %d\n", cstate);
+ 			drv->states[drv->state_count].enter = intel_idle_irq;
++		}
+ 
+ 		if (cpu_feature_enabled(X86_FEATURE_KERNEL_IBRS) &&
+ 		    cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IBRS) {
 
 
 _______________________________________________
