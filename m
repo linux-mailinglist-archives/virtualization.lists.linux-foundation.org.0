@@ -1,82 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5CEBD667FCC
-	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:19 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 54013667FE0
+	for <lists.virtualization@lfdr.de>; Thu, 12 Jan 2023 20:58:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9D6A660F0F;
-	Thu, 12 Jan 2023 19:58:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9D6A660F0F
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=casper.20170209 header.b=QLxqheLQ
+	by smtp2.osuosl.org (Postfix) with ESMTP id 358DA411B9;
+	Thu, 12 Jan 2023 19:58:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 358DA411B9
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=UZP1WhwW
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id DXCZRdxWAaRq; Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4AAnWJJsny4j; Thu, 12 Jan 2023 19:58:23 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 09C4A60F25;
-	Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 09C4A60F25
+	by smtp2.osuosl.org (Postfix) with ESMTPS id BF6D94158D;
+	Thu, 12 Jan 2023 19:58:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BF6D94158D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F6CDC0033;
-	Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 70F42C0085;
+	Thu, 12 Jan 2023 19:58:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4CF98C0033
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7DBE0C0083
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:05 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E60A981E8C
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4E49C8200B
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E60A981E8C
+ Thu, 12 Jan 2023 19:58:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4E49C8200B
 Authentication-Results: smtp1.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=casper.20170209 header.b=QLxqheLQ
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=UZP1WhwW
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id LrAb011eTbHM
+ with ESMTP id rV_EI-RFULbH
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:11 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 33BBA81F84
-Received: from casper.infradead.org (casper.infradead.org
- [IPv6:2001:8b0:10b:1236::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 33BBA81F84
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D58EE81FE8
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D58EE81FE8
  for <virtualization@lists.linux-foundation.org>;
- Thu, 12 Jan 2023 19:58:03 +0000 (UTC)
+ Thu, 12 Jan 2023 19:58:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:References:
+ d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=JTqeKYECYSubBnJX/J9QEXdDkgA0NkIECFSZWgBtZ5c=; b=QLxqheLQZUqNb4ar6Mg/ZNYb8D
- KRXignWHOdRNYAZm1cWdi/oPzQSARGwohBPicdntdXc+jUrRsNN0/8D5g40oSZToLbikwu1cLT8Yq
- DGxNRPTtijYeX370Unaju4jHsAmBpKk4CtqN4rzPT0XsWknfadHdAv5RZqCyX7svpkdfdNo2Iy+X2
- deUTui/Bqe2X+k6Xu+YE1rX06haCXJkDpEbwkwuRoA1QmH69jGtF95HxJnRzgOZzuAinpm8tbEcEr
- TteyBVyGlHJftS/ry2M8MUzehKE9YMacr/muMS965kyZZf+vOtAukwARx8+SxhX8sDlxjf8Sr0LdM
- JiM9bSsw==;
+ bh=GvwbGFmvCEUlvMDtuRKKain2RkezywAYf/go7N4onKI=; b=UZP1WhwWXNKsSNjUZl7FaNdKCn
+ ddEQs2bPXQi5qPjj7qlJxw/QPW/0nxOgZLN8xBPDMZ/1zjz4Cj4cBDEZBuYnBOjn9uMSnfZ/x7+2I
+ 9dTh9PKCvuDC56aeAA3cL71DKDuGL799xQcS7MxhLz5jtlqRv3ljsfno7QvEUZeBL/ZKqQpiu6eX8
+ 1n/CZuVsNYoC/48UeqqLacX54nCFrLom4QSa5qKlMYqjjQVNzfHjWkBbeNM7/Bwfq6S/ww+f2nN0u
+ 0BjGg5qo+ibAucyPfwz5pwvtUQ9FofzqrnD212u/gvXOr0euOanteiang6T+NsdgqQ3BiJZ1d+Ozd
+ /GvjuQPw==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
- by casper.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pG3hr-005P30-66; Thu, 12 Jan 2023 19:57:47 +0000
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1pG3hW-0045tg-0P; Thu, 12 Jan 2023 19:57:31 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 19D3D302D4A;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 20794303471;
  Thu, 12 Jan 2023 20:57:14 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 5B5522CD066C2; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
-Message-ID: <20230112195541.967699392@infradead.org>
+ id 5F8C02CD066D4; Thu, 12 Jan 2023 20:57:08 +0100 (CET)
+Message-ID: <20230112195542.028523143@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 12 Jan 2023 20:43:57 +0100
+Date: Thu, 12 Jan 2023 20:43:58 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: peterz@infradead.org
-Subject: [PATCH v3 43/51] intel_idle: Add force_irq_on module param
+Subject: [PATCH v3 44/51] entry, kasan,
+ x86: Disallow overriding mem*() functions
 References: <20230112194314.845371875@infradead.org>
 MIME-Version: 1.0
 Cc: juri.lelli@redhat.com, "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
@@ -147,7 +148,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-For testing purposes.
+KASAN cannot just hijack the mem*() functions, it needs to emit
+__asan_mem*() variants if it wants instrumentation (other sanitizers
+already do this).
+
+vmlinux.o: warning: objtool: sync_regs+0x24: call to memcpy() leaves .noinstr.text section
+vmlinux.o: warning: objtool: vc_switch_off_ist+0xbe: call to memcpy() leaves .noinstr.text section
+vmlinux.o: warning: objtool: fixup_bad_iret+0x36: call to memset() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __sev_get_ghcb+0xa0: call to memcpy() leaves .noinstr.text section
+vmlinux.o: warning: objtool: __sev_put_ghcb+0x35: call to memcpy() leaves .noinstr.text section
+
+Remove the weak aliases to ensure nobody hijacks these functions and
+add them to the noinstr section.
 
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
 Acked-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
@@ -155,33 +167,156 @@ Acked-by: Frederic Weisbecker <frederic@kernel.org>
 Tested-by: Tony Lindgren <tony@atomide.com>
 Tested-by: Ulf Hansson <ulf.hansson@linaro.org>
 ---
- drivers/idle/intel_idle.c |    7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ arch/x86/lib/memcpy_64.S  |    5 ++---
+ arch/x86/lib/memmove_64.S |    4 +++-
+ arch/x86/lib/memset_64.S  |    4 +++-
+ mm/kasan/kasan.h          |    4 ++++
+ mm/kasan/shadow.c         |   38 ++++++++++++++++++++++++++++++++++++++
+ tools/objtool/check.c     |    3 +++
+ 6 files changed, 53 insertions(+), 5 deletions(-)
 
---- a/drivers/idle/intel_idle.c
-+++ b/drivers/idle/intel_idle.c
-@@ -1787,6 +1787,9 @@ static bool __init intel_idle_verify_cst
- 	return true;
- }
+--- a/arch/x86/lib/memcpy_64.S
++++ b/arch/x86/lib/memcpy_64.S
+@@ -7,7 +7,7 @@
+ #include <asm/alternative.h>
+ #include <asm/export.h>
  
-+static bool force_irq_on __read_mostly;
-+module_param(force_irq_on, bool, 0444);
+-.pushsection .noinstr.text, "ax"
++.section .noinstr.text, "ax"
+ 
+ /*
+  * We build a jump to memcpy_orig by default which gets NOPped out on
+@@ -42,7 +42,7 @@ SYM_FUNC_START(__memcpy)
+ SYM_FUNC_END(__memcpy)
+ EXPORT_SYMBOL(__memcpy)
+ 
+-SYM_FUNC_ALIAS_WEAK(memcpy, __memcpy)
++SYM_FUNC_ALIAS(memcpy, __memcpy)
+ EXPORT_SYMBOL(memcpy)
+ 
+ /*
+@@ -183,4 +183,3 @@ SYM_FUNC_START_LOCAL(memcpy_orig)
+ 	RET
+ SYM_FUNC_END(memcpy_orig)
+ 
+-.popsection
+--- a/arch/x86/lib/memmove_64.S
++++ b/arch/x86/lib/memmove_64.S
+@@ -13,6 +13,8 @@
+ 
+ #undef memmove
+ 
++.section .noinstr.text, "ax"
 +
- static void __init intel_idle_init_cstates_icpu(struct cpuidle_driver *drv)
+ /*
+  * Implement memmove(). This can handle overlap between src and dst.
+  *
+@@ -213,5 +215,5 @@ SYM_FUNC_START(__memmove)
+ SYM_FUNC_END(__memmove)
+ EXPORT_SYMBOL(__memmove)
+ 
+-SYM_FUNC_ALIAS_WEAK(memmove, __memmove)
++SYM_FUNC_ALIAS(memmove, __memmove)
+ EXPORT_SYMBOL(memmove)
+--- a/arch/x86/lib/memset_64.S
++++ b/arch/x86/lib/memset_64.S
+@@ -6,6 +6,8 @@
+ #include <asm/alternative.h>
+ #include <asm/export.h>
+ 
++.section .noinstr.text, "ax"
++
+ /*
+  * ISO C memset - set a memory block to a byte value. This function uses fast
+  * string to get better performance than the original function. The code is
+@@ -43,7 +45,7 @@ SYM_FUNC_START(__memset)
+ SYM_FUNC_END(__memset)
+ EXPORT_SYMBOL(__memset)
+ 
+-SYM_FUNC_ALIAS_WEAK(memset, __memset)
++SYM_FUNC_ALIAS(memset, __memset)
+ EXPORT_SYMBOL(memset)
+ 
+ /*
+--- a/mm/kasan/kasan.h
++++ b/mm/kasan/kasan.h
+@@ -551,6 +551,10 @@ void __asan_set_shadow_f3(const void *ad
+ void __asan_set_shadow_f5(const void *addr, size_t size);
+ void __asan_set_shadow_f8(const void *addr, size_t size);
+ 
++void *__asan_memset(void *addr, int c, size_t len);
++void *__asan_memmove(void *dest, const void *src, size_t len);
++void *__asan_memcpy(void *dest, const void *src, size_t len);
++
+ void __hwasan_load1_noabort(unsigned long addr);
+ void __hwasan_store1_noabort(unsigned long addr);
+ void __hwasan_load2_noabort(unsigned long addr);
+--- a/mm/kasan/shadow.c
++++ b/mm/kasan/shadow.c
+@@ -38,6 +38,12 @@ bool __kasan_check_write(const volatile
+ }
+ EXPORT_SYMBOL(__kasan_check_write);
+ 
++#ifndef CONFIG_GENERIC_ENTRY
++/*
++ * CONFIG_GENERIC_ENTRY relies on compiler emitted mem*() calls to not be
++ * instrumented. KASAN enabled toolchains should emit __asan_mem*() functions
++ * for the sites they want to instrument.
++ */
+ #undef memset
+ void *memset(void *addr, int c, size_t len)
  {
- 	int cstate;
-@@ -1838,8 +1841,10 @@ static void __init intel_idle_init_cstat
- 		/* Structure copy. */
- 		drv->states[drv->state_count] = cpuidle_state_table[cstate];
+@@ -68,6 +74,38 @@ void *memcpy(void *dest, const void *src
  
--		if (cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IRQ_ENABLE)
-+		if ((cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IRQ_ENABLE) || force_irq_on) {
-+			printk("intel_idle: forced intel_idle_irq for state %d\n", cstate);
- 			drv->states[drv->state_count].enter = intel_idle_irq;
-+		}
+ 	return __memcpy(dest, src, len);
+ }
++#endif
++
++void *__asan_memset(void *addr, int c, size_t len)
++{
++	if (!kasan_check_range((unsigned long)addr, len, true, _RET_IP_))
++		return NULL;
++
++	return __memset(addr, c, len);
++}
++EXPORT_SYMBOL(__asan_memset);
++
++#ifdef __HAVE_ARCH_MEMMOVE
++void *__asan_memmove(void *dest, const void *src, size_t len)
++{
++	if (!kasan_check_range((unsigned long)src, len, false, _RET_IP_) ||
++	    !kasan_check_range((unsigned long)dest, len, true, _RET_IP_))
++		return NULL;
++
++	return __memmove(dest, src, len);
++}
++EXPORT_SYMBOL(__asan_memmove);
++#endif
++
++void *__asan_memcpy(void *dest, const void *src, size_t len)
++{
++	if (!kasan_check_range((unsigned long)src, len, false, _RET_IP_) ||
++	    !kasan_check_range((unsigned long)dest, len, true, _RET_IP_))
++		return NULL;
++
++	return __memcpy(dest, src, len);
++}
++EXPORT_SYMBOL(__asan_memcpy);
  
- 		if (cpu_feature_enabled(X86_FEATURE_KERNEL_IBRS) &&
- 		    cpuidle_state_table[cstate].flags & CPUIDLE_FLAG_IBRS) {
+ void kasan_poison(const void *addr, size_t size, u8 value, bool init)
+ {
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -956,6 +956,9 @@ static const char *uaccess_safe_builtin[
+ 	"__asan_store16_noabort",
+ 	"__kasan_check_read",
+ 	"__kasan_check_write",
++	"__asan_memset",
++	"__asan_memmove",
++	"__asan_memcpy",
+ 	/* KASAN in-line */
+ 	"__asan_report_load_n_noabort",
+ 	"__asan_report_load1_noabort",
 
 
 _______________________________________________
