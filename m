@@ -1,86 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E845166E1DB
-	for <lists.virtualization@lfdr.de>; Tue, 17 Jan 2023 16:16:40 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2D8B966E1DA
+	for <lists.virtualization@lfdr.de>; Tue, 17 Jan 2023 16:16:23 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 20CE781F3F;
-	Tue, 17 Jan 2023 15:16:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 20CE781F3F
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=NOUkbYh4
+	by smtp3.osuosl.org (Postfix) with ESMTP id 3276B60BE9;
+	Tue, 17 Jan 2023 15:16:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3276B60BE9
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=IaaJyCgc
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id P4fZUA3yQTNn; Tue, 17 Jan 2023 15:16:38 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Sj8cz2v5ziJ3; Tue, 17 Jan 2023 15:16:19 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 0244681E91;
-	Tue, 17 Jan 2023 15:16:38 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0244681E91
+	by smtp3.osuosl.org (Postfix) with ESMTPS id E699A60BDD;
+	Tue, 17 Jan 2023 15:16:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E699A60BDD
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 56E3BC007B;
-	Tue, 17 Jan 2023 15:16:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 23704C007B;
+	Tue, 17 Jan 2023 15:16:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5D2EAC002D
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 121D9C002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Jan 2023 15:16:35 +0000 (UTC)
+ Tue, 17 Jan 2023 15:16:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 4572D405D7
+ by smtp3.osuosl.org (Postfix) with ESMTP id D2D7160BDD
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Jan 2023 15:16:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4572D405D7
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=NOUkbYh4
+ Tue, 17 Jan 2023 15:16:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D2D7160BDD
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id XDIAPfLp5NOR
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DKoiGoXnXcoZ
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Jan 2023 15:16:34 +0000 (UTC)
+ Tue, 17 Jan 2023 15:16:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 942AF405B8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 178C660BCE
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 942AF405B8
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 178C660BCE
  for <virtualization@lists.linux-foundation.org>;
- Tue, 17 Jan 2023 15:16:34 +0000 (UTC)
+ Tue, 17 Jan 2023 15:16:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1673968593;
+ s=mimecast20190719; t=1673968573;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=fw/nFMgEKd6/JOs4Bo38UV7NzYCcuP0Qle+XYJWZ2qI=;
- b=NOUkbYh42556d+LZ8lB9ncQqF68p0IAHdtEQXsg7gwBth4jiS9G9KobCaGDVum5fHSV1eD
- EO/I3tOXurgQf4JS6Qrcfa1d9ub8/Phe/VksT7UgpcAzLery3KtU10RQ/cg2O3T7gcTl9o
- W0HIGOJ1dQBhKzoECYZ+eYmRAL3uvjg=
+ bh=asTM0g0Ag1HWYFfqMWuusWwOifr4sTs9wZ4Ph94PRks=;
+ b=IaaJyCgcjpfir7yymzgASs1ESVevY3g8D1e7pc6OGZz+EZiq8OAbjkv2uBqtdWiWW4PMwM
+ dQtounFQI387Mv70+jkSDms2xYeYMz77dr2hT9ohN1FKmWcFkgxG0wwwkh+GXXq+uubqi6
+ J+ZwUNJLBi61dQ9eXBSmYUaZbp/sVTY=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-663-XilJkniLMZW6SrZ_Dud_eA-1; Tue, 17 Jan 2023 10:16:32 -0500
-X-MC-Unique: XilJkniLMZW6SrZ_Dud_eA-1
+ us-mta-665-3VwgVySaOGu7fIeoVyop0w-1; Tue, 17 Jan 2023 10:16:09 -0500
+X-MC-Unique: 3VwgVySaOGu7fIeoVyop0w-1
 Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
  [10.11.54.2])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 7B6723814968;
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CE44D3C5C966;
  Tue, 17 Jan 2023 15:15:22 +0000 (UTC)
 Received: from qualcomm-amberwing-rep-06.khw4.lab.eng.bos.redhat.com
  (qualcomm-amberwing-rep-06.khw4.lab.eng.bos.redhat.com [10.19.240.11])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 317F44078904;
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8383540C6EC4;
  Tue, 17 Jan 2023 15:15:22 +0000 (UTC)
 From: Eric Auger <eric.auger@redhat.com>
 To: eric.auger.pro@gmail.com, eric.auger@redhat.com, mst@redhat.com,
  jasowang@redhat.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
  virtualization@lists.linux-foundation.org
-Subject: [PATCH 1/2] vhost: Remove the enabled parameter from
- vhost_init_device_iotlb
-Date: Tue, 17 Jan 2023 10:15:17 -0500
-Message-Id: <20230117151518.44725-2-eric.auger@redhat.com>
+Subject: [PATCH 2/2] vhost/net: Clear the pending messages when the backend is
+ removed
+Date: Tue, 17 Jan 2023 10:15:18 -0500
+Message-Id: <20230117151518.44725-3-eric.auger@redhat.com>
 In-Reply-To: <20230117151518.44725-1-eric.auger@redhat.com>
 References: <20230117151518.44725-1-eric.auger@redhat.com>
 MIME-Version: 1.0
@@ -102,55 +99,81 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The 'enabled' parameter is not used by the function. Remove it.
+When the vhost iotlb is used along with a guest virtual iommu
+and the guest gets rebooted, some MISS messages may have been
+recorded just before the reboot and spuriously executed by
+the virtual iommu after the reboot.
+
+As vhost does not have any explicit reset user API,
+VHOST_NET_SET_BACKEND looks a reasonable point where to clear
+the pending messages, in case the backend is removed.
+
+Export vhost_clear_msg() and call it in vhost_net_set_backend()
+when fd == -1.
 
 Signed-off-by: Eric Auger <eric.auger@redhat.com>
-Reported-by: Michael S. Tsirkin <mst@redhat.com>
+Suggested-by: Jason Wang <jasowang@redhat.com>
+Fixes: 6b1e6cc7855b0 ("vhost: new device IOTLB API")
+
 ---
- drivers/vhost/net.c   | 2 +-
- drivers/vhost/vhost.c | 2 +-
- drivers/vhost/vhost.h | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+
+Without this patch, with QEMU virtio-iommu, on reboot, we get
+spurious messages such as
+
+qemu-kvm: virtio_iommu_translate no mapping for 0xff732800 for sid=1536
+---
+ drivers/vhost/net.c   | 3 +++
+ drivers/vhost/vhost.c | 3 ++-
+ drivers/vhost/vhost.h | 1 +
+ 3 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/vhost/net.c b/drivers/vhost/net.c
-index 9af19b0cf3b7..135e23254a26 100644
+index 135e23254a26..383f8f2ae131 100644
 --- a/drivers/vhost/net.c
 +++ b/drivers/vhost/net.c
-@@ -1642,7 +1642,7 @@ static int vhost_net_set_features(struct vhost_net *n, u64 features)
- 		goto out_unlock;
+@@ -1511,6 +1511,9 @@ static long vhost_net_set_backend(struct vhost_net *n, unsigned index, int fd)
+ 	nvq = &n->vqs[index];
+ 	mutex_lock(&vq->mutex);
  
- 	if ((features & (1ULL << VIRTIO_F_ACCESS_PLATFORM))) {
--		if (vhost_init_device_iotlb(&n->dev, true))
-+		if (vhost_init_device_iotlb(&n->dev))
- 			goto out_unlock;
- 	}
- 
++	if (fd == -1)
++		vhost_clear_msg(&n->dev);
++
+ 	/* Verify that ring has been setup correctly. */
+ 	if (!vhost_vq_access_ok(vq)) {
+ 		r = -EFAULT;
 diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index cbe72bfd2f1f..34458e203716 100644
+index 34458e203716..f11bdbe4c2c5 100644
 --- a/drivers/vhost/vhost.c
 +++ b/drivers/vhost/vhost.c
-@@ -1729,7 +1729,7 @@ long vhost_vring_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *arg
+@@ -661,7 +661,7 @@ void vhost_dev_stop(struct vhost_dev *dev)
  }
- EXPORT_SYMBOL_GPL(vhost_vring_ioctl);
+ EXPORT_SYMBOL_GPL(vhost_dev_stop);
  
--int vhost_init_device_iotlb(struct vhost_dev *d, bool enabled)
-+int vhost_init_device_iotlb(struct vhost_dev *d)
+-static void vhost_clear_msg(struct vhost_dev *dev)
++void vhost_clear_msg(struct vhost_dev *dev)
  {
- 	struct vhost_iotlb *niotlb, *oiotlb;
- 	int i;
+ 	struct vhost_msg_node *node, *n;
+ 
+@@ -679,6 +679,7 @@ static void vhost_clear_msg(struct vhost_dev *dev)
+ 
+ 	spin_unlock(&dev->iotlb_lock);
+ }
++EXPORT_SYMBOL_GPL(vhost_clear_msg);
+ 
+ void vhost_dev_cleanup(struct vhost_dev *dev)
+ {
 diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index d9109107af08..4bfa10e52297 100644
+index 4bfa10e52297..1647b750169c 100644
 --- a/drivers/vhost/vhost.h
 +++ b/drivers/vhost/vhost.h
-@@ -221,7 +221,7 @@ ssize_t vhost_chr_read_iter(struct vhost_dev *dev, struct iov_iter *to,
- 			    int noblock);
- ssize_t vhost_chr_write_iter(struct vhost_dev *dev,
- 			     struct iov_iter *from);
--int vhost_init_device_iotlb(struct vhost_dev *d, bool enabled);
-+int vhost_init_device_iotlb(struct vhost_dev *d);
+@@ -181,6 +181,7 @@ long vhost_dev_ioctl(struct vhost_dev *, unsigned int ioctl, void __user *argp);
+ long vhost_vring_ioctl(struct vhost_dev *d, unsigned int ioctl, void __user *argp);
+ bool vhost_vq_access_ok(struct vhost_virtqueue *vq);
+ bool vhost_log_access_ok(struct vhost_dev *);
++void vhost_clear_msg(struct vhost_dev *dev);
  
- void vhost_iotlb_map_free(struct vhost_iotlb *iotlb,
- 			  struct vhost_iotlb_map *map);
+ int vhost_get_vq_desc(struct vhost_virtqueue *,
+ 		      struct iovec iov[], unsigned int iov_count,
 -- 
 2.31.1
 
