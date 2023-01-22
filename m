@@ -1,74 +1,74 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3682F676C03
-	for <lists.virtualization@lfdr.de>; Sun, 22 Jan 2023 11:11:15 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 981F6676C04
+	for <lists.virtualization@lfdr.de>; Sun, 22 Jan 2023 11:11:16 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 7F5ED4174D;
-	Sun, 22 Jan 2023 10:11:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7F5ED4174D
+	by smtp2.osuosl.org (Postfix) with ESMTP id 0E26D4021C;
+	Sun, 22 Jan 2023 10:11:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0E26D4021C
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uMyGfTH3SPxU; Sun, 22 Jan 2023 10:11:10 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D5E2641745;
-	Sun, 22 Jan 2023 10:11:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D5E2641745
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 6E9-i92rVFv9; Sun, 22 Jan 2023 10:11:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id E0612405A0;
+	Sun, 22 Jan 2023 10:11:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E0612405A0
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 57C13C0077;
-	Sun, 22 Jan 2023 10:11:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 35430C0077;
+	Sun, 22 Jan 2023 10:11:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 84BFCC002D
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EA4BAC002D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:06 +0000 (UTC)
+ Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5061260E4C
+ by smtp4.osuosl.org (Postfix) with ESMTP id AF7A54174D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5061260E4C
+ Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AF7A54174D
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id FCxiMWmGwdKT
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id yKYEBvl263OO
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:02 +0000 (UTC)
-X-Greylist: delayed 00:05:14 by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 64CEF60AC1
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.134])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 64CEF60AC1
+ Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C5A25416F4
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.187])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C5A25416F4
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:01 +0000 (UTC)
+ Sun, 22 Jan 2023 10:11:09 +0000 (UTC)
 Received: from lenovo-t14s.redhat.com ([82.142.8.70]) by
  mrelayeu.kundenserver.de (mreue012 [212.227.15.167]) with ESMTPSA (Nemesis)
- id 1N62mG-1odzFs1dl2-016Sip; Sun, 22 Jan 2023 11:05:32 +0100
+ id 1MqINP-1oy0341K9z-00nPdI; Sun, 22 Jan 2023 11:05:33 +0100
 From: Laurent Vivier <lvivier@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 3/4] vdpa_sim_net: don't always set VIRTIO_NET_F_MAC
-Date: Sun, 22 Jan 2023 11:05:25 +0100
-Message-Id: <20230122100526.2302556-4-lvivier@redhat.com>
+Subject: [PATCH 4/4] virtio_net: fix virtnet_send_command() with vdpa_sim_net
+Date: Sun, 22 Jan 2023 11:05:26 +0100
+Message-Id: <20230122100526.2302556-5-lvivier@redhat.com>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230122100526.2302556-1-lvivier@redhat.com>
 References: <20230122100526.2302556-1-lvivier@redhat.com>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:C0lmlhI9YjKOrifXTYZOHEY7D8bGXsds0Mu6iD7d1jXwqVaA7WL
- sYcBzy078gS83j0QHDpnJctaFKmGZiLCuxb3AA/tfTBL3PRP12tRjCTniZHuigzDnhw/RSg
- zjJVDPHYnTe+K4n9N8dD0jA0kYx8t+SRt+UppkXo1ECIK5buDQUtx5S8U11UY/uLr7Wbis6
- lxctRwls0pgcX4TTRKSBQ==
-UI-OutboundReport: notjunk:1;M01:P0:SkQMJ0VWLMQ=;8pPxbPPxVOf4QTbA6I+V2rreoP0
- JRUgz1YUiAylheEVLk+vB5ZUZRwzZsKxwfdlG8eAC9WwcKLYNK0gXW7e6D67ke53sQbPEeRRq
- 8ALCMjO3HcNHNRqXuBfWETviSCQkWlSh1BegcuarqvR/imVNHup+a9oHm7bAy8Wh5d+qfimKF
- cgXgUBYqNmycjWE16nyz4+ff8s73iemGWZ/t81gHlA/wosZc83evMN4zOhbu5NswRv2GilV4y
- KWSV5tkIdjwhopiMySWiNC0r1QZ/6hx0F8p25fvg2bQRpvSxsqk7dQiRqIxLVXohmZ54akVsd
- YMeVKk1yPl15KgxGqquZKwgH/sVDFQpjppqSoLRAsDOaHGtCo7b6qTCTptwjxbmXmLXXE0vrP
- zArJolck2kX7LcED84aaBnozO224ep4emI9bryassH+NQmLnsAFKYSLcVpHTc3Z2FZBusZnNi
- 3JA8e4Q2dMEkLTfKKhcqnQzCHAQ6uZcr+v9IOdecgytdZeRFSdq6ONpdxbJhckdjYOf0sfyV5
- EWb/swbh7vwyEstVZ+DK8i0t1obpDknBiW1LSKRfH4VFwE1xKuvuzX7KT/MQFMCD+bAhiWiV5
- tlTyxImqTMP56quzpLolFG29jLQ/YKg1dgEYFZ0dWSQnYvoUzLqJA5LQBmIKauI5empmQ3yUa
- y2QIW5Ay/yxJbvAJqu+kdzMuDWc44XXHAMdp6/Z3IA==
+X-Provags-ID: V03:K1:YTjFLU1lj+k8vApmSwkjqxN3EBr0drRgQSUre+RfcDGSw4uTA+0
+ fpObHvWK8k3li6YWyS80RiUZHOX8MywdgaDytn/6t8T+DiaynYAOSnUv/FWk1HaQEOmrj5S
+ KrovGMPtwrXHOQlFb5ZB7KBF2sy6BQdtTORgHlq35jPyVn4D7dbru2lBJVeYHfpcThtGErb
+ +Fr/sA0/vvb/ZKDcaf4ag==
+UI-OutboundReport: notjunk:1;M01:P0:W/8CbaMJfHI=;CztS2YeNk03sPaZQmk0pcBJ6L43
+ XcTq3jVYTR1mPvip15m9kRcm4gx/fCYvZXXAiserRgQ9GFMVi/1LZ0b4jQkbYecKpXXQ+1YOU
+ rBpVaXPROlsifSO1bNiEiHYAbudG2KcSeHDa4oueEPlBlJpIcVfy5U+3ZlKYLxT5ZRzdg50Qs
+ g/IdVtnBO6yU19WOFGc0dYdOtjbIpFy66HsEykChNF0WWHZQhrOOJ2WhiAuzsvuBRJTgO05cc
+ GLWOboaYKXGeWF74daHubX+BlE1K7ZZS9qZ6sIRQ2qMZO+rA8owLFae2Y/cg3W80pIRcNgW47
+ jkd67qMPk0vZjxCO9UrPIK3Tls1BKbZ2u91VxEMWay+YYAE1RqV/NhWBUjZ85vf/Jua4dzf9u
+ UzzD3cflGJ9vqwlR003dHr1chEHCC6R+ff7po0WY+C8azbOlMMlJlx4lV5ntjVsWQkQgVzihl
+ cgg+JKelqfGLSQlRJBSx6aNgedhV/zvuqXKnNPGdNSttYep61gKReoyF4gEDLnVmvpkLkjVzM
+ nlV+b2ig0YvJfYiuFp4QMmD4FiCpy5+9MDcBhXTpaiIDFvMhaMsPdgwPCARDGRKYR8/7oPQku
+ F5Nzmv3rfaax47qfuviRX2Dq8X+FsMmh0fbGYELuiT9zFEea8uCwaEwaW4BsNrsCbbzen8UtB
+ xzMSe0bE+Kdl8LxR2gO5YF/TUzIUv4hfj3/YxuuEzA==
 Cc: Cindy Lu <lulu@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
  =?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
@@ -90,35 +90,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-if vdpa dev command doesn't set a MAC address, don't report
-VIRTIO_NET_F_MAC.
+virtnet_send_command() sends a command to the control virtqueue
+by adding the command to the virtqueue, kicking the queue and waiting
+in a loop.
 
-As vdpa_sim_net sets VIRTIO_NET_F_MAC without setting the MAC address,
-virtio-net doesn't set a random one and the address appears to be the
-zero MAC address.
+The vdpa simulator simulates the control virqueue using a work queue:
+the virqueue_kick() calls schedule_work() to start the queue processing.
+But as virtnet_send_command() uses a loop, the scheduler cannot schedule
+the workqueue and the virtqueue is never processed (and the command
+never executed).
+
+To fix that, replace in the loop the cpu_relax() by a schedule().
 
 Signed-off-by: Laurent Vivier <lvivier@redhat.com>
 ---
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/net/virtio_net.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-index 584b975a98a7..28e858659b85 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim_net.c
-@@ -257,6 +257,12 @@ static int vdpasim_net_dev_add(struct vdpa_mgmt_dev *mdev, const char *name,
- 	dev_attr.work_fn = vdpasim_net_work;
- 	dev_attr.buffer_size = PAGE_SIZE;
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 29b3cc72082d..546c0b2baaca 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -2011,7 +2011,7 @@ static bool virtnet_send_command(struct virtnet_info *vi, u8 class, u8 cmd,
+ 	while (!virtqueue_get_buf(vi->cvq, &tmp) &&
+ 	       !virtqueue_is_broken(vi->cvq) &&
+ 	       !time_after(jiffies, timeout))
+-		cpu_relax();
++		schedule();
  
-+	/* if vdpa dev doesn't provide a MAC address,
-+	 * don't report we have one
-+	 */
-+	if (!(config->mask & (1 << VDPA_ATTR_DEV_NET_CFG_MACADDR)))
-+		dev_attr.supported_features &= ~(1ULL << VIRTIO_NET_F_MAC);
-+
- 	simdev = vdpasim_create(&dev_attr, config);
- 	if (IS_ERR(simdev))
- 		return PTR_ERR(simdev);
+ 	return vi->ctrl->status == VIRTIO_NET_OK;
+ }
 -- 
 2.39.0
 
