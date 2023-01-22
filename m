@@ -1,73 +1,75 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0E189676C01
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E585D676C02
 	for <lists.virtualization@lfdr.de>; Sun, 22 Jan 2023 11:11:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 925E160E4A;
-	Sun, 22 Jan 2023 10:11:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 925E160E4A
+	by smtp1.osuosl.org (Postfix) with ESMTP id 66DDD81F82;
+	Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 66DDD81F82
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 66EjAmupYfNO; Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 33D2460E30;
-	Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 33D2460E30
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id h3Xx5-bp6JBw; Sun, 22 Jan 2023 10:11:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 5033C81F80;
+	Sun, 22 Jan 2023 10:11:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5033C81F80
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 08BFAC0077;
-	Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B489BC0081;
+	Sun, 22 Jan 2023 10:11:09 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 33037C002D
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id D074E41682
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CAF7FC0078
  for <virtualization@lists.linux-foundation.org>;
  Sun, 22 Jan 2023 10:11:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D074E41682
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Acojfw17Tq2v
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id B2C5281F75
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 10:11:05 +0000 (UTC)
+ Sun, 22 Jan 2023 10:11:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B2C5281F75
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id C9HG-4LGmhSf
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 22 Jan 2023 10:11:04 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 97673415DF
-Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 97673415DF
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4A78781F5D
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.135])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4A78781F5D
  for <virtualization@lists.linux-foundation.org>;
  Sun, 22 Jan 2023 10:11:04 +0000 (UTC)
 Received: from lenovo-t14s.redhat.com ([82.142.8.70]) by
  mrelayeu.kundenserver.de (mreue012 [212.227.15.167]) with ESMTPSA (Nemesis)
- id 1Mtxxk-1oPdmn1xOO-00uJdX; Sun, 22 Jan 2023 11:05:29 +0100
+ id 1MRVy9-1p53Hj1ciT-00NSmk; Sun, 22 Jan 2023 11:05:30 +0100
 From: Laurent Vivier <lvivier@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH 0/4] virtio_net: vdpa: update MAC address when it is generated
- by virtio-net
-Date: Sun, 22 Jan 2023 11:05:22 +0100
-Message-Id: <20230122100526.2302556-1-lvivier@redhat.com>
+Subject: [PATCH 1/4] virtio_net: notify MAC address change on device
+ initialization
+Date: Sun, 22 Jan 2023 11:05:23 +0100
+Message-Id: <20230122100526.2302556-2-lvivier@redhat.com>
 X-Mailer: git-send-email 2.39.0
+In-Reply-To: <20230122100526.2302556-1-lvivier@redhat.com>
+References: <20230122100526.2302556-1-lvivier@redhat.com>
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:yq7SLpOrrrwYVuK/Tdk6ssgdcQ6R8SuLVoPPYJezo5ADX4BjNKy
- jPDNlUIGwIUmFhylv5V6HcgBQNaEyIiXaqQowDqi8e4rgKiPvAEhdshNHaqBw48ZIrSEx04
- mGDb2jrNB0YFnhYouLuagZLWB45N6Id3Kx/yqqZbmuDSupW+masgienmCgt/r20QktmRkO4
- MSOX1Ugsi04mspkV6F8KA==
-UI-OutboundReport: notjunk:1;M01:P0:8zp5s8d3byQ=;VxTDJnXgSWcqoj9jK6Z0jrgUKRV
- xdIXae7LSGr11uz887/DmX+feK/EuW2DkElSDBcPwoMbBS0EKDziZmY8n3lhk0VlIeoOtHSms
- 0mdDqhAEgVNanjszFxz62e13szM8r8LHBbTD/ToCB1fRPwLttuQp0kghoy/hYcbehmyQVFHOe
- KKbok64aSuwX7Lnyng57IQ5IHRvmLwatggE2O79/BDsMn99YrVrNFmk1AONbeLrsPm+WWvTZb
- FfWojLxucdiWbpaLcQgl5k8H1qcXE7sLze9Ye2xoM/WmAL5ZQDbMM1QLJo+wuNseA6RGNtvOS
- F+EWCzzrPalH1hqUroL6DfQyjfpAINgqTOxRFDvrfKSadWzGz/aBN+g/Lnl3DwtX4RkJFcrnq
- iLSDWAb4+mDRPXSW/aTWRlET2gcVsnTZnGtWkZUMvDL4ghWvB6xrTgoT08LzdfB4tvB/AUV7U
- VCIv8jO/Zn285MXjBpBODkmTHnr75YJd8T0txWkFb7WDtWLSOLNJ4+RRdRF4p5GYtJhbH7tkf
- NM+O9rtYdXzUFdd7L8P6fx7F5Qo5c8Kc97k7l5nBOXvv6EESCiAgNMdlb7uaH3bHjSERXlKdd
- YRtZPUBJ23dBznF4RhF5yYpbyviDStqJOFx65aVrEASqGAWqOzNA5pWVWHe5l1F/b/epjkN9i
- 29YMG/gPjx2ZyDMv2Wvn/p02BVQ8esMyvRdw9v77Qw==
+X-Provags-ID: V03:K1:OvJkQJpHxHaDCPIk3W9i4eIYijK92aR7qOa7YFbWU4FKa/YfJkR
+ E/a6z8dxmCPAKztm0ukyh/oHdFFG7zYa7NElzj3pnNbO1BMzo/7IgFa9I1NikV6ZzztbCV3
+ E2fJahWqrWBM5gzAUbZWhNFFhiRGzyTdLzqCq6fUs9xJ4pp7Ki6jrCSc0gh3nZNZ5YSb5mm
+ D7PIF++SRA45BlYtN3wpw==
+UI-OutboundReport: notjunk:1;M01:P0:e2GDlv/Tq3Q=;MNZ+MrUpOuDl9rJiIDNCnKL2keJ
+ ypaVzrhPxdSTVqAqADzcFJzLe2j6WoQAal+GcWfv6w0krl8LHR+WDG4zAcH7UvI8JzKg1J4Ch
+ xyJnZcJep1bUZO2dt2a7ysP6lHoS/OkhZBBXMiKL2Rx9zWjP7wtCM8TPcYYZ8+hPtlTzGI9be
+ AOFpqCTvIviw5KOPKaIVOfDdAgBqcjEiYZiaPKKRLlMkmoBt00SUXgb4OdE7N7pVpb15Vo/12
+ RQFT1uropnnEWeNlVCdBgoSsu7tlYILE0B2W2h2KYbymZeE4hPieyFNzbgYcax8l0i+W+74rk
+ 4vTXes05MJ2KmXsnZ3LuzWgy9lr8c1ddlJNkhMtgmcs/F/Jit7LREno3bZF6ou3EdfqOms9MS
+ wskh3xsSUhF3Evr4hhhGQPwynQ64bX9VPX2vqTcykxD9QpOLsf761QXQSjos9pOI+j6KvIJ/g
+ AlK+Ya6Mo9G6SFCGmmdMVSQA7/UVK5gB/MUvmaEG8x5J1Pkw69zxUrTWJf7NpjVpkCpSyHgOC
+ AgoGx3tFZd6FmRPXuCrDDYRxIgfmAPTghu/UkpZGNfTn+4MrjCQwsaIdMbeqN8T/qAyc2jqE1
+ BnhqFd533pYmxopovHxPI39c6jzoT6kNIXGoq1MZky+IBslBnTCVZd4j5/VbKf2YH0hmemVnt
+ UpWI7gBjFxThAzgQcDmaRfUCt//70XpkTtzbX4uImw==
 Cc: Cindy Lu <lulu@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
  netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
  =?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
@@ -89,41 +91,54 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When the MAC address is not provided by the vdpa device virtio_net
-driver assigns a random one without notifying the device.
-The consequence, in the case of mlx5_vdpa, is the internal routing
-tables of the device are not updated and this can block the
-communication between two namespaces.
+In virtnet_probe(), if the device doesn't provide a MAC address the
+driver assigns a random one.
+As we modify the MAC address we need to notify the device to allow it
+to update all the related information.
 
-To fix this problem, use virtnet_send_command(VIRTIO_NET_CTRL_MAC)
-to set the address from virtnet_probe() when the MAC address is
-randomly assigned from virtio_net.
+The problem can be seen with vDPA and mlx5_vdpa driver as it doesn't
+assign a MAC address by default. The virtio_net device uses a random
+MAC address (we can see it with "ip link"), but we can't ping a net
+namespace from another one using the virtio-vdpa device because the
+new MAC address has not been provided to the hardware.
 
-While I was testing this change I found 3 other bugs in vdpa_sim_net:
+Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+---
+ drivers/net/virtio_net.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-- vdpa_sim_net sets the VIRTIO_NET_F_MAC even if no MAC address is
-  provided. So virtio_net doesn't generate a random MAC address and
-  the MAC address appears to be 00:00:00:00:00:00
-
-- vdpa_sim_net never processes the command and virtnet_send_command()
-  hangs in an infinite loop. To avoid a kernel crash add a timeout
-  in the loop.
-
-- To allow vdpa_sim_net to process the command, replace the cpu_relax()
-  in the loop by a schedule(). vdpa_sim_net uses a workqueue to process
-  the queue, and if we don't allow the kernel to schedule, the queue
-  is not processed and the loop is infinite.
-
-Laurent Vivier (4):
-  virtio_net: notify MAC address change on device initialization
-  virtio_net: add a timeout in virtnet_send_command()
-  vdpa_sim_net: don't always set VIRTIO_NET_F_MAC
-  virtio_net: fix virtnet_send_command() with vdpa_sim_net
-
- drivers/net/virtio_net.c             | 21 +++++++++++++++++++--
- drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  6 ++++++
- 2 files changed, 25 insertions(+), 2 deletions(-)
-
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 7723b2a49d8e..25511a86590e 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -3800,6 +3800,8 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 		eth_hw_addr_set(dev, addr);
+ 	} else {
+ 		eth_hw_addr_random(dev);
++		dev_info(&vdev->dev, "Assigned random MAC address %pM\n",
++			 dev->dev_addr);
+ 	}
+ 
+ 	/* Set up our device-specific information */
+@@ -3956,6 +3958,18 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 	pr_debug("virtnet: registered device %s with %d RX and TX vq's\n",
+ 		 dev->name, max_queue_pairs);
+ 
++	/* a random MAC address has been assigned, notify the device */
++	if (dev->addr_assign_type == NET_ADDR_RANDOM &&
++	    virtio_has_feature(vi->vdev, VIRTIO_NET_F_CTRL_MAC_ADDR)) {
++		struct scatterlist sg;
++
++		sg_init_one(&sg, dev->dev_addr, dev->addr_len);
++		if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_MAC,
++					  VIRTIO_NET_CTRL_MAC_ADDR_SET, &sg)) {
++			dev_warn(&vdev->dev, "Failed to update MAC address.\n");
++		}
++	}
++
+ 	return 0;
+ 
+ free_unregister_netdev:
 -- 
 2.39.0
 
