@@ -2,114 +2,77 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id F41E0676BA4
-	for <lists.virtualization@lfdr.de>; Sun, 22 Jan 2023 09:34:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 0E189676C01
+	for <lists.virtualization@lfdr.de>; Sun, 22 Jan 2023 11:11:14 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 59CBF60B35;
-	Sun, 22 Jan 2023 08:34:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 59CBF60B35
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TctIM1ka
+	by smtp3.osuosl.org (Postfix) with ESMTP id 925E160E4A;
+	Sun, 22 Jan 2023 10:11:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 925E160E4A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tZqX9kjs-Er8; Sun, 22 Jan 2023 08:34:47 +0000 (UTC)
+	with ESMTP id 66EjAmupYfNO; Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0680760B43;
-	Sun, 22 Jan 2023 08:34:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0680760B43
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 33D2460E30;
+	Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 33D2460E30
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B8B1C0077;
-	Sun, 22 Jan 2023 08:34:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 08BFAC0077;
+	Sun, 22 Jan 2023 10:11:11 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 99611C002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 33037C002D
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 08:34:44 +0000 (UTC)
+ Sun, 22 Jan 2023 10:11:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 80F204146F
+ by smtp4.osuosl.org (Postfix) with ESMTP id D074E41682
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 08:34:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 80F204146F
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=TctIM1ka
+ Sun, 22 Jan 2023 10:11:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D074E41682
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KXLAQwgsHzHL
+ with ESMTP id Acojfw17Tq2v
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 08:34:43 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1F60D4155E
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1F60D4155E
+ Sun, 22 Jan 2023 10:11:05 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 97673415DF
+Received: from mout.kundenserver.de (mout.kundenserver.de [212.227.126.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 97673415DF
  for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 08:34:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1674376481;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=LBOy3GEyTxqSKd3pw0Cq7/zzqUVdT2OzA5ZHrT96yhk=;
- b=TctIM1ka4wlmHpfP3FMKRldXGp098rmGxDU8OelNNh3ultcAirYzHdLDK84a1lGE1Za2bq
- wYCbXLgUA9xXWVtSKKxmoUBuBFUq9DYYj7PJnbihqYaoJci/SPtAo18Q8TPXhAOvtG1AYa
- 5edC2o4YMPq9fDXDgd35o+qSrkuJ3R0=
-Received: from mail-ed1-f70.google.com (mail-ed1-f70.google.com
- [209.85.208.70]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-633-cbeEfVKeNI-RuB9i_G0f-Q-1; Sun, 22 Jan 2023 03:34:37 -0500
-X-MC-Unique: cbeEfVKeNI-RuB9i_G0f-Q-1
-Received: by mail-ed1-f70.google.com with SMTP id
- v8-20020a056402348800b0049e1913bd43so6610473edc.20
- for <virtualization@lists.linux-foundation.org>;
- Sun, 22 Jan 2023 00:34:37 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LBOy3GEyTxqSKd3pw0Cq7/zzqUVdT2OzA5ZHrT96yhk=;
- b=Ac+w9bfmERykwMmp4UqkJrzZQBxis6GUZzJrI71SNXDYeJ2P+UQeSF1czEMJMxntMo
- zF834IkuupkqabKvk4PToGRX+aQxnsP8CS97pF/ghHCR7e8IQMXeTGJGjV9K8Oy/yige
- eTBGScHvBtZIYC3SEx1Ch7830l9L6IQm2mP7we8LE++E4o/sE/z5sq3rOi2Qj/LXpEr+
- 69SwAI3plphCqK/dT0RtZxtLG3G+31E+IIrZ0KIlwcginErkTVR4scCEVdU/3IbGzLNK
- uCbRPKaYLw44HcUDRRyU9HwNBUXxESlMOuBjHGadbcr8CGlB+S1QKfG96KXRqy8GSByF
- SC7w==
-X-Gm-Message-State: AFqh2krDQ2JWPNZatjAVFzzfc0XLXlUXLHejzsOTTdjCD4QXvPj0OiQY
- 9R8mlp53lL7XwrEFc6j+RY5c0sePXQ1bU1efWlfLt2efWHT2ES5PV2+KaMIIld5zNyOgmU11DR7
- ON2usxucoxKRoYqexJFlAr/iLNrsqoKE9Tg+/YXRlhg==
-X-Received: by 2002:a17:906:d8ad:b0:875:54f5:740d with SMTP id
- qc13-20020a170906d8ad00b0087554f5740dmr18980188ejb.51.1674376471264; 
- Sun, 22 Jan 2023 00:34:31 -0800 (PST)
-X-Google-Smtp-Source: AMrXdXupkktggRT0GhSuPRcESSXkQviODPyb9ZmRHAGX+AHHUI13v12MW9XOdnRYvnmjPv5GEmYCQw==
-X-Received: by 2002:a17:906:d8ad:b0:875:54f5:740d with SMTP id
- qc13-20020a170906d8ad00b0087554f5740dmr18980169ejb.51.1674376471041; 
- Sun, 22 Jan 2023 00:34:31 -0800 (PST)
-Received: from redhat.com ([2.52.149.29]) by smtp.gmail.com with ESMTPSA id
- lb19-20020a170907785300b0084d1efe9af6sm20325371ejc.58.2023.01.22.00.34.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 22 Jan 2023 00:34:30 -0800 (PST)
-Date: Sun, 22 Jan 2023 03:34:26 -0500
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: "Seth Forshee (DigitalOcean)" <sforshee@digitalocean.com>
-Subject: Re: [PATCH 0/2] vhost: improve livepatch switching for heavily
- loaded vhost worker kthreads
-Message-ID: <20230122032944-mutt-send-email-mst@kernel.org>
-References: <20230120-vhost-klp-switching-v1-0-7c2b65519c43@kernel.org>
+ Sun, 22 Jan 2023 10:11:04 +0000 (UTC)
+Received: from lenovo-t14s.redhat.com ([82.142.8.70]) by
+ mrelayeu.kundenserver.de (mreue012 [212.227.15.167]) with ESMTPSA (Nemesis)
+ id 1Mtxxk-1oPdmn1xOO-00uJdX; Sun, 22 Jan 2023 11:05:29 +0100
+From: Laurent Vivier <lvivier@redhat.com>
+To: linux-kernel@vger.kernel.org
+Subject: [PATCH 0/4] virtio_net: vdpa: update MAC address when it is generated
+ by virtio-net
+Date: Sun, 22 Jan 2023 11:05:22 +0100
+Message-Id: <20230122100526.2302556-1-lvivier@redhat.com>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-In-Reply-To: <20230120-vhost-klp-switching-v1-0-7c2b65519c43@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Petr Mladek <pmladek@suse.com>, Joe Lawrence <joe.lawrence@redhat.com>,
- kvm@vger.kernel.org, netdev@vger.kernel.org, Jiri Kosina <jikos@kernel.org>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- "Seth Forshee \(DigitalOcean\)" <sforshee@kernel.org>,
- live-patching@vger.kernel.org, Miroslav Benes <mbenes@suse.cz>,
- Josh Poimboeuf <jpoimboe@kernel.org>
+X-Provags-ID: V03:K1:yq7SLpOrrrwYVuK/Tdk6ssgdcQ6R8SuLVoPPYJezo5ADX4BjNKy
+ jPDNlUIGwIUmFhylv5V6HcgBQNaEyIiXaqQowDqi8e4rgKiPvAEhdshNHaqBw48ZIrSEx04
+ mGDb2jrNB0YFnhYouLuagZLWB45N6Id3Kx/yqqZbmuDSupW+masgienmCgt/r20QktmRkO4
+ MSOX1Ugsi04mspkV6F8KA==
+UI-OutboundReport: notjunk:1;M01:P0:8zp5s8d3byQ=;VxTDJnXgSWcqoj9jK6Z0jrgUKRV
+ xdIXae7LSGr11uz887/DmX+feK/EuW2DkElSDBcPwoMbBS0EKDziZmY8n3lhk0VlIeoOtHSms
+ 0mdDqhAEgVNanjszFxz62e13szM8r8LHBbTD/ToCB1fRPwLttuQp0kghoy/hYcbehmyQVFHOe
+ KKbok64aSuwX7Lnyng57IQ5IHRvmLwatggE2O79/BDsMn99YrVrNFmk1AONbeLrsPm+WWvTZb
+ FfWojLxucdiWbpaLcQgl5k8H1qcXE7sLze9Ye2xoM/WmAL5ZQDbMM1QLJo+wuNseA6RGNtvOS
+ F+EWCzzrPalH1hqUroL6DfQyjfpAINgqTOxRFDvrfKSadWzGz/aBN+g/Lnl3DwtX4RkJFcrnq
+ iLSDWAb4+mDRPXSW/aTWRlET2gcVsnTZnGtWkZUMvDL4ghWvB6xrTgoT08LzdfB4tvB/AUV7U
+ VCIv8jO/Zn285MXjBpBODkmTHnr75YJd8T0txWkFb7WDtWLSOLNJ4+RRdRF4p5GYtJhbH7tkf
+ NM+O9rtYdXzUFdd7L8P6fx7F5Qo5c8Kc97k7l5nBOXvv6EESCiAgNMdlb7uaH3bHjSERXlKdd
+ YRtZPUBJ23dBznF4RhF5yYpbyviDStqJOFx65aVrEASqGAWqOzNA5pWVWHe5l1F/b/epjkN9i
+ 29YMG/gPjx2ZyDMv2Wvn/p02BVQ8esMyvRdw9v77Qw==
+Cc: Cindy Lu <lulu@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ =?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>, Eli Cohen <elic@nvidia.com>,
+ Gautam Dawar <gautam.dawar@xilinx.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -126,68 +89,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jan 20, 2023 at 04:12:20PM -0600, Seth Forshee (DigitalOcean) wrote:
-> We've fairly regularaly seen liveptches which cannot transition within kpatch's
-> timeout period due to busy vhost worker kthreads. In looking for a solution the
-> only answer I found was to call klp_update_patch_state() from a safe location.
-> I tried adding this call to vhost_worker(), and it works, but this creates the
-> potential for problems if a livepatch attempted to patch vhost_worker().
-> Without a call to klp_update_patch_state() fully loaded vhost kthreads can
-> never switch because vhost_worker() will always appear on the stack, but with
-> the call these kthreads can switch but will still be running the old version of
-> vhost_worker().
-> 
-> To avoid this situation I've added a new function, klp_switch_current(), which
-> switches the current task only if its stack does not include any function being
-> patched. This allows kthreads to safely attempt switching themselves if a patch
-> is pending. There is at least one downside, however. Since there's no way for
-> the kthread to track whether it has already tried to switch for a pending patch
-> it can end up calling klp_switch_current() repeatedly when it can never be
-> safely switched.
-> 
-> I don't know whether this is the right solution, and I'm happy to try out other
-> suggestions. But in my testing these patches proved effective in consistently
-> switching heavily loaded vhost kthreads almost immediately.
-> 
-> To: Josh Poimboeuf <jpoimboe@kernel.org>
-> To: Jiri Kosina <jikos@kernel.org>
-> To: Miroslav Benes <mbenes@suse.cz>
-> To: Petr Mladek <pmladek@suse.com>
-> To: Joe Lawrence <joe.lawrence@redhat.com>
-> To: "Michael S. Tsirkin" <mst@redhat.com>
-> To: Jason Wang <jasowang@redhat.com>
-> Cc: live-patching@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Cc: kvm@vger.kernel.org
-> Cc: virtualization@lists.linux-foundation.org
-> Cc: netdev@vger.kernel.org
-> Signed-off-by: Seth Forshee (DigitalOcean) <sforshee@kernel.org>
+When the MAC address is not provided by the vdpa device virtio_net
+driver assigns a random one without notifying the device.
+The consequence, in the case of mlx5_vdpa, is the internal routing
+tables of the device are not updated and this can block the
+communication between two namespaces.
 
-Don't know enough about live patching to judge this.
+To fix this problem, use virtnet_send_command(VIRTIO_NET_CTRL_MAC)
+to set the address from virtnet_probe() when the MAC address is
+randomly assigned from virtio_net.
 
-I'll let livepatch maintainers judge this, and merge through
-the livepatch tree if appropriate. For that:
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-but pls underestand this is more a 'looks ok superficially and
-I don't have better ideas'  than 'I have reviewed this thoroughly'.
+While I was testing this change I found 3 other bugs in vdpa_sim_net:
 
-> 
-> ---
-> Seth Forshee (DigitalOcean) (2):
->       livepatch: add an interface for safely switching kthreads
->       vhost: check for pending livepatches from vhost worker kthreads
-> 
->  drivers/vhost/vhost.c         |  4 ++++
->  include/linux/livepatch.h     |  2 ++
->  kernel/livepatch/transition.c | 11 +++++++++++
->  3 files changed, 17 insertions(+)
-> ---
-> base-commit: 5dc4c995db9eb45f6373a956eb1f69460e69e6d4
-> change-id: 20230120-vhost-klp-switching-ba9a3ae38b8a
-> 
-> Best regards,
-> -- 
-> Seth Forshee (DigitalOcean) <sforshee@kernel.org>
+- vdpa_sim_net sets the VIRTIO_NET_F_MAC even if no MAC address is
+  provided. So virtio_net doesn't generate a random MAC address and
+  the MAC address appears to be 00:00:00:00:00:00
+
+- vdpa_sim_net never processes the command and virtnet_send_command()
+  hangs in an infinite loop. To avoid a kernel crash add a timeout
+  in the loop.
+
+- To allow vdpa_sim_net to process the command, replace the cpu_relax()
+  in the loop by a schedule(). vdpa_sim_net uses a workqueue to process
+  the queue, and if we don't allow the kernel to schedule, the queue
+  is not processed and the loop is infinite.
+
+Laurent Vivier (4):
+  virtio_net: notify MAC address change on device initialization
+  virtio_net: add a timeout in virtnet_send_command()
+  vdpa_sim_net: don't always set VIRTIO_NET_F_MAC
+  virtio_net: fix virtnet_send_command() with vdpa_sim_net
+
+ drivers/net/virtio_net.c             | 21 +++++++++++++++++++--
+ drivers/vdpa/vdpa_sim/vdpa_sim_net.c |  6 ++++++
+ 2 files changed, 25 insertions(+), 2 deletions(-)
+
+-- 
+2.39.0
 
 _______________________________________________
 Virtualization mailing list
