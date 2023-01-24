@@ -1,84 +1,122 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id A82F56790E1
-	for <lists.virtualization@lfdr.de>; Tue, 24 Jan 2023 07:29:52 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id B37526791CD
+	for <lists.virtualization@lfdr.de>; Tue, 24 Jan 2023 08:21:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E2C3581FA2;
-	Tue, 24 Jan 2023 06:29:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E2C3581FA2
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=Y1N1Bp85
+	by smtp4.osuosl.org (Postfix) with ESMTP id D41D4416B7;
+	Tue, 24 Jan 2023 07:21:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D41D4416B7
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=A3wG2I8K
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZA5NM6_98hL8; Tue, 24 Jan 2023 06:29:47 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rDSDvEbJLWd8; Tue, 24 Jan 2023 07:21:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 5C96F81FA3;
-	Tue, 24 Jan 2023 06:29:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5C96F81FA3
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 15F9E41706;
+	Tue, 24 Jan 2023 07:21:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 15F9E41706
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 83363C007C;
-	Tue, 24 Jan 2023 06:29:46 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 26552C007C;
+	Tue, 24 Jan 2023 07:21:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 56F0AC002D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5C38FC002D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Jan 2023 06:29:44 +0000 (UTC)
+ Tue, 24 Jan 2023 07:21:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1E03D60BB0
+ by smtp2.osuosl.org (Postfix) with ESMTP id 219AC4052E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Jan 2023 06:29:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1E03D60BB0
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=Y1N1Bp85
+ Tue, 24 Jan 2023 07:21:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 219AC4052E
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=A3wG2I8K
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HxD-2Qo6Surl
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id cDT00qW2CjAx
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Jan 2023 06:29:42 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 66C4360A69
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 66C4360A69
+ Tue, 24 Jan 2023 07:21:10 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E14E340127
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id E14E340127
  for <virtualization@lists.linux-foundation.org>;
- Tue, 24 Jan 2023 06:29:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=4u7sdeygL2SI0vuOn3AQXqOOeojipj5nJ8JBXiSMSP4=; b=Y1N1Bp85zWT1Yc4mWO5RM/5swn
- z1s/ae7nZBU1XI2LeDBAOv+06U0Bu1PJWHXCDrEjlbbph1xr+oh6cmoXIod4hdcTSIhg05KsUMsH6
- Mt0SAUZbeNMdj95LikeyPio6/J/WyHzPQbupOE2KMJ+OXZv8xSLLdBNtO7Ot/A8dx2JalSA7ubKi2
- aFuBB1XW7qW1wiu2y2b/BJd4x/N6dLqevlGltWAruZGC7j2J5NPe6Xz6f5IgVH1uIF87LFk4mGzQ9
- 1iI2DWcT8gQ30YpVU8YQ5BM2WIzRNm5oNr5lR1NU6lLpwGy0B15qzrZcjDOK9MRUi3zNGYFfM5749
- r4m38yZA==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.94.2 #2 (Red
- Hat Linux)) id 1pKCny-002Vim-8c; Tue, 24 Jan 2023 06:29:14 +0000
-Date: Mon, 23 Jan 2023 22:29:14 -0800
-From: Christoph Hellwig <hch@infradead.org>
-To: Alistair Popple <apopple@nvidia.com>
-Subject: Re: [RFC PATCH 01/19] mm: Introduce vm_account
-Message-ID: <Y896ugI8HoXDRjp3@infradead.org>
-References: <cover.f52b9eb2792bccb8a9ecd6bc95055705cfe2ae03.1674538665.git-series.apopple@nvidia.com>
- <748338ffe4c42d86669923159fe0426808ecb04d.1674538665.git-series.apopple@nvidia.com>
+ Tue, 24 Jan 2023 07:21:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1674544868;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=7q3iqRUHEdMbAtpmNI/eVbLbK/lHpmY+A3ZIsty8k9o=;
+ b=A3wG2I8KX70mG0XbEPYyx1gSFHQF7oUrQF4xEynSnv6s44g3FHKpSt7zNZB/O8Ihcm+Xiq
+ c5NwzdXdXkjIptKoTdVWqXRUsR+UEAnRIsnEg5VtdjUjMQN9H+FKIkprxB4/UuZOU6trOl
+ Vw0ntT+WKZP8SLGABxZnbXm3V3b58po=
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
+ [209.85.222.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-619-DLywSkkPOLGZp0HtZ1UjoA-1; Tue, 24 Jan 2023 02:19:36 -0500
+X-MC-Unique: DLywSkkPOLGZp0HtZ1UjoA-1
+Received: by mail-qk1-f197.google.com with SMTP id
+ y3-20020a05620a44c300b00709109448a3so8470649qkp.19
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 23 Jan 2023 23:19:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7q3iqRUHEdMbAtpmNI/eVbLbK/lHpmY+A3ZIsty8k9o=;
+ b=LgFFT8YIiY6b/+dHtoBMMFpFmUoQENfm7JyHExXHCENdbJKWSrCnO7bCjF5JKp9m8h
+ ROAfXiPNa02pQXI1P4inkjaVMQuqOy+T1mXsL+rb0MXacsdO2V2XOWHpFv6HmdB8c3r3
+ c5Jz5eCvwt6TQBUri7A7bssVdxxxxbHpijqAhJOIs8gNl4Ir4YIyKIJwZPaTr0+PwP7+
+ COOyXsBmEzuHjxyarFuvG5ezFBBFJgo0sc0bKjB/rpUWTea3u/uqPMHrfqr0BqIZjXoV
+ IFOA6MrJONwNNcEPoA5rChWiFchMHmRVOE+Pu6UqW6ZX/20wO5cRgE/heZnNPLSVcK+3
+ 4fsQ==
+X-Gm-Message-State: AFqh2krqTfNWuUVfvncvepSpp7zBrlgpb2YiPIbw5RchfGDZpuqUpUtK
+ NBCRJYvI+u6sFPjSSguhiexcTTg5WTkOzFCQv3w41ztH5yRdWWev12KYhNJYvhfeDh99aGHkIRF
+ T4L2HCjN+6s6JtkC8V5ACYhpBsAiz82I1lH70n+N5mg==
+X-Received: by 2002:a05:622a:4897:b0:3ab:a3d9:c5c8 with SMTP id
+ fc23-20020a05622a489700b003aba3d9c5c8mr45612923qtb.3.1674544775624; 
+ Mon, 23 Jan 2023 23:19:35 -0800 (PST)
+X-Google-Smtp-Source: AMrXdXuN2ZdpfTVek/pkskSHS//zZArD9nCjkHIXPrwJoZbwBa9jqTPDSAuz+JqMDr1JkvokbWw8uA==
+X-Received: by 2002:a05:622a:4897:b0:3ab:a3d9:c5c8 with SMTP id
+ fc23-20020a05622a489700b003aba3d9c5c8mr45612897qtb.3.1674544775412; 
+ Mon, 23 Jan 2023 23:19:35 -0800 (PST)
+Received: from [192.168.100.30] ([82.142.8.70])
+ by smtp.gmail.com with ESMTPSA id
+ 72-20020a37074b000000b00706c1fc62desm909030qkh.112.2023.01.23.23.19.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 23 Jan 2023 23:19:34 -0800 (PST)
+Message-ID: <3ff50750-de59-dc2b-01a9-1a453e49e26e@redhat.com>
+Date: Tue, 24 Jan 2023 08:19:31 +0100
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <748338ffe4c42d86669923159fe0426808ecb04d.1674538665.git-series.apopple@nvidia.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: linux-kselftest@vger.kernel.org, rds-devel@oss.oracle.com, daniel@ffwll.ch,
- kvm@vger.kernel.org, linux-rdma@vger.kernel.org, jhubbard@nvidia.com,
- linux-fpga@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- linux-mm@kvack.org, netdev@vger.kernel.org, mkoutny@suse.com, jgg@nvidia.com,
- hannes@cmpxchg.org, cgroups@vger.kernel.org, bpf@vger.kernel.org,
- surenb@google.com, tjmercier@google.com, io-uring@vger.kernel.org
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.6.0
+Subject: Re: [PATCH 1/4] virtio_net: notify MAC address change on device
+ initialization
+To: Jakub Kicinski <kuba@kernel.org>, Eli Cohen <elic@nvidia.com>
+References: <20230122100526.2302556-1-lvivier@redhat.com>
+ <20230122100526.2302556-2-lvivier@redhat.com>
+ <07a24753-767b-4e1e-2bcf-21ec04bc044a@nvidia.com>
+ <20230123193114.56aaec3a@kernel.org>
+From: Laurent Vivier <lvivier@redhat.com>
+In-Reply-To: <20230123193114.56aaec3a@kernel.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Cc: Cindy Lu <lulu@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org,
+ =?UTF-8?Q?Eugenio_P=c3=a9rez?= <eperezma@redhat.com>,
+ Gautam Dawar <gautam.dawar@xilinx.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,29 +128,31 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-> +/**
-> + * vm_account_init - Initialise a new struct vm_account.
-> + * @vm_account: pointer to uninitialised vm_account.
-> + * @task: task to charge against.
-> + * @user: user to charge against. Must be non-NULL for VM_ACCOUNT_USER.
-> + * @flags: flags to use when charging to vm_account.
-> + *
-> + * Initialise a new uninitialiused struct vm_account. Takes references
-> + * on the task/mm/user/cgroup as required although callers must ensure
-> + * any references passed in remain valid for the duration of this
-> + * call.
-> + */
-> +void vm_account_init(struct vm_account *vm_account, struct task_struct *task,
-> +		struct user_struct *user, enum vm_account_flags flags);
+On 1/24/23 04:31, Jakub Kicinski wrote:
+> On Sun, 22 Jan 2023 15:47:08 +0200 Eli Cohen wrote:
+>>> @@ -3956,6 +3958,18 @@ static int virtnet_probe(struct virtio_device *vdev)
+>>>    	pr_debug("virtnet: registered device %s with %d RX and TX vq's\n",
+>>>    		 dev->name, max_queue_pairs);
+>>>    
+>>> +	/* a random MAC address has been assigned, notify the device */
+>>> +	if (dev->addr_assign_type == NET_ADDR_RANDOM &&
+>> Maybe it's better to not count on addr_assign_type and use a local
+>> variable to indicate that virtnet_probe assigned random MAC.
+> 
+> +1, FWIW
+> 
+v2 sent, but I rely on virtio_has_feature(vdev, VIRTIO_NET_F_MAC) to know if the MAC 
+address is provided by the device or not:
 
+https://lore.kernel.org/lkml/20230123120022.2364889-2-lvivier@redhat.com/T/#me9211516e12771001e0346818255c9fb48a2bf4a
 
-kerneldoc comments are supposed to be next to the implementation, and
-not the declaration in the header.
+Thanks,
+Laurent
 
 _______________________________________________
 Virtualization mailing list
