@@ -1,82 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1161367CF94
-	for <lists.virtualization@lfdr.de>; Thu, 26 Jan 2023 16:15:39 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id B883C67CF9D
+	for <lists.virtualization@lfdr.de>; Thu, 26 Jan 2023 16:15:43 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5741F61169;
-	Thu, 26 Jan 2023 15:15:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5741F61169
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7C7906117A;
+	Thu, 26 Jan 2023 15:15:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7C7906117A
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=j6AtqAY3
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=FDXi87ou
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZzalY8a90Zq9; Thu, 26 Jan 2023 15:15:36 +0000 (UTC)
+	with ESMTP id l5XzWgQxjmxg; Thu, 26 Jan 2023 15:15:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 2972261031;
-	Thu, 26 Jan 2023 15:15:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2972261031
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 4251A61165;
+	Thu, 26 Jan 2023 15:15:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4251A61165
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 02721C0080;
-	Thu, 26 Jan 2023 15:15:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D3070C0084;
+	Thu, 26 Jan 2023 15:15:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9ADACC002D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 24C96C002D
  for <virtualization@lists.linux-foundation.org>;
- Thu, 26 Jan 2023 15:15:32 +0000 (UTC)
+ Thu, 26 Jan 2023 15:15:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7698941700
+ by smtp2.osuosl.org (Postfix) with ESMTP id AE9B541703
  for <virtualization@lists.linux-foundation.org>;
  Thu, 26 Jan 2023 15:15:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7698941700
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AE9B541703
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=desiato.20200630 header.b=j6AtqAY3
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=FDXi87ou
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 47LI_wJAsXwr
+ with ESMTP id 6_MXnLGQ6xKW
  for <virtualization@lists.linux-foundation.org>;
  Thu, 26 Jan 2023 15:15:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2BECF416E0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7A005400B9
 Received: from desiato.infradead.org (desiato.infradead.org
  [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2BECF416E0
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 7A005400B9
  for <virtualization@lists.linux-foundation.org>;
  Thu, 26 Jan 2023 15:15:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=desiato.20200630; h=Content-Type:MIME-Version:References:
  Subject:Cc:To:From:Date:Message-ID:Sender:Reply-To:Content-Transfer-Encoding:
  Content-ID:Content-Description:In-Reply-To;
- bh=svQEe0ECCGCg8wgaTJSn7Vk6+ZlADTvcOCMWRjGVrA4=; b=j6AtqAY3qshb8rFaiRpU53+4Fs
- d1J02gGQk0PHmOdIPPOlItYWC5gMKlVfMkNsvOKixr/gcdoRrOyoJIMmURBLFUMjjZxbH9RT+doob
- sWAjknqD0TQTUUqw5WeqAFD55KQsjxLuN3VkSTHmsOJZ27RI89v7gkCfAStu/mucawQ6N7OOReCI6
- eW2CAbQn8KA5quGx7LzF9m3lpgkZOhvOqTTlyh0DjOQGkMZEZAqRA2Rpqfg1X00lhxZaSM53Xwxsj
- ClmO4ylSPEm29DLDWKgKHaKX7Gd0eoQfQKTxnc1k+VQ1wqqiNWA6sWglXic+xTBfzRP1LWPVf5DET
- J0E7VO2A==;
+ bh=ITY5vhqoQzxGNcQfzB0qFe7a/JC0Zil+qvNvTmPdd5g=; b=FDXi87ouOhD/N+HR5oXUf1InkH
+ ZbQ7wu2PWcmxsDeqCLwyvbFWzMDt9JKoTSCgnbXmSdW4QlnLZgFcQaeiIagk4uk6Ht2D+3gbaFyMl
+ YZVaUh37TBAK1qdqLXmF1z6q4dRQC29a2cA+IdwOgm3uqWDZHpYWME17mUClgR8ZxcUQB1q5yiCFu
+ ppr1IlYisLoIGLSB/+HZO8P/cYBxVYTR9k2a2oxSiOz06Vzs+/+SF3+skSs50PwuDyWs+7Jdr7Wth
+ RrcN4a9apT7N18+1edgpGiySKxpweOYohIL+3wwDOZMElUP3GUP4GMYiEiLOH9uAOBg8yFfR9945Q
+ I/4qKDng==;
 Received: from j130084.upc-j.chello.nl ([24.132.130.84]
  helo=noisy.programming.kicks-ass.net)
  by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
- id 1pL3xH-002U1d-2R; Thu, 26 Jan 2023 15:14:23 +0000
+ id 1pL3xH-002U1f-2Z; Thu, 26 Jan 2023 15:14:23 +0000
 Received: from hirez.programming.kicks-ass.net
  (hirez.programming.kicks-ass.net [192.168.1.225])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (Client did not present a certificate)
- by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 3633E3010ED;
+ by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 3A142301BEC;
  Thu, 26 Jan 2023 16:14:53 +0100 (CET)
 Received: by hirez.programming.kicks-ass.net (Postfix, from userid 0)
- id 10C412084C4A8; Thu, 26 Jan 2023 16:14:53 +0100 (CET)
-Message-ID: <20230126151323.466670589@infradead.org>
+ id 148172084C4AE; Thu, 26 Jan 2023 16:14:53 +0100 (CET)
+Message-ID: <20230126151323.526275416@infradead.org>
 User-Agent: quilt/0.66
-Date: Thu, 26 Jan 2023 16:08:32 +0100
+Date: Thu, 26 Jan 2023 16:08:33 +0100
 From: Peter Zijlstra <peterz@infradead.org>
 To: mingo@kernel.org
-Subject: [PATCH v2 3/9] tracing: Warn about !rcu_is_watching()
+Subject: [PATCH v2 4/9] tracing, preempt: Squash _rcuidle tracing
 References: <20230126150829.087606759@infradead.org>
 MIME-Version: 1.0
 Cc: mark.rutland@arm.com, juri.lelli@redhat.com, daniel.lezcano@linaro.org,
@@ -108,48 +108,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When using noinstr, WARN when tracing hits when RCU is disabled.
+Extend commit 9aedeaed6fc6 ("tracing, hardirq: No moar _rcuidle()
+tracing") to also cover trace_preempt_{on,off}() which were
+mysteriously untouched.
 
-Suggested-by: Steven Rostedt (Google) <rostedt@goodmis.org>
+Fixes: 9aedeaed6fc6 ("tracing, hardirq: No moar _rcuidle() tracing")
+Reported-by: Mark Rutland <mark.rutland@arm.com>
 Signed-off-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+Tested-by: Mark Rutland <mark.rutland@arm.com>
+Link: https://lkml.kernel.org/r/Y9D5AfnOukWNOZ5q@hirez.programming.kicks-ass.net
 ---
- include/linux/trace_recursion.h |   18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
---- a/include/linux/trace_recursion.h
-+++ b/include/linux/trace_recursion.h
-@@ -135,6 +135,21 @@ extern void ftrace_record_recursion(unsi
- # define do_ftrace_record_recursion(ip, pip)	do { } while (0)
+diff --git a/kernel/trace/trace_preemptirq.c b/kernel/trace/trace_preemptirq.c
+index f992444a0b1f..ea96b41c8838 100644
+--- a/kernel/trace/trace_preemptirq.c
++++ b/kernel/trace/trace_preemptirq.c
+@@ -100,15 +100,13 @@ NOKPROBE_SYMBOL(trace_hardirqs_off);
+ 
+ void trace_preempt_on(unsigned long a0, unsigned long a1)
+ {
+-	if (!in_nmi())
+-		trace_preempt_enable_rcuidle(a0, a1);
++	trace(preempt_enable)(a0, a1);
+ 	tracer_preempt_on(a0, a1);
+ }
+ 
+ void trace_preempt_off(unsigned long a0, unsigned long a1)
+ {
+-	if (!in_nmi())
+-		trace_preempt_disable_rcuidle(a0, a1);
++	trace(preempt_disable)(a0, a1);
+ 	tracer_preempt_off(a0, a1);
+ }
  #endif
- 
-+#ifdef CONFIG_ARCH_WANTS_NO_INSTR
-+# define trace_warn_on_no_rcu(ip)					\
-+	({								\
-+		bool __ret = !rcu_is_watching();			\
-+		if (__ret && !trace_recursion_test(TRACE_RECORD_RECURSION_BIT)) { \
-+			trace_recursion_set(TRACE_RECORD_RECURSION_BIT); \
-+			WARN_ONCE(true, "RCU not on for: %pS\n", (void *)ip); \
-+			trace_recursion_clear(TRACE_RECORD_RECURSION_BIT); \
-+		}							\
-+		__ret;							\
-+	})
-+#else
-+# define trace_warn_on_no_rcu(ip)	false
-+#endif
-+
- /*
-  * Preemption is promised to be disabled when return bit >= 0.
-  */
-@@ -144,6 +159,9 @@ static __always_inline int trace_test_an
- 	unsigned int val = READ_ONCE(current->trace_recursion);
- 	int bit;
- 
-+	if (trace_warn_on_no_rcu(ip))
-+		return -1;
-+
- 	bit = trace_get_context_bit() + start;
- 	if (unlikely(val & (1 << bit))) {
- 		/*
 
 
 _______________________________________________
