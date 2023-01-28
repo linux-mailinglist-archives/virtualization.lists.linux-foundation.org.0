@@ -1,80 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D9A8067EFF4
-	for <lists.virtualization@lfdr.de>; Fri, 27 Jan 2023 21:51:01 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5A53F67F33D
+	for <lists.virtualization@lfdr.de>; Sat, 28 Jan 2023 01:38:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id CE38161211;
-	Fri, 27 Jan 2023 20:50:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CE38161211
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7B00F416BA;
+	Sat, 28 Jan 2023 00:38:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7B00F416BA
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ap2ac_234xbp; Fri, 27 Jan 2023 20:50:58 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZXyVGxH3zA9V; Sat, 28 Jan 2023 00:38:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 9A5BB6120F;
-	Fri, 27 Jan 2023 20:50:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9A5BB6120F
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 13318416D1;
+	Sat, 28 Jan 2023 00:38:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 13318416D1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E3F8BC0078;
-	Fri, 27 Jan 2023 20:50:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 33443C0078;
+	Sat, 28 Jan 2023 00:38:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E970FC002D
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id CD325C002D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Jan 2023 20:50:55 +0000 (UTC)
+ Sat, 28 Jan 2023 00:38:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B050D82D14
+ by smtp1.osuosl.org (Postfix) with ESMTP id A1DA08144D
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Jan 2023 20:50:55 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B050D82D14
+ Sat, 28 Jan 2023 00:38:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A1DA08144D
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7p-KdR0gwnBc
+ with ESMTP id ikcOVTlll4Tq
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Jan 2023 20:50:55 +0000 (UTC)
+ Sat, 28 Jan 2023 00:38:47 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A180982D0C
-Received: from mout.kundenserver.de (mout.kundenserver.de [217.72.192.73])
- by smtp1.osuosl.org (Postfix) with ESMTPS id A180982D0C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E20048140F
+Received: from outgoing2021.csail.mit.edu (outgoing2021.csail.mit.edu
+ [128.30.2.78])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id E20048140F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Jan 2023 20:50:54 +0000 (UTC)
-Received: from lenovo-t14s.redhat.com ([82.142.8.70]) by
- mrelayeu.kundenserver.de (mreue106 [212.227.15.183]) with ESMTPSA (Nemesis)
- id 1MWSJJ-1pBMAk2xND-00XusM; Fri, 27 Jan 2023 21:45:05 +0100
-From: Laurent Vivier <lvivier@redhat.com>
-To: linux-kernel@vger.kernel.org
-Subject: [PATCH v3 2/2] virtio_net: notify MAC address change on device
- initialization
-Date: Fri, 27 Jan 2023 21:45:00 +0100
-Message-Id: <20230127204500.51930-3-lvivier@redhat.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230127204500.51930-1-lvivier@redhat.com>
-References: <20230127204500.51930-1-lvivier@redhat.com>
+ Sat, 28 Jan 2023 00:38:46 +0000 (UTC)
+Received: from [64.186.27.43] (helo=srivatsa-dev.eng.vmware.com)
+ by outgoing2021.csail.mit.edu with esmtpa (Exim 4.95)
+ (envelope-from <srivatsa@csail.mit.edu>) id 1pLZER-000elb-VP;
+ Fri, 27 Jan 2023 19:38:12 -0500
+From: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+To: tglx@linutronix.de, mingo@redhat.com, x86@kernel.org, peterz@infradead.org,
+ hpa@zytor.com
+Subject: [PATCH] x86/hotplug: Remove incorrect comment about mwait_play_dead()
+Date: Fri, 27 Jan 2023 16:37:51 -0800
+Message-Id: <20230128003751.141317-1-srivatsa@csail.mit.edu>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-X-Provags-ID: V03:K1:vDP/sU3WbWB3aipv6spulG2sZ/1/Qx0NRvtEbQ/95jvDYBrgqmv
- ZN3NrtTNEg7/lbeTe7M8RMTYDDBTb50tIFBE5sKC1+dGcykmefRnplHi5Jj2SuoDef9L+k8
- JsT+qgN5H7TdT7yYUGdVrw20FOcRMzLIMrLttqxHXylaSE9B0r6WpmSiZaB3QykOyrbZxc9
- 8csVaeU/XH5gJCpVVFPig==
-UI-OutboundReport: notjunk:1;M01:P0:6VfygLwysx0=;9x0E10L2BVjqy0ocRSKJGyPERL0
- OqjcbeRcM/0zNxbwEdedpjPtfEw9GNYyChhauUJ7JgOHNQPsSO02aFBFIqjyRiukS1oTrTNtO
- Q42xZpW3eTebApCSq7JKYs4FZSXq9zmjtsWv6rI+l0f5NLBSvWs0SJS2dZzkwvRWG73YcoLPp
- iZNqBxgnfMLs91mJ1NcoXZpwaoDkzE9JCP6QRtRemYRZMvYFtabvSNtueNsyj/q4BI2/vbeQk
- mYDNS4MqpXER4m6IGRc8jHGzsqWomOBTKCpAzeBTQ0Zcy27ruq25FwoCk8yg+gZt6qAG71AJ1
- qixLw8/Ua0lWMezZAZiruodFFH5ghl63jzAJk9Q4g5Hs8JnVPNmfrwLv4wYiFh/hOxaDx6PKv
- 609BvKIGBpMJ4E4QwgFdTCFO6O6T3ZAnrxBj8aq72Og84+rI2+QD4g315i6laJN5yaX4M+4lf
- UI2R/Ad3S9+6PUY7z6/Nb0x0cCpuEqoIBqIk20lEnmjnnIoSexkARoJe8x4WwSCJmGyD7g8nf
- nPJpvNuktaDPvlFG/RQJuJ3vSI6HF1aAMJ35wGtbVxArOIlCE7a5EWUFYg8+JQiiROiNFT1M8
- phgqTkY+CIKeAK4H5+quHumTTDyE9H74Lvb7VIo+xIqVx46RMM1DIh4kYq2P/izG6hMTyhDIK
- op7OYs47W4feaVPGPLXl8U5WakUtXhFfgE63VpuAYg==
-Cc: Cindy Lu <lulu@redhat.com>, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
- =?UTF-8?q?Eugenio=20P=C3=A9rez?= <eperezma@redhat.com>,
- Eli Cohen <elic@nvidia.com>, virtualization@lists.linux-foundation.org,
- Gautam Dawar <gautam.dawar@xilinx.com>
+Cc: kvm@vger.kernel.org, pv-drivers@vmware.com, dave.hansen@linux.intel.com,
+ virtualization@lists.linux-foundation.org, ganb@vmware.com, ankitja@vmware.com,
+ namit@vmware.com, amakhalov@vmware.com, rafael.j.wysocki@intel.com,
+ bordoloih@vmware.com, xen-devel@lists.xenproject.org, wyes.karny@amd.com,
+ thomas.lendacky@amd.com, paulmck@kernel.org, keerthanak@vmware.com,
+ bp@alien8.de, jgross@suse.com, seanjc@google.com, linux-kernel@vger.kernel.org,
+ lewis.carroll@amd.com, imammedo@redhat.com, blamoreaux@vmware.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,64 +78,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In virtnet_probe(), if the device doesn't provide a MAC address the
-driver assigns a random one.
-As we modify the MAC address we need to notify the device to allow it
-to update all the related information.
+From: "Srivatsa S. Bhat (VMware)" <srivatsa@csail.mit.edu>
 
-The problem can be seen with vDPA and mlx5_vdpa driver as it doesn't
-assign a MAC address by default. The virtio_net device uses a random
-MAC address (we can see it with "ip link"), but we can't ping a net
-namespace from another one using the virtio-vdpa device because the
-new MAC address has not been provided to the hardware:
-RX packets are dropped since they don't go through the receive filters,
-TX packets go through unaffected.
+The comment that says mwait_play_dead() returns only on failure is a
+bit misleading because mwait_play_dead() could actually return for
+valid reasons (such as mwait not being supported by the platform) that
+do not indicate a failure of the CPU offline operation. So, remove the
+comment.
 
-Signed-off-by: Laurent Vivier <lvivier@redhat.com>
+Suggested-by: Thomas Gleixner <tglx@linutronix.de>
+Signed-off-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
 ---
- drivers/net/virtio_net.c | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ arch/x86/kernel/smpboot.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 7d700f8e545a..704a05f1c279 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -3806,6 +3806,8 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		eth_hw_addr_set(dev, addr);
- 	} else {
- 		eth_hw_addr_random(dev);
-+		dev_info(&vdev->dev, "Assigned random MAC address %pM\n",
-+			 dev->dev_addr);
- 	}
+diff --git a/arch/x86/kernel/smpboot.c b/arch/x86/kernel/smpboot.c
+index 55cad72715d9..9013bb28255a 100644
+--- a/arch/x86/kernel/smpboot.c
++++ b/arch/x86/kernel/smpboot.c
+@@ -1833,7 +1833,7 @@ void native_play_dead(void)
+ 	play_dead_common();
+ 	tboot_shutdown(TB_SHUTDOWN_WFS);
  
- 	/* Set up our device-specific information */
-@@ -3933,6 +3935,24 @@ static int virtnet_probe(struct virtio_device *vdev)
- 
- 	virtio_device_ready(vdev);
- 
-+	/* a random MAC address has been assigned, notify the device.
-+	 * We don't fail probe if VIRTIO_NET_F_CTRL_MAC_ADDR is not there
-+	 * because many devices work fine without getting MAC explicitly
-+	 */
-+	if (!virtio_has_feature(vdev, VIRTIO_NET_F_MAC) &&
-+	    virtio_has_feature(vi->vdev, VIRTIO_NET_F_CTRL_MAC_ADDR)) {
-+		struct scatterlist sg;
-+
-+		sg_init_one(&sg, dev->dev_addr, dev->addr_len);
-+		if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_MAC,
-+					  VIRTIO_NET_CTRL_MAC_ADDR_SET, &sg)) {
-+			pr_debug("virtio_net: setting MAC address failed\n");
-+			rtnl_unlock();
-+			err = -EINVAL;
-+			goto free_unregister_netdev;
-+		}
-+	}
-+
- 	rtnl_unlock();
- 
- 	err = virtnet_cpu_notif_add(vi);
+-	mwait_play_dead();	/* Only returns on failure */
++	mwait_play_dead();
+ 	if (cpuidle_play_dead())
+ 		hlt_play_dead();
+ }
 -- 
-2.39.1
+2.25.1
 
 _______________________________________________
 Virtualization mailing list
