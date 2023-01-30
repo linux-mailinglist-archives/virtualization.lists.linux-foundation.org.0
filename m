@@ -1,89 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61062681A8B
-	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 20:33:34 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 46955681CD8
+	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 22:37:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9A1C181EA3;
-	Mon, 30 Jan 2023 19:33:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9A1C181EA3
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WWy6zbdA
+	by smtp3.osuosl.org (Postfix) with ESMTP id 56FDC70046;
+	Mon, 30 Jan 2023 21:37:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 56FDC70046
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=ZopwcV24
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id gqQjswt9xY3D; Mon, 30 Jan 2023 19:33:31 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 71B3D81EA6;
-	Mon, 30 Jan 2023 19:33:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 71B3D81EA6
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sPu7oQuJU6bO; Mon, 30 Jan 2023 21:37:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id A1C8770491;
+	Mon, 30 Jan 2023 21:37:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A1C8770491
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B0D09C007C;
-	Mon, 30 Jan 2023 19:33:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A52BBC007C;
+	Mon, 30 Jan 2023 21:37:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4DC6DC002B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D924BC002B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 19:33:29 +0000 (UTC)
+ Mon, 30 Jan 2023 21:37:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id EB79841862
+ by smtp1.osuosl.org (Postfix) with ESMTP id 9D7938206F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 19:33:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EB79841862
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=WWy6zbdA
+ Mon, 30 Jan 2023 21:37:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9D7938206F
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
+ header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=ZopwcV24
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Ek5-iCl0tSql
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 6B52y9UxysgU
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 19:33:27 +0000 (UTC)
+ Mon, 30 Jan 2023 21:37:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CFA8941814
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CFA8941814
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1E9C0820FC
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 1E9C0820FC
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 19:33:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675107205;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=B3zRnSLp2ynUX7qdmnYkoyQsTORE3q5pAz8/tYex2W8=;
- b=WWy6zbdAUUFvwRycDC13jNFpv2qNuwxzd/ezpdXLhtOYpxat1uEWkG4XIsGWRI9xAqaoPy
- P0WOP8DPTnbN1tVjQipmTdOggY1LK8y12JgmAlTeWmCSG9L6W0f7xj7DD2iONXZHXH6kLI
- tFdHUrGzXGChTBJCqE5/gTe+Q5ReEME=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-631-x27mjU13MBiDmS4SpAKpeg-1; Mon, 30 Jan 2023 14:33:18 -0500
-X-MC-Unique: x27mjU13MBiDmS4SpAKpeg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 5481E1C07548;
- Mon, 30 Jan 2023 19:33:18 +0000 (UTC)
-Received: from localhost (unknown [10.39.195.80])
- by smtp.corp.redhat.com (Postfix) with ESMTP id AC7EE2026D4B;
- Mon, 30 Jan 2023 19:33:17 +0000 (UTC)
-Date: Mon, 30 Jan 2023 14:33:15 -0500
-From: Stefan Hajnoczi <stefanha@redhat.com>
-To: Bo Liu <liubo03@inspur.com>
-Subject: Re: [PATCH] vhost-scsi: convert sysfs snprintf and sprintf to
- sysfs_emit
-Message-ID: <Y9gbe+Pr5AcGbcta@fedora>
-References: <20230129091145.2837-1-liubo03@inspur.com>
-MIME-Version: 1.0
-In-Reply-To: <20230129091145.2837-1-liubo03@inspur.com>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Cc: kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- pbonzini@redhat.com
+ Mon, 30 Jan 2023 21:37:20 +0000 (UTC)
+Received: from pps.filterd (m0246631.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 30UL3rF1010564; Mon, 30 Jan 2023 21:37:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id; s=corp-2022-7-12;
+ bh=0s4y1MDssHKhpvnOleVZPgAoMVzvrH7+LhP7fjbqZEo=;
+ b=ZopwcV24m1pgerC5QsSEzz9rW2SOOsfVG7xb1+hyeisgZVzBPUqmj570OegT0luA8yyu
+ IaSNGU+n3UfI75RTuIcGn7yK7MSxvgQazoiZcYNnqggNa06EAs+7jrVHGxLzC2O7T8Sd
+ Jr18c/u6q3XDP5RiAoB/7/vjaoapuZEG6QlS6NJ7OYUVin80anVrYpkxc+fVgTI8c3gP
+ YWLn5YMPQBIW2HBRJLeMhfJ/JT930bo/J8tniEzU2FsIdo5PJ+UcPsXxgdJgm1EofT2W
+ 6Asq+m0Ij2ziYsy72f8dCRAzO0JNtjjrbs+eKqIUCu5aww/w9ZMXTQ6LJRKwIgN86f8B AA== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3ncvrjv1vw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 30 Jan 2023 21:37:19 +0000
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 30UK8hpv031798; Mon, 30 Jan 2023 21:37:19 GMT
+Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
+ [10.153.73.24])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 3nct54qa7f-1; Mon, 30 Jan 2023 21:37:18 +0000
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+To: mst@redhat.com, jasowang@redhat.com, parav@nvidia.com, elic@nvidia.com
+Subject: [PATCH 0/6] features provisioning fixes and mlx5_vdpa support
+Date: Mon, 30 Jan 2023 12:30:37 -0800
+Message-Id: <1675110643-28143-1-git-send-email-si-wei.liu@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.219,Aquarius:18.0.930,Hydra:6.0.562,FMLib:17.11.122.1
+ definitions=2023-01-30_17,2023-01-30_01,2022-06-22_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0
+ adultscore=0 malwarescore=0
+ spamscore=0 phishscore=0 mlxlogscore=999 suspectscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2212070000
+ definitions=main-2301300200
+X-Proofpoint-GUID: LpeTCHa7klMpYoBGyUBxgmOJTK6HsRdn
+X-Proofpoint-ORIG-GUID: LpeTCHa7klMpYoBGyUBxgmOJTK6HsRdn
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -95,61 +101,44 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2930199684921385391=="
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+This patchset is pre-requisite to export and provision device
+config attributes and features for vdpa live migration, in a way
+backward and forward compatibility can be retained. The follow up
+work [1] will need to be built around the new feature provisioning
+uAPI, with which it's easier to formalize migration compatibility
+support at the driver level.
 
---===============2930199684921385391==
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="zXZMPvM7BUyVfKwq"
-Content-Disposition: inline
+Thanks,
+-Siwei
 
+[1] [PATCH v3 0/4] vDPA: initial config export via "vdpa dev show"
+https://lore.kernel.org/virtualization/1666392237-4042-1-git-send-email-si-wei.liu@oracle.com/
 
---zXZMPvM7BUyVfKwq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+---
 
-On Sun, Jan 29, 2023 at 04:11:45AM -0500, Bo Liu wrote:
-> Follow the advice of the Documentation/filesystems/sysfs.rst
-> and show() should only use sysfs_emit() or sysfs_emit_at()
-> when formatting the value to be returned to user space.
->=20
-> Signed-off-by: Bo Liu <liubo03@inspur.com>
-> ---
->  drivers/vhost/scsi.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+Si-Wei Liu (6):
+  vdpa: fix improper error message when adding vdpa dev
+  vdpa: conditionally read STATUS in config space
+  vdpa: validate provisioned device features against specified attribute
+  virtio: VIRTIO_DEVICE_F_MASK for all per-device features
+  vdpa: validate device feature provisioning against supported class
+  vdpa/mlx5: support device features provisioning
 
-Reviewed-by: Stefan Hajnoczi <stefanha@redhat.com>
+ drivers/vdpa/mlx5/net/mlx5_vnet.c  | 72 ++++++++++++++++++++++------
+ drivers/vdpa/vdpa.c                | 98 ++++++++++++++++++++++++++++++++------
+ include/uapi/linux/virtio_config.h |  8 ++++
+ 3 files changed, 149 insertions(+), 29 deletions(-)
 
---zXZMPvM7BUyVfKwq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmPYG3sACgkQnKSrs4Gr
-c8hxvwf7B5Mbqo82xgBpjBde9q1dmi1tzl28i35KjgqCpyf6DNJNI7r+MrkPyIuw
-mGOZjZ3icMd82hcJVEi0XIP8A6eUOsqKPzob4h6w28sRV0kfqmvgSPh9zpRXf8PR
-G43mj1UArMtXj2mPqW4NTF3sgTLXJl+sZiDWvIVQIUuNjbtkxZ89fSZ5cH8AwdRy
-Yb3EQ8TRhb5xpfcYj0EPIM/nFUpyQPZxIKZpg2OeTpv0QZ6ZSo+2kiXYQSE1Cljl
-j2F8xN8OsOhzS2JTCBr777dn7JIHWjKvQvz0u2d4WBqkWw5O2P9Ea90IU5rPK28X
-K8iZ3SXmteQjQsroywTO/jHtYylj8g==
-=EEEC
------END PGP SIGNATURE-----
-
---zXZMPvM7BUyVfKwq--
-
-
---===============2930199684921385391==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+1.8.3.1
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2930199684921385391==--
-
