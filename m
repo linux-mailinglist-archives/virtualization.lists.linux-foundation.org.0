@@ -1,71 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 288B96808D5
-	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 10:24:33 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id ABDF441716;
-	Mon, 30 Jan 2023 09:24:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ABDF441716
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=Qx6f/vAl
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YvWUVlfdz1vn; Mon, 30 Jan 2023 09:24:29 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 808D941748;
-	Mon, 30 Jan 2023 09:24:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 808D941748
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 44EE5C002B;
-	Mon, 30 Jan 2023 09:24:28 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9D8D7C007C
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:24:26 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id D34E16808D2
+	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 10:24:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 74E5C4063C
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:24:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 74E5C4063C
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6A7C74063F;
+	Mon, 30 Jan 2023 09:24:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6A7C74063F
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=Qx6f/vAl
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=0U7C/4XV
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yv6jmeih5N0b
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id wX_rhgoGHgdn; Mon, 30 Jan 2023 09:24:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 1FAF34062A;
+	Mon, 30 Jan 2023 09:24:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1FAF34062A
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E7430C007C;
+	Mon, 30 Jan 2023 09:24:27 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3EFF4C007C
  for <virtualization@lists.linux-foundation.org>;
  Mon, 30 Jan 2023 09:24:26 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 089F7817AA
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 30 Jan 2023 09:24:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 089F7817AA
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=0U7C/4XV
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id J5g7u03tmgb6
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 30 Jan 2023 09:24:24 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DD1B6401D2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0707E817BA
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DD1B6401D2
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0707E817BA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:24:25 +0000 (UTC)
+ Mon, 30 Jan 2023 09:24:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=iTork4lgSqwAnNzEK3lzK1UwHk37chVOVoUGPRhe1ko=; b=Qx6f/vAlt0702Bw2gaA0yw3fMn
- DSbWXckp85GKL6x2K0wVZWlmBP/HHAMGhBrYB08/Vlm/YRJQCq3kI3xMG/WASmjfzQ5X57qRgvH1M
- aDf2q/VfFfkAfOqqUqPetL8Nnll6XIjG7NgvoDUHbD0cnB+MO8UuF7ljYLg4f4YTGaLPU4yXfmMbt
- xSZ2xC24sTznBHqPUwQ2KOdIbwsTxD5YqcKUievCZTrFdiYRp348Iffsdx6IiKzBdbwdD1fWYnp87
- CKqOs2Hi1NMEf6sOsnEZOuE8nGXc6MpsuZ0+93w6fPSfAyQf9ElR2gHbrsn8rljB8JPoxhMSuKyqW
- Ecg9ip0g==;
+ bh=qP38AeUO0Rmk+VJkMh1f6goA+lT+IUSKmsc4pvMdtPc=; b=0U7C/4XVekTjj+yEkY+iPbVHS9
+ SCowiG4W/On0oC0DNts1jXCq9PANMU5TUjGyEzvCijD/oLG1m+VrJYiNlUNGYBjErEfnFoIaWXips
+ Gq6HKuysFUNiA+dHDOA8lPW1NJrEyhAS3EvRq0MYqc1fbaCN4zTed7e8bCwvFLNiLRhH89ZXkRYWZ
+ FwX12RJjOzkFSnF6rDP7RrVrDM1m8vuCfiYubETB3lLkrwswOgdkZmV8ceIYxk1be2k15UTBH1+s7
+ TP/jadRuAY8HqN/XCCqPHefZ1IPYFmZgmKkFBJP1ZRIdSdEy6x6V7+/hRtYyooMunB7/mc5ClXWZB
+ UVK1amGg==;
 Received: from [2001:4bb8:19a:272a:732e:e417:47d7:2f4a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pMQNF-002oFW-6t; Mon, 30 Jan 2023 09:22:49 +0000
+ id 1pMQNH-002oGb-QE; Mon, 30 Jan 2023 09:22:52 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 14/23] coredump: use bvec_set_page to initialize a bvec
-Date: Mon, 30 Jan 2023 10:21:48 +0100
-Message-Id: <20230130092157.1759539-15-hch@lst.de>
+Subject: [PATCH 15/23] nfs: use bvec_set_page to initialize bvecs
+Date: Mon, 30 Jan 2023 10:21:49 +0100
+Message-Id: <20230130092157.1759539-16-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230130092157.1759539-1-hch@lst.de>
 References: <20230130092157.1759539-1-hch@lst.de>
@@ -107,38 +107,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use the bvec_set_page helper to initialize a bvec.
+Use the bvec_set_page helper to initialize bvecs.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- fs/coredump.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ fs/nfs/fscache.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/fs/coredump.c b/fs/coredump.c
-index de78bde2991beb..0a6873a9c4d0cd 100644
---- a/fs/coredump.c
-+++ b/fs/coredump.c
-@@ -840,11 +840,7 @@ static int __dump_skip(struct coredump_params *cprm, size_t nr)
- 
- static int dump_emit_page(struct coredump_params *cprm, struct page *page)
- {
--	struct bio_vec bvec = {
--		.bv_page	= page,
--		.bv_offset	= 0,
--		.bv_len		= PAGE_SIZE,
--	};
-+	struct bio_vec bvec;
+diff --git a/fs/nfs/fscache.c b/fs/nfs/fscache.c
+index e731c00a9fcbc3..ea5f2976dfaba4 100644
+--- a/fs/nfs/fscache.c
++++ b/fs/nfs/fscache.c
+@@ -245,14 +245,12 @@ static int fscache_fallback_read_page(struct inode *inode, struct page *page)
+ 	struct netfs_cache_resources cres;
+ 	struct fscache_cookie *cookie = nfs_i_fscache(inode);
  	struct iov_iter iter;
- 	struct file *file = cprm->file;
- 	loff_t pos;
-@@ -860,6 +856,7 @@ static int dump_emit_page(struct coredump_params *cprm, struct page *page)
- 	if (dump_interrupted())
- 		return 0;
- 	pos = file->f_pos;
+-	struct bio_vec bvec[1];
++	struct bio_vec bvec;
+ 	int ret;
+ 
+ 	memset(&cres, 0, sizeof(cres));
+-	bvec[0].bv_page		= page;
+-	bvec[0].bv_offset	= 0;
+-	bvec[0].bv_len		= PAGE_SIZE;
+-	iov_iter_bvec(&iter, ITER_DEST, bvec, ARRAY_SIZE(bvec), PAGE_SIZE);
 +	bvec_set_page(&bvec, page, PAGE_SIZE, 0);
- 	iov_iter_bvec(&iter, ITER_SOURCE, &bvec, 1, PAGE_SIZE);
- 	n = __kernel_write_iter(cprm->file, &iter, &pos);
- 	if (n != PAGE_SIZE)
++	iov_iter_bvec(&iter, ITER_DEST, &bvec, 1, PAGE_SIZE);
+ 
+ 	ret = fscache_begin_read_operation(&cres, cookie);
+ 	if (ret < 0)
+@@ -273,16 +271,14 @@ static int fscache_fallback_write_page(struct inode *inode, struct page *page,
+ 	struct netfs_cache_resources cres;
+ 	struct fscache_cookie *cookie = nfs_i_fscache(inode);
+ 	struct iov_iter iter;
+-	struct bio_vec bvec[1];
++	struct bio_vec bvec;
+ 	loff_t start = page_offset(page);
+ 	size_t len = PAGE_SIZE;
+ 	int ret;
+ 
+ 	memset(&cres, 0, sizeof(cres));
+-	bvec[0].bv_page		= page;
+-	bvec[0].bv_offset	= 0;
+-	bvec[0].bv_len		= PAGE_SIZE;
+-	iov_iter_bvec(&iter, ITER_SOURCE, bvec, ARRAY_SIZE(bvec), PAGE_SIZE);
++	bvec_set_page(&bvec, page, PAGE_SIZE, 0);
++	iov_iter_bvec(&iter, ITER_SOURCE, &bvec, 1, PAGE_SIZE);
+ 
+ 	ret = fscache_begin_write_operation(&cres, cookie);
+ 	if (ret < 0)
 -- 
 2.39.0
 
