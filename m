@@ -1,69 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 30C3A680AEA
-	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 11:33:55 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B1063680B05
+	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 11:36:30 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id C41CE416E4;
-	Mon, 30 Jan 2023 10:33:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C41CE416E4
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0F427813E6;
+	Mon, 30 Jan 2023 10:36:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0F427813E6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Kkij9wIrwZwg; Mon, 30 Jan 2023 10:33:52 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 5064C416A5;
-	Mon, 30 Jan 2023 10:33:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5064C416A5
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id G5EcC-ihhU79; Mon, 30 Jan 2023 10:36:28 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id E374D813D1;
+	Mon, 30 Jan 2023 10:36:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E374D813D1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9502EC007C;
-	Mon, 30 Jan 2023 10:33:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 32AA2C007C;
+	Mon, 30 Jan 2023 10:36:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5494DC002B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 64986C002B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 10:33:50 +0000 (UTC)
+ Mon, 30 Jan 2023 10:36:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2F1C540641
+ by smtp2.osuosl.org (Postfix) with ESMTP id 37E1B40489
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 10:33:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2F1C540641
+ Mon, 30 Jan 2023 10:36:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 37E1B40489
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oF3Vr8z_aEi5
+ with ESMTP id uzQTcPIkOi9l
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 10:33:49 +0000 (UTC)
+ Mon, 30 Jan 2023 10:36:25 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EF40B4063F
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8847D4020B
 Received: from verein.lst.de (verein.lst.de [213.95.11.211])
- by smtp2.osuosl.org (Postfix) with ESMTPS id EF40B4063F
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8847D4020B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 10:33:48 +0000 (UTC)
+ Mon, 30 Jan 2023 10:36:25 +0000 (UTC)
 Received: by verein.lst.de (Postfix, from userid 2407)
- id A6F2268D06; Mon, 30 Jan 2023 11:33:43 +0100 (CET)
-Date: Mon, 30 Jan 2023 11:33:43 +0100
+ id DCD3968D07; Mon, 30 Jan 2023 11:36:19 +0100 (CET)
+Date: Mon, 30 Jan 2023 11:36:19 +0100
 From: Christoph Hellwig <hch@lst.de>
 To: David Howells <dhowells@redhat.com>
-Subject: Re: [PATCH 20/23] rxrpc: use bvec_set_page to initialize a bvec
-Message-ID: <20230130103343.GA11663@lst.de>
-References: <20230130092157.1759539-21-hch@lst.de>
+Subject: Re: [PATCH 01/23] block: factor out a bvec_set_page helper
+Message-ID: <20230130103619.GA11874@lst.de>
+References: <20230130092157.1759539-2-hch@lst.de>
  <20230130092157.1759539-1-hch@lst.de>
- <3347459.1675074683@warthog.procyon.org.uk>
+ <3347557.1675074816@warthog.procyon.org.uk>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <3347459.1675074683@warthog.procyon.org.uk>
+In-Reply-To: <3347557.1675074816@warthog.procyon.org.uk>
 User-Agent: Mutt/1.5.17 (2007-11-01)
-Cc: linux-cifs@vger.kernel.org, linux-nfs@vger.kernel.org,
- linux-afs@lists.infradead.org, kvm@vger.kernel.org, linux-scsi@vger.kernel.org,
- netdev@vger.kernel.org, samba-technical@lists.samba.org,
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-nvme@lists.infradead.org, virtualization@lists.linux-foundation.org,
- linux-block@vger.kernel.org, linux-mm@kvack.org, target-devel@vger.kernel.org,
- io-uring@vger.kernel.org, linux-fsdevel@vger.kernel.org,
- ceph-devel@vger.kernel.org, Christoph Hellwig <hch@lst.de>,
- devel@lists.orangefs.org
+ linux-mm@kvack.org, Eric Dumazet <edumazet@google.com>,
+ target-devel@vger.kernel.org, Marc Dionne <marc.dionne@auristor.com>,
+ Christoph Hellwig <hch@lst.de>, io-uring@vger.kernel.org,
+ Mike Marshall <hubcap@omnibond.com>, linux-cifs@vger.kernel.org,
+ Sagi Grimberg <sagi@grimberg.me>, linux-scsi@vger.kernel.org,
+ Sergey Senozhatsky <senozhatsky@chromium.org>, linux-afs@lists.infradead.org,
+ Jakub Kicinski <kuba@kernel.org>, Ilya Dryomov <idryomov@gmail.com>,
+ Paolo Abeni <pabeni@redhat.com>, devel@lists.orangefs.org,
+ linux-block@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
+ ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>,
+ Jens Axboe <axboe@kernel.dk>, linux-nfs@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Minchan Kim <minchan@kernel.org>, Chuck Lever <chuck.lever@oracle.com>,
+ Anna Schumaker <anna@kernel.org>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -80,14 +92,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Jan 30, 2023 at 10:31:23AM +0000, David Howells wrote:
+On Mon, Jan 30, 2023 at 10:33:36AM +0000, David Howells wrote:
 > Christoph Hellwig <hch@lst.de> wrote:
 > 
-> > +		bvec_set_page(&bv, ZERO_PAGE(0), len, 0);
+> > +static inline void bvec_set_page(struct bio_vec *bv, struct page *page,
+> > +		unsigned int len, unsigned int offset)
 > 
-> Maybe bvec_set_zero_page()?
+> Could you swap len and offset around?  It reads better offset first.  You move
+> offset into the page and then do something with len bytes.
 
-Why?
+This matches bio_add_page and the order inside bio_vec itself.  willy
+wanted to switch it around for bio_add_folio but Jens didn't like it,
+so I'll stick to the current convention in this area as well.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
