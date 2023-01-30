@@ -1,68 +1,68 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C591A68087F
-	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 10:23:47 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D3034680887
+	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 10:23:49 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 5CDEC81947;
-	Mon, 30 Jan 2023 09:23:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5CDEC81947
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=i9AYlKAO
+	by smtp3.osuosl.org (Postfix) with ESMTP id 7620A60F4B;
+	Mon, 30 Jan 2023 09:23:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7620A60F4B
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=xOHsjob9
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id T6iIuwnngi2I; Mon, 30 Jan 2023 09:23:45 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 1FCD881882;
-	Mon, 30 Jan 2023 09:23:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1FCD881882
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id HCwGcy4ZLi2U; Mon, 30 Jan 2023 09:23:47 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 3032460F4A;
+	Mon, 30 Jan 2023 09:23:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3032460F4A
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B9D3C007C;
-	Mon, 30 Jan 2023 09:23:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0D261C007C;
+	Mon, 30 Jan 2023 09:23:47 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E5E2DC0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8E26BC007F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:23:41 +0000 (UTC)
+ Mon, 30 Jan 2023 09:23:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C0FFB817AB
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5A4A960F49
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:23:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C0FFB817AB
+ Mon, 30 Jan 2023 09:23:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5A4A960F49
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9c3TYcY--JJU
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fc0ByNMt49Ol
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:23:41 +0000 (UTC)
+ Mon, 30 Jan 2023 09:23:44 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0A914817EB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B7F0E60F46
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0A914817EB
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B7F0E60F46
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 09:23:39 +0000 (UTC)
+ Mon, 30 Jan 2023 09:23:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=p+yCA75hP3xTA4z0JqY98N90poOlsvGyo37k4Ap2woM=; b=i9AYlKAOZ43/SsWyYnAWPiWAuH
- wOnzstLTu84haohS93R+b3+/PFUtyvvWWjhOliCemb0tZtB/BvukLBGtdd3Qfn4AztHpMr5gPDiv9
- pykYVq16zioFYfJbJUqVapz/0j7Z9lIwlzAc3goAfS8/li6bXevI3m2oMuDgPE3R0eRL87akyah+L
- YP8S0UqhRwqk0u2hAa7aNsgUMmQdiU8H7GdpecxVRrtK2g0PJyMvxAcj0GHEEGiFPHkZlYN3Xcgrb
- Zg+hSn9E/U6Bt1mWTQkkWWRFPXtWhjWXN8hIQicH7S0OvZO+ZxtpZxRzB/wDZ4j0GKY2wY9iOJUXC
- VOKko6ag==;
+ bh=mraJ0dlvK0XwWYXGT0DcPLxhMI+ORe9CMkm05FoHT2s=; b=xOHsjob9PMRyKJ4ILlqtTtT2a1
+ BSDOhN5jc440njcpUba2nJJn4oWzHKlh5DYh9s2DBTQtSytoXVfg4egryfmJiUwA01qRqHZMyDpJp
+ k41/6F52tAyqKs8+FJOHLgI6idVUYxVWw63f6ikxbMTvsonHwp2rvU8xER17XbkQQKwuPuEorYONu
+ lBoFR+e+It6xCOx7b04q0jrJemUo+IGk3r0FJ+y3wfCceEClP5rP1JfvxWkw6DvlJRuxLS8JZSWNH
+ vd36DpSVg9AJW+qEayHR4sasRkMheP1AdnGvgFgKp2vugbGtPTxQCn4k0/VQoq9AZDuR9Q9Nfmonk
+ fGtYvRqg==;
 Received: from [2001:4bb8:19a:272a:732e:e417:47d7:2f4a] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pMQMj-002o2F-W8; Mon, 30 Jan 2023 09:22:18 +0000
+ id 1pMQMo-002o3h-6D; Mon, 30 Jan 2023 09:22:22 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 04/23] sd: factor out a sd_set_special_bvec helper
-Date: Mon, 30 Jan 2023 10:21:38 +0100
-Message-Id: <20230130092157.1759539-5-hch@lst.de>
+Subject: [PATCH 05/23] target: use bvec_set_page to initialize bvecs
+Date: Mon, 30 Jan 2023 10:21:39 +0100
+Message-Id: <20230130092157.1759539-6-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230130092157.1759539-1-hch@lst.de>
 References: <20230130092157.1759539-1-hch@lst.de>
@@ -104,91 +104,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add a helper for setting up the special_bvec instead of open coding it
-in three place, and use the new bvec_set_page helper to initialize
-special_vec.
+Use the bvec_set_page helper to initialize bvecs.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- drivers/scsi/sd.c | 36 +++++++++++++++++-------------------
- 1 file changed, 17 insertions(+), 19 deletions(-)
+ drivers/target/target_core_file.c | 18 ++++++------------
+ 1 file changed, 6 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
-index 47dafe6b8a66d1..277960decc104b 100644
---- a/drivers/scsi/sd.c
-+++ b/drivers/scsi/sd.c
-@@ -831,6 +831,19 @@ static void sd_config_discard(struct scsi_disk *sdkp, unsigned int mode)
- 	blk_queue_max_discard_sectors(q, max_blocks * (logical_block_size >> 9));
- }
+diff --git a/drivers/target/target_core_file.c b/drivers/target/target_core_file.c
+index fd584111da45c0..ce0e000b74fc39 100644
+--- a/drivers/target/target_core_file.c
++++ b/drivers/target/target_core_file.c
+@@ -281,10 +281,8 @@ fd_execute_rw_aio(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
+ 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
  
-+static void *sd_set_special_bvec(struct request *rq, unsigned int data_len)
-+{
-+	struct page *page;
-+
-+	page = mempool_alloc(sd_page_pool, GFP_ATOMIC);
-+	if (!page)
-+		return NULL;
-+	clear_highpage(page);
-+	bvec_set_page(&rq->special_vec, page, data_len, 0);
-+	rq->rq_flags |= RQF_SPECIAL_PAYLOAD;
-+	return bvec_virt(&rq->special_vec);
-+}
-+
- static blk_status_t sd_setup_unmap_cmnd(struct scsi_cmnd *cmd)
- {
- 	struct scsi_device *sdp = cmd->device;
-@@ -841,19 +854,14 @@ static blk_status_t sd_setup_unmap_cmnd(struct scsi_cmnd *cmd)
- 	unsigned int data_len = 24;
- 	char *buf;
+ 	for_each_sg(sgl, sg, sgl_nents, i) {
+-		aio_cmd->bvecs[i].bv_page = sg_page(sg);
+-		aio_cmd->bvecs[i].bv_len = sg->length;
+-		aio_cmd->bvecs[i].bv_offset = sg->offset;
+-
++		bvec_set_page(&aio_cmd->bvecs[i], sg_page(sg), sg->length,
++			      sg->offset);
+ 		len += sg->length;
+ 	}
  
--	rq->special_vec.bv_page = mempool_alloc(sd_page_pool, GFP_ATOMIC);
--	if (!rq->special_vec.bv_page)
-+	buf = sd_set_special_bvec(rq, data_len);
-+	if (!buf)
- 		return BLK_STS_RESOURCE;
--	clear_highpage(rq->special_vec.bv_page);
--	rq->special_vec.bv_offset = 0;
--	rq->special_vec.bv_len = data_len;
--	rq->rq_flags |= RQF_SPECIAL_PAYLOAD;
+@@ -329,10 +327,7 @@ static int fd_do_rw(struct se_cmd *cmd, struct file *fd,
+ 	}
  
- 	cmd->cmd_len = 10;
- 	cmd->cmnd[0] = UNMAP;
- 	cmd->cmnd[8] = 24;
+ 	for_each_sg(sgl, sg, sgl_nents, i) {
+-		bvec[i].bv_page = sg_page(sg);
+-		bvec[i].bv_len = sg->length;
+-		bvec[i].bv_offset = sg->offset;
+-
++		bvec_set_page(&bvec[i], sg_page(sg), sg->length, sg->offset);
+ 		len += sg->length;
+ 	}
  
--	buf = bvec_virt(&rq->special_vec);
- 	put_unaligned_be16(6 + 16, &buf[0]);
- 	put_unaligned_be16(16, &buf[2]);
- 	put_unaligned_be64(lba, &buf[8]);
-@@ -876,13 +884,8 @@ static blk_status_t sd_setup_write_same16_cmnd(struct scsi_cmnd *cmd,
- 	u32 nr_blocks = sectors_to_logical(sdp, blk_rq_sectors(rq));
- 	u32 data_len = sdp->sector_size;
+@@ -465,10 +460,9 @@ fd_execute_write_same(struct se_cmd *cmd)
+ 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
  
--	rq->special_vec.bv_page = mempool_alloc(sd_page_pool, GFP_ATOMIC);
--	if (!rq->special_vec.bv_page)
-+	if (!sd_set_special_bvec(rq, data_len))
- 		return BLK_STS_RESOURCE;
--	clear_highpage(rq->special_vec.bv_page);
--	rq->special_vec.bv_offset = 0;
--	rq->special_vec.bv_len = data_len;
--	rq->rq_flags |= RQF_SPECIAL_PAYLOAD;
+ 	for (i = 0; i < nolb; i++) {
+-		bvec[i].bv_page = sg_page(&cmd->t_data_sg[0]);
+-		bvec[i].bv_len = cmd->t_data_sg[0].length;
+-		bvec[i].bv_offset = cmd->t_data_sg[0].offset;
+-
++		bvec_set_page(&bvec[i], sg_page(&cmd->t_data_sg[0]),
++			      cmd->t_data_sg[0].length,
++			      cmd->t_data_sg[0].offset);
+ 		len += se_dev->dev_attrib.block_size;
+ 	}
  
- 	cmd->cmd_len = 16;
- 	cmd->cmnd[0] = WRITE_SAME_16;
-@@ -908,13 +911,8 @@ static blk_status_t sd_setup_write_same10_cmnd(struct scsi_cmnd *cmd,
- 	u32 nr_blocks = sectors_to_logical(sdp, blk_rq_sectors(rq));
- 	u32 data_len = sdp->sector_size;
- 
--	rq->special_vec.bv_page = mempool_alloc(sd_page_pool, GFP_ATOMIC);
--	if (!rq->special_vec.bv_page)
-+	if (!sd_set_special_bvec(rq, data_len))
- 		return BLK_STS_RESOURCE;
--	clear_highpage(rq->special_vec.bv_page);
--	rq->special_vec.bv_offset = 0;
--	rq->special_vec.bv_len = data_len;
--	rq->rq_flags |= RQF_SPECIAL_PAYLOAD;
- 
- 	cmd->cmd_len = 10;
- 	cmd->cmnd[0] = WRITE_SAME;
 -- 
 2.39.0
 
