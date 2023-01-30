@@ -1,106 +1,94 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id CB3C768074E
-	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 09:20:14 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8624368087B
+	for <lists.virtualization@lfdr.de>; Mon, 30 Jan 2023 10:23:42 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0C5C0400FC;
-	Mon, 30 Jan 2023 08:20:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0C5C0400FC
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TZzzvuPo
+	by smtp1.osuosl.org (Postfix) with ESMTP id 92DCD8176D;
+	Mon, 30 Jan 2023 09:23:40 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 92DCD8176D
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=gUt9fXuq
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OmEyOJih81Rp; Mon, 30 Jan 2023 08:20:12 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id uuFis8kh7y4a; Mon, 30 Jan 2023 09:23:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 8034C405FC;
-	Mon, 30 Jan 2023 08:20:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8034C405FC
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 4FD1A817BD;
+	Mon, 30 Jan 2023 09:23:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4FD1A817BD
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B1062C007C;
-	Mon, 30 Jan 2023 08:20:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4E10C0081;
+	Mon, 30 Jan 2023 09:23:37 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5A186C002B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3ABAAC0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 08:20:09 +0000 (UTC)
+ Mon, 30 Jan 2023 09:23:35 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2111960DC2
+ by smtp4.osuosl.org (Postfix) with ESMTP id F2EB641716
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 08:20:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2111960DC2
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=TZzzvuPo
+ Mon, 30 Jan 2023 09:23:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F2EB641716
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=gUt9fXuq
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gouPenI0Xr7n
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VMVFvKi3aerV
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 08:20:07 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C0DE6059B
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0C0DE6059B
+ Mon, 30 Jan 2023 09:23:33 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9D1EB41715
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 9D1EB41715
  for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 08:20:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1675066805;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=KA9Lw68dRWzicu3l/X+LGVGA8EUuuBIveL8Pc6YjBXM=;
- b=TZzzvuPooJdL4CdMnj/O5qeZN7/A3BVJxUpMS/yHvg1lr7956QSi+DAHFDPeJs3ZUZCKV5
- OFYGbwCOtEOXACgM1/lQk1b/PL9WkZY2LLy8+ZkvxLvZUxEIzxO9vmmIhVykqpjnLj+B0S
- nseHOjnbcEIV895PCdvQlrQ6RA02M0Y=
-Received: from mail-oi1-f199.google.com (mail-oi1-f199.google.com
- [209.85.167.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
- us-mta-364-L94Ed6J3PraiU1N1yhymOw-1; Mon, 30 Jan 2023 03:20:03 -0500
-X-MC-Unique: L94Ed6J3PraiU1N1yhymOw-1
-Received: by mail-oi1-f199.google.com with SMTP id
- o206-20020acad7d7000000b00375c9d6b919so4381456oig.4
- for <virtualization@lists.linux-foundation.org>;
- Mon, 30 Jan 2023 00:20:03 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KA9Lw68dRWzicu3l/X+LGVGA8EUuuBIveL8Pc6YjBXM=;
- b=gBlc3v3LPH+1qnqEhbOb6/EP5bjK5li6WyuIsMPiKguQ/Mg5XAfuPJYWZaVMoRG9ou
- NRGWyhI/K26DxpbF3r4KvtbQRqfxQLEufIic1rhHYh0CabKBTMKD0sjd7Au/PX5bkPgP
- 76dHKqSjFs2gT69L+l75Lqz3fjSg1fWvnSkqyCyQ/Tv18zPmDoyGAT29QQ1ZrKHlyPou
- t4OYKOw9xlseJU2QtaItePEIErbevb2FfsU0+Tf7mwJ85DEsdvJUekJ81LCOVAuKa55n
- Z4arM61UfJl6NiYBatcN6g++TswFOv8oBO40/qp30PF9W4LxDEwpfmXxVAnHQk+EysT0
- AxIA==
-X-Gm-Message-State: AO0yUKV9B1D6JxNHNihQRUvKfJyQmNPVgKoSCWPBzmbkj8X1DhWWi9cA
- 6+MDATwKyzVnC4yN0iwyscdJw6SGP/cTXqYTRdc3HzPHD71ShADL4IKfp+yuFM0pMBzcQpyWJwy
- garWaYsN5O0v5vV7Y1ganU0FxDv8ejEXVhMtlcVyel7hG981lHTprxALPBA==
-X-Received: by 2002:a05:6870:959e:b0:163:9cea:eea7 with SMTP id
- k30-20020a056870959e00b001639ceaeea7mr301707oao.35.1675066802582; 
- Mon, 30 Jan 2023 00:20:02 -0800 (PST)
-X-Google-Smtp-Source: AK7set/9ErdoIRMr9bqJMQEjl+qMRL6ffKizdUoBUw3PboDeaxE8AwVvdcoDOIGYB8BspgzDlNRptoFFg8XzqSghoPA=
-X-Received: by 2002:a05:6870:959e:b0:163:9cea:eea7 with SMTP id
- k30-20020a056870959e00b001639ceaeea7mr301703oao.35.1675066802324; Mon, 30 Jan
- 2023 00:20:02 -0800 (PST)
+ Mon, 30 Jan 2023 09:23:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=lCuBrdiApHtnAzdlL9jd8/orKVtuLY/i0Sero01PH48=; b=gUt9fXuq6v7ElJkjGIu4Bt2k6I
+ aie9JrU1FF7iS8hNoPZplHZMIg/mjCy9+CuXAh/U/DNgLjS6V1ufgxJp2NQMex5tHZQGfnrKiKRKo
+ caqpxM1HRuxRxX61XnnyxOSlZ2/Jq47eap8gN/lH6+L4ZPbDi3w4YLBF5OHjyJWW13xcFRDWCqAUZ
+ NKpMf5yhHzm/uS9x384Srna47NYmLZm+gDq7sZpO/NDG+BHvojVyEMNCK01EInd7TUHZ7+Fo+Bd26
+ ywRu7rwlcWBFPjfGdWJeRjwhamdKyIPJEjKoaPO4rYQ0QXObm0HMjgFoMXTg096Bm2LCYjvYSlGAx
+ FW6FwsxA==;
+Received: from [2001:4bb8:19a:272a:732e:e417:47d7:2f4a] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pMQMS-002nyI-W6; Mon, 30 Jan 2023 09:22:01 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Subject: add bvec initialization helpers
+Date: Mon, 30 Jan 2023 10:21:34 +0100
+Message-Id: <20230130092157.1759539-1-hch@lst.de>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-References: <bc4136ed-abe0-dcc2-4dd9-31dcf3d8c179@nvidia.com>
-In-Reply-To: <bc4136ed-abe0-dcc2-4dd9-31dcf3d8c179@nvidia.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 30 Jan 2023 16:19:51 +0800
-Message-ID: <CACGkMEuTz4RVf0CA9y7sf7K3N1FbKrD6A=xC6JL7N+hzX5RLjw@mail.gmail.com>
-Subject: Re: RFC: VDPA Interrupt vector distribution
-To: Eli Cohen <elic@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: "mst@redhat.com" <mst@redhat.com>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ linux-nvme@lists.infradead.org, virtualization@lists.linux-foundation.org,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ Eric Dumazet <edumazet@google.com>, target-devel@vger.kernel.org,
+ Marc Dionne <marc.dionne@auristor.com>, linux-afs@lists.infradead.org,
+ Mike Marshall <hubcap@omnibond.com>, linux-cifs@vger.kernel.org,
+ Sagi Grimberg <sagi@grimberg.me>, linux-scsi@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>, io-uring@vger.kernel.org,
+ Jakub Kicinski <kuba@kernel.org>, Ilya Dryomov <idryomov@gmail.com>,
+ Paolo Abeni <pabeni@redhat.com>, devel@lists.orangefs.org,
+ linux-block@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
+ ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>, linux-nfs@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,65 +105,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Eli:
+Hi all,
 
-On Mon, Jan 23, 2023 at 1:59 PM Eli Cohen <elic@nvidia.com> wrote:
->
-> VDPA allows hardware drivers the propagate interrupts from the hardware
-> directly to the vCPU used by the guest. In a typical implementation, the
-> hardware driver will assign the interrupt vectors to the virtqueues and report
-> this information back through the get_vq_irq() callback defined in
-> struct vdpa_config_ops.
->
-> Interrupt vectors could be a scarce resource and may be limited. For such
-> cases, we can opt the administrator, through the vdpa tool, to set the policy
-> defining how to distribute the available vectors amongst the data virtqueues.
->
-> The following policies are proposed:
->
-> 1. First comes first served. Assign a vector to each data virtqueue by the
->     virtqueue index. Virtqueues which could not be assigned a dedicated vector
->     would use the hardware driver to propagate interrupts using the available
->     callback mechanism.
->
->     vdpa dev add name vdpa0 mgmtdev pci/0000:86:00.2 int=all
->
->     This is the default mode and works even if "int=all" was not specified.
->
-> 2. Use round robin distribution so virtqueues could share vectors.
->     vdpa dev add name vdpa0 mgmtdev pci/0000:86:00.2 int=all intmode=share
->
-> 3. Assign vectors to RX virtqueues only.
-> 3.1 Do not share vectors
->      vdpa dev add name vdpa0 mgmtdev pci/0000:86:00.2 int=rx
-> 3.2 Share vectors
->      vdpa dev add name vdpa0 mgmtdev pci/0000:86:00.2 int=rx intmode=share
->
-> 4. Assign vectors to TX virtqueues only. Can share or not, like rx.
-> 5. Fail device creation if number of vectors cannot be fulfilled.
->     vdpa dev add name vdpa0 mgmtdev pci/0000:86:00.2 max_vq_pairs 8 int=rx intnum=8
+this series adds the helpers to initalize a bvec.  These remove open coding of
+bvec internals and help with experimenting with other representations like
+a phys_addr_t instead of page + offset.
 
-I wonder:
-
-1) how the administrator can know if there's sufficient resources for
-one of the above policies.
-2) how does the administrator know which policy is the best assuming
-the resources are sufficient? (E.g vectors to RX only or vectors to TX
-only)
-
-If it requires a vendor specific way or knowledge, I believe it's
-better to code them in:
-
-1) the vDPA parent or
-2) underlayer management tool or drivers
-
-Thanks
-
->
->
->
->
-
+Diffstat:
+ block/bio-integrity.c             |    7 ------
+ block/bio.c                       |   12 +----------
+ drivers/block/rbd.c               |    7 ++----
+ drivers/block/virtio_blk.c        |    4 ---
+ drivers/block/zram/zram_drv.c     |   15 +++-----------
+ drivers/nvme/host/core.c          |    4 ---
+ drivers/nvme/target/io-cmd-file.c |   10 +--------
+ drivers/nvme/target/tcp.c         |    5 +---
+ drivers/scsi/sd.c                 |   36 ++++++++++++++++------------------
+ drivers/target/target_core_file.c |   18 +++++------------
+ drivers/vhost/vringh.c            |    5 +---
+ fs/afs/write.c                    |    8 ++-----
+ fs/ceph/file.c                    |   10 ++++-----
+ fs/cifs/connect.c                 |    5 ++--
+ fs/cifs/fscache.c                 |   16 +++++----------
+ fs/cifs/misc.c                    |    5 +---
+ fs/cifs/smb2ops.c                 |    6 ++---
+ fs/coredump.c                     |    7 +-----
+ fs/nfs/fscache.c                  |   16 +++++----------
+ fs/orangefs/inode.c               |   22 ++++++--------------
+ fs/splice.c                       |    5 +---
+ include/linux/bvec.h              |   40 ++++++++++++++++++++++++++++++++++++++
+ io_uring/rsrc.c                   |    4 ---
+ mm/page_io.c                      |    8 +------
+ net/ceph/messenger_v1.c           |    7 +-----
+ net/ceph/messenger_v2.c           |   28 ++++++++++----------------
+ net/rxrpc/rxperf.c                |    8 ++-----
+ net/sunrpc/svcsock.c              |    7 +-----
+ net/sunrpc/xdr.c                  |    5 +---
+ 29 files changed, 143 insertions(+), 187 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
