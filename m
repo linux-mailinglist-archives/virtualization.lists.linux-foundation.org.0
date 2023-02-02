@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F49A687B1F
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:33 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C2B4F687B1E
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 22E1C402C5;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 3024540C46;
 	Thu,  2 Feb 2023 11:01:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 22E1C402C5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3024540C46
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZUjjE0Ti8fNY; Thu,  2 Feb 2023 11:01:28 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id POI57Gg4y83O; Thu,  2 Feb 2023 11:01:28 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 9DC80418E3;
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D94B940C0D;
 	Thu,  2 Feb 2023 11:01:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9DC80418E3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D94B940C0D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6BB06C0081;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 98C9BC0085;
 	Thu,  2 Feb 2023 11:01:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CD6FEC002B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D825EC0032
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Feb 2023 11:01:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 95803403C8
+ by smtp1.osuosl.org (Postfix) with ESMTP id A2CF981293
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Feb 2023 11:01:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 95803403C8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A2CF981293
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id datspSUIAFaY
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Ymi-C87acjK9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 11:01:26 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7084E81F25
+Received: from out30-111.freemail.mail.aliyun.com
+ (out30-111.freemail.mail.aliyun.com [115.124.30.111])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7084E81F25
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B855E4046D
-Received: from out30-101.freemail.mail.aliyun.com
- (out30-101.freemail.mail.aliyun.com [115.124.30.101])
- by smtp4.osuosl.org (Postfix) with ESMTPS id B855E4046D
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:24 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VakpyEf_1675335679; 
+ TI=SMTPD_---0VaktKQe_1675335680; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VakpyEf_1675335679) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:20 +0800
+ fp:SMTPD_---0VaktKQe_1675335680) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:21 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 18/33] virtio_net: receive_merageable() use
- virtnet_xdp_handler()
-Date: Thu,  2 Feb 2023 19:00:43 +0800
-Message-Id: <20230202110058.130695-19-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 19/33] virtio_net: introduce virtnet_tx_reset()
+Date: Thu,  2 Feb 2023 19:00:44 +0800
+Message-Id: <20230202110058.130695-20-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -91,183 +90,75 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-receive_merageable() use virtnet_xdp_handler()
+Introduce virtnet_tx_reset() to release the buffers inside virtio ring.
 
-Meanwhile, support Multi Buffer XDP.
+This is needed for xsk disable. When disable xsk, we need to relese the
+buffer from xsk, so this function is needed.
+
+This patch reuse the virtnet_tx_resize.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/main.c | 88 +++++++++++++++------------------------
- 1 file changed, 33 insertions(+), 55 deletions(-)
+ drivers/net/virtio/main.c       | 21 ++++++++++++++++++---
+ drivers/net/virtio/virtio_net.h |  1 +
+ 2 files changed, 19 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index d7a856bd8862..fb82035a0b7f 100644
+index fb82035a0b7f..049a3bb9d88d 100644
 --- a/drivers/net/virtio/main.c
 +++ b/drivers/net/virtio/main.c
-@@ -483,8 +483,10 @@ int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 			unsigned int *xdp_xmit,
- 			struct virtnet_rq_stats *stats)
+@@ -1806,8 +1806,8 @@ static int virtnet_rx_resize(struct virtnet_info *vi,
+ 	return err;
+ }
+ 
+-static int virtnet_tx_resize(struct virtnet_info *vi,
+-			     struct send_queue *sq, u32 ring_num)
++static int __virtnet_tx_reset(struct virtnet_info *vi,
++			      struct send_queue *sq, u32 ring_num)
  {
-+	struct skb_shared_info *shinfo;
- 	struct xdp_frame *xdpf;
--	int err;
-+	struct page *xdp_page;
-+	int err, i;
- 	u32 act;
+ 	bool running = netif_running(vi->dev);
+ 	struct netdev_queue *txq;
+@@ -1833,7 +1833,11 @@ static int virtnet_tx_resize(struct virtnet_info *vi,
  
- 	act = bpf_prog_run_xdp(xdp_prog, xdp);
-@@ -527,6 +529,13 @@ int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 		trace_xdp_exception(dev, xdp_prog, act);
- 		fallthrough;
- 	case XDP_DROP:
-+		if (xdp_buff_has_frags(xdp)) {
-+			shinfo = xdp_get_shared_info_from_buff(xdp);
-+			for (i = 0; i < shinfo->nr_frags; i++) {
-+				xdp_page = skb_frag_page(&shinfo->frags[i]);
-+				put_page(xdp_page);
-+			}
-+		}
- 		return VIRTNET_XDP_RES_DROP;
- 	}
- }
-@@ -809,7 +818,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 	unsigned int xdp_frags_truesz = 0;
- 	struct page *page;
- 	skb_frag_t *frag;
--	int offset;
-+	int offset, i;
- 	void *ctx;
+ 	__netif_tx_unlock_bh(txq);
  
- 	xdp_init_buff(xdp, frame_sz, &rq->xdp_rxq);
-@@ -842,7 +851,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 				 dev->name, *num_buf,
- 				 virtio16_to_cpu(vi->vdev, hdr->num_buffers));
- 			dev->stats.rx_length_errors++;
--			return -EINVAL;
-+			goto err;
- 		}
- 
- 		stats->bytes += len;
-@@ -861,7 +870,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 			pr_debug("%s: rx error: len %u exceeds truesize %lu\n",
- 				 dev->name, len, (unsigned long)(truesize - room));
- 			dev->stats.rx_length_errors++;
--			return -EINVAL;
-+			goto err;
- 		}
- 
- 		frag = &shinfo->frags[shinfo->nr_frags++];
-@@ -876,6 +885,14 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 
- 	*xdp_frags_truesize = xdp_frags_truesz;
- 	return 0;
+-	err = virtqueue_resize(sq->vq, ring_num, virtnet_sq_free_unused_buf);
++	if (ring_num)
++		err = virtqueue_resize(sq->vq, ring_num, virtnet_sq_free_unused_buf);
++	else
++		err = virtqueue_reset(sq->vq, virtnet_sq_free_unused_buf);
 +
-+err:
-+	for (i = 0; i < shinfo->nr_frags; i++) {
-+		page = skb_frag_page(&shinfo->frags[i]);
-+		put_page(page);
-+	}
-+
-+	return -EINVAL;
+ 	if (err)
+ 		netdev_err(vi->dev, "resize tx fail: tx queue index: %d err: %d\n", qindex, err);
+ 
+@@ -1847,6 +1851,17 @@ static int virtnet_tx_resize(struct virtnet_info *vi,
+ 	return err;
  }
  
- static struct sk_buff *receive_mergeable(struct net_device *dev,
-@@ -919,13 +936,10 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 	xdp_prog = rcu_dereference(rq->xdp_prog);
- 	if (xdp_prog) {
- 		unsigned int xdp_frags_truesz = 0;
--		struct skb_shared_info *shinfo;
--		struct xdp_frame *xdpf;
- 		struct page *xdp_page;
- 		struct xdp_buff xdp;
- 		void *data;
- 		u32 act;
--		int i;
- 
- 		/* Transient failure which in theory could occur if
- 		 * in-flight packets from before XDP was enabled reach
-@@ -983,69 +997,33 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 		err = virtnet_build_xdp_buff_mrg(dev, vi, rq, &xdp, data, len, frame_sz,
- 						 &num_buf, &xdp_frags_truesz, stats);
- 		if (unlikely(err))
--			goto err_xdp_frags;
-+			goto err_xdp;
- 
--		act = bpf_prog_run_xdp(xdp_prog, &xdp);
--		stats->xdp_packets++;
-+		act = virtnet_xdp_handler(xdp_prog, &xdp, dev, xdp_xmit, stats);
- 
- 		switch (act) {
--		case XDP_PASS:
-+		case VIRTNET_XDP_RES_PASS:
- 			if (unlikely(xdp_page != page))
- 				put_page(page);
++static int virtnet_tx_resize(struct virtnet_info *vi,
++			     struct send_queue *sq, u32 ring_num)
++{
++	return __virtnet_tx_reset(vi, sq, ring_num);
++}
 +
- 			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
- 			rcu_read_unlock();
- 			return head_skb;
--		case XDP_TX:
--			stats->xdp_tx++;
--			xdpf = xdp_convert_buff_to_frame(&xdp);
--			if (unlikely(!xdpf)) {
--				netdev_dbg(dev, "convert buff to frame failed for xdp\n");
--				goto err_xdp_frags;
--			}
--			err = virtnet_xdp_xmit(dev, 1, &xdpf, 0);
--			if (unlikely(!err)) {
--				xdp_return_frame_rx_napi(xdpf);
--			} else if (unlikely(err < 0)) {
--				trace_xdp_exception(vi->dev, xdp_prog, act);
--				goto err_xdp_frags;
--			}
--			*xdp_xmit |= VIRTIO_XDP_TX;
--			if (unlikely(xdp_page != page))
--				put_page(page);
--			rcu_read_unlock();
--			goto xdp_xmit;
--		case XDP_REDIRECT:
--			stats->xdp_redirects++;
--			err = xdp_do_redirect(dev, &xdp, xdp_prog);
--			if (err)
--				goto err_xdp_frags;
--			*xdp_xmit |= VIRTIO_XDP_REDIR;
++int virtnet_tx_reset(struct virtnet_info *vi, struct send_queue *sq)
++{
++	return __virtnet_tx_reset(vi, sq, 0);
++}
 +
-+		case VIRTNET_XDP_RES_CONSUMED:
- 			if (unlikely(xdp_page != page))
- 				put_page(page);
-+
- 			rcu_read_unlock();
- 			goto xdp_xmit;
--		default:
--			bpf_warn_invalid_xdp_action(vi->dev, xdp_prog, act);
--			fallthrough;
--		case XDP_ABORTED:
--			trace_xdp_exception(vi->dev, xdp_prog, act);
--			fallthrough;
--		case XDP_DROP:
--			goto err_xdp_frags;
--		}
--err_xdp_frags:
--		if (unlikely(xdp_page != page))
--			__free_pages(xdp_page, 0);
- 
--		if (xdp_buff_has_frags(&xdp)) {
--			shinfo = xdp_get_shared_info_from_buff(&xdp);
--			for (i = 0; i < shinfo->nr_frags; i++) {
--				xdp_page = skb_frag_page(&shinfo->frags[i]);
-+		case VIRTNET_XDP_RES_DROP:
-+			if (unlikely(xdp_page != page))
- 				put_page(xdp_page);
--			}
--		}
- 
--		goto err_xdp;
-+			rcu_read_unlock();
-+			goto err_xdp;
-+		}
- 	}
- 	rcu_read_unlock();
- 
+ /*
+  * Send command via the control virtqueue and check status.  Commands
+  * supported by the hypervisor, as indicated by feature bits, should
+diff --git a/drivers/net/virtio/virtio_net.h b/drivers/net/virtio/virtio_net.h
+index af3e7e817f9e..b46f083a630a 100644
+--- a/drivers/net/virtio/virtio_net.h
++++ b/drivers/net/virtio/virtio_net.h
+@@ -273,4 +273,5 @@ int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
+ 			struct net_device *dev,
+ 			unsigned int *xdp_xmit,
+ 			struct virtnet_rq_stats *stats);
++int virtnet_tx_reset(struct virtnet_info *vi, struct send_queue *sq);
+ #endif
 -- 
 2.32.0.3.g01195cf9f
 
