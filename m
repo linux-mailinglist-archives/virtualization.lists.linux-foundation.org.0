@@ -1,64 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3DAB3687C26
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:26:27 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DE54687C92
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:45:52 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id B691D40C5E;
-	Thu,  2 Feb 2023 11:26:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B691D40C5E
+	by smtp1.osuosl.org (Postfix) with ESMTP id D0FF081EC4;
+	Thu,  2 Feb 2023 11:45:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D0FF081EC4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8P46gqrcs-cb; Thu,  2 Feb 2023 11:26:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 4C78140C73;
-	Thu,  2 Feb 2023 11:26:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4C78140C73
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id clvA2_Nc_tsz; Thu,  2 Feb 2023 11:45:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 5E4B581F50;
+	Thu,  2 Feb 2023 11:45:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5E4B581F50
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 81010C007B;
-	Thu,  2 Feb 2023 11:26:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A4660C0078;
+	Thu,  2 Feb 2023 11:45:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ADEA3C002B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D38DBC002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:26:21 +0000 (UTC)
+ Thu,  2 Feb 2023 11:45:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 789CA41A3A
+ by smtp2.osuosl.org (Postfix) with ESMTP id A1C6F40A14
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:26:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 789CA41A3A
+ Thu,  2 Feb 2023 11:45:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A1C6F40A14
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 68GDXdVVHyn1
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8MDORCbBS1Gc
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:26:20 +0000 (UTC)
+ Thu,  2 Feb 2023 11:45:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CE0DF41920
-Received: from out30-99.freemail.mail.aliyun.com
- (out30-99.freemail.mail.aliyun.com [115.124.30.99])
- by smtp4.osuosl.org (Postfix) with ESMTPS id CE0DF41920
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3EF1440C46
+Received: from out30-112.freemail.mail.aliyun.com
+ (out30-112.freemail.mail.aliyun.com [115.124.30.112])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3EF1440C46
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:26:19 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ Thu,  2 Feb 2023 11:45:44 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0Vaksi9Q_1675337173; 
+ TI=SMTPD_---0VaksnL5_1675338335; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vaksi9Q_1675337173) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:26:14 +0800
-Message-ID: <1675336267.0156906-2-xuanzhuo@linux.alibaba.com>
+ fp:SMTPD_---0VaksnL5_1675338335) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:45:36 +0800
+Message-ID: <1675338247.0108669-1-xuanzhuo@linux.alibaba.com>
 Subject: Re: [PATCH 00/33] virtio-net: support AF_XDP zero copy
-Date: Thu, 2 Feb 2023 19:11:07 +0800
+Date: Thu, 2 Feb 2023 19:44:07 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
  <20230202060757-mutt-send-email-mst@kernel.org>
 In-Reply-To: <20230202060757-mutt-send-email-mst@kernel.org>
-Cc: Petr Machata <petrm@nvidia.com>, Menglong Dong <imagedong@tencent.com>, Maciej Fijalkowski <maciej.fijalkowski@intel.com>, Jesper Dangaard Brouer <hawk@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>, Björn Töpel <bjorn@kernel.org>, Alexei Starovoitov <ast@kernel.org>, Eric Dumazet <edumazet@google.com>, Kuniyuki Iwashima <kuniyu@amazon.com>, Sebastian Andrzej Siewior <bigeasy@linutronix.de>, Jonathan Lemon <jonathan.lemon@gmail.com>, Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>, virtualization@lists.linux-foundation.org, "David S. Miller" <davem@davemloft.net>, Magnus Karlsson <magnus.karlsson@intel.com>
+Cc: Petr Machata <petrm@nvidia.com>, Menglong Dong <imagedong@tencent.com>,
+ Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
+ John Fastabend <john.fastabend@gmail.com>,
+ =?utf-8?b?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
+ Alexei Starovoitov <ast@kernel.org>, Eric Dumazet <edumazet@google.com>,
+ Kuniyuki Iwashima <kuniyu@amazon.com>,
+ Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+ Jonathan Lemon <jonathan.lemon@gmail.com>, Jakub Kicinski <kuba@kernel.org>,
+ bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+ virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>,
+ Magnus Karlsson <magnus.karlsson@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -84,6 +97,7 @@ On Thu, 2 Feb 2023 06:08:30 -0500, "Michael S. Tsirkin" <mst@redhat.com> wrote:
 >
 > Great! Any numbers to share?
 
+RESEND. Last mail has some email format error.
 
 ENV: Qemu with vhost.
 
@@ -94,10 +108,10 @@ xmit by xsk:          100%   |   30%         |   33%            | 1192064
 recv by sockperf:     100%   |   68%         |   100%           |  692288
 recv by xsk:          100%   |   33%         |   43%            |  771670
 
-
 Thanks.
-                             |               |                  |
->                                                               |
+
+
+>
 > > mlx5 and intel ixgbe already support
 > > this feature, This patch set allows virtio-net to support xsk's zerocopy xmit
 > > feature.
