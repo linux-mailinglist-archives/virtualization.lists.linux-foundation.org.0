@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A0D2687B12
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:23 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2C83A687B0C
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:18 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id D0B0040C41;
-	Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D0B0040C41
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0152E41837;
+	Thu,  2 Feb 2023 11:01:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0152E41837
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1PfeNOTU4JCe; Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id bIC1Dqw9g3GJ; Thu,  2 Feb 2023 11:01:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 5241840C47;
-	Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5241840C47
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 2554341B65;
+	Thu,  2 Feb 2023 11:01:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2554341B65
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0AFC1C0084;
-	Thu,  2 Feb 2023 11:01:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 44F8CC0084;
+	Thu,  2 Feb 2023 11:01:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CBDEC002B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 15CB5C002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:15 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3848540C05
+ by smtp2.osuosl.org (Postfix) with ESMTP id D8BDB40C0A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3848540C05
+ Thu,  2 Feb 2023 11:01:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D8BDB40C0A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yMcg1yVlRZdq
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:13 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 44D6C40C07
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 44D6C40C07
+ with ESMTP id rFX9tEpvNz7g
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Feb 2023 11:01:11 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R591e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B08BB40C07
+Received: from out30-97.freemail.mail.aliyun.com
+ (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id B08BB40C07
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 11:01:10 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VaksaTH_1675335662; 
+ TI=SMTPD_---0Vakpy9T_1675335664; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VaksaTH_1675335662) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:03 +0800
+ fp:SMTPD_---0Vakpy9T_1675335664) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:04 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 03/33] virtio_ring: packed: virtqueue_add_packed() support
- premapped
-Date: Thu,  2 Feb 2023 19:00:28 +0800
-Message-Id: <20230202110058.130695-4-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 04/33] virtio_ring: introduce virtqueue_add_outbuf_premapped()
+Date: Thu,  2 Feb 2023 19:00:29 +0800
+Message-Id: <20230202110058.130695-5-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -91,223 +90,66 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtqueue_add_packed() only supports virtual addresses, dma is completed
-in virtqueue_add_packed().
-
-In some scenarios (such as the AF_XDP scenario), the memory is allocated
-and DMA is completed in advance, so it is necessary for us to support
-passing the DMA address to virtqueue_add_packed().
-
-Record this information in desc_state, we can skip unmap based on this
-when executing dma unmap.
+Introduce virtqueue_add_outbuf_premapped() to submit premapped sgs.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 71 +++++++++++++++++++++++++-----------
- 1 file changed, 50 insertions(+), 21 deletions(-)
+ drivers/virtio/virtio_ring.c | 25 +++++++++++++++++++++++++
+ include/linux/virtio.h       |  5 +++++
+ 2 files changed, 30 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index ec622403cbd5..25027a35fcf8 100644
+index 25027a35fcf8..6bfa5193b0d8 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -78,6 +78,7 @@ struct vring_desc_state_packed {
- 	struct vring_packed_desc *indir_desc; /* Indirect descriptor, if any. */
- 	u16 num;			/* Descriptor list length. */
- 	u16 last;			/* The last desc state in a list. */
-+	bool premapped;
- };
- 
- struct vring_desc_extra {
-@@ -1200,7 +1201,8 @@ static inline u16 packed_last_used(u16 last_used_idx)
+@@ -2213,6 +2213,31 @@ int virtqueue_add_outbuf(struct virtqueue *vq,
  }
+ EXPORT_SYMBOL_GPL(virtqueue_add_outbuf);
  
- static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
--				     struct vring_desc_extra *extra)
-+				     struct vring_desc_extra *extra,
-+				     bool premapped)
- {
- 	u16 flags;
- 
-@@ -1215,6 +1217,9 @@ static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
- 				 (flags & VRING_DESC_F_WRITE) ?
- 				 DMA_FROM_DEVICE : DMA_TO_DEVICE);
- 	} else {
-+		if (premapped)
-+			return;
++/**
++ * virtqueue_add_outbuf_premapped - expose output buffers to other end
++ * @vq: the struct virtqueue we're talking about.
++ * @sg: scatterlist (must be well-formed and terminated!)
++ * @num: the number of entries in @sg readable by other side
++ * @data: the token identifying the buffer.
++ * @gfp: how to do memory allocations (if necessary).
++ *
++ * Caller must ensure we don't call this with other virtqueue operations
++ * at the same time (except where noted).
++ *
++ * It is required that all addrs have completed DMA operations. And use
++ * sg->dma_address, sg->length to pass addr and length.
++ *
++ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
++ */
++int virtqueue_add_outbuf_premapped(struct virtqueue *vq,
++				   struct scatterlist *sg, unsigned int num,
++				   void *data,
++				   gfp_t gfp)
++{
++	return virtqueue_add(vq, &sg, num, 1, 0, data, NULL, true, gfp);
++}
++EXPORT_SYMBOL_GPL(virtqueue_add_outbuf_premapped);
 +
- 		dma_unmap_page(vring_dma_dev(vq),
- 			       extra->addr, extra->len,
- 			       (flags & VRING_DESC_F_WRITE) ?
-@@ -1262,7 +1267,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 					 unsigned int out_sgs,
- 					 unsigned int in_sgs,
- 					 void *data,
--					 gfp_t gfp)
-+					 gfp_t gfp,
-+					 bool premapped)
- {
- 	struct vring_packed_desc *desc;
- 	struct scatterlist *sg;
-@@ -1288,10 +1294,15 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ /**
+  * virtqueue_add_inbuf - expose input buffers to other end
+  * @vq: the struct virtqueue we're talking about.
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index dcab9c7e8784..d8b472a7dcae 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -43,6 +43,11 @@ int virtqueue_add_outbuf(struct virtqueue *vq,
+ 			 void *data,
+ 			 gfp_t gfp);
  
- 	for (n = 0; n < out_sgs + in_sgs; n++) {
- 		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
--			addr = vring_map_one_sg(vq, sg, n < out_sgs ?
--					DMA_TO_DEVICE : DMA_FROM_DEVICE);
--			if (vring_mapping_error(vq, addr))
--				goto unmap_release;
-+			if (premapped) {
-+				addr = sg_dma_address(sg);
++int virtqueue_add_outbuf_premapped(struct virtqueue *vq,
++				   struct scatterlist *sg, unsigned int num,
++				   void *data,
++				   gfp_t gfp);
 +
-+			} else {
-+				addr = vring_map_one_sg(vq, sg, n < out_sgs ?
-+							DMA_TO_DEVICE : DMA_FROM_DEVICE);
-+				if (vring_mapping_error(vq, addr))
-+					goto unmap_release;
-+			}
- 
- 			desc[i].flags = cpu_to_le16(n < out_sgs ?
- 						0 : VRING_DESC_F_WRITE);
-@@ -1350,6 +1361,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 	vq->packed.desc_state[id].data = data;
- 	vq->packed.desc_state[id].indir_desc = desc;
- 	vq->packed.desc_state[id].last = id;
-+	vq->packed.desc_state[id].premapped = premapped;
- 
- 	vq->num_added += 1;
- 
-@@ -1359,10 +1371,11 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
- 	return 0;
- 
- unmap_release:
--	err_idx = i;
--
--	for (i = 0; i < err_idx; i++)
--		vring_unmap_desc_packed(vq, &desc[i]);
-+	if (!premapped) {
-+		err_idx = i;
-+		for (i = 0; i < err_idx; i++)
-+			vring_unmap_desc_packed(vq, &desc[i]);
-+	}
- 
- 	kfree(desc);
- 
-@@ -1377,6 +1390,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 				       unsigned int in_sgs,
- 				       void *data,
- 				       void *ctx,
-+				       bool premapped,
- 				       gfp_t gfp)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
-@@ -1403,7 +1417,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 
- 	if (virtqueue_use_indirect(vq, total_sg)) {
- 		err = virtqueue_add_indirect_packed(vq, sgs, total_sg, out_sgs,
--						    in_sgs, data, gfp);
-+						    in_sgs, data, gfp, premapped);
- 		if (err != -ENOMEM) {
- 			END_USE(vq);
- 			return err;
-@@ -1435,10 +1449,17 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	c = 0;
- 	for (n = 0; n < out_sgs + in_sgs; n++) {
- 		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
--			dma_addr_t addr = vring_map_one_sg(vq, sg, n < out_sgs ?
--					DMA_TO_DEVICE : DMA_FROM_DEVICE);
--			if (vring_mapping_error(vq, addr))
--				goto unmap_release;
-+			dma_addr_t addr;
-+
-+			if (premapped) {
-+				addr = sg_dma_address(sg);
-+
-+			} else {
-+				addr = vring_map_one_sg(vq, sg, n < out_sgs ?
-+							DMA_TO_DEVICE : DMA_FROM_DEVICE);
-+				if (vring_mapping_error(vq, addr))
-+					goto unmap_release;
-+			}
- 
- 			flags = cpu_to_le16(vq->packed.avail_used_flags |
- 				    (++c == total_sg ? 0 : VRING_DESC_F_NEXT) |
-@@ -1485,6 +1506,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	vq->packed.desc_state[id].data = data;
- 	vq->packed.desc_state[id].indir_desc = ctx;
- 	vq->packed.desc_state[id].last = prev;
-+	vq->packed.desc_state[id].premapped = premapped;
- 
- 	/*
- 	 * A driver MUST NOT make the first descriptor in the list
-@@ -1501,22 +1523,26 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	return 0;
- 
- unmap_release:
-+	vq->packed.avail_used_flags = avail_used_flags;
-+
-+	if (premapped)
-+		goto unmap_free;
-+
- 	err_idx = i;
- 	i = head;
- 	curr = vq->free_head;
- 
--	vq->packed.avail_used_flags = avail_used_flags;
--
- 	for (n = 0; n < total_sg; n++) {
- 		if (i == err_idx)
- 			break;
--		vring_unmap_extra_packed(vq, &vq->packed.desc_extra[curr]);
-+		vring_unmap_extra_packed(vq, &vq->packed.desc_extra[curr], false);
- 		curr = vq->packed.desc_extra[curr].next;
- 		i++;
- 		if (i >= vq->packed.vring.num)
- 			i = 0;
- 	}
- 
-+unmap_free:
- 	END_USE(vq);
- 	return -EIO;
- }
-@@ -1576,8 +1602,10 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
- 	struct vring_desc_state_packed *state = NULL;
- 	struct vring_packed_desc *desc;
- 	unsigned int i, curr;
-+	bool premapped;
- 
- 	state = &vq->packed.desc_state[id];
-+	premapped = state->premapped;
- 
- 	/* Clear data ptr. */
- 	state->data = NULL;
-@@ -1590,7 +1618,8 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
- 		curr = id;
- 		for (i = 0; i < state->num; i++) {
- 			vring_unmap_extra_packed(vq,
--						 &vq->packed.desc_extra[curr]);
-+						 &vq->packed.desc_extra[curr],
-+						 premapped);
- 			curr = vq->packed.desc_extra[curr].next;
- 		}
- 	}
-@@ -1603,7 +1632,7 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
- 		if (!desc)
- 			return;
- 
--		if (vq->use_dma_api) {
-+		if (vq->use_dma_api && !premapped) {
- 			len = vq->packed.desc_extra[id].len;
- 			for (i = 0; i < len / sizeof(struct vring_packed_desc);
- 					i++)
-@@ -2122,7 +2151,7 @@ static inline int virtqueue_add(struct virtqueue *_vq,
- 	struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	return vq->packed_ring ? virtqueue_add_packed(_vq, sgs, total_sg,
--					out_sgs, in_sgs, data, ctx, gfp) :
-+					out_sgs, in_sgs, data, ctx, premapped, gfp) :
- 				 virtqueue_add_split(_vq, sgs, total_sg,
- 					out_sgs, in_sgs, data, ctx, premapped, gfp);
- }
+ int virtqueue_add_inbuf(struct virtqueue *vq,
+ 			struct scatterlist sg[], unsigned int num,
+ 			void *data,
 -- 
 2.32.0.3.g01195cf9f
 
