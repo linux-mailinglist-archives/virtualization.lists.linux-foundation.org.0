@@ -1,105 +1,112 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id D8A6E68785A
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 10:10:04 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 64ABA40BD9;
-	Thu,  2 Feb 2023 09:10:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 64ABA40BD9
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=igel-co-jp.20210112.gappssmtp.com header.i=@igel-co-jp.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=GH6KARO7
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id exTzcOM2tcOh; Thu,  2 Feb 2023 09:10:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 2724640BF9;
-	Thu,  2 Feb 2023 09:10:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2724640BF9
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0875CC002B;
-	Thu,  2 Feb 2023 09:10:02 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 2C8ECC0032
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 09:10:00 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 013B8687A48
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 11:33:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 050FF81EC0
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 09:10:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 050FF81EC0
+	by smtp1.osuosl.org (Postfix) with ESMTP id 4DF1D81F14;
+	Thu,  2 Feb 2023 10:33:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4DF1D81F14
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=igel-co-jp.20210112.gappssmtp.com
- header.i=@igel-co-jp.20210112.gappssmtp.com header.a=rsa-sha256
- header.s=20210112 header.b=GH6KARO7
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=C5Cn17KW
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 3bE94Xss1sV9
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dTpS00-6iLpg; Thu,  2 Feb 2023 10:33:15 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 77AB681F5E;
+	Thu,  2 Feb 2023 10:33:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 77AB681F5E
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5308FC0078;
+	Thu,  2 Feb 2023 10:33:13 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7482BC0032
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 09:09:59 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 54C7A81EA5
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 54C7A81EA5
+ Thu,  2 Feb 2023 10:33:11 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 354DC40547
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 09:09:59 +0000 (UTC)
-Received: by mail-pj1-x1035.google.com with SMTP id
- cq16-20020a17090af99000b0022c9791ac39so4933132pjb.4
+ Thu,  2 Feb 2023 10:33:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 354DC40547
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=C5Cn17KW
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id g-h4r8-WqC0v
  for <virtualization@lists.linux-foundation.org>;
- Thu, 02 Feb 2023 01:09:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=igel-co-jp.20210112.gappssmtp.com; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=gcO0uxyztK7wrPRESDhnWawV9bJajYCn05I6EVJHO1Q=;
- b=GH6KARO7thcAXAecHFCRqv2AThKvwRpSynFUPRyr/OZKPlK2yL0fvDQhRTEuxWPbag
- soLM3KjFH60hrsUUukVibYDKMQm0sViyKG5mYZqPbfML2bae+Go5bIdqdw9B901M7ibu
- wNT7zORKjzFmfIR2oCiVQM3HJyrFKC2BPqVxmkD7X27/Tbuv0DsrL5dChFH+9/NwvzIQ
- EUYkhc2ftdhCYgF8ACeakDBIlsNguRxNJ82koXMxpahyWP6KNfGH647dLQIQkSf08b9Y
- Kg9/9k7MncrjLlOlQrFvpRobgAOYtK7H68cuL5RxgyxNu+F+hxjmjIGD1BbGwHe4fB3M
- 210w==
+ Thu,  2 Feb 2023 10:33:10 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D11D540C19
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id D11D540C19
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 10:33:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1675333988;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=gzY8WLXPZBGvGs13fwLVzvdB3zWOPAiALRIUHU5zbPE=;
+ b=C5Cn17KW2dLp3uYazhRkdwNcakuaOrdtJrEVG/mvT+r5fUp2xzIA+HMIMAKEwtWTBP0f37
+ s1u1pOC1JMA5uOaR4Sf/a3j34FJjErlYT0815kyGPftderUSqN8V0JZCPmnX4P7BFvHuSz
+ k2+GrqjT2gHyt+k9i+8jgNGRr7L1Y9Y=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-391-8KpSrHuXNT-LEJ4M2y6AsA-1; Thu, 02 Feb 2023 05:33:06 -0500
+X-MC-Unique: 8KpSrHuXNT-LEJ4M2y6AsA-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ iz20-20020a05600c555400b003dc53fcc88fso740133wmb.2
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 02 Feb 2023 02:33:06 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20210112;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=gcO0uxyztK7wrPRESDhnWawV9bJajYCn05I6EVJHO1Q=;
- b=hr0ev+YGAuqK8IupSSRiDhc+2xjJIMVTohYtnez0oZ7uviibfV/s7TIxL+Xtq5GeBT
- fdtpjxME8EqQOCv4y2pBbSvI2XBcV45a6LqarXavcoXeI8n97Q9VMqO06TJgW4UJu7Xr
- xOSGraPjRidG7GwRyffW0roTtDL4kY60MtKFSE9omagDlH/AwPayjhpd1MdBXKOBxvB2
- ex+LNOElV0krPr1RuhfBwoOklx7c9wKpskopT6V6ofDY6l2SrfN8P3YNlvj5aW8azqMX
- J8fKcMBPNOQPyUC3iRuJJVtNZO1oKSgemvfcMdulR1X/VByTXZitJDdDD90z8J0qmdMO
- WhCg==
-X-Gm-Message-State: AO0yUKWJpnxb93GSl8f7rrLrUYC5RwniUSu9iD2PVdGP6giHh8Adh7kD
- 3u8xhAaVAn4+KDTZN8l6/9U/8w==
-X-Google-Smtp-Source: AK7set/fXvDEmBQhH8c6B3dTk3eGn1u6YNr6DVl3bDrXS4EUzT2lgnlUWdYhoNLU3kNmqiqzSmYyqg==
-X-Received: by 2002:a17:903:2303:b0:195:f06f:84fc with SMTP id
- d3-20020a170903230300b00195f06f84fcmr7368514plh.40.1675328998631; 
- Thu, 02 Feb 2023 01:09:58 -0800 (PST)
-Received: from tyrell.hq.igel.co.jp (napt.igel.co.jp. [219.106.231.132])
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gzY8WLXPZBGvGs13fwLVzvdB3zWOPAiALRIUHU5zbPE=;
+ b=69s6ARTb+nZCNNVitbyzQ389fRVyfPtUkoN4bFBbbD44JC/C5Id5wlT5NGzXe4iUeX
+ Dw36lMkqGeB1mYnjKUQ1SxvMrl11XVNksag2A7w8NW/i11/uANIf0Q9N8XMW1yYBCBb7
+ iqZKcNm34pMabN/9ttoYeCJPw0SrhnHv0Sm0038SR7cyISAboq/h7HruecyFj1cvyINE
+ qlUfqbL73+6eS3YbrHjPS4qkvINdO1MTDaDPc9opUYW4aImOFEp6BeV1/NXK4YiWLbiM
+ SUVZjg02/d4fqwhm8ujpns3PnPcZd03N+JlV7227nP9zGZKKqQiUNsTj0aacq8HD3JQd
+ B4Cw==
+X-Gm-Message-State: AO0yUKV5f+ucs2MRvTVMxD9GAq0KEXiC9MPZtFgXR81Sn12G5OAswvth
+ SkU183+UYv7RW/5J8N1CW7zHpr4N3qkmNzpE29Cr36RE/vgWC5BzGbPeuCEP1CdTRhgukej1yKp
+ ZKEMQlyEQMui1hRjfQs08CDyq0PrMJ8JiCbFE9lmdQg==
+X-Received: by 2002:a05:600c:4e4e:b0:3d2:bca5:10a2 with SMTP id
+ e14-20020a05600c4e4e00b003d2bca510a2mr5273852wmq.22.1675333984808; 
+ Thu, 02 Feb 2023 02:33:04 -0800 (PST)
+X-Google-Smtp-Source: AK7set/fHx8aUDAB0froK+lS+HWGLVJXUV/PDw9YBioywtgcQQqxlZhTuxBLUkkhhVkUE0oQ07IROQ==
+X-Received: by 2002:a05:600c:4e4e:b0:3d2:bca5:10a2 with SMTP id
+ e14-20020a05600c4e4e00b003d2bca510a2mr5273840wmq.22.1675333984603; 
+ Thu, 02 Feb 2023 02:33:04 -0800 (PST)
+Received: from redhat.com ([2a02:14f:1fc:826d:55d8:70a4:3d30:fc2f])
  by smtp.gmail.com with ESMTPSA id
- ik12-20020a170902ab0c00b001929827731esm13145968plb.201.2023.02.02.01.09.56
+ p11-20020a1c544b000000b003dc4fd6e624sm4452688wmi.19.2023.02.02.02.33.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Feb 2023 01:09:58 -0800 (PST)
-From: Shunsuke Mie <mie@igel.co.jp>
-To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>,
- Rusty Russell <rusty@rustcorp.com.au>
-Subject: [RFC PATCH v2 7/7] vringh: IOMEM support
-Date: Thu,  2 Feb 2023 18:09:34 +0900
-Message-Id: <20230202090934.549556-8-mie@igel.co.jp>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230202090934.549556-1-mie@igel.co.jp>
+ Thu, 02 Feb 2023 02:33:03 -0800 (PST)
+Date: Thu, 2 Feb 2023 05:32:59 -0500
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Shunsuke Mie <mie@igel.co.jp>
+Subject: Re: [RFC PATCH v2 1/7] vringh: fix a typo in comments for vringh_kiov
+Message-ID: <20230202053204-mutt-send-email-mst@kernel.org>
 References: <20230202090934.549556-1-mie@igel.co.jp>
+ <20230202090934.549556-2-mie@igel.co.jp>
 MIME-Version: 1.0
-Cc: netdev@vger.kernel.org, Shunsuke Mie <mie@igel.co.jp>,
- linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+In-Reply-To: <20230202090934.549556-2-mie@igel.co.jp>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org,
+ Rusty Russell <rusty@rustcorp.com.au>, linux-kernel@vger.kernel.org,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -117,144 +124,35 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduces the new memory accessor for vringh. It is able to
-use vringh to virtio rings located on iomemory region.
+On Thu, Feb 02, 2023 at 06:09:28PM +0900, Shunsuke Mie wrote:
+> Probably it is a simple copy error from struct vring_iov.
+> 
+> Fixes: f87d0fbb5798 ("vringh: host-side implementation of virtio rings.")
+> Signed-off-by: Shunsuke Mie <mie@igel.co.jp>
 
-Signed-off-by: Shunsuke Mie <mie@igel.co.jp>
----
- drivers/vhost/Kconfig  |  6 ++++
- drivers/vhost/vringh.c | 76 ++++++++++++++++++++++++++++++++++++++++++
- include/linux/vringh.h |  8 +++++
- 3 files changed, 90 insertions(+)
+Drop the fixes tag pls it's not really relevantfor comments.
+But the patch is correct, pls submit separately we can
+already apply this.
 
-diff --git a/drivers/vhost/Kconfig b/drivers/vhost/Kconfig
-index 587fbae06182..a79a4efbc817 100644
---- a/drivers/vhost/Kconfig
-+++ b/drivers/vhost/Kconfig
-@@ -6,6 +6,12 @@ config VHOST_IOTLB
- 	  This option is selected by any driver which needs to support
- 	  an IOMMU in software.
- 
-+config VHOST_IOMEM
-+	tristate
-+	select VHOST_RING
-+	help
-+	  Generic IOMEM implementation for vhost and vringh.
-+
- config VHOST_RING
- 	tristate
- 	select VHOST_IOTLB
-diff --git a/drivers/vhost/vringh.c b/drivers/vhost/vringh.c
-index 46fb315483ed..e3d9c7281ad0 100644
---- a/drivers/vhost/vringh.c
-+++ b/drivers/vhost/vringh.c
-@@ -18,6 +18,9 @@
- #include <linux/highmem.h>
- #include <linux/vhost_iotlb.h>
- #endif
-+#if IS_REACHABLE(CONFIG_VHOST_IOMEM)
-+#include <linux/io.h>
-+#endif
- #include <uapi/linux/virtio_config.h>
- 
- static __printf(1,2) __cold void vringh_bad(const char *fmt, ...)
-@@ -1165,4 +1168,77 @@ EXPORT_SYMBOL(vringh_set_iotlb);
- 
- #endif
- 
-+#if IS_REACHABLE(CONFIG_VHOST_IOMEM)
-+
-+/* io-memory space access helpers. */
-+static int getu16_iomem(const struct vringh *vrh, u16 *val, const __virtio16 *p)
-+{
-+	*val = vringh16_to_cpu(vrh, ioread16(p));
-+	return 0;
-+}
-+
-+static int putu16_iomem(const struct vringh *vrh, __virtio16 *p, u16 val)
-+{
-+	iowrite16(cpu_to_vringh16(vrh, val), p);
-+	return 0;
-+}
-+
-+static int copydesc_iomem(const struct vringh *vrh, void *dst, const void *src,
-+			  size_t len)
-+{
-+	memcpy_fromio(dst, src, len);
-+	return 0;
-+}
-+
-+static int putused_iomem(const struct vringh *vrh, struct vring_used_elem *dst,
-+			 const struct vring_used_elem *src, unsigned int num)
-+{
-+	memcpy_toio(dst, src, num * sizeof(*dst));
-+	return 0;
-+}
-+
-+static int xfer_from_iomem(const struct vringh *vrh, void *src, void *dst,
-+			   size_t len)
-+{
-+	memcpy_fromio(dst, src, len);
-+	return 0;
-+}
-+
-+static int xfer_to_iomem(const struct vringh *vrh, void *dst, void *src,
-+			 size_t len)
-+{
-+	memcpy_toio(dst, src, len);
-+	return 0;
-+}
-+
-+static struct vringh_ops iomem_vringh_ops = {
-+	.getu16 = getu16_iomem,
-+	.putu16 = putu16_iomem,
-+	.xfer_from = xfer_from_iomem,
-+	.xfer_to = xfer_to_iomem,
-+	.putused = putused_iomem,
-+	.copydesc = copydesc_iomem,
-+	.range_check = no_range_check,
-+	.getrange = NULL,
-+};
-+
-+int vringh_init_iomem(struct vringh *vrh, u64 features, unsigned int num,
-+		      bool weak_barriers, gfp_t gfp, struct vring_desc *desc,
-+		      struct vring_avail *avail, struct vring_used *used)
-+{
-+	int err;
-+
-+	err = __vringh_init(vrh, features, num, weak_barriers, gfp, desc, avail,
-+			    used);
-+	if (err)
-+		return err;
-+
-+	memcpy(&vrh->ops, &iomem_vringh_ops, sizeof(iomem_vringh_ops));
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL(vringh_init_iomem);
-+
-+#endif
-+
- MODULE_LICENSE("GPL");
-diff --git a/include/linux/vringh.h b/include/linux/vringh.h
-index 89c73605c85f..420c2d0ed398 100644
---- a/include/linux/vringh.h
-+++ b/include/linux/vringh.h
-@@ -265,4 +265,12 @@ int vringh_init_iotlb(struct vringh *vrh, u64 features,
- 
- #endif /* CONFIG_VHOST_IOTLB */
- 
-+#if IS_REACHABLE(CONFIG_VHOST_IOMEM)
-+
-+int vringh_init_iomem(struct vringh *vrh, u64 features, unsigned int num,
-+		      bool weak_barriers, gfp_t gfp, struct vring_desc *desc,
-+		      struct vring_avail *avail, struct vring_used *used);
-+
-+#endif /* CONFIG_VHOST_IOMEM */
-+
- #endif /* _LINUX_VRINGH_H */
--- 
-2.25.1
+> ---
+>  include/linux/vringh.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/vringh.h b/include/linux/vringh.h
+> index 212892cf9822..1991a02c6431 100644
+> --- a/include/linux/vringh.h
+> +++ b/include/linux/vringh.h
+> @@ -92,7 +92,7 @@ struct vringh_iov {
+>  };
+>  
+>  /**
+> - * struct vringh_iov - kvec mangler.
+> + * struct vringh_kiov - kvec mangler.
+>   *
+>   * Mangles kvec in place, and restores it.
+>   * Remaining data is iov + i, of used - i elements.
+> -- 
+> 2.25.1
 
 _______________________________________________
 Virtualization mailing list
