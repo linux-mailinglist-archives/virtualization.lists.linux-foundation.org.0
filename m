@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04FEE687B20
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:34 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6D68F687B28
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 9280C81F4B;
-	Thu,  2 Feb 2023 11:01:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9280C81F4B
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3mwl462E5wvt; Thu,  2 Feb 2023 11:01:31 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 366F081F47;
-	Thu,  2 Feb 2023 11:01:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 366F081F47
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0F99AC0078;
-	Thu,  2 Feb 2023 11:01:31 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 62401C002B
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:30 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 3D60E41949
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3D60E41949
+	by smtp4.osuosl.org (Postfix) with ESMTP id 0AFB4409FC;
+	Thu,  2 Feb 2023 11:01:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0AFB4409FC
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id N_FXz-SRA-9p
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dbQsNSREnaoG; Thu,  2 Feb 2023 11:01:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 7ABAE40346;
+	Thu,  2 Feb 2023 11:01:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7ABAE40346
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6CC10C0032;
+	Thu,  2 Feb 2023 11:01:33 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id ABC29C002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:28 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:32 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 86F9440C05
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 11:01:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 86F9440C05
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1_XEDKW90poF
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 11:01:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 79F85418BE
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 79F85418BE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 39E5740C6A
+Received: from out30-119.freemail.mail.aliyun.com
+ (out30-119.freemail.mail.aliyun.com [115.124.30.119])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 39E5740C6A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:26 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ Thu,  2 Feb 2023 11:01:30 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VakkM6e_1675335681; 
+ TI=SMTPD_---0VakkM6u_1675335682; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VakkM6e_1675335681) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:22 +0800
+ fp:SMTPD_---0VakkM6u_1675335682) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:23 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 20/33] virtio_net: xsk: introduce virtnet_rq_bind_xsk_pool()
-Date: Thu,  2 Feb 2023 19:00:45 +0800
-Message-Id: <20230202110058.130695-21-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 21/33] virtio_net: xsk: introduce virtnet_xsk_pool_enable()
+Date: Thu,  2 Feb 2023 19:00:46 +0800
+Message-Id: <20230202110058.130695-22-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -90,166 +90,85 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This function is used to bind or unbind xsk pool to virtnet rq.
+Introduce virtnet_xsk_pool_enable() for xsk setup.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/Makefile     |  2 +-
- drivers/net/virtio/main.c       |  8 ++---
- drivers/net/virtio/virtio_net.h | 16 ++++++++++
- drivers/net/virtio/xsk.c        | 56 +++++++++++++++++++++++++++++++++
- 4 files changed, 76 insertions(+), 6 deletions(-)
- create mode 100644 drivers/net/virtio/xsk.c
+ drivers/net/virtio/xsk.c | 59 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
 
-diff --git a/drivers/net/virtio/Makefile b/drivers/net/virtio/Makefile
-index 15ed7c97fd4f..8c2a884d2dba 100644
---- a/drivers/net/virtio/Makefile
-+++ b/drivers/net/virtio/Makefile
-@@ -5,4 +5,4 @@
- 
- obj-$(CONFIG_VIRTIO_NET) += virtio_net.o
- 
--virtio_net-y := main.o
-+virtio_net-y := main.o xsk.o
-diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index 049a3bb9d88d..0ee23468b795 100644
---- a/drivers/net/virtio/main.c
-+++ b/drivers/net/virtio/main.c
-@@ -110,7 +110,6 @@ struct padded_vnet_hdr {
- 	char padding[12];
- };
- 
--static void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf);
- static void virtnet_sq_free_unused_buf(struct virtqueue *vq, void *buf);
- 
- static void *xdp_to_ptr(struct xdp_frame *ptr)
-@@ -1351,8 +1350,7 @@ static int add_recvbuf_mergeable(struct virtnet_info *vi,
-  * before we're receiving packets, or from refill_work which is
-  * careful to disable receiving (using napi_disable).
-  */
--static bool try_fill_recv(struct virtnet_info *vi, struct receive_queue *rq,
--			  gfp_t gfp)
-+bool try_fill_recv(struct virtnet_info *vi, struct receive_queue *rq, gfp_t gfp)
- {
- 	int err;
- 	bool oom;
-@@ -1388,7 +1386,7 @@ static void skb_recv_done(struct virtqueue *rvq)
- 	virtqueue_napi_schedule(&rq->napi, rvq);
- }
- 
--static void virtnet_napi_enable(struct virtqueue *vq, struct napi_struct *napi)
-+void virtnet_napi_enable(struct virtqueue *vq, struct napi_struct *napi)
- {
- 	napi_enable(napi);
- 
-@@ -3284,7 +3282,7 @@ static void virtnet_sq_free_unused_buf(struct virtqueue *vq, void *buf)
- 		xdp_return_frame(ptr_to_xdp(buf));
- }
- 
--static void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf)
-+void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf)
- {
- 	struct virtnet_info *vi = vq->vdev->priv;
- 	int i = vq2rxq(vq);
-diff --git a/drivers/net/virtio/virtio_net.h b/drivers/net/virtio/virtio_net.h
-index b46f083a630a..4a7633714802 100644
---- a/drivers/net/virtio/virtio_net.h
-+++ b/drivers/net/virtio/virtio_net.h
-@@ -168,6 +168,12 @@ struct send_queue {
- 
- 	/* Record whether sq is in reset state. */
- 	bool reset;
-+
-+	struct {
-+		struct xsk_buff_pool __rcu *pool;
-+
-+		dma_addr_t hdr_dma_address;
-+	} xsk;
- };
- 
- /* Internal representation of a receive virtqueue */
-@@ -200,6 +206,13 @@ struct receive_queue {
- 	char name[16];
- 
- 	struct xdp_rxq_info xdp_rxq;
-+
-+	struct {
-+		struct xsk_buff_pool __rcu *pool;
-+
-+		/* xdp rxq used by xsk */
-+		struct xdp_rxq_info xdp_rxq;
-+	} xsk;
- };
- 
- static inline bool is_xdp_raw_buffer_queue(struct virtnet_info *vi, int q)
-@@ -274,4 +287,7 @@ int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 			unsigned int *xdp_xmit,
- 			struct virtnet_rq_stats *stats);
- int virtnet_tx_reset(struct virtnet_info *vi, struct send_queue *sq);
-+bool try_fill_recv(struct virtnet_info *vi, struct receive_queue *rq, gfp_t gfp);
-+void virtnet_napi_enable(struct virtqueue *vq, struct napi_struct *napi);
-+void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf);
- #endif
 diff --git a/drivers/net/virtio/xsk.c b/drivers/net/virtio/xsk.c
-new file mode 100644
-index 000000000000..e01ff2abea11
---- /dev/null
+index e01ff2abea11..a7e8005233d2 100644
+--- a/drivers/net/virtio/xsk.c
 +++ b/drivers/net/virtio/xsk.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * virtio-net xsk
-+ */
+@@ -5,6 +5,8 @@
+ 
+ #include "virtio_net.h"
+ 
++static struct virtio_net_hdr_mrg_rxbuf xsk_hdr;
 +
-+#include "virtio_net.h"
+ static int virtnet_rq_bind_xsk_pool(struct virtnet_info *vi, struct receive_queue *rq,
+ 				    struct xsk_buff_pool *pool, struct net_device *dev)
+ {
+@@ -54,3 +56,60 @@ static int virtnet_rq_bind_xsk_pool(struct virtnet_info *vi, struct receive_queu
+ 
+ 	return err;
+ }
 +
-+static int virtnet_rq_bind_xsk_pool(struct virtnet_info *vi, struct receive_queue *rq,
-+				    struct xsk_buff_pool *pool, struct net_device *dev)
++static int virtnet_xsk_pool_enable(struct net_device *dev,
++				   struct xsk_buff_pool *pool,
++				   u16 qid)
 +{
-+	bool running = netif_running(vi->dev);
-+	int err, qindex;
++	struct virtnet_info *vi = netdev_priv(dev);
++	struct receive_queue *rq;
++	struct send_queue *sq;
++	int err;
 +
-+	qindex = rq - vi->rq;
++	if (qid >= vi->curr_queue_pairs)
++		return -EINVAL;
 +
-+	if (pool) {
-+		err = xdp_rxq_info_reg(&rq->xsk.xdp_rxq, dev, qindex, rq->napi.napi_id);
-+		if (err < 0)
-+			return err;
++	sq = &vi->sq[qid];
++	rq = &vi->rq[qid];
 +
-+		err = xdp_rxq_info_reg_mem_model(&rq->xsk.xdp_rxq,
-+						 MEM_TYPE_XSK_BUFF_POOL, NULL);
-+		if (err < 0) {
-+			xdp_rxq_info_unreg(&rq->xsk.xdp_rxq);
-+			return err;
-+		}
++	/* xsk zerocopy depend on the tx napi.
++	 *
++	 * All xsk packets are actually consumed and sent out from the xsk tx
++	 * queue under the tx napi mechanism.
++	 */
++	if (!sq->napi.weight)
++		return -EPERM;
 +
-+		xsk_pool_set_rxq_info(pool, &rq->xsk.xdp_rxq);
-+	} else {
-+		xdp_rxq_info_unreg(&rq->xsk.xdp_rxq);
-+	}
++	/* In big_packets mode, xdp cannot work, so there is no need to
++	 * initialize xsk of rq.
++	 */
++	if (vi->big_packets && !vi->mergeable_rx_bufs)
++		return -ENOENT;
 +
-+	if (running)
-+		napi_disable(&rq->napi);
++	sq->xsk.hdr_dma_address = virtio_dma_map(&vi->vdev->dev, &xsk_hdr,
++						 vi->hdr_len, DMA_TO_DEVICE);
++	if (virtio_dma_mapping_error(&vi->vdev->dev, sq->xsk.hdr_dma_address))
++		return -ENOMEM;
 +
-+	err = virtqueue_reset(rq->vq, virtnet_rq_free_unused_buf);
++	err = xsk_pool_dma_map(pool, &vi->vdev->dev, 0);
 +	if (err)
-+		netdev_err(vi->dev, "reset rx fail: rx queue index: %d err: %d\n", qindex, err);
++		goto err_xsk_map;
 +
-+	if (pool) {
-+		if (err)
-+			xdp_rxq_info_unreg(&rq->xsk.xdp_rxq);
-+		else
-+			rcu_assign_pointer(rq->xsk.pool, pool);
-+	} else {
-+		rcu_assign_pointer(rq->xsk.pool, NULL);
-+	}
++	err = virtnet_rq_bind_xsk_pool(vi, rq, pool, dev);
++	if (err)
++		goto err_rxq;
 +
-+	if (!try_fill_recv(vi, rq, GFP_KERNEL))
-+		schedule_delayed_work(&vi->refill, 0);
++	/* Here is already protected by rtnl_lock, so rcu_assign_pointer
++	 * is safe.
++	 */
++	rcu_assign_pointer(sq->xsk.pool, pool);
 +
-+	if (running)
-+		virtnet_napi_enable(rq->vq, &rq->napi);
++	return 0;
 +
++err_rxq:
++	xsk_pool_dma_unmap(pool, 0);
++err_xsk_map:
++	virtio_dma_unmap(&vi->vdev->dev, sq->xsk.hdr_dma_address, vi->hdr_len,
++			 DMA_TO_DEVICE);
 +	return err;
 +}
 -- 
