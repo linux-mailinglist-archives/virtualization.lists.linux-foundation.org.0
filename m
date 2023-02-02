@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 81C08687B13
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:25 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 53075687B10
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:22 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 547F540C30;
-	Thu,  2 Feb 2023 11:01:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 547F540C30
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id h_zhp1T-8qbg; Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 0819D40C4C;
-	Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0819D40C4C
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D79F4C0078;
+	by smtp1.osuosl.org (Postfix) with ESMTP id E1562812A4;
 	Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E1562812A4
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id EThd-iWCCcuT; Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id AACEB813D0;
+	Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AACEB813D0
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 781E6C0080;
+	Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 65006C007D
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8F0CBC007B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 32B8B81F12
+ by smtp1.osuosl.org (Postfix) with ESMTP id 5D34281F17
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 32B8B81F12
+ Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5D34281F17
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VcMd_oyONpeJ
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D9D9481F14
-Received: from out30-124.freemail.mail.aliyun.com
- (out30-124.freemail.mail.aliyun.com [115.124.30.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D9D9481F14
+ with ESMTP id YB8x-gHYYsv8
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Feb 2023 11:01:17 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R301e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 544A3812A4
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 544A3812A4
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Feb 2023 11:01:16 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VakkM2s_1675335670; 
+ TI=SMTPD_---0VakpyCA_1675335671; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VakkM2s_1675335670) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:11 +0800
+ fp:SMTPD_---0VakpyCA_1675335671) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:12 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 10/33] xsk: support virtio DMA map
-Date: Thu,  2 Feb 2023 19:00:35 +0800
-Message-Id: <20230202110058.130695-11-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 11/33] virtio_net: rename free_old_xmit_skbs to free_old_xmit
+Date: Thu,  2 Feb 2023 19:00:36 +0800
+Message-Id: <20230202110058.130695-12-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -90,118 +90,64 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When device is a virtio device, use virtio's DMA interface.
+Since free_old_xmit_skbs not only deals with skb, but also xdp frame and
+subsequent added xsk, so change the name of this function to
+free_old_xmit.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- net/xdp/xsk_buff_pool.c | 59 +++++++++++++++++++++++++++++++----------
- 1 file changed, 45 insertions(+), 14 deletions(-)
+ drivers/net/virtio_net.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/net/xdp/xsk_buff_pool.c b/net/xdp/xsk_buff_pool.c
-index 78e325e195fa..e2785aca8396 100644
---- a/net/xdp/xsk_buff_pool.c
-+++ b/net/xdp/xsk_buff_pool.c
-@@ -3,6 +3,7 @@
- #include <net/xsk_buff_pool.h>
- #include <net/xdp_sock.h>
- #include <net/xdp_sock_drv.h>
-+#include <linux/virtio.h>
- 
- #include "xsk_queue.h"
- #include "xdp_umem.h"
-@@ -334,8 +335,12 @@ static void __xp_dma_unmap(struct xsk_dma_map *dma_map, unsigned long attrs)
- 		dma = &dma_map->dma_pages[i];
- 		if (*dma) {
- 			*dma &= ~XSK_NEXT_PG_CONTIG_MASK;
--			dma_unmap_page_attrs(dma_map->dev, *dma, PAGE_SIZE,
--					     DMA_BIDIRECTIONAL, attrs);
-+			if (is_virtio_device(dma_map->dev))
-+				virtio_dma_unmap(dma_map->dev, *dma, PAGE_SIZE,
-+						 DMA_BIDIRECTIONAL);
-+			else
-+				dma_unmap_page_attrs(dma_map->dev, *dma, PAGE_SIZE,
-+						     DMA_BIDIRECTIONAL, attrs);
- 			*dma = 0;
- 		}
- 	}
-@@ -435,22 +440,40 @@ int xp_dma_map(struct xsk_buff_pool *pool, struct device *dev,
- 		return 0;
- 	}
- 
--	pool->dma_sync_for_cpu = dma_sync_for_cpu;
--	pool->dma_sync_for_device = dma_sync_for_device;
-+	if (is_virtio_device(dev)) {
-+		pool->dma_sync_for_cpu = virtio_dma_sync_signle_range_for_cpu;
-+		pool->dma_sync_for_device = virtio_dma_sync_signle_range_for_device;
-+
-+	} else {
-+		pool->dma_sync_for_cpu = dma_sync_for_cpu;
-+		pool->dma_sync_for_device = dma_sync_for_device;
-+	}
- 
- 	dma_map = xp_create_dma_map(dev, pool->netdev, nr_pages, pool->umem);
- 	if (!dma_map)
- 		return -ENOMEM;
- 
- 	for (i = 0; i < dma_map->dma_pages_cnt; i++) {
--		dma = dma_map_page_attrs(dev, pages[i], 0, PAGE_SIZE,
--					 DMA_BIDIRECTIONAL, attrs);
--		if (dma_mapping_error(dev, dma)) {
--			__xp_dma_unmap(dma_map, attrs);
--			return -ENOMEM;
-+		if (is_virtio_device(dev)) {
-+			dma = virtio_dma_map_page(dev, pages[i], 0, PAGE_SIZE,
-+						  DMA_BIDIRECTIONAL);
-+
-+			if (virtio_dma_mapping_error(dev, dma))
-+				goto err;
-+
-+			if (virtio_dma_need_sync(dev, dma))
-+				dma_map->dma_need_sync = true;
-+
-+		} else {
-+			dma = dma_map_page_attrs(dev, pages[i], 0, PAGE_SIZE,
-+						 DMA_BIDIRECTIONAL, attrs);
-+
-+			if (dma_mapping_error(dev, dma))
-+				goto err;
-+
-+			if (dma_need_sync(dev, dma))
-+				dma_map->dma_need_sync = true;
- 		}
--		if (dma_need_sync(dev, dma))
--			dma_map->dma_need_sync = true;
- 		dma_map->dma_pages[i] = dma;
- 	}
- 
-@@ -464,6 +487,9 @@ int xp_dma_map(struct xsk_buff_pool *pool, struct device *dev,
- 	}
- 
- 	return 0;
-+err:
-+	__xp_dma_unmap(dma_map, attrs);
-+	return -ENOMEM;
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 0f0036b1514d..bc7b9ccb325a 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -1714,7 +1714,7 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
+ 	return stats.packets;
  }
- EXPORT_SYMBOL(xp_dma_map);
  
-@@ -546,9 +572,14 @@ struct xdp_buff *xp_alloc(struct xsk_buff_pool *pool)
- 	xskb->xdp.data_meta = xskb->xdp.data;
+-static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
++static void free_old_xmit(struct send_queue *sq, bool in_napi)
+ {
+ 	unsigned int len;
+ 	unsigned int packets = 0;
+@@ -1778,7 +1778,7 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
  
- 	if (pool->dma_need_sync) {
--		dma_sync_single_range_for_device(pool->dev, xskb->dma, 0,
--						 pool->frame_len,
--						 DMA_BIDIRECTIONAL);
-+		if (is_virtio_device(pool->dev))
-+			virtio_dma_sync_signle_range_for_device(pool->dev, xskb->dma, 0,
-+								pool->frame_len,
-+								DMA_BIDIRECTIONAL);
-+		else
-+			dma_sync_single_range_for_device(pool->dev, xskb->dma, 0,
-+							 pool->frame_len,
-+							 DMA_BIDIRECTIONAL);
- 	}
- 	return &xskb->xdp;
- }
+ 		do {
+ 			virtqueue_disable_cb(sq->vq);
+-			free_old_xmit_skbs(sq, true);
++			free_old_xmit(sq, true);
+ 		} while (unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
+ 
+ 		if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
+@@ -1870,7 +1870,7 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
+ 	txq = netdev_get_tx_queue(vi->dev, index);
+ 	__netif_tx_lock(txq, raw_smp_processor_id());
+ 	virtqueue_disable_cb(sq->vq);
+-	free_old_xmit_skbs(sq, true);
++	free_old_xmit(sq, true);
+ 
+ 	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
+ 		netif_tx_wake_queue(txq);
+@@ -1960,7 +1960,7 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
+ 		if (use_napi)
+ 			virtqueue_disable_cb(sq->vq);
+ 
+-		free_old_xmit_skbs(sq, false);
++		free_old_xmit(sq, false);
+ 
+ 	} while (use_napi && kick &&
+ 	       unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
+@@ -2006,7 +2006,7 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
+ 				virtqueue_napi_schedule(&sq->napi, sq->vq);
+ 		} else if (unlikely(!virtqueue_enable_cb_delayed(sq->vq))) {
+ 			/* More just got used, free them then recheck. */
+-			free_old_xmit_skbs(sq, false);
++			free_old_xmit(sq, false);
+ 			if (sq->vq->num_free >= 2+MAX_SKB_FRAGS) {
+ 				netif_start_subqueue(dev, qnum);
+ 				virtqueue_disable_cb(sq->vq);
 -- 
 2.32.0.3.g01195cf9f
 
