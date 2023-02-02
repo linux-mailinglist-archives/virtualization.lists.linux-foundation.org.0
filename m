@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 20F63687B17
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:27 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E6BCA687B0F
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id AEAB861168;
-	Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AEAB861168
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7D58641BA6;
+	Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7D58641BA6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id iGe0DEmNWRJ4; Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 7ED556113C;
-	Thu,  2 Feb 2023 11:01:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7ED556113C
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zRb5xtA9ntXS; Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id AC3E341B65;
+	Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AC3E341B65
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B6DFC002B;
-	Thu,  2 Feb 2023 11:01:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4B780C0078;
+	Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 05731C002B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3ED52C002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:22 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id C688940C37
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2817040C05
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C688940C37
+ Thu,  2 Feb 2023 11:01:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2817040C05
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Gz_UxuE9glG6
+ with ESMTP id iXBQWlCQUolU
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1C10040C61
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1C10040C61
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DCC1240C0F
+Received: from out30-101.freemail.mail.aliyun.com
+ (out30-101.freemail.mail.aliyun.com [115.124.30.101])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id DCC1240C0F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R291e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ Thu,  2 Feb 2023 11:01:14 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R691e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VaktKMa_1675335668; 
+ TI=SMTPD_---0VakkM2a_1675335669; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VaktKMa_1675335668) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:09 +0800
+ fp:SMTPD_---0VakkM2a_1675335669) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:10 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 08/33] virtio_ring: introduce dma sync api for virtio
-Date: Thu,  2 Feb 2023 19:00:33 +0800
-Message-Id: <20230202110058.130695-9-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 09/33] xsk: xsk_buff_pool add callback for dma_sync
+Date: Thu,  2 Feb 2023 19:00:34 +0800
+Message-Id: <20230202110058.130695-10-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -90,103 +90,86 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In the process of dma sync, we involved whether virtio uses dma api. On
-the other hand, it is also necessary to read vdev->dev.parent. So these
-API has been introduced.
+Use callback to implement dma sync to simplify subsequent support for
+virtio dma sync.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 61 ++++++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  8 +++++
- 2 files changed, 69 insertions(+)
+ include/net/xsk_buff_pool.h |  6 ++++++
+ net/xdp/xsk_buff_pool.c     | 24 ++++++++++++++++++++----
+ 2 files changed, 26 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 67eda7bc23ea..7b393133fd27 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -3102,4 +3102,65 @@ void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
+diff --git a/include/net/xsk_buff_pool.h b/include/net/xsk_buff_pool.h
+index 3e952e569418..53b681120354 100644
+--- a/include/net/xsk_buff_pool.h
++++ b/include/net/xsk_buff_pool.h
+@@ -75,6 +75,12 @@ struct xsk_buff_pool {
+ 	u32 chunk_size;
+ 	u32 chunk_shift;
+ 	u32 frame_len;
++	void (*dma_sync_for_cpu)(struct device *dev, dma_addr_t addr,
++				 unsigned long offset, size_t size,
++				 enum dma_data_direction dir);
++	void (*dma_sync_for_device)(struct device *dev, dma_addr_t addr,
++				    unsigned long offset, size_t size,
++				    enum dma_data_direction dir);
+ 	u8 cached_need_wakeup;
+ 	bool uses_need_wakeup;
+ 	bool dma_need_sync;
+diff --git a/net/xdp/xsk_buff_pool.c b/net/xdp/xsk_buff_pool.c
+index ed6c71826d31..78e325e195fa 100644
+--- a/net/xdp/xsk_buff_pool.c
++++ b/net/xdp/xsk_buff_pool.c
+@@ -403,6 +403,20 @@ static int xp_init_dma_info(struct xsk_buff_pool *pool, struct xsk_dma_map *dma_
+ 	return 0;
  }
- EXPORT_SYMBOL_GPL(virtio_dma_unmap);
  
-+/**
-+ * virtio_dma_need_sync - check dma address need sync
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ */
-+bool virtio_dma_need_sync(struct device *dev, dma_addr_t addr)
++static void dma_sync_for_cpu(struct device *dev, dma_addr_t addr,
++			     unsigned long offset, size_t size,
++			     enum dma_data_direction dir)
 +{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
-+
-+	if (!vring_use_dma_api(vdev))
-+		return 0;
-+
-+	return dma_need_sync(vdev->dev.parent, addr);
++	dma_sync_single_range_for_cpu(dev, addr, offset, size, dir);
 +}
-+EXPORT_SYMBOL_GPL(virtio_dma_need_sync);
 +
-+/**
-+ * virtio_dma_sync_signle_range_for_cpu - dma sync for cpu
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ * @offset: DMA address offset
-+ * @size: mem size for sync
-+ * @dir: DMA direction
-+ *
-+ * Before calling this function, use virtio_dma_need_sync() to confirm that the
-+ * DMA address really needs to be synchronized
-+ */
-+void virtio_dma_sync_signle_range_for_cpu(struct device *dev, dma_addr_t addr,
-+					  unsigned long offset, size_t size,
-+					  enum dma_data_direction dir)
++static void dma_sync_for_device(struct device *dev, dma_addr_t addr,
++				unsigned long offset, size_t size,
++				enum dma_data_direction dir)
 +{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
-+
-+	dma_sync_single_range_for_cpu(vdev->dev.parent, addr, offset,
-+				      size, DMA_BIDIRECTIONAL);
++	dma_sync_single_range_for_device(dev, addr, offset, size, dir);
 +}
-+EXPORT_SYMBOL_GPL(virtio_dma_sync_signle_range_for_cpu);
 +
-+/**
-+ * virtio_dma_sync_signle_range_for_device - dma sync for device
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ * @offset: DMA address offset
-+ * @size: mem size for sync
-+ * @dir: DMA direction
-+ *
-+ * Before calling this function, use virtio_dma_need_sync() to confirm that the
-+ * DMA address really needs to be synchronized
-+ */
-+void virtio_dma_sync_signle_range_for_device(struct device *dev,
-+					     dma_addr_t addr,
-+					     unsigned long offset, size_t size,
-+					     enum dma_data_direction dir)
-+{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
+ int xp_dma_map(struct xsk_buff_pool *pool, struct device *dev,
+ 	       unsigned long attrs, struct page **pages, u32 nr_pages)
+ {
+@@ -421,6 +435,9 @@ int xp_dma_map(struct xsk_buff_pool *pool, struct device *dev,
+ 		return 0;
+ 	}
+ 
++	pool->dma_sync_for_cpu = dma_sync_for_cpu;
++	pool->dma_sync_for_device = dma_sync_for_device;
 +
-+	dma_sync_single_range_for_device(vdev->dev.parent, addr, offset,
-+					 size, DMA_BIDIRECTIONAL);
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_sync_signle_range_for_device);
-+
- MODULE_LICENSE("GPL");
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index ce89126becc5..8c2fae318b0c 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -227,4 +227,12 @@ dma_addr_t virtio_dma_map(struct device *dev, void *addr, unsigned int length,
- int virtio_dma_mapping_error(struct device *dev, dma_addr_t addr);
- void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
- 		      enum dma_data_direction dir);
-+bool virtio_dma_need_sync(struct device *dev, dma_addr_t addr);
-+void virtio_dma_sync_signle_range_for_cpu(struct device *dev, dma_addr_t addr,
-+					  unsigned long offset, size_t size,
-+					  enum dma_data_direction dir);
-+void virtio_dma_sync_signle_range_for_device(struct device *dev,
-+					     dma_addr_t addr,
-+					     unsigned long offset, size_t size,
-+					     enum dma_data_direction dir);
- #endif /* _LINUX_VIRTIO_H */
+ 	dma_map = xp_create_dma_map(dev, pool->netdev, nr_pages, pool->umem);
+ 	if (!dma_map)
+ 		return -ENOMEM;
+@@ -667,15 +684,14 @@ EXPORT_SYMBOL(xp_raw_get_dma);
+ 
+ void xp_dma_sync_for_cpu_slow(struct xdp_buff_xsk *xskb)
+ {
+-	dma_sync_single_range_for_cpu(xskb->pool->dev, xskb->dma, 0,
+-				      xskb->pool->frame_len, DMA_BIDIRECTIONAL);
++	xskb->pool->dma_sync_for_cpu(xskb->pool->dev, xskb->dma, 0,
++				     xskb->pool->frame_len, DMA_BIDIRECTIONAL);
+ }
+ EXPORT_SYMBOL(xp_dma_sync_for_cpu_slow);
+ 
+ void xp_dma_sync_for_device_slow(struct xsk_buff_pool *pool, dma_addr_t dma,
+ 				 size_t size)
+ {
+-	dma_sync_single_range_for_device(pool->dev, dma, 0,
+-					 size, DMA_BIDIRECTIONAL);
++	pool->dma_sync_for_device(pool->dev, dma, 0, size, DMA_BIDIRECTIONAL);
+ }
+ EXPORT_SYMBOL(xp_dma_sync_for_device_slow);
 -- 
 2.32.0.3.g01195cf9f
 
