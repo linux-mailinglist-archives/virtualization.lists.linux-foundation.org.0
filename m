@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 53075687B10
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:22 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5D122687B18
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:29 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E1562812A4;
-	Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E1562812A4
+	by smtp4.osuosl.org (Postfix) with ESMTP id 7932F416F3;
+	Thu,  2 Feb 2023 11:01:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7932F416F3
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id EThd-iWCCcuT; Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id AACEB813D0;
-	Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AACEB813D0
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1m3TQubNJzpk; Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id CA852404A3;
+	Thu,  2 Feb 2023 11:01:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CA852404A3
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 781E6C0080;
-	Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6282AC0084;
+	Thu,  2 Feb 2023 11:01:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8F0CBC007B
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 796AEC002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5D34281F17
+ by smtp3.osuosl.org (Postfix) with ESMTP id 545A161106
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5D34281F17
+ Thu,  2 Feb 2023 11:01:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 545A161106
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YB8x-gHYYsv8
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 77AzeiUpfc_J
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:17 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 544A3812A4
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 544A3812A4
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C7D4160B6C
+Received: from out30-98.freemail.mail.aliyun.com
+ (out30-98.freemail.mail.aliyun.com [115.124.30.98])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id C7D4160B6C
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:16 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ Thu,  2 Feb 2023 11:01:20 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VakpyCA_1675335671; 
+ TI=SMTPD_---0VakpyCS_1675335673; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VakpyCA_1675335671) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:12 +0800
+ fp:SMTPD_---0VakpyCS_1675335673) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:13 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 11/33] virtio_net: rename free_old_xmit_skbs to free_old_xmit
-Date: Thu,  2 Feb 2023 19:00:36 +0800
-Message-Id: <20230202110058.130695-12-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 12/33] virtio_net: unify the code for recycling the xmit ptr
+Date: Thu,  2 Feb 2023 19:00:37 +0800
+Message-Id: <20230202110058.130695-13-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -90,64 +90,144 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Since free_old_xmit_skbs not only deals with skb, but also xdp frame and
-subsequent added xsk, so change the name of this function to
-free_old_xmit.
+There are two completely similar and independent implementations. This
+is inconvenient for the subsequent addition of new types. So extract a
+function from this piece of code and call this function uniformly to
+recover old xmit ptr.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ drivers/net/virtio_net.c | 76 +++++++++++++++++-----------------------
+ 1 file changed, 33 insertions(+), 43 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 0f0036b1514d..bc7b9ccb325a 100644
+index bc7b9ccb325a..058ec6ca7cfc 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -1714,7 +1714,7 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
- 	return stats.packets;
+@@ -318,6 +318,30 @@ static struct xdp_frame *ptr_to_xdp(void *ptr)
+ 	return (struct xdp_frame *)((unsigned long)ptr & ~VIRTIO_XDP_FLAG);
  }
  
--static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
-+static void free_old_xmit(struct send_queue *sq, bool in_napi)
++static void __free_old_xmit(struct send_queue *sq, bool in_napi,
++			    struct virtnet_sq_stats *stats)
++{
++	unsigned int len;
++	void *ptr;
++
++	while ((ptr = virtqueue_get_buf(sq->vq, &len)) != NULL) {
++		if (!is_xdp_frame(ptr)) {
++			struct sk_buff *skb = ptr;
++
++			pr_debug("Sent skb %p\n", skb);
++
++			stats->bytes += skb->len;
++			napi_consume_skb(skb, in_napi);
++		} else {
++			struct xdp_frame *frame = ptr_to_xdp(ptr);
++
++			stats->bytes += xdp_get_frame_len(frame);
++			xdp_return_frame(frame);
++		}
++		stats->packets++;
++	}
++}
++
+ /* Converting between virtqueue no. and kernel tx/rx queue no.
+  * 0:rx0 1:tx0 2:rx1 3:tx1 ... 2N:rxN 2N+1:txN 2N+2:cvq
+  */
+@@ -635,15 +659,12 @@ static int virtnet_xdp_xmit(struct net_device *dev,
+ 			    int n, struct xdp_frame **frames, u32 flags)
  {
- 	unsigned int len;
- 	unsigned int packets = 0;
-@@ -1778,7 +1778,7 @@ static void virtnet_poll_cleantx(struct receive_queue *rq)
+ 	struct virtnet_info *vi = netdev_priv(dev);
++	struct virtnet_sq_stats stats = {};
+ 	struct receive_queue *rq = vi->rq;
+ 	struct bpf_prog *xdp_prog;
+ 	struct send_queue *sq;
+-	unsigned int len;
+-	int packets = 0;
+-	int bytes = 0;
+ 	int nxmit = 0;
+ 	int kicks = 0;
+-	void *ptr;
+ 	int ret;
+ 	int i;
  
- 		do {
- 			virtqueue_disable_cb(sq->vq);
--			free_old_xmit_skbs(sq, true);
-+			free_old_xmit(sq, true);
- 		} while (unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
+@@ -662,20 +683,7 @@ static int virtnet_xdp_xmit(struct net_device *dev,
+ 	}
  
- 		if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
-@@ -1870,7 +1870,7 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 	txq = netdev_get_tx_queue(vi->dev, index);
- 	__netif_tx_lock(txq, raw_smp_processor_id());
- 	virtqueue_disable_cb(sq->vq);
--	free_old_xmit_skbs(sq, true);
-+	free_old_xmit(sq, true);
+ 	/* Free up any pending old buffers before queueing new ones. */
+-	while ((ptr = virtqueue_get_buf(sq->vq, &len)) != NULL) {
+-		if (likely(is_xdp_frame(ptr))) {
+-			struct xdp_frame *frame = ptr_to_xdp(ptr);
+-
+-			bytes += xdp_get_frame_len(frame);
+-			xdp_return_frame(frame);
+-		} else {
+-			struct sk_buff *skb = ptr;
+-
+-			bytes += skb->len;
+-			napi_consume_skb(skb, false);
+-		}
+-		packets++;
+-	}
++	__free_old_xmit(sq, false, &stats);
  
- 	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
- 		netif_tx_wake_queue(txq);
-@@ -1960,7 +1960,7 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
- 		if (use_napi)
- 			virtqueue_disable_cb(sq->vq);
+ 	for (i = 0; i < n; i++) {
+ 		struct xdp_frame *xdpf = frames[i];
+@@ -692,8 +700,8 @@ static int virtnet_xdp_xmit(struct net_device *dev,
+ 	}
+ out:
+ 	u64_stats_update_begin(&sq->stats.syncp);
+-	sq->stats.bytes += bytes;
+-	sq->stats.packets += packets;
++	sq->stats.bytes += stats.bytes;
++	sq->stats.packets += stats.packets;
+ 	sq->stats.xdp_tx += n;
+ 	sq->stats.xdp_tx_drops += n - nxmit;
+ 	sq->stats.kicks += kicks;
+@@ -1716,37 +1724,19 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
  
--		free_old_xmit_skbs(sq, false);
-+		free_old_xmit(sq, false);
+ static void free_old_xmit(struct send_queue *sq, bool in_napi)
+ {
+-	unsigned int len;
+-	unsigned int packets = 0;
+-	unsigned int bytes = 0;
+-	void *ptr;
++	struct virtnet_sq_stats stats = {};
  
- 	} while (use_napi && kick &&
- 	       unlikely(!virtqueue_enable_cb_delayed(sq->vq)));
-@@ -2006,7 +2006,7 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
- 				virtqueue_napi_schedule(&sq->napi, sq->vq);
- 		} else if (unlikely(!virtqueue_enable_cb_delayed(sq->vq))) {
- 			/* More just got used, free them then recheck. */
--			free_old_xmit_skbs(sq, false);
-+			free_old_xmit(sq, false);
- 			if (sq->vq->num_free >= 2+MAX_SKB_FRAGS) {
- 				netif_start_subqueue(dev, qnum);
- 				virtqueue_disable_cb(sq->vq);
+-	while ((ptr = virtqueue_get_buf(sq->vq, &len)) != NULL) {
+-		if (likely(!is_xdp_frame(ptr))) {
+-			struct sk_buff *skb = ptr;
+-
+-			pr_debug("Sent skb %p\n", skb);
+-
+-			bytes += skb->len;
+-			napi_consume_skb(skb, in_napi);
+-		} else {
+-			struct xdp_frame *frame = ptr_to_xdp(ptr);
+-
+-			bytes += xdp_get_frame_len(frame);
+-			xdp_return_frame(frame);
+-		}
+-		packets++;
+-	}
++	__free_old_xmit(sq, in_napi, &stats);
+ 
+ 	/* Avoid overhead when no packets have been processed
+ 	 * happens when called speculatively from start_xmit.
+ 	 */
+-	if (!packets)
++	if (!stats.packets)
+ 		return;
+ 
+ 	u64_stats_update_begin(&sq->stats.syncp);
+-	sq->stats.bytes += bytes;
+-	sq->stats.packets += packets;
++	sq->stats.bytes += stats.bytes;
++	sq->stats.packets += stats.packets;
+ 	u64_stats_update_end(&sq->stats.syncp);
+ }
+ 
 -- 
 2.32.0.3.g01195cf9f
 
