@@ -1,147 +1,131 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B7EF96874C7
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 05:58:41 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id B13396874D4
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 06:01:27 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C0E3981244;
-	Thu,  2 Feb 2023 04:58:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C0E3981244
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=er3InxOf
+	by smtp2.osuosl.org (Postfix) with ESMTP id 2833B403E9;
+	Thu,  2 Feb 2023 05:01:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2833B403E9
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=KSLjgc2S
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 97QBd2dKkT09; Thu,  2 Feb 2023 04:58:39 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SQIHV0AmQrhd; Thu,  2 Feb 2023 05:01:25 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id DFA338124C;
-	Thu,  2 Feb 2023 04:58:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DFA338124C
+	by smtp2.osuosl.org (Postfix) with ESMTPS id C1C8F40B9E;
+	Thu,  2 Feb 2023 05:01:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C1C8F40B9E
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1CAA9C007C;
-	Thu,  2 Feb 2023 04:58:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E685FC007C;
+	Thu,  2 Feb 2023 05:01:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id AF895C002B
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C9C49C002B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 04:58:35 +0000 (UTC)
+ Thu,  2 Feb 2023 05:01:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 768EB403E9
+ by smtp2.osuosl.org (Postfix) with ESMTP id A451B4056F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 04:58:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 768EB403E9
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256
- header.s=selector2 header.b=er3InxOf
+ Thu,  2 Feb 2023 05:01:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A451B4056F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 5igIjK1b0GLk
+ with ESMTP id pL-mydBqrDTZ
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 04:58:34 +0000 (UTC)
+ Thu,  2 Feb 2023 05:01:21 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AA602401F1
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eae::601])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AA602401F1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 07907403E9
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on2061a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::61a])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 07907403E9
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 04:58:34 +0000 (UTC)
+ Thu,  2 Feb 2023 05:01:20 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=I/za+c/9eEpB1M8YIA8j4nGUJdv0CZFT1K0n8syZAAx3ksvRwj5adGQeKgcPYLNBvH7TjDoTCf/6QyQPYCSCQOm24xgp0dbwzww92W2/i/HliRpZxe5TTLU/TWlFbS+m5RyP4kk0Zv3Gl79nzA56fFEUFPRUSqWbSfx/B+gDHR19lvB+vRjXkpQTEz95raMTh85VkdTmQ3DvmztRTG8xHc+aLPJYPPgLR6diXwjS0Mp5oG29PeGwS77FteTaaigouEu2pczDMxNEze/Auav3UNPPaaq/Pb1HOrJ3BNYgvwG/Rwxv723/oNX4TlKVh1kDHbb4wPnsSaP/bxK9tEAyiQ==
+ b=jthc8E/IAn3rVTyIO6cQ7b9iQvpRnRwHUjsREBaaO6hl6LqTjJd4AvyECE0wsDkLPumv+jLnR3cXxvLTAvsvObSDeSknyW46dgmOwU/ok/RptGniM2+WPwz+umT0kiDVsPWBhWc9jYHknIFyInpbEFCTNteYAXWTjTmj4bBzCOHj+YQP2C3tBzxvnL3isn2vJTjGdREvxBF+7J4hQXi+tzlltw6B5Lq/+tVrtpuNGFRgpeliufg4hEEW1yS3OYYQVuXY298tR0N4F9s3h3e1YRZbbOlRpvgKoRVZ37U2NxzmQ8YdH4ltuctMQppPtXaBPYoGnwwgB6k6y+3zRNBAcQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rk2uNVE92RX2UYiSS0SOKJH3C/kzbkazgqni15wgco8=;
- b=Qtbw90OxDOEbNbiRuFNHJWLHX2GBFNDWFlhbrvH7I8TRxao2W2onfBjAw0YxC7tGwSGvQ4FxYLfKDzDD4XgbuJ3Kc2hYRhw6JkeFVknPZW9LIOormIvthx6b9ayl5y9Lz+6GWOkpex3Qg+J+f+NyhwO0Xlq37BBgAMKzETxKayUlVEqvqzH8pc/3IdUWEx3r1DgJ9mxella+Rd6fh+SL+ShyZTdb+umEvi8zxycEdYMv6Xhrkl3QmZIFA6HXtLbBxkgmeoN8fzow/bvyHEPDK5krftzAQWWeiT5Pz4pE9NbvZpXradMGhFnK7FrZuWdO2sfpyeYpmlDsNf29W0AgrA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
+ bh=4I/diG3QnC7clJPYiRr0UXMWSF6BiaRsvuJPmh+r5m8=;
+ b=dRL9xvUb8+qdNnwA7UsecyeyBYbHgZZ+mS6HpvM8BmuO1vTxb8XsZ5GckZdagQ61GVSGWjXuayCKROmy1yH4C5ZXpygBQLINxjCxmuQoksK+qGqIWjXkL/n5b6Nj9m9tqvZEbew9JLtXQZDsn4wlwDyDzySclisQVUmylMCj/G8J/zWvZVbv4Fl54p5Rpif0vs2MtQ13MwIBKfGM48mAFVFw99a0FvLXlT4cv59fNosNInc+A82/b4XAhwxYZjKYnCjA5S5uNM0ELUsqPdrbuZw9XfLtM76PzsOJ0VbCTDalEuQctG9wYK2GfCGF7bQk6JzPdAkR/Uin7Mdzpp7XAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rk2uNVE92RX2UYiSS0SOKJH3C/kzbkazgqni15wgco8=;
- b=er3InxOfiaY0BeU/XWJtLJIG9xInqKHsNcWzwRAqpX26TfQWJGOzQiqMK4KL8idFcHL+P8E2uljnYCg6Q6czyOwTAunf4xerRVkHdBUl1y8EEJ4PnMjXB+lYxejbzjCQfGq37n/JCda0+aurMbofRep41GJ/O6iZkv/poldXRrLC0f4YiTWVfV5Dlmhg3dbvFYiBZ3UHUVJQOfnaRznsWPWFagTZHyddK1EPRDlgXdI7+/0IcyGc/GDCV+qCQoSG8dmcEoDZp2cn39jYMBxdpLj2UOfVMzP7r4oHzlJPgRDc4AoKUbi+4Az33hPCCjVT+mvOi22Xq/oqfVcr05tZ5g==
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com (2603:10b6:510:d4::15)
- by SN7PR12MB6910.namprd12.prod.outlook.com (2603:10b6:806:262::21)
+ bh=4I/diG3QnC7clJPYiRr0UXMWSF6BiaRsvuJPmh+r5m8=;
+ b=KSLjgc2S1xhtO6vUALAM+RWGTZbgPMmJ+naV7jBabG9DpE2arIoFkfZV8u5oBXsHJecOvzGN3dXzhc7FMMGT5/EMESuNCMnRoWwawZoDmd6R4dX9QIXj7NSCqR+hXSgEMGMg/Dq0Qbt3j7ch8r/Onmxkz/5mEdSp8wIN5HIV+UMe7tND4gpelLRMYxlaWrGl7OAVwgiHGLQpUd4WZJGh13S8ABByMt47zmXMzquz0d+yn1p8DUYauJ1vq37vrUXdPgFS1Xg0ckza7TjiIoHz1/j3hSrdOAXbZdwIsnru9nKu/ytmHSV01dBOAwnJW7WVr4Xmj4Qd2zPNngdbEKblaQ==
+Received: from BN9PR03CA0480.namprd03.prod.outlook.com (2603:10b6:408:139::35)
+ by MN0PR12MB5787.namprd12.prod.outlook.com (2603:10b6:208:376::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.27; Thu, 2 Feb
- 2023 04:58:31 +0000
-Received: from PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::a891:beb7:5440:3f0]) by PH0PR12MB5481.namprd12.prod.outlook.com
- ([fe80::a891:beb7:5440:3f0%4]) with mapi id 15.20.6064.025; Thu, 2 Feb 2023
- 04:58:31 +0000
-To: Si-Wei Liu <si-wei.liu@oracle.com>, "mst@redhat.com" <mst@redhat.com>,
- "jasowang@redhat.com" <jasowang@redhat.com>, Eli Cohen <elic@nvidia.com>
-Subject: RE: [PATCH v2 2/7] vdpa: conditionally read STATUS in config space
-Thread-Topic: [PATCH v2 2/7] vdpa: conditionally read STATUS in config space
-Thread-Index: AQHZNcrt16j1tjEdlESo1L34RWyIYa67GkzA
-Date: Thu, 2 Feb 2023 04:58:31 +0000
-Message-ID: <PH0PR12MB54810E49707E9C06F177D24ADCD69@PH0PR12MB5481.namprd12.prod.outlook.com>
-References: <1675207345-22328-1-git-send-email-si-wei.liu@oracle.com>
- <1675207345-22328-3-git-send-email-si-wei.liu@oracle.com>
-In-Reply-To: <1675207345-22328-3-git-send-email-si-wei.liu@oracle.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PH0PR12MB5481:EE_|SN7PR12MB6910:EE_
-x-ms-office365-filtering-correlation-id: 154fe27c-531c-4b56-16d0-08db04da21a4
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: yUwGAI+sw/F/1zQPL1uTk3yS4p6nKL1SATgjPQdm1WXsSJFaYDxN8Dz3dBMozxHMXZibN/KWXTD6YjzoqTGO5xinQh1MIZx/FeDfEcD6Dw1QEWDjNPej/ZqOi0hdhAWPV2DlTpbvudGlPMFLE7JMeZqpECwo0mL2lfMF/y2QcM2CZ/LcPwLB6FiXhmXAx+sSsdTWbBZKqmc+sLaUy5aWp8lEa6h3dqv5fkqyfrGjBMFkY+KC42Y+9vmr+1BcN9sSTaCqiS6tLVsfaWu8+eW/46L7GdkpkjbKBpoKI8bpmCszFCgtBxuJh5mVFigHowbGd+nljXN6x98fngk7ZauyVALOY1n40KlhNafHK+97XPRH2YLnu5OyTt65L3f+0+SZd84iwBciib3FhscgMYyGqjYcN+tYdIgRy54tWfO/Xm96kD12X+exequNOMZaPlYOwErdr2K57WZJDiUSva1fZjYbi4g966eyAjvDPD6BGB7oSW9jwZTB95LXeFtPhTyPpxFFNcvu+ounV5WTZGq2nVf8/5h1hFuctYfP8AGpSHKs64cRrAhy2Qquar1hFDCqbKO1xWQDyULhGfb7GiNPW60O/ym9Da3JkEuoJUj+OeS5SCC5rEwwsjay7Z/UN1FBeBPl20A7on8qlG5DIF0sBpDMQbaiK0F103mHyOZnbH5kC4tlEY/MrMl+sx8s+9h4xe3l32sJWsX0Koiom93Jjg==
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PH0PR12MB5481.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230025)(4636009)(346002)(366004)(376002)(39860400002)(136003)(396003)(451199018)(55016003)(41300700001)(26005)(186003)(9686003)(6506007)(38100700002)(54906003)(110136005)(122000001)(8936002)(38070700005)(52536014)(2906002)(316002)(6636002)(71200400001)(7696005)(76116006)(66556008)(66946007)(83380400001)(33656002)(66476007)(86362001)(5660300002)(8676002)(64756008)(66446008)(478600001)(4326008);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?+Kvii9ohilq3G/cbe6RhSU+WSys2LdAAsfYBu7t3KHxmjRoAFDrodsmryEWr?=
- =?us-ascii?Q?/NczVx1Um6SlPMxDgrvJZhmulll0wekvXONER7piJ7vi1CQEx7h4GF60/vc8?=
- =?us-ascii?Q?qyrcIt3n+E68O8gEhvYxF39H+e2KPfNCIg8wdYOebTRxtHbWn8BhJL82T1eG?=
- =?us-ascii?Q?3f5hGfVUcGevUtNh7S8qi2O+e1yj4ANAJhrvDdtpOodAKHL6ZrqqSUDmGcoQ?=
- =?us-ascii?Q?xBOxaEpGDz162YU9NnNbvxhCzLR1k6tdGca8lqMH0Uba/ebhM2Zaqu11AW6k?=
- =?us-ascii?Q?x998yS+mX6hM6AI8scEb5m78Wm0F0Azz+XCe8fQwACUSLq9RwGqsg42Mo8Ia?=
- =?us-ascii?Q?jPaGymNygdJTKDG6hbrRLo08qCaU2At33/UzmIvqfegntzmRJB72s0THVU4+?=
- =?us-ascii?Q?1gkbArz717hvZBhgr4ZGoiZqPcggL/RwywXADlefYJYQAnnXUcoaS1FhHv/s?=
- =?us-ascii?Q?/ZO1hvXpDSFCLhYpdgrU4JyHqcvPZD+PUE/yO13DBn57hExfx+BfYgpRjrop?=
- =?us-ascii?Q?GHZieebtOxqAswNfnnth/qreCbiIHsxXHF/Ce8sXpg33PIT7K+nbIOlRF2xv?=
- =?us-ascii?Q?F6ZtOiFVmUY25wpkabgxC9AFRMFEtMxn6AVEe/Lg+PPjTgtlJes31aogwRRj?=
- =?us-ascii?Q?uzGXh1nqK32Zd57HmoTe2bD98HN43LboAUaXI99y9/pfv1jzB+otu4Z6h/X+?=
- =?us-ascii?Q?MDnIN4v3a74YcMTTmKFG+DYR91XJL35Wh7nMpHp8Z+GkG7goXDAQdz8iCizv?=
- =?us-ascii?Q?ZR8LhohTBG5DPPMmBSCarPLRec844bXQRT5+8FHr2PISrLqqQalVS61rNxPS?=
- =?us-ascii?Q?CuJrM0BXdIBbAhTB8qh3KI7QiVdj3shbXn7HOCLojC1+snQpYs0gaLSvI4lK?=
- =?us-ascii?Q?t53AfFtkZ8tqT6gxTLE1YjAemcdR9xyZF5icxs8ptgPpF9FP7HfR5WnXOE3f?=
- =?us-ascii?Q?4rmn9plhz6N7bBXENBoN02vQrnLTwvnEwv6dciNimV7Rb3NLOPSYXOaRkZnr?=
- =?us-ascii?Q?d8dKN/RGQC7DV6/1kMGGu7x/b00srVBCsuhU4KFZlbxrg3GChGGwUTxzmbGn?=
- =?us-ascii?Q?60pk38rCmzF/zLOc36GmEPp6ST39W0UeCuK2sN6lAnPbBqW9QNW9aOQ9h6oi?=
- =?us-ascii?Q?cuoK1uMJnCorHnbNMkFFhVkCJ+KUJTDv6NkCPydekS7HtNta2mtQaWn78P2H?=
- =?us-ascii?Q?7HE9UeppeXjIOsUlCgpAE5RCbOR/u/eXTNMt+41KBUjmzsLN1ffhfivKBfPd?=
- =?us-ascii?Q?PEpxq+BFklK4/eSzx8UKuKapucOcx9VbIPwyXWZbFu3MMb8QViQe/Dsz7dXt?=
- =?us-ascii?Q?wQ3x40n4yLn4wHCboNOQY/SykrcZEMMSZlX+WfjCTsptEV8SaZLFwBlF33Gx?=
- =?us-ascii?Q?BhTjPuajMbZVixsTpuXRatE4FLuzPems/Mj+k6RMI2uYEhI3IIpEPifULFE9?=
- =?us-ascii?Q?ftr05dodmM4iPwGPkugqnIrtKMfqPvHF0NAEHBeEkFPKRMtlIC91Sk5Ym/DN?=
- =?us-ascii?Q?PHmkIhAncTN2u7F1XfUCY7KFgwF9XxlP/U+6ZVamKPxn7QlvTJgw6q9GZ9+t?=
- =?us-ascii?Q?vNpWh6h8ecg2O0fqNbc=3D?=
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.25; Thu, 2 Feb
+ 2023 05:01:18 +0000
+Received: from BN8NAM11FT051.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:139:cafe::23) by BN9PR03CA0480.outlook.office365.com
+ (2603:10b6:408:139::35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.25 via Frontend
+ Transport; Thu, 2 Feb 2023 05:01:18 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ smtp.mailfrom=nvidia.com;
+ dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.161) by
+ BN8NAM11FT051.mail.protection.outlook.com (10.13.177.66) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6064.27 via Frontend Transport; Thu, 2 Feb 2023 05:01:17 +0000
+Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
+ (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.36; Wed, 1 Feb 2023
+ 21:00:58 -0800
+Received: from sw-mtx-036.mtx.labs.mlnx (10.126.231.37) by
+ rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.986.36; Wed, 1 Feb 2023 21:00:56 -0800
+To: <mst@redhat.com>, <jasowang@redhat.com>, <davem@davemloft.net>,
+ <kuba@kernel.org>, <netdev@vger.kernel.org>
+Subject: [PATCH 0/2] virtio-net: close() to follow mirror of open()
+Date: Thu, 2 Feb 2023 07:00:36 +0200
+Message-ID: <20230202050038.3187-1-parav@nvidia.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
+X-Originating-IP: [10.126.231.37]
+X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
+ rnnvmail201.nvidia.com (10.129.68.8)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN8NAM11FT051:EE_|MN0PR12MB5787:EE_
+X-MS-Office365-Filtering-Correlation-Id: 89cee5f3-4e1d-4480-d751-08db04da84db
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 7lP/okB+6Jey7nkxmzQloRQ/0q0eW/rxYqiEUERy8eRLvGhNE3rxnnbNuWW1jqNMFvH0xa9Mw4H3v6DCMzB9+UV736HbJTdgdUElRM9UavhsYqgrGCyn/qKhcp85uqh0fqjOHUdV1k6Obt5pvyfH7VCMpsvhkyBiEI2E2i5peIu4EFP2blYTUKnGW6qbxyJ4W8tJxI0CGfFB6Mrd/d/H5SnG06U2Xk9THu9okxPyKYxqLM+Gvtn6hZHMc04/sr6++u98BhLUzl8zDKqJNNEPoKO8AQHptIzxwWrwXRAXVJxUtFw9hsGgcVL+L4xNaQ79JfUTqto+63dmnp5S6S1pXuZT5WPNC+0cWaR+AkOgsJ1GjzUE213lw8ppfcWAKtAbPNceUGJ9gMI0XKr9SKc6r5PK55cFLAm7RGKWtkSV6UGGD/mHnoDYKiIQhFOyJ72Lmgfuzqdnrba7DrvQ6IIryeHBaqGAnkiNRzXU8SMpMQA8DZO2duayawPgU0M7Tuj52aR4X0IVNhF0zCHf/XjYfedjl+ZiDK872pGb5aDu8zKVJl8+4FjJyVSsOxpP1ix5pS3wyHFdAsAiUmTLvmtVzIgNu5acOuM8/bAtBYPrvibt9xNgg7C1eY5cr3PahsGFOvcuD5qfNWWzDhpD4fY9sYp622CqtMP2Me71gogX8zZIs+TRo65orQwvoW9HbOj2OQBlhySr5UsPxiG9NnyuiQ==
+X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
+ SFS:(13230025)(4636009)(346002)(136003)(396003)(376002)(39860400002)(451199018)(40470700004)(46966006)(36840700001)(5660300002)(4744005)(7416002)(41300700001)(8936002)(478600001)(36860700001)(4326008)(47076005)(70206006)(70586007)(8676002)(107886003)(6666004)(26005)(36756003)(1076003)(16526019)(186003)(83380400001)(336012)(110136005)(2616005)(2906002)(7636003)(82740400003)(40480700001)(40460700003)(86362001)(356005)(54906003)(316002)(426003)(82310400005);
+ DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR12MB5481.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 154fe27c-531c-4b56-16d0-08db04da21a4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Feb 2023 04:58:31.6528 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: TjgjzcG6M5uSMr1pPHzTzeSLmv1NCTF+WAaCaPYKcXyp8c5Vk33fFHqtEKuUZ9clW/+NHiBpYCXoG6wi/5ab1w==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6910
-Cc: "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Feb 2023 05:01:17.9407 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89cee5f3-4e1d-4480-d751-08db04da84db
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+ Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT051.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB5787
+Cc: hawk@kernel.org, daniel@iogearbox.net, ast@kernel.org,
+ virtualization@lists.linux-foundation.org, edumazet@google.com,
+ bpf@vger.kernel.org, pabeni@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -161,71 +145,29 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
+Hi,
 
+This two small patches improves ndo_close() callback to follow
+the mirror sequence of ndo_open() callback. This improves the code auditing
+and also ensure that xdp rxq info is not unregistered while NAPI on
+RXQ is ongoing.
 
-> From: Si-Wei Liu <si-wei.liu@oracle.com>
-> Sent: Tuesday, January 31, 2023 6:22 PM
-> 
-> The spec says:
->     status only exists if VIRTIO_NET_F_STATUS is set
-> 
-> Similar to MAC and MTU, vdpa_dev_net_config_fill() should read STATUS
-> conditionally depending on the feature bits.
-> 
-> Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
-> ---
->  drivers/vdpa/vdpa.c | 20 +++++++++++++++-----
->  1 file changed, 15 insertions(+), 5 deletions(-)
-> 
-> diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c index
-> 3a82ca78..21c8aa3 100644
-> --- a/drivers/vdpa/vdpa.c
-> +++ b/drivers/vdpa/vdpa.c
-> @@ -843,18 +843,25 @@ static int vdpa_dev_net_mac_config_fill(struct
-> sk_buff *msg, u64 features,
->  			sizeof(config->mac), config->mac);
->  }
-> 
-> +static int vdpa_dev_net_status_config_fill(struct sk_buff *msg, u64 features,
-> +					   const struct virtio_net_config
-> *config) {
-> +	u16 val_u16;
-> +
-> +	if ((features & BIT_ULL(VIRTIO_NET_F_STATUS)) == 0)
-> +		return 0;
-> +
-> +	val_u16 = __virtio16_to_cpu(true, config->status);
-> +	return nla_put_u16(msg, VDPA_ATTR_DEV_NET_STATUS, val_u16); }
-> +
->  static int vdpa_dev_net_config_fill(struct vdpa_device *vdev, struct sk_buff
-> *msg)  {
->  	struct virtio_net_config config = {};
->  	u64 features_device;
-> -	u16 val_u16;
-> 
->  	vdev->config->get_config(vdev, 0, &config, sizeof(config));
-> 
-> -	val_u16 = __virtio16_to_cpu(true, config.status);
-> -	if (nla_put_u16(msg, VDPA_ATTR_DEV_NET_STATUS, val_u16))
-> -		return -EMSGSIZE;
-> -
->  	features_device = vdev->config->get_device_features(vdev);
-> 
->  	if (nla_put_u64_64bit(msg, VDPA_ATTR_DEV_FEATURES,
-> features_device, @@ -867,6 +874,9 @@ static int
-> vdpa_dev_net_config_fill(struct vdpa_device *vdev, struct sk_buff *ms
->  	if (vdpa_dev_net_mac_config_fill(msg, features_device, &config))
->  		return -EMSGSIZE;
-> 
-> +	if (vdpa_dev_net_status_config_fill(msg, features_device, &config))
-> +		return -EMSGSIZE;
-> +
->  	return vdpa_dev_net_mq_config_fill(msg, features_device, &config);  }
-> 
-> --
-> 1.8.3.1
+Please review.
 
-Reviewed-by: Parav Pandit <parav@nvidia.com>
+Patch summary:
+patch-1 ensures that xdp rq info is unregistered after rq napi is disabled
+patch-2 keeps the mirror sequence for close() be mirror of open()
+
+Parav Pandit (2):
+  virtio-net: Keep stop() to follow mirror sequence of open()
+  virtio-net: Maintain reverse cleanup order
+
+ drivers/net/virtio_net.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+-- 
+2.26.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
