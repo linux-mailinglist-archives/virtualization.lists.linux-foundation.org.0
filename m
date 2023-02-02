@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id CD85B687B16
-	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:26 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 496C2687B1C
+	for <lists.virtualization@lfdr.de>; Thu,  2 Feb 2023 12:01:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4BE1740048;
-	Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4BE1740048
+	by smtp3.osuosl.org (Postfix) with ESMTP id 9E2C76114F;
+	Thu,  2 Feb 2023 11:01:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9E2C76114F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lRW4lB_8Thum; Thu,  2 Feb 2023 11:01:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id D7BD140346;
-	Thu,  2 Feb 2023 11:01:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D7BD140346
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id AW4ui_HyoC7S; Thu,  2 Feb 2023 11:01:27 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 5514E6116B;
+	Thu,  2 Feb 2023 11:01:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5514E6116B
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1117CC0078;
-	Thu,  2 Feb 2023 11:01:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 31462C0078;
+	Thu,  2 Feb 2023 11:01:27 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9F365C002B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E1471C007B
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 7922E40C37
+ by smtp2.osuosl.org (Postfix) with ESMTP id BAB9240C37
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7922E40C37
+ Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BAB9240C37
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bUiMLMvjvb8b
+ with ESMTP id pmDuXWy25DsV
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:19 +0000 (UTC)
+ Thu,  2 Feb 2023 11:01:25 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 19DD440C55
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 19DD440C55
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6B64E40C6A
+Received: from out30-101.freemail.mail.aliyun.com
+ (out30-101.freemail.mail.aliyun.com [115.124.30.101])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6B64E40C6A
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Feb 2023 11:01:18 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+ Thu,  2 Feb 2023 11:01:23 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=21; SR=0;
- TI=SMTPD_---0VakkM4._1675335674; 
+ TI=SMTPD_---0VakfX1j_1675335675; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VakkM4._1675335674) by smtp.aliyun-inc.com;
- Thu, 02 Feb 2023 19:01:14 +0800
+ fp:SMTPD_---0VakfX1j_1675335675) by smtp.aliyun-inc.com;
+ Thu, 02 Feb 2023 19:01:15 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 13/33] virtio_net: virtnet_poll_tx support rescheduled
-Date: Thu,  2 Feb 2023 19:00:38 +0800
-Message-Id: <20230202110058.130695-14-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 14/33] virtio_net: independent directory
+Date: Thu,  2 Feb 2023 19:00:39 +0800
+Message-Id: <20230202110058.130695-15-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
 References: <20230202110058.130695-1-xuanzhuo@linux.alibaba.com>
@@ -90,46 +90,103 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtnet_poll_tx() support to return budget when busy to be rescheduled.
-
-When retval < budget, napi_poll() in dev.c will exit directly. And
-virtqueue_napi_complete() will be called to close napi.
-
-When retval == budget, the napi_poll() in dev.c will re-add napi to the
-queue.
-
-The purpose of this patch is to support xsk xmit in virtio_poll_tx() for
-subsequent patch.
+Create a separate directory for virtio-net. AF_XDP support will be added
+later, then a separate xsk.c file will be added, so we should create a
+directory for virtio-net.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ MAINTAINERS                                 |  2 +-
+ drivers/net/Kconfig                         |  8 +-------
+ drivers/net/Makefile                        |  2 +-
+ drivers/net/virtio/Kconfig                  | 11 +++++++++++
+ drivers/net/virtio/Makefile                 |  8 ++++++++
+ drivers/net/{virtio_net.c => virtio/main.c} |  0
+ 6 files changed, 22 insertions(+), 9 deletions(-)
+ create mode 100644 drivers/net/virtio/Kconfig
+ create mode 100644 drivers/net/virtio/Makefile
+ rename drivers/net/{virtio_net.c => virtio/main.c} (100%)
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 058ec6ca7cfc..eb7f00194b5c 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -1848,6 +1848,7 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 	struct virtnet_info *vi = sq->vq->vdev->priv;
- 	unsigned int index = vq2txq(sq->vq);
- 	struct netdev_queue *txq;
-+	int busy = 0;
- 	int opaque;
- 	bool done;
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 8cdba0580cb8..4f2bb7013768 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -22052,7 +22052,7 @@ F:	Documentation/ABI/testing/sysfs-class-vduse
+ F:	Documentation/devicetree/bindings/virtio/
+ F:	drivers/block/virtio_blk.c
+ F:	drivers/crypto/virtio/
+-F:	drivers/net/virtio_net.c
++F:	drivers/net/virtio/
+ F:	drivers/vdpa/
+ F:	drivers/virtio/
+ F:	include/linux/vdpa.h
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index 950a09f021dd..825a091c902a 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -408,13 +408,7 @@ config VETH
+ 	  When one end receives the packet it appears on its pair and vice
+ 	  versa.
  
-@@ -1865,6 +1866,11 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
- 		netif_tx_wake_queue(txq);
+-config VIRTIO_NET
+-	tristate "Virtio network driver"
+-	depends on VIRTIO
+-	select NET_FAILOVER
+-	help
+-	  This is the virtual network driver for virtio.  It can be used with
+-	  QEMU based VMMs (like KVM or Xen).  Say Y or M.
++source "drivers/net/virtio/Kconfig"
  
-+	if (busy) {
-+		__netif_tx_unlock(txq);
-+		return budget;
-+	}
+ config NLMON
+ 	tristate "Virtual netlink monitoring device"
+diff --git a/drivers/net/Makefile b/drivers/net/Makefile
+index e26f98f897c5..47537dd0f120 100644
+--- a/drivers/net/Makefile
++++ b/drivers/net/Makefile
+@@ -31,7 +31,7 @@ obj-$(CONFIG_NET_TEAM) += team/
+ obj-$(CONFIG_TUN) += tun.o
+ obj-$(CONFIG_TAP) += tap.o
+ obj-$(CONFIG_VETH) += veth.o
+-obj-$(CONFIG_VIRTIO_NET) += virtio_net.o
++obj-$(CONFIG_VIRTIO_NET) += virtio/
+ obj-$(CONFIG_VXLAN) += vxlan/
+ obj-$(CONFIG_GENEVE) += geneve.o
+ obj-$(CONFIG_BAREUDP) += bareudp.o
+diff --git a/drivers/net/virtio/Kconfig b/drivers/net/virtio/Kconfig
+new file mode 100644
+index 000000000000..9bc2a2fc6c3e
+--- /dev/null
++++ b/drivers/net/virtio/Kconfig
+@@ -0,0 +1,11 @@
++# SPDX-License-Identifier: GPL-2.0-only
++#
++# virtio-net device configuration
++#
++config VIRTIO_NET
++	tristate "Virtio network driver"
++	depends on VIRTIO
++	select NET_FAILOVER
++	help
++	  This is the virtual network driver for virtio.  It can be used with
++	  QEMU based VMMs (like KVM or Xen).  Say Y or M.
+diff --git a/drivers/net/virtio/Makefile b/drivers/net/virtio/Makefile
+new file mode 100644
+index 000000000000..15ed7c97fd4f
+--- /dev/null
++++ b/drivers/net/virtio/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0
++#
++# Makefile for the virtio network device drivers.
++#
 +
- 	opaque = virtqueue_enable_cb_prepare(sq->vq);
- 
- 	done = napi_complete_done(napi, 0);
++obj-$(CONFIG_VIRTIO_NET) += virtio_net.o
++
++virtio_net-y := main.o
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio/main.c
+similarity index 100%
+rename from drivers/net/virtio_net.c
+rename to drivers/net/virtio/main.c
 -- 
 2.32.0.3.g01195cf9f
 
