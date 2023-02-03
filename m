@@ -1,77 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id C2B96689CCE
-	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:08:46 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id AFE1868A026
+	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 18:18:19 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 447EB82213;
-	Fri,  3 Feb 2023 15:08:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 447EB82213
+	by smtp1.osuosl.org (Postfix) with ESMTP id D79F9821BB;
+	Fri,  3 Feb 2023 17:18:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D79F9821BB
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=BFKATpqt
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel-dk.20210112.gappssmtp.com header.i=@kernel-dk.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=R00Jv7r0
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CchDuAyCqRT1; Fri,  3 Feb 2023 15:08:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id E66818220A;
-	Fri,  3 Feb 2023 15:08:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E66818220A
+	with ESMTP id oCvxDpA6gUbL; Fri,  3 Feb 2023 17:18:17 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id B4B29821C5;
+	Fri,  3 Feb 2023 17:18:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B4B29821C5
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4D25BC007C;
-	Fri,  3 Feb 2023 15:08:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D7584C007C;
+	Fri,  3 Feb 2023 17:18:15 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D37AEC002B
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 13081C002B
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:08:41 +0000 (UTC)
+ Fri,  3 Feb 2023 17:18:14 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id AEA25612EF
+ by smtp1.osuosl.org (Postfix) with ESMTP id CE3A4821C5
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:08:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AEA25612EF
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=BFKATpqt
+ Fri,  3 Feb 2023 17:18:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CE3A4821C5
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KA_dAvbCgYgd
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id tQuo6EVsiVyc
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:08:41 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E2880612ED
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E2880612ED
+ Fri,  3 Feb 2023 17:18:13 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DD7B2821BB
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DD7B2821BB
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:08:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
- MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
- :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=hrqLS9VRJdwWgQKPMrZrcg15ZPJuMvt1hsLhaUGAnIc=; b=BFKATpqtVunXubdNNkJ5PWdGdR
- w5eGqcr1X3knNS9rr6k9oWENyIENlbi6OonNovYL8ZHpJJjUDwpcHhHTonjJY90oiMj+zCg0GCLCT
- ZgNdYtwQXm0LQxe0W+f7iZTRogn9U/K+/3e+BH4ejOUB6/fIsWrQ9/00S1gnU4+Kd1mny+mtvIcKf
- JBQbwIHCn96cgHxD69nkGyasiOfbHuKn0hnE8rzKpZB3qBEEW9iNbSwkEF+umPMiYEN99kqyv25Ra
- OyRlO6fWHiMfP1LpyRoEaKpRG1PL6hAcJNC4/vgMJdlJJBo2kCaI7cWoF5XwWHzsLSZZ3Jn/itg0Q
- 3+X6SEYg==;
-Received: from [2001:4bb8:19a:272a:910:bb67:7287:f956] (helo=localhost)
- by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pNxfT-002bcT-3j; Fri, 03 Feb 2023 15:07:59 +0000
-From: Christoph Hellwig <hch@lst.de>
-To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 23/23] libceph: use bvec_set_page to initialize bvecs
-Date: Fri,  3 Feb 2023 16:06:34 +0100
-Message-Id: <20230203150634.3199647-24-hch@lst.de>
-X-Mailer: git-send-email 2.39.0
+ Fri,  3 Feb 2023 17:18:12 +0000 (UTC)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ cl23-20020a17090af69700b0022c745bfdc3so5543661pjb.3
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 03 Feb 2023 09:18:12 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=kernel-dk.20210112.gappssmtp.com; s=20210112;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=K70GwBbxm76u0ZHh9QualBnSNVhMmwCaA4xLAgTOsU4=;
+ b=R00Jv7r0nGI0Ztnp5TNHhM+FfJ5zmFRR/yKaJPFf48QgjKh7tXSwGMmQnOoqu8Xid4
+ wge7CmaLgfoEKprgizb7/sm8rwZ8EQ9OCoyJKMGvTA4kiktJCR4NV/cva7qvSGWATdmE
+ /2uT8roACaKsn4YLwQl6hQkgbKX7IYcNLKQL5KVRHggoW1I8XImpl9s6MfEiMUSpHo9Y
+ S5fkZix1iQi2f9FmnThOmhtEMaBrJr9ePfucBJOf0enZnaK+aBn2RScZgWLk6sLYtLKJ
+ 6yN94xDkDiQ62CShnA6PepLuiQAIJ+UkyAdk860JzMBR19PnaXvBFKHmerQBvkix95On
+ 9+yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=K70GwBbxm76u0ZHh9QualBnSNVhMmwCaA4xLAgTOsU4=;
+ b=NL7QpNI6n2IzZ3mOlPRJC3XAtc4Ru0oOiNm0KKNddpfnH71l4TrLUf4ZoYW2NkqBFl
+ WuRvrMUyEd9+48JUgdC2qnlyfqkkSDcQsgyW0zlBmH572J9VUNtAOQLBtpG6Y02mUNal
+ 7ksAwqpkxZUOukxjWwSiII6rvcVydXPJU0lBd1yJvOnt5xP990EfweVvJKBU334+vW1o
+ YrPeH8UXVLrZkbknM0X9rDgfX7BnWjtyAWt5vrqhyVTfdatt/xxg8Gtdcrb6RWMjiIZj
+ Btxl1Zf5vT+I4mVSpUNMxE7kzV7DFy99GDgyjjiU9uvvtH9RFmErtO3kNQP6u5isUjtp
+ YLDg==
+X-Gm-Message-State: AO0yUKWVhGd751bzYjiyZB6PmtYxh59DFkwNz4fIZioOnrL6jgqqk92x
+ eLOiQHkMNPx/XyW6CWFEx9QOHA==
+X-Google-Smtp-Source: AK7set/8QyEeOBS5HCdwVVv3pX8pLqYaYDC09KN7ZX0YiSUh3tCWtH5sa+Lu+Eay2bGB3phfSCaeYw==
+X-Received: by 2002:a17:90a:3c83:b0:22b:afef:9228 with SMTP id
+ g3-20020a17090a3c8300b0022bafef9228mr8980675pjc.4.1675444691816; 
+ Fri, 03 Feb 2023 09:18:11 -0800 (PST)
+Received: from [127.0.0.1] ([198.8.77.157]) by smtp.gmail.com with ESMTPSA id
+ s1-20020a17090a6e4100b0021900ba8eeesm5189271pjm.2.2023.02.03.09.18.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 03 Feb 2023 09:18:11 -0800 (PST)
+From: Jens Axboe <axboe@kernel.dk>
+To: Christoph Hellwig <hch@lst.de>
 In-Reply-To: <20230203150634.3199647-1-hch@lst.de>
 References: <20230203150634.3199647-1-hch@lst.de>
+Subject: Re: add bvec initialization helpers v2
+Message-Id: <167544468926.66559.8388961280734694655.b4-ty@kernel.dk>
+Date: Fri, 03 Feb 2023 10:18:09 -0700
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+X-Mailer: b4 0.12.0
 Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
  linux-nvme@lists.infradead.org, virtualization@lists.linux-foundation.org,
  David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
@@ -107,106 +127,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use the bvec_set_page helper to initialize bvecs.
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Ilya Dryomov <idryomov@gmail.com>
----
- net/ceph/messenger_v1.c |  7 ++-----
- net/ceph/messenger_v2.c | 28 +++++++++++-----------------
- 2 files changed, 13 insertions(+), 22 deletions(-)
+On Fri, 03 Feb 2023 16:06:11 +0100, Christoph Hellwig wrote:
+> this series adds the helpers to initalize a bvec.  These remove open coding of
+> bvec internals and help with experimenting with other representations like
+> a phys_addr_t instead of page + offset.
+> 
+> Changes since v1:
+>  - fix a typo
+>  - simplify the code in ceph's __iter_get_bvecs a little bit further
+>  - fix two subject prefixes
+> 
+> [...]
 
-diff --git a/net/ceph/messenger_v1.c b/net/ceph/messenger_v1.c
-index d1787d7d33ef9a..d664cb1593a777 100644
---- a/net/ceph/messenger_v1.c
-+++ b/net/ceph/messenger_v1.c
-@@ -40,15 +40,12 @@ static int ceph_tcp_recvmsg(struct socket *sock, void *buf, size_t len)
- static int ceph_tcp_recvpage(struct socket *sock, struct page *page,
- 		     int page_offset, size_t length)
- {
--	struct bio_vec bvec = {
--		.bv_page = page,
--		.bv_offset = page_offset,
--		.bv_len = length
--	};
-+	struct bio_vec bvec;
- 	struct msghdr msg = { .msg_flags = MSG_DONTWAIT | MSG_NOSIGNAL };
- 	int r;
- 
- 	BUG_ON(page_offset + length > PAGE_SIZE);
-+	bvec_set_page(&bvec, page, length, page_offset);
- 	iov_iter_bvec(&msg.msg_iter, ITER_DEST, &bvec, 1, length);
- 	r = sock_recvmsg(sock, &msg, msg.msg_flags);
- 	if (r == -EAGAIN)
-diff --git a/net/ceph/messenger_v2.c b/net/ceph/messenger_v2.c
-index 3009028c4fa28f..301a991dc6a68e 100644
---- a/net/ceph/messenger_v2.c
-+++ b/net/ceph/messenger_v2.c
-@@ -149,10 +149,10 @@ static int do_try_sendpage(struct socket *sock, struct iov_iter *it)
- 
- 	while (iov_iter_count(it)) {
- 		/* iov_iter_iovec() for ITER_BVEC */
--		bv.bv_page = it->bvec->bv_page;
--		bv.bv_offset = it->bvec->bv_offset + it->iov_offset;
--		bv.bv_len = min(iov_iter_count(it),
--				it->bvec->bv_len - it->iov_offset);
-+		bvec_set_page(&bv, it->bvec->bv_page,
-+			      min(iov_iter_count(it),
-+				  it->bvec->bv_len - it->iov_offset),
-+			      it->bvec->bv_offset + it->iov_offset);
- 
- 		/*
- 		 * sendpage cannot properly handle pages with
-@@ -286,9 +286,8 @@ static void set_out_bvec_zero(struct ceph_connection *con)
- 	WARN_ON(iov_iter_count(&con->v2.out_iter));
- 	WARN_ON(!con->v2.out_zero);
- 
--	con->v2.out_bvec.bv_page = ceph_zero_page;
--	con->v2.out_bvec.bv_offset = 0;
--	con->v2.out_bvec.bv_len = min(con->v2.out_zero, (int)PAGE_SIZE);
-+	bvec_set_page(&con->v2.out_bvec, ceph_zero_page,
-+		      min(con->v2.out_zero, (int)PAGE_SIZE), 0);
- 	con->v2.out_iter_sendpage = true;
- 	iov_iter_bvec(&con->v2.out_iter, ITER_SOURCE, &con->v2.out_bvec, 1,
- 		      con->v2.out_bvec.bv_len);
-@@ -863,10 +862,7 @@ static void get_bvec_at(struct ceph_msg_data_cursor *cursor,
- 
- 	/* get a piece of data, cursor isn't advanced */
- 	page = ceph_msg_data_next(cursor, &off, &len);
--
--	bv->bv_page = page;
--	bv->bv_offset = off;
--	bv->bv_len = len;
-+	bvec_set_page(bv, page, len, off);
- }
- 
- static int calc_sg_cnt(void *buf, int buf_len)
-@@ -1855,9 +1851,8 @@ static void prepare_read_enc_page(struct ceph_connection *con)
- 	     con->v2.in_enc_resid);
- 	WARN_ON(!con->v2.in_enc_resid);
- 
--	bv.bv_page = con->v2.in_enc_pages[con->v2.in_enc_i];
--	bv.bv_offset = 0;
--	bv.bv_len = min(con->v2.in_enc_resid, (int)PAGE_SIZE);
-+	bvec_set_page(&bv, con->v2.in_enc_pages[con->v2.in_enc_i],
-+		      min(con->v2.in_enc_resid, (int)PAGE_SIZE), 0);
- 
- 	set_in_bvec(con, &bv);
- 	con->v2.in_enc_i++;
-@@ -2998,9 +2993,8 @@ static void queue_enc_page(struct ceph_connection *con)
- 	     con->v2.out_enc_resid);
- 	WARN_ON(!con->v2.out_enc_resid);
- 
--	bv.bv_page = con->v2.out_enc_pages[con->v2.out_enc_i];
--	bv.bv_offset = 0;
--	bv.bv_len = min(con->v2.out_enc_resid, (int)PAGE_SIZE);
-+	bvec_set_page(&bv, con->v2.out_enc_pages[con->v2.out_enc_i],
-+		      min(con->v2.out_enc_resid, (int)PAGE_SIZE), 0);
- 
- 	set_out_bvec(con, &bv, false);
- 	con->v2.out_enc_i++;
+Applied, thanks!
+
+[01/23] block: factor out a bvec_set_page helper
+        commit: d58cdfae6a22e5079656c487aad669597a0635c8
+[02/23] block: add a bvec_set_folio helper
+        commit: 26db5ee158510108c819aa7be6eb8c75accf85d7
+[03/23] block: add a bvec_set_virt helper
+        commit: 666e6550cb74e3a7206b5699409c9f31e123887e
+[04/23] sd: factor out a sd_set_special_bvec helper
+        commit: f1e117cbb01a38f764db2f292174b93eab7c2db2
+[05/23] target: use bvec_set_page to initialize bvecs
+        commit: 3c7ebe952fefb646c56b60f1c3e3388f3b938cc7
+[06/23] nvmet: use bvec_set_page to initialize bvecs
+        commit: fc41c97a3a7b08131e6998bc7692f95729f9d359
+[07/23] nvme: use bvec_set_virt to initialize special_vec
+        commit: 4bee16daf13225d6b109bb95d613fd691b04a757
+[08/23] rbd: use bvec_set_page to initialize the copy up bvec
+        commit: 7df2af0bb4912cf360045d065f88fe4ed2f702ca
+[09/23] virtio_blk: use bvec_set_virt to initialize special_vec
+        commit: b831f3a1031664ae2443bab63d35c416ed30c91d
+[10/23] zram: use bvec_set_page to initialize bvecs
+        commit: 13ae4db0c05107814db4e774856aa83e72e8bf04
+[11/23] afs: use bvec_set_folio to initialize a bvec
+        commit: a8173be1863e57393edb5c158860ec43a1f21ed7
+[12/23] ceph: use bvec_set_page to initialize a bvec
+        commit: 5c6542b6612f635eaa001c54af22018f1e996418
+[13/23] cifs: use bvec_set_page to initialize bvecs
+        commit: 220ae4a5c2ba10333b3b01fbf3dea0d759e77a76
+[14/23] coredump: use bvec_set_page to initialize a bvec
+        commit: cd598003206839ed1354902805b52c3a4f6ead2e
+[15/23] nfs: use bvec_set_page to initialize bvecs
+        commit: 8bb7cd842c44b299586bfed6aadde8863c48b415
+[16/23] orangefs: use bvec_set_{page,folio} to initialize bvecs
+        commit: 8ead80b2c5f8c59d6ca18cd7fb582a3ffc7ea5b7
+[17/23] splice: use bvec_set_page to initialize a bvec
+        commit: 664e40789abaad892737a696102052dae199a029
+[18/23] io_uring: use bvec_set_page to initialize a bvec
+        commit: cc342a21930f0e3862c5fd0871cd5a65c5b59e27
+[19/23] swap: use bvec_set_page to initialize bvecs
+        commit: 8976fa6d79d70502181fa16b5e023645c0f44ec4
+[20/23] rxrpc: use bvec_set_page to initialize a bvec
+        commit: efde918ac66958c568926120841e7692b1e9bd9d
+[21/23] sunrpc: use bvec_set_page to initialize bvecs
+        commit: 9088151f1bfe670ae9e28b77095f974196bb2343
+[22/23] vringh: use bvec_set_page to initialize a bvec
+        commit: 58dfe14073846e416d5b3595314a4f37e1a89c50
+[23/23] libceph: use bvec_set_page to initialize bvecs
+        commit: 1eb9cd15004fa91b6d1911af9fbaff299d8e9e45
+
+Best regards,
 -- 
-2.39.0
+Jens Axboe
+
+
 
 _______________________________________________
 Virtualization mailing list
