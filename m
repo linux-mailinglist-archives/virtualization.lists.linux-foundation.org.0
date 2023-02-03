@@ -1,71 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DD02689CBA
-	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:43 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 17ECC689CB9
+	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2BA1E42A98;
-	Fri,  3 Feb 2023 15:07:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2BA1E42A98
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=jThz1+8n
+	by smtp1.osuosl.org (Postfix) with ESMTP id 77D00821BC;
+	Fri,  3 Feb 2023 15:07:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 77D00821BC
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=D+S3e79r
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rPpHFUwZLpHO; Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Rzwyo65paGHM; Fri,  3 Feb 2023 15:07:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 2CAFC42A68;
-	Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2CAFC42A68
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 412CAC0088;
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 2BE13821CC;
 	Fri,  3 Feb 2023 15:07:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2BE13821CC
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4EDF7C007C;
+	Fri,  3 Feb 2023 15:07:36 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 749A0C002B
- for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:35 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id DC73C40520
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C36F5C002B
  for <virtualization@lists.linux-foundation.org>;
  Fri,  3 Feb 2023 15:07:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DC73C40520
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9D629415A0
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  3 Feb 2023 15:07:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9D629415A0
 Authentication-Results: smtp2.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=jThz1+8n
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=D+S3e79r
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7I5J6f8AaFem
+ with ESMTP id 7DmlnuGMN0SY
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:34 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:33 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0C5BB4159C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A405C40520
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0C5BB4159C
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A405C40520
  for <virtualization@lists.linux-foundation.org>;
  Fri,  3 Feb 2023 15:07:33 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=0dnvJ4/YC2qBSRJoUXjkVbZEbeJtTI76nFk14xqdiQw=; b=jThz1+8n2gvxR38Zi9f42VmE45
- A0CQMmeY4zEOFyZVpnGrj7P3ElL65WJv08LoA8qb4oLRV9x/A+fETre1KW3oI0WTHrjKsgFn+udP9
- s8a7hrQusDgbFYCjIl78yvwptpj2jEEGnKDDzqCGq/bYeCWCTdbYIGBEdQ6rFkqzFD5JMgegY/DME
- 2+tmqE2azh6NMd1kOiaut0xU3w249YI9lKsJhI7VvYjZLGRpGu26md2fN2faz+WSsNcmtIb3zqiwu
- pTf6YtHpE9SOvDbM4uz3U03Q9zSNtoPuZYSLX0u2MBqlOX+a5b/Mm5OP0GBEkpqNc/X1qmsSVgNln
- AYxdeXlw==;
+ bh=CiyB48vb6mrmTaEOVbqLR4u5Ie+kSkIibxGdt/yEGrQ=; b=D+S3e79rKed63zGKQODZ2ajajk
+ tY9PTZKFAa2fY7TmJOLLnb65WB73dEl4Jgj/gOugeSqMbkmLbXohy1C6IwWfuiZo77jdisGjM3yt4
+ 9xvdaWC7YH4+evg/huO/wnallnWJ+vAfbAy+KZ1lxMwOxypC9YvrMMgminhOcGcxNYLxnvCObX1OD
+ yOODt3y4LRWDt6sPzQe9gbo91x07bQX4zJYyv+FuFp5RkEeW42m5CZNG2NJ+PmXd8QRNdkVwaLx8u
+ Ed4Ftp13pBU7ExNTD2TCUOM24LHzJnSBzaVBjKWd5mYX39pRy/ZbN9BsCfck6fVftE+tsT0WOITG1
+ xZXpO+3Q==;
 Received: from [2001:4bb8:19a:272a:910:bb67:7287:f956] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pNxeB-002ac4-UN; Fri, 03 Feb 2023 15:06:40 +0000
+ id 1pNxeE-002adJ-Pc; Fri, 03 Feb 2023 15:06:43 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 01/23] block: factor out a bvec_set_page helper
-Date: Fri,  3 Feb 2023 16:06:12 +0100
-Message-Id: <20230203150634.3199647-2-hch@lst.de>
+Subject: [PATCH 02/23] block: add a bvec_set_folio helper
+Date: Fri,  3 Feb 2023 16:06:13 +0100
+Message-Id: <20230203150634.3199647-3-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230203150634.3199647-1-hch@lst.de>
 References: <20230203150634.3199647-1-hch@lst.de>
@@ -108,101 +108,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add a helper to initialize a bvec based of a page pointer.  This will help
-removing various open code bvec initializations.
+A smaller wrapper around bvec_set_page that takes a folio instead.
+There are only two potential users for this in the tree, but the number
+will grow in the future.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
 Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- block/bio-integrity.c |  7 +------
- block/bio.c           | 12 ++----------
- include/linux/bvec.h  | 15 +++++++++++++++
- 3 files changed, 18 insertions(+), 16 deletions(-)
+ include/linux/bvec.h | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/block/bio-integrity.c b/block/bio-integrity.c
-index 3f5685c00e360b..a3776064c52a16 100644
---- a/block/bio-integrity.c
-+++ b/block/bio-integrity.c
-@@ -124,23 +124,18 @@ int bio_integrity_add_page(struct bio *bio, struct page *page,
- 			   unsigned int len, unsigned int offset)
- {
- 	struct bio_integrity_payload *bip = bio_integrity(bio);
--	struct bio_vec *iv;
- 
- 	if (bip->bip_vcnt >= bip->bip_max_vcnt) {
- 		printk(KERN_ERR "%s: bip_vec full\n", __func__);
- 		return 0;
- 	}
- 
--	iv = bip->bip_vec + bip->bip_vcnt;
--
- 	if (bip->bip_vcnt &&
- 	    bvec_gap_to_prev(&bdev_get_queue(bio->bi_bdev)->limits,
- 			     &bip->bip_vec[bip->bip_vcnt - 1], offset))
- 		return 0;
- 
--	iv->bv_page = page;
--	iv->bv_len = len;
--	iv->bv_offset = offset;
-+	bvec_set_page(&bip->bip_vec[bip->bip_vcnt], page, len, offset);
- 	bip->bip_vcnt++;
- 
- 	return len;
-diff --git a/block/bio.c b/block/bio.c
-index d7fbc7adfc50aa..71e411a0c12950 100644
---- a/block/bio.c
-+++ b/block/bio.c
-@@ -1029,10 +1029,7 @@ int bio_add_hw_page(struct request_queue *q, struct bio *bio,
- 	if (bio->bi_vcnt >= queue_max_segments(q))
- 		return 0;
- 
--	bvec = &bio->bi_io_vec[bio->bi_vcnt];
--	bvec->bv_page = page;
--	bvec->bv_len = len;
--	bvec->bv_offset = offset;
-+	bvec_set_page(&bio->bi_io_vec[bio->bi_vcnt], page, len, offset);
- 	bio->bi_vcnt++;
- 	bio->bi_iter.bi_size += len;
- 	return len;
-@@ -1108,15 +1105,10 @@ EXPORT_SYMBOL_GPL(bio_add_zone_append_page);
- void __bio_add_page(struct bio *bio, struct page *page,
- 		unsigned int len, unsigned int off)
- {
--	struct bio_vec *bv = &bio->bi_io_vec[bio->bi_vcnt];
--
- 	WARN_ON_ONCE(bio_flagged(bio, BIO_CLONED));
- 	WARN_ON_ONCE(bio_full(bio, len));
- 
--	bv->bv_page = page;
--	bv->bv_offset = off;
--	bv->bv_len = len;
--
-+	bvec_set_page(&bio->bi_io_vec[bio->bi_vcnt], page, len, off);
- 	bio->bi_iter.bi_size += len;
- 	bio->bi_vcnt++;
- }
 diff --git a/include/linux/bvec.h b/include/linux/bvec.h
-index 35c25dff651a5e..9e3dac51eb26b6 100644
+index 9e3dac51eb26b6..2bae1134499e7f 100644
 --- a/include/linux/bvec.h
 +++ b/include/linux/bvec.h
-@@ -35,6 +35,21 @@ struct bio_vec {
- 	unsigned int	bv_offset;
- };
+@@ -50,6 +50,19 @@ static inline void bvec_set_page(struct bio_vec *bv, struct page *page,
+ 	bv->bv_offset = offset;
+ }
  
 +/**
-+ * bvec_set_page - initialize a bvec based off a struct page
++ * bvec_set_folio - initialize a bvec based off a struct folio
 + * @bv:		bvec to initialize
-+ * @page:	page the bvec should point to
++ * @folio:	folio the bvec should point to
 + * @len:	length of the bvec
-+ * @offset:	offset into the page
++ * @offset:	offset into the folio
 + */
-+static inline void bvec_set_page(struct bio_vec *bv, struct page *page,
++static inline void bvec_set_folio(struct bio_vec *bv, struct folio *folio,
 +		unsigned int len, unsigned int offset)
 +{
-+	bv->bv_page = page;
-+	bv->bv_len = len;
-+	bv->bv_offset = offset;
++	bvec_set_page(bv, &folio->page, len, offset);
 +}
 +
  struct bvec_iter {
