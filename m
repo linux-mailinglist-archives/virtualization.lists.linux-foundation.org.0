@@ -1,71 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48838689CBC
-	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:46 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6643F689CBE
+	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:48 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 18A1A82202;
-	Fri,  3 Feb 2023 15:07:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 18A1A82202
+	by smtp1.osuosl.org (Postfix) with ESMTP id D55D3821F5;
+	Fri,  3 Feb 2023 15:07:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D55D3821F5
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=U7gHGI4+
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=aF5Qbqrg
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KCVQhsnhwIq6; Fri,  3 Feb 2023 15:07:40 +0000 (UTC)
+	with ESMTP id 5gFCvxT3MgP6; Fri,  3 Feb 2023 15:07:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id D66F9821F9;
-	Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D66F9821F9
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 072B2821E6;
+	Fri,  3 Feb 2023 15:07:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 072B2821E6
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AC5D0C002B;
-	Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E0F0BC007E;
+	Fri,  3 Feb 2023 15:07:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1A39CC0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 16C02C007E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:37 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:40 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 486F440520
+ by smtp3.osuosl.org (Postfix) with ESMTP id D45DB612BF
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 486F440520
-Authentication-Results: smtp2.osuosl.org;
+ Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D45DB612BF
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=U7gHGI4+
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=aF5Qbqrg
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id WvXzuQf1vqgk
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id s6rY1bd54anT
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:35 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A49B6403D6
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1417760C33
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp2.osuosl.org (Postfix) with ESMTPS id A49B6403D6
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1417760C33
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:35 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=yYE/od14GoUSfS3SrqxEgI5AwVsNpiRxxWihLgbj1lM=; b=U7gHGI4+jFww+bLgY2qB+UJ4Eb
- YA2OMvfnZAc5GIuqbs0dC0b5/ypXraaHVc3zXOzYoz92nlDl6cc9tfrbD8QiR5RuddFZ/24vxgEs3
- tAQvsBOWvRR4DnM/Ts7iPycHDqB8SLxXBlwRo2qrTh3FfGjdSgSWlLXk/MAT7/txciVBFyq66zTF6
- 7jbBNwJc5NB1VF8aIBvk7ciGc/6w/kjvXfgX7GT/MIdD5VzKXBo9WHkJeCcWHzlVRUL3orKCIcveH
- k3IsETytcOcYa4M7MebhZowmCK48eVnfXowJXtyuxT4UQQZueio9wZREhVWDQtXDqeIGzpsaH3iWh
- VhCYEFnw==;
+ bh=qOELs8Cf+3DRHH4YZ5i8Y7BY08du3RSg74OTiYB5sHQ=; b=aF5Qbqrg1yclOtyaI4gTKBWydF
+ RggQAyGRBco620c8Fi869LlPO2pe8evEIqDoV1ozOXdNfytn1MRinE/6QYY5k2oPlPJhB01no6VtD
+ eldvco5iwWgUqJuF6Ln9UEwZNa6v1GVbT/6Kwoxq6v6E47EA3+X0x/5UWmfkwWrsPlCary6PtwIur
+ 8CI+Wl9GP1YyGgxKum6MPQS4lap8xnIx1Ov95K0LpqVrUkLoMLragJkM0cWq7Yw5U2U5JFh4+zQgw
+ adzFS91VzTwjl1q4AJys+nyWOqDq0dqD/Ug/qOVE9Xw8ZapK+WSEj6v0Tc7w/kwwgNzmawXYW/9S4
+ JiaBbcyQ==;
 Received: from [2001:4bb8:19a:272a:910:bb67:7287:f956] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pNxeO-002aht-77; Fri, 03 Feb 2023 15:06:52 +0000
+ id 1pNxeR-002aju-IY; Fri, 03 Feb 2023 15:06:56 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 05/23] target: use bvec_set_page to initialize bvecs
-Date: Fri,  3 Feb 2023 16:06:16 +0100
-Message-Id: <20230203150634.3199647-6-hch@lst.de>
+Subject: [PATCH 06/23] nvmet: use bvec_set_page to initialize bvecs
+Date: Fri,  3 Feb 2023 16:06:17 +0100
+Message-Id: <20230203150634.3199647-7-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230203150634.3199647-1-hch@lst.de>
 References: <20230203150634.3199647-1-hch@lst.de>
@@ -89,7 +89,8 @@ Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
  samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
  Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Johannes Thumshirn <johannes.thumshirn@wdc.com>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
  "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -111,53 +112,56 @@ Use the bvec_set_page helper to initialize bvecs.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- drivers/target/target_core_file.c | 18 ++++++------------
- 1 file changed, 6 insertions(+), 12 deletions(-)
+ drivers/nvme/target/io-cmd-file.c | 10 ++--------
+ drivers/nvme/target/tcp.c         |  5 ++---
+ 2 files changed, 4 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/target/target_core_file.c b/drivers/target/target_core_file.c
-index fd584111da45c0..ce0e000b74fc39 100644
---- a/drivers/target/target_core_file.c
-+++ b/drivers/target/target_core_file.c
-@@ -281,10 +281,8 @@ fd_execute_rw_aio(struct se_cmd *cmd, struct scatterlist *sgl, u32 sgl_nents,
- 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
+diff --git a/drivers/nvme/target/io-cmd-file.c b/drivers/nvme/target/io-cmd-file.c
+index 871c4f32f443f5..2d068439b129c5 100644
+--- a/drivers/nvme/target/io-cmd-file.c
++++ b/drivers/nvme/target/io-cmd-file.c
+@@ -73,13 +73,6 @@ int nvmet_file_ns_enable(struct nvmet_ns *ns)
+ 	return ret;
+ }
  
- 	for_each_sg(sgl, sg, sgl_nents, i) {
--		aio_cmd->bvecs[i].bv_page = sg_page(sg);
--		aio_cmd->bvecs[i].bv_len = sg->length;
--		aio_cmd->bvecs[i].bv_offset = sg->offset;
+-static void nvmet_file_init_bvec(struct bio_vec *bv, struct scatterlist *sg)
+-{
+-	bv->bv_page = sg_page(sg);
+-	bv->bv_offset = sg->offset;
+-	bv->bv_len = sg->length;
+-}
 -
-+		bvec_set_page(&aio_cmd->bvecs[i], sg_page(sg), sg->length,
+ static ssize_t nvmet_file_submit_bvec(struct nvmet_req *req, loff_t pos,
+ 		unsigned long nr_segs, size_t count, int ki_flags)
+ {
+@@ -146,7 +139,8 @@ static bool nvmet_file_execute_io(struct nvmet_req *req, int ki_flags)
+ 
+ 	memset(&req->f.iocb, 0, sizeof(struct kiocb));
+ 	for_each_sg(req->sg, sg, req->sg_cnt, i) {
+-		nvmet_file_init_bvec(&req->f.bvec[bv_cnt], sg);
++		bvec_set_page(&req->f.bvec[bv_cnt], sg_page(sg), sg->length,
 +			      sg->offset);
- 		len += sg->length;
- 	}
+ 		len += req->f.bvec[bv_cnt].bv_len;
+ 		total_len += req->f.bvec[bv_cnt].bv_len;
+ 		bv_cnt++;
+diff --git a/drivers/nvme/target/tcp.c b/drivers/nvme/target/tcp.c
+index cc05c094de221d..c5759eb503d004 100644
+--- a/drivers/nvme/target/tcp.c
++++ b/drivers/nvme/target/tcp.c
+@@ -321,9 +321,8 @@ static void nvmet_tcp_build_pdu_iovec(struct nvmet_tcp_cmd *cmd)
+ 	while (length) {
+ 		u32 iov_len = min_t(u32, length, sg->length - sg_offset);
  
-@@ -329,10 +327,7 @@ static int fd_do_rw(struct se_cmd *cmd, struct file *fd,
- 	}
+-		iov->bv_page = sg_page(sg);
+-		iov->bv_len = sg->length;
+-		iov->bv_offset = sg->offset + sg_offset;
++		bvec_set_page(iov, sg_page(sg), sg->length,
++				sg->offset + sg_offset);
  
- 	for_each_sg(sgl, sg, sgl_nents, i) {
--		bvec[i].bv_page = sg_page(sg);
--		bvec[i].bv_len = sg->length;
--		bvec[i].bv_offset = sg->offset;
--
-+		bvec_set_page(&bvec[i], sg_page(sg), sg->length, sg->offset);
- 		len += sg->length;
- 	}
- 
-@@ -465,10 +460,9 @@ fd_execute_write_same(struct se_cmd *cmd)
- 		return TCM_LOGICAL_UNIT_COMMUNICATION_FAILURE;
- 
- 	for (i = 0; i < nolb; i++) {
--		bvec[i].bv_page = sg_page(&cmd->t_data_sg[0]);
--		bvec[i].bv_len = cmd->t_data_sg[0].length;
--		bvec[i].bv_offset = cmd->t_data_sg[0].offset;
--
-+		bvec_set_page(&bvec[i], sg_page(&cmd->t_data_sg[0]),
-+			      cmd->t_data_sg[0].length,
-+			      cmd->t_data_sg[0].offset);
- 		len += se_dev->dev_attrib.block_size;
- 	}
- 
+ 		length -= iov_len;
+ 		sg = sg_next(sg);
 -- 
 2.39.0
 
