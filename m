@@ -2,133 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 030236899E6
-	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 14:38:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FF57689CBD
+	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 8FA6642A58;
-	Fri,  3 Feb 2023 13:38:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8FA6642A58
+	by smtp4.osuosl.org (Postfix) with ESMTP id 2C32642A53;
+	Fri,  3 Feb 2023 15:07:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2C32642A53
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=fGBlukxr
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=LwFg4o7F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HobnAM8iRwsg; Fri,  3 Feb 2023 13:38:15 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 3EA1642A45;
-	Fri,  3 Feb 2023 13:38:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3EA1642A45
+	with ESMTP id hz-eHzvEt0Ox; Fri,  3 Feb 2023 15:07:40 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id A87E342A57;
+	Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A87E342A57
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6802BC007C;
-	Fri,  3 Feb 2023 13:38:14 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6F1B0C007C;
+	Fri,  3 Feb 2023 15:07:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 87400C002B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 76BD6C0081
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 13:38:13 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 5A35F612BD
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5136E4159C
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 13:38:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5A35F612BD
-Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256
- header.s=selector2 header.b=fGBlukxr
+ Fri,  3 Feb 2023 15:07:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5136E4159C
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=LwFg4o7F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id V8p5IuD9Lp41
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Df8mnVhG2RhW
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 13:38:11 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EAA1F612C5
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20605.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::605])
- by smtp3.osuosl.org (Postfix) with ESMTPS id EAA1F612C5
+ Fri,  3 Feb 2023 15:07:33 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2FE46403D6
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2FE46403D6
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 13:38:10 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TFSu07Pwyn87ev+NG9HJauHkbkO3qCGaP2JjVtqbKtajxcqNfilM7cqbmpcAG5b0h8qvaOrdW9Gza0/A/Y+quXg2wGuDh3sSlHTpjZk5aRRrYXX3xYHGO/FbvAc3ef7VUjWQkPbY3s005EoapTk+QcuY7vxHLfITcEkrwf2YPo8xNPpqJNyvW5SyKc1DE0G2u9CcXjRW1B/m/Ghujfa9h92SaZj3yLQ+BAh+PwWUrY0ZN9Ts8lQg8cPmK9bUjRPwoV96rc+Bu3zeFc0miuFLOuXRHpJqgXJ06yViarLifHZiLkZ0NWthIkQZAIGPGyVAMGT23jNFzMlW4ebg0sOWhA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0cva6VJDvB1x+ZVPx+3mcK2Hh0vn7JnluBXHff9CISc=;
- b=VdMR7Gqk6g8E+ICxoufJp0i9mJnQS4yury2r6NPqetRdoBKEOpBDD83PmmrnS3bzqrac46GTYJdrxGMFEIYYxRZV0qTKfJBpVu6QDk2la9fPM+T7KF7oPyTK4ycokIRyAjBRgBBUUaBJiliQZocXYR1oAd548Nrp60s9yTnwLB87gz3vjK6w/YVx6OhMbqY79/Ldh1WU7f4u7WIPMLmE//ER3xjhNdOcrlN7ExdVCft3o2iNfUfXrygTdmNipEHTvwKpvSIwwTyUbPOCr4892Y/pvYeyV094NJTttmOUBNoiM9vMKOg7R/+VdRDWawGa4eLngYRBv4t+2b/TM9DH3A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
- dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0cva6VJDvB1x+ZVPx+3mcK2Hh0vn7JnluBXHff9CISc=;
- b=fGBlukxrXwVyC9CBRag23wM2SYQtXeo3VMjEDSnsNUMZ6364twWZEfX7B3xAR9kYrvbMp2T0ZkYIEBoyMN2qkFZA/X6ZS7cLaGMilK01y95Xk/Uv7dIa7+WHa0t2rf52Ze4Pf2f69NxJg2m6CMCHltZhEZUSpHWxhK0UIwq2cdIys9dJhHahC41WacNN/rS0uBzVtrhNQpnDyVx5YIe9drp+9gAOAspyKqGd1sbsLhbr0P3dmb1t/uZbJU6qyhitbTTcbC6xcIMui9C0qeT050UpGeZz7lTtJToM3Vr6Kpzb0MTnoer6CC3I81tX56SRcbpNZTr8xtABYd/VRE1AGA==
-Received: from CY5PR15CA0064.namprd15.prod.outlook.com (2603:10b6:930:18::17)
- by BN9PR12MB5292.namprd12.prod.outlook.com (2603:10b6:408:105::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.31; Fri, 3 Feb
- 2023 13:38:06 +0000
-Received: from CY4PEPF0000C977.namprd02.prod.outlook.com
- (2603:10b6:930:18:cafe::3) by CY5PR15CA0064.outlook.office365.com
- (2603:10b6:930:18::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6064.31 via Frontend
- Transport; Fri, 3 Feb 2023 13:38:06 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- CY4PEPF0000C977.mail.protection.outlook.com (10.167.241.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6064.18 via Frontend Transport; Fri, 3 Feb 2023 13:38:06 +0000
-Received: from rnnvmail201.nvidia.com (10.129.68.8) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.36; Fri, 3 Feb 2023
- 05:37:52 -0800
-Received: from sw-mtx-036.mtx.labs.mlnx (10.126.231.37) by
- rnnvmail201.nvidia.com (10.129.68.8) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.986.36; Fri, 3 Feb 2023 05:37:50 -0800
-To: <mst@redhat.com>, <jasowang@redhat.com>, <davem@davemloft.net>,
- <kuba@kernel.org>, <netdev@vger.kernel.org>
-Subject: [PATCH net-next] virtio-net: Maintain reverse cleanup order
-Date: Fri, 3 Feb 2023 15:37:38 +0200
-Message-ID: <20230203133738.33527-1-parav@nvidia.com>
-X-Mailer: git-send-email 2.26.2
+ Fri,  3 Feb 2023 15:07:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
+ MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+ Content-ID:Content-Description:In-Reply-To:References;
+ bh=xaXfHvtmirT//H/Mo9JZTCfopwE0ARO2STlU1q4PXIU=; b=LwFg4o7FNRjNvzeL1UIeY+PB30
+ pigk8LO6ghAV/PW8A2diZklP7ONPkf/QuZ1j8F2QHoj76RmFvj/Q8pZxLQNZCU995h2ds4C/fgoU6
+ vJrgHAy3JyTeMQU3sBiEJ2k75Q4WOqSb0agWbK9kpPxrkSUpCMcMfqkAl8xQSVnMiGJsWds5MEA0/
+ ttVela2LE/82AgMzn2QpTZPgzNm+u+iJUJj6KJXJcu0gz4sOsbBmYQNi3tJoXH33FBOPEsxVAF/p5
+ 5brK/jfAn9M2GdavX3Sg69iNnol9jENDgRqr7idObKYZRPtBjJSz+TRjAv8KvwNM3XfV2T+AE+LX+
+ QYoCj3mg==;
+Received: from [2001:4bb8:19a:272a:910:bb67:7287:f956] (helo=localhost)
+ by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
+ id 1pNxe8-002abR-B0; Fri, 03 Feb 2023 15:06:36 +0000
+From: Christoph Hellwig <hch@lst.de>
+To: Jens Axboe <axboe@kernel.dk>
+Subject: add bvec initialization helpers v2
+Date: Fri,  3 Feb 2023 16:06:11 +0100
+Message-Id: <20230203150634.3199647-1-hch@lst.de>
+X-Mailer: git-send-email 2.39.0
 MIME-Version: 1.0
-X-Originating-IP: [10.126.231.37]
-X-ClientProxiedBy: rnnvmail203.nvidia.com (10.129.68.9) To
- rnnvmail201.nvidia.com (10.129.68.8)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY4PEPF0000C977:EE_|BN9PR12MB5292:EE_
-X-MS-Office365-Filtering-Correlation-Id: da46d0c5-6512-4e7f-6dca-08db05ebe178
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 9BfJ+pkTmTGwkhyT1lfBu0s2fxzAYo5f5PLyVr6r6N/7iA8krlHFNvZ+mwaMzzfmrYoFrvu7UBuBS6BKmW45TvsmnY8g+c6oTlGRezJVvHr/CmmHrVnqwBa0+oB53WSM/HrfTHWujfIHdxzK+UaeIi1lPcRtWLyBUHI5ncp/8dmeKx9NOkMTpJZtXnzDVga41D7lrY8ZL7g0F4F72Iw2qawRPKtF9uDKUTlq+7E5TqJ8q+Zhq2Fd+WlIWAikQcseactH+pRhiQoUeBRw5TW63qdGOHtUS4rkSu7YdkDDBBHFN9cqq6LI8tnjxB+OqZLiK5GD8SL7uVNInCSBwXi+WV7f8KOv2p0plMiBUv4SBn29r9rj8UzjysPMCQtVm29Fh1wNPxCerAM7IxDJ0v845LpLlNAbzOrw2qX640qUrUPEzZ4ac8qUXQ2yeVFWmHUS812PNQAFv6Nmba22oVbJqGanVV2Z7goEb0EKmDIa2xj6eEVVhKJiJDRQZv7mc2qE/7pBDVwxnVid9K5kYzJMu8eahxhW3GZvtq25FelIyKM/UAlvslSZ38XuQ79uitIG2WalsXqTXpzscm9NqqE/UUSPr12rs/9WcQnxNPC4spFD0hHuxCKcDCTWWo5Epkj4fe79nZsku3eL2Y9UTZls/+CqNLC+gDjVmz2+xqf4Mal7fa0+4CK7+1/oXLXNFnxk/LneUboVePdx5uDDQya7zQ==
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230025)(4636009)(396003)(136003)(346002)(39860400002)(376002)(451199018)(36840700001)(40470700004)(46966006)(2616005)(36756003)(16526019)(86362001)(186003)(2906002)(26005)(107886003)(6666004)(8676002)(478600001)(36860700001)(5660300002)(1076003)(82310400005)(4744005)(7416002)(336012)(40480700001)(356005)(110136005)(54906003)(83380400001)(426003)(316002)(8936002)(70586007)(70206006)(47076005)(4326008)(40460700003)(41300700001)(7636003)(82740400003);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2023 13:38:06.0032 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: da46d0c5-6512-4e7f-6dca-08db05ebe178
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000C977.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN9PR12MB5292
-Cc: hawk@kernel.org, daniel@iogearbox.net, john.fastabend@gmail.com,
- ast@kernel.org, virtualization@lists.linux-foundation.org, edumazet@google.com,
- Jiri Pirko <jiri@nvidia.com>, bpf@vger.kernel.org, pabeni@redhat.com
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
+ linux-nvme@lists.infradead.org, virtualization@lists.linux-foundation.org,
+ David Howells <dhowells@redhat.com>, linux-mm@kvack.org,
+ Eric Dumazet <edumazet@google.com>, target-devel@vger.kernel.org,
+ Marc Dionne <marc.dionne@auristor.com>, linux-afs@lists.infradead.org,
+ Mike Marshall <hubcap@omnibond.com>, linux-cifs@vger.kernel.org,
+ Sagi Grimberg <sagi@grimberg.me>, linux-scsi@vger.kernel.org,
+ Minchan Kim <minchan@kernel.org>, io-uring@vger.kernel.org,
+ Jakub Kicinski <kuba@kernel.org>, Ilya Dryomov <idryomov@gmail.com>,
+ Paolo Abeni <pabeni@redhat.com>, devel@lists.orangefs.org,
+ linux-block@vger.kernel.org, Keith Busch <kbusch@kernel.org>,
+ ceph-devel@vger.kernel.org, Xiubo Li <xiubli@redhat.com>,
+ Trond Myklebust <trond.myklebust@hammerspace.com>, linux-nfs@vger.kernel.org,
+ "Martin K. Petersen" <martin.petersen@oracle.com>, netdev@vger.kernel.org,
+ samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
+ Sergey Senozhatsky <senozhatsky@chromium.org>,
+ Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
+ linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -140,42 +100,53 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Parav Pandit via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Parav Pandit <parav@nvidia.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-To easily audit the code, better to keep the device stop()
-sequence to be mirror of the device open() sequence.
+Hi all,
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Reviewed-by: Jiri Pirko <jiri@nvidia.com>
-Signed-off-by: Parav Pandit <parav@nvidia.com>
----
- drivers/net/virtio_net.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+this series adds the helpers to initalize a bvec.  These remove open coding of
+bvec internals and help with experimenting with other representations like
+a phys_addr_t instead of page + offset.
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index b7d0b54c3bb0..1f8168e0f64d 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -2279,9 +2279,9 @@ static int virtnet_close(struct net_device *dev)
- 	cancel_delayed_work_sync(&vi->refill);
- 
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
-+		virtnet_napi_tx_disable(&vi->sq[i].napi);
- 		napi_disable(&vi->rq[i].napi);
- 		xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
--		virtnet_napi_tx_disable(&vi->sq[i].napi);
- 	}
- 
- 	return 0;
--- 
-2.26.2
+Changes since v1:
+ - fix a typo
+ - simplify the code in ceph's __iter_get_bvecs a little bit further
+ - fix two subject prefixes
 
+Diffstat:
+ block/bio-integrity.c             |    7 ------
+ block/bio.c                       |   12 +----------
+ drivers/block/rbd.c               |    7 ++----
+ drivers/block/virtio_blk.c        |    4 ---
+ drivers/block/zram/zram_drv.c     |   15 +++-----------
+ drivers/nvme/host/core.c          |    4 ---
+ drivers/nvme/target/io-cmd-file.c |   10 +--------
+ drivers/nvme/target/tcp.c         |    5 +---
+ drivers/scsi/sd.c                 |   36 ++++++++++++++++------------------
+ drivers/target/target_core_file.c |   18 +++++------------
+ drivers/vhost/vringh.c            |    5 +---
+ fs/afs/write.c                    |    8 ++-----
+ fs/ceph/file.c                    |   12 +++--------
+ fs/cifs/connect.c                 |    5 ++--
+ fs/cifs/fscache.c                 |   16 +++++----------
+ fs/cifs/misc.c                    |    5 +---
+ fs/cifs/smb2ops.c                 |    6 ++---
+ fs/coredump.c                     |    7 +-----
+ fs/nfs/fscache.c                  |   16 +++++----------
+ fs/orangefs/inode.c               |   22 ++++++--------------
+ fs/splice.c                       |    5 +---
+ include/linux/bvec.h              |   40 ++++++++++++++++++++++++++++++++++++++
+ io_uring/rsrc.c                   |    4 ---
+ mm/page_io.c                      |    8 +------
+ net/ceph/messenger_v1.c           |    7 +-----
+ net/ceph/messenger_v2.c           |   28 ++++++++++----------------
+ net/rxrpc/rxperf.c                |    8 ++-----
+ net/sunrpc/svcsock.c              |    7 +-----
+ net/sunrpc/xdr.c                  |    5 +---
+ 29 files changed, 142 insertions(+), 190 deletions(-)
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
