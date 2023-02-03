@@ -1,71 +1,71 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 04CF4689CC1
-	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:57 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 35A22689CC2
+	for <lists.virtualization@lfdr.de>; Fri,  3 Feb 2023 16:07:58 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 8BC27821D8;
-	Fri,  3 Feb 2023 15:07:55 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8BC27821D8
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=SHYAKMQ+
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id wiMX0IaQmssW; Fri,  3 Feb 2023 15:07:54 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 6AE06821CE;
-	Fri,  3 Feb 2023 15:07:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6AE06821CE
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C350BC0077;
-	Fri,  3 Feb 2023 15:07:53 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 57B42C002B
- for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:52 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2ADA442A9A
- for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2ADA442A9A
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9B71042A9B;
+	Fri,  3 Feb 2023 15:07:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9B71042A9B
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=SHYAKMQ+
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=QSfgGBAh
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KFlFevHB8SnP
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id pQmcleFkbaGF; Fri,  3 Feb 2023 15:07:55 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 2DA9E42A9A;
+	Fri,  3 Feb 2023 15:07:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2DA9E42A9A
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0678DC0077;
+	Fri,  3 Feb 2023 15:07:55 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 96EBFC0077
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:51 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 5854D415AF
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  3 Feb 2023 15:07:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5854D415AF
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=QSfgGBAh
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id aSA_bNDGT5I6
+ for <virtualization@lists.linux-foundation.org>;
+ Fri,  3 Feb 2023 15:07:52 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6154342A5E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8AEBE415B1
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 6154342A5E
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8AEBE415B1
  for <virtualization@lists.linux-foundation.org>;
- Fri,  3 Feb 2023 15:07:51 +0000 (UTC)
+ Fri,  3 Feb 2023 15:07:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=Content-Transfer-Encoding:
  MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender
  :Reply-To:Content-Type:Content-ID:Content-Description;
- bh=81B+gzWiKP3dSyMHoEpejaF7sEqhUPFohDfKzzK3URY=; b=SHYAKMQ+SwVUyLVeypwgrT8ITx
- 8OWSemfR3V1d5j1KVncg4YVuObwfg9Pbi32h+XryiQ6gJs4IZtST1Vv4iZ2hrbDVmjo3gmEVm7+ex
- RoPBp7jp/JuF4fa7BxH5vi1oAhRP7/Aw3jj0MJzqlpyt6AFJ90fRZah2qP7iO5Fa4hS+QXNBJM5G2
- 2fhU4cv9RjOoRb6A67sOeOJMRUWrq9yBLqOOwdzXIP7dYjqfyd7J8G4jWqM9LgJLyWvy41xt0Qfgo
- kGvvzQfyRIhnon9F7XkqbVma6W8zGAQfkAjRNuTkqVxLf+emMmW/6xjo5W4e00BEBjjlcCfn2iZAf
- UBeI/ApA==;
+ bh=2ivuZdJU66fGeGNrDCSX2XtHVJq8+h1pLMvYDbA6wQ8=; b=QSfgGBAh+EXZxzz/Xx6bibyovx
+ 8Nrgb07oWFXF7SI+3wqJ/enmvP8hFHc6hUi3sA6GWv5A6dP7fcYPg732hEG/Jv2/jgoMcNgX6QddE
+ Klux6y3fIgLzUgx2tQwUDLRbjwR42AzjGvRy3d+zXy8gseAM9WJfDA8waCftfZvGrqDwKbb421JO+
+ A7KmM+t82WMvPJd60uQmgjS17we9cGNrkQfjYtCxBhWbUJkld5d206L4xTBajgBh6O8m/iXqiwdQ5
+ Cvd+cDQIEMDIlKCNI2qXlOITbs0hvvqOAEaly0PMreLcEnepGH9pQ2ba/Ud+fBJ4c0tY614+rY/Gv
+ 8MQKv9iw==;
 Received: from [2001:4bb8:19a:272a:910:bb67:7287:f956] (helo=localhost)
  by bombadil.infradead.org with esmtpsa (Exim 4.94.2 #2 (Red Hat Linux))
- id 1pNxeb-002apl-U8; Fri, 03 Feb 2023 15:07:06 +0000
+ id 1pNxef-002ar9-Df; Fri, 03 Feb 2023 15:07:10 +0000
 From: Christoph Hellwig <hch@lst.de>
 To: Jens Axboe <axboe@kernel.dk>
-Subject: [PATCH 09/23] virtio_blk: use bvec_set_virt to initialize special_vec
-Date: Fri,  3 Feb 2023 16:06:20 +0100
-Message-Id: <20230203150634.3199647-10-hch@lst.de>
+Subject: [PATCH 10/23] zram: use bvec_set_page to initialize bvecs
+Date: Fri,  3 Feb 2023 16:06:21 +0100
+Message-Id: <20230203150634.3199647-11-hch@lst.de>
 X-Mailer: git-send-email 2.39.0
 In-Reply-To: <20230203150634.3199647-1-hch@lst.de>
 References: <20230203150634.3199647-1-hch@lst.de>
@@ -89,7 +89,8 @@ Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
  samba-technical@lists.samba.org, Steve French <sfrench@samba.org>,
  Sergey Senozhatsky <senozhatsky@chromium.org>,
  Chuck Lever <chuck.lever@oracle.com>, Anna Schumaker <anna@kernel.org>,
- linux-fsdevel@vger.kernel.org, Andrew Morton <akpm@linux-foundation.org>,
+ Johannes Thumshirn <johannes.thumshirn@wdc.com>, linux-fsdevel@vger.kernel.org,
+ Andrew Morton <akpm@linux-foundation.org>,
  "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -107,31 +108,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use the bvec_set_virt helper to initialize the special_vec.
+Use the bvec_set_page helper to initialize bvecs.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
-Reviewed-by: Chaitanya Kulkarni <kch@nvidia.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
+Reviewed-by: Sergey Senozhatsky <senozhatsky@chromium.org>
+Reviewed-by: Johannes Thumshirn <johannes.thumshirn@wdc.com>
 ---
- drivers/block/virtio_blk.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ drivers/block/zram/zram_drv.c | 15 ++++-----------
+ 1 file changed, 4 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/block/virtio_blk.c b/drivers/block/virtio_blk.c
-index 6a77fa91742880..dc6e9b989910b0 100644
---- a/drivers/block/virtio_blk.c
-+++ b/drivers/block/virtio_blk.c
-@@ -170,9 +170,7 @@ static int virtblk_setup_discard_write_zeroes_erase(struct request *req, bool un
+diff --git a/drivers/block/zram/zram_drv.c b/drivers/block/zram/zram_drv.c
+index e290d6d970474e..bd8ae4822dc3ef 100644
+--- a/drivers/block/zram/zram_drv.c
++++ b/drivers/block/zram/zram_drv.c
+@@ -703,9 +703,7 @@ static ssize_t writeback_store(struct device *dev,
+ 	for (; nr_pages != 0; index++, nr_pages--) {
+ 		struct bio_vec bvec;
  
- 	WARN_ON_ONCE(n != segments);
+-		bvec.bv_page = page;
+-		bvec.bv_len = PAGE_SIZE;
+-		bvec.bv_offset = 0;
++		bvec_set_page(&bvec, page, PAGE_SIZE, 0);
  
--	req->special_vec.bv_page = virt_to_page(range);
--	req->special_vec.bv_offset = offset_in_page(range);
--	req->special_vec.bv_len = sizeof(*range) * segments;
-+	bvec_set_virt(&req->special_vec, range, sizeof(*range) * segments);
- 	req->rq_flags |= RQF_SPECIAL_PAYLOAD;
+ 		spin_lock(&zram->wb_limit_lock);
+ 		if (zram->wb_limit_enable && !zram->bd_wb_limit) {
+@@ -1380,12 +1378,9 @@ static void zram_free_page(struct zram *zram, size_t index)
+ static int zram_bvec_read_from_bdev(struct zram *zram, struct page *page,
+ 				    u32 index, struct bio *bio, bool partial_io)
+ {
+-	struct bio_vec bvec = {
+-		.bv_page = page,
+-		.bv_len = PAGE_SIZE,
+-		.bv_offset = 0,
+-	};
++	struct bio_vec bvec;
  
- 	return 0;
++	bvec_set_page(&bvec, page, PAGE_SIZE, 0);
+ 	return read_from_bdev(zram, &bvec, zram_get_element(zram, index), bio,
+ 			      partial_io);
+ }
+@@ -1652,9 +1647,7 @@ static int zram_bvec_write(struct zram *zram, struct bio_vec *bvec,
+ 		memcpy_from_bvec(dst + offset, bvec);
+ 		kunmap_atomic(dst);
+ 
+-		vec.bv_page = page;
+-		vec.bv_len = PAGE_SIZE;
+-		vec.bv_offset = 0;
++		bvec_set_page(&vec, page, PAGE_SIZE, 0);
+ 	}
+ 
+ 	ret = __zram_bvec_write(zram, &vec, index, bio);
 -- 
 2.39.0
 
