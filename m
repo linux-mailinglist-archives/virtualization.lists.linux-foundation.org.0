@@ -2,83 +2,80 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DADB68CA50
-	for <lists.virtualization@lfdr.de>; Tue,  7 Feb 2023 00:12:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 51FBC68CA55
+	for <lists.virtualization@lfdr.de>; Tue,  7 Feb 2023 00:12:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id CB96341748;
-	Mon,  6 Feb 2023 23:12:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CB96341748
+	by smtp4.osuosl.org (Postfix) with ESMTP id 647EA4171F;
+	Mon,  6 Feb 2023 23:12:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 647EA4171F
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=iVWUXcQi
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=ZTGXVzJO
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Xrzw89-wQH5E; Mon,  6 Feb 2023 23:12:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 3E4DD41720;
+	with ESMTP id Hsd5MdAWF9EG; Mon,  6 Feb 2023 23:12:34 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id E2AE541740;
 	Mon,  6 Feb 2023 23:12:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3E4DD41720
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E2AE541740
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 02E03C002B;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 819C5C0083;
 	Mon,  6 Feb 2023 23:12:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C74B3C002B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 234B0C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Feb 2023 23:12:29 +0000 (UTC)
+ Mon,  6 Feb 2023 23:12:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 95C294021C
+ by smtp4.osuosl.org (Postfix) with ESMTP id 099134150E
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Feb 2023 23:12:29 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 95C294021C
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=iVWUXcQi
+ Mon,  6 Feb 2023 23:12:31 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 099134150E
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZwdFQwPMxltA
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5X4mVQUscJ7G
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Feb 2023 23:12:29 +0000 (UTC)
+ Mon,  6 Feb 2023 23:12:30 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DFA0440590
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EEBC84157B
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
  [205.220.177.32])
- by smtp2.osuosl.org (Postfix) with ESMTPS id DFA0440590
+ by smtp4.osuosl.org (Postfix) with ESMTPS id EEBC84157B
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Feb 2023 23:12:28 +0000 (UTC)
-Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ Mon,  6 Feb 2023 23:12:29 +0000 (UTC)
+Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 316KE2p6029602; Mon, 6 Feb 2023 23:12:28 GMT
+ 316KDrhf003911; Mon, 6 Feb 2023 23:12:28 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references; s=corp-2022-7-12;
- bh=0CriircPtC5ExQ5QJKfnKlayKOe8WG6ZDKh8VqSRLTw=;
- b=iVWUXcQi3PZ5p5b14zda5RyTLGqGx9+eL3FaftoBoXA+coVyfjZEhqUh3c9lJ4JhiWav
- rLlVpgMbXYLshDjIzr+a7827NGpGTqY1vbuL/ntWpPviwx0H7UZgJy077vTU/K7al3Ki
- JGAa73z70CYh/22wj2Icu8QPh3u/S0xySsnWuZlhj1Qn8zPV8Y04MNu7mdc3oFrfbPMF
- IeLid+9UpfJAdW0lNuFRLb3JuiZ27Fae/TzrdkFYcXJlO5BZRFMXDjp8YFtI6TMDw9Is
- 9bHfsx0Yd9KZKNsh4pwzajeJBOnmj6V1MlMfF91AW3GhAKO0qa3xc4OTsvclMi7LsKYx iw== 
+ bh=d3JugFvzxOjps33xev2euAm7g4qNmWk7oY4Vz08lzVM=;
+ b=ZTGXVzJO4bSE/0v+jxfEf9XTuSzyyotNX2Yr1sT8ZUDVbokDhqLrYXLrLP+OYRPVXQ3Q
+ O/CJGi2I2Q6qU8plhsB2VPWkS3lrRBZVZRKzS1RAHVSVgcVadQZmAl++AGTP0Gzhxtdf
+ 0pl444B7XsndMHsWr/nZWKSP0ruzEUkZuhnQ22nb+MBsTdmxRVJaKf7vNP29KPRkxf+U
+ IcxiE5EoiIkiwA7ZSsuEf1fG7tKaZjv8VnjhCED5yeqAuHI9iUgHu1GC1X6ToRs6DjW3
+ +NFGkS4Ri+ITH9CiGs5Ll0Ex0qsHhD+fEEXD0W8v3zTEmXKZDHZtwDdICP+5GOQwhPZh 0A== 
 Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3nhdsdm991-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3nheytv8br-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 06 Feb 2023 23:12:27 +0000
+ Mon, 06 Feb 2023 23:12:28 +0000
 Received: from pps.filterd
  (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 316LpWgs021033; Mon, 6 Feb 2023 23:12:26 GMT
+ with ESMTP id 316LpWgt021033; Mon, 6 Feb 2023 23:12:27 GMT
 Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
  [10.153.73.24])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 3nhdt4sj6f-4; Mon, 06 Feb 2023 23:12:26 +0000
+ 3nhdt4sj6f-5; Mon, 06 Feb 2023 23:12:27 +0000
 From: Si-Wei Liu <si-wei.liu@oracle.com>
 To: mst@redhat.com, jasowang@redhat.com, parav@nvidia.com, elic@nvidia.com
-Subject: [PATCH RESENT v4 3/6] vdpa: validate provisioned device features
- against specified attribute
-Date: Mon,  6 Feb 2023 15:12:01 -0800
-Message-Id: <1675725124-7375-4-git-send-email-si-wei.liu@oracle.com>
+Subject: [PATCH RESENT v4 4/6] vdpa: validate device feature provisioning
+ against supported class
+Date: Mon,  6 Feb 2023 15:12:02 -0800
+Message-Id: <1675725124-7375-5-git-send-email-si-wei.liu@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1675725124-7375-1-git-send-email-si-wei.liu@oracle.com>
 References: <1675725124-7375-1-git-send-email-si-wei.liu@oracle.com>
@@ -90,8 +87,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
  malwarescore=0 mlxscore=0 mlxlogscore=999 adultscore=0 spamscore=0
  phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2212070000 definitions=main-2302060202
-X-Proofpoint-ORIG-GUID: vXQnM26dD8UEN7y1bMMm6xxbR58_yLxk
-X-Proofpoint-GUID: vXQnM26dD8UEN7y1bMMm6xxbR58_yLxk
+X-Proofpoint-GUID: KZV65-0zqrh8RBL-x8u4yUftGOYLTUxQ
+X-Proofpoint-ORIG-GUID: KZV65-0zqrh8RBL-x8u4yUftGOYLTUxQ
 Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -110,58 +107,122 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-With device feature provisioning, there's a chance for misconfiguration
-that the vdpa feature attribute supplied in 'vdpa dev add' command doesn't
-get selected on the device_features to be provisioned. For instance, when
-a @mac attribute is specified, the corresponding feature bit _F_MAC in
-device_features should be set for consistency. If there's conflict on
-provisioned features against the attribute, it should be treated as an
-error to fail the ambiguous command. Noted the opposite is not
-necessarily true, for e.g. it's okay to have _F_MAC set in device_features
-without providing a corresponding @mac attribute, in which case the vdpa
-vendor driver could load certain default value for attribute that is not
-explicitly specified.
-
-Generalize this check in vdpa core so that there's no duplicate code in
-each vendor driver.
+Today when device features are explicitly provisioned, the features
+user supplied may contain device class specific features that are
+not supported by the parent management device. On the other hand,
+when parent management device supports more than one class, the
+device features to provision may be ambiguous if none of the class
+specific attributes is provided at the same time. Validate these
+cases and prompt appropriate user errors accordingly.
 
 Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
-Reviewed-by: Eli Cohen <elic@nvidia.com>
 ---
- drivers/vdpa/vdpa.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ drivers/vdpa/vdpa.c | 59 +++++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 50 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/vdpa/vdpa.c b/drivers/vdpa/vdpa.c
-index 21c8aa3..1eba978 100644
+index 1eba978..8da5120 100644
 --- a/drivers/vdpa/vdpa.c
 +++ b/drivers/vdpa/vdpa.c
-@@ -601,8 +601,26 @@ static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *i
- 		config.mask |= BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MAX_VQP);
- 	}
- 	if (nl_attrs[VDPA_ATTR_DEV_FEATURES]) {
-+		u64 missing = 0x0ULL;
+@@ -460,12 +460,28 @@ static int vdpa_nl_mgmtdev_handle_fill(struct sk_buff *msg, const struct vdpa_mg
+ 	return 0;
+ }
+ 
++static u64 vdpa_mgmtdev_get_classes(const struct vdpa_mgmt_dev *mdev,
++				    unsigned int *nclasses)
++{
++	u64 supported_classes = 0;
++	unsigned int n = 0;
 +
- 		config.device_features =
- 			nla_get_u64(nl_attrs[VDPA_ATTR_DEV_FEATURES]);
-+		if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MACADDR] &&
-+		    !(config.device_features & BIT_ULL(VIRTIO_NET_F_MAC)))
-+			missing |= BIT_ULL(VIRTIO_NET_F_MAC);
-+		if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MTU] &&
-+		    !(config.device_features & BIT_ULL(VIRTIO_NET_F_MTU)))
-+			missing |= BIT_ULL(VIRTIO_NET_F_MTU);
-+		if (nl_attrs[VDPA_ATTR_DEV_NET_CFG_MAX_VQP] &&
-+		    config.net.max_vq_pairs > 1 &&
-+		    !(config.device_features & BIT_ULL(VIRTIO_NET_F_MQ)))
-+			missing |= BIT_ULL(VIRTIO_NET_F_MQ);
-+		if (missing) {
-+			NL_SET_ERR_MSG_FMT_MOD(info->extack,
-+					       "Missing features 0x%llx for provided attributes",
-+					       missing);
-+			return -EINVAL;
-+		}
- 		config.mask |= BIT_ULL(VDPA_ATTR_DEV_FEATURES);
++	for (int i = 0; mdev->id_table[i].device; i++) {
++		if (mdev->id_table[i].device > 63)
++			continue;
++		supported_classes |= BIT_ULL(mdev->id_table[i].device);
++		n++;
++	}
++	if (nclasses)
++		*nclasses = n;
++
++	return supported_classes;
++}
++
+ static int vdpa_mgmtdev_fill(const struct vdpa_mgmt_dev *mdev, struct sk_buff *msg,
+ 			     u32 portid, u32 seq, int flags)
+ {
+-	u64 supported_classes = 0;
+ 	void *hdr;
+-	int i = 0;
+ 	int err;
+ 
+ 	hdr = genlmsg_put(msg, portid, seq, &vdpa_nl_family, flags, VDPA_CMD_MGMTDEV_NEW);
+@@ -475,14 +491,9 @@ static int vdpa_mgmtdev_fill(const struct vdpa_mgmt_dev *mdev, struct sk_buff *m
+ 	if (err)
+ 		goto msg_err;
+ 
+-	while (mdev->id_table[i].device) {
+-		if (mdev->id_table[i].device <= 63)
+-			supported_classes |= BIT_ULL(mdev->id_table[i].device);
+-		i++;
+-	}
+-
+ 	if (nla_put_u64_64bit(msg, VDPA_ATTR_MGMTDEV_SUPPORTED_CLASSES,
+-			      supported_classes, VDPA_ATTR_UNSPEC)) {
++			      vdpa_mgmtdev_get_classes(mdev, NULL),
++			      VDPA_ATTR_UNSPEC)) {
+ 		err = -EMSGSIZE;
+ 		goto msg_err;
+ 	}
+@@ -566,13 +577,25 @@ static int vdpa_nl_cmd_mgmtdev_get_doit(struct sk_buff *skb, struct genl_info *i
+ 				 BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MTU)     | \
+ 				 BIT_ULL(VDPA_ATTR_DEV_NET_CFG_MAX_VQP))
+ 
++/*
++ * Bitmask for all per-device features: feature bits VIRTIO_TRANSPORT_F_START
++ * through VIRTIO_TRANSPORT_F_END are unset, i.e. 0xfffffc000fffffff for
++ * all 64bit features. If the features are extended beyond 64 bits, or new
++ * "holes" are reserved for other type of features than per-device, this
++ * macro would have to be updated.
++ */
++#define VIRTIO_DEVICE_F_MASK (~0ULL << (VIRTIO_TRANSPORT_F_END + 1) | \
++			      ((1ULL << VIRTIO_TRANSPORT_F_START) - 1))
++
+ static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *info)
+ {
+ 	struct vdpa_dev_set_config config = {};
+ 	struct nlattr **nl_attrs = info->attrs;
+ 	struct vdpa_mgmt_dev *mdev;
++	unsigned int ncls = 0;
+ 	const u8 *macaddr;
+ 	const char *name;
++	u64 classes;
+ 	int err = 0;
+ 
+ 	if (!info->attrs[VDPA_ATTR_DEV_NAME])
+@@ -649,6 +672,24 @@ static int vdpa_nl_cmd_dev_add_set_doit(struct sk_buff *skb, struct genl_info *i
+ 		goto err;
  	}
  
++	classes = vdpa_mgmtdev_get_classes(mdev, &ncls);
++	if (config.mask & VDPA_DEV_NET_ATTRS_MASK &&
++	    !(classes & BIT_ULL(VIRTIO_ID_NET))) {
++		NL_SET_ERR_MSG_MOD(info->extack,
++				   "Network class attributes provided on unsupported management device");
++		err = -EINVAL;
++		goto err;
++	}
++	if (!(config.mask & VDPA_DEV_NET_ATTRS_MASK) &&
++	    config.mask & BIT_ULL(VDPA_ATTR_DEV_FEATURES) &&
++	    classes & BIT_ULL(VIRTIO_ID_NET) && ncls > 1 &&
++	    config.device_features & VIRTIO_DEVICE_F_MASK) {
++		NL_SET_ERR_MSG_MOD(info->extack,
++				   "Management device supports multi-class while device features specified are ambiguous");
++		err = -EINVAL;
++		goto err;
++	}
++
+ 	err = mdev->ops->dev_add(mdev, name, &config);
+ err:
+ 	up_write(&vdpa_dev_lock);
 -- 
 1.8.3.1
 
