@@ -1,60 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E2C5695A9A
-	for <lists.virtualization@lfdr.de>; Tue, 14 Feb 2023 08:27:25 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 45CEF695A9E
+	for <lists.virtualization@lfdr.de>; Tue, 14 Feb 2023 08:27:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id B15BE416E4;
-	Tue, 14 Feb 2023 07:27:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B15BE416E4
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5CD6161129;
+	Tue, 14 Feb 2023 07:27:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5CD6161129
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id XOAaZ6G3vslb; Tue, 14 Feb 2023 07:27:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 247FE416DE;
-	Tue, 14 Feb 2023 07:27:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 247FE416DE
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id QQmEYswY_OKO; Tue, 14 Feb 2023 07:27:22 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id D829F6113C;
+	Tue, 14 Feb 2023 07:27:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D829F6113C
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 83157C002B;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4955FC0081;
 	Tue, 14 Feb 2023 07:27:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3ECDBC0071
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DB381C0071
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Feb 2023 07:27:19 +0000 (UTC)
+ Tue, 14 Feb 2023 07:27:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 596276110B
+ by smtp4.osuosl.org (Postfix) with ESMTP id 9CCEE416D3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Feb 2023 07:27:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 596276110B
+ Tue, 14 Feb 2023 07:27:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9CCEE416D3
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JgvoIIE1zokU
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id r9WoiWUyYFcc
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 14 Feb 2023 07:27:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 46020416C4
+Received: from out30-131.freemail.mail.aliyun.com
+ (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 46020416C4
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Feb 2023 07:27:16 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BD3A461098
-Received: from out30-99.freemail.mail.aliyun.com
- (out30-99.freemail.mail.aliyun.com [115.124.30.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BD3A461098
- for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Feb 2023 07:27:15 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0Vbeue5j_1676359631; 
+ TI=SMTPD_---0Vbeyoyl_1676359632; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vbeue5j_1676359631) by smtp.aliyun-inc.com;
- Tue, 14 Feb 2023 15:27:11 +0800
+ fp:SMTPD_---0Vbeyoyl_1676359632) by smtp.aliyun-inc.com;
+ Tue, 14 Feb 2023 15:27:12 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost 08/10] virtio_ring: introduce dma sync api for virtio
-Date: Tue, 14 Feb 2023 15:27:02 +0800
-Message-Id: <20230214072704.126660-9-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost 09/10] virtio_ring: correct the expression of the
+ description of virtqueue_resize()
+Date: Tue, 14 Feb 2023 15:27:03 +0800
+Message-Id: <20230214072704.126660-10-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230214072704.126660-1-xuanzhuo@linux.alibaba.com>
 References: <20230214072704.126660-1-xuanzhuo@linux.alibaba.com>
@@ -77,117 +78,26 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-These API has been introduced:
-
-* virtio_dma_need_sync
-* virtio_dma_sync_single_range_for_cpu
-* virtio_dma_sync_single_range_for_device
-
-These APIs can be used together with the premapped mechanism to sync the
-DMA address.
+Modify the "useless" to a more accurate "unused".
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 70 ++++++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  8 +++++
- 2 files changed, 78 insertions(+)
+ drivers/virtio/virtio_ring.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 855338609c7f..84129b8c3e2a 100644
+index 84129b8c3e2a..2ba60a14f557 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -3264,4 +3264,74 @@ void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
- }
- EXPORT_SYMBOL_GPL(virtio_dma_unmap);
- 
-+/**
-+ * virtio_dma_need_sync - check a dma address needs sync
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ *
-+ * This API is only for pre-mapped buffers, for non premapped buffers virtio
-+ * core handles DMA API internally.
-+ */
-+bool virtio_dma_need_sync(struct device *dev, dma_addr_t addr)
-+{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
-+
-+	if (!vring_use_dma_api(vdev))
-+		return 0;
-+
-+	return dma_need_sync(vdev->dev.parent, addr);
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_need_sync);
-+
-+/**
-+ * virtio_dma_sync_single_range_for_cpu - dma sync for cpu
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ * @offset: DMA address offset
-+ * @size: mem size for sync
-+ * @dir: DMA direction
-+ *
-+ * Before calling this function, use virtio_dma_need_sync() to confirm that the
-+ * DMA address really needs to be synchronized
-+ *
-+ * This API is only for pre-mapped buffers, for non premapped buffers virtio
-+ * core handles DMA API internally.
-+ */
-+void virtio_dma_sync_single_range_for_cpu(struct device *dev, dma_addr_t addr,
-+					  unsigned long offset, size_t size,
-+					  enum dma_data_direction dir)
-+{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
-+
-+	dma_sync_single_range_for_cpu(vdev->dev.parent, addr, offset,
-+				      size, DMA_BIDIRECTIONAL);
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_sync_single_range_for_cpu);
-+
-+/**
-+ * virtio_dma_sync_single_range_for_device - dma sync for device
-+ * @dev: virtio device
-+ * @addr: DMA address
-+ * @offset: DMA address offset
-+ * @size: mem size for sync
-+ * @dir: DMA direction
-+ *
-+ * Before calling this function, use virtio_dma_need_sync() to confirm that the
-+ * DMA address really needs to be synchronized
-+ *
-+ * This API is only for pre-mapped buffers, for non premapped buffers virtio
-+ * core handles DMA API internally.
-+ */
-+void virtio_dma_sync_single_range_for_device(struct device *dev,
-+					     dma_addr_t addr,
-+					     unsigned long offset, size_t size,
-+					     enum dma_data_direction dir)
-+{
-+	struct virtio_device *vdev = dev_to_virtio(dev);
-+
-+	dma_sync_single_range_for_device(vdev->dev.parent, addr, offset,
-+					 size, DMA_BIDIRECTIONAL);
-+}
-+EXPORT_SYMBOL_GPL(virtio_dma_sync_single_range_for_device);
-+
- MODULE_LICENSE("GPL");
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index b5fa71476737..d0e707d744a0 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -225,4 +225,12 @@ dma_addr_t virtio_dma_map(struct device *dev, void *addr, unsigned int length,
- int virtio_dma_mapping_error(struct device *dev, dma_addr_t addr);
- void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
- 		      enum dma_data_direction dir);
-+bool virtio_dma_need_sync(struct device *dev, dma_addr_t addr);
-+void virtio_dma_sync_single_range_for_cpu(struct device *dev, dma_addr_t addr,
-+					  unsigned long offset, size_t size,
-+					  enum dma_data_direction dir);
-+void virtio_dma_sync_single_range_for_device(struct device *dev,
-+					     dma_addr_t addr,
-+					     unsigned long offset, size_t size,
-+					     enum dma_data_direction dir);
- #endif /* _LINUX_VIRTIO_H */
+@@ -2865,7 +2865,7 @@ EXPORT_SYMBOL_GPL(vring_create_virtqueue_dma);
+  * virtqueue_resize - resize the vring of vq
+  * @_vq: the struct virtqueue we're talking about.
+  * @num: new ring num
+- * @recycle: callback for recycle the useless buffer
++ * @recycle: callback to recycle unused buffers
+  *
+  * When it is really necessary to create a new vring, it will set the current vq
+  * into the reset state. Then call the passed callback to recycle the buffer
 -- 
 2.32.0.3.g01195cf9f
 
