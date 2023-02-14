@@ -1,61 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D53F695A99
-	for <lists.virtualization@lfdr.de>; Tue, 14 Feb 2023 08:27:24 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 685D9695A9B
+	for <lists.virtualization@lfdr.de>; Tue, 14 Feb 2023 08:27:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E284D81E3A;
-	Tue, 14 Feb 2023 07:27:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E284D81E3A
+	by smtp2.osuosl.org (Postfix) with ESMTP id B578B40AF0;
+	Tue, 14 Feb 2023 07:27:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B578B40AF0
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Z5qcYtFAiT0m; Tue, 14 Feb 2023 07:27:19 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id yjVBXueMySt3; Tue, 14 Feb 2023 07:27:21 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 6AEFA81E39;
-	Tue, 14 Feb 2023 07:27:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6AEFA81E39
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 42D5540AE2;
+	Tue, 14 Feb 2023 07:27:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 42D5540AE2
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3F199C0088;
-	Tue, 14 Feb 2023 07:27:18 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0E527C007B;
+	Tue, 14 Feb 2023 07:27:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 140A2C0033
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 10E68C0087
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 14 Feb 2023 07:27:18 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp3.osuosl.org (Postfix) with ESMTP id BAA91610EA
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Feb 2023 07:27:16 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 484266112C
- for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Feb 2023 07:27:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 484266112C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BAA91610EA
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xa6YqKFe4wLI
+ with ESMTP id tJYvpuVWBd8L
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 14 Feb 2023 07:27:15 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 229BC61117
+Received: from out30-100.freemail.mail.aliyun.com
+ (out30-100.freemail.mail.aliyun.com [115.124.30.100])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 229BC61117
  for <virtualization@lists.linux-foundation.org>;
  Tue, 14 Feb 2023 07:27:14 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2930661103
-Received: from out30-124.freemail.mail.aliyun.com
- (out30-124.freemail.mail.aliyun.com [115.124.30.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 2930661103
- for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Feb 2023 07:27:13 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R721e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0Vbeue5L_1676359629; 
+ TI=SMTPD_---0VbetAyS_1676359630; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vbeue5L_1676359629) by smtp.aliyun-inc.com;
- Tue, 14 Feb 2023 15:27:10 +0800
+ fp:SMTPD_---0VbetAyS_1676359630) by smtp.aliyun-inc.com;
+ Tue, 14 Feb 2023 15:27:11 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost 06/10] virtio_ring: introduce
- virtqueue_add_inbuf_premapped()
-Date: Tue, 14 Feb 2023 15:27:00 +0800
-Message-Id: <20230214072704.126660-7-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost 07/10] virtio_ring: add api virtio_dma_map() for advance
+ dma
+Date: Tue, 14 Feb 2023 15:27:01 +0800
+Message-Id: <20230214072704.126660-8-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230214072704.126660-1-xuanzhuo@linux.alibaba.com>
 References: <20230214072704.126660-1-xuanzhuo@linux.alibaba.com>
@@ -78,66 +78,144 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce virtqueue_add_inbuf_premapped() to submit premapped sgs.
+Added virtio_dma_map() to map DMA addresses for virtual memory in
+advance. The purpose is to keep memory mapped across multiple add/get
+buf operations.
+
+Added virtio_dma_unmap() for unmap DMA address.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 25 +++++++++++++++++++++++++
- include/linux/virtio.h       |  5 +++++
- 2 files changed, 30 insertions(+)
+ drivers/virtio/virtio_ring.c | 92 ++++++++++++++++++++++++++++++++++++
+ include/linux/virtio.h       |  9 ++++
+ 2 files changed, 101 insertions(+)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 79244ccbae9e..cd9364eb2345 100644
+index cd9364eb2345..855338609c7f 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2452,6 +2452,31 @@ int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
+@@ -3172,4 +3172,96 @@ const struct vring *virtqueue_get_vring(struct virtqueue *vq)
  }
- EXPORT_SYMBOL_GPL(virtqueue_add_inbuf_ctx);
+ EXPORT_SYMBOL_GPL(virtqueue_get_vring);
  
 +/**
-+ * virtqueue_add_inbuf_premapped - expose input buffers to other end
-+ * @vq: the struct virtqueue we're talking about.
-+ * @sg: scatterlist (must be well-formed and terminated!)
-+ * @num: the number of entries in @sg writable by other side
-+ * @data: the token identifying the buffer.
-+ * @gfp: how to do memory allocations (if necessary).
++ * virtio_dma_map_page - get the DMA addr of the memory for virtio device
++ * @dev: virtio device
++ * @page: the page of the memory to DMA
++ * @offset: the offset of the memory inside page
++ * @length: memory length
++ * @dir: DMA direction
 + *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
++ * This API is only for pre-mapped buffers, for non premapped buffers virtio
++ * core handles DMA API internally.
 + *
-+ * It is required that all addrs have completed DMA operations. And use
-+ * sg->dma_address, sg->length to pass addr and length.
-+ *
-+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
++ * Returns the DMA addr. DMA_MAPPING_ERROR means error.
 + */
-+int virtqueue_add_inbuf_premapped(struct virtqueue *vq,
-+				  struct scatterlist *sg, unsigned int num,
-+				  void *data,
-+				  gfp_t gfp)
++dma_addr_t virtio_dma_map_page(struct device *dev, struct page *page, size_t offset,
++			       unsigned int length, enum dma_data_direction dir)
 +{
-+	return virtqueue_add_premapped(vq, &sg, num, 0, 1, data, NULL, gfp);
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_add_inbuf_premapped);
++	struct virtio_device *vdev = dev_to_virtio(dev);
 +
- /**
-  * virtqueue_kick_prepare - first half of split virtqueue_kick call.
-  * @_vq: the struct virtqueue
++	if (!vring_use_dma_api(vdev))
++		return page_to_phys(page) + offset;
++
++	return dma_map_page(vdev->dev.parent, page, offset, length, dir);
++}
++
++/**
++ * virtio_dma_map - get the DMA addr of the memory for virtio device
++ * @dev: virtio device
++ * @addr: the addr to DMA
++ * @length: memory length
++ * @dir: DMA direction
++ *
++ * This API is only for pre-mapped buffers, for non premapped buffers virtio
++ * core handles DMA API internally.
++ *
++ * Returns the DMA addr.
++ */
++dma_addr_t virtio_dma_map(struct device *dev, void *addr, unsigned int length,
++			  enum dma_data_direction dir)
++{
++	struct page *page;
++	size_t offset;
++
++	page = virt_to_page(addr);
++	offset = offset_in_page(addr);
++
++	return virtio_dma_map_page(dev, page, offset, length, dir);
++}
++EXPORT_SYMBOL_GPL(virtio_dma_map);
++
++/**
++ * virtio_dma_mapping_error - check dma address
++ * @dev: virtio device
++ * @addr: DMA address
++ *
++ * This API is only for pre-mapped buffers, for non premapped buffers virtio
++ * core handles DMA API internally.
++ *
++ * Returns 0 means dma valid. Other means invalid dma address.
++ */
++int virtio_dma_mapping_error(struct device *dev, dma_addr_t addr)
++{
++	struct virtio_device *vdev = dev_to_virtio(dev);
++
++	if (!vring_use_dma_api(vdev))
++		return 0;
++
++	return dma_mapping_error(vdev->dev.parent, addr);
++}
++EXPORT_SYMBOL_GPL(virtio_dma_mapping_error);
++
++/**
++ * virtio_dma_unmap - unmap DMA addr
++ * @dev: virtio device
++ * @dma: DMA address
++ * @length: memory length
++ * @dir: DMA direction
++ *
++ * This API is only for pre-mapped buffers, for non premapped buffers virtio
++ * core handles DMA API internally.
++ */
++void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
++		      enum dma_data_direction dir)
++{
++	struct virtio_device *vdev = dev_to_virtio(dev);
++
++	if (!vring_use_dma_api(vdev))
++		return;
++
++	dma_unmap_page(vdev->dev.parent, dma, length, dir);
++}
++EXPORT_SYMBOL_GPL(virtio_dma_unmap);
++
+ MODULE_LICENSE("GPL");
 diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index d8b472a7dcae..3ebb346ebb7c 100644
+index 3ebb346ebb7c..b5fa71476737 100644
 --- a/include/linux/virtio.h
 +++ b/include/linux/virtio.h
-@@ -59,6 +59,11 @@ int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
- 			    void *ctx,
- 			    gfp_t gfp);
+@@ -9,6 +9,7 @@
+ #include <linux/device.h>
+ #include <linux/mod_devicetable.h>
+ #include <linux/gfp.h>
++#include <linux/dma-mapping.h>
  
-+int virtqueue_add_inbuf_premapped(struct virtqueue *vq,
-+				  struct scatterlist *sg, unsigned int num,
-+				  void *data,
-+				  gfp_t gfp);
+ /**
+  * struct virtqueue - a queue to register buffers for sending or receiving.
+@@ -216,4 +217,12 @@ void unregister_virtio_driver(struct virtio_driver *drv);
+ #define module_virtio_driver(__virtio_driver) \
+ 	module_driver(__virtio_driver, register_virtio_driver, \
+ 			unregister_virtio_driver)
 +
- int virtqueue_add_sgs(struct virtqueue *vq,
- 		      struct scatterlist *sgs[],
- 		      unsigned int out_sgs,
++dma_addr_t virtio_dma_map_page(struct device *dev, struct page *page, size_t offset,
++			       unsigned int length, enum dma_data_direction dir);
++dma_addr_t virtio_dma_map(struct device *dev, void *addr, unsigned int length,
++			  enum dma_data_direction dir);
++int virtio_dma_mapping_error(struct device *dev, dma_addr_t addr);
++void virtio_dma_unmap(struct device *dev, dma_addr_t dma, unsigned int length,
++		      enum dma_data_direction dir);
+ #endif /* _LINUX_VIRTIO_H */
 -- 
 2.32.0.3.g01195cf9f
 
