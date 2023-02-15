@@ -1,94 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 48CE86980D2
-	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 17:25:35 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4586B698070
+	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 17:15:40 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 8CF0240134;
-	Wed, 15 Feb 2023 16:25:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8CF0240134
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=sN4/0aSE;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=DjGOf9Pt
+	by smtp3.osuosl.org (Postfix) with ESMTP id D6C146117A;
+	Wed, 15 Feb 2023 16:15:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D6C146117A
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=v6Oj3weR;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=UtYf68N4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id BXht68QF5Qum; Wed, 15 Feb 2023 16:25:30 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8Vr9v0SemAdT; Wed, 15 Feb 2023 16:15:37 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 353AB40BF8;
-	Wed, 15 Feb 2023 16:25:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 353AB40BF8
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 66D3161183;
+	Wed, 15 Feb 2023 16:15:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 66D3161183
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0ABEAC0032;
-	Wed, 15 Feb 2023 16:25:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2FA99C008C;
+	Wed, 15 Feb 2023 16:15:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EBBB7C0085
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9DC60C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:25:27 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:33 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C0E56408B3
+ by smtp2.osuosl.org (Postfix) with ESMTP id 76D6440134
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:25:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C0E56408B3
-Authentication-Results: smtp4.osuosl.org;
+ Wed, 15 Feb 2023 16:15:33 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 76D6440134
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=sN4/0aSE; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=v6Oj3weR; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=DjGOf9Pt
+ header.s=susede2_ed25519 header.b=UtYf68N4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id t-HzJQb3Z00g
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id KN_pQUd-e1Kv
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:25:25 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:32 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 94D74408C3
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 94D74408C3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AADB040BF7
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AADB040BF7
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:25:25 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:32 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 96FF7200FE;
- Wed, 15 Feb 2023 16:15:28 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 17890339A3;
+ Wed, 15 Feb 2023 16:15:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1676477728; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1676477729; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1BM2d13cHOWxOOXcWmdpVLKai8Z6PGV5O4/2zcDhOGk=;
- b=sN4/0aSEwS/qhPT0XQRO3odk13GIGxwhepeCr/s8kwHZ8lxq/XBZx58AwM8xB8aGdDYRZc
- F3NqQwIG5IaHtOURd8P9mADAx4fthxxUdWEOiaiY0krBnVmIF39DYydHZey1FamTMgfktT
- D6nxf30y58ap5uFu/h6J957Qnt6hmwQ=
+ bh=tgfwC4HTlECoV8bLgLGrSLYiHXhh0M9Td1f5HdAONmY=;
+ b=v6Oj3weR/sdlY5Gw6FqpBh26tEvy+tVIoyf+D+N488SSZRmbWumUA0L779LoYuiuX7hp5e
+ oPEkQ7OYAbm84chXAIep/kjs3QUEKg5OPQNHDDuCbXRKb8lFmT/ReA9M+OOlvQdTcy3aZH
+ yLpIKP/cILPwpk11j4/kI/KEiXRHfxA=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1676477728;
+ s=susede2_ed25519; t=1676477729;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=1BM2d13cHOWxOOXcWmdpVLKai8Z6PGV5O4/2zcDhOGk=;
- b=DjGOf9Pty95t41DwdfeMd+A3QKvty9D5mpM2uYxceSnK8SnehJx1UYD9Rc7t/S8krduvqZ
- LcFFP1ECy4PdZ/Bg==
+ bh=tgfwC4HTlECoV8bLgLGrSLYiHXhh0M9Td1f5HdAONmY=;
+ b=UtYf68N4LlEW+U82nQHR6s9nYB2Ayas/RypHSXdc4sLNp8GI+Mtnv4k6wvoMjZkkIDvwqV
+ y2EY9HZzx0quf0BA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 47AD2134BA;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id BD5AA134BA;
  Wed, 15 Feb 2023 16:15:28 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id sJCLECAF7WNHOgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id SBCmKSAF7WNHOgAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Wed, 15 Feb 2023 16:15:28 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: kraxel@redhat.com, airlied@redhat.com, daniel@ffwll.ch, sam@ravnborg.org,
  javierm@redhat.com, dri-devel@lists.freedesktop.org
-Subject: [PATCH 12/17] drm/cirrus: Remove size test from cirrus_fb_create()
-Date: Wed, 15 Feb 2023 17:15:12 +0100
-Message-Id: <20230215161517.5113-13-tzimmermann@suse.de>
+Subject: [PATCH 13/17] drm/cirrus: Test mode against video-memory size in
+ device-wide mode_valid
+Date: Wed, 15 Feb 2023 17:15:13 +0100
+Message-Id: <20230215161517.5113-14-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230215161517.5113-1-tzimmermann@suse.de>
 References: <20230215161517.5113-1-tzimmermann@suse.de>
@@ -111,37 +112,63 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The DRM core implements a size check against the mode config's
-limits when creating a framebuffer. [1] Remove the unnecessary
-test from cirrus_fb_create() and remove the now-empty function.
-Create framebuffers with drm_gem_fb_create_with_dirty().
+Test a display mode against the available amount of video memory in
+struct drm_mode_config_funcs.mode_valid, which cirrus implements in
+cirrus_mode_config_mode_valid(). This helper tests display modes against
+device-wide limits. Remove the now-obsolete per-CRTC test.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Link: https://elixir.bootlin.com/linux/v6.1/source/drivers/gpu/drm/drm_framebuffer.c#L287 # [1]
 ---
- drivers/gpu/drm/tiny/cirrus.c | 11 +----------
- 1 file changed, 1 insertion(+), 10 deletions(-)
+ drivers/gpu/drm/tiny/cirrus.c | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-index c1ffbbe1d545..c2d7bb775629 100644
+index c2d7bb775629..6c2be39d79a5 100644
 --- a/drivers/gpu/drm/tiny/cirrus.c
 +++ b/drivers/gpu/drm/tiny/cirrus.c
-@@ -555,17 +555,8 @@ static int cirrus_pipe_init(struct cirrus_device *cirrus)
+@@ -419,15 +419,6 @@ static const struct drm_plane_funcs cirrus_primary_plane_funcs = {
+ 	DRM_GEM_SHADOW_PLANE_FUNCS,
+ };
+ 
+-static enum drm_mode_status cirrus_crtc_helper_mode_valid(struct drm_crtc *crtc,
+-							  const struct drm_display_mode *mode)
+-{
+-	if (cirrus_check_size(mode->hdisplay, mode->vdisplay, NULL) < 0)
+-		return MODE_BAD;
+-
+-	return MODE_OK;
+-}
+-
+ static int cirrus_crtc_helper_atomic_check(struct drm_crtc *crtc, struct drm_atomic_state *state)
+ {
+ 	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(state, crtc);
+@@ -462,7 +453,6 @@ static void cirrus_crtc_helper_atomic_enable(struct drm_crtc *crtc,
+ }
+ 
+ static const struct drm_crtc_helper_funcs cirrus_crtc_helper_funcs = {
+-	.mode_valid = cirrus_crtc_helper_mode_valid,
+ 	.atomic_check = cirrus_crtc_helper_atomic_check,
+ 	.atomic_enable = cirrus_crtc_helper_atomic_enable,
+ };
+@@ -555,8 +545,21 @@ static int cirrus_pipe_init(struct cirrus_device *cirrus)
  /* ------------------------------------------------------------------ */
  /* cirrus framebuffers & mode config				      */
  
--static struct drm_framebuffer*
--cirrus_fb_create(struct drm_device *dev, struct drm_file *file_priv,
--		 const struct drm_mode_fb_cmd2 *mode_cmd)
--{
--	if (cirrus_check_size(mode_cmd->width, mode_cmd->height, NULL) < 0)
--		return ERR_PTR(-EINVAL);
--	return drm_gem_fb_create_with_dirty(dev, file_priv, mode_cmd);
--}
--
++static enum drm_mode_status cirrus_mode_config_mode_valid(struct drm_device *dev,
++							  const struct drm_display_mode *mode)
++{
++	const struct drm_format_info *format = drm_format_info(DRM_FORMAT_XRGB8888);
++	uint64_t pitch = drm_format_info_min_pitch(format, 0, mode->hdisplay);
++
++	if (pitch * mode->vdisplay > CIRRUS_VRAM_SIZE)
++		return MODE_MEM;
++
++	return MODE_OK;
++}
++
  static const struct drm_mode_config_funcs cirrus_mode_config_funcs = {
--	.fb_create = cirrus_fb_create,
-+	.fb_create = drm_gem_fb_create_with_dirty,
+ 	.fb_create = drm_gem_fb_create_with_dirty,
++	.mode_valid = cirrus_mode_config_mode_valid,
  	.atomic_check = drm_atomic_helper_check,
  	.atomic_commit = drm_atomic_helper_commit,
  };
