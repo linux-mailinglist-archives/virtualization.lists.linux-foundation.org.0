@@ -2,94 +2,93 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5E3C569806E
-	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 17:15:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id E09B6698073
+	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 17:15:41 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 4F9C840C06;
-	Wed, 15 Feb 2023 16:15:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4F9C840C06
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7D39940C05;
+	Wed, 15 Feb 2023 16:15:40 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7D39940C05
 Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ZO5W9vun;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=kEDwPgXe
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=rO1VzL1s;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=pdEHnDqK
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oZsNGYCxXr6m; Wed, 15 Feb 2023 16:15:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id E77984012F;
-	Wed, 15 Feb 2023 16:15:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E77984012F
+	with ESMTP id RZkeYWwhZnPw; Wed, 15 Feb 2023 16:15:39 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 3764040BFB;
+	Wed, 15 Feb 2023 16:15:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3764040BFB
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D9328C0032;
-	Wed, 15 Feb 2023 16:15:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0D8BCC0032;
+	Wed, 15 Feb 2023 16:15:39 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 94FDAC0077
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 23BCDC0033
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:15:32 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 525004173C
+ by smtp4.osuosl.org (Postfix) with ESMTP id 600C340278
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:15:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 525004173C
+ Wed, 15 Feb 2023 16:15:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 600C340278
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=ZO5W9vun; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=rO1VzL1s; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=kEDwPgXe
+ header.s=susede2_ed25519 header.b=pdEHnDqK
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id F5Prc1H5OfjK
+ with ESMTP id WNE5RXfAUzAO
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:15:31 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:34 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2EC2C4172A
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2EC2C4172A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1171F4173E
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1171F4173E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 16:15:31 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:33 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 6A837339A4;
- Wed, 15 Feb 2023 16:15:29 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 44EC020623;
+ Wed, 15 Feb 2023 16:15:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1676477729; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ t=1676477730; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7I5MfF11ud5D261yH0s5T+3bBpyxJvygQrUk7F9YTRw=;
- b=ZO5W9vun+atawyeqvjx1FRhg2hZkh0RM0x4jEiYMh52WzELO5VhkvDDQpohK4Os7FWKnPl
- 9i2e3IFOxLQ3rpj4sfTPOGJEoGJlUBsWKF+NO8/obutiRnQUrUEBONyMmzmP9aM7qDpSOq
- DfOomrtTLtDHodAaRpru8fRuLfMvv2o=
+ bh=lrHZl8AETaVXT9eBQiWd6PbqrRgR6tEvkF9TypK9U7c=;
+ b=rO1VzL1sNcdSd9mzC3Ze9i8Pj+MLBGxtkQDDjY4nghYIeqUBBP516WigSh6QgnLeH7R02R
+ HwzVCyHbwMDkZpfZDLkxW61SYSPo4mwTRpUlqdPtX4K78sG8FkrtMiajs/C4Sy6CGmRtub
+ ql/R7S8c3elgGzyyuaFc+TmMcMN3Tac=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1676477729;
+ s=susede2_ed25519; t=1676477730;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=7I5MfF11ud5D261yH0s5T+3bBpyxJvygQrUk7F9YTRw=;
- b=kEDwPgXen3eY7JkPgtj6SJjqbrtl4HvKSxBUtJDbWl0swFb4lTDdJtgkQgEH2H2OR7rN3a
- q/vM2CwPRBCDqGBA==
+ bh=lrHZl8AETaVXT9eBQiWd6PbqrRgR6tEvkF9TypK9U7c=;
+ b=pdEHnDqKubeLRGq8/IRGZ0RGBfjiyxwB+1ubuutKPI5RS9oo7UpxLm9XO52kTcVuF4gLrC
+ E4sCLkfmpgWKNUAA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 2BE05134BA;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 6E9F813928;
  Wed, 15 Feb 2023 16:15:29 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id WJmvCSEF7WNHOgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id EMwEGiEF7WNHOgAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Wed, 15 Feb 2023 16:15:29 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: kraxel@redhat.com, airlied@redhat.com, daniel@ffwll.ch, sam@ravnborg.org,
  javierm@redhat.com, dri-devel@lists.freedesktop.org
-Subject: [PATCH 14/17] drm/cirrus: Inline cirrus_check_size() into
- primary-plane atomic_check
-Date: Wed, 15 Feb 2023 17:15:14 +0100
-Message-Id: <20230215161517.5113-15-tzimmermann@suse.de>
+Subject: [PATCH 15/17] drm/cirrus: Introduce struct cirrus_primary_plane_state
+Date: Wed, 15 Feb 2023 17:15:15 +0100
+Message-Id: <20230215161517.5113-16-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230215161517.5113-1-tzimmermann@suse.de>
 References: <20230215161517.5113-1-tzimmermann@suse.de>
@@ -112,65 +111,96 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Inline the framebuffer size check into the primary plane's atomic_check
-cirrus_primary_plane_atomic_check(). No functional changes.
+The cirrus driver maintains plane state, format and pitch, in it's
+device structure. Introduce a plane state for the primary plane to
+store the values.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/tiny/cirrus.c | 26 ++++++++++----------------
- 1 file changed, 10 insertions(+), 16 deletions(-)
+ drivers/gpu/drm/tiny/cirrus.c | 59 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 58 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-index 6c2be39d79a5..8a1ae94d9106 100644
+index 8a1ae94d9106..ec6b918dce7b 100644
 --- a/drivers/gpu/drm/tiny/cirrus.c
 +++ b/drivers/gpu/drm/tiny/cirrus.c
-@@ -317,21 +317,6 @@ static void cirrus_pitch_set(struct cirrus_device *cirrus,
- 	cirrus_set_start_address(cirrus, 0);
- }
+@@ -74,6 +74,16 @@ struct cirrus_device {
  
--static int cirrus_check_size(int width, int height,
--			     struct drm_framebuffer *fb)
--{
--	int pitch = width * 2;
--
--	if (fb)
--		pitch = cirrus_pitch(fb);
--
--	if (pitch > CIRRUS_MAX_PITCH)
--		return -EINVAL;
--	if (pitch * height > CIRRUS_VRAM_SIZE)
--		return -EINVAL;
--	return 0;
--}
--
+ #define to_cirrus(_dev) container_of(_dev, struct cirrus_device, dev)
+ 
++struct cirrus_primary_plane_state {
++	struct drm_shadow_plane_state base;
++};
++
++static inline struct cirrus_primary_plane_state *
++to_cirrus_primary_plane_state(struct drm_plane_state *plane_state)
++{
++	return container_of(plane_state, struct cirrus_primary_plane_state, base.base);
++};
++
  /* ------------------------------------------------------------------ */
- /* cirrus display pipe						      */
+ /*
+  * The meat of this driver. The core passes us a mode and we have to program
+@@ -406,11 +416,58 @@ static const struct drm_plane_helper_funcs cirrus_primary_plane_helper_funcs = {
+ 	.atomic_update = cirrus_primary_plane_helper_atomic_update,
+ };
  
-@@ -354,6 +339,7 @@ static int cirrus_primary_plane_helper_atomic_check(struct drm_plane *plane,
- 	struct drm_crtc *new_crtc = new_plane_state->crtc;
- 	struct drm_crtc_state *new_crtc_state = NULL;
- 	int ret;
-+	unsigned int pitch;
- 
- 	if (new_crtc)
- 		new_crtc_state = drm_atomic_get_new_crtc_state(state, new_crtc);
-@@ -367,7 +353,15 @@ static int cirrus_primary_plane_helper_atomic_check(struct drm_plane *plane,
- 	else if (!new_plane_state->visible)
- 		return 0;
- 
--	return cirrus_check_size(fb->width, fb->height, fb);
-+	pitch = cirrus_pitch(fb);
++static struct drm_plane_state *
++cirrus_primary_plane_atomic_duplicate_state(struct drm_plane *plane)
++{
++	struct drm_plane_state *plane_state = plane->state;
++	struct cirrus_primary_plane_state *new_primary_plane_state;
++	struct drm_shadow_plane_state *new_shadow_plane_state;
 +
-+	/* validate size constraints */
-+	if (pitch > CIRRUS_MAX_PITCH)
-+		return -EINVAL;
-+	else if (pitch * fb->height > CIRRUS_VRAM_SIZE)
-+		return -EINVAL;
++	if (!plane_state)
++		return NULL;
 +
-+	return 0;
- }
++	new_primary_plane_state = kzalloc(sizeof(*new_primary_plane_state), GFP_KERNEL);
++	if (!new_primary_plane_state)
++		return NULL;
++	new_shadow_plane_state = &new_primary_plane_state->base;
++
++	__drm_gem_duplicate_shadow_plane_state(plane, new_shadow_plane_state);
++
++	return &new_shadow_plane_state->base;
++}
++
++static void cirrus_primary_plane_atomic_destroy_state(struct drm_plane *plane,
++						      struct drm_plane_state *plane_state)
++{
++	struct cirrus_primary_plane_state *primary_plane_state =
++		to_cirrus_primary_plane_state(plane_state);
++
++	__drm_gem_destroy_shadow_plane_state(&primary_plane_state->base);
++	kfree(primary_plane_state);
++}
++
++static void cirrus_reset_primary_plane(struct drm_plane *plane)
++{
++	struct cirrus_primary_plane_state *primary_plane_state;
++
++	if (plane->state) {
++		cirrus_primary_plane_atomic_destroy_state(plane, plane->state);
++		plane->state = NULL; /* must be set to NULL here */
++	}
++
++	primary_plane_state = kzalloc(sizeof(*primary_plane_state), GFP_KERNEL);
++	if (!primary_plane_state)
++		return;
++	__drm_gem_reset_shadow_plane(plane, &primary_plane_state->base);
++}
++
+ static const struct drm_plane_funcs cirrus_primary_plane_funcs = {
+ 	.update_plane = drm_atomic_helper_update_plane,
+ 	.disable_plane = drm_atomic_helper_disable_plane,
+ 	.destroy = drm_plane_cleanup,
+-	DRM_GEM_SHADOW_PLANE_FUNCS,
++	.reset = cirrus_reset_primary_plane,
++	.atomic_duplicate_state = cirrus_primary_plane_atomic_duplicate_state,
++	.atomic_destroy_state = cirrus_primary_plane_atomic_destroy_state,
+ };
  
- static void cirrus_primary_plane_helper_atomic_update(struct drm_plane *plane,
+ static int cirrus_crtc_helper_atomic_check(struct drm_crtc *crtc, struct drm_atomic_state *state)
 -- 
 2.39.1
 
