@@ -2,95 +2,88 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1F36E697F20
-	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 16:08:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 03C49698062
+	for <lists.virtualization@lfdr.de>; Wed, 15 Feb 2023 17:15:32 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 93FE060A8D;
-	Wed, 15 Feb 2023 15:08:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 93FE060A8D
+	by smtp3.osuosl.org (Postfix) with ESMTP id 8718361167;
+	Wed, 15 Feb 2023 16:15:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8718361167
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=pxB5rQcH
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=IgBljbXs;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=Uk4/09t8
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id djuSkJNHR-IA; Wed, 15 Feb 2023 15:08:13 +0000 (UTC)
+	with ESMTP id Gvf-Td0ZOHPK; Wed, 15 Feb 2023 16:15:29 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 66EA060AAE;
-	Wed, 15 Feb 2023 15:08:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 66EA060AAE
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 5B55360B1B;
+	Wed, 15 Feb 2023 16:15:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5B55360B1B
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A8F72C0078;
-	Wed, 15 Feb 2023 15:08:12 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 91ECBC0078;
+	Wed, 15 Feb 2023 16:15:28 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3AFD5C002B
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E7BA3C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 15:08:12 +0000 (UTC)
+ Wed, 15 Feb 2023 16:15:26 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 21FB58188D
+ by smtp3.osuosl.org (Postfix) with ESMTP id CEEF560D5F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 15:08:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 21FB58188D
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=solid-run-com.20210112.gappssmtp.com
- header.i=@solid-run-com.20210112.gappssmtp.com header.a=rsa-sha256
- header.s=20210112 header.b=pxB5rQcH
+ Wed, 15 Feb 2023 16:15:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CEEF560D5F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZQnwYb7zA5mB
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id woH8iJvL594D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 15:08:11 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8CC70813A3
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 8CC70813A3
+ Wed, 15 Feb 2023 16:15:26 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E9D1460B1B
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E9D1460B1B
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 15:08:11 +0000 (UTC)
-Received: by mail-pf1-x434.google.com with SMTP id bt14so6058660pfb.13
- for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Feb 2023 07:08:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=solid-run-com.20210112.gappssmtp.com; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=om5xFN9DIqdUPr2TpEEvGw4kLIL/LefrYACkVqsX0aY=;
- b=pxB5rQcHCg32tiqpWkO0sVy+jk+yqanZXcRrjHAatJ6cLhdfRA1Y2j6V+1wxoFDWvW
- TPfyWUdVAE580PCr3cNZD7xiayPIl0n1PeVDoeQjk0vn8gbXfABIedSwDVt/cNKeWKyf
- YlzxkzmFNN3QGT06AWdtkuXLb2ZIi0qGsWUdSKbdjC5woS0xzuAYCNbOjY4KLxEqZkC1
- mQYJhnXFf+rz6NrcVn0flST5H3/sr0o4VIoc5VvPiEe4ZzfVf8k92ya/5cD83JzsUvcY
- AIm90BllkG9170bE1ombUAS/QtbbmbxEvA3ArigrjTXr9l9YEva20AojBr92K+1CRRcz
- opgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=om5xFN9DIqdUPr2TpEEvGw4kLIL/LefrYACkVqsX0aY=;
- b=1C9/opRNYYJpaW+SNQCDxpMTL6pMEGnPuboLWLS1Kuh+xOTz8Y3vZH4REmiqXN1bJS
- oZogTOLo2HSvJOK0Pu1cASkcDkIXU0qfaf9rVWdRRBjzkHKYRf8uaJFiWESdbg6B+jcn
- U8Gm23pUgJHIh9ofvNPFULstbSGTZ0TU1KmrSfVt6Fnao6rOzRcI13XCx2WanMUEtm87
- 9lfqN4MldoSPX/1EXJgCpesz+OUk/+b+2Ft2al3VQs5SuW7T9tM2hSMrzlOI5IY5pp7i
- wBaeHSLc6Kh1fEo81PnxqkzdywL37Munf7zOS4z5yqHNVjl9xsLGWGh1Iw7+1dLVIsp+
- hZcA==
-X-Gm-Message-State: AO0yUKXnPACPtTueyr0GzMTUPpHD9tTu6gjD/6NMcb7Q2VNKNfdcedUp
- sG5QX1A2PEDRQ4Vm2zTMHOIbppOzAX6in6y9MbFLig==
-X-Google-Smtp-Source: AK7set8IP+nxzoJIpBKnAnUSj+1hOv4ULHL1fOIa2eJLeSUCIkpwUMrjiRCTinPYHUoPsky+6aEED+11BassA9OUVzQ=
-X-Received: by 2002:a63:3c1a:0:b0:4da:146e:f14a with SMTP id
- j26-20020a633c1a000000b004da146ef14amr367627pga.8.1676473690911; Wed, 15 Feb
- 2023 07:08:10 -0800 (PST)
+ Wed, 15 Feb 2023 16:15:25 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id D5CA51F8D6;
+ Wed, 15 Feb 2023 16:15:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1676477720; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=H8O2pqGGz2IXryxdRbZ/zKUMEMQ+ehGKWwZJA0uDVho=;
+ b=IgBljbXsgPTiYSvqNr+ShEsIDE/SHrnQzwTeQYPX5dpMpweFMtXLxH61nhKWPnflJeX6nO
+ KNK5XqqxK+EfQm+i8dSgGIW+C0TTiMc4gPbg3HR9vlyxhrKnHtLST6NwIrKIZb7tGOHa2r
+ lbO13oVrWbqgTCoZS19FI1/RjpgqvNI=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1676477720;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=H8O2pqGGz2IXryxdRbZ/zKUMEMQ+ehGKWwZJA0uDVho=;
+ b=Uk4/09t8ES7GBW267K+UMBIdNOR/8xxcL82nSocq4Ojh74wFNWip6RtXB/Aug0FN4Zi5kI
+ VpGMzKFuYQji+hBQ==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 47314134BA;
+ Wed, 15 Feb 2023 16:15:20 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id DRtwDRgF7WNHOgAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Wed, 15 Feb 2023 16:15:20 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: kraxel@redhat.com, airlied@redhat.com, daniel@ffwll.ch, sam@ravnborg.org,
+ javierm@redhat.com, dri-devel@lists.freedesktop.org
+Subject: [PATCH 00/17] cirrus: Modernize the cirrus driver
+Date: Wed, 15 Feb 2023 17:15:00 +0100
+Message-Id: <20230215161517.5113-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-References: <20230209075128.78915-1-alvaro.karsz@solid-run.com>
- <CAJs=3_CfX-K9E5Y=s8cK1YKRktcKNmyRhGFcD8OU-N8YYPt4XA@mail.gmail.com>
-In-Reply-To: <CAJs=3_CfX-K9E5Y=s8cK1YKRktcKNmyRhGFcD8OU-N8YYPt4XA@mail.gmail.com>
-From: Alvaro Karsz <alvaro.karsz@solid-run.com>
-Date: Wed, 15 Feb 2023 17:07:33 +0200
-Message-ID: <CAJs=3_Af0wJsdMZs2aqm8Y68c7+zk9y39s0MDFNHMZq-amrAYA@mail.gmail.com>
-Subject: Re: [PATCH] vdpa: snet: clear dpu_ready flag on reset
-To: mst@redhat.com, jasowang@redhat.com
-Cc: virtualization@lists.linux-foundation.org
+Cc: Thomas Zimmermann <tzimmermann@suse.de>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,12 +100,62 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Michael, never mind.
+Update the cirrus driver to follow current best practices. While the
+driver's hardware is obsolete, the cirrus driver is still one of the
+go-to modules to learn about writing a DRM driver. So keep it in good
+shape.
 
-I just saw that you merged the commit with "virtio: vdpa: new SolidNET
-DPU driver."
+Patches 1 to 3 simplify blitting and convert it to the DRM's current
+helpers.
 
-Thanks!
+Patches 4 to 8 replace simple-KMS helpers with DRM's regular atomic
+helpers. The former are midlayers on top of the latter, and should
+be replaced entirely.
+
+Patches 9 and 10 further improve blitting. This enables damage clipping
+for userspace and the console. Until now, cirrus' mandatory fullscreen
+updates have added unnecessary overhead to every screen update.
+
+Patches 11 to 14 simplify mode and framebuffer tests. With the use
+of regular helpers, these tests can now be implemented in the places
+they belong.
+
+Patches 15 and 16 move hardware color format and pitch into plane
+state of the primary plane. These fields have been kept in the device
+structure itself, where thy don't belong.
+
+Patch 17 replaces two magic values by macro constants. There are
+more such cases within cirrus, but those two values stuck out as
+specifically hard to interpret.
+
+Tested with qemu's cirrus emulation.
+
+Thomas Zimmermann (17):
+  drm/cirrus: Compute blit destination offset in single location
+  drm/cirrus: Replace cpp value with format
+  drm/cirrus: Use drm_fb_blit() to update scanout buffer
+  drm/cirrus: Move drm_dev_{enter,exit}() into DRM helpers
+  drm/cirrus: Split cirrus_mode_set() into smaller functions
+  drm/cirrus: Integrate connector into pipeline code
+  drm/cirrus: Move primary-plane format arrays
+  drm/cirrus: Convert to regular atomic helpers
+  drm/cirrus: Enable damage clipping on primary plane
+  drm/cirrus: Inline cirrus_fb_blit_rect()
+  drm/cirrus: Remove format test from cirrus_fb_create()
+  drm/cirrus: Remove size test from cirrus_fb_create()
+  drm/cirrus: Test mode against video-memory size in device-wide
+    mode_valid
+  drm/cirrus: Inline cirrus_check_size() into primary-plane atomic_check
+  drm/cirrus: Introduce struct cirrus_primary_plane_state
+  drm/cirrus: Store HW format/pitch in primary-plane state
+  drm/cirrus: Use VGA macro constants to unblank
+
+ drivers/gpu/drm/tiny/cirrus.c | 499 +++++++++++++++++++++-------------
+ 1 file changed, 305 insertions(+), 194 deletions(-)
+
+-- 
+2.39.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
