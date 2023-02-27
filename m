@@ -1,94 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8B0E26A45FE
-	for <lists.virtualization@lfdr.de>; Mon, 27 Feb 2023 16:24:36 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 996E06A4637
+	for <lists.virtualization@lfdr.de>; Mon, 27 Feb 2023 16:40:31 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DD78881E1E;
-	Mon, 27 Feb 2023 15:24:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DD78881E1E
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=REqR8xt+
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5BB994176B;
+	Mon, 27 Feb 2023 15:40:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5BB994176B
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=oI9zcZYj
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id VhgjeiVivfU1; Mon, 27 Feb 2023 15:24:34 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dei-uJCmpZ4Y; Mon, 27 Feb 2023 15:40:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id CC13E81E55;
-	Mon, 27 Feb 2023 15:24:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CC13E81E55
+	by smtp4.osuosl.org (Postfix) with ESMTPS id ED83D41763;
+	Mon, 27 Feb 2023 15:40:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ED83D41763
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E5668C007C;
-	Mon, 27 Feb 2023 15:24:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 16784C007C;
+	Mon, 27 Feb 2023 15:40:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3EC74C002B
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7CB3EC002B
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Feb 2023 15:24:31 +0000 (UTC)
+ Mon, 27 Feb 2023 15:40:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2714760BF9
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5769341763
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Feb 2023 15:24:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2714760BF9
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=REqR8xt+
+ Mon, 27 Feb 2023 15:40:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5769341763
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id IyfIDFTz6VQe
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Z-2Q3HtGpG6Z
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Feb 2023 15:24:30 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1ED376103F
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 1ED376103F
+ Mon, 27 Feb 2023 15:40:23 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8E711408EA
+Received: from mail-oi1-x233.google.com (mail-oi1-x233.google.com
+ [IPv6:2607:f8b0:4864:20::233])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 8E711408EA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Feb 2023 15:24:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1677511469;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=NWdwiI4PJ+IBncsrNHjeMLRPIquT5DILZIcxMXt8jUI=;
- b=REqR8xt+7gv+IABmapf6wBcnMzby4HnHZODSllza9ugMfiU9DvGLx4Po7zjGxfFPefXGyI
- xS62/DpOtEUfHOzT+k1TwwgtQIPbhodWKJTGGJGzkiqahkg7ad9YXem4egZU28/M7+ZMiM
- xUz54gs0uWbkjQY0AGBkKqd/nNXiYK4=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-183-XHmEih5kMpWQMmNTXrNLrw-1; Mon, 27 Feb 2023 10:24:22 -0500
-X-MC-Unique: XHmEih5kMpWQMmNTXrNLrw-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 18B33830F81;
- Mon, 27 Feb 2023 15:24:22 +0000 (UTC)
-Received: from warthog.procyon.org.uk (unknown [10.33.36.18])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 13A182026D68;
- Mon, 27 Feb 2023 15:24:20 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
- Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
- Kingdom.
- Registered in England and Wales under Company Registration No. 3798903
-From: David Howells <dhowells@redhat.com>
-In-Reply-To: <Y/zCB43mmeZ/vSbz@casper.infradead.org>
-References: <Y/zCB43mmeZ/vSbz@casper.infradead.org>
- <2734058.1677507812@warthog.procyon.org.uk>
-To: Matthew Wilcox <willy@infradead.org>
-Subject: Re: [RFC][PATCH] splice: Prevent gifting of multipage folios
+ Mon, 27 Feb 2023 15:40:23 +0000 (UTC)
+Received: by mail-oi1-x233.google.com with SMTP id bm20so5488257oib.7
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 27 Feb 2023 07:40:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CyTB/8yjHEGeVb5eYubYQqNDzW1fdOoIcMGH96ABpv4=;
+ b=oI9zcZYjxrQqI5sYOaUtqe/5zhMZErmABdHSldC6FrXKdAHLIc51dMDe5gV3uHW+Sj
+ WduVlXX2H1y0qnMrwVnxVOL79HAsX+q/8PqyZmSxC3+q7tzpSAdM6VvzBN8SwQ1x7DMV
+ IYzXTUyH7EroFrtoQC45sSNzp7yFQDODcKIMPCKQMKXnkZtC3eohfaP5y3+hME4QLIUA
+ zx9gWufCFU8QRWqia6+SjTJSW+nLIgw2Z164GAbcHI3Q9e1UmOTnGU1/R86td0RUWYe8
+ yFfrdDSXHf/vtV5Q2HbH0bMJ0ssqfaOizzn0u6O7K12fvzRYES8no82mhajBy8V7g6gC
+ oYCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CyTB/8yjHEGeVb5eYubYQqNDzW1fdOoIcMGH96ABpv4=;
+ b=xHGJB2ZX6NQoZgtJOLl+e/FD4Zzozmc8RfH3LDexNoQAnt3iGzYSHWwnGqm1YbQBWT
+ mh8IS+xydO5YysLrySJ3qQ07hWefWM7z+cI4fmgZKJPAIWzt9ABmok4RrLeBAbKs3HFW
+ pKUuOB5Cn0rpFxXiqf85/TAVtl3Ip1HBIf/zIsyCTF/80GNNe5haSnNGcMfMRecpVZRu
+ 3E4oZ/uMqpdWnhDLYzEtxaOkoZt4UB0yt6+bulFKODDIXDtXIaOxMZyvOZAjOwrWhAqD
+ /98FGhZRrEDBtCuz3ygrF/tkxuhjgFJZ6mR4FdTOKhyQJfxBtKPJNrBg3JqvYbcUI8Ts
+ +7lQ==
+X-Gm-Message-State: AO0yUKW2cBDxnfM1K3FkGGo0JgLrir3ngQTfN+EZQVEjhxtFzgsvZtUW
+ 8dN0wzDP2Nh+q7WmzgWm8wqYnKHZZkOJfE8bPOE=
+X-Google-Smtp-Source: AK7set+WPiN+PMC33D7dGKvMOq4tjpD5BANv/fOXy/omKUC1JZ4GUk6hlHvST2Ba9zIlMFuhIdoN5PtweesP99tGF+U=
+X-Received: by 2002:a05:6808:486:b0:384:23ed:1ff6 with SMTP id
+ z6-20020a056808048600b0038423ed1ff6mr1448259oid.3.1677512422552; Mon, 27 Feb
+ 2023 07:40:22 -0800 (PST)
 MIME-Version: 1.0
-Content-ID: <2737654.1677511460.1@warthog.procyon.org.uk>
-Date: Mon, 27 Feb 2023 15:24:20 +0000
-Message-ID: <2737655.1677511460@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Cc: Amit Shah <amit@kernel.org>, Miklos Szeredi <miklos@szeredi.hu>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- dhowells@redhat.com, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org
+References: <20230224180225.2477641-1-robdclark@gmail.com>
+ <20230227063821.dg2gbjjwcekbxyzw@sirius.home.kraxel.org>
+In-Reply-To: <20230227063821.dg2gbjjwcekbxyzw@sirius.home.kraxel.org>
+From: Rob Clark <robdclark@gmail.com>
+Date: Mon, 27 Feb 2023 07:40:11 -0800
+Message-ID: <CAF6AEGsv1G7CPSkCPe3iHGB9JEO4iy+bTbkFLoitmx64U78RJw@mail.gmail.com>
+Subject: Re: [PATCH] drm/virtio: Add option to disable KMS support
+To: Gerd Hoffmann <kraxel@redhat.com>
+Cc: Rob Clark <robdclark@chromium.org>, Daniel Vetter <daniel@ffwll.ch>,
+ Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+ open list <linux-kernel@vger.kernel.org>, dri-devel@lists.freedesktop.org,
+ Gurchetan Singh <gurchetansingh@chromium.org>,
+ Ryan Neph <ryanneph@chromium.org>, David Airlie <airlied@redhat.com>,
+ "open list:VIRTIO GPU DRIVER" <virtualization@lists.linux-foundation.org>,
+ Chia-I Wu <olvaffe@gmail.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -105,16 +108,30 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Matthew Wilcox <willy@infradead.org> wrote:
+On Sun, Feb 26, 2023 at 10:38 PM Gerd Hoffmann <kraxel@redhat.com> wrote:
+>
+> On Fri, Feb 24, 2023 at 10:02:24AM -0800, Rob Clark wrote:
+> > From: Rob Clark <robdclark@chromium.org>
+> >
+> > Add a build option to disable modesetting support.  This is useful in
+> > cases where the guest only needs to use the GPU in a headless mode, or
+> > (such as in the CrOS usage) window surfaces are proxied to a host
+> > compositor.
+>
+> Why make that a compile time option?  There is a config option for the
+> number of scanouts (aka virtual displays) a device has.  Just set that
+> to zero (and fix the driver to not consider that configuration an
+> error).
 
-> What should the Fixes: here be?  This was already possible with THPs
-> (both anon and tmpfs backed) long before I introduced folios.
+The goal is to not advertise DRIVER_MODESET (and DRIVER_ATOMIC).. I
+guess that could be done based on whether there are any scanouts, but
+it would mean making the drm_driver struct non-const.  And I think it
+is legitimate to allow the guest to make this choice, regardless of
+what the host decides to expose, since it is about the ioctl surface
+area that the guest kernel exposes to guest userspace.
 
-Good question.  How do I tell when THPs were introduced?  It looks like they
-might predate git, looking at free_compound_page()'s comment.
-
-David
-
+BR,
+-R
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
