@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7361A6A81C2
-	for <lists.virtualization@lfdr.de>; Thu,  2 Mar 2023 12:59:23 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 72E776A81C3
+	for <lists.virtualization@lfdr.de>; Thu,  2 Mar 2023 12:59:25 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6A138408AA;
-	Thu,  2 Mar 2023 11:59:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6A138408AA
+	by smtp2.osuosl.org (Postfix) with ESMTP id 8946740C20;
+	Thu,  2 Mar 2023 11:59:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8946740C20
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id JiX3MBiUcdwk; Thu,  2 Mar 2023 11:59:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id C109D40915;
-	Thu,  2 Mar 2023 11:59:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C109D40915
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5MvMd_BJUAgw; Thu,  2 Mar 2023 11:59:21 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 26FD440BE5;
+	Thu,  2 Mar 2023 11:59:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 26FD440BE5
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7EB26C008E;
-	Thu,  2 Mar 2023 11:59:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 09C85C0090;
+	Thu,  2 Mar 2023 11:59:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5A1B5C008D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1656CC0032
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Mar 2023 11:59:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6C1B140FD1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Mar 2023 11:59:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6C1B140FD1
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id f7CSSKKhDKlu
+ for <virtualization@lists.linux-foundation.org>;
+ Thu,  2 Mar 2023 11:59:17 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C883B40CB1
+Received: from out30-99.freemail.mail.aliyun.com
+ (out30-99.freemail.mail.aliyun.com [115.124.30.99])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C883B40CB1
  for <virtualization@lists.linux-foundation.org>;
  Thu,  2 Mar 2023 11:59:16 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id D9E3E60EC4
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D9E3E60EC4
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id s0iQjjnA911p
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:15 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7C83E610D9
-Received: from out30-113.freemail.mail.aliyun.com
- (out30-113.freemail.mail.aliyun.com [115.124.30.113])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7C83E610D9
- for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:14 +0000 (UTC)
 X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0VcxMh1c_1677758349; 
+ TI=SMTPD_---0VcxMh2B_1677758350; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VcxMh1c_1677758349) by smtp.aliyun-inc.com;
- Thu, 02 Mar 2023 19:59:09 +0800
+ fp:SMTPD_---0VcxMh2B_1677758350) by smtp.aliyun-inc.com;
+ Thu, 02 Mar 2023 19:59:10 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v1 01/12] virtio_ring: split: refactor
- virtqueue_add_split() for premapped
-Date: Thu,  2 Mar 2023 19:58:57 +0800
-Message-Id: <20230302115908.1461-2-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v1 02/12] virtio_ring: split: separate DMA codes
+Date: Thu,  2 Mar 2023 19:58:58 +0800
+Message-Id: <20230302115908.1461-3-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230302115908.1461-1-xuanzhuo@linux.alibaba.com>
 References: <20230302115908.1461-1-xuanzhuo@linux.alibaba.com>
@@ -78,203 +77,204 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This commit splits virtqueue_add_split() to two functions. The purpose
-of such splitting is to separate DMA operations.
+DMA-related logic is separated from the virtqueue_add_vring_split() to
+prepare for subsequent support for premapped.
 
-The first function includes all codes that may fail before the DMA
-operation. The subsequent part is used as the second function.
+DMA address will be saved as sg->dma_address, then
+virtqueue_add_vring_split() will use it directly.
 
-In this way, we can perform DMA operations in the middle of the two
-functions. If the first function fails, we do not need to perform DMA
-operations. If it is premapped, we can pass the DMA operation.
+If it is a premapped scene, the transmitted sgs should have saved DMA
+address in dma_address, and in virtio core, we need to pass
+virtqueue_map_sgs().
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 131 +++++++++++++++++++++++------------
- 1 file changed, 88 insertions(+), 43 deletions(-)
+ drivers/virtio/virtio_ring.c | 116 ++++++++++++++++++++++++-----------
+ 1 file changed, 80 insertions(+), 36 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 41144b5246a8..3005893ecc61 100644
+index 3005893ecc61..17520f0d7649 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -520,57 +520,38 @@ static inline unsigned int virtqueue_add_desc_split(struct virtqueue *vq,
+@@ -520,6 +520,73 @@ static inline unsigned int virtqueue_add_desc_split(struct virtqueue *vq,
  	return next;
  }
  
--static inline int virtqueue_add_split(struct virtqueue *_vq,
--				      struct scatterlist *sgs[],
--				      unsigned int total_sg,
--				      unsigned int out_sgs,
--				      unsigned int in_sgs,
--				      void *data,
--				      void *ctx,
--				      gfp_t gfp)
-+/* note: return NULL means no indirect that is valid. */
-+static struct vring_desc *virtqueue_get_desc_split(struct vring_virtqueue *vq,
-+						   unsigned int total_sg,
-+						   unsigned int out_sgs,
-+						   void *data,
-+						   void *ctx,
-+						   gfp_t gfp)
- {
--	struct vring_virtqueue *vq = to_vvq(_vq);
--	struct scatterlist *sg;
- 	struct vring_desc *desc;
--	unsigned int i, n, avail, descs_used, prev, err_idx;
--	int head;
--	bool indirect;
--
--	START_USE(vq);
-+	unsigned int descs_used;
- 
- 	BUG_ON(data == NULL);
- 	BUG_ON(ctx && vq->indirect);
- 
--	if (unlikely(vq->broken)) {
--		END_USE(vq);
--		return -EIO;
--	}
-+	if (unlikely(vq->broken))
-+		return ERR_PTR(-EIO);
- 
- 	LAST_ADD_TIME_UPDATE(vq);
- 
- 	BUG_ON(total_sg == 0);
- 
--	head = vq->free_head;
--
- 	if (virtqueue_use_indirect(vq, total_sg))
--		desc = alloc_indirect_split(_vq, total_sg, gfp);
-+		desc = alloc_indirect_split(&vq->vq, total_sg, gfp);
- 	else {
- 		desc = NULL;
- 		WARN_ON_ONCE(total_sg > vq->split.vring.num && !vq->indirect);
- 	}
- 
--	if (desc) {
--		/* Use a single buffer which doesn't continue */
--		indirect = true;
--		/* Set up rest to use this indirect table. */
--		i = 0;
-+	if (desc)
- 		descs_used = 1;
--	} else {
--		indirect = false;
--		desc = vq->split.vring.desc;
--		i = head;
-+	else
- 		descs_used = total_sg;
--	}
- 
- 	if (unlikely(vq->vq.num_free < descs_used)) {
- 		pr_debug("Can't add buf len %i - avail = %i\n",
-@@ -580,10 +561,39 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 		 * host should service the ring ASAP. */
- 		if (out_sgs)
- 			vq->notify(&vq->vq);
--		if (indirect)
--			kfree(desc);
--		END_USE(vq);
--		return -ENOSPC;
-+		kfree(desc);
-+		return ERR_PTR(-ENOSPC);
++static int virtqueue_map_sgs(struct vring_virtqueue *vq,
++			     struct scatterlist *sgs[],
++			     unsigned int total_sg,
++			     unsigned int out_sgs,
++			     unsigned int in_sgs)
++{
++	struct scatterlist *sg;
++	unsigned int n;
++
++	for (n = 0; n < out_sgs; n++) {
++		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
++			dma_addr_t addr = vring_map_one_sg(vq, sg, DMA_TO_DEVICE);
++
++			if (vring_mapping_error(vq, addr))
++				return -ENOMEM;
++
++			sg->dma_address = addr;
++		}
 +	}
 +
-+	return desc;
++	for (; n < (out_sgs + in_sgs); n++) {
++		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
++			dma_addr_t addr = vring_map_one_sg(vq, sg, DMA_FROM_DEVICE);
++
++			if (vring_mapping_error(vq, addr))
++				return -ENOMEM;
++
++			sg->dma_address = addr;
++		}
++	}
++
++	return 0;
 +}
 +
-+static inline int virtqueue_add_vring_split(struct vring_virtqueue *vq,
-+					    struct scatterlist *sgs[],
-+					    unsigned int total_sg,
-+					    unsigned int out_sgs,
-+					    unsigned int in_sgs,
-+					    struct vring_desc *desc)
++static void virtqueue_unmap_sgs(struct vring_virtqueue *vq,
++				struct scatterlist *sgs[],
++				unsigned int total_sg,
++				unsigned int out_sgs,
++				unsigned int in_sgs)
 +{
-+	struct virtqueue *_vq = &vq->vq;
 +	struct scatterlist *sg;
-+	unsigned int i, n, avail, descs_used, prev, err_idx;
-+	int head;
-+	bool indirect;
++	unsigned int n;
 +
-+	head = vq->free_head;
++	if (!vq->use_dma_api)
++		return;
 +
-+	if (desc) {
-+		/* Use a single buffer which doesn't continue */
-+		indirect = true;
-+		/* Set up rest to use this indirect table. */
-+		i = 0;
-+		descs_used = 1;
-+	} else {
-+		indirect = false;
-+		desc = vq->split.vring.desc;
-+		i = head;
-+		descs_used = total_sg;
- 	}
- 
- 	for (n = 0; n < out_sgs; n++) {
-@@ -648,13 +658,6 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 	else
- 		vq->free_head = i;
- 
--	/* Store token and indirect buffer state. */
--	vq->split.desc_state[head].data = data;
--	if (indirect)
--		vq->split.desc_state[head].indir_desc = desc;
--	else
--		vq->split.desc_state[head].indir_desc = ctx;
--
- 	/* Put entry in available array (but don't update avail->idx until they
- 	 * do sync). */
- 	avail = vq->split.avail_idx_shadow & (vq->split.vring.num - 1);
-@@ -703,6 +706,48 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
- 	return -ENOMEM;
- }
- 
-+static inline int virtqueue_add_split(struct virtqueue *_vq,
-+				      struct scatterlist *sgs[],
-+				      unsigned int total_sg,
-+				      unsigned int out_sgs,
-+				      unsigned int in_sgs,
-+				      void *data,
-+				      void *ctx,
-+				      gfp_t gfp)
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+	struct vring_desc *desc;
-+	int head;
-+	int err;
++	for (n = 0; n < out_sgs; n++) {
++		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
++			if (!sg->dma_address)
++				return;
 +
-+	START_USE(vq);
-+
-+	/* check vq state and try to alloc desc for indirect. */
-+	desc = virtqueue_get_desc_split(vq, total_sg, out_sgs, data, ctx, gfp);
-+	if (IS_ERR(desc)) {
-+		err = PTR_ERR(desc);
-+		goto end;
++			dma_unmap_page(vring_dma_dev(vq), sg->dma_address,
++				       sg->length, DMA_TO_DEVICE);
++		}
 +	}
 +
-+	head = vq->free_head;
-+	err = virtqueue_add_vring_split(vq, sgs, total_sg, out_sgs, in_sgs, desc);
++	for (; n < (out_sgs + in_sgs); n++) {
++		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
++			if (!sg->dma_address)
++				return;
++
++			dma_unmap_page(vring_dma_dev(vq), sg->dma_address,
++				       sg->length, DMA_FROM_DEVICE);
++		}
++	}
++}
++
+ /* note: return NULL means no indirect that is valid. */
+ static struct vring_desc *virtqueue_get_desc_split(struct vring_virtqueue *vq,
+ 						   unsigned int total_sg,
+@@ -577,7 +644,7 @@ static inline int virtqueue_add_vring_split(struct vring_virtqueue *vq,
+ {
+ 	struct virtqueue *_vq = &vq->vq;
+ 	struct scatterlist *sg;
+-	unsigned int i, n, avail, descs_used, prev, err_idx;
++	unsigned int i, n, avail, descs_used, prev;
+ 	int head;
+ 	bool indirect;
+ 
+@@ -598,30 +665,25 @@ static inline int virtqueue_add_vring_split(struct vring_virtqueue *vq,
+ 
+ 	for (n = 0; n < out_sgs; n++) {
+ 		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
+-			dma_addr_t addr = vring_map_one_sg(vq, sg, DMA_TO_DEVICE);
+-			if (vring_mapping_error(vq, addr))
+-				goto unmap_release;
+-
+ 			prev = i;
+ 			/* Note that we trust indirect descriptor
+ 			 * table since it use stream DMA mapping.
+ 			 */
+-			i = virtqueue_add_desc_split(_vq, desc, i, addr, sg->length,
++			i = virtqueue_add_desc_split(_vq, desc, i,
++						     sg->dma_address,
++						     sg->length,
+ 						     VRING_DESC_F_NEXT,
+ 						     indirect);
+ 		}
+ 	}
+ 	for (; n < (out_sgs + in_sgs); n++) {
+ 		for (sg = sgs[n]; sg; sg = sg_next(sg)) {
+-			dma_addr_t addr = vring_map_one_sg(vq, sg, DMA_FROM_DEVICE);
+-			if (vring_mapping_error(vq, addr))
+-				goto unmap_release;
+-
+ 			prev = i;
+ 			/* Note that we trust indirect descriptor
+ 			 * table since it use stream DMA mapping.
+ 			 */
+-			i = virtqueue_add_desc_split(_vq, desc, i, addr,
++			i = virtqueue_add_desc_split(_vq, desc, i,
++						     sg->dma_address,
+ 						     sg->length,
+ 						     VRING_DESC_F_NEXT |
+ 						     VRING_DESC_F_WRITE,
+@@ -640,7 +702,7 @@ static inline int virtqueue_add_vring_split(struct vring_virtqueue *vq,
+ 			vq, desc, total_sg * sizeof(struct vring_desc),
+ 			DMA_TO_DEVICE);
+ 		if (vring_mapping_error(vq, addr))
+-			goto unmap_release;
++			return -ENOMEM;
+ 
+ 		virtqueue_add_desc_split(_vq, vq->split.vring.desc,
+ 					 head, addr,
+@@ -680,30 +742,6 @@ static inline int virtqueue_add_vring_split(struct vring_virtqueue *vq,
+ 		virtqueue_kick(_vq);
+ 
+ 	return 0;
+-
+-unmap_release:
+-	err_idx = i;
+-
+-	if (indirect)
+-		i = 0;
+-	else
+-		i = head;
+-
+-	for (n = 0; n < total_sg; n++) {
+-		if (i == err_idx)
+-			break;
+-		if (indirect) {
+-			vring_unmap_one_split_indirect(vq, &desc[i]);
+-			i = virtio16_to_cpu(_vq->vdev, desc[i].next);
+-		} else
+-			i = vring_unmap_one_split(vq, i);
+-	}
+-
+-	if (indirect)
+-		kfree(desc);
+-
+-	END_USE(vq);
+-	return -ENOMEM;
+ }
+ 
+ static inline int virtqueue_add_split(struct virtqueue *_vq,
+@@ -729,6 +767,10 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+ 		goto end;
+ 	}
+ 
++	err = virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
 +	if (err)
 +		goto err;
 +
-+	/* Store token and indirect buffer state. */
-+	vq->split.desc_state[head].data = data;
-+	vq->split.desc_state[head].indir_desc = desc ? desc : ctx;
+ 	head = vq->free_head;
+ 	err = virtqueue_add_vring_split(vq, sgs, total_sg, out_sgs, in_sgs, desc);
+ 	if (err)
+@@ -741,6 +783,8 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+ 	goto end;
+ 
+ err:
++	virtqueue_unmap_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
 +
-+	goto end;
-+
-+err:
-+	kfree(desc);
-+
-+end:
-+	END_USE(vq);
-+	return err;
-+}
-+
- static bool virtqueue_kick_prepare_split(struct virtqueue *_vq)
- {
- 	struct vring_virtqueue *vq = to_vvq(_vq);
+ 	kfree(desc);
+ 
+ end:
 -- 
 2.32.0.3.g01195cf9f
 
