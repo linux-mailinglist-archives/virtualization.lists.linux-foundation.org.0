@@ -1,66 +1,114 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8356C6A81CA
-	for <lists.virtualization@lfdr.de>; Thu,  2 Mar 2023 12:59:31 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E67C66A83A8
+	for <lists.virtualization@lfdr.de>; Thu,  2 Mar 2023 14:39:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 2283A40FCB;
-	Thu,  2 Mar 2023 11:59:29 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2283A40FCB
+	by smtp4.osuosl.org (Postfix) with ESMTP id EF5EB41B35;
+	Thu,  2 Mar 2023 13:39:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EF5EB41B35
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Zei47VLs
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nBgmOzRgJIZs; Thu,  2 Mar 2023 11:59:28 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ZYB944I2jZ4E; Thu,  2 Mar 2023 13:39:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D9DDA40FEB;
-	Thu,  2 Mar 2023 11:59:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D9DDA40FEB
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 48A2A4194D;
+	Thu,  2 Mar 2023 13:39:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 48A2A4194D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BD7D6C008F;
-	Thu,  2 Mar 2023 11:59:27 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 71CCBC008C;
+	Thu,  2 Mar 2023 13:38:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1328FC0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8CCE4C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:23 +0000 (UTC)
+ Thu,  2 Mar 2023 13:38:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id C82AA8202B
+ by smtp4.osuosl.org (Postfix) with ESMTP id 59CA841832
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C82AA8202B
+ Thu,  2 Mar 2023 13:38:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 59CA841832
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id JWVJfi0J7Mz4
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id BahEivcpI8bF
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:22 +0000 (UTC)
+ Thu,  2 Mar 2023 13:38:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9963C82039
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9963C82039
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 37DF041751
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 37DF041751
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Mar 2023 11:59:21 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R221e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0VcxJKrh_1677758357; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VcxJKrh_1677758357) by smtp.aliyun-inc.com;
- Thu, 02 Mar 2023 19:59:17 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v1 12/12] virtio_ring: introduce virtqueue_reset()
-Date: Thu,  2 Mar 2023 19:59:08 +0800
-Message-Id: <20230302115908.1461-13-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20230302115908.1461-1-xuanzhuo@linux.alibaba.com>
-References: <20230302115908.1461-1-xuanzhuo@linux.alibaba.com>
+ Thu,  2 Mar 2023 13:38:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1677764334;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4ZdM39Rwm+APVNSKOoKjEHl8iHMadAxZ6z3x8N7ucVs=;
+ b=Zei47VLsm/aZ1PCSOugc/UFqQ6gQTVHaMdniqqbszL7D6MrI9GQoq0ExXOsYgQUQN52a+F
+ t4u67ett89Y6Ta96gRc6BWyzavZb+2WA58i9NgqF2YWsDikdj3nKLI7HSH7MulwTpwaZ0u
+ puVhKb2Y1zBsNcSj5F53qVI4wkeMI0E=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_128_GCM_SHA256) id
+ us-mta-141-8-X00b1HMIylliKexu473Q-1; Thu, 02 Mar 2023 08:38:51 -0500
+X-MC-Unique: 8-X00b1HMIylliKexu473Q-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ l23-20020a7bc457000000b003e206cbce8dso5758231wmi.7
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 02 Mar 2023 05:38:50 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1677764330;
+ h=in-reply-to:content-transfer-encoding:content-disposition
+ :mime-version:references:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4ZdM39Rwm+APVNSKOoKjEHl8iHMadAxZ6z3x8N7ucVs=;
+ b=bvfhPKNQe6fRv3X+BVdpbUMcGujkQg5GO5Ue6zBCLe+B6orRlptqi936K6Y5hOfOue
+ /B7mD7lIdgSe+/vDQvN7Lfr15orlhPTsse8VAeSitUVURHpMwtLaWUrEFZ8wVfayHAUc
+ cbzwUoQbgiMcSm7m4mzhEnMmR+3yoaLFg3u55HjRlBZVCHMD/WxE6eWtBru99NKdGWJs
+ 6YDQUqrEXTaG9LS87cV1irEoBFvQA7rRhoTukjjQBb8Bbe2veB6IKxMisi3HOzFpOjiE
+ JlqEBi4Vwd/ZRrgV9qkwNg1ezLj0A/NxItjqTuMTxqmrQkJDAr25mzHoOdGWikdyYlvq
+ o8HA==
+X-Gm-Message-State: AO0yUKVncYvK05AzK6/eFv6j1BuZ9wQBRmy6S6t73hWPSsOo+TPMN5vQ
+ Wu/+Rx2Ys4xEl2K+ig7ygkONm5gkqouTVhZch+1imL95zIOlcpMTA778raQx4mmJgG6O5i6i2mH
+ Eg/Ll7moAh4zz6rUGJDVXUJz9nI34bF+GdN55uvyniw==
+X-Received: by 2002:a5d:56cb:0:b0:2c7:1b3d:1fb9 with SMTP id
+ m11-20020a5d56cb000000b002c71b3d1fb9mr7355479wrw.50.1677764329883; 
+ Thu, 02 Mar 2023 05:38:49 -0800 (PST)
+X-Google-Smtp-Source: AK7set86niPGr89uB0anqISxCl4PutLnmZ7/ReX6UXFcr5ISdGk14j6U7XkC6IbLZNuiZojlUcc9Bw==
+X-Received: by 2002:a5d:56cb:0:b0:2c7:1b3d:1fb9 with SMTP id
+ m11-20020a5d56cb000000b002c71b3d1fb9mr7355466wrw.50.1677764329563; 
+ Thu, 02 Mar 2023 05:38:49 -0800 (PST)
+Received: from sgarzare-redhat (c-115-213.cust-q.wadsl.it. [212.43.115.213])
+ by smtp.gmail.com with ESMTPSA id
+ hg13-20020a05600c538d00b003d9aa76dc6asm3022317wmb.0.2023.03.02.05.38.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 02 Mar 2023 05:38:49 -0800 (PST)
+Date: Thu, 2 Mar 2023 14:38:45 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseniy Krasnov <avkrasnov@sberdevices.ru>
+Subject: Re: [RFC PATCH v1] vsock: check error queue to set EPOLLERR
+Message-ID: <20230302133845.hglm4uregjsvrcrc@sgarzare-redhat>
+References: <76e7698d-890b-d14d-fa34-da5dd7dd13d8@sberdevices.ru>
+ <20230302100621.gk45unegjbqjgpxh@sgarzare-redhat>
+ <3b38870c-7606-bf2e-8b17-21a75a1ed751@sberdevices.ru>
 MIME-Version: 1.0
-X-Git-Hash: b21604ee9ed7
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
+In-Reply-To: <3b38870c-7606-bf2e-8b17-21a75a1ed751@sberdevices.ru>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Bobby Eshleman <bobby.eshleman@bytedance.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Eric Dumazet <edumazet@google.com>, oxffffaa@gmail.com, kernel@sberdevices.ru,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -72,78 +120,121 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce virtqueue_reset() to release all buffer inside vq.
+On Thu, Mar 02, 2023 at 02:41:29PM +0300, Arseniy Krasnov wrote:
+>Hello!
+>
+>On 02.03.2023 13:06, Stefano Garzarella wrote:
+>> On Wed, Mar 01, 2023 at 08:19:45AM +0300, Arseniy Krasnov wrote:
+>>> EPOLLERR must be set not only when there is error on the socket, but al=
+so
+>>> when error queue of it is not empty (may be it contains some control
+>>> messages). Without this patch 'poll()' won't detect data in error queue.
+>>
+>> Do you have a reproducer?
+>>
+>Dedicated reproducer - no:)
+>To reproduce this issue, i used last MSG_ZEROCOPY patches. Completion was =
+inserted to
+>error queue, and 'poll()' didn't report about it. That was the reason, why=
+ this patch
+>was included to MSG_ZEROCOPY patchset. But also i think it is better to re=
+duce number
+>of patches in it(i'm working on v2), so it is good to handle this patch se=
+parately.
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/virtio/virtio_ring.c | 33 +++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  2 ++
- 2 files changed, 35 insertions(+)
+Yep, absolutely!
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 5ab9136a363e..bbec7c6709dc 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -2897,6 +2897,39 @@ int virtqueue_resize(struct virtqueue *_vq, u32 num,
- }
- EXPORT_SYMBOL_GPL(virtqueue_resize);
- 
-+/**
-+ * virtqueue_reset - detach and recycle all unused buffers
-+ * @_vq: the struct virtqueue we're talking about.
-+ * @recycle: callback to recycle unused buffers
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error.
-+ * 0: success.
-+ * -EBUSY: Failed to sync with device, vq may not work properly
-+ * -ENOENT: Transport or device not supported
-+ * -EPERM: Operation not permitted
-+ */
-+int virtqueue_reset(struct virtqueue *_vq,
-+		    void (*recycle)(struct virtqueue *vq, void *buf))
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+	int err;
-+
-+	err = virtqueue_disable_and_recycle(_vq, recycle);
-+	if (err)
-+		return err;
-+
-+	if (vq->packed_ring)
-+		virtqueue_reinit_packed(vq);
-+	else
-+		virtqueue_reinit_split(vq);
-+
-+	return virtqueue_enable_after_reset(_vq);
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_reset);
-+
- /* Only available for split ring */
- struct virtqueue *vring_new_virtqueue(unsigned int index,
- 				      unsigned int num,
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index ac028b07f684..7e93d0dc973e 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -107,6 +107,8 @@ dma_addr_t virtqueue_get_used_addr(struct virtqueue *vq);
- 
- int virtqueue_resize(struct virtqueue *vq, u32 num,
- 		     void (*recycle)(struct virtqueue *vq, void *buf));
-+int virtqueue_reset(struct virtqueue *vq,
-+		    void (*recycle)(struct virtqueue *vq, void *buf));
- 
- /**
-  * struct virtio_device - representation of a device using virtio
--- 
-2.32.0.3.g01195cf9f
+>May be one way to reproduce it is use SO_TIMESTAMP(time info about skbuff =
+will be queued
+>to the error queue). IIUC this feature is implemented at socket layer and =
+may work in
+>vsock (but i'm not sure). Ok, i'll check it and try to implement reproduce=
+r.
+>
+>IIUC, for future, policy for fixes is "for each fix implement reproducer i=
+n vsock_test"?
+
+Nope, but for each fix we should have a Fixes tag.
+
+Usually we use vsock_test to check regressions on features and also the
+behaviour of different transports.
+My question was more about whether this problem was there before
+supporting sk_buff or not, to figure out which Fixes tag to use.
+
+>
+>>> This patch is based on 'tcp_poll()'.
+>>
+>> LGTM but we should add a Fixes tag.
+>> It's not clear to me whether the problem depends on when we switched to =
+using sk_buff or was pre-existing.
+>>
+>> Do you have any idea when we introduced this issue?
+>git blame shows, that this code exists since first commit to vsock:
+
+Okay, but did we use sk_error_queue before supporting sk_buff?
+
+Anyway, if we are not sure I think we can use the following Fixes tag,
+I don't see any issue if we backport this patch also before supporting
+sk_buff.
+
+Thanks,
+Stefano
+
+>
+>commit d021c344051af91f42c5ba9fdedc176740cbd238
+>Author: Andy King <acking@vmware.com>
+>Date:   Wed Feb 6 14:23:56 2013 +0000
+>
+>    VSOCK: Introduce VM Sockets
+>
+>For TCP same logic was added by:
+>
+>commit 4ed2d765dfaccff5ebdac68e2064b59125033a3b
+>Author: Willem de Bruijn <willemb@google.com>
+>Date:   Mon Aug 4 22:11:49 2014 -0400
+>
+>    net-timestamp: TCP timestamping
+>
+>
+>>
+>> Thanks,
+>> Stefano
+>>
+>
+>Thanks Arseniy
+>
+>>>
+>>> Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+>>> ---
+>>> net/vmw_vsock/af_vsock.c | 2 +-
+>>> 1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/net/vmw_vsock/af_vsock.c b/net/vmw_vsock/af_vsock.c
+>>> index 19aea7cba26e..b5e51ef4a74c 100644
+>>> --- a/net/vmw_vsock/af_vsock.c
+>>> +++ b/net/vmw_vsock/af_vsock.c
+>>> @@ -1026,7 +1026,7 @@ static __poll_t vsock_poll(struct file *file, str=
+uct socket *sock,
+>>> =A0=A0=A0=A0poll_wait(file, sk_sleep(sk), wait);
+>>> =A0=A0=A0=A0mask =3D 0;
+>>>
+>>> -=A0=A0=A0 if (sk->sk_err)
+>>> +=A0=A0=A0 if (sk->sk_err || !skb_queue_empty_lockless(&sk->sk_error_qu=
+eue))
+>>> =A0=A0=A0=A0=A0=A0=A0 /* Signify that there has been an error on this s=
+ocket. */
+>>> =A0=A0=A0=A0=A0=A0=A0 mask |=3D EPOLLERR;
+>>>
+>>> --=A0
+>>> 2.25.1
+>>>
+>>
+>
 
 _______________________________________________
 Virtualization mailing list
