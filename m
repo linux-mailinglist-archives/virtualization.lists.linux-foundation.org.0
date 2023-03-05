@@ -1,77 +1,79 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0A3F06AB016
-	for <lists.virtualization@lfdr.de>; Sun,  5 Mar 2023 14:52:45 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2224B6AB02E
+	for <lists.virtualization@lfdr.de>; Sun,  5 Mar 2023 14:53:38 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 6835840A00;
-	Sun,  5 Mar 2023 13:52:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6835840A00
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=cbjVW1/a
+	by smtp1.osuosl.org (Postfix) with ESMTP id AE76B81AD7;
+	Sun,  5 Mar 2023 13:53:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AE76B81AD7
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20201202 header.b=l0EpUe9g
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9KLf4jGm5Gcb; Sun,  5 Mar 2023 13:52:39 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id cDfhtwiFmKnz; Sun,  5 Mar 2023 13:53:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 18CCE409FD;
-	Sun,  5 Mar 2023 13:52:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 18CCE409FD
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 38D2881489;
+	Sun,  5 Mar 2023 13:53:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 38D2881489
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 26EF7C007F;
-	Sun,  5 Mar 2023 13:52:38 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6671DC007F;
+	Sun,  5 Mar 2023 13:53:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B60F2C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B9235C0032
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Mar 2023 13:52:36 +0000 (UTC)
+ Sun,  5 Mar 2023 13:53:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7D3A0409FD
+ by smtp4.osuosl.org (Postfix) with ESMTP id 945EF4056A
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Mar 2023 13:52:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7D3A0409FD
+ Sun,  5 Mar 2023 13:53:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 945EF4056A
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org
+ header.a=rsa-sha256 header.s=k20201202 header.b=l0EpUe9g
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1ESOtpsWewFn
+ with ESMTP id 1WKe9W9T1vhB
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Mar 2023 13:52:35 +0000 (UTC)
+ Sun,  5 Mar 2023 13:53:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1987D409FC
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 1987D409FC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 061CB40338
+Received: from ams.source.kernel.org (ams.source.kernel.org [145.40.68.75])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 061CB40338
  for <virtualization@lists.linux-foundation.org>;
- Sun,  5 Mar 2023 13:52:35 +0000 (UTC)
+ Sun,  5 Mar 2023 13:53:30 +0000 (UTC)
 Received: from smtp.kernel.org (relay.kernel.org [52.25.139.140])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by dfw.source.kernel.org (Postfix) with ESMTPS id 4074760B07;
- Sun,  5 Mar 2023 13:52:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4310CC433D2;
- Sun,  5 Mar 2023 13:52:28 +0000 (UTC)
+ by ams.source.kernel.org (Postfix) with ESMTPS id 3042EB80A89;
+ Sun,  5 Mar 2023 13:53:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A1FEC4339E;
+ Sun,  5 Mar 2023 13:53:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1678024349;
+ s=k20201202; t=1678024406;
  bh=cghi09Wbzn7gRbEilv55hS/JW49IJkg0VYRCod5bCys=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=cbjVW1/agSxqO2GdSR3t7AvCbMR5Sq1DExHjlmcLUKytHw7GybkZ0SQDw2Vfr+kpn
- sP8vN8LTlyvkbWG605BGEPj7xjUsLbdLjHKn09kFJp3tGNO/XY37IcnBKMePc7/znh
- tpc+Xam5aTfJjBQTKCI+OMoOX7XSLx9fZIFxJCWCQGK92y54vxZ3qm5cdBwKf30vqc
- 6ZAe/eOxEkYw629DmIlrgLjgsTsKDEI8joQN18ofQBvwuGrC//10UGcWJhuftepGOn
- 1JqUnCc7pYpg6QnGXwLcAIJy3UztAE6FDb+CLhDqHP/isBI1XwmXI8Os1fU74nGpPx
- /c6NA+yNxEC6A==
+ b=l0EpUe9g45auH0H1UZNMQk27XknjtohHphKLP8DXt4M0koLJ5r26nQbjN2WvK5VK/
+ 3NPJlhLsCGKfJBOArBJHywr8VkqoiqHHZfDjjsc7PbSKMH/LxBnh2mppI3TxC6xLc8
+ UFqC0lmRR+nwpYMmmkWn8W77GZk4I2R1SQiDHHxMZl2vPSmSN287Fvx9eeElm7dEjG
+ HMrBUMF2vMlIql7AtLbiTzhJ88Aph++C00hn8zvwCAIQNcTGcPLFZUt/utu9SIkP7P
+ VF6fuvC12Qpx1H/5LIwlIm25VfWq2/fDVdTrcRkrgkcZ+K2brSjpaAFEbi812bLI1+
+ SY/SKogzuBUQg==
 From: Sasha Levin <sashal@kernel.org>
 To: linux-kernel@vger.kernel.org,
 	stable@vger.kernel.org
-Subject: [PATCH AUTOSEL 6.2 05/16] s390/virtio: sort out physical vs virtual
+Subject: [PATCH AUTOSEL 6.1 05/15] s390/virtio: sort out physical vs virtual
  pointers usage
-Date: Sun,  5 Mar 2023 08:51:56 -0500
-Message-Id: <20230305135207.1793266-5-sashal@kernel.org>
+Date: Sun,  5 Mar 2023 08:52:56 -0500
+Message-Id: <20230305135306.1793564-5-sashal@kernel.org>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20230305135207.1793266-1-sashal@kernel.org>
-References: <20230305135207.1793266-1-sashal@kernel.org>
+In-Reply-To: <20230305135306.1793564-1-sashal@kernel.org>
+References: <20230305135306.1793564-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
