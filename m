@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 582346AFF14
-	for <lists.virtualization@lfdr.de>; Wed,  8 Mar 2023 07:45:09 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 764F86AFF0E
+	for <lists.virtualization@lfdr.de>; Wed,  8 Mar 2023 07:45:02 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 78DE84038E;
-	Wed,  8 Mar 2023 06:45:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 78DE84038E
+	by smtp3.osuosl.org (Postfix) with ESMTP id CD11961122;
+	Wed,  8 Mar 2023 06:45:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CD11961122
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qH2PVNG3vXVn; Wed,  8 Mar 2023 06:45:00 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id D856040BA3;
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id c6sSvL0M2Qpo; Wed,  8 Mar 2023 06:45:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6282F6110D;
 	Wed,  8 Mar 2023 06:44:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D856040BA3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6282F6110D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D4C95C007F;
-	Wed,  8 Mar 2023 06:44:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8C79BC009B;
+	Wed,  8 Mar 2023 06:44:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1FC02C0093
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 1A555C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Mar 2023 06:44:57 +0000 (UTC)
+ Wed,  8 Mar 2023 06:44:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3FB7160DCA
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0C7676110A
  for <virtualization@lists.linux-foundation.org>;
  Wed,  8 Mar 2023 06:44:55 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3FB7160DCA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0C7676110A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id vU8tUgp7l3H7
+ with ESMTP id MyF7jiL-93Yj
  for <virtualization@lists.linux-foundation.org>;
  Wed,  8 Mar 2023 06:44:54 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9F5F1610EE
-Received: from out30-101.freemail.mail.aliyun.com
- (out30-101.freemail.mail.aliyun.com [115.124.30.101])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9F5F1610EE
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9B00560FB1
+Received: from out30-97.freemail.mail.aliyun.com
+ (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9B00560FB1
  for <virtualization@lists.linux-foundation.org>;
- Wed,  8 Mar 2023 06:44:52 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+ Wed,  8 Mar 2023 06:44:53 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0VdOOYQL_1678257888; 
+ TI=SMTPD_---0VdORVwD_1678257889; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VdOOYQL_1678257888) by smtp.aliyun-inc.com;
+ fp:SMTPD_---0VdORVwD_1678257889) by smtp.aliyun-inc.com;
  Wed, 08 Mar 2023 14:44:49 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v2 06/12] virtio_ring: split-indirect: support premapped
-Date: Wed,  8 Mar 2023 14:44:37 +0800
-Message-Id: <20230308064443.50639-7-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v2 07/12] virtio_ring: packed-indirect: support premapped
+Date: Wed,  8 Mar 2023 14:44:38 +0800
+Message-Id: <20230308064443.50639-8-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230308064443.50639-1-xuanzhuo@linux.alibaba.com>
 References: <20230308064443.50639-1-xuanzhuo@linux.alibaba.com>
@@ -89,77 +89,75 @@ core. If one sg->dma_address is used then all sgs must use sg->dma_address,
 otherwise all dma_address must be null.
 
 On the indirect path, if dma_address is used, desc_state.indir_desc will
-be mixed with VRING_INDIRECT_PREMAPPED. So when do unmap, we can pass it.
+be mixed with VRING_INDIRECT_NO_DMA_MAP. So when do unmap, we can pass it.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 28 ++++++++++++++++++++++------
- 1 file changed, 22 insertions(+), 6 deletions(-)
+ drivers/virtio/virtio_ring.c | 18 ++++++++++++------
+ 1 file changed, 12 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 66a071e3bdef..11827d2e56a8 100644
+index 11827d2e56a8..b23d301effb5 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -231,6 +231,18 @@ static void vring_free(struct virtqueue *_vq);
-  * Helpers.
-  */
+@@ -1331,6 +1331,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	unsigned int i, n;
+ 	u16 head, id;
+ 	dma_addr_t addr;
++	bool do_map;
  
-+#define VRING_INDIRECT_PREMAPPED  BIT(0)
-+
-+#define desc_mix_dma_map(do_map, desc) \
-+	(do_map ? desc : (typeof(desc))((unsigned long)(desc) | VRING_INDIRECT_PREMAPPED))
-+
-+#define desc_rm_dma_map(desc) \
-+	((typeof(desc))((unsigned long)(desc) & ~VRING_INDIRECT_PREMAPPED))
-+
-+#define desc_map_inter(desc) \
-+	!((unsigned long)(desc) & VRING_INDIRECT_PREMAPPED)
-+
-+
- #define to_vvq(_vq) container_of(_vq, struct vring_virtqueue, vq)
+ 	head = vq->packed.next_avail_idx;
+ 	desc = alloc_indirect_packed(total_sg, gfp);
+@@ -1348,7 +1349,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	id = vq->free_head;
+ 	BUG_ON(id == vq->packed.vring.num);
  
- static inline bool virtqueue_use_indirect(struct vring_virtqueue *vq,
-@@ -725,7 +737,7 @@ static inline int virtqueue_add_split(struct virtqueue *_vq,
+-	if (virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs))
++	do_map = !sgs[0]->dma_address;
++	if (do_map && virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs))
+ 		return -ENOMEM;
+ 
+ 	for (n = 0; n < out_sgs + in_sgs; n++) {
+@@ -1408,7 +1410,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
  	/* Store token and indirect buffer state. */
- 	vq->split.desc_state[head].data = data;
- 	if (indirect)
--		vq->split.desc_state[head].indir_desc = desc;
-+		vq->split.desc_state[head].indir_desc = desc_mix_dma_map(do_map, desc);
- 	else
- 		vq->split.desc_state[head].indir_desc = ctx;
+ 	vq->packed.desc_state[id].num = 1;
+ 	vq->packed.desc_state[id].data = data;
+-	vq->packed.desc_state[id].indir_desc = desc;
++	vq->packed.desc_state[id].indir_desc = desc_mix_dma_map(do_map, desc);
+ 	vq->packed.desc_state[id].last = id;
  
-@@ -820,22 +832,26 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
- 	vq->vq.num_free++;
+ 	vq->num_added += 1;
+@@ -1419,7 +1421,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	return 0;
+ 
+ unmap_release:
+-	virtqueue_unmap_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
++	if (do_map)
++		virtqueue_unmap_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
+ 
+ 	kfree(desc);
+ 
+@@ -1633,14 +1636,17 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
+ 	}
  
  	if (vq->indirect) {
--		struct vring_desc *indir_desc =
--				vq->split.desc_state[head].indir_desc;
-+		struct vring_desc *mix = vq->split.desc_state[head].indir_desc;
-+		struct vring_desc *indir_desc;
++		struct vring_packed_desc *mix;
  		u32 len;
  
  		/* Free the indirect table, if any, now that it's unmapped. */
--		if (!indir_desc)
+-		desc = state->indir_desc;
+-		if (!desc)
++		mix = state->indir_desc;
 +		if (!mix)
  			return;
  
-+		indir_desc = desc_rm_dma_map(mix);
+-		if (vq->use_dma_api) {
++		desc = desc_rm_dma_map(mix);
 +
- 		len = vq->split.desc_extra[head].len;
- 
- 		BUG_ON(!(vq->split.desc_extra[head].flags &
- 				VRING_DESC_F_INDIRECT));
- 		BUG_ON(len == 0 || len % sizeof(struct vring_desc));
- 
--		for (j = 0; j < len / sizeof(struct vring_desc); j++)
--			vring_unmap_one_split_indirect(vq, &indir_desc[j]);
-+		if (desc_map_inter(mix)) {
-+			for (j = 0; j < len / sizeof(struct vring_desc); j++)
-+				vring_unmap_one_split_indirect(vq, &indir_desc[j]);
-+		}
- 
- 		kfree(indir_desc);
- 		vq->split.desc_state[head].indir_desc = NULL;
++		if (vq->use_dma_api && desc_map_inter(mix)) {
+ 			len = vq->packed.desc_extra[id].len;
+ 			for (i = 0; i < len / sizeof(struct vring_packed_desc);
+ 					i++)
 -- 
 2.32.0.3.g01195cf9f
 
