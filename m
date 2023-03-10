@@ -1,136 +1,140 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0BE0F6B3619
-	for <lists.virtualization@lfdr.de>; Fri, 10 Mar 2023 06:34:56 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5B3026B361B
+	for <lists.virtualization@lfdr.de>; Fri, 10 Mar 2023 06:34:57 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 64C7B419A6;
-	Fri, 10 Mar 2023 05:34:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 64C7B419A6
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=I4XkPZIg
+	by smtp1.osuosl.org (Postfix) with ESMTP id 79F0382271;
+	Fri, 10 Mar 2023 05:34:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 79F0382271
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=cXlChzsC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ehpB7eSagTyI; Fri, 10 Mar 2023 05:34:53 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id E64F141995;
-	Fri, 10 Mar 2023 05:34:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E64F141995
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id H5aRN_uGhGzT; Fri, 10 Mar 2023 05:34:54 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 2F15E81F3D;
+	Fri, 10 Mar 2023 05:34:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2F15E81F3D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B2AC5C008C;
-	Fri, 10 Mar 2023 05:34:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F3E55C007F;
+	Fri, 10 Mar 2023 05:34:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A5015C0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id ACDC8C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Mar 2023 05:34:50 +0000 (UTC)
+ Fri, 10 Mar 2023 05:34:51 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7261B60B20
+ by smtp3.osuosl.org (Postfix) with ESMTP id 87CB760B20
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Mar 2023 05:34:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7261B60B20
+ Fri, 10 Mar 2023 05:34:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 87CB760B20
 Authentication-Results: smtp3.osuosl.org; dkim=pass (2048-bit key,
  unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256
- header.s=selector2 header.b=I4XkPZIg
+ header.s=selector2 header.b=cXlChzsC
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pB7drjSe_c8Q
+ with ESMTP id H4yDkQLh11RO
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Mar 2023 05:34:48 +0000 (UTC)
+ Fri, 10 Mar 2023 05:34:50 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CB82760881
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on2062e.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7eab::62e])
- by smtp3.osuosl.org (Postfix) with ESMTPS id CB82760881
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B496260881
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::628])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id B496260881
  for <virtualization@lists.linux-foundation.org>;
- Fri, 10 Mar 2023 05:34:48 +0000 (UTC)
+ Fri, 10 Mar 2023 05:34:50 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XI4V7gs1JapIw090N/cuaqdK42GUGqIvpMYHfH6WAY4T5TGgqdBWFivq4i3UYjev7Y7cfppvzOOWrt/f8e8hP7hGAEHlhEaJkblBbztKe9mOJ3DCCcfOWa3lOGpLFxTyJ5becLrbzQMzfyZdAMn3/wywxk9IreJQFHWU/+WU24jSyoYiHrIdY1nMsl5aN0TI2okWgkL5b4IR2fUkGDKwdRz6srLcs80Es1XzrJtLu+31wmfrUMnFCAQGJ7yGWPmS90X6pAKPjLekCw2cGKedJ/rcLX86FiCN6vBEMhfDi3Ri2K6M04O6QxunPSMe4qkyE8XZMw9P5SNube5zu8g2vQ==
+ b=afuuuoLCP5N02l+SOqGoJn2pbeOZ195fpygA71pkjSbY0fCde86OEMI8qh7N9C1m84k281UciVXnup3J1DMzvEm5sSqKrh9YW2K9ltoLDMg8y3680AhOnezTEZI6MsH0i2VHe3lCdfpoQ3ixYebVYXyXmG+NTvGWPJRRsZHxFv1/X6/WDOEOTU5cqfMQxMpyeCaPdDz4hFaiWqJG9/jWybWl2jxymnr5yqQCZOdz/jhgMyQpspcC2THoy6w0205SqUfFu+3KxE4Nivxkyo5rfDd6wHE9nkcASv7xOYAf0J+4SuQqe0yIFFSI3exWYyV5z8h6p/sUGeH2e40HkObTMw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yUqbMIVwysstyfmAey8B8misaUbySXRVpI13TEa0tbM=;
- b=PYVrKwEpapEdke1ULHUlKxaGlrvJtmLY193p/AIb/MR7fBim024qISdPXIIiNKJYVxBHib+oImra0t4Fd+Jrggqhe4M2x6D4/WleMs7F7hHU7YVW63CguDSI+xANXPtAYwsuNxzxNNznLN7xyU6DlUOHjmpscPzXbdqDhEXLDJSHQuQSUsAe+YQyPK0hGHOE7XW9ZbwltE07Mijj1mSJgIvmMkgvxMQbXbwWHpWjcYkgEkD4/LoHIozMQMWa/S7xOdCN6E6TxHZHRmoNAZVfFbzPE9d56hgW79a00DspQ1o8nMbBQWAOqxmneo1auM/j6QA2iZCLd6jO25PKgaFdRg==
+ bh=ldfJr1fk5FByGbwkxwCSA6PPc/jsF4k0GZ2CYl9Z7oU=;
+ b=HoLOsEIzZGC/DfHzQhWiGxhZdUDOgqYUn7Ora2BndSKRZKBONV66TWz8k8NyLmMF6PtplQUfeWMZ7TJ8eCiF/3QpLpbABF9Yhud81Q3N+aTL+WgdV2M5uMy4YHKapUwnDpdVjNZLfaV15uqXS0ylf7eZxiVQ9VBu3B7Cl9XurdPNEo81W5MpKdwfpls+zOfhiFv7tp9LxSp8Sq4G+YsSNABQZOgsKZSjzPr3lQwdq6kbobCvTTgbP+SUZL9m2hVzu4S8MOGvi1MjKR+XUVwsYf0kTcajYk5PYBgA8PmsW4UYOrTSnv6R6pPk6/uf30GVfvhJvgLsyGzDn65Blufzkg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.161) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ 216.228.117.160) smtp.rcpttodomain=oracle.com smtp.mailfrom=nvidia.com;
  dmarc=pass (p=reject sp=reject pct=100) action=none header.from=nvidia.com;
  dkim=none (message not signed); arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yUqbMIVwysstyfmAey8B8misaUbySXRVpI13TEa0tbM=;
- b=I4XkPZIg43EM4WnF+lCgEuGNHUyNfXGckbCmqGEFlYcMRexR0oJYr/YaZ6DFWkV98IUmkrg9CF5RlO2wmpE5Enk7MKunAmdChVltdLIxmXVCyBaehFw1ujhR4qUKurgjkyhgCVR4bek9a9G3x4HaOaAWMNIXsnuO7Qcn1UFDHvMZly6R1f3Clye4rdr9ZS3fvWaZWsIz8CZApAw0H7js6ZY/BM57a5A2dAp2QhTtpXbK3s92AHGXAWK5CIbnjysIQvgVCrS3KTy941fh7ygnXj3ShCJSzhkjrYXLYyJhA8Fq1efG7qwywqF360lFxSpV6dnucEekCFJhrYzqRF/ptw==
-Received: from DM6PR11CA0057.namprd11.prod.outlook.com (2603:10b6:5:14c::34)
- by SJ2PR12MB8183.namprd12.prod.outlook.com (2603:10b6:a03:4f4::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.29; Fri, 10 Mar
- 2023 05:34:46 +0000
-Received: from DS1PEPF0000E63C.namprd02.prod.outlook.com
- (2603:10b6:5:14c:cafe::c4) by DM6PR11CA0057.outlook.office365.com
- (2603:10b6:5:14c::34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.19 via Frontend
- Transport; Fri, 10 Mar 2023 05:34:46 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.161)
+ bh=ldfJr1fk5FByGbwkxwCSA6PPc/jsF4k0GZ2CYl9Z7oU=;
+ b=cXlChzsCBellX/928bnFSy5CPcqFR8vZPnjNjyOqy0CjOT65jyz5G3vMK1WDqZPI61ANNv6Rkt345Zv9dL5iCuDQwoZeCH3uKs81i0rLe+DjjvUjWtalXwnaZlBwt+bmsRhw/23z0rd6N9X2SnFYnJz0vclO40WSbGM/+xs9kpaXHGr5BWadMKxVwYL9svNa/n3/7wkCAsy0cfIY+rS2RaYyTESQAZ36h48lRgrbkuDPl3/NWsU/c+JY8N+6afzrTFFb/tQlwbljuZAQMa8Ju3eVeYcOf5v2dwBvfv5Aj+VhN3FgJubt2ngJQeo33Bv03xcNfUN3E2V//cs04f2qtg==
+Received: from MW4PR03CA0138.namprd03.prod.outlook.com (2603:10b6:303:8c::23)
+ by SJ2PR12MB7845.namprd12.prod.outlook.com (2603:10b6:a03:4ce::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.17; Fri, 10 Mar
+ 2023 05:34:48 +0000
+Received: from CO1NAM11FT042.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:303:8c:cafe::d5) by MW4PR03CA0138.outlook.office365.com
+ (2603:10b6:303:8c::23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6156.28 via Frontend
+ Transport; Fri, 10 Mar 2023 05:34:48 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
  smtp.mailfrom=nvidia.com;
  dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=nvidia.com;
 Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.161 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.161; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.161) by
- DS1PEPF0000E63C.mail.protection.outlook.com (10.167.17.74) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6178.13 via Frontend Transport; Fri, 10 Mar 2023 05:34:45 +0000
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by mail.nvidia.com
- (10.129.200.67) with Microsoft SMTP Server (version=TLS1_2,
+ 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
+Received: from mail.nvidia.com (216.228.117.160) by
+ CO1NAM11FT042.mail.protection.outlook.com (10.13.174.250) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.6178.19 via Frontend Transport; Fri, 10 Mar 2023 05:34:48 +0000
+Received: from rnnvmail203.nvidia.com (10.129.68.9) by mail.nvidia.com
+ (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.5; Thu, 9 Mar 2023
- 21:34:35 -0800
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by rnnvmail202.nvidia.com
- (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
+ 21:34:37 -0800
+Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail203.nvidia.com
+ (10.129.68.9) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.37; Thu, 9 Mar 2023
- 21:34:34 -0800
+ 21:34:37 -0800
 Received: from mtl123.mtl.labs.mlnx (10.127.8.10) by mail.nvidia.com
- (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
+ (10.129.68.7) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.5 via Frontend
- Transport; Thu, 9 Mar 2023 21:34:34 -0800
+ Transport; Thu, 9 Mar 2023 21:34:36 -0800
 Received: from sw-mtx-012-001.mtx.labs.mlnx (sw-mtx-012-001.mtx.labs.mlnx
  [10.9.150.40])
- by mtl123.mtl.labs.mlnx (8.14.4/8.14.4) with ESMTP id 32A5YVo2007739;
- Fri, 10 Mar 2023 07:34:31 +0200
+ by mtl123.mtl.labs.mlnx (8.14.4/8.14.4) with ESMTP id 32A5YVo3007739;
+ Fri, 10 Mar 2023 07:34:32 +0200
 To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH v2 0/3] virtio_ring: Clean up code for virtio ring and pci
-Date: Fri, 10 Mar 2023 07:34:25 +0200
-Message-ID: <20230310053428.3376-1-feliu@nvidia.com>
+Subject: [PATCH v2 1/3] virtio_pci_modern: Allow non power of 2 sizes for
+ virtqueues
+Date: Fri, 10 Mar 2023 07:34:26 +0200
+Message-ID: <20230310053428.3376-2-feliu@nvidia.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230310053428.3376-1-feliu@nvidia.com>
+References: <20230310053428.3376-1-feliu@nvidia.com>
 MIME-Version: 1.0
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS1PEPF0000E63C:EE_|SJ2PR12MB8183:EE_
-X-MS-Office365-Filtering-Correlation-Id: ece57b16-bcc0-4a35-800c-08db21292892
+X-MS-TrafficTypeDiagnostic: CO1NAM11FT042:EE_|SJ2PR12MB7845:EE_
+X-MS-Office365-Filtering-Correlation-Id: d60b213b-2226-4392-3015-08db212929cc
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 1OwpwFTfRtBkF6zuLpecEq/c9cjdi/aF3Q1orc/6JaapzMlEeAiaqw+ZjUoXQlHqsRj+lv6LS7xby03XGdOHVte7DrOUYfhyED+/J+rNa3xRXtjYf0/uZalzBBi23j1Bn56UAcFlC49wpY3cT7nXNDPM7GiTDregqoaGAzDZCJGnz57u39AXDDLW++TozQPGiVnUfO9cscTEXz6YOsCBOjQi4SWHuc1DUMSOhJjZ8dk8jn692bYFmj5G+qBOlNGEqcaMzsnRwU6JoG+4fH4yj0FtK6CCxGvzqZzaLvtNeoz7IOqp4bF4zi4vHrtEZnT07UYystekQqoIzopxZrzW0seklN4/qUMeuAwJi1/Xf+ptZNjIiimOsIRAIF1O4B7M0EGt2spoZ/EKDhFy8sZQAHP3iM5pbS66Ev3IBSaJ0seRMHE+JwXNL3EIL+WElaM0HN/LLxj8cSxrPjgm4sRg+3aWohnEVWkZIDupY3juqhecFOLVUA9fAdmGUv6YcKFkfNycEhpdG9DgVkibZZI8ZWBL1xxY+2AY8kwMaAJhIUDnZe1GcxG3ONPQpGGSCs751qQQ/RYmsxX6eC58VYst5GcEVGPykMi8Ddn9d07skZzBxXzMe2NFgeKBBm3PI3iyXgzfNFzERcD1gVuzlkrh9Oa0Dh3nM21dAgBJOWEF6gvmU8kiJtYtG4NjvpOMS3id7Lpju7ANLuSVzsN8Oqe6wlQP4xbbodMRkaKocoHN3/V67ONUGpRSn/s0WFtCnkeygrw9wn/O33gZcwVKhTq4J9xUXO5SiF6uyjHYpuFwZEs=
-X-Forefront-Antispam-Report: CIP:216.228.117.161; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge2.nvidia.com; CAT:NONE;
- SFS:(13230025)(4636009)(376002)(396003)(346002)(136003)(39860400002)(451199018)(36840700001)(46966006)(40470700004)(966005)(36756003)(356005)(6666004)(6916009)(41300700001)(8676002)(8936002)(5660300002)(4326008)(2906002)(7636003)(82740400003)(86362001)(70206006)(36860700001)(70586007)(1076003)(316002)(40480700001)(107886003)(478600001)(54906003)(82310400005)(26005)(40460700003)(83380400001)(336012)(186003)(47076005)(2616005);
+X-Microsoft-Antispam-Message-Info: dbhRsFs8S+KlIZ5OsZ9rFR7LiWKMZpmtmc8yOT5uWVyxqJ5LokvGFzgq2iVXhAvCE8DmCiFF3lSo6C7P5lmAib/Su9xn+G8/oVQ+T3fp6EvO2hRSj31cW+ez+ek5ZG8NbUy2BaRh/CyAZNB+gGJYSTqan5gRO0NNMM0YkbXM5a0ECTdSZ9upJRzwfm8cU+mkktGbtBrmskqfdXt3h3/6GePF7flRyPOKMERw/jeuljL+Yo+y9Z5aZlZ2I+gX568IuT3rQu6hR6pNsqMRkhVj0sg/kFRILZJ+qEb4BA3dcGCKdVW3Oh4Qprbz3aiONAz2upL4/5HybwEd0Y/uBPq/uRRZ9+W4RTsMIW+UFk2BR2sNCWz3FtTIQP8/mR9qqqWetTAEmaobFLdNcmRLIl8PYyM0NXig3B8kP6JgQzI2XeV9pZwQUt3eLA0+9YgbrferkBqwLveXWEWC473E4aZF06UazbXnbXvS1++yVx1oXzXCi+B0jgPkJCOzPNT6hMkBrBijLSZn8QKWHQ6R6RlGXtul0Dm9hlZnWx+RHqY//wcuZ3v0omxuKW4+ig73Q2UYSOEmXAUdJjCqPmgdIiA+uqMS+rKYWLDC58SZ8mrzAfgMq8jOfuMpw1WjNl7MdQwMb18ukwlXhx6MxTCsO9o6Ef4H/RygomwEjrQGZxMq834TtuVfmtAtTwUFFrDFebquEB0nYN50Zy363vAH2kZvp7j4Xq0f668swsGZ8oH83SndOGhH1X1bBALVkUH4PmaE
+X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
+ SFS:(13230025)(4636009)(396003)(136003)(376002)(346002)(39860400002)(451199018)(46966006)(36840700001)(40470700004)(336012)(47076005)(54906003)(316002)(40460700003)(36756003)(86362001)(82740400003)(7636003)(36860700001)(1076003)(83380400001)(82310400005)(186003)(2616005)(26005)(356005)(478600001)(40480700001)(8936002)(5660300002)(2906002)(41300700001)(4326008)(6666004)(8676002)(6916009)(70586007)(70206006);
  DIR:OUT; SFP:1101; 
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2023 05:34:45.9716 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ece57b16-bcc0-4a35-800c-08db21292892
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Mar 2023 05:34:48.0742 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d60b213b-2226-4392-3015-08db212929cc
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.161];
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
  Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS1PEPF0000E63C.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT042.eop-nam11.prod.protection.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8183
-Cc: "Michael S . Tsirkin" <mst@redhat.com>
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7845
+Cc: "Michael S . Tsirkin" <mst@redhat.com>, Jiri Pirko <jiri@nvidia.com>,
+ Bodong Wang <bodong@nvidia.com>, Gavin Li <gavinl@nvidia.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -149,31 +153,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch series performs a clean up of the code in virtio_ring and
-virtio_pci, modifying it to conform with the Linux kernel coding style
-guidance [1]. The modifications ensure the code easy to read and
-understand. This small series does few short cleanups in the code.
+According to the Virtio Specification, the Queue Size parameter of a
+virtqueue corresponds to the maximum number of descriptors in that
+queue, and it does not have to be a power of 2 for packed virtqueues.
+However, the virtio_pci_modern driver enforced a power of 2 check for
+virtqueue sizes, which is unnecessary and restrictive. This commit
+removes that check, allowing virtqueues to have arbitrary sizes as
+specified by the Virtio Specification.
 
-Patch-1 Allow non power of 2 sizes for virtqueues
-Patch-2 Avoid using inline for small functions.
-Patch-3 Use const to annotate read-only pointer params.
+To validate this change, we tested various virtqueue sizes for packed
+rings, including 128, 256, 512, 100, 200, 500, and 1000, with
+CONFIG_PAGE_POISONING enabled, and all tests passed successfully.
 
-[1]
-https://www.kernel.org/doc/html/v6.2-rc3/process/coding-style.html#the-inline-disease
+Signed-off-by: Feng Liu <feliu@nvidia.com>
+Reviewed-by: Jiri Pirko <jiri@nvidia.com>
+Reviewed-by: Parav Pandit <parav@nvidia.com>
+Reviewed-by: Gavin Li <gavinl@nvidia.com>
+Reviewed-by: Bodong Wang <bodong@nvidia.com>
+Reviewed-by: David Edmondson <david.edmondson@oracle.com>
 
-All of the patches have been verified based on the kernel code
-commit 44889ba56cbb ("Merge tag 'net-6.3-rc2' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net")
+---
+v1 -> v2
+feedbacks from Jason Wang and Michael S. Tsirkin
+- remove power_of_2 check of virtqueue size
+---
+ drivers/virtio/virtio_pci_modern.c | 5 -----
+ 1 file changed, 5 deletions(-)
 
-Feng Liu (3):
-  virtio_pci_modern: Allow non power of 2 sizes for virtqueues
-  virtio_ring: Avoid using inline for small functions
-  virtio_ring: Use const to annotate read-only pointer params
-
- drivers/virtio/virtio_pci_modern.c |  5 ----
- drivers/virtio/virtio_ring.c       | 48 +++++++++++++++---------------
- include/linux/virtio.h             | 14 ++++-----
- 3 files changed, 31 insertions(+), 36 deletions(-)
-
+diff --git a/drivers/virtio/virtio_pci_modern.c b/drivers/virtio/virtio_pci_modern.c
+index 9e496e288cfa..6e713904d8e8 100644
+--- a/drivers/virtio/virtio_pci_modern.c
++++ b/drivers/virtio/virtio_pci_modern.c
+@@ -310,11 +310,6 @@ static struct virtqueue *setup_vq(struct virtio_pci_device *vp_dev,
+ 	if (!num || vp_modern_get_queue_enable(mdev, index))
+ 		return ERR_PTR(-ENOENT);
+ 
+-	if (!is_power_of_2(num)) {
+-		dev_warn(&vp_dev->pci_dev->dev, "bad queue size %u", num);
+-		return ERR_PTR(-EINVAL);
+-	}
+-
+ 	info->msix_vector = msix_vec;
+ 
+ 	/* create the vring */
 -- 
 2.34.1
 
