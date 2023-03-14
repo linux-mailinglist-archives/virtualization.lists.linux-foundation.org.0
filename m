@@ -1,73 +1,72 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7A2AC6B908D
-	for <lists.virtualization@lfdr.de>; Tue, 14 Mar 2023 11:49:59 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id E21A76B919D
+	for <lists.virtualization@lfdr.de>; Tue, 14 Mar 2023 12:28:20 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id E8DF3408ED;
-	Tue, 14 Mar 2023 10:49:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E8DF3408ED
+	by smtp1.osuosl.org (Postfix) with ESMTP id 7F7AE81CA0;
+	Tue, 14 Mar 2023 11:28:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7F7AE81CA0
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id t5oACDA-xmr9; Tue, 14 Mar 2023 10:49:54 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nonkG427gOll; Tue, 14 Mar 2023 11:28:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id A25F040A12;
-	Tue, 14 Mar 2023 10:49:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A25F040A12
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 4DAF781DEA;
+	Tue, 14 Mar 2023 11:28:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4DAF781DEA
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 63553C008A;
-	Tue, 14 Mar 2023 10:49:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 967F1C008A;
+	Tue, 14 Mar 2023 11:28:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C48D8C0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8B0FBC0032
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Mar 2023 10:49:50 +0000 (UTC)
+ Tue, 14 Mar 2023 11:28:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 929C2409B1
+ by smtp3.osuosl.org (Postfix) with ESMTP id 62ACC61093
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Mar 2023 10:49:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 929C2409B1
+ Tue, 14 Mar 2023 11:28:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 62ACC61093
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NEVRR5oT-DvS
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id cHOzP5jM9TWU
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Mar 2023 10:49:49 +0000 (UTC)
+ Tue, 14 Mar 2023 11:28:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5CB0640977
-Received: from out30-113.freemail.mail.aliyun.com
- (out30-113.freemail.mail.aliyun.com [115.124.30.113])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 5CB0640977
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 96F9661063
+Received: from out30-130.freemail.mail.aliyun.com
+ (out30-130.freemail.mail.aliyun.com [115.124.30.130])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 96F9661063
  for <virtualization@lists.linux-foundation.org>;
- Tue, 14 Mar 2023 10:49:49 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ Tue, 14 Mar 2023 11:28:14 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=15; SR=0;
- TI=SMTPD_---0Vds07MK_1678790982; 
+ TI=SMTPD_---0VdsByGS_1678793285; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vds07MK_1678790982) by smtp.aliyun-inc.com;
- Tue, 14 Mar 2023 18:49:42 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: netdev@vger.kernel.org
-Subject: [PATCH net v1 2/2] virtio_net: free xdp shinfo frags when
+ fp:SMTPD_---0VdsByGS_1678793285) by smtp.aliyun-inc.com;
+ Tue, 14 Mar 2023 19:28:06 +0800
+Message-ID: <1678793273.5523777-1-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net v1 2/2] virtio_net: free xdp shinfo frags when
  build_skb_from_xdp_buff() fails
-Date: Tue, 14 Mar 2023 18:49:39 +0800
-Message-Id: <20230314104939.67212-3-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20230314104939.67212-1-xuanzhuo@linux.alibaba.com>
+Date: Tue, 14 Mar 2023 19:27:53 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Yunsheng Lin <linyunsheng@huawei.com>
 References: <20230314104939.67212-1-xuanzhuo@linux.alibaba.com>
-MIME-Version: 1.0
-X-Git-Hash: b2016341b15d
+ <20230314104939.67212-3-xuanzhuo@linux.alibaba.com>
+ <faf3772c-b494-54bd-b29a-6cc3068985d5@huawei.com>
+In-Reply-To: <faf3772c-b494-54bd-b29a-6cc3068985d5@huawei.com>
 Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
  Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
- virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
- Heng Qi <hengqi@linux.alibaba.com>, Jakub Kicinski <kuba@kernel.org>,
- bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
- "David S. Miller" <davem@davemloft.net>
+ netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
+ Alexei Starovoitov <ast@kernel.org>, virtualization@lists.linux-foundation.org,
+ Eric Dumazet <edumazet@google.com>, Heng Qi <hengqi@linux.alibaba.com>,
+ Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
+ Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -79,42 +78,52 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-build_skb_from_xdp_buff() may return NULL, in this case
-we need to free the frags of xdp shinfo.
+On Tue, 14 Mar 2023 19:19:19 +0800, Yunsheng Lin <linyunsheng@huawei.com> wrote:
+> On 2023/3/14 18:49, Xuan Zhuo wrote:
+> > build_skb_from_xdp_buff() may return NULL, in this case
+> > we need to free the frags of xdp shinfo.
+> >
+> > Fixes: fab89bafa95b ("virtio-net: support multi-buffer xdp")
+> > Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+> > Acked-by: Michael S. Tsirkin <mst@redhat.com>
+> > ---
+> >  drivers/net/virtio_net.c | 5 ++++-
+> >  1 file changed, 4 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> > index 8ecf7a341d54..d36183be0481 100644
+> > --- a/drivers/net/virtio_net.c
+> > +++ b/drivers/net/virtio_net.c
+> > @@ -1273,9 +1273,12 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+> >
+> >  		switch (act) {
+> >  		case XDP_PASS:
+> > +			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
+> > +			if (!head_skb)
+>
+> It is a error case, perhaps add a unlikely() for it.
 
-Fixes: fab89bafa95b ("virtio-net: support multi-buffer xdp")
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
----
- drivers/net/virtio_net.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Yes. Will fix.
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 8ecf7a341d54..d36183be0481 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -1273,9 +1273,12 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 
- 		switch (act) {
- 		case XDP_PASS:
-+			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
-+			if (!head_skb)
-+				goto err_xdp_frags;
-+
- 			if (unlikely(xdp_page != page))
- 				put_page(page);
--			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
- 			rcu_read_unlock();
- 			return head_skb;
- 		case XDP_TX:
--- 
-2.32.0.3.g01195cf9f
+Thanks.
 
+
+>
+> > +				goto err_xdp_frags;
+> > +
+> >  			if (unlikely(xdp_page != page))
+> >  				put_page(page);
+> > -			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
+> >  			rcu_read_unlock();
+> >  			return head_skb;
+> >  		case XDP_TX:
+> >
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
