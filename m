@@ -1,135 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5DCA06BBCC7
-	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 19:55:27 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id DB7526BBEF0
+	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 22:23:03 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 056AA41876;
-	Wed, 15 Mar 2023 18:55:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 056AA41876
+	by smtp4.osuosl.org (Postfix) with ESMTP id B69E541655;
+	Wed, 15 Mar 2023 21:23:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B69E541655
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key, unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256 header.s=selector2 header.b=rsMBNvpD
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=TT5PfyzZ
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sEj1reIjk2HS; Wed, 15 Mar 2023 18:55:22 +0000 (UTC)
+	with ESMTP id 4jYN9QfIjvt8; Wed, 15 Mar 2023 21:23:00 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 49EA64189E;
-	Wed, 15 Mar 2023 18:55:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 49EA64189E
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 4A979416D0;
+	Wed, 15 Mar 2023 21:23:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4A979416D0
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 87D8DC008D;
-	Wed, 15 Mar 2023 18:55:21 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 621F6C008C;
+	Wed, 15 Mar 2023 21:22:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B5836C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BA9AEC0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 18:55:20 +0000 (UTC)
+ Wed, 15 Mar 2023 21:22:57 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 90E7540BCA
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8E7B541638
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 18:55:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 90E7540BCA
-Authentication-Results: smtp2.osuosl.org; dkim=pass (2048-bit key,
- unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.a=rsa-sha256
- header.s=selector2 header.b=rsMBNvpD
+ Wed, 15 Mar 2023 21:22:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8E7B541638
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id KrfF6zwHMjDv
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eZVfolulfZ5z
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 18:55:19 +0000 (UTC)
+ Wed, 15 Mar 2023 21:22:56 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 162DB40BD3
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on2061b.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::61b])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 162DB40BD3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 330A34160F
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 330A34160F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 18:55:16 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JQ9l3fN0NTpsNGSLjbUKqDjLJ3CI/qSPF9RQlrIjqoBVpc3topirCLGf4ZBO81LFuwoYwJrAcJSHOwpLsOZUJeUdDa6qpq728xo5ZNxEm0ZIA7N/z2eVZ/fbfkRGIqe1MYOSyFE8MbKMqK3Rlp9nm7X+UJkoc4q0Zx5rg5IeaYSFsKsx/45nHEHzIknwNHD8m6ku+jOYOIuja3YQf33s1FM1mFxyw366fh3ZtTBrqVS5fuoNNBXGAiJW70gv6GhtCz0Kg1IkTrY7Yckom5vOriTfUDzoHqzz5fkfCBdckIt2DrLmb50frcjqZx7Gnui/1hXz2s+f8GbBYFsqaYIXDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Tha9eY/m17EAjfeQQtYiOGjw5Hp5dsoIg5MaIox28vQ=;
- b=namhldfzM2GZnfju5ABcogsOueuyQtJjGobpEXgm9bYwZW1Rxy1kZ3e82QG0EsdfehRGdIe8V3JIfW9UoR6VgzK9mVU3GYaMvlCiiy6qocIp1stk29SS8+s+BRblV5oe03KcV1E3jCtM6brpQDSscpifkPx1k50CReQqfjez67VWh4EA3giQcykvqmzGai/cLUF/jODKrI3hpd0hfdDw1VUbJgPQwto5ivOuw20i2HEx1wOrGnTmP4nyKsh3EX4VxWb1G4hriYHjNIv9oHmSHRCFxEn9llL9zvnJ34QfV9+c69M3aUYJAjj5/bCior5y2Omj/G+hYHZXC3lYZsb+Hw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.117.160) smtp.rcpttodomain=lists.linux-foundation.org
- smtp.mailfrom=nvidia.com; dmarc=pass (p=reject sp=reject pct=100) action=none
- header.from=nvidia.com; dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Tha9eY/m17EAjfeQQtYiOGjw5Hp5dsoIg5MaIox28vQ=;
- b=rsMBNvpD+w+lY4maOjFEYe2EyB2V/7bf4Tx9sggIZm6Qy0i4LaVZY+2RnggBm65w0k8VjcyqN/Bz7z0q/KxfMuL4+/TL3ljhU5bM/tXAdPwWjgDMWQBEtUJR5APeEsHqH+QyVl9DtsMUXhCe6gVn24vJ/JUzA9LMBshsmel7U++Vxsc+Ld7NnB5dixUtUvwWn0EcLfIe6Qd8DDvr/4upIj7fiFtJY+MK/kEcNjWZx1L4hoJAXGb3PbwFRx7O0i4Hf2UprcNeEwqZ/N3vDF0hfHsZ3wL8ReeO3PuA5V/DR2b+KGkXWTU3CXetVYk0p3SQvN66GIAjjpgHauFBK0FupA==
-Received: from DM6PR06CA0026.namprd06.prod.outlook.com (2603:10b6:5:120::39)
- by MW3PR12MB4395.namprd12.prod.outlook.com (2603:10b6:303:5c::23) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.29; Wed, 15 Mar
- 2023 18:55:14 +0000
-Received: from DM6NAM11FT061.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:120:cafe::59) by DM6PR06CA0026.outlook.office365.com
- (2603:10b6:5:120::39) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6178.29 via Frontend
- Transport; Wed, 15 Mar 2023 18:55:14 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.117.160)
- smtp.mailfrom=nvidia.com;
- dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.117.160 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.117.160; helo=mail.nvidia.com; pr=C
-Received: from mail.nvidia.com (216.228.117.160) by
- DM6NAM11FT061.mail.protection.outlook.com (10.13.173.138) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6199.11 via Frontend Transport; Wed, 15 Mar 2023 18:55:13 +0000
-Received: from rnnvmail205.nvidia.com (10.129.68.10) by mail.nvidia.com
- (10.129.200.66) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.5; Wed, 15 Mar 2023
- 11:55:04 -0700
-Received: from rnnvmail202.nvidia.com (10.129.68.7) by rnnvmail205.nvidia.com
- (10.129.68.10) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.986.37; Wed, 15 Mar
- 2023 11:55:04 -0700
-Received: from vdi.nvidia.com (10.127.8.11) by mail.nvidia.com (10.129.68.7)
- with Microsoft SMTP Server id 15.2.986.5 via Frontend Transport; Wed, 15 Mar
- 2023 11:55:03 -0700
-To: <virtualization@lists.linux-foundation.org>
-Subject: [PATCH v2 3/3] virtio_ring: Use const to annotate read-only pointer
- params
-Date: Wed, 15 Mar 2023 20:54:58 +0200
-Message-ID: <20230315185458.11638-4-feliu@nvidia.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230315185458.11638-1-feliu@nvidia.com>
-References: <20230315185458.11638-1-feliu@nvidia.com>
-MIME-Version: 1.0
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT061:EE_|MW3PR12MB4395:EE_
-X-MS-Office365-Filtering-Correlation-Id: e637d745-5f2d-495e-a190-08db2586cf83
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: R+6vkdzSClwUGVJoBawZtgQxb5WwoCdBKUd0Tki+MGJcDTHHE31LvvY3uDuhMe9DbJUfsyOKk5V9ddeHsIk9Ucd3DK+nQZkG2FFFhcyc3JVvIaxK4oNZtbn3wXxYdSa6aoMSzv28xOdQ+eDTIW8hYpcf85iAHe2Z+qToOSFfhzCAzh2TMl986LS0eJW12ZkogGZZ5/ts8wThr3sH7O+gmMtq9VZeluFlkSs4GyYPAArbGZtpbujl8Xt5vtsSC8gGmK7D2FSqYtrVT4jw50jf4ZXQTqDhau2XrVsUqtH0De49+KTqmLn4CkW05nv09m5n79syrxcQoAscqELZxlROmbkndOuSSIGcClQuw5c8sLgOF7Fg2CMkt2eo5vZ/mwgkCo3NCprZ0xbe1AsLR50SsJhTj6B3wO+NLVDlHALz8ksoqNbPWx5AVDFBeGXMdrNrDHmjokau1NwfE1CUqfeFFsI60iZ2BxaiN+Z2qp8ynVGdilLCS9ldRXoHUnjnLHqwfhV7x8+JVjUqPWCgcu9vd77ij405cbPmxTaGFsQJORNu4DI/ndrAxRmUYai21aoPJwkd+wh0nvfIg9lH65S9wPSL6golvGpkiv0+QYFjxAHWPvETZmWO+6LxR7UlGTsUM6pC/cKIsngt0XFFoLriREV9fDagqFBAbjjB61I/1cinsGz418hU7JLVHRoPgjympYydMztdQh3OjuLlObBJeurenwm9AGlT0ud5on7YHmDBhmlwEj/XH8UnhNghJbet
-X-Forefront-Antispam-Report: CIP:216.228.117.160; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:mail.nvidia.com; PTR:dc6edge1.nvidia.com; CAT:NONE;
- SFS:(13230025)(4636009)(39860400002)(376002)(136003)(346002)(396003)(451199018)(46966006)(36840700001)(40470700004)(356005)(36756003)(36860700001)(86362001)(7636003)(82740400003)(41300700001)(8936002)(2906002)(5660300002)(26005)(82310400005)(40460700003)(4326008)(2616005)(40480700001)(1076003)(47076005)(186003)(83380400001)(336012)(316002)(54906003)(426003)(70206006)(70586007)(8676002)(107886003)(6666004)(6916009)(7696005)(478600001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Mar 2023 18:55:13.8850 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: e637d745-5f2d-495e-a190-08db2586cf83
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a; Ip=[216.228.117.160];
- Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT061.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW3PR12MB4395
-Cc: "Michael S . Tsirkin" <mst@redhat.com>, Jiri Pirko <jiri@nvidia.com>,
- Bodong Wang <bodong@nvidia.com>, Gavin Li <gavinl@nvidia.com>
+ Wed, 15 Mar 2023 21:22:56 +0000 (UTC)
+Received: by mail-pl1-x62d.google.com with SMTP id a2so21504324plm.4
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 15 Mar 2023 14:22:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1678915375;
+ h=content-transfer-encoding:mime-version:subject:references
+ :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=fx6XINbG22RuRvopp7NSnS9Ir7wpXLl6X3F0oM3Lksk=;
+ b=TT5PfyzZmVmlzKB78JIUQfKeQ3T88kEK2ZqX6va1SSv/9h9+8QE+hjgSa6qknXnz0S
+ 1xXSbXMxuRxNCFLdguERPbLmfMq+N/WIVTyX/FcrGg7SRyjOA/G3fCWTwR7SQKbphY9N
+ 7LNmTsYCjDZ6rC4BVZsl5nfz3VjTgObuewhGw4u9Fwqs0fmCNxLHdZiJrD1yRs2D0Zhl
+ V7mHgmhjybJMSOJSQvGyDovYpWpEEA17yDa4vrF5z1CU4J3JjdIshgp7x+Eg/ekobZQX
+ 6EmXSHZmbggVvbV2az9j+hmRBrt1Y870aP8ydfMP3DW44W6xiOyp8IYevClTvgOFM5Ol
+ MwDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1678915375;
+ h=content-transfer-encoding:mime-version:subject:references
+ :in-reply-to:message-id:cc:to:from:date:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=fx6XINbG22RuRvopp7NSnS9Ir7wpXLl6X3F0oM3Lksk=;
+ b=R/qU8Bv57HoRMuPQ7D117EdUuKeUz/etQkc7vCuR06EcQUxETHDgIUwqI3ZklORSsH
+ v3EGRRWWCmd2NDq32NCEMIfmndklaqKccbDybpKqgykSwk/rAIoZdFPG/WysihK1cwuF
+ PtVDcbGzDw7wi/HPgXX1RtZoLEX6xtu84IHdCl5hynpUHyK9N9lMuuQLEQC3mHVycpSl
+ inNhVpMQLWU+4BUKlO6m3tdW7kBaT1b6ZGvvpeiQhfU8k0JXw5tZoqvtmHC/36Vo5UDT
+ h6AN7lnwnnbYHAzBQuYOheD2Dd7cynkGrO4Y0CMlunRg9yEz2QjpCQ820ZBqShuVDB1o
+ 7DxQ==
+X-Gm-Message-State: AO0yUKVOLQonpd+YIs7YJ1RcbTv/lq+NSE/vLqGl+AJ1DvgdJeELIOvV
+ ITh/v2hhEqsD+gzF/mrhy1w=
+X-Google-Smtp-Source: AK7set8w++g0E9Oio4lvebxzVA2u/R2NCFuVd9SPlDPbBsiMF87XW6hdxTbGpP47FgjxTjqMIFyGRQ==
+X-Received: by 2002:a17:903:2341:b0:1a0:5bb1:3f0b with SMTP id
+ c1-20020a170903234100b001a05bb13f0bmr1286312plh.40.1678915375520; 
+ Wed, 15 Mar 2023 14:22:55 -0700 (PDT)
+Received: from localhost ([98.97.36.54]) by smtp.gmail.com with ESMTPSA id
+ g12-20020a170902868c00b0019b0afc24e8sm4043842plo.250.2023.03.15.14.22.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 15 Mar 2023 14:22:54 -0700 (PDT)
+Date: Wed, 15 Mar 2023 14:22:53 -0700
+From: John Fastabend <john.fastabend@gmail.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>, 
+ netdev@vger.kernel.org
+Message-ID: <6412372ddb847_63dce20857@john.notmuch>
+In-Reply-To: <20230314083901.40521-2-xuanzhuo@linux.alibaba.com>
+References: <20230314083901.40521-1-xuanzhuo@linux.alibaba.com>
+ <20230314083901.40521-2-xuanzhuo@linux.alibaba.com>
+Subject: RE: [PATCH net 1/2] virtio_net: fix page_to_skb() miss headroom
+Mime-Version: 1.0
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Heng Qi <hengqi@linux.alibaba.com>, Jakub Kicinski <kuba@kernel.org>,
+ bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -141,200 +110,92 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Feng Liu via Virtualization <virtualization@lists.linux-foundation.org>
-Reply-To: Feng Liu <feliu@nvidia.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add const to make the read-only pointer parameters clear, similar to
-many existing functions.
+Xuan Zhuo wrote:
+> Because headroom is not passed to page_to_skb(), this causes the shinfo
+> exceeds the range. Then the frags of shinfo are changed by other process.
+> 
+> [  157.724634] stack segment: 0000 [#1] PREEMPT SMP NOPTI
+> [  157.725358] CPU: 3 PID: 679 Comm: xdp_pass_user_f Tainted: G            E      6.2.0+ #150
+> [  157.726401] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.org 04/01/4
+> [  157.727820] RIP: 0010:skb_release_data+0x11b/0x180
+> [  157.728449] Code: 44 24 02 48 83 c3 01 39 d8 7e be 48 89 d8 48 c1 e0 04 41 80 7d 7e 00 49 8b 6c 04 30 79 0c 48 89 ef e8 89 b
+> [  157.730751] RSP: 0018:ffffc90000178b48 EFLAGS: 00010202
+> [  157.731383] RAX: 0000000000000010 RBX: 0000000000000001 RCX: 0000000000000000
+> [  157.732270] RDX: 0000000000000000 RSI: 0000000000000002 RDI: ffff888100dd0b00
+> [  157.733117] RBP: 5d5d76010f6e2408 R08: ffff888100dd0b2c R09: 0000000000000000
+> [  157.734013] R10: ffffffff82effd30 R11: 000000000000a14e R12: ffff88810981ffc0
+> [  157.734904] R13: ffff888100dd0b00 R14: 0000000000000002 R15: 0000000000002310
+> [  157.735793] FS:  00007f06121d9740(0000) GS:ffff88842fcc0000(0000) knlGS:0000000000000000
+> [  157.736794] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [  157.737522] CR2: 00007ffd9a56c084 CR3: 0000000104bda001 CR4: 0000000000770ee0
+> [  157.738420] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+> [  157.739283] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+> [  157.740146] PKRU: 55555554
+> [  157.740502] Call Trace:
+> [  157.740843]  <IRQ>
+> [  157.741117]  kfree_skb_reason+0x50/0x120
+> [  157.741613]  __udp4_lib_rcv+0x52b/0x5e0
+> [  157.742132]  ip_protocol_deliver_rcu+0xaf/0x190
+> [  157.742715]  ip_local_deliver_finish+0x77/0xa0
+> [  157.743280]  ip_sublist_rcv_finish+0x80/0x90
+> [  157.743834]  ip_list_rcv_finish.constprop.0+0x16f/0x190
+> [  157.744493]  ip_list_rcv+0x126/0x140
+> [  157.744952]  __netif_receive_skb_list_core+0x29b/0x2c0
+> [  157.745602]  __netif_receive_skb_list+0xed/0x160
+> [  157.746190]  ? udp4_gro_receive+0x275/0x350
+> [  157.746732]  netif_receive_skb_list_internal+0xf2/0x1b0
+> [  157.747398]  napi_gro_receive+0xd1/0x210
+> [  157.747911]  virtnet_receive+0x75/0x1c0
+> [  157.748422]  virtnet_poll+0x48/0x1b0
+> [  157.748878]  __napi_poll+0x29/0x1b0
+> [  157.749330]  net_rx_action+0x27a/0x340
+> [  157.749812]  __do_softirq+0xf3/0x2fb
+> [  157.750298]  do_softirq+0xa2/0xd0
+> [  157.750745]  </IRQ>
+> [  157.751563]  <TASK>
+> [  157.752329]  __local_bh_enable_ip+0x6d/0x80
+> [  157.753178]  virtnet_xdp_set+0x482/0x860
+> [  157.754159]  ? __pfx_virtnet_xdp+0x10/0x10
+> [  157.755129]  dev_xdp_install+0xa4/0xe0
+> [  157.756033]  dev_xdp_attach+0x20b/0x5e0
+> [  157.756933]  do_setlink+0x82e/0xc90
+> [  157.757777]  ? __nla_validate_parse+0x12b/0x1e0
+> [  157.758744]  rtnl_setlink+0xd8/0x170
+> [  157.759549]  ? mod_objcg_state+0xcb/0x320
+> [  157.760328]  ? security_capable+0x37/0x60
+> [  157.761209]  ? security_capable+0x37/0x60
+> [  157.762072]  rtnetlink_rcv_msg+0x145/0x3d0
+> [  157.762929]  ? ___slab_alloc+0x327/0x610
+> [  157.763754]  ? __alloc_skb+0x141/0x170
+> [  157.764533]  ? __pfx_rtnetlink_rcv_msg+0x10/0x10
+> [  157.765422]  netlink_rcv_skb+0x58/0x110
+> [  157.766229]  netlink_unicast+0x21f/0x330
+> [  157.766951]  netlink_sendmsg+0x240/0x4a0
+> [  157.767654]  sock_sendmsg+0x93/0xa0
+> [  157.768434]  ? sockfd_lookup_light+0x12/0x70
+> [  157.769245]  __sys_sendto+0xfe/0x170
+> [  157.770079]  ? handle_mm_fault+0xe9/0x2d0
+> [  157.770859]  ? preempt_count_add+0x51/0xa0
+> [  157.771645]  ? up_read+0x3c/0x80
+> [  157.772340]  ? do_user_addr_fault+0x1e9/0x710
+> [  157.773166]  ? kvm_read_and_reset_apf_flags+0x49/0x60
+> [  157.774087]  __x64_sys_sendto+0x29/0x30
+> [  157.774856]  do_syscall_64+0x3c/0x90
+> [  157.775518]  entry_SYSCALL_64_after_hwframe+0x72/0xdc
+> [  157.776382] RIP: 0033:0x7f06122def70
+> 
+> Fixes: 18117a842ab0 ("virtio-net: remove xdp related info from page_to_skb()")
+> Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+> ---
 
-Use `container_of_const` to implement `to_vvq`, which ensures the
-const-ness of read-only parameters and avoids accidental modification
-of their members.
+LGTM thanks.
 
-Signed-off-by: Feng Liu <feliu@nvidia.com>
-Reviewed-by: Jiri Pirko <jiri@nvidia.com>
-
----
-v0 -> v1
-feedbacks from Michael S. Tsirkin
-- use `container_of_const` to implement `to_vvq`
----
- drivers/virtio/virtio_ring.c | 36 ++++++++++++++++++------------------
- include/linux/virtio.h       | 14 +++++++-------
- 2 files changed, 25 insertions(+), 25 deletions(-)
-
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index a26fab91c59f..4c3bb0ddeb9b 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -231,9 +231,9 @@ static void vring_free(struct virtqueue *_vq);
-  * Helpers.
-  */
- 
--#define to_vvq(_vq) container_of(_vq, struct vring_virtqueue, vq)
-+#define to_vvq(_vq) container_of_const(_vq, struct vring_virtqueue, vq)
- 
--static bool virtqueue_use_indirect(struct vring_virtqueue *vq,
-+static bool virtqueue_use_indirect(const struct vring_virtqueue *vq,
- 				   unsigned int total_sg)
- {
- 	/*
-@@ -269,7 +269,7 @@ static bool virtqueue_use_indirect(struct vring_virtqueue *vq,
-  * unconditionally on data path.
-  */
- 
--static bool vring_use_dma_api(struct virtio_device *vdev)
-+static bool vring_use_dma_api(const struct virtio_device *vdev)
- {
- 	if (!virtio_has_dma_quirk(vdev))
- 		return true;
-@@ -289,7 +289,7 @@ static bool vring_use_dma_api(struct virtio_device *vdev)
- 	return false;
- }
- 
--size_t virtio_max_dma_size(struct virtio_device *vdev)
-+size_t virtio_max_dma_size(const struct virtio_device *vdev)
- {
- 	size_t max_segment_size = SIZE_MAX;
- 
-@@ -423,7 +423,7 @@ static void virtqueue_init(struct vring_virtqueue *vq, u32 num)
-  */
- 
- static void vring_unmap_one_split_indirect(const struct vring_virtqueue *vq,
--					   struct vring_desc *desc)
-+					   const struct vring_desc *desc)
- {
- 	u16 flags;
- 
-@@ -1183,7 +1183,7 @@ static u16 packed_last_used(u16 last_used_idx)
- }
- 
- static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
--				     struct vring_desc_extra *extra)
-+				     const struct vring_desc_extra *extra)
- {
- 	u16 flags;
- 
-@@ -1206,7 +1206,7 @@ static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
- }
- 
- static void vring_unmap_desc_packed(const struct vring_virtqueue *vq,
--				   struct vring_packed_desc *desc)
-+				    const struct vring_packed_desc *desc)
- {
- 	u16 flags;
- 
-@@ -2786,10 +2786,10 @@ EXPORT_SYMBOL_GPL(vring_transport_features);
-  * Returns the size of the vring.  This is mainly used for boasting to
-  * userspace.  Unlike other operations, this need not be serialized.
-  */
--unsigned int virtqueue_get_vring_size(struct virtqueue *_vq)
-+unsigned int virtqueue_get_vring_size(const struct virtqueue *_vq)
- {
- 
--	struct vring_virtqueue *vq = to_vvq(_vq);
-+	const struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	return vq->packed_ring ? vq->packed.vring.num : vq->split.vring.num;
- }
-@@ -2819,9 +2819,9 @@ void __virtqueue_unbreak(struct virtqueue *_vq)
- }
- EXPORT_SYMBOL_GPL(__virtqueue_unbreak);
- 
--bool virtqueue_is_broken(struct virtqueue *_vq)
-+bool virtqueue_is_broken(const struct virtqueue *_vq)
- {
--	struct vring_virtqueue *vq = to_vvq(_vq);
-+	const struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	return READ_ONCE(vq->broken);
- }
-@@ -2868,9 +2868,9 @@ void __virtio_unbreak_device(struct virtio_device *dev)
- }
- EXPORT_SYMBOL_GPL(__virtio_unbreak_device);
- 
--dma_addr_t virtqueue_get_desc_addr(struct virtqueue *_vq)
-+dma_addr_t virtqueue_get_desc_addr(const struct virtqueue *_vq)
- {
--	struct vring_virtqueue *vq = to_vvq(_vq);
-+	const struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	BUG_ON(!vq->we_own_ring);
- 
-@@ -2881,9 +2881,9 @@ dma_addr_t virtqueue_get_desc_addr(struct virtqueue *_vq)
- }
- EXPORT_SYMBOL_GPL(virtqueue_get_desc_addr);
- 
--dma_addr_t virtqueue_get_avail_addr(struct virtqueue *_vq)
-+dma_addr_t virtqueue_get_avail_addr(const struct virtqueue *_vq)
- {
--	struct vring_virtqueue *vq = to_vvq(_vq);
-+	const struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	BUG_ON(!vq->we_own_ring);
- 
-@@ -2895,9 +2895,9 @@ dma_addr_t virtqueue_get_avail_addr(struct virtqueue *_vq)
- }
- EXPORT_SYMBOL_GPL(virtqueue_get_avail_addr);
- 
--dma_addr_t virtqueue_get_used_addr(struct virtqueue *_vq)
-+dma_addr_t virtqueue_get_used_addr(const struct virtqueue *_vq)
- {
--	struct vring_virtqueue *vq = to_vvq(_vq);
-+	const struct vring_virtqueue *vq = to_vvq(_vq);
- 
- 	BUG_ON(!vq->we_own_ring);
- 
-@@ -2910,7 +2910,7 @@ dma_addr_t virtqueue_get_used_addr(struct virtqueue *_vq)
- EXPORT_SYMBOL_GPL(virtqueue_get_used_addr);
- 
- /* Only available for split ring */
--const struct vring *virtqueue_get_vring(struct virtqueue *vq)
-+const struct vring *virtqueue_get_vring(const struct virtqueue *vq)
- {
- 	return &to_vvq(vq)->split.vring;
- }
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index 2b472514c49b..c4225653f949 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -84,14 +84,14 @@ bool virtqueue_enable_cb_delayed(struct virtqueue *vq);
- 
- void *virtqueue_detach_unused_buf(struct virtqueue *vq);
- 
--unsigned int virtqueue_get_vring_size(struct virtqueue *vq);
-+unsigned int virtqueue_get_vring_size(const struct virtqueue *vq);
- 
--bool virtqueue_is_broken(struct virtqueue *vq);
-+bool virtqueue_is_broken(const struct virtqueue *vq);
- 
--const struct vring *virtqueue_get_vring(struct virtqueue *vq);
--dma_addr_t virtqueue_get_desc_addr(struct virtqueue *vq);
--dma_addr_t virtqueue_get_avail_addr(struct virtqueue *vq);
--dma_addr_t virtqueue_get_used_addr(struct virtqueue *vq);
-+const struct vring *virtqueue_get_vring(const struct virtqueue *vq);
-+dma_addr_t virtqueue_get_desc_addr(const struct virtqueue *vq);
-+dma_addr_t virtqueue_get_avail_addr(const struct virtqueue *vq);
-+dma_addr_t virtqueue_get_used_addr(const struct virtqueue *vq);
- 
- int virtqueue_resize(struct virtqueue *vq, u32 num,
- 		     void (*recycle)(struct virtqueue *vq, void *buf));
-@@ -147,7 +147,7 @@ int virtio_device_restore(struct virtio_device *dev);
- #endif
- void virtio_reset_device(struct virtio_device *dev);
- 
--size_t virtio_max_dma_size(struct virtio_device *vdev);
-+size_t virtio_max_dma_size(const struct virtio_device *vdev);
- 
- #define virtio_device_for_each_vq(vdev, vq) \
- 	list_for_each_entry(vq, &vdev->vqs, list)
--- 
-2.34.1
-
+Acked-by: John Fastabend <john.fastabend@gmail.com>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
