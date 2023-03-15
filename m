@@ -1,96 +1,90 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 15F766BAFB6
-	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 12:55:26 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 618196BB94D
+	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 17:14:59 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id C87AC81E38;
-	Wed, 15 Mar 2023 11:55:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C87AC81E38
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=b4aiPWVf
+	by smtp3.osuosl.org (Postfix) with ESMTP id C56D360F64;
+	Wed, 15 Mar 2023 16:14:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C56D360F64
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=FSStY76U;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=lup7F//R
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9rKEtiH8ZvFG; Wed, 15 Mar 2023 11:55:21 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id dOzNXE4j3PwR; Wed, 15 Mar 2023 16:14:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 7970881E2F;
-	Wed, 15 Mar 2023 11:55:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7970881E2F
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 8224660F76;
+	Wed, 15 Mar 2023 16:14:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8224660F76
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B3881C008C;
-	Wed, 15 Mar 2023 11:55:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D87C5C007C;
+	Wed, 15 Mar 2023 16:14:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 003DFC0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6F170C008C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 11:55:18 +0000 (UTC)
+ Wed, 15 Mar 2023 16:14:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id DC1DE81E28
+ by smtp3.osuosl.org (Postfix) with ESMTP id C03C160F0F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 11:55:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DC1DE81E28
+ Wed, 15 Mar 2023 16:14:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C03C160F0F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id J3JBryciN2TN
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id a1J4gYjrw8n7
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 11:55:18 +0000 (UTC)
+ Wed, 15 Mar 2023 16:14:46 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1446281E26
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 1446281E26
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7EEB860B97
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7EEB860B97
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 11:55:18 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1678881318; x=1710417318;
- h=from:to:cc:subject:in-reply-to:references:date:
- message-id:mime-version;
- bh=oPJSnVJBwKqGK8ZAqvFY8WXT8H4giRQeUz42yfh764o=;
- b=b4aiPWVfAd2Nzy7BsvgEqXB0kYHfsIA32kllsnMrQZRf7+NVndSC1odD
- XLYw39y3KJf6N30IR+wb+HT52ctFJ1WUV/gaG36SHivMnDT3bC5XoNnU7
- xrQu40E8k61GHOSdoz9/JKhpgTg8SkKWPlUgIeAiVK296uhcsY83gLLzZ
- XU/ahKSF4FaMac+ts2dmq8v+fXue+CtyqRGSoftfs9miuiEbGocRQtm2D
- cMQBVPH4UHDeNsmURTnzreSb/uoQG+DFz9h43mnlWKvbFUO7/v0lhatEZ
- z8eO4iQHHAmvvRZ3IV9on+cAwWzkNMN1QJoSKo+Ngz7sYHvPixpnxGcVk w==;
-X-IronPort-AV: E=McAfee;i="6500,9779,10649"; a="335166527"
-X-IronPort-AV: E=Sophos;i="5.98,262,1673942400"; d="scan'208";a="335166527"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
- by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Mar 2023 04:54:59 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6500,9779,10649"; a="803256923"
-X-IronPort-AV: E=Sophos;i="5.98,262,1673942400"; d="scan'208";a="803256923"
-Received: from wujunyox-mobl.ger.corp.intel.com (HELO localhost)
- ([10.252.59.32])
- by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 15 Mar 2023 04:54:52 -0700
-From: Jani Nikula <jani.nikula@linux.intel.com>
-To: Niklas Schnelle <schnelle@linux.ibm.com>, Arnd Bergmann <arnd@arndb.de>,
- Dave Airlie <airlied@redhat.com>, Gerd Hoffmann <kraxel@redhat.com>, David
- Airlie <airlied@gmail.com>, Daniel Vetter <daniel@ffwll.ch>
-Subject: Re: [PATCH v3 07/38] drm: handle HAS_IOPORT dependencies
-In-Reply-To: <20230314121216.413434-8-schnelle@linux.ibm.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20230314121216.413434-1-schnelle@linux.ibm.com>
- <20230314121216.413434-8-schnelle@linux.ibm.com>
-Date: Wed, 15 Mar 2023 13:54:49 +0200
-Message-ID: <87fsa65iwm.fsf@intel.com>
-MIME-Version: 1.0
-Cc: linux-arch@vger.kernel.org, Arnd Bergmann <arnd@kernel.org>,
- Geert Uytterhoeven <geert@linux-m68k.org>, Albert Ou <aou@eecs.berkeley.edu>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Wed, 15 Mar 2023 16:14:46 +0000 (UTC)
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id B0A281FD80;
+ Wed, 15 Mar 2023 16:14:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1678896883; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=/s20+U9lqKe8TkL0+NybCexAELZRyFRoTsa7CKljr7E=;
+ b=FSStY76U4lO/wtb8cfNG42ryAcS+jPmRs0zgoUYf3Me116SMKDLykcSNor9Fs7PhDTlnN5
+ 6rAh+X+hT32jUSqHXo+P7rq6nA+J/bXHik00fgBlK42Z1WAmmYEKtxxAB9m0CX3+en2Mn5
+ KHTTprB0/GCt/KtFPieLUpalqtlsxQ4=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1678896883;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=/s20+U9lqKe8TkL0+NybCexAELZRyFRoTsa7CKljr7E=;
+ b=lup7F//RMBsu0ZKErzyEVOlBVGeOr0wEUM6kxmhGRC//Wx5sSA2I4/UTFYonIeG2O69yjQ
+ AxbgaudWdezbuTCA==
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 7538113A2F;
+ Wed, 15 Mar 2023 16:14:43 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id mB6dG/PuEWTrAwAAMHmgww
+ (envelope-from <tzimmermann@suse.de>); Wed, 15 Mar 2023 16:14:43 +0000
+From: Thomas Zimmermann <tzimmermann@suse.de>
+To: javierm@redhat.com, daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
+ maarten.lankhorst@linux.intel.com, zackr@vmware.com, kraxel@redhat.com,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- Alan Stern <stern@rowland.harvard.edu>,
- Paul Walmsley <paul.walmsley@sifive.com>, Bjorn Helgaas <bhelgaas@google.com>,
- spice-devel@lists.freedesktop.org, Mauro Carvalho Chehab <mchehab@kernel.org>,
- Palmer Dabbelt <palmer@dabbelt.com>
+ linux-graphics-maintainer@vmware.com
+Subject: [PATCH 0/6] drm/fbdev-generic: Mandatory shadow buffering
+Date: Wed, 15 Mar 2023 17:14:36 +0100
+Message-Id: <20230315161442.27318-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.39.2
+MIME-Version: 1.0
+Cc: Thomas Zimmermann <tzimmermann@suse.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,130 +101,40 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, 14 Mar 2023, Niklas Schnelle <schnelle@linux.ibm.com> wrote:
-> In a future patch HAS_IOPORT=n will result in inb()/outb() and friends
-> not being declared. We thus need to add HAS_IOPORT as dependency for
-> those drivers using them. In the bochs driver there is optional MMIO
-> support detected at runtime, warn if this isn't taken when
-> HAS_IOPORT is not defined.
+After adding fbdev-dma and converting drivers, all users of
+fbdev-generic require shadow buffering. Make it mandatory and
+remove all other codepaths. This change greatly simplifies the
+code for generic fbdev emulation. It will work with any driver
+that supports GEM's vmap and vunmap.
 
-Not that I care a whole lot, but there should really only be one warning
-or even failure to probe at bochs_hw_init() for !bochs->mmio &&
-!IS_ENABLED(CONFIG_HAS_IOPORT), not warnings all over the place.
+The change further allows for a number of cleanups and fixes. The
+flag prefer_shadow_fbdev is unused and to be removed. Probing in
+fbdev-generic is now simple enough to roll back if it fails. Further
+simplify the code for exporting the framebuffer's physical address.
+Finally rename the symbols to follow other fbdev emulation.
 
-Moreover, the config macro is CONFIG_HAS_IOPORT instead of HAS_IOPORT
-that you check for below.
+Thomas Zimmermann (6):
+  drm/fbdev-generic: Always use shadow buffering
+  drm/fbdev-generic: Remove unused prefer_shadow_fbdev flag
+  drm/fb-helper: Export drm_fb_helper_release_info()
+  drm/fbdev-generic: Clean up after failed probing
+  drm/fb-helper: Consolidate CONFIG_DRM_FBDEV_LEAK_PHYS_SMEM
+  drm/fbdev-generic: Rename symbols
 
-BR,
-Jani.
+ drivers/gpu/drm/drm_fb_helper.c     |  55 +++---
+ drivers/gpu/drm/drm_fbdev_dma.c     |   9 +-
+ drivers/gpu/drm/drm_fbdev_generic.c | 280 +++++++++-------------------
+ drivers/gpu/drm/tiny/bochs.c        |   1 -
+ drivers/gpu/drm/vmwgfx/vmwgfx_kms.c |   1 -
+ include/drm/drm_fb_helper.h         |  14 +-
+ include/drm/drm_mode_config.h       |   7 -
+ 7 files changed, 125 insertions(+), 242 deletions(-)
 
-> There is also a direct and hard coded use in cirrus.c which according to
-> the comment is only necessary during resume.  Let's just skip this as
-> for example s390 which doesn't have I/O port support also doesen't
-> support suspend/resume.
->
-> Co-developed-by: Arnd Bergmann <arnd@kernel.org>
-> Signed-off-by: Niklas Schnelle <schnelle@linux.ibm.com>
-> ---
->  drivers/gpu/drm/qxl/Kconfig   |  1 +
->  drivers/gpu/drm/tiny/bochs.c  | 19 +++++++++++++++++++
->  drivers/gpu/drm/tiny/cirrus.c |  2 ++
->  3 files changed, 22 insertions(+)
->
-> diff --git a/drivers/gpu/drm/qxl/Kconfig b/drivers/gpu/drm/qxl/Kconfig
-> index ca3f51c2a8fe..d0e0d440c8d9 100644
-> --- a/drivers/gpu/drm/qxl/Kconfig
-> +++ b/drivers/gpu/drm/qxl/Kconfig
-> @@ -2,6 +2,7 @@
->  config DRM_QXL
->  	tristate "QXL virtual GPU"
->  	depends on DRM && PCI && MMU
-> +	depends on HAS_IOPORT
->  	select DRM_KMS_HELPER
->  	select DRM_TTM
->  	select DRM_TTM_HELPER
-> diff --git a/drivers/gpu/drm/tiny/bochs.c b/drivers/gpu/drm/tiny/bochs.c
-> index 024346054c70..da4a5d53b003 100644
-> --- a/drivers/gpu/drm/tiny/bochs.c
-> +++ b/drivers/gpu/drm/tiny/bochs.c
-> @@ -2,6 +2,7 @@
->  
->  #include <linux/module.h>
->  #include <linux/pci.h>
-> +#include <asm/bug.h>
->  
->  #include <drm/drm_aperture.h>
->  #include <drm/drm_atomic_helper.h>
-> @@ -105,7 +106,11 @@ static void bochs_vga_writeb(struct bochs_device *bochs, u16 ioport, u8 val)
->  
->  		writeb(val, bochs->mmio + offset);
->  	} else {
-> +#ifdef HAS_IOPORT
->  		outb(val, ioport);
-> +#else
-> +		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-> +#endif
->  	}
->  }
->  
-> @@ -119,7 +124,12 @@ static u8 bochs_vga_readb(struct bochs_device *bochs, u16 ioport)
->  
->  		return readb(bochs->mmio + offset);
->  	} else {
-> +#ifdef HAS_IOPORT
->  		return inb(ioport);
-> +#else
-> +		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-> +		return 0xff;
-> +#endif
->  	}
->  }
->  
-> @@ -132,8 +142,13 @@ static u16 bochs_dispi_read(struct bochs_device *bochs, u16 reg)
->  
->  		ret = readw(bochs->mmio + offset);
->  	} else {
-> +#ifdef HAS_IOPORT
->  		outw(reg, VBE_DISPI_IOPORT_INDEX);
->  		ret = inw(VBE_DISPI_IOPORT_DATA);
-> +#else
-> +		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-> +		ret = 0xffff;
-> +#endif
->  	}
->  	return ret;
->  }
-> @@ -145,8 +160,12 @@ static void bochs_dispi_write(struct bochs_device *bochs, u16 reg, u16 val)
->  
->  		writew(val, bochs->mmio + offset);
->  	} else {
-> +#ifdef HAS_IOPORT
->  		outw(reg, VBE_DISPI_IOPORT_INDEX);
->  		outw(val, VBE_DISPI_IOPORT_DATA);
-> +#else
-> +		WARN_ONCE(1, "Non-MMIO bochs device needs HAS_IOPORT");
-> +#endif
->  	}
->  }
->  
-> diff --git a/drivers/gpu/drm/tiny/cirrus.c b/drivers/gpu/drm/tiny/cirrus.c
-> index accfa52e78c5..9da89732c5ac 100644
-> --- a/drivers/gpu/drm/tiny/cirrus.c
-> +++ b/drivers/gpu/drm/tiny/cirrus.c
-> @@ -308,8 +308,10 @@ static int cirrus_mode_set(struct cirrus_device *cirrus,
->  
->  	cirrus_set_start_address(cirrus, 0);
->  
-> +#ifdef CONFIG_HAS_IOPORT
->  	/* Unblank (needed on S3 resume, vgabios doesn't do it then) */
->  	outb(0x20, 0x3c0);
-> +#endif
->  
->  	drm_dev_exit(idx);
->  	return 0;
 
+base-commit: ec0708e846b819c8d5b642de42448a87d7526564
 -- 
-Jani Nikula, Intel Open Source Graphics Center
+2.39.2
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
