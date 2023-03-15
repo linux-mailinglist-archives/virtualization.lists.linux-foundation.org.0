@@ -1,96 +1,91 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5294B6BB948
-	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 17:14:55 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C56EF6BB946
+	for <lists.virtualization@lfdr.de>; Wed, 15 Mar 2023 17:14:54 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 89DCA81E40;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 6066440141;
 	Wed, 15 Mar 2023 16:14:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 89DCA81E40
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ONvgv8wX;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=ScdUyn7T
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6066440141
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=1n/BUqph;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=L0HMWm2/
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sO4mX0aCDy6D; Wed, 15 Mar 2023 16:14:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id CE0A981E28;
-	Wed, 15 Mar 2023 16:14:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CE0A981E28
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 365V1aRRR5jZ; Wed, 15 Mar 2023 16:14:52 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 1CB14404F1;
+	Wed, 15 Mar 2023 16:14:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1CB14404F1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BE6B1C0032;
-	Wed, 15 Mar 2023 16:14:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87386C008C;
+	Wed, 15 Mar 2023 16:14:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 76D46C0035
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id A7238C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 15 Mar 2023 16:14:47 +0000 (UTC)
+ Wed, 15 Mar 2023 16:14:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 3B5EC60F34
+ by smtp2.osuosl.org (Postfix) with ESMTP id 740E640141
  for <virtualization@lists.linux-foundation.org>;
  Wed, 15 Mar 2023 16:14:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3B5EC60F34
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=ONvgv8wX; 
- dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=ScdUyn7T
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 740E640141
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 50k-uu8fgnNB
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1pR9AJmXPwjB
  for <virtualization@lists.linux-foundation.org>;
  Wed, 15 Mar 2023 16:14:46 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 51C0E60B1A
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.220.28])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 51C0E60B1A
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 91185402E6
+Received: from smtp-out1.suse.de (smtp-out1.suse.de [IPv6:2001:67c:2178:6::1c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 91185402E6
  for <virtualization@lists.linux-foundation.org>;
  Wed, 15 Mar 2023 16:14:46 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 7DCA2219D2;
+ by smtp-out1.suse.de (Postfix) with ESMTPS id BEF14219D3;
  Wed, 15 Mar 2023 16:14:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1678896884; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eTpDVoMSd93qEAO9SAHyeliiS1wClvZbyimukwJNAAQ=;
- b=ONvgv8wXwgoWiaJ9wJzmTsu8V/4yD+sfxN3QPsHhyivP2MqNAC2gUO95aUlXYhVDoFBJRd
- 6MS2pSiAAq+jpCCiyHaKAj79ZqwPNMVq/tFBa4qPS6UpV+pV6/p2WgPChwu57J0zzQ8EkZ
- 1+SQAiZ3X/SdOmX0sukd5fs7VLQOdCY=
+ bh=DbTADgv5f+ZEladv28RtQJnaTsz/F2C6EOsmEJjSkPk=;
+ b=1n/BUqphpp74UnU+F3gZJm/DYIEDJ/M31s0Bp/z+DMqbCAmrPDhAcjPnEMJ+vIle2Uzlqg
+ 5l2DDVEYv6HuldK85ZhPKkx/42cSgn7wCI29Qj6DQ3WqTlit7+jam+bYiVyXAZ+w3r7ntq
+ xtjZA/aI/EeYNRnlyQ38IpgmRZ442f8=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1678896884;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=eTpDVoMSd93qEAO9SAHyeliiS1wClvZbyimukwJNAAQ=;
- b=ScdUyn7TcZAXSbPzkKqltC61Al00k5Wddgb13LSdUzpx2aYL8NInDATavZtNWChNcDABkK
- gHj5X+WkRg2RfiAw==
+ bh=DbTADgv5f+ZEladv28RtQJnaTsz/F2C6EOsmEJjSkPk=;
+ b=L0HMWm2/Iylvc8KB8E1rQ67CHbG32F7YCC/bOSnhwftXq8MHmQ5bowQRpGvcCRh9JMI9rU
+ 9o72guIT721XFVDA==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4568913A2F;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 827EB13A7A;
  Wed, 15 Mar 2023 16:14:44 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id wDQPEPTuEWTrAwAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id 0JTqHvTuEWTrAwAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Wed, 15 Mar 2023 16:14:44 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: javierm@redhat.com, daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com, zackr@vmware.com, kraxel@redhat.com,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
  linux-graphics-maintainer@vmware.com
-Subject: [PATCH 3/6] drm/fb-helper: Export drm_fb_helper_release_info()
-Date: Wed, 15 Mar 2023 17:14:39 +0100
-Message-Id: <20230315161442.27318-4-tzimmermann@suse.de>
+Subject: [PATCH 4/6] drm/fbdev-generic: Clean up after failed probing
+Date: Wed, 15 Mar 2023 17:14:40 +0100
+Message-Id: <20230315161442.27318-5-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230315161442.27318-1-tzimmermann@suse.de>
 References: <20230315161442.27318-1-tzimmermann@suse.de>
@@ -112,96 +107,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Export the fb_info release code as drm_fb_helper_release_info(). Will
-help with cleaning up failed fbdev probing.
+Clean up fbdev and client state if the probe function fails. It
+used to leak allocated resources. Also reorder the individual steps
+to simplify cleanup.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/drm_fb_helper.c | 33 ++++++++++++++++++++++++---------
- include/drm/drm_fb_helper.h     |  5 +++++
- 2 files changed, 29 insertions(+), 9 deletions(-)
+ drivers/gpu/drm/drm_fbdev_generic.c | 46 ++++++++++++++++++++---------
+ 1 file changed, 32 insertions(+), 14 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index a39998047f8a..7e96ed9efdb5 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -538,6 +538,29 @@ struct fb_info *drm_fb_helper_alloc_info(struct drm_fb_helper *fb_helper)
- }
- EXPORT_SYMBOL(drm_fb_helper_alloc_info);
+diff --git a/drivers/gpu/drm/drm_fbdev_generic.c b/drivers/gpu/drm/drm_fbdev_generic.c
+index e48a8e82378d..0d08ddbe9608 100644
+--- a/drivers/gpu/drm/drm_fbdev_generic.c
++++ b/drivers/gpu/drm/drm_fbdev_generic.c
+@@ -7,6 +7,7 @@
+ #include <drm/drm_drv.h>
+ #include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
++#include <drm/drm_gem.h>
+ #include <drm/drm_print.h>
  
-+/**
-+ * drm_fb_helper_release_info - release fb_info and its members
-+ * @fb_helper: driver-allocated fbdev helper
-+ *
-+ * A helper to release fb_info and the member cmap.  Drivers do not
-+ * need to release the allocated fb_info structure themselves, this is
-+ * automatically done when calling drm_fb_helper_fini().
-+ */
-+void drm_fb_helper_release_info(struct drm_fb_helper *fb_helper)
-+{
-+	struct fb_info *info = fb_helper->info;
+ #include <drm/drm_fbdev_generic.h>
+@@ -74,8 +75,9 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
+ 	struct drm_client_dev *client = &fb_helper->client;
+ 	struct drm_device *dev = fb_helper->dev;
+ 	struct drm_client_buffer *buffer;
+-	struct drm_framebuffer *fb;
+ 	struct fb_info *info;
++	size_t screen_size;
++	void *screen_buffer;
+ 	u32 format;
+ 	int ret;
+ 
+@@ -91,36 +93,52 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
+ 
+ 	fb_helper->buffer = buffer;
+ 	fb_helper->fb = buffer->fb;
+-	fb = buffer->fb;
 +
-+	if (!info)
-+		return;
++	screen_size = buffer->gem->size;
++	screen_buffer = vzalloc(screen_size);
++	if (!screen_buffer) {
++		ret = -ENOMEM;
++		goto err_drm_client_framebuffer_delete;
++	}
+ 
+ 	info = drm_fb_helper_alloc_info(fb_helper);
+-	if (IS_ERR(info))
+-		return PTR_ERR(info);
++	if (IS_ERR(info)) {
++		ret = PTR_ERR(info);
++		goto err_vfree;
++	}
 +
-+	fb_helper->info = NULL;
-+
-+	if (info->cmap.len)
-+		fb_dealloc_cmap(&info->cmap);
-+	framebuffer_release(info);
-+}
-+EXPORT_SYMBOL(drm_fb_helper_release_info);
-+
- /**
-  * drm_fb_helper_unregister_info - unregister fb_info framebuffer device
-  * @fb_helper: driver-allocated fbdev helper, can be NULL
-@@ -561,8 +584,6 @@ EXPORT_SYMBOL(drm_fb_helper_unregister_info);
-  */
- void drm_fb_helper_fini(struct drm_fb_helper *fb_helper)
- {
--	struct fb_info *info;
++	drm_fb_helper_fill_info(info, fb_helper, sizes);
+ 
+ 	info->fbops = &drm_fbdev_fb_ops;
+-	info->screen_size = sizes->surface_height * fb->pitches[0];
+-	info->fix.smem_len = info->screen_size;
+ 	info->flags = FBINFO_DEFAULT;
+ 
+-	drm_fb_helper_fill_info(info, fb_helper, sizes);
 -
- 	if (!fb_helper)
- 		return;
+-	info->screen_buffer = vzalloc(info->screen_size);
+-	if (!info->screen_buffer)
+-		return -ENOMEM;
++	/* screen */
+ 	info->flags |= FBINFO_VIRTFB | FBINFO_READS_FAST;
+-
++	info->screen_size = screen_size;
++	info->screen_buffer = screen_buffer;
+ 	info->fix.smem_start = page_to_phys(vmalloc_to_page(info->screen_buffer));
++	info->fix.smem_len = info->screen_size;
  
-@@ -574,13 +595,7 @@ void drm_fb_helper_fini(struct drm_fb_helper *fb_helper)
- 	cancel_work_sync(&fb_helper->resume_work);
- 	cancel_work_sync(&fb_helper->damage_work);
+-	/* Set a default deferred I/O handler */
++	/* deferred I/O */
+ 	fb_helper->fbdefio.delay = HZ / 20;
+ 	fb_helper->fbdefio.deferred_io = drm_fb_helper_deferred_io;
  
--	info = fb_helper->info;
--	if (info) {
--		if (info->cmap.len)
--			fb_dealloc_cmap(&info->cmap);
--		framebuffer_release(info);
--	}
--	fb_helper->info = NULL;
-+	drm_fb_helper_release_info(fb_helper);
+ 	info->fbdefio = &fb_helper->fbdefio;
+ 	ret = fb_deferred_io_init(info);
+ 	if (ret)
+-		return ret;
++		goto err_drm_fb_helper_release_info;
  
- 	mutex_lock(&kernel_fb_helper_lock);
- 	if (!list_empty(&fb_helper->kernel_fb_list)) {
-diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
-index 013654de3fc5..c5822ec2fdd1 100644
---- a/include/drm/drm_fb_helper.h
-+++ b/include/drm/drm_fb_helper.h
-@@ -256,6 +256,7 @@ int drm_fb_helper_check_var(struct fb_var_screeninfo *var,
- int drm_fb_helper_restore_fbdev_mode_unlocked(struct drm_fb_helper *fb_helper);
- 
- struct fb_info *drm_fb_helper_alloc_info(struct drm_fb_helper *fb_helper);
-+void drm_fb_helper_release_info(struct drm_fb_helper *fb_helper);
- void drm_fb_helper_unregister_info(struct drm_fb_helper *fb_helper);
- void drm_fb_helper_fill_info(struct fb_info *info,
- 			     struct drm_fb_helper *fb_helper,
-@@ -365,6 +366,10 @@ drm_fb_helper_alloc_info(struct drm_fb_helper *fb_helper)
- 	return NULL;
- }
- 
-+static inline void drm_fb_helper_release_info(struct drm_fb_helper *fb_helper)
-+{
-+}
+ 	return 0;
 +
- static inline void drm_fb_helper_unregister_info(struct drm_fb_helper *fb_helper)
- {
++err_drm_fb_helper_release_info:
++	drm_fb_helper_release_info(fb_helper);
++err_vfree:
++	vfree(screen_buffer);
++err_drm_client_framebuffer_delete:
++	fb_helper->fb = NULL;
++	fb_helper->buffer = NULL;
++	drm_client_framebuffer_delete(buffer);
++	return ret;
  }
+ 
+ static void drm_fbdev_damage_blit_real(struct drm_fb_helper *fb_helper,
 -- 
 2.39.2
 
