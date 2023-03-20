@@ -1,96 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 623366C169E
-	for <lists.virtualization@lfdr.de>; Mon, 20 Mar 2023 16:08:03 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 88C5D6C16AB
+	for <lists.virtualization@lfdr.de>; Mon, 20 Mar 2023 16:08:12 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id E266C81E09;
-	Mon, 20 Mar 2023 15:08:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E266C81E09
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=tY3Ql9iJ;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=Tu6H19lK
+	by smtp3.osuosl.org (Postfix) with ESMTP id A3A6861017;
+	Mon, 20 Mar 2023 15:08:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A3A6861017
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=pSVQ7jh6;
+	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=VuDGNPbu
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZrRaDpqeZ7d6; Mon, 20 Mar 2023 15:08:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id n4XDiWlDXuGA; Mon, 20 Mar 2023 15:08:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 922AA81DEE;
-	Mon, 20 Mar 2023 15:08:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 922AA81DEE
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 292606100C;
+	Mon, 20 Mar 2023 15:08:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 292606100C
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3C5F2C008F;
-	Mon, 20 Mar 2023 15:07:59 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B4512C008F;
+	Mon, 20 Mar 2023 15:08:01 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A9324C0035
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 14F40C008F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Mar 2023 15:07:57 +0000 (UTC)
+ Mon, 20 Mar 2023 15:07:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 6FAED41766
+ by smtp4.osuosl.org (Postfix) with ESMTP id ECE4240907
  for <virtualization@lists.linux-foundation.org>;
  Mon, 20 Mar 2023 15:07:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6FAED41766
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ECE4240907
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de
- header.a=rsa-sha256 header.s=susede2_rsa header.b=tY3Ql9iJ; 
+ header.a=rsa-sha256 header.s=susede2_rsa header.b=pSVQ7jh6; 
  dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256
- header.s=susede2_ed25519 header.b=Tu6H19lK
+ header.s=susede2_ed25519 header.b=VuDGNPbu
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Fldn8K8d_R_0
+ with ESMTP id 6fJue5OyCuI9
  for <virtualization@lists.linux-foundation.org>;
  Mon, 20 Mar 2023 15:07:56 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4B7A6410A0
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [IPv6:2001:67c:2178:6::1d])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4B7A6410A0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 89DD64167E
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 89DD64167E
  for <virtualization@lists.linux-foundation.org>;
  Mon, 20 Mar 2023 15:07:56 +0000 (UTC)
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8417C1F890;
+ by smtp-out2.suse.de (Postfix) with ESMTPS id C141A1F894;
  Mon, 20 Mar 2023 15:07:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
  t=1679324874; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=F8iEY6hvgFvbfS66JBlGNNOLt4qzuk1VBL9oz6gKuvc=;
- b=tY3Ql9iJDGGUUtONILGkHGG9FkJ4d9+WsA4v6XorK3nOjS8nwd/c9ARNmeDsL2oInbTdBk
- +jjMeGO2eWrXoxoWPVVmq+q+uKVjNnZGnZNLZgb9eDNDiHzt/DjxEA41p2sJMh2zEmtmBI
- RYDdLudpgImprfPhVYTQys7obZanak8=
+ bh=lqwli5v2zHnqsLMb/1Vpyr1bNtttt0sBI50GKZI7Vdg=;
+ b=pSVQ7jh6T12rDZOx45NAbtjwV6PtkP0pcJyyjyrALle82z4HQ4OUkCLRWcctnvM0dNTmBo
+ +iSN5xsIux3uZF0it3kgQ5QQbriudJvnI33tV5RMywGDAnB4yLjPerYVEXAemBJ+zhkN/c
+ dlZEqXM5F2SXZSh80jE+CJcLcaryNxM=
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
  s=susede2_ed25519; t=1679324874;
  h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
  mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=F8iEY6hvgFvbfS66JBlGNNOLt4qzuk1VBL9oz6gKuvc=;
- b=Tu6H19lK1lCbh1UVuI64UqkklNSYStJ8GirUbFDfpkbi6pGsClREeT6sWYG4wRjNnnoT9g
- g69nLVjVwqw9V3DQ==
+ bh=lqwli5v2zHnqsLMb/1Vpyr1bNtttt0sBI50GKZI7Vdg=;
+ b=VuDGNPbup7WiyYi99L+ad71kQYYi62q0H/I6yF3kOsRuajP+SBd0OtkCUG2iXOPl7RdFwW
+ c2r5KCI7Wem//OCg==
 Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
  (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 453D613A00;
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 87D6D13A2F;
  Mon, 20 Mar 2023 15:07:54 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id sIoPEMp2GGTXOgAAMHmgww
+ by imap2.suse-dmz.suse.de with ESMTPSA id IBJEIMp2GGTXOgAAMHmgww
  (envelope-from <tzimmermann@suse.de>); Mon, 20 Mar 2023 15:07:54 +0000
 From: Thomas Zimmermann <tzimmermann@suse.de>
 To: javierm@redhat.com, daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
  maarten.lankhorst@linux.intel.com, zackr@vmware.com, kraxel@redhat.com,
  dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
  linux-graphics-maintainer@vmware.com
-Subject: [PATCH v2 4/8] drm/fb-helper: Support smem_len in deferred I/O
-Date: Mon, 20 Mar 2023 16:07:47 +0100
-Message-Id: <20230320150751.20399-5-tzimmermann@suse.de>
+Subject: [PATCH v2 5/8] drm/fbdev-generic: Set screen size to size of GEM
+ buffer
+Date: Mon, 20 Mar 2023 16:07:48 +0100
+Message-Id: <20230320150751.20399-6-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230320150751.20399-1-tzimmermann@suse.de>
 References: <20230320150751.20399-1-tzimmermann@suse.de>
@@ -112,40 +113,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The size of the framebuffer can either be stored in screen_info or
-smem_len. Take both into account in the deferred I/O code.
+The size of the screen memory should be equivalent to the size of
+the screen's GEM buffer. Don't recalculate the value.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/drm_fb_helper.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ drivers/gpu/drm/drm_fbdev_generic.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_fb_helper.c b/drivers/gpu/drm/drm_fb_helper.c
-index 7e96ed9efdb5..bb0b25209b3e 100644
---- a/drivers/gpu/drm/drm_fb_helper.c
-+++ b/drivers/gpu/drm/drm_fb_helper.c
-@@ -672,7 +672,7 @@ static void drm_fb_helper_memory_range_to_clip(struct fb_info *info, off_t off,
- void drm_fb_helper_deferred_io(struct fb_info *info, struct list_head *pagereflist)
- {
- 	struct drm_fb_helper *helper = info->par;
--	unsigned long start, end, min_off, max_off;
-+	unsigned long start, end, min_off, max_off, total_size;
- 	struct fb_deferred_io_pageref *pageref;
- 	struct drm_rect damage_area;
+diff --git a/drivers/gpu/drm/drm_fbdev_generic.c b/drivers/gpu/drm/drm_fbdev_generic.c
+index e48a8e82378d..73834a3cc6b0 100644
+--- a/drivers/gpu/drm/drm_fbdev_generic.c
++++ b/drivers/gpu/drm/drm_fbdev_generic.c
+@@ -7,6 +7,7 @@
+ #include <drm/drm_drv.h>
+ #include <drm/drm_fb_helper.h>
+ #include <drm/drm_framebuffer.h>
++#include <drm/drm_gem.h>
+ #include <drm/drm_print.h>
  
-@@ -690,7 +690,11 @@ void drm_fb_helper_deferred_io(struct fb_info *info, struct list_head *pagerefli
- 	 * of the screen and account for non-existing scanlines. Hence,
- 	 * keep the covered memory area within the screen buffer.
- 	 */
--	max_off = min(max_off, info->screen_size);
-+	if (info->screen_size)
-+		total_size = info->screen_size;
-+	else
-+		total_size = info->fix.smem_len;
-+	max_off = min(max_off, total_size);
+ #include <drm/drm_fbdev_generic.h>
+@@ -74,8 +75,8 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
+ 	struct drm_client_dev *client = &fb_helper->client;
+ 	struct drm_device *dev = fb_helper->dev;
+ 	struct drm_client_buffer *buffer;
+-	struct drm_framebuffer *fb;
+ 	struct fb_info *info;
++	size_t screen_size;
+ 	u32 format;
+ 	int ret;
  
- 	if (min_off < max_off) {
- 		drm_fb_helper_memory_range_to_clip(info, min_off, max_off - min_off, &damage_area);
+@@ -91,20 +92,20 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
+ 
+ 	fb_helper->buffer = buffer;
+ 	fb_helper->fb = buffer->fb;
+-	fb = buffer->fb;
++	screen_size = buffer->gem->size;
+ 
+ 	info = drm_fb_helper_alloc_info(fb_helper);
+ 	if (IS_ERR(info))
+ 		return PTR_ERR(info);
+ 
+ 	info->fbops = &drm_fbdev_fb_ops;
+-	info->screen_size = sizes->surface_height * fb->pitches[0];
+-	info->fix.smem_len = info->screen_size;
++	info->screen_size = screen_size;
++	info->fix.smem_len = screen_size;
+ 	info->flags = FBINFO_DEFAULT;
+ 
+ 	drm_fb_helper_fill_info(info, fb_helper, sizes);
+ 
+-	info->screen_buffer = vzalloc(info->screen_size);
++	info->screen_buffer = vzalloc(screen_size);
+ 	if (!info->screen_buffer)
+ 		return -ENOMEM;
+ 	info->flags |= FBINFO_VIRTFB | FBINFO_READS_FAST;
 -- 
 2.40.0
 
