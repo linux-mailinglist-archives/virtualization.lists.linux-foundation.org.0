@@ -1,96 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id E11BE6C16A2
-	for <lists.virtualization@lfdr.de>; Mon, 20 Mar 2023 16:08:05 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52A926C1934
+	for <lists.virtualization@lfdr.de>; Mon, 20 Mar 2023 16:31:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0894C81E0C;
-	Mon, 20 Mar 2023 15:08:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0894C81E0C
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=XpwmmeLy;
-	dkim=fail reason="signature verification failed" header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=aJEYUpRR
+	by smtp4.osuosl.org (Postfix) with ESMTP id CC3CE409EA;
+	Mon, 20 Mar 2023 15:31:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CC3CE409EA
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=fGCkUo0O
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uUd_MZ_6gQtG; Mon, 20 Mar 2023 15:08:02 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 3902D81E0B;
-	Mon, 20 Mar 2023 15:08:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3902D81E0B
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1RDEaAmFQICn; Mon, 20 Mar 2023 15:31:47 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 40D77415FE;
+	Mon, 20 Mar 2023 15:31:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 40D77415FE
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2F9B9C0035;
-	Mon, 20 Mar 2023 15:08:00 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 84137C0089;
+	Mon, 20 Mar 2023 15:31:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 96257C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 47222C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Mar 2023 15:07:58 +0000 (UTC)
+ Mon, 20 Mar 2023 15:31:45 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 6445E813B9
+ by smtp4.osuosl.org (Postfix) with ESMTP id 21CCB415FE
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Mar 2023 15:07:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6445E813B9
+ Mon, 20 Mar 2023 15:31:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 21CCB415FE
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nnjngxuusLxw
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id G7_ZJjKvPAKg
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Mar 2023 15:07:57 +0000 (UTC)
+ Mon, 20 Mar 2023 15:31:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 539BC8136A
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 539BC8136A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 16F2C409EA
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 16F2C409EA
  for <virtualization@lists.linux-foundation.org>;
- Mon, 20 Mar 2023 15:07:57 +0000 (UTC)
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 8AD491F896;
- Mon, 20 Mar 2023 15:07:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1679324875; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
+ Mon, 20 Mar 2023 15:31:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1679326303;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=b3zTQT1jnVYYBAbmkb0Rkl2KItyUgFua+RzCRC5T03c=;
- b=XpwmmeLyBFyzcjutEs167xloQYQeWM7LW9Qapq3Qb08D+99dnXXOIE9w5w7x6LEUfewZkT
- /gzSOf5tkthm9/qDbSdJzT+qrZDCBzPOqAvyL4Tsc9ZCyiyxrfX7ApwcPEWwaPCtFDmK5V
- qodE+lLFesSfqVKsP4ubwqLHHuo9spE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1679324875;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=b3zTQT1jnVYYBAbmkb0Rkl2KItyUgFua+RzCRC5T03c=;
- b=aJEYUpRRaiTiSe21D8K3jx5oSAf78qbfBFlAyphYtlFD/oQc09Bo8I/6iOIT3TZubN0zXR
- xNkk3BLHxdWcGmBQ==
-Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
- (No client certificate requested)
- by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 4FD3513A00;
- Mon, 20 Mar 2023 15:07:55 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([192.168.254.65])
- by imap2.suse-dmz.suse.de with ESMTPSA id YKpvEst2GGTXOgAAMHmgww
- (envelope-from <tzimmermann@suse.de>); Mon, 20 Mar 2023 15:07:55 +0000
-From: Thomas Zimmermann <tzimmermann@suse.de>
-To: javierm@redhat.com, daniel@ffwll.ch, airlied@gmail.com, mripard@kernel.org,
- maarten.lankhorst@linux.intel.com, zackr@vmware.com, kraxel@redhat.com,
- dri-devel@lists.freedesktop.org, virtualization@lists.linux-foundation.org,
- linux-graphics-maintainer@vmware.com
-Subject: [PATCH v2 8/8] drm/fbdev-generic: Rename symbols
-Date: Mon, 20 Mar 2023 16:07:51 +0100
-Message-Id: <20230320150751.20399-9-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.40.0
-In-Reply-To: <20230320150751.20399-1-tzimmermann@suse.de>
-References: <20230320150751.20399-1-tzimmermann@suse.de>
+ bh=4kPJZ32Y+l53box6ko+ne5cwDvp4Win8rdXeR0QS2JU=;
+ b=fGCkUo0OkgNzQ0OppMZ5fphmJm9DGhO4QUhynQfJ5pDsiYty5IYkXyXxw5sPGblhOsXhdj
+ 1B0Dtm3LF+VoSTdasXyjFfB2hBeGGSYQZc4lxJGjtviUpekvSV9XxByQw9jM820I/IRkbA
+ MljCWqDzgOwd+E9l99itnvsEZEYGTJI=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-128-MVlLuENDMO-3F0b1bd17xg-1; Mon, 20 Mar 2023 11:31:39 -0400
+X-MC-Unique: MVlLuENDMO-3F0b1bd17xg-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ n38-20020a05600c3ba600b003ed29a0b729so5696036wms.9
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 20 Mar 2023 08:31:39 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1679326298;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4kPJZ32Y+l53box6ko+ne5cwDvp4Win8rdXeR0QS2JU=;
+ b=D02bRmPCVFt3Xe9fKmP+Im0DcK6J3+0JngNsxyK30neeTcqo2xYQFbSupF38Fqg39Q
+ YospXQu+QIIZQGjHc2Qm8JIA4aQuQuy7c2FwNyLZZcwiFBnwcl+UsLc1SngilPHldJPd
+ uXUdPZ7HF3eInfHfAj0cVSqGZ5lHeEBEyXvu26ik1PW+96bSxDxPxBfklt1U9QQk+bmb
+ j2pH0nY7kJ6tBOW4sA8oC8yCok6Wn7GKjhICuT6OB4yzyZ8eS0wFu89pBjQ8u0hMtHov
+ +tmfppSJtcrszLRKvlDYQRDikogX1pDtikGS7gCAj0H7yH5oW/0lqclQ2sKZuPETnLO/
+ MOmQ==
+X-Gm-Message-State: AO0yUKX9ZBRj0zt5J21XZJ49VI25peJEH+TUQ1Al9vNy5uaIwdDKNHn9
+ xXYeo09Bo+O9bTZg/xXtrO2Htu8rhEKe5uD3Z+qrEO+L4C4XlzUApo9JN5ccB4dezK/GzHg4GZ2
+ hJT0yIj5uKFPU1al6OeYps0Ig+kLon/KiuEg3DrRE4w==
+X-Received: by 2002:a05:600c:3aca:b0:3ed:6049:a5ae with SMTP id
+ d10-20020a05600c3aca00b003ed6049a5aemr9662594wms.4.1679326298129; 
+ Mon, 20 Mar 2023 08:31:38 -0700 (PDT)
+X-Google-Smtp-Source: AK7set+K/iSPqBhOxqnDWry6nMA6XFyLEMJvZ5BagJzhVQg80QiS5si7gT89jIVKwdv6jvS+LcnPCg==
+X-Received: by 2002:a05:600c:3aca:b0:3ed:6049:a5ae with SMTP id
+ d10-20020a05600c3aca00b003ed6049a5aemr9662575wms.4.1679326297864; 
+ Mon, 20 Mar 2023 08:31:37 -0700 (PDT)
+Received: from sgarzare-redhat (host-82-57-51-170.retail.telecomitalia.it.
+ [82.57.51.170]) by smtp.gmail.com with ESMTPSA id
+ h11-20020a05600c314b00b003e7c89b3514sm7332828wmo.23.2023.03.20.08.31.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 20 Mar 2023 08:31:37 -0700 (PDT)
+Date: Mon, 20 Mar 2023 16:31:32 +0100
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseniy Krasnov <avkrasnov@sberdevices.ru>
+Subject: Re: [RFC PATCH v1 3/3] test/vsock: skbuff merging test
+Message-ID: <20230320153132.o3xvwxmn3722lin4@sgarzare-redhat>
+References: <e141e6f1-00ae-232c-b840-b146bdb10e99@sberdevices.ru>
+ <14ca87d1-3e07-85e9-d11c-39789a9d17d4@sberdevices.ru>
 MIME-Version: 1.0
-Cc: Thomas Zimmermann <tzimmermann@suse.de>
+In-Reply-To: <14ca87d1-3e07-85e9-d11c-39789a9d17d4@sberdevices.ru>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Bobby Eshleman <bobby.eshleman@bytedance.com>, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, oxffffaa@gmail.com,
+ Eric Dumazet <edumazet@google.com>, Stefan Hajnoczi <stefanha@redhat.com>,
+ kernel@sberdevices.ru, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -102,226 +119,160 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Rename symbols to match the style of other fbdev-emulation source
-code. No functional changes.
+On Sun, Mar 19, 2023 at 09:53:54PM +0300, Arseniy Krasnov wrote:
+>This adds test which checks case when data of newly received skbuff is
+>appended to the last skbuff in the socket's queue.
+>
+>This test is actual only for virtio transport.
+>
+>Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+>---
+> tools/testing/vsock/vsock_test.c | 81 ++++++++++++++++++++++++++++++++
+> 1 file changed, 81 insertions(+)
+>
+>diff --git a/tools/testing/vsock/vsock_test.c b/tools/testing/vsock/vsock_test.c
+>index 3de10dbb50f5..00216c52d8b6 100644
+>--- a/tools/testing/vsock/vsock_test.c
+>+++ b/tools/testing/vsock/vsock_test.c
+>@@ -968,6 +968,82 @@ static void test_seqpacket_inv_buf_server(const struct test_opts *opts)
+> 	test_inv_buf_server(opts, false);
+> }
+>
+>+static void test_stream_virtio_skb_merge_client(const struct test_opts *opts)
+>+{
+>+	ssize_t res;
+>+	int fd;
+>+
+>+	fd = vsock_stream_connect(opts->peer_cid, 1234);
+>+	if (fd < 0) {
+>+		perror("connect");
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Javier Martinez Canillas <javierm@redhat.com>
-Acked-by: Zack Rusin <zackr@vmware.com>
----
- drivers/gpu/drm/drm_fbdev_generic.c | 66 ++++++++++++++---------------
- 1 file changed, 33 insertions(+), 33 deletions(-)
+Please use a macro for "HELLO" or a variabile, e.g.
 
-diff --git a/drivers/gpu/drm/drm_fbdev_generic.c b/drivers/gpu/drm/drm_fbdev_generic.c
-index e7eeba0c44b4..8e5148bf40bb 100644
---- a/drivers/gpu/drm/drm_fbdev_generic.c
-+++ b/drivers/gpu/drm/drm_fbdev_generic.c
-@@ -13,7 +13,7 @@
- #include <drm/drm_fbdev_generic.h>
- 
- /* @user: 1=userspace, 0=fbcon */
--static int drm_fbdev_fb_open(struct fb_info *info, int user)
-+static int drm_fbdev_generic_fb_open(struct fb_info *info, int user)
- {
- 	struct drm_fb_helper *fb_helper = info->par;
- 
-@@ -24,7 +24,7 @@ static int drm_fbdev_fb_open(struct fb_info *info, int user)
- 	return 0;
- }
- 
--static int drm_fbdev_fb_release(struct fb_info *info, int user)
-+static int drm_fbdev_generic_fb_release(struct fb_info *info, int user)
- {
- 	struct drm_fb_helper *fb_helper = info->par;
- 
-@@ -34,7 +34,7 @@ static int drm_fbdev_fb_release(struct fb_info *info, int user)
- 	return 0;
- }
- 
--static void drm_fbdev_fb_destroy(struct fb_info *info)
-+static void drm_fbdev_generic_fb_destroy(struct fb_info *info)
- {
- 	struct drm_fb_helper *fb_helper = info->par;
- 	void *shadow = info->screen_buffer;
-@@ -52,10 +52,10 @@ static void drm_fbdev_fb_destroy(struct fb_info *info)
- 	kfree(fb_helper);
- }
- 
--static const struct fb_ops drm_fbdev_fb_ops = {
-+static const struct fb_ops drm_fbdev_generic_fb_ops = {
- 	.owner		= THIS_MODULE,
--	.fb_open	= drm_fbdev_fb_open,
--	.fb_release	= drm_fbdev_fb_release,
-+	.fb_open	= drm_fbdev_generic_fb_open,
-+	.fb_release	= drm_fbdev_generic_fb_release,
- 	.fb_read	= drm_fb_helper_sys_read,
- 	.fb_write	= drm_fb_helper_sys_write,
- 	DRM_FB_HELPER_DEFAULT_OPS,
-@@ -63,14 +63,14 @@ static const struct fb_ops drm_fbdev_fb_ops = {
- 	.fb_copyarea	= drm_fb_helper_sys_copyarea,
- 	.fb_imageblit	= drm_fb_helper_sys_imageblit,
- 	.fb_mmap	= fb_deferred_io_mmap,
--	.fb_destroy	= drm_fbdev_fb_destroy,
-+	.fb_destroy	= drm_fbdev_generic_fb_destroy,
- };
- 
- /*
-  * This function uses the client API to create a framebuffer backed by a dumb buffer.
-  */
--static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
--			      struct drm_fb_helper_surface_size *sizes)
-+static int drm_fbdev_generic_helper_fb_probe(struct drm_fb_helper *fb_helper,
-+					     struct drm_fb_helper_surface_size *sizes)
- {
- 	struct drm_client_dev *client = &fb_helper->client;
- 	struct drm_device *dev = fb_helper->dev;
-@@ -109,7 +109,7 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
- 
- 	drm_fb_helper_fill_info(info, fb_helper, sizes);
- 
--	info->fbops = &drm_fbdev_fb_ops;
-+	info->fbops = &drm_fbdev_generic_fb_ops;
- 	info->flags = FBINFO_DEFAULT;
- 
- 	/* screen */
-@@ -140,9 +140,9 @@ static int drm_fbdev_fb_probe(struct drm_fb_helper *fb_helper,
- 	return ret;
- }
- 
--static void drm_fbdev_damage_blit_real(struct drm_fb_helper *fb_helper,
--				       struct drm_clip_rect *clip,
--				       struct iosys_map *dst)
-+static void drm_fbdev_generic_damage_blit_real(struct drm_fb_helper *fb_helper,
-+					       struct drm_clip_rect *clip,
-+					       struct iosys_map *dst)
- {
- 	struct drm_framebuffer *fb = fb_helper->fb;
- 	size_t offset = clip->y1 * fb->pitches[0];
-@@ -179,8 +179,8 @@ static void drm_fbdev_damage_blit_real(struct drm_fb_helper *fb_helper,
- 	}
- }
- 
--static int drm_fbdev_damage_blit(struct drm_fb_helper *fb_helper,
--				 struct drm_clip_rect *clip)
-+static int drm_fbdev_generic_damage_blit(struct drm_fb_helper *fb_helper,
-+					 struct drm_clip_rect *clip)
- {
- 	struct drm_client_buffer *buffer = fb_helper->buffer;
- 	struct iosys_map map, dst;
-@@ -204,7 +204,7 @@ static int drm_fbdev_damage_blit(struct drm_fb_helper *fb_helper,
- 		goto out;
- 
- 	dst = map;
--	drm_fbdev_damage_blit_real(fb_helper, clip, &dst);
-+	drm_fbdev_generic_damage_blit_real(fb_helper, clip, &dst);
- 
- 	drm_client_buffer_vunmap(buffer);
- 
-@@ -214,7 +214,8 @@ static int drm_fbdev_damage_blit(struct drm_fb_helper *fb_helper,
- 	return ret;
- }
- 
--static int drm_fbdev_fb_dirty(struct drm_fb_helper *helper, struct drm_clip_rect *clip)
-+static int drm_fbdev_generic_helper_fb_dirty(struct drm_fb_helper *helper,
-+					     struct drm_clip_rect *clip)
- {
- 	struct drm_device *dev = helper->dev;
- 	int ret;
-@@ -223,7 +224,7 @@ static int drm_fbdev_fb_dirty(struct drm_fb_helper *helper, struct drm_clip_rect
- 	if (!(clip->x1 < clip->x2 && clip->y1 < clip->y2))
- 		return 0;
- 
--	ret = drm_fbdev_damage_blit(helper, clip);
-+	ret = drm_fbdev_generic_damage_blit(helper, clip);
- 	if (drm_WARN_ONCE(dev, ret, "Damage blitter failed: ret=%d\n", ret))
- 		return ret;
- 
-@@ -236,12 +237,12 @@ static int drm_fbdev_fb_dirty(struct drm_fb_helper *helper, struct drm_clip_rect
- 	return 0;
- }
- 
--static const struct drm_fb_helper_funcs drm_fb_helper_generic_funcs = {
--	.fb_probe = drm_fbdev_fb_probe,
--	.fb_dirty = drm_fbdev_fb_dirty,
-+static const struct drm_fb_helper_funcs drm_fbdev_generic_helper_funcs = {
-+	.fb_probe = drm_fbdev_generic_helper_fb_probe,
-+	.fb_dirty = drm_fbdev_generic_helper_fb_dirty,
- };
- 
--static void drm_fbdev_client_unregister(struct drm_client_dev *client)
-+static void drm_fbdev_generic_client_unregister(struct drm_client_dev *client)
- {
- 	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
- 
-@@ -254,14 +255,14 @@ static void drm_fbdev_client_unregister(struct drm_client_dev *client)
- 	}
- }
- 
--static int drm_fbdev_client_restore(struct drm_client_dev *client)
-+static int drm_fbdev_generic_client_restore(struct drm_client_dev *client)
- {
- 	drm_fb_helper_lastclose(client->dev);
- 
- 	return 0;
- }
- 
--static int drm_fbdev_client_hotplug(struct drm_client_dev *client)
-+static int drm_fbdev_generic_client_hotplug(struct drm_client_dev *client)
- {
- 	struct drm_fb_helper *fb_helper = drm_fb_helper_from_client(client);
- 	struct drm_device *dev = client->dev;
-@@ -290,11 +291,11 @@ static int drm_fbdev_client_hotplug(struct drm_client_dev *client)
- 	return ret;
- }
- 
--static const struct drm_client_funcs drm_fbdev_client_funcs = {
-+static const struct drm_client_funcs drm_fbdev_generic_client_funcs = {
- 	.owner		= THIS_MODULE,
--	.unregister	= drm_fbdev_client_unregister,
--	.restore	= drm_fbdev_client_restore,
--	.hotplug	= drm_fbdev_client_hotplug,
-+	.unregister	= drm_fbdev_generic_client_unregister,
-+	.restore	= drm_fbdev_generic_client_restore,
-+	.hotplug	= drm_fbdev_generic_client_hotplug,
- };
- 
- /**
-@@ -320,8 +321,7 @@ static const struct drm_client_funcs drm_fbdev_client_funcs = {
-  *
-  * The fbdev is destroyed by drm_dev_unregister().
-  */
--void drm_fbdev_generic_setup(struct drm_device *dev,
--			     unsigned int preferred_bpp)
-+void drm_fbdev_generic_setup(struct drm_device *dev, unsigned int preferred_bpp)
- {
- 	struct drm_fb_helper *fb_helper;
- 	int ret;
-@@ -332,15 +332,15 @@ void drm_fbdev_generic_setup(struct drm_device *dev,
- 	fb_helper = kzalloc(sizeof(*fb_helper), GFP_KERNEL);
- 	if (!fb_helper)
- 		return;
--	drm_fb_helper_prepare(dev, fb_helper, preferred_bpp, &drm_fb_helper_generic_funcs);
-+	drm_fb_helper_prepare(dev, fb_helper, preferred_bpp, &drm_fbdev_generic_helper_funcs);
- 
--	ret = drm_client_init(dev, &fb_helper->client, "fbdev", &drm_fbdev_client_funcs);
-+	ret = drm_client_init(dev, &fb_helper->client, "fbdev", &drm_fbdev_generic_client_funcs);
- 	if (ret) {
- 		drm_err(dev, "Failed to register client: %d\n", ret);
- 		goto err_drm_client_init;
- 	}
- 
--	ret = drm_fbdev_client_hotplug(&fb_helper->client);
-+	ret = drm_fbdev_generic_client_hotplug(&fb_helper->client);
- 	if (ret)
- 		drm_dbg_kms(dev, "client hotplug ret=%d\n", ret);
- 
--- 
-2.40.0
+         char *buf;
+         ...
+
+         buf = "HELLO";
+         res = send(fd, buf, strlen(buf), 0);
+         ...
+
+>+	res = send(fd, "HELLO", strlen("HELLO"), 0);
+>+	if (res != strlen("HELLO")) {
+>+		fprintf(stderr, "unexpected send(2) result %zi\n", res);
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
+>+	control_writeln("SEND0");
+>+	/* Peer reads part of first packet. */
+>+	control_expectln("REPLY0");
+>+
+>+	/* Send second skbuff, it will be merged. */
+>+	res = send(fd, "WORLD", strlen("WORLD"), 0);
+
+Ditto.
+
+>+	if (res != strlen("WORLD")) {
+>+		fprintf(stderr, "unexpected send(2) result %zi\n", res);
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
+>+	control_writeln("SEND1");
+>+	/* Peer reads merged skbuff packet. */
+>+	control_expectln("REPLY1");
+>+
+>+	close(fd);
+>+}
+>+
+>+static void test_stream_virtio_skb_merge_server(const struct test_opts *opts)
+>+{
+>+	unsigned char buf[64];
+>+	ssize_t res;
+>+	int fd;
+>+
+>+	fd = vsock_stream_accept(VMADDR_CID_ANY, 1234, NULL);
+>+	if (fd < 0) {
+>+		perror("accept");
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
+>+	control_expectln("SEND0");
+>+
+>+	/* Read skbuff partially. */
+>+	res = recv(fd, buf, 2, 0);
+>+	if (res != 2) {
+>+		fprintf(stderr, "expected recv(2) failure, got %zi\n", res);
+
+We don't expect a failure, so please update the error message and make
+it easy to figure out which recv() is failing. For example by saying
+how many bytes you expected and how many you received.
+
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
+>+	control_writeln("REPLY0");
+>+	control_expectln("SEND1");
+>+
+>+
+>+	res = recv(fd, buf, sizeof(buf), 0);
+
+Perhaps a comment here to explain why we expect only 8 bytes.
+
+>+	if (res != 8) {
+>+		fprintf(stderr, "expected recv(2) failure, got %zi\n", res);
+
+Ditto.
+
+>+		exit(EXIT_FAILURE);
+>+	}
+>+
+>+	res = recv(fd, buf, sizeof(buf), MSG_DONTWAIT);
+>+	if (res != -1) {
+>+		fprintf(stderr, "expected recv(2) success, got %zi\n", res);
+
+It's the other way around, isn't it?
+Here you expect it to fail instead it is not failing.
+
+>+		exit(EXIT_FAILURE);
+>+	}
+
+Moving the pointer correctly, I would also check that there is
+HELLOWORLD in the buffer.
+
+Thanks for adding tests in this suite!
+Stefano
+
+>+
+>+	control_writeln("REPLY1");
+>+
+>+	close(fd);
+>+}
+>+
+> static struct test_case test_cases[] = {
+> 	{
+> 		.name = "SOCK_STREAM connection reset",
+>@@ -1038,6 +1114,11 @@ static struct test_case test_cases[] = {
+> 		.run_client = test_seqpacket_inv_buf_client,
+> 		.run_server = test_seqpacket_inv_buf_server,
+> 	},
+>+	{
+>+		.name = "SOCK_STREAM virtio skb merge",
+>+		.run_client = test_stream_virtio_skb_merge_client,
+>+		.run_server = test_stream_virtio_skb_merge_server,
+>+	},
+> 	{},
+> };
+>
+>-- 
+>2.25.1
+>
 
 _______________________________________________
 Virtualization mailing list
