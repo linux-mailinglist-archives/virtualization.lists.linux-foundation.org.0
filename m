@@ -2,91 +2,92 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9BAD46C27C6
-	for <lists.virtualization@lfdr.de>; Tue, 21 Mar 2023 03:06:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 6FF896C27CB
+	for <lists.virtualization@lfdr.de>; Tue, 21 Mar 2023 03:06:46 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C46C240AE1;
-	Tue, 21 Mar 2023 02:06:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C46C240AE1
+	by smtp2.osuosl.org (Postfix) with ESMTP id 16BFF40ACD;
+	Tue, 21 Mar 2023 02:06:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 16BFF40ACD
 Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=x4uXVeon
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=e5lDDR14
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id zxBeHnRHmNuE; Tue, 21 Mar 2023 02:06:41 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 8CB3540ACD;
-	Tue, 21 Mar 2023 02:06:40 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8CB3540ACD
+	with ESMTP id qFf9d5y2OYvY; Tue, 21 Mar 2023 02:06:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id A85AB40AC9;
+	Tue, 21 Mar 2023 02:06:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A85AB40AC9
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3EBABC0093;
-	Tue, 21 Mar 2023 02:06:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8FC8FC0032;
+	Tue, 21 Mar 2023 02:06:41 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B79DBC0032
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 888E3C0071
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Mar 2023 02:06:37 +0000 (UTC)
+ Tue, 21 Mar 2023 02:06:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 86C4440AC9
+ by smtp2.osuosl.org (Postfix) with ESMTP id 7096440ACB
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Mar 2023 02:06:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 86C4440AC9
+ Tue, 21 Mar 2023 02:06:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7096440ACB
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8et57HhD-dp3
+ with ESMTP id lyBGg6sE3Vo0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Mar 2023 02:06:37 +0000 (UTC)
+ Tue, 21 Mar 2023 02:06:39 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D98B240AB9
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C4D90400F3
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
  [205.220.177.32])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D98B240AB9
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C4D90400F3
  for <virtualization@lists.linux-foundation.org>;
- Tue, 21 Mar 2023 02:06:36 +0000 (UTC)
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+ Tue, 21 Mar 2023 02:06:38 +0000 (UTC)
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 32KM4Rbv014753; Tue, 21 Mar 2023 02:06:36 GMT
+ 32KM4Nwp017041; Tue, 21 Mar 2023 02:06:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references : mime-version :
  content-transfer-encoding; s=corp-2022-7-12;
- bh=kPNNQe0Jkx7j+gAbUS6oUeXbB7bLjs0FNjYR0kSxCp4=;
- b=x4uXVeonER6Cy7wEDDiwO+PUonbFi0mlieYrPjmXXle9k0KQa5jXgl9/nkkh9/1Y09HB
- 4iMtJNDG8o6Dc3Gy7EDGmi/B9coOsQ6w2IKaHpK2Fq8fpiRfwcohpvpkELhnRm28Trex
- y9E99Lan1RNs3yauKLNmdAMCUhOdSuZVrIbQrEIsSjYTL1wBj19xvvbU2NcJQAt10nS5
- UfMpwp0LZOE2CGl0TJ//j15MedpKvj2jK1v2nWT0mE4S/ErHnnYVwCZWnYQJ6yQm7zkq
- gn/1G+UnpQlKlq2fgIXU/XMHmes1WcmreCBAUd2wWSVlt0OAr7dbC3kj1T44AxjCYxu1 tQ== 
+ bh=g/fWfgh2zgVn1G6uuOchSviM3Kl8lun20//Qo3MS6UI=;
+ b=e5lDDR141feVlzQjLQ+orIVMQM5nAcXNQw+9NcsvrmWvAWN4ExsTvMnpfRlBIH7edEtY
+ yuvB/QU68YScZkS3mBQP92V9F1pYVk/2dZKZ+TrFP4kDJwZ1nzeDu8x5LXZdtDqxf6r3
+ AoVhluaO15HVbWZPMy6SnKVwE7v3osmzxKIRl9AaV2g0ZRQS3f0yZnk/ERhPeIKVy60Z
+ KdxE/VMnLz33O/TmvWt/SqcsKUxPstfDvwXSS9YiNdzhYuwuHzg5TnMTs3ISVyKfEXvE
+ qSJKc0XpmU31dHQ1PfutFJrj71pn5KNTMG3XeqMObo6x9Vn1IhKUIvvqc33wM4maePpx jA== 
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
  (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3pd4wt4yrp-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3pd5bcd14f-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 21 Mar 2023 02:06:35 +0000
+ Tue, 21 Mar 2023 02:06:37 +0000
 Received: from pps.filterd
  (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
  by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
- with ESMTP id 32KNPAGZ010423; Tue, 21 Mar 2023 02:06:35 GMT
+ with ESMTP id 32KNYkhf010738; Tue, 21 Mar 2023 02:06:37 GMT
 Received: from pps.reinject (localhost [127.0.0.1])
  by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3peqjn4c4d-1
+ 3peqjn4c4u-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 21 Mar 2023 02:06:35 +0000
+ Tue, 21 Mar 2023 02:06:36 +0000
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
  (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32L26T9Y007440;
- Tue, 21 Mar 2023 02:06:34 GMT
+ by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 32L26T9a007440;
+ Tue, 21 Mar 2023 02:06:36 GMT
 Received: from mnchrist-mac.us.oracle.com (dhcp-10-154-165-250.vpn.oracle.com
  [10.154.165.250])
  by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 3peqjn4c0v-5; Tue, 21 Mar 2023 02:06:34 +0000
+ 3peqjn4c0v-6; Tue, 21 Mar 2023 02:06:36 +0000
 From: Mike Christie <michael.christie@oracle.com>
 To: target-devel@vger.kernel.org, linux-scsi@vger.kernel.org,
  stefanha@redhat.com, jasowang@redhat.com, mst@redhat.com,
  sgarzare@redhat.com, virtualization@lists.linux-foundation.org
-Subject: [PATCH v2 4/7] vhost-scsi: Drop device mutex use in vhost_scsi_do_plug
-Date: Mon, 20 Mar 2023 21:06:21 -0500
-Message-Id: <20230321020624.13323-5-michael.christie@oracle.com>
+Subject: [PATCH v2 5/7] vhost-scsi: Check for a cleared backend before
+ queueing an event
+Date: Mon, 20 Mar 2023 21:06:22 -0500
+Message-Id: <20230321020624.13323-6-michael.christie@oracle.com>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20230321020624.13323-1-michael.christie@oracle.com>
 References: <20230321020624.13323-1-michael.christie@oracle.com>
@@ -99,8 +100,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
  phishscore=0 suspectscore=0 malwarescore=0 mlxscore=0 spamscore=0
  bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.12.0-2303150002 definitions=main-2303210017
-X-Proofpoint-GUID: 6sdUmtzut9zu79SSTGG2flVR9jkN3BuT
-X-Proofpoint-ORIG-GUID: 6sdUmtzut9zu79SSTGG2flVR9jkN3BuT
+X-Proofpoint-ORIG-GUID: C9zns4ZwLWXe2SaW7yy-EhTv7Nry9sEO
+X-Proofpoint-GUID: C9zns4ZwLWXe2SaW7yy-EhTv7Nry9sEO
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -117,43 +118,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-We don't need the device mutex in vhost_scsi_do_plug because:
-1. we have the vhost_scsi_mutex so the tpg->vhost_scsi pointer will not
-change on us and the vhost_scsi can't be freed from under us if it was
-set.
-2. vhost_scsi_clear_endpoint will stop the virtqueues and flush them while
-holding the vhost_scsi_mutex so we know once vhost_scsi_clear_endpoint
-has completed that vhost_scsi_do_plug can't send new events and any
-queued ones have completed.
+We currenly hold the vhost_scsi_mutex while clearing the endpoint and
+while performing vhost_scsi_do_plug, so tpg->vhost_scsi can't be freed
+from uder us, and to make sure anything queued is handled by the
+full call in vhost_scsi_clear_endpoint.
 
-So this patch drops the device mutex use in vhost_scsi_do_plug.
+This patch removes the need for the vhost_scsi_mutex for the latter
+case. In the next patches, we won't hold the vhost_scsi_mutex while
+flushing so this patch adds a check for the clearing of the virtqueue
+from vhost_scsi_clear_endpoint. We then know that once
+vhost_scsi_clear_endpoint has cleared the backend that no new events
+will be queued, and the flush after the vhost_vq_set_backend(vq, NULL)
+call will see everything that's been queued to that point. So the flush
+will then handle all events without the need for the vhost_scsi_mutex.
 
 Signed-off-by: Mike Christie <michael.christie@oracle.com>
 ---
- drivers/vhost/scsi.c | 3 ---
- 1 file changed, 3 deletions(-)
+ drivers/vhost/scsi.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/drivers/vhost/scsi.c b/drivers/vhost/scsi.c
-index 502d6803df0b..c945136ecf18 100644
+index c945136ecf18..ba8097fcea43 100644
 --- a/drivers/vhost/scsi.c
 +++ b/drivers/vhost/scsi.c
-@@ -2003,8 +2003,6 @@ vhost_scsi_do_plug(struct vhost_scsi_tpg *tpg,
- 	if (!vs)
- 		return;
+@@ -2010,9 +2010,17 @@ vhost_scsi_do_plug(struct vhost_scsi_tpg *tpg,
  
--	mutex_lock(&vs->dev.mutex);
--
- 	if (plug)
- 		reason = VIRTIO_SCSI_EVT_RESET_RESCAN;
- 	else
-@@ -2016,7 +2014,6 @@ vhost_scsi_do_plug(struct vhost_scsi_tpg *tpg,
+ 	vq = &vs->vqs[VHOST_SCSI_VQ_EVT].vq;
+ 	mutex_lock(&vq->mutex);
++	/*
++	 * We can't queue events if the backend has been cleared, because
++	 * we could end up queueing an event after the flush.
++	 */
++	if (!vhost_vq_get_backend(vq))
++		goto unlock;
++
+ 	if (vhost_has_feature(vq, VIRTIO_SCSI_F_HOTPLUG))
  		vhost_scsi_send_evt(vs, tpg, lun,
  				   VIRTIO_SCSI_T_TRANSPORT_RESET, reason);
++unlock:
  	mutex_unlock(&vq->mutex);
--	mutex_unlock(&vs->dev.mutex);
  }
  
- static void vhost_scsi_hotplug(struct vhost_scsi_tpg *tpg, struct se_lun *lun)
 -- 
 2.25.1
 
