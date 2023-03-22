@@ -1,66 +1,69 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id AF4C06C4098
-	for <lists.virtualization@lfdr.de>; Wed, 22 Mar 2023 03:57:22 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id D084F6C40A6
+	for <lists.virtualization@lfdr.de>; Wed, 22 Mar 2023 04:03:21 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 11FD34050C;
-	Wed, 22 Mar 2023 02:57:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 11FD34050C
+	by smtp1.osuosl.org (Postfix) with ESMTP id 3987782661;
+	Wed, 22 Mar 2023 03:03:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3987782661
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 8o6_Ml7tw8Ix; Wed, 22 Mar 2023 02:57:20 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id CF1F440B3F;
-	Wed, 22 Mar 2023 02:57:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CF1F440B3F
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 5G7Vl-wcCFO9; Wed, 22 Mar 2023 03:03:19 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D9B1582219;
+	Wed, 22 Mar 2023 03:03:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D9B1582219
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3A317C0077;
-	Wed, 22 Mar 2023 02:57:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 19A55C007E;
+	Wed, 22 Mar 2023 03:03:18 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5CD1BC0032
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EFEAFC0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Mar 2023 02:57:16 +0000 (UTC)
+ Wed, 22 Mar 2023 03:03:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 1E58C409B1
+ by smtp3.osuosl.org (Postfix) with ESMTP id B491760F48
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Mar 2023 02:57:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E58C409B1
+ Wed, 22 Mar 2023 03:03:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B491760F48
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Y7IoRd8XkKHW
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id g2fPrGqHkFxM
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Mar 2023 02:57:14 +0000 (UTC)
+ Wed, 22 Mar 2023 03:03:15 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2DCD3414C8
-Received: from out30-111.freemail.mail.aliyun.com
- (out30-111.freemail.mail.aliyun.com [115.124.30.111])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 2DCD3414C8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1A9F060E79
+Received: from out30-124.freemail.mail.aliyun.com
+ (out30-124.freemail.mail.aliyun.com [115.124.30.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 1A9F060E79
  for <virtualization@lists.linux-foundation.org>;
- Wed, 22 Mar 2023 02:57:13 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R111e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0VeOuZwM_1679453829; 
+ Wed, 22 Mar 2023 03:03:14 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
+ TI=SMTPD_---0VeOqVgd_1679454189; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VeOuZwM_1679453829) by smtp.aliyun-inc.com;
- Wed, 22 Mar 2023 10:57:09 +0800
+ fp:SMTPD_---0VeOqVgd_1679454189) by smtp.aliyun-inc.com;
+ Wed, 22 Mar 2023 11:03:09 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v4 11/11] virtio_ring: introduce virtqueue_reset()
-Date: Wed, 22 Mar 2023 10:57:01 +0800
-Message-Id: <20230322025701.2955-12-xuanzhuo@linux.alibaba.com>
+To: netdev@vger.kernel.org
+Subject: [PATCH net-next 0/8] virtio_net: refactor xdp codes
+Date: Wed, 22 Mar 2023 11:03:00 +0800
+Message-Id: <20230322030308.16046-1-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20230322025701.2955-1-xuanzhuo@linux.alibaba.com>
-References: <20230322025701.2955-1-xuanzhuo@linux.alibaba.com>
 MIME-Version: 1.0
-X-Git-Hash: b085e6b5b953
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
+X-Git-Hash: 7e9e1372f356
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
+ Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -77,73 +80,38 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce virtqueue_reset() to release all buffer inside vq.
+Due to historical reasons, the implementation of XDP in virtio-net is relatively
+chaotic. For example, the processing of XDP actions has two copies of similar
+code. Such as page, xdp_page processing, etc.
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Acked-by: Jason Wang <jasowang@redhat.com>
----
- drivers/virtio/virtio_ring.c | 33 +++++++++++++++++++++++++++++++++
- include/linux/virtio.h       |  2 ++
- 2 files changed, 35 insertions(+)
+The purpose of this patch set is to refactor these code. Reduce the difficulty
+of subsequent maintenance. Subsequent developers will not introduce new bugs
+because of some complex logical relationships.
 
-diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index bd79d681022b..38058de7f1b9 100644
---- a/drivers/virtio/virtio_ring.c
-+++ b/drivers/virtio/virtio_ring.c
-@@ -2789,6 +2789,39 @@ int virtqueue_resize(struct virtqueue *_vq, u32 num,
- }
- EXPORT_SYMBOL_GPL(virtqueue_resize);
- 
-+/**
-+ * virtqueue_reset - detach and recycle all unused buffers
-+ * @_vq: the struct virtqueue we're talking about.
-+ * @recycle: callback to recycle unused buffers
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error.
-+ * 0: success.
-+ * -EBUSY: Failed to sync with device, vq may not work properly
-+ * -ENOENT: Transport or device not supported
-+ * -EPERM: Operation not permitted
-+ */
-+int virtqueue_reset(struct virtqueue *_vq,
-+		    void (*recycle)(struct virtqueue *vq, void *buf))
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+	int err;
-+
-+	err = virtqueue_disable_and_recycle(_vq, recycle);
-+	if (err)
-+		return err;
-+
-+	if (vq->packed_ring)
-+		virtqueue_reinit_packed(vq);
-+	else
-+		virtqueue_reinit_split(vq);
-+
-+	return virtqueue_enable_after_reset(_vq);
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_reset);
-+
- /* Only available for split ring */
- struct virtqueue *vring_new_virtqueue(unsigned int index,
- 				      unsigned int num,
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index 1fa50191cf0a..22bbd06ef8c8 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -97,6 +97,8 @@ dma_addr_t virtqueue_get_used_addr(struct virtqueue *vq);
- 
- int virtqueue_resize(struct virtqueue *vq, u32 num,
- 		     void (*recycle)(struct virtqueue *vq, void *buf));
-+int virtqueue_reset(struct virtqueue *vq,
-+		    void (*recycle)(struct virtqueue *vq, void *buf));
- 
- /**
-  * struct virtio_device - representation of a device using virtio
--- 
+In addition, the supporting to AF_XDP that I want to submit later will also need
+to reuse the logic of XDP, such as the processing of actions, I don't want to
+introduce a new similar code. In this way, I can reuse these codes in the
+future.
+
+Please review.
+
+Thanks.
+
+Xuan Zhuo (8):
+  virtio_net: mergeable xdp: put old page immediately
+  virtio_net: mergeable xdp: introduce mergeable_xdp_prepare
+  virtio_net: introduce virtnet_xdp_handler() to seprate the logic of
+    run xdp
+  virtio_net: separate the logic of freeing xdp shinfo
+  virtio_net: separate the logic of freeing the rest mergeable buf
+  virtio_net: auto release xdp shinfo
+  virtio_net: introduce receive_mergeable_xdp()
+  virtio_net: introduce receive_small_xdp()
+
+ drivers/net/virtio_net.c | 615 +++++++++++++++++++++++----------------
+ 1 file changed, 357 insertions(+), 258 deletions(-)
+
+--
 2.32.0.3.g01195cf9f
 
 _______________________________________________
