@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id C4C386C77E3
-	for <lists.virtualization@lfdr.de>; Fri, 24 Mar 2023 07:30:26 +0100 (CET)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id BD7306C77E5
+	for <lists.virtualization@lfdr.de>; Fri, 24 Mar 2023 07:30:28 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 23C7040604;
-	Fri, 24 Mar 2023 06:30:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 23C7040604
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id dd1q6cvvsJFC; Fri, 24 Mar 2023 06:30:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id ACE8D408FB;
-	Fri, 24 Mar 2023 06:30:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org ACE8D408FB
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C8DC0C008F;
-	Fri, 24 Mar 2023 06:30:22 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9AB4DC008B
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Mar 2023 06:30:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 7BCAA41EA9
- for <virtualization@lists.linux-foundation.org>;
- Fri, 24 Mar 2023 06:30:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7BCAA41EA9
+	by smtp4.osuosl.org (Postfix) with ESMTP id 21F8941EEF;
+	Fri, 24 Mar 2023 06:30:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 21F8941EEF
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id sQ0lHw4HFg45
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NwMyOJNARMjT; Fri, 24 Mar 2023 06:30:25 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 8E90A41EE4;
+	Fri, 24 Mar 2023 06:30:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8E90A41EE4
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 39BA5C009A;
+	Fri, 24 Mar 2023 06:30:23 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 19276C008E
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Mar 2023 06:30:22 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6156B83FBD
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 24 Mar 2023 06:30:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6156B83FBD
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id kpoL44b95hCJ
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Mar 2023 06:30:20 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DE26941E6A
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id DE26941E6A
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0F8A48215A
+Received: from out30-132.freemail.mail.aliyun.com
+ (out30-132.freemail.mail.aliyun.com [115.124.30.132])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0F8A48215A
  for <virtualization@lists.linux-foundation.org>;
  Fri, 24 Mar 2023 06:30:19 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0VeWi7Vl_1679639414; 
+ TI=SMTPD_---0VeWd0GK_1679639415; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VeWi7Vl_1679639414) by smtp.aliyun-inc.com;
- Fri, 24 Mar 2023 14:30:14 +0800
+ fp:SMTPD_---0VeWd0GK_1679639415) by smtp.aliyun-inc.com;
+ Fri, 24 Mar 2023 14:30:15 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v5 05/11] virtio_ring: packed: support premapped
-Date: Fri, 24 Mar 2023 14:30:04 +0800
-Message-Id: <20230324063010.48670-6-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v5 06/11] virtio_ring: packed-indirect: support premapped
+Date: Fri, 24 Mar 2023 14:30:05 +0800
+Message-Id: <20230324063010.48670-7-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230324063010.48670-1-xuanzhuo@linux.alibaba.com>
 References: <20230324063010.48670-1-xuanzhuo@linux.alibaba.com>
@@ -85,94 +85,65 @@ and DMA mapping is completed in advance, so it is necessary for us to
 support passing the DMA address to virtio core.
 
 Drives can use sg->dma_address to pass the mapped dma address to virtio
-core. If one sg->dma_address is used then all sgs must use
-sg->dma_address, otherwise all must be null when passing it to the APIs
-of virtio.
+core. If one sg->dma_address is used then all sgs must use sg->dma_address,
+otherwise all dma_address must be null when passing it to the APIs of
+virtio.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ drivers/virtio/virtio_ring.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index 1c3084a8f4e3..df6d514a681a 100644
+index df6d514a681a..511d791ba9cc 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -78,6 +78,7 @@ struct vring_desc_state_split {
- struct vring_desc_state_packed {
- 	void *data;			/* Data for callback. */
- 	struct vring_packed_desc *indir_desc; /* Indirect descriptor, if any. */
-+	u64 flags;			/* State flags. */
- 	u16 num;			/* Descriptor list length. */
- 	u16 last;			/* The last desc state in a list. */
- };
-@@ -1263,7 +1264,8 @@ static inline u16 packed_last_used(u16 last_used_idx)
- }
- 
- static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
--				     struct vring_desc_extra *extra)
-+				     struct vring_desc_extra *extra,
-+				     bool dma_map_internal)
- {
- 	u16 flags;
- 
-@@ -1278,6 +1280,9 @@ static void vring_unmap_extra_packed(const struct vring_virtqueue *vq,
- 				 (flags & VRING_DESC_F_WRITE) ?
- 				 DMA_FROM_DEVICE : DMA_TO_DEVICE);
- 	} else {
-+		if (!dma_map_internal)
-+			return;
-+
- 		dma_unmap_page(vring_dma_dev(vq),
- 			       extra->addr, extra->len,
- 			       (flags & VRING_DESC_F_WRITE) ?
-@@ -1444,6 +1449,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
- 	unsigned int i, n, c, descs_used;
- 	__le16 head_flags, flags;
- 	u16 head, id, prev, curr;
+@@ -1337,6 +1337,7 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	unsigned int i, n;
+ 	u16 head, id;
+ 	dma_addr_t addr;
 +	bool dma_map_internal;
- 	int err;
  
- 	START_USE(vq);
-@@ -1489,7 +1495,8 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
+ 	head = vq->packed.next_avail_idx;
+ 	desc = alloc_indirect_packed(total_sg, gfp);
+@@ -1354,7 +1355,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
  	id = vq->free_head;
  	BUG_ON(id == vq->packed.vring.num);
  
--	if (virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs)) {
+-	if (virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs))
 +	dma_map_internal = !sgs[0]->dma_address;
-+	if (dma_map_internal && virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs)) {
- 		END_USE(vq);
- 		return -EIO;
- 	}
-@@ -1543,6 +1550,7 @@ static inline int virtqueue_add_packed(struct virtqueue *_vq,
++	if (dma_map_internal && virtqueue_map_sgs(vq, sgs, total_sg, out_sgs, in_sgs))
+ 		goto err_map;
+ 
+ 	for (n = 0; n < out_sgs + in_sgs; n++) {
+@@ -1416,6 +1418,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
  	vq->packed.desc_state[id].data = data;
- 	vq->packed.desc_state[id].indir_desc = ctx;
- 	vq->packed.desc_state[id].last = prev;
+ 	vq->packed.desc_state[id].indir_desc = desc;
+ 	vq->packed.desc_state[id].last = id;
 +	vq->packed.desc_state[id].flags = dma_map_internal ? VRING_STATE_F_MAP_INTERNAL : 0;
++
  
- 	/*
- 	 * A driver MUST NOT make the first descriptor in the list
-@@ -1614,8 +1622,10 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
- 	struct vring_desc_state_packed *state = NULL;
- 	struct vring_packed_desc *desc;
- 	unsigned int i, curr;
-+	bool dma_map_internal;
+ 	vq->num_added += 1;
  
- 	state = &vq->packed.desc_state[id];
-+	dma_map_internal = !!(state->flags & VRING_STATE_F_MAP_INTERNAL);
+@@ -1425,7 +1429,8 @@ static int virtqueue_add_indirect_packed(struct vring_virtqueue *vq,
+ 	return 0;
  
- 	/* Clear data ptr. */
- 	state->data = NULL;
-@@ -1628,7 +1638,8 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
- 		curr = id;
- 		for (i = 0; i < state->num; i++) {
- 			vring_unmap_extra_packed(vq,
--						 &vq->packed.desc_extra[curr]);
-+						 &vq->packed.desc_extra[curr],
-+						 dma_map_internal);
- 			curr = vq->packed.desc_extra[curr].next;
- 		}
- 	}
+ unmap_release:
+-	virtqueue_unmap_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
++	if (dma_map_internal)
++		virtqueue_unmap_sgs(vq, sgs, total_sg, out_sgs, in_sgs);
+ 
+ err_map:
+ 	kfree(desc);
+@@ -1652,7 +1657,7 @@ static void detach_buf_packed(struct vring_virtqueue *vq,
+ 		if (!desc)
+ 			return;
+ 
+-		if (vq->use_dma_api) {
++		if (vq->use_dma_api && dma_map_internal) {
+ 			len = vq->packed.desc_extra[id].len;
+ 			for (i = 0; i < len / sizeof(struct vring_packed_desc);
+ 					i++)
 -- 
 2.32.0.3.g01195cf9f
 
