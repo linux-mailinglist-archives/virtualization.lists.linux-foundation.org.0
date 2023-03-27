@@ -2,60 +2,59 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id B89096C9A6F
-	for <lists.virtualization@lfdr.de>; Mon, 27 Mar 2023 06:05:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 58F386C9A71
+	for <lists.virtualization@lfdr.de>; Mon, 27 Mar 2023 06:06:00 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 09B0540A31;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7568F4056F;
 	Mon, 27 Mar 2023 04:05:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 09B0540A31
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7568F4056F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ZbBEwsI-AxIs; Mon, 27 Mar 2023 04:05:55 +0000 (UTC)
+	with ESMTP id zQ_7TjzG6Twl; Mon, 27 Mar 2023 04:05:55 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id A09264056F;
-	Mon, 27 Mar 2023 04:05:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A09264056F
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 2001C40592;
+	Mon, 27 Mar 2023 04:05:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2001C40592
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9668BC008F;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E0AFFC0093;
 	Mon, 27 Mar 2023 04:05:53 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 86A05C0094
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4A139C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Mar 2023 04:05:48 +0000 (UTC)
+ Mon, 27 Mar 2023 04:05:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 4F69E60F66
+ by smtp3.osuosl.org (Postfix) with ESMTP id 0F73B60F66
  for <virtualization@lists.linux-foundation.org>;
- Mon, 27 Mar 2023 04:05:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4F69E60F66
+ Mon, 27 Mar 2023 04:05:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0F73B60F66
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EGGx_mWMoioW
+ with ESMTP id bTgcQRSwu-N6
  for <virtualization@lists.linux-foundation.org>;
  Mon, 27 Mar 2023 04:05:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E073460E84
-Received: from out30-113.freemail.mail.aliyun.com
- (out30-113.freemail.mail.aliyun.com [115.124.30.113])
- by smtp3.osuosl.org (Postfix) with ESMTPS id E073460E84
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 499FF60F12
+Received: from out30-130.freemail.mail.aliyun.com
+ (out30-130.freemail.mail.aliyun.com [115.124.30.130])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 499FF60F12
  for <virtualization@lists.linux-foundation.org>;
  Mon, 27 Mar 2023 04:05:46 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R591e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=3; SR=0;
- TI=SMTPD_---0Vef4Nhm_1679889942; 
+ TI=SMTPD_---0Vef5sw4_1679889942; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vef4Nhm_1679889942) by smtp.aliyun-inc.com;
- Mon, 27 Mar 2023 12:05:42 +0800
+ fp:SMTPD_---0Vef5sw4_1679889942) by smtp.aliyun-inc.com;
+ Mon, 27 Mar 2023 12:05:43 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v6 07/11] virtio_ring: update document for
- virtqueue_add_*
-Date: Mon, 27 Mar 2023 12:05:32 +0800
-Message-Id: <20230327040536.48338-8-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v6 08/11] virtio_ring: introduce virtqueue_dma_dev()
+Date: Mon, 27 Mar 2023 12:05:33 +0800
+Message-Id: <20230327040536.48338-9-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
 References: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
@@ -78,62 +77,81 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Update the document of virtqueue_add_* series API, allowing the callers to
-use sg->dma_address to pass the dma address to Virtio Core.
+Added virtqueue_dma_dev() to get DMA device for virtio. Then the
+caller can do dma operation in advance. The purpose is to keep memory
+mapped across multiple add/get buf operations.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ drivers/virtio/virtio.c      |  6 ++++++
+ drivers/virtio/virtio_ring.c | 17 +++++++++++++++++
+ include/linux/virtio.h       |  2 ++
+ 3 files changed, 25 insertions(+)
 
+diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+index 3893dc29eb26..11c5035369e2 100644
+--- a/drivers/virtio/virtio.c
++++ b/drivers/virtio/virtio.c
+@@ -1,4 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0-only
++#include <linux/dma-mapping.h>
+ #include <linux/virtio.h>
+ #include <linux/spinlock.h>
+ #include <linux/virtio_config.h>
+@@ -243,6 +244,11 @@ static int virtio_dev_probe(struct device *_d)
+ 	u64 driver_features;
+ 	u64 driver_features_legacy;
+ 
++	_d->dma_mask = &_d->coherent_dma_mask;
++	err = dma_set_mask_and_coherent(_d, DMA_BIT_MASK(64));
++	if (err)
++		return err;
++
+ 	/* We have a driver! */
+ 	virtio_add_status(dev, VIRTIO_CONFIG_S_DRIVER);
+ 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index d5dffbe50070..0b198ec3ff92 100644
+index 0b198ec3ff92..7b538c16c9b5 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2202,6 +2202,10 @@ static inline int virtqueue_add(struct virtqueue *_vq,
-  * Caller must ensure we don't call this with other virtqueue operations
-  * at the same time (except where noted).
-  *
-+ * If the caller has done dma map then use sg->dma_address to pass dma address.
-+ * If one sg->dma_address is used, then all sgs must use sg->dma_address;
-+ * otherwise all sg->dma_address must be NULL.
+@@ -2309,6 +2309,23 @@ int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
+ }
+ EXPORT_SYMBOL_GPL(virtqueue_add_inbuf_ctx);
+ 
++/**
++ * virtqueue_dma_dev - get the dma dev
++ * @_vq: the struct virtqueue we're talking about.
 + *
-  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-  */
- int virtqueue_add_sgs(struct virtqueue *_vq,
-@@ -2236,6 +2240,10 @@ EXPORT_SYMBOL_GPL(virtqueue_add_sgs);
-  * Caller must ensure we don't call this with other virtqueue operations
-  * at the same time (except where noted).
-  *
-+ * If the caller has done dma map then use sg->dma_address to pass dma address.
-+ * If one sg->dma_address is used, then all sgs must use sg->dma_address;
-+ * otherwise all sg->dma_address must be NULL.
-+ *
-  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-  */
- int virtqueue_add_outbuf(struct virtqueue *vq,
-@@ -2258,6 +2266,10 @@ EXPORT_SYMBOL_GPL(virtqueue_add_outbuf);
-  * Caller must ensure we don't call this with other virtqueue operations
-  * at the same time (except where noted).
-  *
-+ * If the caller has done dma map then use sg->dma_address to pass dma address.
-+ * If one sg->dma_address is used, then all sgs must use sg->dma_address;
-+ * otherwise all sg->dma_address must be NULL.
-+ *
-  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-  */
- int virtqueue_add_inbuf(struct virtqueue *vq,
-@@ -2281,6 +2293,10 @@ EXPORT_SYMBOL_GPL(virtqueue_add_inbuf);
-  * Caller must ensure we don't call this with other virtqueue operations
-  * at the same time (except where noted).
-  *
-+ * If the caller has done dma map then use sg->dma_address to pass dma address.
-+ * If one sg->dma_address is used, then all sgs must use sg->dma_address;
-+ * otherwise all sg->dma_address must be NULL.
-+ *
-  * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-  */
- int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
++ * Returns the dma dev. That can been used for dma api.
++ */
++struct device *virtqueue_dma_dev(struct virtqueue *_vq)
++{
++	struct vring_virtqueue *vq = to_vvq(_vq);
++
++	if (vq->use_dma_api)
++		return vring_dma_dev(vq);
++	else
++		return &vq->vq.vdev->dev;
++}
++EXPORT_SYMBOL_GPL(virtqueue_dma_dev);
++
+ /**
+  * virtqueue_kick_prepare - first half of split virtqueue_kick call.
+  * @_vq: the struct virtqueue
+diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+index 2b472514c49b..1fa50191cf0a 100644
+--- a/include/linux/virtio.h
++++ b/include/linux/virtio.h
+@@ -61,6 +61,8 @@ int virtqueue_add_sgs(struct virtqueue *vq,
+ 		      void *data,
+ 		      gfp_t gfp);
+ 
++struct device *virtqueue_dma_dev(struct virtqueue *vq);
++
+ bool virtqueue_kick(struct virtqueue *vq);
+ 
+ bool virtqueue_kick_prepare(struct virtqueue *vq);
 -- 
 2.32.0.3.g01195cf9f
 
