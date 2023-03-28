@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4ECAE6CBAAA
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E5696CBAAC
 	for <lists.virtualization@lfdr.de>; Tue, 28 Mar 2023 11:29:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0F76541594;
-	Tue, 28 Mar 2023 09:29:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0F76541594
+	by smtp4.osuosl.org (Postfix) with ESMTP id 85588418F4;
+	Tue, 28 Mar 2023 09:29:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 85588418F4
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ifxymfIC2qWJ; Tue, 28 Mar 2023 09:29:04 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id d4PFCBwyZ7JI; Tue, 28 Mar 2023 09:29:06 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 962DA4158F;
-	Tue, 28 Mar 2023 09:29:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 962DA4158F
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 8486E418FC;
+	Tue, 28 Mar 2023 09:29:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8486E418FC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 85F58C008F;
-	Tue, 28 Mar 2023 09:29:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5335BC008B;
+	Tue, 28 Mar 2023 09:29:05 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id ED121C002F
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9FDADC002F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:00 +0000 (UTC)
+ Tue, 28 Mar 2023 09:29:03 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D6C9D82255
+ by smtp2.osuosl.org (Postfix) with ESMTP id 72D0C41665
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D6C9D82255
+ Tue, 28 Mar 2023 09:29:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 72D0C41665
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VuAHccv705Vq
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id W8eFiQkMzT6w
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:00 +0000 (UTC)
+ Tue, 28 Mar 2023 09:29:03 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BB4EE81B83
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BB4EE81B83
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6246E4158F
+Received: from out30-98.freemail.mail.aliyun.com
+ (out30-98.freemail.mail.aliyun.com [115.124.30.98])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 6246E4158F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:28:59 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ Tue, 28 Mar 2023 09:29:01 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R731e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VesYnUJ_1679995734; 
+ TI=SMTPD_---0Vesaxcb_1679995735; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VesYnUJ_1679995734) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 17:28:55 +0800
+ fp:SMTPD_---0Vesaxcb_1679995735) by smtp.aliyun-inc.com;
+ Tue, 28 Mar 2023 17:28:56 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 06/16] virtio_net: separate virtnet_ctrl_set_mac_address()
-Date: Tue, 28 Mar 2023 17:28:37 +0800
-Message-Id: <20230328092847.91643-7-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 07/16] virtio_net: remove lock from virtnet_ack_link_announce()
+Date: Tue, 28 Mar 2023 17:28:38 +0800
+Message-Id: <20230328092847.91643-8-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230328092847.91643-1-xuanzhuo@linux.alibaba.com>
 References: <20230328092847.91643-1-xuanzhuo@linux.alibaba.com>
@@ -82,78 +82,41 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Separating the code setting MAC by cq to a function.
-
-This is to facilitate separating cq-related functions into a separate
-file.
+Removing rtnl_lock() from virtnet_ack_link_announce(). This is to
+facilitate separating cq-related functions into a separate file.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/virtnet.c | 31 +++++++++++++++++++------------
- 1 file changed, 19 insertions(+), 12 deletions(-)
+ drivers/net/virtio/virtnet.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/net/virtio/virtnet.c b/drivers/net/virtio/virtnet.c
-index 0196492f289b..6ad217af44d9 100644
+index 6ad217af44d9..4a3b5efb674e 100644
 --- a/drivers/net/virtio/virtnet.c
 +++ b/drivers/net/virtio/virtnet.c
-@@ -1982,13 +1982,29 @@ static bool virtnet_send_command(struct virtnet_info *vi, u8 class, u8 cmd,
- 	return vi->ctrl->status == VIRTIO_NET_OK;
+@@ -2083,11 +2083,9 @@ static void virtnet_stats(struct net_device *dev,
+ 
+ static void virtnet_ack_link_announce(struct virtnet_info *vi)
+ {
+-	rtnl_lock();
+ 	if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_ANNOUNCE,
+ 				  VIRTIO_NET_CTRL_ANNOUNCE_ACK, NULL))
+ 		dev_warn(&vi->dev->dev, "Failed to ack link announce.\n");
+-	rtnl_unlock();
  }
  
-+static int virtnet_ctrl_set_mac_address(struct virtnet_info *vi, const void *addr, int len)
-+{
-+	struct virtio_device *vdev = vi->vdev;
-+	struct scatterlist sg;
-+
-+	sg_init_one(&sg, addr, len);
-+
-+	if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_MAC,
-+				  VIRTIO_NET_CTRL_MAC_ADDR_SET, &sg)) {
-+		dev_warn(&vdev->dev,
-+			 "Failed to set mac address by vq command.\n");
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
- static int virtnet_set_mac_address(struct net_device *dev, void *p)
- {
- 	struct virtnet_info *vi = netdev_priv(dev);
- 	struct virtio_device *vdev = vi->vdev;
- 	int ret;
- 	struct sockaddr *addr;
--	struct scatterlist sg;
+ static int virtnet_ctrl_set_queues(struct virtnet_info *vi, u16 queue_pairs)
+@@ -3187,7 +3185,10 @@ static void virtnet_config_changed_work(struct work_struct *work)
  
- 	if (virtio_has_feature(vi->vdev, VIRTIO_NET_F_STANDBY))
- 		return -EOPNOTSUPP;
-@@ -2002,11 +2018,7 @@ static int virtnet_set_mac_address(struct net_device *dev, void *p)
- 		goto out;
+ 	if (v & VIRTIO_NET_S_ANNOUNCE) {
+ 		netdev_notify_peers(vi->dev);
++
++		rtnl_lock();
+ 		virtnet_ack_link_announce(vi);
++		rtnl_unlock();
+ 	}
  
- 	if (virtio_has_feature(vdev, VIRTIO_NET_F_CTRL_MAC_ADDR)) {
--		sg_init_one(&sg, addr->sa_data, dev->addr_len);
--		if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_MAC,
--					  VIRTIO_NET_CTRL_MAC_ADDR_SET, &sg)) {
--			dev_warn(&vdev->dev,
--				 "Failed to set mac address by vq command.\n");
-+		if (virtnet_ctrl_set_mac_address(vi, addr->sa_data, dev->addr_len)) {
- 			ret = -EINVAL;
- 			goto out;
- 		}
-@@ -3822,12 +3834,7 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	 */
- 	if (!virtio_has_feature(vdev, VIRTIO_NET_F_MAC) &&
- 	    virtio_has_feature(vi->vdev, VIRTIO_NET_F_CTRL_MAC_ADDR)) {
--		struct scatterlist sg;
--
--		sg_init_one(&sg, dev->dev_addr, dev->addr_len);
--		if (!virtnet_send_command(vi, VIRTIO_NET_CTRL_MAC,
--					  VIRTIO_NET_CTRL_MAC_ADDR_SET, &sg)) {
--			pr_debug("virtio_net: setting MAC address failed\n");
-+		if (virtnet_ctrl_set_mac_address(vi, dev->dev_addr, dev->addr_len)) {
- 			rtnl_unlock();
- 			err = -EINVAL;
- 			goto free_unregister_netdev;
+ 	/* Ignore unknown (future) status bits */
 -- 
 2.32.0.3.g01195cf9f
 
