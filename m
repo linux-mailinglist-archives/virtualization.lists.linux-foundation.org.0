@@ -1,60 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4FF1D6CBAB2
-	for <lists.virtualization@lfdr.de>; Tue, 28 Mar 2023 11:29:15 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9F0B86CBAB5
+	for <lists.virtualization@lfdr.de>; Tue, 28 Mar 2023 11:29:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id BA0CF418FA;
-	Tue, 28 Mar 2023 09:29:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BA0CF418FA
+	by smtp4.osuosl.org (Postfix) with ESMTP id 75BEE41904;
+	Tue, 28 Mar 2023 09:29:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 75BEE41904
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id i78XSSYceOWK; Tue, 28 Mar 2023 09:29:12 +0000 (UTC)
+	with ESMTP id OO0JSvxqXJxM; Tue, 28 Mar 2023 09:29:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 8C2FD41908;
-	Tue, 28 Mar 2023 09:29:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8C2FD41908
+	by smtp4.osuosl.org (Postfix) with ESMTPS id EFFAF418F7;
+	Tue, 28 Mar 2023 09:29:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org EFFAF418F7
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C6288C0037;
-	Tue, 28 Mar 2023 09:29:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 95D8EC002F;
+	Tue, 28 Mar 2023 09:29:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 23E7DC0090
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2FFFEC002F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:09 +0000 (UTC)
+ Tue, 28 Mar 2023 09:29:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 0DB1081F50
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8874641904
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0DB1081F50
+ Tue, 28 Mar 2023 09:29:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8874641904
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id NusyKMdILXFT
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 8-ElcK8OZ00g
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Mar 2023 09:29:10 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 65B94418FC
+Received: from out30-131.freemail.mail.aliyun.com
+ (out30-131.freemail.mail.aliyun.com [115.124.30.131])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 65B94418FC
  for <virtualization@lists.linux-foundation.org>;
  Tue, 28 Mar 2023 09:29:08 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BD45482268
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id BD45482268
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 09:29:07 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R921e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VesZtZh_1679995742; 
+ TI=SMTPD_---0VeseIE3_1679995743; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VesZtZh_1679995742) by smtp.aliyun-inc.com;
- Tue, 28 Mar 2023 17:29:02 +0800
+ fp:SMTPD_---0VeseIE3_1679995743) by smtp.aliyun-inc.com;
+ Tue, 28 Mar 2023 17:29:03 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH 13/16] virtio_net: prepare for virtio
-Date: Tue, 28 Mar 2023 17:28:44 +0800
-Message-Id: <20230328092847.91643-14-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH 14/16] virtio_net: move virtnet_[en/dis]able_delayed_refill to
+ header file
+Date: Tue, 28 Mar 2023 17:28:45 +0800
+Message-Id: <20230328092847.91643-15-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230328092847.91643-1-xuanzhuo@linux.alibaba.com>
 References: <20230328092847.91643-1-xuanzhuo@linux.alibaba.com>
@@ -82,196 +83,91 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Put some functions or macro into the header file.
+Move virtnet_[en/dis]able_delayed_refill to header file.
 
-This is prepare for separating the virtio-related funcs.
+This is prepare for separating virtio-related funcs.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/virtnet.c | 43 +++++++++++++++++++-----------------
- drivers/net/virtio/virtnet.h |  7 ++++++
- 2 files changed, 30 insertions(+), 20 deletions(-)
+ drivers/net/virtio/virtnet.c | 20 +++-----------------
+ drivers/net/virtio/virtnet.h | 15 +++++++++++++++
+ 2 files changed, 18 insertions(+), 17 deletions(-)
 
 diff --git a/drivers/net/virtio/virtnet.c b/drivers/net/virtio/virtnet.c
-index 5f508d9500f3..8f281a7f9d7a 100644
+index 8f281a7f9d7a..75a74864c3fe 100644
 --- a/drivers/net/virtio/virtnet.c
 +++ b/drivers/net/virtio/virtnet.c
-@@ -33,8 +33,6 @@ module_param(csum, bool, 0444);
- module_param(gso, bool, 0444);
- module_param(napi_tx, bool, 0644);
- 
--/* FIXME: MTU in config. */
--#define GOOD_PACKET_LEN (ETH_HLEN + VLAN_HLEN + ETH_DATA_LEN)
- #define GOOD_COPY_LEN	128
- 
- static const unsigned long guest_offloads[] = {
-@@ -175,7 +173,7 @@ static void virtqueue_napi_complete(struct napi_struct *napi,
- 	}
+@@ -136,20 +136,6 @@ static struct page *get_a_page(struct virtnet_rq *rq, gfp_t gfp_mask)
+ 	return p;
  }
  
--static void skb_xmit_done(struct virtqueue *vq)
-+void virtnet_skb_xmit_done(struct virtqueue *vq)
+-static void enable_delayed_refill(struct virtnet_info *vi)
+-{
+-	spin_lock_bh(&vi->refill_lock);
+-	vi->refill_enabled = true;
+-	spin_unlock_bh(&vi->refill_lock);
+-}
+-
+-static void disable_delayed_refill(struct virtnet_info *vi)
+-{
+-	spin_lock_bh(&vi->refill_lock);
+-	vi->refill_enabled = false;
+-	spin_unlock_bh(&vi->refill_lock);
+-}
+-
+ static void virtqueue_napi_schedule(struct napi_struct *napi,
+ 				    struct virtqueue *vq)
  {
- 	struct virtnet_info *vi = vq->vdev->priv;
- 	struct napi_struct *napi = &vi->sq[vq2txq(vq)].napi;
-@@ -635,7 +633,7 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 	unsigned int xdp_headroom = (unsigned long)ctx;
- 	unsigned int header_offset = VIRTNET_RX_PAD + xdp_headroom;
- 	unsigned int headroom = vi->hdr_len + header_offset;
--	unsigned int buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
-+	unsigned int buflen = SKB_DATA_ALIGN(VIRTNET_GOOD_PACKET_LEN + headroom) +
- 			      SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
- 	struct page *page = virt_to_head_page(buf);
- 	unsigned int delta = 0;
-@@ -646,9 +644,9 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 	len -= vi->hdr_len;
- 	stats->bytes += len;
+@@ -1622,7 +1608,7 @@ static int virtnet_open(struct net_device *dev)
+ 	struct virtnet_info *vi = netdev_priv(dev);
+ 	int i, err;
  
--	if (unlikely(len > GOOD_PACKET_LEN)) {
-+	if (unlikely(len > VIRTNET_GOOD_PACKET_LEN)) {
- 		pr_debug("%s: rx error: len %u exceeds max size %d\n",
--			 dev->name, len, GOOD_PACKET_LEN);
-+			 dev->name, len, VIRTNET_GOOD_PACKET_LEN);
- 		dev->stats.rx_length_errors++;
- 		goto err;
- 	}
-@@ -678,7 +676,7 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 			xdp_headroom = virtnet_get_headroom(vi);
- 			header_offset = VIRTNET_RX_PAD + xdp_headroom;
- 			headroom = vi->hdr_len + header_offset;
--			buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
-+			buflen = SKB_DATA_ALIGN(VIRTNET_GOOD_PACKET_LEN + headroom) +
- 				 SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
- 			xdp_page = xdp_linearize_page(rq, &num_buf, page,
- 						      offset, header_offset,
-@@ -1286,7 +1284,7 @@ static int add_recvbuf_small(struct virtnet_info *vi, struct virtnet_rq *rq,
- 	char *buf;
- 	unsigned int xdp_headroom = virtnet_get_headroom(vi);
- 	void *ctx = (void *)(unsigned long)xdp_headroom;
--	int len = vi->hdr_len + VIRTNET_RX_PAD + GOOD_PACKET_LEN + xdp_headroom;
-+	int len = vi->hdr_len + VIRTNET_RX_PAD + VIRTNET_GOOD_PACKET_LEN + xdp_headroom;
- 	int err;
+-	enable_delayed_refill(vi);
++	virtnet_enable_delayed_refill(vi);
  
- 	len = SKB_DATA_ALIGN(len) +
-@@ -1298,7 +1296,7 @@ static int add_recvbuf_small(struct virtnet_info *vi, struct virtnet_rq *rq,
- 	get_page(alloc_frag->page);
- 	alloc_frag->offset += len;
- 	sg_init_one(rq->sg, buf + VIRTNET_RX_PAD + xdp_headroom,
--		    vi->hdr_len + GOOD_PACKET_LEN);
-+		    vi->hdr_len + VIRTNET_GOOD_PACKET_LEN);
- 	err = virtqueue_add_inbuf_ctx(rq->vq, rq->sg, 1, buf, ctx, gfp);
- 	if (err < 0)
- 		put_page(virt_to_head_page(buf));
-@@ -1421,7 +1419,7 @@ static int add_recvbuf_mergeable(struct virtnet_info *vi,
-  * Returns false if we couldn't fill entirely (OOM).
-  *
-  * Normally run in the receive path, but can also be run from ndo_open
-- * before we're receiving packets, or from refill_work which is
-+ * before we're receiving packets, or from virtnet_refill_work which is
-  * careful to disable receiving (using napi_disable).
-  */
- static bool try_fill_recv(struct virtnet_info *vi, struct virtnet_rq *rq,
-@@ -1453,7 +1451,7 @@ static bool try_fill_recv(struct virtnet_info *vi, struct virtnet_rq *rq,
- 	return !oom;
- }
- 
--static void skb_recv_done(struct virtqueue *rvq)
-+void virtnet_skb_recv_done(struct virtqueue *rvq)
- {
- 	struct virtnet_info *vi = rvq->vdev->priv;
- 	struct virtnet_rq *rq = &vi->rq[vq2rxq(rvq)];
-@@ -1498,7 +1496,7 @@ static void virtnet_napi_tx_disable(struct napi_struct *napi)
- 		napi_disable(napi);
- }
- 
--static void refill_work(struct work_struct *work)
-+void virtnet_refill_work(struct work_struct *work)
- {
- 	struct virtnet_info *vi =
- 		container_of(work, struct virtnet_info, refill.work);
-@@ -1982,7 +1980,7 @@ static int virtnet_close(struct net_device *dev)
+ 	for (i = 0; i < vi->max_queue_pairs; i++) {
+ 		if (i < vi->curr_queue_pairs)
+@@ -1979,7 +1965,7 @@ static int virtnet_close(struct net_device *dev)
+ 	int i;
  
  	/* Make sure NAPI doesn't schedule refill work */
- 	disable_delayed_refill(vi);
--	/* Make sure refill_work doesn't re-enable napi! */
-+	/* Make sure virtnet_refill_work doesn't re-enable napi! */
+-	disable_delayed_refill(vi);
++	virtnet_disable_delayed_refill(vi);
+ 	/* Make sure virtnet_refill_work doesn't re-enable napi! */
  	cancel_delayed_work_sync(&vi->refill);
  
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
-@@ -2480,7 +2478,7 @@ static unsigned int mergeable_min_buf_len(struct virtnet_info *vi, struct virtqu
- 	unsigned int min_buf_len = DIV_ROUND_UP(buf_len, rq_size);
+@@ -2068,7 +2054,7 @@ static int virtnet_restore_up(struct virtio_device *vdev)
  
- 	return max(max(min_buf_len, hdr_len) - hdr_len,
--		   (unsigned int)GOOD_PACKET_LEN);
-+		   (unsigned int)VIRTNET_GOOD_PACKET_LEN);
- }
+ 	virtio_device_ready(vdev);
  
- static int virtnet_find_vqs(struct virtnet_info *vi)
-@@ -2525,8 +2523,8 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
+-	enable_delayed_refill(vi);
++	virtnet_enable_delayed_refill(vi);
  
- 	/* Allocate/initialize parameters for send/receive virtqueues */
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
--		callbacks[rxq2vq(i)] = skb_recv_done;
--		callbacks[txq2vq(i)] = skb_xmit_done;
-+		callbacks[rxq2vq(i)] = virtnet_skb_recv_done;
-+		callbacks[txq2vq(i)] = virtnet_skb_xmit_done;
- 		sprintf(vi->rq[i].name, "input.%d", i);
- 		sprintf(vi->sq[i].name, "output.%d", i);
- 		names[rxq2vq(i)] = vi->rq[i].name;
-@@ -2585,7 +2583,7 @@ static int virtnet_alloc_queues(struct virtnet_info *vi)
- 	if (!vi->rq)
- 		goto err_rq;
- 
--	INIT_DELAYED_WORK(&vi->refill, refill_work);
-+	INIT_DELAYED_WORK(&vi->refill, virtnet_refill_work);
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
- 		vi->rq[i].pages = NULL;
- 		netif_napi_add_weight(vi->dev, &vi->rq[i].napi, virtnet_poll,
-@@ -3045,14 +3043,19 @@ static int virtnet_probe(struct virtio_device *vdev)
- 	return err;
- }
- 
--static void remove_vq_common(struct virtnet_info *vi)
-+void virtnet_free_bufs(struct virtnet_info *vi)
- {
--	virtio_reset_device(vi->vdev);
--
- 	/* Free unused buffers in both send and recv, if any. */
- 	free_unused_bufs(vi);
- 
- 	free_receive_bufs(vi);
-+}
-+
-+static void remove_vq_common(struct virtnet_info *vi)
-+{
-+	virtio_reset_device(vi->vdev);
-+
-+	virtnet_free_bufs(vi);
- 
- 	free_receive_page_frags(vi);
- 
+ 	if (netif_running(vi->dev)) {
+ 		err = virtnet_get_netdev()->ndo_open(vi->dev);
 diff --git a/drivers/net/virtio/virtnet.h b/drivers/net/virtio/virtnet.h
-index 269ddc386418..1315dcf52f1b 100644
+index 1315dcf52f1b..5f20e9103a0e 100644
 --- a/drivers/net/virtio/virtnet.h
 +++ b/drivers/net/virtio/virtnet.h
-@@ -26,6 +26,9 @@ DECLARE_EWMA(pkt_len, 0, 64)
- 
- #define VIRTNET_DRIVER_VERSION "1.0.0"
- 
-+/* FIXME: MTU in config. */
-+#define VIRTNET_GOOD_PACKET_LEN (ETH_HLEN + VLAN_HLEN + ETH_DATA_LEN)
+@@ -193,4 +193,19 @@ void virtnet_skb_xmit_done(struct virtqueue *vq);
+ void virtnet_skb_recv_done(struct virtqueue *rvq);
+ void virtnet_refill_work(struct work_struct *work);
+ void virtnet_free_bufs(struct virtnet_info *vi);
 +
- struct virtnet_sq_stats {
- 	struct u64_stats_sync syncp;
- 	u64 packets;
-@@ -186,4 +189,8 @@ int virtnet_tx_resize(struct virtnet_info *vi, struct virtnet_sq *sq, u32 ring_n
- int _virtnet_set_queues(struct virtnet_info *vi, u16 queue_pairs);
- void virtnet_dev_rx_queue_group(struct virtnet_info *vi, struct net_device *dev);
- const struct net_device_ops *virtnet_get_netdev(void);
-+void virtnet_skb_xmit_done(struct virtqueue *vq);
-+void virtnet_skb_recv_done(struct virtqueue *rvq);
-+void virtnet_refill_work(struct work_struct *work);
-+void virtnet_free_bufs(struct virtnet_info *vi);
++static inline void virtnet_enable_delayed_refill(struct virtnet_info *vi)
++{
++	spin_lock_bh(&vi->refill_lock);
++	vi->refill_enabled = true;
++	spin_unlock_bh(&vi->refill_lock);
++}
++
++static inline void virtnet_disable_delayed_refill(struct virtnet_info *vi)
++{
++	spin_lock_bh(&vi->refill_lock);
++	vi->refill_enabled = false;
++	spin_unlock_bh(&vi->refill_lock);
++}
++
  #endif
 -- 
 2.32.0.3.g01195cf9f
