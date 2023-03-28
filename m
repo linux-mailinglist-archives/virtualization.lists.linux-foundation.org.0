@@ -1,96 +1,96 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 718B26CB39D
-	for <lists.virtualization@lfdr.de>; Tue, 28 Mar 2023 04:14:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 4DD85417CC;
-	Tue, 28 Mar 2023 02:14:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4DD85417CC
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.a=rsa-sha256 header.s=2 header.b=xPW62TJv;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=codewreck.org header.i=@codewreck.org header.a=rsa-sha256 header.s=2 header.b=xPW62TJv
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Usg3CIPKcbNV; Tue, 28 Mar 2023 02:14:03 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 9BDE8417CE;
-	Tue, 28 Mar 2023 02:14:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9BDE8417CE
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A7FF8C008C;
-	Tue, 28 Mar 2023 02:14:01 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3C1E9C007C
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 02:14:00 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 48AC56CB3AE
+	for <lists.virtualization@lfdr.de>; Tue, 28 Mar 2023 04:17:32 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 03A2A81F50
- for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 02:14:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 03A2A81F50
+	by smtp1.osuosl.org (Postfix) with ESMTP id 279C282052;
+	Tue, 28 Mar 2023 02:17:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 279C282052
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org
- header.a=rsa-sha256 header.s=2 header.b=xPW62TJv; 
- dkim=pass (2048-bit key) header.d=codewreck.org header.i=@codewreck.org
- header.a=rsa-sha256 header.s=2 header.b=xPW62TJv
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=VE+1Q8Oi
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id bv76rLFkHFs1
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id GZy2l1MBhju5; Tue, 28 Mar 2023 02:17:29 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 995AA8203E;
+	Tue, 28 Mar 2023 02:17:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 995AA8203E
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 87D42C007C;
+	Tue, 28 Mar 2023 02:17:27 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 795F5C007E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 02:13:57 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 18D5E81F4F
-Received: from nautica.notk.org (ipv6.notk.org [IPv6:2001:41d0:1:7a93::1])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 18D5E81F4F
+ Tue, 28 Mar 2023 02:17:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5217141850
  for <virtualization@lists.linux-foundation.org>;
- Tue, 28 Mar 2023 02:13:57 +0000 (UTC)
-Received: by nautica.notk.org (Postfix, from userid 108)
- id EE4F2C01C; Tue, 28 Mar 2023 04:13:53 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
- t=1679969633; bh=wqMNk37v7ep6rr1jhz7sYBORs1dIt3NXHYcIbaQ7jIg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xPW62TJvFSHPl3Gv9JQ8HAfCEesqn8fdPlrV/CljUx8VPMf1mGBfubqVsMbbBLDP1
- k/nyIvbgcrXG1s6YDRs3CA0dcn2CAUE1rBN2WGUpmWHfJ2yUYVKV3K7GDV0camJXxY
- uJTGxrpr4i6TbwJtSv/zBV8oLhJWFv9ShJwHjSKFOHAe376n/xtBtayDrsxdKYOgv1
- RDxRmc5C8zR2V6Fj69hCPWk1hi+UFbd/7EzKdE923DKvf5XqwU0J5t40q/ie2PQR+x
- GbwSmpsScKd8D44OkV+Vo3YLetFhBfoxgMG197N335V0aiPlAWRN8JCmlS8YG97Q/d
- GvX97CEcOLOog==
-Received: from odin.codewreck.org (localhost [127.0.0.1])
- by nautica.notk.org (Postfix) with ESMTPS id 7569FC009;
- Tue, 28 Mar 2023 04:13:50 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=codewreck.org; s=2;
- t=1679969633; bh=wqMNk37v7ep6rr1jhz7sYBORs1dIt3NXHYcIbaQ7jIg=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=xPW62TJvFSHPl3Gv9JQ8HAfCEesqn8fdPlrV/CljUx8VPMf1mGBfubqVsMbbBLDP1
- k/nyIvbgcrXG1s6YDRs3CA0dcn2CAUE1rBN2WGUpmWHfJ2yUYVKV3K7GDV0camJXxY
- uJTGxrpr4i6TbwJtSv/zBV8oLhJWFv9ShJwHjSKFOHAe376n/xtBtayDrsxdKYOgv1
- RDxRmc5C8zR2V6Fj69hCPWk1hi+UFbd/7EzKdE923DKvf5XqwU0J5t40q/ie2PQR+x
- GbwSmpsScKd8D44OkV+Vo3YLetFhBfoxgMG197N335V0aiPlAWRN8JCmlS8YG97Q/d
- GvX97CEcOLOog==
-Received: from localhost (odin.codewreck.org [local])
- by odin.codewreck.org (OpenSMTPD) with ESMTPA id c6bb0979;
- Tue, 28 Mar 2023 02:13:48 +0000 (UTC)
-Date: Tue, 28 Mar 2023 11:13:32 +0900
-From: Dominique Martinet <asmadeus@codewreck.org>
-To: Albert Huang <huangjie.albert@bytedance.com>,
- "Michael S. Tsirkin" <mst@redhat.com>
-Subject: 9p regression (Was: [PATCH v2] virtio_ring: don't update event idx
- on get_buf)
-Message-ID: <ZCJNTBQLZeyLBKKB@codewreck.org>
-References: <20230325105633.58592-1-huangjie.albert@bytedance.com>
+ Tue, 28 Mar 2023 02:17:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5217141850
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
+ header.a=rsa-sha256 header.s=corp-2022-7-12 header.b=VE+1Q8Oi
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id h31gXKjmgCHD
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Mar 2023 02:17:22 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 37720416BE
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 37720416BE
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 28 Mar 2023 02:17:21 +0000 (UTC)
+Received: from pps.filterd (m0333520.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 32S24shY006761; Tue, 28 Mar 2023 02:17:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : subject :
+ date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2022-7-12; bh=CNk8GULyVFmfo5GhMIi7eDTnsxQAVJ7/EmvaL6k5m7k=;
+ b=VE+1Q8OihojKWQzyUTYkrlweAdmLl0rOOevBZHuXu/i97nk6xCnGQpcbly4OMUeGkwO9
+ 6bkmUiVskPF2GUnn133RCdZy40Za/UZBRKAeWolwdVFPP09ZATH7DM37YyMvXFE4Vabo
+ DNqxr67tCOuVpRg6LCfO5d6ROkPoBolZtVygWMsW6NpUwzLdd8yqH1NZKx4GOGqGhCBI
+ PHRSX8tBSs6RxuJVvqrpEsBp+iaYRIRPnim/kJIj/Otp8qEek98m/QLcAlbY8YJOftJm
+ 9enzJxv5T9MyBVElI6HBKyp0P/RMEYWJVWcfSOxesNR4uM40bRnwIBUVTNB8ixFHZgj/ Ew== 
+Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3pkq4k00e4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 28 Mar 2023 02:17:20 +0000
+Received: from pps.filterd
+ (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.5/8.17.1.5)
+ with ESMTP id 32S1f4FD020368; Tue, 28 Mar 2023 02:17:19 GMT
+Received: from mnchrist-mac.us.oracle.com (dhcp-10-154-123-40.vpn.oracle.com
+ [10.154.123.40])
+ by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 3phqd61bky-1; Tue, 28 Mar 2023 02:17:19 +0000
+From: Mike Christie <michael.christie@oracle.com>
+To: stefanha@redhat.com, jasowang@redhat.com, mst@redhat.com,
+ sgarzare@redhat.com, virtualization@lists.linux-foundation.org
+Subject: [PATCH v6 00/11] vhost: multiple worker support
+Date: Mon, 27 Mar 2023 21:17:06 -0500
+Message-Id: <20230328021717.42268-1-michael.christie@oracle.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230325105633.58592-1-huangjie.albert@bytedance.com>
-Cc: Eric Van Hensbergen <ericvh@gmail.com>,
- Christian Schoenebeck <linux_oss@crudebyte.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Luis Chamberlain <mcgrof@kernel.org>, v9fs-developer@lists.sourceforge.net
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.254,Aquarius:18.0.942,Hydra:6.0.573,FMLib:17.11.170.22
+ definitions=2023-03-24_11,2023-03-27_02,2023-02-09_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ mlxscore=0 phishscore=0
+ malwarescore=0 adultscore=0 spamscore=0 mlxlogscore=547 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2303200000
+ definitions=main-2303280016
+X-Proofpoint-ORIG-GUID: o5qg4I2UU86MdkQ_jMNP38JN-2zdUhaO
+X-Proofpoint-GUID: o5qg4I2UU86MdkQ_jMNP38JN-2zdUhaO
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -107,100 +107,109 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Michael, Albert,
+The following patches were built over linux-next which contains various
+vhost patches in mst's tree and the vhost_task patchset in Christian
+Brauner's tree:
 
-Albert Huang wrote on Sat, Mar 25, 2023 at 06:56:33PM +0800:
-> in virtio_net, if we disable the napi_tx, when we triger a tx interrupt,
-> the vq->event_triggered will be set to true. It will no longer be set to
-> false. Unless we explicitly call virtqueue_enable_cb_delayed or
-> virtqueue_enable_cb_prepare.
+git://git.kernel.org/pub/scm/linux/kernel/git/brauner/linux.git
 
-This patch (commited as 35395770f803 ("virtio_ring: don't update event
-idx on get_buf") in next-20230327 apparently breaks 9p, as reported by
-Luis in https://lkml.kernel.org/r/ZCI+7Wg5OclSlE8c@bombadil.infradead.org
+kernel.user_worker branch:
 
-I've just hit had a look at recent patches[1] and reverted this to test
-and I can mount again, so I'm pretty sure this is the culprit, but I
-didn't look at the content at all yet so cannot advise further.
-It might very well be that we need some extra handling for 9p
-specifically that can be added separately if required.
+https://git.kernel.org/pub/scm/linux/kernel/git/brauner/linux.git/log/?h=kernel.user_worker
 
-[1] git log 0ec57cfa721fbd36b4c4c0d9ccc5d78a78f7fa35..HEAD drivers/virtio/
+The latter patchset handles the review comment for the patches in thread
+to make sure that worker threads we create are accounted for in the parent
+process's NPROC limit. The patches are scheduled to be sent to Linus for
+6.4.
+
+The patches in this patchset allow us to support multiple vhost workers
+per device. The design is a modified version of Stefan's original idea
+where userspace has the kernel create a worker and we pass back the pid.
+In this version instead of passing the pid between user/kernel space we
+use a worker_id which is just an integer managed by the vhost driver and
+we allow userspace to create and free workers and then attach them to
+virtqueues at setup time.
+
+All review comments from the past reviews should be handled. If I didn't
+reply to a review comment, I agreed with the comment and should have
+handled it in this posting. Let me know if I missed one.
+
+Results:
+--------
+
+fio jobs        1       2       4       8       12      16
+----------------------------------------------------------
+1 worker        160k   488k     -       -       -       -
+worker per vq   160k   310k    620k    1300k   1836k   2326k
+
+Notes:
+0. This used a simple fio command:
+
+fio --filename=/dev/sdb  --direct=1 --rw=randrw --bs=4k \
+--ioengine=libaio --iodepth=128  --numjobs=$JOBS_ABOVE
+
+and I used a VM with 16 vCPUs and 16 virtqueues.
+
+1. The patches were tested with LIO's emulate_pr=0 which drops the
+LIO PR lock use. This was a bottleneck at around 12 vqs/jobs.
+
+2. Because we have a hard limit of 1024 cmds, if the num jobs * iodepth
+was greater than 1024, I would decrease iodepth. So 12 jobs used 85 cmds,
+and 16 used 64.
+
+3. The perf issue above at 2 jobs is because when we only have 1 worker
+we execute more cmds per vhost_work due to all vqs funneling to one worker.
+This results in less context switches and better batching without having to
+tweak any settings. I'm working on patches to add back batching during lio
+completion and do polling on the submission side.
+
+We will still want the threading patches, because if we batch at the fio
+level plus use the vhost theading patches, we can see a big boost like
+below. So hopefully doing it at the kernel will allow apps to just work
+without having to be smart like fio.
+
+fio using io_uring and batching with the iodepth_batch* settings:
+
+fio jobs        1       2       4       8       12      16
+-------------------------------------------------------------
+1 worker        494k    520k    -       -       -       -
+worker per vq   496k    878k    1542k   2436k   2304k   2590k
 
 
-This can be reproduced with a simple mount, run qemu with some -virtfs
-argument and `mount -t 9p -o debug=65535 tag mountpoint` will hang after
-these messages:
-9pnet: -- p9_virtio_request (83): 9p debug: virtio request
-9pnet: -- p9_virtio_request (83): virtio request kicked
+V6:
+- Rebase against vhost_task patchset.
+- Used xa instead of idr.
+V5:
+- Rebase against user_worker patchset.
+- Rebase against flush patchset.
+- Redo vhost-scsi tmf flush handling so it doesn't access vq->worker.
+V4:
+- fix vhost-sock VSOCK_VQ_RX use.
+- name functions called directly by ioctl cmd's to match the ioctl cmd.
+- break up VHOST_SET_VRING_WORKER into a new, free and attach cmd.
+- document worker lifetime, and cgroup, namespace, mm, rlimit
+inheritance, make it clear we currently only support sharing within the
+device.
+- add support to attach workers while IO is running.
+- instead of passing a pid_t of the kernel thread, pass a int allocated
+by the vhost layer with an idr.
 
-So I suspect we're just not getting a callback.
+V3:
+- fully convert vhost code to use vq based APIs instead of leaving it
+half per dev and half per vq.
+- rebase against kernel worker API.
+- Drop delayed worker creation. We always create the default worker at
+VHOST_SET_OWNER time. Userspace can create and bind workers after that.
+
+V2:
+- change loop that we take a refcount to the worker in
+- replaced pid == -1 with define.
+- fixed tabbing/spacing coding style issue
+- use hash instead of list to lookup workers.
+- I dropped the patch that added an ioctl cmd to get a vq's worker's
+pid. I saw we might do a generic netlink interface instead.
 
 
-I'll have a closer look after work, but any advice meanwhile will be
-appreciated!
-(I'm sure Luis would also like a temporary drop from -next until
-this is figured out, but I'll leave this up to you)
-
-
-> 
-> If we disable the napi_tx, it will only be called when the tx ring
-> buffer is relatively small.
-> 
-> Because event_triggered is true. Therefore, VRING_AVAIL_F_NO_INTERRUPT or
-> VRING_PACKED_EVENT_FLAG_DISABLE will not be set. So we update
-> vring_used_event(&vq->split.vring) or vq->packed.vring.driver->off_wrap
-> every time we call virtqueue_get_buf_ctx. This will bring more interruptions.
-> 
-> To summarize:
-> 1) event_triggered was set to true in vring_interrupt()
-> 2) after this nothing will happen for virtqueue_disable_cb() so
->    VRING_AVAIL_F_NO_INTERRUPT is not set in avail_flags_shadow
-> 3) virtqueue_get_buf_ctx_split() will still think the cb is enabled
->    then it tries to publish new event
-> 
-> To fix, if event_triggered is set to true, do not update
-> vring_used_event(&vq->split.vring) or vq->packed.vring.driver->off_wrap
-> 
-> Tested with iperf:
-> iperf3 tcp stream:
-> vm1 -----------------> vm2
-> vm2 just receives tcp data stream from vm1, and sends the ack to vm1,
-> there are many tx interrupts in vm2.
-> but without event_triggered there are just a few tx interrupts.
-> 
-> Fixes: 8d622d21d248 ("virtio: fix up virtio_disable_cb")
-> Signed-off-by: Albert Huang <huangjie.albert@bytedance.com>
-> Message-Id: <20230321085953.24949-1-huangjie.albert@bytedance.com>
-> Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-> ---
->  drivers/virtio/virtio_ring.c | 6 ++++--
->  1 file changed, 4 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-> index cbeeea1b0439..1c36fa477966 100644
-> --- a/drivers/virtio/virtio_ring.c
-> +++ b/drivers/virtio/virtio_ring.c
-> @@ -914,7 +914,8 @@ static void *virtqueue_get_buf_ctx_split(struct virtqueue *_vq,
->  	/* If we expect an interrupt for the next entry, tell host
->  	 * by writing event index and flush out the write before
->  	 * the read in the next get_buf call. */
-> -	if (!(vq->split.avail_flags_shadow & VRING_AVAIL_F_NO_INTERRUPT))
-> +	if (unlikely(!(vq->split.avail_flags_shadow & VRING_AVAIL_F_NO_INTERRUPT) &&
-> +		     !vq->event_triggered))
->  		virtio_store_mb(vq->weak_barriers,
->  				&vring_used_event(&vq->split.vring),
->  				cpu_to_virtio16(_vq->vdev, vq->last_used_idx));
-> @@ -1744,7 +1745,8 @@ static void *virtqueue_get_buf_ctx_packed(struct virtqueue *_vq,
->  	 * by writing event index and flush out the write before
->  	 * the read in the next get_buf call.
->  	 */
-> -	if (vq->packed.event_flags_shadow == VRING_PACKED_EVENT_FLAG_DESC)
-> +	if (unlikely(vq->packed.event_flags_shadow == VRING_PACKED_EVENT_FLAG_DESC &&
-> +		     !vq->event_triggered))
->  		virtio_store_mb(vq->weak_barriers,
->  				&vq->packed.vring.driver->off_wrap,
->  				cpu_to_le16(vq->last_used_idx));
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
