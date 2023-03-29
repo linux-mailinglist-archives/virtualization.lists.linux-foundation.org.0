@@ -1,100 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9DCE56CD815
-	for <lists.virtualization@lfdr.de>; Wed, 29 Mar 2023 13:03:54 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id B61CE6CD81A
+	for <lists.virtualization@lfdr.de>; Wed, 29 Mar 2023 13:03:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 94EB841DC4;
-	Wed, 29 Mar 2023 11:03:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 94EB841DC4
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com header.i=@daynix-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=hp9Oqw5d
+	by smtp1.osuosl.org (Postfix) with ESMTP id F2D2B8411E;
+	Wed, 29 Mar 2023 11:03:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F2D2B8411E
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com header.i=@daynix-com.20210112.gappssmtp.com header.a=rsa-sha256 header.s=20210112 header.b=1dcJ+wPm
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id QxWHy-izAaNd; Wed, 29 Mar 2023 11:03:49 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id E728E41DF7;
-	Wed, 29 Mar 2023 11:03:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E728E41DF7
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id IOec7MD9Qr_j; Wed, 29 Mar 2023 11:03:56 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 988CC81A81;
+	Wed, 29 Mar 2023 11:03:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 988CC81A81
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B19EEC008F;
-	Wed, 29 Mar 2023 11:03:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AA448C002F;
+	Wed, 29 Mar 2023 11:03:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1EA85C0037
+ by lists.linuxfoundation.org (Postfix) with ESMTP id E796DC002F
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Mar 2023 11:03:46 +0000 (UTC)
+ Wed, 29 Mar 2023 11:03:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id CD2CA61460
+ by smtp3.osuosl.org (Postfix) with ESMTP id 291ED6146D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Mar 2023 11:03:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org CD2CA61460
+ Wed, 29 Mar 2023 11:03:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 291ED6146D
 Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=daynix-com.20210112.gappssmtp.com
  header.i=@daynix-com.20210112.gappssmtp.com header.a=rsa-sha256
- header.s=20210112 header.b=hp9Oqw5d
+ header.s=20210112 header.b=1dcJ+wPm
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RYa7DAKyQgPc
+ with ESMTP id BFbKfLIo1et2
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Mar 2023 11:03:44 +0000 (UTC)
+ Wed, 29 Mar 2023 11:03:47 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7EEEA61464
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7EEEA61464
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 592B761464
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 592B761464
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Mar 2023 11:03:44 +0000 (UTC)
-Received: by mail-ed1-x52f.google.com with SMTP id y4so61600346edo.2
+ Wed, 29 Mar 2023 11:03:47 +0000 (UTC)
+Received: by mail-ed1-x52e.google.com with SMTP id eh3so61447651edb.11
  for <virtualization@lists.linux-foundation.org>;
- Wed, 29 Mar 2023 04:03:44 -0700 (PDT)
+ Wed, 29 Mar 2023 04:03:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=daynix-com.20210112.gappssmtp.com; s=20210112; t=1680087824;
+ d=daynix-com.20210112.gappssmtp.com; s=20210112; t=1680087825;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=gTcU5HqVU1XgtuJ2Y8sd/OBjaB0pp67CpHcRkiVabVQ=;
- b=hp9Oqw5dPokqfYz22NTNm5CHcmPFA2qdpKFsieBHsz4KO70+K4slt8EpuWfc6ep4lp
- TYCGSsvwp0m6/9lSJ9u4U+XtDTleePGuvm92TS3wFIPH0sKpaOR+VOuBOWyaBcxhIprl
- FARrFe2ntTy9ipfwq7TB8Aks2TMPoxAFMbsBI3niPkMH2onKdvwgO+mN4vfgYTP4Sk5s
- 560shzhQjKaKxTtm8+F4rijxkDlnGHGpR99TmIHlQ3334L8qfu1uZOGyBadXQSvoPu6v
- BsxD4OBg21M3czeMY3tXp5tf1EPM98Ho0kDC8lZY6x5niT/b/zLxAS7keWu0ZZTA+kz6
- 8moQ==
+ bh=wrfwKePkllnALnkJ2zV/3yw/+BvIeTv0XWFEcNBw8YA=;
+ b=1dcJ+wPmxC9snk2hmBPEKQoXzNuJWkkqm3ON1LX6qgcNx0LODC4FnhV8ZDgh9qxxHz
+ 7bHUxRbbIvcjerza/iEoLvHl/lR3VWp5km9cVI831ypXHNgO0EkUg+sUCcVYo0zNUIf2
+ CjJFDKin+n+wlWQiU4Ggips5+i45qU30QX6d10hw3dKuiBqoNWtEJ+FMk0F3ewl9x3cc
+ RCIG2QP0Djcave7xpgQw7q08JJEQ/ItGsBLMEDkxNn000ZCZ3KQowjl0Yf/4+4/osAFQ
+ rvj/Nc5iwAAUJxjYpbKb6v6nG5yq6R19STcdmxfA1jsF2WqiJFIemuvit3TIY6a1HiGN
+ MGYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1680087824;
+ d=1e100.net; s=20210112; t=1680087825;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gTcU5HqVU1XgtuJ2Y8sd/OBjaB0pp67CpHcRkiVabVQ=;
- b=MdCFVV03IY7C1bJrf5HHeOBJ1u6WqEqmZAG1XexQX30GlkN3rSGwG69ncDlMUr6zz/
- tvQQVAxHynVCwVjMBVo4KZDaRbybPIOkWKTk93ioVmsb1/fJ/Ce4s7uj2ngqwsFaFTGM
- zrOjf/+ququ7ut5w4t4J5Fz7nbwPXwBQM5r0ah5PSeIgjb+F/FVlfmknwmq9o75cMNOc
- yF3Oitkf5kUMcICEhy6dnZqLjToEJrLp5F8k4pCY6QrCYaaeZEaVtWwMOSWfWr27V1vJ
- Vid4j+Sfat01b8IOe71BRkmJ9cjClrRYVhVJlCGxDJCSxYPc9RVkhP0hIx9zdAQrsrbf
- H3eg==
-X-Gm-Message-State: AAQBX9eKmFV8526wnzcPnELJ7GZL3H2mO2DbL6iaXAXpFZcxz1HZl9ss
- UwJPsXLGQRgXun7YpOX1jaNxCQ==
-X-Google-Smtp-Source: AKy350Z+lk0YVQodaLqvLOoFXIYHXTVciDftd4mzJAORAhetfY/MF8nRkPvYHqDZI2pPUaUQRSSdsA==
-X-Received: by 2002:a17:906:4d8b:b0:92f:7c42:8631 with SMTP id
- s11-20020a1709064d8b00b0092f7c428631mr18787825eju.16.1680087824034; 
- Wed, 29 Mar 2023 04:03:44 -0700 (PDT)
+ bh=wrfwKePkllnALnkJ2zV/3yw/+BvIeTv0XWFEcNBw8YA=;
+ b=7rvgEp/Wcsdo6eFs3nDMoxrBxJ5vE80hjT0fGD+WW63YJKkDLHDMcd9802gaR4VlLV
+ aZS4BpukatPoWbu9bbIOGEkh1N+viAx4i2JUY4wylllLvdnfMge+cqXEKBOWlwykj7E+
+ ykjGExpyV0g+0tZUms8pIccAgtIuU+21ftZeAF8tlT1yuTWY1lyGxLfG9SqtyD0I8GYJ
+ zrxSahUDZHffshKZaI+dfj+8dn/gkSYU7nNd+TLJxFwD0pffff6qYHfXGOCu5sTbbBlc
+ cnh5bW2H7+RMkMCNocF4dyJShrDYVyeacpGvZx0SWxNMoVWTemvW7l13TH05FfyOfpr5
+ 2Oug==
+X-Gm-Message-State: AAQBX9cZM8CeMou4O1H79nyVBYR3J754S1hO6X+MzTxPppgd0NoOyi3W
+ y6owG9B601Af627mY2ox6T4uvw==
+X-Google-Smtp-Source: AKy350Z16UKXumN3KnQDzRbKZJX9u64esHjbx9gtBr5Z8d0SvvEDLi9zU2vbK4QEzPWAONlYBMhi9A==
+X-Received: by 2002:a17:906:71d7:b0:8a6:5720:9101 with SMTP id
+ i23-20020a17090671d700b008a657209101mr20733205ejk.4.1680087825633; 
+ Wed, 29 Mar 2023 04:03:45 -0700 (PDT)
 Received: from localhost.localdomain (178-133-100-41.mobile.vf-ua.net.
  [178.133.100.41]) by smtp.gmail.com with ESMTPSA id
- md12-20020a170906ae8c00b008e68d2c11d8sm16406975ejb.218.2023.03.29.04.03.42
+ md12-20020a170906ae8c00b008e68d2c11d8sm16406975ejb.218.2023.03.29.04.03.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 29 Mar 2023 04:03:43 -0700 (PDT)
+ Wed, 29 Mar 2023 04:03:45 -0700 (PDT)
 From: Andrew Melnychenko <andrew@daynix.com>
 To: davem@davemloft.net, edumazet@google.com, kuba@kernel.org,
  pabeni@redhat.com, mst@redhat.com, jasowang@redhat.com,
  yoshfuji@linux-ipv6.org, dsahern@kernel.org, netdev@vger.kernel.org,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
-Subject: [RFC PATCH 3/5] ebpf: Added declaration/initialization routines.
-Date: Wed, 29 Mar 2023 13:45:44 +0300
-Message-Id: <20230329104546.108016-4-andrew@daynix.com>
+Subject: [RFC PATCH 4/5] qmp: Added new command to retrieve eBPF blob.
+Date: Wed, 29 Mar 2023 13:45:45 +0300
+Message-Id: <20230329104546.108016-5-andrew@daynix.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230329104546.108016-1-andrew@daynix.com>
 References: <20230329104546.108016-1-andrew@daynix.com>
@@ -116,131 +116,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Now, the binary objects may be retrieved by id/name.
-It would require for future qmp commands that may require specific
-eBPF blob.
+Added command "request-ebpf". This command returns
+eBPF program encoded base64. The program taken from the
+skeleton and essentially is an ELF object that can be
+loaded in the future with libbpf.
 
 Signed-off-by: Andrew Melnychenko <andrew@daynix.com>
 ---
- ebpf/ebpf.c      | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
- ebpf/ebpf.h      | 25 +++++++++++++++++++++++++
- ebpf/ebpf_rss.c  |  4 ++++
- ebpf/meson.build |  1 +
- 4 files changed, 78 insertions(+)
- create mode 100644 ebpf/ebpf.c
- create mode 100644 ebpf/ebpf.h
+ monitor/qmp-cmds.c | 17 +++++++++++++++++
+ qapi/misc.json     | 25 +++++++++++++++++++++++++
+ 2 files changed, 42 insertions(+)
 
-diff --git a/ebpf/ebpf.c b/ebpf/ebpf.c
-new file mode 100644
-index 0000000000..86320d72f5
---- /dev/null
-+++ b/ebpf/ebpf.c
-@@ -0,0 +1,48 @@
-+/*
-+ * QEMU eBPF binary declaration routine.
-+ *
-+ * Developed by Daynix Computing LTD (http://www.daynix.com)
-+ *
-+ * Authors:
-+ *  Andrew Melnychenko <andrew@daynix.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
-+
-+#include "qemu/osdep.h"
-+#include "qemu/queue.h"
+diff --git a/monitor/qmp-cmds.c b/monitor/qmp-cmds.c
+index b0f948d337..8f2fc3e7ec 100644
+--- a/monitor/qmp-cmds.c
++++ b/monitor/qmp-cmds.c
+@@ -32,6 +32,7 @@
+ #include "hw/mem/memory-device.h"
+ #include "hw/intc/intc.h"
+ #include "hw/rdma/rdma.h"
 +#include "ebpf/ebpf.h"
-+
-+struct ElfBinaryDataEntry {
-+    const char *id;
-+    const void * (*fn)(size_t *);
-+
-+    QSLIST_ENTRY(ElfBinaryDataEntry) node;
-+};
-+
-+static QSLIST_HEAD(, ElfBinaryDataEntry) ebpf_elf_obj_list =
-+                                            QSLIST_HEAD_INITIALIZER();
-+
-+void ebpf_register_binary_data(const char *id, const void * (*fn)(size_t *))
-+{
-+    struct ElfBinaryDataEntry *data = NULL;
-+
-+    data = g_malloc0(sizeof(*data));
-+    data->fn = fn;
-+    data->id = id;
-+
-+    QSLIST_INSERT_HEAD(&ebpf_elf_obj_list, data, node);
-+}
-+
-+const void *ebpf_find_binary_by_id(const char *id, size_t *sz)
-+{
-+    struct ElfBinaryDataEntry *it = NULL;
-+    QSLIST_FOREACH(it, &ebpf_elf_obj_list, node) {
-+        if (strcmp(id, it->id) == 0) {
-+            return it->fn(sz);
-+        }
-+    }
-+
-+    return NULL;
-+}
-diff --git a/ebpf/ebpf.h b/ebpf/ebpf.h
-new file mode 100644
-index 0000000000..fd705cb73e
---- /dev/null
-+++ b/ebpf/ebpf.h
-@@ -0,0 +1,25 @@
-+/*
-+ * QEMU eBPF binary declaration routine.
-+ *
-+ * Developed by Daynix Computing LTD (http://www.daynix.com)
-+ *
-+ * Authors:
-+ *  Andrew Melnychenko <andrew@daynix.com>
-+ *
-+ * This work is licensed under the terms of the GNU GPL, version 2 or
-+ * later.  See the COPYING file in the top-level directory.
-+ */
-+
-+#ifndef EBPF_H
-+#define EBPF_H
-+
-+void ebpf_register_binary_data(const char *id, const void * (*fn)(size_t *));
-+const void *ebpf_find_binary_by_id(const char *id, size_t *sz);
-+
-+#define ebpf_binary_init(id, fn)                                           \
-+static void __attribute__((constructor)) ebpf_binary_init_ ## fn(void)     \
-+{                                                                          \
-+    ebpf_register_binary_data(id, fn);                                     \
-+}
-+
-+#endif /* EBPF_H */
-diff --git a/ebpf/ebpf_rss.c b/ebpf/ebpf_rss.c
-index 08015fecb1..b4038725f2 100644
---- a/ebpf/ebpf_rss.c
-+++ b/ebpf/ebpf_rss.c
-@@ -21,6 +21,8 @@
  
- #include "ebpf/ebpf_rss.h"
- #include "ebpf/rss.bpf.skeleton.h"
-+#include "ebpf/ebpf.h"
-+
- #include "trace.h"
- 
- void ebpf_rss_init(struct EBPFRSSContext *ctx)
-@@ -237,3 +239,5 @@ void ebpf_rss_unload(struct EBPFRSSContext *ctx)
-     ctx->obj = NULL;
-     ctx->program_fd = -1;
+ NameInfo *qmp_query_name(Error **errp)
+ {
+@@ -209,3 +210,19 @@ static void __attribute__((__constructor__)) monitor_init_qmp_commands(void)
+                          qmp_marshal_qmp_capabilities,
+                          QCO_ALLOW_PRECONFIG, 0);
  }
 +
-+ebpf_binary_init("rss", rss_bpf__elf_bytes)
-diff --git a/ebpf/meson.build b/ebpf/meson.build
-index 2dd0fd8948..67c3f53aa9 100644
---- a/ebpf/meson.build
-+++ b/ebpf/meson.build
-@@ -1 +1,2 @@
-+softmmu_ss.add(files('ebpf.c'))
- softmmu_ss.add(when: libbpf, if_true: files('ebpf_rss.c'), if_false: files('ebpf_rss-stub.c'))
++EbpfObject *qmp_request_ebpf(const char *id, Error **errp)
++{
++    EbpfObject *ret = NULL;
++    size_t size = 0;
++    const guchar *data = ebpf_find_binary_by_id(id, &size);
++
++    if (data) {
++        ret = g_new0(EbpfObject, 1);
++        ret->object = g_base64_encode(data, size);
++    } else {
++        error_setg(errp, "can't find eBPF object with id: %s", id);
++    }
++
++    return ret;
++}
+diff --git a/qapi/misc.json b/qapi/misc.json
+index 6ddd16ea28..4689802460 100644
+--- a/qapi/misc.json
++++ b/qapi/misc.json
+@@ -618,3 +618,28 @@
+ { 'event': 'VFU_CLIENT_HANGUP',
+   'data': { 'vfu-id': 'str', 'vfu-qom-path': 'str',
+             'dev-id': 'str', 'dev-qom-path': 'str' } }
++
++##
++# @EbpfObject:
++#
++# Structure that holds eBPF ELF object encoded in base64.
++##
++{ 'struct': 'EbpfObject',
++  'data': {'object': 'str'} }
++
++##
++# @request-ebpf:
++#
++# Function returns eBPF object that can be loaded with libbpf.
++# Management applications (g.e. libvirt) may load it and pass file
++# descriptors to QEMU. Which allows running QEMU without BPF capabilities.
++#
++# Returns: RSS eBPF object encoded in base64.
++#
++# Since: 7.3
++#
++##
++{ 'command': 'request-ebpf',
++  'data': { 'id': 'str' },
++  'returns': 'EbpfObject' }
++
 -- 
 2.39.1
 
