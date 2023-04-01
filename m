@@ -1,85 +1,116 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id A34F16D20D5
-	for <lists.virtualization@lfdr.de>; Fri, 31 Mar 2023 14:49:23 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2024D6D2C48
+	for <lists.virtualization@lfdr.de>; Sat,  1 Apr 2023 03:06:19 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id E0F7B6172E;
-	Fri, 31 Mar 2023 12:49:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E0F7B6172E
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=Mqmzzj6s
+	by smtp2.osuosl.org (Postfix) with ESMTP id 23B4D400E2;
+	Sat,  1 Apr 2023 01:06:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 23B4D400E2
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=RciMOpzW
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ShEbBFzGOmzN; Fri, 31 Mar 2023 12:49:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id AF6576173C;
-	Fri, 31 Mar 2023 12:49:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org AF6576173C
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 4VV9_gP8fh3Q; Sat,  1 Apr 2023 01:06:16 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id D0BC3405D1;
+	Sat,  1 Apr 2023 01:06:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D0BC3405D1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EAE1BC007C;
-	Fri, 31 Mar 2023 12:49:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id D878EC008C;
+	Sat,  1 Apr 2023 01:06:14 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CDCEBC007C
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 746BFC002F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Mar 2023 12:49:12 +0000 (UTC)
+ Sat,  1 Apr 2023 01:06:13 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id A84084224C
+ by smtp3.osuosl.org (Postfix) with ESMTP id 488AF60BC6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Mar 2023 12:49:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A84084224C
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=Mqmzzj6s
+ Sat,  1 Apr 2023 01:06:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 488AF60BC6
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com
+ header.a=rsa-sha256 header.s=20210112 header.b=RciMOpzW
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id My6YgTiVv-Nj
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 7ofkK33hEYq0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Mar 2023 12:49:11 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D4812422D4
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by smtp4.osuosl.org (Postfix) with ESMTPS id D4812422D4
+ Sat,  1 Apr 2023 01:06:12 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 75F4960B79
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 75F4960B79
  for <virtualization@lists.linux-foundation.org>;
- Fri, 31 Mar 2023 12:49:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1680266950; x=1711802950;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=n+5+SUZzPrxatwYjN1ApwjxG0eo4koKtFj5Tv7Hn1hA=;
- b=Mqmzzj6sNX+vxnQUxiYBKmWRdF7KcpzSnAU2D5Ke25Dlpe4fGuJqEGF7
- b/FX3jTx91rIkz0tgdlhvDnYwbCGssfTW2HozBs8OWuPH6cVHF0rZbVLu
- nDF6Tl5dZk+by2gdCCFjd2z8O9wS/snDzp1MXJIKZJG1x70b50LidMFi/
- Gy9YCsodsymLLrHQB+of9FvdHBR8M1bpTwrdq+Okff6ZYOvnu154lCCjB
- uiDQv6pt7X+uvEOOpnr/wd6xMHsZ+p0c+QRxdCwwaFemAZQWFeDx5jan+
- VC2tVZl7yIgGuuXLKz1VY+O0e+dD17uZgsCWhCRrW7yl/e+7+p4kdWr6q A==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10666"; a="404162367"
-X-IronPort-AV: E=Sophos;i="5.98,307,1673942400"; d="scan'208";a="404162367"
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 31 Mar 2023 05:49:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10666"; a="931156007"
-X-IronPort-AV: E=Sophos;i="5.98,307,1673942400"; d="scan'208";a="931156007"
-Received: from lingshan-icx.bj.intel.com ([10.240.192.125])
- by fmsmga006.fm.intel.com with ESMTP; 31 Mar 2023 05:49:06 -0700
-From: Zhu Lingshan <lingshan.zhu@intel.com>
-To: mst@redhat.com,
-	jasowang@redhat.com
-Subject: [PATCH 5/5] a vendor driver should not set _CONFIG_S_FAILED
-Date: Sat,  1 Apr 2023 04:48:54 +0800
-Message-Id: <20230331204854.20082-6-lingshan.zhu@intel.com>
-X-Mailer: git-send-email 2.39.1
-In-Reply-To: <20230331204854.20082-1-lingshan.zhu@intel.com>
-References: <20230331204854.20082-1-lingshan.zhu@intel.com>
-MIME-Version: 1.0
-Cc: virtualization@lists.linux-foundation.org
+ Sat,  1 Apr 2023 01:06:12 +0000 (UTC)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ e15-20020a17090ac20f00b0023d1b009f52so27250499pjt.2
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 31 Mar 2023 18:06:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20210112; t=1680311172;
+ h=content-transfer-encoding:mime-version:subject:references
+ :in-reply-to:message-id:cc:to:from:date:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=lptAq23Bhxck5w4z/rG8RS6tmRRir3me5yWghBfZL5w=;
+ b=RciMOpzWuO92XZZ491w3Y2DRYMTk1B/OuOYYEgSqs4w2yJ0FKDEx4PyPOdLPXVASLH
+ HeNugxvV6lVKFtQbAgjusSVnN9Qa3BspUavTeWaWlaIeltduRQTJSlUHWifbYgZmKH3c
+ 1ajobv052ByD1ZxgrIGtq1u2IKSDh1m7NdRJVyBf1RS+Ruf1FQ9wFDfES6V9whcJkHrz
+ kZXHZypSh4qPhO6ZOH9F3jdQjxnrIc5h1CQas2SI7zzvi6FwmjJ87DDlt09VxHlmKZXT
+ TQ5TZsq3YlPOqJ01h6OlRLwQ5bduGep0FyhfMuRNKh9+q3jDIOFIZUfrx3mzt2PnP7VJ
+ 5Ifg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1680311172;
+ h=content-transfer-encoding:mime-version:subject:references
+ :in-reply-to:message-id:cc:to:from:date:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=lptAq23Bhxck5w4z/rG8RS6tmRRir3me5yWghBfZL5w=;
+ b=Lc9s/dyq1Y7s46CU4upTGVsuAGhRqygQ6qtOCVIlpS2iI1hziC9rTcUf5JgtSIqRb7
+ HnnAI8vqf2PjtEKgRpIK1dXKvFaLvjy5GCSJMrG04sZl+AR8a4ihRnKeVq95S+bWbOKK
+ 8oFIZmCepAjW27W1Jo+4hjBD+2UOeyOiXf/VRVJxU1S6PVt0m88OTLeINgYxzUP53E6+
+ 0+Gc7KJWyHExWKY/n7dIGZsidxLCGfgIYBiBf3z0r21wVBuMJTcxEpHhVfHqPgz3+NNF
+ 2X2LBgVf9VMy4jwHCwDL3I8rdswvEQlJ6Q2C2msLzbCTBGND+rSXPvXiyk7y1NcxtdXc
+ GFdQ==
+X-Gm-Message-State: AAQBX9dpN/1/s4e3OsxZ4htxH88KnoZYVzxmrY5nfgDzTqNMUT/sKGss
+ nUaTuwspjnQY+pB6Jva7hx0=
+X-Google-Smtp-Source: AKy350Z8u3DIY9zOK2GGbRh+IzTtZrAQZu687R480OVrDZT6cATs8RfxE2bQUMA6S8EqfzHYuLBzNA==
+X-Received: by 2002:a17:902:fa04:b0:1a2:85f0:e747 with SMTP id
+ la4-20020a170902fa0400b001a285f0e747mr8814999plb.41.1680311171897; 
+ Fri, 31 Mar 2023 18:06:11 -0700 (PDT)
+Received: from localhost ([98.97.116.12]) by smtp.gmail.com with ESMTPSA id
+ w16-20020a63c110000000b0050f6add54fcsm2204421pgf.44.2023.03.31.18.06.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 31 Mar 2023 18:06:11 -0700 (PDT)
+Date: Fri, 31 Mar 2023 18:06:10 -0700
+From: John Fastabend <john.fastabend@gmail.com>
+To: Bobby Eshleman <bobby.eshleman@bytedance.com>, 
+ Stefan Hajnoczi <stefanha@redhat.com>, 
+ Stefano Garzarella <sgarzare@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowang@redhat.com>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, Andrii Nakryiko <andrii@kernel.org>, 
+ Mykola Lysenko <mykolal@fb.com>, Alexei Starovoitov <ast@kernel.org>, 
+ Daniel Borkmann <daniel@iogearbox.net>, 
+ Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>, 
+ Yonghong Song <yhs@fb.com>, John Fastabend <john.fastabend@gmail.com>, 
+ KP Singh <kpsingh@kernel.org>, Stanislav Fomichev <sdf@google.com>, 
+ Hao Luo <haoluo@google.com>, Jiri Olsa <jolsa@kernel.org>, 
+ Shuah Khan <shuah@kernel.org>
+Message-ID: <6427838247d16_c503a2087e@john.notmuch>
+In-Reply-To: <20230327-vsock-sockmap-v4-0-c62b7cd92a85@bytedance.com>
+References: <20230327-vsock-sockmap-v4-0-c62b7cd92a85@bytedance.com>
+Subject: RE: [PATCH net-next v4 0/3] Add support for sockmap to vsock.
+Mime-Version: 1.0
+Cc: Bobby Eshleman <bobby.eshleman@bytedance.com>, kvm@vger.kernel.org,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-kselftest@vger.kernel.org,
+ bpf@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -96,33 +127,43 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-VIRTIO_CONFIG_S_FAILED indicates the guest driver has given up
-the device due to fatal errors. So it is the guest decision,
-the vendor driver should not set this status to the device.
+Bobby Eshleman wrote:
+> We're testing usage of vsock as a way to redirect guest-local UDS
+> requests to the host and this patch series greatly improves the
+> performance of such a setup.
+> 
+> Compared to copying packets via userspace, this improves throughput by
+> 121% in basic testing.
+> 
+> Tested as follows.
+> 
+> Setup: guest unix dgram sender -> guest vsock redirector -> host vsock
+>        server
+> Threads: 1
+> Payload: 64k
+> No sockmap:
+> - 76.3 MB/s
+> - The guest vsock redirector was
+>   "socat VSOCK-CONNECT:2:1234 UNIX-RECV:/path/to/sock"
+> Using sockmap (this patch):
+> - 168.8 MB/s (+121%)
+> - The guest redirector was a simple sockmap echo server,
+>   redirecting unix ingress to vsock 2:1234 egress.
+> - Same sender and server programs
+> 
+> *Note: these numbers are from RFC v1
+> 
+> Only the virtio transport has been tested. The loopback transport was
+> used in writing bpf/selftests, but not thoroughly tested otherwise.
+> 
+> This series requires the skb patch.
 
-Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
----
- drivers/vdpa/ifcvf/ifcvf_main.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+Appears reasonable to me although I didn't review internals of all
+the af_vsock stuff. I see it got merged great.
 
-diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
-index 15c6157ee841..f228fba74c61 100644
---- a/drivers/vdpa/ifcvf/ifcvf_main.c
-+++ b/drivers/vdpa/ifcvf/ifcvf_main.c
-@@ -423,9 +423,7 @@ static void ifcvf_vdpa_set_status(struct vdpa_device *vdpa_dev, u8 status)
- 	    !(status_old & VIRTIO_CONFIG_S_DRIVER_OK)) {
- 		ret = ifcvf_request_irq(vf);
- 		if (ret) {
--			status = ifcvf_get_status(vf);
--			status |= VIRTIO_CONFIG_S_FAILED;
--			ifcvf_set_status(vf, status);
-+			IFCVF_ERR(vf->pdev, "failed to request irq with error %d\n", ret);
- 			return;
- 		}
- 	}
--- 
-2.39.1
-
+One nit, I have a series coming shortly to pull the tests out of
+the sockmap_listen and into a sockmap_vsock because I don't think they
+belong in _listen but that is just a refactor.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
