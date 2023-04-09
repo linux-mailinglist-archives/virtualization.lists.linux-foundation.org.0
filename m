@@ -1,144 +1,142 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E27156DBF4F
-	for <lists.virtualization@lfdr.de>; Sun,  9 Apr 2023 11:10:53 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C34E060AB9;
-	Sun,  9 Apr 2023 09:10:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C34E060AB9
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-solidrn-onmicrosoft-com header.b=AMMa4x9Q
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id CIhsmrJn0bza; Sun,  9 Apr 2023 09:10:51 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 74E5B60FA4;
-	Sun,  9 Apr 2023 09:10:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 74E5B60FA4
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B298FC0089;
-	Sun,  9 Apr 2023 09:10:49 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CDCE9C002A
- for <virtualization@lists.linux-foundation.org>;
- Sun,  9 Apr 2023 09:10:46 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 4FAF36DBFC4
+	for <lists.virtualization@lfdr.de>; Sun,  9 Apr 2023 14:03:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 96901822DD
- for <virtualization@lists.linux-foundation.org>;
- Sun,  9 Apr 2023 09:10:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 96901822DD
+	by smtp1.osuosl.org (Postfix) with ESMTP id 5887682295;
+	Sun,  9 Apr 2023 12:02:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5887682295
 Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=solidrn.onmicrosoft.com
- header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-solidrn-onmicrosoft-com header.b=AMMa4x9Q
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-solidrn-onmicrosoft-com header.b=hXle2fyv
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0GmamrIfBrhT
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id BOUjmSBtBUuT; Sun,  9 Apr 2023 12:02:58 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 1B81981E2F;
+	Sun,  9 Apr 2023 12:02:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1B81981E2F
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2E649C0089;
+	Sun,  9 Apr 2023 12:02:57 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 3E8A8C002A
  for <virtualization@lists.linux-foundation.org>;
- Sun,  9 Apr 2023 09:10:45 +0000 (UTC)
+ Sun,  9 Apr 2023 12:02:55 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1046741761
+ for <virtualization@lists.linux-foundation.org>;
+ Sun,  9 Apr 2023 12:02:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1046741761
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=solidrn.onmicrosoft.com
+ header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256
+ header.s=selector1-solidrn-onmicrosoft-com header.b=hXle2fyv
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id GcrByCwPQ3Tq
+ for <virtualization@lists.linux-foundation.org>;
+ Sun,  9 Apr 2023 12:02:54 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CB594822F8
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0622.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::622])
- by smtp1.osuosl.org (Postfix) with ESMTPS id CB594822F8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E0F4B41725
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on062b.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0d::62b])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id E0F4B41725
  for <virtualization@lists.linux-foundation.org>;
- Sun,  9 Apr 2023 09:10:44 +0000 (UTC)
+ Sun,  9 Apr 2023 12:02:53 +0000 (UTC)
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=C6e5dAKthlPRU3/dvdSecBvXFUFLdU1JljXcItzFy/Q1H82nZ1kjMPhApSKPqs+yr9j3CJXE6o/xcVHlYsMJyY43H45aspeXtoqMO2n1Zmt5x1PBmGwijcY98V2bwNtu5eO49JVOC+2Q8BvXIsw7IoEl+VsVXzvTBohzDmzmarfiBAON5fv4PUXbCMgg/RR5W551m3ZtSaDQqk5TQIRAt3c9Nn83jiB2VQxFvB0oWJqXlO5huW7e9FlDo2tdBIZFY/w5n06LwY4xOQmix9QtvCi4mT89t0K1qGpNCqRjOMuOMjvUbmY18maIbHWDHp9cTvpBrFUTgm5Q/x/7NbVFvQ==
+ b=F6RQIJM68lQrIibsNJELiItGDA+MFQFtPDALFIIpYFnVVybBMUob6WJ9fXbwaVsq2QjjEaKoTTrU0ZqBy5TRzcvnXuyYjfTf5R6sC/1mhvlSkB2cKkRnpYkK2qhwbavXKf3sefkkHRZ67aDe2XBGk2zrC4d/u2q5ezACNQ4wxPLGLEhooJhjQyI746v0x88XR6Ao+rIxfPXtj9fKkDHY2jeUqzcd0wPgM7HDbJ75dRE6VE6fZhlN4UefvN8+k0slQX7aXs8Tt4vPIAF+kxPpGzCZgY9JdgSo7ndCNGkdzn006pyFK+270KMyEPAA3e8avopCHJui7T+8jONViqHUtg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gnT7bLmoMsT6ZKGYbp/6uJJDBLJYpNI/iT5CFmVra1E=;
- b=NlDUVBze4lk5FzjrVkxYzGqDcqmSrmeDdFdqmuhKn4EQGvH/7VYT8N7UdRh7h/T9lcfB4R8ZG0g1Qdtad8QrN4keSuZYSuIMBxs3EEijKmWxbylE+ER7XRd08BtnmuaUS2l9zOmaXFMsC28g+fB1IPlEzvGytfXDJWOjtkBsyzNFs1fFrpRG1ptgEDXn8q7NPAdXNrn+9he+2EntwjPfkMk2MCjOYqXUlrd1igl4NTU1vkVh2QQ3QROh9X2QqDbCJOX/Vk+Iob+DaoKpzd9cNKHQXauHLRnyDHqLJCUxXz2Dql9dmGq2HTqGAsFYKdIn4SL+BlFMnKoyjoJXVZfjSg==
+ bh=oWIMdXd5J3D49SFjHsbs9zNU0gubenasLYy9FHFgGXM=;
+ b=Ob8fUSiTTehGnwaPLfAHdXrtzrselvVD6REu4P0aGg9raAsZXfgB0HsNVoo583kCTWsbWnPAb2bscRQuLBTtZRLZcyHwC5b46Sp+vlJ8HnwQQ3OKFTDUPGbEYPd4GPmXwyxcp1Ji/iCqqr55FU9LwoS5roOXniGpfZC86y1lfV/Lyp3hRl8FKy+snWAhOtm+uXiDmk0PRUiJxbpIdOBJi4X6BU27rPy7q7APlZeb75qjhOscnk+vJe2E5DV+E6swGFeT1yrz0nX78xHFA7IaDwG4XSmSBD23LqXZeN/Qw0X2wdBoHucAGo5ZE/+PWskDlVOhnK+ZNXkiNGQN29KeKQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=solid-run.com; dmarc=pass action=none
  header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gnT7bLmoMsT6ZKGYbp/6uJJDBLJYpNI/iT5CFmVra1E=;
- b=AMMa4x9Q6Sv8zvOyDsXbYB0rc5zj+DGJqoUN5o3L+1ux2yfY38Hx1U+zXATJ3tj32N/z2xehAiAmNxCkisUbXlGh8uaFG4W/T9coLC6qgAfgoKccbFZ5ViLTHPUWn8ciSxMsKpXJn0LMzwZedjELYBuemIugeXrPqhs/xSz/7ck=
+ bh=oWIMdXd5J3D49SFjHsbs9zNU0gubenasLYy9FHFgGXM=;
+ b=hXle2fyv6cdAaUwJxjX8pJ7wt43Kn81DI//AzmaZhrsMfyS9j/zvVHNtV2zAYG/9EDLouWFSe0524jSk1dvyeiG2FFAwgUu31FpEByU1eXDbhV3UZE5kHz0f2Xgza++koY+5iJf6SYtXPTbI6PizTAK9UVJyRaPSB/WyJGEyB/8=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=solid-run.com;
 Received: from AM0PR04MB4723.eurprd04.prod.outlook.com (2603:10a6:208:c0::20)
- by PA4PR04MB9485.eurprd04.prod.outlook.com (2603:10a6:102:27d::18)
+ by DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.34; Sun, 9 Apr
- 2023 09:10:42 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6277.38; Sun, 9 Apr
+ 2023 12:02:50 +0000
 Received: from AM0PR04MB4723.eurprd04.prod.outlook.com
  ([fe80::54c9:6706:9dc6:d977]) by AM0PR04MB4723.eurprd04.prod.outlook.com
  ([fe80::54c9:6706:9dc6:d977%5]) with mapi id 15.20.6277.038; Sun, 9 Apr 2023
- 09:10:42 +0000
+ 12:02:50 +0000
 From: Alvaro Karsz <alvaro.karsz@solid-run.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH v2 2/2] vdpa/snet: support the suspend vDPA callback
-Date: Sun,  9 Apr 2023 12:10:24 +0300
-Message-Id: <20230409091024.3437405-3-alvaro.karsz@solid-run.com>
+Subject: [PATCH] vdpa/snet: use likely/unlikely macros in hot functions
+Date: Sun,  9 Apr 2023 15:02:42 +0300
+Message-Id: <20230409120242.3460074-1-alvaro.karsz@solid-run.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230409091024.3437405-1-alvaro.karsz@solid-run.com>
-References: <20230409091024.3437405-1-alvaro.karsz@solid-run.com>
-X-ClientProxiedBy: ZR0P278CA0133.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:40::12) To AM0PR04MB4723.eurprd04.prod.outlook.com
+X-ClientProxiedBy: ZR2P278CA0010.CHEP278.PROD.OUTLOOK.COM
+ (2603:10a6:910:50::14) To AM0PR04MB4723.eurprd04.prod.outlook.com
  (2603:10a6:208:c0::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB4723:EE_|PA4PR04MB9485:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e7ef4fd-5d10-4ca1-a994-08db38da4b49
+X-MS-TrafficTypeDiagnostic: AM0PR04MB4723:EE_|DU2PR04MB8536:EE_
+X-MS-Office365-Filtering-Correlation-Id: 818ceb46-73a3-45d3-3935-08db38f25724
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HRdKsCjCkJaWGIBog7GOcXag6gR8bxBoZHOKjLLvcAb77klwghQKElfSi0MBqSbh1xP7cipluXe0z8gkZa7lRkbvumZumfEzRT1X7mhgcOy4FjXzpH//Kai8sP2EZ3iwUiTYAV3c39HrtcUny3c1jB6YztLa59Jq8Y3XN2g9gmYKpXFJNoOu4kJeD/OeWr/MLIU9Zqw6KWbN5MOl1Qgq1BtqYkvOdoFU4ieq3ds6TT1QJBy1As/ecBZXawxT5tplcVeLXF9rUAsBz7pJrVOda8XmHfptvC6CguBttBHhGvXsvkcaqNITcrBbrzahqoBxiFGWcHN92OK0lzcMmugyXSOX+0Ov/SgbpdSug1cqiqxTKPWCac/dF2z/u6HQt/7YPypZyX+SPYcD/DHdKzXBuedBKdhSNMZIj59g4a2XLidaaYQWODrGdqxgaRUpYulyJZG5nZClo7+KEndwsLYUgjKpjwEgVsngR3oZ7PBmLpFW1vMvQPIBgleZpmSf9rJDmB862T2j3H+ojHI+Fl4JUaHHH2KSj9NzVG40/vZAHZIfj4LVeoLwj2NHeVPvIj3HyJZO9OZHzOKMYMNeo1Xpec9pm2maikCjsLefG6oQIQ5vKGmcGjwyXfdkyvfHk49m
+X-Microsoft-Antispam-Message-Info: sH43eQPhGlUxIlll+UNeCzwSmNZlQ7H7uslPXXuQMoFGNwq4KFq7kE19iX+RA+87vUliOoD76ZI+9PqChJUTNzv1Ukx3YsX3K7J4bKZARDBgvxcekoqlVdojgSmTzjTDy+GJcUA3vTOq4BuzqKccpnjgMm2Yk1YREDX+H8+vabq1BB3/fjKC1mOyYp1RCtpLJ6fiUQxkG30eDWSKT95LlMPWlQOZOQasQi65TuE+k4citDQg5sBBqK8cGwj4rHuVJ4AnDo3HPLV/kJQCPkVhgErYKJZJQ0POqiBx3sVw2jCXB9sFWJCsz8StlKLjw1RWKAm6fueIyMhFnm10RNm9w+gdMIAikx/2zl++Mb6I+KZp38n2kHt7I9cyQuCdRquykARpZudtnB36k7lPd0dyoLiB60h4SJC//Cq+/M70wQzxQn23qkTG0NmKc+M+Wb4Dsehmp3awEBhjL9N0QyPBF2fVtWdwOcy9eow+tKmI7GxN4pGKnVheB96AtDnfT7nRZ2pZmxL2nYQZNrvrYJSVt8kxgoy9d+MEwcPwOegfow3o7ROmAe86p7vkb8OynNFomeCo68yAN9nUAJo+9GuMq+6lnFI6erp4LyzrGff8sR3JwJ8lJzxUaYm82JUqOOz8
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AM0PR04MB4723.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(366004)(39830400003)(376002)(396003)(136003)(346002)(451199021)(8936002)(83380400001)(2616005)(186003)(6486002)(52116002)(6666004)(1076003)(26005)(6506007)(6512007)(107886003)(478600001)(15650500001)(44832011)(5660300002)(2906002)(38100700002)(36756003)(38350700002)(66946007)(4326008)(41300700001)(66556008)(66476007)(8676002)(86362001)(316002);
+ SFS:(13230028)(396003)(136003)(39840400004)(366004)(376002)(346002)(451199021)(66946007)(86362001)(26005)(1076003)(316002)(6506007)(6512007)(66556008)(66476007)(4326008)(186003)(36756003)(6666004)(6486002)(52116002)(478600001)(107886003)(38350700002)(8676002)(8936002)(38100700002)(2616005)(5660300002)(41300700001)(2906002)(83380400001)(44832011);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?MBIV40fDXxTCv6gwb+5R94SUV+ZyyztPD7nw/G/RM8sLevJBft2T9jgKnPgh?=
- =?us-ascii?Q?45tIe1FWJ8BmUqBgqljE9NU5IUbDd9MYufzFGa5RT/WvG08se+vRTIXyxIRm?=
- =?us-ascii?Q?tXH557H6tPgA3d2zXqnEVpm8/lsUfwZMhsaQMYn5FmWB+PpMq+eSWklG9D+B?=
- =?us-ascii?Q?VwVGT55VeRUwzgVT/tSPxO16yzuNv5j93ng9utcas3XAzX4FkGAhxNtHMR7H?=
- =?us-ascii?Q?uYz5f98pUVfXex8TI78ow3hyblEaOunEBYccjzbpne/rzwgkAjEEDEDpgaSy?=
- =?us-ascii?Q?+iNZLFRa/xCVBooNqUn7FC8igRI5tU2HRpHnto54q0+R59KDGbtsUJViqWIK?=
- =?us-ascii?Q?WbCrdSN3pfduaQzLReetZ0OZdc5aX/GIxhVl1/zJNMfhn3ICDvhb+4o+/J0G?=
- =?us-ascii?Q?EnfcWqj3xAzUQU0UvcB37goAPbV9AXsgEQm1CNJrBytXLCyVZpC7NeHGtooE?=
- =?us-ascii?Q?oZ1ilPUI/YwFDdO8T0+VpHVtfHBi07jxGiPwwqTE5QwbN68Ctq8DaArqTEFM?=
- =?us-ascii?Q?dG4tiDPNFehlt56jAXS720mHfE2FGfIIUMZ8CjhAbkVwqwhck2jze+vGSI8E?=
- =?us-ascii?Q?hXfddWQ6GGegpVYrL/Y4iXjZ8mmh7XQlu6Rmzw1o0gF2/DN1jEgV0CsGqcHq?=
- =?us-ascii?Q?HG3An4uNZ4htXclM+sL4DN+EdiuLkRAi3l8qVSbNLsmSXm/Z60iHpahQy6tK?=
- =?us-ascii?Q?4dbQSY30N51LwU24FzFUp1nZ6duYBcd/JhGNY2AvA5nPJi6DfIH2xyHQxGv7?=
- =?us-ascii?Q?OA0ww31SpPoqWz3vwCW3TawyBnJkU88lQYjSfiM4av1WByuRepIRpbRnYPSg?=
- =?us-ascii?Q?9hNRCXOqKALCTq/DUJSt2EpdEU2EiHTdQI6PPCcYY1gnOGvUNMsIENLER6XT?=
- =?us-ascii?Q?kthjnmj6GvJcG0qKwK4hYVtD9wIiMOdmO/Aosm6oJ1C0cG9RgApLs2+sBAZ5?=
- =?us-ascii?Q?ow9DmxpsjPpMHH159c0GGBfzXbbD5MRFjdTjesoVj/QDkfwQ/8lfKfrd+7SI?=
- =?us-ascii?Q?DyT1/WRijxZr0nJXK2G/frY7FaoEr1L5PNphxIxGBnmpbYsrNy+FHrZINXip?=
- =?us-ascii?Q?04lShJJBM3C1OUTpQYhDj8OL5EjrxJZiD8v32t7dL59f6TXxjAffnH6Iap8R?=
- =?us-ascii?Q?5oTjcOwM8IAtkNmT9MhOFXS9y4R5Qk7wYgKDqJdiWtR76K5m5PeRusJZoJoZ?=
- =?us-ascii?Q?venISLp3PpalQP4Ie6hNRnZ+sb/T/mVNUlQUghO2DaV4rbf+yMRALWAo+N0x?=
- =?us-ascii?Q?GESNUoOajhyjN+tO2mYYeRu+1Z1bMz1XiYK7eGDiXwUkGOYe7DikWDoBQ4L2?=
- =?us-ascii?Q?tXHL9u8ar0FJWexDM7QyKurUe54/ftN77tzwW+F4PxnvYJTh5GW0Tp5kF+ol?=
- =?us-ascii?Q?RV1O6OE/43/sX3ZPsewaH9zx0koWk3ZEZpuVi+WrTdhw8XuMq1cpmBZYwJoJ?=
- =?us-ascii?Q?O/RFLZG5PRpl/6N0jh0a9AosHJGMz9/IeoE4FVnJvSjDImwv2pjuuZHFISR4?=
- =?us-ascii?Q?RGkYxZI6TUw40o6+J6QKkz7yo419RlApwaY2PfdYyKoyY8UMB+kgOoTCd1JJ?=
- =?us-ascii?Q?HP1w6uqVbJUtDrqLuaWJoq2lrUiNN2CLH/yqclQ7ugdeGLcrFLBZlana7rtJ?=
- =?us-ascii?Q?Gg=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Y1KBq8AdzlaWteMtr1zce7gy1jAXaNbbiKvG0+7iqr5l8Iz1rhgFcmYh8kE+?=
+ =?us-ascii?Q?/yzrqBbKXvmLTDmSuh5mJbNER0vH2X6XOFlz4M8gYnVNGe+SgKyFfehIFTGv?=
+ =?us-ascii?Q?QBaV80eT1LN5wh0nzNoU0K8QEoeBgaa0FOVxF8C9ac+f5YTUH7QcbfmUxbXC?=
+ =?us-ascii?Q?EOqrDZHj5E9J3GSnH8a9/LChGC5miuyu+UV264KrEW9TdtwTAHyeh64iOnca?=
+ =?us-ascii?Q?X2X+vAyPkUnYuCpYJ+IHGIpBMaEXLVK+ftAUj0xNde0IWFwoo8q2cv2l9dg5?=
+ =?us-ascii?Q?mayZAHZDASOVBKtT1aKgWzzU+UitQJT1oHaAGr8L8Zny5A1CJor+T24Gpyk/?=
+ =?us-ascii?Q?QSivhj7Yf7hIS8jsF1u4q+F6WBgBD/qV3RNoaTmP7syr7beYeucY+IhGF3bB?=
+ =?us-ascii?Q?tU1GB1oX6tod59qsGoGyfDJ+qColzIE7WXGDhsgKRB6GFjvmTL/CGuUDKcn8?=
+ =?us-ascii?Q?UXme2U7QGo1TtK8ZtrONVVe9DLILTWinr95ZE+xsTbtZ7DkDqpcdK2mI2mJN?=
+ =?us-ascii?Q?Jtv4SQImtglIt1RKDI2kIh5AB68eB39Q2cJts1sIyYCCo0tVwdxRyXxbSVWL?=
+ =?us-ascii?Q?iyUcqDi4MT8RecxX8GNbJlr5FVIhztrTh7eSabAYsL8hTNbBr1moub4yd6Ey?=
+ =?us-ascii?Q?cT0n3m+rSp+UyA0p9lv8aoA9ZXoFh44hW964Stk/kFBnJrfC0qHY+088rpgb?=
+ =?us-ascii?Q?Ke0AxyLtidh5ea4MAJXI5IOrmJD2NdcUx8gxZqmGrR6+WEKDv+qFKWx3+2So?=
+ =?us-ascii?Q?90qiOFyfYtq11GLyGEXtVZP6+zbFvu5iXPAclP0/xAmLVTdrXppONym/e1Ta?=
+ =?us-ascii?Q?Q7Q4kD4PvVMg4L7tn2qNaWy2DPXGfzl5I80gD2VT7gLjYLkNSiWWxmUmxiRm?=
+ =?us-ascii?Q?9cuiILivoGVQVacayybaSlsfm+H6NVoOoOTBVofqIQuVCUGMoY9vnKNUSIeH?=
+ =?us-ascii?Q?00zx+gGwriWp7ga73qYtF4WmC/4R9kwu0VAcPu5Eia/77z8Lc2NMCj3D6H20?=
+ =?us-ascii?Q?JOkuIQ/rGH1DEP3Im5x7wvsGCWFBKAUp8kFhPKFZgq9+wMtVAYElUj60h3hY?=
+ =?us-ascii?Q?mgjE5Wm6WaVk4EIyD5/oqYywTXJDFdGTlsaG2P5BcGigGSUAgYoVnLbjzDiJ?=
+ =?us-ascii?Q?/7JkGet7J3xtxSKECLwF0AlvyB48kObP4p5DXFjDxm50dKXEAzoTFAL+CQKn?=
+ =?us-ascii?Q?M9bgNRrX01wO3dvXnJnvKte8G44RdrTZVsIF0rD6zXP++JX5EjsDMBCd6LAC?=
+ =?us-ascii?Q?rMJQwJGI+OPQ6rS6ouYEe5ZfGYeXuTyE+D0ceau3QOZy6r2MceEkzxB+gguq?=
+ =?us-ascii?Q?4gNhBZoZ7alCij+A0DLusbkihEz3+d6YIj14gGqQLvZz4MvxMLtSrO8xtcPN?=
+ =?us-ascii?Q?SjnNwWK53dOwUBmV772ujkLj81X2jSeJ665ZM38Z3JYSeZAIyuZmU66zk4Fc?=
+ =?us-ascii?Q?SnXgEbeeSbmK4tk2YvrhImMDughlOoJwgPOoLqYx+yJemc4jvLx7i1sJ5cj0?=
+ =?us-ascii?Q?7g9gsXFN1a3WWhMXS1uxQDXbKleb9qVOi0zLkwqS0TJG9wa7c8atOddDTFFd?=
+ =?us-ascii?Q?zNxTawQYAeagLpK6nzYzWjLwuhdTeXb+tpdnMKGASIXt0R46hzmLZ6MtlbgX?=
+ =?us-ascii?Q?8g=3D=3D?=
 X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e7ef4fd-5d10-4ca1-a994-08db38da4b49
+X-MS-Exchange-CrossTenant-Network-Message-Id: 818ceb46-73a3-45d3-3935-08db38f25724
 X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB4723.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2023 09:10:42.1744 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2023 12:02:50.0675 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0cQWT32HVkA6uwE3IqdJECXszumDX+bD1SVCMvc1yro6wXKkCJX6Qfsrt5ptjZ+WS88Jwlbat6Q4pQZp391evNnZi+RmZ24njufZ0K7yNnI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9485
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0mRkMKsbVoVVvfrln5kOKrAahzOCDmut/+xeXgriCrEyTg9yWzJq9M6eFSgW/SGh4ZzhkhsvZgtuhT5sl1xv30Zq8uMj0gwEQUI8tz2hT1s=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR04MB8536
 Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -156,81 +154,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When suspend is called, the driver sends a suspend command to the DPU
-through the control mechanism.
+- kick callback: most likely that the VQ is ready.
+- interrupt handlers: most likely that the callback is not NULL.
 
 Signed-off-by: Alvaro Karsz <alvaro.karsz@solid-run.com>
 ---
- drivers/vdpa/solidrun/snet_ctrl.c |  6 ++++++
- drivers/vdpa/solidrun/snet_main.c | 15 +++++++++++++++
- drivers/vdpa/solidrun/snet_vdpa.h |  1 +
- 3 files changed, 22 insertions(+)
+ drivers/vdpa/solidrun/snet_main.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/vdpa/solidrun/snet_ctrl.c b/drivers/vdpa/solidrun/snet_ctrl.c
-index 01e746ba7ac..4e808ec9ad0 100644
---- a/drivers/vdpa/solidrun/snet_ctrl.c
-+++ b/drivers/vdpa/solidrun/snet_ctrl.c
-@@ -15,6 +15,7 @@
- enum snet_ctrl_opcodes {
- 	SNET_CTRL_OP_DESTROY = 1,
- 	SNET_CTRL_OP_READ_VQ_STATE,
-+	SNET_CTRL_OP_SUSPEND,
- };
- 
- #define SNET_CTRL_TIMEOUT	        2000000
-@@ -314,3 +315,8 @@ int snet_read_vq_state(struct snet *snet, u16 idx, struct vdpa_vq_state *state)
- 	return snet_ctrl_read_from_dpu(snet, SNET_CTRL_OP_READ_VQ_STATE, idx, state,
- 				       sizeof(*state));
- }
-+
-+int snet_suspend_dev(struct snet *snet)
-+{
-+	return snet_send_ctrl_msg(snet, SNET_CTRL_OP_SUSPEND, 0);
-+}
 diff --git a/drivers/vdpa/solidrun/snet_main.c b/drivers/vdpa/solidrun/snet_main.c
-index daeb69d00ed..96830e58211 100644
+index 96830e58211..8d9c033a7bf 100644
 --- a/drivers/vdpa/solidrun/snet_main.c
 +++ b/drivers/vdpa/solidrun/snet_main.c
-@@ -483,6 +483,20 @@ static void snet_set_config(struct vdpa_device *vdev, unsigned int offset,
- 		iowrite8(*buf_ptr++, cfg_ptr + i);
- }
+@@ -39,7 +39,7 @@ static irqreturn_t snet_cfg_irq_hndlr(int irq, void *data)
+ {
+ 	struct snet *snet = data;
+ 	/* Call callback if any */
+-	if (snet->cb.callback)
++	if (likely(snet->cb.callback))
+ 		return snet->cb.callback(snet->cb.private);
  
-+static int snet_suspend(struct vdpa_device *vdev)
-+{
-+	struct snet *snet = vdpa_to_snet(vdev);
-+	int ret;
-+
-+	ret = snet_suspend_dev(snet);
-+	if (ret)
-+		SNET_ERR(snet->pdev, "SNET[%u] suspend failed, err: %d\n", snet->sid, ret);
-+	else
-+		SNET_DBG(snet->pdev, "Suspend SNET[%u] device\n", snet->sid);
-+
-+	return ret;
-+}
-+
- static const struct vdpa_config_ops snet_config_ops = {
- 	.set_vq_address         = snet_set_vq_address,
- 	.set_vq_num             = snet_set_vq_num,
-@@ -508,6 +522,7 @@ static const struct vdpa_config_ops snet_config_ops = {
- 	.set_status             = snet_set_status,
- 	.get_config             = snet_get_config,
- 	.set_config             = snet_set_config,
-+	.suspend		= snet_suspend,
- };
+ 	return IRQ_HANDLED;
+@@ -49,7 +49,7 @@ static irqreturn_t snet_vq_irq_hndlr(int irq, void *data)
+ {
+ 	struct snet_vq *vq = data;
+ 	/* Call callback if any */
+-	if (vq->cb.callback)
++	if (likely(vq->cb.callback))
+ 		return vq->cb.callback(vq->cb.private);
  
- static int psnet_open_pf_bar(struct pci_dev *pdev, struct psnet *psnet)
-diff --git a/drivers/vdpa/solidrun/snet_vdpa.h b/drivers/vdpa/solidrun/snet_vdpa.h
-index a4213e97cfc..6dbb95fe2b7 100644
---- a/drivers/vdpa/solidrun/snet_vdpa.h
-+++ b/drivers/vdpa/solidrun/snet_vdpa.h
-@@ -201,5 +201,6 @@ void psnet_create_hwmon(struct pci_dev *pdev);
- void snet_ctrl_clear(struct snet *snet);
- int snet_destroy_dev(struct snet *snet);
- int snet_read_vq_state(struct snet *snet, u16 idx, struct vdpa_vq_state *state);
-+int snet_suspend_dev(struct snet *snet);
+ 	return IRQ_HANDLED;
+@@ -106,7 +106,7 @@ static void snet_kick_vq(struct vdpa_device *vdev, u16 idx)
+ {
+ 	struct snet *snet = vdpa_to_snet(vdev);
+ 	/* not ready - ignore */
+-	if (!snet->vqs[idx]->ready)
++	if (unlikely(!snet->vqs[idx]->ready))
+ 		return;
  
- #endif //_SNET_VDPA_H_
+ 	iowrite32(SNET_KICK_VAL, snet->vqs[idx]->kick_ptr);
 -- 
 2.34.1
 
