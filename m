@@ -1,107 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0B6F16DC794
-	for <lists.virtualization@lfdr.de>; Mon, 10 Apr 2023 16:03:12 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8D7356DC878
+	for <lists.virtualization@lfdr.de>; Mon, 10 Apr 2023 17:27:27 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 41C5181EAD;
-	Mon, 10 Apr 2023 14:03:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 41C5181EAD
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20210112 header.b=oEWIIxAF
+	by smtp4.osuosl.org (Postfix) with ESMTP id C7B8C41484;
+	Mon, 10 Apr 2023 15:27:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C7B8C41484
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=HccVOaRC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oZHCAJFPIjcp; Mon, 10 Apr 2023 14:03:09 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kWMvBVL9TJF9; Mon, 10 Apr 2023 15:27:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id BA7DE81EB2;
-	Mon, 10 Apr 2023 14:03:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BA7DE81EB2
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 3767340E46;
+	Mon, 10 Apr 2023 15:27:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3767340E46
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F1F92C008C;
-	Mon, 10 Apr 2023 14:03:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4D090C008C;
+	Mon, 10 Apr 2023 15:27:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 20B45C002A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D2523C002A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Apr 2023 14:03:06 +0000 (UTC)
+ Mon, 10 Apr 2023 15:27:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id E308981EB2
+ by smtp2.osuosl.org (Postfix) with ESMTP id AE3FB40BA1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Apr 2023 14:03:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E308981EB2
+ Mon, 10 Apr 2023 15:27:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AE3FB40BA1
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=bombadil.20210309 header.b=HccVOaRC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id oYbB-iwL6mKb
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id PJq6QxPhSncu
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Apr 2023 14:03:04 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C90B681EAD
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- by smtp1.osuosl.org (Postfix) with ESMTPS id C90B681EAD
+ Mon, 10 Apr 2023 15:27:19 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B07140B9D
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 0B07140B9D
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Apr 2023 14:03:04 +0000 (UTC)
-Received: by mail-pj1-x102b.google.com with SMTP id
- pc4-20020a17090b3b8400b0024676052044so4672170pjb.1
- for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Apr 2023 07:03:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20210112; t=1681135384; x=1683727384;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:from:to:cc:subject:date:message-id:reply-to;
- bh=qY72AomAbMje6jRkZ+K0dBVO8y8e5SQs2AgwhNQHgaI=;
- b=oEWIIxAFZGUXoIe7xm1Ww8Nz5Z1O+m6YP4HtPpJ8p7hF+bFb+WyuYjq7x04iikFM+V
- rHVxzwXXMnvyiYcVtj5wcGfCt4t4q87NA1P1H95JgxzGknyyU/CEkZpl31YynsD+Jsrz
- gumTPlz6ysQsp2NrISfE2b94qiWJga0fqfYEIii2PDW/4rLJyrHlDvXpeFWhbL/zT0U6
- 3BLmHxrSQwc14m5nuP+gak300fknTJrwK3qrf5wgFiUNEI1OF/qNEgjLUlIx+FspC1N3
- knJ1AP9JfKHwmN7tg4SvgsKxGmFR2wSHr3Fv5TxK+a4J4zs3QkdFX5fwwamB0n/e+xX6
- BpTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20210112; t=1681135384; x=1683727384;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :sender:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qY72AomAbMje6jRkZ+K0dBVO8y8e5SQs2AgwhNQHgaI=;
- b=vdRdwbUa8ErTYsazRfi4POutcc4KyyotrToKF/tI8ZTOg4ulFP/J+5w24fN5kdm7uj
- tF/LmkY1lrS2a75zcRKp992DR7U3z1rIpWbKKpFjbjW23lP1HkCW/mi2Bgbu/7FMFaQD
- cRsdhRoyPUz4Kn3grqdJEhFGYbtYvFjrw4toKSHvWLkHFs2IWVZfYHQXVokJPYt6+ngb
- vcDCCaC7SZmLpkj2ceTrErEGYgBuUFlSLjMNAP2d+p/SZjK2EqrGpOC2W0TJhjW8igLP
- DUZXshk/C2jBBE2a+/WRpF7V6xYaurv6dg+gBwEi6nn0EdKGXs8IeU/2Nw4HvWfbQgkU
- Dvaw==
-X-Gm-Message-State: AAQBX9fq4lMt49t2m+SePH5Upe/DfGMoa2IZlBxyoWOM7dSCvxJhFw3z
- LJzuH/FwQ+ZyveURTuoyqX0=
-X-Google-Smtp-Source: AKy350ZhmibEj2DixzKyVcxxNP46/k57WPd2OqJaXKP90aKYHVrwKh1KvVPgM74ZIbICsziOKIE9Sw==
-X-Received: by 2002:a17:902:f544:b0:1a1:d70f:7114 with SMTP id
- h4-20020a170902f54400b001a1d70f7114mr13250142plf.14.1681135384043; 
- Mon, 10 Apr 2023 07:03:04 -0700 (PDT)
-Received: from ?IPV6:2600:1700:e321:62f0:329c:23ff:fee3:9d7c?
- ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
- by smtp.gmail.com with ESMTPSA id
- p12-20020a1709028a8c00b001a63deeb5e2sm2108819plo.92.2023.04.10.07.03.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 10 Apr 2023 07:03:03 -0700 (PDT)
-Message-ID: <2facc7cd-81fa-b8b7-6974-217392906578@roeck-us.net>
-Date: Mon, 10 Apr 2023 07:03:01 -0700
+ Mon, 10 Apr 2023 15:27:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=+VM/9tZCmksJLjY8Xs7M6EV4V1sfoeHQiJffNMfhRRw=; b=HccVOaRCUMt3KZ058V6EA+96n7
+ 5KJkyF1z0j4so3uSSQjksDt2xWvlAxg6WOVHLO+JgWJW3CPb3hN6xBmiZ8jgeEvXvdi63t6lq35Cr
+ mokCLKKEJemDYmOUwU+z/EEs+C2bAykKhxnWX3RiPNk7yWbxosia5DkmbCxkki+cJ6REBt3PNRH7l
+ 6EWpJoGPP+/YMf0nD/MmnLCSDtj2s5b5D9evrgQac3U9ZC3vortLbc3J/JhTczjftvcu72fuzRi3X
+ bYkJXAKB4OrmOvBn2JhQh8lf+d8ABqJYRUTaS2Se1+rav0p+ay49gNKis2GvUbEZ8JtLa8tjRPTvP
+ I0ms8OXg==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1pltQI-00FRS7-1B; Mon, 10 Apr 2023 15:27:14 +0000
+Date: Mon, 10 Apr 2023 08:27:14 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Jason Wang <jasowang@redhat.com>
+Subject: Re: [PATCH vhost v6 08/11] virtio_ring: introduce virtqueue_dma_dev()
+Message-ID: <ZDQq0pDVkr8TvoTM@infradead.org>
+References: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
+ <20230327040536.48338-9-xuanzhuo@linux.alibaba.com>
+ <73a24f95-b779-44ac-be28-45b35d1bf540@roeck-us.net>
+ <20230407064634-mutt-send-email-mst@kernel.org>
+ <1681097397.338332-4-xuanzhuo@linux.alibaba.com>
+ <CACGkMEvLLbGTuF1sVSse1RBssvsTR40+P5eBzYkrYnqF7EO3Jw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.9.0
-Subject: Re: [PATCH] vdpa: solidrun: constify pointers to hwmon_channel_info
-Content-Language: en-US
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20230407150130.79917-1-krzysztof.kozlowski@linaro.org>
- <0395eff6-694e-1a2f-de78-8cb9d7b129a7@roeck-us.net>
- <20230410055634-mutt-send-email-mst@kernel.org>
-From: Guenter Roeck <linux@roeck-us.net>
-In-Reply-To: <20230410055634-mutt-send-email-mst@kernel.org>
-Cc: linux-hwmon@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
- linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
- Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Content-Disposition: inline
+In-Reply-To: <CACGkMEvLLbGTuF1sVSse1RBssvsTR40+P5eBzYkrYnqF7EO3Jw@mail.gmail.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
+Cc: Christoph Hellwig <hch@infradead.org>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ virtualization@lists.linux-foundation.org, Guenter Roeck <linux@roeck-us.net>,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,68 +91,27 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 4/10/23 02:56, Michael S. Tsirkin wrote:
-> On Fri, Apr 07, 2023 at 04:08:30PM -0700, Guenter Roeck wrote:
->> On 4/7/23 08:01, Krzysztof Kozlowski wrote:
->>> Statically allocated array of pointed to hwmon_channel_info can be made
->>> const for safety.
->>>
->>> Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
->>>
->>> ---
->>>
->>> This depends on hwmon core patch:
->>> https://lore.kernel.org/all/20230406203103.3011503-2-krzysztof.kozlowski@linaro.org/
->>>
->>> Therefore I propose this should also go via hwmon tree.
->>
->> I am not going to apply patches for 10+ subsystems through the hwmon tree.
->> This can only result in chaos. The dependent patch is available at
->>
->> git://git.kernel.org/pub/scm/linux/kernel/git/groeck/linux-staging.git hwmon-const
+On Mon, Apr 10, 2023 at 01:14:13PM +0800, Jason Wang wrote:
+> > But rethink, this is unreliable. Some platforms have returned their own ops,
+> > including X86.
+> >
+> > Because the priority of dev->dma_ops is higher than get_arch_dma_ops(), we
+> > should not let dev->dma_ops be null. We should define a set of dma_ops to
+> > actively implement direct dMA.
 > 
-> Doesn't it cause build errors or warnings there?
+> Then this will duplicate with existing DMA API helpers. Could we tweak
+> the sparc or introduce a new flag for the device structure then the
+> DMA API knows it needs to use direct mapping?
 > 
+> Adding Christoph for more comments.
 
-Are you saying that "hwmon: constify pointers to hwmon_channel_info" applied on its own
-on top of v6.3-rc5 (as done in above branch) causes build errors or warnings ?
-I have not seen any such reports, and I don't immediately see why that would be
-the case. Please elaborate.
-
-Guenter
-
->> or wait until after the next commit window to apply this patch.
->>
->> Thanks,
->> Guenter
->>
->>>
->>> Cc: Jean Delvare <jdelvare@suse.com>
->>> Cc: Guenter Roeck <linux@roeck-us.net>
->>> Cc: linux-hwmon@vger.kernel.org
->>> ---
->>>    drivers/vdpa/solidrun/snet_hwmon.c | 2 +-
->>>    1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/drivers/vdpa/solidrun/snet_hwmon.c b/drivers/vdpa/solidrun/snet_hwmon.c
->>> index e695e36ff753..65304354b34a 100644
->>> --- a/drivers/vdpa/solidrun/snet_hwmon.c
->>> +++ b/drivers/vdpa/solidrun/snet_hwmon.c
->>> @@ -159,7 +159,7 @@ static const struct hwmon_ops snet_hwmon_ops = {
->>>    	.read_string = snet_hwmon_read_string
->>>    };
->>> -static const struct hwmon_channel_info *snet_hwmon_info[] = {
->>> +static const struct hwmon_channel_info * const snet_hwmon_info[] = {
->>>    	HWMON_CHANNEL_INFO(temp, HWMON_T_INPUT | HWMON_T_MAX | HWMON_T_CRIT | HWMON_T_LABEL,
->>>    			   HWMON_T_INPUT | HWMON_T_CRIT | HWMON_T_LABEL),
->>>    	HWMON_CHANNEL_INFO(power, HWMON_P_INPUT | HWMON_P_LABEL),
-> 
-
+Code outside of the core kernel/dma/ code has no business doing
+anything with the dma_ops.  WTF is going on?
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
