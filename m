@@ -1,75 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 582816DD2D6
-	for <lists.virtualization@lfdr.de>; Tue, 11 Apr 2023 08:32:26 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 146896DD2C8
+	for <lists.virtualization@lfdr.de>; Tue, 11 Apr 2023 08:29:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id E5B8F405AE;
-	Tue, 11 Apr 2023 06:32:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org E5B8F405AE
+	by smtp3.osuosl.org (Postfix) with ESMTP id 53D4461440;
+	Tue, 11 Apr 2023 06:29:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 53D4461440
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Hra8B2eC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 48nQkT0iFcgx; Tue, 11 Apr 2023 06:32:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id BD99B4017A;
-	Tue, 11 Apr 2023 06:32:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BD99B4017A
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id SUcjZpQj2Nis; Tue, 11 Apr 2023 06:29:50 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 286FD6143C;
+	Tue, 11 Apr 2023 06:29:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 286FD6143C
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 01002C008C;
-	Tue, 11 Apr 2023 06:32:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 57F70C008C;
+	Tue, 11 Apr 2023 06:29:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 51116C002A
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8D8A9C002A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:32:21 +0000 (UTC)
+ Tue, 11 Apr 2023 06:29:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 32B014017A
+ by smtp1.osuosl.org (Postfix) with ESMTP id 552A181E12
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:32:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 32B014017A
+ Tue, 11 Apr 2023 06:29:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 552A181E12
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=Hra8B2eC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TUh1hPToac1Z
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JuGhvALkxTsO
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:32:20 +0000 (UTC)
+ Tue, 11 Apr 2023 06:29:47 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C1FB34014B
-Received: from out30-119.freemail.mail.aliyun.com
- (out30-119.freemail.mail.aliyun.com [115.124.30.119])
- by smtp2.osuosl.org (Postfix) with ESMTPS id C1FB34014B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 86B5281E10
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 86B5281E10
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:32:19 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R471e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=7; SR=0;
- TI=SMTPD_---0Vfr5Wg7_1681194733; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vfr5Wg7_1681194733) by smtp.aliyun-inc.com;
- Tue, 11 Apr 2023 14:32:14 +0800
-Message-ID: <1681194480.146465-3-xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH vhost v6 08/11] virtio_ring: introduce virtqueue_dma_dev()
-Date: Tue, 11 Apr 2023 14:28:00 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: Christoph Hellwig <hch@infradead.org>
-References: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
- <20230327040536.48338-9-xuanzhuo@linux.alibaba.com>
- <73a24f95-b779-44ac-be28-45b35d1bf540@roeck-us.net>
- <20230407064634-mutt-send-email-mst@kernel.org>
- <1681097397.338332-4-xuanzhuo@linux.alibaba.com>
- <CACGkMEvLLbGTuF1sVSse1RBssvsTR40+P5eBzYkrYnqF7EO3Jw@mail.gmail.com>
- <ZDQq0pDVkr8TvoTM@infradead.org>
- <1681178179.2350223-1-xuanzhuo@linux.alibaba.com>
- <CACGkMEskNEwD0_AZgoDLS2RBv9cpbH5u1q01=cDuawV0NbhK_w@mail.gmail.com>
- <ZDTUn6TUqzrF06mr@infradead.org>
- <CACGkMEtD0BLBXv7S-TLY-Y483_Lx4UskLyPmEC2wyGa8VE_R6w@mail.gmail.com>
- <1681193477.0633929-1-xuanzhuo@linux.alibaba.com>
- <ZDT8S6Q9mzNa5dRh@infradead.org>
-In-Reply-To: <ZDT8S6Q9mzNa5dRh@infradead.org>
-Cc: Maciej Fijalkowski <maciej.fijalkowski@intel.com>, "Michael S. Tsirkin" <mst@redhat.com>, virtualization@lists.linux-foundation.org, Christoph Hellwig <hch@infradead.org>, Björn Töpel <bjorn@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Magnus Karlsson <magnus.karlsson@intel.com>
+ Tue, 11 Apr 2023 06:29:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1681194586;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=oSR/BoPrTP4dM6eEMbqNicTKlgGAh6IQScE+JTRaUCI=;
+ b=Hra8B2eCWiJ6BdeclaIvYpWFdv1Yuk6cRegWMdaj6GhlrolKkaEfbYcFT10240nA2mnu6k
+ 5xaXtIZ5NpGUs/QxUDJ4tWuCxS/sef6kbGllsxWD1obVoyRpB4+K/bW68s9w8zpa0YWyZb
+ T/57KP+tOdmd7EZKPkiohNP2TcN5+9E=
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-13-pWBuj2_rPleJ5hzS3Ttqzg-1; Tue, 11 Apr 2023 02:29:43 -0400
+X-MC-Unique: pWBuj2_rPleJ5hzS3Ttqzg-1
+Received: by mail-wm1-f70.google.com with SMTP id
+ m7-20020a05600c3b0700b003ee112e6df1so1315781wms.2
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 10 Apr 2023 23:29:43 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20210112; t=1681194582;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oSR/BoPrTP4dM6eEMbqNicTKlgGAh6IQScE+JTRaUCI=;
+ b=BS1gz7HNVefgTLWq+H4Je9awN85VwEMmXOqxv+D0xI36pWtwCID4Uev0+HIEYH0tU+
+ 64/due3QI3v7BkRscHlEp/FbWo/0YMXJ8WKCT5yFO4gI8K0sirGke/JpOFLbAahtqoTs
+ 2jxky7W1QksDRgrEpCgk4ZYn4gTyF+GNT6PrEZw1jliKbO7NSm71jUt6HNQC1u8pqdvf
+ kQ6b74bptnq1aUb0LyAAjvasmXhFKZFis7QHdcFGbVu9gooTZOvsipimF7xeMxHw/dr/
+ TM2TuZqOz3oPFFsRUEqsve7plIDcwAc9/CSn6VvKEa+ONVxkOtcFxr4WjHoWrIsp7DQh
+ NRIw==
+X-Gm-Message-State: AAQBX9e6sudaoShsIL52prke8Hpu5EAi0bGs5QIGu8XYzWP7fVsiWpoB
+ QfxldNAaAJ+B7gflZG+6Uwkoye5nJXSwo1CCsSl3ou+ARgftQUOnV4qToeenHNpRb+8TGznLgsk
+ vUS4laXE3hkvvt4LZz5z4EkqieqqxaQiBGMrPDyawf+7ssHiz4Q==
+X-Received: by 2002:a05:600c:3786:b0:3eb:3104:efec with SMTP id
+ o6-20020a05600c378600b003eb3104efecmr6103019wmr.16.1681194581882; 
+ Mon, 10 Apr 2023 23:29:41 -0700 (PDT)
+X-Google-Smtp-Source: AKy350ZMnDmXJKwVPTFLe5E+xPCjkP07zR84RGkXb1tNKi76IBa8wNnsmfGG09/OTcO4lFwDkKN4+Q==
+X-Received: by 2002:a05:600c:3786:b0:3eb:3104:efec with SMTP id
+ o6-20020a05600c378600b003eb3104efecmr6103012wmr.16.1681194581491; 
+ Mon, 10 Apr 2023 23:29:41 -0700 (PDT)
+Received: from redhat.com ([2.52.10.80]) by smtp.gmail.com with ESMTPSA id
+ m30-20020a05600c3b1e00b003ef5deb4188sm19722538wms.17.2023.04.10.23.29.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Apr 2023 23:29:40 -0700 (PDT)
+Date: Tue, 11 Apr 2023 02:29:37 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Angus Chen <angus.chen@jaguarmicro.com>
+Subject: Re: [PATCH] virtio_pci: Wait for legacy device to be reset
+Message-ID: <20230411022329-mutt-send-email-mst@kernel.org>
+References: <20230411013833.1305-1-angus.chen@jaguarmicro.com>
+MIME-Version: 1.0
+In-Reply-To: <20230411013833.1305-1-angus.chen@jaguarmicro.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -81,34 +115,61 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, 10 Apr 2023 23:20:59 -0700, Christoph Hellwig <hch@infradead.org> wrote:
-> On Tue, Apr 11, 2023 at 02:11:17PM +0800, Xuan Zhuo wrote:
-> > NO, all dma maping is done inside xdp socket. That is done
-> > when setup.
->
-> That is just completely broken, virtio or not.  Highlevel code like
-> sockets must never do dma mappings themselves.
+On Tue, Apr 11, 2023 at 09:38:32AM +0800, Angus Chen wrote:
+> We read the status of device after reset,
+> It is not guaranteed that the device be reseted successfully.
 
-AF_XDP provides some API for net driver. This API will do dma map or dma sync.
+Sorry not guaranteed by what? I am guessing you have a legacy device
+that does not reset fully on write, and you need to wait?
 
-cc AF_XDP maintainers.
+> We can use a while loop to make sure that,like the modern device did.
+> The spec is not request it ,but it work.
+> 
+> Signed-off-by: Angus Chen <angus.chen@jaguarmicro.com>
 
-If we cannot set Virtio Deivce to a direct DMA device, then we can only make
-some modifications in AF_XDP.
+Generally I don't much like touching legacy, no telling what
+that will do. Case in point, is your device a pure
+legacy device or a transitional device?
 
-Thanks.
+> ---
+>  drivers/virtio/virtio_pci_legacy.c | 4 +++-
+>  1 file changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/drivers/virtio/virtio_pci_legacy.c b/drivers/virtio/virtio_pci_legacy.c
+> index 2257f1b3d8ae..f2d241563e4f 100644
+> --- a/drivers/virtio/virtio_pci_legacy.c
+> +++ b/drivers/virtio/virtio_pci_legacy.c
+> @@ -14,6 +14,7 @@
+>   *  Michael S. Tsirkin <mst@redhat.com>
+>   */
+>  
+> +#include <linux/delay.h>
+>  #include "linux/virtio_pci_legacy.h"
+>  #include "virtio_pci_common.h"
+>  
+> @@ -97,7 +98,8 @@ static void vp_reset(struct virtio_device *vdev)
+>  	vp_legacy_set_status(&vp_dev->ldev, 0);
+>  	/* Flush out the status write, and flush in device writes,
+>  	 * including MSi-X interrupts, if any. */
+> -	vp_legacy_get_status(&vp_dev->ldev);
+> +	while (vp_legacy_get_status(&vp_dev->ldev))
+> +		msleep(1);
+
+The problem with this is that it will break surprise
+removal even worse than it's already broken.
 
 
-> _______________________________________________
-> Virtualization mailing list
-> Virtualization@lists.linux-foundation.org
-> https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+>  	/* Flush pending VQ/configuration callbacks. */
+>  	vp_synchronize_vectors(vdev);
+>  }
+> -- 
+> 2.25.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
