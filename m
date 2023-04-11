@@ -1,67 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9661B6DD2CC
-	for <lists.virtualization@lfdr.de>; Tue, 11 Apr 2023 08:30:36 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 848486DD2ED
+	for <lists.virtualization@lfdr.de>; Tue, 11 Apr 2023 08:35:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AF1684177C;
-	Tue, 11 Apr 2023 06:30:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AF1684177C
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=jUjouYtq
+	by smtp2.osuosl.org (Postfix) with ESMTP id 9E606408CA;
+	Tue, 11 Apr 2023 06:35:23 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9E606408CA
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7Uz-QH0lo-lF; Tue, 11 Apr 2023 06:30:33 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 5924B4179E;
-	Tue, 11 Apr 2023 06:30:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5924B4179E
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id rewA-niyDAXD; Tue, 11 Apr 2023 06:35:23 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 5B3F040609;
+	Tue, 11 Apr 2023 06:35:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5B3F040609
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 935BCC008C;
-	Tue, 11 Apr 2023 06:30:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8A526C008C;
+	Tue, 11 Apr 2023 06:35:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 54E0EC002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F3B5BC002A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:30:31 +0000 (UTC)
+ Tue, 11 Apr 2023 06:35:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 2D8854177F
+ by smtp4.osuosl.org (Postfix) with ESMTP id C6A9C410B0
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:30:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2D8854177F
+ Tue, 11 Apr 2023 06:35:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C6A9C410B0
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1bmNqLGFpT1Q
+ with ESMTP id 9iRF04MXdT0Q
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:30:30 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 331274177C
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 331274177C
+ Tue, 11 Apr 2023 06:35:18 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4183B410A7
+Received: from out30-97.freemail.mail.aliyun.com
+ (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4183B410A7
  for <virtualization@lists.linux-foundation.org>;
- Tue, 11 Apr 2023 06:30:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=FNvFeGrTou+NGjTd2TqOWZ2REBumgpmWXYRPq6cKlvE=; b=jUjouYtql+GvvSESHLBddu3oWH
- Lhc3SBi9YVwVFxHPIeZ6zbywH58AZuNG4v2dHzaFFZanUKN5SOicGcg9cqYYy3GdSmorowN6vrB9i
- Caz7jvNgJk4uc9CctZJdDXWe+5A70Mv/bstMBorDAJc+qZuufghEv2t9Gaxdm9TFlP2aI8vSHUrQ2
- lVBHRyxqKgeXZtIBpZH7DboAGc1C5kVTb+/dglwYvAR/TAD1SUUss7ELD86MUHYntemKHFjBo4Ko9
- zN9lf0QLjeb6xTnwVkp/U9t1qMQqSk/dFtBHjiR28FTHqBzHK1/F7keza5q7wtZwwsIruSkR8BaRa
- QRy/J+HQ==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1pm7WP-00GZxR-0r; Tue, 11 Apr 2023 06:30:29 +0000
-Date: Mon, 10 Apr 2023 23:30:29 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+ Tue, 11 Apr 2023 06:35:17 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R161e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=4; SR=0;
+ TI=SMTPD_---0Vfr5u5h_1681194912; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0Vfr5u5h_1681194912) by smtp.aliyun-inc.com;
+ Tue, 11 Apr 2023 14:35:12 +0800
+Message-ID: <1681194809.9329011-4-xuanzhuo@linux.alibaba.com>
 Subject: Re: [PATCH vhost v6 08/11] virtio_ring: introduce virtqueue_dma_dev()
-Message-ID: <ZDT+hc2XsqbVifjL@infradead.org>
+Date: Tue, 11 Apr 2023 14:33:29 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Christoph Hellwig <hch@infradead.org>
 References: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
  <20230327040536.48338-9-xuanzhuo@linux.alibaba.com>
  <73a24f95-b779-44ac-be28-45b35d1bf540@roeck-us.net>
@@ -72,14 +65,11 @@ References: <20230327040536.48338-1-xuanzhuo@linux.alibaba.com>
  <1681178179.2350223-1-xuanzhuo@linux.alibaba.com>
  <ZDTTXCPaW8D1nW4C@infradead.org>
  <1681194222.3822775-2-xuanzhuo@linux.alibaba.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1681194222.3822775-2-xuanzhuo@linux.alibaba.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
+ <ZDT+hc2XsqbVifjL@infradead.org>
+In-Reply-To: <ZDT+hc2XsqbVifjL@infradead.org>
 Cc: Christoph Hellwig <hch@infradead.org>,
- virtualization@lists.linux-foundation.org, Guenter Roeck <linux@roeck-us.net>,
- "Michael S. Tsirkin" <mst@redhat.com>
+ "Michael S. Tsirkin" <mst@redhat.com>, Guenter Roeck <linux@roeck-us.net>,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -91,16 +81,31 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-> > Can you please explain what you're even trying to do?
-> 
-> I want to force a device use direct dma map.
+On Mon, 10 Apr 2023 23:30:29 -0700, Christoph Hellwig <hch@infradead.org> wrote:
+> > > Can you please explain what you're even trying to do?
+> >
+> > I want to force a device use direct dma map.
+>
+> You fundamentally can't do that.  It can't work.
 
-You fundamentally can't do that.  It can't work.
+Do you mean my idea is wrong, right?
+
+Can you explain it? Why can't we support a device that uses only dirct map?
+
+Thanks.
+
+
+
+> _______________________________________________
+> Virtualization mailing list
+> Virtualization@lists.linux-foundation.org
+> https://lists.linuxfoundation.org/mailman/listinfo/virtualization
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
