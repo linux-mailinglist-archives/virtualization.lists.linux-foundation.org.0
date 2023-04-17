@@ -1,120 +1,116 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 505296E3FF6
-	for <lists.virtualization@lfdr.de>; Mon, 17 Apr 2023 08:41:22 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 235C46E4002
+	for <lists.virtualization@lfdr.de>; Mon, 17 Apr 2023 08:43:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E7E19417A3;
-	Mon, 17 Apr 2023 06:41:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E7E19417A3
+	by smtp4.osuosl.org (Postfix) with ESMTP id 34F4B40937;
+	Mon, 17 Apr 2023 06:43:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 34F4B40937
 Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=YuETFynO
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SfSaXI7i
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
 	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id chD9DVeJ-gy8; Mon, 17 Apr 2023 06:41:19 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 6FCE74177A;
-	Mon, 17 Apr 2023 06:41:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6FCE74177A
+	with ESMTP id 6WEuRYibsqeR; Mon, 17 Apr 2023 06:43:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 9690B40941;
+	Mon, 17 Apr 2023 06:43:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9690B40941
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9D5D9C0089;
-	Mon, 17 Apr 2023 06:41:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 458B2C008B;
+	Mon, 17 Apr 2023 06:43:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C56D4C002A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8DED3C002A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Apr 2023 06:41:16 +0000 (UTC)
+ Mon, 17 Apr 2023 06:43:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AA11682215
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5B48C4092C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Apr 2023 06:41:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AA11682215
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=YuETFynO
+ Mon, 17 Apr 2023 06:43:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5B48C4092C
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ARISqh9wegLS
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id RWvmwANG8xj0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Apr 2023 06:41:14 +0000 (UTC)
+ Mon, 17 Apr 2023 06:43:44 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 87D8282214
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 09EDB4091C
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 87D8282214
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 09EDB4091C
  for <virtualization@lists.linux-foundation.org>;
- Mon, 17 Apr 2023 06:41:14 +0000 (UTC)
+ Mon, 17 Apr 2023 06:43:43 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1681713673;
+ s=mimecast20190719; t=1681713822;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=OxKMHMF5ij1bxNLeFZRcL6SeBcLJINT9bFcDHFvcGBQ=;
- b=YuETFynOezCctj1CJlHYhFR+u8Gtev3GqeiR4y5+NBR8qP9E3DPA4HBtcAIyNzhvt4sDLc
- kVVfYzhcOUvBNMtBVOY2BcM6VhjQ7bc3f3xvBEmtceifg98HEa3AKCm6ygU2JY+y0VuO19
- roQOQ21fzHzFbHc1bga78lJrY93CVNk=
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com
- [209.85.219.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=HU6O3KzfQ0zQunJtU8XAVLCiL1L8OjBQOXvK0FwCmb0=;
+ b=SfSaXI7i9rolakEjO4owKe4TQSpiewGYwgn4phOkST6c0iDXFrCOJ9zBRZRFo2dUFyS5nY
+ WEpGPSEQieH5MKV9yTv08M7ntAhfe7GghzrDabyjWU9CvDXogZ6utBlWdn152uLD7ctkUm
+ EtD3h91YUA8n9pIqZ05FXWc/8Fhd45s=
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com
+ [209.85.219.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-16-CSr3L_1kN_al52m-xEcyXg-1; Mon, 17 Apr 2023 02:41:12 -0400
-X-MC-Unique: CSr3L_1kN_al52m-xEcyXg-1
-Received: by mail-qv1-f69.google.com with SMTP id
- q5-20020ad44025000000b005ef45791eb5so5421123qvp.19
+ us-mta-623-49NYjv2OMJ-oieuZa_wCjg-1; Mon, 17 Apr 2023 02:43:41 -0400
+X-MC-Unique: 49NYjv2OMJ-oieuZa_wCjg-1
+Received: by mail-qv1-f72.google.com with SMTP id
+ j4-20020a0cc344000000b005e94fb0d2b0so10915876qvi.4
  for <virtualization@lists.linux-foundation.org>;
- Sun, 16 Apr 2023 23:41:12 -0700 (PDT)
+ Sun, 16 Apr 2023 23:43:41 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1681713671; x=1684305671;
+ d=1e100.net; s=20221208; t=1681713821; x=1684305821;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OxKMHMF5ij1bxNLeFZRcL6SeBcLJINT9bFcDHFvcGBQ=;
- b=deTbeCZqlh7YjMXYtAFJcbn476RJ7GEV08KqFtHyxzZa3o4ByW5Xt8xZG4xstFTXGi
- a03PlhrldhPwpf0xxtrkOX6lYyecOa84jZH3mJUQgLufK0EJSRouF0jG5Iw9Wgf58QuE
- 9mG86CCukaH9uOBX9bKBqmnJvAAph7BAUNJHsYmQRqgu7m5nU14LMxyzOWD975xkAL+W
- lCotcfmZn8JbUXdXSHOeoU6apBKo4Y4lGYErKdwTRxyIc2xV7UfcCsKJTvlHRw9OGPty
- JeKxoAvDwpKi61XIpSwI76yOAyTNWAWk5MLFjmrctXVgARQOfESVw6Q91C5+p8JSQwdA
- whlQ==
-X-Gm-Message-State: AAQBX9cCS6JmEXqBwoo03zIwOIQ1LjOOUzYU5AJs1Coz6sMu9PJ/QK45
- wOL8rPuo0XOI6p08LfQ4TfEtrCxGsvW05ei0JkYg29a7s1rPYyVFJq9dF7KEF65zv4Hu4+wONkS
- b4yknKHJfyN+d2CxK1/eW2rd2qMWuTWAIiFu8Sj6TgQGtM10SQsYr
-X-Received: by 2002:a05:622a:144:b0:3e3:9036:8d7b with SMTP id
- v4-20020a05622a014400b003e390368d7bmr23144627qtw.24.1681713671547; 
- Sun, 16 Apr 2023 23:41:11 -0700 (PDT)
-X-Google-Smtp-Source: AKy350awUisy2QmOytI/7wHAUSKfUVvRV0PC8LxBgH9zz1azFDxXLfpwgedyZCjCtr2bsDRdI6Gagw==
-X-Received: by 2002:a05:622a:144:b0:3e3:9036:8d7b with SMTP id
- v4-20020a05622a014400b003e390368d7bmr23144611qtw.24.1681713671291; 
- Sun, 16 Apr 2023 23:41:11 -0700 (PDT)
+ bh=HU6O3KzfQ0zQunJtU8XAVLCiL1L8OjBQOXvK0FwCmb0=;
+ b=hNafaDLEnRDho5uD5oiY69G6G25td8nucs8puMW/9D8hwbwwFDI0tP2A7N0EJII0kj
+ 7w3a/zXH2GR1AIUIuUvSxAKo4HUM7/7EWB+nu7Gdkpwtdj5UqxEnpkQLTiXRQ50iaOQy
+ 5M2wUfP5J0XUEJAGjus0SlR5oDVOvGFwKrTENTmRJOj+M+ZrouNQjhK5B0aEy48lP5P2
+ yGPRh8Yl7ky3Z46obAfhJBGzwmlKNggo/QgwhJ/t0xogtdocmtHIZan8il7NTVHnSzuF
+ hpmZTfPcSs//cwvQfnEd4N9E56YzWptalgeEjEOaCsBkc2H60M3c5dZGEIEM+dw3eBgI
+ XwgQ==
+X-Gm-Message-State: AAQBX9chk5lcvqJ+zJGJ6UZotqtr2yHGtz8LEFeg+tJpIX3owpRiNZOf
+ iVYvn8QkqKYrHLyLioYXWQ7WitNyo64E2i7x/gWtVr4VzRLWjCPb5lLiC6JvOdmYUsA++Eb4ssO
+ 9t54PclJrnC4JHXtMqKQm/WQaE1SNAPaBmQoKnqD+LA==
+X-Received: by 2002:a05:622a:1756:b0:3bf:d8b6:4ca1 with SMTP id
+ l22-20020a05622a175600b003bfd8b64ca1mr20925359qtk.28.1681713821387; 
+ Sun, 16 Apr 2023 23:43:41 -0700 (PDT)
+X-Google-Smtp-Source: AKy350aze/kYu2ExuJQuREbYNzivfTsLWddfaCb28LVbISLKnDjQ8eKYMKUloj0ytrzWgoKdCDYq1w==
+X-Received: by 2002:a05:622a:1756:b0:3bf:d8b6:4ca1 with SMTP id
+ l22-20020a05622a175600b003bfd8b64ca1mr20925333qtk.28.1681713821133; 
+ Sun, 16 Apr 2023 23:43:41 -0700 (PDT)
 Received: from redhat.com ([185.199.103.251]) by smtp.gmail.com with ESMTPSA id
- bi8-20020a05620a318800b007456b51ee13sm1898249qkb.16.2023.04.16.23.41.08
+ ay43-20020a05620a17ab00b0074577e835f2sm2985905qkb.48.2023.04.16.23.43.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Apr 2023 23:41:10 -0700 (PDT)
-Date: Mon, 17 Apr 2023 02:41:04 -0400
+ Sun, 16 Apr 2023 23:43:40 -0700 (PDT)
+Date: Mon, 17 Apr 2023 02:43:32 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Alvaro Karsz <alvaro.karsz@solid-run.com>
-Subject: Re: [PATCH net] virtio-net: reject small vring sizes
-Message-ID: <20230417023911-mutt-send-email-mst@kernel.org>
-References: <20230416074607.292616-1-alvaro.karsz@solid-run.com>
- <AM0PR04MB4723C6E99A217F51973710F5D49F9@AM0PR04MB4723.eurprd04.prod.outlook.com>
- <20230416164453-mutt-send-email-mst@kernel.org>
- <CACGkMEvFhVyWb5+ET_akPvnjUq04+ZbJC8o_GtNBWqSMGNum8A@mail.gmail.com>
- <20230417021725-mutt-send-email-mst@kernel.org>
- <AM0PR04MB4723B8489F8F9AE547393697D49C9@AM0PR04MB4723.eurprd04.prod.outlook.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net-next] xsk: introduce xsk_dma_ops
+Message-ID: <20230417024216-mutt-send-email-mst@kernel.org>
+References: <20230417032750.7086-1-xuanzhuo@linux.alibaba.com>
 MIME-Version: 1.0
-In-Reply-To: <AM0PR04MB4723B8489F8F9AE547393697D49C9@AM0PR04MB4723.eurprd04.prod.outlook.com>
+In-Reply-To: <20230417032750.7086-1-xuanzhuo@linux.alibaba.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
- "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
- "virtualization@lists.linux-foundation.org"
- <virtualization@lists.linux-foundation.org>,
- "edumazet@google.com" <edumazet@google.com>,
- "kuba@kernel.org" <kuba@kernel.org>, "pabeni@redhat.com" <pabeni@redhat.com>,
- "davem@davemloft.net" <davem@davemloft.net>
+Cc: Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
+ John Fastabend <john.fastabend@gmail.com>, Eric Dumazet <edumazet@google.com>,
+ Alexei Starovoitov <ast@kernel.org>, Christoph Hellwig <hch@infradead.org>,
+ =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn@kernel.org>,
+ Guenter Roeck <linux@roeck-us.net>, Jonathan Lemon <jonathan.lemon@gmail.com>,
+ Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
+ Paolo Abeni <pabeni@redhat.com>, virtualization@lists.linux-foundation.org,
+ "David S. Miller" <davem@davemloft.net>,
+ Magnus Karlsson <magnus.karlsson@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -131,25 +127,45 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Apr 17, 2023 at 06:38:43AM +0000, Alvaro Karsz wrote:
-> > Actually, I think that all you need to do is disable NETIF_F_SG,
-> > and things will work, no?
-> 
-> I think that this is not so simple, if I understand correctly, by disabling NETIF_F_SG we will never receive a chained skbs to transmit, but we still have more functionality to address, for example:
-> * The TX timeouts.
+On Mon, Apr 17, 2023 at 11:27:50AM +0800, Xuan Zhuo wrote:
+> @@ -532,9 +545,9 @@ struct xdp_buff *xp_alloc(struct xsk_buff_pool *pool)
+>  	xskb->xdp.data_meta = xskb->xdp.data;
+>  
+>  	if (pool->dma_need_sync) {
+> -		dma_sync_single_range_for_device(pool->dev, xskb->dma, 0,
+> -						 pool->frame_len,
+> -						 DMA_BIDIRECTIONAL);
+> +		pool->dma_ops.sync_single_range_for_device(pool->dev, xskb->dma, 0,
+> +							   pool->frame_len,
+> +							   DMA_BIDIRECTIONAL);
+>  	}
+>  	return &xskb->xdp;
+>  }
+> @@ -670,15 +683,15 @@ EXPORT_SYMBOL(xp_raw_get_dma);
+>  
+>  void xp_dma_sync_for_cpu_slow(struct xdp_buff_xsk *xskb)
+>  {
+> -	dma_sync_single_range_for_cpu(xskb->pool->dev, xskb->dma, 0,
+> -				      xskb->pool->frame_len, DMA_BIDIRECTIONAL);
+> +	xskb->pool->dma_ops.sync_single_range_for_cpu(xskb->pool->dev, xskb->dma, 0,
+> +						      xskb->pool->frame_len, DMA_BIDIRECTIONAL);
+>  }
+>  EXPORT_SYMBOL(xp_dma_sync_for_cpu_slow);
+>  
+>  void xp_dma_sync_for_device_slow(struct xsk_buff_pool *pool, dma_addr_t dma,
+>  				 size_t size)
+>  {
+> -	dma_sync_single_range_for_device(pool->dev, dma, 0,
+> -					 size, DMA_BIDIRECTIONAL);
+> +	pool->dma_ops.sync_single_range_for_device(pool->dev, dma, 0,
+> +						   size, DMA_BIDIRECTIONAL);
+>  }
+>  EXPORT_SYMBOL(xp_dma_sync_for_device_slow);
 
-I don't get it. With a linear skb we can transmit it as long as there's
-space for 2 entries in the vq: header and data. What's the source of the
-timeouts?
+So you add an indirect function call on data path? Won't this be costly?
 
-> * Guest GSO/big MTU (without VIRTIO_NET_F_MRG_RXBUF?), we can't chain page size buffers anymore.
-
-I think we can.  mergeable_min_buf_len will just be large.
-
-
-> > Alvaro, can you try?
-> 
-> It won't matter at the moment, we'll get TX timeout after the first tx packet, we need to address this part as well.
+> -- 
+> 2.32.0.3.g01195cf9f
 
 _______________________________________________
 Virtualization mailing list
