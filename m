@@ -1,61 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 686716E59C5
-	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:47 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id A9C166E59C8
+	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:51 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id EE32381E26;
-	Tue, 18 Apr 2023 06:53:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EE32381E26
+	by smtp4.osuosl.org (Postfix) with ESMTP id 12DE34180B;
+	Tue, 18 Apr 2023 06:53:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 12DE34180B
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1dsG2IQQ9P8Q; Tue, 18 Apr 2023 06:53:44 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id CFVN7sqjpYYb; Tue, 18 Apr 2023 06:53:46 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A92AA81DF9;
-	Tue, 18 Apr 2023 06:53:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A92AA81DF9
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 58D68417D5;
+	Tue, 18 Apr 2023 06:53:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 58D68417D5
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7E07AC008B;
-	Tue, 18 Apr 2023 06:53:43 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2001EC008F;
+	Tue, 18 Apr 2023 06:53:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E8C01C008B
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2DDABC008B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:41 +0000 (UTC)
+ Tue, 18 Apr 2023 06:53:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 994C341043
+ by smtp2.osuosl.org (Postfix) with ESMTP id EDC3540CA6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 994C341043
+ Tue, 18 Apr 2023 06:53:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EDC3540CA6
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RaJq8ZrbpnVJ
+ with ESMTP id wkiW3r54FzGC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:40 +0000 (UTC)
+ Tue, 18 Apr 2023 06:53:42 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5BE4140CC8
-Received: from out30-112.freemail.mail.aliyun.com
- (out30-112.freemail.mail.aliyun.com [115.124.30.112])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5BE4140CC8
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 97C1B41030
+Received: from out30-100.freemail.mail.aliyun.com
+ (out30-100.freemail.mail.aliyun.com [115.124.30.100])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 97C1B41030
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:39 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
+ Tue, 18 Apr 2023 06:53:41 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R861e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VgOLniu_1681800813; 
+ TI=SMTPD_---0VgOLnjZ_1681800814; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VgOLniu_1681800813) by smtp.aliyun-inc.com;
- Tue, 18 Apr 2023 14:53:34 +0800
+ fp:SMTPD_---0VgOLnjZ_1681800814) by smtp.aliyun-inc.com;
+ Tue, 18 Apr 2023 14:53:35 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v2 06/14] virtio_net: separate the logic of freeing
- xdp shinfo
-Date: Tue, 18 Apr 2023 14:53:19 +0800
-Message-Id: <20230418065327.72281-7-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v2 07/14] virtio_net: separate the logic of freeing
+ the rest mergeable buf
+Date: Tue, 18 Apr 2023 14:53:20 +0800
+Message-Id: <20230418065327.72281-8-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
 References: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
@@ -83,70 +83,69 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch introduce a new function that releases the
-xdp shinfo. The subsequent patch will reuse this function.
+This patch introduce a new function that frees the rest mergeable buf.
+The subsequent patch will reuse this function.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/net/virtio_net.c | 27 ++++++++++++++++-----------
- 1 file changed, 16 insertions(+), 11 deletions(-)
+ drivers/net/virtio_net.c | 36 ++++++++++++++++++++++++------------
+ 1 file changed, 24 insertions(+), 12 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 4dfdc211d355..5cec4b418110 100644
+index 5cec4b418110..e2eade87d2d4 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -798,6 +798,21 @@ static int virtnet_xdp_xmit(struct net_device *dev,
- 	return ret;
+@@ -1078,6 +1078,28 @@ static struct sk_buff *receive_big(struct net_device *dev,
+ 	return NULL;
  }
  
-+static void put_xdp_frags(struct xdp_buff *xdp)
++static void mergeable_buf_free(struct receive_queue *rq, int num_buf,
++			       struct net_device *dev,
++			       struct virtnet_rq_stats *stats)
 +{
-+	struct skb_shared_info *shinfo;
-+	struct page *xdp_page;
-+	int i;
++	struct page *page;
++	void *buf;
++	int len;
 +
-+	if (xdp_buff_has_frags(xdp)) {
-+		shinfo = xdp_get_shared_info_from_buff(xdp);
-+		for (i = 0; i < shinfo->nr_frags; i++) {
-+			xdp_page = skb_frag_page(&shinfo->frags[i]);
-+			put_page(xdp_page);
++	while (num_buf-- > 1) {
++		buf = virtqueue_get_buf(rq->vq, &len);
++		if (unlikely(!buf)) {
++			pr_debug("%s: rx error: %d buffers missing\n",
++				 dev->name, num_buf);
++			dev->stats.rx_length_errors++;
++			break;
 +		}
++		stats->bytes += len;
++		page = virt_to_head_page(buf);
++		put_page(page);
 +	}
 +}
 +
- static int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 			       struct net_device *dev,
- 			       unsigned int *xdp_xmit,
-@@ -1315,12 +1330,9 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 	xdp_prog = rcu_dereference(rq->xdp_prog);
- 	if (xdp_prog) {
- 		unsigned int xdp_frags_truesz = 0;
--		struct skb_shared_info *shinfo;
--		struct page *xdp_page;
- 		struct xdp_buff xdp;
- 		void *data;
- 		u32 act;
--		int i;
- 
- 		data = mergeable_xdp_prepare(vi, rq, xdp_prog, ctx, &frame_sz,
- 					     &num_buf, &page, offset, &len, hdr);
-@@ -1351,14 +1363,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 			break;
- 		}
- err_xdp_frags:
--		if (xdp_buff_has_frags(&xdp)) {
--			shinfo = xdp_get_shared_info_from_buff(&xdp);
--			for (i = 0; i < shinfo->nr_frags; i++) {
--				xdp_page = skb_frag_page(&shinfo->frags[i]);
--				put_page(xdp_page);
--			}
+ /* Why not use xdp_build_skb_from_frame() ?
+  * XDP core assumes that xdp frags are PAGE_SIZE in length, while in
+  * virtio-net there are 2 points that do not match its requirements:
+@@ -1439,18 +1461,8 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ 	stats->xdp_drops++;
+ err_skb:
+ 	put_page(page);
+-	while (num_buf-- > 1) {
+-		buf = virtqueue_get_buf(rq->vq, &len);
+-		if (unlikely(!buf)) {
+-			pr_debug("%s: rx error: %d buffers missing\n",
+-				 dev->name, num_buf);
+-			dev->stats.rx_length_errors++;
+-			break;
 -		}
--
-+		put_xdp_frags(&xdp);
- 		goto err_xdp;
- 	}
- 	rcu_read_unlock();
+-		stats->bytes += len;
+-		page = virt_to_head_page(buf);
+-		put_page(page);
+-	}
++	mergeable_buf_free(rq, num_buf, dev, stats);
++
+ err_buf:
+ 	stats->drops++;
+ 	dev_kfree_skb(head_skb);
 -- 
 2.32.0.3.g01195cf9f
 
