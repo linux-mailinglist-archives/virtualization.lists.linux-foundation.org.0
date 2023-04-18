@@ -1,60 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 56A586E59C7
-	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:49 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 689086E59C9
+	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3F8DE81B14;
-	Tue, 18 Apr 2023 06:53:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3F8DE81B14
+	by smtp3.osuosl.org (Postfix) with ESMTP id DF36B61362;
+	Tue, 18 Apr 2023 06:53:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DF36B61362
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0u0W-E6xI0Fe; Tue, 18 Apr 2023 06:53:45 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id LO2RqRjz3FDS; Tue, 18 Apr 2023 06:53:47 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 0099181E44;
-	Tue, 18 Apr 2023 06:53:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0099181E44
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 959E7611D0;
+	Tue, 18 Apr 2023 06:53:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 959E7611D0
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C83F4C002A;
-	Tue, 18 Apr 2023 06:53:44 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7D72BC0089;
+	Tue, 18 Apr 2023 06:53:46 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E841DC008A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 94EC1C0089
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:42 +0000 (UTC)
+ Tue, 18 Apr 2023 06:53:44 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B4928818AC
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6DC8340CB6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B4928818AC
+ Tue, 18 Apr 2023 06:53:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6DC8340CB6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Dqx-AP3XiTbR
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id KSVoMj6A9b4L
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Apr 2023 06:53:43 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C466D41192
+Received: from out30-110.freemail.mail.aliyun.com
+ (out30-110.freemail.mail.aliyun.com [115.124.30.110])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id C466D41192
  for <virtualization@lists.linux-foundation.org>;
  Tue, 18 Apr 2023 06:53:42 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9611181A47
-Received: from out30-124.freemail.mail.aliyun.com
- (out30-124.freemail.mail.aliyun.com [115.124.30.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9611181A47
- for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:41 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R411e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VgOLSH8_1681800815; 
+ TI=SMTPD_---0VgOLnl._1681800817; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VgOLSH8_1681800815) by smtp.aliyun-inc.com;
- Tue, 18 Apr 2023 14:53:36 +0800
+ fp:SMTPD_---0VgOLnl._1681800817) by smtp.aliyun-inc.com;
+ Tue, 18 Apr 2023 14:53:37 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v2 08/14] virtio_net: auto release xdp shinfo
-Date: Tue, 18 Apr 2023 14:53:21 +0800
-Message-Id: <20230418065327.72281-9-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v2 09/14] virtio_net: introduce
+ receive_mergeable_xdp()
+Date: Tue, 18 Apr 2023 14:53:22 +0800
+Message-Id: <20230418065327.72281-10-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
 References: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
@@ -82,118 +83,152 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtnet_build_xdp_buff_mrg() and virtnet_xdp_handler() auto
-release xdp shinfo then the caller no need to careful the xdp shinfo.
+The purpose of this patch is to simplify the receive_mergeable().
+Separate all the logic of XDP into a function.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 29 +++++++++++++++++------------
- 1 file changed, 17 insertions(+), 12 deletions(-)
+ drivers/net/virtio_net.c | 100 ++++++++++++++++++++++++---------------
+ 1 file changed, 61 insertions(+), 39 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index e2eade87d2d4..266c1670beda 100644
+index 266c1670beda..42e9927e316b 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -834,7 +834,7 @@ static int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 		xdpf = xdp_convert_buff_to_frame(xdp);
- 		if (unlikely(!xdpf)) {
- 			netdev_dbg(dev, "convert buff to frame failed for xdp\n");
--			return VIRTNET_XDP_RES_DROP;
-+			goto drop;
- 		}
+@@ -1319,6 +1319,63 @@ static void *mergeable_xdp_prepare(struct virtnet_info *vi,
+ 	return page_address(*page) + VIRTIO_XDP_HEADROOM;
+ }
  
- 		err = virtnet_xdp_xmit(dev, 1, &xdpf, 0);
-@@ -842,7 +842,7 @@ static int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 			xdp_return_frame_rx_napi(xdpf);
- 		} else if (unlikely(err < 0)) {
- 			trace_xdp_exception(dev, xdp_prog, act);
--			return VIRTNET_XDP_RES_DROP;
-+			goto drop;
- 		}
- 
- 		*xdp_xmit |= VIRTIO_XDP_TX;
-@@ -852,7 +852,7 @@ static int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 		stats->xdp_redirects++;
- 		err = xdp_do_redirect(dev, xdp, xdp_prog);
- 		if (err)
--			return VIRTNET_XDP_RES_DROP;
-+			goto drop;
- 
- 		*xdp_xmit |= VIRTIO_XDP_REDIR;
- 		return VIRTNET_XDP_RES_CONSUMED;
-@@ -864,8 +864,12 @@ static int virtnet_xdp_handler(struct bpf_prog *xdp_prog, struct xdp_buff *xdp,
- 		trace_xdp_exception(dev, xdp_prog, act);
- 		fallthrough;
- 	case XDP_DROP:
--		return VIRTNET_XDP_RES_DROP;
++static struct sk_buff *receive_mergeable_xdp(struct net_device *dev,
++					     struct virtnet_info *vi,
++					     struct receive_queue *rq,
++					     struct bpf_prog *xdp_prog,
++					     void *buf,
++					     void *ctx,
++					     unsigned int len,
++					     unsigned int *xdp_xmit,
++					     struct virtnet_rq_stats *stats)
++{
++	struct virtio_net_hdr_mrg_rxbuf *hdr = buf;
++	int num_buf = virtio16_to_cpu(vi->vdev, hdr->num_buffers);
++	struct page *page = virt_to_head_page(buf);
++	int offset = buf - page_address(page);
++	unsigned int xdp_frags_truesz = 0;
++	struct sk_buff *head_skb;
++	unsigned int frame_sz;
++	struct xdp_buff xdp;
++	void *data;
++	u32 act;
++	int err;
++
++	data = mergeable_xdp_prepare(vi, rq, xdp_prog, ctx, &frame_sz, &num_buf, &page,
++				     offset, &len, hdr);
++	if (unlikely(!data))
++		goto err_xdp;
++
++	err = virtnet_build_xdp_buff_mrg(dev, vi, rq, &xdp, data, len, frame_sz,
++					 &num_buf, &xdp_frags_truesz, stats);
++	if (unlikely(err))
++		goto err_xdp;
++
++	act = virtnet_xdp_handler(xdp_prog, &xdp, dev, xdp_xmit, stats);
++
++	switch (act) {
++	case VIRTNET_XDP_RES_PASS:
++		head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
++		if (unlikely(!head_skb))
++			goto err_xdp;
++		return head_skb;
++
++	case VIRTNET_XDP_RES_CONSUMED:
++		return NULL;
++
++	case VIRTNET_XDP_RES_DROP:
 +		break;
- 	}
++	}
 +
-+drop:
-+	put_xdp_frags(xdp);
-+	return VIRTNET_XDP_RES_DROP;
- }
- 
- static unsigned int virtnet_get_headroom(struct virtnet_info *vi)
-@@ -1201,7 +1205,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 				 dev->name, *num_buf,
- 				 virtio16_to_cpu(vi->vdev, hdr->num_buffers));
- 			dev->stats.rx_length_errors++;
--			return -EINVAL;
-+			goto err;
- 		}
- 
- 		stats->bytes += len;
-@@ -1220,7 +1224,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 			pr_debug("%s: rx error: len %u exceeds truesize %lu\n",
- 				 dev->name, len, (unsigned long)(truesize - room));
- 			dev->stats.rx_length_errors++;
--			return -EINVAL;
-+			goto err;
- 		}
- 
- 		frag = &shinfo->frags[shinfo->nr_frags++];
-@@ -1235,6 +1239,10 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 
- 	*xdp_frags_truesize = xdp_frags_truesz;
- 	return 0;
++err_xdp:
++	put_page(page);
++	mergeable_buf_free(rq, num_buf, dev, stats);
 +
-+err:
-+	put_xdp_frags(xdp);
-+	return -EINVAL;
- }
++	stats->xdp_drops++;
++	stats->drops++;
++	return NULL;
++}
++
+ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ 					 struct virtnet_info *vi,
+ 					 struct receive_queue *rq,
+@@ -1338,8 +1395,6 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ 	unsigned int headroom = mergeable_ctx_to_headroom(ctx);
+ 	unsigned int tailroom = headroom ? sizeof(struct skb_shared_info) : 0;
+ 	unsigned int room = SKB_DATA_ALIGN(headroom + tailroom);
+-	unsigned int frame_sz;
+-	int err;
  
- static void *mergeable_xdp_prepare(struct virtnet_info *vi,
-@@ -1364,7 +1372,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 		err = virtnet_build_xdp_buff_mrg(dev, vi, rq, &xdp, data, len, frame_sz,
- 						 &num_buf, &xdp_frags_truesz, stats);
- 		if (unlikely(err))
--			goto err_xdp_frags;
-+			goto err_xdp;
- 
- 		act = virtnet_xdp_handler(xdp_prog, &xdp, dev, xdp_xmit, stats);
- 
-@@ -1372,7 +1380,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 		case VIRTNET_XDP_RES_PASS:
- 			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
- 			if (unlikely(!head_skb))
--				goto err_xdp_frags;
-+				goto err_xdp;
- 
- 			rcu_read_unlock();
- 			return head_skb;
-@@ -1382,11 +1390,8 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 			goto xdp_xmit;
- 
- 		case VIRTNET_XDP_RES_DROP:
--			break;
-+			goto err_xdp;
- 		}
--err_xdp_frags:
--		put_xdp_frags(&xdp);
--		goto err_xdp;
+ 	head_skb = NULL;
+ 	stats->bytes += len - vi->hdr_len;
+@@ -1359,39 +1414,10 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ 	rcu_read_lock();
+ 	xdp_prog = rcu_dereference(rq->xdp_prog);
+ 	if (xdp_prog) {
+-		unsigned int xdp_frags_truesz = 0;
+-		struct xdp_buff xdp;
+-		void *data;
+-		u32 act;
+-
+-		data = mergeable_xdp_prepare(vi, rq, xdp_prog, ctx, &frame_sz,
+-					     &num_buf, &page, offset, &len, hdr);
+-		if (unlikely(!data))
+-			goto err_xdp;
+-
+-		err = virtnet_build_xdp_buff_mrg(dev, vi, rq, &xdp, data, len, frame_sz,
+-						 &num_buf, &xdp_frags_truesz, stats);
+-		if (unlikely(err))
+-			goto err_xdp;
+-
+-		act = virtnet_xdp_handler(xdp_prog, &xdp, dev, xdp_xmit, stats);
+-
+-		switch (act) {
+-		case VIRTNET_XDP_RES_PASS:
+-			head_skb = build_skb_from_xdp_buff(dev, vi, &xdp, xdp_frags_truesz);
+-			if (unlikely(!head_skb))
+-				goto err_xdp;
+-
+-			rcu_read_unlock();
+-			return head_skb;
+-
+-		case VIRTNET_XDP_RES_CONSUMED:
+-			rcu_read_unlock();
+-			goto xdp_xmit;
+-
+-		case VIRTNET_XDP_RES_DROP:
+-			goto err_xdp;
+-		}
++		head_skb = receive_mergeable_xdp(dev, vi, rq, xdp_prog, buf, ctx,
++						 len, xdp_xmit, stats);
++		rcu_read_unlock();
++		return head_skb;
  	}
  	rcu_read_unlock();
+ 
+@@ -1461,9 +1487,6 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ 	ewma_pkt_len_add(&rq->mrg_avg_pkt_len, head_skb->len);
+ 	return head_skb;
+ 
+-err_xdp:
+-	rcu_read_unlock();
+-	stats->xdp_drops++;
+ err_skb:
+ 	put_page(page);
+ 	mergeable_buf_free(rq, num_buf, dev, stats);
+@@ -1471,7 +1494,6 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
+ err_buf:
+ 	stats->drops++;
+ 	dev_kfree_skb(head_skb);
+-xdp_xmit:
+ 	return NULL;
+ }
  
 -- 
 2.32.0.3.g01195cf9f
