@@ -1,60 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5FD3B6E59CA
-	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:54 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id ED50F6E59CC
+	for <lists.virtualization@lfdr.de>; Tue, 18 Apr 2023 08:53:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id C0D1A614A6;
-	Tue, 18 Apr 2023 06:53:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C0D1A614A6
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NrHPxeOZn1UJ; Tue, 18 Apr 2023 06:53:52 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8A03E613E0;
-	Tue, 18 Apr 2023 06:53:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8A03E613E0
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6695DC0089;
-	Tue, 18 Apr 2023 06:53:51 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E3C72C008F
- for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:48 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id B2AC981E5B
- for <virtualization@lists.linux-foundation.org>;
- Tue, 18 Apr 2023 06:53:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B2AC981E5B
+	by smtp1.osuosl.org (Postfix) with ESMTP id 8F2AA81EC3;
+	Tue, 18 Apr 2023 06:53:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8F2AA81EC3
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MEUjY-vUcBcf
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7ihy-jpOFb8C; Tue, 18 Apr 2023 06:53:54 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 4B9B681DF1;
+	Tue, 18 Apr 2023 06:53:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4B9B681DF1
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9EEECC0089;
+	Tue, 18 Apr 2023 06:53:53 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 18C9AC002A
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Apr 2023 06:53:53 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id D305F41809
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 18 Apr 2023 06:53:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D305F41809
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5jgV4Hc90jK1
  for <virtualization@lists.linux-foundation.org>;
  Tue, 18 Apr 2023 06:53:48 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B159A817F2
-Received: from out30-131.freemail.mail.aliyun.com
- (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B159A817F2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 97BAA408A3
+Received: from out30-101.freemail.mail.aliyun.com
+ (out30-101.freemail.mail.aliyun.com [115.124.30.101])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 97BAA408A3
  for <virtualization@lists.linux-foundation.org>;
  Tue, 18 Apr 2023 06:53:47 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VgOLno7_1681800821; 
+ TI=SMTPD_---0VgOLnp3_1681800822; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VgOLno7_1681800821) by smtp.aliyun-inc.com;
- Tue, 18 Apr 2023 14:53:41 +0800
+ fp:SMTPD_---0VgOLnp3_1681800822) by smtp.aliyun-inc.com;
+ Tue, 18 Apr 2023 14:53:43 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v2 13/14] virtio_net: small: optimize code
-Date: Tue, 18 Apr 2023 14:53:26 +0800
-Message-Id: <20230418065327.72281-14-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v2 14/14] virtio_net: small: remove skip_xdp
+Date: Tue, 18 Apr 2023 14:53:27 +0800
+Message-Id: <20230418065327.72281-15-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
 References: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
@@ -82,45 +82,66 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Avoid the problem that some variables(headroom and so on) will repeat
-the calculation when process xdp.
+now, the process of xdp is simple, we can remove the skip_xdp.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ drivers/net/virtio_net.c | 26 ++++++++++++--------------
+ 1 file changed, 12 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index f6f5903face2..5a5636178bd3 100644
+index 5a5636178bd3..19f7a8367c17 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -1040,11 +1040,10 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 	struct sk_buff *skb;
- 	struct bpf_prog *xdp_prog;
+@@ -1037,13 +1037,12 @@ static struct sk_buff *receive_small(struct net_device *dev,
+ 				     unsigned int *xdp_xmit,
+ 				     struct virtnet_rq_stats *stats)
+ {
+-	struct sk_buff *skb;
+-	struct bpf_prog *xdp_prog;
  	unsigned int xdp_headroom = (unsigned long)ctx;
--	unsigned int header_offset = VIRTNET_RX_PAD + xdp_headroom;
--	unsigned int headroom = vi->hdr_len + header_offset;
--	unsigned int buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
--			      SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
  	struct page *page = virt_to_head_page(buf);
-+	unsigned int header_offset;
-+	unsigned int headroom;
-+	unsigned int buflen;
+ 	unsigned int header_offset;
+ 	unsigned int headroom;
+ 	unsigned int buflen;
++	struct sk_buff *skb;
  
  	len -= vi->hdr_len;
  	stats->bytes += len;
-@@ -1072,6 +1071,11 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 	rcu_read_unlock();
- 
- skip_xdp:
-+	header_offset = VIRTNET_RX_PAD + xdp_headroom;
-+	headroom = vi->hdr_len + header_offset;
-+	buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
-+		SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
-+
- 	skb = build_skb(buf, buflen);
- 	if (!skb)
+@@ -1055,22 +1054,21 @@ static struct sk_buff *receive_small(struct net_device *dev,
  		goto err;
+ 	}
+ 
+-	if (likely(!vi->xdp_enabled)) {
+-		xdp_prog = NULL;
+-		goto skip_xdp;
+-	}
++	if (unlikely(vi->xdp_enabled)) {
++		struct bpf_prog *xdp_prog;
+ 
+-	rcu_read_lock();
+-	xdp_prog = rcu_dereference(rq->xdp_prog);
+-	if (xdp_prog) {
+-		skb = receive_small_xdp(dev, vi, rq, xdp_prog, buf, xdp_headroom,
+-					len, xdp_xmit, stats);
++		rcu_read_lock();
++		xdp_prog = rcu_dereference(rq->xdp_prog);
++		if (xdp_prog) {
++			skb = receive_small_xdp(dev, vi, rq, xdp_prog, buf,
++						xdp_headroom, len, xdp_xmit,
++						stats);
++			rcu_read_unlock();
++			return skb;
++		}
+ 		rcu_read_unlock();
+-		return skb;
+ 	}
+-	rcu_read_unlock();
+ 
+-skip_xdp:
+ 	header_offset = VIRTNET_RX_PAD + xdp_headroom;
+ 	headroom = vi->hdr_len + header_offset;
+ 	buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
 -- 
 2.32.0.3.g01195cf9f
 
