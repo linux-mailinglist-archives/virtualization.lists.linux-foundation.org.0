@@ -1,70 +1,67 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8E80D6E9953
-	for <lists.virtualization@lfdr.de>; Thu, 20 Apr 2023 18:16:10 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id EAD6B6E995C
+	for <lists.virtualization@lfdr.de>; Thu, 20 Apr 2023 18:18:39 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 835DA84231;
-	Thu, 20 Apr 2023 16:16:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 835DA84231
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=XxVPm6LU
+	by smtp3.osuosl.org (Postfix) with ESMTP id 39B9D61135;
+	Thu, 20 Apr 2023 16:18:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 39B9D61135
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=2l58lpIs
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hFHVoHMMClzr; Thu, 20 Apr 2023 16:16:07 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id pJfdcvw7IDc8; Thu, 20 Apr 2023 16:18:36 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 6D34084262;
-	Thu, 20 Apr 2023 16:16:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6D34084262
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 1982A60AB9;
+	Thu, 20 Apr 2023 16:18:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1982A60AB9
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B10B1C008C;
-	Thu, 20 Apr 2023 16:16:06 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 545E2C008C;
+	Thu, 20 Apr 2023 16:18:35 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 16834C0037
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BFF55C002A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 16:16:05 +0000 (UTC)
+ Thu, 20 Apr 2023 16:18:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4EE0441BAF
+ by smtp3.osuosl.org (Postfix) with ESMTP id 8DE0660BC0
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 16:15:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4EE0441BAF
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=XxVPm6LU
+ Thu, 20 Apr 2023 16:18:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8DE0660BC0
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id TJ8w5t7KxCCv
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id FMULYFyK-oIN
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 16:15:54 +0000 (UTC)
+ Thu, 20 Apr 2023 16:18:32 +0000 (UTC)
 X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A03F840977
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EE4006076C
 Received: from bombadil.infradead.org (bombadil.infradead.org
  [IPv6:2607:7c80:54:3::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id A03F840977
+ by smtp3.osuosl.org (Postfix) with ESMTPS id EE4006076C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 16:15:54 +0000 (UTC)
+ Thu, 20 Apr 2023 16:18:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
  d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
  :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
  Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=8cylqzdP0hXk5+N5BXe5Y74wAIWGCOav7qKznB1OcHU=; b=XxVPm6LUtaULMeaI3bbiNdFmBk
- MT0gzQoFXxLpTVFqApMHWsr9uCibCIZH/Ar5VtYm4BE9U8TAoxiELgcvErBDkD1lFZQP73U2jvKK4
- MGYTVF3is9fL2r2XC/7Go/+1wV7CcRP4uV1sVx4d56ODJBNQEBRY89e+WYtlbgEXDo+ng9n4RW/eb
- dhYksqqCLXLJ7oXuPTIzGIA5/HATPY7lArpuLuhiyGunZX1pJYLx/7/P6zeUPXkL9rQiWzB3FXXE5
- ayJBzZCYD0s+XN4JcPD1Uv4CBypRW/SPmfLwW450ZLR5SNuxc9Q+ULPc9mrpfqhyOnTRrBd5zKiAT
- YlsP+2Yw==;
+ bh=WriYvcEYXKuK/u58ncTN0aOBy6C3Ot7CD4a8g8BQ4+4=; b=2l58lpIsSDMv9cBpyQ1xOmrKYd
+ GY1YczBXm1i8BazJ2u7OC8T0xxiRCgKPwwenqlQwPF3bypZsMmd+nJcMGl7IZeNexgNrdWdhTkjYK
+ jPCEmKIxtYAtxy45FpQ+PEgJ3ZC3XPgnTEDhygBY5E3UOACDCxNAtmxx6jG/lTBQ1k/Bui7KAUSTy
+ QGbTVB/8cLEuFxt3wxOe0Xx3P5MVpc96vWpAZyA1Un9xrOlwVgzZDozxqE6WWNnz/4AdbkNNAs4Uy
+ nRWNqOPipvvhyY6a0XiqKJ4ZYNBKfkd9FiK41saU96nD/BXapbES0ypRc7j2CuzPyjQnRfty0viil
+ cy5VTR7w==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1ppWwO-008WEu-01; Thu, 20 Apr 2023 16:15:24 +0000
-Date: Thu, 20 Apr 2023 09:15:23 -0700
+ Linux)) id 1ppWzF-008WWw-0D; Thu, 20 Apr 2023 16:18:21 +0000
+Date: Thu, 20 Apr 2023 09:18:21 -0700
 From: Christoph Hellwig <hch@infradead.org>
-To: Alexander Lobakin <aleksander.lobakin@intel.com>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Subject: Re: [PATCH net-next] xsk: introduce xsk_dma_ops
-Message-ID: <ZEFlG9rINkutmpCT@infradead.org>
+Message-ID: <ZEFlzdiyu2IAyX7a@infradead.org>
 References: <CACGkMEtPNPXFThHt4aNm4g-fC1DqTLcDnB_iBWb9-cAOHMYV_A@mail.gmail.com>
  <20230417181950.5db68526@kernel.org>
  <1681784379.909136-2-xuanzhuo@linux.alibaba.com>
@@ -72,17 +69,17 @@ References: <CACGkMEtPNPXFThHt4aNm4g-fC1DqTLcDnB_iBWb9-cAOHMYV_A@mail.gmail.com>
  <ZD4kMOym15pFcjq+@infradead.org>
  <20230417231947.3972f1a8@kernel.org>
  <ZD95RY9PjVRi7qz3@infradead.org>
- <d18eea7a-a71c-8de0-bde3-7ab000a77539@intel.com>
- <ZEDYt/EQJk39dTuK@infradead.org>
- <ff3d588e-10ac-36dd-06af-d55a79424ede@intel.com>
+ <20230419094506.2658b73f@kernel.org>
+ <ZEDZaitjcX+egzvf@infradead.org>
+ <1681981908.9700203-3-xuanzhuo@linux.alibaba.com>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <ff3d588e-10ac-36dd-06af-d55a79424ede@intel.com>
+In-Reply-To: <1681981908.9700203-3-xuanzhuo@linux.alibaba.com>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
  bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Cc: "Michael S. Tsirkin" <mst@redhat.com>, Alexei Starovoitov <ast@kernel.org>,
  virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Daniel Borkmann <daniel@iogearbox.net>,
+ Daniel Borkmann <daniel@iogearbox.net>,
  John Fastabend <john.fastabend@gmail.com>,
  Christoph Hellwig <hch@infradead.org>, Jakub Kicinski <kuba@kernel.org>,
  Paolo Abeni <pabeni@redhat.com>, Guenter Roeck <linux@roeck-us.net>,
@@ -110,27 +107,17 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Apr 20, 2023 at 03:59:39PM +0200, Alexander Lobakin wrote:
-> Hmm, currently almost all Ethernet drivers map Rx pages once and then
-> just recycle them, keeping the original DMA mapping. Which means pages
-> can have the same first mapping for very long time, often even for the
-> lifetime of the struct device. Same for XDP sockets, the lifetime of DMA
-> mappings equals the lifetime of sockets.
-> Does it mean we'd better review that approach and try switching to
-> dma_alloc_*() family (non-coherent/caching in our case)?
+On Thu, Apr 20, 2023 at 05:11:48PM +0800, Xuan Zhuo wrote:
+> I know that the current design of DMA API only supports some physical hardware,
+> but can it be modified or expanded?
 
-Yes, exactly.  dma_alloc_noncoherent can be used exactly as alloc_pages
-+ dma_map_* by the driver (including the dma_sync_* calls on reuse), but
-has a huge number of advantages.
+I think the important point is that for some cases there is no need
+to dma map at all, and upper layers should be fine by that by just
+doing the dma mapping in helpers called by the driver.
 
-> Also, I remember I tried to do that for one my driver, but the thing
-> that all those functions zero the whole page(s) before returning them to
-> the driver ruins the performance -- we don't need to zero buffers for
-> receiving packets and spend a ton of cycles on it (esp. in cases when 4k
-> gets zeroed each time, but your main body of traffic is 64-byte frames).
-
-Hmm, the single zeroing when doing the initial allocation shows up
-in these profiles?
+The virtio drivers then check if platform_access is set, then call the
+generic dma mapping helper, or if not just allocate memory using
+alloc_pages and also skip all the sync calls.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
