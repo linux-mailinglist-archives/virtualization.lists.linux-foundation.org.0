@@ -1,70 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 61A626E8DA8
-	for <lists.virtualization@lfdr.de>; Thu, 20 Apr 2023 11:11:24 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 343CA6E8DD0
+	for <lists.virtualization@lfdr.de>; Thu, 20 Apr 2023 11:19:37 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 45B696FE77;
-	Thu, 20 Apr 2023 09:11:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 45B696FE77
+	by smtp3.osuosl.org (Postfix) with ESMTP id C7760605A2;
+	Thu, 20 Apr 2023 09:19:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C7760605A2
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id TYutSeCcnfBh; Thu, 20 Apr 2023 09:11:21 +0000 (UTC)
+	with ESMTP id iVlcD2JNuCR9; Thu, 20 Apr 2023 09:19:34 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 0A09F60C28;
-	Thu, 20 Apr 2023 09:11:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0A09F60C28
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 56DA260672;
+	Thu, 20 Apr 2023 09:19:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 56DA260672
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A455C008C;
-	Thu, 20 Apr 2023 09:11:20 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9CC78C008C;
+	Thu, 20 Apr 2023 09:19:33 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 04868C002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9C6FCC002A
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 09:11:19 +0000 (UTC)
+ Thu, 20 Apr 2023 09:19:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D398540320
+ by smtp2.osuosl.org (Postfix) with ESMTP id 6A63340320
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 09:11:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D398540320
+ Thu, 20 Apr 2023 09:19:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6A63340320
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id jDMGHILytCFF
+ with ESMTP id uAQ41g-puWUy
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 09:11:18 +0000 (UTC)
+ Thu, 20 Apr 2023 09:19:31 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 88E15400C5
-Received: from out30-110.freemail.mail.aliyun.com
- (out30-110.freemail.mail.aliyun.com [115.124.30.110])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 88E15400C5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BA43F400BA
+Received: from out30-124.freemail.mail.aliyun.com
+ (out30-124.freemail.mail.aliyun.com [115.124.30.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id BA43F400BA
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Apr 2023 09:11:17 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VgYINEN_1681981870; 
+ Thu, 20 Apr 2023 09:19:30 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R481e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=23; SR=0;
+ TI=SMTPD_---0VgYNbDy_1681982363; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VgYINEN_1681981870) by smtp.aliyun-inc.com;
- Thu, 20 Apr 2023 17:11:11 +0800
-Message-ID: <1681981800.3300662-2-xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH net-next v2 08/14] virtio_net: auto release xdp shinfo
-Date: Thu, 20 Apr 2023 17:10:00 +0800
+ fp:SMTPD_---0VgYNbDy_1681982363) by smtp.aliyun-inc.com;
+ Thu, 20 Apr 2023 17:19:24 +0800
+Message-ID: <1681981908.9700203-3-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net-next] xsk: introduce xsk_dma_ops
+Date: Thu, 20 Apr 2023 17:11:48 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: Jason Wang <jasowang@redhat.com>
-References: <20230418065327.72281-1-xuanzhuo@linux.alibaba.com>
- <20230418065327.72281-9-xuanzhuo@linux.alibaba.com>
- <CACGkMEuNxh-YC6A=nyt682ReSbujbgepABgwX0Y+WW30XgFktA@mail.gmail.com>
-In-Reply-To: <CACGkMEuNxh-YC6A=nyt682ReSbujbgepABgwX0Y+WW30XgFktA@mail.gmail.com>
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
- Alexei Starovoitov <ast@kernel.org>, virtualization@lists.linux-foundation.org,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+To: Christoph Hellwig <hch@infradead.org>
+References: <20230417032750.7086-1-xuanzhuo@linux.alibaba.com>
+ <ZDzKAD2SNe1q/XA6@infradead.org>
+ <1681711081.378984-2-xuanzhuo@linux.alibaba.com>
+ <20230417115610.7763a87c@kernel.org>
+ <20230417115753.7fb64b68@kernel.org>
+ <CACGkMEtPNPXFThHt4aNm4g-fC1DqTLcDnB_iBWb9-cAOHMYV_A@mail.gmail.com>
+ <20230417181950.5db68526@kernel.org>
+ <1681784379.909136-2-xuanzhuo@linux.alibaba.com>
+ <20230417195400.482cfe75@kernel.org>
+ <ZD4kMOym15pFcjq+@infradead.org>
+ <20230417231947.3972f1a8@kernel.org>
+ <ZD95RY9PjVRi7qz3@infradead.org>
+ <20230419094506.2658b73f@kernel.org>
+ <ZEDZaitjcX+egzvf@infradead.org>
+In-Reply-To: <ZEDZaitjcX+egzvf@infradead.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Daniel Borkmann <daniel@iogearbox.net>,
+ John Fastabend <john.fastabend@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Jakub Kicinski <kuba@kernel.org>,
+ Paolo Abeni <pabeni@redhat.com>, Guenter Roeck <linux@roeck-us.net>,
+ Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Jonathan Lemon <jonathan.lemon@gmail.com>,
+ Magnus Karlsson <magnus.karlsson@intel.com>, Jens Axboe <axboe@kernel.dk>,
+ netdev@vger.kernel.org, =?utf-8?b?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, bpf@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
  "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -78,108 +96,57 @@ List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=hel
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gVGh1LCAyMCBBcHIgMjAyMyAxMzo1OTozMCArMDgwMCwgSmFzb24gV2FuZyA8amFzb3dhbmdA
-cmVkaGF0LmNvbT4gd3JvdGU6Cj4gT24gVHVlLCBBcHIgMTgsIDIwMjMgYXQgMjo1M+KAr1BNIFh1
-YW4gWmh1byA8eHVhbnpodW9AbGludXguYWxpYmFiYS5jb20+IHdyb3RlOgo+ID4KPiA+IHZpcnRu
-ZXRfYnVpbGRfeGRwX2J1ZmZfbXJnKCkgYW5kIHZpcnRuZXRfeGRwX2hhbmRsZXIoKSBhdXRvCj4g
-PiByZWxlYXNlIHhkcCBzaGluZm8gdGhlbiB0aGUgY2FsbGVyIG5vIG5lZWQgdG8gY2FyZWZ1bCB0
-aGUgeGRwIHNoaW5mby4KPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBYdWFuIFpodW8gPHh1YW56aHVv
-QGxpbnV4LmFsaWJhYmEuY29tPgo+ID4gLS0tCj4gPiAgZHJpdmVycy9uZXQvdmlydGlvX25ldC5j
-IHwgMjkgKysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0KPiA+ICAxIGZpbGUgY2hhbmdlZCwg
-MTcgaW5zZXJ0aW9ucygrKSwgMTIgZGVsZXRpb25zKC0pCj4gPgo+ID4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvbmV0L3ZpcnRpb19uZXQuYyBiL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYwo+ID4gaW5k
-ZXggZTJlYWRlODdkMmQ0Li4yNjZjMTY3MGJlZGEgMTAwNjQ0Cj4gPiAtLS0gYS9kcml2ZXJzL25l
-dC92aXJ0aW9fbmV0LmMKPiA+ICsrKyBiL2RyaXZlcnMvbmV0L3ZpcnRpb19uZXQuYwo+ID4gQEAg
-LTgzNCw3ICs4MzQsNyBAQCBzdGF0aWMgaW50IHZpcnRuZXRfeGRwX2hhbmRsZXIoc3RydWN0IGJw
-Zl9wcm9nICp4ZHBfcHJvZywgc3RydWN0IHhkcF9idWZmICp4ZHAsCj4gPiAgICAgICAgICAgICAg
-ICAgeGRwZiA9IHhkcF9jb252ZXJ0X2J1ZmZfdG9fZnJhbWUoeGRwKTsKPiA+ICAgICAgICAgICAg
-ICAgICBpZiAodW5saWtlbHkoIXhkcGYpKSB7Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBu
-ZXRkZXZfZGJnKGRldiwgImNvbnZlcnQgYnVmZiB0byBmcmFtZSBmYWlsZWQgZm9yIHhkcFxuIik7
-Cj4gPiAtICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gVklSVE5FVF9YRFBfUkVTX0RST1A7
-Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBnb3RvIGRyb3A7Cj4gPiAgICAgICAgICAgICAg
-ICAgfQo+ID4KPiA+ICAgICAgICAgICAgICAgICBlcnIgPSB2aXJ0bmV0X3hkcF94bWl0KGRldiwg
-MSwgJnhkcGYsIDApOwo+ID4gQEAgLTg0Miw3ICs4NDIsNyBAQCBzdGF0aWMgaW50IHZpcnRuZXRf
-eGRwX2hhbmRsZXIoc3RydWN0IGJwZl9wcm9nICp4ZHBfcHJvZywgc3RydWN0IHhkcF9idWZmICp4
-ZHAsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICB4ZHBfcmV0dXJuX2ZyYW1lX3J4X25hcGko
-eGRwZik7Cj4gPiAgICAgICAgICAgICAgICAgfSBlbHNlIGlmICh1bmxpa2VseShlcnIgPCAwKSkg
-ewo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgdHJhY2VfeGRwX2V4Y2VwdGlvbihkZXYsIHhk
-cF9wcm9nLCBhY3QpOwo+ID4gLSAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIFZJUlRORVRf
-WERQX1JFU19EUk9QOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgZ290byBkcm9wOwo+ID4g
-ICAgICAgICAgICAgICAgIH0KPiA+Cj4gPiAgICAgICAgICAgICAgICAgKnhkcF94bWl0IHw9IFZJ
-UlRJT19YRFBfVFg7Cj4gPiBAQCAtODUyLDcgKzg1Miw3IEBAIHN0YXRpYyBpbnQgdmlydG5ldF94
-ZHBfaGFuZGxlcihzdHJ1Y3QgYnBmX3Byb2cgKnhkcF9wcm9nLCBzdHJ1Y3QgeGRwX2J1ZmYgKnhk
-cCwKPiA+ICAgICAgICAgICAgICAgICBzdGF0cy0+eGRwX3JlZGlyZWN0cysrOwo+ID4gICAgICAg
-ICAgICAgICAgIGVyciA9IHhkcF9kb19yZWRpcmVjdChkZXYsIHhkcCwgeGRwX3Byb2cpOwo+ID4g
-ICAgICAgICAgICAgICAgIGlmIChlcnIpCj4gPiAtICAgICAgICAgICAgICAgICAgICAgICByZXR1
-cm4gVklSVE5FVF9YRFBfUkVTX0RST1A7Cj4gPiArICAgICAgICAgICAgICAgICAgICAgICBnb3Rv
-IGRyb3A7Cj4gPgo+ID4gICAgICAgICAgICAgICAgICp4ZHBfeG1pdCB8PSBWSVJUSU9fWERQX1JF
-RElSOwo+ID4gICAgICAgICAgICAgICAgIHJldHVybiBWSVJUTkVUX1hEUF9SRVNfQ09OU1VNRUQ7
-Cj4gPiBAQCAtODY0LDggKzg2NCwxMiBAQCBzdGF0aWMgaW50IHZpcnRuZXRfeGRwX2hhbmRsZXIo
-c3RydWN0IGJwZl9wcm9nICp4ZHBfcHJvZywgc3RydWN0IHhkcF9idWZmICp4ZHAsCj4gPiAgICAg
-ICAgICAgICAgICAgdHJhY2VfeGRwX2V4Y2VwdGlvbihkZXYsIHhkcF9wcm9nLCBhY3QpOwo+ID4g
-ICAgICAgICAgICAgICAgIGZhbGx0aHJvdWdoOwo+ID4gICAgICAgICBjYXNlIFhEUF9EUk9QOgo+
-ID4gLSAgICAgICAgICAgICAgIHJldHVybiBWSVJUTkVUX1hEUF9SRVNfRFJPUDsKPiA+ICsgICAg
-ICAgICAgICAgICBicmVhazsKPiA+ICAgICAgICAgfQo+ID4gKwo+ID4gK2Ryb3A6Cj4gPiArICAg
-ICAgIHB1dF94ZHBfZnJhZ3MoeGRwKTsKPiA+ICsgICAgICAgcmV0dXJuIFZJUlRORVRfWERQX1JF
-U19EUk9QOwo+ID4gIH0KPgo+IFBhdGNoIGxvb2tzIGNvcnJlY3QgYnV0IHdlIGVuZCB1cCBzb21l
-IGluY29uc2lzdGVuY3kgaGVyZS4KPgo+IGZyYWdzIGFyZSBhdXRvbWF0aWNhbGx5IHJlbGVhc2Vk
-Lgo+Cj4gYnV0IHRoZSBwYWdlIHN0aWxsIG5lZWRzIHRvIGJlIGZyZWVkIGJ5IHRoZSBjYWxsZXI/
-CgoKWWVzLgoKRG8geW91IHdhbnQgdG8gYXV0byBmcmVlIHBhZ2U/CgpUaGFua3MuCgoKCj4KPiBU
-aGFua3MKPgo+Cj4gPgo+ID4gIHN0YXRpYyB1bnNpZ25lZCBpbnQgdmlydG5ldF9nZXRfaGVhZHJv
-b20oc3RydWN0IHZpcnRuZXRfaW5mbyAqdmkpCj4gPiBAQCAtMTIwMSw3ICsxMjA1LDcgQEAgc3Rh
-dGljIGludCB2aXJ0bmV0X2J1aWxkX3hkcF9idWZmX21yZyhzdHJ1Y3QgbmV0X2RldmljZSAqZGV2
-LAo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZGV2LT5uYW1lLCAqbnVtX2J1
-ZiwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZpcnRpbzE2X3RvX2NwdSh2
-aS0+dmRldiwgaGRyLT5udW1fYnVmZmVycykpOwo+ID4gICAgICAgICAgICAgICAgICAgICAgICAg
-ZGV2LT5zdGF0cy5yeF9sZW5ndGhfZXJyb3JzKys7Cj4gPiAtICAgICAgICAgICAgICAgICAgICAg
-ICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAgIGdvdG8gZXJyOwo+
-ID4gICAgICAgICAgICAgICAgIH0KPiA+Cj4gPiAgICAgICAgICAgICAgICAgc3RhdHMtPmJ5dGVz
-ICs9IGxlbjsKPiA+IEBAIC0xMjIwLDcgKzEyMjQsNyBAQCBzdGF0aWMgaW50IHZpcnRuZXRfYnVp
-bGRfeGRwX2J1ZmZfbXJnKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsCj4gPiAgICAgICAgICAgICAg
-ICAgICAgICAgICBwcl9kZWJ1ZygiJXM6IHJ4IGVycm9yOiBsZW4gJXUgZXhjZWVkcyB0cnVlc2l6
-ZSAlbHVcbiIsCj4gPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkZXYtPm5hbWUs
-IGxlbiwgKHVuc2lnbmVkIGxvbmcpKHRydWVzaXplIC0gcm9vbSkpOwo+ID4gICAgICAgICAgICAg
-ICAgICAgICAgICAgZGV2LT5zdGF0cy5yeF9sZW5ndGhfZXJyb3JzKys7Cj4gPiAtICAgICAgICAg
-ICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
-IGdvdG8gZXJyOwo+ID4gICAgICAgICAgICAgICAgIH0KPiA+Cj4gPiAgICAgICAgICAgICAgICAg
-ZnJhZyA9ICZzaGluZm8tPmZyYWdzW3NoaW5mby0+bnJfZnJhZ3MrK107Cj4gPiBAQCAtMTIzNSw2
-ICsxMjM5LDEwIEBAIHN0YXRpYyBpbnQgdmlydG5ldF9idWlsZF94ZHBfYnVmZl9tcmcoc3RydWN0
-IG5ldF9kZXZpY2UgKmRldiwKPiA+Cj4gPiAgICAgICAgICp4ZHBfZnJhZ3NfdHJ1ZXNpemUgPSB4
-ZHBfZnJhZ3NfdHJ1ZXN6Owo+ID4gICAgICAgICByZXR1cm4gMDsKPiA+ICsKPiA+ICtlcnI6Cj4g
-PiArICAgICAgIHB1dF94ZHBfZnJhZ3MoeGRwKTsKPiA+ICsgICAgICAgcmV0dXJuIC1FSU5WQUw7
-Cj4gPiAgfQo+ID4KPiA+ICBzdGF0aWMgdm9pZCAqbWVyZ2VhYmxlX3hkcF9wcmVwYXJlKHN0cnVj
-dCB2aXJ0bmV0X2luZm8gKnZpLAo+ID4gQEAgLTEzNjQsNyArMTM3Miw3IEBAIHN0YXRpYyBzdHJ1
-Y3Qgc2tfYnVmZiAqcmVjZWl2ZV9tZXJnZWFibGUoc3RydWN0IG5ldF9kZXZpY2UgKmRldiwKPiA+
-ICAgICAgICAgICAgICAgICBlcnIgPSB2aXJ0bmV0X2J1aWxkX3hkcF9idWZmX21yZyhkZXYsIHZp
-LCBycSwgJnhkcCwgZGF0YSwgbGVuLCBmcmFtZV9zeiwKPiA+ICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAmbnVtX2J1ZiwgJnhkcF9mcmFnc190cnVlc3os
-IHN0YXRzKTsKPiA+ICAgICAgICAgICAgICAgICBpZiAodW5saWtlbHkoZXJyKSkKPiA+IC0gICAg
-ICAgICAgICAgICAgICAgICAgIGdvdG8gZXJyX3hkcF9mcmFnczsKPiA+ICsgICAgICAgICAgICAg
-ICAgICAgICAgIGdvdG8gZXJyX3hkcDsKPiA+Cj4gPiAgICAgICAgICAgICAgICAgYWN0ID0gdmly
-dG5ldF94ZHBfaGFuZGxlcih4ZHBfcHJvZywgJnhkcCwgZGV2LCB4ZHBfeG1pdCwgc3RhdHMpOwo+
-ID4KPiA+IEBAIC0xMzcyLDcgKzEzODAsNyBAQCBzdGF0aWMgc3RydWN0IHNrX2J1ZmYgKnJlY2Vp
-dmVfbWVyZ2VhYmxlKHN0cnVjdCBuZXRfZGV2aWNlICpkZXYsCj4gPiAgICAgICAgICAgICAgICAg
-Y2FzZSBWSVJUTkVUX1hEUF9SRVNfUEFTUzoKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGhl
-YWRfc2tiID0gYnVpbGRfc2tiX2Zyb21feGRwX2J1ZmYoZGV2LCB2aSwgJnhkcCwgeGRwX2ZyYWdz
-X3RydWVzeik7Cj4gPiAgICAgICAgICAgICAgICAgICAgICAgICBpZiAodW5saWtlbHkoIWhlYWRf
-c2tiKSkKPiA+IC0gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ290byBlcnJfeGRwX2Zy
-YWdzOwo+ID4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnb3RvIGVycl94ZHA7Cj4g
-Pgo+ID4gICAgICAgICAgICAgICAgICAgICAgICAgcmN1X3JlYWRfdW5sb2NrKCk7Cj4gPiAgICAg
-ICAgICAgICAgICAgICAgICAgICByZXR1cm4gaGVhZF9za2I7Cj4gPiBAQCAtMTM4MiwxMSArMTM5
-MCw4IEBAIHN0YXRpYyBzdHJ1Y3Qgc2tfYnVmZiAqcmVjZWl2ZV9tZXJnZWFibGUoc3RydWN0IG5l
-dF9kZXZpY2UgKmRldiwKPiA+ICAgICAgICAgICAgICAgICAgICAgICAgIGdvdG8geGRwX3htaXQ7
-Cj4gPgo+ID4gICAgICAgICAgICAgICAgIGNhc2UgVklSVE5FVF9YRFBfUkVTX0RST1A6Cj4gPiAt
-ICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPiA+ICsgICAgICAgICAgICAgICAgICAgICAg
-IGdvdG8gZXJyX3hkcDsKPiA+ICAgICAgICAgICAgICAgICB9Cj4gPiAtZXJyX3hkcF9mcmFnczoK
-PiA+IC0gICAgICAgICAgICAgICBwdXRfeGRwX2ZyYWdzKCZ4ZHApOwo+ID4gLSAgICAgICAgICAg
-ICAgIGdvdG8gZXJyX3hkcDsKPiA+ICAgICAgICAgfQo+ID4gICAgICAgICByY3VfcmVhZF91bmxv
-Y2soKTsKPiA+Cj4gPiAtLQo+ID4gMi4zMi4wLjMuZzAxMTk1Y2Y5Zgo+ID4KPgpfX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXwpWaXJ0dWFsaXphdGlvbiBtYWls
-aW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgtZm91bmRhdGlvbi5vcmcKaHR0cHM6
-Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4vbGlzdGluZm8vdmlydHVhbGl6YXRp
-b24=
+On Wed, 19 Apr 2023 23:19:22 -0700, Christoph Hellwig <hch@infradead.org> wrote:
+> On Wed, Apr 19, 2023 at 09:45:06AM -0700, Jakub Kicinski wrote:
+> > > Can you explain what the actual use case is?
+> > >
+> > > From the original patchset I suspect it is dma mapping something very
+> > > long term and then maybe doing syncs on it as needed?
+> >
+> > In this case yes, pinned user memory, it gets sliced up into MTU sized
+> > chunks, fed into an Rx queue of a device, and user can see packets
+> > without any copies.
+>
+> How long is the life time of these mappings?  Because dma_map_*
+> assumes a temporary mapping and not one that is pinned bascically
+> forever.
+>
+> > Quite similar use case #2 is upcoming io_uring / "direct placement"
+> > patches (former from Meta, latter for Google) which will try to receive
+> > just the TCP data into pinned user memory.
+>
+> I don't think we can just long term pin user memory here.  E.g. for
+> confidential computing cases we can't even ever do DMA straight to
+> userspace.  I had that conversation with Meta's block folks who
+> want to do something similar with io_uring and the only option is an
+> an allocator for memory that is known DMAable, e.g. through dma-bufs.
+>
+> You guys really all need to get together and come up with a scheme
+> that actually works instead of piling these hacks over hacks.
+
+I think that cases Jakub mentioned are new requirements. From the perspective of
+implementation, compared to this patch I submitted, if the DMA API can be
+expanded, compatible with some special hardware, I think it is a good solution.
+
+I know that the current design of DMA API only supports some physical hardware,
+but can it be modified or expanded?
+
+Still the previous idea, can we add a new ops (not dma_ops) in device? After the
+driver configuration, so that the DMA API can be compatible with some special
+hardware?
+
+
+Thanks.
+
+
+
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
