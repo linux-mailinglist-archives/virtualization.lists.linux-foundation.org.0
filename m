@@ -1,61 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5F4876EBEE5
-	for <lists.virtualization@lfdr.de>; Sun, 23 Apr 2023 12:58:07 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2301C6EBEE6
+	for <lists.virtualization@lfdr.de>; Sun, 23 Apr 2023 12:58:08 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 71F56611D0;
-	Sun, 23 Apr 2023 10:58:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 71F56611D0
+	by smtp4.osuosl.org (Postfix) with ESMTP id 931F2417C1;
+	Sun, 23 Apr 2023 10:58:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 931F2417C1
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NZWfUgMFKclA; Sun, 23 Apr 2023 10:58:04 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id PAIdM83Suahm; Sun, 23 Apr 2023 10:58:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 4A4D860F7E;
+	by smtp4.osuosl.org (Postfix) with ESMTPS id B1871417D4;
 	Sun, 23 Apr 2023 10:58:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4A4D860F7E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B1871417D4
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 2792BC0093;
-	Sun, 23 Apr 2023 10:58:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B2F1C008D;
+	Sun, 23 Apr 2023 10:58:04 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 344A0C002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 394C6C002A
  for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Apr 2023 10:58:01 +0000 (UTC)
+ Sun, 23 Apr 2023 10:58:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 022F961186
+ by smtp3.osuosl.org (Postfix) with ESMTP id A0D1A611D0
  for <virtualization@lists.linux-foundation.org>;
  Sun, 23 Apr 2023 10:58:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 022F961186
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A0D1A611D0
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ER3tJTstxY2a
+ with ESMTP id z6z3PtlsQc6V
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 23 Apr 2023 10:58:01 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6B062611E6
+Received: from out30-100.freemail.mail.aliyun.com
+ (out30-100.freemail.mail.aliyun.com [115.124.30.100])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 6B062611E6
  for <virtualization@lists.linux-foundation.org>;
  Sun, 23 Apr 2023 10:58:00 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8F256611D5
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 8F256611D5
- for <virtualization@lists.linux-foundation.org>;
- Sun, 23 Apr 2023 10:57:59 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R101e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
- TI=SMTPD_---0VgjkwmZ_1682247473; 
+ TI=SMTPD_---0VgjkwnI_1682247474; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VgjkwmZ_1682247473) by smtp.aliyun-inc.com;
- Sun, 23 Apr 2023 18:57:54 +0800
+ fp:SMTPD_---0VgjkwnI_1682247474) by smtp.aliyun-inc.com;
+ Sun, 23 Apr 2023 18:57:55 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v3 14/15] virtio_net: introduce
- receive_small_build_xdp
-Date: Sun, 23 Apr 2023 18:57:35 +0800
-Message-Id: <20230423105736.56918-15-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v3 15/15] virtio_net: introduce virtnet_build_skb()
+Date: Sun, 23 Apr 2023 18:57:36 +0800
+Message-Id: <20230423105736.56918-16-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230423105736.56918-1-xuanzhuo@linux.alibaba.com>
 References: <20230423105736.56918-1-xuanzhuo@linux.alibaba.com>
@@ -83,87 +82,87 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Simplifying receive_small() function. Bringing the logic relating to
-build_skb together.
+This logic is used in multiple places, now we separate it into
+a helper.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio_net.c | 48 ++++++++++++++++++++++++++--------------
- 1 file changed, 31 insertions(+), 17 deletions(-)
+ drivers/net/virtio_net.c | 34 +++++++++++++++++++++-------------
+ 1 file changed, 21 insertions(+), 13 deletions(-)
 
 diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index d2973c8fa48c..811cf1046df2 100644
+index 811cf1046df2..f768e683dadb 100644
 --- a/drivers/net/virtio_net.c
 +++ b/drivers/net/virtio_net.c
-@@ -931,6 +931,34 @@ static struct page *xdp_linearize_page(struct receive_queue *rq,
- 	return NULL;
+@@ -443,6 +443,22 @@ static unsigned int mergeable_ctx_to_truesize(void *mrg_ctx)
+ 	return (unsigned long)mrg_ctx & ((1 << MRG_CTX_HEADER_SHIFT) - 1);
  }
  
-+static struct sk_buff *receive_small_build_skb(struct virtnet_info *vi,
-+					       unsigned int xdp_headroom,
-+					       void *buf,
-+					       unsigned int len)
++static struct sk_buff *virtnet_build_skb(void *buf, unsigned int buflen,
++					 unsigned int headroom,
++					 unsigned int len)
 +{
-+	unsigned int header_offset;
-+	unsigned int headroom;
-+	unsigned int buflen;
 +	struct sk_buff *skb;
 +
-+	header_offset = VIRTNET_RX_PAD + xdp_headroom;
-+	headroom = vi->hdr_len + header_offset;
-+	buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
-+		SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
-+
 +	skb = build_skb(buf, buflen);
-+	if (!skb)
++	if (unlikely(!skb))
 +		return NULL;
 +
 +	skb_reserve(skb, headroom);
 +	skb_put(skb, len);
 +
-+	buf += header_offset;
-+	memcpy(skb_vnet_hdr(skb), buf, vi->hdr_len);
-+
 +	return skb;
 +}
 +
- static struct sk_buff *receive_small_xdp(struct net_device *dev,
- 					 struct virtnet_info *vi,
- 					 struct receive_queue *rq,
-@@ -1030,9 +1058,6 @@ static struct sk_buff *receive_small(struct net_device *dev,
- {
- 	unsigned int xdp_headroom = (unsigned long)ctx;
- 	struct page *page = virt_to_head_page(buf);
--	unsigned int header_offset;
--	unsigned int headroom;
--	unsigned int buflen;
- 	struct sk_buff *skb;
+ /* Called from bottom half context */
+ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
+ 				   struct receive_queue *rq,
+@@ -476,13 +492,10 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
  
- 	len -= vi->hdr_len;
-@@ -1060,20 +1085,9 @@ static struct sk_buff *receive_small(struct net_device *dev,
- 		rcu_read_unlock();
- 	}
+ 	/* copy small packet so we can reuse these pages */
+ 	if (!NET_IP_ALIGN && len > GOOD_COPY_LEN && tailroom >= shinfo_size) {
+-		skb = build_skb(buf, truesize);
++		skb = virtnet_build_skb(buf, truesize, p - buf, len);
+ 		if (unlikely(!skb))
+ 			return NULL;
  
--	header_offset = VIRTNET_RX_PAD + xdp_headroom;
--	headroom = vi->hdr_len + header_offset;
--	buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
--		SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
+-		skb_reserve(skb, p - buf);
+-		skb_put(skb, len);
 -
+ 		page = (struct page *)page->private;
+ 		if (page)
+ 			give_pages(rq, page);
+@@ -946,13 +959,10 @@ static struct sk_buff *receive_small_build_skb(struct virtnet_info *vi,
+ 	buflen = SKB_DATA_ALIGN(GOOD_PACKET_LEN + headroom) +
+ 		SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
+ 
 -	skb = build_skb(buf, buflen);
 -	if (!skb)
--		goto err;
++	skb = virtnet_build_skb(buf, buflen, headroom, len);
++	if (unlikely(!skb))
+ 		return NULL;
+ 
 -	skb_reserve(skb, headroom);
 -	skb_put(skb, len);
 -
--	buf += header_offset;
--	memcpy(skb_vnet_hdr(skb), buf, vi->hdr_len);
--	return skb;
-+	skb = receive_small_build_skb(vi, xdp_headroom, buf, len);
-+	if (likely(skb))
-+		return skb;
+ 	buf += header_offset;
+ 	memcpy(skb_vnet_hdr(skb), buf, vi->hdr_len);
  
- err:
- 	stats->drops++;
+@@ -1028,12 +1038,10 @@ static struct sk_buff *receive_small_xdp(struct net_device *dev,
+ 		goto err_xdp;
+ 	}
+ 
+-	skb = build_skb(buf, buflen);
+-	if (!skb)
++	skb = virtnet_build_skb(buf, buflen, xdp.data - buf, len);
++	if (unlikely(!skb))
+ 		goto err;
+ 
+-	skb_reserve(skb, xdp.data - buf);
+-	skb_put(skb, len);
+ 	if (metasize)
+ 		skb_metadata_set(skb, metasize);
+ 
 -- 
 2.32.0.3.g01195cf9f
 
