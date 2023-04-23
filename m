@@ -2,127 +2,91 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 375EB6EB293
-	for <lists.virtualization@lfdr.de>; Fri, 21 Apr 2023 21:57:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id AA4756EBC59
+	for <lists.virtualization@lfdr.de>; Sun, 23 Apr 2023 03:56:01 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4987A843D7;
-	Fri, 21 Apr 2023 19:57:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4987A843D7
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=zwfTcMZ+
+	by smtp1.osuosl.org (Postfix) with ESMTP id 9F00382197;
+	Sun, 23 Apr 2023 01:55:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9F00382197
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xVBJIeehvtpB; Fri, 21 Apr 2023 19:57:04 +0000 (UTC)
+	with ESMTP id qEf6Iufn41JY; Sun, 23 Apr 2023 01:55:57 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 16F94843D5;
-	Fri, 21 Apr 2023 19:57:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 16F94843D5
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 74B8882194;
+	Sun, 23 Apr 2023 01:55:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 74B8882194
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C6062C008B;
-	Fri, 21 Apr 2023 19:57:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 94AC1C008A;
+	Sun, 23 Apr 2023 01:55:56 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9E485C002A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9056EC002A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Apr 2023 19:57:02 +0000 (UTC)
+ Sun, 23 Apr 2023 01:55:55 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 7529A7001C
+ by smtp2.osuosl.org (Postfix) with ESMTP id 53B6440125
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Apr 2023 19:57:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7529A7001C
-Authentication-Results: smtp3.osuosl.org; dkim=pass (1024-bit key,
- unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256
- header.s=selector1 header.b=zwfTcMZ+
+ Sun, 23 Apr 2023 01:55:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 53B6440125
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id z-9itXD2TC_N
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id JZ9_Dek0vgkU
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Apr 2023 19:57:01 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9746460E0D
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e8d::612])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 9746460E0D
+ Sun, 23 Apr 2023 01:55:54 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AD250400F3
+Received: from out30-97.freemail.mail.aliyun.com
+ (out30-97.freemail.mail.aliyun.com [115.124.30.97])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id AD250400F3
  for <virtualization@lists.linux-foundation.org>;
- Fri, 21 Apr 2023 19:57:01 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=lKn/5B5Zf1wlY2JEuXgws0HF4i8Lr9x0T8bDpX0l0aMo2khC+pPSh2Z6YADe3ep7975vn4dYudvhynBeTctO5EAiDqtTSaCHyYuj1fdVzo6QVu+DQBNsHus/4fPgwTFK2OFaTDsmqC7jxzwCgBiZuyC9AAuqPJ/RzQM8xxGUXUplmBcKmtlUgIVIHyyvtsTgRXmy9gJAhdsmmCyncGb1vnlNyPVUJE8Xq/gtKrIcy7lA1sQYnTmnRpYa2VllsY/S5b2QosZfTjmMWEipstsfEPF1XLk/rQgFli47C+T6EgW0b830Zuurql1EFVz4pexxFTK6aZ3+/aVtkjNJNPGN6A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=LwlP/0aNRzwpA4zxgvJUobb7af1y91HH5ZEoy/+nVTg=;
- b=GZi324OL1CzlBQTtwt/2S8s3MYCB4p0+I+9qtvC0RIh9XV8YHvgIF1G1FTrTHHa/9djRAf0SKT4p6yukoSdkOaON1wSl1fPby5ToGFueZCXtdlCj+SakTOOHcP+VQOP8rOzTbI0xWIuL0onfXb8LPEDwI1eTiZFmHEP64KJu7BTHIiMRKeaKTcUYLibDaib2iXgCetSn12XDOpz4CheCEw23abNieqlb9mMrF3UY5TQzUcYHcw2qltrv1LGMIfhhsplN64BwrQmMf5cm5q8U/Dlf6e+gb21gCFX6uAtmGgYV4XwoUdghrhWB1Pbps7x0KHmI7eL4JBxn+PLEFL7kEQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=LwlP/0aNRzwpA4zxgvJUobb7af1y91HH5ZEoy/+nVTg=;
- b=zwfTcMZ+YZ8h4FCxzii8Mp4wx7lq114O7sRiUtPNoDfzCUCcBk8/oEgaxOPd90YgkJXHDz8Fn77rxCDs2hxnjwI3pW667CnfPl+DxiF2PQc668EXOub1UnpA31y3eIsYSmLbJfwqWsNGP3r96PzGw9cS8Q/gz61z0+T5eSrxxhk=
-Received: from DM6PR07CA0117.namprd07.prod.outlook.com (2603:10b6:5:330::32)
- by DM4PR12MB6207.namprd12.prod.outlook.com (2603:10b6:8:a6::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.22; Fri, 21 Apr
- 2023 19:56:57 +0000
-Received: from DM6NAM11FT098.eop-nam11.prod.protection.outlook.com
- (2603:10b6:5:330:cafe::93) by DM6PR07CA0117.outlook.office365.com
- (2603:10b6:5:330::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6319.25 via Frontend
- Transport; Fri, 21 Apr 2023 19:56:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT098.mail.protection.outlook.com (10.13.173.61) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6319.27 via Frontend Transport; Fri, 21 Apr 2023 19:56:57 +0000
-Received: from driver-dev1.pensando.io (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Fri, 21 Apr
- 2023 14:56:56 -0500
-To: <jasowang@redhat.com>, <mst@redhat.com>,
- <virtualization@lists.linux-foundation.org>
-Subject: [PATCH 3/3] vhost_vdpa: support PACKED when setting-getting vring_base
-Date: Fri, 21 Apr 2023 12:56:41 -0700
-Message-ID: <20230421195641.391-4-shannon.nelson@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230421195641.391-1-shannon.nelson@amd.com>
-References: <20230421195641.391-1-shannon.nelson@amd.com>
-MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT098:EE_|DM4PR12MB6207:EE_
-X-MS-Office365-Filtering-Correlation-Id: b9eec500-7a4a-488f-c84b-08db42a29051
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Efyz482rr7JHrJf8YnUI+fgA8vyNBHusp+iorkD98pje6ea3jKJwy8TnfX6g0cU2nBWQcHQGYsJbjJRtjdMG7yfIJUhq8fOsFYhjJISivPl66nhK9Vv3mN6YcuGwVSWE3VAuGYNfv3nT+zgWVTr7Se5/t4AAvA/bDcZlhMWhM0uhJMLg4uB2jTT57HWTukTkdaBjSa9dOhQvUNCRQzwkWO+ptXk7KpuPngen8/c9hPKLsC5v37vkJTCvexBGdagCDWymsndilA0vdymZB3qXsOPvjKgNcXxuHShSd1WiKtuw7fYRPTmSwIoVVrrgiEcJEPGajxz0iLmxD3jgRkvkeM2WKNS9RVJtd6mzX4eZBLJpCTOBxix7W+KKR63UXGCekM8PkvlNNjxj1Q0x5JhJE2k9AG/wlbqbflv8R6/QkrFY8LIaNCMfVZA45INJv4fJMWU7szsTzDm32ivFa9ZR333xDYS5Xgzz8d3OFtfDnqO+52Yvwe8AspcADkTDcvP3kQJugVYJk6oSWRy9G65sFdFx1im9eTqOHHm161q4tKrS3TpwB5+anwxq4DK3Aso5mU/etLmajb6o3/GIh9FwgGyDKJJH+yKi8FeFzitEMxSOZKEWS4Wv4vxltoKwZrT4TZVcrElvuw8sWIFE8VnsglY9NcqKaAO8F2hYYR1IhZW1+6aK2ABaLJ4+a9V/7FllPJkjSH5zaGwF8MVHU9SPAC4jpBNoJIaW/4Ut6+lIRUw=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230028)(4636009)(136003)(346002)(396003)(376002)(39860400002)(451199021)(46966006)(36840700001)(40470700004)(478600001)(54906003)(110136005)(426003)(83380400001)(40480700001)(36860700001)(2616005)(1076003)(47076005)(36756003)(26005)(16526019)(356005)(186003)(82740400003)(86362001)(81166007)(82310400005)(336012)(40460700003)(6666004)(8936002)(316002)(8676002)(41300700001)(4326008)(70586007)(70206006)(5660300002)(2906002)(44832011)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Apr 2023 19:56:57.5689 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b9eec500-7a4a-488f-c84b-08db42a29051
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT098.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6207
-Cc: drivers@pensando.io
+ Sun, 23 Apr 2023 01:55:53 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R611e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=23; SR=0;
+ TI=SMTPD_---0VghoFDq_1682214945; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0VghoFDq_1682214945) by smtp.aliyun-inc.com;
+ Sun, 23 Apr 2023 09:55:46 +0800
+Message-ID: <1682214868.0321188-1-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net-next] xsk: introduce xsk_dma_ops
+Date: Sun, 23 Apr 2023 09:54:28 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Jakub Kicinski <kuba@kernel.org>
+References: <20230417032750.7086-1-xuanzhuo@linux.alibaba.com>
+ <ZDzKAD2SNe1q/XA6@infradead.org>
+ <1681711081.378984-2-xuanzhuo@linux.alibaba.com>
+ <20230417115610.7763a87c@kernel.org>
+ <20230417115753.7fb64b68@kernel.org>
+ <CACGkMEtPNPXFThHt4aNm4g-fC1DqTLcDnB_iBWb9-cAOHMYV_A@mail.gmail.com>
+ <20230417181950.5db68526@kernel.org>
+ <1681784379.909136-2-xuanzhuo@linux.alibaba.com>
+ <20230417195400.482cfe75@kernel.org>
+ <ZD4kMOym15pFcjq+@infradead.org>
+ <20230417231947.3972f1a8@kernel.org>
+ <ZD95RY9PjVRi7qz3@infradead.org>
+ <20230419094506.2658b73f@kernel.org>
+ <ZEDZaitjcX+egzvf@infradead.org>
+ <20230420071349.5e441027@kernel.org>
+ <1682062264.418752-2-xuanzhuo@linux.alibaba.com>
+ <20230421065059.1bc78133@kernel.org>
+In-Reply-To: <20230421065059.1bc78133@kernel.org>
+Cc: "Michael S. Tsirkin" <mst@redhat.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Daniel Borkmann <daniel@iogearbox.net>,
+ John Fastabend <john.fastabend@gmail.com>,
+ Christoph Hellwig <hch@infradead.org>, Paolo Abeni <pabeni@redhat.com>,
+ Guenter Roeck <linux@roeck-us.net>,
+ Maciej Fijalkowski <maciej.fijalkowski@intel.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Jonathan Lemon <jonathan.lemon@gmail.com>,
+ Magnus Karlsson <magnus.karlsson@intel.com>, Jens Axboe <axboe@kernel.dk>,
+ netdev@vger.kernel.org, =?utf-8?b?QmrDtnJuIFTDtnBlbA==?= <bjorn@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>, bpf@vger.kernel.org,
+ Linus Torvalds <torvalds@linux-foundation.org>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -134,62 +98,32 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Shannon Nelson via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Shannon Nelson <shannon.nelson@amd.com>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Use the right structs for PACKED or split vqs when setting and
-getting the vring base.
+On Fri, 21 Apr 2023 06:50:59 -0700, Jakub Kicinski <kuba@kernel.org> wrote:
+> On Fri, 21 Apr 2023 15:31:04 +0800 Xuan Zhuo wrote:
+> > I am not particularly familiar with dma-bufs. I want to know if this mechanism
+> > can solve the problem of virtio-net.
+> >
+> > I saw this framework, allowing the driver do something inside the ops of
+> > dma-bufs.
+> >
+> > If so, is it possible to propose a new patch based on dma-bufs?
+>
+> I haven't looked in detail, maybe Olek has? AFAIU you'd need to rework
+> uAPI of XSK to allow user to pass in a dma-buf region rather than just
+> a user VA.
 
-Signed-off-by: Shannon Nelson <shannon.nelson@amd.com>
----
- drivers/vhost/vdpa.c | 19 +++++++++++++++----
- 1 file changed, 15 insertions(+), 4 deletions(-)
+This seems to be a big job. Can we first receive this patch.
 
-diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-index 599b8cc238c7..2543ae9d5939 100644
---- a/drivers/vhost/vdpa.c
-+++ b/drivers/vhost/vdpa.c
-@@ -585,7 +585,12 @@ static long vhost_vdpa_vring_ioctl(struct vhost_vdpa *v, unsigned int cmd,
- 		if (r)
- 			return r;
- 
--		vq->last_avail_idx = vq_state.split.avail_index;
-+		if (vhost_has_feature(vq, VIRTIO_F_RING_PACKED)) {
-+			vq->last_avail_idx = vq_state.packed.last_avail_idx;
-+			vq->last_used_idx = vq_state.packed.last_used_idx;
-+		} else {
-+			vq->last_avail_idx = vq_state.split.avail_index;
-+		}
- 		break;
- 	}
- 
-@@ -603,9 +608,15 @@ static long vhost_vdpa_vring_ioctl(struct vhost_vdpa *v, unsigned int cmd,
- 		break;
- 
- 	case VHOST_SET_VRING_BASE:
--		vq_state.split.avail_index = vq->last_avail_idx;
--		if (ops->set_vq_state(vdpa, idx, &vq_state))
--			r = -EINVAL;
-+		if (vhost_has_feature(vq, VIRTIO_F_RING_PACKED)) {
-+			vq_state.packed.last_avail_idx = vq->last_avail_idx & 0x7fff;
-+			vq_state.packed.last_avail_counter = !!(vq->last_avail_idx & 0x8000);
-+			vq_state.packed.last_used_idx = vq->last_used_idx & 0x7fff;
-+			vq_state.packed.last_used_counter = !!(vq->last_used_idx & 0x8000);
-+		} else {
-+			vq_state.split.avail_index = vq->last_avail_idx;
-+		}
-+		r = ops->set_vq_state(vdpa, idx, &vq_state);
- 		break;
- 
- 	case VHOST_SET_VRING_CALL:
--- 
-2.17.1
+Thanks.
 
+> So it may be a larger effort but architecturally it may be
+> the right solution.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
