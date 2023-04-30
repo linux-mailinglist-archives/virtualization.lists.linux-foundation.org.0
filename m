@@ -1,145 +1,110 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 3B2D06F28FF
-	for <lists.virtualization@lfdr.de>; Sun, 30 Apr 2023 15:15:42 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 671BF81F47;
-	Sun, 30 Apr 2023 13:15:40 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 671BF81F47
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256 header.s=selector1-solidrn-onmicrosoft-com header.b=dhX1SOch
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id r12iUju7gXio; Sun, 30 Apr 2023 13:15:39 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 476EB81F50;
-	Sun, 30 Apr 2023 13:15:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 476EB81F50
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1D149C007A;
-	Sun, 30 Apr 2023 13:15:39 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 42951C007A
- for <virtualization@lists.linux-foundation.org>;
- Sun, 30 Apr 2023 13:15:37 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id CC4EC6F290C
+	for <lists.virtualization@lfdr.de>; Sun, 30 Apr 2023 15:27:42 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id D77C440332
- for <virtualization@lists.linux-foundation.org>;
- Sun, 30 Apr 2023 13:15:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D77C440332
+	by smtp2.osuosl.org (Postfix) with ESMTP id A3C8940017;
+	Sun, 30 Apr 2023 13:27:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A3C8940017
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=solidrn.onmicrosoft.com
- header.i=@solidrn.onmicrosoft.com header.a=rsa-sha256
- header.s=selector1-solidrn-onmicrosoft-com header.b=dhX1SOch
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JX52VvI6
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id k7idaZPami3U
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kPCdd8NWWmS6; Sun, 30 Apr 2023 13:27:38 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 359C440332;
+	Sun, 30 Apr 2023 13:27:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 359C440332
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 66B25C0089;
+	Sun, 30 Apr 2023 13:27:37 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 93432C002A
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 Apr 2023 13:15:34 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 17B5040017
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20626.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe13::626])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 17B5040017
+ Sun, 30 Apr 2023 13:27:35 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 677F883C64
  for <virtualization@lists.linux-foundation.org>;
- Sun, 30 Apr 2023 13:15:34 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YglorN+m/uNV2tCqpeqx9vD+nAgucbhf6rYQaNjMM/ArjiprJ7Uurdy6VQhGstbN+bBR9g3R/dPSz5RBpSY23kI7VKEe6kRxT+PJldhLZEE3u1sjjL+rS5TC4a4dRIjF6theBaYtcBw8CkblMvKTd2t2amDBIuqJhn6B7E3zKE7BRbezMubzizaENYh1QJpNaqtHtoJp7t2py6wfzxcUOZJTbsWGxQycPwsFq/LOJieHSgUMQg5yBOcIJhOpT9ZzOszznN3VqV9ROAy51asYmViErlcJbSrW0vsBfNrqDjs9u/de2D5093WDGTWNsxbuckvQqK8VuZuxjrmDbZX4ug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3CkMn617NGcOIW82fXp6biqVBtJmQyqTZuuxdSUg1fE=;
- b=dZeOXkwnXsXtJ1/AZJVgtVg8rI0jfbSXN89NkSQ4MDoG7D7l+Pj1/Fs0GfCjK8KCB6t7E4WiXxTDjmzVEA5pgILXlVhYMvZp/XaERTYgaQLu17ChMKP8hEqzAtDHHd/VIx0KNzyhsN5ymtGvGqPasQXY16OjVqaeRyHsCegEAVXSjwuQoYGYHv525GeiGtRUE1+FI610Zipfdhcu2Ra5kBEnuB7yl/hYU9gaT6YnVVmRJ3ZYHPVbSe3rAFg4O7gKrIKaVpb/9LjaFxezRxDSRF4LkC5d524aE/yksfax8kzQDlKG1BbX0y+h9t1dMXJubZyruoSEnBdbChxWk6aoHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=solid-run.com; dmarc=pass action=none
- header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3CkMn617NGcOIW82fXp6biqVBtJmQyqTZuuxdSUg1fE=;
- b=dhX1SOchEQFpionO8As6uBA+yUxPwyY33dmENTGXwKtulv/3iSCPD3Xt6VDJPQylcX71Np1enPN8Q+lqtGsFD6U+6DC/a44B+7EztU5t2IkmQEqY7/GI9ro92qQ6tEeTuv4SBi1CM7rbd2kGxLoSb89bgmes5pAPY3aIVfH6A2U=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=solid-run.com;
-Received: from AM0PR04MB4723.eurprd04.prod.outlook.com (2603:10a6:208:c0::20)
- by AM7PR04MB7142.eurprd04.prod.outlook.com (2603:10a6:20b:113::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.26; Sun, 30 Apr
- 2023 13:15:33 +0000
-Received: from AM0PR04MB4723.eurprd04.prod.outlook.com
- ([fe80::a5ea:bc1c:6fa6:8106]) by AM0PR04MB4723.eurprd04.prod.outlook.com
- ([fe80::a5ea:bc1c:6fa6:8106%5]) with mapi id 15.20.6340.026; Sun, 30 Apr 2023
- 13:15:33 +0000
-From: Alvaro Karsz <alvaro.karsz@solid-run.com>
-To: mst@redhat.com,
-	jasowang@redhat.com
-Subject: [RFC PATCH net 3/3] virtio-net: block ethtool from converting a ring
- to a small ring
-Date: Sun, 30 Apr 2023 16:15:18 +0300
-Message-Id: <20230430131518.2708471-4-alvaro.karsz@solid-run.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20230430131518.2708471-1-alvaro.karsz@solid-run.com>
+ Sun, 30 Apr 2023 13:27:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 677F883C64
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=JX52VvI6
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 2PtB6Zsn7g6p
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 30 Apr 2023 13:27:34 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F388783C32
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id F388783C32
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 30 Apr 2023 13:27:33 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1682861252;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=ByfksgfAfk/uxpL9BVE+5FLntDZWZHVF8lQ+xy8gE0M=;
+ b=JX52VvI6F8464GKqZvZjeX9/yTR2ky5KHilUCWpb4xCgT1cS4OcCrzfy9dS5qGefdqUJq5
+ QZ3BbC1mtaQ8ckyeDQdYi+Q8dwSlZNSLvmh5qjIE2CJpSLlQeJT+5BYC3lT4KGjQ5gn1Qg
+ IhPQv53BYe4kkhWXLl/61MiglBG2twQ=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-205-TOF4goQ6OnChGwOgp2b0CA-1; Sun, 30 Apr 2023 09:27:28 -0400
+X-MC-Unique: TOF4goQ6OnChGwOgp2b0CA-1
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-3f1749c63c9so4248785e9.3
+ for <virtualization@lists.linux-foundation.org>;
+ Sun, 30 Apr 2023 06:27:28 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1682861247; x=1685453247;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ByfksgfAfk/uxpL9BVE+5FLntDZWZHVF8lQ+xy8gE0M=;
+ b=M5WBAdi59uqRO1KU51JTB9Ta1r9dEkd0VLP1GACB/7wYMN3Ts+DIlLfWQB6/SfSwCU
+ 40n+DR+3cC/heH/7nJzF1bTuufduWWg8v/jtz80YhagffMXR1eLYnovbOfStByoqk+87
+ HWYtMO+3y0xoscC0tzybtoN+hQQjl3DtMFig2UPrLr/WT4CpVIgSbI750irBZdT/RowS
+ 8V8qnqelhu2k7jPkmLN5BTUE0N3cKoYT9mM1NVBhjsLikW2ndKGuk3qjMMuoxrRSM56z
+ 8a1wf175qq6xtM4El//P1AtNo5hRlTuvaHUXuxpCoUjvjRB0RI+1/XhBgv8qlAYUuX5b
+ wvSQ==
+X-Gm-Message-State: AC+VfDzoirBhWT7hZw0QbYis9NyCIAgzvItZKWaD5z5AzrRJCJTOD1C3
+ cAOQpH6hNKcC8BK17PAY5mQ4ed5z+I6zK4vwSk5yq1pCO5thfEhkWTg4BGw0q0JVyv915QNsQ5W
+ j9Bw+OLoLCyEjnY3c3I24y01Z9WAIUOeY+M9KwiG0sw==
+X-Received: by 2002:a7b:c015:0:b0:3f1:662a:93d0 with SMTP id
+ c21-20020a7bc015000000b003f1662a93d0mr8322127wmb.15.1682861247612; 
+ Sun, 30 Apr 2023 06:27:27 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7ETv6GryHgo+COy+D101D1I+zk9PjXqylCJcECyfbSbp4HpTMUDiTN0979D6XmXqcM12ZLdg==
+X-Received: by 2002:a7b:c015:0:b0:3f1:662a:93d0 with SMTP id
+ c21-20020a7bc015000000b003f1662a93d0mr8322115wmb.15.1682861247234; 
+ Sun, 30 Apr 2023 06:27:27 -0700 (PDT)
+Received: from redhat.com ([2.52.139.131]) by smtp.gmail.com with ESMTPSA id
+ x8-20020a05600c21c800b003f2390bdd0csm21102744wmj.32.2023.04.30.06.27.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 30 Apr 2023 06:27:26 -0700 (PDT)
+Date: Sun, 30 Apr 2023 09:27:22 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Alvaro Karsz <alvaro.karsz@solid-run.com>
+Subject: Re: [RFC PATCH net 1/3] virtio: re-negotiate features if probe fails
+ and features are blocked
+Message-ID: <20230430092142-mutt-send-email-mst@kernel.org>
 References: <20230430131518.2708471-1-alvaro.karsz@solid-run.com>
-X-ClientProxiedBy: ZR0P278CA0191.CHEP278.PROD.OUTLOOK.COM
- (2603:10a6:910:44::10) To AM0PR04MB4723.eurprd04.prod.outlook.com
- (2603:10a6:208:c0::20)
+ <20230430131518.2708471-2-alvaro.karsz@solid-run.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB4723:EE_|AM7PR04MB7142:EE_
-X-MS-Office365-Filtering-Correlation-Id: f007aea1-0fad-4575-1c5f-08db497cfa7b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: kwIAWr7AprY5tyGqBsbUgR7d/QK7xAhnHHZnBY5xS795DxfPSodyYEev9CEC25zFU/WjuRhY6Jq/9vlqxS5HuNfb1GLm9e7TO14zwi3e9N8eoH0gc6JP5HIfKlxm5rfw/IVTBAKyiyXQctmrSyorJp42Oq+fbZw0pazluQ71j3wo2nuw88AVpEe/WYQdrF4CzKJIrGtsMuCE0bJXyUOOPIVre85mmNkaWDIGVOcnnu7Rl3g9djW18bvpvtsKe+Rz+I3ysg3tc/M0Qri9yF5tswrxfuhEx/lZfahJH6r0LOz2a1hmPOvFfoIGsDmGehJrhfK1TdJlI2NxCXbOXwOrcIeiAlpx8lYiOzUbyIM+QLSDbIPgYrxFJVRbT5i2IcxyJgeW+jbu16s2UiQJ9MtVWlxF7CuTUJM6QldWdYBQzEIzGWTKvrpUZQdDe5M00f1I3eyZ1Xv18CrVSdMhwYXG6+5meWp9iWOMd3rEmnf8CwP2gP0/PqEBnKQ/4+ZKUgA5XvXrryQtBKrqV+9lMNacCM44xS+RkhfhdKZBgO4yCzUlQ1fD2QXtNbzYkaKRVfKviPuEEkNH12FZY2+qUUfL5lNZ4iDs55pZpAWdUiz/yHWB6BiZgSfkv+jeDv4IatdS
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB4723.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(376002)(366004)(136003)(346002)(396003)(39830400003)(451199021)(86362001)(36756003)(38100700002)(38350700002)(7416002)(5660300002)(4326008)(66946007)(316002)(66476007)(44832011)(8936002)(41300700001)(66556008)(8676002)(2906002)(2616005)(6666004)(52116002)(478600001)(6486002)(6506007)(1076003)(26005)(107886003)(6512007)(186003);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?ijhI6mvsm7jz8ftjOh6UmrsHXhA9cNSBAw2tykjpxwCAUvORiv9kMFjbIN81?=
- =?us-ascii?Q?P1X6ql03Ca7k2KIBbrWgLbzyf5vzwStx78teNw705K74kGDFW+wbfS/OZXLw?=
- =?us-ascii?Q?6zNYL5jkTDL34v+js/7be0+nTYT74ZxFsrn95WbWOP8S+0+3EiDWMIMIJg0k?=
- =?us-ascii?Q?MINtLVxD6PJR5iA11Rxaef2Iylfa/pWIK/+vguKhf/XOH+MsgqlOgMlpJVe4?=
- =?us-ascii?Q?Jx3AU3EAwvy/vNXTcvz6IGFs6Ay1Gi9OCMsHfJFec5MGP4619XBVJX7O+DSz?=
- =?us-ascii?Q?ZsA9NSN0uv3sxTShxZKXmcysFehNBZLkPpd8cQelEFbyuh3nQlIZpJYsyt2n?=
- =?us-ascii?Q?iagNPBiWj0Mjl/072zflcyhgqcxbYHRrVZvLc5PvcESks+X3eN9k6cRbJ/PU?=
- =?us-ascii?Q?rvC+7Tb4VUtDKa0SFrKUPdgC+SVUnRynzkZWQ592k/r38q8HcNFw3qAIvRvt?=
- =?us-ascii?Q?R7neoFmWfg7wWvwD0NcGnY8t7tNe2GeTevmEM64RZgWeH6a9k4esQ4/x79IE?=
- =?us-ascii?Q?lHE+KpJHQZIvL3LAGOgpngUqFnWKqW3Yu2kXI4+CWYw2eHm0EcvQQIj3Qygf?=
- =?us-ascii?Q?c+R1WX49+p6dGNSyldmi2UY2/FDVr1aRViAaMov0NH+vUlI77wXAUKncmAwP?=
- =?us-ascii?Q?TOpKGSCjmnFDHXayxZALQpmKgG66AyDQF44bDQN1xglT1sNCHeqdZleyfk7f?=
- =?us-ascii?Q?eCh5cmqg9wrwerbfL2SnFVAyZeNv0yTMCEDQPCPEHDL3xzaqxlNwaKE+ZIFZ?=
- =?us-ascii?Q?tzxWsaalrkpeOh8yO9lcwFaxSz0R6p77UQ2xh5ytEnRQ7RSrXTfQE+TdMcNw?=
- =?us-ascii?Q?t94CaPI/oMLdsPZxVgy2UZKBFHWGx4Sus7ULKfaDgvwWA91a7JefEejl7KN1?=
- =?us-ascii?Q?eiICRAgNz+eNnQsfTfe2GXvVb4vcVqCKdMoRxO8nG2lfXImDxBVBHqEphsma?=
- =?us-ascii?Q?O6z4QZPl+IQ/e1+KP4fyTQ0R6WZQkfpga+r2XacPDpXlklEC00AyM0AOLifO?=
- =?us-ascii?Q?zhPvShQZAlKkOmHuOHBvsc6aQ2LERa+2HWHqZT/HTbJ5Xb3QiKD366SWD5tb?=
- =?us-ascii?Q?yJjodQxd5gef+NxtcG6mNM4wVGDsezGYc3FkOUDkoHIlDCTBkaw0lSv2WhKv?=
- =?us-ascii?Q?l673sY8pgx/xii2k6y8qwRGar+pZ10SqDGqo9GDWAaRADLv/AE9RHqvjRk7W?=
- =?us-ascii?Q?AIyMBAeqKQY9OfMGwvjW50fTOuZstvNEKbWm+2xJd1lZIJCejD5W6I0Tzvfq?=
- =?us-ascii?Q?qi7OSU4hPY5UYgw69WbVMP+iu8ZfyE9/1ipP3lLEiwsvM21YDS/PGcJf/HkN?=
- =?us-ascii?Q?q9gFV1OWtPJ/VJFUbKbZAjUm5wn3z96qZB9SIPV9CIqQvPb1Ch1e8C2FdWWu?=
- =?us-ascii?Q?j+kiJH6Bl0jE5UAUhZwsFgJ9BKLIqvnfO4TAV7HG8cIxDlbcNWufZVn1Mg2s?=
- =?us-ascii?Q?IGJJONFTkvGS1a27MCUGLW+qvlGgAVmbUQicq9gbIlDkIGaER0r3K8g2VDrY?=
- =?us-ascii?Q?nLnCuC2dAtnSi7zw1sDt+g1Z/T5M338DcNfYOTlS7NqCOUbhNHhwIFMe3ipT?=
- =?us-ascii?Q?0Fv+4ZjmyzfE2MNaWGqO2LT9rQ0DrDj27Ni2wqjVL6M6+mCgiwP5NC5IOdtC?=
- =?us-ascii?Q?HA=3D=3D?=
-X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f007aea1-0fad-4575-1c5f-08db497cfa7b
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB4723.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2023 13:15:33.1993 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: +C1LX+kRjfaIiRFASgP9tiBeyF3EPG9bIx6W3Uppy/6IP2+IEE8lgDmU4P3FNvj3AuPRYpRRsVxB5Z/h38v6NPZ4FmIinr7oH2pX24cpeAk=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7142
+In-Reply-To: <20230430131518.2708471-2-alvaro.karsz@solid-run.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
 Cc: xuanzhuo@linux.alibaba.com, netdev@vger.kernel.org,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, davem@davemloft.net
@@ -159,48 +124,184 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Stop ethtool from resizing a TX/RX ring to size less than
-MAX_SKB_FRAGS + 2, if the ring was initialized with a bigger size.
+On Sun, Apr 30, 2023 at 04:15:16PM +0300, Alvaro Karsz wrote:
+> This patch exports a new virtio core function: virtio_block_feature.
+> The function should be called during a virtio driver probe.
+> 
+> If a virtio driver blocks features during probe and fails probe, virtio
+> core will reset the device, try to re-negotiate the new features and
+> probe again.
+> 
+> Signed-off-by: Alvaro Karsz <alvaro.karsz@solid-run.com>
+> ---
+>  drivers/virtio/virtio.c | 73 ++++++++++++++++++++++++++++++-----------
+>  include/linux/virtio.h  |  3 ++
+>  2 files changed, 56 insertions(+), 20 deletions(-)
+> 
+> diff --git a/drivers/virtio/virtio.c b/drivers/virtio/virtio.c
+> index 3893dc29eb2..eaad5b6a7a9 100644
+> --- a/drivers/virtio/virtio.c
+> +++ b/drivers/virtio/virtio.c
+> @@ -167,6 +167,13 @@ void virtio_add_status(struct virtio_device *dev, unsigned int status)
+>  }
+>  EXPORT_SYMBOL_GPL(virtio_add_status);
+>  
+> +void virtio_block_feature(struct virtio_device *dev, unsigned int f)
+> +{
+> +	BUG_ON(f >= 64);
+> +	dev->blocked_features |= (1ULL << f);
+> +}
+> +EXPORT_SYMBOL_GPL(virtio_block_feature);
+> +
 
-We cannot convert a "normal" ring to a "small" ring in runtime.
+Let's add documentation please. Also pls call it __virtio_block_feature
+since it has to be used in a special way - specifically only during
+probe.
 
-Signed-off-by: Alvaro Karsz <alvaro.karsz@solid-run.com>
----
- drivers/net/virtio_net.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+>  /* Do some validation, then set FEATURES_OK */
+>  static int virtio_features_ok(struct virtio_device *dev)
+>  {
+> @@ -234,17 +241,13 @@ void virtio_reset_device(struct virtio_device *dev)
+>  }
+>  EXPORT_SYMBOL_GPL(virtio_reset_device);
+>  
+> -static int virtio_dev_probe(struct device *_d)
+> +static int virtio_negotiate_features(struct virtio_device *dev)
+>  {
+> -	int err, i;
+> -	struct virtio_device *dev = dev_to_virtio(_d);
+>  	struct virtio_driver *drv = drv_to_virtio(dev->dev.driver);
+>  	u64 device_features;
+>  	u64 driver_features;
+>  	u64 driver_features_legacy;
+> -
+> -	/* We have a driver! */
+> -	virtio_add_status(dev, VIRTIO_CONFIG_S_DRIVER);
+> +	int i, ret;
+>  
+>  	/* Figure out what features the device supports. */
+>  	device_features = dev->config->get_features(dev);
+> @@ -279,30 +282,61 @@ static int virtio_dev_probe(struct device *_d)
+>  		if (device_features & (1ULL << i))
+>  			__virtio_set_bit(dev, i);
+>  
+> -	err = dev->config->finalize_features(dev);
+> -	if (err)
+> -		goto err;
+> +	/* Remove blocked features */
+> +	dev->features &= ~dev->blocked_features;
+> +
+> +	ret = dev->config->finalize_features(dev);
+> +	if (ret)
+> +		goto exit;
+>  
+>  	if (drv->validate) {
+>  		u64 features = dev->features;
+>  
+> -		err = drv->validate(dev);
+> -		if (err)
+> -			goto err;
+> +		ret = drv->validate(dev);
+> +		if (ret)
+> +			goto exit;
+>  
+>  		/* Did validation change any features? Then write them again. */
+>  		if (features != dev->features) {
+> -			err = dev->config->finalize_features(dev);
+> -			if (err)
+> -				goto err;
+> +			ret = dev->config->finalize_features(dev);
+> +			if (ret)
+> +				goto exit;
+>  		}
+>  	}
+>  
+> -	err = virtio_features_ok(dev);
+> -	if (err)
+> -		goto err;
+> +	ret = virtio_features_ok(dev);
+> +exit:
+> +	return ret;
+> +}
+> +
+> +static int virtio_dev_probe(struct device *_d)
+> +{
+> +	int err;
+> +	struct virtio_device *dev = dev_to_virtio(_d);
+> +	struct virtio_driver *drv = drv_to_virtio(dev->dev.driver);
+> +	u64 blocked_features;
+> +	bool renegotiate = true;
+> +
+> +	/* We have a driver! */
+> +	virtio_add_status(dev, VIRTIO_CONFIG_S_DRIVER);
+> +
+> +	/* Store blocked features and attempt to negotiate features & probe.
+> +	 * If the probe fails, we check if the driver has blocked any new features.
+> +	 * If it has, we reset the device and try again with the new features.
+> +	 */
+> +	while (renegotiate) {
+> +		blocked_features = dev->blocked_features;
+> +		err = virtio_negotiate_features(dev);
+> +		if (err)
+> +			break;
+> +
+> +		err = drv->probe(dev);
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index b4441d63890..b8238eaa1e4 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -2071,6 +2071,12 @@ static int virtnet_rx_resize(struct virtnet_info *vi,
- 	bool running = netif_running(vi->dev);
- 	int err, qindex;
- 
-+	/* We cannot convert a ring to a small vring */
-+	if (!vi->svring && IS_SMALL_VRING(ring_num)) {
-+		netdev_err(vi->dev, "resize rx fail: size is too small..\n");
-+		return -EINVAL;
-+	}
-+
- 	qindex = rq - vi->rq;
- 
- 	if (running)
-@@ -2097,6 +2103,12 @@ static int virtnet_tx_resize(struct virtnet_info *vi,
- 
- 	qindex = sq - vi->sq;
- 
-+	/* We cannot convert a ring to a small vring */
-+	if (!vi->svring && IS_SMALL_VRING(ring_num)) {
-+		netdev_err(vi->dev, "resize tx fail: size is too small..\n");
-+		return -EINVAL;
-+	}
-+
- 	if (running)
- 		virtnet_napi_tx_disable(&sq->napi);
- 
--- 
-2.34.1
+
+there's no way to driver to clear blocked features, but
+just in case, I'd add BUG_ON to check.
+
+> +		if (err && blocked_features != dev->blocked_features)
+> +			virtio_reset_device(dev);
+> +		else
+> +			renegotiate = false;
+> +	}
+>  
+> -	err = drv->probe(dev);
+>  	if (err)
+>  		goto err;
+>  
+> @@ -319,7 +353,6 @@ static int virtio_dev_probe(struct device *_d)
+>  err:
+>  	virtio_add_status(dev, VIRTIO_CONFIG_S_FAILED);
+>  	return err;
+> -
+>  }
+>  
+>  static void virtio_dev_remove(struct device *_d)
+> diff --git a/include/linux/virtio.h b/include/linux/virtio.h
+> index b93238db94e..2de9b2d3ca4 100644
+> --- a/include/linux/virtio.h
+> +++ b/include/linux/virtio.h
+> @@ -109,6 +109,7 @@ int virtqueue_resize(struct virtqueue *vq, u32 num,
+>   * @vringh_config: configuration ops for host vrings.
+>   * @vqs: the list of virtqueues for this device.
+>   * @features: the features supported by both driver and device.
+> + * @blocked_features: the features blocked by the driver that can't be negotiated.
+>   * @priv: private pointer for the driver's use.
+>   */
+>  struct virtio_device {
+> @@ -124,6 +125,7 @@ struct virtio_device {
+>  	const struct vringh_config_ops *vringh_config;
+>  	struct list_head vqs;
+>  	u64 features;
+> +	u64 blocked_features;
+
+add comment here too, explain purpose and rules of use
+
+>  	void *priv;
+>  };
+>  
+> @@ -133,6 +135,7 @@ void virtio_add_status(struct virtio_device *dev, unsigned int status);
+>  int register_virtio_device(struct virtio_device *dev);
+>  void unregister_virtio_device(struct virtio_device *dev);
+>  bool is_virtio_device(struct device *dev);
+> +void virtio_block_feature(struct virtio_device *dev, unsigned int f);
+>  
+>  void virtio_break_device(struct virtio_device *dev);
+>  void __virtio_unbreak_device(struct virtio_device *dev);
+> -- 
+> 2.34.1
 
 _______________________________________________
 Virtualization mailing list
