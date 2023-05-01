@@ -1,111 +1,108 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 93AF66F31E0
-	for <lists.virtualization@lfdr.de>; Mon,  1 May 2023 16:14:20 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 496066F31E4
+	for <lists.virtualization@lfdr.de>; Mon,  1 May 2023 16:15:30 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id B1F01408B1;
-	Mon,  1 May 2023 14:14:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B1F01408B1
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=AqOFPDU7
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6ACB46135E;
+	Mon,  1 May 2023 14:15:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6ACB46135E
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Tc4n80UL
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id txGtJlmxT6em; Mon,  1 May 2023 14:14:17 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sHejeR1mCxpq; Mon,  1 May 2023 14:15:27 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 4A5CD40B81;
-	Mon,  1 May 2023 14:14:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4A5CD40B81
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 0D13C60C2B;
+	Mon,  1 May 2023 14:15:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0D13C60C2B
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 84F52C008A;
-	Mon,  1 May 2023 14:14:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5C3D6C002A;
+	Mon,  1 May 2023 14:15:26 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 248F1C002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B3287C002A
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 May 2023 14:14:15 +0000 (UTC)
+ Mon,  1 May 2023 14:15:24 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id F37F7408B1
+ by smtp3.osuosl.org (Postfix) with ESMTP id 815D260F04
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 May 2023 14:14:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F37F7408B1
+ Mon,  1 May 2023 14:15:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 815D260F04
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ary0RR5hz4xY
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YQUystekFqZV
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 May 2023 14:14:14 +0000 (UTC)
+ Mon,  1 May 2023 14:15:23 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1EEE640491
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9B9B760B45
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1EEE640491
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9B9B760B45
  for <virtualization@lists.linux-foundation.org>;
- Mon,  1 May 2023 14:14:13 +0000 (UTC)
+ Mon,  1 May 2023 14:15:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1682950452;
+ s=mimecast20190719; t=1682950522;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=ZbS5IjUaNlPU8hbwLWUCcqwd+h51QQNEXep9a6KbrKM=;
- b=AqOFPDU7oYd7BlMklmL3A0H5x2eeRHdRKhPqm0uI3VJqiQNMINnYhyRQT4CPRdj155StOS
- Gqpt77GpuZpJ28z9P9EUWP/hr+GA8VROwtF9OcCAYxG22/Qki+yqjqojR/juks8KXZaHcv
- xS3OFsPfVRbDeb5D+Ez87e+FR5gQbU8=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=RkzLjfDV3jDBH/5apcAJdC/NVfaw0NU9ehtudGGZu7o=;
+ b=Tc4n80ULeL7rjeXKORyuuW9O9fuXVJCWqxCoNoe6JaCRU/WMdo5jKdhjRSrcKVdIfwS1J9
+ Z/l5jvvGKwyFJuTdBcCAtBtcS0n78JYdYveYbcZWO5J4ggvvPVHCgbg2T4YCTQ5J0Uvv2k
+ kni0WQjxE+qh4UvSToyuf7VaOxDcQP0=
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-530-iKEEVnSDO5uYXQma702P0Q-1; Mon, 01 May 2023 10:14:05 -0400
-X-MC-Unique: iKEEVnSDO5uYXQma702P0Q-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-3f18c2b2110so7383435e9.3
+ us-mta-408-DWipLteHPk6aSN0p7SyIIw-1; Mon, 01 May 2023 10:15:00 -0400
+X-MC-Unique: DWipLteHPk6aSN0p7SyIIw-1
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-2ff4bc7a6a3so1562804f8f.3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 01 May 2023 07:14:04 -0700 (PDT)
+ Mon, 01 May 2023 07:14:45 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1682950444; x=1685542444;
+ d=1e100.net; s=20221208; t=1682950484; x=1685542484;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ZbS5IjUaNlPU8hbwLWUCcqwd+h51QQNEXep9a6KbrKM=;
- b=WNddsr4/m503o1TeUqI78ViAkbZ5uV0MN86mfkJsQc45g20kC46dHWe+2IUhMhEy/x
- nja1ofVIHtH5xCZlshS7joJw4QDS4MkEkdDp2giY9/gjcXGBiWfh55Ux0yCU7YBoYM1W
- eEGuISRZhtJU1IgKhCTH0Nk1fvxlXLlMlkUvRaL94FS68er6I3RctKqQATt1OqG407qs
- bw89No5uZMSKkM0ZpCfBsR9vflaoVuu7/cKTPBY8Qg4T1pMcFKjqMG9j5syW4vto66xi
- waciOb6nSncnDY13J7nYVMQ0Dt7G66uwsV4+Wj7AsWy2YqCwvUEZz51iy+usVzJhSyPL
- uLCQ==
-X-Gm-Message-State: AC+VfDz8ZCAeBcajah6g1g7wBGgLWhMkRws2FDIWldLj3lHs1Obi3lBC
- Wdo9lfbEbbF28LePebZ8sMqEhB7LnYcxmx6kuJfYu16PMQ40NvfrkBns4zbt5qa/5lmRMmKKNAT
- IYqz8A8HjoKSiUqay6/GeEbzXAKZ3yQxsxg2p0EOVDw==
-X-Received: by 2002:a1c:4b06:0:b0:3f0:3d47:2cc5 with SMTP id
- y6-20020a1c4b06000000b003f03d472cc5mr10326842wma.10.1682950443988; 
- Mon, 01 May 2023 07:14:03 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5uwbn+68k6dEwgamd9RB+Cf3SAOrfWXIAOfHT0cY5NAJ1rKClQM9jVpxSANY9aJ1gTlwwrQA==
-X-Received: by 2002:a1c:4b06:0:b0:3f0:3d47:2cc5 with SMTP id
- y6-20020a1c4b06000000b003f03d472cc5mr10326826wma.10.1682950443676; 
- Mon, 01 May 2023 07:14:03 -0700 (PDT)
+ bh=RkzLjfDV3jDBH/5apcAJdC/NVfaw0NU9ehtudGGZu7o=;
+ b=Ig+g4IJKZPAsgZ7mNz2hlldJdmNsIm+QYMlXYaofJkwraf35OmnGX16bZqBi0Srg4b
+ qpRcJdcz1uTQsQqs3ZuHHLOSjT1KiZSx/d9xmBaqY9mEPdQduH/eOsvU0LVVC59NbSO8
+ wwLY8RboDqY4SEw1rtZSplk+srAxgkxA/K2I3JadYcZcZKbqTEIzwBLuJskwKaon5c9p
+ qt8herJJNyxwYWpPsAYuw5wjSua1aSBXGSj7AtzefBrbnJLxHarKsjfNwmk1nbV6guNe
+ STsKHfCvy+3l5hptmG0AMhqnCpgx9XbrSkbthbsbrXFrdlSMxwYVmipLL7yT5w7MaeVh
+ XnWQ==
+X-Gm-Message-State: AC+VfDx0/rZSn6AR5xkCVgdiF4LZkUK+FRKSbX1WIRYBeOX3vUVaVT6D
+ 0rjKjQtUq1vJjUOlchQGrU9lJz8FLujsYMMjv+oPimxZ2t7i2hIiNTujj1ZNGD1MNj2GyDNVFS0
+ wNXSPn/M63k3J75vy6GxfoZHw39zgJh40UoZxCcFy+g==
+X-Received: by 2002:a05:6000:509:b0:2fe:851c:672f with SMTP id
+ a9-20020a056000050900b002fe851c672fmr9551048wrf.8.1682950484514; 
+ Mon, 01 May 2023 07:14:44 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7bj2HHSdD3I+NdpPeXH4HQFptQUC3elBpKv3Fi3+yFl4cDAKLhdolkyoIR/w5qExxaIYONDQ==
+X-Received: by 2002:a05:6000:509:b0:2fe:851c:672f with SMTP id
+ a9-20020a056000050900b002fe851c672fmr9551040wrf.8.1682950484267; 
+ Mon, 01 May 2023 07:14:44 -0700 (PDT)
 Received: from redhat.com ([31.210.184.46]) by smtp.gmail.com with ESMTPSA id
- f22-20020a1c6a16000000b003f17e79d74asm33036957wmc.7.2023.05.01.07.14.01
+ z16-20020a5d4410000000b002f79ea6746asm28263967wrq.94.2023.05.01.07.14.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 May 2023 07:14:03 -0700 (PDT)
-Date: Mon, 1 May 2023 10:14:00 -0400
+ Mon, 01 May 2023 07:14:43 -0700 (PDT)
+Date: Mon, 1 May 2023 10:14:40 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Feng Liu <feliu@nvidia.com>
-Subject: Re: [PATCH net v1 2/2] virtio_net: Close queue pairs using helper
- function
-Message-ID: <20230501101231-mutt-send-email-mst@kernel.org>
-References: <20230428224346.68211-1-feliu@nvidia.com>
- <ZE+0RsBYDTgnauOX@corigine.com>
- <9dba94bb-3e40-6809-3f5a-cbb0ae19c5b7@nvidia.com>
+Subject: Re: [PATCH net v1 1/2] virtio_net: Fix error unwinding of XDP
+ initialization
+Message-ID: <20230501101415-mutt-send-email-mst@kernel.org>
+References: <20230428223712.67499-1-feliu@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <9dba94bb-3e40-6809-3f5a-cbb0ae19c5b7@nvidia.com>
+In-Reply-To: <20230428223712.67499-1-feliu@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Simon Horman <simon.horman@corigine.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, netdev@vger.kernel.org,
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  William Tu <witu@nvidia.com>, bpf@vger.kernel.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -123,36 +120,79 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, May 01, 2023 at 09:58:18AM -0400, Feng Liu wrote:
+On Fri, Apr 28, 2023 at 06:37:12PM -0400, Feng Liu wrote:
+> When initializing XDP in virtnet_open(), some rq xdp initialization
+> may hit an error causing net device open failed. However, previous
+> rqs have already initialized XDP and enabled NAPI, which is not the
+> expected behavior. Need to roll back the previous rq initialization
+> to avoid leaks in error unwinding of init code.
 > 
-> 
-> On 2023-05-01 a.m.8:44, Simon Horman wrote:
-> > External email: Use caution opening links or attachments
-> > 
-> > 
-> > On Fri, Apr 28, 2023 at 06:43:46PM -0400, Feng Liu wrote:
-> > > Use newly introduced helper function that exactly does the same of
-> > > closing the queue pairs.
-> > > 
-> > > Signed-off-by: Feng Liu <feliu@nvidia.com>
-> > > Reviewed-by: William Tu <witu@nvidia.com>
-> > > Reviewed-by: Parav Pandit <parav@nvidia.com>
-> > 
-> > I guess this was put in a separate patch to 1/2, as it's more
-> > net-next material, as opposed to 1/2 which seems to be net material.
-> > FWIIW, I'd lean to putting 1/2 in net. And holding this one for net-next.
-> > 
-> > That aside, this looks good to me.
-> > 
-> > Reviewed-by: Simon Horman <simon.horman@corigine.com>
-> 
-> Will do, thanks Simon
+> Fixes: 754b8a21a96d ("virtio_net: setup xdp_rxq_info")
+> Signed-off-by: Feng Liu <feliu@nvidia.com>
+> Reviewed-by: William Tu <witu@nvidia.com>
+> Reviewed-by: Parav Pandit <parav@nvidia.com>
 
-Nah, I think you should just squash these two patches together.
-It's early in the merge window.
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
--- 
-MST
+Post with 2/2 in the same thread or better just squashed.
+
+> ---
+>  drivers/net/virtio_net.c | 24 +++++++++++++++++++-----
+>  1 file changed, 19 insertions(+), 5 deletions(-)
+> 
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index 8d8038538fc4..fc6ee833a09f 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -1868,6 +1868,13 @@ static int virtnet_poll(struct napi_struct *napi, int budget)
+>  	return received;
+>  }
+>  
+> +static void virtnet_disable_qp(struct virtnet_info *vi, int qp_index)
+> +{
+> +	virtnet_napi_tx_disable(&vi->sq[qp_index].napi);
+> +	napi_disable(&vi->rq[qp_index].napi);
+> +	xdp_rxq_info_unreg(&vi->rq[qp_index].xdp_rxq);
+> +}
+> +
+>  static int virtnet_open(struct net_device *dev)
+>  {
+>  	struct virtnet_info *vi = netdev_priv(dev);
+> @@ -1883,20 +1890,27 @@ static int virtnet_open(struct net_device *dev)
+>  
+>  		err = xdp_rxq_info_reg(&vi->rq[i].xdp_rxq, dev, i, vi->rq[i].napi.napi_id);
+>  		if (err < 0)
+> -			return err;
+> +			goto err_xdp_info_reg;
+>  
+>  		err = xdp_rxq_info_reg_mem_model(&vi->rq[i].xdp_rxq,
+>  						 MEM_TYPE_PAGE_SHARED, NULL);
+> -		if (err < 0) {
+> -			xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
+> -			return err;
+> -		}
+> +		if (err < 0)
+> +			goto err_xdp_reg_mem_model;
+>  
+>  		virtnet_napi_enable(vi->rq[i].vq, &vi->rq[i].napi);
+>  		virtnet_napi_tx_enable(vi, vi->sq[i].vq, &vi->sq[i].napi);
+>  	}
+>  
+>  	return 0;
+> +
+> +	/* error unwinding of xdp init */
+> +err_xdp_reg_mem_model:
+> +	xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
+> +err_xdp_info_reg:
+> +	for (i = i - 1; i >= 0; i--)
+> +		virtnet_disable_qp(vi, i);
+> +
+> +	return err;
+>  }
+>  
+>  static int virtnet_poll_tx(struct napi_struct *napi, int budget)
+> -- 
+> 2.37.1 (Apple Git-137.1)
 
 _______________________________________________
 Virtualization mailing list
