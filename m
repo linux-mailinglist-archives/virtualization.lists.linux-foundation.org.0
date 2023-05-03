@@ -1,113 +1,124 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6D69B6F5CB6
-	for <lists.virtualization@lfdr.de>; Wed,  3 May 2023 19:07:55 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 426C16F5D9C
+	for <lists.virtualization@lfdr.de>; Wed,  3 May 2023 20:13:10 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id DA99540562;
-	Wed,  3 May 2023 17:07:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DA99540562
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=J9QxD/1Q
+	by smtp3.osuosl.org (Postfix) with ESMTP id BD61861114;
+	Wed,  3 May 2023 18:13:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BD61861114
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=alhEM1BG
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id HuwH_RX-QgyU; Wed,  3 May 2023 17:07:52 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id FtOD_1XacZge; Wed,  3 May 2023 18:13:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 74F964047B;
-	Wed,  3 May 2023 17:07:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 74F964047B
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 1A71F610C9;
+	Wed,  3 May 2023 18:13:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1A71F610C9
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9BBD5C008A;
-	Wed,  3 May 2023 17:07:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F063CC0037;
+	Wed,  3 May 2023 18:13:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5034AC002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 95AFCC002A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 17:07:50 +0000 (UTC)
+ Wed,  3 May 2023 18:13:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 1E09683C2D
+ by smtp3.osuosl.org (Postfix) with ESMTP id 7099C60E32
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 17:07:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1E09683C2D
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=J9QxD/1Q
+ Wed,  3 May 2023 18:13:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7099C60E32
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id r--AtOEF5wXh
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1CIZNU4Y8ZyI
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 17:07:46 +0000 (UTC)
+ Wed,  3 May 2023 18:13:01 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0B3C983C2C
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 0B3C983C2C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2407960BE8
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20615.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7eb2::615])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 2407960BE8
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 17:07:45 +0000 (UTC)
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-50bc070c557so8781261a12.0
- for <virtualization@lists.linux-foundation.org>;
- Wed, 03 May 2023 10:07:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1683133664; x=1685725664;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=tqgRjKeAlYwdSQZlNcCAAg86aRPeNLHNBU6nas3RZ6E=;
- b=J9QxD/1QXu+7IwdDU81QuY6jTbppC0cHLNpRQwNP60tcx3RCZvR71AQVXfzxRNMfH0
- W0ydkkEltICHurrgEIGDrzhZCvIez22yOFwaexx3D1eAkFC/QPapJStjEYmBDR3lo04c
- cXUxcSAnmC8BgCAfzYTsgSX7OpwOzMhKoQ+/w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683133664; x=1685725664;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tqgRjKeAlYwdSQZlNcCAAg86aRPeNLHNBU6nas3RZ6E=;
- b=g4C/0gx4LoYuD6OwUnXzZwmprQV+pJmWpcWwsGJrPlZveEzLk875DI+OCBC/5jrLHF
- P6g+PDm/S2z0kl/sheppV+/7EDtmrMwBa0xtVdxrWsY/2elEKtPl/Q1Lz74pdsdlroBo
- JdLdtuEWUuv0iPIjfdTLdrMdQlJHXd+Z/01KxMqpIQRFy2J05k3xSVcPXYvr+yXo4qHo
- YpeJaN8i8/ya2/NVQNUPmS/BDhGNoJxmbdN9F+XKpZIrXKyr1bkLaHOPS3mNjIuO8KqA
- caFHEcBxrKtYeaAmMobKHZIo2mvAvUHE4c7t//L2y9xukywGcBQHZNpk9VqwVCUNZn3D
- Yy2w==
-X-Gm-Message-State: AC+VfDwgLkE2wl9WoWdkN6nhdnCQOYpo4uJlpfOit+XTZ1FIPgrZs12M
- fZZ+YMyYtFi5F03BAkHfvm60cUO3kLi/WSMdEcs=
-X-Google-Smtp-Source: ACHHUZ5TSg2evZ2Ojmv23S8jpxPxqN0A4/94BmFkNMr6d/4bw97l4myCexL90Lf9SlB89JYHB6E8Tw==
-X-Received: by 2002:a17:907:9721:b0:94f:3980:bf91 with SMTP id
- jg33-20020a170907972100b0094f3980bf91mr4713221ejc.19.1683133664145; 
- Wed, 03 May 2023 10:07:44 -0700 (PDT)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com.
- [209.85.208.43]) by smtp.gmail.com with ESMTPSA id
- gv57-20020a1709072bf900b00960c27e4611sm7580504ejc.181.2023.05.03.10.07.43
- for <virtualization@lists.linux-foundation.org>
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 03 May 2023 10:07:43 -0700 (PDT)
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-4d9b2045e1cso13922a12.1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 03 May 2023 10:07:43 -0700 (PDT)
-X-Received: by 2002:a05:6402:2b90:b0:50a:20bf:d92d with SMTP id
- fj16-20020a0564022b9000b0050a20bfd92dmr83038edb.5.1683133663353; Wed, 03 May
- 2023 10:07:43 -0700 (PDT)
+ Wed,  3 May 2023 18:13:01 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZYxUFb/J4vi9DVAldDjmeKf6+pIdl5E4FEcI9lo6G7WUDxHDNLL+ZBO7/rs/AJl09qDN6hmUHtV4llqOe1qF5+Fz2R5I6L1GxDTbWeMB4b0fh5+SGnX1UD6H+dizZV5mDHx4CPG/LrkZnL+ciuWjB/Xw6KdpuNrCs3CC4GRvalBijNmIScxnlUmfWZhAQSV+phpMOPhPKVblhm6gyPxxaUUuCQqz7biuVtD72MxWAyCDPF0OYqqLNkJQaXhqDWfpD6ZEnRlBgCrp+UKtkfieT7+dBMm6h5YLXCHdTzeQeFs9ICK6n8SM27+RAYcohiaBRjGPBOhK3DasNFekLeyUgA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=suNY/GftPPz1DzbwYNWvMeaPVMo8XMf35wnbP9bws9c=;
+ b=Cgie8wMnI2JjqK0hHFUyA7Spfgfdkrbzhd7j29/OleGH7mCDVoFw9xVayF/6Sf8zZxwiGYoLpNAof2S7yh1yZ7VRixc+ZBRMBTSYu9ahqPMrgL/6bR4WR5oOHuTj4zucpOG0LBiiZa2OD8xNUeYJjVKK6IG+BOZ645hsnOg7W18ek73KRQi8+3Hm5qUwV4R6S+rZQn+PQXiiGel2SEQAodRjoXH/JSp/KzYXLvHtkSUOwz85Dx8xs9xexIBSSGgE+tNzEHcjuL12pfkt2elPnVhTDnkStrZy1r/RGB+jWaYKFBrSrL70SFM32+/WUasiR2D2YdeTgqYcLE8ShrjcbA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=suNY/GftPPz1DzbwYNWvMeaPVMo8XMf35wnbP9bws9c=;
+ b=alhEM1BG3rfqL9sr5L4g1xI4UGY9B1pzeXhxC+v42KwXOxMwVCJNvkdbrwzgSIvxMnHVYLvsu14T9So7bqMbDkk6IF3G+HuaAnBfFyxI2oGeeNPjKgy9zgnNHPMpuHU/qpGYVa/KhKLcvE8fgBUcOc7k1qd3S+MfA+N9hpzJ9Do=
+Received: from DM6PR08CA0042.namprd08.prod.outlook.com (2603:10b6:5:1e0::16)
+ by SN7PR12MB6910.namprd12.prod.outlook.com (2603:10b6:806:262::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6340.31; Wed, 3 May
+ 2023 18:12:57 +0000
+Received: from DM6NAM11FT094.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:5:1e0:cafe::2f) by DM6PR08CA0042.outlook.office365.com
+ (2603:10b6:5:1e0::16) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.22 via Frontend
+ Transport; Wed, 3 May 2023 18:12:57 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DM6NAM11FT094.mail.protection.outlook.com (10.13.172.195) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.6363.22 via Frontend Transport; Wed, 3 May 2023 18:12:57 +0000
+Received: from driver-dev1.pensando.io (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 3 May
+ 2023 13:12:56 -0500
+To: <jasowang@redhat.com>, <mst@redhat.com>,
+ <virtualization@lists.linux-foundation.org>, <shannon.nelson@amd.com>,
+ <brett.creeley@amd.com>, <netdev@vger.kernel.org>
+Subject: [PATCH v5 virtio 00/11] pds_vdpa driver
+Date: Wed, 3 May 2023 11:12:29 -0700
+Message-ID: <20230503181240.14009-1-shannon.nelson@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-References: <20230416115237.798604-1-dmitry.osipenko@collabora.com>
- <141b928d-6165-f282-b8e6-f140cb09333d@collabora.com>
-In-Reply-To: <141b928d-6165-f282-b8e6-f140cb09333d@collabora.com>
-From: Gurchetan Singh <gurchetansingh@chromium.org>
-Date: Wed, 3 May 2023 10:07:31 -0700
-X-Gmail-Original-Message-ID: <CAAfnVBnrUotph4TYJVu9Bohqv3m80t90V34TNhh-Tspxwsj-ZQ@mail.gmail.com>
-Message-ID: <CAAfnVBnrUotph4TYJVu9Bohqv3m80t90V34TNhh-Tspxwsj-ZQ@mail.gmail.com>
-Subject: Re: [PATCH v6 0/3] Add sync object UAPI support to VirtIO-GPU driver
-To: Dmitry Osipenko <dmitry.osipenko@collabora.com>
-Cc: Pierre-Eric Pelloux-Prayer <pierre-eric.pelloux-prayer@amd.com>,
- =?UTF-8?B?TWFyZWsgT2zFocOhaw==?= <maraeo@gmail.com>,
- linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
- virtualization@lists.linux-foundation.org, Rob Clark <robdclark@gmail.com>,
- Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@redhat.com>,
- kernel@collabora.com, Chia-I Wu <olvaffe@gmail.com>,
- Emil Velikov <emil.velikov@collabora.com>
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM6NAM11FT094:EE_|SN7PR12MB6910:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4fcabe6d-0e26-4f66-8ca9-08db4c0205ea
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: ito+9uxR4yilc5MT0np7nVkyW39IL3ASxdAIFYZrwiy5onCJl4+vf+3qNFhLkCR+t6n8nWAYDKIbL6vucDHlS4n5Bhe8TkuLqiHrcr9ZIPa3yy52BgFwgLwyScYjHf8BlXx4bBf7w48vxTXgpqXIg5CQJ6kB62e0q7L+PwIPHC3Ldwmfdz6oOLf8aDJ0pcQBpzI7F08Fad9VELpLr1fzZy4+UhdGvS8HN96eRAKnSrJa9Y1b6TViAoW+2LnALhax445riZ1RGUDmFtQBTOKuOFU8kNjb3Keern/0kQDcnzqH65TwMFDOcZjubQhdXWRVu1NUOzCUs1gjUHis8bWQ8eEh4Ia8KiR1rdd9xoXsZZwiw6iSV3OqNU1TYRllBpyBY7PT+/c5EH30uBPTqU2mZvn8kRNgn3NM+ewB3ykZdqbCNvQwjm+DhAVTMHZ0X3MiCCyos+dOLZ4c5eieg9QxUq8fiksAdLBJtSg/f/ppCSBEtYQaOk2Dx6at52TUvUkw0VkgzfimJO0MQfYYvxNQgHkzx2dNG6w5FoOfic3cYHdFYBAIU2uMs8VXXHIYqILPchCw6e0YmWhADwgvl2U5BhR30EtOiZqBMfcmfhFS53C0bB30G5Mp71bGfG7nysEZCOc2prtkYZiXRmLPmsjl8eXnhH0wHB8cxW1TZa5OkrYJZu1teUZIBiyY3ZD/2Bpz6kRjxscrNecg6hURzyfp8HuNeUpOqviDTwn8yuV0qFn40Lv8NGEuvqOSxMSoiZy/Bb5aXCMQh+wMBOzRlWwHAw==
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230028)(4636009)(136003)(396003)(346002)(39860400002)(376002)(451199021)(40470700004)(46966006)(36840700001)(478600001)(110136005)(8676002)(5660300002)(8936002)(2906002)(4326008)(316002)(70586007)(70206006)(54906003)(44832011)(41300700001)(6666004)(16526019)(966005)(82740400003)(26005)(83380400001)(1076003)(40460700003)(36860700001)(2616005)(426003)(36756003)(336012)(186003)(40480700001)(86362001)(82310400005)(356005)(81166007)(47076005)(36900700001);
+ DIR:OUT; SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2023 18:12:57.5179 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4fcabe6d-0e26-4f66-8ca9-08db4c0205ea
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT094.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB6910
+Cc: simon.horman@corigine.com, drivers@pensando.io
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -119,160 +130,133 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: multipart/mixed; boundary="===============2531182391468620778=="
+From: Shannon Nelson via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Shannon Nelson <shannon.nelson@amd.com>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
---===============2531182391468620778==
-Content-Type: multipart/alternative; boundary="0000000000001d933005facd18d1"
+This patchset implements a new module for the AMD/Pensando DSC that
+supports vDPA services on PDS Core VF devices.  This code is based on
+and depends on include files from the pds_core driver described here[0].
+The pds_core driver creates the auxiliary_bus devices that this module
+connects to, and this creates vdpa devices for use by the vdpa module.
 
---0000000000001d933005facd18d1
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The first version of this driver was a part of the original pds_core RFC
+[1] but has since been reworked to pull out the PCI driver and to make
+better use of the virtio and virtio_net configuration spaces made available
+by the DSC's PCI configuration.  As the device development has progressed,
+the ability to rely on the virtio config spaces has grown.
 
-On Mon, May 1, 2023 at 8:38=E2=80=AFAM Dmitry Osipenko <
-dmitry.osipenko@collabora.com> wrote:
+This patchset includes a modification to the existing vp_modern_probe()
+which implements overrides for the PCI device id check and the DMA mask.
+These are intended to be used with vendor vDPA devices that implement
+enough of the virtio config space to be used directly, but don't use the
+virtio device id.
 
-> On 4/16/23 14:52, Dmitry Osipenko wrote:
-> > We have multiple Vulkan context types that are awaiting for the additio=
-n
-> > of the sync object DRM UAPI support to the VirtIO-GPU kernel driver:
-> >
-> >  1. Venus context
-> >  2. Native contexts (virtio-freedreno, virtio-intel, virtio-amdgpu)
-> >
-> > Mesa core supports DRM sync object UAPI, providing Vulkan drivers with =
-a
-> > generic fencing implementation that we want to utilize.
-> >
-> > This patch adds initial sync objects support. It creates fundament for =
-a
-> > further fencing improvements. Later on we will want to extend the
-> VirtIO-GPU
-> > fencing API with passing fence IDs to host for waiting, it will be a ne=
-w
-> > additional VirtIO-GPU IOCTL and more. Today we have several VirtIO-GPU
-> context
-> > drivers in works that require VirtIO-GPU to support sync objects UAPI.
-> >
-> > The patch is heavily inspired by the sync object UAPI implementation of
-> the
-> > MSM driver.
->
-> Gerd, do you have any objections to merging this series?
->
-> We have AMDGPU [1] and Intel [2] native context WIP drivers depending on
-> the sync object support. It is the only part missing from kernel today
-> that is wanted by the native context drivers. Otherwise, there are few
-> other things in Qemu and virglrenderer left to sort out.
->
-> [1] https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21658
-> [2]
-> https://gitlab.freedesktop.org/digetx/mesa/-/commits/native-context-iris
+To use this module, enable the VFs and turn on the vDPA services in the
+pds_core PF, then use the 'vdpa' utility to create devices for use by
+virtio_vdpa or vhost_vdpa:
+   echo 1 > /sys/bus/pci/drivers/pds_core/$PF_BDF/sriov_numvfs
+   devlink dev param set pci/$PF_BDF name enable_vnet value true cmode runtime
+   PDS_VDPA_MGMT=`vdpa mgmtdev show | grep vDPA | head -1 | cut -d: -f1`
+   vdpa dev add name vdpa1 mgmtdev $PDS_VDPA_MGMT mac 00:11:22:33:44:55
 
+[0] Link: https://lore.kernel.org/netdev/20230322185626.38758-1-shannon.nelson@amd.com/
+[1] Link: https://lore.kernel.org/netdev/20221118225656.48309-1-snelson@pensando.io/
 
-I'm not saying this change isn't good, just it's probably possible to
-implement the native contexts (even up to even VK1.2) without it.  But this
-patch series may be the most ergonomic way to do it, given how Mesa is
-designed.  But you probably want one of Mesa MRs reviewed first before
-merging (I added a comment on the amdgpu change) and that is a requirement
-[a].
+Changes:
+ v5:
+ - split dma_mask and device_id_check() into separate patches
+ - simplify use of dma_mask into a single line change
+ - changed test of VIRTIO_F_RING_PACKED to use BIT_ULL()
 
-[a] "The userspace side must be fully reviewed and tested to the standards
-of that user space project. For e.g. mesa this means piglit testcases and
-review on the mailing list. This is again to ensure that the new interface
-actually gets the job done." -- from the requirements
+ v4:
+Link: https://lore.kernel.org/virtualization/20230425212602.1157-1-shannon.nelson@amd.com/
+ - rename device_id_check_override() to device_id_check()
+ - make device_id_check() return the device_id found and checked
+ - removed pds_vdpa.h, put its adminq changes into pds_adminq.h
+ - added a patch to separate out the adminq changes
+ - added a patch to move an adminq enum from pds_common.h to pds_adminq.h
+ - moved adminq calls for get/set_vq_state into cmds.c
+ - limit max_vqs by number of msix available
+ - don't increment nintrs for CVQ, it should already be covered from max_vqs
+ - pds_core API related rework following pds_core inclusion to net-next
+ - use non-debugfs method to find PF pci address in pds_vdpa.rst instructions
 
+ v3:
+Link: https://lore.kernel.org/netdev/20230330192313.62018-1-shannon.nelson@amd.com/
+ - added a patch to modify vp_modern_probe() such that specific device id and
+   DMA mask overrides can be used
+ - add pds_vdpa.rst into index file
+ - dev_dbg instead of dev_err on most of the adminq commands
+ - rework use of pds_vdpa_cmd_reset() and pds_vdpa_init_hw() for better
+   firmware setup in start-stop-start scenarios
+ - removed unused pds_vdpa_cmd_set_features(), we can rely on vp_modern_set_features()
+ - remove unused hw_qtype and hw_qindex from pds_vdpa_vq_info
+ - reworked debugfs print_feature_bits to also print unknown bits
+ - changed use of PAGE_SIZE to local PDS_PAGE_SIZE to keep with FW layout needs
+   without regard to kernel PAGE_SIZE configuration
 
->
->
-> --
-> Best regards,
-> Dmitry
->
->
+ v2:
+https://lore.kernel.org/netdev/20230309013046.23523-1-shannon.nelson@amd.com/
+ - removed PCI driver code
+ - replaced home-grown event listener with notifier
+ - replaced many adminq uses with direct virtio_net config access
+ - reworked irqs to follow virtio layout
+ - removed local_mac_bit logic
+ - replaced uses of devm_ interfaces as suggested in pds_core reviews
+ - updated copyright strings to reflect the new owner
 
---0000000000001d933005facd18d1
-Content-Type: text/html; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Shannon Nelson (11):
+  virtio: allow caller to override device id in vp_modern
+  virtio: allow caller to override device DMA mask in vp_modern
+  pds_vdpa: Add new vDPA driver for AMD/Pensando DSC
+  pds_vdpa: move enum from common to adminq header
+  pds_vdpa: new adminq entries
+  pds_vdpa: get vdpa management info
+  pds_vdpa: virtio bar setup for vdpa
+  pds_vdpa: add vdpa config client commands
+  pds_vdpa: add support for vdpa and vdpamgmt interfaces
+  pds_vdpa: subscribe to the pds_core events
+  pds_vdpa: pds_vdps.rst and Kconfig
 
-<div dir=3D"ltr"><div dir=3D"ltr"><br></div><br><div class=3D"gmail_quote">=
-<div dir=3D"ltr" class=3D"gmail_attr">On Mon, May 1, 2023 at 8:38=E2=80=AFA=
-M Dmitry Osipenko &lt;<a href=3D"mailto:dmitry.osipenko@collabora.com">dmit=
-ry.osipenko@collabora.com</a>&gt; wrote:<br></div><blockquote class=3D"gmai=
-l_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,20=
-4,204);padding-left:1ex">On 4/16/23 14:52, Dmitry Osipenko wrote:<br>
-&gt; We have multiple Vulkan context types that are awaiting for the additi=
-on<br>
-&gt; of the sync object DRM UAPI support to the VirtIO-GPU kernel driver:<b=
-r>
-&gt; <br>
-&gt;=C2=A0 1. Venus context<br>
-&gt;=C2=A0 2. Native contexts (virtio-freedreno, virtio-intel, virtio-amdgp=
-u)<br>
-&gt; <br>
-&gt; Mesa core supports DRM sync object UAPI, providing Vulkan drivers with=
- a<br>
-&gt; generic fencing implementation that we want to utilize.<br>
-&gt; <br>
-&gt; This patch adds initial sync objects support. It creates fundament for=
- a<br>
-&gt; further fencing improvements. Later on we will want to extend the Virt=
-IO-GPU<br>
-&gt; fencing API with passing fence IDs to host for waiting, it will be a n=
-ew<br>
-&gt; additional VirtIO-GPU IOCTL and more. Today we have several VirtIO-GPU=
- context<br>
-&gt; drivers in works that require VirtIO-GPU to support sync objects UAPI.=
-<br>
-&gt; <br>
-&gt; The patch is heavily inspired by the sync object UAPI implementation o=
-f the<br>
-&gt; MSM driver.<br>
-<br>
-Gerd, do you have any objections to merging this series?<br>
-<br>
-We have AMDGPU [1] and Intel [2] native context WIP drivers depending on<br=
->
-the sync object support. It is the only part missing from kernel today<br>
-that is wanted by the native context drivers. Otherwise, there are few<br>
-other things in Qemu and virglrenderer left to sort out.<br>
-<br>
-[1] <a href=3D"https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21=
-658" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedesktop.org/me=
-sa/mesa/-/merge_requests/21658</a><br>
-[2] <a href=3D"https://gitlab.freedesktop.org/digetx/mesa/-/commits/native-=
-context-iris" rel=3D"noreferrer" target=3D"_blank">https://gitlab.freedeskt=
-op.org/digetx/mesa/-/commits/native-context-iris</a></blockquote><div><br><=
-/div><div>I&#39;m not saying this change isn&#39;t good, just it&#39;s prob=
-ably possible to implement the native contexts (even up to even VK1.2) with=
-out it.=C2=A0 But this patch series may be the most ergonomic way to do it,=
- given how Mesa is designed.=C2=A0 But you probably want one of Mesa MRs re=
-viewed first before merging (I added a comment on the amdgpu change) and th=
-at is a requirement [a].=C2=A0</div><div><br></div><div>[a] &quot;The users=
-pace side must be fully reviewed and tested to the standards of that user s=
-pace project. For e.g. mesa this means piglit testcases and review on the m=
-ailing list. This is again to ensure that the new interface actually gets t=
-he job done.&quot; -- from the requirements</div><div>=C2=A0</div><blockquo=
-te class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px =
-solid rgb(204,204,204);padding-left:1ex"><br>
-<br>
--- <br>
-Best regards,<br>
-Dmitry<br>
-<br>
-</blockquote></div></div>
+ .../device_drivers/ethernet/amd/pds_vdpa.rst  |  85 +++
+ .../device_drivers/ethernet/index.rst         |   1 +
+ MAINTAINERS                                   |   4 +
+ drivers/vdpa/Kconfig                          |   8 +
+ drivers/vdpa/Makefile                         |   1 +
+ drivers/vdpa/pds/Makefile                     |  10 +
+ drivers/vdpa/pds/aux_drv.c                    | 140 ++++
+ drivers/vdpa/pds/aux_drv.h                    |  26 +
+ drivers/vdpa/pds/cmds.c                       | 207 +++++
+ drivers/vdpa/pds/cmds.h                       |  20 +
+ drivers/vdpa/pds/debugfs.c                    | 287 +++++++
+ drivers/vdpa/pds/debugfs.h                    |  17 +
+ drivers/vdpa/pds/vdpa_dev.c                   | 704 ++++++++++++++++++
+ drivers/vdpa/pds/vdpa_dev.h                   |  47 ++
+ drivers/virtio/virtio_pci_modern_dev.c        |  33 +-
+ include/linux/pds/pds_adminq.h                | 287 +++++++
+ include/linux/pds/pds_common.h                |  21 +-
+ include/linux/virtio_pci_modern.h             |   6 +
+ 18 files changed, 1872 insertions(+), 32 deletions(-)
+ create mode 100644 Documentation/networking/device_drivers/ethernet/amd/pds_vdpa.rst
+ create mode 100644 drivers/vdpa/pds/Makefile
+ create mode 100644 drivers/vdpa/pds/aux_drv.c
+ create mode 100644 drivers/vdpa/pds/aux_drv.h
+ create mode 100644 drivers/vdpa/pds/cmds.c
+ create mode 100644 drivers/vdpa/pds/cmds.h
+ create mode 100644 drivers/vdpa/pds/debugfs.c
+ create mode 100644 drivers/vdpa/pds/debugfs.h
+ create mode 100644 drivers/vdpa/pds/vdpa_dev.c
+ create mode 100644 drivers/vdpa/pds/vdpa_dev.h
 
---0000000000001d933005facd18d1--
-
---===============2531182391468620778==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+-- 
+2.17.1
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
---===============2531182391468620778==--
