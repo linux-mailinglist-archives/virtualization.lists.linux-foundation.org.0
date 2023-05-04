@@ -1,126 +1,112 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 2F2286F5DAC
-	for <lists.virtualization@lfdr.de>; Wed,  3 May 2023 20:13:20 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id EDF176F656E
+	for <lists.virtualization@lfdr.de>; Thu,  4 May 2023 09:06:26 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id BE65F41CEC;
-	Wed,  3 May 2023 18:13:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BE65F41CEC
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=QSZLU1v+
+	by smtp3.osuosl.org (Postfix) with ESMTP id 25FF960AD0;
+	Thu,  4 May 2023 07:06:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 25FF960AD0
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aGDu/bNB
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Bl4OAHMdaAwu; Wed,  3 May 2023 18:13:17 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hjWp-oJL3_WE; Thu,  4 May 2023 07:06:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 31D1A40A4D;
-	Wed,  3 May 2023 18:13:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 31D1A40A4D
+	by smtp3.osuosl.org (Postfix) with ESMTPS id C6E1D60E43;
+	Thu,  4 May 2023 07:06:23 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C6E1D60E43
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 616A5C0095;
-	Wed,  3 May 2023 18:13:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E1F8DC0089;
+	Thu,  4 May 2023 07:06:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 47EDAC002A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 67707C002A
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 18:13:15 +0000 (UTC)
+ Thu,  4 May 2023 07:06:21 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 1625A41D2F
+ by smtp2.osuosl.org (Postfix) with ESMTP id 3B21841DCC
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 18:13:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1625A41D2F
+ Thu,  4 May 2023 07:06:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3B21841DCC
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=aGDu/bNB
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zvu_gerc9g1q
+ with ESMTP id lj6RosgRp5XV
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 18:13:14 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2EE3541CEC
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20611.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe59::611])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 2EE3541CEC
+ Thu,  4 May 2023 07:06:20 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CEBB541DBB
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id CEBB541DBB
  for <virtualization@lists.linux-foundation.org>;
- Wed,  3 May 2023 18:13:14 +0000 (UTC)
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=If4WybWdHTe5VPsufhxN8vk+O4N6gVHy/nAN35pIa+4w3tkj0dcTbyyXDRCAOFTcZwADJ0Xay4OROVDjmAfkqx7wOs1xljv5F45nQic96Yu9eVS2PjS6tLnF398Sk3vDPeQ6bhyVNg7NSqu/Ss4IFR1OdQ4xq0cqZEiaSEwBvPvaOfIsXmTVYuj9FdPkNbPDCi39Zr8vioTqrGoorijw+S/9lLgZQ2+8qdeNyYCXweps+y6bSYvKUlQKF6iHrNOug0sDoEpHWKfL+TARJPlp59+Yt0UPQWzVpolUrKLN0BckbN2B6H8lIF/7DSCLcEaY58H9QcfJtW9/cp7YsdmtfQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G4X7BYEh41/agJMATD7dH6YpPYWIFHkmRU6JZ29VbMo=;
- b=UPw7QSSjF8b2cTaf4IdTaf3VlMiMolTy5AvYFYrMuUDoNRNMeCJRTIeYi3+gr/hUSSWW4mJJ0MimQyDUE2OKce9rghEO56ZZq1YvlNV2tWD8QkG2BPFw9/kBD54KJs/Dx7HnortmfsylvhpTHKgsU8U52lSldZYaF1AO+vvH9HC+pzXrIdR/pxBKNFuc927cdZIxP/reERElPyC8/jqO4m29qCHx42oDOIhRrpAS/AjHo4vdR0xRwxXbtpfQWxSpFVVElvA6Kuja4Ton/i8Yc2CxpLcBiLAhOUUgiJiPNd90DevwqHHPRHHBqKQV1ZhL4zxGtkFXwLP+um/brKNtFw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=redhat.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G4X7BYEh41/agJMATD7dH6YpPYWIFHkmRU6JZ29VbMo=;
- b=QSZLU1v+WT7TwXdty0yBp+vg3RKjPnd7v86osuBvBLdUs7ymFT16UQyW9Xt315wwVro74IlarAwRAizxjFkwQTaSXciuja8m/cKq1E8qzsPYSX9BUMmc5LEwCeLqZZ+Sl9ri3D4xYs4bb3kPv+Oqfymqa3an9Jo5CsbD+mStzc4=
-Received: from DS7PR06CA0018.namprd06.prod.outlook.com (2603:10b6:8:2a::9) by
- PH0PR12MB7079.namprd12.prod.outlook.com (2603:10b6:510:21d::8) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.6340.31; Wed, 3 May 2023 18:13:09 +0000
-Received: from DM6NAM11FT030.eop-nam11.prod.protection.outlook.com
- (2603:10b6:8:2a:cafe::51) by DS7PR06CA0018.outlook.office365.com
- (2603:10b6:8:2a::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6363.22 via Frontend
- Transport; Wed, 3 May 2023 18:13:09 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DM6NAM11FT030.mail.protection.outlook.com (10.13.172.146) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.6363.22 via Frontend Transport; Wed, 3 May 2023 18:13:09 +0000
-Received: from driver-dev1.pensando.io (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2375.34; Wed, 3 May
- 2023 13:13:08 -0500
-To: <jasowang@redhat.com>, <mst@redhat.com>,
- <virtualization@lists.linux-foundation.org>, <shannon.nelson@amd.com>,
- <brett.creeley@amd.com>, <netdev@vger.kernel.org>
-Subject: [PATCH v5 virtio 11/11] pds_vdpa: pds_vdps.rst and Kconfig
-Date: Wed, 3 May 2023 11:12:40 -0700
-Message-ID: <20230503181240.14009-12-shannon.nelson@amd.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20230503181240.14009-1-shannon.nelson@amd.com>
-References: <20230503181240.14009-1-shannon.nelson@amd.com>
+ Thu,  4 May 2023 07:06:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1683183978;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=7iM8ql6U32hllNnQM8/MvCWRLr14Z6gVQHMHyvjhAJs=;
+ b=aGDu/bNBlBaZI0bP+pV1nVfaTezeIFModt2rR7Kk5AgxvU70TciGGgTBHA6x2hjJnx8uLb
+ H9TtQUpy+zE82NnqPSVjGlt3rp1TTj2IBW1tOSOnNmatpK/pquKOO8ecMQWHn1u+IaxvyL
+ 7B1da+5Hun/+0jWnv6AyrJMYPorZcms=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-365-rH2iLM31MsOVdhZ-smhOpg-1; Thu, 04 May 2023 03:06:17 -0400
+X-MC-Unique: rH2iLM31MsOVdhZ-smhOpg-1
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-3f315735edeso31328575e9.1
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 04 May 2023 00:06:17 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1683183976; x=1685775976;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7iM8ql6U32hllNnQM8/MvCWRLr14Z6gVQHMHyvjhAJs=;
+ b=hYapeqJemfBRKCj0CzF78+Rhr/sSmKpT4Te4xRNErcQyJhqOM1HA1dBrUJsG6m12zI
+ ZD7Mn+JFsAgwSdnf4RqFmqKD71wE5btvD19dE0tTFPdDCDLJaRotsj8YJyG3oF5BcABb
+ NipQ3lStMmoq5Yp13kWlIR+W0Aw+b7XtLFfn+1MHMubja+4CIBVb0UsM/pq5N0rDP+BO
+ Zvt35bys1MV2HaiCKx8JdtHlqnVju46LZEnXZCYaqKYhQR+tTOZCbdUeMBYzkp2Uba4u
+ TrR9yLz5MuVZOVLY5YIEJTdpz01XDWIvzY2Ej2x5N0o2LvNGSLkNQ2/xQGXO6n6u5quP
+ A6LA==
+X-Gm-Message-State: AC+VfDzxaXT9+yyqTxXB0yl9hsBsxbKm6A/7y3RUJQxQWNAyKXaKxs2O
+ ggR2uwP7L2GUBZgzBjWOZ50a/giknYZgLq5IZU5WVgcS+pleY7p8R7cbz/wMRxxLO5nj2qPUn8d
+ hbcvMvOrA/rUWwywiTmFYFa2hJYGmBRRCCK3vkPmQYA==
+X-Received: by 2002:adf:f950:0:b0:2f1:b74:5d8a with SMTP id
+ q16-20020adff950000000b002f10b745d8amr1675314wrr.5.1683183976224; 
+ Thu, 04 May 2023 00:06:16 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ4CgwTMT0Nhemerdz6SF54k/h2cU7j+aMDelbq7ULOYa16/suNYC6YVRr/AAzrrM8mjZYvILA==
+X-Received: by 2002:adf:f950:0:b0:2f1:b74:5d8a with SMTP id
+ q16-20020adff950000000b002f10b745d8amr1675292wrr.5.1683183975895; 
+ Thu, 04 May 2023 00:06:15 -0700 (PDT)
+Received: from redhat.com ([31.187.78.120]) by smtp.gmail.com with ESMTPSA id
+ s1-20020adff801000000b00300aee6c9cesm35957612wrp.20.2023.05.04.00.06.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 May 2023 00:06:15 -0700 (PDT)
+Date: Thu, 4 May 2023 03:06:10 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Wenliang Wang <wangwenliang.1995@bytedance.com>
+Subject: Re: [PATCH v4] virtio_net: suppress cpu stall when free_unused_bufs
+Message-ID: <20230504030546-mutt-send-email-mst@kernel.org>
+References: <1683167226-7012-1-git-send-email-wangwenliang.1995@bytedance.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6NAM11FT030:EE_|PH0PR12MB7079:EE_
-X-MS-Office365-Filtering-Correlation-Id: dea3c13a-1d55-4f33-73d4-08db4c020cfe
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NP2E5hiZLf1QJqaWFv0WQnv0rljs01KKXOeeK8SEeLsV6tWe1CQIUVvOemdFC6PFBkH1DSqTLnVIG85PAh+3SrdBOI6mPRB8OAxDRIg+kdvxOD4Exq24laY85JJ0pbg8PXKIDDukmvFSbh3iZ5srLCRBMJ83ASucC/lnVAroMvgVyg6ovqhPikoiP7581ggl4k2cvC9ip8rqUWEwlK5VoCjZ3Dw/0ryN3GpvyAcmA/QsMEF8FRzOYHTH3KNYolnp2unhgfkckCukDlkOOXqv1/lIap4FH2H29uftc80/ioqbtq/hqQuAnSdHmyBl0c0lTSidYQg0H09n8Q+h/CMofYV0Z8OtrRXzF5/9KA7+ZOx1DmoLJqWnh6wNFXUsUwWSagdFzJrS+izODECBlaZtZOaKEwEmKG9qFTogKtq600qL9VaJb/8gLI7CRWePK7wWRBUzegB+sM3vm+DqVYJsf8FAYngGcXyBSJ2KD+IASzDrnJwIEGsk4YpGxEYz+mSo6tiotxNGOR8c9OQhLnZu2PstdLes6CIMrmBgMwta6ZLJ3bmHm4Az4rl7viX02nvwUfSvp55mGfS+Nz2XPhs4OitUErO7b1msQi+g7BG9y+cUR5QujnPqQlazD/7rMV7zS4Yff3tOdZpFPGCp296jJYWLfAzgRVMACmg4YOWwYXnn92oq/In0wtz2MXv+91nFo6DfcpOkT5VluIQEDFxM9LLxMF+sqqpkF4Kv6yjvCMl4XloTmBVc/5EISTsPO34Ub5TTED5ZJMXDoxB2GWLicg==
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230028)(4636009)(346002)(136003)(396003)(376002)(39860400002)(451199021)(46966006)(40470700004)(36840700001)(70206006)(70586007)(4326008)(6666004)(316002)(16526019)(186003)(110136005)(26005)(1076003)(40480700001)(82740400003)(36756003)(40460700003)(478600001)(54906003)(86362001)(5660300002)(83380400001)(43170500006)(36860700001)(356005)(81166007)(41300700001)(44832011)(8936002)(8676002)(2906002)(82310400005)(2616005)(47076005)(66899021)(426003)(336012)(36900700001);
- DIR:OUT; SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 May 2023 18:13:09.3923 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dea3c13a-1d55-4f33-73d4-08db4c020cfe
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DM6NAM11FT030.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7079
-Cc: simon.horman@corigine.com, drivers@pensando.io
+In-Reply-To: <1683167226-7012-1-git-send-email-wangwenliang.1995@bytedance.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: xuanzhuo@linux.alibaba.com, willemdebruijn.kernel@gmail.com,
+ netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ zhengqi.arch@bytedance.com, virtualization@lists.linux-foundation.org,
+ edumazet@google.com, kuba@kernel.org, pabeni@redhat.com, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -132,162 +118,56 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: Shannon Nelson via Virtualization
- <virtualization@lists.linux-foundation.org>
-Reply-To: Shannon Nelson <shannon.nelson@amd.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add the documentation and Kconfig entry for pds_vdpa driver.
+On Thu, May 04, 2023 at 10:27:06AM +0800, Wenliang Wang wrote:
+> For multi-queue and large ring-size use case, the following error
+> occurred when free_unused_bufs:
+> rcu: INFO: rcu_sched self-detected stall on CPU.
+> 
+> Fixes: 986a4f4d452d ("virtio_net: multiqueue support")
+> Signed-off-by: Wenliang Wang <wangwenliang.1995@bytedance.com>
 
-Signed-off-by: Shannon Nelson <shannon.nelson@amd.com>
----
- .../device_drivers/ethernet/amd/pds_vdpa.rst  | 85 +++++++++++++++++++
- .../device_drivers/ethernet/index.rst         |  1 +
- MAINTAINERS                                   |  4 +
- drivers/vdpa/Kconfig                          |  8 ++
- 4 files changed, 98 insertions(+)
- create mode 100644 Documentation/networking/device_drivers/ethernet/amd/pds_vdpa.rst
+Acked-by: Michael S. Tsirkin <mst@redhat.com>
 
-diff --git a/Documentation/networking/device_drivers/ethernet/amd/pds_vdpa.rst b/Documentation/networking/device_drivers/ethernet/amd/pds_vdpa.rst
-new file mode 100644
-index 000000000000..587927d3de92
---- /dev/null
-+++ b/Documentation/networking/device_drivers/ethernet/amd/pds_vdpa.rst
-@@ -0,0 +1,85 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. note: can be edited and viewed with /usr/bin/formiko-vim
-+
-+==========================================================
-+PCI vDPA driver for the AMD/Pensando(R) DSC adapter family
-+==========================================================
-+
-+AMD/Pensando vDPA VF Device Driver
-+
-+Copyright(c) 2023 Advanced Micro Devices, Inc
-+
-+Overview
-+========
-+
-+The ``pds_vdpa`` driver is an auxiliary bus driver that supplies
-+a vDPA device for use by the virtio network stack.  It is used with
-+the Pensando Virtual Function devices that offer vDPA and virtio queue
-+services.  It depends on the ``pds_core`` driver and hardware for the PF
-+and VF PCI handling as well as for device configuration services.
-+
-+Using the device
-+================
-+
-+The ``pds_vdpa`` device is enabled via multiple configuration steps and
-+depends on the ``pds_core`` driver to create and enable SR-IOV Virtual
-+Function devices.  After the VFs are enabled, we enable the vDPA service
-+in the ``pds_core`` device to create the auxiliary devices used by pds_vdpa.
-+
-+Example steps:
-+
-+.. code-block:: bash
-+
-+  #!/bin/bash
-+
-+  modprobe pds_core
-+  modprobe vdpa
-+  modprobe pds_vdpa
-+
-+  PF_BDF=`ls /sys/module/pds_core/drivers/pci\:pds_core/*/sriov_numvfs | awk -F / '{print $7}'`
-+
-+  # Enable vDPA VF auxiliary device(s) in the PF
-+  devlink dev param set pci/$PF_BDF name enable_vnet cmode runtime value true
-+
-+  # Create a VF for vDPA use
-+  echo 1 > /sys/bus/pci/drivers/pds_core/$PF_BDF/sriov_numvfs
-+
-+  # Find the vDPA services/devices available
-+  PDS_VDPA_MGMT=`vdpa mgmtdev show | grep vDPA | head -1 | cut -d: -f1`
-+
-+  # Create a vDPA device for use in virtio network configurations
-+  vdpa dev add name vdpa1 mgmtdev $PDS_VDPA_MGMT mac 00:11:22:33:44:55
-+
-+  # Set up an ethernet interface on the vdpa device
-+  modprobe virtio_vdpa
-+
-+
-+
-+Enabling the driver
-+===================
-+
-+The driver is enabled via the standard kernel configuration system,
-+using the make command::
-+
-+  make oldconfig/menuconfig/etc.
-+
-+The driver is located in the menu structure at:
-+
-+  -> Device Drivers
-+    -> Network device support (NETDEVICES [=y])
-+      -> Ethernet driver support
-+        -> Pensando devices
-+          -> Pensando Ethernet PDS_VDPA Support
-+
-+Support
-+=======
-+
-+For general Linux networking support, please use the netdev mailing
-+list, which is monitored by Pensando personnel::
-+
-+  netdev@vger.kernel.org
-+
-+For more specific support needs, please use the Pensando driver support
-+email::
-+
-+  drivers@pensando.io
-diff --git a/Documentation/networking/device_drivers/ethernet/index.rst b/Documentation/networking/device_drivers/ethernet/index.rst
-index 417ca514a4d0..94ecb67c0885 100644
---- a/Documentation/networking/device_drivers/ethernet/index.rst
-+++ b/Documentation/networking/device_drivers/ethernet/index.rst
-@@ -15,6 +15,7 @@ Contents:
-    amazon/ena
-    altera/altera_tse
-    amd/pds_core
-+   amd/pds_vdpa
-    aquantia/atlantic
-    chelsio/cxgb
-    cirrus/cs89x0
-diff --git a/MAINTAINERS b/MAINTAINERS
-index ebd26b3ca90e..c565b71ce56f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -22200,6 +22200,10 @@ SNET DPU VIRTIO DATA PATH ACCELERATOR
- R:	Alvaro Karsz <alvaro.karsz@solid-run.com>
- F:	drivers/vdpa/solidrun/
- 
-+PDS DSC VIRTIO DATA PATH ACCELERATOR
-+R:	Shannon Nelson <shannon.nelson@amd.com>
-+F:	drivers/vdpa/pds/
-+
- VIRTIO BALLOON
- M:	"Michael S. Tsirkin" <mst@redhat.com>
- M:	David Hildenbrand <david@redhat.com>
-diff --git a/drivers/vdpa/Kconfig b/drivers/vdpa/Kconfig
-index cd6ad92f3f05..2ee1b288691d 100644
---- a/drivers/vdpa/Kconfig
-+++ b/drivers/vdpa/Kconfig
-@@ -116,4 +116,12 @@ config ALIBABA_ENI_VDPA
- 	  This driver includes a HW monitor device that
- 	  reads health values from the DPU.
- 
-+config PDS_VDPA
-+	tristate "vDPA driver for AMD/Pensando DSC devices"
-+	depends on PDS_CORE
-+	help
-+	  vDPA network driver for AMD/Pensando's PDS Core devices.
-+	  With this driver, the VirtIO dataplane can be
-+	  offloaded to an AMD/Pensando DSC device.
-+
- endif # VDPA
--- 
-2.17.1
+Probably a good idea for stable, too.
+
+> ---
+> v2:
+> -add need_resched check.
+> -apply same logic to sq.
+> v3:
+> -use cond_resched instead.
+> v4:
+> -add fixes tag
+> ---
+>  drivers/net/virtio_net.c | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index 8d8038538fc4..a12ae26db0e2 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -3560,12 +3560,14 @@ static void free_unused_bufs(struct virtnet_info *vi)
+>  		struct virtqueue *vq = vi->sq[i].vq;
+>  		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
+>  			virtnet_sq_free_unused_buf(vq, buf);
+> +		cond_resched();
+>  	}
+>  
+>  	for (i = 0; i < vi->max_queue_pairs; i++) {
+>  		struct virtqueue *vq = vi->rq[i].vq;
+>  		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
+>  			virtnet_rq_free_unused_buf(vq, buf);
+> +		cond_resched();
+>  	}
+>  }
+>  
+> -- 
+> 2.20.1
 
 _______________________________________________
 Virtualization mailing list
