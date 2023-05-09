@@ -2,110 +2,64 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 55CA86FBE4F
-	for <lists.virtualization@lfdr.de>; Tue,  9 May 2023 06:43:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 505D86FC154
+	for <lists.virtualization@lfdr.de>; Tue,  9 May 2023 10:09:20 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id CE10C403AA;
-	Tue,  9 May 2023 04:42:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CE10C403AA
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=RLbafM62
+	by smtp2.osuosl.org (Postfix) with ESMTP id 5D44141DC3;
+	Tue,  9 May 2023 08:09:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5D44141DC3
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id OchI3AIDXOK0; Tue,  9 May 2023 04:42:57 +0000 (UTC)
+	with ESMTP id b21aSHRFZYTa; Tue,  9 May 2023 08:09:15 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 6FB1A41D4D;
-	Tue,  9 May 2023 04:42:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6FB1A41D4D
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0A50241DDB;
+	Tue,  9 May 2023 08:09:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0A50241DDB
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B14DC0089;
-	Tue,  9 May 2023 04:42:56 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CCD05C002A;
+	Tue,  9 May 2023 08:09:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 64222C002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B5066C002A
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 May 2023 04:42:55 +0000 (UTC)
+ Tue,  9 May 2023 08:09:11 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2C3DE41D4D
+ by smtp3.osuosl.org (Postfix) with ESMTP id 836266104F
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 May 2023 04:42:55 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2C3DE41D4D
+ Tue,  9 May 2023 08:09:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 836266104F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8mxZluMGeO_1
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5OJyDHAtOKLH
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 May 2023 04:42:53 +0000 (UTC)
+ Tue,  9 May 2023 08:09:10 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 48C13403AA
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 48C13403AA
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9387E60E43
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 9387E60E43
  for <virtualization@lists.linux-foundation.org>;
- Tue,  9 May 2023 04:42:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1683607371;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=W7lkveXXMx28z2hQQkgi6XifNwekRx4w5U94EsCpzfo=;
- b=RLbafM62OckbkZ2sQxijDifkWh6JlIEU12aMwnVK8yauG/4Hs2HjBNXFLw/f4T//S9kkLW
- yAZLr3GzMbGR6Kt6bkJzTrTd3mlPIumY+6yUpGtjI5wS4f8vEpcTVQXGzN+0+JMYx2isTS
- r7kM5f6JunsMRS0HyX7yYABgGtmxTNY=
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com
- [209.85.222.198]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-175-P-yv56iTMBe0_O47sgn_jg-1; Tue, 09 May 2023 00:42:48 -0400
-X-MC-Unique: P-yv56iTMBe0_O47sgn_jg-1
-Received: by mail-qk1-f198.google.com with SMTP id
- af79cd13be357-7577727a00eso744713685a.1
- for <virtualization@lists.linux-foundation.org>;
- Mon, 08 May 2023 21:42:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1683607368; x=1686199368;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=W7lkveXXMx28z2hQQkgi6XifNwekRx4w5U94EsCpzfo=;
- b=WaPa0Qz3O8PGaliNBrKhVq7GR+Mr+4/sJxdAxIqfkMVxGYNYxUokQBr6t5EJFiLYUj
- I3mEf1yh5R7CYdMeI7Q5nMU/L4MzlGzH9xrI//jHm3hTmfTp6EdUKhm4t9+elZFWCoDy
- VA1mpQhdZ/CdpWhwuyNlTADRVcaiTenaaOvDmcQ3iFVkxjL0V+AfK5a0dUn0NsT8Qqag
- stUdT0G80cV8F5wAyODfZnfDiSKNWq/pmmmrrRRbymyttW8iSJ4OSz7lJGKQE7GMR3FZ
- hUJLBaI+YK1MUPj1t3XRhxX2ccPAu61c3B37uRcux1M5COVdqC+DbwdK55jDVUDnXPG+
- TjSg==
-X-Gm-Message-State: AC+VfDx9JcWIjyd0j3qMiESr3tOZIR1m2rLVbrp6QMlwIH3PtqAPMaev
- BneK/FI7fEgNIgqCpTeN+McF18WhPRZW+QqjApkkSv7Enn5Zl8+j4Lyll1w9vvsF542Oc+7l50W
- O/azedBVYF/Tbw86pRDWwdLdHqrNULVy1s5sGrnLjpA==
-X-Received: by 2002:a05:6214:408:b0:5dd:b986:b44 with SMTP id
- z8-20020a056214040800b005ddb9860b44mr22544258qvx.6.1683607368246; 
- Mon, 08 May 2023 21:42:48 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6j3iab8C9dTm3YoE+9qDG5jkVMfm91YDSkfYW2q1isW0mgFLBflIC9pEd53x+/Sn1pYDGxFw==
-X-Received: by 2002:a05:6214:408:b0:5dd:b986:b44 with SMTP id
- z8-20020a056214040800b005ddb9860b44mr22544245qvx.6.1683607367963; 
- Mon, 08 May 2023 21:42:47 -0700 (PDT)
-Received: from redhat.com ([185.187.243.118]) by smtp.gmail.com with ESMTPSA id
- r3-20020a0ce283000000b005dd8b9345aesm492559qvl.70.2023.05.08.21.42.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 May 2023 21:42:47 -0700 (PDT)
-Date: Tue, 9 May 2023 00:42:39 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Feng Liu <feliu@nvidia.com>
-Subject: Re: [PATCH net v4] virtio_net: Fix error unwinding of XDP
- initialization
-Message-ID: <20230509004010-mutt-send-email-mst@kernel.org>
-References: <20230508222708.68281-1-feliu@nvidia.com>
+ Tue,  9 May 2023 08:09:09 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R751e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
+ TI=SMTPD_---0ViAH4kR_1683619742; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0ViAH4kR_1683619742) by smtp.aliyun-inc.com;
+ Tue, 09 May 2023 16:09:03 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH vhost v8 00/12] virtio core prepares for AF_XDP
+Date: Tue,  9 May 2023 16:08:50 +0800
+Message-Id: <20230509080902.104619-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 MIME-Version: 1.0
-In-Reply-To: <20230508222708.68281-1-feliu@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>, netdev@vger.kernel.org,
- Jiri Pirko <jiri@nvidia.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org,
- Simon Horman <simon.horman@corigine.com>, Bodong Wang <bodong@nvidia.com>,
- bpf@vger.kernel.org
+X-Git-Hash: 3c61b1a50a99
+Cc: Christoph Hellwig <hch@infradead.org>,
+ Xuan Zhuo <xuanzhuo@linux.alibaba.com>, "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -122,140 +76,104 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, May 08, 2023 at 06:27:08PM -0400, Feng Liu wrote:
-> When initializing XDP in virtnet_open(), some rq xdp initialization
-> may hit an error causing net device open failed. However, previous
-> rqs have already initialized XDP and enabled NAPI, which is not the
-> expected behavior. Need to roll back the previous rq initialization
-> to avoid leaks in error unwinding of init code.
-> 
-> Also extract helper functions of disable and enable queue pairs.
-> Use newly introduced disable helper function in error unwinding and
-> virtnet_close. Use enable helper function in virtnet_open.
-> 
-> Fixes: 754b8a21a96d ("virtio_net: setup xdp_rxq_info")
-> Signed-off-by: Feng Liu <feliu@nvidia.com>
-> Reviewed-by: Jiri Pirko <jiri@nvidia.com>
-> ---
-> 
-> v3 -> v4
-> feedbacks from Jiri Pirko
-> - Add symmetric helper function virtnet_enable_qp to enable queues.
-> - Error handle:  cleanup current queue pair in virtnet_enable_qp,
->   and complete the reset queue pairs cleanup in virtnet_open.
-> - Fix coding style.
-> feedbacks from Parav Pandit
-> - Remove redundant debug message and white space.
-> 
-> v2 -> v3
-> feedbacks from Michael S. Tsirkin
-> - Remove redundant comment.
-> 
-> v1 -> v2
-> feedbacks from Michael S. Tsirkin
-> - squash two patches together.
-> 
-> ---
->  drivers/net/virtio_net.c | 58 ++++++++++++++++++++++++++++------------
->  1 file changed, 41 insertions(+), 17 deletions(-)
-> 
-> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-> index 8d8038538fc4..df7c08048fa7 100644
-> --- a/drivers/net/virtio_net.c
-> +++ b/drivers/net/virtio_net.c
-> @@ -1868,6 +1868,38 @@ static int virtnet_poll(struct napi_struct *napi, int budget)
->  	return received;
->  }
->  
-> +static void virtnet_disable_qp(struct virtnet_info *vi, int qp_index)
+## About DMA APIs
+
+Now, virtio may can not work with DMA APIs when virtio features do not have
+VIRTIO_F_ACCESS_PLATFORM.
+
+1. I tried to let DMA APIs return phy address by virtio-device. But DMA APIs just
+   work with the "real" devices.
+2. I tried to let xsk support callballs to get phy address from virtio-net
+   driver as the dma address. But the maintainers of xsk may want to use dma-buf
+   to replace the DMA APIs. I think that may be a larger effort. We will wait
+   too long.
+
+So rethinking this, firstly, we can support premapped-dma only for devices with
+VIRTIO_F_ACCESS_PLATFORM. In the case of af-xdp, if the users want to use it,
+they have to update the device to support VIRTIO_F_RING_RESET, and they can also
+enable the device's VIRTIO_F_ACCESS_PLATFORM feature.
+
+Thanks for the help from Christoph.
+
+=================
+
+XDP socket(AF_XDP) is an excellent bypass kernel network framework. The zero
+copy feature of xsk (XDP socket) needs to be supported by the driver. The
+performance of zero copy is very good.
+
+ENV: Qemu with vhost.
+
+                   vhost cpu | Guest APP CPU |Guest Softirq CPU | PPS
+-----------------------------|---------------|------------------|------------
+xmit by sockperf:     90%    |   100%        |                  |  318967
+xmit by xsk:          100%   |   30%         |   33%            | 1192064
+recv by sockperf:     100%   |   68%         |   100%           |  692288
+recv by xsk:          100%   |   33%         |   43%            |  771670
+
+Before achieving the function of Virtio-Net, we also have to let virtio core
+support these features:
+
+1. virtio core support premapped
+2. virtio core support reset per-queue
+3. introduce DMA APIs to virtio core
+
+Please review.
+
+Thanks.
+
+v8:
+ 1. vring_sg_address: check by sg_page(sg) not dma_address. Because 0 is a valid dma address
+ 2. remove unused code from vring_map_one_sg()
+
+v7:
+ 1. virtqueue_dma_dev() return NULL when virtio is without DMA API.
+
+v6:
+ 1. change the size of the flags to u32.
+
+v5:
+ 1. fix for error handler
+ 2. add flags to record internal dma mapping
+
+v4:
+ 1. rename map_inter to dma_map_internal
+ 2. fix: Excess function parameter 'vq' description in 'virtqueue_dma_dev'
+
+v3:
+ 1. add map_inter to struct desc state to reocrd whether virtio core do dma map
+
+v2:
+ 1. based on sgs[0]->dma_address to judgment is premapped
+ 2. based on extra.addr to judgment to do unmap for no-indirect desc
+ 3. based on indir_desc to judgment to do unmap for indirect desc
+ 4. rename virtqueue_get_dma_dev to virtqueue_dma_dev
+
+v1:
+ 1. expose dma device. NO introduce the api for dma and sync
+ 2. split some commit for review.
 
 
-I am guessing _qp stands for queue pair? Let's call it
-virtnet_disable_queue_pair please, consistently with max_queue_pairs.
+Xuan Zhuo (12):
+  virtio_ring: split: separate dma codes
+  virtio_ring: packed: separate dma codes
+  virtio_ring: packed-indirect: separate dma codes
+  virtio_ring: split: support premapped
+  virtio_ring: packed: support premapped
+  virtio_ring: packed-indirect: support premapped
+  virtio_ring: remove unused code
+  virtio_ring: update document for virtqueue_add_*
+  virtio_ring: introduce virtqueue_dma_dev()
+  virtio_ring: correct the expression of the description of
+    virtqueue_resize()
+  virtio_ring: separate the logic of reset/enable from virtqueue_resize
+  virtio_ring: introduce virtqueue_reset()
 
-> +{
-> +	virtnet_napi_tx_disable(&vi->sq[qp_index].napi);
-> +	napi_disable(&vi->rq[qp_index].napi);
-> +	xdp_rxq_info_unreg(&vi->rq[qp_index].xdp_rxq);
-> +}
-> +
-> +static int virtnet_enable_qp(struct virtnet_info *vi, int qp_index)
+ drivers/virtio/virtio_ring.c | 375 +++++++++++++++++++++++++----------
+ include/linux/virtio.h       |   4 +
+ 2 files changed, 272 insertions(+), 107 deletions(-)
 
-Similarly, virtnet_enable_queue_pair
-
-> +{
-> +	struct net_device *dev = vi->dev;
-> +	int err;
-> +
-> +	err = xdp_rxq_info_reg(&vi->rq[qp_index].xdp_rxq, dev, qp_index,
-> +			       vi->rq[qp_index].napi.napi_id);
-> +	if (err < 0)
-> +		return err;
-> +
-> +	err = xdp_rxq_info_reg_mem_model(&vi->rq[qp_index].xdp_rxq,
-> +					 MEM_TYPE_PAGE_SHARED, NULL);
-> +	if (err < 0)
-> +		goto err_xdp_reg_mem_model;
-> +
-> +	virtnet_napi_enable(vi->rq[qp_index].vq, &vi->rq[qp_index].napi);
-> +	virtnet_napi_tx_enable(vi, vi->sq[qp_index].vq, &vi->sq[qp_index].napi);
-> +
-> +	return 0;
-> +
-> +err_xdp_reg_mem_model:
-> +	xdp_rxq_info_unreg(&vi->rq[qp_index].xdp_rxq);
-> +	return err;
-> +}
-> +
->  static int virtnet_open(struct net_device *dev)
->  {
->  	struct virtnet_info *vi = netdev_priv(dev);
-> @@ -1881,22 +1913,17 @@ static int virtnet_open(struct net_device *dev)
->  			if (!try_fill_recv(vi, &vi->rq[i], GFP_KERNEL))
->  				schedule_delayed_work(&vi->refill, 0);
->  
-> -		err = xdp_rxq_info_reg(&vi->rq[i].xdp_rxq, dev, i, vi->rq[i].napi.napi_id);
-> +		err = virtnet_enable_qp(vi, i);
->  		if (err < 0)
-> -			return err;
-> -
-> -		err = xdp_rxq_info_reg_mem_model(&vi->rq[i].xdp_rxq,
-> -						 MEM_TYPE_PAGE_SHARED, NULL);
-> -		if (err < 0) {
-> -			xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
-> -			return err;
-> -		}
-> -
-> -		virtnet_napi_enable(vi->rq[i].vq, &vi->rq[i].napi);
-> -		virtnet_napi_tx_enable(vi, vi->sq[i].vq, &vi->sq[i].napi);
-> +			goto err_enable_qp;
->  	}
->  
->  	return 0;
-> +
-> +err_enable_qp:
-> +	for (i--; i >= 0; i--)
-> +		virtnet_disable_qp(vi, i);
-> +	return err;
->  }
->  
->  static int virtnet_poll_tx(struct napi_struct *napi, int budget)
-> @@ -2305,11 +2332,8 @@ static int virtnet_close(struct net_device *dev)
->  	/* Make sure refill_work doesn't re-enable napi! */
->  	cancel_delayed_work_sync(&vi->refill);
->  
-> -	for (i = 0; i < vi->max_queue_pairs; i++) {
-> -		virtnet_napi_tx_disable(&vi->sq[i].napi);
-> -		napi_disable(&vi->rq[i].napi);
-> -		xdp_rxq_info_unreg(&vi->rq[i].xdp_rxq);
-> -	}
-> +	for (i = 0; i < vi->max_queue_pairs; i++)
-> +		virtnet_disable_qp(vi, i);
->  
->  	return 0;
->  }
-> -- 
-> 2.37.1 (Apple Git-137.1)
+--
+2.32.0.3.g01195cf9f
 
 _______________________________________________
 Virtualization mailing list
