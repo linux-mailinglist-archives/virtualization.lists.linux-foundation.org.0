@@ -2,58 +2,58 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1CD53700DAD
-	for <lists.virtualization@lfdr.de>; Fri, 12 May 2023 19:10:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 93BA9700DB0
+	for <lists.virtualization@lfdr.de>; Fri, 12 May 2023 19:10:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 71E28404DB;
-	Fri, 12 May 2023 17:10:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 71E28404DB
+	by smtp2.osuosl.org (Postfix) with ESMTP id 2F33D42D9E;
+	Fri, 12 May 2023 17:10:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2F33D42D9E
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tE681M1orwMC; Fri, 12 May 2023 17:10:08 +0000 (UTC)
+	with ESMTP id rN8mOSwScOn2; Fri, 12 May 2023 17:10:11 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 3C23242DA0;
-	Fri, 12 May 2023 17:10:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3C23242DA0
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0C7D342DA5;
+	Fri, 12 May 2023 17:10:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0C7D342DA5
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6CC70C0089;
-	Fri, 12 May 2023 17:10:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E3878C008E;
+	Fri, 12 May 2023 17:10:10 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D271FC002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5B3EDC002A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 May 2023 17:10:04 +0000 (UTC)
+ Fri, 12 May 2023 17:10:09 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 9958260B58
+ by smtp3.osuosl.org (Postfix) with ESMTP id 35CD5613AB
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 May 2023 17:10:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9958260B58
+ Fri, 12 May 2023 17:10:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 35CD5613AB
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id hLxLN7AW7zgN
+ with ESMTP id 6dC5FcgCg8eT
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 May 2023 17:10:03 +0000 (UTC)
-X-Greylist: delayed 00:19:29 by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B700460804
+ Fri, 12 May 2023 17:10:08 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 841F460804
 Received: from outgoing2021.csail.mit.edu (outgoing2021.csail.mit.edu
  [128.30.2.78])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B700460804
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 841F460804
  for <virtualization@lists.linux-foundation.org>;
- Fri, 12 May 2023 17:10:03 +0000 (UTC)
+ Fri, 12 May 2023 17:10:08 +0000 (UTC)
 Received: from [64.186.27.43] (helo=srivatsa-dev.eng.vmware.com)
  by outgoing2021.csail.mit.edu with esmtpa (Exim 4.95)
- (envelope-from <srivatsa@csail.mit.edu>) id 1pxVyH-001Zzx-IH;
- Fri, 12 May 2023 12:50:21 -0400
+ (envelope-from <srivatsa@csail.mit.edu>) id 1pxVyN-001Zzx-6w;
+ Fri, 12 May 2023 12:50:27 -0400
 From: "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
 To: jgross@suse.com, bp@suse.de, tglx@linutronix.de, kuba@kernel.org,
  davem@davemloft.net, richardcochran@gmail.com
-Subject: [PATCH 2/3] MAINTAINERS: Update maintainers for VMware hypervisor
- interface
-Date: Fri, 12 May 2023 09:49:57 -0700
-Message-Id: <20230512164958.575174-2-srivatsa@csail.mit.edu>
+Subject: [PATCH net 3/3] MAINTAINERS: Update maintainers for VMware virtual
+ PTP clock driver
+Date: Fri, 12 May 2023 09:49:58 -0700
+Message-Id: <20230512164958.575174-3-srivatsa@csail.mit.edu>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20230512164958.575174-1-srivatsa@csail.mit.edu>
 References: <20230512164958.575174-1-srivatsa@csail.mit.edu>
@@ -83,43 +83,45 @@ From: "Srivatsa S. Bhat (VMware)" <srivatsa@csail.mit.edu>
 I have decided to change employers, so I would like to remove myself
 from the maintainer role for VMware-supported subsystems.
 
-Remove Srivatsa from the maintainers entry for VMware hypervisor
-interface and add Ajay Kaher as a co-maintainer. Also, update CREDITS
-for Srivatsa.
+Remove Srivatsa from the maintainers entry for VMware virtual PTP
+clock driver (ptp_vmw) and add Ajay Kaher as an additional reviewer.
+Also, update CREDITS for Srivatsa.
 
 Signed-off-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
 Acked-by: Ajay Kaher <akaher@vmware.com>
 Acked-by: Alexey Makhalov <amakhalov@vmware.com>
+Acked-by: Deep Shah <sdeep@vmware.com>
 ---
  CREDITS     | 1 +
  MAINTAINERS | 2 +-
  2 files changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/CREDITS b/CREDITS
-index 5d48f1a201f2..313435c93e2c 100644
+index 313435c93e2c..670c256aff5d 100644
 --- a/CREDITS
 +++ b/CREDITS
-@@ -386,6 +386,7 @@ D: dsp56k device driver
- N: Srivatsa S. Bhat
+@@ -387,6 +387,7 @@ N: Srivatsa S. Bhat
  E: srivatsa@csail.mit.edu
  D: Maintainer of Generic Paravirt-Ops subsystem
-+D: Maintainer of VMware hypervisor interface
+ D: Maintainer of VMware hypervisor interface
++D: Maintainer of VMware virtual PTP clock driver (ptp_vmw)
  
  N: Ross Biro
  E: ross.biro@gmail.com
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 2d8d000353b5..309d4cc325f9 100644
+index 309d4cc325f9..a00bea4d7438 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -22493,7 +22493,7 @@ S:	Supported
- F:	drivers/misc/vmw_balloon.c
+@@ -22520,8 +22520,8 @@ F:	drivers/scsi/vmw_pvscsi.c
+ F:	drivers/scsi/vmw_pvscsi.h
  
- VMWARE HYPERVISOR INTERFACE
+ VMWARE VIRTUAL PTP CLOCK DRIVER
 -M:	Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
-+M:	Ajay Kaher <akaher@vmware.com>
- M:	Alexey Makhalov <amakhalov@vmware.com>
+ M:	Deep Shah <sdeep@vmware.com>
++R:	Ajay Kaher <akaher@vmware.com>
+ R:	Alexey Makhalov <amakhalov@vmware.com>
  R:	VMware PV-Drivers Reviewers <pv-drivers@vmware.com>
- L:	virtualization@lists.linux-foundation.org
+ L:	netdev@vger.kernel.org
 -- 
 2.25.1
 
