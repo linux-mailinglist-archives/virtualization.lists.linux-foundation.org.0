@@ -1,95 +1,98 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id E57DC702BCC
-	for <lists.virtualization@lfdr.de>; Mon, 15 May 2023 13:51:13 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 7D83A702BD1
+	for <lists.virtualization@lfdr.de>; Mon, 15 May 2023 13:51:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 2FC8760EA7;
-	Mon, 15 May 2023 11:51:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2FC8760EA7
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=igkrhFkh
+	by smtp1.osuosl.org (Postfix) with ESMTP id D0E97812A4;
+	Mon, 15 May 2023 11:51:33 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D0E97812A4
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=bOD9yY7h
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7RiCu2t71_8t; Mon, 15 May 2023 11:51:11 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id F2E9E60E38;
-	Mon, 15 May 2023 11:51:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org F2E9E60E38
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Oaxt9xpRxv8z; Mon, 15 May 2023 11:51:33 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 7D65183BFC;
+	Mon, 15 May 2023 11:51:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7D65183BFC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3FA2DC008A;
-	Mon, 15 May 2023 11:51:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AC9C2C008A;
+	Mon, 15 May 2023 11:51:31 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B64EEC002A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 593BDC002A
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 May 2023 11:51:08 +0000 (UTC)
+ Mon, 15 May 2023 11:51:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 8420E60E38
+ by smtp2.osuosl.org (Postfix) with ESMTP id 34A0F40165
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 May 2023 11:51:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8420E60E38
+ Mon, 15 May 2023 11:51:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 34A0F40165
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org
+ header.a=rsa-sha256 header.s=google header.b=bOD9yY7h
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7PZU_7TKJoGh
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id LAjFdnyQJYd9
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 May 2023 11:51:07 +0000 (UTC)
+ Mon, 15 May 2023 11:51:29 +0000 (UTC)
 X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6235560D90
-Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
- [IPv6:2a00:1450:4864:20::429])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 6235560D90
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 62B7A400FF
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 62B7A400FF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 May 2023 11:51:07 +0000 (UTC)
-Received: by mail-wr1-x429.google.com with SMTP id
- ffacd0b85a97d-30639daee76so8165338f8f.1
+ Mon, 15 May 2023 11:51:29 +0000 (UTC)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3078d1c8828so9506212f8f.3
  for <virtualization@lists.linux-foundation.org>;
- Mon, 15 May 2023 04:51:07 -0700 (PDT)
+ Mon, 15 May 2023 04:51:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1684151465; x=1686743465;
+ d=linaro.org; s=google; t=1684151487; x=1686743487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mMyHC9pQClYTJqDoQAfkFzjBLC/t080M5U1EcEdPfZY=;
- b=igkrhFkh08x2YsMCeAvMMAe0SFfzztydrm3ZJjc2Mir8dj7yMFyFTFg3oGbORQH+Qs
- JUKLv3zrjMCxwbDxx+NDJPNTBzwiu+z890zD/yMw6MQzXOGLkwHSYKs+41zjQof3YiNn
- QueCkn46tIwyGN2YGjwmu7M5/MRFntdka8h0+bXa07wqnuDRadWjhKK7ZtVDBz33SRvK
- KK4/WYRVH6gHqvTf05MB+ikI7G8G7sS87fvyGCDNykmZxWauJTYeXA5suig9NrtAkV+9
- C1IrScTCKRZDuJqja2J8wsjPRVLPslxB5vhJIpBrIQ0p+c18sgoLkJGud7iX++L5kRME
- cAnQ==
+ bh=+ZxrLhbMqm9tPsig+ULpfo3eVRUq7zl+eSt53OmHcko=;
+ b=bOD9yY7he8bOP4vGifYwZxj73H9sGfaKjhUIG2mfk5hvv6Dg2FxfWMFXFzKxD7Hzkg
+ xBd4q4/49Z8k2Q4CToovriHAYv4xjWmJQnzbCCGhQ4EnBflG6bgPOgEinwiK6RB7kCB1
+ OSaxmBw5z9g1pHsl1nvaLCHFaUsSzxcJRDdChZuXmMo4E0rFhxEez6GDaAHRmkNfSYPb
+ gi/8lXkjAa3szTdovcnRiqKonQbDnpYCviHRnLJatCwKR7fB7tp30wojLIjn70Eld4nl
+ CL+SbfDH29owrcs/gyvTK/ELZU8WBYlc71oFKANzghmZED7BoRDCi0ai4glk2WAoFqPU
+ 0SNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684151465; x=1686743465;
+ d=1e100.net; s=20221208; t=1684151487; x=1686743487;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mMyHC9pQClYTJqDoQAfkFzjBLC/t080M5U1EcEdPfZY=;
- b=TAc7EHiHuVRxZ9M0YmgZR6YKpQb1kCbeVdKkKArRWyTdg0yNwpHHf7/qZ/ywGoPamG
- t7cA4D/nLpTD/kNEwa/7PW2/r9wvFAOB38+xhmTwTDsOutAzPFbk7J6+n6o+7YaoLyWO
- fMTY4tzPFCWhtFJBytCYh5blNMz15dym3ZPBj+l9kPc23NKTrRTZGpS8mmQEIEGRE9vF
- f1CmZafy8xeQILB3iT8dzgZv9ByhcVtWkZ4sOTUXkFGqiy8Svhbao4qEatWIeCv3pw7e
- P1J2vh5ET/esb8XCKtNxJq0oToY3o01sNAqLmk+y/roEQtdjwfA437ot+9uTeXzabd6Y
- 4eTQ==
-X-Gm-Message-State: AC+VfDzjHINRIBVKErEUFUtn3jjjf1QzbIvsOoRLHe5FTprN0aXDsFxU
- 3YTIgS6bN3BI9pqPVBOtnYLftQ==
-X-Google-Smtp-Source: ACHHUZ5SZl/PE5+AtEId5xzehL1k3Eb4OG0FMa0JvJvuJtb/eeHROEXuFz/QNLebunUadXO3qsHKlQ==
-X-Received: by 2002:adf:fc46:0:b0:2f4:9f46:6865 with SMTP id
- e6-20020adffc46000000b002f49f466865mr24451854wrs.30.1684151465528; 
- Mon, 15 May 2023 04:51:05 -0700 (PDT)
+ bh=+ZxrLhbMqm9tPsig+ULpfo3eVRUq7zl+eSt53OmHcko=;
+ b=bqFH79XUCdjo/rvHC+UW9Z2T9lKegAEeCwtgYMtqu+x+oP4vpoZQ65FNMtW72dJ2uX
+ E/kOxVvaZUbKc2H2F1slxQrJ53F2VEAz6MZszveA+YIkDULpq5zNdBbx6SE6oXy6j6Jw
+ r81hPTQgZyJhk/74ngrZbJ8DK+M6HCv15CBkDHdnfaIcZ1SfxU84hFD2Nt2FhWQE+fBz
+ mupjbvjU8lksy4kXXgsH8hUytp8RtYr598f4EIQeHEZwb0nZ5w7J80XmHOKjFLXrQQOl
+ cc9hmN/kbKq1zdX4bGc6SBJFvNTapAY4ATQ5wly4gjKbzXzQ9WYO94HP0httvCZgUoel
+ BdKA==
+X-Gm-Message-State: AC+VfDwm0RwBnAyKD+j+rZKSFMwgHFi6TD6w1C+Ib91FoqS3gcndou38
+ YSptAdkyDM+72YmGaCZjoR4WsA==
+X-Google-Smtp-Source: ACHHUZ4V3Qog11yuZXD7nJ2Hy/NH2/YCvWaYTADQRCZiytBjuiZAVb4Ic6lBz+Kvcci1bbuTc4Oq3Q==
+X-Received: by 2002:adf:e552:0:b0:307:7be5:90da with SMTP id
+ z18-20020adfe552000000b003077be590damr21729916wrm.68.1684151487437; 
+ Mon, 15 May 2023 04:51:27 -0700 (PDT)
 Received: from localhost.localdomain (5750a5b3.skybroadband.com.
  [87.80.165.179]) by smtp.gmail.com with ESMTPSA id
- j6-20020a5d6186000000b003090cb7a9e6sm7555395wru.31.2023.05.15.04.51.04
+ j6-20020a5d6186000000b003090cb7a9e6sm7555395wru.31.2023.05.15.04.51.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 May 2023 04:51:05 -0700 (PDT)
+ Mon, 15 May 2023 04:51:27 -0700 (PDT)
 From: Jean-Philippe Brucker <jean-philippe@linaro.org>
 To: joro@8bytes.org,
 	will@kernel.org
-Subject: [PATCH v2 1/2] iommu/virtio: Detach domain on endpoint release
-Date: Mon, 15 May 2023 12:39:48 +0100
-Message-Id: <20230515113946.1017624-2-jean-philippe@linaro.org>
+Subject: [PATCH v2 2/2] iommu/virtio: Return size mapped for a detached domain
+Date: Mon, 15 May 2023 12:39:50 +0100
+Message-Id: <20230515113946.1017624-3-jean-philippe@linaro.org>
 X-Mailer: git-send-email 2.40.0
 In-Reply-To: <20230515113946.1017624-1-jean-philippe@linaro.org>
 References: <20230515113946.1017624-1-jean-philippe@linaro.org>
@@ -113,64 +116,65 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-When an endpoint is released, for example a PCIe VF being destroyed or a
-function hot-unplugged, it should be detached from its domain. Send a
-DETACH request.
+When map() is called on a detached domain, the domain does not exist in
+the device so we do not send a MAP request, but we do update the
+internal mapping tree, to be replayed on the next attach. Since this
+constitutes a successful iommu_map() call, return *mapped in this case
+too.
 
-Fixes: edcd69ab9a32 ("iommu: Add virtio-iommu driver")
-Reported-by: Akihiko Odaki <akihiko.odaki@daynix.com>
-Link: https://lore.kernel.org/all/15bf1b00-3aa0-973a-3a86-3fa5c4d41d2c@daynix.com/
+Fixes: 7e62edd7a33a ("iommu/virtio: Add map/unmap_pages() callbacks implementation")
 Signed-off-by: Jean-Philippe Brucker <jean-philippe@linaro.org>
-Tested-by: Akihiko Odaki <akihiko.odaki@daynix.com>
 ---
-v1: https://lore.kernel.org/linux-iommu/20230414150744.562456-1-jean-philippe@linaro.org/
-v2: fixed nr_endpoints count reported by Eric
----
- drivers/iommu/virtio-iommu.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/iommu/virtio-iommu.c | 33 +++++++++++++++++----------------
+ 1 file changed, 17 insertions(+), 16 deletions(-)
 
 diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
-index 5b8fe9bfa9a5b..fd316a37d7562 100644
+index fd316a37d7562..3551ed057774e 100644
 --- a/drivers/iommu/virtio-iommu.c
 +++ b/drivers/iommu/virtio-iommu.c
-@@ -788,6 +788,29 @@ static int viommu_attach_dev(struct iommu_domain *domain, struct device *dev)
- 	return 0;
- }
+@@ -833,25 +833,26 @@ static int viommu_map_pages(struct iommu_domain *domain, unsigned long iova,
+ 	if (ret)
+ 		return ret;
  
-+static void viommu_detach_dev(struct viommu_endpoint *vdev)
-+{
-+	int i;
-+	struct virtio_iommu_req_detach req;
-+	struct viommu_domain *vdomain = vdev->vdomain;
-+	struct iommu_fwspec *fwspec = dev_iommu_fwspec_get(vdev->dev);
-+
-+	if (!vdomain)
-+		return;
-+
-+	req = (struct virtio_iommu_req_detach) {
-+		.head.type	= VIRTIO_IOMMU_T_DETACH,
-+		.domain		= cpu_to_le32(vdomain->id),
-+	};
-+
-+	for (i = 0; i < fwspec->num_ids; i++) {
-+		req.endpoint = cpu_to_le32(fwspec->ids[i]);
-+		WARN_ON(viommu_send_req_sync(vdev->viommu, &req, sizeof(req)));
+-	map = (struct virtio_iommu_req_map) {
+-		.head.type	= VIRTIO_IOMMU_T_MAP,
+-		.domain		= cpu_to_le32(vdomain->id),
+-		.virt_start	= cpu_to_le64(iova),
+-		.phys_start	= cpu_to_le64(paddr),
+-		.virt_end	= cpu_to_le64(end),
+-		.flags		= cpu_to_le32(flags),
+-	};
++	if (vdomain->nr_endpoints) {
++		map = (struct virtio_iommu_req_map) {
++			.head.type	= VIRTIO_IOMMU_T_MAP,
++			.domain		= cpu_to_le32(vdomain->id),
++			.virt_start	= cpu_to_le64(iova),
++			.phys_start	= cpu_to_le64(paddr),
++			.virt_end	= cpu_to_le64(end),
++			.flags		= cpu_to_le32(flags),
++		};
+ 
+-	if (!vdomain->nr_endpoints)
+-		return 0;
+-
+-	ret = viommu_send_req_sync(vdomain->viommu, &map, sizeof(map));
+-	if (ret)
+-		viommu_del_mappings(vdomain, iova, end);
+-	else if (mapped)
++		ret = viommu_send_req_sync(vdomain->viommu, &map, sizeof(map));
++		if (ret) {
++			viommu_del_mappings(vdomain, iova, end);
++			return ret;
++		}
 +	}
-+	vdomain->nr_endpoints--;
-+	vdev->vdomain = NULL;
-+}
-+
- static int viommu_map_pages(struct iommu_domain *domain, unsigned long iova,
- 			    phys_addr_t paddr, size_t pgsize, size_t pgcount,
- 			    int prot, gfp_t gfp, size_t *mapped)
-@@ -990,6 +1013,7 @@ static void viommu_release_device(struct device *dev)
- {
- 	struct viommu_endpoint *vdev = dev_iommu_priv_get(dev);
++	if (mapped)
+ 		*mapped = size;
  
-+	viommu_detach_dev(vdev);
- 	iommu_put_resv_regions(dev, &vdev->resv_regions);
- 	kfree(vdev);
+-	return ret;
++	return 0;
  }
+ 
+ static size_t viommu_unmap_pages(struct iommu_domain *domain, unsigned long iova,
 -- 
 2.40.0
 
