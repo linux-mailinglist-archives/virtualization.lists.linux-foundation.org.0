@@ -1,104 +1,106 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id BAA2B705D8D
-	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 04:56:51 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D9389705DC1
+	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 05:10:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B3AD8841A0;
-	Wed, 17 May 2023 02:56:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B3AD8841A0
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=bytedance.com header.i=@bytedance.com header.a=rsa-sha256 header.s=google header.b=kuDjzxnj
+	by smtp4.osuosl.org (Postfix) with ESMTP id D619441FB7;
+	Wed, 17 May 2023 03:10:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D619441FB7
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ixAu4OfH
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id LB_b9Q1sYbXD; Wed, 17 May 2023 02:56:44 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id DCEDF841C7;
-	Wed, 17 May 2023 02:56:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DCEDF841C7
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7N9JMEBG3tAV; Wed, 17 May 2023 03:10:20 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 0945541EAE;
+	Wed, 17 May 2023 03:10:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0945541EAE
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A1012C007A;
-	Wed, 17 May 2023 02:56:42 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 42577C008A;
+	Wed, 17 May 2023 03:10:19 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7DC96C002A
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 526E0C002A
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:56:40 +0000 (UTC)
+ Wed, 17 May 2023 03:10:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3CB40405EC
+ by smtp3.osuosl.org (Postfix) with ESMTP id 26BF66115C
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:56:40 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3CB40405EC
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=bytedance.com header.i=@bytedance.com
- header.a=rsa-sha256 header.s=google header.b=kuDjzxnj
+ Wed, 17 May 2023 03:10:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 26BF66115C
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=ixAu4OfH
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id Puwr0bjss8L0
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Mc_YWUZjnjEx
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:56:39 +0000 (UTC)
-X-Greylist: whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1220D40134
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 1220D40134
+ Wed, 17 May 2023 03:10:16 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 3FB7060B1E
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 3FB7060B1E
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:56:39 +0000 (UTC)
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-643912bca6fso163573b3a.0
+ Wed, 17 May 2023 03:10:16 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1684293015;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=ZgLYU/dAL2mGwl0YWl7bhert7p/mQK2X2+Q84+GRAwc=;
+ b=ixAu4OfHp4/BLe3UIsTZazoqDwRDK8dUjF3bV8QXu3MLntBvzJ6BQX6gVNe66VntuBeVIU
+ qouLb2ypbpsmoBQiYkAE0Dt6NEuwkKoKdy9CPUIYfV+mb/YXp4y6M7XTeCz1qL0nn3Qq7I
+ Za3UFe//Rd47ltmDX3NESgUftFoqN/k=
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-298-Es2cLV3SM-KWkG3M9LuuKw-1; Tue, 16 May 2023 23:10:13 -0400
+X-MC-Unique: Es2cLV3SM-KWkG3M9LuuKw-1
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2ac7cefaa9dso1030941fa.2
  for <virtualization@lists.linux-foundation.org>;
- Tue, 16 May 2023 19:56:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=bytedance.com; s=google; t=1684292198; x=1686884198;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YNR0ELjA7D2S00xqqzGzOkpPvuTb1rz+KyHRpi9sdyI=;
- b=kuDjzxnjwcWsTkQeL4gr80ola2quVtUXgXvVWK1R6gypwIEeSUikVA0NXEtXPX9qUd
- tTQxouwC5LX8aGG4gLnn/y8s2qLQQjU8NF8QIpGQW/dnnpfqwAFZvQ8/K09kY1KXqJf5
- 5jHls3NIPyuHifDxdQ8QKKVfGW9s/QeUO6WeRXc7ImbgyNG5wZfJojjIp/+Fqd4AZIot
- MtKmYufs6ep9fWbN+b8XtYr6Q9ChaSauAPZYlag9XKyxGnTygpeYG+QyZw1fcXirLO+S
- cVU96gsSIoeWifvnnTTQnjv1ZeOKQl4C6Va9oyu9yPDupfH0aiPimb3U43xnbT0+n1qB
- j7dA==
+ Tue, 16 May 2023 20:10:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1684292198; x=1686884198;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20221208; t=1684293012; x=1686885012;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YNR0ELjA7D2S00xqqzGzOkpPvuTb1rz+KyHRpi9sdyI=;
- b=KELzn/mtJ5gvXg3DGDzsxgbl+KS2YD34xWdm50WwBxBFfeYpZ4X3NZogFxWlg3BcYG
- aakgYf21Mo4AUqGuyRHbllnL57no++7jn9a+joTUQYi1tKlLS2rKHjE7fLReyQyD5zcj
- Azr8CRBCvv2+dQyqLlkgrE99Bo3eJQ3GBoBIGGhBDEGdF7go2SG1B8iOTRJw/iK4AaPl
- K7cvGwgkkS7lPKWNKlMIDyNOmpShoLxRepSNWz9zsx8/OozC2wkONeXIwsyGN/T7i9SW
- 5Jj1Wlut2ntUP6SDUeeL4VST4ZYb3Rjk53gKfG995DL7He1YF7fPFnF9uspbCB/1Rtri
- 3Fbw==
-X-Gm-Message-State: AC+VfDwNyCngPq5CZZQBrpu4IifXcsoGvsbKeVWSn/soSuQZE7V81i2S
- UBowMzqcn24PMjcF6mBnGutV5w==
-X-Google-Smtp-Source: ACHHUZ7xXvQYNGELgpFriUG501xpoJ1MGa2FRvJ6ssAeMoOSnFzD6KYjhwLdtSnghhae8a/3ud57sA==
-X-Received: by 2002:a05:6a00:2da8:b0:64c:aa98:a69f with SMTP id
- fb40-20020a056a002da800b0064caa98a69fmr11453469pfb.1.1684292198325; 
- Tue, 16 May 2023 19:56:38 -0700 (PDT)
-Received: from always-x1.bytedance.net ([61.213.176.11])
- by smtp.gmail.com with ESMTPSA id
- b19-20020aa78713000000b00643355ff6a6sm14527971pfo.99.2023.05.16.19.56.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 May 2023 19:56:37 -0700 (PDT)
-To: stefanha@redhat.com,
-	mst@redhat.com,
-	jasowang@redhat.com
-Subject: [PATCH v2 2/2] tools/virtio: implement virtqueue in test
-Date: Wed, 17 May 2023 10:54:24 +0800
-Message-Id: <20230517025424.601141-3-pizhenwei@bytedance.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20230517025424.601141-1-pizhenwei@bytedance.com>
-References: <20230517025424.601141-1-pizhenwei@bytedance.com>
+ bh=ZgLYU/dAL2mGwl0YWl7bhert7p/mQK2X2+Q84+GRAwc=;
+ b=UN2c9KB9rUEvwDUPiJBxSVq7f8lHjqaYIl8GNBufryMW98rI6YC/zR2Ee4ni3NUSvX
+ t4w+QdBvMv8xvyN/LXRELRaFoNttvkO7m2uHSz1bDXOMVnSKknSlZYK1+OFmozi2sPQN
+ ID+2kk8X9jv+YBolwep0Yyz91B8tDixC+8IDnB/BNTrr8ykvxJEC4h2uev7dyE0zcR01
+ mDtRSw99kd92adtYdI+pScCRtBmcQCEGQFViwzak/ptsJaw4GPf5arqyoCzFLwvg1ZxB
+ 6GvdDbxUUwmFedAnj1NcSCkHaWrYTS9X1T4rvydmXeim6KSfYhg1111cGtczfu/Linwf
+ 6RVg==
+X-Gm-Message-State: AC+VfDyzKiFrUbrOnjaDwLc7Rfh5HoU0/+FGmICsiVI4fR5ddZ80ypXC
+ cJEXxgWuIC7u7tvAHdoXvFJLzBwE2mqAbXSdHJGNefjAWBoX/6Zw/ldL1myL/cxg4eJyWHVRhUy
+ JOFdxYHrAfUikBliC489oVM/7MrTm+FF1xThoY7obWc8ymdWGx1+mbbzhGA==
+X-Received: by 2002:a2e:3205:0:b0:2ac:8a05:b2c7 with SMTP id
+ y5-20020a2e3205000000b002ac8a05b2c7mr8853732ljy.7.1684293012143; 
+ Tue, 16 May 2023 20:10:12 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7PwTS30E9vLdDSebY2kJUDXWZnJEKlhkt3EZOh9P2ADVutxYoDPOpA5udDfgb6nNiRvoQhO56gSHCTiuFLYlQ=
+X-Received: by 2002:a2e:3205:0:b0:2ac:8a05:b2c7 with SMTP id
+ y5-20020a2e3205000000b002ac8a05b2c7mr8853721ljy.7.1684293011722; Tue, 16 May
+ 2023 20:10:11 -0700 (PDT)
 MIME-Version: 1.0
-Cc: xuanzhuo@linux.alibaba.com, linux-kernel@vger.kernel.org,
- zhenwei pi <pizhenwei@bytedance.com>,
+References: <20230428163131.92777-1-michael.christie@oracle.com>
+ <20230428163131.92777-13-michael.christie@oracle.com>
+In-Reply-To: <20230428163131.92777-13-michael.christie@oracle.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Wed, 17 May 2023 11:10:00 +0800
+Message-ID: <CACGkMEutZEGkXPVoSjfTCofjqD7=F+=m7S-BKDX8s8BAayQa_w@mail.gmail.com>
+Subject: Re: [PATCH 13/14] vhost: allow userspace to create workers
+To: Mike Christie <michael.christie@oracle.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Cc: mst@redhat.com, stefanha@redhat.com,
  virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -111,408 +113,235 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-From: zhenwei pi via Virtualization <virtualization@lists.linux-foundation.org>
-Reply-To: zhenwei pi <pizhenwei@bytedance.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-virtqueue related functions has been abstract since commit
-("virtio: abstract virtqueue related methods"), add compatible for
-abstract API.
-
-Signed-off-by: zhenwei pi <pizhenwei@bytedance.com>
----
- tools/virtio/linux/virtio.h | 355 ++++++++++++++++++++++++++++++++----
- 1 file changed, 324 insertions(+), 31 deletions(-)
-
-diff --git a/tools/virtio/linux/virtio.h b/tools/virtio/linux/virtio.h
-index 5d3440f474dd..3531dba53584 100644
---- a/tools/virtio/linux/virtio.h
-+++ b/tools/virtio/linux/virtio.h
-@@ -4,6 +4,7 @@
- #include <linux/scatterlist.h>
- #include <linux/kernel.h>
- #include <linux/spinlock.h>
-+#include <linux/virtio_ring.h>
- 
- struct device {
- 	void *parent;
-@@ -27,46 +28,338 @@ struct virtqueue {
- 	unsigned int num_max;
- 	void *priv;
- 	bool reset;
-+	bool abstract;
-+
-+	/* abstract operations */
-+	int (*add_sgs)(struct virtqueue *vq, struct scatterlist *sgs[],
-+		       unsigned int total_sg,
-+		       unsigned int out_sgs, unsigned int in_sgs,
-+		       void *data, void *ctx, gfp_t gfp);
-+	bool (*kick_prepare)(struct virtqueue *vq);
-+	bool (*notify)(struct virtqueue *vq);
-+	unsigned int (*enable_cb_prepare)(struct virtqueue *vq);
-+	bool (*enable_cb_delayed)(struct virtqueue *vq);
-+	void (*disable_cb)(struct virtqueue *vq);
-+	bool (*poll)(struct virtqueue *vq, unsigned int idx);
-+	void *(*get_buf_ctx)(struct virtqueue *vq, unsigned int *len, void **ctx);
-+	void *(*detach_unused_buf)(struct virtqueue *vq);
-+	unsigned int (*get_vring_size)(const struct virtqueue *vq);
-+	int (*resize)(struct virtqueue *vq, u32 num,
-+		      void (*recycle)(struct virtqueue *vq, void *buf));
-+	void (*__break)(struct virtqueue *vq);
-+	void (*__unbreak)(struct virtqueue *vq);
-+	bool (*is_broken)(const struct virtqueue *vq);
- };
- 
--/* Interfaces exported by virtio_ring. */
--int virtqueue_add_sgs(struct virtqueue *vq,
--		      struct scatterlist *sgs[],
--		      unsigned int out_sgs,
--		      unsigned int in_sgs,
--		      void *data,
--		      gfp_t gfp);
-+/**
-+ * virtqueue_add_sgs - expose buffers to other end
-+ * @vq: the struct virtqueue we're talking about.
-+ * @sgs: array of terminated scatterlists.
-+ * @out_sgs: the number of scatterlists readable by other side
-+ * @in_sgs: the number of scatterlists which are writable (after readable ones)
-+ * @data: the token identifying the buffer.
-+ * @gfp: how to do memory allocations (if necessary).
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-+ */
-+static inline int virtqueue_add_sgs(struct virtqueue *vq,
-+				    struct scatterlist *sgs[],
-+				    unsigned int out_sgs,
-+				    unsigned int in_sgs,
-+				    void *data, gfp_t gfp)
-+{
-+	unsigned int i, total_sg = 0;
- 
--int virtqueue_add_outbuf(struct virtqueue *vq,
--			 struct scatterlist sg[], unsigned int num,
--			 void *data,
--			 gfp_t gfp);
-+	/* Count them first. */
-+	for (i = 0; i < out_sgs + in_sgs; i++) {
-+		struct scatterlist *sg;
- 
--int virtqueue_add_inbuf(struct virtqueue *vq,
--			struct scatterlist sg[], unsigned int num,
--			void *data,
--			gfp_t gfp);
-+		for (sg = sgs[i]; sg; sg = sg_next(sg))
-+			total_sg++;
-+	}
- 
--bool virtqueue_kick(struct virtqueue *vq);
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_add_sgs(vq, sgs, total_sg, out_sgs, in_sgs, data, NULL, gfp);
- 
--void *virtqueue_get_buf(struct virtqueue *vq, unsigned int *len);
-+	return vq->add_sgs(vq, sgs, total_sg, out_sgs, in_sgs, data, NULL, gfp);
-+}
- 
--void virtqueue_disable_cb(struct virtqueue *vq);
-+/**
-+ * virtqueue_add_outbuf - expose output buffers to other end
-+ * @vq: the struct virtqueue we're talking about.
-+ * @sg: scatterlist (must be well-formed and terminated!)
-+ * @num: the number of entries in @sg readable by other side
-+ * @data: the token identifying the buffer.
-+ * @gfp: how to do memory allocations (if necessary).
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-+ */
-+static inline int virtqueue_add_outbuf(struct virtqueue *vq,
-+				       struct scatterlist *sg,
-+				       unsigned int num,
-+				       void *data,
-+				       gfp_t gfp)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_add_sgs(vq, &sg, num, 1, 0, data, NULL, gfp);
- 
--bool virtqueue_enable_cb(struct virtqueue *vq);
--bool virtqueue_enable_cb_delayed(struct virtqueue *vq);
-+	return vq->add_sgs(vq, &sg, num, 1, 0, data, NULL, gfp);
-+}
- 
--void *virtqueue_detach_unused_buf(struct virtqueue *vq);
--struct virtqueue *vring_new_virtqueue(unsigned int index,
-+/**
-+ * virtqueue_add_inbuf - expose input buffers to other end
-+ * @vq: the struct virtqueue we're talking about.
-+ * @sg: scatterlist (must be well-formed and terminated!)
-+ * @num: the number of entries in @sg writable by other side
-+ * @data: the token identifying the buffer.
-+ * @gfp: how to do memory allocations (if necessary).
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-+ */
-+static inline int virtqueue_add_inbuf(struct virtqueue *vq,
-+				      struct scatterlist *sg,
- 				      unsigned int num,
--				      unsigned int vring_align,
--				      struct virtio_device *vdev,
--				      bool weak_barriers,
--				      bool ctx,
--				      void *pages,
--				      bool (*notify)(struct virtqueue *vq),
--				      void (*callback)(struct virtqueue *vq),
--				      const char *name);
--void vring_del_virtqueue(struct virtqueue *vq);
-+				      void *data,
-+				      gfp_t gfp)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_add_sgs(vq, &sg, num, 0, 1, data, NULL, gfp);
-+
-+	return vq->add_sgs(vq, &sg, num, 0, 1, data, NULL, gfp);
-+}
-+
-+/**
-+ * virtqueue_add_inbuf_ctx - expose input buffers to other end
-+ * @vq: the struct virtqueue we're talking about.
-+ * @sg: scatterlist (must be well-formed and terminated!)
-+ * @num: the number of entries in @sg writable by other side
-+ * @data: the token identifying the buffer.
-+ * @ctx: extra context for the token
-+ * @gfp: how to do memory allocations (if necessary).
-+ *
-+ * Caller must ensure we don't call this with other virtqueue operations
-+ * at the same time (except where noted).
-+ *
-+ * Returns zero or a negative error (ie. ENOSPC, ENOMEM, EIO).
-+ */
-+static inline int virtqueue_add_inbuf_ctx(struct virtqueue *vq,
-+					  struct scatterlist *sg,
-+					  unsigned int num,
-+					  void *data,
-+					  void *ctx,
-+					  gfp_t gfp)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_add_sgs(vq, &sg, num, 0, 1, data, ctx, gfp);
-+
-+	return vq->add_sgs(vq, &sg, num, 0, 1, data, ctx, gfp);
-+}
-+
-+/**
-+ * virtqueue_kick_prepare - first half of split virtqueue_kick call.
-+ * @vq: the struct virtqueue
-+ *
-+ * Instead of virtqueue_kick(), you can do:
-+ *	if (virtqueue_kick_prepare(vq))
-+ *		virtqueue_notify(vq);
-+ *
-+ * This is sometimes useful because the virtqueue_kick_prepare() needs
-+ * to be serialized, but the actual virtqueue_notify() call does not.
-+ */
-+static inline bool virtqueue_kick_prepare(struct virtqueue *vq)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_kick_prepare(vq);
-+
-+	return vq->kick_prepare(vq);
-+}
-+
-+/**
-+ * virtqueue_notify - second half of split virtqueue_kick call.
-+ * @vq: the struct virtqueue
-+ *
-+ * This does not need to be serialized.
-+ *
-+ * Returns false if host notify failed or queue is broken, otherwise true.
-+ */
-+static inline bool virtqueue_notify(struct virtqueue *vq)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_notify(vq);
-+
-+	return vq->notify(vq);
-+}
-+
-+/**
-+ * virtqueue_kick - update after add_buf
-+ * @vq: the struct virtqueue
-+ *
-+ * After one or more virtqueue_add_* calls, invoke this to kick
-+ * the other side.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue
-+ * operations at the same time (except where noted).
-+ *
-+ * Returns false if kick failed, otherwise true.
-+ */
-+static inline bool virtqueue_kick(struct virtqueue *vq)
-+{
-+	if (virtqueue_kick_prepare(vq))
-+		return virtqueue_notify(vq);
-+
-+	return true;
-+}
-+
-+/**
-+ * virtqueue_enable_cb_prepare - restart callbacks after disable_cb
-+ * @vq: the struct virtqueue we're talking about.
-+ *
-+ * This re-enables callbacks; it returns current queue state
-+ * in an opaque unsigned value. This value should be later tested by
-+ * virtqueue_poll, to detect a possible race between the driver checking for
-+ * more work, and enabling callbacks.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue
-+ * operations at the same time (except where noted).
-+ */
-+static inline unsigned int virtqueue_enable_cb_prepare(struct virtqueue *vq)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_enable_cb_prepare(vq);
-+
-+	return vq->enable_cb_prepare(vq);
-+}
-+
-+/**
-+ * virtqueue_poll - query pending used buffers
-+ * @vq: the struct virtqueue we're talking about.
-+ * @last_used_idx: virtqueue state (from call to virtqueue_enable_cb_prepare).
-+ *
-+ * Returns "true" if there are pending used buffers in the queue.
-+ *
-+ * This does not need to be serialized.
-+ */
-+static inline bool virtqueue_poll(struct virtqueue *vq, unsigned int idx)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_poll(vq, idx);
-+
-+	return vq->poll(vq, idx);
-+}
-+
-+/**
-+ * virtqueue_enable_cb - restart callbacks after disable_cb.
-+ * @vq: the struct virtqueue we're talking about.
-+ *
-+ * This re-enables callbacks; it returns "false" if there are pending
-+ * buffers in the queue, to detect a possible race between the driver
-+ * checking for more work, and enabling callbacks.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue
-+ * operations at the same time (except where noted).
-+ */
-+static inline bool virtqueue_enable_cb(struct virtqueue *vq)
-+{
-+	unsigned int opaque = virtqueue_enable_cb_prepare(vq);
-+
-+	return !virtqueue_poll(vq, opaque);
-+}
-+
-+/**
-+ * virtqueue_enable_cb_delayed - restart callbacks after disable_cb.
-+ * @vq: the struct virtqueue we're talking about.
-+ *
-+ * This re-enables callbacks but hints to the other side to delay
-+ * interrupts until most of the available buffers have been processed;
-+ * it returns "false" if there are many pending buffers in the queue,
-+ * to detect a possible race between the driver checking for more work,
-+ * and enabling callbacks.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue
-+ * operations at the same time (except where noted).
-+ */
-+static inline bool virtqueue_enable_cb_delayed(struct virtqueue *vq)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_enable_cb_delayed(vq);
-+
-+	return vq->enable_cb_delayed(vq);
-+}
-+
-+/**
-+ * virtqueue_disable_cb - disable callbacks
-+ * @vq: the struct virtqueue we're talking about.
-+ *
-+ * Note that this is not necessarily synchronous, hence unreliable and only
-+ * useful as an optimization.
-+ *
-+ * Unlike other operations, this need not be serialized.
-+ */
-+static inline void virtqueue_disable_cb(struct virtqueue *vq)
-+{
-+	if (likely(!vq->abstract)) {
-+		vring_virtqueue_disable_cb(vq);
-+		return;
-+	}
-+
-+	vq->disable_cb(vq);
-+}
-+
-+/**
-+ * virtqueue_get_buf_ctx - get the next used buffer
-+ * @vq: the struct virtqueue we're talking about.
-+ * @len: the length written into the buffer
-+ * @ctx: extra context for the token
-+ *
-+ * If the device wrote data into the buffer, @len will be set to the
-+ * amount written.  This means you don't need to clear the buffer
-+ * beforehand to ensure there's no data leakage in the case of short
-+ * writes.
-+ *
-+ * Caller must ensure we don't call this with other virtqueue
-+ * operations at the same time (except where noted).
-+ *
-+ * Returns NULL if there are no used buffers, or the "data" token
-+ * handed to virtqueue_add_*().
-+ */
-+static inline void *virtqueue_get_buf_ctx(struct virtqueue *vq,
-+					  unsigned int *len,
-+					  void **ctx)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_get_buf_ctx(vq, len, ctx);
-+
-+	return vq->get_buf_ctx(vq, len, ctx);
-+}
-+
-+static inline void *virtqueue_get_buf(struct virtqueue *vq, unsigned int *len)
-+{
-+	if (likely(!vq->abstract))
-+		return vring_virtqueue_get_buf_ctx(vq, len, NULL);
-+
-+	return vq->get_buf_ctx(vq, len, NULL);
-+}
-+
-+/**
-+ * virtqueue_detach_unused_buf - detach first unused buffer
-+ * @vq: the struct virtqueue we're talking about.
-+ *
-+ * Returns NULL or the "data" token handed to virtqueue_add_*().
-+ * This is not valid on an active queue; it is useful for device
-+ * shutdown or the reset queue.
-+ */
-+static inline void *virtqueue_detach_unused_buf(struct virtqueue *vq)
-+{
-+	return vq->detach_unused_buf(vq);
-+}
- 
- #endif
--- 
-2.20.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gU2F0LCBBcHIgMjksIDIwMjMgYXQgMTI6MzLigK9BTSBNaWtlIENocmlzdGllCjxtaWNoYWVs
+LmNocmlzdGllQG9yYWNsZS5jb20+IHdyb3RlOgo+Cj4gRm9yIHZob3N0LXNjc2kgd2l0aCAzIHZx
+cyBvciBtb3JlIGFuZCBhIHdvcmtsb2FkIHRoYXQgdHJpZXMgdG8gdXNlCj4gdGhlbSBpbiBwYXJh
+bGxlbCBsaWtlOgo+Cj4gZmlvIC0tZmlsZW5hbWU9L2Rldi9zZGIgIC0tZGlyZWN0PTEgLS1ydz1y
+YW5kcncgLS1icz00ayBcCj4gLS1pb2VuZ2luZT1saWJhaW8gLS1pb2RlcHRoPTEyOCAgLS1udW1q
+b2JzPTMKPgo+IHRoZSBzaW5nbGUgdmhvc3Qgd29ya2VyIHRocmVhZCB3aWxsIGJlY29tZSBhIGJv
+dHRsbmVjayBhbmQgd2UgYXJlIHN0dWNrCj4gYXQgYXJvdW5kIDUwMEsgSU9QcyBubyBtYXR0ZXIg
+aG93IG1hbnkgam9icywgdmlydHF1ZXVlcywgYW5kIENQVXMgYXJlCj4gdXNlZC4KPgo+IFRvIGJl
+dHRlciB1dGlsaXplIHZpcnRxdWV1ZXMgYW5kIGF2YWlsYWJsZSBDUFVzLCB0aGlzIHBhdGNoIGFs
+bG93cwo+IHVzZXJzcGFjZSB0byBjcmVhdGUgd29ya2VycyBhbmQgYmluZCB0aGVtIHRvIHZxcy4g
+WW91IGNhbiBoYXZlIE4gd29ya2Vycwo+IHBlciBkZXYgYW5kIGFsc28gc2hhcmUgTiB3b3JrZXJz
+IHdpdGggTSB2cXMgb24gdGhhdCBkZXYuCj4KPiBUaGlzIHBhdGNoIGFkZHMgdGhlIGludGVyZmFj
+ZSByZWxhdGVkIGNvZGUgYW5kIHRoZSBuZXh0IHBhdGNoIHdpbGwgaG9vawo+IHZob3N0LXNjc2kg
+aW50byBpdC4gVGhlIHBhdGNoZXMgZG8gbm90IHRyeSB0byBob29rIG5ldCBhbmQgdnNvY2sgaW50
+bwo+IHRoZSBpbnRlcmZhY2UgYmVjYXVzZToKPgo+IDEuIG11bHRpcGxlIHdvcmtlcnMgZG9uJ3Qg
+c2VlbSB0byBoZWxwIHZzb2NrLiBUaGUgcHJvYmxlbSBpcyB0aGF0IHdpdGgKPiBvbmx5IDIgdmly
+dHF1ZXVlcyB3ZSBuZXZlciBmdWxseSB1c2UgdGhlIGV4aXN0aW5nIHdvcmtlciB3aGVuIGRvaW5n
+Cj4gYmlkaXJlY3Rpb25hbCB0ZXN0cy4gVGhpcyBzZWVtcyB0byBtYXRjaCB2aG9zdC1zY3NpIHdo
+ZXJlIHdlIGRvbid0IHNlZQo+IHRoZSB3b3JrZXIgYXMgYSBib3R0bGVuZWNrIHVudGlsIDMgdmly
+dHF1ZXVlcyBhcmUgdXNlZC4KPgo+IDIuIG5ldCBhbHJlYWR5IGhhcyBhIHdheSB0byB1c2UgbXVs
+dGlwbGUgd29ya2Vycy4KPgo+IFNpZ25lZC1vZmYtYnk6IE1pa2UgQ2hyaXN0aWUgPG1pY2hhZWwu
+Y2hyaXN0aWVAb3JhY2xlLmNvbT4KPiAtLS0KPiAgZHJpdmVycy92aG9zdC92aG9zdC5jICAgICAg
+ICAgICAgfCAxNDUgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrLQo+ICBkcml2ZXJzL3Zo
+b3N0L3Zob3N0LmggICAgICAgICAgICB8ICAgMyArCj4gIGluY2x1ZGUvdWFwaS9saW51eC92aG9z
+dC5oICAgICAgIHwgIDMzICsrKysrKysKPiAgaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0X3R5cGVz
+LmggfCAgMTYgKysrKwo+ICA0IGZpbGVzIGNoYW5nZWQsIDE5NiBpbnNlcnRpb25zKCspLCAxIGRl
+bGV0aW9uKC0pCj4KPiBkaWZmIC0tZ2l0IGEvZHJpdmVycy92aG9zdC92aG9zdC5jIGIvZHJpdmVy
+cy92aG9zdC92aG9zdC5jCj4gaW5kZXggNGIwYjgyMjkyMzc5Li5lOGY4MjlmMzU4MTQgMTAwNjQ0
+Cj4gLS0tIGEvZHJpdmVycy92aG9zdC92aG9zdC5jCj4gKysrIGIvZHJpdmVycy92aG9zdC92aG9z
+dC5jCj4gQEAgLTYzMCw2ICs2MzAsODAgQEAgc3RhdGljIHN0cnVjdCB2aG9zdF93b3JrZXIgKnZo
+b3N0X3dvcmtlcl9jcmVhdGUoc3RydWN0IHZob3N0X2RldiAqZGV2KQo+ICAgICAgICAgcmV0dXJu
+IE5VTEw7Cj4gIH0KPgo+ICsvKiBDYWxsZXIgbXVzdCBoYXZlIGRldmljZSBtdXRleCAqLwo+ICtz
+dGF0aWMgdm9pZCBfX3Zob3N0X3ZxX2F0dGFjaF93b3JrZXIoc3RydWN0IHZob3N0X3ZpcnRxdWV1
+ZSAqdnEsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aG9z
+dF93b3JrZXIgKndvcmtlcikKPiArewo+ICsgICAgICAgaWYgKHZxLT53b3JrZXIpCj4gKyAgICAg
+ICAgICAgICAgIHZxLT53b3JrZXItPmF0dGFjaG1lbnRfY250LS07Cj4gKyAgICAgICB3b3JrZXIt
+PmF0dGFjaG1lbnRfY250Kys7Cj4gKyAgICAgICB2cS0+d29ya2VyID0gd29ya2VyOwo+ICt9Cj4g
+Kwo+ICsvKioKPiArICogdmhvc3RfdnFfYXR0YWNoX3dvcmtlciAtIHNldCBhIHZpcnRxdWV1ZSdz
+IHdvcmtlciBmcm9tIGFuIGlvY3RsIGNvbW1hbmQKPiArICogQHZxOiB0aGUgdmlydHF1ZXVlIHdl
+IHdpbGwgc2V0IHRoZSB3b3JrZXIgZm9yCj4gKyAqIEBpbmZvOiB0aGUgd29ya2VyIHVzZXJzcGFj
+ZSBoYXMgcmVxdWVzdGVkIHVzIHRvIHVzZQo+ICsgKgo+ICsgKiBXZSBvbmx5IGFsbG93IHVzZXJz
+cGFjZSB0byBzZXQgYSB2aXJ0cXVldWUncyB3b3JrZXIgaWYgaXQncyBub3QgYWN0aXZlIGFuZAo+
+ICsgKiBwb2xsaW5nIGlzIG5vdCBlbmFibGVkLgoKSSB3b25kZXIgaWYgd2UgY2FuIG1hbmRhdGUg
+dGhpcyBpbiB0aGUgY29kZSBsaWtlIGNoZWNrIHRoZSB2cSBiYWNrZW5kCmluIHZob3N0X3ZxX3dv
+cmtfcXVldWUoKS4KCiBXZSBhbHNvIGFzc3VtZSBkcml2ZXJzIHN1cHBvcnRpbmcgdGhpcyB3aWxs
+IG5vdCBiZQo+ICsgKiBpbnRlcm5hbGx5IHF1ZXVlaW5nIHdvcmtzIGRpcmVjdGx5IG9yIHZpYSBj
+YWxscyBsaWtlIHZob3N0X2Rldl9mbHVzaCBhdAo+ICsgKiB0aGlzIHRpbWUuCj4gKyAqCj4gKyAq
+IENhbGxlciBtdXN0IGhhdmUgZGV2aWNlIGFuZCB2aXJ0cXVldWUgbXV0ZXguCj4gKyAqLwo+ICtz
+dGF0aWMgaW50IHZob3N0X3ZxX2F0dGFjaF93b3JrZXIoc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAq
+dnEsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aG9zdF92cmlu
+Z193b3JrZXIgKmluZm8pCj4gK3sKPiArICAgICAgIHVuc2lnbmVkIGxvbmcgaW5kZXggPSBpbmZv
+LT53b3JrZXJfaWQ7Cj4gKyAgICAgICBzdHJ1Y3Qgdmhvc3RfZGV2ICpkZXYgPSB2cS0+ZGV2Owo+
+ICsgICAgICAgc3RydWN0IHZob3N0X3dvcmtlciAqd29ya2VyOwo+ICsKPiArICAgICAgIGlmICgh
+ZGV2LT51c2Vfd29ya2VyKQo+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVJTlZBTDsKPiArCj4g
+KyAgICAgICBpZiAodmhvc3RfdnFfZ2V0X2JhY2tlbmQodnEpIHx8IHZxLT5raWNrKQoKSXQgbWln
+aHQgYmUgd29ydGh3aGlsZSB0byBoYXZlIGEgY29tbWVudCB0byBleHBsYWluIHdoeSB3ZSBuZWVk
+IHRvCmNoZWNrIHZxLT5raWNrIGhlcmUuCgpUaGlzIGFsc28gbWVhbnMgdGhlIGRldmljZSBzaG91
+bGQgbm90IHF1ZXVlIHdvcmsgd2hlbiB0aGUgYmFja2VuZCBpcyBOVUxMLgoKQnV0IEkgZm91bmQg
+aXQgaXMgcHJvYmFibHkgbm90IHRoZSBjYXNlIGZvciB2c29jaywgaXQgY2FsbHMKdmhvc3RfcG9s
+bF9xdWV1ZSgpIGluIHZob3N0X3RyYW5zcG9ydF9jYW5jZWxfcGt0KCkgYnV0CnZob3N0X3Zzb2Nr
+X3N0b3AoKSBkb2Vzbid0IHdhaXQgYmVmb3JlIGRvaW5nIHZob3N0X3ZxX3NldF9iYWNrZW5kKHZx
+LApOVUxMKTsKCk5ldCBzZWVtcyB0byBiZSBmaW5lIHNpbmNlIGl0IHdhaXRzIGZvciB1YnVmcyB0
+byBiZSBjb21wbGV0ZWQgaW4Kdmhvc3RfbmV0X3NldF9iYWNrZW5kKCkuCgpDYW4gd2UgbWFrZSB0
+aGluZ3MgZWFzaWVyIGJ5IG1pZ3JhdGluZyB0aGUgd29ya19saXN0PyBJIGFsc28gd29ycnkgaWYK
+dGhlcmUgYXJlIG90aGVyIGNvcm5lciBjYXNlcyB3aGljaCBtYWtlcyBtZSB0aGluayBob3cgaGFy
+ZCBpdCBpcyBpZiB3ZQpjYW4ganVzdCBzdXBwb3J0IHRob3NlIGlvY3RscyBhZnRlciB0aGUgYmFj
+a2VuZCBpcyBzZXQ/CgoKPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FQlVTWTsKPiArCj4gKyAg
+ICAgICB3b3JrZXIgPSB4YV9maW5kKCZkZXYtPndvcmtlcl94YSwgJmluZGV4LCBVSU5UX01BWCwg
+WEFfUFJFU0VOVCk7Cj4gKyAgICAgICBpZiAoIXdvcmtlciB8fCB3b3JrZXItPmlkICE9IGluZm8t
+Pndvcmtlcl9pZCkKPiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9ERVY7Cj4gKwo+ICsgICAg
+ICAgX192aG9zdF92cV9hdHRhY2hfd29ya2VyKHZxLCB3b3JrZXIpOwo+ICsgICAgICAgcmV0dXJu
+IDA7Cj4gK30KPiArCj4gKy8qIENhbGxlciBtdXN0IGhhdmUgZGV2aWNlIG11dGV4ICovCj4gK3N0
+YXRpYyBpbnQgdmhvc3RfbmV3X3dvcmtlcihzdHJ1Y3Qgdmhvc3RfZGV2ICpkZXYsCj4gKyAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aG9zdF93b3JrZXJfc3RhdGUgKmluZm8pCj4g
+K3sKPiArICAgICAgIHN0cnVjdCB2aG9zdF93b3JrZXIgKndvcmtlcjsKPiArCj4gKyAgICAgICB3
+b3JrZXIgPSB2aG9zdF93b3JrZXJfY3JlYXRlKGRldik7Cj4gKyAgICAgICBpZiAoIXdvcmtlcikK
+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9NRU07Cj4gKwo+ICsgICAgICAgaW5mby0+d29y
+a2VyX2lkID0gd29ya2VyLT5pZDsKPiArICAgICAgIHJldHVybiAwOwo+ICt9Cj4gKwo+ICtzdGF0
+aWMgaW50IHZob3N0X2ZyZWVfd29ya2VyKHN0cnVjdCB2aG9zdF9kZXYgKmRldiwKPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgIHN0cnVjdCB2aG9zdF93b3JrZXJfc3RhdGUgKmluZm8pCj4g
+K3sKPiArICAgICAgIHVuc2lnbmVkIGxvbmcgaW5kZXggPSBpbmZvLT53b3JrZXJfaWQ7Cj4gKyAg
+ICAgICBzdHJ1Y3Qgdmhvc3Rfd29ya2VyICp3b3JrZXI7Cj4gKwo+ICsgICAgICAgd29ya2VyID0g
+eGFfZmluZCgmZGV2LT53b3JrZXJfeGEsICZpbmRleCwgVUlOVF9NQVgsIFhBX1BSRVNFTlQpOwo+
+ICsgICAgICAgaWYgKCF3b3JrZXIgfHwgd29ya2VyLT5pZCAhPSBpbmZvLT53b3JrZXJfaWQpCj4g
+KyAgICAgICAgICAgICAgIHJldHVybiAtRU5PREVWOwo+ICsKPiArICAgICAgIGlmICh3b3JrZXIt
+PmF0dGFjaG1lbnRfY250KQo+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVCVVNZOwo+ICsKPiAr
+ICAgICAgIHZob3N0X3dvcmtlcl9kZXN0cm95KGRldiwgd29ya2VyKTsKPiArICAgICAgIHJldHVy
+biAwOwo+ICt9Cj4gKwo+ICBzdGF0aWMgaW50IHZob3N0X2dldF92cV9mcm9tX3VzZXIoc3RydWN0
+IHZob3N0X2RldiAqZGV2LCB2b2lkIF9fdXNlciAqYXJncCwKPiAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgc3RydWN0IHZob3N0X3ZpcnRxdWV1ZSAqKnZxLCB1MzIgKmlkKQo+ICB7
+Cj4gQEAgLTY1MSw2ICs3MjUsNzUgQEAgc3RhdGljIGludCB2aG9zdF9nZXRfdnFfZnJvbV91c2Vy
+KHN0cnVjdCB2aG9zdF9kZXYgKmRldiwgdm9pZCBfX3VzZXIgKmFyZ3AsCj4gICAgICAgICByZXR1
+cm4gMDsKPiAgfQo+Cj4gKy8qIENhbGxlciBtdXN0IGhhdmUgZGV2aWNlIG11dGV4ICovCj4gK2xv
+bmcgdmhvc3Rfd29ya2VyX2lvY3RsKHN0cnVjdCB2aG9zdF9kZXYgKmRldiwgdW5zaWduZWQgaW50
+IGlvY3RsLAo+ICsgICAgICAgICAgICAgICAgICAgICAgIHZvaWQgX191c2VyICphcmdwKQo+ICt7
+Cj4gKyAgICAgICBzdHJ1Y3Qgdmhvc3RfdnJpbmdfd29ya2VyIHJpbmdfd29ya2VyOwo+ICsgICAg
+ICAgc3RydWN0IHZob3N0X3dvcmtlcl9zdGF0ZSBzdGF0ZTsKPiArICAgICAgIHN0cnVjdCB2aG9z
+dF92aXJ0cXVldWUgKnZxOwo+ICsgICAgICAgbG9uZyByZXQ7Cj4gKyAgICAgICB1MzIgaWR4Owo+
+ICsKPiArICAgICAgIGlmICghZGV2LT51c2Vfd29ya2VyKQo+ICsgICAgICAgICAgICAgICByZXR1
+cm4gLUVJTlZBTDsKPiArCj4gKyAgICAgICBpZiAoIXZob3N0X2Rldl9oYXNfb3duZXIoZGV2KSkK
+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FSU5WQUw7Cj4gKwo+ICsgICAgICAgc3dpdGNoIChp
+b2N0bCkgewo+ICsgICAgICAgLyogZGV2IHdvcmtlciBpb2N0bHMgKi8KPiArICAgICAgIGNhc2Ug
+VkhPU1RfTkVXX1dPUktFUjoKPiArICAgICAgICAgICAgICAgcmV0ID0gdmhvc3RfbmV3X3dvcmtl
+cihkZXYsICZzdGF0ZSk7Cj4gKyAgICAgICAgICAgICAgIGlmICghcmV0ICYmIGNvcHlfdG9fdXNl
+cihhcmdwLCAmc3RhdGUsIHNpemVvZihzdGF0ZSkpKQo+ICsgICAgICAgICAgICAgICAgICAgICAg
+IHJldCA9IC1FRkFVTFQ7Cj4gKyAgICAgICAgICAgICAgIHJldHVybiByZXQ7Cj4gKyAgICAgICBj
+YXNlIFZIT1NUX0ZSRUVfV09SS0VSOgo+ICsgICAgICAgICAgICAgICBpZiAoY29weV9mcm9tX3Vz
+ZXIoJnN0YXRlLCBhcmdwLCBzaXplb2Yoc3RhdGUpKSkKPiArICAgICAgICAgICAgICAgICAgICAg
+ICByZXR1cm4gLUVGQVVMVDsKPiArICAgICAgICAgICAgICAgcmV0dXJuIHZob3N0X2ZyZWVfd29y
+a2VyKGRldiwgJnN0YXRlKTsKPiArICAgICAgIC8qIHZyaW5nIHdvcmtlciBpb2N0bHMgKi8KPiAr
+ICAgICAgIGNhc2UgVkhPU1RfQVRUQUNIX1ZSSU5HX1dPUktFUjoKPiArICAgICAgIGNhc2UgVkhP
+U1RfR0VUX1ZSSU5HX1dPUktFUjoKPiArICAgICAgICAgICAgICAgYnJlYWs7Cj4gKyAgICAgICBk
+ZWZhdWx0Ogo+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVOT0lPQ1RMQ01EOwo+ICsgICAgICAg
+fQo+ICsKPiArICAgICAgIHJldCA9IHZob3N0X2dldF92cV9mcm9tX3VzZXIoZGV2LCBhcmdwLCAm
+dnEsICZpZHgpOwo+ICsgICAgICAgaWYgKHJldCkKPiArICAgICAgICAgICAgICAgcmV0dXJuIHJl
+dDsKPiArCj4gKyAgICAgICBtdXRleF9sb2NrKCZ2cS0+bXV0ZXgpOwo+ICsgICAgICAgc3dpdGNo
+IChpb2N0bCkgewo+ICsgICAgICAgY2FzZSBWSE9TVF9BVFRBQ0hfVlJJTkdfV09SS0VSOgo+ICsg
+ICAgICAgICAgICAgICBpZiAoY29weV9mcm9tX3VzZXIoJnJpbmdfd29ya2VyLCBhcmdwLCBzaXpl
+b2YocmluZ193b3JrZXIpKSkgewo+ICsgICAgICAgICAgICAgICAgICAgICAgIHJldCA9IC1FRkFV
+TFQ7Cj4gKyAgICAgICAgICAgICAgICAgICAgICAgYnJlYWs7Cj4gKyAgICAgICAgICAgICAgIH0K
+PiArCj4gKyAgICAgICAgICAgICAgIHJldCA9IHZob3N0X3ZxX2F0dGFjaF93b3JrZXIodnEsICZy
+aW5nX3dvcmtlcik7Cj4gKyAgICAgICAgICAgICAgIGlmICghcmV0ICYmIGNvcHlfdG9fdXNlcihh
+cmdwLCAmcmluZ193b3JrZXIsCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICBzaXplb2YocmluZ193b3JrZXIpKSkKPiArICAgICAgICAgICAgICAgICAgICAgICByZXQg
+PSAtRUZBVUxUOwo+ICsgICAgICAgICAgICAgICBicmVhazsKPiArICAgICAgIGNhc2UgVkhPU1Rf
+R0VUX1ZSSU5HX1dPUktFUjoKPiArICAgICAgICAgICAgICAgcmluZ193b3JrZXIuaW5kZXggPSBp
+ZHg7Cj4gKyAgICAgICAgICAgICAgIHJpbmdfd29ya2VyLndvcmtlcl9pZCA9IHZxLT53b3JrZXIt
+PmlkOwo+ICsKPiArICAgICAgICAgICAgICAgaWYgKGNvcHlfdG9fdXNlcihhcmdwLCAmcmluZ193
+b3JrZXIsIHNpemVvZihyaW5nX3dvcmtlcikpKQo+ICsgICAgICAgICAgICAgICAgICAgICAgIHJl
+dCA9IC1FRkFVTFQ7Cj4gKyAgICAgICAgICAgICAgIGJyZWFrOwo+ICsgICAgICAgZGVmYXVsdDoK
+PiArICAgICAgICAgICAgICAgcmV0ID0gLUVOT0lPQ1RMQ01EOwo+ICsgICAgICAgICAgICAgICBi
+cmVhazsKPiArICAgICAgIH0KPiArCj4gKyAgICAgICBtdXRleF91bmxvY2soJnZxLT5tdXRleCk7
+Cj4gKyAgICAgICByZXR1cm4gcmV0Owo+ICt9Cj4gK0VYUE9SVF9TWU1CT0xfR1BMKHZob3N0X3dv
+cmtlcl9pb2N0bCk7Cj4gKwo+ICAvKiBDYWxsZXIgc2hvdWxkIGhhdmUgZGV2aWNlIG11dGV4ICov
+Cj4gIGxvbmcgdmhvc3RfZGV2X3NldF9vd25lcihzdHJ1Y3Qgdmhvc3RfZGV2ICpkZXYpCj4gIHsK
+PiBAQCAtNjcxLDcgKzgxNCw3IEBAIGxvbmcgdmhvc3RfZGV2X3NldF9vd25lcihzdHJ1Y3Qgdmhv
+c3RfZGV2ICpkZXYpCj4gICAgICAgICAgICAgICAgICAgICAgICAgZ290byBlcnJfd29ya2VyOwo+
+Cj4gICAgICAgICAgICAgICAgIGZvciAoaSA9IDA7IGkgPCBkZXYtPm52cXM7IGkrKykKPiAtICAg
+ICAgICAgICAgICAgICAgICAgICBkZXYtPnZxc1tpXS0+d29ya2VyID0gd29ya2VyOwo+ICsgICAg
+ICAgICAgICAgICAgICAgICAgIF9fdmhvc3RfdnFfYXR0YWNoX3dvcmtlcihkZXYtPnZxc1tpXSwg
+d29ya2VyKTsKPiAgICAgICAgIH0KPgo+ICAgICAgICAgZXJyID0gdmhvc3RfZGV2X2FsbG9jX2lv
+dmVjcyhkZXYpOwo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmggYi9kcml2ZXJz
+L3Zob3N0L3Zob3N0LmgKPiBpbmRleCAyZWVhMjBkNTQxMzQuLmJjYjMzYTJmNjRmMCAxMDA2NDQK
+PiAtLS0gYS9kcml2ZXJzL3Zob3N0L3Zob3N0LmgKPiArKysgYi9kcml2ZXJzL3Zob3N0L3Zob3N0
+LmgKPiBAQCAtMzEsNiArMzEsNyBAQCBzdHJ1Y3Qgdmhvc3Rfd29ya2VyIHsKPiAgICAgICAgIHN0
+cnVjdCBsbGlzdF9oZWFkICAgICAgIHdvcmtfbGlzdDsKPiAgICAgICAgIHU2NCAgICAgICAgICAg
+ICAgICAgICAgIGtjb3ZfaGFuZGxlOwo+ICAgICAgICAgdTMyICAgICAgICAgICAgICAgICAgICAg
+aWQ7Cj4gKyAgICAgICBpbnQgICAgICAgICAgICAgICAgICAgICBhdHRhY2htZW50X2NudDsKPiAg
+fTsKPgo+ICAvKiBQb2xsIGEgZmlsZSAoZXZlbnRmZCBvciBzb2NrZXQpICovCj4gQEAgLTE4Nyw2
+ICsxODgsOCBAQCB2b2lkIHZob3N0X2Rldl9jbGVhbnVwKHN0cnVjdCB2aG9zdF9kZXYgKik7Cj4g
+IHZvaWQgdmhvc3RfZGV2X3N0b3Aoc3RydWN0IHZob3N0X2RldiAqKTsKPiAgbG9uZyB2aG9zdF9k
+ZXZfaW9jdGwoc3RydWN0IHZob3N0X2RldiAqLCB1bnNpZ25lZCBpbnQgaW9jdGwsIHZvaWQgX191
+c2VyICphcmdwKTsKPiAgbG9uZyB2aG9zdF92cmluZ19pb2N0bChzdHJ1Y3Qgdmhvc3RfZGV2ICpk
+LCB1bnNpZ25lZCBpbnQgaW9jdGwsIHZvaWQgX191c2VyICphcmdwKTsKPiArbG9uZyB2aG9zdF93
+b3JrZXJfaW9jdGwoc3RydWN0IHZob3N0X2RldiAqZGV2LCB1bnNpZ25lZCBpbnQgaW9jdGwsCj4g
+KyAgICAgICAgICAgICAgICAgICAgICAgdm9pZCBfX3VzZXIgKmFyZ3ApOwo+ICBib29sIHZob3N0
+X3ZxX2FjY2Vzc19vayhzdHJ1Y3Qgdmhvc3RfdmlydHF1ZXVlICp2cSk7Cj4gIGJvb2wgdmhvc3Rf
+bG9nX2FjY2Vzc19vayhzdHJ1Y3Qgdmhvc3RfZGV2ICopOwo+ICB2b2lkIHZob3N0X2NsZWFyX21z
+ZyhzdHJ1Y3Qgdmhvc3RfZGV2ICpkZXYpOwo+IGRpZmYgLS1naXQgYS9pbmNsdWRlL3VhcGkvbGlu
+dXgvdmhvc3QuaCBiL2luY2x1ZGUvdWFwaS9saW51eC92aG9zdC5oCj4gaW5kZXggOTJlMWI3MDBi
+NTFjLi4xNTU3MTA1ODU5NzkgMTAwNjQ0Cj4gLS0tIGEvaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0
+LmgKPiArKysgYi9pbmNsdWRlL3VhcGkvbGludXgvdmhvc3QuaAo+IEBAIC00NSw2ICs0NSwyNSBA
+QAo+ICAjZGVmaW5lIFZIT1NUX1NFVF9MT0dfQkFTRSBfSU9XKFZIT1NUX1ZJUlRJTywgMHgwNCwg
+X191NjQpCj4gIC8qIFNwZWNpZnkgYW4gZXZlbnRmZCBmaWxlIGRlc2NyaXB0b3IgdG8gc2lnbmFs
+IG9uIGxvZyB3cml0ZS4gKi8KPiAgI2RlZmluZSBWSE9TVF9TRVRfTE9HX0ZEIF9JT1coVkhPU1Rf
+VklSVElPLCAweDA3LCBpbnQpCj4gKy8qIEJ5IGRlZmF1bHQsIGEgZGV2aWNlIGdldHMgb25lIHZo
+b3N0X3dvcmtlciB0aGF0IGl0cyB2aXJ0cXVldWVzIHNoYXJlLiBUaGlzCj4gKyAqIGNvbW1hbmQg
+YWxsb3dzIHRoZSBvd25lciBvZiB0aGUgZGV2aWNlIHRvIGNyZWF0ZSBhbiBhZGRpdGlvbmFsIHZo
+b3N0X3dvcmtlcgo+ICsgKiBmb3IgdGhlIGRldmljZS4gSXQgY2FuIGxhdGVyIGJlIGJvdW5kIHRv
+IDEgb3IgbW9yZSBvZiBpdHMgdmlydHF1ZXVlcyB1c2luZwo+ICsgKiB0aGUgVkhPU1RfQVRUQUNI
+X1ZSSU5HX1dPUktFUiBjb21tYW5kLgo+ICsgKgo+ICsgKiBUaGlzIG11c3QgYmUgY2FsbGVkIGFm
+dGVyIFZIT1NUX1NFVF9PV05FUiBhbmQgdGhlIGNhbGxlciBtdXN0IGJlIHRoZSBvd25lcgo+ICsg
+KiBvZiB0aGUgZGV2aWNlLiBUaGUgbmV3IHRocmVhZCB3aWxsIGluaGVyaXQgY2FsbGVyJ3MgY2dy
+b3VwcyBhbmQgbmFtZXNwYWNlcywKPiArICogYW5kIHdpbGwgc2hhcmUgdGhlIGNhbGxlcidzIG1l
+bW9yeSBzcGFjZS4gVGhlIG5ldyB0aHJlYWQgd2lsbCBhbHNvIGJlCj4gKyAqIGNvdW50ZWQgYWdh
+aW5zdCB0aGUgY2FsbGVyJ3MgUkxJTUlUX05QUk9DIHZhbHVlLgoKVGhpcyBtYWtlcyBtZSB0aGlu
+ayBpZiB3ZSBzaG91bGQgZGVzdHJveSBhbmQgcmUtY3JlYXRlIHRob3NlIGFmdGVyClZIT1NUX1JF
+U0VUX09XTkVSPwoKVGhhbmtzCgo+ICsgKgo+ICsgKiBUaGUgd29ya2VyJ3MgSUQgdXNlZCBpbiBv
+dGhlciBjb21tYW5kcyB3aWxsIGJlIHJldHVybmVkIGluCj4gKyAqIHZob3N0X3dvcmtlcl9zdGF0
+ZS4KPiArICovCj4gKyNkZWZpbmUgVkhPU1RfTkVXX1dPUktFUiBfSU9SKFZIT1NUX1ZJUlRJTywg
+MHg4LCBzdHJ1Y3Qgdmhvc3Rfd29ya2VyX3N0YXRlKQo+ICsvKiBGcmVlIGEgd29ya2VyIGNyZWF0
+ZWQgd2l0aCBWSE9TVF9ORVdfV09SS0VSIGlmIGl0J3Mgbm90IGF0dGFjaGVkIHRvIGFueQo+ICsg
+KiB2aXJ0cXVldWUuIElmIHVzZXJzcGFjZSBpcyBub3QgYWJsZSB0byBjYWxsIHRoaXMgZm9yIHdv
+cmtlcnMgaXRzIGNyZWF0ZWQsCj4gKyAqIHRoZSBrZXJuZWwgd2lsbCBmcmVlIGFsbCB0aGUgZGV2
+aWNlJ3Mgd29ya2VycyB3aGVuIHRoZSBkZXZpY2UgaXMgY2xvc2VkLgo+ICsgKi8KPiArI2RlZmlu
+ZSBWSE9TVF9GUkVFX1dPUktFUiBfSU9XKFZIT1NUX1ZJUlRJTywgMHg5LCBzdHJ1Y3Qgdmhvc3Rf
+d29ya2VyX3N0YXRlKQo+Cj4gIC8qIFJpbmcgc2V0dXAuICovCj4gIC8qIFNldCBudW1iZXIgb2Yg
+ZGVzY3JpcHRvcnMgaW4gcmluZy4gVGhpcyBwYXJhbWV0ZXIgY2FuIG5vdAo+IEBAIC03MCw2ICs4
+OSwyMCBAQAo+ICAjZGVmaW5lIFZIT1NUX1ZSSU5HX0JJR19FTkRJQU4gMQo+ICAjZGVmaW5lIFZI
+T1NUX1NFVF9WUklOR19FTkRJQU4gX0lPVyhWSE9TVF9WSVJUSU8sIDB4MTMsIHN0cnVjdCB2aG9z
+dF92cmluZ19zdGF0ZSkKPiAgI2RlZmluZSBWSE9TVF9HRVRfVlJJTkdfRU5ESUFOIF9JT1coVkhP
+U1RfVklSVElPLCAweDE0LCBzdHJ1Y3Qgdmhvc3RfdnJpbmdfc3RhdGUpCj4gKy8qIEF0dGFjaCBh
+IHZob3N0X3dvcmtlciBjcmVhdGVkIHdpdGggVkhPU1RfTkVXX1dPUktFUiB0byBvbmUgb2YgdGhl
+IGRldmljZSdzCj4gKyAqIHZpcnRxdWV1ZXMuIFRoaXMgbXVzdCBiZSBkb25lIGJlZm9yZSBWSE9T
+VF9TRVRfVlJJTkdfS0lDSyBhbmQgdGhlIGRyaXZlcgo+ICsgKiBzcGVjaWZpYyBpb2N0bCB0byBh
+Y3RpdmF0ZSB0aGUgdmlydHF1ZXVlIChWSE9TVF9TQ1NJX1NFVF9FTkRQT0lOVCwKPiArICogVkhP
+U1RfTkVUX1NFVF9CQUNLRU5ELCBWSE9TVF9WU09DS19TRVRfUlVOTklORykgaGFzIGJlZW4gcnVu
+Lgo+ICsgKgo+ICsgKiBUaGlzIHdpbGwgcmVwbGFjZSB0aGUgdmlydHF1ZXVlJ3MgZXhpc3Rpbmcg
+d29ya2VyLiBJZiB0aGUgcmVwbGFjZWQgd29ya2VyCj4gKyAqIGlzIG5vIGxvbmdlciBhdHRhY2hl
+ZCB0byBhbnkgdmlydHF1ZXVlcywgaXQgY2FuIGJlIGZyZWVkIHdpdGgKPiArICogVkhPU1RfRlJF
+RV9XT1JLRVIuCj4gKyAqLwo+ICsjZGVmaW5lIFZIT1NUX0FUVEFDSF9WUklOR19XT1JLRVIgX0lP
+V1IoVkhPU1RfVklSVElPLCAweDE1LCAgICAgICAgICAgIFwKPiArICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZob3N0X3ZyaW5nX3dvcmtlcikKPiArLyogUmV0
+dXJuIHRoZSB2cmluZyB3b3JrZXIncyBJRCAqLwo+ICsjZGVmaW5lIFZIT1NUX0dFVF9WUklOR19X
+T1JLRVIgX0lPV1IoVkhPU1RfVklSVElPLCAweDE2LCAgICAgICAgICAgICAgIFwKPiArICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RydWN0IHZob3N0X3ZyaW5nX3dvcmtlcikK
+Pgo+ICAvKiBUaGUgZm9sbG93aW5nIGlvY3RscyB1c2UgZXZlbnRmZCBmaWxlIGRlc2NyaXB0b3Jz
+IHRvIHNpZ25hbCBhbmQgcG9sbAo+ICAgKiBmb3IgZXZlbnRzLiAqLwo+IGRpZmYgLS1naXQgYS9p
+bmNsdWRlL3VhcGkvbGludXgvdmhvc3RfdHlwZXMuaCBiL2luY2x1ZGUvdWFwaS9saW51eC92aG9z
+dF90eXBlcy5oCj4gaW5kZXggYzU2OTBhODk5MmQ4Li5kM2FhZDEyYWQxZmEgMTAwNjQ0Cj4gLS0t
+IGEvaW5jbHVkZS91YXBpL2xpbnV4L3Zob3N0X3R5cGVzLmgKPiArKysgYi9pbmNsdWRlL3VhcGkv
+bGludXgvdmhvc3RfdHlwZXMuaAo+IEBAIC00Nyw2ICs0NywyMiBAQCBzdHJ1Y3Qgdmhvc3RfdnJp
+bmdfYWRkciB7Cj4gICAgICAgICBfX3U2NCBsb2dfZ3Vlc3RfYWRkcjsKPiAgfTsKPgo+ICtzdHJ1
+Y3Qgdmhvc3Rfd29ya2VyX3N0YXRlIHsKPiArICAgICAgIC8qCj4gKyAgICAgICAgKiBGb3IgVkhP
+U1RfTkVXX1dPUktFUiB0aGUga2VybmVsIHdpbGwgcmV0dXJuIHRoZSBuZXcgdmhvc3Rfd29ya2Vy
+IGlkLgo+ICsgICAgICAgICogRm9yIFZIT1NUX0ZSRUVfV09SS0VSIHRoaXMgbXVzdCBiZSBzZXQg
+dG8gdGhlIGlkIG9mIHRoZSB2aG9zdF93b3JrZXIKPiArICAgICAgICAqIHRvIGZyZWUuCj4gKyAg
+ICAgICAgKi8KPiArICAgICAgIHVuc2lnbmVkIGludCB3b3JrZXJfaWQ7Cj4gK307Cj4gKwo+ICtz
+dHJ1Y3Qgdmhvc3RfdnJpbmdfd29ya2VyIHsKPiArICAgICAgIC8qIHZyaW5nIGluZGV4ICovCj4g
+KyAgICAgICB1bnNpZ25lZCBpbnQgaW5kZXg7Cj4gKyAgICAgICAvKiBUaGUgaWQgb2YgdGhlIHZo
+b3N0X3dvcmtlciByZXR1cm5lZCBmcm9tIFZIT1NUX05FV19XT1JLRVIgKi8KPiArICAgICAgIHVu
+c2lnbmVkIGludCB3b3JrZXJfaWQ7Cj4gK307Cj4gKwo+ICAvKiBubyBhbGlnbm1lbnQgcmVxdWly
+ZW1lbnQgKi8KPiAgc3RydWN0IHZob3N0X2lvdGxiX21zZyB7Cj4gICAgICAgICBfX3U2NCBpb3Zh
+Owo+IC0tCj4gMi4yNS4xCj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
