@@ -1,60 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5B559705D26
-	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 04:23:14 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 745D9705D20
+	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 04:23:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 5C16B4208F;
-	Wed, 17 May 2023 02:23:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5C16B4208F
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0FDF084134;
+	Wed, 17 May 2023 02:23:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0FDF084134
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id xW_jBVynmWxx; Wed, 17 May 2023 02:23:08 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id er9q1_tCpM8o; Wed, 17 May 2023 02:23:09 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id E824A4208A;
-	Wed, 17 May 2023 02:23:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E824A4208A
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 3418884237;
+	Wed, 17 May 2023 02:23:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3418884237
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4B058C002A;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 90F62C0091;
 	Wed, 17 May 2023 02:23:07 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 00E82C002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6E619C0036
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:23:05 +0000 (UTC)
+ Wed, 17 May 2023 02:23:06 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id D0D18841EC
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4A04D8412D
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:23:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D0D18841EC
+ Wed, 17 May 2023 02:23:06 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4A04D8412D
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8Ynznk452M_9
+ with ESMTP id bzIbZUPMtO7W
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 17 May 2023 02:23:05 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2FE46841EC
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 2FE46841EC
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 May 2023 02:23:04 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B6D9484215
-Received: from out30-119.freemail.mail.aliyun.com
- (out30-119.freemail.mail.aliyun.com [115.124.30.119])
- by smtp1.osuosl.org (Postfix) with ESMTPS id B6D9484215
- for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:23:03 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R171e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R921e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
- TI=SMTPD_---0ViqkiD9_1684290178; 
+ TI=SMTPD_---0ViqlmYE_1684290179; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0ViqkiD9_1684290178) by smtp.aliyun-inc.com;
- Wed, 17 May 2023 10:22:59 +0800
+ fp:SMTPD_---0ViqlmYE_1684290179) by smtp.aliyun-inc.com;
+ Wed, 17 May 2023 10:23:00 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v9 09/12] virtio_ring: introduce virtqueue_dma_dev()
-Date: Wed, 17 May 2023 10:22:46 +0800
-Message-Id: <20230517022249.20790-10-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v9 10/12] virtio_ring: correct the expression of the
+ description of virtqueue_resize()
+Date: Wed, 17 May 2023 10:22:47 +0800
+Message-Id: <20230517022249.20790-11-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230517022249.20790-1-xuanzhuo@linux.alibaba.com>
 References: <20230517022249.20790-1-xuanzhuo@linux.alibaba.com>
@@ -78,57 +79,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Added virtqueue_dma_dev() to get DMA device for virtio. Then the
-caller can do dma operation in advance. The purpose is to keep memory
-mapped across multiple add/get buf operations.
+Modify the "useless" to a more accurate "unused".
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/virtio/virtio_ring.c | 17 +++++++++++++++++
- include/linux/virtio.h       |  2 ++
- 2 files changed, 19 insertions(+)
+ drivers/virtio/virtio_ring.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index cbeac2f516c7..42730c4ecdc5 100644
+index 42730c4ecdc5..c90160d2d280 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -2335,6 +2335,23 @@ int virtqueue_add_inbuf_premapped(struct virtqueue *vq,
- }
- EXPORT_SYMBOL_GPL(virtqueue_add_inbuf_premapped);
- 
-+/**
-+ * virtqueue_dma_dev - get the dma dev
-+ * @_vq: the struct virtqueue we're talking about.
-+ *
-+ * Returns the dma dev. That can been used for dma api.
-+ */
-+struct device *virtqueue_dma_dev(struct virtqueue *_vq)
-+{
-+	struct vring_virtqueue *vq = to_vvq(_vq);
-+
-+	if (vq->use_dma_api)
-+		return vring_dma_dev(vq);
-+	else
-+		return NULL;
-+}
-+EXPORT_SYMBOL_GPL(virtqueue_dma_dev);
-+
- /**
-  * virtqueue_kick_prepare - first half of split virtqueue_kick call.
-  * @_vq: the struct virtqueue
-diff --git a/include/linux/virtio.h b/include/linux/virtio.h
-index 0f787cdcfd5a..41ff92b6184e 100644
---- a/include/linux/virtio.h
-+++ b/include/linux/virtio.h
-@@ -71,6 +71,8 @@ int virtqueue_add_sgs(struct virtqueue *vq,
- 		      void *data,
- 		      gfp_t gfp);
- 
-+struct device *virtqueue_dma_dev(struct virtqueue *vq);
-+
- bool virtqueue_kick(struct virtqueue *vq);
- 
- bool virtqueue_kick_prepare(struct virtqueue *vq);
+@@ -2734,7 +2734,7 @@ EXPORT_SYMBOL_GPL(vring_create_virtqueue_dma);
+  * virtqueue_resize - resize the vring of vq
+  * @_vq: the struct virtqueue we're talking about.
+  * @num: new ring num
+- * @recycle: callback for recycle the useless buffer
++ * @recycle: callback to recycle unused buffers
+  *
+  * When it is really necessary to create a new vring, it will set the current vq
+  * into the reset state. Then call the passed callback to recycle the buffer
 -- 
 2.32.0.3.g01195cf9f
 
