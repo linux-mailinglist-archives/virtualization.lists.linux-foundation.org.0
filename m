@@ -1,61 +1,61 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 50000705D1B
-	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 04:23:05 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 63B2E705D1D
+	for <lists.virtualization@lfdr.de>; Wed, 17 May 2023 04:23:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 7B75D841E8;
-	Wed, 17 May 2023 02:23:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7B75D841E8
+	by smtp3.osuosl.org (Postfix) with ESMTP id D5DBC61385;
+	Wed, 17 May 2023 02:23:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D5DBC61385
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tjNk9EGox4Oy; Wed, 17 May 2023 02:23:01 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id nRQIeTlZnX9X; Wed, 17 May 2023 02:23:03 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 38AB784134;
-	Wed, 17 May 2023 02:23:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 38AB784134
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 9529561675;
+	Wed, 17 May 2023 02:23:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9529561675
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 71B98C008A;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F1629C0097;
 	Wed, 17 May 2023 02:23:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id CB5BBC002A
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2F8A5C0036
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:22:59 +0000 (UTC)
+ Wed, 17 May 2023 02:23:00 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 930B2614B2
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0AB5784133
  for <virtualization@lists.linux-foundation.org>;
- Wed, 17 May 2023 02:22:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 930B2614B2
+ Wed, 17 May 2023 02:23:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0AB5784133
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9HsY4zSPvTM2
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VWX1P_aeQ13K
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 May 2023 02:22:58 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B53FA61377
-Received: from out30-99.freemail.mail.aliyun.com
- (out30-99.freemail.mail.aliyun.com [115.124.30.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B53FA61377
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 478B983F79
+Received: from out30-132.freemail.mail.aliyun.com
+ (out30-132.freemail.mail.aliyun.com [115.124.30.132])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 478B983F79
  for <virtualization@lists.linux-foundation.org>;
  Wed, 17 May 2023 02:22:57 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R191e4; CH=green; DM=||false|;
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=5; SR=0;
- TI=SMTPD_---0ViqlPKF_1684290171; 
+ TI=SMTPD_---0Viqf67M_1684290172; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0ViqlPKF_1684290171) by smtp.aliyun-inc.com;
- Wed, 17 May 2023 10:22:52 +0800
+ fp:SMTPD_---0Viqf67M_1684290172) by smtp.aliyun-inc.com;
+ Wed, 17 May 2023 10:22:53 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v9 02/12] virtio_ring: simplify the reference of desc
- state inside detach_buf_split()
-Date: Wed, 17 May 2023 10:22:39 +0800
-Message-Id: <20230517022249.20790-3-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost v9 03/12] virtio_ring: check use_dma_api before unmap
+ desc for indirect
+Date: Wed, 17 May 2023 10:22:40 +0800
+Message-Id: <20230517022249.20790-4-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20230517022249.20790-1-xuanzhuo@linux.alibaba.com>
 References: <20230517022249.20790-1-xuanzhuo@linux.alibaba.com>
@@ -79,56 +79,32 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The purpose of this is to simplify the reference to state. It is
-convenient for subsequent commit.
+Inside detach_buf_split(), if use_dma_api is false,
+vring_unmap_one_split_indirect will be called many times, but actually
+nothing is done. So this patch check use_dma_api firstly.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/virtio/virtio_ring.c | 12 +++++++-----
- 1 file changed, 7 insertions(+), 5 deletions(-)
+ drivers/virtio/virtio_ring.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/virtio/virtio_ring.c b/drivers/virtio/virtio_ring.c
-index c563215be6b9..479203346c36 100644
+index 479203346c36..1ffab1eb40c0 100644
 --- a/drivers/virtio/virtio_ring.c
 +++ b/drivers/virtio/virtio_ring.c
-@@ -744,11 +744,14 @@ static bool virtqueue_kick_prepare_split(struct virtqueue *_vq)
- static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
- 			     void **ctx)
- {
-+	struct vring_desc_state_split *state;
- 	unsigned int i, j;
- 	__virtio16 nextflag = cpu_to_virtio16(vq->vq.vdev, VRING_DESC_F_NEXT);
+@@ -783,8 +783,10 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
+ 				VRING_DESC_F_INDIRECT));
+ 		BUG_ON(len == 0 || len % sizeof(struct vring_desc));
  
-+	state = &vq->split.desc_state[head];
-+
- 	/* Clear data ptr. */
--	vq->split.desc_state[head].data = NULL;
-+	state->data = NULL;
- 
- 	/* Put back on free list: unmap first-level descriptors and find end */
- 	i = head;
-@@ -767,8 +770,7 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
- 	vq->vq.num_free++;
- 
- 	if (vq->indirect) {
--		struct vring_desc *indir_desc =
--				vq->split.desc_state[head].indir_desc;
-+		struct vring_desc *indir_desc = state->indir_desc;
- 		u32 len;
- 
- 		/* Free the indirect table, if any, now that it's unmapped. */
-@@ -785,9 +787,9 @@ static void detach_buf_split(struct vring_virtqueue *vq, unsigned int head,
- 			vring_unmap_one_split_indirect(vq, &indir_desc[j]);
+-		for (j = 0; j < len / sizeof(struct vring_desc); j++)
+-			vring_unmap_one_split_indirect(vq, &indir_desc[j]);
++		if (vq->use_dma_api) {
++			for (j = 0; j < len / sizeof(struct vring_desc); j++)
++				vring_unmap_one_split_indirect(vq, &indir_desc[j]);
++		}
  
  		kfree(indir_desc);
--		vq->split.desc_state[head].indir_desc = NULL;
-+		state->indir_desc = NULL;
- 	} else if (ctx) {
--		*ctx = vq->split.desc_state[head].indir_desc;
-+		*ctx = state->indir_desc;
- 	}
- }
- 
+ 		state->indir_desc = NULL;
 -- 
 2.32.0.3.g01195cf9f
 
