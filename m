@@ -1,100 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 897F570E12C
-	for <lists.virtualization@lfdr.de>; Tue, 23 May 2023 17:57:21 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 0A44170E711
+	for <lists.virtualization@lfdr.de>; Tue, 23 May 2023 23:03:56 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 0B6014020B;
-	Tue, 23 May 2023 15:57:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B6014020B
+	by smtp1.osuosl.org (Postfix) with ESMTP id 07E7F83EF4;
+	Tue, 23 May 2023 21:03:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 07E7F83EF4
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=GlTsGQ9D
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id bu1CMoBE9-RW; Tue, 23 May 2023 15:57:19 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id ahTH8ydXwXfN; Tue, 23 May 2023 21:03:53 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id B714340646;
-	Tue, 23 May 2023 15:57:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B714340646
+	by smtp1.osuosl.org (Postfix) with ESMTPS id CD38B83EF7;
+	Tue, 23 May 2023 21:03:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org CD38B83EF7
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E92A1C007C;
-	Tue, 23 May 2023 15:57:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 04A34C007C;
+	Tue, 23 May 2023 21:03:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 64306C002A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 581E7C002A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 15:57:16 +0000 (UTC)
+ Tue, 23 May 2023 21:03:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 2B7F240646
+ by smtp2.osuosl.org (Postfix) with ESMTP id 20FF74016F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 15:57:16 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2B7F240646
+ Tue, 23 May 2023 21:03:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 20FF74016F
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=GlTsGQ9D
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id QP1DA1JuE9zo
+ with ESMTP id wrHVrO7YiJso
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 15:57:15 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0D5B14020B
-Received: from out02.mta.xmission.com (out02.mta.xmission.com [166.70.13.232])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0D5B14020B
+ Tue, 23 May 2023 21:03:49 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 60FD941DA4
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 60FD941DA4
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 15:57:14 +0000 (UTC)
-Received: from in02.mta.xmission.com ([166.70.13.52]:43398)
- by out02.mta.xmission.com with esmtps (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
- (envelope-from <ebiederm@xmission.com>)
- id 1q1UNt-005YDB-2I; Tue, 23 May 2023 09:57:13 -0600
-Received: from ip68-110-29-46.om.om.cox.net ([68.110.29.46]:48834
- helo=email.froward.int.ebiederm.org.xmission.com)
- by in02.mta.xmission.com with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
- (envelope-from <ebiederm@xmission.com>)
- id 1q1UNr-008Meo-P3; Tue, 23 May 2023 09:57:12 -0600
-From: "Eric W. Biederman" <ebiederm@xmission.com>
-To: Oleg Nesterov <oleg@redhat.com>
-References: <20230522025124.5863-1-michael.christie@oracle.com>
- <20230522025124.5863-4-michael.christie@oracle.com>
- <20230522123029.GA22159@redhat.com>
- <cfca7764-d210-6df9-e182-2c093101c6cf@oracle.com>
- <20230522174757.GC22159@redhat.com> <20230523121506.GA6562@redhat.com>
-Date: Tue, 23 May 2023 10:57:04 -0500
-In-Reply-To: <20230523121506.GA6562@redhat.com> (Oleg Nesterov's message of
- "Tue, 23 May 2023 14:15:06 +0200")
-Message-ID: <87bkib6nxr.fsf@email.froward.int.ebiederm.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
+ Tue, 23 May 2023 21:03:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1684875828;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=dDfzDTi3bvLYMGRSQ2aUta3Popi1PlcNquIJQrs4Los=;
+ b=GlTsGQ9Djj88YmB5SMGPLzfSrcNdRCtjEp9ggnWaftgGWaXID2akcObhmP42kHmRsZ48cF
+ sH95dX/HqYHE/jxKGkYwtcdRdJQALIfpiI2qEePKIrBIwYkPE7FoQtBOKKKU4q53GEu/U7
+ OS8TeOeMWya5+OsB8K48WGt3bHP1QUc=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-140-9p2KsFM-MD-6K4o0n8nsGg-1; Tue, 23 May 2023 17:03:44 -0400
+X-MC-Unique: 9p2KsFM-MD-6K4o0n8nsGg-1
+Received: from smtp.corp.redhat.com (int-mx09.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.9])
+ (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A0D7585A5AA;
+ Tue, 23 May 2023 21:03:43 +0000 (UTC)
+Received: from localhost (unknown [10.39.192.61])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 98456492B00;
+ Tue, 23 May 2023 21:03:42 +0000 (UTC)
+Date: Tue, 23 May 2023 17:03:35 -0400
+From: Stefan Hajnoczi <stefanha@redhat.com>
+To: Peter-Jan Gootzen <peter-jan@gootzen.net>
+Subject: Re: [PATCH] virtio-fs: Improved request latencies when Virtio queue
+ is full
+Message-ID: <20230523210335.GA141797@fedora>
+References: <20230522131915.114534-1-peter-jan@gootzen.net>
 MIME-Version: 1.0
-X-XM-SPF: eid=1q1UNr-008Meo-P3; ; ;
- mid=<87bkib6nxr.fsf@email.froward.int.ebiederm.org>; ; ;
- hst=in02.mta.xmission.com; ; ; ip=68.110.29.46; ; ; frm=ebiederm@xmission.com;
- ; ; spf=pass
-X-XM-AID: U2FsdGVkX1/ZYI+rgtjgtOjfAlPhkboPTJIRJCH5jOE=
-X-SA-Exim-Connect-IP: 68.110.29.46
-X-SA-Exim-Mail-From: ebiederm@xmission.com
-X-Spam-DCC: XMission; sa05 1397; Body=1 Fuz1=1 Fuz2=1 
-X-Spam-Combo: **;Oleg Nesterov <oleg@redhat.com>
-X-Spam-Relay-Country: 
-X-Spam-Timing: total 696 ms - load_scoreonly_sql: 0.04 (0.0%),
- signal_user_changed: 11 (1.5%), b_tie_ro: 9 (1.3%), parse: 1.03 (0.1%),
- extract_message_metadata: 4.2 (0.6%), get_uri_detail_list: 2.2 (0.3%),
- tests_pri_-2000: 3.5 (0.5%), tests_pri_-1000: 2.4 (0.3%),
- tests_pri_-950: 1.13 (0.2%), tests_pri_-900: 0.88 (0.1%),
- tests_pri_-200: 0.72 (0.1%), tests_pri_-100: 3.4 (0.5%),
- tests_pri_-90: 274 (39.4%), check_bayes: 272 (39.0%), b_tokenize: 9
- (1.3%), b_tok_get_all: 11 (1.5%), b_comp_prob: 3.0 (0.4%),
- b_tok_touch_all: 244 (35.1%), b_finish: 1.07 (0.2%), tests_pri_0: 372
- (53.5%), check_dkim_signature: 0.64 (0.1%), check_dkim_adsp: 2.9
- (0.4%), poll_dns_idle: 0.81 (0.1%), tests_pri_10: 2.0 (0.3%),
- tests_pri_500: 12 (1.7%), rewrite_mail: 0.00 (0.0%)
-Subject: Re: [PATCH 3/3] fork, vhost: Use CLONE_THREAD to fix freezer/ps
- regression
-X-SA-Exim-Version: 4.2.1 (built Sat, 08 Feb 2020 21:53:50 +0000)
-X-SA-Exim-Scanned: Yes (on in02.mta.xmission.com)
-Cc: axboe@kernel.dk, brauner@kernel.org, mst@redhat.com, linux@leemhuis.info,
- linux-kernel@vger.kernel.org, stefanha@redhat.com, nicolas.dichtel@6wind.com,
- virtualization@lists.linux-foundation.org, torvalds@linux-foundation.org
+In-Reply-To: <20230522131915.114534-1-peter-jan@gootzen.net>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.9
+Cc: miklos@szeredi.hu, vgoyal@redhat.com,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,154 +94,89 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/mixed; boundary="===============1199237978471684012=="
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Oleg Nesterov <oleg@redhat.com> writes:
 
-> On 05/22, Oleg Nesterov wrote:
->>
->> Right now I think that "int dead" should die,
->
-> No, probably we shouldn't call get_signal() if we have already
-> dequeued SIGKILL.
-
-Very much agreed.  It is one thing to add a patch to move do_exit
-out of get_signal.  It is another to keep calling get_signal after
-that.  Nothing tests that case, and so we get some weird behaviors.
+--===============1199237978471684012==
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="557lsgXCVjWg7/iP"
+Content-Disposition: inline
 
 
->> but let me think tomorrow.
->
-> May be something like this... I don't like it but I can't suggest anything better
-> right now.
->
-> 	bool killed = false;
->
-> 	for (;;) {
-> 		...
-> 	
-> 		node = llist_del_all(&worker->work_list);
-> 		if (!node) {
-> 			schedule();
-> 			/*
-> 			 * When we get a SIGKILL our release function will
-> 			 * be called. That will stop new IOs from being queued
-> 			 * and check for outstanding cmd responses. It will then
-> 			 * call vhost_task_stop to tell us to return and exit.
-> 			 */
-> 			if (signal_pending(current)) {
-> 				struct ksignal ksig;
->
-> 				if (!killed)
-> 					killed = get_signal(&ksig);
->
-> 				clear_thread_flag(TIF_SIGPENDING);
-> 			}
->
-> 			continue;
-> 		}
+--557lsgXCVjWg7/iP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I want to point out that we need to consider not just SIGKILL, but
-SIGABRT that causes a coredump, as well as the process peforming
-an ordinary exit(2).  All of which will cause get_signal to return
-SIGKILL in this context.
+On Mon, May 22, 2023 at 03:19:15PM +0200, Peter-Jan Gootzen wrote:
+> When the Virtio queue is full, a work item is scheduled
+> to execute in 1ms that retries adding the request to the queue.
+> This is a large amount of time on the scale on which a
+> virtio-fs device can operate. When using a DPU this is around
+> 40us baseline without going to a remote server (4k, QD=3D1).
+> This patch queues requests when the Virtio queue is full,
+> and when a completed request is taken off, immediately fills
+> it back up with queued requests.
+>=20
+> This reduces the 99.9th percentile latencies in our tests by
+> 60x and slightly increases the overall throughput, when using a
+> queue depth 2x the size of the Virtio queue size, with a
+> DPU-powered virtio-fs device.
+>=20
+> Signed-off-by: Peter-Jan Gootzen <peter-jan@gootzen.net>
+> ---
+>  fs/fuse/virtio_fs.c | 10 ++++------
+>  1 file changed, 4 insertions(+), 6 deletions(-)
+>=20
+> diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+> index 4d8d4f16c727..8af9d3dc61d3 100644
+> --- a/fs/fuse/virtio_fs.c
+> +++ b/fs/fuse/virtio_fs.c
+> @@ -347,6 +347,8 @@ static void virtio_fs_hiprio_done_work(struct work_st=
+ruct *work)
+>  		}
+>  	} while (!virtqueue_enable_cb(vq) && likely(!virtqueue_is_broken(vq)));
+>  	spin_unlock(&fsvq->lock);
+> +
+> +	schedule_delayed_work(&fsvq->dispatch_work, 0);
 
->
-> -------------------------------------------------------------------------------
-> But let me ask a couple of questions.
+This avoids scheduling work when there is nothing queued and uses
+schedule_work() since there is no timeout value:
 
-I share most of these questions.
+  if (!list_empty(&fsvq->queued_reqs)) {
+      schedule_work(&fsvq->dispatch_work);
+  }
+  spin_unlock(&fsvq->lock);
 
-> Let's forget this patch, let's look at the
-> current code:
->
-> 		node = llist_del_all(&worker->work_list);
-> 		if (!node)
-> 			schedule();
->
-> 		node = llist_reverse_order(node);
-> 		... process works ...
->
-> To me this looks a bit confusing. Shouldn't we do
->
-> 		if (!node) {
-> 			schedule();
-> 			continue;
-> 		}
->
-> just to make the code a bit more clear? If node == NULL then
-> llist_reverse_order() and llist_for_each_entry_safe() will do nothing.
-> But this is minor.
->
->
->
-> 		/* make sure flag is seen after deletion */
-> 		smp_wmb();
-> 		llist_for_each_entry_safe(work, work_next, node, node) {
-> 			clear_bit(VHOST_WORK_QUEUED, &work->flags);
->
-> I am not sure about smp_wmb + clear_bit. Once we clear VHOST_WORK_QUEUED,
-> vhost_work_queue() can add this work again and change work->node->next.
->
-> That is why we use _safe, but we need to ensure that llist_for_each_safe()
-> completes LOAD(work->node->next) before VHOST_WORK_QUEUED is cleared.
->
-> So it seems that smp_wmb() can't help and should be removed, instead we need
->
-> 		llist_for_each_entry_safe(...) {
-> 			smp_mb__before_atomic();
-> 			clear_bit(VHOST_WORK_QUEUED, &work->flags);
->
-> Also, if the work->fn pointer is not stable, we should read it before
-> smp_mb__before_atomic() as well.
->
-> No?
->
->
-> 			__set_current_state(TASK_RUNNING);
->
-> Why do we set TASK_RUNNING inside the loop? Does this mean that work->fn()
-> can return with current->state != RUNNING ?
->
->
-> 			work->fn(work);
->
-> Now the main question. Whatever we do, SIGKILL/SIGSTOP/etc can come right
-> before we call work->fn(). Is it "safe" to run this callback with
-> signal_pending() or fatal_signal_pending() ?
->
->
-> Finally. I never looked into drivers/vhost/ before so I don't understand
-> this code at all, but let me ask anyway... Can we change vhost_dev_flush()
-> to run the pending callbacks rather than wait for vhost_worker() ?
-> I guess we can't, ->mm won't be correct, but can you confirm?
+--557lsgXCVjWg7/iP
+Content-Type: application/pgp-signature; name="signature.asc"
 
-In a conversation long ago I remember hearing that vhost does not
-support file descriptor passing.  Which means all of the file
-descriptors should be in the same process.
+-----BEGIN PGP SIGNATURE-----
 
-Looking at the vhost code what I am seeing happening is that the
-vhost_worker persists until vhost_dev_cleanup is called from
-one of the vhost_???_release() functions.  The release functions
-are only called after the last flush function completes.  See __fput
-if you want to trace the details.
+iQEzBAEBCAAdFiEEhpWov9P5fNqsNXdanKSrs4Grc8gFAmRtKicACgkQnKSrs4Gr
+c8jY/wgAhjjhgWP2hLT+OseMLTR9zRCSxrW/p/3pb2SzT+pMw28ZjXiQiQSJpqO9
+hPRaaAdj8yCM0DrhzF8ssxw5g/AzH40gnGXslBzzCXPcvqkEew/woRJfA5uKzB9O
+Nvgr4CBG3VX6maQVm8+UroUyAs8CqDPdWyayU7KZQJ4S59ErVKimOECPR3hobJpc
+6debKmLxI6m+vVa8gGaDBIVd6h2yrrdULYd0toYvNTfm4g57gGee8iPhFOH0E3Ip
+s2K1q9p/E6VeokjmGU9HHQFTmWk+N03MTRtS92uOzsdv2wlVmSisMLfnG6eQ6Dpt
+aA3D+Y1Rv/CbKmYih8N+J0q9deV2Rw==
+=O6HK
+-----END PGP SIGNATURE-----
+
+--557lsgXCVjWg7/iP--
 
 
-On one hand this all seems reasonable.  On the other hand I am not
-seeing the code that prevents file descriptor passing.
-
-
-It is probably not the worst thing in the world, but what this means
-is now if you pass a copy of the vhost file descriptor to another
-process the vhost_worker will persist, and thus the process will persist
-until that copy of the file descriptor is closed.
-
-Eric
+--===============1199237978471684012==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
 https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+--===============1199237978471684012==--
+
