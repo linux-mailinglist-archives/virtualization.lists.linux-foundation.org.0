@@ -1,78 +1,83 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 6F9AC70D38A
-	for <lists.virtualization@lfdr.de>; Tue, 23 May 2023 08:03:32 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id E8FB970D3F4
+	for <lists.virtualization@lfdr.de>; Tue, 23 May 2023 08:27:16 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 88E5881277;
-	Tue, 23 May 2023 06:03:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 88E5881277
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=R3r/ggLf
+	by smtp2.osuosl.org (Postfix) with ESMTP id 64A5E403C4;
+	Tue, 23 May 2023 06:27:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 64A5E403C4
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=8bytes.org header.i=@8bytes.org header.a=rsa-sha256 header.s=default header.b=palNgPOe
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GuUzQI9Ocjd1; Tue, 23 May 2023 06:03:29 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id NB1pEB-Sg45e; Tue, 23 May 2023 06:27:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 56D6D810AA;
-	Tue, 23 May 2023 06:03:29 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 56D6D810AA
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 43FDF40462;
+	Tue, 23 May 2023 06:27:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 43FDF40462
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id BFE8BC002A;
-	Tue, 23 May 2023 06:03:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 82545C007C;
+	Tue, 23 May 2023 06:27:13 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 39271C002A
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0DB42C002A
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 06:03:27 +0000 (UTC)
+ Tue, 23 May 2023 06:27:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 144E98234A
+ by smtp4.osuosl.org (Postfix) with ESMTP id D472141DD6
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 06:03:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 144E98234A
+ Tue, 23 May 2023 06:27:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D472141DD6
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=8bytes.org header.i=@8bytes.org
+ header.a=rsa-sha256 header.s=default header.b=palNgPOe
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PHmCuYSUg7VT
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eGJfyC2IWK6b
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 06:03:26 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7F15882341
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 7F15882341
+ Tue, 23 May 2023 06:27:10 +0000 (UTC)
+X-Greylist: delayed 00:07:22 by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A2E3041DCC
+Received: from mail.8bytes.org (mail.8bytes.org
+ [IPv6:2a01:238:42d9:3f00:e505:6202:4f0c:f051])
+ by smtp4.osuosl.org (Postfix) with ESMTP id A2E3041DCC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 23 May 2023 06:03:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=kcFDkSsMRrfkWsIuJGYMHBEClN46Y9jaORQasZOlE70=; b=R3r/ggLfgGh0zRFThzzh04ptaQ
- Odm0OLwuCRxOzQzrUUTA1EqUPupr6H1CdePk4XrUAAOJn1jWZ8ukUFpIAeOwdvf681AAIs4KeXTv8
- DLNKYNE/VQhCaCQ4GE4BbDTKMBc8tknwF3mnUZx2N+A0BEUGQvLLem4/F6S04EpOtOPJg1IYQCRFa
- AmqbVKfsFgTF153BWqvgh0JM9ZLoAKSnpFHZnjVJSqGo7nhktUetWRhOF2PhLPAZ1W613A2Lf506j
- LBSkVugg9Lzhb0EC45AU1GGFepZ3An6A4fXZP9qi39yljJ2dT7FnEkuAHcE/ew72BxOsi2X/HHFnL
- XHrlf1Kw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1q1L7G-00928i-0I; Tue, 23 May 2023 06:03:26 +0000
-Date: Mon, 22 May 2023 23:03:26 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH vhost v9 04/12] virtio_ring: virtqueue_add() support
- premapped
-Message-ID: <ZGxXLpEXlk+sg2BM@infradead.org>
-References: <20230517022249.20790-1-xuanzhuo@linux.alibaba.com>
- <20230517022249.20790-5-xuanzhuo@linux.alibaba.com>
+ Tue, 23 May 2023 06:27:10 +0000 (UTC)
+Received: from 8bytes.org
+ (p200300c2773e310086ad4f9d2505dd0d.dip0.t-ipconnect.de
+ [IPv6:2003:c2:773e:3100:86ad:4f9d:2505:dd0d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ by mail.8bytes.org (Postfix) with ESMTPSA id 73B1724819E;
+ Tue, 23 May 2023 08:19:44 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=8bytes.org;
+ s=default; t=1684822784;
+ bh=kk/rFcdM8uF58TGv8EhNODC2C+pt9UnXaiEp3keQBfs=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=palNgPOeKPv3PXx6QZMklOulatBhRHQxs5jXZngY/YtcLVHszbcxq5C/iJ6TmHN2Q
+ q/MBLKy5BSIlMsm861xR7QindUM9cASw3BaJtUrTNzfm2twD07Pou1BPHzk+P5gREe
+ FPBH6lkebIpLRmnvt0MIGkg9QeV5MMDd4JMSPPxuISOJBe6T/Po/aImOyupkuEBP4h
+ pOvPMWfTqujYlQK/7esSoE0aHcq3yg6FF2L5igVq16BpgFRJrI7CQ4yuWYo4hSJZlh
+ MME1iV727/sAqz7drmziV/yaxg/SZDYBu8QiOJrMgLOuP2gQPtAA30NLXMwHZeOIi5
+ /L9T6MXTddJbA==
+Date: Tue, 23 May 2023 08:19:43 +0200
+From: Joerg Roedel <joro@8bytes.org>
+To: Jean-Philippe Brucker <jean-philippe@linaro.org>
+Subject: Re: [PATCH v2 0/2] iommu/virtio: Fixes
+Message-ID: <ZGxa_-jkf1olFYXK@8bytes.org>
+References: <20230515113946.1017624-1-jean-philippe@linaro.org>
 MIME-Version: 1.0
 Content-Disposition: inline
-In-Reply-To: <20230517022249.20790-5-xuanzhuo@linux.alibaba.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: Christoph Hellwig <hch@infradead.org>,
- "Michael S. Tsirkin" <mst@redhat.com>,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20230515113946.1017624-1-jean-philippe@linaro.org>
+Cc: akihiko.odaki@daynix.com, will@kernel.org,
+ virtualization@lists.linux-foundation.org, eric.auger@redhat.com,
+ iommu@lists.linux.dev, robin.murphy@arm.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -89,11 +94,18 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, May 17, 2023 at 10:22:41AM +0800, Xuan Zhuo wrote:
-> virtuque_add() adds parameter premapped.
+On Mon, May 15, 2023 at 12:39:46PM +0100, Jean-Philippe Brucker wrote:
+> One fix reported by Akihiko, and another found while going over the
+> driver.
+> 
+> Jean-Philippe Brucker (2):
+>   iommu/virtio: Detach domain on endpoint release
+>   iommu/virtio: Return size mapped for a detached domain
+> 
+>  drivers/iommu/virtio-iommu.c | 57 ++++++++++++++++++++++++++----------
+>  1 file changed, 41 insertions(+), 16 deletions(-)
 
-Well, I can see that.  But why?
-
+Applied, thanks.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
