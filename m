@@ -1,92 +1,80 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 8519F712C04
-	for <lists.virtualization@lfdr.de>; Fri, 26 May 2023 19:44:50 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id C64D571245B
+	for <lists.virtualization@lfdr.de>; Fri, 26 May 2023 12:16:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 1FADA6F59D;
-	Fri, 26 May 2023 17:44:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1FADA6F59D
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=iumDFVZi
+	by smtp2.osuosl.org (Postfix) with ESMTP id BD6CD4055E;
+	Fri, 26 May 2023 10:16:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BD6CD4055E
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=d6B3TH/H
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id R0-pz729PYWd; Fri, 26 May 2023 17:44:48 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 24ffbzPqKFPH; Fri, 26 May 2023 10:16:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id D7C4C6F59B;
-	Fri, 26 May 2023 17:44:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D7C4C6F59B
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 5C12442CB3;
+	Fri, 26 May 2023 10:16:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5C12442CB3
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3BA4DC008C;
-	Fri, 26 May 2023 17:44:47 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6521EC008C;
+	Fri, 26 May 2023 10:16:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8EC22C002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EC6A3C002A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 17:44:45 +0000 (UTC)
+ Fri, 26 May 2023 10:16:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 557BA42EE3
+ by smtp2.osuosl.org (Postfix) with ESMTP id C99854018F
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 17:44:45 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 557BA42EE3
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=iumDFVZi
+ Fri, 26 May 2023 10:16:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C99854018F
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id VLkcjaxA321x
+ with ESMTP id AP8Er5ILFkVW
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 17:44:44 +0000 (UTC)
+ Fri, 26 May 2023 10:16:02 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5E9BE42EDB
-Received: from mga06.intel.com (mga06b.intel.com [134.134.136.31])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 5E9BE42EDB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 424A8400D8
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 424A8400D8
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 17:44:44 +0000 (UTC)
+ Fri, 26 May 2023 10:16:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1685123084; x=1716659084;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=x5pHN9VZUDdP2TLxPCWhN/t1BZUONMIrFg5l5cvTays=;
- b=iumDFVZi7C80j6evW6iF0RKqad73FursD70v3leNkSM9R/swmRsZtacA
- GI59VxuTAHyVoKzWWueAiltYGwmSooOapOedX4iDqdBMmb9KlgyVIfi86
- AuxWod5EHeZkaL+lyVM4AkAWEssL2tiZS1zm7SNTRpRvTdGn83q91fvWO
- bmqBp+Mf3uVsZVdGbWo2KH4kC32ei3BtUAqMrYg8libwgRpQ+1eBpsc4j
- r91k5ksf1SK9myYf6v3iOIsGasbpfx2ORxTJKP7adTp5CBdfcm6h3n7lK
- 511WjJFydYB/XIMHCCnR/yaROsSn/A3Tjw0ZMVwL67TGC7pdZ4K8k+UlX Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10722"; a="417745388"
-X-IronPort-AV: E=Sophos;i="6.00,194,1681196400"; d="scan'208";a="417745388"
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
- by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 May 2023 10:44:43 -0700
+ t=1685096162; x=1716632162;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=X7k8WZt9ivrs86FT946r9LIIfPS8nth72TJNaGjY4KA=;
+ b=d6B3TH/HhrFdfD4rGPvKmQHU2bYF0uIyuTxmwGmmfM6wx6QBT86wC3/Y
+ lrNirWzO+3LUhsCfIv33w9f2xZV4C6s7BPrAEo96z5r3hA/tJ1RuZOvkg
+ s1s+DjmFUOZ/pG7PVFi4NNggO5+tglXJnAmUwoerOf4s+TVuL5aApchw3
+ wMwLNsWLWGcxYf2lXs0s/qmj88X/AIhHQepHnfgDOS/rtlOFfKVE7tqw3
+ teJ6weVtE1B3nh5UtDpOvkkV0m4XxIOviuHtXnelv4zaVCecPu1Hu3tVX
+ pniYOAYbE8hwSN49nvdSxItb/uCFNPojYNqxoFgwKvfuJ52o6xoGo0mdd Q==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="351679984"
+X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="351679984"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 May 2023 03:16:00 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10722"; a="775163669"
-X-IronPort-AV: E=Sophos;i="6.00,194,1681196400"; d="scan'208";a="775163669"
-Received: from lkp-server01.sh.intel.com (HELO dea6d5a4f140) ([10.239.97.150])
- by fmsmga004.fm.intel.com with ESMTP; 26 May 2023 10:44:40 -0700
-Received: from kbuild by dea6d5a4f140 with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1q2bUV-000JVq-2o;
- Fri, 26 May 2023 17:44:39 +0000
-Date: Sat, 27 May 2023 01:44:27 +0800
-From: kernel test robot <lkp@intel.com>
-To: Liang Chen <liangchen.linux@gmail.com>, jasowang@redhat.com, mst@redhat.com
-Subject: Re: [PATCH net-next 3/5] virtio_net: Add page pool fragmentation
- support
-Message-ID: <202305270116.TJ31IjNL-lkp@intel.com>
-References: <20230526054621.18371-3-liangchen.linux@gmail.com>
+X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="770293656"
+X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="770293656"
+Received: from lingshan-icx.bj.intel.com ([10.240.192.125])
+ by fmsmga008.fm.intel.com with ESMTP; 26 May 2023 03:15:59 -0700
+From: Zhu Lingshan <lingshan.zhu@intel.com>
+To: mst@redhat.com,
+	jasowang@redhat.com
+Subject: [RFC] virtio-net: support modern-transtional devices
+Date: Sat, 27 May 2023 02:15:42 +0800
+Message-Id: <20230526181542.364412-1-lingshan.zhu@intel.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230526054621.18371-3-liangchen.linux@gmail.com>
-Cc: xuanzhuo@linux.alibaba.com, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, alexander.duyck@gmail.com,
- virtualization@lists.linux-foundation.org, edumazet@google.com,
- oe-kbuild-all@lists.linux.dev, kuba@kernel.org, pabeni@redhat.com,
- davem@davemloft.net
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,49 +91,61 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Liang,
+Current virtio-net only probes a device with VIRITO_ID_NET == 1.
 
-kernel test robot noticed the following build errors:
+For a modern-transtional virtio-net device which has a transtional
+device id 0x1000 and acts as a modern device, current virtio-pci
+modern driver will assign the sub-device-id to its mdev->id.device,
+which may not be 0x1, this sub-device-id is up to the vendor.
 
-[auto build test ERROR on net-next/main]
+That means virtio-net driver doesn't probe a modern-transitonal
+virtio-net with a sub-device-id other than 0x1, which is a bug.
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Liang-Chen/virtio_net-Add-page_pool-support-to-improve-performance/20230526-135805
-base:   net-next/main
-patch link:    https://lore.kernel.org/r/20230526054621.18371-3-liangchen.linux%40gmail.com
-patch subject: [PATCH net-next 3/5] virtio_net: Add page pool fragmentation support
-config: x86_64-defconfig (https://download.01.org/0day-ci/archive/20230527/202305270116.TJ31IjNL-lkp@intel.com/config)
-compiler: gcc-11 (Debian 11.3.0-12) 11.3.0
-reproduce (this is a W=1 build):
-        # https://github.com/intel-lab-lkp/linux/commit/dda0469e059354b61192e1d25b77c57351346282
-        git remote add linux-review https://github.com/intel-lab-lkp/linux
-        git fetch --no-tags linux-review Liang-Chen/virtio_net-Add-page_pool-support-to-improve-performance/20230526-135805
-        git checkout dda0469e059354b61192e1d25b77c57351346282
-        # save the config file
-        mkdir build_dir && cp config build_dir/.config
-        make W=1 O=build_dir ARCH=x86_64 olddefconfig
-        make W=1 O=build_dir ARCH=x86_64 SHELL=/bin/bash
+Other types of devices also have similar issues, like virito-blk.
 
-If you fix the issue, kindly add following tag where applicable
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202305270116.TJ31IjNL-lkp@intel.com/
+I propose to fix this problem of modern-transitonal device
+whith this solution, all in the modern code path:
+1) assign the device id to mdev->id.device
+2) add transitional device ids in the virtio-net(and others) probe table.
 
-All errors (new ones prefixed by >>):
+Comments are welcome!
 
-   ld: vmlinux.o: in function `virtnet_find_vqs':
-   virtio_net.c:(.text+0x901fd2): undefined reference to `page_pool_create'
-   ld: vmlinux.o: in function `add_recvbuf_mergeable.isra.0':
-   virtio_net.c:(.text+0x905662): undefined reference to `page_pool_alloc_pages'
->> ld: virtio_net.c:(.text+0x905715): undefined reference to `page_pool_alloc_frag'
-   ld: vmlinux.o: in function `xdp_linearize_page':
-   virtio_net.c:(.text+0x906c50): undefined reference to `page_pool_alloc_pages'
-   ld: virtio_net.c:(.text+0x906e33): undefined reference to `page_pool_alloc_frag'
-   ld: vmlinux.o: in function `mergeable_xdp_get_buf.isra.0':
->> virtio_net.c:(.text+0x90740e): undefined reference to `page_pool_alloc_frag'
->> ld: virtio_net.c:(.text+0x90750b): undefined reference to `page_pool_alloc_pages'
+Thanks!
 
+Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+---
+ drivers/net/virtio_net.c               | 1 +
+ drivers/virtio/virtio_pci_modern_dev.c | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+index 56ca1d270304..6b45d8602a6b 100644
+--- a/drivers/net/virtio_net.c
++++ b/drivers/net/virtio_net.c
+@@ -4250,6 +4250,7 @@ static __maybe_unused int virtnet_restore(struct virtio_device *vdev)
+ 
+ static struct virtio_device_id id_table[] = {
+ 	{ VIRTIO_ID_NET, VIRTIO_DEV_ANY_ID },
++	{ VIRTIO_TRANS_ID_NET, VIRTIO_DEV_ANY_ID },
+ 	{ 0 },
+ };
+ 
+diff --git a/drivers/virtio/virtio_pci_modern_dev.c b/drivers/virtio/virtio_pci_modern_dev.c
+index 869cb46bef96..80846e1195ce 100644
+--- a/drivers/virtio/virtio_pci_modern_dev.c
++++ b/drivers/virtio/virtio_pci_modern_dev.c
+@@ -229,7 +229,7 @@ int vp_modern_probe(struct virtio_pci_modern_device *mdev)
+ 		/* Transitional devices: use the PCI subsystem device id as
+ 		 * virtio device id, same as legacy driver always did.
+ 		 */
+-		mdev->id.device = pci_dev->subsystem_device;
++		mdev->id.device = pci_dev->device;
+ 	} else {
+ 		/* Modern devices: simply use PCI device id, but start from 0x1040. */
+ 		mdev->id.device = pci_dev->device - 0x1040;
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+2.39.1
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
