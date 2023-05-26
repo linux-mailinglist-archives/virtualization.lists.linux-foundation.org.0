@@ -1,80 +1,78 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 00E3471207D
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6825971207E
 	for <lists.virtualization@lfdr.de>; Fri, 26 May 2023 08:53:24 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 79BE141EE1;
+	by smtp2.osuosl.org (Postfix) with ESMTP id 8D37C42C8A;
 	Fri, 26 May 2023 06:53:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 79BE141EE1
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=a5P6fgJw
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8D37C42C8A
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=JZ5/WAAY
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id YZ5vRhDzsPcT; Fri, 26 May 2023 06:53:21 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 93484402F8;
-	Fri, 26 May 2023 06:53:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 93484402F8
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id itm4roRpoAnP; Fri, 26 May 2023 06:53:21 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 44AF842C8B;
+	Fri, 26 May 2023 06:53:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 44AF842C8B
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E9E9BC008C;
-	Fri, 26 May 2023 06:53:19 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 234D6C002A;
+	Fri, 26 May 2023 06:53:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5DF51C002A
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4AB52C002A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 06:53:17 +0000 (UTC)
+ Fri, 26 May 2023 06:53:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3993F42C84
+ by smtp2.osuosl.org (Postfix) with ESMTP id CFF4442A7A
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 06:53:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3993F42C84
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=a5P6fgJw
+ Fri, 26 May 2023 06:53:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CFF4442A7A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ENJiSZLXfris
+ with ESMTP id 6EmPNVl8dn78
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 06:53:16 +0000 (UTC)
+ Fri, 26 May 2023 06:53:18 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 76F104016B
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2402442C81
 Received: from mga12.intel.com (mga12.intel.com [192.55.52.136])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 76F104016B
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 2402442C81
  for <virtualization@lists.linux-foundation.org>;
- Fri, 26 May 2023 06:53:16 +0000 (UTC)
+ Fri, 26 May 2023 06:53:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1685083996; x=1716619996;
+ t=1685083998; x=1716619998;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=KnsKIB1now+pzDFEX2PgkxT3VTzMiWwscam6zsFht9Q=;
- b=a5P6fgJwocsS3p5butmiBcny93+cmeEn2brVmCaUnOD6QYkLmjO3udeD
- wk7OM65LXEvSS9AZlWGXmERiUx1lHGGz/NGQPYRCuDzIZiUmmUwclHV0B
- mwJKS4MV0Uxi2Td2z38RLLs9Qe9Jiq3vIJ8DznGCIFYhhxpviDpyIgmcK
- frrFhnHIE86d2VoaxTSu5vWns+1F7rIO0h9gCssZgEfFIu5Q2I3S2AC3Z
- 2kutNjlAUtC2rxkI32C5pUKcyapTPJfMFfH8tA/HqdMVf5dmcpRCBocKA
- fK7v3z8JLMMfaHVItl80bEkUaoeBoEXOvorJrHuOKjf0EkKF3WMQ9INaJ Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="333763369"
-X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="333763369"
+ bh=LLmB/p5g3iW0+1qZZQUmpDD+FSCoiprMudoANa3RSq0=;
+ b=JZ5/WAAY9RJ4fWTxcMusOU3DMEmAwcJHCxig+98yQu4//1U6L7MshDPc
+ Gj9KWQSRfEEPVZnMutmsbkRssrDNSCoLsK992eZPb4BUnR5ncq5j6QMcT
+ 2xYTar+fIJePfHCoaynKTeJmfHK20G4jtZFXNpIpLWgzFVSv8wSEylazh
+ NVg2LSKPmCRhwV+7Qh8GI7UtInTmzaXOpAzsC1lAwZDOZ7iC1Z0Lzq8qZ
+ Bvr6cYv04SGr2SlFT9rYdk3xFwLOsZxjjnzxrPV2sDz+Wl8IiRL/XXSSV
+ 2m0NO4Nt3IiMxAxq0T4J3ks4g1oKdmn3PTFSb9yK8onxRUooRhPx4dwBA g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="333763387"
+X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="333763387"
 Received: from fmsmga008.fm.intel.com ([10.253.24.58])
  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 25 May 2023 23:53:16 -0700
+ 25 May 2023 23:53:17 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="770241646"
-X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="770241646"
+X-IronPort-AV: E=McAfee;i="6600,9927,10721"; a="770241650"
+X-IronPort-AV: E=Sophos;i="6.00,193,1681196400"; d="scan'208";a="770241650"
 Received: from lingshan-icx.bj.intel.com ([10.240.192.125])
- by fmsmga008.fm.intel.com with ESMTP; 25 May 2023 23:53:14 -0700
+ by fmsmga008.fm.intel.com with ESMTP; 25 May 2023 23:53:16 -0700
 From: Zhu Lingshan <lingshan.zhu@intel.com>
 To: mst@redhat.com,
 	jasowang@redhat.com
-Subject: [PATCH V3 2/5] vDPA/ifcvf: get_driver_features from virtio registers
-Date: Fri, 26 May 2023 22:52:51 +0800
-Message-Id: <20230526145254.39537-3-lingshan.zhu@intel.com>
+Subject: [PATCH V3 3/5] vDPA/ifcvf: retire ifcvf_start_datapath and
+ ifcvf_add_status
+Date: Fri, 26 May 2023 22:52:52 +0800
+Message-Id: <20230526145254.39537-4-lingshan.zhu@intel.com>
 X-Mailer: git-send-email 2.39.1
 In-Reply-To: <20230526145254.39537-1-lingshan.zhu@intel.com>
 References: <20230526145254.39537-1-lingshan.zhu@intel.com>
@@ -96,159 +94,127 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This commit implements a new function ifcvf_get_driver_feature()
-which read driver_features from virtio registers.
+Rather than former lazy-initialization mechanism,
+now the virtqueue operations and driver_features related
+ops access the virtio registers directly to take
+immediate actions. So ifcvf_start_datapath() should
+retire.
 
-To be less ambiguous, ifcvf_set_features() is renamed to
-ifcvf_set_driver_features(), and ifcvf_get_features()
-is renamed to ifcvf_get_dev_features() which returns
-the provisioned vDPA device features.
+ifcvf_add_status() is retierd because we should not change
+device status by a vendor driver's decision, this driver should
+only set device status which is from virito drivers
+upon vdpa_ops.set_status()
 
 Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
 Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/vdpa/ifcvf/ifcvf_base.c | 38 +++++++++++++++++----------------
- drivers/vdpa/ifcvf/ifcvf_base.h |  5 +++--
- drivers/vdpa/ifcvf/ifcvf_main.c |  9 +++++---
- 3 files changed, 29 insertions(+), 23 deletions(-)
+ drivers/vdpa/ifcvf/ifcvf_base.c | 19 -------------------
+ drivers/vdpa/ifcvf/ifcvf_base.h |  1 -
+ drivers/vdpa/ifcvf/ifcvf_main.c | 23 -----------------------
+ 3 files changed, 43 deletions(-)
 
 diff --git a/drivers/vdpa/ifcvf/ifcvf_base.c b/drivers/vdpa/ifcvf/ifcvf_base.c
-index 6c5650f73007..546e923bcd16 100644
+index 546e923bcd16..79e313c5e10e 100644
 --- a/drivers/vdpa/ifcvf/ifcvf_base.c
 +++ b/drivers/vdpa/ifcvf/ifcvf_base.c
-@@ -204,11 +204,29 @@ u64 ifcvf_get_hw_features(struct ifcvf_hw *hw)
- 	return features;
+@@ -178,15 +178,6 @@ void ifcvf_reset(struct ifcvf_hw *hw)
+ 	ifcvf_get_status(hw);
  }
  
--u64 ifcvf_get_features(struct ifcvf_hw *hw)
-+/* return provisioned vDPA dev features */
-+u64 ifcvf_get_dev_features(struct ifcvf_hw *hw)
- {
- 	return hw->dev_features;
- }
- 
-+u64 ifcvf_get_driver_features(struct ifcvf_hw *hw)
-+{
-+	struct virtio_pci_common_cfg __iomem *cfg = hw->common_cfg;
-+	u32 features_lo, features_hi;
-+	u64 features;
-+
-+	vp_iowrite32(0, &cfg->device_feature_select);
-+	features_lo = vp_ioread32(&cfg->guest_feature);
-+
-+	vp_iowrite32(1, &cfg->device_feature_select);
-+	features_hi = vp_ioread32(&cfg->guest_feature);
-+
-+	features = ((u64)features_hi << 32) | features_lo;
-+
-+	return features;
-+}
-+
- int ifcvf_verify_min_features(struct ifcvf_hw *hw, u64 features)
- {
- 	if (!(features & BIT_ULL(VIRTIO_F_ACCESS_PLATFORM)) && features) {
-@@ -275,7 +293,7 @@ void ifcvf_write_dev_config(struct ifcvf_hw *hw, u64 offset,
- 		vp_iowrite8(*p++, hw->dev_cfg + offset + i);
- }
- 
--static void ifcvf_set_features(struct ifcvf_hw *hw, u64 features)
-+void ifcvf_set_driver_features(struct ifcvf_hw *hw, u64 features)
+-static void ifcvf_add_status(struct ifcvf_hw *hw, u8 status)
+-{
+-	if (status != 0)
+-		status |= ifcvf_get_status(hw);
+-
+-	ifcvf_set_status(hw, status);
+-	ifcvf_get_status(hw);
+-}
+-
+ u64 ifcvf_get_hw_features(struct ifcvf_hw *hw)
  {
  	struct virtio_pci_common_cfg __iomem *cfg = hw->common_cfg;
- 
-@@ -286,19 +304,6 @@ static void ifcvf_set_features(struct ifcvf_hw *hw, u64 features)
- 	vp_iowrite32(features >> 32, &cfg->guest_feature);
+@@ -387,16 +378,6 @@ static void ifcvf_hw_disable(struct ifcvf_hw *hw)
+ 	}
  }
  
--static int ifcvf_config_features(struct ifcvf_hw *hw)
+-int ifcvf_start_hw(struct ifcvf_hw *hw)
 -{
--	ifcvf_set_features(hw, hw->req_features);
--	ifcvf_add_status(hw, VIRTIO_CONFIG_S_FEATURES_OK);
+-	ifcvf_add_status(hw, VIRTIO_CONFIG_S_ACKNOWLEDGE);
+-	ifcvf_add_status(hw, VIRTIO_CONFIG_S_DRIVER);
 -
--	if (!(ifcvf_get_status(hw) & VIRTIO_CONFIG_S_FEATURES_OK)) {
--		IFCVF_ERR(hw->pdev, "Failed to set FEATURES_OK status\n");
--		return -EIO;
--	}
+-	ifcvf_add_status(hw, VIRTIO_CONFIG_S_DRIVER_OK);
 -
 -	return 0;
 -}
 -
- u16 ifcvf_get_vq_state(struct ifcvf_hw *hw, u16 qid)
+ void ifcvf_stop_hw(struct ifcvf_hw *hw)
  {
- 	struct ifcvf_lm_cfg __iomem *ifcvf_lm;
-@@ -387,9 +392,6 @@ int ifcvf_start_hw(struct ifcvf_hw *hw)
- 	ifcvf_add_status(hw, VIRTIO_CONFIG_S_ACKNOWLEDGE);
- 	ifcvf_add_status(hw, VIRTIO_CONFIG_S_DRIVER);
- 
--	if (ifcvf_config_features(hw) < 0)
--		return -EINVAL;
--
- 	ifcvf_add_status(hw, VIRTIO_CONFIG_S_DRIVER_OK);
- 
- 	return 0;
+ 	ifcvf_hw_disable(hw);
 diff --git a/drivers/vdpa/ifcvf/ifcvf_base.h b/drivers/vdpa/ifcvf/ifcvf_base.h
-index d545a9411143..cb19196c3ece 100644
+index cb19196c3ece..d34d3bc0dbf4 100644
 --- a/drivers/vdpa/ifcvf/ifcvf_base.h
 +++ b/drivers/vdpa/ifcvf/ifcvf_base.h
-@@ -69,7 +69,6 @@ struct ifcvf_hw {
- 	phys_addr_t notify_base_pa;
- 	u32 notify_off_multiplier;
- 	u32 dev_type;
--	u64 req_features;
- 	u64 hw_features;
- 	/* provisioned device features */
- 	u64 dev_features;
-@@ -122,7 +121,7 @@ u8 ifcvf_get_status(struct ifcvf_hw *hw);
- void ifcvf_set_status(struct ifcvf_hw *hw, u8 status);
- void io_write64_twopart(u64 val, u32 *lo, u32 *hi);
- void ifcvf_reset(struct ifcvf_hw *hw);
--u64 ifcvf_get_features(struct ifcvf_hw *hw);
-+u64 ifcvf_get_dev_features(struct ifcvf_hw *hw);
- u64 ifcvf_get_hw_features(struct ifcvf_hw *hw);
- int ifcvf_verify_min_features(struct ifcvf_hw *hw, u64 features);
- u16 ifcvf_get_vq_state(struct ifcvf_hw *hw, u16 qid);
-@@ -137,4 +136,6 @@ int ifcvf_set_vq_address(struct ifcvf_hw *hw, u16 qid, u64 desc_area,
- 			 u64 driver_area, u64 device_area);
- bool ifcvf_get_vq_ready(struct ifcvf_hw *hw, u16 qid);
- void ifcvf_set_vq_ready(struct ifcvf_hw *hw, u16 qid, bool ready);
-+void ifcvf_set_driver_features(struct ifcvf_hw *hw, u64 features);
-+u64 ifcvf_get_driver_features(struct ifcvf_hw *hw);
- #endif /* _IFCVF_H_ */
+@@ -110,7 +110,6 @@ struct ifcvf_vdpa_mgmt_dev {
+ };
+ 
+ int ifcvf_init_hw(struct ifcvf_hw *hw, struct pci_dev *dev);
+-int ifcvf_start_hw(struct ifcvf_hw *hw);
+ void ifcvf_stop_hw(struct ifcvf_hw *hw);
+ void ifcvf_notify_queue(struct ifcvf_hw *hw, u16 qid);
+ void ifcvf_read_dev_config(struct ifcvf_hw *hw, u64 offset,
 diff --git a/drivers/vdpa/ifcvf/ifcvf_main.c b/drivers/vdpa/ifcvf/ifcvf_main.c
-index 1357c67014ab..4588484bd53d 100644
+index 4588484bd53d..968687159e44 100644
 --- a/drivers/vdpa/ifcvf/ifcvf_main.c
 +++ b/drivers/vdpa/ifcvf/ifcvf_main.c
-@@ -410,7 +410,7 @@ static u64 ifcvf_vdpa_get_device_features(struct vdpa_device *vdpa_dev)
- 	u64 features;
- 
- 	if (type == VIRTIO_ID_NET || type == VIRTIO_ID_BLOCK)
--		features = ifcvf_get_features(vf);
-+		features = ifcvf_get_dev_features(vf);
- 	else {
- 		features = 0;
- 		IFCVF_ERR(pdev, "VIRTIO ID %u not supported\n", vf->dev_type);
-@@ -428,7 +428,7 @@ static int ifcvf_vdpa_set_driver_features(struct vdpa_device *vdpa_dev, u64 feat
- 	if (ret)
- 		return ret;
- 
--	vf->req_features = features;
-+	ifcvf_set_driver_features(vf, features);
- 
+@@ -346,22 +346,6 @@ static int ifcvf_request_irq(struct ifcvf_hw *vf)
  	return 0;
  }
-@@ -436,8 +436,11 @@ static int ifcvf_vdpa_set_driver_features(struct vdpa_device *vdpa_dev, u64 feat
- static u64 ifcvf_vdpa_get_driver_features(struct vdpa_device *vdpa_dev)
+ 
+-static int ifcvf_start_datapath(struct ifcvf_adapter *adapter)
+-{
+-	struct ifcvf_hw *vf = adapter->vf;
+-	u8 status;
+-	int ret;
+-
+-	ret = ifcvf_start_hw(vf);
+-	if (ret < 0) {
+-		status = ifcvf_get_status(vf);
+-		status |= VIRTIO_CONFIG_S_FAILED;
+-		ifcvf_set_status(vf, status);
+-	}
+-
+-	return ret;
+-}
+-
+ static int ifcvf_stop_datapath(struct ifcvf_adapter *adapter)
  {
- 	struct ifcvf_hw *vf = vdpa_to_vf(vdpa_dev);
-+	u64 features;
-+
-+	features = ifcvf_get_driver_features(vf);
+ 	struct ifcvf_hw *vf = adapter->vf;
+@@ -452,13 +436,11 @@ static u8 ifcvf_vdpa_get_status(struct vdpa_device *vdpa_dev)
  
--	return vf->req_features;
-+	return features;
- }
+ static void ifcvf_vdpa_set_status(struct vdpa_device *vdpa_dev, u8 status)
+ {
+-	struct ifcvf_adapter *adapter;
+ 	struct ifcvf_hw *vf;
+ 	u8 status_old;
+ 	int ret;
  
- static u8 ifcvf_vdpa_get_status(struct vdpa_device *vdpa_dev)
+ 	vf  = vdpa_to_vf(vdpa_dev);
+-	adapter = vdpa_to_adapter(vdpa_dev);
+ 	status_old = ifcvf_get_status(vf);
+ 
+ 	if (status_old == status)
+@@ -473,11 +455,6 @@ static void ifcvf_vdpa_set_status(struct vdpa_device *vdpa_dev, u8 status)
+ 			ifcvf_set_status(vf, status);
+ 			return;
+ 		}
+-
+-		if (ifcvf_start_datapath(adapter) < 0)
+-			IFCVF_ERR(adapter->pdev,
+-				  "Failed to set ifcvf vdpa  status %u\n",
+-				  status);
+ 	}
+ 
+ 	ifcvf_set_status(vf, status);
 -- 
 2.39.1
 
