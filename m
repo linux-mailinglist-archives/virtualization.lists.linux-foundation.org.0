@@ -1,230 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B0124718753
-	for <lists.virtualization@lfdr.de>; Wed, 31 May 2023 18:28:20 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 2470471884F
+	for <lists.virtualization@lfdr.de>; Wed, 31 May 2023 19:18:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 4F2DF8356C;
-	Wed, 31 May 2023 16:28:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4F2DF8356C
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=3BSLjPI1;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=oracle.onmicrosoft.com header.i=@oracle.onmicrosoft.com header.a=rsa-sha256 header.s=selector2-oracle-onmicrosoft-com header.b=aG5JDXB+
+	by smtp2.osuosl.org (Postfix) with ESMTP id A32B54046B;
+	Wed, 31 May 2023 17:18:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A32B54046B
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=gootzen.net header.i=@gootzen.net header.a=rsa-sha256 header.s=aw2020113001 header.b=XeEQy4VF
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id nsnORTEUbTVd; Wed, 31 May 2023 16:28:18 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zzsrKRfYdpJU; Wed, 31 May 2023 17:18:50 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id AD3B483F33;
-	Wed, 31 May 2023 16:28:17 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AD3B483F33
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 05C87400DC;
+	Wed, 31 May 2023 17:18:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 05C87400DC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C4FE6C008C;
-	Wed, 31 May 2023 16:28:16 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4CBC2C008C;
+	Wed, 31 May 2023 17:18:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 48D96C0037
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4C912C0037
  for <virtualization@lists.linux-foundation.org>;
- Wed, 31 May 2023 16:28:15 +0000 (UTC)
+ Wed, 31 May 2023 17:18:47 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 225DA61452
+ by smtp1.osuosl.org (Postfix) with ESMTP id 1A1B4818CD
  for <virtualization@lists.linux-foundation.org>;
- Wed, 31 May 2023 16:28:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 225DA61452
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=3BSLjPI1; 
- dkim=pass (1024-bit key) header.d=oracle.onmicrosoft.com
- header.i=@oracle.onmicrosoft.com header.a=rsa-sha256
- header.s=selector2-oracle-onmicrosoft-com header.b=aG5JDXB+
+ Wed, 31 May 2023 17:18:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1A1B4818CD
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (2048-bit key) header.d=gootzen.net header.i=@gootzen.net
+ header.a=rsa-sha256 header.s=aw2020113001 header.b=XeEQy4VF
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ye28JV7KAr-3
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fa7TP6BIU5sv
  for <virtualization@lists.linux-foundation.org>;
- Wed, 31 May 2023 16:28:13 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 733076147D
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 733076147D
+ Wed, 31 May 2023 17:18:45 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9388C817A4
+Received: from arg-plspam-c1n3.mailshover.nl (arg-plspam-c1n3.mailshover.nl
+ [145.131.15.37])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9388C817A4
  for <virtualization@lists.linux-foundation.org>;
- Wed, 31 May 2023 16:28:13 +0000 (UTC)
-Received: from pps.filterd (m0246627.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 34VERXxD009437; Wed, 31 May 2023 16:28:12 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=message-id : date :
- subject : from : to : cc : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=corp-2023-03-30;
- bh=N0oBKmF9mOIDzsHwBT2RTnpAXzj9dv9wuk/KR4n1jIs=;
- b=3BSLjPI1X/zcxmqReeft8w1+Lei2b27W+Am2qfV93YfcoaZjtVPnvF705chk0ixJoRi/
- LVynMmC/Yu9UP2iFiSrHjg/cqBpE4CltmKbS1OncdBJxyVonGnbhpUIWFed4zq1New1s
- W06Pv8y3CgN57DYmmVsd09ASwrBc3pvkhq4VAmxHAbxoO7RTP8675SD7uVxFi/BIuvFU
- /kE0zkfLJX/K8G+8TKK3DCkv78wausP8gxEZRBND9ZUiTZUOkk0FLbTLHiFr0SqEILIu
- 2/XLxvVN6j96vwhNLLANOtQaHW3PKRihKlXTPTEao7CR21/1sWils5MpGP9MIvme83Lj qw== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3qvhjkpbh4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 31 May 2023 16:27:17 +0000
-Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 34VFXfvP026076; Wed, 31 May 2023 16:27:16 GMT
-Received: from nam10-dm6-obe.outbound.protection.outlook.com
- (mail-dm6nam10lp2103.outbound.protection.outlook.com [104.47.58.103])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3qu8accr6v-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 31 May 2023 16:27:16 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=B840DYv8anILjXmwWKHPklFc1Aqn+/u2KgDWdqur5mhAofTtlXea7zS0r8ato/bX2Mo/aDt+5QuQXf22EVgCPi90d6BmZL6ZHmSXVqobMBnFTqrw+NbN/BgkIX5kH40m7NVDymDFVoZdhlcD3/+tDT4HCrcAnod4iarHmpofKgtw+3zpxgpkiZHjp0xe9wXCehUTTbHwnIGPQBfPY8Jo+6SywWQZRtuKUgRs3kUBQzf4J8lTZJN9kIouOBVggTZdgSW+Bk5xI/ocyNRMYjgCXwZTOaHX8xpQw0taT8agoJT9cm7ZGOv5Rh5lCav1esXRWpaGzUmPzPKiwJ1GWpVtZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N0oBKmF9mOIDzsHwBT2RTnpAXzj9dv9wuk/KR4n1jIs=;
- b=UuSc0ByI5VS3gs4Q6BGc8AIHASjw5mKFIfsRGJraOuZ6ZbiTpwtA2kQvL20wqbKNNqiKQh5G40OPTIxrknwFaxhKL/TdpsALM1G0yaX00iUxMuvvU149eaut/MxL7qwDeAFrRtNuPrpFzI3RXhhqBuGnnU/TlnkFq6dwJwb5D4dOofydRWEpwj7ND61Uc8NbONbMz9TYDfaw2uRoU8xbulChPnBp2UCfdwNtYJaXspL44Owwf5YzSMTh/DHUz2DynmaYAIpPgFv65QD3qYFTz+wVYIxgriCfWoqav1mEKg3lhlh1fYRHZUK59GKinaWANvYPnzSkCiP7vG7mTN5gDw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
- dkim=pass header.d=oracle.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N0oBKmF9mOIDzsHwBT2RTnpAXzj9dv9wuk/KR4n1jIs=;
- b=aG5JDXB+eE1ToITrOtGXszTBvvQie2/1JGAyKLCLHyKTG5jlQ5XVkqXy1D+s7x/mzybkVUf5Qzb7KKYevwIYmGiDsTvINFNQc3Mz3wzvH/THaQGERr0D8qzvb45Imp4fLuzwMAXrSLlywUTrcFCtFHEidVfoPR5OtVrWZ7XUftk=
-Received: from CY8PR10MB7243.namprd10.prod.outlook.com (2603:10b6:930:7c::10)
- by DS7PR10MB5008.namprd10.prod.outlook.com (2603:10b6:5:3b1::19) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.6433.23; Wed, 31 May
- 2023 16:27:14 +0000
-Received: from CY8PR10MB7243.namprd10.prod.outlook.com
- ([fe80::13d6:c3f3:2447:6559]) by CY8PR10MB7243.namprd10.prod.outlook.com
- ([fe80::13d6:c3f3:2447:6559%5]) with mapi id 15.20.6433.024; Wed, 31 May 2023
- 16:27:13 +0000
-Message-ID: <bbe697b6-dd9e-5a8d-21c5-315ab59f0456@oracle.com>
-Date: Wed, 31 May 2023 11:27:12 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.2
-Subject: Re: [syzbot] [kvm?] [net?] [virt?] general protection fault in
- vhost_work_queue
-From: Mike Christie <michael.christie@oracle.com>
-To: Stefano Garzarella <sgarzare@redhat.com>
-References: <0000000000001777f605fce42c5f@google.com>
- <20230530072310-mutt-send-email-mst@kernel.org>
- <CAGxU2F7O7ef3mdvNXtiC0VtWiS2DMnoiGwSR=Z6SWbzqcrBF-g@mail.gmail.com>
- <CAGxU2F7HK5KRggiY7xnKHeXFRXJmqcKbjf3JnXC3mbmn9xqRtw@mail.gmail.com>
- <e4589879-1139-22cc-854f-fed22cc18693@oracle.com>
- <6p7pi6mf3db3gp3xqarap4uzrgwlzqiz7wgg5kn2ep7hvrw5pg@wxowhbw4e7w7>
- <035e3423-c003-3de9-0805-2091b9efb45d@oracle.com>
- <CAGxU2F5oTLY_weLixRKMQVqmjpDG_09yL6tS2rF8mwJ7K+xP0Q@mail.gmail.com>
- <43f67549-fe4d-e3ca-fbb0-33bea6e2b534@oracle.com>
-Content-Language: en-US
-In-Reply-To: <43f67549-fe4d-e3ca-fbb0-33bea6e2b534@oracle.com>
-X-ClientProxiedBy: DM6PR05CA0059.namprd05.prod.outlook.com
- (2603:10b6:5:335::28) To CY8PR10MB7243.namprd10.prod.outlook.com
- (2603:10b6:930:7c::10)
+ Wed, 31 May 2023 17:18:44 +0000 (UTC)
+Received: from gw.mailshover.nl ([2001:678:76c:1:3996::58]
+ helo=arg-plsmtp-c1n2.argewebhosting.nl)
+ by arg-plspam-c1n3.mailshover.nl with esmtp (Exim 4.92)
+ (envelope-from <peter-jan@gootzen.net>)
+ id 1q4PT5-00CZDC-6a; Wed, 31 May 2023 19:18:40 +0200
+Received: from flex01.zurich.ibm.com (pat.zurich.ibm.com [195.176.20.45])
+ (Authenticated sender: peter-jan@gootzen.net)
+ by arg-plsmtp-c1n2.argewebhosting.nl (Postfix) with ESMTPA id 704CE2043332;
+ Wed, 31 May 2023 19:18:37 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 arg-plsmtp-c1n2.argewebhosting.nl
+ 704CE2043332
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gootzen.net;
+ s=aw2020113001; t=1685553517;
+ bh=3NhBml1y1HeW8d6Zo/t1vksqrDGirXMNvpuVtGeL17I=;
+ h=From:To:Cc:Subject:Date:From;
+ b=XeEQy4VFzFn9dNxcmUTEUwOvJJtXE0KKTegJo9P7uo1xGnPKPFmrpCxS9wVuLPn79
+ sNebR6J1ZaReIBbf8UITFNOp8FARv2aNEpYrfD+Bp6illiOFN7OZEGbFaU1Os2CuvT
+ u7JKScIE3lKy07ZZ8VWwLFnWkNKKI9GDx1gs9lnGVjFLc6HZ109bjevNNXc4a91F/s
+ dVvO52DNJAIxGnQY9EJDC9r7kaPLvVKcKM8FfVi/kqpidvH9DyX6AL7ihgej4zvPzZ
+ J9DY1yub90j2YjLeM6Q7aArqrSp5/gX3Dj4TleNiOvz3bPlqbLBr5seBPqgDu+s7EM
+ yr8MUgw6OwDZA==
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH V2] virtio-fs: Improved request latencies when Virtio queue is
+ full
+Date: Wed, 31 May 2023 19:10:32 +0200
+Message-Id: <20230531171031.1424338-1-peter-jan@gootzen.net>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CY8PR10MB7243:EE_|DS7PR10MB5008:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2112764b-fd59-45df-40ea-08db61f3e442
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: gR1119R3H0mprnlkdSL6T1sZy5N46JmoVoWg3PwO3en3a44vcfJk91OCbCsUCzKGviUTTNGGBzn7Wuhkcv/UBZEqgg6cKZroLjoxfAOamw3bDv9gWB2IoKgr8sBbuugqiTY/VYerWWLIo269mWhGiBElsK34SOcmT1cUEiHFu52f2sCJ0lRWUDFOhM+FXGgwJWQKhz1MDUA80fENtdw8MF/umCjeaxreDE7K32onWdNCR7bb0wFezoW1tM7Weo8XU1XEVBR3guxJbpNoScwX6O+OjbZ0IlIKyI31pa/VKsHUaj1Mi3/b1hDnO8M8lRkxJIVx9W9TfGLPNiQfHiE0AooEte+L241E3Mxj95/40ZUdjQM+t3o3yuMl1fIGqxwefT2vn/W0JFYInkKYYhGtyvvwRcFJp2Cno23tFwHPsu/kzqV9vlYu5SCiea0s7d6w3BD0aQtdoiAt9W1wySUakfQXIcOHAxhJ+UUk4VdiaLoReiWksGvnm1tVVTmxvo1Xw3oJbgSn3cB8Isasf6Rt4yKpxQCnGbRJGaXrvtJuOpaKJQOWACynTr3SLw7OUgyIzZB8yE4qrCYB6ePd0FfGYwEaoyH4JTS5+WlBEZ2KvbjoUl9mXXsR+aw/ag0S+Km+7DA2Tr4bo34cNw2MuEkyhg==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY8PR10MB7243.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230028)(136003)(396003)(346002)(39860400002)(376002)(366004)(451199021)(26005)(83380400001)(38100700002)(41300700001)(6486002)(186003)(53546011)(6512007)(31686004)(6506007)(2616005)(54906003)(478600001)(6916009)(66946007)(66476007)(66556008)(4326008)(316002)(86362001)(5660300002)(8936002)(8676002)(7416002)(31696002)(2906002)(36756003)(43740500002)(45980500001);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MUE5QkJlL3dFWGlmdjhWSEdwUlpreW9HWFZaM2hWNXlGRlEwb2xJbnpCZ0g3?=
- =?utf-8?B?SVNiV3VPbnhtSysyaHljMlpDTThwMC9IVkF2eDZhbnZDdThGMDI5SkFkNDFR?=
- =?utf-8?B?UXVkMkpvcEVUc05ESTR4dHJGdW5abjY2TjYvWXZHak1yK1VqYTJnU2dvUUdk?=
- =?utf-8?B?Y1kwa3B6N2VqRGhya2ppN3ZUbGdDR0xlbSt6Z3c5RTdnSFN6VGV0WlZRaU5F?=
- =?utf-8?B?eFVTRG14NkNsUTFCRElFTllHdTFxUVJrVnhkd2k1V2lxZWliNmlGSUoyMXhN?=
- =?utf-8?B?Vk5vY2J4bStZRG8wUk1SbnllaWp4bEZ4dkZxOG9ES2FxVFZremdEMGtHVUs5?=
- =?utf-8?B?cm1WcUtuVzNGS01qUis5eE9RdkIwV3N0bGNNTnJzazVsUGZGOCtRakV3VEJD?=
- =?utf-8?B?ZmN2QXdTSHk3ODEvcHRVaGpQS2FHdENxRHNHQ08xMDc1Wnl0UHdKN2dETXpq?=
- =?utf-8?B?QW9HL1VtbzhtN1JOQ0Q3NlhvRlU4ZC9YLzVCMXBhNTBwOE5sTVU5NWc5dGtK?=
- =?utf-8?B?dkhSOGZpcG50NXJhVE8zM0ZUQS9EbUkrU1JKUTlEVG5UMmxwM0VyaWg2bzdp?=
- =?utf-8?B?NzVkYnJFRFpMSzlVQVRRbVFqMDUyQWp2amE0SStLWmM1WVRkOFIxazcwemtJ?=
- =?utf-8?B?MDBqQ3o0djE1UnFqUThabUVaeUlIYkVyTEFxNW02U1ZQTzlFT2txM0lOcysv?=
- =?utf-8?B?TUdMUkg3OFNSdzR1ODlBaktyUlkrcS85cWNTaXpTc0FMVWt4UTA1RDYzS2dF?=
- =?utf-8?B?UlNUQjFuYzFCd1pxWC9EdTRxVVpuR1JaTENteTVjRkNXUkcza0doTXhLcU9N?=
- =?utf-8?B?ZUF6bmZXNWgyMFlrSFVXWS9vcHVBdHFXRFoxbEpMcWpNZVhzdStZTjR6Ylg1?=
- =?utf-8?B?eUM5QWRpQkJtck1vdXF4NFRiVEVLNEYwb2VkM0FpZjI0c0ZIdTNsTk94TEVM?=
- =?utf-8?B?TjdaNFJxSVY1cnRyd3ZuM3VpNDJxMGRvTHdDclIwU3Q5Umo4NS9COC9EVHVP?=
- =?utf-8?B?WEkrak5RWldUazczSytuQldDU3hZTnRuUFVIcVhiUmNZcnJLQWlzSVVneXdB?=
- =?utf-8?B?YlI4VTZVa2hpRFdrdGhleEczYjgwVWliQlpuYTM4WTZJTytuK2ZMUlBRK1dE?=
- =?utf-8?B?VWxodSs1UC9TYVRra3ZmNmtkc201Um8xcGJQY0RIUkxiU0JJTTFLTHgxMzVJ?=
- =?utf-8?B?VzVkS1M5dFkxbktxQnk5cU1Tb29mUUszQzU3SnhBVE9Kd1hiZXoyVkRUUlZJ?=
- =?utf-8?B?NUdnMmYyKzlXRnRvb1k5U1FSUjErenUvcEN1K0s4aGdxbERzNWVvQUZoaS9M?=
- =?utf-8?B?eSt4aFJhUnllOUgxUFpQZFdjQTA1cVNRZTRNajFVS24wMVhmSVJaSDgzNmNO?=
- =?utf-8?B?MzV2M2dhOXBhbWVjYXpFRHB4TktLZjJyN2NQazMzUnNRaUVmWmd4eUUzWkJM?=
- =?utf-8?B?aE5OTWdSR0NWeXlxZTNzWXl3MmZNYnNQMFZNWlA3TEhqSGtBeUZRQnNPN3VW?=
- =?utf-8?B?Q3BEb0JRcGF1cXlxVUtpc051MkVwNjRlQXdWZmNEa1JsUHdFWUpHejZ1MFYv?=
- =?utf-8?B?U2Q3cUh6YnZaaTNieDVlY0MyUFFWN2src2w2M3Q0SExLOXRvaWxCU0tIOFVG?=
- =?utf-8?B?ak1QU1ZIWXJyMDhBK29Nd3ZXbUVUOGxCNjFXRUtYNzVqamxUMjA1cnhrVG1o?=
- =?utf-8?B?M3JBRk5LUnZxOHdjNDV4QkNISDZMVnZSY2ZIbTB0S21Galg5UHFGQ0l4K3l0?=
- =?utf-8?B?VENDSmNaWWdkQlZhdm9xSTl3UmlhZm54OCt2d2lzSzFkb292WnE0bFBQWmNx?=
- =?utf-8?B?TjZOeVVvb0xuUzlJaEszTndZNzZCd2RoRVd5MjNXQ21oc0pLVkV6ZWlmM0p5?=
- =?utf-8?B?SzZSaWkzVTdlWEJ3eTRBTHM4YnNlbTViRnd4MlRwNXNqeWtPVnhvc3hURlAx?=
- =?utf-8?B?dTljcUhWNkRjOVVvRkRjZnBwSk5lV254Ym01RExreVVxRWNiUFo1YWZBSkM3?=
- =?utf-8?B?d1E1cVFvSVM5MWVkbEQzaVJRbFFsOVVtblkvRE1acHRNRjJyaUU1ZUxRZmhl?=
- =?utf-8?B?OS9ackNObHRRSHJmRWJTTUtRdGRYR1gzZnZ0ZmtwYUtlbTI3VXhIcGNCVnk4?=
- =?utf-8?B?Qm9iQmNXNDZjWWNPaVRYeUtqY0ZORExjZ09zdklFZXgwYVhTajFITlFyWXJK?=
- =?utf-8?B?S3c9PQ==?=
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: =?utf-8?B?NDdobHc4ckZqcHdEWFdxSHFiR1NQMFhsa05GY2VFRzFTREk2cytYMTVaZXZ1?=
- =?utf-8?B?VDI2elpFb25QUm5sU0lJMkJLK1RlUklWajR2bWFSMTJ3dTRFL0JQK0hTaXFi?=
- =?utf-8?B?MzZhV1dxTmVRVWxDWVVYTlZwUThoaUQrTEVMWk1GM3hwVmZQL2ZHS3dRZW5B?=
- =?utf-8?B?SnVwNXlYVUN3YTRzdHU4M1gwWXIvRnVMRzM4T29ya1dSdmFPcEZjQnhJcUla?=
- =?utf-8?B?ZFRabmh1WnEwWlp0emNoT1IvYWdkSk05NFJNd0tpam5HWHhKbU5Gait0cHFs?=
- =?utf-8?B?cHZzdnVvdTVabHRneTR4N0s1b3p2a3FRalk1RGhtL0huSUMrSmtqL1ZJU3lM?=
- =?utf-8?B?KzJqbHE2ZGNJbzdXY2lQREZmcVhGa01YVkplYkJMR3NhL205TVNYWDhsVHJv?=
- =?utf-8?B?alZNeStadDJ0ZlBCVWROTnR6S1ZYWTIxaG5kY0VxMEExWndkNXVLeGc1a2Nj?=
- =?utf-8?B?QUxMSUVKSHV1RVltRy9OVm5yRVRQOWF4Ym9nUHhGcE91OHdZUDdrS1NCcllS?=
- =?utf-8?B?SExueXBxWUtvS2w2QVZpVUpaeU9NZm10NWpyRlJKSXZzZnFuOEkrcUVFQjI4?=
- =?utf-8?B?NWVHemxFQW9JdFF4NGFJUVpQOVN0V0FBMEVSSVFjNHljNFd3ZkJIMmVUMkhz?=
- =?utf-8?B?Rlh3RXFjQk8vTGYrRGdTSko0WEV6a2FRTXdFVS9KYnR5NHhCZDlSUmU0dEpZ?=
- =?utf-8?B?S1FkZitpNkExQTU4bWU4Y1VhR1lqd3M0aUdldTJmbndZSnVSM1p3NVJja2RH?=
- =?utf-8?B?T3JERHFvRHpKMVU2VERlVnZBVk9NQnhjaDZWcDUxakZNV2trZEVnZVljOGI1?=
- =?utf-8?B?WXVWcjhNZVViTFJDdzkrbUxuZ1NJKzU2T2N1SENNNTdRL2dkY1gxRWtwQ1RQ?=
- =?utf-8?B?MlltYkN3VWdXWUp3V0dQL3N1alkxK0s1M0lCR01jejZZRGdwQk0zcml2QnFi?=
- =?utf-8?B?S1ZVQi80allaazhwN05lQnEyVWJsTTZiUDhGSnI4VWJKU0RaaWhkOUV1VFFa?=
- =?utf-8?B?ZlJaZGJFRjVwQnE1OXdtQXg1REloZjhSWTMwSXlKYjhFWGxVd3lFKy9IY3Ex?=
- =?utf-8?B?WWNQSWMwN1dkY3F1MFNwMkJpSUhVMGE2MzhKQ1I3eHVYOS9IM3RTaDdkUlNJ?=
- =?utf-8?B?T2FPc3RSTStwSHpLeCtNei9jZ0VVbjlDdXpRZE5pQWpzRVVSN3Vnb3hmWXlR?=
- =?utf-8?B?ckZYYmQvbjJhbUhaamlJK0tMMXJqN3lhV0EvdnhsQmlHRE45RTRGWVg4ZVk0?=
- =?utf-8?B?a0JmVlEzMGhwVUNsK2pSSjhVWG1ZUmNaNUNQdFRPTGwxYUpNS0VHNkNneFZB?=
- =?utf-8?Q?YS6F3GTDaGSis=3D?=
-X-OriginatorOrg: oracle.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2112764b-fd59-45df-40ea-08db61f3e442
-X-MS-Exchange-CrossTenant-AuthSource: CY8PR10MB7243.namprd10.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 May 2023 16:27:13.8844 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: srN9aOIFf2Y9ZBUmJf0uUZtXh08ZHFqAn4fNgMDEaKzNwfbizZ/3N3iRsGvlHxSL0Ur3jmaiv7s8VwYUDxKq7TdDCSVRqOC1bncFl3cTguc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR10MB5008
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.254,Aquarius:18.0.957,Hydra:6.0.573,FMLib:17.11.176.26
- definitions=2023-05-31_11,2023-05-31_03,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- phishscore=0 spamscore=0
- adultscore=0 mlxlogscore=999 bulkscore=0 malwarescore=0 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2304280000
- definitions=main-2305310140
-X-Proofpoint-ORIG-GUID: FWnCyAIaiNzu2Eszgb8D0ZWOkTvVyZyB
-X-Proofpoint-GUID: FWnCyAIaiNzu2Eszgb8D0ZWOkTvVyZyB
-Cc: kvm@vger.kernel.org, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, syzkaller-bugs@googlegroups.com,
- linux-kernel@vger.kernel.org,
- syzbot <syzbot+d0d442c22fa8db45ff0e@syzkaller.appspotmail.com>,
- stefanha@redhat.com, virtualization@lists.linux-foundation.org
+X-Originating-IP: 2001:678:76c:1:3996::58
+X-SpamExperts-Domain: out.mailshover.nl
+X-SpamExperts-Username: 2001:678:76c:1:3996::58
+Authentication-Results: mailshover.nl; auth=pass
+ smtp.auth=2001:678:76c:1:3996::58@out.mailshover.nl
+X-SpamExperts-Outgoing-Class: unsure
+X-SpamExperts-Outgoing-Evidence: Combined (0.50)
+X-Recommended-Action: accept
+X-Filter-ID: Pt3MvcO5N4iKaDQ5O6lkdGlMVN6RH8bjRMzItlySaT90jVzTLJt3vj6cAu5S4eQ0PUtbdvnXkggZ
+ 3YnVId/Y5jcf0yeVQAvfjHznO7+bT5xzOoHxWscew68UvLJqW/V1opzyoDuAP4C0aaz3STa5zA+i
+ +LgxjoYkXCbk6qYg3TLiBCq0YCJmjpNMbRTU3wgrC0Y3u/qphs34dTesYrpa6tiW8BKfyIS6EHTV
+ hG8std+lEPHKAzuJoUDzV774tvkniFloh3x3CR4Jb2gWRrpPKFGnGIGoHztXsNmb3KziTcGouJYi
+ QWxaMB85XLIGw32ggM1FjTV5UXzaWZFiY/IuWRLx/Du65BKz/oEcyvz1uhV1UWVvvdkzh9/Seh7h
+ SLJU1ktV7ekmGpxaAJ/k28IIq/fPjylt/HZ8k1j7Ut/7PLZdmEMNeZsamptl2lSfYoV17Ogv5mRk
+ S/8bWrZGatZmbSSp6wqBiWgCUvpQC7hp792Kjeyl92hTDJK+4O0vOmkQc1UkGqjsciyILerEw8FX
+ FnC9J8Tfx0FDPUDJU5K58QZrH/iEgzfzmnMXBIwMoePog2OkM5zMbrn2rUwXJSugd8VmzzAQ6gJW
+ hVbNViZCOWKRNtlfJySsZ2eS9qGTagUdlCnL4IjEaJi/Te03jgZkrrEp5+1QCuHCTUw0ggLUf54P
+ bqpDL7OvFc18bWQRihVmn+UCB3F67PeP7Iep2w5lJ/gPneWh5kublaxZVQoA47wpOMQJvQ/Ck3ii
+ U+4DQAj3DhYpgwxEDQuH7GNpv2Hu1lWbvKBSWz9JL+ncH+8owBXh81G7jrpdN7mVSzj08dE/spk/
+ hCiWnhfUApZOb69D6yGlvdSbGn5mVFvXj2ZlcXuRq3oTg7MWD+ZQoaUmN03jRfRyWTWs40tiYHh/
+ OVIkQNEvdUolNl0YNdMUajomuQYN/2oiLQnPnhxk6tgp0mibbPhjo3exrvNYlwUjtixib2avL+YD
+ c2YHUzAZPzd03lfeLwwWMKXDYWRmRiEAGsmgMir4QqyEiQ820Rz+zAgdxlz1pRXWhjh9fdbl44I0
+ Df3UANye5mij+Mqql8NZoGGE1H07YtaUHC2h22rHSV+m0L6jX0Is2t8eEL3ZqG06ZzoMifa29zXh
+ hznXry6IqJnerLfiFNb0FFyRjT8NmcTq0ZsK3TexxWxyube0LJjGSj+jnQa75Jum1feMIVfUDmU/
+ w0m9OyPDekvkd3BNWiTFSFOlxsY77ASAZB1sLAji3Opi4pBglvBqtTQxJduSkSzRv5CQHId5vY1x
+ DTpc1F/nsvY4ocfmWv3Fe9Iziczdq+A=
+X-Report-Abuse-To: spam@arg-plspam-c1n0.mailshover.nl
+Cc: stefanha@redhat.com, vgoyal@redhat.com, miklos@szeredi.hu
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -236,153 +115,153 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Peter-Jan Gootzen via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Peter-Jan Gootzen <peter-jan@gootzen.net>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 5/31/23 10:15 AM, Mike Christie wrote:
->>> rcu would work for your case and for what Jason had requested.
->> Yeah, so you already have some patches?
->>
->> Do you want to send it to solve this problem?
->>
-> Yeah, I'll break them out and send them later today when I can retest
-> rebased patches.
-> 
+When the Virtio queue is full, a work item is scheduled
+to execute in 1ms that retries adding the request to the queue.
+This is a large amount of time on the scale on which a
+virtio-fs device can operate. When using a DPU this is around
+40us baseline without going to a remote server (4k, QD=1).
+This patch queues requests when the Virtio queue is full,
+and when a completed request is taken off, immediately fills
+it back up with queued requests.
 
-Just one question. Do you core vhost developers consider RCU more complex
-or switching to READ_ONCE/WRITE_ONCE? I am asking because for this immediate
-regression fix we could just switch to the latter like below to just fix
-the crash if we think that is more simple.
+This reduces the 99.9th percentile latencies in our tests by
+60x and slightly increases the overall throughput, when using a
+queue depth 2x the size of the Virtio queue size, with a
+DPU-powered virtio-fs device.
 
-I think RCU is just a little more complex/invasive because it will have the
-extra synchronize_rcu calls.
+Signed-off-by: Peter-Jan Gootzen <peter-jan@gootzen.net>
+---
+V1 -> V2: Not scheduling dispatch work anymore when not needed
+and changed delayed_work structs to work_struct structs
 
+ fs/fuse/virtio_fs.c | 32 +++++++++++++++++---------------
+ 1 file changed, 17 insertions(+), 15 deletions(-)
 
-diff --git a/drivers/vhost/vhost.c b/drivers/vhost/vhost.c
-index a92af08e7864..03fd47a22a73 100644
---- a/drivers/vhost/vhost.c
-+++ b/drivers/vhost/vhost.c
-@@ -235,7 +235,7 @@ void vhost_dev_flush(struct vhost_dev *dev)
- {
- 	struct vhost_flush_struct flush;
- 
--	if (dev->worker) {
-+	if (READ_ONCE(dev->worker.vtsk)) {
- 		init_completion(&flush.wait_event);
- 		vhost_work_init(&flush.work, vhost_flush_work);
- 
-@@ -247,7 +247,9 @@ EXPORT_SYMBOL_GPL(vhost_dev_flush);
- 
- void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
- {
--	if (!dev->worker)
-+	struct vhost_task *vtsk = READ_ONCE(dev->worker.vtsk);
-+
-+	if (!vtsk)
- 		return;
- 
- 	if (!test_and_set_bit(VHOST_WORK_QUEUED, &work->flags)) {
-@@ -255,8 +257,8 @@ void vhost_work_queue(struct vhost_dev *dev, struct vhost_work *work)
- 		 * sure it was not in the list.
- 		 * test_and_set_bit() implies a memory barrier.
- 		 */
--		llist_add(&work->node, &dev->worker->work_list);
--		wake_up_process(dev->worker->vtsk->task);
-+		llist_add(&work->node, &dev->worker.work_list);
-+		wake_up_process(vtsk->task);
+diff --git a/fs/fuse/virtio_fs.c b/fs/fuse/virtio_fs.c
+index 4d8d4f16c727..a676297db09b 100644
+--- a/fs/fuse/virtio_fs.c
++++ b/fs/fuse/virtio_fs.c
+@@ -45,7 +45,7 @@ struct virtio_fs_vq {
+ 	struct work_struct done_work;
+ 	struct list_head queued_reqs;
+ 	struct list_head end_reqs;	/* End these requests */
+-	struct delayed_work dispatch_work;
++	struct work_struct dispatch_work;
+ 	struct fuse_dev *fud;
+ 	bool connected;
+ 	long in_flight;
+@@ -202,7 +202,7 @@ static void virtio_fs_drain_queue(struct virtio_fs_vq *fsvq)
  	}
- }
- EXPORT_SYMBOL_GPL(vhost_work_queue);
-@@ -264,7 +266,7 @@ EXPORT_SYMBOL_GPL(vhost_work_queue);
- /* A lockless hint for busy polling code to exit the loop */
- bool vhost_has_work(struct vhost_dev *dev)
- {
--	return dev->worker && !llist_empty(&dev->worker->work_list);
-+	return !llist_empty(&dev->worker.work_list);
- }
- EXPORT_SYMBOL_GPL(vhost_has_work);
  
-@@ -468,7 +470,7 @@ void vhost_dev_init(struct vhost_dev *dev,
- 	dev->umem = NULL;
- 	dev->iotlb = NULL;
- 	dev->mm = NULL;
--	dev->worker = NULL;
-+	memset(&dev->worker, 0, sizeof(dev->worker));
- 	dev->iov_limit = iov_limit;
- 	dev->weight = weight;
- 	dev->byte_weight = byte_weight;
-@@ -542,46 +544,38 @@ static void vhost_detach_mm(struct vhost_dev *dev)
- 
- static void vhost_worker_free(struct vhost_dev *dev)
- {
--	struct vhost_worker *worker = dev->worker;
-+	struct vhost_task *vtsk = READ_ONCE(dev->worker.vtsk);
- 
--	if (!worker)
-+	if (!vtsk)
- 		return;
- 
--	dev->worker = NULL;
--	WARN_ON(!llist_empty(&worker->work_list));
--	vhost_task_stop(worker->vtsk);
--	kfree(worker);
-+	vhost_task_stop(vtsk);
-+	WARN_ON(!llist_empty(&dev->worker.work_list));
-+	WRITE_ONCE(dev->worker.vtsk, NULL);
+ 	flush_work(&fsvq->done_work);
+-	flush_delayed_work(&fsvq->dispatch_work);
++	flush_work(&fsvq->dispatch_work);
  }
  
- static int vhost_worker_create(struct vhost_dev *dev)
+ static void virtio_fs_drain_all_queues_locked(struct virtio_fs *fs)
+@@ -346,6 +346,9 @@ static void virtio_fs_hiprio_done_work(struct work_struct *work)
+ 			dec_in_flight_req(fsvq);
+ 		}
+ 	} while (!virtqueue_enable_cb(vq) && likely(!virtqueue_is_broken(vq)));
++
++	if (!list_empty(&fsvq->queued_reqs))
++		schedule_work(&fsvq->dispatch_work);
+ 	spin_unlock(&fsvq->lock);
+ }
+ 
+@@ -353,7 +356,7 @@ static void virtio_fs_request_dispatch_work(struct work_struct *work)
  {
--	struct vhost_worker *worker;
- 	struct vhost_task *vtsk;
- 	char name[TASK_COMM_LEN];
+ 	struct fuse_req *req;
+ 	struct virtio_fs_vq *fsvq = container_of(work, struct virtio_fs_vq,
+-						 dispatch_work.work);
++						 dispatch_work);
  	int ret;
  
--	worker = kzalloc(sizeof(*worker), GFP_KERNEL_ACCOUNT);
--	if (!worker)
--		return -ENOMEM;
--
--	dev->worker = worker;
--	worker->kcov_handle = kcov_common_handle();
--	init_llist_head(&worker->work_list);
-+	dev->worker.kcov_handle = kcov_common_handle();
-+	init_llist_head(&dev->worker.work_list);
- 	snprintf(name, sizeof(name), "vhost-%d", current->pid);
- 
--	vtsk = vhost_task_create(vhost_worker, worker, name);
-+	vtsk = vhost_task_create(vhost_worker, &dev->worker, name);
- 	if (!vtsk) {
- 		ret = -ENOMEM;
- 		goto free_worker;
+ 	pr_debug("virtio-fs: worker %s called.\n", __func__);
+@@ -388,8 +391,6 @@ static void virtio_fs_request_dispatch_work(struct work_struct *work)
+ 			if (ret == -ENOMEM || ret == -ENOSPC) {
+ 				spin_lock(&fsvq->lock);
+ 				list_add_tail(&req->list, &fsvq->queued_reqs);
+-				schedule_delayed_work(&fsvq->dispatch_work,
+-						      msecs_to_jiffies(1));
+ 				spin_unlock(&fsvq->lock);
+ 				return;
+ 			}
+@@ -436,8 +437,6 @@ static int send_forget_request(struct virtio_fs_vq *fsvq,
+ 			pr_debug("virtio-fs: Could not queue FORGET: err=%d. Will try later\n",
+ 				 ret);
+ 			list_add_tail(&forget->list, &fsvq->queued_reqs);
+-			schedule_delayed_work(&fsvq->dispatch_work,
+-					      msecs_to_jiffies(1));
+ 			if (!in_flight)
+ 				inc_in_flight_req(fsvq);
+ 			/* Queue is full */
+@@ -469,7 +468,7 @@ static void virtio_fs_hiprio_dispatch_work(struct work_struct *work)
+ {
+ 	struct virtio_fs_forget *forget;
+ 	struct virtio_fs_vq *fsvq = container_of(work, struct virtio_fs_vq,
+-						 dispatch_work.work);
++						 dispatch_work);
+ 	pr_debug("virtio-fs: worker %s called.\n", __func__);
+ 	while (1) {
+ 		spin_lock(&fsvq->lock);
+@@ -647,6 +646,11 @@ static void virtio_fs_requests_done_work(struct work_struct *work)
+ 			virtio_fs_request_complete(req, fsvq);
+ 		}
  	}
- 
--	worker->vtsk = vtsk;
-+	WRITE_ONCE(dev->worker.vtsk, vtsk);
- 	vhost_task_start(vtsk);
- 	return 0;
- 
- free_worker:
--	kfree(worker);
--	dev->worker = NULL;
-+	WRITE_ONCE(dev->worker.vtsk, NULL);
- 	return ret;
++
++	spin_lock(&fsvq->lock);
++	if (!list_empty(&fsvq->queued_reqs))
++		schedule_work(&fsvq->dispatch_work);
++	spin_unlock(&fsvq->lock);
  }
  
-diff --git a/drivers/vhost/vhost.h b/drivers/vhost/vhost.h
-index 0308638cdeee..305ec8593d46 100644
---- a/drivers/vhost/vhost.h
-+++ b/drivers/vhost/vhost.h
-@@ -154,7 +154,7 @@ struct vhost_dev {
- 	struct vhost_virtqueue **vqs;
- 	int nvqs;
- 	struct eventfd_ctx *log_ctx;
--	struct vhost_worker *worker;
-+	struct vhost_worker worker;
- 	struct vhost_iotlb *umem;
- 	struct vhost_iotlb *iotlb;
- 	spinlock_t iotlb_lock;
+ /* Virtqueue interrupt handler */
+@@ -670,12 +674,12 @@ static void virtio_fs_init_vq(struct virtio_fs_vq *fsvq, char *name,
+ 
+ 	if (vq_type == VQ_REQUEST) {
+ 		INIT_WORK(&fsvq->done_work, virtio_fs_requests_done_work);
+-		INIT_DELAYED_WORK(&fsvq->dispatch_work,
+-				  virtio_fs_request_dispatch_work);
++		INIT_WORK(&fsvq->dispatch_work,
++			  virtio_fs_request_dispatch_work);
+ 	} else {
+ 		INIT_WORK(&fsvq->done_work, virtio_fs_hiprio_done_work);
+-		INIT_DELAYED_WORK(&fsvq->dispatch_work,
+-				  virtio_fs_hiprio_dispatch_work);
++		INIT_WORK(&fsvq->dispatch_work,
++			  virtio_fs_hiprio_dispatch_work);
+ 	}
+ }
+ 
+@@ -1254,8 +1258,6 @@ __releases(fiq->lock)
+ 			spin_lock(&fsvq->lock);
+ 			list_add_tail(&req->list, &fsvq->queued_reqs);
+ 			inc_in_flight_req(fsvq);
+-			schedule_delayed_work(&fsvq->dispatch_work,
+-						msecs_to_jiffies(1));
+ 			spin_unlock(&fsvq->lock);
+ 			return;
+ 		}
+@@ -1265,7 +1267,7 @@ __releases(fiq->lock)
+ 		/* Can't end request in submission context. Use a worker */
+ 		spin_lock(&fsvq->lock);
+ 		list_add_tail(&req->list, &fsvq->end_reqs);
+-		schedule_delayed_work(&fsvq->dispatch_work, 0);
++		schedule_work(&fsvq->dispatch_work);
+ 		spin_unlock(&fsvq->lock);
+ 		return;
+ 	}
+-- 
+2.34.1
 
 _______________________________________________
 Virtualization mailing list
