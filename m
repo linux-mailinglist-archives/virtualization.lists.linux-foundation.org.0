@@ -1,72 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 627B771FDA1
-	for <lists.virtualization@lfdr.de>; Fri,  2 Jun 2023 11:22:32 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 99B5271FE68
+	for <lists.virtualization@lfdr.de>; Fri,  2 Jun 2023 11:56:38 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id E460A426F6;
-	Fri,  2 Jun 2023 09:22:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E460A426F6
+	by smtp3.osuosl.org (Postfix) with ESMTP id 27BAD615D8;
+	Fri,  2 Jun 2023 09:56:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 27BAD615D8
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=AtDlqxN9
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 0vhY5-A7YABR; Fri,  2 Jun 2023 09:22:29 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 2tzTIZrTQdfJ; Fri,  2 Jun 2023 09:56:33 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id B2495426EF;
-	Fri,  2 Jun 2023 09:22:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B2495426EF
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 56027615D1;
+	Fri,  2 Jun 2023 09:56:33 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 56027615D1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 7AFBFC0029;
-	Fri,  2 Jun 2023 09:22:28 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 97EEAC0088;
+	Fri,  2 Jun 2023 09:56:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EBCE2C0029
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 16233C0029
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jun 2023 09:22:26 +0000 (UTC)
+ Fri,  2 Jun 2023 09:56:31 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id C72CB615C3
+ by smtp3.osuosl.org (Postfix) with ESMTP id DDBEC615CB
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jun 2023 09:22:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C72CB615C3
+ Fri,  2 Jun 2023 09:56:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DDBEC615CB
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1vgUM6QkTexO
+ with ESMTP id EqerUfhDI4Jy
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jun 2023 09:22:24 +0000 (UTC)
+ Fri,  2 Jun 2023 09:56:26 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DF945615C1
-Received: from out30-99.freemail.mail.aliyun.com
- (out30-99.freemail.mail.aliyun.com [115.124.30.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id DF945615C1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 96D21615C4
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 96D21615C4
  for <virtualization@lists.linux-foundation.org>;
- Fri,  2 Jun 2023 09:22:23 +0000 (UTC)
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R291e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0Vk9Mo2n_1685697738; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vk9Mo2n_1685697738) by smtp.aliyun-inc.com;
- Fri, 02 Jun 2023 17:22:19 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v10 10/10] virtio_net: support dma premapped
-Date: Fri,  2 Jun 2023 17:22:06 +0800
-Message-Id: <20230602092206.50108-11-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20230602092206.50108-1-xuanzhuo@linux.alibaba.com>
-References: <20230602092206.50108-1-xuanzhuo@linux.alibaba.com>
+ Fri,  2 Jun 2023 09:56:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1685699786; x=1717235786;
+ h=date:from:to:cc:subject:message-id:references:
+ mime-version:in-reply-to;
+ bh=pAgKRoXqRVadaelHXWC7m0n4Mx4Yh4aRGVNZmKHtEd0=;
+ b=AtDlqxN9SV/clmUwdxRuBCDXthsSPDLAkq8CqTcEmlo/JWlilWLSE//7
+ 7hn5FjZ8ppY8kHbOYTlZqNDQhUeU2iPxZFQaQzQwq+Qk5YfQU3OEBuaUh
+ wmvy0+3hkyj1/eygN5W1cNehVW3xtBCP/Im8XWcqSdxNU8khf6AnqPSyn
+ A1tMfNfBCmVPbuOu9/e920UvhM1K4I7z4ZULFhWYgUbCeiA5c17Og7izT
+ jhYjeYnm+/9K+maLJwM77RbIvJNeeJWg3Vy8iIpRsSPXqggidV2Xej5S7
+ imTS3/pVUP0t78R3eNFUnnFVjRouuLF6hcm9xnEvh67Sa4SBJkkf+vkJT w==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10728"; a="353326334"
+X-IronPort-AV: E=Sophos;i="6.00,212,1681196400"; d="scan'208";a="353326334"
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+ by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 02 Jun 2023 02:56:25 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10728"; a="685267326"
+X-IronPort-AV: E=Sophos;i="6.00,212,1681196400"; d="scan'208";a="685267326"
+Received: from lkp-server01.sh.intel.com (HELO 15ab08e44a81) ([10.239.97.150])
+ by orsmga006.jf.intel.com with ESMTP; 02 Jun 2023 02:56:22 -0700
+Received: from kbuild by 15ab08e44a81 with local (Exim 4.96)
+ (envelope-from <lkp@intel.com>) id 1q51W9-0000Ij-2r;
+ Fri, 02 Jun 2023 09:56:21 +0000
+Date: Fri, 2 Jun 2023 17:56:12 +0800
+From: kernel test robot <lkp@intel.com>
+To: Shunsuke Mie <mie@igel.co.jp>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowang@redhat.com>, Rusty Russell <rusty@rustcorp.com.au>
+Subject: Re: [PATCH v4 1/1] vringh: IOMEM support
+Message-ID: <202306021725.3otSfXPF-lkp@intel.com>
+References: <20230602055211.309960-2-mie@igel.co.jp>
 MIME-Version: 1.0
-X-Git-Hash: 3bf1b1dbeb8a
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
- Alexei Starovoitov <ast@kernel.org>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
- Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
+Content-Disposition: inline
+In-Reply-To: <20230602055211.309960-2-mie@igel.co.jp>
+Cc: kvm@vger.kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, Shunsuke Mie <mie@igel.co.jp>,
+ oe-kbuild-all@lists.linux.dev
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -83,329 +98,237 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Introduce the module param "experiment_premapped" to enable the function
-that the virtio-net do dma mapping.
+Hi Shunsuke,
 
-If that is true, the vq of virtio-net is under the premapped mode.
-It just handle the sg with dma_address. And the driver must get the dma
-address of the buffer to unmap after get the buffer from virtio core.
+kernel test robot noticed the following build warnings:
 
-That will be useful when AF_XDP is enable, AF_XDP tx and the kernel packet
-xmit will share the tx queue, so the skb xmit must support the premapped
-mode.
+[auto build test WARNING on mst-vhost/linux-next]
+[also build test WARNING on linus/master horms-ipvs/master v6.4-rc4 next-20230602]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/net/virtio_net.c | 163 +++++++++++++++++++++++++++++++++------
- 1 file changed, 141 insertions(+), 22 deletions(-)
+url:    https://github.com/intel-lab-lkp/linux/commits/Shunsuke-Mie/vringh-IOMEM-support/20230602-135351
+base:   https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git linux-next
+patch link:    https://lore.kernel.org/r/20230602055211.309960-2-mie%40igel.co.jp
+patch subject: [PATCH v4 1/1] vringh: IOMEM support
+config: alpha-allyesconfig (https://download.01.org/0day-ci/archive/20230602/202306021725.3otSfXPF-lkp@intel.com/config)
+compiler: alpha-linux-gcc (GCC) 12.3.0
+reproduce (this is a W=1 build):
+        mkdir -p ~/bin
+        wget https://raw.githubusercontent.com/intel/lkp-tests/master/sbin/make.cross -O ~/bin/make.cross
+        chmod +x ~/bin/make.cross
+        # https://github.com/intel-lab-lkp/linux/commit/de2a1f5220c32e953400f225aba6bd294a8d41b8
+        git remote add linux-review https://github.com/intel-lab-lkp/linux
+        git fetch --no-tags linux-review Shunsuke-Mie/vringh-IOMEM-support/20230602-135351
+        git checkout de2a1f5220c32e953400f225aba6bd294a8d41b8
+        # save the config file
+        mkdir build_dir && cp config build_dir/.config
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=alpha olddefconfig
+        COMPILER_INSTALL_PATH=$HOME/0day COMPILER=gcc-12.3.0 ~/bin/make.cross W=1 O=build_dir ARCH=alpha SHELL=/bin/bash drivers/
 
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 2396c28c0122..5898212fcb3c 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -26,10 +26,11 @@
- static int napi_weight = NAPI_POLL_WEIGHT;
- module_param(napi_weight, int, 0444);
- 
--static bool csum = true, gso = true, napi_tx = true;
-+static bool csum = true, gso = true, napi_tx = true, experiment_premapped;
- module_param(csum, bool, 0444);
- module_param(gso, bool, 0444);
- module_param(napi_tx, bool, 0644);
-+module_param(experiment_premapped, bool, 0644);
- 
- /* FIXME: MTU in config. */
- #define GOOD_PACKET_LEN (ETH_HLEN + VLAN_HLEN + ETH_DATA_LEN)
-@@ -142,6 +143,9 @@ struct send_queue {
- 
- 	/* Record whether sq is in reset state. */
- 	bool reset;
-+
-+	/* The vq is premapped mode. */
-+	bool premapped;
- };
- 
- /* Internal representation of a receive virtqueue */
-@@ -174,6 +178,9 @@ struct receive_queue {
- 	char name[16];
- 
- 	struct xdp_rxq_info xdp_rxq;
-+
-+	/* The vq is premapped mode. */
-+	bool premapped;
- };
- 
- /* This structure can contain rss message with maximum settings for indirection table and keysize
-@@ -546,6 +553,105 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
- 	return skb;
- }
- 
-+static int virtnet_generic_unmap(struct virtqueue *vq, struct virtqueue_detach_cursor *cursor)
-+{
-+	enum dma_data_direction dir;
-+	dma_addr_t addr;
-+	u32 len;
-+	int err;
-+
-+	do {
-+		err = virtqueue_detach(vq, cursor, &addr, &len, &dir);
-+		if (!err || err == -EAGAIN)
-+			dma_unmap_page_attrs(virtqueue_dma_dev(vq), addr, len, dir, 0);
-+
-+	} while (err == -EAGAIN);
-+
-+	return err;
-+}
-+
-+static void *virtnet_detach_unused_buf(struct virtqueue *vq, bool premapped)
-+{
-+	struct virtqueue_detach_cursor cursor;
-+	void *buf;
-+
-+	if (!premapped)
-+		return virtqueue_detach_unused_buf(vq);
-+
-+	buf = virtqueue_detach_unused_buf_premapped(vq, &cursor);
-+	if (buf)
-+		virtnet_generic_unmap(vq, &cursor);
-+
-+	return buf;
-+}
-+
-+static void *virtnet_get_buf_ctx(struct virtqueue *vq, bool premapped, u32 *len, void **ctx)
-+{
-+	struct virtqueue_detach_cursor cursor;
-+	void *buf;
-+
-+	if (!premapped)
-+		return virtqueue_get_buf_ctx(vq, len, ctx);
-+
-+	buf = virtqueue_get_buf_premapped(vq, len, ctx, &cursor);
-+	if (buf)
-+		virtnet_generic_unmap(vq, &cursor);
-+
-+	return buf;
-+}
-+
-+#define virtnet_rq_get_buf(rq, plen, pctx) \
-+({ \
-+	typeof(rq) _rq = (rq); \
-+	virtnet_get_buf_ctx(_rq->vq, _rq->premapped, plen, pctx); \
-+})
-+
-+#define virtnet_sq_get_buf(sq, plen, pctx) \
-+({ \
-+	typeof(sq) _sq = (sq); \
-+	virtnet_get_buf_ctx(_sq->vq, _sq->premapped, plen, pctx); \
-+})
-+
-+static int virtnet_add_sg(struct virtqueue *vq, bool premapped,
-+			  struct scatterlist *sg, unsigned int num, bool out,
-+			  void *data, void *ctx, gfp_t gfp)
-+{
-+	enum dma_data_direction dir;
-+	struct device *dev;
-+	int err, ret;
-+
-+	if (!premapped)
-+		return virtqueue_add_sg(vq, sg, num, out, data, ctx, gfp);
-+
-+	dir = out ? DMA_TO_DEVICE : DMA_FROM_DEVICE;
-+	dev = virtqueue_dma_dev(vq);
-+
-+	ret = dma_map_sg_attrs(dev, sg, num, dir, 0);
-+	if (ret != num)
-+		goto err;
-+
-+	err = virtqueue_add_sg(vq, sg, num, out, data, ctx, gfp);
-+	if (err < 0)
-+		goto err;
-+
-+	return 0;
-+
-+err:
-+	dma_unmap_sg_attrs(dev, sg, num, dir, 0);
-+	return -ENOMEM;
-+}
-+
-+static int virtnet_add_outbuf(struct send_queue *sq, unsigned int num, void *data)
-+{
-+	return virtnet_add_sg(sq->vq, sq->premapped, sq->sg, num, true, data, NULL, GFP_ATOMIC);
-+}
-+
-+static int virtnet_add_inbuf(struct receive_queue *rq, unsigned int num, void *data,
-+			     void *ctx, gfp_t gfp)
-+{
-+	return virtnet_add_sg(rq->vq, rq->premapped, rq->sg, num, false, data, ctx, gfp);
-+}
-+
- static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
- {
- 	unsigned int len;
-@@ -553,7 +659,7 @@ static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
- 	unsigned int bytes = 0;
- 	void *ptr;
- 
--	while ((ptr = virtqueue_get_buf(sq->vq, &len)) != NULL) {
-+	while ((ptr = virtnet_sq_get_buf(sq, &len, NULL)) != NULL) {
- 		if (likely(!is_xdp_frame(ptr))) {
- 			struct sk_buff *skb = ptr;
- 
-@@ -667,8 +773,7 @@ static int __virtnet_xdp_xmit_one(struct virtnet_info *vi,
- 			    skb_frag_size(frag), skb_frag_off(frag));
- 	}
- 
--	err = virtqueue_add_outbuf(sq->vq, sq->sg, nr_frags + 1,
--				   xdp_to_ptr(xdpf), GFP_ATOMIC);
-+	err = virtnet_add_outbuf(sq, nr_frags + 1, xdp_to_ptr(xdpf));
- 	if (unlikely(err))
- 		return -ENOSPC; /* Caller handle free/refcnt */
- 
-@@ -744,7 +849,7 @@ static int virtnet_xdp_xmit(struct net_device *dev,
- 	}
- 
- 	/* Free up any pending old buffers before queueing new ones. */
--	while ((ptr = virtqueue_get_buf(sq->vq, &len)) != NULL) {
-+	while ((ptr = virtnet_sq_get_buf(sq, &len, NULL)) != NULL) {
- 		if (likely(is_xdp_frame(ptr))) {
- 			struct xdp_frame *frame = ptr_to_xdp(ptr);
- 
-@@ -828,7 +933,7 @@ static struct page *xdp_linearize_page(struct receive_queue *rq,
- 		void *buf;
- 		int off;
- 
--		buf = virtqueue_get_buf(rq->vq, &buflen);
-+		buf = virtnet_rq_get_buf(rq, &buflen, NULL);
- 		if (unlikely(!buf))
- 			goto err_buf;
- 
-@@ -1119,7 +1224,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 		return -EINVAL;
- 
- 	while (--*num_buf > 0) {
--		buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx);
-+		buf = virtnet_rq_get_buf(rq, &len, &ctx);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers out of %d missing\n",
- 				 dev->name, *num_buf,
-@@ -1344,7 +1449,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 	while (--num_buf) {
- 		int num_skb_frags;
- 
--		buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx);
-+		buf = virtnet_rq_get_buf(rq, &len, &ctx);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers out of %d missing\n",
- 				 dev->name, num_buf,
-@@ -1407,7 +1512,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- err_skb:
- 	put_page(page);
- 	while (num_buf-- > 1) {
--		buf = virtqueue_get_buf(rq->vq, &len);
-+		buf = virtnet_rq_get_buf(rq, &len, NULL);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers missing\n",
- 				 dev->name, num_buf);
-@@ -1534,7 +1639,7 @@ static int add_recvbuf_small(struct virtnet_info *vi, struct receive_queue *rq,
- 	alloc_frag->offset += len;
- 	sg_init_one(rq->sg, buf + VIRTNET_RX_PAD + xdp_headroom,
- 		    vi->hdr_len + GOOD_PACKET_LEN);
--	err = virtqueue_add_inbuf_ctx(rq->vq, rq->sg, 1, buf, ctx, gfp);
-+	err = virtnet_add_inbuf(rq, 1, buf, ctx, gfp);
- 	if (err < 0)
- 		put_page(virt_to_head_page(buf));
- 	return err;
-@@ -1581,8 +1686,8 @@ static int add_recvbuf_big(struct virtnet_info *vi, struct receive_queue *rq,
- 
- 	/* chain first in list head */
- 	first->private = (unsigned long)list;
--	err = virtqueue_add_inbuf(rq->vq, rq->sg, vi->big_packets_num_skbfrags + 2,
--				  first, gfp);
-+	err = virtnet_add_inbuf(rq, vi->big_packets_num_skbfrags + 2,
-+				first, NULL, gfp);
- 	if (err < 0)
- 		give_pages(rq, first);
- 
-@@ -1645,7 +1750,7 @@ static int add_recvbuf_mergeable(struct virtnet_info *vi,
- 
- 	sg_init_one(rq->sg, buf, len);
- 	ctx = mergeable_len_to_ctx(len + room, headroom);
--	err = virtqueue_add_inbuf_ctx(rq->vq, rq->sg, 1, buf, ctx, gfp);
-+	err = virtnet_add_inbuf(rq, 1, buf, ctx, gfp);
- 	if (err < 0)
- 		put_page(virt_to_head_page(buf));
- 
-@@ -1768,13 +1873,13 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
- 		void *ctx;
- 
- 		while (stats.packets < budget &&
--		       (buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx))) {
-+		       (buf = virtnet_rq_get_buf(rq, &len, &ctx))) {
- 			receive_buf(vi, rq, buf, len, ctx, xdp_xmit, &stats);
- 			stats.packets++;
- 		}
- 	} else {
- 		while (stats.packets < budget &&
--		       (buf = virtqueue_get_buf(rq->vq, &len)) != NULL) {
-+		       (buf = virtnet_rq_get_buf(rq, &len, NULL)) != NULL) {
- 			receive_buf(vi, rq, buf, len, NULL, xdp_xmit, &stats);
- 			stats.packets++;
- 		}
-@@ -1984,7 +2089,7 @@ static int xmit_skb(struct send_queue *sq, struct sk_buff *skb)
- 			return num_sg;
- 		num_sg++;
- 	}
--	return virtqueue_add_outbuf(sq->vq, sq->sg, num_sg, skb, GFP_ATOMIC);
-+	return virtnet_add_outbuf(sq, num_sg, skb);
- }
- 
- static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
-@@ -3552,15 +3657,17 @@ static void free_unused_bufs(struct virtnet_info *vi)
- 	int i;
- 
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
--		struct virtqueue *vq = vi->sq[i].vq;
--		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
--			virtnet_sq_free_unused_buf(vq, buf);
-+		struct send_queue *sq = &vi->sq[i];
-+
-+		while ((buf = virtnet_detach_unused_buf(sq->vq, sq->premapped)) != NULL)
-+			virtnet_sq_free_unused_buf(sq->vq, buf);
- 	}
- 
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
--		struct virtqueue *vq = vi->rq[i].vq;
--		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
--			virtnet_rq_free_unused_buf(vq, buf);
-+		struct receive_queue *rq = &vi->rq[i];
-+
-+		while ((buf = virtnet_detach_unused_buf(rq->vq, rq->premapped)) != NULL)
-+			virtnet_rq_free_unused_buf(rq->vq, buf);
- 	}
- }
- 
-@@ -3658,6 +3765,18 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
- 		vi->rq[i].vq = vqs[rxq2vq(i)];
- 		vi->rq[i].min_buf_len = mergeable_min_buf_len(vi, vi->rq[i].vq);
- 		vi->sq[i].vq = vqs[txq2vq(i)];
-+
-+		if (experiment_premapped) {
-+			if (!virtqueue_set_premapped(vi->rq[i].vq))
-+				vi->rq[i].premapped = true;
-+			else
-+				netdev_warn(vi->dev, "RXQ (%d) enable premapped failure.\n", i);
-+
-+			if (!virtqueue_set_premapped(vi->sq[i].vq))
-+				vi->sq[i].premapped = true;
-+			else
-+				netdev_warn(vi->dev, "TXQ (%d) enable premapped failure.\n", i);
-+		}
- 	}
- 
- 	/* run here: ret == 0. */
+If you fix the issue, kindly add following tag where applicable
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/202306021725.3otSfXPF-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+>> drivers/vhost/vringh.c:1661:5: warning: no previous prototype for 'vringh_init_iomem' [-Wmissing-prototypes]
+    1661 | int vringh_init_iomem(struct vringh *vrh, u64 features, unsigned int num,
+         |     ^~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1683:5: warning: no previous prototype for 'vringh_getdesc_iomem' [-Wmissing-prototypes]
+    1683 | int vringh_getdesc_iomem(struct vringh *vrh, struct vringh_kiov *riov,
+         |     ^~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1714:9: warning: no previous prototype for 'vringh_iov_pull_iomem' [-Wmissing-prototypes]
+    1714 | ssize_t vringh_iov_pull_iomem(struct vringh *vrh, struct vringh_kiov *riov,
+         |         ^~~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1729:9: warning: no previous prototype for 'vringh_iov_push_iomem' [-Wmissing-prototypes]
+    1729 | ssize_t vringh_iov_push_iomem(struct vringh *vrh, struct vringh_kiov *wiov,
+         |         ^~~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1744:6: warning: no previous prototype for 'vringh_abandon_iomem' [-Wmissing-prototypes]
+    1744 | void vringh_abandon_iomem(struct vringh *vrh, unsigned int num)
+         |      ^~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1759:5: warning: no previous prototype for 'vringh_complete_iomem' [-Wmissing-prototypes]
+    1759 | int vringh_complete_iomem(struct vringh *vrh, u16 head, u32 len)
+         |     ^~~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1777:6: warning: no previous prototype for 'vringh_notify_enable_iomem' [-Wmissing-prototypes]
+    1777 | bool vringh_notify_enable_iomem(struct vringh *vrh)
+         |      ^~~~~~~~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1790:6: warning: no previous prototype for 'vringh_notify_disable_iomem' [-Wmissing-prototypes]
+    1790 | void vringh_notify_disable_iomem(struct vringh *vrh)
+         |      ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+>> drivers/vhost/vringh.c:1802:5: warning: no previous prototype for 'vringh_need_notify_iomem' [-Wmissing-prototypes]
+    1802 | int vringh_need_notify_iomem(struct vringh *vrh)
+         |     ^~~~~~~~~~~~~~~~~~~~~~~~
+
+
+vim +/vringh_init_iomem +1661 drivers/vhost/vringh.c
+
+  1647	
+  1648	/**
+  1649	 * vringh_init_iomem - initialize a vringh for a vring on io-memory.
+  1650	 * @vrh: the vringh to initialize.
+  1651	 * @features: the feature bits for this ring.
+  1652	 * @num: the number of elements.
+  1653	 * @weak_barriers: true if we only need memory barriers, not I/O.
+  1654	 * @desc: the userspace descriptor pointer.
+  1655	 * @avail: the userspace avail pointer.
+  1656	 * @used: the userspace used pointer.
+  1657	 *
+  1658	 * Returns an error if num is invalid: you should check pointers
+  1659	 * yourself!
+  1660	 */
+> 1661	int vringh_init_iomem(struct vringh *vrh, u64 features, unsigned int num,
+  1662			      bool weak_barriers, struct vring_desc *desc,
+  1663			      struct vring_avail *avail, struct vring_used *used)
+  1664	{
+  1665		return vringh_init_kern(vrh, features, num, weak_barriers, desc, avail,
+  1666					used);
+  1667	}
+  1668	EXPORT_SYMBOL(vringh_init_iomem);
+  1669	
+  1670	/**
+  1671	 * vringh_getdesc_iomem - get next available descriptor from vring on io-memory.
+  1672	 * @vrh: the vring on io-memory.
+  1673	 * @riov: where to put the readable descriptors (or NULL)
+  1674	 * @wiov: where to put the writable descriptors (or NULL)
+  1675	 * @head: head index we received, for passing to vringh_complete_iomem().
+  1676	 * @gfp: flags for allocating larger riov/wiov.
+  1677	 *
+  1678	 * Returns 0 if there was no descriptor, 1 if there was, or -errno.
+  1679	 *
+  1680	 * There some notes, and those are same with vringh_getdesc_kern(). Please see
+  1681	 * it.
+  1682	 */
+> 1683	int vringh_getdesc_iomem(struct vringh *vrh, struct vringh_kiov *riov,
+  1684				 struct vringh_kiov *wiov, u16 *head, gfp_t gfp)
+  1685	{
+  1686		int err;
+  1687	
+  1688		err = __vringh_get_head(vrh, getu16_iomem, &vrh->last_avail_idx);
+  1689		if (err < 0)
+  1690			return err;
+  1691	
+  1692		/* Empty... */
+  1693		if (err == vrh->vring.num)
+  1694			return 0;
+  1695	
+  1696		*head = err;
+  1697		err = __vringh_iov(vrh, *head, riov, wiov, no_range_check, NULL, gfp,
+  1698				   copydesc_iomem);
+  1699		if (err)
+  1700			return err;
+  1701	
+  1702		return 1;
+  1703	}
+  1704	EXPORT_SYMBOL(vringh_getdesc_iomem);
+  1705	
+  1706	/**
+  1707	 * vringh_iov_pull_iomem - copy bytes from vring_iov.
+  1708	 * @riov: the riov as passed to vringh_getdesc_iomem() (updated as we consume)
+  1709	 * @dst: the place to copy.
+  1710	 * @len: the maximum length to copy.
+  1711	 *
+  1712	 * Returns the bytes copied <= len or a negative errno.
+  1713	 */
+> 1714	ssize_t vringh_iov_pull_iomem(struct vringh *vrh, struct vringh_kiov *riov,
+  1715				      void *dst, size_t len)
+  1716	{
+  1717		return vringh_iov_xfer(vrh, riov, dst, len, xfer_from_iomem);
+  1718	}
+  1719	EXPORT_SYMBOL(vringh_iov_pull_iomem);
+  1720	
+  1721	/**
+  1722	 * vringh_iov_push_iomem - copy bytes into vring_iov.
+  1723	 * @wiov: the wiov as passed to vringh_getdesc_iomem() (updated as we consume)
+  1724	 * @src: the place to copy from.
+  1725	 * @len: the maximum length to copy.
+  1726	 *
+  1727	 * Returns the bytes copied <= len or a negative errno.
+  1728	 */
+> 1729	ssize_t vringh_iov_push_iomem(struct vringh *vrh, struct vringh_kiov *wiov,
+  1730				      const void *src, size_t len)
+  1731	{
+  1732		return vringh_iov_xfer(vrh, wiov, (void *)src, len, xfer_to_iomem);
+  1733	}
+  1734	EXPORT_SYMBOL(vringh_iov_push_iomem);
+  1735	
+  1736	/**
+  1737	 * vringh_abandon_iomem - we've decided not to handle the descriptor(s).
+  1738	 * @vrh: the vring.
+  1739	 * @num: the number of descriptors to put back (ie. num
+  1740	 *	 vringh_getdesc_iomem() to undo).
+  1741	 *
+  1742	 * The next vringh_get_kern() will return the old descriptor(s) again.
+  1743	 */
+> 1744	void vringh_abandon_iomem(struct vringh *vrh, unsigned int num)
+  1745	{
+  1746		vringh_abandon_kern(vrh, num);
+  1747	}
+  1748	EXPORT_SYMBOL(vringh_abandon_iomem);
+  1749	
+  1750	/**
+  1751	 * vringh_complete_iomem - we've finished with descriptor, publish it.
+  1752	 * @vrh: the vring.
+  1753	 * @head: the head as filled in by vringh_getdesc_iomem().
+  1754	 * @len: the length of data we have written.
+  1755	 *
+  1756	 * You should check vringh_need_notify_iomem() after one or more calls
+  1757	 * to this function.
+  1758	 */
+> 1759	int vringh_complete_iomem(struct vringh *vrh, u16 head, u32 len)
+  1760	{
+  1761		struct vring_used_elem used;
+  1762	
+  1763		used.id = cpu_to_vringh32(vrh, head);
+  1764		used.len = cpu_to_vringh32(vrh, len);
+  1765	
+  1766		return __vringh_complete(vrh, &used, 1, putu16_iomem, putused_iomem);
+  1767	}
+  1768	EXPORT_SYMBOL(vringh_complete_iomem);
+  1769	
+  1770	/**
+  1771	 * vringh_notify_enable_iomem - we want to know if something changes.
+  1772	 * @vrh: the vring.
+  1773	 *
+  1774	 * This always enables notifications, but returns false if there are
+  1775	 * now more buffers available in the vring.
+  1776	 */
+> 1777	bool vringh_notify_enable_iomem(struct vringh *vrh)
+  1778	{
+  1779		return __vringh_notify_enable(vrh, getu16_iomem, putu16_iomem);
+  1780	}
+  1781	EXPORT_SYMBOL(vringh_notify_enable_iomem);
+  1782	
+  1783	/**
+  1784	 * vringh_notify_disable_iomem - don't tell us if something changes.
+  1785	 * @vrh: the vring.
+  1786	 *
+  1787	 * This is our normal running state: we disable and then only enable when
+  1788	 * we're going to sleep.
+  1789	 */
+> 1790	void vringh_notify_disable_iomem(struct vringh *vrh)
+  1791	{
+  1792		__vringh_notify_disable(vrh, putu16_iomem);
+  1793	}
+  1794	EXPORT_SYMBOL(vringh_notify_disable_iomem);
+  1795	
+  1796	/**
+  1797	 * vringh_need_notify_iomem - must we tell the other side about used buffers?
+  1798	 * @vrh: the vring we've called vringh_complete_iomem() on.
+  1799	 *
+  1800	 * Returns -errno or 0 if we don't need to tell the other side, 1 if we do.
+  1801	 */
+> 1802	int vringh_need_notify_iomem(struct vringh *vrh)
+  1803	{
+  1804		return __vringh_need_notify(vrh, getu16_iomem);
+  1805	}
+  1806	EXPORT_SYMBOL(vringh_need_notify_iomem);
+  1807	
+
 -- 
-2.32.0.3.g01195cf9f
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
