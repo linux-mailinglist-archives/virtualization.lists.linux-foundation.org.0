@@ -2,111 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 47B03729FE5
-	for <lists.virtualization@lfdr.de>; Fri,  9 Jun 2023 18:17:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id DAFC37292E5
+	for <lists.virtualization@lfdr.de>; Fri,  9 Jun 2023 10:22:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B44E884274;
-	Fri,  9 Jun 2023 16:17:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B44E884274
+	by smtp1.osuosl.org (Postfix) with ESMTP id 191F984156;
+	Fri,  9 Jun 2023 08:22:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 191F984156
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=HV8dNv+j
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UfOc9h69
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3y3YMLsN0tp4; Fri,  9 Jun 2023 16:17:50 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 9721184251;
-	Fri,  9 Jun 2023 16:17:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9721184251
+	with ESMTP id 5hEkgc89mpzj; Fri,  9 Jun 2023 08:22:23 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id E364283FE7;
+	Fri,  9 Jun 2023 08:22:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E364283FE7
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 6C2E7C0097;
-	Fri,  9 Jun 2023 16:17:48 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 06A5EC008C;
+	Fri,  9 Jun 2023 08:22:22 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EC9FEC007A
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7FA17C0029
  for <virtualization@lists.linux-foundation.org>;
- Fri,  9 Jun 2023 16:17:45 +0000 (UTC)
+ Fri,  9 Jun 2023 08:22:20 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C119242046
+ by smtp2.osuosl.org (Postfix) with ESMTP id 666D7402DC
  for <virtualization@lists.linux-foundation.org>;
- Fri,  9 Jun 2023 16:17:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C119242046
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=HV8dNv+j
+ Fri,  9 Jun 2023 08:22:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 666D7402DC
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
+ header.a=rsa-sha256 header.s=Intel header.b=UfOc9h69
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 8HBj0EB8waJm
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id FD08cFGAcj-t
  for <virtualization@lists.linux-foundation.org>;
- Fri,  9 Jun 2023 16:17:43 +0000 (UTC)
+ Fri,  9 Jun 2023 08:22:19 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9C44E42439
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 9C44E42439
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3978D4015E
+Received: from mga18.intel.com (mga18.intel.com [134.134.136.126])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 3978D4015E
  for <virtualization@lists.linux-foundation.org>;
- Fri,  9 Jun 2023 16:17:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1686327462;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type;
- bh=4M45gRnQ1u7hqy31r1Lf6wTaxv13BKes8mPSZrcPv2Y=;
- b=HV8dNv+jPAed3700iHy5eSGN4NcvCEDkrJVDpdFW2/Ff+kGFknl9FIaIF1DacB9XKSvy52
- XAvnW4ov4YL/EgJdnvnXOk2hm4jZULWIynXSzWUW4turBi+f9A8fqeFJFRGEXYLj2Os0kr
- iCYils6zuF4ZvL8Qef2pBaSl2JldrYg=
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-299-KgE1TpkJPv2t1oAG-Qmndw-1; Fri, 09 Jun 2023 12:17:41 -0400
-X-MC-Unique: KgE1TpkJPv2t1oAG-Qmndw-1
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-30c6060eb32so2554347f8f.1
- for <virtualization@lists.linux-foundation.org>;
- Fri, 09 Jun 2023 09:17:41 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1686327460; x=1688919460;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4M45gRnQ1u7hqy31r1Lf6wTaxv13BKes8mPSZrcPv2Y=;
- b=E1YOxbjGVIxGQTfgKaopHdyAIkQyeZu0vREtkJLGFnY6k9oy/E0HKUiYBA6Jt6cMjk
- aAPOaqA1dJsGr9I7M93s2D3Ls798sDbONCzArNgp4RT5sGi0uOI6dShShdxCJfLZeJHI
- yp5m8ddDuvefaAjAmG0+rLfrhUuNU++45T9J1RM73om5n+7FiiTGby+8JcBwZUal21HM
- TU0C/YXbvAjYllC+KMl9Mx1C36NCDA+HgykgwsPC86OsFSb03J/jcWBA5P5tbfzhY20B
- guqgzJekRpub1cEquKctD0qCroveHBHDqHFJkH6E/qobunhMxlKRLGkSUWmZICf0hZ8q
- DbRg==
-X-Gm-Message-State: AC+VfDxreYSrEnJrFFctKyYULulKFcYCAqH/OQ5epd94Dz9sEapiYPqH
- m7rtQLO8A5oH6ZWedBIibCFg5KgeoW0+FOHvQ/x47ZAcWPRNoTWFxcayNiUim6TbwyPaUBS4RsS
- RXAMYdnYsMlhhNMf6yZBG2e93i67gFeGcqq7a03wbOg==
-X-Received: by 2002:adf:e110:0:b0:307:2d0c:4036 with SMTP id
- t16-20020adfe110000000b003072d0c4036mr1422042wrz.66.1686327460472; 
- Fri, 09 Jun 2023 09:17:40 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ5MwccKZqMZmmQAMpaztP78KxQ/TadfL/ac1dUpnVsjT6zjT2OgsfcKy47axrXbgo+oojXt4w==
-X-Received: by 2002:adf:e110:0:b0:307:2d0c:4036 with SMTP id
- t16-20020adfe110000000b003072d0c4036mr1422026wrz.66.1686327460126; 
- Fri, 09 Jun 2023 09:17:40 -0700 (PDT)
-Received: from redhat.com ([2a06:c701:7403:2800:22a6:7656:500:4dab])
- by smtp.gmail.com with ESMTPSA id
- u12-20020a5d6acc000000b003062b6a522bsm4864763wrw.96.2023.06.09.09.17.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 09 Jun 2023 09:17:39 -0700 (PDT)
-Date: Fri, 9 Jun 2023 12:17:37 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Linus Torvalds <torvalds@linux-foundation.org>
-Subject: [GIT PULL] virtio,vhost,vdpa: bugfixes
-Message-ID: <20230609121737-mutt-send-email-mst@kernel.org>
+ Fri,  9 Jun 2023 08:22:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1686298939; x=1717834939;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=lOEZo56z5dpwqItP2zsKo9eL1v0moR1zXALkXEFrjbg=;
+ b=UfOc9h69e3IW/RPiwPqr3pobme15aL9B0x21Xc3B3P7MsLRLg8822brc
+ /soi050NNiDT5hYf8HW+Ol0PcWg7gNCaHHSMqY57REuHXq9Dz7uumdAnx
+ jNA/7SJwEMrTR97OYbu01VFXi5nT9rN8QW8+jLpn+bqPQ08akLUUts0eg
+ ai5aD9Ia6nw59yIvraVCshpW0e2ZUA6h/DRTEqqSoypZmlBf0NwkFDkyZ
+ lcAcdFDUWNxlebRz4b5Z3M4crKm00GpOftbwrYP6IHU1yAat5ouCgrLCc
+ 9zu0ZIKIgpt1i3UMroTxqRqYxU8ECzT4GsQd8AicYBXTt5NLMFf44yJR7 g==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10735"; a="342221800"
+X-IronPort-AV: E=Sophos;i="6.00,228,1681196400"; d="scan'208";a="342221800"
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+ by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 09 Jun 2023 01:22:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10735"; a="713423253"
+X-IronPort-AV: E=Sophos;i="6.00,228,1681196400"; d="scan'208";a="713423253"
+Received: from lingshan-icx.bj.intel.com ([10.240.192.125])
+ by fmsmga007.fm.intel.com with ESMTP; 09 Jun 2023 01:22:16 -0700
+From: Zhu Lingshan <lingshan.zhu@intel.com>
+To: mst@redhat.com,
+	jasowang@redhat.com
+Subject: [PATCH 0/3] vDPA/ifcvf: enable virtio-net on Intel F2000X-PL
+Date: Sat, 10 Jun 2023 00:21:57 +0800
+Message-Id: <20230609162200.875433-1-lingshan.zhu@intel.com>
+X-Mailer: git-send-email 2.39.1
 MIME-Version: 1.0
-X-Mutt-Fcc: =sent
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: sheng.zhao@bytedance.com, zwisler@chromium.org, kvm@vger.kernel.org,
- mst@redhat.com, syzbot+d0d442c22fa8db45ff0e@syzkaller.appspotmail.com,
- netdev@vger.kernel.org, zwisler@google.com, linux-kernel@vger.kernel.org,
- xieyongji@bytedance.com, asmetanin@yandex-team.ru, prathubaronia2011@gmail.com,
- zengxianjun@bytedance.com, virtualization@lists.linux-foundation.org,
- rongtao@cestc.cn
+Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -123,67 +94,27 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The following changes since commit 9561de3a55bed6bdd44a12820ba81ec416e705a7:
+Hi
 
-  Linux 6.4-rc5 (2023-06-04 14:04:27 -0400)
+This series enables vDPA/ifcvf support for virtio-net devices
+on Intel F2000X-PL Infrastructure Processing Unit.
 
-are available in the Git repository at:
+Please help review
 
-  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+Thanks!
 
-for you to fetch changes up to 07496eeab577eef1d4912b3e1b502a2b52002ac3:
+Zhu Lingshan (3):
+  vDPA/ifcvf: dynamic allocate vq data stores
+  vDPA/ifcvf: detect and report max allowed vq size
+  vDPA/ifcvf: implement new accessors for vq_state
 
-  tools/virtio: use canonical ftrace path (2023-06-09 12:08:08 -0400)
+ drivers/vdpa/ifcvf/ifcvf_base.c | 55 +++++++++++++++++++++++----------
+ drivers/vdpa/ifcvf/ifcvf_base.h | 26 +++++++---------
+ drivers/vdpa/ifcvf/ifcvf_main.c | 10 ++++--
+ 3 files changed, 58 insertions(+), 33 deletions(-)
 
-----------------------------------------------------------------
-virtio,vhost,vdpa: bugfixes
-
-A bunch of fixes all over the place
-
-Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
-
-----------------------------------------------------------------
-Andrey Smetanin (1):
-      vhost_net: revert upend_idx only on retriable error
-
-Dragos Tatulea (1):
-      vdpa/mlx5: Fix hang when cvq commands are triggered during device unregister
-
-Mike Christie (2):
-      vhost: Fix crash during early vhost_transport_send_pkt calls
-      vhost: Fix worker hangs due to missed wake up calls
-
-Prathu Baronia (1):
-      vhost: use kzalloc() instead of kmalloc() followed by memset()
-
-Rong Tao (2):
-      tools/virtio: Fix arm64 ringtest compilation error
-      tools/virtio: Add .gitignore for ringtest
-
-Ross Zwisler (1):
-      tools/virtio: use canonical ftrace path
-
-Shannon Nelson (3):
-      vhost_vdpa: tell vqs about the negotiated
-      vhost: support PACKED when setting-getting vring_base
-      vhost_vdpa: support PACKED when setting-getting vring_base
-
-Sheng Zhao (1):
-      vduse: avoid empty string for dev name
-
- drivers/vdpa/mlx5/net/mlx5_vnet.c       |  2 +-
- drivers/vdpa/vdpa_user/vduse_dev.c      |  3 ++
- drivers/vhost/net.c                     | 11 +++--
- drivers/vhost/vdpa.c                    | 34 +++++++++++++--
- drivers/vhost/vhost.c                   | 75 +++++++++++++++------------------
- drivers/vhost/vhost.h                   | 10 +++--
- kernel/vhost_task.c                     | 18 ++++----
- tools/virtio/ringtest/.gitignore        |  7 +++
- tools/virtio/ringtest/main.h            | 11 +++++
- tools/virtio/virtio-trace/README        |  2 +-
- tools/virtio/virtio-trace/trace-agent.c | 12 ++++--
- 11 files changed, 120 insertions(+), 65 deletions(-)
- create mode 100644 tools/virtio/ringtest/.gitignore
+-- 
+2.39.1
 
 _______________________________________________
 Virtualization mailing list
