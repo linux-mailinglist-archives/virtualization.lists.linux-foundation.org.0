@@ -1,102 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 57FE572AE2B
-	for <lists.virtualization@lfdr.de>; Sat, 10 Jun 2023 20:47:26 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4855C72B3ED
+	for <lists.virtualization@lfdr.de>; Sun, 11 Jun 2023 22:27:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id AA710405E6;
-	Sat, 10 Jun 2023 18:47:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AA710405E6
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=linutronix.de header.i=@linutronix.de header.a=rsa-sha256 header.s=2020 header.b=YCL2WcdN;
-	dkim=fail reason="signature verification failed" header.d=linutronix.de header.i=@linutronix.de header.a=ed25519-sha256 header.s=2020e header.b=S7g5PoBv
+	by smtp1.osuosl.org (Postfix) with ESMTP id 82714821C3;
+	Sun, 11 Jun 2023 20:27:54 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 82714821C3
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Zcz4_4PGxD07; Sat, 10 Jun 2023 18:47:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 87DBF405CA;
-	Sat, 10 Jun 2023 18:47:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 87DBF405CA
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Zg4huVWiEQRC; Sun, 11 Jun 2023 20:27:53 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 611AA821D0;
+	Sun, 11 Jun 2023 20:27:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 611AA821D0
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A8A04C008C;
-	Sat, 10 Jun 2023 18:47:22 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B0CE5C0089;
+	Sun, 11 Jun 2023 20:27:52 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id E7BD2C0029
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EE9A8C0029
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jun 2023 18:47:20 +0000 (UTC)
+ Sun, 11 Jun 2023 20:27:50 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id BC012821DA
+ by smtp1.osuosl.org (Postfix) with ESMTP id B5738821C3
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jun 2023 18:47:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BC012821DA
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (2048-bit key) header.d=linutronix.de header.i=@linutronix.de
- header.a=rsa-sha256 header.s=2020 header.b=YCL2WcdN; 
- dkim=pass header.d=linutronix.de header.i=@linutronix.de
- header.a=ed25519-sha256 header.s=2020e header.b=S7g5PoBv
+ Sun, 11 Jun 2023 20:27:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B5738821C3
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id binvejwJQ9J7
+ with ESMTP id WojPx0-Vr-pl
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jun 2023 18:47:19 +0000 (UTC)
-X-Greylist: delayed 00:09:58 by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3EB82821CE
-Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 3EB82821CE
+ Sun, 11 Jun 2023 20:27:48 +0000 (UTC)
+X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B57DD821B5
+Received: from out03.mta.xmission.com (out03.mta.xmission.com [166.70.13.233])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id B57DD821B5
  for <virtualization@lists.linux-foundation.org>;
- Sat, 10 Jun 2023 18:47:18 +0000 (UTC)
-From: Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020; t=1686422239;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=N7WjIOv23GkoARnLqItYOF1clW2sOuIKmsM3GXO5Xpg=;
- b=YCL2WcdNIO0s3K7UdC06CzI1RNfJDkJe7HEF4v5qdxN8RrO3sAaq8xX62f444BjcyFpI8P
- dvsdlA/V4XzVxCD0n8uz5bQYGAgwsvDqWJ8rNLJDHj8k8iQwRRGGrRVWI0YDNiCXV818Ht
- GruRrk0/QYF97Rhj5uVOQfTLlEitAY6Rs+rjvdpG7tob605G0Kvr/fVugOur6hufdowyf4
- Ax62Ig7bPHia5hggr2KaWqBtF0qOBpkmhrvFk02kMofvAv6EhF1xBRXZSKW4DrYvu52o5K
- D3W+c9UFX4owv7UrRYBLocORMja3sAJWQxRmRkowpokWoNy9GULDK6NIlr681w==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
- s=2020e; t=1686422239;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=N7WjIOv23GkoARnLqItYOF1clW2sOuIKmsM3GXO5Xpg=;
- b=S7g5PoBvQUVBSn498XvK9vJHSGy+5G3W0vpFYxeTng6YEJJyB4cAG/EGEkYC18Ui7RMwlG
- 7oqYWL4zDKXltfCg==
-To: Hou Wenlong <houwenlong.hwl@antgroup.com>, Dave Hansen
- <dave.hansen@intel.com>
-Subject: Re: [PATCH RFC 0/4] x86/fixmap: Unify FIXADDR_TOP
-In-Reply-To: <20230608093303.GA16983@k08j02272.eu95sqa>
-References: <cover.1684137557.git.houwenlong.hwl@antgroup.com>
- <1f633e99-d294-6932-31e9-0eb158d030ea@intel.com>
- <20230608093303.GA16983@k08j02272.eu95sqa>
-Date: Sat, 10 Jun 2023 20:37:18 +0200
-Message-ID: <87y1kr88pt.ffs@tglx>
+ Sun, 11 Jun 2023 20:27:48 +0000 (UTC)
+Received: from in02.mta.xmission.com ([166.70.13.52]:32866)
+ by out03.mta.xmission.com with esmtps (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
+ (envelope-from <ebiederm@xmission.com>)
+ id 1q8Rf7-00FsPF-6p; Sun, 11 Jun 2023 14:27:45 -0600
+Received: from ip68-110-29-46.om.om.cox.net ([68.110.29.46]:57338
+ helo=email.froward.int.ebiederm.org.xmission.com)
+ by in02.mta.xmission.com with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.93)
+ (envelope-from <ebiederm@xmission.com>)
+ id 1q8Rf5-00Dwr8-Ub; Sun, 11 Jun 2023 14:27:44 -0600
+From: "Eric W. Biederman" <ebiederm@xmission.com>
+To: Oleg Nesterov <oleg@redhat.com>
+References: <20230601183232.8384-1-michael.christie@oracle.com>
+ <20230602192254.GD555@redhat.com>
+ <87r0qt18qq.fsf_-_@email.froward.int.ebiederm.org>
+ <ae250076-7d55-c407-1066-86b37014c69c@oracle.com>
+ <20230605151037.GE32275@redhat.com>
+ <03c07f48-8922-f563-560c-f0d4cc3e1279@oracle.com>
+ <20230606121643.GD7542@redhat.com>
+ <39f5913c-e658-e476-0378-62236bb4ed49@oracle.com>
+ <20230606193907.GB18866@redhat.com>
+Date: Sun, 11 Jun 2023 15:27:37 -0500
+In-Reply-To: <20230606193907.GB18866@redhat.com> (Oleg Nesterov's message of
+ "Tue, 6 Jun 2023 21:39:07 +0200")
+Message-ID: <87o7llycau.fsf@email.froward.int.ebiederm.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/27.1 (gnu/linux)
 MIME-Version: 1.0
-Cc: Peter Zijlstra <peterz@infradead.org>,
- Dave Hansen <dave.hansen@linux.intel.com>,
- virtualization@lists.linux-foundation.org,
- Usama Arif <usama.arif@bytedance.com>, "H. Peter Anvin" <hpa@zytor.com>,
- x86@kernel.org, Lai Jiangshan <jiangshan.ljs@antgroup.com>,
- VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
- Ingo Molnar <mingo@redhat.com>, xen-devel@lists.xenproject.org,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>, Brian Gerst <brgerst@gmail.com>,
- Borislav Petkov <bp@alien8.de>, Andy Lutomirski <luto@kernel.org>,
- Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Suren Baghdasaryan <surenb@google.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Juergen Gross <jgross@suse.com>, Alexey Makhalov <amakhalov@vmware.com>,
- linux-kernel@vger.kernel.org,
- "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
- Andrew Morton <akpm@linux-foundation.org>, David Woodhouse <dwmw@amazon.co.uk>,
- "Mike Rapoport \(IBM\)" <rppt@kernel.org>
+X-XM-SPF: eid=1q8Rf5-00Dwr8-Ub; ; ;
+ mid=<87o7llycau.fsf@email.froward.int.ebiederm.org>; ; ;
+ hst=in02.mta.xmission.com; ; ; ip=68.110.29.46; ; ; frm=ebiederm@xmission.com;
+ ; ; spf=pass
+X-XM-AID: U2FsdGVkX18l/LHrg7YOf3qY6kN95CS3gXrqGb0gCq8=
+X-SA-Exim-Connect-IP: 68.110.29.46
+X-SA-Exim-Mail-From: ebiederm@xmission.com
+X-Spam-DCC: XMission; sa07 1397; Body=1 Fuz1=1 Fuz2=1 
+X-Spam-Combo: **;Oleg Nesterov <oleg@redhat.com>
+X-Spam-Relay-Country: 
+X-Spam-Timing: total 623 ms - load_scoreonly_sql: 0.06 (0.0%),
+ signal_user_changed: 12 (2.0%), b_tie_ro: 11 (1.7%), parse: 1.19
+ (0.2%), extract_message_metadata: 4.6 (0.7%), get_uri_detail_list:
+ 1.90 (0.3%), tests_pri_-2000: 3.4 (0.5%), tests_pri_-1000: 2.6 (0.4%),
+ tests_pri_-950: 1.28 (0.2%), tests_pri_-900: 1.11 (0.2%),
+ tests_pri_-200: 0.89 (0.1%), tests_pri_-100: 4.5 (0.7%),
+ tests_pri_-90: 54 (8.7%), check_bayes: 52 (8.4%), b_tokenize: 7 (1.1%),
+ b_tok_get_all: 7 (1.2%), b_comp_prob: 2.4 (0.4%), b_tok_touch_all: 32
+ (5.2%), b_finish: 0.92 (0.1%), tests_pri_0: 515 (82.7%),
+ check_dkim_signature: 0.60 (0.1%), check_dkim_adsp: 2.6 (0.4%),
+ poll_dns_idle: 0.54 (0.1%), tests_pri_10: 2.9 (0.5%), tests_pri_500: 9
+ (1.4%), rewrite_mail: 0.00 (0.0%)
+Subject: Re: [CFT][PATCH v3] fork, vhost: Use CLONE_THREAD to fix freezer/ps
+ regression
+X-SA-Exim-Version: 4.2.1 (built Sat, 08 Feb 2020 21:53:50 +0000)
+X-SA-Exim-Scanned: Yes (on in02.mta.xmission.com)
+Cc: axboe@kernel.dk, brauner@kernel.org, mst@redhat.com, linux@leemhuis.info,
+ linux-kernel@vger.kernel.org, stefanha@redhat.com, nicolas.dichtel@6wind.com,
+ virtualization@lists.linux-foundation.org, torvalds@linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -113,29 +115,56 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Jun 08 2023 at 17:33, Hou Wenlong wrote:
-> On Wed, Jun 07, 2023 at 08:49:15PM +0800, Dave Hansen wrote:
->> What problems does this patch set solve?  How might that solution be
->> visible to end users?  Why is this problem important to you?
+Oleg Nesterov <oleg@redhat.com> writes:
+
+> On 06/06, Mike Christie wrote:
+>>
+>> On 6/6/23 7:16 AM, Oleg Nesterov wrote:
+>> > On 06/05, Mike Christie wrote:
+>> >
+>> >> So it works like if we were using a kthread still:
+>> >>
+>> >> 1. Userapce thread0 opens /dev/vhost-$something.
+>> >> 2. thread0 does VHOST_SET_OWNER ioctl. This calls vhost_task_create() to
+>> >> create the task_struct which runs the vhost_worker() function which handles
+>> >> the work->fns.
+>> >> 3. If userspace now does a SIGKILL or just exits without doing a close() on
+>> >> /dev/vhost-$something, then when thread0 does exit_files() that will do the
+>> >> fput that does vhost-$something's file_operations->release.
+>> >
+>> > So, at least in this simple case vhost_worker() can just exit after SIGKILL,
+>> > and thread0 can flush the outstanding commands when it calls vhost_dev_flush()
+>> > rather than wait for vhost_worker().
+>> >
+>> > Right?
+>>
+>> With the current code, the answer is no. We would hang like I mentioned here:
+>>
+>> https://lore.kernel.org/lkml/ae250076-7d55-c407-1066-86b37014c69c@oracle.com/
 >
-> We want to build the kernel as PIE and allow the kernel image area,
-> including the fixmap area, to be placed at any virtual address.
+> If only I could fully understand this email ;)
+>
+> Could you spell to explain why this can't work (again, in this simple case) ?
+>
+> My current (and I know, very poor) understanding is that .release() should
+> roughly do the following:
+>
+> 	1. Ensure that vhost_work_queue() can't add the new callbacks
+>
+> 	2. Call vhost_dev_flush() to ensure that worker->work_list is empty
+>
+> 	3. Call vhost_task_stop()
 
-You are still failing to tell us why you want that and which problem
-this solves. Just that fact that you want to something is not an
-argument.
 
-> We have also implemented a PV Linux guest based on PIE, which can be
-> used in software virtualization similar to Lguest. PIE makes the guest
-> kernel share the host kernel space similar to a normal userspace
-> process.  Additionally, we are considering whether it is possible to
-> use PIE and PVOPS to implement a user-mode kernel.
+At least in the case of exec by the time the final fput happens
+from close_on_exec the task has already changed it's mm.  So the
+conditions are wrong to run the work queue items.
 
-That solves what?
+For close(2) and SIGKILL perhaps, but definitely not in the case of
+exec.
 
-Thanks,
 
-        tglx
+Eric
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
