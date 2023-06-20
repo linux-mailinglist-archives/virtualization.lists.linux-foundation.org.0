@@ -1,101 +1,102 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 985BF736F6C
-	for <lists.virtualization@lfdr.de>; Tue, 20 Jun 2023 16:58:17 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E170737008
+	for <lists.virtualization@lfdr.de>; Tue, 20 Jun 2023 17:13:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B546B822E5;
-	Tue, 20 Jun 2023 14:58:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B546B822E5
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=G3DILaIj
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id INTLLfpcM0xX; Tue, 20 Jun 2023 14:58:14 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 635ED822DA;
-	Tue, 20 Jun 2023 14:58:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 635ED822DA
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A9ECCC008C;
-	Tue, 20 Jun 2023 14:58:13 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9AB74C0029
- for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jun 2023 14:58:12 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 743BC401F3
- for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jun 2023 14:58:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 743BC401F3
+	by smtp4.osuosl.org (Postfix) with ESMTP id 9E7A54094B;
+	Tue, 20 Jun 2023 15:13:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9E7A54094B
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=G3DILaIj
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=N6t88ac0
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id cS73RFwMr5t3
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id b1OzaAeXCwYV; Tue, 20 Jun 2023 15:13:55 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 00D1C40919;
+	Tue, 20 Jun 2023 15:13:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 00D1C40919
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2E125C008C;
+	Tue, 20 Jun 2023 15:13:54 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 99930C0029
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jun 2023 14:58:11 +0000 (UTC)
-X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 45EB94015E
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 45EB94015E
+ Tue, 20 Jun 2023 15:13:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 7E29781324
  for <virtualization@lists.linux-foundation.org>;
- Tue, 20 Jun 2023 14:58:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687273090;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=096kfvQCNbO3jjvPJlb61wpL4gpNse4m8jbz5dQcH+U=;
- b=G3DILaIjYHb+Tnc5Pca2c9IlkoHV8B1zEu8QpK4LfclT2xdQPXqm6hdGjz5/GmSibD2HbD
- Cj5GDXG/eecoNv6SIOBebvbJk6T1JrsDXo3P51VgWtySfFRNJlTcNdEHnF3+tIF1Nntx9C
- 9TvgL6NI4HtEzL6gvpoiORQA79lXOII=
-Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
- [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-246-cetdja7_MNaYUIl_PdTHIQ-1; Tue, 20 Jun 2023 10:58:01 -0400
-X-MC-Unique: cetdja7_MNaYUIl_PdTHIQ-1
-Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.rdu2.redhat.com
- [10.11.54.2])
- (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
- (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id D63E710665CD;
- Tue, 20 Jun 2023 14:54:49 +0000 (UTC)
-Received: from warthog.procyon.org.com (unknown [10.42.28.4])
- by smtp.corp.redhat.com (Postfix) with ESMTP id D321E40C6CD2;
- Tue, 20 Jun 2023 14:54:46 +0000 (UTC)
-From: David Howells <dhowells@redhat.com>
-To: netdev@vger.kernel.org
-Subject: [PATCH net-next v3 18/18] net: Kill MSG_SENDPAGE_NOTLAST
-Date: Tue, 20 Jun 2023 15:53:37 +0100
-Message-ID: <20230620145338.1300897-19-dhowells@redhat.com>
-In-Reply-To: <20230620145338.1300897-1-dhowells@redhat.com>
-References: <20230620145338.1300897-1-dhowells@redhat.com>
+ Tue, 20 Jun 2023 15:13:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7E29781324
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=N6t88ac0
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YrnGX4L31UTY
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Jun 2023 15:13:51 +0000 (UTC)
+X-Greylist: whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6DD598129F
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 6DD598129F
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Jun 2023 15:13:51 +0000 (UTC)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-666683eb028so2709845b3a.0
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 20 Jun 2023 08:13:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1687274031; x=1689866031;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=cYhpq8kII/zBY/3iWU+UakUCHm4VL9Cr+rVrcVWuTHY=;
+ b=N6t88ac0/O9s1WSvaIdjbqn07sFmRw7LRT9pzUoAPItbwebr1dZnPGKuiO5ep9pKb2
+ UBuw49WxISSOx7oeBfa4zbSCOE68r0PGKekjIy3XjV5KVMtuATtOpyGJafarRoNOxZpX
+ JavurTTFcLQInhHa02OYpekFd7Wg/YQL4TOJU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1687274031; x=1689866031;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cYhpq8kII/zBY/3iWU+UakUCHm4VL9Cr+rVrcVWuTHY=;
+ b=FkOlKE7eGO4INufgR2pUnlBsstn8TXAnuEpLOxSw0UQWOjXeYrheLsliGR6GBt9JJP
+ fgnljDhrNqQ4pvRxiQL7lHZfoWDEirxp3tO8XJN9Yh4rZCFRpYHnb6z4qpHeHST9Gs0H
+ vFTv6etvS2P3mexoIB7WINu+rQoZ4Zi+y6KWtZ80XPx0YNQ7yFovz9tzyPsByH8G4gMh
+ V/uVtRcRQvjcS3x0FfcAsY/Rbn1zp8cxX5MDeOM5mUwJXwjXLLfT4448paoCCHVukxGf
+ 0CsgpIIkKim2Au1uxw7bKYZ6lhFI6hsatd2AqD92VcycIY5lRuRgkHJ00ngHY7e+9t1W
+ lyIQ==
+X-Gm-Message-State: AC+VfDyxWQqwFnKt+7SVwW5sCpH6zfHraOkzQszdpauqLK9DgnHGNDnc
+ otqmTs6gwLL7RodSO0hFYuG6hQ==
+X-Google-Smtp-Source: ACHHUZ5FuufZTijicZcf+ErEEp0rFQuZuKEzL6yES24xb2lmYLqT0Bo9sqezWSJJNuVJRjpYIfom4g==
+X-Received: by 2002:a05:6a20:8411:b0:10c:4c76:e909 with SMTP id
+ c17-20020a056a20841100b0010c4c76e909mr10027154pzd.8.1687274030764; 
+ Tue, 20 Jun 2023 08:13:50 -0700 (PDT)
+Received: from keiichiw1.tok.corp.google.com
+ ([2401:fa00:8f:203:e87e:41e3:d762:f8a8])
+ by smtp.gmail.com with ESMTPSA id
+ x9-20020a170902ec8900b001aaf370b1c7sm1731872plg.278.2023.06.20.08.13.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Jun 2023 08:13:50 -0700 (PDT)
+From: Keiichi Watanabe <keiichiw@chromium.org>
+To: LKML <linux-kernel@vger.kernel.org>
+Subject: [PATCH 0/3] Support negative dentry cache for FUSE and virtiofs
+Date: Wed, 21 Jun 2023 00:13:13 +0900
+Message-ID: <20230620151328.1637569-1-keiichiw@chromium.org>
+X-Mailer: git-send-email 2.41.0.185.g7c58973941-goog
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.2
-Cc: linux-doc@vger.kernel.org, Alexander Duyck <alexander.duyck@gmail.com>,
- virtualization@lists.linux-foundation.org, David Howells <dhowells@redhat.com>,
- linux-mm@kvack.org, Eric Dumazet <edumazet@google.com>,
- linux-afs@lists.infradead.org,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, linux-x25@vger.kernel.org,
- dccp@vger.kernel.org, linux-rdma@vger.kernel.org,
- Matthew Wilcox <willy@infradead.org>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, linux-arm-msm@vger.kernel.org,
- rds-devel@oss.oracle.com, linux-can@vger.kernel.org,
- linux-hams@vger.kernel.org, mptcp@lists.linux.dev,
- Jens Axboe <axboe@kernel.dk>, David Ahern <dsahern@kernel.org>,
- linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
- linux-sctp@vger.kernel.org, tipc-discussion@lists.sourceforge.net,
- linux-crypto@vger.kernel.org, bpf@vger.kernel.org, linux-wpan@vger.kernel.org,
- "David S. Miller" <davem@davemloft.net>
+Cc: uekawa@chromium.org, mhiramat@google.com, drosen@google.com,
+ Jonathan Corbet <corbet@lwn.net>, sarthakkukreti@google.com,
+ Miklos Szeredi <miklos@szeredi.hu>, linux-doc@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, takayas@chromium.org,
+ Stefan Hajnoczi <stefanha@redhat.com>, linux-fsdevel@vger.kernel.org,
+ Vivek Goyal <vgoyal@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -112,138 +113,82 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Now that ->sendpage() has been removed, MSG_SENDPAGE_NOTLAST can be cleaned
-up.  Things were converted to use MSG_MORE instead, but the protocol
-sendpage stubs still convert MSG_SENDPAGE_NOTLAST to MSG_MORE, which is now
-unnecessary.
 
-Signed-off-by: David Howells <dhowells@redhat.com>
-cc: "David S. Miller" <davem@davemloft.net>
-cc: Eric Dumazet <edumazet@google.com>
-cc: Jakub Kicinski <kuba@kernel.org>
-cc: Paolo Abeni <pabeni@redhat.com>
-cc: Jens Axboe <axboe@kernel.dk>
-cc: Matthew Wilcox <willy@infradead.org>
-cc: bpf@vger.kernel.org
-cc: dccp@vger.kernel.org
-cc: linux-afs@lists.infradead.org
-cc: linux-arm-msm@vger.kernel.org
-cc: linux-can@vger.kernel.org
-cc: linux-crypto@vger.kernel.org
-cc: linux-doc@vger.kernel.org
-cc: linux-hams@vger.kernel.org
-cc: linux-perf-users@vger.kernel.org
-cc: linux-rdma@vger.kernel.org
-cc: linux-sctp@vger.kernel.org
-cc: linux-wpan@vger.kernel.org
-cc: linux-x25@vger.kernel.org
-cc: mptcp@lists.linux.dev
-cc: netdev@vger.kernel.org
-cc: rds-devel@oss.oracle.com
-cc: tipc-discussion@lists.sourceforge.net
-cc: virtualization@lists.linux-foundation.org
----
+This patch series adds a new mount option called negative_dentry_timeout
+for FUSE and virtio-fs filesystems. This option allows the kernel to cache
+negative dentries, which are dentries that represent a non-existent file.
+When this option is enabled, the kernel will skip FUSE_LOOKUP requests for
+second and subsequent lookups to a non-existent file.
 
-Notes:
-    ver #3)
-     - tcp_bpf is now handled by an earlier patch.
+Unlike negative dentry caches on a normal filesystem such as ext4, the
+kernel may need to refresh the cache for FUSE and virtio-fs filesystems.
+This is because the kernel does not know when a FUSE server or a virtio-fs
+device creates or deletes files. To address this, the new
+negative_dentry_timeout option takes an expiration time for cache entries.
+The appropriate timeout duration should be determined by considering how
+often a FUSE server updates file paths and the amount of memory the kernel
+can use for the cache.
 
- include/linux/socket.h                         | 4 +---
- net/tls/tls_device.c                           | 3 +--
- net/tls/tls_main.c                             | 2 +-
- net/tls/tls_sw.c                               | 2 +-
- tools/perf/trace/beauty/include/linux/socket.h | 1 -
- tools/perf/trace/beauty/msg_flags.c            | 3 ---
- 6 files changed, 4 insertions(+), 11 deletions(-)
+As we evaluated the virtio-fs's performance on a guest Linux on crosvm
+[1]'s virtiofs device[2], the `negative_dentry_timeout` option saved ~1
+second per 10000 `stat` call against a non-existent path. The experiment
+settings and results are as follows:
 
-diff --git a/include/linux/socket.h b/include/linux/socket.h
-index 58204700018a..39b74d83c7c4 100644
---- a/include/linux/socket.h
-+++ b/include/linux/socket.h
-@@ -319,7 +319,6 @@ struct ucred {
- #define MSG_MORE	0x8000	/* Sender will send more */
- #define MSG_WAITFORONE	0x10000	/* recvmmsg(): block until 1+ packets avail */
- #define MSG_SENDPAGE_NOPOLICY 0x10000 /* sendpage() internal : do no apply policy */
--#define MSG_SENDPAGE_NOTLAST 0x20000 /* sendpage() internal : not the last page */
- #define MSG_BATCH	0x40000 /* sendmmsg(): more messages coming */
- #define MSG_EOF         MSG_FIN
- #define MSG_NO_SHARED_FRAGS 0x80000 /* sendpage() internal : page frags are not shared */
-@@ -341,8 +340,7 @@ struct ucred {
- 
- /* Flags to be cleared on entry by sendmsg and sendmmsg syscalls */
- #define MSG_INTERNAL_SENDMSG_FLAGS \
--	(MSG_SPLICE_PAGES | MSG_SENDPAGE_NOPOLICY | MSG_SENDPAGE_NOTLAST | \
--	 MSG_SENDPAGE_DECRYPTED)
-+	(MSG_SPLICE_PAGES | MSG_SENDPAGE_NOPOLICY | MSG_SENDPAGE_DECRYPTED)
- 
- /* Setsockoptions(2) level. Thanks to BSD these must match IPPROTO_xxx */
- #define SOL_IP		0
-diff --git a/net/tls/tls_device.c b/net/tls/tls_device.c
-index 840ee06f1708..2021fe557e50 100644
---- a/net/tls/tls_device.c
-+++ b/net/tls/tls_device.c
-@@ -441,8 +441,7 @@ static int tls_push_data(struct sock *sk,
- 	long timeo;
- 
- 	if (flags &
--	    ~(MSG_MORE | MSG_DONTWAIT | MSG_NOSIGNAL | MSG_SENDPAGE_NOTLAST |
--	      MSG_SPLICE_PAGES))
-+	    ~(MSG_MORE | MSG_DONTWAIT | MSG_NOSIGNAL | MSG_SPLICE_PAGES))
- 		return -EOPNOTSUPP;
- 
- 	if (unlikely(sk->sk_err))
-diff --git a/net/tls/tls_main.c b/net/tls/tls_main.c
-index d5ed4d47b16e..b6896126bb92 100644
---- a/net/tls/tls_main.c
-+++ b/net/tls/tls_main.c
-@@ -127,7 +127,7 @@ int tls_push_sg(struct sock *sk,
- {
- 	struct bio_vec bvec;
- 	struct msghdr msg = {
--		.msg_flags = MSG_SENDPAGE_NOTLAST | MSG_SPLICE_PAGES | flags,
-+		.msg_flags = MSG_SPLICE_PAGES | flags,
- 	};
- 	int ret = 0;
- 	struct page *p;
-diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
-index 9b3aa89a4292..53f944e6d8ef 100644
---- a/net/tls/tls_sw.c
-+++ b/net/tls/tls_sw.c
-@@ -1194,7 +1194,7 @@ int tls_sw_sendmsg(struct sock *sk, struct msghdr *msg, size_t size)
- 
- 	if (msg->msg_flags & ~(MSG_MORE | MSG_DONTWAIT | MSG_NOSIGNAL |
- 			       MSG_CMSG_COMPAT | MSG_SPLICE_PAGES |
--			       MSG_SENDPAGE_NOTLAST | MSG_SENDPAGE_NOPOLICY))
-+			       MSG_SENDPAGE_NOPOLICY))
- 		return -EOPNOTSUPP;
- 
- 	ret = mutex_lock_interruptible(&tls_ctx->tx_lock);
-diff --git a/tools/perf/trace/beauty/include/linux/socket.h b/tools/perf/trace/beauty/include/linux/socket.h
-index 13c3a237b9c9..3bef212a24d7 100644
---- a/tools/perf/trace/beauty/include/linux/socket.h
-+++ b/tools/perf/trace/beauty/include/linux/socket.h
-@@ -318,7 +318,6 @@ struct ucred {
- #define MSG_MORE	0x8000	/* Sender will send more */
- #define MSG_WAITFORONE	0x10000	/* recvmmsg(): block until 1+ packets avail */
- #define MSG_SENDPAGE_NOPOLICY 0x10000 /* sendpage() internal : do no apply policy */
--#define MSG_SENDPAGE_NOTLAST 0x20000 /* sendpage() internal : not the last page */
- #define MSG_BATCH	0x40000 /* sendmmsg(): more messages coming */
- #define MSG_EOF         MSG_FIN
- #define MSG_NO_SHARED_FRAGS 0x80000 /* sendpage() internal : page frags are not shared */
-diff --git a/tools/perf/trace/beauty/msg_flags.c b/tools/perf/trace/beauty/msg_flags.c
-index ea68db08b8e7..b5b580e5a77e 100644
---- a/tools/perf/trace/beauty/msg_flags.c
-+++ b/tools/perf/trace/beauty/msg_flags.c
-@@ -8,9 +8,6 @@
- #ifndef MSG_WAITFORONE
- #define MSG_WAITFORONE		   0x10000
- #endif
--#ifndef MSG_SENDPAGE_NOTLAST
--#define MSG_SENDPAGE_NOTLAST	   0x20000
--#endif
- #ifndef MSG_FASTOPEN
- #define MSG_FASTOPEN		0x20000000
- #endif
+* Command to start VM with crosvm:
+sudo crosvm run \
+  --disable-sandbox \
+  --cpus 1 \
+  --mem 2048 \
+  --rwroot debian.img \
+  --shared-dir \
+  /path/:my_virtiofs:type=fs:cache=always:timeout=3600 \
+  -p "console=hvc0 init=/bin/bash" \
+  vmlinux
+
+* Mount command in the guest
+Default:
+$ mount -t virtiofs my_virtiofs ./workspace/
+With negative dentry cache:
+$ mount -t virtiofs -o negative_dentry_timeout=10 my_virtiofs ./workspace/
+
+* Test commands
+$ cd workspace
+$ echo 3 > /proc/sys/vm/drop_caches
+$ time for i in `seq 1 10000`; \
+  do stat non-existent.txt 2> /dev/null; \
+  done
+
+* Results:
+Default:
+real 0m12.606s
+user 0m3.624s
+sys 0m7.756s
+
+With `-o negative_dentry_timeout=10`:
+real 0m11.276s
+user 0m3.514s
+sys 0m7.544s
+
+[1]: https://crosvm.dev/book/
+[2]: https://crosvm.dev/book/devices/fs.html
+
+
+Keiichi Watanabe (3):
+  docs: virtiofs: Fix descriptions about virtiofs mount option
+  fuse: Add negative_dentry_timeout option
+  virtiofs: Add negative_dentry_timeout option
+
+ Documentation/filesystems/dax.rst      |  1 +
+ Documentation/filesystems/fuse.rst     |  6 ++++++
+ Documentation/filesystems/virtiofs.rst |  9 ++++++++-
+ fs/fuse/dir.c                          |  3 ++-
+ fs/fuse/fuse_i.h                       |  4 ++++
+ fs/fuse/inode.c                        | 12 +++++++++++-
+ fs/fuse/virtio_fs.c                    |  8 ++++++++
+ 7 files changed, 40 insertions(+), 3 deletions(-)
+
+-- 
+2.41.0.185.g7c58973941-goog
 
 _______________________________________________
 Virtualization mailing list
