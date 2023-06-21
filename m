@@ -1,79 +1,108 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5D2767384A3
-	for <lists.virtualization@lfdr.de>; Wed, 21 Jun 2023 15:15:56 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 96A00738857
+	for <lists.virtualization@lfdr.de>; Wed, 21 Jun 2023 17:04:53 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 98AE460E09;
-	Wed, 21 Jun 2023 13:15:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 98AE460E09
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=NpVRqyd2
+	by smtp2.osuosl.org (Postfix) with ESMTP id 3A6DB40C25;
+	Wed, 21 Jun 2023 15:04:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3A6DB40C25
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=R27AZ4iO
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id NwxuVfg10waX; Wed, 21 Jun 2023 13:15:53 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id o2nMPyeshAOP; Wed, 21 Jun 2023 15:04:51 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 6F0FD613D8;
-	Wed, 21 Jun 2023 13:15:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6F0FD613D8
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 0B03340354;
+	Wed, 21 Jun 2023 15:04:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0B03340354
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A046EC008C;
-	Wed, 21 Jun 2023 13:15:52 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 35B10C008C;
+	Wed, 21 Jun 2023 15:04:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 42FADC0029
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 59189C0029
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jun 2023 13:15:50 +0000 (UTC)
+ Wed, 21 Jun 2023 15:04:49 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 10EF0613D8
+ by smtp4.osuosl.org (Postfix) with ESMTP id 2143640188
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jun 2023 13:15:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 10EF0613D8
+ Wed, 21 Jun 2023 15:04:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2143640188
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=R27AZ4iO
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id uFGf14UVT7db
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id d5taaBuS0BE5
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jun 2023 13:15:48 +0000 (UTC)
-X-Greylist: from auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BC2F760E09
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id BC2F760E09
+ Wed, 21 Jun 2023 15:04:48 +0000 (UTC)
+X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1CA57400E8
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1CA57400E8
  for <virtualization@lists.linux-foundation.org>;
- Wed, 21 Jun 2023 13:15:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=7KtYi3eep9XbX588SNTMn5wloXG6pscuzpNL2Pfc/eI=; b=NpVRqyd25XnP+LIMi0RBCfaMb1
- C979QWJcaCpZ9oWDTPhnKiGBGmXmF80gnUoRdljpTV8/TiFMlIG/oCiDKnRc9ylgniKn1TocD54UV
- Wa7Tsq+j99vPRMp2Cpymkun14uEMRTUyR9m5oRV8TYopVNzdwjke0kXM/0FEZRsK4wrkhNKEmw+fh
- Wfhqrx1rgIiieFhpa+rqJkCqifgpvAyWMjPFvAMv3U0MOQaXAJJs6SABcM8lJXIMViHkXKyZetFXS
- tjxIlwBNGdlbJAGIoAOPWHsteifabiK47EeBRM1I1nHsLnCbHQ1WpHp6pF7hL6kBNIIoV+MV6sp7M
- MfcL0fnw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qBxgO-00EeS1-3C; Wed, 21 Jun 2023 13:15:36 +0000
-Date: Wed, 21 Jun 2023 06:15:36 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Hou Tao <houtao@huaweicloud.com>
-Subject: Re: [PATCH v2] virtio_pmem: add the missing REQ_OP_WRITE for flush bio
-Message-ID: <ZJL3+E5P+Yw5jDKy@infradead.org>
-References: <ZJLpYMC8FgtZ0k2k@infradead.org>
- <20230621134340.878461-1-houtao@huaweicloud.com>
+ Wed, 21 Jun 2023 15:04:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1687359887;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type;
+ bh=uMB3ETdHgdD0tMcM81kCwTmy5JB6eW9+tHfNYuJVs80=;
+ b=R27AZ4iOLwKkrApOGfBl1IT9vQhadjOM2ZRGp3HWU4g8SLdgSc67kDyxOGB/AAKME49Ifc
+ 04R9huigr0GOrEJmYylYC4KEGATPmuOKaAs6JfYu6Ckmw+8RNKyflTYPWMS4JOwWgYCnGM
+ Lg+pweeWcDb6Te9FBbvURmURR3O6Pqo=
+Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
+ [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-364-T4QxFSHcPYGFDw2PNJSxOw-1; Wed, 21 Jun 2023 11:04:42 -0400
+X-MC-Unique: T4QxFSHcPYGFDw2PNJSxOw-1
+Received: by mail-lj1-f199.google.com with SMTP id
+ 38308e7fff4ca-2b448b13faaso46362771fa.2
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 21 Jun 2023 08:04:42 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1687359881; x=1689951881;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=uMB3ETdHgdD0tMcM81kCwTmy5JB6eW9+tHfNYuJVs80=;
+ b=iiRzrKvK0ql0278VMPYaIfMmr2s/fsYi5aaZpowwCIL+64KJKbUJrzLPgr/pAFSovj
+ DQcVRBQ3AAD5tRaRb6fFMCarJXTLVlAs8Kyku8AvbL387Nbq+iIFT1u1aW96x4HciTq8
+ sdgR+kIzB0iAbrfoyHbcYL4aA6nO6gjwlAc7FFQmhJGkx9Ls9q6D9xz+P53IC+YqiLh4
+ EbxI39A0kXrSdXHdmcIKLqCoMwKea092TWvc6SI4gonun0LbG0IdO/WlcXRBCR5MK+x1
+ eCRpplXCeTLN+etnmUH9HBVtrUXPxx7XYXamryPUXu9o3lAd7zYX0/QWfhb3b3ycbjtt
+ Bo6g==
+X-Gm-Message-State: AC+VfDyVLAcUhRZNlX9KOsTIuVKqIAGvKYypAOk9zDXIDlVKvFuxDdkS
+ JLNxfPx64R/GCOOVu1SWaFJmVsyWEDIlVD+LKi4rE7yj0OsUDFmZtz9rRcT8j1LmF+I44guiQCY
+ +UIpaEMKX81memve9OiD5v2v776deaSZeSK9sVf9umA==
+X-Received: by 2002:a05:651c:8c:b0:2ad:9783:bca with SMTP id
+ 12-20020a05651c008c00b002ad97830bcamr9809843ljq.27.1687359880944; 
+ Wed, 21 Jun 2023 08:04:40 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ6vuvyyKGk8qVbIbbO2C0uzdA3jUE5LT/K/8MPLqve8CmK2tHPbnZ1hPdf3acB2DVxep5kd3w==
+X-Received: by 2002:a05:651c:8c:b0:2ad:9783:bca with SMTP id
+ 12-20020a05651c008c00b002ad97830bcamr9809823ljq.27.1687359880587; 
+ Wed, 21 Jun 2023 08:04:40 -0700 (PDT)
+Received: from redhat.com ([2.52.159.126]) by smtp.gmail.com with ESMTPSA id
+ e14-20020a50ec8e000000b0051a5c6a50d4sm2743117edr.51.2023.06.21.08.04.36
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Jun 2023 08:04:39 -0700 (PDT)
+Date: Wed, 21 Jun 2023 11:04:31 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Linus Torvalds <torvalds@linux-foundation.org>
+Subject: [GIT PULL] virtio: last minute revert
+Message-ID: <20230621110431-mutt-send-email-mst@kernel.org>
 MIME-Version: 1.0
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-In-Reply-To: <20230621134340.878461-1-houtao@huaweicloud.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: Jens Axboe <axboe@kernel.dk>, linux-block@vger.kernel.org,
- nvdimm@lists.linux.dev, Pankaj Gupta <pankaj.gupta.linux@gmail.com>,
- virtualization@lists.linux-foundation.org,
- Christoph Hellwig <hch@infradead.org>, houtao1@huawei.com,
- Dan Williams <dan.j.williams@intel.com>
+Cc: lkp@intel.com, kvm@vger.kernel.org, mst@redhat.com, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ suwan.kim027@gmail.com, martin.roberts@intel.com, edliaw@google.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -90,8 +119,31 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Please avoid the overly long line.  With that fixe this looks good
-to me.
+The following changes since commit 45a3e24f65e90a047bef86f927ebdc4c710edaa1:
+
+  Linux 6.4-rc7 (2023-06-18 14:06:27 -0700)
+
+are available in the Git repository at:
+
+  https://git.kernel.org/pub/scm/linux/kernel/git/mst/vhost.git tags/for_linus
+
+for you to fetch changes up to afd384f0dbea2229fd11159efb86a5b41051c4a9:
+
+  Revert "virtio-blk: support completion batching for the IRQ path" (2023-06-21 04:14:28 -0400)
+
+----------------------------------------------------------------
+virtio: bugfix
+
+A last minute revert to fix a regression.
+
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+
+----------------------------------------------------------------
+Michael S. Tsirkin (1):
+      Revert "virtio-blk: support completion batching for the IRQ path"
+
+ drivers/block/virtio_blk.c | 82 +++++++++++++++++++++-------------------------
+ 1 file changed, 37 insertions(+), 45 deletions(-)
 
 _______________________________________________
 Virtualization mailing list
