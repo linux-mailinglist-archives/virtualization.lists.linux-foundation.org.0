@@ -1,82 +1,85 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 068DD73FB01
-	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:22:40 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D554573FB03
+	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:22:41 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id F104F40176;
-	Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org F104F40176
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=f5yW+z4B
+	by smtp4.osuosl.org (Postfix) with ESMTP id 017E841B5C;
+	Tue, 27 Jun 2023 11:22:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 017E841B5C
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KKgYqPPT
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7y44Ew9EtsIF; Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Pc2ESSDlApPF; Tue, 27 Jun 2023 11:22:39 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id A9FCD416A2;
-	Tue, 27 Jun 2023 11:22:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A9FCD416A2
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 7DBAF41A49;
+	Tue, 27 Jun 2023 11:22:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 7DBAF41A49
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id E3100C0DD4;
-	Tue, 27 Jun 2023 11:22:35 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5DFEAC0DD4;
+	Tue, 27 Jun 2023 11:22:38 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8D08AC0037
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DADAC0037
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:34 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 53BBA60E27
+ by smtp2.osuosl.org (Postfix) with ESMTP id 42CB741714
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:34 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 53BBA60E27
-Authentication-Results: smtp3.osuosl.org;
+ Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 42CB741714
+Authentication-Results: smtp2.osuosl.org;
  dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=f5yW+z4B
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=KKgYqPPT
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 9lHfe10yD7HF
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 5sxQc6-oADc1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:33 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:36 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D8C0660BB3
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 99A2540B52
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D8C0660BB3
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 99A2540B52
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:32 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:36 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687864951;
+ s=mimecast20190719; t=1687864955;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=AXpX6+bIX3VG+BFlIbD8IyCdNffvSiQAQaFthXvYXYA=;
- b=f5yW+z4BA9GZ4IMpu1WFTtfqvZRPySQPSst5tXvmaQd60QIiXmb9+JEw290gToA1XjnLGJ
- vOcSEftQHhmv0RNvFJDsrJv5nKUHHwlBBBfbSQm091akxJiPPOWDFqcPC8Skz/b3IhLQ1V
- DHeHfFCABYxOlNNgfzMuMXKDfPwBEus=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=2tWgJbMty0vF+sRGgcNfqljzE54wPeczugMOQkaZlck=;
+ b=KKgYqPPTmVA4gHipNXOy6A0FUY/TkqNtSwEvrzOdfCOzYPyWRvkSxWSFXqHzzeU2kt8yAB
+ h9ZNY75m7MGwoH/Yu52PNJPawd/wNqUvlToFPLaCLhqSFqKHrOmPAm2QmMoo8x7BH2mQqz
+ Gu8lsXy/SGZR0OTQ39c64vnzf7MsInA=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-458-KoLIc-NHPDWNdw4_zSVBwg-1; Tue, 27 Jun 2023 07:22:28 -0400
-X-MC-Unique: KoLIc-NHPDWNdw4_zSVBwg-1
+ us-mta-636-FJnFfwwzPY-Qr_PfD7F3LQ-1; Tue, 27 Jun 2023 07:22:30 -0400
+X-MC-Unique: FJnFfwwzPY-Qr_PfD7F3LQ-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
  [10.11.54.4])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 638D11C07588;
- Tue, 27 Jun 2023 11:22:27 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id C720F381494D;
+ Tue, 27 Jun 2023 11:22:29 +0000 (UTC)
 Received: from t480s.redhat.com (unknown [10.39.192.116])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 69FFF200A3AD;
- Tue, 27 Jun 2023 11:22:21 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A1185200A3AD;
+ Tue, 27 Jun 2023 11:22:27 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 0/5] mm/memory_hotplug: make offline_and_remove_memory()
- timeout instead of failing on fatal signals
-Date: Tue, 27 Jun 2023 13:22:15 +0200
-Message-Id: <20230627112220.229240-1-david@redhat.com>
+Subject: [PATCH v1 1/5] mm/memory_hotplug: check for fatal signals only in
+ offline_pages()
+Date: Tue, 27 Jun 2023 13:22:16 +0200
+Message-Id: <20230627112220.229240-2-david@redhat.com>
+In-Reply-To: <20230627112220.229240-1-david@redhat.com>
+References: <20230627112220.229240-1-david@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
 Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Michal Hocko <mhocko@suse.com>,
@@ -99,53 +102,33 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-As raised by John Hubbard [1], offline_and_remove_memory() failing on
-fatal signals can be sub-optimal for out-of-tree drivers: dying user space
-might be the last one holding a device node open.
+Let's check for fatal signals only. That looks cleaner and still keeps
+the documented use case for manual user-space triggered memory offlining
+working. From Documentation/admin-guide/mm/memory-hotplug.rst:
 
-As that device node gets closed, the driver might unplug the device
-and trigger offline_and_remove_memory() to unplug previously
-hotplugged device memory. This, however, will fail reliably when fatal
-signals are pending on the dying process, turning the device unusable until
-the machine gets rebooted.
+	% timeout $TIMEOUT offline_block | failure_handling
 
-That can be optizied easily by ignoring fatal signals. In fact, checking
-for fatal signals in the case of offline_and_remove_memory() doesn't
-make too much sense; the check makes sense when offlining is triggered
-directly via sysfs.  However, we actually do want a way to not end up
-stuck in offline_and_remove_memory() forever.
+In fact, we even document there: "the offlining context can be terminated
+by sending a fatal signal".
 
-What offline_and_remove_memory() users actually want is fail after some
-given timeout and not care about fatal signals.
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ mm/memory_hotplug.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-So let's implement that, optimizing virtio-mem along the way.
-
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: "Michael S. Tsirkin" <mst@redhat.com>
-Cc: John Hubbard <jhubbard@nvidia.com>
-Cc: Oscar Salvador <osalvador@suse.de>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: Jason Wang <jasowang@redhat.com>
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-
-[1] https://lkml.kernel.org/r/20230620011719.155379-1-jhubbard@nvidia.com
-
-David Hildenbrand (5):
-  mm/memory_hotplug: check for fatal signals only in offline_pages()
-  virtio-mem: convert most offline_and_remove_memory() errors to -EBUSY
-  mm/memory_hotplug: make offline_and_remove_memory() timeout instead of
-    failing on fatal signals
-  virtio-mem: set the timeout for offline_and_remove_memory() to 10
-    seconds
-  virtio-mem: check if the config changed before (fake) offlining memory
-
- drivers/virtio/virtio_mem.c    | 22 +++++++++++++--
- include/linux/memory_hotplug.h |  2 +-
- mm/memory_hotplug.c            | 50 ++++++++++++++++++++++++++++++++--
- 3 files changed, 68 insertions(+), 6 deletions(-)
-
-
-base-commit: 6995e2de6891c724bfeb2db33d7b87775f913ad1
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index 8e0fa209d533..0d2151df4ee1 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -1879,7 +1879,7 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 	do {
+ 		pfn = start_pfn;
+ 		do {
+-			if (signal_pending(current)) {
++			if (fatal_signal_pending(current)) {
+ 				ret = -EINTR;
+ 				reason = "signal backoff";
+ 				goto failed_removal_isolated;
 -- 
 2.40.1
 
