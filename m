@@ -1,79 +1,82 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id BC95273FB31
-	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:37:30 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+	by mail.lfdr.de (Postfix) with ESMTPS id BB21873FB32
+	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:37:33 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id A80F460FC7;
-	Tue, 27 Jun 2023 11:37:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A80F460FC7
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CxQ8vuDQ
+	by smtp4.osuosl.org (Postfix) with ESMTP id 3508941993;
+	Tue, 27 Jun 2023 11:37:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3508941993
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=LufAKi4l
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7d3APjLmkmdb; Tue, 27 Jun 2023 11:37:27 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id zSHTyWSCTFo4; Tue, 27 Jun 2023 11:37:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 8710260BBD;
-	Tue, 27 Jun 2023 11:37:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8710260BBD
+	by smtp4.osuosl.org (Postfix) with ESMTPS id ADBD84098D;
+	Tue, 27 Jun 2023 11:37:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org ADBD84098D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D299CC0DD4;
-	Tue, 27 Jun 2023 11:37:25 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 182B4C0DD4;
+	Tue, 27 Jun 2023 11:37:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id C26C0C0037
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 770A1C0037
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:37:24 +0000 (UTC)
+ Tue, 27 Jun 2023 11:37:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id A686460FC7
+ by smtp4.osuosl.org (Postfix) with ESMTP id 417C94098B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:37:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A686460FC7
+ Tue, 27 Jun 2023 11:37:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 417C94098B
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id rYAkHk0MNqoq
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id rKWGTNJsWr34
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:37:23 +0000 (UTC)
+ Tue, 27 Jun 2023 11:37:27 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B920260BBD
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 854F240997
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id B920260BBD
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 854F240997
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:37:23 +0000 (UTC)
+ Tue, 27 Jun 2023 11:37:27 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687865842;
+ s=mimecast20190719; t=1687865846;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Tdurvxft1YKsdJG5IOcbskrBx73tXYW6QLBL2YhfQC0=;
- b=CxQ8vuDQ+CNg2Jd/OzleKRY/CLcN2lLy04oug9Q3yUd/Soqu4nUekZUke8KRdr5NoxJw0C
- nBT2Xz8B+zGHtf98j9OTt3dP4FSi8Tr+xEmZ1eTroZduJSPkjRImYspAuFZN0EDd2dqq95
- M2RaS/dKsupGdTawLo9aBmBYBv+OaMQ=
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=fm78avJkH6pYdzAlud14BVCLEgTOcTb6h7jlCJ92I3M=;
+ b=LufAKi4lAt2qfuz9acCqjq88tpNjtrOr0GXpIBPY6utNojhGP/rQW4cpaOMPVnO+Uz8boZ
+ Jm3zsrbR84KcujKEAOj8smztTa5Fd0RmN7zn/XNEjEHBYheSY+8DYQq8kCF72lrrN+T/ng
+ LVpsu2WmArAZPQeSJRTwYN4RkR73bdA=
 Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
  [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-590-KcYV-GFPMhK3r4fVNxggkg-1; Tue, 27 Jun 2023 07:37:19 -0400
-X-MC-Unique: KcYV-GFPMhK3r4fVNxggkg-1
+ us-mta-104-lIxHzTeIN4O5vdJSe9EULw-1; Tue, 27 Jun 2023 07:37:22 -0400
+X-MC-Unique: lIxHzTeIN4O5vdJSe9EULw-1
 Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
  [10.11.54.5])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A0A781C06EE7;
- Tue, 27 Jun 2023 11:37:18 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 996481C06ED1;
+ Tue, 27 Jun 2023 11:37:21 +0000 (UTC)
 Received: from max-t490s.redhat.com (unknown [10.39.208.28])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 55BA7F5CD0;
- Tue, 27 Jun 2023 11:37:15 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id F2A20F5CC7;
+ Tue, 27 Jun 2023 11:37:18 +0000 (UTC)
 From: Maxime Coquelin <maxime.coquelin@redhat.com>
 To: xieyongji@bytedance.com, jasowang@redhat.com, mst@redhat.com,
  david.marchand@redhat.com, lulu@redhat.com
-Subject: [PATCH v1 0/2] vduse: add support for networking devices
-Date: Tue, 27 Jun 2023 13:36:50 +0200
-Message-ID: <20230627113652.65283-1-maxime.coquelin@redhat.com>
+Subject: [PATCH v1 1/2] vduse: validate block features only with block devices
+Date: Tue, 27 Jun 2023 13:36:51 +0200
+Message-ID: <20230627113652.65283-2-maxime.coquelin@redhat.com>
+In-Reply-To: <20230627113652.65283-1-maxime.coquelin@redhat.com>
+References: <20230627113652.65283-1-maxime.coquelin@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.1 on 10.11.54.5
 Cc: xuanzhuo@linux.alibaba.com, netdev@vger.kernel.org,
@@ -95,29 +98,49 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This small series enables virtio-net device type in VDUSE.
-With it, basic operation have been tested, both with
-virtio-vdpa and vhost-vdpa using DPDK Vhost library series
-adding VDUSE support using split rings layout (merged in
-DPDK v23.07-rc1).
+This patch is preliminary work to enable network device
+type support to VDUSE.
 
-Control queue support (and so multiqueue) has also been
-tested, but requires a Kernel series from Jason Wang
-relaxing control queue polling [1] to function reliably.
+As VIRTIO_BLK_F_CONFIG_WCE shares the same value as
+VIRTIO_NET_F_HOST_TSO4, we need to restrict its check
+to Virtio-blk device type.
 
-[1]: https://lore.kernel.org/lkml/CACGkMEtgrxN3PPwsDo4oOsnsSLJfEmBEZ0WvjGRr3whU+QasUg@mail.gmail.com/T/
+Signed-off-by: Maxime Coquelin <maxime.coquelin@redhat.com>
+---
+ drivers/vdpa/vdpa_user/vduse_dev.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-RFC -> v1 changes:
-==================
-- Fail device init if it does not support VERSION_1 (Jason)
-
-Maxime Coquelin (2):
-  vduse: validate block features only with block devices
-  vduse: enable Virtio-net device type
-
- drivers/vdpa/vdpa_user/vduse_dev.c | 15 +++++++++++----
- 1 file changed, 11 insertions(+), 4 deletions(-)
-
+diff --git a/drivers/vdpa/vdpa_user/vduse_dev.c b/drivers/vdpa/vdpa_user/vduse_dev.c
+index 5f5c21674fdc..c1c2f4c711ae 100644
+--- a/drivers/vdpa/vdpa_user/vduse_dev.c
++++ b/drivers/vdpa/vdpa_user/vduse_dev.c
+@@ -1658,13 +1658,14 @@ static bool device_is_allowed(u32 device_id)
+ 	return false;
+ }
+ 
+-static bool features_is_valid(u64 features)
++static bool features_is_valid(struct vduse_dev_config *config)
+ {
+-	if (!(features & (1ULL << VIRTIO_F_ACCESS_PLATFORM)))
++	if (!(config->features & (1ULL << VIRTIO_F_ACCESS_PLATFORM)))
+ 		return false;
+ 
+ 	/* Now we only support read-only configuration space */
+-	if (features & (1ULL << VIRTIO_BLK_F_CONFIG_WCE))
++	if ((config->device_id == VIRTIO_ID_BLOCK) &&
++			(config->features & (1ULL << VIRTIO_BLK_F_CONFIG_WCE)))
+ 		return false;
+ 
+ 	return true;
+@@ -1691,7 +1692,7 @@ static bool vduse_validate_config(struct vduse_dev_config *config)
+ 	if (!device_is_allowed(config->device_id))
+ 		return false;
+ 
+-	if (!features_is_valid(config->features))
++	if (!features_is_valid(config))
+ 		return false;
+ 
+ 	return true;
 -- 
 2.41.0
 
