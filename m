@@ -1,106 +1,107 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id DD98C73F64A
-	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 10:01:33 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5C2CC73F662
+	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 10:03:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 3BCA74190A;
-	Tue, 27 Jun 2023 08:01:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3BCA74190A
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Ik1N6zEH
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0464D8132C;
+	Tue, 27 Jun 2023 08:03:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0464D8132C
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=RW4TnC4E
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vNAzI1ItQwOJ; Tue, 27 Jun 2023 08:01:31 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id BA5C741902;
-	Tue, 27 Jun 2023 08:01:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org BA5C741902
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id C4Yrf9C5h5MR; Tue, 27 Jun 2023 08:03:56 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8D4238135A;
+	Tue, 27 Jun 2023 08:03:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8D4238135A
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B51EC0DD4;
-	Tue, 27 Jun 2023 08:01:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id BB1DFC0DD7;
+	Tue, 27 Jun 2023 08:03:54 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BA16DC0037
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B19EDC0037
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 08:01:28 +0000 (UTC)
+ Tue, 27 Jun 2023 08:03:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 86952418FF
+ by smtp1.osuosl.org (Postfix) with ESMTP id 99E2E8134F
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 08:01:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 86952418FF
+ Tue, 27 Jun 2023 08:03:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 99E2E8134F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id RwfQmcBwnkd0
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id bRT3g66VRzmC
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 08:01:27 +0000 (UTC)
+ Tue, 27 Jun 2023 08:03:52 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 98332418B5
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D05088132C
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 98332418B5
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D05088132C
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 08:01:27 +0000 (UTC)
+ Tue, 27 Jun 2023 08:03:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687852886;
+ s=mimecast20190719; t=1687853030;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=oZVrQ3elX4XCNFCp5FYtuzZCCkQ+mBaJA/Ngz6/9n5g=;
- b=Ik1N6zEHugtTkZMHBO8RaSFEYfSdcFwTRy46W6JyZKsdi1KmbBNgH4W5sXxTKcdCO27Rss
- pGYUti0Q8lx1sreQwZFOjuy5J/ZZWUUxx/xn0NQSTV1k23d8k2dm1HqJbyoJLtcche6OB4
- Fe+8/GL3tzNebNsJuZKmM4xBBvWH6u8=
+ bh=lP7TnuDcLltzpIl6PbyCFq5YcrBT0OHcqbbRWvHt8GI=;
+ b=RW4TnC4E5LCx3x8jpYi27WVpSHJG+1CcApBxx4BMAJOasWaRveZz/jGk0nLb6HCcNqUej1
+ KC11VZG+leB0X5BZtzONwlBpMBtdbKDENYwcoM869ezju359wW+Z7YdfEsHu9MAhhrhFft
+ 1LJq7LQC/5NgosQ4foCqSg2wPBBxO6k=
 Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
  [209.85.218.69]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-458-TYVPs2EaNTeE5WvYfH212w-1; Tue, 27 Jun 2023 04:01:24 -0400
-X-MC-Unique: TYVPs2EaNTeE5WvYfH212w-1
+ us-mta-64-h-nXMOQmPeCv5u5wDxeG7w-1; Tue, 27 Jun 2023 04:03:48 -0400
+X-MC-Unique: h-nXMOQmPeCv5u5wDxeG7w-1
 Received: by mail-ej1-f69.google.com with SMTP id
- a640c23a62f3a-9877da14901so313065466b.1
+ a640c23a62f3a-94a348facbbso247374966b.1
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 01:01:24 -0700 (PDT)
+ Tue, 27 Jun 2023 01:03:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1687852883; x=1690444883;
+ d=1e100.net; s=20221208; t=1687852720; x=1690444720;
  h=in-reply-to:content-transfer-encoding:content-disposition
  :mime-version:references:message-id:subject:cc:to:from:date
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oZVrQ3elX4XCNFCp5FYtuzZCCkQ+mBaJA/Ngz6/9n5g=;
- b=Ji0v8sVopvLnj/rZzVv7GhEhZODCr9d67v2OnR6hi6YlKBCKrfuFNkKr2726Ru0Ebx
- SS5rhVE833rSnjJ5DTnBqQwN+ZM6immkhAg5M//tJ/N+3NltkCMn7kDh093q/eDMKzcA
- Pxalet1fi+KxB7snlInP1jemRmrREs+sm+4xeUYJPbbLz+2KOsgUtV/+uV5hZF69M8cn
- fKQ65WVnLERIYjxQEWsZdr56i/f7CmqLT2jA7NT0JBSBqbnhYgeUnKmGob1teilNviMB
- eFYlRCQ9YAOfodfJJOh5MOSUHKPpoQ1rCgIEgPnbzPNX7CqWshIyHcwb7VrEgK10qwr1
- 3zBw==
-X-Gm-Message-State: AC+VfDyVp2SKahbZSygY+dLyg0U+pAjeuI4/s/zjlYu+/ffkft2tTwQW
- kzPYQBYHIMz57ec20p/VySI1MirRi19kf77BrAhbGHUCmKCTTlfXoPp8r2/tOWSXCFMFVVG6NGz
- hlFbRmmJ90jhpKBl5m/18Ehr/np/2ZIByprD8kTu0hg==
-X-Received: by 2002:a17:907:16a1:b0:988:d1d5:cd5b with SMTP id
- hc33-20020a17090716a100b00988d1d5cd5bmr22462646ejc.75.1687852883137; 
- Tue, 27 Jun 2023 01:01:23 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ7Z0J/vWmfnxp6OJSKZUcEDuPdK0byEs7sKI3sU5hfyvYS5pWlrPir4/Xy8z0GyEbfTC147Zw==
-X-Received: by 2002:a17:907:16a1:b0:988:d1d5:cd5b with SMTP id
- hc33-20020a17090716a100b00988d1d5cd5bmr22462601ejc.75.1687852882783; 
- Tue, 27 Jun 2023 01:01:22 -0700 (PDT)
+ bh=lP7TnuDcLltzpIl6PbyCFq5YcrBT0OHcqbbRWvHt8GI=;
+ b=ihShV1ORmLt+OmyhpjqRjN19g7QZh97K0psAUpxwejxpR7kBk+fYgojj92rifG4BL/
+ H6wTdLO5yYg+g0UXhtOdLSeXJiR+z5/eydST/coiDuAVP8tZ6tvXgTX3qgcZeFcgxGLX
+ ReiAvoFJpWtkX63YgxBQl8QP/CXatt14ztndApnbY/x+7XYNg3lvjbQ59odQnjDFWkzC
+ oOte4UejC0blrfF3mHaAYuBAq7cB5FKEbLiJrp4PKxXsb96ish2qiTIIN00CbglKYQQ1
+ NAHWMAr7a1fOi9VFi+s6WxzSxvLKL3r5jlMNJXggRKrUjGQIU6iQHe/43MBLEkjptrSN
+ 5U+g==
+X-Gm-Message-State: AC+VfDzGso3CrCNDY8aioac5eX7YY3f0EexU5Mry8DPRqhqJ9iu6umCB
+ wFLSnyWr2ZZcz3SMjgSASsTA3AetcPaiVOnUzUUTk/Z5ubk1BHLnYIgpGNY3hCMg4BCGpHvzPvq
+ DFH85rE9dTsoGgnVYA8D37V44qqOESpRCZP7N7Lc9xg==
+X-Received: by 2002:a17:907:7293:b0:988:d841:7f8d with SMTP id
+ dt19-20020a170907729300b00988d8417f8dmr20588110ejc.71.1687852720273; 
+ Tue, 27 Jun 2023 00:58:40 -0700 (PDT)
+X-Google-Smtp-Source: ACHHUZ7Z/tM/gaNroDjLrNnUmnljiX/qH4WmzORhNLz3fZPpTiwtq7Yuehq0VVWZN1uDhbc2Myv9fw==
+X-Received: by 2002:a17:907:7293:b0:988:d841:7f8d with SMTP id
+ dt19-20020a170907729300b00988d8417f8dmr20588100ejc.71.1687852719994; 
+ Tue, 27 Jun 2023 00:58:39 -0700 (PDT)
 Received: from sgarzare-redhat (host-87-11-6-160.retail.telecomitalia.it.
  [87.11.6.160]) by smtp.gmail.com with ESMTPSA id
- re3-20020a170906d8c300b00977ca5de275sm4307511ejb.13.2023.06.27.01.01.20
+ u13-20020a1709064acd00b00991f773d9c3sm1109508ejt.76.2023.06.27.00.58.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 27 Jun 2023 01:01:22 -0700 (PDT)
-Date: Tue, 27 Jun 2023 10:01:11 +0200
+ Tue, 27 Jun 2023 00:58:39 -0700 (PDT)
+Date: Tue, 27 Jun 2023 09:58:37 +0200
 From: Stefano Garzarella <sgarzare@redhat.com>
 To: Arseniy Krasnov <avkrasnov@sberdevices.ru>
-Subject: Re: [RFC PATCH v4 00/17] vsock: MSG_ZEROCOPY flag support
-Message-ID: <vqh472etosyyht53hd3bafvtuaedwhqsuqwdbmfkd6lyvxkkgq@mnp42ujut5ox>
+Subject: Re: [RFC PATCH v4 07/17] vsock: read from socket's error queue
+Message-ID: <3ek3jnkp7iu6ypc6kq7iarx45bc4hkrmko4mtfqke6nvrjmsiu@mnvs66r2sejc>
 References: <20230603204939.1598818-1-AVKrasnov@sberdevices.ru>
- <kilgxopbdguge4bd6pfdjb3oqzemttwzf4na54xurwl62hi7uc@2njjwuhox3al>
- <352508dd-1ea2-5d2d-9ccf-dfcfbd2bb911@sberdevices.ru>
+ <20230603204939.1598818-8-AVKrasnov@sberdevices.ru>
+ <sq5jlfhhlj347uapazqnotc5rakzdvj33ruzqwxdjsfx275m5r@dxujwphcffkl>
+ <4d532e35-c03c-fbf6-0744-9397e269750d@sberdevices.ru>
 MIME-Version: 1.0
-In-Reply-To: <352508dd-1ea2-5d2d-9ccf-dfcfbd2bb911@sberdevices.ru>
+In-Reply-To: <4d532e35-c03c-fbf6-0744-9397e269750d@sberdevices.ru>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -127,52 +128,44 @@ Content-Type: text/plain; charset="iso-8859-1"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Jun 27, 2023 at 07:55:58AM +0300, Arseniy Krasnov wrote:
+On Tue, Jun 27, 2023 at 07:49:00AM +0300, Arseniy Krasnov wrote:
 >
 >
->On 26.06.2023 19:15, Stefano Garzarella wrote:
->> On Sat, Jun 03, 2023 at 11:49:22PM +0300, Arseniy Krasnov wrote:
-
-[...]
-
+>On 26.06.2023 19:08, Stefano Garzarella wrote:
+>> On Sat, Jun 03, 2023 at 11:49:29PM +0300, Arseniy Krasnov wrote:
+>>> This adds handling of MSG_ERRQUEUE input flag in receive call. This flag
+>>> is used to read socket's error queue instead of data queue. Possible
+>>> scenario of error queue usage is receiving completions for transmission
+>>> with MSG_ZEROCOPY flag.
 >>>
->>> =A0=A0=A0=A0=A0=A0=A0=A0=A0 LET'S SPLIT PATCHSET TO MAKE REVIEW EASIER
+>>> Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+>>> ---
+>>> include/linux/socket.h=A0=A0 | 1 +
+>>> net/vmw_vsock/af_vsock.c | 5 +++++
+>>> 2 files changed, 6 insertions(+)
 >>>
->>> In v3 Stefano Garzarella <sgarzare@redhat.com> asked to split this patc=
-hset
->>> for several parts, because it looks too big for review. I think in this
->>> version (v4) we can do it in the following way:
->>>
->>> [0001 - 0005] - this is preparation for virtio/vhost part.
->>> [0006 - 0009] - this is preparation for AF_VSOCK part.
->>> [0010 - 0013] - these patches allows to trigger logic from the previous
->>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 two parts.
->>> [0014 - rest] - updates for doc, tests, utils. This part doesn't touch
->>> =A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0=A0 kernel code and looks not cr=
-itical.
+>>> diff --git a/include/linux/socket.h b/include/linux/socket.h
+>>> index bd1cc3238851..d79efd026880 100644
+>>> --- a/include/linux/socket.h
+>>> +++ b/include/linux/socket.h
+>>> @@ -382,6 +382,7 @@ struct ucred {
+>>> #define SOL_MPTCP=A0=A0=A0 284
+>>> #define SOL_MCTP=A0=A0=A0 285
+>>> #define SOL_SMC=A0=A0=A0=A0=A0=A0=A0 286
+>>> +#define SOL_VSOCK=A0=A0=A0 287
 >>
->> Yeah, I like this split, but I'd include 14 in the (10, 13) group.
->>
->> I have reviewed most of them and I think we are well on our way :-)
->> I've already seen that Bobby suggested changes for v5, so I'll review
->> that version better.
->>
->> Great work so far!
+>> Maybe this change should go in another patch where we describe that
+>> we need to support setsockopt()
 >
->Hello Stefano!
+>Ok, You mean patch which handles SO_ZEROCOPY option in af_vsock.c as Bobby=
+ suggested? No
+>problem, but in this case there will be no user for this define there - th=
+is option
+>(SO_ZEROCOPY) uses SOL_SOCKET level, not SOL_VSOCK.
 
-Hi Arseniy :-)
+Got it, so it is fine to leave it here.
 
->
->Thanks for review! I left some questions, but most of comments are clear
->for me. So I guess that idea of split is that I still keep all patches in
->a big single patchset, but preserve structure described above and we will
->do review process step by step according split?
->
->Or I should split this patchset for 3 separated sets? I guess this will be
->more complex to review...
-
-If the next is still RFC, a single series is fine.
+Just mention that we are defining SOL_VSOCK in the commit description.
 
 Thanks,
 Stefano
