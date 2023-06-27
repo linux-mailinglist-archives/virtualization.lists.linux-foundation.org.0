@@ -2,82 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9337A73FB02
-	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:22:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 25AD773FB06
+	for <lists.virtualization@lfdr.de>; Tue, 27 Jun 2023 13:22:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 8E4FD61236;
-	Tue, 27 Jun 2023 11:22:38 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8E4FD61236
+	by smtp3.osuosl.org (Postfix) with ESMTP id B722660BB3;
+	Tue, 27 Jun 2023 11:22:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B722660BB3
 Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=erBmXhLc
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=B0XUmtXq
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id o4DfYPnUeea2; Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 61FE6611E6;
-	Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 61FE6611E6
+	with ESMTP id km_sIfCaN0x7; Tue, 27 Jun 2023 11:22:44 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 50A41611DA;
+	Tue, 27 Jun 2023 11:22:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 50A41611DA
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 29ADCC0DD6;
-	Tue, 27 Jun 2023 11:22:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A6680C0DD5;
+	Tue, 27 Jun 2023 11:22:43 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 326A6C0037
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 77442C0037
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:36 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 0BD9741772
+ by smtp4.osuosl.org (Postfix) with ESMTP id 420914175D
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 0BD9741772
+ Tue, 27 Jun 2023 11:22:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 420914175D
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=erBmXhLc
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=B0XUmtXq
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nBbJJ9u-GNcA
+ with ESMTP id LtTU1LRkHx8M
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:35 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:41 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 210364175D
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C2E3E41D6E
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 210364175D
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C2E3E41D6E
  for <virtualization@lists.linux-foundation.org>;
- Tue, 27 Jun 2023 11:22:34 +0000 (UTC)
+ Tue, 27 Jun 2023 11:22:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1687864954;
+ s=mimecast20190719; t=1687864959;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=4aSs18Pv+ZzmA9Rj2C8nVvP+WDMPcyKRh1O4HH29Hbc=;
- b=erBmXhLcw+gWawuIpu2NJNCejYv8B0uPjOKKZYjhdn7frqBUEMQ57KxKlDzxLbphnqJbtD
- 5h3KOoD4xfMQicotbG7SfUGEL3kWvDjKJywwRFDjPzax/gUDq47TQ7gq74ybuUEJCKgk1G
- yQ8m8zPClzZQcRGkLg9WIyu0WS0ItnI=
-Received: from mimecast-mx02.redhat.com (mx3-rdu2.redhat.com
- [66.187.233.73]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=fr+vpotgatzONrB41R1RGYN75/TLbh/yXCu/qwGS3Ro=;
+ b=B0XUmtXqbClOQr4B6glfkmKN0EiE+QLa8COqa0uTMpwlsiq3OVnzxqXLuPURGvprtMniwg
+ un+DPurtDvn95ymNJa0M1rCrVEWvP0b3ElIG8bNHySdPlsC4qmME4k4MIyw1rkfPRNd+KS
+ AQBaG9TTLOVx4jlpPuvr8k1dsuTFPYA=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-266-y_sQWVhBPMapPH_5wxp9qg-1; Tue, 27 Jun 2023 07:22:32 -0400
-X-MC-Unique: y_sQWVhBPMapPH_5wxp9qg-1
+ us-mta-344-5tImlbEUOjm-C3jcDkwNPA-1; Tue, 27 Jun 2023 07:22:34 -0400
+X-MC-Unique: 5tImlbEUOjm-C3jcDkwNPA-1
 Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
  [10.11.54.4])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id CA5553814947;
- Tue, 27 Jun 2023 11:22:31 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id A9866800962;
+ Tue, 27 Jun 2023 11:22:33 +0000 (UTC)
 Received: from t480s.redhat.com (unknown [10.39.192.116])
- by smtp.corp.redhat.com (Postfix) with ESMTP id 30867200A3AD;
- Tue, 27 Jun 2023 11:22:30 +0000 (UTC)
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 10AC1200A3AD;
+ Tue, 27 Jun 2023 11:22:31 +0000 (UTC)
 From: David Hildenbrand <david@redhat.com>
 To: linux-kernel@vger.kernel.org
-Subject: [PATCH v1 2/5] virtio-mem: convert most offline_and_remove_memory()
- errors to -EBUSY
-Date: Tue, 27 Jun 2023 13:22:17 +0200
-Message-Id: <20230627112220.229240-3-david@redhat.com>
+Subject: [PATCH v1 3/5] mm/memory_hotplug: make offline_and_remove_memory()
+ timeout instead of failing on fatal signals
+Date: Tue, 27 Jun 2023 13:22:18 +0200
+Message-Id: <20230627112220.229240-4-david@redhat.com>
 In-Reply-To: <20230627112220.229240-1-david@redhat.com>
 References: <20230627112220.229240-1-david@redhat.com>
 MIME-Version: 1.0
@@ -102,35 +102,175 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Let's prepare for offline_and_remove_memory() to return other error
-codes that effectively translate to -EBUSY, such as -ETIMEDOUT.
+John Hubbard writes [1]:
+
+        Some device drivers add memory to the system via memory hotplug.
+        When the driver is unloaded, that memory is hot-unplugged.
+
+        However, memory hot unplug can fail. And these days, it fails a
+        little too easily, with respect to the above case. Specifically, if
+        a signal is pending on the process, hot unplug fails.
+
+        [...]
+
+        So in this case, other things (unmovable pages, un-splittable huge
+        pages) can also cause the above problem. However, those are
+        demonstrably less common than simply having a pending signal. I've
+        got bug reports from users who can trivially reproduce this by
+        killing their process with a "kill -9", for example.
+
+Especially with ZONE_MOVABLE, offlining is supposed to work in most
+cases when offlining actually hotplugged (not boot) memory, and only fail
+in rare corner cases (e.g., some driver holds a reference to a page in
+ZONE_MOVABLE, turning it unmovable).
+
+In these corner cases we really don't want to be stuck forever in
+offline_and_remove_memory(). But in the general cases, we really want to
+do our best to make memory offlining succeed -- in a reasonable
+timeframe.
+
+Reliably failing in the described case when there is a fatal signal pending
+is sub-optimal. The pending signal check is mostly only relevant when user
+space explicitly triggers offlining of memory using sysfs device attributes
+("state" or "online" attribute), but not when coming via
+offline_and_remove_memory().
+
+So let's use a timer instead and ignore fatal signals, because they are
+not really expressive for offline_and_remove_memory() users. Let's default
+to 30 seconds if no timeout was specified, and limit the timeout to 120
+seconds.
+
+This change is also valuable for virtio-mem in BBM (Big Block Mode) with
+"bbm_safe_unplug=off", to avoid endless loops when stuck forever in
+offline_and_remove_memory().
+
+While at it, drop the "extern" from offline_and_remove_memory() to make
+it fit into a single line.
+
+[1] https://lkml.kernel.org/r/20230620011719.155379-1-jhubbard@nvidia.com
 
 Signed-off-by: David Hildenbrand <david@redhat.com>
 ---
- drivers/virtio/virtio_mem.c | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ drivers/virtio/virtio_mem.c    |  2 +-
+ include/linux/memory_hotplug.h |  2 +-
+ mm/memory_hotplug.c            | 50 ++++++++++++++++++++++++++++++++--
+ 3 files changed, 50 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/virtio/virtio_mem.c b/drivers/virtio/virtio_mem.c
-index 835f6cc2fb66..cb8bc6f6aa90 100644
+index cb8bc6f6aa90..f8792223f1db 100644
 --- a/drivers/virtio/virtio_mem.c
 +++ b/drivers/virtio/virtio_mem.c
-@@ -750,7 +750,15 @@ static int virtio_mem_offline_and_remove_memory(struct virtio_mem *vm,
- 		dev_dbg(&vm->vdev->dev,
- 			"offlining and removing memory failed: %d\n", rc);
- 	}
--	return rc;
-+
-+	switch (rc) {
-+	case 0:
-+	case -ENOMEM:
-+	case -EINVAL:
-+		return rc;
-+	default:
-+		return -EBUSY;
-+	}
- }
+@@ -738,7 +738,7 @@ static int virtio_mem_offline_and_remove_memory(struct virtio_mem *vm,
+ 		"offlining and removing memory: 0x%llx - 0x%llx\n", addr,
+ 		addr + size - 1);
  
- /*
+-	rc = offline_and_remove_memory(addr, size);
++	rc = offline_and_remove_memory(addr, size, 0);
+ 	if (!rc) {
+ 		atomic64_sub(size, &vm->offline_size);
+ 		/*
+diff --git a/include/linux/memory_hotplug.h b/include/linux/memory_hotplug.h
+index 9fcbf5706595..d5f9e8b5a4a4 100644
+--- a/include/linux/memory_hotplug.h
++++ b/include/linux/memory_hotplug.h
+@@ -307,7 +307,7 @@ extern int offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 			 struct zone *zone, struct memory_group *group);
+ extern int remove_memory(u64 start, u64 size);
+ extern void __remove_memory(u64 start, u64 size);
+-extern int offline_and_remove_memory(u64 start, u64 size);
++int offline_and_remove_memory(u64 start, u64 size, unsigned int timeout_ms);
+ 
+ #else
+ static inline void try_offline_node(int nid) {}
+diff --git a/mm/memory_hotplug.c b/mm/memory_hotplug.c
+index 0d2151df4ee1..ca635121644a 100644
+--- a/mm/memory_hotplug.c
++++ b/mm/memory_hotplug.c
+@@ -152,6 +152,22 @@ void put_online_mems(void)
+ 
+ bool movable_node_enabled = false;
+ 
++/*
++ * Protected by the device hotplug lock: offline_and_remove_memory()
++ * will activate a timer such that offlining cannot be stuck forever.
++ *
++ * With an active timer, fatal signals will be ignored, because they can be
++ * counter-productive when dying user space triggers device unplug/driver
++ * unloading that ends up offlining+removing device memory.
++ */
++static bool mhp_offlining_timer_active;
++static atomic_t mhp_offlining_timer_expired;
++
++static void mhp_offline_timer_fn(struct timer_list *unused)
++{
++	atomic_set(&mhp_offlining_timer_expired, 1);
++}
++
+ #ifndef CONFIG_MEMORY_HOTPLUG_DEFAULT_ONLINE
+ int mhp_default_online_type = MMOP_OFFLINE;
+ #else
+@@ -1879,7 +1895,18 @@ int __ref offline_pages(unsigned long start_pfn, unsigned long nr_pages,
+ 	do {
+ 		pfn = start_pfn;
+ 		do {
+-			if (fatal_signal_pending(current)) {
++			/*
++			 * If a timer is active, we're coming via
++			 * offline_and_remove_memory() and want to ignore even
++			 * fatal signals.
++			 */
++			if (mhp_offlining_timer_active) {
++				if (atomic_read(&mhp_offlining_timer_expired)) {
++					ret = -ETIMEDOUT;
++					reason = "timeout";
++					goto failed_removal_isolated;
++				}
++			} else if (fatal_signal_pending(current)) {
+ 				ret = -EINTR;
+ 				reason = "signal backoff";
+ 				goto failed_removal_isolated;
+@@ -2232,11 +2259,17 @@ static int try_reonline_memory_block(struct memory_block *mem, void *arg)
+  * memory is still in use. Primarily useful for memory devices that logically
+  * unplugged all memory (so it's no longer in use) and want to offline + remove
+  * that memory.
++ *
++ * offline_and_remove_memory() will not fail on fatal signals. Instead, it will
++ * fail once the timeout has been reached and offlining was not completed. If
++ * no timeout was specified, it will timeout after 30 seconds. The timeout is
++ * limited to 120 seconds.
+  */
+-int offline_and_remove_memory(u64 start, u64 size)
++int offline_and_remove_memory(u64 start, u64 size, unsigned int timeout_ms)
+ {
+ 	const unsigned long mb_count = size / memory_block_size_bytes();
+ 	uint8_t *online_types, *tmp;
++	struct timer_list timer;
+ 	int rc;
+ 
+ 	if (!IS_ALIGNED(start, memory_block_size_bytes()) ||
+@@ -2261,9 +2294,22 @@ int offline_and_remove_memory(u64 start, u64 size)
+ 
+ 	lock_device_hotplug();
+ 
++	if (!timeout_ms)
++		timeout_ms = 30 * MSEC_PER_SEC;
++	timeout_ms = min_t(unsigned int, timeout_ms, 120 * MSEC_PER_SEC);
++
++	timer_setup_on_stack(&timer, mhp_offline_timer_fn, 0);
++	mod_timer(&timer, jiffies + msecs_to_jiffies(timeout_ms));
++	mhp_offlining_timer_active = true;
++
+ 	tmp = online_types;
+ 	rc = walk_memory_blocks(start, size, &tmp, try_offline_memory_block);
+ 
++	timer_delete_sync(&timer);
++	atomic_set(&mhp_offlining_timer_expired, 0);
++	mhp_offlining_timer_active = false;
++	destroy_timer_on_stack(&timer);
++
+ 	/*
+ 	 * In case we succeeded to offline all memory, remove it.
+ 	 * This cannot fail as it cannot get onlined in the meantime.
 -- 
 2.40.1
 
