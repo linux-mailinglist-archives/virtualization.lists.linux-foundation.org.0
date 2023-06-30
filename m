@@ -1,108 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 01FBB743759
-	for <lists.virtualization@lfdr.de>; Fri, 30 Jun 2023 10:35:24 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id DD4A47437E2
+	for <lists.virtualization@lfdr.de>; Fri, 30 Jun 2023 11:04:25 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id D6D8041F69;
-	Fri, 30 Jun 2023 08:35:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D6D8041F69
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CHXIjeKV
+	by smtp3.osuosl.org (Postfix) with ESMTP id D93C8612CB;
+	Fri, 30 Jun 2023 09:04:23 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D93C8612CB
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=J7MCIKJt
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rFw9P7j-ON3H; Fri, 30 Jun 2023 08:35:18 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 6B7C941F73;
-	Fri, 30 Jun 2023 08:35:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6B7C941F73
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qtE73R87CG7B; Fri, 30 Jun 2023 09:04:22 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id DDC39612E1;
+	Fri, 30 Jun 2023 09:04:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DDC39612E1
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A3CB0C0DD4;
-	Fri, 30 Jun 2023 08:35:17 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2A666C0DD4;
+	Fri, 30 Jun 2023 09:04:21 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id BFDB9C0037
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 488E3C0037
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Jun 2023 08:35:15 +0000 (UTC)
+ Fri, 30 Jun 2023 09:04:19 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 865C340154
+ by smtp2.osuosl.org (Postfix) with ESMTP id 551454190C
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Jun 2023 08:35:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 865C340154
+ Fri, 30 Jun 2023 09:04:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 551454190C
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=CHXIjeKV
+ dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
+ header.a=rsa-sha256 header.s=Intel header.b=J7MCIKJt
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id lG9bG1xvjKDv
+ with ESMTP id wq71tW6fMk4U
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Jun 2023 08:35:15 +0000 (UTC)
+ Fri, 30 Jun 2023 09:04:17 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org D8D4F40131
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id D8D4F40131
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A19CE41905
+Received: from mga17.intel.com (mga17.intel.com [192.55.52.151])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A19CE41905
  for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Jun 2023 08:35:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688114113;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=TnaOhNvtxh50U8yZd9VkBSSsjMY9dRb44ZcwWbWlcRU=;
- b=CHXIjeKVmCEfW4Neik9fKpMUDMEOWEQWsUc5lKymGGF67J4JONawJtk+yZ1sg/YqJz9/J6
- 8cI2xIVR3v/h5awWHFBxI4RUsKdhwbgMCJg/2/kaPQBUwAWJdPel66GCWYkG0UdNGQNXFn
- OHK5vSmPdnQ3XHVwsnYupzYweTfQ9Z4=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-595-u32Q5vspNR-o-8asBl8SAw-1; Fri, 30 Jun 2023 04:34:13 -0400
-X-MC-Unique: u32Q5vspNR-o-8asBl8SAw-1
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-3f81dda24d3so23458685e9.1
- for <virtualization@lists.linux-foundation.org>;
- Fri, 30 Jun 2023 01:34:13 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688114052; x=1690706052;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TnaOhNvtxh50U8yZd9VkBSSsjMY9dRb44ZcwWbWlcRU=;
- b=gUggC794yqrm/1pE605SUUtDEavgk499LsQvaINUeTy2KK2th8u6s8kEOLSnaNYDwX
- mM/jGiBWmGZYjBdh60oiLtcNd9U+IJCfnIDgRA3+8awxV+4wXNn+K3wLH+0c/F+fdjpx
- 93Zo9xCSNEMajTue0qJnvIAFSbh65sxCiDeEO+lPVSjPVm+x5hpck8KLiStbgIST+hGY
- /yYBZWiQn9yqdxvs9yUCIM5fipM/reiIPntYsO9zueCw9R74V/2r/QQLKnsrvYteGiWJ
- mWDSfuuJ3xP66l7WaTL1jVfefTt8Tk9jOKa737R85bNBoIYmfBozKdaRLYoOh/R9k7To
- yDYw==
-X-Gm-Message-State: AC+VfDxBBbp9obrBHzOw4wxh6ur6fq4I5iFrza7w7fkUGjV16sJWS0n5
- ht2gh8Vt8goY/PACZEasAK+vobTf43m35nOhqroIq7GQ40yY7iMwGlr2JyU1Ko7bq3iyoNYODtY
- kBTiLzSuH15R3wzzX87mmqIfePAolkIMJYEIAMuWtkw==
-X-Received: by 2002:a7b:cd8e:0:b0:3fa:8aed:d57f with SMTP id
- y14-20020a7bcd8e000000b003fa8aedd57fmr1714741wmj.24.1688114052467; 
- Fri, 30 Jun 2023 01:34:12 -0700 (PDT)
-X-Google-Smtp-Source: ACHHUZ6rjC7KQu1QwHKrASacJdWaPZDMD1SUADNxMqW8XVs6LwTiOUh89h6kOAfgnx8Ur5YqXjLOnA==
-X-Received: by 2002:a7b:cd8e:0:b0:3fa:8aed:d57f with SMTP id
- y14-20020a7bcd8e000000b003fa8aedd57fmr1714725wmj.24.1688114052172; 
- Fri, 30 Jun 2023 01:34:12 -0700 (PDT)
-Received: from redhat.com ([2.52.154.169]) by smtp.gmail.com with ESMTPSA id
- a20-20020a05600c225400b003fbb06af219sm6631296wmm.32.2023.06.30.01.34.10
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 30 Jun 2023 01:34:11 -0700 (PDT)
-Date: Fri, 30 Jun 2023 04:34:05 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Zhu Lingshan <lingshan.zhu@intel.com>
-Subject: Re: [PATCH] vp_vdpa: synchronize irq when free irq
-Message-ID: <20230630043342-mutt-send-email-mst@kernel.org>
-References: <20230630103656.345870-1-lingshan.zhu@intel.com>
+ Fri, 30 Jun 2023 09:04:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1688115857; x=1719651857;
+ h=message-id:date:mime-version:subject:to:cc:references:
+ from:in-reply-to:content-transfer-encoding;
+ bh=486JHenMkrUu3ckj/agpZn4KD7m/EpRQ1NAQyqEUXkk=;
+ b=J7MCIKJtfdQB2qYX1lBH5SjfAOQm3wtXi8CzmQlj3yhk/nsakoz5bYg6
+ YnM+ZB5MIqN5RhRHvoInx0jMFUJFE7j5JehcfOQ+4ixElMpQnjZmG/kgO
+ NC3NHE2jQ5GRzazCsBK2bTS/igWDcSaaZ2uzYMji+qPT3+4HIBtktUp3I
+ j6vl7s8oVUpCwqHxz4fNIlO7pIGZ9d0zYXYVqywo4WBTdwavQyJyOVvoW
+ YU2+JDpAH9/SUJt0sPlBKWX7sVrruBlA96kGeoO2ghz/1AocTOqdBoOAz
+ YDgZCzr9Cjm9WbSUiisY15E+j4e0EUyP89iHsBACUctMv30fdOHSIOI6t A==;
+X-IronPort-AV: E=McAfee;i="6600,9927,10756"; a="342690438"
+X-IronPort-AV: E=Sophos;i="6.01,170,1684825200"; d="scan'208";a="342690438"
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+ by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Jun 2023 02:04:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=McAfee;i="6600,9927,10756"; a="1048149883"
+X-IronPort-AV: E=Sophos;i="6.01,170,1684825200"; d="scan'208";a="1048149883"
+Received: from lingshan-mobl.ccr.corp.intel.com (HELO [10.249.169.9])
+ ([10.249.169.9])
+ by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 30 Jun 2023 02:04:15 -0700
+Message-ID: <5f6dc902-cb41-8538-3fb3-42c9c358ed8b@intel.com>
+Date: Fri, 30 Jun 2023 17:04:12 +0800
 MIME-Version: 1.0
-In-Reply-To: <20230630103656.345870-1-lingshan.zhu@intel.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:102.0) Gecko/20100101
+ Firefox/102.0 Thunderbird/102.12.0
+Subject: Re: [PATCH] vp_vdpa: synchronize irq when free irq
+Content-Language: en-US
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20230630103656.345870-1-lingshan.zhu@intel.com>
+ <20230630043342-mutt-send-email-mst@kernel.org>
+From: "Zhu, Lingshan" <lingshan.zhu@intel.com>
+In-Reply-To: <20230630043342-mutt-send-email-mst@kernel.org>
 Cc: Cindy Lu <lulu@redhat.com>, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -115,46 +95,51 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Jun 30, 2023 at 06:36:56PM +0800, Zhu Lingshan wrote:
-> This commits synchronizes irqs when free them
-> 
-> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
-> Tested-by: Cindy Lu <lulu@redhat.com>
-> ---
->  drivers/vdpa/virtio_pci/vp_vdpa.c | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/drivers/vdpa/virtio_pci/vp_vdpa.c b/drivers/vdpa/virtio_pci/vp_vdpa.c
-> index 281287fae89f..d8ee3e68cd2d 100644
-> --- a/drivers/vdpa/virtio_pci/vp_vdpa.c
-> +++ b/drivers/vdpa/virtio_pci/vp_vdpa.c
-> @@ -116,6 +116,7 @@ static void vp_vdpa_free_irq(struct vp_vdpa *vp_vdpa)
->  	for (i = 0; i < vp_vdpa->queues; i++) {
->  		if (vp_vdpa->vring[i].irq != VIRTIO_MSI_NO_VECTOR) {
->  			vp_modern_queue_vector(mdev, i, VIRTIO_MSI_NO_VECTOR);
-> +			synchronize_irq(vp_vdpa->vring[i].irq);
->  			devm_free_irq(&pdev->dev, vp_vdpa->vring[i].irq,
->  				      &vp_vdpa->vring[i]);
->  			vp_vdpa->vring[i].irq = VIRTIO_MSI_NO_VECTOR;
-> @@ -124,6 +125,7 @@ static void vp_vdpa_free_irq(struct vp_vdpa *vp_vdpa)
->  
->  	if (vp_vdpa->config_irq != VIRTIO_MSI_NO_VECTOR) {
->  		vp_modern_config_vector(mdev, VIRTIO_MSI_NO_VECTOR);
-> +		synchronize_irq(vp_vdpa->config_irq);
->  		devm_free_irq(&pdev->dev, vp_vdpa->config_irq, vp_vdpa);
->  		vp_vdpa->config_irq = VIRTIO_MSI_NO_VECTOR;
 
 
-Weird, doesn't free_irq synchronize automatically?
+On 6/30/2023 4:34 PM, Michael S. Tsirkin wrote:
+> On Fri, Jun 30, 2023 at 06:36:56PM +0800, Zhu Lingshan wrote:
+>> This commits synchronizes irqs when free them
+>>
+>> Signed-off-by: Zhu Lingshan <lingshan.zhu@intel.com>
+>> Tested-by: Cindy Lu <lulu@redhat.com>
+>> ---
+>>   drivers/vdpa/virtio_pci/vp_vdpa.c | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>
+>> diff --git a/drivers/vdpa/virtio_pci/vp_vdpa.c b/drivers/vdpa/virtio_pci/vp_vdpa.c
+>> index 281287fae89f..d8ee3e68cd2d 100644
+>> --- a/drivers/vdpa/virtio_pci/vp_vdpa.c
+>> +++ b/drivers/vdpa/virtio_pci/vp_vdpa.c
+>> @@ -116,6 +116,7 @@ static void vp_vdpa_free_irq(struct vp_vdpa *vp_vdpa)
+>>   	for (i = 0; i < vp_vdpa->queues; i++) {
+>>   		if (vp_vdpa->vring[i].irq != VIRTIO_MSI_NO_VECTOR) {
+>>   			vp_modern_queue_vector(mdev, i, VIRTIO_MSI_NO_VECTOR);
+>> +			synchronize_irq(vp_vdpa->vring[i].irq);
+>>   			devm_free_irq(&pdev->dev, vp_vdpa->vring[i].irq,
+>>   				      &vp_vdpa->vring[i]);
+>>   			vp_vdpa->vring[i].irq = VIRTIO_MSI_NO_VECTOR;
+>> @@ -124,6 +125,7 @@ static void vp_vdpa_free_irq(struct vp_vdpa *vp_vdpa)
+>>   
+>>   	if (vp_vdpa->config_irq != VIRTIO_MSI_NO_VECTOR) {
+>>   		vp_modern_config_vector(mdev, VIRTIO_MSI_NO_VECTOR);
+>> +		synchronize_irq(vp_vdpa->config_irq);
+>>   		devm_free_irq(&pdev->dev, vp_vdpa->config_irq, vp_vdpa);
+>>   		vp_vdpa->config_irq = VIRTIO_MSI_NO_VECTOR;
+>
+> Weird, doesn't free_irq synchronize automatically?
+Oh, I see free_irq calls __syncronize_hardirq internally
 
->  	}
-> -- 
-> 2.39.3
+Thanks
+>
+>>   	}
+>> -- 
+>> 2.39.3
 
 _______________________________________________
 Virtualization mailing list
