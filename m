@@ -2,108 +2,70 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0F5B774CA49
-	for <lists.virtualization@lfdr.de>; Mon, 10 Jul 2023 05:16:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 46FEA74CAB4
+	for <lists.virtualization@lfdr.de>; Mon, 10 Jul 2023 05:42:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 31C41400EA;
-	Mon, 10 Jul 2023 03:16:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 31C41400EA
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=EtDC9taN
+	by smtp2.osuosl.org (Postfix) with ESMTP id B2DAD40395;
+	Mon, 10 Jul 2023 03:42:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B2DAD40395
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id SployyhL84Ri; Mon, 10 Jul 2023 03:16:52 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 09EB840129;
-	Mon, 10 Jul 2023 03:16:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 09EB840129
+	with ESMTP id 7JO_aAOfnNe5; Mon, 10 Jul 2023 03:42:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 6AABD40129;
+	Mon, 10 Jul 2023 03:42:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6AABD40129
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3B27DC0DD4;
-	Mon, 10 Jul 2023 03:16:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2C551C0DD6;
+	Mon, 10 Jul 2023 03:42:51 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 6A5F1C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id B8924C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Jul 2023 03:16:49 +0000 (UTC)
+ Mon, 10 Jul 2023 03:42:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 30BAA81604
+ by smtp1.osuosl.org (Postfix) with ESMTP id 84928818C0
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Jul 2023 03:16:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 30BAA81604
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=EtDC9taN
+ Mon, 10 Jul 2023 03:42:47 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 84928818C0
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id HAyKj2JAEGos
+ with ESMTP id u3n6_57FCBq1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Jul 2023 03:16:48 +0000 (UTC)
+ Mon, 10 Jul 2023 03:42:45 +0000 (UTC)
 X-Greylist: domain auto-whitelisted by SQLgrey-1.8.0
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 548C0815AB
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 548C0815AB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DDFB3817A1
+Received: from out30-110.freemail.mail.aliyun.com
+ (out30-110.freemail.mail.aliyun.com [115.124.30.110])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id DDFB3817A1
  for <virtualization@lists.linux-foundation.org>;
- Mon, 10 Jul 2023 03:16:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1688959006;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=a62DSLSpXeASP7dYpa5HsA33PutQ3KjJO6C/G/Q8iAk=;
- b=EtDC9taNDHxe3UhqS0Y14C9GRRrvbHW+ueIqProwcxJlRByuZtx+cnvnRc7Z+G7cq9wh87
- wU5+SGTKeEdB3+kJ+G22FYsTIEf30g1tID9cqbrtAlJhwKGWro5WCVQVlKI7XiccCJngZH
- P42ZiJogMaJfuwV5F7AvW0EP+f4sVCc=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-586-sSkd99KXPdyy1HwS5lHJ1Q-1; Sun, 09 Jul 2023 23:16:45 -0400
-X-MC-Unique: sSkd99KXPdyy1HwS5lHJ1Q-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2b701e0bb10so33311781fa.3
- for <virtualization@lists.linux-foundation.org>;
- Sun, 09 Jul 2023 20:16:45 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1688959004; x=1691551004;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=a62DSLSpXeASP7dYpa5HsA33PutQ3KjJO6C/G/Q8iAk=;
- b=Evqx5SNHeeJSbXRRQTI8tnrktznEa27BHBeQkeKl7rwzYYRdDCO8/TcnzT0GPcAHKF
- CEspNTW4t/y6+cX1tvn++81XTRqH6lEmYfDl2K+apvdQwcZfSe2RgHuew4DaqQv6LTf5
- j+NkDNUm+olvZQPOPGkDIwPEoQ/bMZ2m72hWikSTak0EQ7mrBD2zD5y0mfqv5xTrgkVt
- LG8Hk4l7sL3Sy/2M/xKT6esI5qhXRnlRVwpmPQUjDv2YN31IfXIzzXUNmGzKb98z2N1g
- v6ij2WNhjLFlo7Jp3MZOh0QdLvYfUjYo2iu+8qVgelCf/b4GxjBa0tHzzdCfFvG+R1JE
- BktA==
-X-Gm-Message-State: ABy/qLb4LXoxAli/twTyRXnYC9S/SPTBdQIsnsq4G40PTXl/HB29Cf8E
- Ie2X28PqdW6Eiw5r2NSKyZB1ERISBs9ZjpvGKr2spPjzt87Em2m3SrpnNGP7C4IaeEo9zSd7lcB
- mh1O30LtcH1APYp1zrI1KCGS1PO4B9tt8W8UNMV4ACH4EhN7Zsjuc36tGjg==
-X-Received: by 2002:a05:651c:1025:b0:2b6:a22f:9fb9 with SMTP id
- w5-20020a05651c102500b002b6a22f9fb9mr8375724ljm.27.1688959004007; 
- Sun, 09 Jul 2023 20:16:44 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlEnVegvrkpNt0TR6XRnujYIiNrsRYYJzxc37gJtNWKUE7a5YX0jPBMxs0gFC9cJdQNoUf+kMZdSTNMkLAa3IKo=
-X-Received: by 2002:a05:651c:1025:b0:2b6:a22f:9fb9 with SMTP id
- w5-20020a05651c102500b002b6a22f9fb9mr8375700ljm.27.1688959002988; Sun, 09 Jul
- 2023 20:16:42 -0700 (PDT)
+ Mon, 10 Jul 2023 03:42:44 +0000 (UTC)
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=15; SR=0;
+ TI=SMTPD_---0VmxH3ZP_1688960557; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0VmxH3ZP_1688960557) by smtp.aliyun-inc.com;
+ Mon, 10 Jul 2023 11:42:38 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH vhost v11 00/10] virtio core prepares for AF_XDP
+Date: Mon, 10 Jul 2023 11:42:27 +0800
+Message-Id: <20230710034237.12391-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 MIME-Version: 1.0
-References: <20230706231718.54198-1-shannon.nelson@amd.com>
-In-Reply-To: <20230706231718.54198-1-shannon.nelson@amd.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Mon, 10 Jul 2023 11:16:32 +0800
-Message-ID: <CACGkMEuD9DgK7CEp0cW-he3FAbzDVsvnhvouLWAMv9bUrq+ATA@mail.gmail.com>
-Subject: Re: [PATCH virtio] pds_vdpa: protect Makefile from unconfigured
- debugfs
-To: Shannon Nelson <shannon.nelson@amd.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: sfr@canb.auug.org.au, brett.creeley@amd.com, mst@redhat.com,
- netdev@vger.kernel.org, rdunlap@infradead.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-next@vger.kernel.org,
- drivers@pensando.io
+X-Git-Hash: 39991abed41c
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
+ Alexei Starovoitov <ast@kernel.org>, Christoph Hellwig <hch@infradead.org>,
+ Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
+ bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+ "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -115,31 +77,129 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gRnJpLCBKdWwgNywgMjAyMyBhdCA3OjE34oCvQU0gU2hhbm5vbiBOZWxzb24gPHNoYW5ub24u
-bmVsc29uQGFtZC5jb20+IHdyb3RlOgo+Cj4gZGVidWdmcy5oIHByb3RlY3RzIGl0c2VsZiBmcm9t
-IGFuIHVuZGVmaW5lZCBERUJVR19GUywgc28gaXQgaXMKPiBub3QgbmVjZXNzYXJ5IHRvIGNoZWNr
-IGl0IGluIHRoZSBkcml2ZXIgY29kZSBvciB0aGUgTWFrZWZpbGUuCj4gVGhlIGRyaXZlciBjb2Rl
-IGhhZCBiZWVuIHVwZGF0ZWQgZm9yIHRoaXMsIGJ1dCB0aGUgTWFrZWZpbGUgaGFkCj4gbWlzc2Vk
-IHRoZSB1cGRhdGUuCj4KPiBMaW5rOiBodHRwczovL2xvcmUua2VybmVsLm9yZy9saW51eC1uZXh0
-L2ZlYzY4YzNjLTgyNDktN2FmNC01MzkwLTA0OTUzODZhNzZmOUBpbmZyYWRlYWQub3JnLwo+IEZp
-eGVzOiBhMTYyOTFiNWJjYmIgKCJwZHNfdmRwYTogQWRkIG5ldyB2RFBBIGRyaXZlciBmb3IgQU1E
-L1BlbnNhbmRvIERTQyIpCj4gU2lnbmVkLW9mZi1ieTogU2hhbm5vbiBOZWxzb24gPHNoYW5ub24u
-bmVsc29uQGFtZC5jb20+CgpBY2tlZC1ieTogSmFzb24gV2FuZyA8amFzb3dhbmdAcmVkaGF0LmNv
-bT4KClRoYW5rcwoKPiAtLS0KPiAgZHJpdmVycy92ZHBhL3Bkcy9NYWtlZmlsZSB8IDMgKy0tCj4g
-IDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMiBkZWxldGlvbnMoLSkKPgo+IGRpZmYg
-LS1naXQgYS9kcml2ZXJzL3ZkcGEvcGRzL01ha2VmaWxlIGIvZHJpdmVycy92ZHBhL3Bkcy9NYWtl
-ZmlsZQo+IGluZGV4IDJlMjI0MThlM2FiMy4uYzJkMzE0ZDQ2MTRkIDEwMDY0NAo+IC0tLSBhL2Ry
-aXZlcnMvdmRwYS9wZHMvTWFrZWZpbGUKPiArKysgYi9kcml2ZXJzL3ZkcGEvcGRzL01ha2VmaWxl
-Cj4gQEAgLTUsNiArNSw1IEBAIG9iai0kKENPTkZJR19QRFNfVkRQQSkgOj0gcGRzX3ZkcGEubwo+
-Cj4gIHBkc192ZHBhLXkgOj0gYXV4X2Rydi5vIFwKPiAgICAgICAgICAgICAgIGNtZHMubyBcCj4g
-KyAgICAgICAgICAgICBkZWJ1Z2ZzLm8gXAo+ICAgICAgICAgICAgICAgdmRwYV9kZXYubwo+IC0K
-PiAtcGRzX3ZkcGEtJChDT05GSUdfREVCVUdfRlMpICs9IGRlYnVnZnMubwo+IC0tCj4gMi4xNy4x
-Cj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1
-YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0
-aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5m
-by92aXJ0dWFsaXphdGlvbg==
+## About DMA APIs
+
+Now, virtio may can not work with DMA APIs when virtio features do not have
+VIRTIO_F_ACCESS_PLATFORM.
+
+1. I tried to let DMA APIs return phy address by virtio-device. But DMA APIs just
+   work with the "real" devices.
+2. I tried to let xsk support callballs to get phy address from virtio-net
+   driver as the dma address. But the maintainers of xsk may want to use dma-buf
+   to replace the DMA APIs. I think that may be a larger effort. We will wait
+   too long.
+
+So rethinking this, firstly, we can support premapped-dma only for devices with
+VIRTIO_F_ACCESS_PLATFORM. In the case of af-xdp, if the users want to use it,
+they have to update the device to support VIRTIO_F_RING_RESET, and they can also
+enable the device's VIRTIO_F_ACCESS_PLATFORM feature.
+
+Thanks for the help from Christoph.
+
+=================
+
+XDP socket(AF_XDP) is an excellent bypass kernel network framework. The zero
+copy feature of xsk (XDP socket) needs to be supported by the driver. The
+performance of zero copy is very good.
+
+ENV: Qemu with vhost.
+
+                   vhost cpu | Guest APP CPU |Guest Softirq CPU | PPS
+-----------------------------|---------------|------------------|------------
+xmit by sockperf:     90%    |   100%        |                  |  318967
+xmit by xsk:          100%   |   30%         |   33%            | 1192064
+recv by sockperf:     100%   |   68%         |   100%           |  692288
+recv by xsk:          100%   |   33%         |   43%            |  771670
+
+Before achieving the function of Virtio-Net, we also have to let virtio core
+support these features:
+
+1. virtio core support premapped
+2. virtio core support reset per-queue
+
+=================
+
+After introducing premapping, I added an example to virtio-net. virtio-net can
+merge dma mappings through this feature. @Jason
+
+
+Please review.
+
+Thanks.
+
+v11
+ 1. virtio-net merges dma operates based on the feature premapped
+ 2. A better way to handle the map error with the premapped
+
+v10:
+ 1. support to set vq to premapped mode, then the vq just handles the premapped request.
+ 2. virtio-net support to do dma mapping in advance
+
+v9:
+ 1. use flag to distinguish the premapped operations. no do judgment by sg.
+
+v8:
+ 1. vring_sg_address: check by sg_page(sg) not dma_address. Because 0 is a valid dma address
+ 2. remove unused code from vring_map_one_sg()
+
+v7:
+ 1. virtqueue_dma_dev() return NULL when virtio is without DMA API.
+
+v6:
+ 1. change the size of the flags to u32.
+
+v5:
+ 1. fix for error handler
+ 2. add flags to record internal dma mapping
+
+v4:
+ 1. rename map_inter to dma_map_internal
+ 2. fix: Excess function parameter 'vq' description in 'virtqueue_dma_dev'
+
+v3:
+ 1. add map_inter to struct desc state to reocrd whether virtio core do dma map
+
+v2:
+ 1. based on sgs[0]->dma_address to judgment is premapped
+ 2. based on extra.addr to judgment to do unmap for no-indirect desc
+ 3. based on indir_desc to judgment to do unmap for indirect desc
+ 4. rename virtqueue_get_dma_dev to virtqueue_dma_dev
+
+v1:
+ 1. expose dma device. NO introduce the api for dma and sync
+ 2. split some commit for review.
+
+
+
+
+
+Xuan Zhuo (10):
+  virtio_ring: check use_dma_api before unmap desc for indirect
+  virtio_ring: put mapping error check in vring_map_one_sg
+  virtio_ring: introduce virtqueue_set_premapped()
+  virtio_ring: support add premapped buf
+  virtio_ring: introduce virtqueue_dma_dev()
+  virtio_ring: skip unmap for premapped
+  virtio_ring: correct the expression of the description of
+    virtqueue_resize()
+  virtio_ring: separate the logic of reset/enable from virtqueue_resize
+  virtio_ring: introduce virtqueue_reset()
+  virtio_net: merge dma operation for one page
+
+ drivers/net/virtio_net.c     | 283 +++++++++++++++++++++++++++++++++--
+ drivers/virtio/virtio_ring.c | 257 ++++++++++++++++++++++++-------
+ include/linux/virtio.h       |   6 +
+ 3 files changed, 478 insertions(+), 68 deletions(-)
+
+--
+2.32.0.3.g01195cf9f
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
