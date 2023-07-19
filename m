@@ -1,72 +1,120 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 88A4A758C52
-	for <lists.virtualization@lfdr.de>; Wed, 19 Jul 2023 06:04:49 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 1A7E8758F59
+	for <lists.virtualization@lfdr.de>; Wed, 19 Jul 2023 09:43:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 3005881F4A;
-	Wed, 19 Jul 2023 04:04:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3005881F4A
+	by smtp1.osuosl.org (Postfix) with ESMTP id E3E2B813A2;
+	Wed, 19 Jul 2023 07:43:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E3E2B813A2
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=E3lLKEFP
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 74sdUH92IqZR; Wed, 19 Jul 2023 04:04:47 +0000 (UTC)
+	with ESMTP id L_gXHbSrnXuK; Wed, 19 Jul 2023 07:43:14 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 99FE081F49;
-	Wed, 19 Jul 2023 04:04:46 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 99FE081F49
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 9ABCF81A47;
+	Wed, 19 Jul 2023 07:43:13 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9ABCF81A47
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id CE78AC0DD4;
-	Wed, 19 Jul 2023 04:04:45 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B8609C008D;
+	Wed, 19 Jul 2023 07:43:12 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 7C7B8C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 29040C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jul 2023 04:04:44 +0000 (UTC)
+ Wed, 19 Jul 2023 07:43:12 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 5523A81EAF
+ by smtp4.osuosl.org (Postfix) with ESMTP id 011A441879
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jul 2023 04:04:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5523A81EAF
+ Wed, 19 Jul 2023 07:43:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 011A441879
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=E3lLKEFP
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PD4pcpMhx7HT
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YoR1rzFORZQz
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jul 2023 04:04:43 +0000 (UTC)
-Received: from out30-112.freemail.mail.aliyun.com
- (out30-112.freemail.mail.aliyun.com [115.124.30.112])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 884B681E5C
+ Wed, 19 Jul 2023 07:43:11 +0000 (UTC)
+X-Greylist: delayed 395 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 19 Jul 2023 07:43:10 UTC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C14DA41862
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id C14DA41862
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jul 2023 04:04:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 884B681E5C
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046051;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=15; SR=0;
- TI=SMTPD_---0Vnk0JDX_1689739475; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vnk0JDX_1689739475) by smtp.aliyun-inc.com;
- Wed, 19 Jul 2023 12:04:36 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost v12 10/10] virtio_net: merge dma operations when filling
- mergeable buffers
-Date: Wed, 19 Jul 2023 12:04:22 +0800
-Message-Id: <20230719040422.126357-11-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20230719040422.126357-1-xuanzhuo@linux.alibaba.com>
-References: <20230719040422.126357-1-xuanzhuo@linux.alibaba.com>
+ Wed, 19 Jul 2023 07:43:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1689752589;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=/l/BFx3Ouxomc0W5crH0QEL+N5uRN2SeYoUdCWhVZBA=;
+ b=E3lLKEFPqeohJDdAYVIgclTm6farV2hxggHuCKHdC1UA9rYiSDNVRLwLQuRA66NKjw+z+s
+ FTq9/USGs10AipMXh2c/5ZwynBGQUZlRml/zaRfdIjWE+DRvC16vsrjlR9j87nzt0pfgq3
+ WyyDEE5ywaXHQYQIcVK2/uiIIEi9A2k=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-556-_thwS79hN5y6zgnYmnQF0w-1; Wed, 19 Jul 2023 03:36:32 -0400
+X-MC-Unique: _thwS79hN5y6zgnYmnQF0w-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2b95eac8399so878221fa.0
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 19 Jul 2023 00:36:32 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1689752191; x=1690356991;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/l/BFx3Ouxomc0W5crH0QEL+N5uRN2SeYoUdCWhVZBA=;
+ b=aTi02G3KwJQLu2SheSx3KaQJrdT+1fKei3DipVSzQqzEFFUSR1vavgmLAFuIRlQj4z
+ kxmEmgiX5ZmOpd0MxY6VMqbU7NsuodRdjTuVW//2ZWUNa+1M0RNGiGEn+qQhpnkzW7ZA
+ TTfk1J/M77Gk2jqn+JuXzys0DdRQY5IkrfUuNPxKkcb9EN6pS1D7TxcNZvCHDP5VrQhE
+ F6g8u/P8dOnEmpAOft781e7qtNiPJT+bsh1kJN+dzAvtw/wwJxQkgaieuAvkCtz4F8HL
+ NaqHInzInzzdQiCPrG9xZ6z7oIFGR58i8ZabXfDd6uJDQ8xDLQvzI8sUgGWamyMUnSKE
+ +kpQ==
+X-Gm-Message-State: ABy/qLZqDeSX32jaZpWaCILrtABhGp6Q3QtwO7z4GkoPf3rw/ofC5P9a
+ iif2absWnHZGl9IZcDZ6Z+5Hb6qT4oxZD6mlCKr4RkVks6nZgIFXu6FETaqoCmpe/8yIeiWfnBC
+ 7EmPj7RqcAAYus2tIb+TmlWbZ6ZsNuYU5pDaqI/kSoQ==
+X-Received: by 2002:a05:6512:15a6:b0:4fd:d3aa:e425 with SMTP id
+ bp38-20020a05651215a600b004fdd3aae425mr1581929lfb.27.1689752191000; 
+ Wed, 19 Jul 2023 00:36:31 -0700 (PDT)
+X-Google-Smtp-Source: APBJJlH1vDeqm1BTcVm9t1Zzvu6JlLhYTYor1hjJsu8aGBt07Q6f2nfDA4itiCmBAX5Xer/YiP+tpg==
+X-Received: by 2002:a05:6512:15a6:b0:4fd:d3aa:e425 with SMTP id
+ bp38-20020a05651215a600b004fdd3aae425mr1581912lfb.27.1689752190665; 
+ Wed, 19 Jul 2023 00:36:30 -0700 (PDT)
+Received: from sgarzare-redhat (host-87-12-25-29.business.telecomitalia.it.
+ [87.12.25.29]) by smtp.gmail.com with ESMTPSA id
+ by27-20020a0564021b1b00b0051d87e72159sm2315237edb.13.2023.07.19.00.36.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Jul 2023 00:36:29 -0700 (PDT)
+Date: Wed, 19 Jul 2023 09:36:27 +0200
+From: Stefano Garzarella <sgarzare@redhat.com>
+To: Arseniy Krasnov <avkrasnov@sberdevices.ru>
+Subject: Re: [PATCH net-next v2 2/4] vsock/virtio: support to send non-linear
+ skb
+Message-ID: <4batgyn7pmxn2rysqpztuaim4dxtpfjbrjyyuodsct3qun7w5e@ebd45ngrsfut>
+References: <20230718180237.3248179-1-AVKrasnov@sberdevices.ru>
+ <20230718180237.3248179-3-AVKrasnov@sberdevices.ru>
+ <20230718162202-mutt-send-email-mst@kernel.org>
+ <1ac4be11-0814-05af-6c2e-8563ac15e206@sberdevices.ru>
 MIME-Version: 1.0
-X-Git-Hash: fc7afa711e97
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
- Alexei Starovoitov <ast@kernel.org>, Christoph Hellwig <hch@infradead.org>,
- Eric Dumazet <edumazet@google.com>, Jakub Kicinski <kuba@kernel.org>,
- bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+In-Reply-To: <1ac4be11-0814-05af-6c2e-8563ac15e206@sberdevices.ru>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
+Content-Disposition: inline
+Cc: Bobby Eshleman <bobby.eshleman@bytedance.com>, kvm@vger.kernel.org,
+ "Michael S. Tsirkin" <mst@redhat.com>, netdev@vger.kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ oxffffaa@gmail.com, Eric Dumazet <edumazet@google.com>,
+ Stefan Hajnoczi <stefanha@redhat.com>, kernel@sberdevices.ru,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
  "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -79,392 +127,127 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Currently, the virtio core will perform a dma operation for each
-buffer. Although, the same page may be operated multiple times.
+On Wed, Jul 19, 2023 at 07:46:05AM +0300, Arseniy Krasnov wrote:
+>
+>
+>On 18.07.2023 23:27, Michael S. Tsirkin wrote:
+>> On Tue, Jul 18, 2023 at 09:02:35PM +0300, Arseniy Krasnov wrote:
+>>> For non-linear skb use its pages from fragment array as buffers in
+>>> virtio tx queue. These pages are already pinned by 'get_user_pages()'
+>>> during such skb creation.
+>>>
+>>> Signed-off-by: Arseniy Krasnov <AVKrasnov@sberdevices.ru>
+>>> Reviewed-by: Stefano Garzarella <sgarzare@redhat.com>
+>>> ---
+>>>  net/vmw_vsock/virtio_transport.c | 40 +++++++++++++++++++++++++++-----
+>>>  1 file changed, 34 insertions(+), 6 deletions(-)
+>>>
+>>> diff --git a/net/vmw_vsock/virtio_transport.c b/net/vmw_vsock/virtio_transport.c
+>>> index e95df847176b..6cbb45bb12d2 100644
+>>> --- a/net/vmw_vsock/virtio_transport.c
+>>> +++ b/net/vmw_vsock/virtio_transport.c
+>>> @@ -100,7 +100,9 @@ virtio_transport_send_pkt_work(struct work_struct *work)
+>>>  	vq = vsock->vqs[VSOCK_VQ_TX];
+>>>
+>>>  	for (;;) {
+>>> -		struct scatterlist hdr, buf, *sgs[2];
+>>> +		/* +1 is for packet header. */
+>>> +		struct scatterlist *sgs[MAX_SKB_FRAGS + 1];
+>>> +		struct scatterlist bufs[MAX_SKB_FRAGS + 1];
+>>>  		int ret, in_sg = 0, out_sg = 0;
+>>>  		struct sk_buff *skb;
+>>>  		bool reply;
+>>> @@ -111,12 +113,38 @@ virtio_transport_send_pkt_work(struct work_struct *work)
+>>>
+>>>  		virtio_transport_deliver_tap_pkt(skb);
+>>>  		reply = virtio_vsock_skb_reply(skb);
+>>> +		sg_init_one(&bufs[out_sg], virtio_vsock_hdr(skb),
+>>> +			    sizeof(*virtio_vsock_hdr(skb)));
+>>> +		sgs[out_sg] = &bufs[out_sg];
+>>> +		out_sg++;
+>>> +
+>>> +		if (!skb_is_nonlinear(skb)) {
+>>> +			if (skb->len > 0) {
+>>> +				sg_init_one(&bufs[out_sg], skb->data, skb->len);
+>>> +				sgs[out_sg] = &bufs[out_sg];
+>>> +				out_sg++;
+>>> +			}
+>>> +		} else {
+>>> +			struct skb_shared_info *si;
+>>> +			int i;
+>>> +
+>>> +			si = skb_shinfo(skb);
+>>> +
+>>> +			for (i = 0; i < si->nr_frags; i++) {
+>>> +				skb_frag_t *skb_frag = &si->frags[i];
+>>> +				void *va = page_to_virt(skb_frag->bv_page);
+>>>
+>>> -		sg_init_one(&hdr, virtio_vsock_hdr(skb), sizeof(*virtio_vsock_hdr(skb)));
+>>> -		sgs[out_sg++] = &hdr;
+>>> -		if (skb->len > 0) {
+>>> -			sg_init_one(&buf, skb->data, skb->len);
+>>> -			sgs[out_sg++] = &buf;
+>>> +				/* We will use 'page_to_virt()' for userspace page here,
+>>
+>> don't put comments after code they refer to, please?
+>>
+>>> +				 * because virtio layer will call 'virt_to_phys()' later
+>>
+>> it will but not always. sometimes it's the dma mapping layer.
+>>
+>>
+>>> +				 * to fill buffer descriptor. We don't touch memory at
+>>> +				 * "virtual" address of this page.
+>>
+>>
+>> you need to stick "the" in a bunch of places above.
+>
+>Ok, I'll fix this comment!
+>
+>>
+>>> +				 */
+>>> +				sg_init_one(&bufs[out_sg],
+>>> +					    va + skb_frag->bv_offset,
+>>> +					    skb_frag->bv_len);
+>>> +				sgs[out_sg] = &bufs[out_sg];
+>>> +				out_sg++;
+>>> +			}
+>>>  		}
+>>>
+>>>  		ret = virtqueue_add_sgs(vq, sgs, out_sg, in_sg, skb, GFP_KERNEL);
+>>
+>>
+>> There's a problem here: if there vq is small this will fail.
+>> So you really should check free vq s/gs and switch to non-zcopy
+>> if too small.
+>
+>Ok, so idea is that:
+>
+>if (out_sg > vq->num_free)
+>    reorganise current skb for copy mode (e.g. 2 out_sg - header and data)
+>    and try to add it to vq again.
+>
+>?
+>
+>@Stefano, I'll remove net-next tag (guess RFC is not required again, but not net-next
+>anyway) as this change will require review. R-b I think should be also removed. All
+>other patches in this set still unchanged.
 
-This patch, the driver does the dma operation and manages the dma
-address based the feature premapped of virtio core.
+It's still a new feature so we have net-next tree as the target, right?
 
-This way, we can perform only one dma operation for the pages of the
-alloc frag. This is beneficial for the iommu device.
+I think we should keep net-next. Even if patches require to be
+re-reviewed, net-next indicates the tree where we want these to be merge
+and for new features is the right one.
 
-kernel command line: intel_iommu=on iommu.passthrough=0
+Ack for not putting RFC again and for R-b removal for this patch.
 
-       |  strict=0  | strict=1
-Before |  775496pps | 428614pps
-After  | 1109316pps | 742853pps
-
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/net/virtio_net.c | 225 ++++++++++++++++++++++++++++++++++-----
- 1 file changed, 199 insertions(+), 26 deletions(-)
-
-diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
-index 486b5849033d..496344468e7c 100644
---- a/drivers/net/virtio_net.c
-+++ b/drivers/net/virtio_net.c
-@@ -126,6 +126,14 @@ static const struct virtnet_stat_desc virtnet_rq_stats_desc[] = {
- #define VIRTNET_SQ_STATS_LEN	ARRAY_SIZE(virtnet_sq_stats_desc)
- #define VIRTNET_RQ_STATS_LEN	ARRAY_SIZE(virtnet_rq_stats_desc)
- 
-+/* The dma information of pages allocated at a time. */
-+struct virtnet_rq_dma {
-+	dma_addr_t addr;
-+	u32 ref;
-+	u16 len;
-+	u16 need_sync;
-+};
-+
- /* Internal representation of a send virtqueue */
- struct send_queue {
- 	/* Virtqueue associated with this send _queue */
-@@ -175,6 +183,12 @@ struct receive_queue {
- 	char name[16];
- 
- 	struct xdp_rxq_info xdp_rxq;
-+
-+	/* Record the last dma info to free after new pages is allocated. */
-+	struct virtnet_rq_dma *last_dma;
-+
-+	/* Do dma by self */
-+	bool do_dma;
- };
- 
- /* This structure can contain rss message with maximum settings for indirection table and keysize
-@@ -549,6 +563,151 @@ static struct sk_buff *page_to_skb(struct virtnet_info *vi,
- 	return skb;
- }
- 
-+static void virtnet_rq_unmap(struct receive_queue *rq, void *buf, u32 len)
-+{
-+	struct page *page = virt_to_head_page(buf);
-+	struct virtnet_rq_dma *dma;
-+	struct device *dev;
-+	void *head;
-+	int offset;
-+
-+	head = page_address(page);
-+
-+	dma = head;
-+
-+	--dma->ref;
-+
-+	if (dma->ref) {
-+		if (dma->need_sync && len) {
-+			dev = virtqueue_dma_dev(rq->vq);
-+
-+			offset = buf - (head + sizeof(*dma));
-+
-+			dma_sync_single_range_for_cpu(dev, dma->addr, offset, len, DMA_FROM_DEVICE);
-+		}
-+
-+		return;
-+	}
-+
-+	dev = virtqueue_dma_dev(rq->vq);
-+
-+	dma_unmap_single(dev, dma->addr, dma->len, DMA_FROM_DEVICE);
-+	put_page(page);
-+}
-+
-+static void *virtnet_rq_get_buf(struct receive_queue *rq, u32 *len, void **ctx)
-+{
-+	void *buf;
-+
-+	buf = virtqueue_get_buf_ctx(rq->vq, len, ctx);
-+	if (buf && rq->do_dma)
-+		virtnet_rq_unmap(rq, buf, *len);
-+
-+	return buf;
-+}
-+
-+static void *virtnet_rq_detach_unused_buf(struct receive_queue *rq)
-+{
-+	void *buf;
-+
-+	buf = virtqueue_detach_unused_buf(rq->vq);
-+	if (buf && rq->do_dma)
-+		virtnet_rq_unmap(rq, buf, 0);
-+
-+	return buf;
-+}
-+
-+static void virtnet_rq_init_one_sg(struct receive_queue *rq, void *addr, u32 len)
-+{
-+	if (rq->do_dma) {
-+		sg_init_table(rq->sg, 1);
-+		rq->sg[0].dma_address = (dma_addr_t)addr;
-+		rq->sg[0].length = len;
-+	} else {
-+		sg_init_one(rq->sg, addr, len);
-+	}
-+}
-+
-+static void *virtnet_rq_alloc(struct receive_queue *rq, u32 size,
-+			      void **sg_addr, gfp_t gfp)
-+{
-+	struct page_frag *alloc_frag = &rq->alloc_frag;
-+	struct virtnet_rq_dma *dma;
-+	struct device *dev;
-+	void *buf, *head;
-+	dma_addr_t addr;
-+
-+	if (unlikely(!skb_page_frag_refill(size, alloc_frag, gfp)))
-+		return NULL;
-+
-+	head = (char *)page_address(alloc_frag->page);
-+
-+	if (rq->do_dma) {
-+		dma = head;
-+
-+		/* new pages */
-+		if (!alloc_frag->offset) {
-+			if (rq->last_dma) {
-+				/* Now, the new page is allocated, the last dma
-+				 * will not be used. So the dma can be unmapped
-+				 * if the ref is 0.
-+				 */
-+				virtnet_rq_unmap(rq, rq->last_dma, 0);
-+				rq->last_dma = NULL;
-+			}
-+
-+			dev = virtqueue_dma_dev(rq->vq);
-+
-+			dma->len = alloc_frag->size - sizeof(*dma);
-+
-+			addr = dma_map_single_attrs(dev, dma + 1, dma->len, DMA_FROM_DEVICE, 0);
-+			if (addr == DMA_MAPPING_ERROR)
-+				return NULL;
-+
-+			dma->addr = addr;
-+			dma->need_sync = dma_need_sync(dev, addr);
-+
-+			/* Add a reference to dma to prevent the entire dma from
-+			 * being released during error handling. This reference
-+			 * will be freed after the pages are no longer used.
-+			 */
-+			get_page(alloc_frag->page);
-+			dma->ref = 1;
-+			alloc_frag->offset = sizeof(*dma);
-+
-+			rq->last_dma = dma;
-+		}
-+
-+		++dma->ref;
-+		*sg_addr = (void *)(dma->addr + alloc_frag->offset - sizeof(*dma));
-+	} else {
-+		*sg_addr = head + alloc_frag->offset;
-+	}
-+
-+	buf = head + alloc_frag->offset;
-+
-+	get_page(alloc_frag->page);
-+	alloc_frag->offset += size;
-+
-+	return buf;
-+}
-+
-+static void virtnet_rq_set_premapped(struct virtnet_info *vi)
-+{
-+	int i;
-+
-+	/* disable for big mode */
-+	if (!vi->mergeable_rx_bufs && vi->big_packets)
-+		return;
-+
-+	for (i = 0; i < vi->max_queue_pairs; i++) {
-+		if (virtqueue_set_dma_premapped(vi->rq[i].vq))
-+			continue;
-+
-+		vi->rq[i].do_dma = true;
-+	}
-+}
-+
- static void free_old_xmit_skbs(struct send_queue *sq, bool in_napi)
- {
- 	unsigned int len;
-@@ -835,7 +994,7 @@ static struct page *xdp_linearize_page(struct receive_queue *rq,
- 		void *buf;
- 		int off;
- 
--		buf = virtqueue_get_buf(rq->vq, &buflen);
-+		buf = virtnet_rq_get_buf(rq, &buflen, NULL);
- 		if (unlikely(!buf))
- 			goto err_buf;
- 
-@@ -1126,7 +1285,7 @@ static int virtnet_build_xdp_buff_mrg(struct net_device *dev,
- 		return -EINVAL;
- 
- 	while (--*num_buf > 0) {
--		buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx);
-+		buf = virtnet_rq_get_buf(rq, &len, &ctx);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers out of %d missing\n",
- 				 dev->name, *num_buf,
-@@ -1351,7 +1510,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- 	while (--num_buf) {
- 		int num_skb_frags;
- 
--		buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx);
-+		buf = virtnet_rq_get_buf(rq, &len, &ctx);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers out of %d missing\n",
- 				 dev->name, num_buf,
-@@ -1414,7 +1573,7 @@ static struct sk_buff *receive_mergeable(struct net_device *dev,
- err_skb:
- 	put_page(page);
- 	while (num_buf-- > 1) {
--		buf = virtqueue_get_buf(rq->vq, &len);
-+		buf = virtnet_rq_get_buf(rq, &len, NULL);
- 		if (unlikely(!buf)) {
- 			pr_debug("%s: rx error: %d buffers missing\n",
- 				 dev->name, num_buf);
-@@ -1524,26 +1683,30 @@ static void receive_buf(struct virtnet_info *vi, struct receive_queue *rq,
- static int add_recvbuf_small(struct virtnet_info *vi, struct receive_queue *rq,
- 			     gfp_t gfp)
- {
--	struct page_frag *alloc_frag = &rq->alloc_frag;
- 	char *buf;
- 	unsigned int xdp_headroom = virtnet_get_headroom(vi);
- 	void *ctx = (void *)(unsigned long)xdp_headroom;
- 	int len = vi->hdr_len + VIRTNET_RX_PAD + GOOD_PACKET_LEN + xdp_headroom;
-+	void *sg_addr;
- 	int err;
- 
- 	len = SKB_DATA_ALIGN(len) +
- 	      SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
--	if (unlikely(!skb_page_frag_refill(len, alloc_frag, gfp)))
-+
-+	buf = virtnet_rq_alloc(rq, len, &sg_addr, gfp);
-+	if (unlikely(!buf))
- 		return -ENOMEM;
- 
--	buf = (char *)page_address(alloc_frag->page) + alloc_frag->offset;
--	get_page(alloc_frag->page);
--	alloc_frag->offset += len;
--	sg_init_one(rq->sg, buf + VIRTNET_RX_PAD + xdp_headroom,
--		    vi->hdr_len + GOOD_PACKET_LEN);
-+	virtnet_rq_init_one_sg(rq, sg_addr + VIRTNET_RX_PAD + xdp_headroom,
-+			       vi->hdr_len + GOOD_PACKET_LEN);
-+
- 	err = virtqueue_add_inbuf_ctx(rq->vq, rq->sg, 1, buf, ctx, gfp);
--	if (err < 0)
-+	if (err < 0) {
-+		if (rq->do_dma)
-+			virtnet_rq_unmap(rq, buf, 0);
- 		put_page(virt_to_head_page(buf));
-+	}
-+
- 	return err;
- }
- 
-@@ -1620,23 +1783,23 @@ static int add_recvbuf_mergeable(struct virtnet_info *vi,
- 	unsigned int headroom = virtnet_get_headroom(vi);
- 	unsigned int tailroom = headroom ? sizeof(struct skb_shared_info) : 0;
- 	unsigned int room = SKB_DATA_ALIGN(headroom + tailroom);
--	char *buf;
-+	unsigned int len, hole;
-+	void *sg_addr;
- 	void *ctx;
-+	char *buf;
- 	int err;
--	unsigned int len, hole;
- 
- 	/* Extra tailroom is needed to satisfy XDP's assumption. This
- 	 * means rx frags coalescing won't work, but consider we've
- 	 * disabled GSO for XDP, it won't be a big issue.
- 	 */
- 	len = get_mergeable_buf_len(rq, &rq->mrg_avg_pkt_len, room);
--	if (unlikely(!skb_page_frag_refill(len + room, alloc_frag, gfp)))
-+
-+	buf = virtnet_rq_alloc(rq, len + room, &sg_addr, gfp);
-+	if (unlikely(!buf))
- 		return -ENOMEM;
- 
--	buf = (char *)page_address(alloc_frag->page) + alloc_frag->offset;
- 	buf += headroom; /* advance address leaving hole at front of pkt */
--	get_page(alloc_frag->page);
--	alloc_frag->offset += len + room;
- 	hole = alloc_frag->size - alloc_frag->offset;
- 	if (hole < len + room) {
- 		/* To avoid internal fragmentation, if there is very likely not
-@@ -1650,11 +1813,15 @@ static int add_recvbuf_mergeable(struct virtnet_info *vi,
- 		alloc_frag->offset += hole;
- 	}
- 
--	sg_init_one(rq->sg, buf, len);
-+	virtnet_rq_init_one_sg(rq, sg_addr + headroom, len);
-+
- 	ctx = mergeable_len_to_ctx(len + room, headroom);
- 	err = virtqueue_add_inbuf_ctx(rq->vq, rq->sg, 1, buf, ctx, gfp);
--	if (err < 0)
-+	if (err < 0) {
-+		if (rq->do_dma)
-+			virtnet_rq_unmap(rq, buf, 0);
- 		put_page(virt_to_head_page(buf));
-+	}
- 
- 	return err;
- }
-@@ -1775,13 +1942,13 @@ static int virtnet_receive(struct receive_queue *rq, int budget,
- 		void *ctx;
- 
- 		while (stats.packets < budget &&
--		       (buf = virtqueue_get_buf_ctx(rq->vq, &len, &ctx))) {
-+		       (buf = virtnet_rq_get_buf(rq, &len, &ctx))) {
- 			receive_buf(vi, rq, buf, len, ctx, xdp_xmit, &stats);
- 			stats.packets++;
- 		}
- 	} else {
- 		while (stats.packets < budget &&
--		       (buf = virtqueue_get_buf(rq->vq, &len)) != NULL) {
-+		       (buf = virtnet_rq_get_buf(rq, &len, NULL)) != NULL) {
- 			receive_buf(vi, rq, buf, len, NULL, xdp_xmit, &stats);
- 			stats.packets++;
- 		}
-@@ -3553,8 +3720,11 @@ static void free_receive_page_frags(struct virtnet_info *vi)
- {
- 	int i;
- 	for (i = 0; i < vi->max_queue_pairs; i++)
--		if (vi->rq[i].alloc_frag.page)
-+		if (vi->rq[i].alloc_frag.page) {
-+			if (vi->rq[i].do_dma && vi->rq[i].last_dma)
-+				virtnet_rq_unmap(&vi->rq[i], vi->rq[i].last_dma, 0);
- 			put_page(vi->rq[i].alloc_frag.page);
-+		}
- }
- 
- static void virtnet_sq_free_unused_buf(struct virtqueue *vq, void *buf)
-@@ -3591,9 +3761,10 @@ static void free_unused_bufs(struct virtnet_info *vi)
- 	}
- 
- 	for (i = 0; i < vi->max_queue_pairs; i++) {
--		struct virtqueue *vq = vi->rq[i].vq;
--		while ((buf = virtqueue_detach_unused_buf(vq)) != NULL)
--			virtnet_rq_free_unused_buf(vq, buf);
-+		struct receive_queue *rq = &vi->rq[i];
-+
-+		while ((buf = virtnet_rq_detach_unused_buf(rq)) != NULL)
-+			virtnet_rq_free_unused_buf(rq->vq, buf);
- 		cond_resched();
- 	}
- }
-@@ -3767,6 +3938,8 @@ static int init_vqs(struct virtnet_info *vi)
- 	if (ret)
- 		goto err_free;
- 
-+	virtnet_rq_set_premapped(vi);
-+
- 	cpus_read_lock();
- 	virtnet_set_affinity(vi);
- 	cpus_read_unlock();
--- 
-2.32.0.3.g01195cf9f
+Thanks,
+Stefano
 
 _______________________________________________
 Virtualization mailing list
