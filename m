@@ -1,82 +1,66 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id B3B5775A701
-	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 08:56:50 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 0725A80F53;
-	Thu, 20 Jul 2023 06:56:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0725A80F53
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=AqSaRvK0
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id qXPU0tW1bbWg; Thu, 20 Jul 2023 06:56:48 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id BC8F380FA8;
-	Thu, 20 Jul 2023 06:56:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BC8F380FA8
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 18171C0DD4;
-	Thu, 20 Jul 2023 06:56:47 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 22925C0032
- for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:56:45 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 54DD575A6DC
+	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 08:48:17 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id E2E1D4167B
- for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:56:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E2E1D4167B
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
- header.a=rsa-sha256 header.s=bombadil.20210309 header.b=AqSaRvK0
+	by smtp4.osuosl.org (Postfix) with ESMTP id DEC2841930;
+	Thu, 20 Jul 2023 06:48:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DEC2841930
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7zpKz4uCc91U
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id X4kd0ccErtZF; Thu, 20 Jul 2023 06:48:14 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 61C754192B;
+	Thu, 20 Jul 2023 06:48:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61C754192B
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id AF791C0DD4;
+	Thu, 20 Jul 2023 06:48:13 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 760F2C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:56:44 +0000 (UTC)
-Received: from bombadil.infradead.org (bombadil.infradead.org
- [IPv6:2607:7c80:54:3::133])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 30460414E5
+ Thu, 20 Jul 2023 06:48:12 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 4F54E81387
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:56:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 30460414E5
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
- :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
- Content-Transfer-Encoding:Content-ID:Content-Description;
- bh=/QvVdhn5LHQNczKlivYbrTWjk8x34Zhu2grRA8NWy1s=; b=AqSaRvK0xTUrt3RAYmXQVISJNF
- 9fpaZHhtQPK35TmTHM694ZKj5Mv5poxHf93oJ0wgkHh9vLBM6+g1KSIeXewLheB1mOgC7VlpjYULy
- OvlGox3Oq14nNFTGcn0isyoM0WPWTGaQVLOrzdOm6pSFVOSEpCfiBLRWSO4jO1GbQcjynxdkCo93i
- yR/g+TI8On5I+zW8no3+K71NZa4w59b176DmSyltc+0/ThU+WkRawesYEqLP+5eV4uhwqs3KJ3UKZ
- Rts+zegC4dyjTWH1/eok0G1U2KYo4JmfP/UoVlQbBaIeUYf21p6UAElCJZjGMPd8ctG+UwzB2umo6
- Rpi5Kcuw==;
-Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
- Linux)) id 1qMN4S-009vVW-38; Thu, 20 Jul 2023 06:23:28 +0000
-Date: Wed, 19 Jul 2023 23:23:28 -0700
-From: Christoph Hellwig <hch@infradead.org>
-To: Jason Wang <jasowang@redhat.com>
-Subject: Re: [PATCH vhost v11 10/10] virtio_net: merge dma operation for one
- page
-Message-ID: <ZLjS4D7urgIK1MxV@infradead.org>
+ Thu, 20 Jul 2023 06:48:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4F54E81387
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id MwcvYbnXX9NV
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 20 Jul 2023 06:48:11 +0000 (UTC)
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 9C2D481378
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 20 Jul 2023 06:48:10 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9C2D481378
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0Vnou-WY_1689835680; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0Vnou-WY_1689835680) by smtp.aliyun-inc.com;
+ Thu, 20 Jul 2023 14:48:01 +0800
+Message-ID: <1689835514.217712-8-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH vhost v11 05/10] virtio_ring: introduce virtqueue_dma_dev()
+Date: Thu, 20 Jul 2023 14:45:14 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Christoph Hellwig <hch@infradead.org>
 References: <20230710034237.12391-1-xuanzhuo@linux.alibaba.com>
- <20230710034237.12391-11-xuanzhuo@linux.alibaba.com>
- <CACGkMEtoiHXese1sNJELeidmFc6nFR8rE1aA8MooaEKKUSw_eg@mail.gmail.com>
- <1689231087.0744615-2-xuanzhuo@linux.alibaba.com>
- <CACGkMEsf4+56veqem1HMWiqYhiW5LVw-1CbWX-cQSN6Z0zYMRQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CACGkMEsf4+56veqem1HMWiqYhiW5LVw-1CbWX-cQSN6Z0zYMRQ@mail.gmail.com>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
- bombadil.infradead.org. See http://www.infradead.org/rpr.html
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
+ <20230710034237.12391-6-xuanzhuo@linux.alibaba.com>
+ <ZK/cxNHzI23I6efc@infradead.org>
+ <20230713104805-mutt-send-email-mst@kernel.org>
+ <ZLjSsmTfcpaL6H/I@infradead.org>
+In-Reply-To: <ZLjSsmTfcpaL6H/I@infradead.org>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
  Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
  netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
  Alexei Starovoitov <ast@kernel.org>, virtualization@lists.linux-foundation.org,
@@ -94,16 +78,35 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Jason,
+On Wed, 19 Jul 2023 23:22:42 -0700, Christoph Hellwig <hch@infradead.org> wrote:
+> On Thu, Jul 13, 2023 at 10:51:59AM -0400, Michael S. Tsirkin wrote:
+> > On Thu, Jul 13, 2023 at 04:15:16AM -0700, Christoph Hellwig wrote:
+> > > On Mon, Jul 10, 2023 at 11:42:32AM +0800, Xuan Zhuo wrote:
+> > > > Added virtqueue_dma_dev() to get DMA device for virtio. Then the
+> > > > caller can do dma operation in advance. The purpose is to keep memory
+> > > > mapped across multiple add/get buf operations.
+> > >
+> > > This is just poking holes into the abstraction..
+> >
+> > More specifically?
+>
+> Because now you expose a device that can't be used for the non-dma
+> mapping case and shoud be hidden.
 
-can you please resend your reply with proper quoting?  I had to give
-up after multiple pages of scrolling without finding anything that
-you added to the full quote.
+ Sorry I can not got.
+
+ virtqueue_dma_dev() return the device that working with the DMA APIs.
+ Then that can be used like other devices. So what is the problem.
+
+ I always think the code path without the DMA APIs is the trouble for you.
+
+ Thanks.
 
 _______________________________________________
 Virtualization mailing list
