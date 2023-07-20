@@ -1,108 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id E02E575A45B
-	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 04:27:25 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 59B6775A468
+	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 04:33:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C9149400A4;
-	Thu, 20 Jul 2023 02:27:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C9149400A4
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=fNQvVjiQ
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id KYSi43ZSWX45; Thu, 20 Jul 2023 02:27:22 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 78658400FE;
-	Thu, 20 Jul 2023 02:27:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 78658400FE
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D306AC008D;
-	Thu, 20 Jul 2023 02:27:21 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 1D7A9C0032
- for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 02:27:21 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id EC33060BB1
- for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 02:27:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EC33060BB1
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=fNQvVjiQ
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6A40B607F5;
+	Thu, 20 Jul 2023 02:33:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6A40B607F5
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id P67z64gQMiFl
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tpqAxvHAPebn; Thu, 20 Jul 2023 02:33:02 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id DD1E860FB0;
+	Thu, 20 Jul 2023 02:33:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DD1E860FB0
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 007AFC008D;
+	Thu, 20 Jul 2023 02:33:01 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 50A14C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 02:27:20 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 0F4A160B49
+ Thu, 20 Jul 2023 02:32:59 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 2AF2A400FE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 02:27:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 0F4A160B49
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1689820038;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=PhX0KcPz6bpGMzzt6+Tw+HFeLg7cMeTIF/CHwLfDxqU=;
- b=fNQvVjiQzy6HisfBBRGWYv0mNQUAj+0v8hwfI2P7dV8u37rlNz2zp3l34ahLdBuGoHAl8H
- KHDd45NrPyyJ8zlKrIDYF8fh4lojxxarYr8WyYKTWQO+TiMLwHaq2chsibXU6DhyfNsxt0
- 3jYY1HbmQ+JqoRKzhMJV+YcA5jUDQxw=
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-556--ZyWnbW8MnSRbYiHbo85mw-1; Wed, 19 Jul 2023 22:27:17 -0400
-X-MC-Unique: -ZyWnbW8MnSRbYiHbo85mw-1
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2b708e49042so2388091fa.2
+ Thu, 20 Jul 2023 02:32:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 2AF2A400FE
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id bSdYhn3OWr2z
  for <virtualization@lists.linux-foundation.org>;
- Wed, 19 Jul 2023 19:27:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20221208; t=1689820036; x=1692412036;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PhX0KcPz6bpGMzzt6+Tw+HFeLg7cMeTIF/CHwLfDxqU=;
- b=hA76isl6S/Lo7b7+oVLtxjHXSVrrw2g4t90JOyAsNMa4XZXCUZOM+RMbHU4ONJpGHM
- oI7UinLIWhIpP8lCgulPwF0u6aYUARyAGP/u5HG1lIcCEP6VRKY+2Oas8XRQ3dJXoTBb
- ju+dBET/hsHIKK8UdLNyLTbriSMiu0xZlN3awUkt/mgUnIusxpltlU+k8zB34f4gEk4+
- Jatbwz9CR0NVrIPo0pDhfNPJIVqOE4NyT4tfk4iRZ5Gqt+8MB/mIcOjV8d+xY394jFzZ
- 95zHFt8wgIscqoaYopjb8+IGe2wg59bek370T0RZsqJZMjpb0rsHfVxi5f5jZvmeFAtL
- m7Hw==
-X-Gm-Message-State: ABy/qLbiX05iFKU5itrthePL83Bklqxcld5mAE5SO8KhV27Ny22r1bBE
- 3nyi1dTHSzXAtW8qILI9CKHdnEbj8Sq4T9WEaqeBIkil2ZGgSZbEGo+o60jA4+BiSprsQ/cbj6v
- ktZcOzeqpZp9GAC1BPlJb2TEYTFTsPAPnCBNU+WnCwv3M5h+uniXCKcpDEg==
-X-Received: by 2002:a2e:b70a:0:b0:2a7:adf7:1781 with SMTP id
- j10-20020a2eb70a000000b002a7adf71781mr1207364ljo.2.1689820036241; 
- Wed, 19 Jul 2023 19:27:16 -0700 (PDT)
-X-Google-Smtp-Source: APBJJlGG8VfnWGKux2XQqloHvmum/oTHRj7uk/Z8damP4dF1V13QVr/IDb3lqUNAF2zJ46P6L2CkZPMsB4+tjAqSbnQ=
-X-Received: by 2002:a2e:b70a:0:b0:2a7:adf7:1781 with SMTP id
- j10-20020a2eb70a000000b002a7adf71781mr1207359ljo.2.1689820035929; Wed, 19 Jul
- 2023 19:27:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20230719154550.79536-1-feliu@nvidia.com>
-In-Reply-To: <20230719154550.79536-1-feliu@nvidia.com>
-From: Jason Wang <jasowang@redhat.com>
-Date: Thu, 20 Jul 2023 10:27:04 +0800
-Message-ID: <CACGkMEv1b698NcpZHxpDoNokWH0gEs07D2eYSAjsiF1efhxORw@mail.gmail.com>
-Subject: Re: [PATCH v1] virtio-pci: Fix legacy device flag setting error in
- probe
-To: Feng Liu <feliu@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- "Michael S . Tsirkin" <mst@redhat.com>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, Jiri Pirko <jiri@nvidia.com>,
- Bodong Wang <bodong@nvidia.com>
+ Thu, 20 Jul 2023 02:32:57 +0000 (UTC)
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 4555E400D2
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 20 Jul 2023 02:32:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4555E400D2
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R121e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045170;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=15; SR=0;
+ TI=SMTPD_---0Vno54XS_1689820369; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0Vno54XS_1689820369) by smtp.aliyun-inc.com;
+ Thu, 20 Jul 2023 10:32:50 +0800
+Message-ID: <1689820301.2489104-6-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH vhost v12 10/10] virtio_net: merge dma operations when
+ filling mergeable buffers
+Date: Thu, 20 Jul 2023 10:31:41 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
+References: <20230719040422.126357-1-xuanzhuo@linux.alibaba.com>
+ <20230719040422.126357-11-xuanzhuo@linux.alibaba.com>
+ <202307191819.0tatknWa-lkp@intel.com>
+ <20230719070450-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20230719070450-mutt-send-email-mst@kernel.org>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
+ John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org,
+ Christoph Hellwig <hch@infradead.org>, Eric Dumazet <edumazet@google.com>,
+ oe-kbuild-all@lists.linux.dev, Jakub Kicinski <kuba@kernel.org>,
+ bpf@vger.kernel.org, Paolo Abeni <pabeni@redhat.com>,
+ kernel test robot <lkp@intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -114,54 +79,148 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-T24gV2VkLCBKdWwgMTksIDIwMjMgYXQgMTE6NDbigK9QTSBGZW5nIExpdSA8ZmVsaXVAbnZpZGlh
-LmNvbT4gd3JvdGU6Cj4KPiBUaGUgJ2lzX2xlZ2FjeScgZmxhZyBpcyB1c2VkIHRvIGRpZmZlcmVu
-dGlhdGUgYmV0d2VlbiBsZWdhY3kgdnMgbW9kZXJuCj4gZGV2aWNlLiBDdXJyZW50bHksIGl0IGlz
-IGJhc2VkIG9uIHRoZSB2YWx1ZSBvZiB2cF9kZXYtPmxkZXYuaW9hZGRyLgo+IEhvd2V2ZXIsIGR1
-ZSB0byB0aGUgc2hhcmVkIG1lbW9yeSBvZiB0aGUgdW5pb24gYmV0d2VlbiBzdHJ1Y3QKPiB2aXJ0
-aW9fcGNpX2xlZ2FjeV9kZXZpY2UgYW5kIHN0cnVjdCB2aXJ0aW9fcGNpX21vZGVybl9kZXZpY2Us
-IHdoZW4KPiB2aXJ0aW9fcGNpX21vZGVybl9wcm9iZSBtb2RpZmllcyB0aGUgY29udGVudCBvZiBz
-dHJ1Y3QKPiB2aXJ0aW9fcGNpX21vZGVybl9kZXZpY2UsIGl0IGFmZmVjdHMgdGhlIGNvbnRlbnQg
-b2Ygc3RydWN0Cj4gdmlydGlvX3BjaV9sZWdhY3lfZGV2aWNlLCBhbmQgbGRldi5pb2FkZHIgaXMg
-bm8gbG9uZ2VyIHplcm8sIGNhdXNpbmcKPiB0aGUgJ2lzX2xlZ2FjeScgZmxhZyB0byBiZSBzZXQg
-YXMgdHJ1ZS4gVG8gcmVzb2x2ZSBpc3N1ZSwgd2hlbiBsZWdhY3kKPiBkZXZpY2UgaXMgcHJvYmVk
-LCBtYXJrICdpc19sZWdhY3knIGFzIHRydWUsIHdoZW4gbW9kZXJuIGRldmljZSBpcwo+IHByb2Jl
-ZCwga2VlcCAnaXNfbGVnYWN5JyBhcyBmYWxzZS4KPgo+IEZpeGVzOiA0ZjBmYzIyNTM0ZTMgKCJ2
-aXJ0aW9fcGNpOiBPcHRpbWl6ZSB2aXJ0aW9fcGNpX2RldmljZSBzdHJ1Y3R1cmUgc2l6ZSIpCj4g
-U2lnbmVkLW9mZi1ieTogRmVuZyBMaXUgPGZlbGl1QG52aWRpYS5jb20+Cj4gUmV2aWV3ZWQtYnk6
-IFBhcmF2IFBhbmRpdCA8cGFyYXZAbnZpZGlhLmNvbT4KPiBSZXZpZXdlZC1ieTogSmlyaSBQaXJr
-byA8amlyaUBudmlkaWEuY29tPgo+IC0tLQo+ICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX2Nv
-bW1vbi5jIHwgMiAtLQo+ICBkcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX2xlZ2FjeS5jIHwgMSAr
-Cj4gIDIgZmlsZXMgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDIgZGVsZXRpb25zKC0pCj4KPiBk
-aWZmIC0tZ2l0IGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX3BjaV9jb21tb24uYyBiL2RyaXZlcnMv
-dmlydGlvL3ZpcnRpb19wY2lfY29tbW9uLmMKPiBpbmRleCBhNmM4NmY5MTZkYmQuLmMyNTI0YTcy
-MDdjZiAxMDA2NDQKPiAtLS0gYS9kcml2ZXJzL3ZpcnRpby92aXJ0aW9fcGNpX2NvbW1vbi5jCj4g
-KysrIGIvZHJpdmVycy92aXJ0aW8vdmlydGlvX3BjaV9jb21tb24uYwo+IEBAIC01NTcsOCArNTU3
-LDYgQEAgc3RhdGljIGludCB2aXJ0aW9fcGNpX3Byb2JlKHN0cnVjdCBwY2lfZGV2ICpwY2lfZGV2
-LAo+Cj4gICAgICAgICBwY2lfc2V0X21hc3RlcihwY2lfZGV2KTsKPgo+IC0gICAgICAgdnBfZGV2
-LT5pc19sZWdhY3kgPSB2cF9kZXYtPmxkZXYuaW9hZGRyID8gdHJ1ZSA6IGZhbHNlOwo+IC0KPiAg
-ICAgICAgIHJjID0gcmVnaXN0ZXJfdmlydGlvX2RldmljZSgmdnBfZGV2LT52ZGV2KTsKPiAgICAg
-ICAgIHJlZ19kZXYgPSB2cF9kZXY7Cj4gICAgICAgICBpZiAocmMpCj4gZGlmZiAtLWdpdCBhL2Ry
-aXZlcnMvdmlydGlvL3ZpcnRpb19wY2lfbGVnYWN5LmMgYi9kcml2ZXJzL3ZpcnRpby92aXJ0aW9f
-cGNpX2xlZ2FjeS5jCj4gaW5kZXggMjI1N2YxYjNkOGFlLi5kOWNiYjAyYjM1YTEgMTAwNjQ0Cj4g
-LS0tIGEvZHJpdmVycy92aXJ0aW8vdmlydGlvX3BjaV9sZWdhY3kuYwo+ICsrKyBiL2RyaXZlcnMv
-dmlydGlvL3ZpcnRpb19wY2lfbGVnYWN5LmMKPiBAQCAtMjIzLDYgKzIyMyw3IEBAIGludCB2aXJ0
-aW9fcGNpX2xlZ2FjeV9wcm9iZShzdHJ1Y3QgdmlydGlvX3BjaV9kZXZpY2UgKnZwX2RldikKPiAg
-ICAgICAgIHZwX2Rldi0+Y29uZmlnX3ZlY3RvciA9IHZwX2NvbmZpZ192ZWN0b3I7Cj4gICAgICAg
-ICB2cF9kZXYtPnNldHVwX3ZxID0gc2V0dXBfdnE7Cj4gICAgICAgICB2cF9kZXYtPmRlbF92cSA9
-IGRlbF92cTsKPiArICAgICAgIHZwX2Rldi0+aXNfbGVnYWN5ID0gdHJ1ZTsKClRoaXMgc2VlbXMg
-YnJlYWsgZm9yY2VfbGVnYWN5IGZvciBtb2Rlcm4gZGV2aWNlOgoKICAgICAgICBpZiAoZm9yY2Vf
-bGVnYWN5KSB7CiAgICAgICAgICAgICAgICByYyA9IHZpcnRpb19wY2lfbGVnYWN5X3Byb2JlKHZw
-X2Rldik7CiAgICAgICAgICAgICAgICAvKiBBbHNvIHRyeSBtb2Rlcm4gbW9kZSBpZiB3ZSBjYW4n
-dCBtYXAgQkFSMCAobm8gSU8gc3BhY2UpLiAqLwogICAgICAgICAgICAgICAgaWYgKHJjID09IC1F
-Tk9ERVYgfHwgcmMgPT0gLUVOT01FTSkKICAgICAgICAgICAgICAgICAgICAgICAgcmMgPSB2aXJ0
-aW9fcGNpX21vZGVybl9wcm9iZSh2cF9kZXYpOwoKVGhhbmtzCgo+Cj4gICAgICAgICByZXR1cm4g
-MDsKPiAgfQo+IC0tCj4gMi4zNy4xIChBcHBsZSBHaXQtMTM3LjEpCj4KCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcg
-bGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xp
-c3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+On Wed, 19 Jul 2023 07:05:50 -0400, "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> On Wed, Jul 19, 2023 at 06:33:05PM +0800, kernel test robot wrote:
+> > Hi Xuan,
+> >
+> > kernel test robot noticed the following build warnings:
+> >
+> > [auto build test WARNING on v6.4]
+> > [cannot apply to mst-vhost/linux-next linus/master v6.5-rc2 v6.5-rc1 next-20230719]
+> > [If your patch is applied to the wrong git tree, kindly drop us a note.
+> > And when submitting patch, we suggest to use '--base' as documented in
+> > https://git-scm.com/docs/git-format-patch#_base_tree_information]
+> >
+> > url:    https://github.com/intel-lab-lkp/linux/commits/Xuan-Zhuo/virtio_ring-check-use_dma_api-before-unmap-desc-for-indirect/20230719-121424
+> > base:   v6.4
+> > patch link:    https://lore.kernel.org/r/20230719040422.126357-11-xuanzhuo%40linux.alibaba.com
+> > patch subject: [PATCH vhost v12 10/10] virtio_net: merge dma operations when filling mergeable buffers
+> > config: i386-randconfig-i006-20230718 (https://download.01.org/0day-ci/archive/20230719/202307191819.0tatknWa-lkp@intel.com/config)
+> > compiler: gcc-12 (Debian 12.2.0-14) 12.2.0
+> > reproduce: (https://download.01.org/0day-ci/archive/20230719/202307191819.0tatknWa-lkp@intel.com/reproduce)
+> >
+> > If you fix the issue in a separate patch/commit (i.e. not just a new version of
+> > the same patch/commit), kindly add following tags
+> > | Reported-by: kernel test robot <lkp@intel.com>
+> > | Closes: https://lore.kernel.org/oe-kbuild-all/202307191819.0tatknWa-lkp@intel.com/
+> >
+> > All warnings (new ones prefixed by >>):
+> >
+> >    drivers/net/virtio_net.c: In function 'virtnet_rq_init_one_sg':
+> > >> drivers/net/virtio_net.c:624:41: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+> >      624 |                 rq->sg[0].dma_address = (dma_addr_t)addr;
+> >          |                                         ^
+> >    drivers/net/virtio_net.c: In function 'virtnet_rq_alloc':
+> > >> drivers/net/virtio_net.c:682:28: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+> >      682 |                 *sg_addr = (void *)(dma->addr + alloc_frag->offset - sizeof(*dma));
+> >          |                            ^
+>
+>
+> yea these casts are pretty creepy. I think it's possible dma_addr_t won't fit in a pointer
+> or a pointer won't fit in dma_addr_t.
+
+
+Yes.
+
+I will fix this.
+
+I hope this will not affect the review.
+
+Thanks.
+
+
+>
+> >
+> > vim +624 drivers/net/virtio_net.c
+> >
+> >    619
+> >    620	static void virtnet_rq_init_one_sg(struct receive_queue *rq, void *addr, u32 len)
+> >    621	{
+> >    622		if (rq->do_dma) {
+> >    623			sg_init_table(rq->sg, 1);
+> >  > 624			rq->sg[0].dma_address = (dma_addr_t)addr;
+> >    625			rq->sg[0].length = len;
+> >    626		} else {
+> >    627			sg_init_one(rq->sg, addr, len);
+> >    628		}
+> >    629	}
+> >    630
+> >    631	static void *virtnet_rq_alloc(struct receive_queue *rq, u32 size,
+> >    632				      void **sg_addr, gfp_t gfp)
+> >    633	{
+> >    634		struct page_frag *alloc_frag = &rq->alloc_frag;
+> >    635		struct virtnet_rq_dma *dma;
+> >    636		struct device *dev;
+> >    637		void *buf, *head;
+> >    638		dma_addr_t addr;
+> >    639
+> >    640		if (unlikely(!skb_page_frag_refill(size, alloc_frag, gfp)))
+> >    641			return NULL;
+> >    642
+> >    643		head = (char *)page_address(alloc_frag->page);
+> >    644
+> >    645		if (rq->do_dma) {
+> >    646			dma = head;
+> >    647
+> >    648			/* new pages */
+> >    649			if (!alloc_frag->offset) {
+> >    650				if (rq->last_dma) {
+> >    651					/* Now, the new page is allocated, the last dma
+> >    652					 * will not be used. So the dma can be unmapped
+> >    653					 * if the ref is 0.
+> >    654					 */
+> >    655					virtnet_rq_unmap(rq, rq->last_dma, 0);
+> >    656					rq->last_dma = NULL;
+> >    657				}
+> >    658
+> >    659				dev = virtqueue_dma_dev(rq->vq);
+> >    660
+> >    661				dma->len = alloc_frag->size - sizeof(*dma);
+> >    662
+> >    663				addr = dma_map_single_attrs(dev, dma + 1, dma->len, DMA_FROM_DEVICE, 0);
+> >    664				if (addr == DMA_MAPPING_ERROR)
+> >    665					return NULL;
+> >    666
+> >    667				dma->addr = addr;
+> >    668				dma->need_sync = dma_need_sync(dev, addr);
+> >    669
+> >    670				/* Add a reference to dma to prevent the entire dma from
+> >    671				 * being released during error handling. This reference
+> >    672				 * will be freed after the pages are no longer used.
+> >    673				 */
+> >    674				get_page(alloc_frag->page);
+> >    675				dma->ref = 1;
+> >    676				alloc_frag->offset = sizeof(*dma);
+> >    677
+> >    678				rq->last_dma = dma;
+> >    679			}
+> >    680
+> >    681			++dma->ref;
+> >  > 682			*sg_addr = (void *)(dma->addr + alloc_frag->offset - sizeof(*dma));
+> >    683		} else {
+> >    684			*sg_addr = head + alloc_frag->offset;
+> >    685		}
+> >    686
+> >    687		buf = head + alloc_frag->offset;
+> >    688
+> >    689		get_page(alloc_frag->page);
+> >    690		alloc_frag->offset += size;
+> >    691
+> >    692		return buf;
+> >    693	}
+> >    694
+> >
+> > --
+> > 0-DAY CI Kernel Test Service
+> > https://github.com/intel/lkp-tests/wiki
+>
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
