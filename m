@@ -1,65 +1,77 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 54DD575A6DC
-	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 08:48:17 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 297CA75A70A
+	for <lists.virtualization@lfdr.de>; Thu, 20 Jul 2023 08:57:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DEC2841930;
-	Thu, 20 Jul 2023 06:48:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DEC2841930
+	by smtp1.osuosl.org (Postfix) with ESMTP id 93D3D814B1;
+	Thu, 20 Jul 2023 06:57:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 93D3D814B1
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=bombadil.20210309 header.b=vB2sfpF9
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id X4kd0ccErtZF; Thu, 20 Jul 2023 06:48:14 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 61C754192B;
-	Thu, 20 Jul 2023 06:48:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 61C754192B
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Aqh_ZHyycTpi; Thu, 20 Jul 2023 06:57:56 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 6563481489;
+	Thu, 20 Jul 2023 06:57:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6563481489
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id AF791C0DD4;
-	Thu, 20 Jul 2023 06:48:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9F070C0DD4;
+	Thu, 20 Jul 2023 06:57:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 760F2C0032
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DD4C9C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:48:12 +0000 (UTC)
+ Thu, 20 Jul 2023 06:57:52 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4F54E81387
+ by smtp1.osuosl.org (Postfix) with ESMTP id AACB481464
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:48:12 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4F54E81387
+ Thu, 20 Jul 2023 06:57:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AACB481464
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id MwcvYbnXX9NV
+ with ESMTP id gx5ISPNY-mj7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:48:11 +0000 (UTC)
-Received: from out30-118.freemail.mail.aliyun.com
- (out30-118.freemail.mail.aliyun.com [115.124.30.118])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9C2D481378
+ Thu, 20 Jul 2023 06:57:52 +0000 (UTC)
+Received: from bombadil.infradead.org (bombadil.infradead.org
+ [IPv6:2607:7c80:54:3::133])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 21E8D81431
  for <virtualization@lists.linux-foundation.org>;
- Thu, 20 Jul 2023 06:48:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9C2D481378
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R141e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0Vnou-WY_1689835680; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0Vnou-WY_1689835680) by smtp.aliyun-inc.com;
- Thu, 20 Jul 2023 14:48:01 +0800
-Message-ID: <1689835514.217712-8-xuanzhuo@linux.alibaba.com>
+ Thu, 20 Jul 2023 06:57:52 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 21E8D81431
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20210309; h=In-Reply-To:Content-Type:MIME-Version
+ :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=tpFZ9x/guiUwHSLCuwqhF00CriObkSLCrgFFWuig6CE=; b=vB2sfpF99Y6Hfs52IwYhy9ldql
+ ERLNEp2xxsdUaVRoJT10S6gTAPE5tnR+qAB7f7VfX0oX3cOvJqF8fo6g4mLDnd2PfYTu5xml5wpBL
+ iLd5oZCQhLBDRU1MM+/3xNT+ybh/tfavVoX8x9yRLTvtQCc0T+1YPbdWgG4AKB5pPD0xBiW5OseL1
+ /zQX9OQWGDorBtGNe64ykoJ5nN5nJnCXu0CXEEpu3OJ0vh3QZeCmjqqBdd2u9lp80cpW9EWIXxZmy
+ ZHJvBWVZHCkBYssiD6i2zCYMydZaLn0q9H/9vql01rlU702eUQirQH8MkQa+KhiTVGWXM1wZ3PRUf
+ qcvSFVfA==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.96 #2 (Red Hat
+ Linux)) id 1qMNbj-00A1hF-06; Thu, 20 Jul 2023 06:57:51 +0000
+Date: Wed, 19 Jul 2023 23:57:51 -0700
+From: Christoph Hellwig <hch@infradead.org>
+To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 Subject: Re: [PATCH vhost v11 05/10] virtio_ring: introduce virtqueue_dma_dev()
-Date: Thu, 20 Jul 2023 14:45:14 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: Christoph Hellwig <hch@infradead.org>
+Message-ID: <ZLja73TJ1Ow19xdr@infradead.org>
 References: <20230710034237.12391-1-xuanzhuo@linux.alibaba.com>
  <20230710034237.12391-6-xuanzhuo@linux.alibaba.com>
  <ZK/cxNHzI23I6efc@infradead.org>
  <20230713104805-mutt-send-email-mst@kernel.org>
  <ZLjSsmTfcpaL6H/I@infradead.org>
-In-Reply-To: <ZLjSsmTfcpaL6H/I@infradead.org>
+ <1689835514.217712-8-xuanzhuo@linux.alibaba.com>
+MIME-Version: 1.0
+Content-Disposition: inline
+In-Reply-To: <1689835514.217712-8-xuanzhuo@linux.alibaba.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by
+ bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
  Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
  netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
@@ -78,36 +90,20 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, 19 Jul 2023 23:22:42 -0700, Christoph Hellwig <hch@infradead.org> wrote:
-> On Thu, Jul 13, 2023 at 10:51:59AM -0400, Michael S. Tsirkin wrote:
-> > On Thu, Jul 13, 2023 at 04:15:16AM -0700, Christoph Hellwig wrote:
-> > > On Mon, Jul 10, 2023 at 11:42:32AM +0800, Xuan Zhuo wrote:
-> > > > Added virtqueue_dma_dev() to get DMA device for virtio. Then the
-> > > > caller can do dma operation in advance. The purpose is to keep memory
-> > > > mapped across multiple add/get buf operations.
-> > >
-> > > This is just poking holes into the abstraction..
-> >
-> > More specifically?
->
-> Because now you expose a device that can't be used for the non-dma
-> mapping case and shoud be hidden.
+On Thu, Jul 20, 2023 at 02:45:14PM +0800, Xuan Zhuo wrote:
+>  virtqueue_dma_dev() return the device that working with the DMA APIs.
+>  Then that can be used like other devices. So what is the problem.
+> 
+>  I always think the code path without the DMA APIs is the trouble for you.
 
- Sorry I can not got.
-
- virtqueue_dma_dev() return the device that working with the DMA APIs.
- Then that can be used like other devices. So what is the problem.
-
- I always think the code path without the DMA APIs is the trouble for you.
-
- Thanks.
-
+Because we now have an API where the upper level drivers sometimes
+see the dma device and sometimes not.  This will be abused and cause
+trouble sooner than you can say "layering".
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
