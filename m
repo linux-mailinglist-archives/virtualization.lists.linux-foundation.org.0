@@ -1,76 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4A9A776132E
-	for <lists.virtualization@lfdr.de>; Tue, 25 Jul 2023 13:08:41 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 8AF60761365
+	for <lists.virtualization@lfdr.de>; Tue, 25 Jul 2023 13:10:35 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 9EEB160EA5;
-	Tue, 25 Jul 2023 11:08:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9EEB160EA5
+	by smtp1.osuosl.org (Postfix) with ESMTP id 0847181F30;
+	Tue, 25 Jul 2023 11:10:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0847181F30
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id oCDMNw_4f1Ap; Tue, 25 Jul 2023 11:08:38 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qDUcy-rY2mTT; Tue, 25 Jul 2023 11:10:31 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 6A67D60E82;
-	Tue, 25 Jul 2023 11:08:38 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6A67D60E82
+	by smtp1.osuosl.org (Postfix) with ESMTPS id D66F281F26;
+	Tue, 25 Jul 2023 11:10:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D66F281F26
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 9EF3FC0DD4;
-	Tue, 25 Jul 2023 11:08:37 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 0982FC0DD4;
+	Tue, 25 Jul 2023 11:10:30 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 3B947C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 4B959C0032
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jul 2023 11:08:35 +0000 (UTC)
+ Tue, 25 Jul 2023 11:10:28 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 10884608A5
+ by smtp1.osuosl.org (Postfix) with ESMTP id 23E2281F1B
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jul 2023 11:08:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 10884608A5
+ Tue, 25 Jul 2023 11:10:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 23E2281F1B
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id O-WrgNUQA2xw
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id fS-b9rv8UTuH
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jul 2023 11:08:33 +0000 (UTC)
-Received: from out30-97.freemail.mail.aliyun.com
- (out30-97.freemail.mail.aliyun.com [115.124.30.97])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 13D7C60759
+ Tue, 25 Jul 2023 11:10:27 +0000 (UTC)
+Received: from out30-99.freemail.mail.aliyun.com
+ (out30-99.freemail.mail.aliyun.com [115.124.30.99])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id EACA781F19
  for <virtualization@lists.linux-foundation.org>;
- Tue, 25 Jul 2023 11:08:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 13D7C60759
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R841e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046056;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VoCypj._1690283304; 
+ Tue, 25 Jul 2023 11:10:26 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org EACA781F19
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R341e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=8; SR=0;
+ TI=SMTPD_---0VoCzvI0_1690283420; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VoCypj._1690283304) by smtp.aliyun-inc.com;
- Tue, 25 Jul 2023 19:08:25 +0800
-Message-ID: <1690283243.4048996-1-xuanzhuo@linux.alibaba.com>
-Subject: Re: [PATCH vhost v11 05/10] virtio_ring: introduce virtqueue_dma_dev()
-Date: Tue, 25 Jul 2023 19:07:23 +0800
+ fp:SMTPD_---0VoCzvI0_1690283420) by smtp.aliyun-inc.com;
+ Tue, 25 Jul 2023 19:10:21 +0800
+Message-ID: <1690283405.6083395-2-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net] virtio-net: fix race between set queues and probe
+Date: Tue, 25 Jul 2023 19:10:05 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-References: <20230710034237.12391-1-xuanzhuo@linux.alibaba.com>
- <20230710034237.12391-6-xuanzhuo@linux.alibaba.com>
- <ZK/cxNHzI23I6efc@infradead.org>
- <20230713104805-mutt-send-email-mst@kernel.org>
- <ZLjSsmTfcpaL6H/I@infradead.org>
- <20230720131928-mutt-send-email-mst@kernel.org>
- <ZL6qPvd6X1CgUD4S@infradead.org>
- <1690251228.3455179-1-xuanzhuo@linux.alibaba.com>
- <20230725033321-mutt-send-email-mst@kernel.org>
-In-Reply-To: <20230725033321-mutt-send-email-mst@kernel.org>
-Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
- John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
- virtualization@lists.linux-foundation.org,
- Christoph Hellwig <hch@infradead.org>, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
- Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
+To: Jason Wang <jasowang@redhat.com>
+References: <20230725072049.617289-1-jasowang@redhat.com>
+In-Reply-To: <20230725072049.617289-1-jasowang@redhat.com>
+Cc: mst@redhat.com, netdev@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, edumazet@google.com,
+ kuba@kernel.org, pabeni@redhat.com, davem@davemloft.net
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -88,43 +76,46 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, 25 Jul 2023 03:34:34 -0400, "Michael S. Tsirkin" <mst@redhat.com> wrote:
-> On Tue, Jul 25, 2023 at 10:13:48AM +0800, Xuan Zhuo wrote:
-> > On Mon, 24 Jul 2023 09:43:42 -0700, Christoph Hellwig <hch@infradead.org> wrote:
-> > > On Thu, Jul 20, 2023 at 01:21:07PM -0400, Michael S. Tsirkin wrote:
-> > > > Well I think we can add wrappers like virtio_dma_sync and so on.
-> > > > There are NOP for non-dma so passing the dma device is harmless.
-> > >
-> > > Yes, please.
-> >
-> >
-> > I am not sure I got this fully.
-> >
-> > Are you mean this:
-> > https://lore.kernel.org/all/20230214072704.126660-8-xuanzhuo@linux.alibaba.com/
-> > https://lore.kernel.org/all/20230214072704.126660-9-xuanzhuo@linux.alibaba.com/
-> >
-> > Then the driver must do dma operation(map and sync) by these virtio_dma_* APIs.
-> > No care the device is non-dma device or dma device.
+On Tue, 25 Jul 2023 03:20:49 -0400, Jason Wang <jasowang@redhat.com> wrote:
+> A race were found where set_channels could be called after registering
+> but before virtnet_set_queues() in virtnet_probe(). Fixing this by
+> moving the virtnet_set_queues() before netdevice registering. While at
+> it, use _virtnet_set_queues() to avoid holding rtnl as the device is
+> not even registered at that time.
 >
-> yes
+> Fixes: a220871be66f ("virtio-net: correctly enable multiqueue")
+> Signed-off-by: Jason Wang <jasowang@redhat.com>
+
+Reviewed-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+
+> ---
+>  drivers/net/virtio_net.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> > Then the AF_XDP must use these virtio_dma_* APIs for virtio device.
+> diff --git a/drivers/net/virtio_net.c b/drivers/net/virtio_net.c
+> index 0db14f6b87d3..1270c8d23463 100644
+> --- a/drivers/net/virtio_net.c
+> +++ b/drivers/net/virtio_net.c
+> @@ -4219,6 +4219,8 @@ static int virtnet_probe(struct virtio_device *vdev)
+>  	if (vi->has_rss || vi->has_rss_hash_report)
+>  		virtnet_init_default_rss(vi);
 >
-> We'll worry about AF_XDP when the patch is posted.
-
-YES.
-
-We discussed it. They voted 'no'.
-
-http://lore.kernel.org/all/20230424082856.15c1e593@kernel.org
-
-Thanks.
-
-
+> +	_virtnet_set_queues(vi, vi->curr_queue_pairs);
+> +
+>  	/* serialize netdev register + virtio_device_ready() with ndo_open() */
+>  	rtnl_lock();
 >
+> @@ -4257,8 +4259,6 @@ static int virtnet_probe(struct virtio_device *vdev)
+>  		goto free_unregister_netdev;
+>  	}
+>
+> -	virtnet_set_queues(vi, vi->curr_queue_pairs);
+> -
+>  	/* Assume link up if device can't report link status,
+>  	   otherwise get link status from config. */
+>  	netif_carrier_off(dev);
 > --
-> MST
+> 2.39.3
 >
 _______________________________________________
 Virtualization mailing list
