@@ -2,79 +2,82 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 64D4E775FF2
-	for <lists.virtualization@lfdr.de>; Wed,  9 Aug 2023 14:56:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 8A1F4775FF3
+	for <lists.virtualization@lfdr.de>; Wed,  9 Aug 2023 14:56:55 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 819B882127;
+	by smtp1.osuosl.org (Postfix) with ESMTP id B65728219E;
 	Wed,  9 Aug 2023 12:56:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 819B882127
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B65728219E
 Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=x+nGvJkB
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=I8Jlr3uR
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ByJ1dct0wOHa; Wed,  9 Aug 2023 12:56:50 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 554638219E;
+	with ESMTP id ZRtjO3ea2k7B; Wed,  9 Aug 2023 12:56:51 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8D8BE82D57;
 	Wed,  9 Aug 2023 12:56:50 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 554638219E
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8D8BE82D57
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DCAA1C0032;
-	Wed,  9 Aug 2023 12:56:49 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1F55BC0DD6;
+	Wed,  9 Aug 2023 12:56:50 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5EDC5C0DD6
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id BF61FC0032
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Aug 2023 12:56:48 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 3A3BE8216C
+ by smtp2.osuosl.org (Postfix) with ESMTP id 983F540C6C
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Aug 2023 12:56:48 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3A3BE8216C
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 983F540C6C
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
+ header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=I8Jlr3uR
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id z7_LBCFWwOE8
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id zAKqFyd6-RtC
+ for <virtualization@lists.linux-foundation.org>;
+ Wed,  9 Aug 2023 12:56:48 +0000 (UTC)
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EA471409AD
  for <virtualization@lists.linux-foundation.org>;
  Wed,  9 Aug 2023 12:56:47 +0000 (UTC)
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 849ED82127
- for <virtualization@lists.linux-foundation.org>;
- Wed,  9 Aug 2023 12:56:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 849ED82127
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EA471409AD
+Received: from pps.filterd (m0333521.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 379CrbaY001769; Wed, 9 Aug 2023 12:56:46 GMT
+ 379CrDeU009152; Wed, 9 Aug 2023 12:56:47 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
  subject : date : message-id : in-reply-to : references; s=corp-2023-03-30;
- bh=zzG0zcf6t2ayfD6iDUDXPBgadsk0gvptgjNEEQA8wK4=;
- b=x+nGvJkB/E4S299+7e4ngWLYvJapVAN+W2x9WujpO7d9DMoP4Hv2Xi8e4pEpPMVmBQ5q
- nkw/GE5IV9CEFqNJ6J5vCOO+Ph7KuWPgaoQtOTm8UWZcBH+LTlOpClEgj0ykNse9zMzZ
- 3Xfk9bD3fyiXMvBIDuDcOO8li+xef2IlvCtAxFTrgd0tSkHrBzICbjyjpkag8gVHlxKf
- Bi4zISoqvYIpHUcU+RH4K5UNt5NRsNjwNygTXie9dKvrQB96Tu2iTDFaN6tf76tS9mid
- JsGdRNLR2TRM/7aPZXcLlM2kWRJzRKif1PTUFVzAAB7kVxBlRJqMtMC0hm07N69TOebZ Hw== 
+ bh=PwqbrPAMlguA1Wr1oMTiW68K4Ea22MPJy3PTEDT8a8s=;
+ b=I8Jlr3uRafChvhCuLGXwG5vb03GCdqFdoraX4xKV/potCYsjnDGpuyMfrJWfWyE1ag23
+ +RiB4t0ApfYptNDL+TnPI1lnJVkF1xYHbdLcxJwicmDjB3bg7W0Y+RprV+NaKyPRBmuI
+ lPvhv8xVeNFemz1ybgxJDuh5B+MzRkYiV9RZLCeLE3ocX3hKlQY4W5j+IyFv1EGHvfIK
+ nAIQ+ujKUR4ltCLbuwge4COSgMrAk4NXH8qWGl7PNBQ4JUGv6bcV8SVnZSjX7paF+hKY
+ pG8kJU4DyUDmHYPT1/wzRAArQWOWTfebeU0dVq0NcSU4fBp+72HYcskuvLBOgCKupz4d WQ== 
 Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
  (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3s9e1u8h51-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3s9dbc8n28-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 09 Aug 2023 12:56:46 +0000
+ Wed, 09 Aug 2023 12:56:47 +0000
 Received: from pps.filterd
  (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 379CFxLL030509; Wed, 9 Aug 2023 12:56:45 GMT
+ with ESMTP id 379CFxLN030509; Wed, 9 Aug 2023 12:56:46 GMT
 Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
  [10.153.73.24])
  by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 3s9cvdf832-3; Wed, 09 Aug 2023 12:56:45 +0000
+ 3s9cvdf832-4; Wed, 09 Aug 2023 12:56:46 +0000
 From: Si-Wei Liu <si-wei.liu@oracle.com>
 To: eperezma@redhat.com, jasowang@redhat.com, mst@redhat.com,
  dtatulea@nvidia.com, parav@nvidia.com, elic@nvidia.com
-Subject: [PATCH RFC 2/3] vhost-vdpa: introduce descriptor group backend feature
-Date: Wed,  9 Aug 2023 05:54:42 -0700
-Message-Id: <1691585683-3948-3-git-send-email-si-wei.liu@oracle.com>
+Subject: [PATCH RFC 3/3] vhost-vdpa: uAPI to get dedicated descriptor group id
+Date: Wed,  9 Aug 2023 05:54:43 -0700
+Message-Id: <1691585683-3948-4-git-send-email-si-wei.liu@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1691585683-3948-1-git-send-email-si-wei.liu@oracle.com>
 References: <1691585683-3948-1-git-send-email-si-wei.liu@oracle.com>
@@ -83,11 +86,11 @@ X-Proofpoint-Virus-Version: vendor=baseguard
  definitions=2023-08-09_10,2023-08-09_01,2023-05-22_02
 X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0
  suspectscore=0 spamscore=0
- mlxscore=0 bulkscore=0 phishscore=0 malwarescore=0 mlxlogscore=862
+ mlxscore=0 bulkscore=0 phishscore=0 malwarescore=0 mlxlogscore=667
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2306200000
  definitions=main-2308090114
-X-Proofpoint-GUID: tNLRNvMTjxjMkMS600zcFWxeoI0goGny
-X-Proofpoint-ORIG-GUID: tNLRNvMTjxjMkMS600zcFWxeoI0goGny
+X-Proofpoint-ORIG-GUID: qzYvtcjap7rI1-gEYvaEIHRmHyYuSwFe
+X-Proofpoint-GUID: qzYvtcjap7rI1-gEYvaEIHRmHyYuSwFe
 Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -106,83 +109,55 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Userspace knows if the device has dedicated descriptor group or not
-by checking this feature bit.
-
-It's only exposed if the vdpa driver backend implements the
-.get_vq_desc_group() operation callback. Userspace trying to negotiate
-this feature when it or the dependent _F_IOTLB_ASID feature hasn't
-been exposed will result in an error.
+With _F_DESC_ASID backend feature, the device can now support the
+VHOST_VDPA_GET_VRING_DESC_GROUP ioctl, and it may expose the descriptor
+table (including avail and used ring) in a different group than the
+buffers it contains. This new uAPI will fetch the group ID of the
+descriptor table.
 
 Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
 ---
- drivers/vhost/vdpa.c             | 17 +++++++++++++++++
- include/uapi/linux/vhost_types.h |  5 +++++
- 2 files changed, 22 insertions(+)
+ drivers/vhost/vdpa.c       | 10 ++++++++++
+ include/uapi/linux/vhost.h |  8 ++++++++
+ 2 files changed, 18 insertions(+)
 
 diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-index b43e868..f2e5dce 100644
+index f2e5dce..eabac06 100644
 --- a/drivers/vhost/vdpa.c
 +++ b/drivers/vhost/vdpa.c
-@@ -389,6 +389,14 @@ static bool vhost_vdpa_can_resume(const struct vhost_vdpa *v)
- 	return ops->resume;
- }
- 
-+static bool vhost_vdpa_has_desc_group(const struct vhost_vdpa *v)
-+{
-+	struct vdpa_device *vdpa = v->vdpa;
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return ops->get_vq_desc_group;
-+}
-+
- static long vhost_vdpa_get_features(struct vhost_vdpa *v, u64 __user *featurep)
- {
- 	struct vdpa_device *vdpa = v->vdpa;
-@@ -679,6 +687,7 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 		if (copy_from_user(&features, featurep, sizeof(features)))
+@@ -602,6 +602,16 @@ static long vhost_vdpa_vring_ioctl(struct vhost_vdpa *v, unsigned int cmd,
+ 		else if (copy_to_user(argp, &s, sizeof(s)))
  			return -EFAULT;
- 		if (features & ~(VHOST_VDPA_BACKEND_FEATURES |
-+				 BIT_ULL(VHOST_BACKEND_F_DESC_ASID) |
- 				 BIT_ULL(VHOST_BACKEND_F_SUSPEND) |
- 				 BIT_ULL(VHOST_BACKEND_F_RESUME)))
- 			return -EOPNOTSUPP;
-@@ -688,6 +697,12 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 		if ((features & BIT_ULL(VHOST_BACKEND_F_RESUME)) &&
- 		     !vhost_vdpa_can_resume(v))
- 			return -EOPNOTSUPP;
-+		if ((features & BIT_ULL(VHOST_BACKEND_F_DESC_ASID)) &&
-+		    !(features & BIT_ULL(VHOST_BACKEND_F_IOTLB_ASID)))
-+			return -EINVAL;
-+		if ((features & BIT_ULL(VHOST_BACKEND_F_DESC_ASID)) &&
-+		     !vhost_vdpa_has_desc_group(v))
-+			return -EOPNOTSUPP;
- 		vhost_set_backend_features(&v->vdev, features);
  		return 0;
- 	}
-@@ -741,6 +756,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 			features |= BIT_ULL(VHOST_BACKEND_F_SUSPEND);
- 		if (vhost_vdpa_can_resume(v))
- 			features |= BIT_ULL(VHOST_BACKEND_F_RESUME);
-+		if (vhost_vdpa_has_desc_group(v))
-+			features |= BIT_ULL(VHOST_BACKEND_F_DESC_ASID);
- 		if (copy_to_user(featurep, &features, sizeof(features)))
- 			r = -EFAULT;
- 		break;
-diff --git a/include/uapi/linux/vhost_types.h b/include/uapi/linux/vhost_types.h
-index d3aad12a..0856f84 100644
---- a/include/uapi/linux/vhost_types.h
-+++ b/include/uapi/linux/vhost_types.h
-@@ -181,5 +181,10 @@ struct vhost_vdpa_iova_range {
- #define VHOST_BACKEND_F_SUSPEND  0x4
- /* Device can be resumed */
- #define VHOST_BACKEND_F_RESUME  0x5
-+/* Device may expose the descriptor table, avail and used ring in a
-+ * different group for ASID binding than the buffers it contains.
-+ * Requires VHOST_BACKEND_F_IOTLB_ASID.
-+ */
-+#define VHOST_BACKEND_F_DESC_ASID    0x6
++	case VHOST_VDPA_GET_VRING_DESC_GROUP:
++		if (!vhost_vdpa_has_desc_group(v))
++			return -EOPNOTSUPP;
++		s.index = idx;
++		s.num = ops->get_vq_desc_group(vdpa, idx);
++		if (s.num >= vdpa->ngroups)
++			return -EIO;
++		else if (copy_to_user(argp, &s, sizeof(s)))
++			return -EFAULT;
++		return 0;
+ 	case VHOST_VDPA_SET_GROUP_ASID:
+ 		if (copy_from_user(&s, argp, sizeof(s)))
+ 			return -EFAULT;
+diff --git a/include/uapi/linux/vhost.h b/include/uapi/linux/vhost.h
+index f5c48b6..05faad2 100644
+--- a/include/uapi/linux/vhost.h
++++ b/include/uapi/linux/vhost.h
+@@ -219,4 +219,12 @@
+  */
+ #define VHOST_VDPA_RESUME		_IO(VHOST_VIRTIO, 0x7E)
  
++/* Get the dedicated group for the descriptor table of a virtqueue:
++ * read index, write group in num.
++ * The virtqueue index is stored in the index field of vhost_vring_state.
++ * The group id for the descriptor table of this specific virtqueue
++ * is returned via num field of vhost_vring_state.
++ */
++#define VHOST_VDPA_GET_VRING_DESC_GROUP	_IOWR(VHOST_VIRTIO, 0x7F,	\
++					      struct vhost_vring_state)
  #endif
 -- 
 1.8.3.1
