@@ -1,100 +1,100 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 016E37798AE
-	for <lists.virtualization@lfdr.de>; Fri, 11 Aug 2023 22:42:27 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id C7762779C24
+	for <lists.virtualization@lfdr.de>; Sat, 12 Aug 2023 02:48:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 71338613D2;
-	Fri, 11 Aug 2023 20:42:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 71338613D2
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Suhsd//6
+	by smtp1.osuosl.org (Postfix) with ESMTP id 6510D83F35;
+	Sat, 12 Aug 2023 00:48:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6510D83F35
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=hgmxEQGa
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id uNHp-E_O2ftU; Fri, 11 Aug 2023 20:42:24 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 9C8va85G4MUR; Sat, 12 Aug 2023 00:48:07 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 44C84613CB;
-	Fri, 11 Aug 2023 20:42:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 44C84613CB
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 1417E83F1E;
+	Sat, 12 Aug 2023 00:48:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1417E83F1E
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 5B100C008D;
-	Fri, 11 Aug 2023 20:42:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 39608C008D;
+	Sat, 12 Aug 2023 00:48:06 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 75CCDC0032
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5DEC6C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Aug 2023 20:42:22 +0000 (UTC)
+ Sat, 12 Aug 2023 00:48:05 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 4F70D840AC
+ by smtp1.osuosl.org (Postfix) with ESMTP id 249B283B40
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Aug 2023 20:42:22 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4F70D840AC
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=Suhsd//6
+ Sat, 12 Aug 2023 00:48:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 249B283B40
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id yF_P9YDNijqx
+ with ESMTP id R0OyhO8psZPz
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Aug 2023 20:42:21 +0000 (UTC)
+ Sat, 12 Aug 2023 00:48:04 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 9BAB8840A6
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 4CF3983B06
  for <virtualization@lists.linux-foundation.org>;
- Fri, 11 Aug 2023 20:42:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 9BAB8840A6
+ Sat, 12 Aug 2023 00:48:04 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4CF3983B06
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1691786540;
+ s=mimecast20190719; t=1691801283;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=QYsuYB/f15MU2xfH+EM7bqeXLDjg5PV6c8YrC96T5p8=;
- b=Suhsd//6zqH0bsE33O0VNr9IpTBt3neTvmJeYp4/wANru3jHFzGQtf9bB4gafPF2H/FJY0
- ukCDybDign2QbiWJCg/PJIVrO4c86bJPAByTt5OaXhGG+lImQMxZFt6V5LxzEJ1kiTDCls
- 9CIyyN2XOeCgT3uYmIedpbx/zfeyIhM=
+ bh=rLC/yOAR2d4wIWdWwjFchmmeIa+RdcqwrFVJ1+GuKDw=;
+ b=hgmxEQGarnOQZuMKSheRJhCTU6jYcgoLQs5/O3JXDeV6RNmiFaqU+guQsV70vYHiNlmWtJ
+ TyqM+nRG4ccf49i6CACNS/sYdE4fMEXMcLgEt6a7LsaGxwSqWmVT5dmUCIvbLvn0Cg4JcM
+ nNg2RLdmu0Of173TzDYV2IKqTL4Ux68=
 Received: from mimecast-mx02.redhat.com (66.187.233.73 [66.187.233.73]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- us-mta-294-RkKW7mn5MiCC7qNnb5xmEg-1; Fri, 11 Aug 2023 16:42:16 -0400
-X-MC-Unique: RkKW7mn5MiCC7qNnb5xmEg-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.rdu2.redhat.com
- [10.11.54.4])
+ us-mta-339-lUtXwiZgPMmXVj5sVgtwdQ-1; Fri, 11 Aug 2023 20:47:54 -0400
+X-MC-Unique: lUtXwiZgPMmXVj5sVgtwdQ-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.6])
  (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
  (No client certificate requested)
- by mimecast-mx02.redhat.com (Postfix) with ESMTPS id B6B4838008C0;
- Fri, 11 Aug 2023 20:42:14 +0000 (UTC)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 918563C0ED49;
+ Sat, 12 Aug 2023 00:47:53 +0000 (UTC)
 Received: from [10.22.17.82] (unknown [10.22.17.82])
- by smtp.corp.redhat.com (Postfix) with ESMTP id E581D2026D4B;
- Fri, 11 Aug 2023 20:42:12 +0000 (UTC)
-Message-ID: <5cf1117c-d537-703c-cdcf-f43c5bd9ed1b@redhat.com>
-Date: Fri, 11 Aug 2023 16:42:12 -0400
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 8E04A2166B25;
+ Sat, 12 Aug 2023 00:47:51 +0000 (UTC)
+Message-ID: <2f84b806-193a-6d7c-71fe-cc718e9455f9@redhat.com>
+Date: Fri, 11 Aug 2023 20:47:51 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
  Thunderbird/102.7.1
 Subject: Re: [PATCH V10 18/19] locking/qspinlock: Move pv_ops into x86
  directory
 Content-Language: en-US
-To: guoren@kernel.org, paul.walmsley@sifive.com, anup@brainfault.org,
- peterz@infradead.org, mingo@redhat.com, will@kernel.org,
- palmer@rivosinc.com, boqun.feng@gmail.com, tglx@linutronix.de,
- paulmck@kernel.org, rostedt@goodmis.org, rdunlap@infradead.org,
- catalin.marinas@arm.com, conor.dooley@microchip.com,
- xiaoguang.xing@sophgo.com, bjorn@rivosinc.com, alexghiti@rivosinc.com,
- keescook@chromium.org, greentime.hu@sifive.com, ajones@ventanamicro.com,
- jszhang@kernel.org, wefu@redhat.com, wuwei2016@iscas.ac.cn
+To: Guo Ren <guoren@kernel.org>
 References: <20230802164701.192791-1-guoren@kernel.org>
  <20230802164701.192791-19-guoren@kernel.org>
+ <5cf1117c-d537-703c-cdcf-f43c5bd9ed1b@redhat.com>
+ <CAJF2gTQ6zJrcyOVCqF+xDXTEzFYUVQuTP0rKy=K6R99TQ05CrA@mail.gmail.com>
 From: Waiman Long <longman@redhat.com>
-In-Reply-To: <20230802164701.192791-19-guoren@kernel.org>
-X-Scanned-By: MIMEDefang 3.1 on 10.11.54.4
-Cc: linux-arch@vger.kernel.org, Guo Ren <guoren@linux.alibaba.com>,
- kvm@vger.kernel.org, linux-doc@vger.kernel.org, linux-csky@vger.kernel.org,
- virtualization@lists.linux-foundation.org, linux-riscv@lists.infradead.org
+In-Reply-To: <CAJF2gTQ6zJrcyOVCqF+xDXTEzFYUVQuTP0rKy=K6R99TQ05CrA@mail.gmail.com>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.6
+Cc: Guo Ren <guoren@linux.alibaba.com>, kvm@vger.kernel.org,
+ linux-doc@vger.kernel.org, peterz@infradead.org, catalin.marinas@arm.com,
+ bjorn@rivosinc.com, palmer@rivosinc.com,
+ virtualization@lists.linux-foundation.org, conor.dooley@microchip.com,
+ jszhang@kernel.org, linux-riscv@lists.infradead.org, will@kernel.org,
+ keescook@chromium.org, linux-arch@vger.kernel.org, anup@brainfault.org,
+ linux-csky@vger.kernel.org, xiaoguang.xing@sophgo.com, mingo@redhat.com,
+ greentime.hu@sifive.com, ajones@ventanamicro.com, alexghiti@rivosinc.com,
+ paulmck@kernel.org, boqun.feng@gmail.com, rostedt@goodmis.org,
+ paul.walmsley@sifive.com, tglx@linutronix.de, rdunlap@infradead.org,
+ wuwei2016@iscas.ac.cn, wefu@redhat.com
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -106,27 +106,26 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
+Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On 8/2/23 12:47, guoren@kernel.org wrote:
-> From: Guo Ren <guoren@linux.alibaba.com>
->
-> The pv_ops belongs to x86 custom infrastructure and cleans up the
-> cna_configure_spin_lock_slowpath() with standard code. This is
-> preparation for riscv support CNA qspoinlock.
-
-CNA qspinlock has not been merged into mainline yet. I will suggest you 
-drop the last 2 patches for now. Of course, you can provide benchmark 
-data to boost the case for the inclusion of the CNA qspinlock patch into 
-the mainline.
-
-Cheers,
-Longman
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+Ck9uIDgvMTEvMjMgMjA6MjQsIEd1byBSZW4gd3JvdGU6Cj4gT24gU2F0LCBBdWcgMTIsIDIwMjMg
+YXQgNDo0MuKAr0FNIFdhaW1hbiBMb25nIDxsb25nbWFuQHJlZGhhdC5jb20+IHdyb3RlOgo+PiBP
+biA4LzIvMjMgMTI6NDcsIGd1b3JlbkBrZXJuZWwub3JnIHdyb3RlOgo+Pj4gRnJvbTogR3VvIFJl
+biA8Z3VvcmVuQGxpbnV4LmFsaWJhYmEuY29tPgo+Pj4KPj4+IFRoZSBwdl9vcHMgYmVsb25ncyB0
+byB4ODYgY3VzdG9tIGluZnJhc3RydWN0dXJlIGFuZCBjbGVhbnMgdXAgdGhlCj4+PiBjbmFfY29u
+ZmlndXJlX3NwaW5fbG9ja19zbG93cGF0aCgpIHdpdGggc3RhbmRhcmQgY29kZS4gVGhpcyBpcwo+
+Pj4gcHJlcGFyYXRpb24gZm9yIHJpc2N2IHN1cHBvcnQgQ05BIHFzcG9pbmxvY2suCj4+IENOQSBx
+c3BpbmxvY2sgaGFzIG5vdCBiZWVuIG1lcmdlZCBpbnRvIG1haW5saW5lIHlldC4gSSB3aWxsIHN1
+Z2dlc3QgeW91Cj4+IGRyb3AgdGhlIGxhc3QgMiBwYXRjaGVzIGZvciBub3cuIE9mIGNvdXJzZSwg
+eW91IGNhbiBwcm92aWRlIGJlbmNobWFyawo+PiBkYXRhIHRvIGJvb3N0IHRoZSBjYXNlIGZvciB0
+aGUgaW5jbHVzaW9uIG9mIHRoZSBDTkEgcXNwaW5sb2NrIHBhdGNoIGludG8KPj4gdGhlIG1haW5s
+aW5lLgo+IFllcywgbXkgbGF6eSwgSSB3b3VsZCBzZXBhcmF0ZSBwYXJhdmlydCBhbmQgQ05BIGZy
+b20gdGhpcyBzZXJpZXMuCgpwYXJhdmlydCBpcyBPSywgaXQgaXMganVzdCB0aGF0IENOQSBoYXNu
+J3QgYmVlbiBtZXJnZWQgeWV0LgoKQ2hlZXJzLApMb25nbWFuCgo+Cj4+IENoZWVycywKPj4gTG9u
+Z21hbgo+Pgo+CgpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+XwpWaXJ0dWFsaXphdGlvbiBtYWlsaW5nIGxpc3QKVmlydHVhbGl6YXRpb25AbGlzdHMubGludXgt
+Zm91bmRhdGlvbi5vcmcKaHR0cHM6Ly9saXN0cy5saW51eGZvdW5kYXRpb24ub3JnL21haWxtYW4v
+bGlzdGluZm8vdmlydHVhbGl6YXRpb24=
