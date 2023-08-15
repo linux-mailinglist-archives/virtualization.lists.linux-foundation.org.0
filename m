@@ -1,106 +1,105 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0530F77C549
-	for <lists.virtualization@lfdr.de>; Tue, 15 Aug 2023 03:45:44 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 83A7A41755;
-	Tue, 15 Aug 2023 01:45:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 83A7A41755
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=svb6UsQl
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sO920n12p1yd; Tue, 15 Aug 2023 01:45:40 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id E986B4175C;
-	Tue, 15 Aug 2023 01:45:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org E986B4175C
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 362B5C008D;
-	Tue, 15 Aug 2023 01:45:39 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 926B5C0032
- for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Aug 2023 01:45:37 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id 3DD8177C5CC
+	for <lists.virtualization@lfdr.de>; Tue, 15 Aug 2023 04:22:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5F7204064D
- for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Aug 2023 01:45:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5F7204064D
+	by smtp2.osuosl.org (Postfix) with ESMTP id 5C13A4064A;
+	Tue, 15 Aug 2023 02:22:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5C13A4064A
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=svb6UsQl
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=YupO12QT
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 7rZxgCXHYIiV
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id az7yeNvMRMk6; Tue, 15 Aug 2023 02:22:01 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 296434020B;
+	Tue, 15 Aug 2023 02:22:01 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 296434020B
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 60937C008D;
+	Tue, 15 Aug 2023 02:22:00 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id EAA5DC0032
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Aug 2023 01:45:36 +0000 (UTC)
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 8AD7C40468
+ Tue, 15 Aug 2023 02:21:58 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id BDA8581462
  for <virtualization@lists.linux-foundation.org>;
- Tue, 15 Aug 2023 01:45:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8AD7C40468
-Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 37EJOsLs023643; Tue, 15 Aug 2023 01:45:34 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2023-03-30;
- bh=GmzgeWelKQolP+WJ3LzphyiaUevasb/FBdXmsCIpQxQ=;
- b=svb6UsQlDcyzKHQWQBOUwDekQZBvWah2JVajwcrnuSsg3NJZI95lC5oGhmaWoLp9KLbk
- AWdP7eUsDNyp1b38QDncnP8/g5cCCoLTZLGoVjPFxiYeG1QKow9HQUKgpWOdrJgd3lyS
- sVW6/WNkMQ1iPriL9ZGK1xJYlwsghXTaKT5tTFHy7RLvagdJyzVNRQHKiydSCL6pJycx
- 8H+qZkksAXQN/RQlIb9ydc4vD/LQJ+huLqwbKPPlGvXUsGwcKBy/IFFTjcO1a512Cy+x
- xLEjfvQMkcvjnRn1uSCa0UxSAKNxMVF/lxm/S582TKxBX++huAZPyVJzWXKWB99sw1bC Nw== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3se2w5uusv-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Aug 2023 01:45:33 +0000
-Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 37ENE9HV005491; Tue, 15 Aug 2023 01:45:32 GMT
-Received: from pps.reinject (localhost [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
- 3sey2ckejq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 15 Aug 2023 01:45:32 +0000
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by pps.reinject (8.17.1.5/8.17.1.5) with ESMTP id 37F1jTKF011831;
- Tue, 15 Aug 2023 01:45:31 GMT
-Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
- [10.153.73.24])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 3sey2ckehb-5; Tue, 15 Aug 2023 01:45:31 +0000
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: jasowang@redhat.com
-Subject: [PATCH RFC 4/4] vhost-vdpa: introduce IOTLB_PERSIST backend feature
- bit
-Date: Mon, 14 Aug 2023 18:43:27 -0700
-Message-Id: <1692063807-5018-5-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1692063807-5018-1-git-send-email-si-wei.liu@oracle.com>
+ Tue, 15 Aug 2023 02:21:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BDA8581462
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=YupO12QT
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 6sckeg6QiW3b
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 15 Aug 2023 02:21:58 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 028738144F
+ for <virtualization@lists.linux-foundation.org>;
+ Tue, 15 Aug 2023 02:21:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 028738144F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1692066116;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=c8Mf6SJdHrVFgrHSuwN7VWvzQVHaWatOcZXjdyX1ds0=;
+ b=YupO12QTNuEh6TLb67DwCzFRbYq8j2wZHv/oFcAIPmFIFKA/AAhwNQvx0Rt9gbTa+nMBsc
+ HH/8hEEnQxlZJQEvMXwuz4Th+pLmXcXoAIOSlKpPzL9KNjaQMLUiZn0SDFaLVr4J5Qb4FZ
+ QAF2AdYe4DZ2ppwMmLC1Wj2J4UYx0P0=
+Received: from mail-lj1-f200.google.com (mail-lj1-f200.google.com
+ [209.85.208.200]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-43-z2hKCU2JPKCV40-egii7mw-1; Mon, 14 Aug 2023 22:21:55 -0400
+X-MC-Unique: z2hKCU2JPKCV40-egii7mw-1
+Received: by mail-lj1-f200.google.com with SMTP id
+ 38308e7fff4ca-2ba7e6c988dso24050481fa.1
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 14 Aug 2023 19:21:54 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20221208; t=1692066113; x=1692670913;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=c8Mf6SJdHrVFgrHSuwN7VWvzQVHaWatOcZXjdyX1ds0=;
+ b=ekeGTDdfDKyVTcKg9v07RsglRjQrlGKvNzoiYbt8AiD/103FXoED9CXLOR0FfGTQFj
+ Lcf9TXhx6oC8CufCr34Y5ty+Tu6h815L8HDyYGkviE2VUgijqkL3QDMTZH0okOHuBd8j
+ mtM/pEZXqYnNOyZNKI0Vg66e25d8N3m6AUyd7WP3Jonr88BOPgdGsDuoaCmtCWV6QYuc
+ /xMc22mM7xr1ATGqkCrZN6h7Ch2oYhc57qm5aLUQr/O7vNBa8pbHwjZrcnjf8s1ccbJ+
+ NJU+zlZBXc22UUs3e0a/V5XIE5RIkIsCf+N8ZDKODs6NPxnIDUDO4b0pgsBfve5VnZNJ
+ TzJw==
+X-Gm-Message-State: AOJu0YxoITroB88F7k1BhgABGBCarEpgWfxXAkKDp15Xkt8luYJk6ZEo
+ oAeqFN57GAgu3IKtCAF8GQ/vTjWtII3AHXhIbZC+5sufqaZTBawVAbdcVtqHS0B2fg5DC6qYJwh
+ XEkkE8RRomQR7BEQqL1Eb4fdk78CyvaF4izP2NpOKUglHASrYvYMLP2qFOw==
+X-Received: by 2002:a2e:874a:0:b0:2ba:3eac:bece with SMTP id
+ q10-20020a2e874a000000b002ba3eacbecemr7235379ljj.49.1692066113595; 
+ Mon, 14 Aug 2023 19:21:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGnFPM+Uyg4zQmIFAr0Gb+dF/9C1kz2mM3ka9Q1CxZ53dK/3gSYuO/vmcyZ0ZRwyR2cjgf2/GprDQT/zgDHZZ8=
+X-Received: by 2002:a2e:874a:0:b0:2ba:3eac:bece with SMTP id
+ q10-20020a2e874a000000b002ba3eacbecemr7235374ljj.49.1692066113253; Mon, 14
+ Aug 2023 19:21:53 -0700 (PDT)
+MIME-Version: 1.0
 References: <CACGkMEseKv8MzaF8uxVTjkaAm2xvei578g=rNVzogfPQRQPOhQ@mail.gmail.com>
  <1692063807-5018-1-git-send-email-si-wei.liu@oracle.com>
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.591,FMLib:17.11.176.26
- definitions=2023-08-15_01,2023-08-10_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
- phishscore=0
- mlxlogscore=999 bulkscore=0 adultscore=0 spamscore=0 malwarescore=0
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2306200000 definitions=main-2308150013
-X-Proofpoint-ORIG-GUID: AfewiI6wC-SYHxFKlpzUEzQILf1BjsDv
-X-Proofpoint-GUID: AfewiI6wC-SYHxFKlpzUEzQILf1BjsDv
+ <1692063807-5018-2-git-send-email-si-wei.liu@oracle.com>
+In-Reply-To: <1692063807-5018-2-git-send-email-si-wei.liu@oracle.com>
+From: Jason Wang <jasowang@redhat.com>
+Date: Tue, 15 Aug 2023 10:21:42 +0800
+Message-ID: <CACGkMEuGeXYo3s6Ytd-Nvp7EXU6td1NY6LrLcVgntprXJwBEhQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/4] vdpa: introduce .reset_map operation callback
+To: Si-Wei Liu <si-wei.liu@oracle.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-Originator: redhat.com
 Cc: xuanzhuo@linux.alibaba.com, mst@redhat.com, gal@nvidia.com,
  linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
  eperezma@redhat.com
@@ -115,82 +114,45 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
----
- drivers/vhost/vdpa.c             | 16 +++++++++++++++-
- include/uapi/linux/vhost_types.h |  2 ++
- 2 files changed, 17 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-index 62b0a01..75092a7 100644
---- a/drivers/vhost/vdpa.c
-+++ b/drivers/vhost/vdpa.c
-@@ -406,6 +406,14 @@ static bool vhost_vdpa_can_resume(const struct vhost_vdpa *v)
- 	return ops->resume;
- }
- 
-+static bool vhost_vdpa_has_persistent_map(const struct vhost_vdpa *v)
-+{
-+	struct vdpa_device *vdpa = v->vdpa;
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return (!ops->set_map && !ops->dma_map) || ops->reset_map;
-+}
-+
- static long vhost_vdpa_get_features(struct vhost_vdpa *v, u64 __user *featurep)
- {
- 	struct vdpa_device *vdpa = v->vdpa;
-@@ -697,7 +705,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 			return -EFAULT;
- 		if (features & ~(VHOST_VDPA_BACKEND_FEATURES |
- 				 BIT_ULL(VHOST_BACKEND_F_SUSPEND) |
--				 BIT_ULL(VHOST_BACKEND_F_RESUME)))
-+				 BIT_ULL(VHOST_BACKEND_F_RESUME) |
-+				 BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST)))
- 			return -EOPNOTSUPP;
- 		if ((features & BIT_ULL(VHOST_BACKEND_F_SUSPEND)) &&
- 		     !vhost_vdpa_can_suspend(v))
-@@ -705,6 +714,9 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 		if ((features & BIT_ULL(VHOST_BACKEND_F_RESUME)) &&
- 		     !vhost_vdpa_can_resume(v))
- 			return -EOPNOTSUPP;
-+		if ((features & BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST)) &&
-+		     !vhost_vdpa_has_persistent_map(v))
-+			return -EOPNOTSUPP;
- 		vhost_set_backend_features(&v->vdev, features);
- 		return 0;
- 	}
-@@ -758,6 +770,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 			features |= BIT_ULL(VHOST_BACKEND_F_SUSPEND);
- 		if (vhost_vdpa_can_resume(v))
- 			features |= BIT_ULL(VHOST_BACKEND_F_RESUME);
-+		if (vhost_vdpa_has_persistent_map(v))
-+			features |= BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST);
- 		if (copy_to_user(featurep, &features, sizeof(features)))
- 			r = -EFAULT;
- 		break;
-diff --git a/include/uapi/linux/vhost_types.h b/include/uapi/linux/vhost_types.h
-index d3aad12a..a7f8fc6 100644
---- a/include/uapi/linux/vhost_types.h
-+++ b/include/uapi/linux/vhost_types.h
-@@ -181,5 +181,7 @@ struct vhost_vdpa_iova_range {
- #define VHOST_BACKEND_F_SUSPEND  0x4
- /* Device can be resumed */
- #define VHOST_BACKEND_F_RESUME  0x5
-+/* IOTLB don't flush memory mapping across device reset */
-+#define VHOST_BACKEND_F_IOTLB_PERSIST  0x6
- 
- #endif
--- 
-1.8.3.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gVHVlLCBBdWcgMTUsIDIwMjMgYXQgOTo0NuKAr0FNIFNpLVdlaSBMaXUgPHNpLXdlaS5saXVA
+b3JhY2xlLmNvbT4gd3JvdGU6Cj4KPiBTaWduZWQtb2ZmLWJ5OiBTaS1XZWkgTGl1IDxzaS13ZWku
+bGl1QG9yYWNsZS5jb20+Cj4gLS0tCj4gIGluY2x1ZGUvbGludXgvdmRwYS5oIHwgNyArKysrKysr
+Cj4gIDEgZmlsZSBjaGFuZ2VkLCA3IGluc2VydGlvbnMoKykKPgo+IGRpZmYgLS1naXQgYS9pbmNs
+dWRlL2xpbnV4L3ZkcGEuaCBiL2luY2x1ZGUvbGludXgvdmRwYS5oCj4gaW5kZXggZGIxYjBlYS4u
+M2EzODc4ZCAxMDA2NDQKPiAtLS0gYS9pbmNsdWRlL2xpbnV4L3ZkcGEuaAo+ICsrKyBiL2luY2x1
+ZGUvbGludXgvdmRwYS5oCj4gQEAgLTMxNCw2ICszMTQsMTIgQEAgc3RydWN0IHZkcGFfbWFwX2Zp
+bGUgewo+ICAgKiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQGlvdmE6IGlvdmEgdG8gYmUg
+dW5tYXBwZWQKPiAgICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIEBzaXplOiBzaXplIG9m
+IHRoZSBhcmVhCj4gICAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICBSZXR1cm5zIGludGVn
+ZXI6IHN1Y2Nlc3MgKDApIG9yIGVycm9yICg8IDApCj4gKyAqIEByZXNldF9tYXA6ICAgICAgICAg
+ICAgICAgICBSZXNldCBkZXZpY2UgbWVtb3J5IG1hcHBpbmcgKG9wdGlvbmFsKQo+ICsgKiAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgTmVlZGVkIGZvciBkZXZpY2UgdGhhdCB1c2luZyBkZXZp
+Y2UKPiArICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNwZWNpZmljIERNQSB0cmFuc2xh
+dGlvbiAob24tY2hpcCBJT01NVSkKClRoaXMgZXhwb3NlcyB0aGUgZGV2aWNlIGludGVybmFsIHRv
+IHRoZSB1cHBlciBsYXllciB3aGljaCBpcyBub3Qgb3B0aW1hbC4KCkJ0dywgd2hhdCdzIHRoZSBk
+aWZmZXJlbmNlIGJldHdlZW4gdGhpcyBhbmQgYSBzaW1wbGUKCnNldF9tYXAoTlVMTCk/CgpUaGFu
+a3MKCj4gKyAqICAgICAgICAgICAgICAgICAgICAgICAgICAgICBAdmRldjogdmRwYSBkZXZpY2UK
+PiArICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIEBhc2lkOiBhZGRyZXNzIHNwYWNlIGlk
+ZW50aWZpZXIKPiArICogICAgICAgICAgICAgICAgICAgICAgICAgICAgIFJldHVybnMgaW50ZWdl
+cjogc3VjY2VzcyAoMCkgb3IgZXJyb3IgKDwgMCkKPiAgICogQGdldF92cV9kbWFfZGV2OiAgICAg
+ICAgICAgIEdldCB0aGUgZG1hIGRldmljZSBmb3IgYSBzcGVjaWZpYwo+ICAgKiAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgdmlydHF1ZXVlIChvcHRpb25hbCkKPiAgICogICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIEB2ZGV2OiB2ZHBhIGRldmljZQo+IEBAIC0zOTAsNiArMzk2LDcgQEAg
+c3RydWN0IHZkcGFfY29uZmlnX29wcyB7Cj4gICAgICAgICAgICAgICAgICAgICAgICB1NjQgaW92
+YSwgdTY0IHNpemUsIHU2NCBwYSwgdTMyIHBlcm0sIHZvaWQgKm9wYXF1ZSk7Cj4gICAgICAgICBp
+bnQgKCpkbWFfdW5tYXApKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRldiwgdW5zaWduZWQgaW50IGFz
+aWQsCj4gICAgICAgICAgICAgICAgICAgICAgICAgIHU2NCBpb3ZhLCB1NjQgc2l6ZSk7Cj4gKyAg
+ICAgICBpbnQgKCpyZXNldF9tYXApKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRldiwgdW5zaWduZWQg
+aW50IGFzaWQpOwo+ICAgICAgICAgaW50ICgqc2V0X2dyb3VwX2FzaWQpKHN0cnVjdCB2ZHBhX2Rl
+dmljZSAqdmRldiwgdW5zaWduZWQgaW50IGdyb3VwLAo+ICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHVuc2lnbmVkIGludCBhc2lkKTsKPiAgICAgICAgIHN0cnVjdCBkZXZpY2UgKigqZ2V0
+X3ZxX2RtYV9kZXYpKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRldiwgdTE2IGlkeCk7Cj4gLS0KPiAx
+LjguMy4xCj4KCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+ClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1m
+b3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9s
+aXN0aW5mby92aXJ0dWFsaXphdGlvbg==
