@@ -1,98 +1,95 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7DA1D7996EE
-	for <lists.virtualization@lfdr.de>; Sat,  9 Sep 2023 10:45:06 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 760C47998AD
+	for <lists.virtualization@lfdr.de>; Sat,  9 Sep 2023 15:34:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id EC90C60F2D;
-	Sat,  9 Sep 2023 08:45:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org EC90C60F2D
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=VcC5jyF2
+	by smtp2.osuosl.org (Postfix) with ESMTP id 7C1B440AAF;
+	Sat,  9 Sep 2023 13:34:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7C1B440AAF
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=qbtRCc+e
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id vEahIQmGxg2B; Sat,  9 Sep 2023 08:45:04 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id gT35FmWbP38Z; Sat,  9 Sep 2023 13:34:41 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id B32BD60F49;
-	Sat,  9 Sep 2023 08:45:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B32BD60F49
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 1F8BC40A8A;
+	Sat,  9 Sep 2023 13:34:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1F8BC40A8A
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A779EC0DD7;
-	Sat,  9 Sep 2023 08:45:02 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 736BEC008C;
+	Sat,  9 Sep 2023 13:34:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8681BC0039
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id F16BBC0032
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 08:45:00 +0000 (UTC)
+ Sat,  9 Sep 2023 13:34:36 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 4B0D841721
+ by smtp3.osuosl.org (Postfix) with ESMTP id BFD8060FD1
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 08:45:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4B0D841721
-Authentication-Results: smtp4.osuosl.org;
+ Sat,  9 Sep 2023 13:34:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BFD8060FD1
+Authentication-Results: smtp3.osuosl.org;
  dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=VcC5jyF2
+ header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=qbtRCc+e
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id EbFBQ8W3z3ml
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id Lba2iUNQnVPC
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 08:44:58 +0000 (UTC)
-Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
- [205.220.177.32])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 4BA79405FB
+ Sat,  9 Sep 2023 13:34:36 +0000 (UTC)
+Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
+ [205.220.165.32])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id E2B8860E09
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 08:44:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4BA79405FB
-Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
+ Sat,  9 Sep 2023 13:34:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E2B8860E09
+Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 3898dgvn012077; Sat, 9 Sep 2023 08:44:57 GMT
+ 389DV1l1002724; Sat, 9 Sep 2023 13:34:29 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-type : content-transfer-encoding; s=corp-2023-03-30;
- bh=jSMOrKu+GOgnx+zBObx/pCpKIJPIbb3KfLHim2zMvSo=;
- b=VcC5jyF2wv/ZL1+O2KHq/62pdYjCcYFOy/TNfWVLQ6LdhtzNCBWIvupevf3fRGt8/39q
- L+7XG5OC3csr9RgAqOIInZCzOQDqSWKkIsDbzU+2xJcIRgEbkJ+40v+U/vCBiUgb8ohy
- oUugzMgV+SqbFW+BxWvWvyK39pi4QaqXrAJ7gCmv2rce1OPA05/2XEV5CSLsc5n6rdQT
- JKksptJSZIiqHkzeqe0fkSt9s5BzQ1xAgZjF65HpB5JlFCqVhJvRK2XQ/IiArMykhuYJ
- S+Ob5YCDYIMZzdwJF63laYA9pYnW1V09N3ZDE0wmBEJuwb86HzWywPpTTPU6SPgppGdo SQ== 
-Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3t0ncug134-1
+ subject : date : message-id; s=corp-2023-03-30;
+ bh=WK9ncQB4P8cm59cUNLcvl3yDergKAgsOC66LkDn1fHI=;
+ b=qbtRCc+eb8C/d+SqSDbHcGyRsX+8V6SYXKom3S47UnGwkzflw7IYlpvhtW6V97nv2t68
+ f1RekQ9o2iLtLN6Tfp5uoXVjECLsJjDPIp6GAKHcS5LwJcbi5tCPWMzXcvMnh/Ep+bXD
+ RbhV6KMe67Iu4I6rT2QHMyjeKweoDkxZwFavHYeQL/dHy1YkG37+vf+95l25sQug21W1
+ wjylFKtILVEnhyw9k+2OlNjl1x7K3qagVhZo9RT0VIDuyRt8B6H/nmZ8GSn0RGjtWHfV
+ VaF1wtYDvWurb2zizcY3OtAwJGd8Q6fmhMB3NsWxpTT7pVh9IrqQaNkPB8QRq8JvoZMe /Q== 
+Received: from phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com
+ (phxpaimrmta02.appoci.oracle.com [147.154.114.232])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3t0sn2g02e-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 09 Sep 2023 08:44:57 +0000
+ Sat, 09 Sep 2023 13:34:29 +0000
 Received: from pps.filterd
- (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 38954WNq002299; Sat, 9 Sep 2023 08:44:56 GMT
+ (phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 389D22JF023060; Sat, 9 Sep 2023 13:34:16 GMT
 Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
  [10.153.73.24])
- by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 3t0f58qgc7-4; Sat, 09 Sep 2023 08:44:56 +0000
+ by phxpaimrmta02.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
+ 3t0f52vccr-1; Sat, 09 Sep 2023 13:34:16 +0000
 From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: eperezma@redhat.com, jasowang@redhat.com, mst@redhat.com
-Subject: [PATCH RFC v2 3/3] vhost-vdpa: uAPI to get dedicated descriptor group
- id
-Date: Sat,  9 Sep 2023 01:42:39 -0700
-Message-Id: <1694248959-13369-4-git-send-email-si-wei.liu@oracle.com>
+To: eperezma@redhat.com, jasowang@redhat.com, mst@redhat.com,
+ xuanzhuo@linux.alibaba.com, dtatulea@nvidia.com
+Subject: [PATCH RFC v2 0/4] vdpa: decouple reset of iotlb mapping from device
+ reset
+Date: Sat,  9 Sep 2023 06:31:55 -0700
+Message-Id: <1694266319-32287-1-git-send-email-si-wei.liu@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1694248959-13369-1-git-send-email-si-wei.liu@oracle.com>
-References: <1694248959-13369-1-git-send-email-si-wei.liu@oracle.com>
-MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-09_07,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- mlxscore=0 bulkscore=0
- adultscore=0 phishscore=0 spamscore=0 mlxlogscore=788 suspectscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2308100000
- definitions=main-2309090078
-X-Proofpoint-GUID: 12jFS1X8sQFjd3IShF1eXXzfATm-PQ9f
-X-Proofpoint-ORIG-GUID: 12jFS1X8sQFjd3IShF1eXXzfATm-PQ9f
+ definitions=2023-09-09_11,2023-09-05_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0
+ adultscore=0
+ mlxlogscore=999 phishscore=0 malwarescore=0 mlxscore=0 spamscore=0
+ bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2308100000 definitions=main-2309090123
+X-Proofpoint-GUID: OoiLuk_DrTQro4hse_QwhHjrsaEBhKqS
+X-Proofpoint-ORIG-GUID: OoiLuk_DrTQro4hse_QwhHjrsaEBhKqS
 Cc: virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -105,45 +102,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-V2l0aCBfRl9ERVNDX0FTSUQgYmFja2VuZCBmZWF0dXJlLCB0aGUgZGV2aWNlIGNhbiBub3cgc3Vw
-cG9ydCB0aGUKVkhPU1RfVkRQQV9HRVRfVlJJTkdfREVTQ19HUk9VUCBpb2N0bCwgYW5kIGl0IG1h
-eSBleHBvc2UgdGhlIGRlc2NyaXB0b3IKdGFibGUgKGluY2x1ZGluZyBhdmFpbCBhbmQgdXNlZCBy
-aW5nKSBpbiBhIGRpZmZlcmVudCBncm91cCB0aGFuIHRoZQpidWZmZXJzIGl0IGNvbnRhaW5zLiBU
-aGlzIG5ldyB1QVBJIHdpbGwgZmV0Y2ggdGhlIGdyb3VwIElEIG9mIHRoZQpkZXNjcmlwdG9yIHRh
-YmxlLgoKU2lnbmVkLW9mZi1ieTogU2ktV2VpIExpdSA8c2ktd2VpLmxpdUBvcmFjbGUuY29tPgpB
-Y2tlZC1ieTogRXVnZW5pbyBQw6lyZXogPGVwZXJlem1hQHJlZGhhdC5jb20+Ci0tLQogZHJpdmVy
-cy92aG9zdC92ZHBhLmMgICAgICAgfCAxMCArKysrKysrKysrCiBpbmNsdWRlL3VhcGkvbGludXgv
-dmhvc3QuaCB8ICA4ICsrKysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDE4IGluc2VydGlvbnMoKykK
-CmRpZmYgLS1naXQgYS9kcml2ZXJzL3Zob3N0L3ZkcGEuYyBiL2RyaXZlcnMvdmhvc3QvdmRwYS5j
-CmluZGV4IGYyZTVkY2UuLmVhYmFjMDYgMTAwNjQ0Ci0tLSBhL2RyaXZlcnMvdmhvc3QvdmRwYS5j
-CisrKyBiL2RyaXZlcnMvdmhvc3QvdmRwYS5jCkBAIC02MDIsNiArNjAyLDE2IEBAIHN0YXRpYyBs
-b25nIHZob3N0X3ZkcGFfdnJpbmdfaW9jdGwoc3RydWN0IHZob3N0X3ZkcGEgKnYsIHVuc2lnbmVk
-IGludCBjbWQsCiAJCWVsc2UgaWYgKGNvcHlfdG9fdXNlcihhcmdwLCAmcywgc2l6ZW9mKHMpKSkK
-IAkJCXJldHVybiAtRUZBVUxUOwogCQlyZXR1cm4gMDsKKwljYXNlIFZIT1NUX1ZEUEFfR0VUX1ZS
-SU5HX0RFU0NfR1JPVVA6CisJCWlmICghdmhvc3RfdmRwYV9oYXNfZGVzY19ncm91cCh2KSkKKwkJ
-CXJldHVybiAtRU9QTk9UU1VQUDsKKwkJcy5pbmRleCA9IGlkeDsKKwkJcy5udW0gPSBvcHMtPmdl
-dF92cV9kZXNjX2dyb3VwKHZkcGEsIGlkeCk7CisJCWlmIChzLm51bSA+PSB2ZHBhLT5uZ3JvdXBz
-KQorCQkJcmV0dXJuIC1FSU87CisJCWVsc2UgaWYgKGNvcHlfdG9fdXNlcihhcmdwLCAmcywgc2l6
-ZW9mKHMpKSkKKwkJCXJldHVybiAtRUZBVUxUOworCQlyZXR1cm4gMDsKIAljYXNlIFZIT1NUX1ZE
-UEFfU0VUX0dST1VQX0FTSUQ6CiAJCWlmIChjb3B5X2Zyb21fdXNlcigmcywgYXJncCwgc2l6ZW9m
-KHMpKSkKIAkJCXJldHVybiAtRUZBVUxUOwpkaWZmIC0tZ2l0IGEvaW5jbHVkZS91YXBpL2xpbnV4
-L3Zob3N0LmggYi9pbmNsdWRlL3VhcGkvbGludXgvdmhvc3QuaAppbmRleCBmNWM0OGI2Li42NDk1
-NjBjIDEwMDY0NAotLS0gYS9pbmNsdWRlL3VhcGkvbGludXgvdmhvc3QuaAorKysgYi9pbmNsdWRl
-L3VhcGkvbGludXgvdmhvc3QuaApAQCAtMjE5LDQgKzIxOSwxMiBAQAogICovCiAjZGVmaW5lIFZI
-T1NUX1ZEUEFfUkVTVU1FCQlfSU8oVkhPU1RfVklSVElPLCAweDdFKQogCisvKiBHZXQgdGhlIGdy
-b3VwIGZvciB0aGUgZGVzY3JpcHRvciB0YWJsZSBpbmNsdWRpbmcgZHJpdmVyICYgZGV2aWNlIGFy
-ZWFzCisgKiBvZiBhIHZpcnRxdWV1ZTogcmVhZCBpbmRleCwgd3JpdGUgZ3JvdXAgaW4gbnVtLgor
-ICogVGhlIHZpcnRxdWV1ZSBpbmRleCBpcyBzdG9yZWQgaW4gdGhlIGluZGV4IGZpZWxkIG9mIHZo
-b3N0X3ZyaW5nX3N0YXRlLgorICogVGhlIGdyb3VwIElEIG9mIHRoZSBkZXNjcmlwdG9yIHRhYmxl
-IGZvciB0aGlzIHNwZWNpZmljIHZpcnRxdWV1ZQorICogaXMgcmV0dXJuZWQgdmlhIG51bSBmaWVs
-ZCBvZiB2aG9zdF92cmluZ19zdGF0ZS4KKyAqLworI2RlZmluZSBWSE9TVF9WRFBBX0dFVF9WUklO
-R19ERVNDX0dST1VQCV9JT1dSKFZIT1NUX1ZJUlRJTywgMHg3RiwJXAorCQkJCQkgICAgICBzdHJ1
-Y3Qgdmhvc3RfdnJpbmdfc3RhdGUpCiAjZW5kaWYKLS0gCjEuOC4zLjEKCl9fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcg
-bGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xp
-c3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
+In order to reduce needlessly high setup and teardown cost
+of iotlb mapping during live migration, it's crucial to
+decouple the vhost-vdpa iotlb abstraction from the virtio
+device life cycle, i.e. iotlb mappings should be left
+intact across virtio device reset [1]. For it to work, the
+on-chip IOMMU parent device should implement a separate
+.reset_map() operation callback to restore 1:1 DMA mapping
+without having to resort to the .reset() callback, which
+is mainly used to reset virtio specific device state.
+This new .reset_map() callback will be invoked only when
+the vhost-vdpa driver is to be removed and detached from
+the vdpa bus, such that other vdpa bus drivers, e.g. 
+virtio-vdpa, can start with 1:1 DMA mapping when they
+are attached. For the context, those on-chip IOMMU parent
+devices, create the 1:1 DMA mapping at vdpa device add,
+and they would implicitly destroy the 1:1 mapping when
+the first .set_map or .dma_map callback is invoked.
+
+[1] Reducing vdpa migration downtime because of memory pin / maps
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg953755.html
+
+---
+
+RFC v2:
+- rebased on top of the "[PATCH RFC v2 0/3] vdpa: dedicated descriptor table group" series:
+  https://lore.kernel.org/virtualization/1694248959-13369-1-git-send-email-si-wei.liu@oracle.com/
+
+---
+
+Si-Wei Liu (4):
+  vdpa: introduce .reset_map operation callback
+  vdpa/mlx5: implement .reset_map driver op
+  vhost-vdpa: should restore 1:1 dma mapping before detaching driver
+  vhost-vdpa: introduce IOTLB_PERSIST backend feature bit
+
+ drivers/vdpa/mlx5/core/mlx5_vdpa.h |  1 +
+ drivers/vdpa/mlx5/core/mr.c        | 70 +++++++++++++++++++++++---------------
+ drivers/vdpa/mlx5/net/mlx5_vnet.c  | 18 +++++++---
+ drivers/vhost/vdpa.c               | 32 ++++++++++++++++-
+ include/linux/vdpa.h               |  7 ++++
+ include/uapi/linux/vhost_types.h   |  2 ++
+ 6 files changed, 96 insertions(+), 34 deletions(-)
+
+-- 
+1.8.3.1
+
+_______________________________________________
+Virtualization mailing list
+Virtualization@lists.linux-foundation.org
+https://lists.linuxfoundation.org/mailman/listinfo/virtualization
