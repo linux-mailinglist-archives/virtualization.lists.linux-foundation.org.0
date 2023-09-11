@@ -1,98 +1,101 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id AA9A87998B9
-	for <lists.virtualization@lfdr.de>; Sat,  9 Sep 2023 15:46:36 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BAD2579A168
+	for <lists.virtualization@lfdr.de>; Mon, 11 Sep 2023 04:35:36 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id AFEC882005;
-	Sat,  9 Sep 2023 13:46:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AFEC882005
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=OU9ZBESf
+	by smtp2.osuosl.org (Postfix) with ESMTP id 0C087404AB;
+	Mon, 11 Sep 2023 02:35:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0C087404AB
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QIBNWNnA
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id k2KJaKndIKFB; Sat,  9 Sep 2023 13:46:32 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id D831382043;
-	Sat,  9 Sep 2023 13:46:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D831382043
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id V_HvWZKboXuR; Mon, 11 Sep 2023 02:35:33 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id CFA824049E;
+	Mon, 11 Sep 2023 02:35:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CFA824049E
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A2193C0032;
-	Sat,  9 Sep 2023 13:46:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 02A0EC0DD3;
+	Mon, 11 Sep 2023 02:35:32 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5AEF4C0032
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 8F275C0032
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 13:46:29 +0000 (UTC)
+ Mon, 11 Sep 2023 02:35:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2890F60FE9
+ by smtp3.osuosl.org (Postfix) with ESMTP id 62B7060BA7
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 13:46:29 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2890F60FE9
+ Mon, 11 Sep 2023 02:35:30 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 62B7060BA7
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=OU9ZBESf
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=QIBNWNnA
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id CTCXgQU0TUX3
+ with ESMTP id AI-3R35qu2DU
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 13:46:28 +0000 (UTC)
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 7355260E77
+ Mon, 11 Sep 2023 02:35:29 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 7578A60B9D
  for <virtualization@lists.linux-foundation.org>;
- Sat,  9 Sep 2023 13:46:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7355260E77
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 389DU4H7002052; Sat, 9 Sep 2023 13:46:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2023-03-30;
- bh=0VPuXDl5dbLFsT2nPyZqoPLQIWxfTyE1HRkfyRSSUWU=;
- b=OU9ZBESfhpyh11rz7tqrZ3ue9366zJzOqNQk0Eo4dk8Brw1fah31n3vnkb2z6s6K32Y6
- eyLKRS1RlHAdFEu1iP9AN3Ev63YNDGkewWyHE5YBsQ9WnRd5Lurf6zWLykl/PS3ZYG03
- peQzDDPkAu8Wr/7dj+Todb5B3cgaZ5YhIu3wjWPSM4cOAYn5+h1WMG3Lveb5rxJzO+LF
- t3l0+YgkCEPu8KYcM2evpgl6SXYnSCPwPkJeIVA+GjfsGytTAWhg/hbfYra4v/G4Pbtj
- g+aP/b1BmYYC3yGBrHX33MIN4D2w/U50uZlhFVFBT5Yu+LjsMSof3GSMu3hw9B5YqLS5 lQ== 
-Received: from phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com
- (phxpaimrmta01.appoci.oracle.com [138.1.114.2])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3t0sn2g0qp-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 09 Sep 2023 13:46:25 +0000
-Received: from pps.filterd
- (phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com [127.0.0.1])
- by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 389A1UVC007574; Sat, 9 Sep 2023 13:46:25 GMT
-Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
- [10.153.73.24])
- by phxpaimrmta01.imrmtpd1.prodappphxaev1.oraclevcn.com (PPS) with ESMTP id
- 3t0f52mh12-5; Sat, 09 Sep 2023 13:46:25 +0000
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: eperezma@redhat.com, jasowang@redhat.com, mst@redhat.com,
- xuanzhuo@linux.alibaba.com, dtatulea@nvidia.com
-Subject: [PATCH RFC v3 4/4] vhost-vdpa: introduce IOTLB_PERSIST backend
- feature bit
-Date: Sat,  9 Sep 2023 06:43:59 -0700
-Message-Id: <1694267039-718-5-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1694267039-718-1-git-send-email-si-wei.liu@oracle.com>
-References: <1694267039-718-1-git-send-email-si-wei.liu@oracle.com>
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.267,Aquarius:18.0.957,Hydra:6.0.601,FMLib:17.11.176.26
- definitions=2023-09-09_12,2023-09-05_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0
- suspectscore=0
- spamscore=0 mlxscore=0 mlxlogscore=999 adultscore=0 phishscore=0
- bulkscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2308100000 definitions=main-2309090124
-X-Proofpoint-GUID: sKx2HzpdFS840XcpgdAcAAKdyo4ixgE5
-X-Proofpoint-ORIG-GUID: sKx2HzpdFS840XcpgdAcAAKdyo4ixgE5
-Cc: virtualization@lists.linux-foundation.org
+ Mon, 11 Sep 2023 02:35:29 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 7578A60B9D
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1694399728;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=1JiEAacOPpZr8Csa8+TL/orlrtaJ6UeA2+KsyYOTzfY=;
+ b=QIBNWNnA1n7jZoHWDBjgr3TvyqYbK4HZX15ezec6M4AsgjfmziNaxjF4M4za1LrN0pnS8W
+ Sedb/SAd/u0jn41O8NXveRGfqqX4uOUrmTBWRhzG0iEfDbgVsuFYls5O+huKM0ODZ/4eNw
+ +26WPMf5lBHKyqC8bYPyWcqejgijHN4=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-97-azuA0cncMTqSkMKdZMqhhg-1; Sun, 10 Sep 2023 22:35:22 -0400
+X-MC-Unique: azuA0cncMTqSkMKdZMqhhg-1
+Received: from smtp.corp.redhat.com (int-mx10.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 90084101FAA8;
+ Mon, 11 Sep 2023 02:35:21 +0000 (UTC)
+Received: from [10.22.8.52] (unknown [10.22.8.52])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id 5531549310E;
+ Mon, 11 Sep 2023 02:35:19 +0000 (UTC)
+Message-ID: <f091ead0-99b9-b30a-a295-730ce321ac60@redhat.com>
+Date: Sun, 10 Sep 2023 22:35:19 -0400
+MIME-Version: 1.0
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.14.0
+Subject: Re: [PATCH V11 04/17] locking/qspinlock: Improve xchg_tail for number
+ of cpus >= 16k
+Content-Language: en-US
+To: guoren@kernel.org, paul.walmsley@sifive.com, anup@brainfault.org,
+ peterz@infradead.org, mingo@redhat.com, will@kernel.org,
+ palmer@rivosinc.com, boqun.feng@gmail.com, tglx@linutronix.de,
+ paulmck@kernel.org, rostedt@goodmis.org, rdunlap@infradead.org,
+ catalin.marinas@arm.com, conor.dooley@microchip.com,
+ xiaoguang.xing@sophgo.com, bjorn@rivosinc.com, alexghiti@rivosinc.com,
+ keescook@chromium.org, greentime.hu@sifive.com, ajones@ventanamicro.com,
+ jszhang@kernel.org, wefu@redhat.com, wuwei2016@iscas.ac.cn,
+ leobras@redhat.com
+References: <20230910082911.3378782-1-guoren@kernel.org>
+ <20230910082911.3378782-5-guoren@kernel.org>
+From: Waiman Long <longman@redhat.com>
+In-Reply-To: <20230910082911.3378782-5-guoren@kernel.org>
+X-Scanned-By: MIMEDefang 3.1 on 10.11.54.10
+Cc: linux-arch@vger.kernel.org, Guo Ren <guoren@linux.alibaba.com>,
+ kvm@vger.kernel.org, linux-doc@vger.kernel.org, linux-csky@vger.kernel.org,
+ virtualization@lists.linux-foundation.org, linux-riscv@lists.infradead.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -104,93 +107,54 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Userspace needs this feature flag to distinguish if vhost-vdpa
-iotlb in the kernel supports persistent IOTLB mapping across
-device reset. There are two cases that backend may claim
-this feature bit on:
 
-- parent device that has to work with platform IOMMU
-- parent device with on-chip IOMMU that has the expected
-  .reset_map support in driver
+On 9/10/23 04:28, guoren@kernel.org wrote:
+> From: Guo Ren <guoren@linux.alibaba.com>
+>
+> The target of xchg_tail is to write the tail to the lock value, so
+> adding prefetchw could help the next cmpxchg step, which may
+> decrease the cmpxchg retry loops of xchg_tail. Some processors may
+> utilize this feature to give a forward guarantee, e.g., RISC-V
+> XuanTie processors would block the snoop channel & irq for several
+> cycles when prefetch.w instruction (from Zicbop extension) retired,
+> which guarantees the next cmpxchg succeeds.
+>
+> Signed-off-by: Guo Ren <guoren@linux.alibaba.com>
+> Signed-off-by: Guo Ren <guoren@kernel.org>
+> ---
+>   kernel/locking/qspinlock.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
+>
+> diff --git a/kernel/locking/qspinlock.c b/kernel/locking/qspinlock.c
+> index d3f99060b60f..96b54e2ade86 100644
+> --- a/kernel/locking/qspinlock.c
+> +++ b/kernel/locking/qspinlock.c
+> @@ -223,7 +223,10 @@ static __always_inline void clear_pending_set_locked(struct qspinlock *lock)
+>    */
+>   static __always_inline u32 xchg_tail(struct qspinlock *lock, u32 tail)
+>   {
+> -	u32 old, new, val = atomic_read(&lock->val);
+> +	u32 old, new, val;
+> +
+> +	prefetchw(&lock->val);
+> +	val = atomic_read(&lock->val);
+>   
+>   	for (;;) {
+>   		new = (val & _Q_LOCKED_PENDING_MASK) | tail;
 
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
----
-RFC v2 -> v3:
-  - fix missing return due to merge error
+That looks a bit weird. You pre-fetch and then immediately read it. How 
+much performance gain you get by this change alone?
 
----
- drivers/vhost/vdpa.c             | 16 +++++++++++++++-
- include/uapi/linux/vhost_types.h |  2 ++
- 2 files changed, 17 insertions(+), 1 deletion(-)
+Maybe you can define an arch specific primitive that default back to 
+atomic_read() if not defined.
 
-diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-index 71fbd559..b404504 100644
---- a/drivers/vhost/vdpa.c
-+++ b/drivers/vhost/vdpa.c
-@@ -414,6 +414,14 @@ static bool vhost_vdpa_has_desc_group(const struct vhost_vdpa *v)
- 	return ops->get_vq_desc_group;
- }
- 
-+static bool vhost_vdpa_has_persistent_map(const struct vhost_vdpa *v)
-+{
-+	struct vdpa_device *vdpa = v->vdpa;
-+	const struct vdpa_config_ops *ops = vdpa->config;
-+
-+	return (!ops->set_map && !ops->dma_map) || ops->reset_map;
-+}
-+
- static long vhost_vdpa_get_features(struct vhost_vdpa *v, u64 __user *featurep)
- {
- 	struct vdpa_device *vdpa = v->vdpa;
-@@ -716,7 +724,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 		if (features & ~(VHOST_VDPA_BACKEND_FEATURES |
- 				 BIT_ULL(VHOST_BACKEND_F_DESC_ASID) |
- 				 BIT_ULL(VHOST_BACKEND_F_SUSPEND) |
--				 BIT_ULL(VHOST_BACKEND_F_RESUME)))
-+				 BIT_ULL(VHOST_BACKEND_F_RESUME) |
-+				 BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST)))
- 			return -EOPNOTSUPP;
- 		if ((features & BIT_ULL(VHOST_BACKEND_F_SUSPEND)) &&
- 		     !vhost_vdpa_can_suspend(v))
-@@ -730,6 +739,9 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 		if ((features & BIT_ULL(VHOST_BACKEND_F_DESC_ASID)) &&
- 		     !vhost_vdpa_has_desc_group(v))
- 			return -EOPNOTSUPP;
-+		if ((features & BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST)) &&
-+		     !vhost_vdpa_has_persistent_map(v))
-+			return -EOPNOTSUPP;
- 		vhost_set_backend_features(&v->vdev, features);
- 		return 0;
- 	}
-@@ -785,6 +797,8 @@ static long vhost_vdpa_unlocked_ioctl(struct file *filep,
- 			features |= BIT_ULL(VHOST_BACKEND_F_RESUME);
- 		if (vhost_vdpa_has_desc_group(v))
- 			features |= BIT_ULL(VHOST_BACKEND_F_DESC_ASID);
-+		if (vhost_vdpa_has_persistent_map(v))
-+			features |= BIT_ULL(VHOST_BACKEND_F_IOTLB_PERSIST);
- 		if (copy_to_user(featurep, &features, sizeof(features)))
- 			r = -EFAULT;
- 		break;
-diff --git a/include/uapi/linux/vhost_types.h b/include/uapi/linux/vhost_types.h
-index 6acc604..0fdb6f0 100644
---- a/include/uapi/linux/vhost_types.h
-+++ b/include/uapi/linux/vhost_types.h
-@@ -186,5 +186,7 @@ struct vhost_vdpa_iova_range {
-  * buffers may reside. Requires VHOST_BACKEND_F_IOTLB_ASID.
-  */
- #define VHOST_BACKEND_F_DESC_ASID    0x6
-+/* IOTLB don't flush memory mapping across device reset */
-+#define VHOST_BACKEND_F_IOTLB_PERSIST  0x7
- 
- #endif
--- 
-1.8.3.1
+Cheers,
+Longman
 
 _______________________________________________
 Virtualization mailing list
