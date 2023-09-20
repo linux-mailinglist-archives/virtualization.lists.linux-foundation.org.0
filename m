@@ -1,113 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 29B067A831B
-	for <lists.virtualization@lfdr.de>; Wed, 20 Sep 2023 15:18:43 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 90E137A884A
+	for <lists.virtualization@lfdr.de>; Wed, 20 Sep 2023 17:28:52 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id C21184181F;
-	Wed, 20 Sep 2023 13:18:41 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org C21184181F
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Lst+AXDs
+	by smtp3.osuosl.org (Postfix) with ESMTP id A497061335;
+	Wed, 20 Sep 2023 15:28:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A497061335
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=infradead.org header.i=@infradead.org header.a=rsa-sha256 header.s=desiato.20200630 header.b=oK8vRjz6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id AhaslfoAfGkn; Wed, 20 Sep 2023 13:18:41 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 7B74D4181B;
-	Wed, 20 Sep 2023 13:18:40 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7B74D4181B
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id pKBSpAxjkblx; Wed, 20 Sep 2023 15:28:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 67AF561310;
+	Wed, 20 Sep 2023 15:28:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 67AF561310
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A2A91C008C;
-	Wed, 20 Sep 2023 13:18:39 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 9265AC008C;
+	Wed, 20 Sep 2023 15:28:48 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id D56ACC0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id C589BC0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Sep 2023 13:18:38 +0000 (UTC)
+ Wed, 20 Sep 2023 15:28:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id AFBC9827CA
+ by smtp4.osuosl.org (Postfix) with ESMTP id 8BDFB418B0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Sep 2023 13:18:38 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AFBC9827CA
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=Lst+AXDs
+ Wed, 20 Sep 2023 15:28:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8BDFB418B0
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org
+ header.a=rsa-sha256 header.s=desiato.20200630 header.b=oK8vRjz6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id uZv0EzLYC90s
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 1-yHRh2zDgxc
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Sep 2023 13:18:38 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D8D7482308
+ Wed, 20 Sep 2023 15:28:45 +0000 (UTC)
+X-Greylist: delayed 2149 seconds by postgrey-1.37 at util1.osuosl.org;
+ Wed, 20 Sep 2023 15:28:45 UTC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3293441830
+Received: from desiato.infradead.org (desiato.infradead.org
+ [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 3293441830
  for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Sep 2023 13:18:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D8D7482308
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1695215916;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=Ft0Hvww98DIVI9AAi+gO6RxI47Nc/V9+mUfEY+K4xFY=;
- b=Lst+AXDsS2+GSuLw88nFpLL8TKWC7X/e+qG55zrJc9V4tw5ZMbGDawI5h/ziP/FU4WgUz+
- krmn/zrjDUoTHA5iiTqnT+F/tKAPzib+PvOcm7qgrfA/nw+j6zlc0/IjhYi+2a8ebTMbgz
- nfhNIIr0J3MLQ3TQM5+cXSsvlFpLODk=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-112-UFqYo7-HNBOG46JwnrYDpw-1; Wed, 20 Sep 2023 09:18:34 -0400
-X-MC-Unique: UFqYo7-HNBOG46JwnrYDpw-1
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-3fef5403093so4487395e9.0
- for <virtualization@lists.linux-foundation.org>;
- Wed, 20 Sep 2023 06:18:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695215913; x=1695820713;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Ft0Hvww98DIVI9AAi+gO6RxI47Nc/V9+mUfEY+K4xFY=;
- b=TypIHzOEi3nBBTsKJp5GtAsJyvuMHuvbhkZsAlX05UZZxilZaFGp69LMPdjBbzySEo
- ZPSeiMBheuGHe2XrAtFo/GxRdYPrj5JzoQCSeyZaQKGkpRlCvuTwCsrsfFokyai2rmXV
- EH1ZyDcaMYZTYOOVrjnWVm9u0cdPEAnd6ju2c56r7+pf0hv/jYYMEokxGlnOAyr1+wN6
- I8lMtaGlu2xm+r3AMPU/L5UuLRg4agqVOVfRJ3Cgw0PK8KPX0rKOuvSaXRjFCWNWSBrI
- t0BiWcO6uZ9q1p/frGF+jg11KqA13zX5THO2ABe71NsmZTPIlTInHI5/gE1M7iOuZc3p
- cNsQ==
-X-Gm-Message-State: AOJu0YwxMpe1Up3Jqu7zEIGhpjVZkAlpRO10QZUy+rWitGU2yYYanGwF
- qHHuE3xna4evViKTR0HBq5vbnshrvqeifXd34a5lptTlMmwDCdKTVRGlJuUPMLarHB5uU2XaAG3
- T3EY8iWTDu+FcJ2k+bb+dsC4U5yZpkfmnDxW06XI90g==
-X-Received: by 2002:a05:600c:224b:b0:3ff:516b:5c4c with SMTP id
- a11-20020a05600c224b00b003ff516b5c4cmr2304962wmm.18.1695215912949; 
- Wed, 20 Sep 2023 06:18:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGabC1hwv/xqFBYRbrp9O89UlJtSsJ98NuuHoD1jnD2tJsRjwSepgqimuIq55Kap6Xk3Gd70Q==
-X-Received: by 2002:a05:600c:224b:b0:3ff:516b:5c4c with SMTP id
- a11-20020a05600c224b00b003ff516b5c4cmr2304951wmm.18.1695215912588; 
- Wed, 20 Sep 2023 06:18:32 -0700 (PDT)
-Received: from fedora ([2a01:e0a:257:8c60:80f1:cdf8:48d0:b0a1])
- by smtp.gmail.com with ESMTPSA id
- u3-20020a7bc043000000b003fd2d3462fcsm819037wmc.1.2023.09.20.06.18.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 20 Sep 2023 06:18:32 -0700 (PDT)
-Date: Wed, 20 Sep 2023 15:18:30 +0200
-From: Matias Ezequiel Vara Larsen <mvaralar@redhat.com>
-To: "Michael S. Tsirkin" <mst@redhat.com>
-Subject: Re: virtio-sound linux driver conformance to spec
-Message-ID: <ZQrxJnzYHSH0OhiR@fedora>
-References: <ZQHPeD0fds9sYzHO@pc-79.home>
- <20230919054054-mutt-send-email-mst@kernel.org>
- <ZQmt0Z8lbPMuFzR+@fedora>
- <20230919102250-mutt-send-email-mst@kernel.org>
+ Wed, 20 Sep 2023 15:28:45 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
+ References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+ Content-Transfer-Encoding:Content-ID:Content-Description;
+ bh=ZerJcnOhEvUGAjVvFDnt+ED8Lu+58HuQE4rkQfwGHOA=; b=oK8vRjz6Cd8f7av9WAZ5MrtvDW
+ ibgh94KLBV8bt3XT/9afi1rlEMXon7JYGg022FAXhUQZjpxFY0xwx6vKCjVnzWjaj1Wf05zIekyP+
+ 7Tdo8to/IC62m6luX7US+MvBnpB5L+C5sRZGxmzkbD1eLLHMxatdmUuwEwjYb1jgWR+CK6y35zJk/
+ Jqpg71tlE334dkhfQmcvC+yZTUBqEThAiih5oPlNhMoCKZFNJgWxLQFXYYZItL9o229FD8LorfdgL
+ PQsAN960x2p15PJgxMjFr6zjsjVxfLazY91uScz7lkmL9lJrXIg3ghzbHk6i7YEspFdVx8Fq2lCyU
+ ooWAy3kA==;
+Received: from j130084.upc-j.chello.nl ([24.132.130.84]
+ helo=noisy.programming.kicks-ass.net)
+ by desiato.infradead.org with esmtpsa (Exim 4.96 #2 (Red Hat Linux))
+ id 1qiyYv-00EfZI-0q; Wed, 20 Sep 2023 14:52:23 +0000
+Received: by noisy.programming.kicks-ass.net (Postfix, from userid 1000)
+ id 5EBD4300348; Wed, 20 Sep 2023 16:52:22 +0200 (CEST)
+Date: Wed, 20 Sep 2023 16:52:22 +0200
+From: Peter Zijlstra <peterz@infradead.org>
+To: Juergen Gross <jgross@suse.com>
+Subject: Re: [RFC PATCH 3/3] x86/paravirt: switch mixed paravirt/alternative
+ calls to alternative_2
+Message-ID: <20230920145222.GB6687@noisy.programming.kicks-ass.net>
+References: <20230608140333.4083-1-jgross@suse.com>
+ <20230608140333.4083-4-jgross@suse.com>
 MIME-Version: 1.0
-In-Reply-To: <20230919102250-mutt-send-email-mst@kernel.org>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
-Cc: virtio-comment@lists.oasis-open.org, stefanha@redhat.com,
- virtualization@lists.linux-foundation.org
+In-Reply-To: <20230608140333.4083-4-jgross@suse.com>
+Cc: Dave Hansen <dave.hansen@linux.intel.com>,
+ Alexey Makhalov <amakhalov@vmware.com>,
+ VMware PV-Drivers Reviewers <pv-drivers@vmware.com>, x86@kernel.org,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ "H. Peter Anvin" <hpa@zytor.com>, Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -124,86 +98,47 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Tue, Sep 19, 2023 at 11:52:27AM -0400, Michael S. Tsirkin wrote:
-> On Tue, Sep 19, 2023 at 04:18:57PM +0200, Matias Ezequiel Vara Larsen wrote:
-> > On Tue, Sep 19, 2023 at 05:43:56AM -0400, Michael S. Tsirkin wrote:
-> > > On Wed, Sep 13, 2023 at 05:04:24PM +0200, Matias Ezequiel Vara Larsen wrote:
-> > > > Hello,
-> > > > 
-> > > > This email is to report a behavior of the Linux virtio-sound driver that
-> > > > looks like it is not conforming to the VirtIO specification. The kernel
-> > > > driver is moving buffers from the used ring to the available ring
-> > > > without knowing if the content has been updated from the user. If the
-> > > > device picks up buffers from the available ring just after it is
-> > > > notified, it happens that the content is old.
-> > > 
-> > > Then, what happens, exactly? Do things still work?
-> > 
-> > We are currently developing a vhost-user backend for virtio-sound and
-> > what happens is that if the backend implementation decides to copy the
-> > content of a buffer from a request that just arrived to the available
-> > ring, it gets the old content thus reproducing some sections two times.
-> > For example, we observe that when issuing `aplay FrontLeft.wav`, we hear
-> > `Front, front left...`. To fix this issue, our current implementation
-> > delays reading from guest memory just until the audio engine requires.
-> > However, the first implementation shall also work since it is conforming
-> > to the specification.
-> > 
-> > Matias
+On Thu, Jun 08, 2023 at 04:03:33PM +0200, Juergen Gross wrote:
+> Instead of stacking alternative and paravirt patching, use the new
+> ALT_FLAG_CALL flag to switch those mixed calls to pure alternative
+> handling.
 > 
-> Sounds like it. How hard is it to change the behaviour though?
-> Does it involve changing userspace?
+> This eliminates the need to be careful regarding the sequence of
+> alternative and paravirt patching.
+> 
+> For call depth tracking callthunks_setup() needs to be adapted to patch
+> calls at alternative patching sites instead of paravirt calls.
+> 
+> Remove the no longer needed paravirt patching and related code.
 
-AFAIU, a fix for the driver may be to somehow wait until userspace
-updates the buffer before add it in the available ring.  
-So far, when the device notifies the driver that a new buffer is in the
-used ring, the driver calls the virtsnd_pcm_msg_complete() function to
-do:
-``` 
-schedule_work(&vss->elapsed_period);
-
-virtsnd_pcm_msg_send(vss); 
-``` 
-It first defers the notification to userspace regarding an elapse period
-and then it enqueues the request again in the available
-ring.`schedule_work()` defers the calling to the
-`virtsnd_pcm_period_elapsed()` function that issues
-`snd_pcm_period_elapsed(vss->substream);` to notify userspace.  
-My proposal would be that the driver could also defer
-`virtsnd_pcm_msg_send(vss)` to execute just after
-`snd_pcm_period_elapsed(vss->substream)`. Something like this:
-
-diff --git a/sound/virtio/virtio_pcm.c b/sound/virtio/virtio_pcm.c
-index c10d91fff2fb..41f1e74c8478 100644
---- a/sound/virtio/virtio_pcm.c
-+++ b/sound/virtio/virtio_pcm.c
-@@ -309,6 +309,7 @@ static void virtsnd_pcm_period_elapsed(struct work_struct *work)
-                container_of(work, struct virtio_pcm_substream, elapsed_period);
- 
-        snd_pcm_period_elapsed(vss->substream);
-+       virtsnd_pcm_msg_send(vss);
- }
- 
- /**
-diff --git a/sound/virtio/virtio_pcm_msg.c b/sound/virtio/virtio_pcm_msg.c
-index aca2dc1989ba..43f0078b1152 100644
---- a/sound/virtio/virtio_pcm_msg.c
-+++ b/sound/virtio/virtio_pcm_msg.c
-@@ -321,7 +321,6 @@ static void virtsnd_pcm_msg_complete(struct virtio_pcm_msg *msg,
- 
-                schedule_work(&vss->elapsed_period);
- 
--               virtsnd_pcm_msg_send(vss);
-        } else if (!vss->msg_count) {
-                wake_up_all(&vss->msg_empty);
-        }
+I think this becomes easier if you first convert the paravirt sites to
+alternatives, such that .parainstructions is empty, and then in a
+subsequent patch remove all the paravirt infrastructure that is unused.
 
 
-I tested it and it looks it fixes the issue. However, I am not sure if
-this is enough since I do not know if when `snd_pcm_period_elapsed()`
-returns, the buffers have been already updated.
+> +#define SAVE_FLAGS	ALTERNATIVE_2 "PARA_IRQ_save_fl;", ALT_CALL_INSTR, \
+> +				      ALT_CALL_ALWAYS, "pushf; pop %rax;", \
+> +				      ALT_NOT(X86_FEATURE_XENPV)
 
-Matias
+I find this more readable when written as:
+
+#define SAVE_FLAGS	ALTERNATIVE_2 "PARA_IRQ_save_fl;",		\
+				      ALT_CALL_INSTR, ALT_CALL_ALWAYS,	\
+				      "pushf; pop %rax;", ALT_NOT(X86_FEATURE_XENPV)
+
+(and perhaps ALT_NOT_XEN is in order, there's a ton of those)
+
+If you base this on top of the nested alternative patches, another
+helper might be:
+
+#define __PV_ALTERNATIVE(old) __ALTERNATIVE(old, ALT_CALL_INSTR, ALT_CALL_ALWAYS)
+
+So that you can then write:
+
+#define SAVE_FLAGS	__ALTERNATIVE(__PV_ALTERNATIVE("PARA_IRQ_save_fl;"),
+				      "pushf; pop %rax;", ALT_NOT_XEN)
+
+But perhaps I'm over-cooking things now..
 
 _______________________________________________
 Virtualization mailing list
