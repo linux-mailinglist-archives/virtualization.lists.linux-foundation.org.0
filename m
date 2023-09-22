@@ -1,114 +1,110 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 58E557AB7BF
-	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:35:10 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 394437AB7E5
+	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:42:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 1DF0241992;
-	Fri, 22 Sep 2023 17:35:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 1DF0241992
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=JYfwPKa5
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5F09B416CE;
+	Fri, 22 Sep 2023 17:42:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5F09B416CE
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=fK3yv+G/
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 9Q8z80VJv7T2; Fri, 22 Sep 2023 17:35:06 +0000 (UTC)
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Wl9cXzzLyxLh; Fri, 22 Sep 2023 17:42:17 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 7389640B56;
-	Fri, 22 Sep 2023 17:35:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7389640B56
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 6AEC3416FC;
+	Fri, 22 Sep 2023 17:42:17 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 6AEC3416FC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id C81A5C008C;
-	Fri, 22 Sep 2023 17:35:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id CB9F1C008C;
+	Fri, 22 Sep 2023 17:42:16 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 5874CC0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 0597EC0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:35:02 +0000 (UTC)
+ Fri, 22 Sep 2023 17:42:16 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 2C0FC83EC3
+ by smtp4.osuosl.org (Postfix) with ESMTP id D3235416FC
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2C0FC83EC3
-Authentication-Results: smtp1.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=JYfwPKa5
+ Fri, 22 Sep 2023 17:42:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org D3235416FC
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id xTKBFZjz3UUT
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id eMXJdxihTqZ6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:26 +0000 (UTC)
-Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
- [IPv6:2607:f8b0:4864:20::42d])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 4D844822D1
+ Fri, 22 Sep 2023 17:42:14 +0000 (UTC)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 64BD7416CE
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 4D844822D1
-Received: by mail-pf1-x42d.google.com with SMTP id
- d2e1a72fcca58-692b2bdfce9so652691b3a.3
+ Fri, 22 Sep 2023 17:42:14 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 64BD7416CE
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1c3d8fb23d9so20926845ad.0
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 10:32:26 -0700 (PDT)
+ Fri, 22 Sep 2023 10:42:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695403945; x=1696008745;
+ d=chromium.org; s=google; t=1695404534; x=1696009334;
  darn=lists.linux-foundation.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aju3+JSf6eGUIv+LcbKwNlrE4eQbXi+VM+zVoGclrt0=;
- b=JYfwPKa5Io20jo4eHAsux1l5TmbKKcsbF6/OkxnDlNDvxPwIzVdFBuBf1pOx+UV/68
- 3gxo7zj/q13VC8z/NykmJOnSx2/OhjC5B/0qwkp282CqkYzQrzwlQMynnsKrxutRqSTF
- Ft7fy1lfe6ZBI9H5Fv3z6xBpQzLEZqbOuCAwA=
+ bh=gDHDeV42Frwj7XYTpJqGl5ND8N8KbUFLGf1moqK0weE=;
+ b=fK3yv+G/v7cm5FYUvnsABXJUoTaspnKjP/Mo9cRxqeYPXDvsZyJg4LDnLEgSqdlxBD
+ R1b4pR3szAEG+dLKf5ncPtdMNkzRDdXPktOocNxh4galecrW+Q9abQ70OPYcBF8M+z04
+ XoaKtSwVmIM9DbI1DTgnqPITUMI4Fc30+h5O4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695403945; x=1696008745;
+ d=1e100.net; s=20230601; t=1695404534; x=1696009334;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aju3+JSf6eGUIv+LcbKwNlrE4eQbXi+VM+zVoGclrt0=;
- b=J54Rwvelso4NYKhK6s69V5Q5ybHGTBAxtOj+++XynLZbxOcPaWNDIbHbuIl6WI8O2W
- igA2Si+XBlyr3wvi6gT3fptIxnxgt7mhsHNkfokO9H9iHf+Sja/0j24SqJQvPOHGntv2
- 1FE0KxGz1uPRiGa3B9/5S9ZvTFRIhi5vk7UVu5Fjhoy9tcLE5P4xCLQSX7MwU1EK/qe0
- Dth1mbYP7VYY8FDejEHamZMDrf351mdjxZMTDh1SxE2Bwbt7dTgSnonKYhCP8Kt4YN8j
- vOJlTbzMs5UICwLEUtuqIVL9Z2HRy4WSA+f3tKU5apzqkWjp/xIYgOtLsVRO0J1bbC9I
- 02FQ==
-X-Gm-Message-State: AOJu0YyZn0RFCwYDaGH3ht8pLGZm+ekuQkiumsPXEsxYUCL0zKe5+7mp
- 1hiKvMNzMc5R+MUAIHieNHfciw==
-X-Google-Smtp-Source: AGHT+IHgT/bhDe7l/fJSBw+bewXNYr1woAQ273HxnwMMW/1b4ePjBTtMzVLx9TJ9ssFNw7g8YFAmqQ==
-X-Received: by 2002:a05:6a20:3d8b:b0:137:74f8:62ee with SMTP id
- s11-20020a056a203d8b00b0013774f862eemr269550pzi.18.1695403945599; 
- Fri, 22 Sep 2023 10:32:25 -0700 (PDT)
+ bh=gDHDeV42Frwj7XYTpJqGl5ND8N8KbUFLGf1moqK0weE=;
+ b=vL/YuYmB8cVAdK11udpJUtScq01e5iYoUJsFu8m51NWJZdx8nuj7gCrI4UCB2jbd5Q
+ vcgoRV/m3TQWB1SJzP/pFgv5hMESSlJyOpnDJEvoey+OzH1k98XUS7VNP8WIvAPTrVtY
+ YzI2RyztttF5tp9QBg4RUH+Udu2ViX2P9Cp7+JatStZPZMBFx6+WgfvmAGQU/+4srJ+n
+ 6WtU+08O71/uZuLp/fbL0GKHOGAFsgnGFrqdYPq6kipV1mfmawaWBlCwtf3vg8He7kN4
+ ftoiCfhsjgmMarZUN8mEpwyhhYJRrI6hWx7H6pmU774tBil1SvePEndPBCRecoLFodA6
+ w7Sw==
+X-Gm-Message-State: AOJu0YxoWX5L4OsqQ3REySoK1lDa9ZqKsbINPPSv/xfa0IiJ7QEdtVRy
+ FZfx7ibTtdLGWZOzEadSbUspUQ==
+X-Google-Smtp-Source: AGHT+IGrotoWlyQLkbK6Whf4OiNGUyhA4I63WbY8Ewuxyx3hCVqXIcaVt+Ft6DWt7mPQfxETuKi2Cg==
+X-Received: by 2002:a17:902:f812:b0:1c5:6f3c:94fe with SMTP id
+ ix18-20020a170902f81200b001c56f3c94femr128683plb.69.1695404533773; 
+ Fri, 22 Sep 2023 10:42:13 -0700 (PDT)
 Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
  [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
- z27-20020a637e1b000000b00563e1ef0491sm3423207pgc.8.2023.09.22.10.32.20
+ e3-20020a170902b78300b001bdd68b3f4bsm3751544pls.295.2023.09.22.10.42.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 10:32:22 -0700 (PDT)
+ Fri, 22 Sep 2023 10:42:13 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: David Airlie <airlied@gmail.com>
-Subject: [PATCH 8/9] drm/vmwgfx: Annotate struct vmw_surface_dirty with
- __counted_by
-Date: Fri, 22 Sep 2023 10:32:13 -0700
-Message-Id: <20230922173216.3823169-8-keescook@chromium.org>
+Subject: [PATCH 9/9] drm/v3d: Annotate struct v3d_perfmon with __counted_by
+Date: Fri, 22 Sep 2023 10:32:14 -0700
+Message-Id: <20230922173216.3823169-9-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230922173110.work.084-kees@kernel.org>
 References: <20230922173110.work.084-kees@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1369; i=keescook@chromium.org; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1250; i=keescook@chromium.org; 
  h=from:subject;
- bh=arqXb+Ta6Sc7/P6cgbiuTW33qm7tl3AbrpWLIpWMOrs=; 
- b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+eMheJSZWlkxEjVkQYSxOb48cD+nN4OVb7V
- LKQ+3uUqo6JAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PngAKCRCJcvTf3G3A
- JrX8D/4u4mGTNY0H31raYIAy39e0MQyr+8F7lCaJtmz2p55bHTGxLREiFkYdiEpuailORE0wwsW
- BdlQDhRjLTf2KU9T7kldf6gcsBqFx5GS03UQDFirRowApSq5fh8IhxpEuGCuARDeUQrxNtmKCN0
- kN+bcH9BoSyxbEJQzpBBCbp5RMSt4XXDDkDi3oSsbZuZRkPmbszcp8iXrqUoFv7S/Vb8X5tGSRw
- nMO+fGglPvpNerLuaODEVbqAcj6XsI5FnEUPAbqIRdOyr/vAf4ZrHXXTeukSN6uOcb1w6XAw9GC
- 4wnO7W4eW8CaLB6Kn2OhET6y8+h69ft05VnFFrnCTVxxJScjLTXrSCCsV544YFnE9eWFcjVivpW
- F3KuWexvi43Nc986ga140ka16uCaP//Thnt3s311iQsr5hvWJH4fkl32zdBPXWCwGX4ceRWSch2
- JEogxta26Yvy5CIJRHdU1z5humCdNzFVvMxbgMwQIRSKyKG1M7mMT/nBOIMfytjgY8S0vaBALVu
- EciVOC1nl86GXTm1b+MB9R8ZKZyOZPrX7vK8PyRCASDUnCN/37sg23Cq5Aqn4UUJ+sZeFPAF+11
- o0r5FyrPrmPW3O3hQUprUGrQsd68XMRpXTFcnKOPsEaG9G23VqHiDSPPILF+sczZ20HKQ+LMyhP
- 63vfZbPCZqHgx8g==
+ bh=SnNIrp1FHi4lB0nFNYirvVw5/7/jvEw6i/lP/RJRA6A=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+e3L4G5PZF7SaBMxHwj62ZCFc4FzMHTqhT9
+ tfDr8MgF6uJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PngAKCRCJcvTf3G3A
+ JnkWEACXtjUq16fS873Hx8yyB8djpvoH6XVS+/OuSPCo2t7GIoIpy1zBkPiH2Ei14JMNlHdMGGy
+ 8yOKrl1rGoQOP3jjY04cxJWy1h5uFFHAxW6VGYIBsbbFRIqAXuVC4UKEN+qYZ97MTJmwc0eHVdX
+ Z441sTRctCLNHoMhSAQn6O3TWU2+/QOV8cz2Ls8cuKVLErRruCIa6OzHgGSnhC5Rq1OWXZyJNiQ
+ 1aWVoVn67WL0VqIe3RW1cZvMnlWNTbgZP1DUee1eLb7MmfT7XMLkW6Jz/8rTfAeSUSsLhxKbIcO
+ ZpXIWrrfcefYP4Dz3BMU6z9OLUAHdpdLEnnvQyDviUPLmbRyS5mdJpKrC9XT7FTANcayQSTonRu
+ M12CaA8ASNf3ak1iu7o4DhTMZeHyb2Wpz2kwj4Nyg6YzYpRNC2gtRkBRdxIJn60r90kd27Yxl7Y
+ Hb+w/DnzIvunJlaIiKWIEE9lJfyZWF2fgi9gcXtI26HlMj/Jn9jmdHnLwh96IqxloMmooRdvULL
+ NK01ICP7mB/XJ36KSBZv5ss3B5LUV9OwyC4T2xpvqKmG/iSr65/EUsg0AYInGQ5v0STKkN7TYFV
+ abYOWvuq0o/pltuNX+Gpbsn9+VvBaxhF2CeSHtOP8ARhgkctRhQJ2+OhqQ35i3SIQBBSkeCOxlL
+ 2y59f7fhlJo6LCg==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp;
  fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
@@ -167,33 +163,33 @@ their accesses bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS
 (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family
 functions).
 
-As found with Coccinelle[1], add __counted_by for struct vmw_surface_dirty.
+As found with Coccinelle[1], add __counted_by for struct v3d_perfmon.
 
 [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
 
-Cc: Zack Rusin <zackr@vmware.com>
-Cc: VMware Graphics Reviewers <linux-graphics-maintainer@vmware.com>
+Cc: Emma Anholt <emma@anholt.net>
+Cc: Melissa Wen <mwen@igalia.com>
 Cc: David Airlie <airlied@gmail.com>
 Cc: Daniel Vetter <daniel@ffwll.ch>
 Cc: dri-devel@lists.freedesktop.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/gpu/drm/vmwgfx/vmwgfx_surface.c | 2 +-
+ drivers/gpu/drm/v3d/v3d_drv.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-index 5db403ee8261..2d1d857f99ae 100644
---- a/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-+++ b/drivers/gpu/drm/vmwgfx/vmwgfx_surface.c
-@@ -77,7 +77,7 @@ struct vmw_surface_offset {
- struct vmw_surface_dirty {
- 	struct vmw_surface_cache cache;
- 	u32 num_subres;
--	SVGA3dBox boxes[];
-+	SVGA3dBox boxes[] __counted_by(num_subres);
+diff --git a/drivers/gpu/drm/v3d/v3d_drv.h b/drivers/gpu/drm/v3d/v3d_drv.h
+index 7f664a4b2a75..106454f28956 100644
+--- a/drivers/gpu/drm/v3d/v3d_drv.h
++++ b/drivers/gpu/drm/v3d/v3d_drv.h
+@@ -59,7 +59,7 @@ struct v3d_perfmon {
+ 	 * values can't be reset, but you can fake a reset by
+ 	 * destroying the perfmon and creating a new one.
+ 	 */
+-	u64 values[];
++	u64 values[] __counted_by(ncounters);
  };
  
- static void vmw_user_surface_free(struct vmw_resource *res);
+ struct v3d_dev {
 -- 
 2.34.1
 
