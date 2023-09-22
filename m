@@ -1,110 +1,114 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 7C7427AB7BB
-	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:35:04 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id D99877AB7B7
+	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:34:40 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 181A741990;
-	Fri, 22 Sep 2023 17:35:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 181A741990
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=JDONcoLZ
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5KytQswGMiRv; Fri, 22 Sep 2023 17:35:01 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 629174197F;
-	Fri, 22 Sep 2023 17:35:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 629174197F
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 70860C008D;
-	Fri, 22 Sep 2023 17:35:00 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 449A8C0032
- for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:34:59 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 9E71A42012
- for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:19 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 9E71A42012
+	by smtp4.osuosl.org (Postfix) with ESMTP id 5F4CE41711;
+	Fri, 22 Sep 2023 17:34:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5F4CE41711
 Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=JDONcoLZ
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=Bg/MWgqA
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id YEhsSv7KmPGI
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id w1BBgEVcIoGa; Fri, 22 Sep 2023 17:34:37 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 3775641708;
+	Fri, 22 Sep 2023 17:34:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3775641708
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6DBF3C008D;
+	Fri, 22 Sep 2023 17:34:36 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6DC9CC0032
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 22 Sep 2023 17:34:34 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 0120A41A18
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 22 Sep 2023 17:32:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0120A41A18
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=Bg/MWgqA
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id gujm--28Lptv
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Sep 2023 17:32:18 +0000 (UTC)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 34AF64175B
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id A4237419E2
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Sep 2023 17:32:18 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 34AF64175B
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-1c44c7dbaf9so22017115ad.1
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org A4237419E2
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1bd9b4f8e0eso20910735ad.1
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Sep 2023 10:32:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695403937; x=1696008737;
+ d=chromium.org; s=google; t=1695403938; x=1696008738;
  darn=lists.linux-foundation.org; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=maP8YXhB08F9LY5OG0jMprTbidCF0YS16nloYI5WUaA=;
- b=JDONcoLZSJZeL+NP8TGidif7KRjhyr+tlEgaxS83Dwk+zVjc+2JG7Gf/x7cunVeiYo
- nwMWiAUfhfrVIezZrZWfhUFTjSrEj0Ep2zsoUbus+/x9f4CMSZdSymv70qIt7pBb8RCm
- Ww6gDE3JhzmTWkuprpcY3pRR+j5M69wBnWNTE=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=i7mFLDUO5Hv4nuyIM6aHVjhOJF2f1Ccv+t7gCPQABb0=;
+ b=Bg/MWgqAqK6oJjL5kGOtCEOtAOsssxE0q7FKqk0Kvw//bnskPY+eKNFt9eJFPXhybg
+ XqSpFeHjvTaB8qsILN3x15OyfGnoov+omGwJZM2iLOUTIsm5H8uoKLbd9vHOel9740pk
+ xxcRnvGEYLdhcaw1xn8xcwVHRhQor3N0pIH/E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695403937; x=1696008737;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=maP8YXhB08F9LY5OG0jMprTbidCF0YS16nloYI5WUaA=;
- b=k5xlfUeRF33U9p0ymg/bazbYHnKB/d7AkTRLwFBM1JP4oqLlOZJdRQEMY0CsB0jxfg
- AqYaFj9SNDvFlbkE4Kndgp32/9dd3nNcD6RrDVHkg3G7uTdKgrzOrIp70Tl8+CfWHu2D
- ue4eTaXIQjBWTB+TmUgdctkdbh1iP8FlHTRIIBMSnoapAGWhDxatbm8te1MvSp+IXspQ
- xJzemBr9UX92QQ7uBzSlm08Hb0Byjiv6S1UVdq1tx4AqTmHO7ITCCYDKnWYCu8CL2f6v
- XHAL7RYr9UtM8BGE3UyHRiB7WisPkO3Io/lxq8op1e0hvV7XwQCN1+sVFu1XOqKH+zLi
- za3A==
-X-Gm-Message-State: AOJu0YzJbsLB3RR62402u6pD6wBHUwoD8vv1bn8eaTOdYvffF0VeA1I6
- 8+paf36S7osXaEsG7RErgHMsIw==
-X-Google-Smtp-Source: AGHT+IEElaiJXwd+cHN0UEyfbPuovVQdbx97tEz5jWVvCwnMzBcyrsLzHF1i0U0dBU7w1PZYxVLT7w==
-X-Received: by 2002:a17:903:1cf:b0:1bd:d911:2a85 with SMTP id
- e15-20020a17090301cf00b001bdd9112a85mr102054plh.12.1695403937531; 
- Fri, 22 Sep 2023 10:32:17 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1695403938; x=1696008738;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=i7mFLDUO5Hv4nuyIM6aHVjhOJF2f1Ccv+t7gCPQABb0=;
+ b=sVQlOc4EuyxIhiSHyzl0ortbVehcdrVxtDNUnnHFbt9Rc8TmpIn8fQdmxw1NOdU5LK
+ iR52BY80+hXe1sEBYPd/CEp2JNvh7IZzqLWAsu7RXjxhpuGtS+ASsFi9L81jO888XBJw
+ I68s0VuoJyyDJfPC3oEV3fJtf+MIKQ7J0i7qiGHHnUAnBlHEqcoEDcZTJq4/OGNSYhzJ
+ qLGkt3PI6yBEorERGFo5v+nIWYNY7lkPtaESo2e83YbZr7Tfpn0A6RMnFfUm6uXgcs8a
+ deZ+RnXapO7H9M7i4ngpO1qcc0S06N3rIf5hEQqevOfJ69XNH28M7ePnd3JYwxrHCSkK
+ Q9kg==
+X-Gm-Message-State: AOJu0Yw30I+sl9kkOJwqHz0cDOPim0coxhLcJxLdo5AkZrrRlLcWJlvP
+ r6Fh2nEuBEt6EN3+7ULy4tsq6g==
+X-Google-Smtp-Source: AGHT+IE6F6K7CDwEaF3fHkMJFZDdCooH5rNl5USI0rssAlTS7mc8rdfuFtX4TpzsK8su4KRyBFD88Q==
+X-Received: by 2002:a17:902:e847:b0:1b6:bced:1dc2 with SMTP id
+ t7-20020a170902e84700b001b6bced1dc2mr224040plg.0.1695403938058; 
+ Fri, 22 Sep 2023 10:32:18 -0700 (PDT)
 Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
  [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
- v10-20020a1709029a0a00b001b53953f306sm3755352plp.178.2023.09.22.10.32.16
+ jf2-20020a170903268200b001b8c6662094sm3752514plb.188.2023.09.22.10.32.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 22 Sep 2023 10:32:17 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: David Airlie <airlied@gmail.com>
-Subject: [PATCH 0/9] drm: Annotate structs with __counted_by
-Date: Fri, 22 Sep 2023 10:32:05 -0700
-Message-Id: <20230922173110.work.084-kees@kernel.org>
+Subject: [PATCH 1/9] drm/amd/pm: Annotate struct
+ smu10_voltage_dependency_table with __counted_by
+Date: Fri, 22 Sep 2023 10:32:06 -0700
+Message-Id: <20230922173216.3823169-1-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20230922173110.work.084-kees@kernel.org>
+References: <20230922173110.work.084-kees@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2029; i=keescook@chromium.org; 
- h=from:subject:message-id;
- bh=YV47XR+Dr1NybdP/JWrsHmoQYKkqVQbnuP88RsqPU7s=; 
- b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+dsj3+Vh5qemjuEPg29sGFlFmzA+yi/v3Rh
- XtvZqOfqaGJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PnQAKCRCJcvTf3G3A
- JiHwEACLzTcgywMl1i+ngflg0YluRoEeJQAxOBHxuE5H6DZMdzVg2q1O7AYcZvuFgGEob07505+
- PzEtpDzTZH/46SXLgI4Sgl0XmudzghRjlp0XTK1UC22xnOBNM9k0OIJif5wStFA/0uiZLRrHII7
- A/+AqzgBiY88gBa4O+x8Vj0+JBJGnDCr0QudEO6XyIcvvmLLgiRCce78vOKBXTXq6Dktknkayr7
- GSRsmx3ZTid9GiUDFYYu7/JLETFdk3ZPoT0iX6O1OocWU9VVd8IE71u38u38X+AdokHQtuEXbCe
- GXNdGJrLV9VqJ6qvypVr3S1EhagL/Z+f7Xz/GMY6nMu+6H9YM0Nbh7PQ8fyD/y9rlT2jcsSJY3r
- eqE3X+ATIdov/4puub/Z5OUm9R4z3dXWHGfnc/vb5l24ZPzLfhFdjlnbl4LYKnZyxK/lH0OGSkH
- 9Wks6MuSdRE+bNJFV0VibfzZlV0+wemFXXSlAxxVQGcZ7CWgQaV2w7wE1Y3AMJLRthOuVUU6Kts
- VfGI7p8XZRScEI6mnWSh8w9zLZOftTtdiCxcVj1gdXRTx2/K3Xfv0UkoHgdzOBqTTEPqGetCOjs
- WS30PIjoUXxpO+DRvCTjySDsnQXksC7AsjBRhvnXyIR8tgFSEAywP6FcLYaX3ltdG79BvgAkkzq
- Bs7QmlF kGRGYttQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1712; i=keescook@chromium.org; 
+ h=from:subject;
+ bh=kCvC5X4RJuHaoweqFnQ9xMUwIDOFINcpTmqcFOUOp9g=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+dzQGoS9m8Q71IG/SluCNIy0Np4uBUNCXIF
+ 2oTBIaso6OJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PnQAKCRCJcvTf3G3A
+ JjY9EACkZXMo7wzxY4THEhXZJmkYixLA2UlloTPXgPy8CvMUYiNLBwVLSqoh/h/5MhgdgB+pVHX
+ gjEPVRbNLsQ1sMYLw31nppSpdtNmrx+qI2Xv8/FCIrTsOHuBoHSi+9nwoY2LW7IEx8xVxDORb01
+ i9WnFgRMl8JlxFCnGrKgYtrWpQVCGXMfpunpsPAAmh2g5Yfkoo8Yodegj0WGJdFnSQzp2irODLS
+ 4fzO25EG9TH3jtCwjZItDt5m0cT8oO2gC1LVyKm/WXFfllivnEC967z9zUAtQtABdtjhtosOPHC
+ 1jSJ119A0nTIyM6aLwtiK32qSZA2Of2ooijB8afmhRUb5Jb+iPKwLmRnvY+TycfX8U8VtGQBkbA
+ PsbT82Qj4Qqirr4cuxGVW/oAnE7XDwMh8IEHMNP1n3XOmEtlx7TVlgUKL774++kkLb5/dO90oUm
+ DGOwxoXK9G23PdRFLUZ82z/F0glCWWkDrqrmKUkcKnY7rdSxGYAapRKXY6YbnmQ3EA3hqkEBXtV
+ Df/r+VTS0EiXZ6VrmE54NZ2HQTkIjn/3uMxtp2UVPqb2tn6zRXFLAI85C3NUtvV2TNniYKdU/mB
+ V12ppntQS4AmfEbCBhZc3biSLzO4h5eErGTnBoeVzf8NDuINYiUgr2+IDcyvEE0XObVZcrukMxP
+ e9S9RTOiaW+wWUw==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp;
  fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
@@ -126,7 +130,7 @@ Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
  intel-gfx@lists.freedesktop.org, Kevin Wang <kevin1.wang@amd.com>,
  Abhinav Kumar <quic_abhinavk@quicinc.com>,
  Jani Nikula <jani.nikula@linux.intel.com>, Melissa Wen <mwen@igalia.com>,
- Alex Deucher <alexander.deucher@amd.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
  Gurchetan Singh <gurchetansingh@chromium.org>,
  Maxime Ripard <mripard@kernel.org>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
  Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
@@ -136,8 +140,8 @@ Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
  Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
  linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
  Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Nirmoy Das <nirmoy.das@intel.com>, Lang Yu <Lang.Yu@amd.com>,
+ Alex Deucher <alexander.deucher@amd.com>, Nirmoy Das <nirmoy.das@intel.com>,
+ Lang Yu <Lang.Yu@amd.com>,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  John Harrison <john.c.harrison@Intel.com>,
  Hawking Zhang <Hawking.Zhang@amd.com>
@@ -152,57 +156,41 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi,
-
-This is a batch of patches touching drm for preparing for the coming
-implementation by GCC and Clang of the __counted_by attribute. Flexible
-array members annotated with __counted_by can have their accesses
-bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS (for array
-indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family functions).
-
-As found with Coccinelle[1], add __counted_by to structs that would
-benefit from the annotation.
-
-Since the element count member must be set before accessing the annotated
-flexible array member, some patches also move the member's initialization
-earlier. (These are noted in the individual patches.)
-
--Kees
-
-[1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
-
-Kees Cook (9):
-  drm/amd/pm: Annotate struct smu10_voltage_dependency_table with
-    __counted_by
-  drm/amdgpu/discovery: Annotate struct ip_hw_instance with __counted_by
-  drm/i915/selftests: Annotate struct perf_series with __counted_by
-  drm/msm/dpu: Annotate struct dpu_hw_intr with __counted_by
-  drm/nouveau/pm: Annotate struct nvkm_perfdom with __counted_by
-  drm/vc4: Annotate struct vc4_perfmon with __counted_by
-  drm/virtio: Annotate struct virtio_gpu_object_array with __counted_by
-  drm/vmwgfx: Annotate struct vmw_surface_dirty with __counted_by
-  drm/v3d: Annotate struct v3d_perfmon with __counted_by
-
- drivers/gpu/drm/amd/amdgpu/amdgpu_discovery.c        | 2 +-
- drivers/gpu/drm/amd/pm/powerplay/hwmgr/smu10_hwmgr.h | 2 +-
- drivers/gpu/drm/i915/selftests/i915_request.c        | 2 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h    | 2 +-
- drivers/gpu/drm/nouveau/nvkm/engine/pm/priv.h        | 2 +-
- drivers/gpu/drm/v3d/v3d_drv.h                        | 2 +-
- drivers/gpu/drm/vc4/vc4_drv.h                        | 2 +-
- drivers/gpu/drm/virtio/virtgpu_drv.h                 | 2 +-
- drivers/gpu/drm/vmwgfx/vmwgfx_surface.c              | 2 +-
- 9 files changed, 9 insertions(+), 9 deletions(-)
-
--- 
-2.34.1
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+UHJlcGFyZSBmb3IgdGhlIGNvbWluZyBpbXBsZW1lbnRhdGlvbiBieSBHQ0MgYW5kIENsYW5nIG9m
+IHRoZSBfX2NvdW50ZWRfYnkKYXR0cmlidXRlLiBGbGV4aWJsZSBhcnJheSBtZW1iZXJzIGFubm90
+YXRlZCB3aXRoIF9fY291bnRlZF9ieSBjYW4gaGF2ZQp0aGVpciBhY2Nlc3NlcyBib3VuZHMtY2hl
+Y2tlZCBhdCBydW4tdGltZSBjaGVja2luZyB2aWEgQ09ORklHX1VCU0FOX0JPVU5EUwooZm9yIGFy
+cmF5IGluZGV4aW5nKSBhbmQgQ09ORklHX0ZPUlRJRllfU09VUkNFIChmb3Igc3RyY3B5L21lbWNw
+eS1mYW1pbHkKZnVuY3Rpb25zKS4KCkFzIGZvdW5kIHdpdGggQ29jY2luZWxsZVsxXSwgYWRkIF9f
+Y291bnRlZF9ieSBmb3Igc3RydWN0IHNtdTEwX3ZvbHRhZ2VfZGVwZW5kZW5jeV90YWJsZS4KClsx
+XSBodHRwczovL2dpdGh1Yi5jb20va2Vlcy9rZXJuZWwtdG9vbHMvYmxvYi90cnVuay9jb2NjaW5l
+bGxlL2V4YW1wbGVzL2NvdW50ZWRfYnkuY29jY2kKCkNjOiBFdmFuIFF1YW4gPGV2YW4ucXVhbkBh
+bWQuY29tPgpDYzogQWxleCBEZXVjaGVyIDxhbGV4YW5kZXIuZGV1Y2hlckBhbWQuY29tPgpDYzog
+IkNocmlzdGlhbiBLw7ZuaWciIDxjaHJpc3RpYW4ua29lbmlnQGFtZC5jb20+CkNjOiAiUGFuLCBY
+aW5odWkiIDxYaW5odWkuUGFuQGFtZC5jb20+CkNjOiBEYXZpZCBBaXJsaWUgPGFpcmxpZWRAZ21h
+aWwuY29tPgpDYzogRGFuaWVsIFZldHRlciA8ZGFuaWVsQGZmd2xsLmNoPgpDYzogWGlhb2ppYW4g
+RHUgPFhpYW9qaWFuLkR1QGFtZC5jb20+CkNjOiBIdWFuZyBSdWkgPHJheS5odWFuZ0BhbWQuY29t
+PgpDYzogS2V2aW4gV2FuZyA8a2V2aW4xLndhbmdAYW1kLmNvbT4KQ2M6IGFtZC1nZnhAbGlzdHMu
+ZnJlZWRlc2t0b3Aub3JnCkNjOiBkcmktZGV2ZWxAbGlzdHMuZnJlZWRlc2t0b3Aub3JnClNpZ25l
+ZC1vZmYtYnk6IEtlZXMgQ29vayA8a2Vlc2Nvb2tAY2hyb21pdW0ub3JnPgotLS0KIGRyaXZlcnMv
+Z3B1L2RybS9hbWQvcG0vcG93ZXJwbGF5L2h3bWdyL3NtdTEwX2h3bWdyLmggfCAyICstCiAxIGZp
+bGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRpZmYgLS1naXQgYS9k
+cml2ZXJzL2dwdS9kcm0vYW1kL3BtL3Bvd2VycGxheS9od21nci9zbXUxMF9od21nci5oIGIvZHJp
+dmVycy9ncHUvZHJtL2FtZC9wbS9wb3dlcnBsYXkvaHdtZ3Ivc211MTBfaHdtZ3IuaAppbmRleCA4
+MDhlMGVjYmUxZjAuLjQyYWRjMmEzZGNiYyAxMDA2NDQKLS0tIGEvZHJpdmVycy9ncHUvZHJtL2Ft
+ZC9wbS9wb3dlcnBsYXkvaHdtZ3Ivc211MTBfaHdtZ3IuaAorKysgYi9kcml2ZXJzL2dwdS9kcm0v
+YW1kL3BtL3Bvd2VycGxheS9od21nci9zbXUxMF9od21nci5oCkBAIC0xOTIsNyArMTkyLDcgQEAg
+c3RydWN0IHNtdTEwX2Nsb2NrX3ZvbHRhZ2VfZGVwZW5kZW5jeV9yZWNvcmQgewogCiBzdHJ1Y3Qg
+c211MTBfdm9sdGFnZV9kZXBlbmRlbmN5X3RhYmxlIHsKIAl1aW50MzJfdCBjb3VudDsKLQlzdHJ1
+Y3Qgc211MTBfY2xvY2tfdm9sdGFnZV9kZXBlbmRlbmN5X3JlY29yZCBlbnRyaWVzW107CisJc3Ry
+dWN0IHNtdTEwX2Nsb2NrX3ZvbHRhZ2VfZGVwZW5kZW5jeV9yZWNvcmQgZW50cmllc1tdIF9fY291
+bnRlZF9ieShjb3VudCk7CiB9OwogCiBzdHJ1Y3Qgc211MTBfY2xvY2tfdm9sdGFnZV9pbmZvcm1h
+dGlvbiB7Ci0tIAoyLjM0LjEKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBsaXN0
+cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5vcmcv
+bWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
