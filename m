@@ -1,114 +1,113 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 4DE6D7AB7BE
-	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:35:08 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id DA6E97AB7BA
+	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 19:35:03 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 5F4E741983;
-	Fri, 22 Sep 2023 17:35:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5F4E741983
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=gUIRf0Lq
+	by smtp3.osuosl.org (Postfix) with ESMTP id 6890661127;
+	Fri, 22 Sep 2023 17:35:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6890661127
+Authentication-Results: smtp3.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=Mch2cL1z
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rsnTRJW-g7ep; Fri, 22 Sep 2023 17:35:04 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id hAYGdSgjBhdF; Fri, 22 Sep 2023 17:35:01 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id CD9F44197F;
-	Fri, 22 Sep 2023 17:35:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org CD9F44197F
+	by smtp3.osuosl.org (Postfix) with ESMTPS id B51D3610F3;
+	Fri, 22 Sep 2023 17:35:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B51D3610F3
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4DBC1C0DDC;
-	Fri, 22 Sep 2023 17:35:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 34B78C008C;
+	Fri, 22 Sep 2023 17:35:00 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 107E8C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 14E84C0071
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:35:02 +0000 (UTC)
+ Fri, 22 Sep 2023 17:34:59 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id C7383423DD
+ by smtp1.osuosl.org (Postfix) with ESMTP id F005283C6D
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 22 Sep 2023 17:32:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org F005283C6D
+Authentication-Results: smtp1.osuosl.org;
+ dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
+ header.a=rsa-sha256 header.s=google header.b=Mch2cL1z
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id YJBPL8R_dlR1
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 22 Sep 2023 17:32:22 +0000 (UTC)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 0C2D080BF8
  for <virtualization@lists.linux-foundation.org>;
  Fri, 22 Sep 2023 17:32:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C7383423DD
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org
- header.a=rsa-sha256 header.s=google header.b=gUIRf0Lq
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id eUPe3bAir5h2
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0C2D080BF8
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1c0ecb9a075so20612685ad.2
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:20 +0000 (UTC)
-Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
- [IPv6:2607:f8b0:4864:20::433])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 975C042262
- for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 17:32:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 975C042262
-Received: by mail-pf1-x433.google.com with SMTP id
- d2e1a72fcca58-692a9bc32bcso919937b3a.2
- for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 10:32:20 -0700 (PDT)
+ Fri, 22 Sep 2023 10:32:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1695403940; x=1696008740;
+ d=chromium.org; s=google; t=1695403941; x=1696008741;
  darn=lists.linux-foundation.org; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q96X+e6e2GphA8WEKNidppfkY54O3UO5SgYggFHsXis=;
- b=gUIRf0LqVMclPgy0eVgOZZT2JUeot+scf+Zr+YdgHuOkCOe4DZ6clufhSgMTcuw2fD
- Nw+gYHQDPVqN8Fw0ICy0rw3q/7kosmEIRmLVTzeajLBxv3jev7zDtAGruT+UnYUdhHmR
- vNB8xeYD2qpf5icoeSolfjlcDshJyGwtUL+hE=
+ bh=wWOiU92ExO1tEuVJ2ItejZKQh8uiQWENZYmfi07W000=;
+ b=Mch2cL1ztoFsfjy6UJcf60DCcVuiYB2zCcFhTPoAvQG6rBitxinrwSBz2L3D8QsnOe
+ ZnGJmJlRy17dznRcmPIdDSQCKkSQ4yeYFrV26H80Ap2o3Ze0xBZ+0ANMULQl0JMGXlxo
+ OqfcgnVO+hgRw1Jx4PnyRy/KbGMll89o6doEQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695403940; x=1696008740;
+ d=1e100.net; s=20230601; t=1695403941; x=1696008741;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q96X+e6e2GphA8WEKNidppfkY54O3UO5SgYggFHsXis=;
- b=U3cJrraaj+EdWirPCzdLbZW9gVikobPtTxcZHIyRiQJZQKmqs+qpo0SDlAxTxb9Mo2
- jDnfk35gG6X92vfTkBq8aGc0sVKfYJEogS4DkXEGPnoT5+Lk+nGuG7Gj0sgDHMKF6/Dq
- /hn5eyN6own5n5NkeCbxUQG8fxozYj/JGEwTxS6n40t/CbLeYe2opsottlKPLaRtK8Au
- cNcyl+i8QetUVEzfVWjs8fFF1DOdzlG8PtS818iiMKpA8BIOSJI8zVlIIt4Bstq+TrmG
- 1AjCjJWsZvcOfVLZEfhb6WHtmKUnslTOUNPVeyH9m1v4p8KiGYXgyfAVOmIk7g8ybJgS
- mo7w==
-X-Gm-Message-State: AOJu0YyoIHakPPiJYNvfPjpAgJFzsgiYaPgBPxERor5OERjPL9PbcSdD
- 7VcW673eAyvXItEIXElIjY+zhg==
-X-Google-Smtp-Source: AGHT+IGXr1Sat+m9Td0MGaNcSAWB3dRra4hS8nmW8pMNrVJgFfBDLEWjUeK3DqEHM0m4IjyMLEfwlA==
-X-Received: by 2002:a05:6a20:9756:b0:14d:9bd1:6361 with SMTP id
- hs22-20020a056a20975600b0014d9bd16361mr200432pzc.11.1695403939966; 
- Fri, 22 Sep 2023 10:32:19 -0700 (PDT)
+ bh=wWOiU92ExO1tEuVJ2ItejZKQh8uiQWENZYmfi07W000=;
+ b=pStzqyNeMMCAyrxgAQGxeSJjYF05E5MoT8AEX9synu5iebXfMLbrof4rhzQHZ3BFCH
+ BdQnXqWya0BnQK8pjpepm5tKsusatKll8f2vW36sM7iRQAg2VkqNdHIsJkwR1s/XeLiP
+ 8qL6SJmHGKxG/4lqZrIQy+7AJtuR16aIdGO4z+fd7PP5Rh7g8OZQiXPTclbA58Cg/ECr
+ hlhV/GPzBN/ckYY4qhEee7rZTsicWJgxTUdeH7W5AbESDqpWxAbZKDIV+5i8lLELf2TS
+ 6CpKJ+uiYGqT0KBn3fvj/hCy3IetdKFRIdPKssv7QsHCoGzqv6cUVaFTn4lt6+/RO26v
+ HAJw==
+X-Gm-Message-State: AOJu0Yx4XSsXIq0SvbUuLJF5bLMzdYmeDl1IjhNVyA5MBgNpWb6mywoS
+ DiS4YGBb0bTJL4StH93CtYtO+A==
+X-Google-Smtp-Source: AGHT+IHozbo6RGGEOfFNm2quF7eyhyB1jYnKoC2EoQE9eESJOC/u5eL19BCqbdONa5XuKmexTM0hYA==
+X-Received: by 2002:a17:902:e5c1:b0:1c3:d07f:39f7 with SMTP id
+ u1-20020a170902e5c100b001c3d07f39f7mr152502plf.62.1695403941371; 
+ Fri, 22 Sep 2023 10:32:21 -0700 (PDT)
 Received: from www.outflux.net (198-0-35-241-static.hfc.comcastbusiness.net.
  [198.0.35.241]) by smtp.gmail.com with ESMTPSA id
- u74-20020a63794d000000b00565e2ad12e5sm3318350pgc.91.2023.09.22.10.32.17
+ h6-20020a170902f54600b001c5f7e06256sm8967plf.152.2023.09.22.10.32.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Fri, 22 Sep 2023 10:32:19 -0700 (PDT)
 From: Kees Cook <keescook@chromium.org>
 To: David Airlie <airlied@gmail.com>
-Subject: [PATCH 3/9] drm/i915/selftests: Annotate struct perf_series with
- __counted_by
-Date: Fri, 22 Sep 2023 10:32:08 -0700
-Message-Id: <20230922173216.3823169-3-keescook@chromium.org>
+Subject: [PATCH 4/9] drm/msm/dpu: Annotate struct dpu_hw_intr with __counted_by
+Date: Fri, 22 Sep 2023 10:32:09 -0700
+Message-Id: <20230922173216.3823169-4-keescook@chromium.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20230922173110.work.084-kees@kernel.org>
 References: <20230922173110.work.084-kees@kernel.org>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1705; i=keescook@chromium.org; 
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1561; i=keescook@chromium.org; 
  h=from:subject;
- bh=SbNV7tt6Hho3aemFjM+WsFyDqpMFvSNtroJg7EF/6LY=; 
- b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+e99M+BFyGmat9Yjgpanw6UekhSMQhhAVfe
- PzecbdVf2uJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PngAKCRCJcvTf3G3A
- JhPmD/oDoTfSn61jeN+hZ6qtbqMVL0umbxgqdZnXY/WBbLuBKV20tcaMAcUgkDgD7IZTf9vLT7N
- QvsK/I3NzdeyXN9KRjg9P26c5TGRnuFhT5ow/Mmpjw2ZfwY/adYsynGhgMsY1zCzocr9Klih2M5
- ONqETCgHopA10PwXUTZcfeylbqK62rRaYAWtkuoi0RcYjB0ba0MiguwtlB6nrG6fwv2owEKE9yZ
- q2M6NVTsjfrdnESUtkpr+ZQMSdTP4DYj6WZCs8PEing/sqS9G43U/93adZtoUdXHfx6OIvtf4kR
- QVJDI5f2FtS/OLpfsJPETvUFATNLl9zt+qYEEI6Xo/nwVAIDi10lef4gFjjLtPRlK+1R5w0hwDl
- vKJUW0WgT4cnNhXnSosMUxrlYOzDiiFUv22K7MRCjwllhPuoEqIvmEu2skXTbfOi++COJZQENGW
- mjr4E/cj8Pue9+KM7OxnSvfWccW9jLZfobZ+Mt3QO0uwzIKFw3tbN6roSBWKQjPzGVWZBhoB7P/
- YBx8LyLPlIme4RIAinnRTvKcRBVmPKq0z5qb+ZrfdbS5SyUax0buA8IufSmAFbFNMVWiehiR7kj
- m3qIzz42RIlit5ahExdpEPXkGeqqxLI86EouMV1p14sfdA6bPnL2FdLAyVYLHh92VJ7BRKvGmB7
- gVsy2dUkMQ94AOw==
+ bh=xDkJWau6qmNIlEczl2n21zh31yaWnnGb4ZbtRzkDM5w=; 
+ b=owEBbQKS/ZANAwAKAYly9N/cbcAmAcsmYgBlDc+eutUHe9SLnXaUpaJySdpFne687ECfxzj9x
+ c9gWcqZLYaJAjMEAAEKAB0WIQSlw/aPIp3WD3I+bhOJcvTf3G3AJgUCZQ3PngAKCRCJcvTf3G3A
+ JjnbD/9OQiE+N5TDN74IQPEo9SgzH0oAvZBxcgjjWQ+yn1SxoSDB5LIrgeGtiyQGvx7BYlpt+Mk
+ MT5bPfHehA9na7K4kzqg9quYRtDWvIN27rP/uwZxsg6q5pZKW93YRamZq1G+itcAKW6RA20Gl5L
+ oXzlXw8xjsnhIYhIM57Pko4wOg7e7p9M1OFiWoZvPmi3jXsn0iVx99yrPXIgM7uK4j+SGaJVO/e
+ Db6B/ovadEGxmj6A5SpZjflvdzGUHbCnD/wxy8R6PCGroCHj+rG2bB4Bzu1Bz+aXu2YhIKPBoAr
+ CfA7YAuzv8p7/Dy4rMzzOl1WMQu/T5Rh5tIJo2Eg44ksRdJK4w4OJBgr+8wPd1dntiatR4Ulsgn
+ ZfRzuaLWVaPb+FcgFpd7LGX/chEK+f5iu5eFguQ8F1ZvI4wUYZ1dYV0HliOOkBFszZQ42WITuND
+ M88ZKBxyD4ccXy0nUhHCMZsLs9jr152hzbB82sQrCyl+qJ7p0yYLaHOjzT6CRZvzNUXk0DrXNdf
+ cM+AdoWXZHFWhEsT+HLVIWg+oEAfqN+3W2w08etC077cqQ4Kj366BbtIh2HIlNX7LYF3uztip5O
+ Cy/EA3VNLkh7U/Gwv7/PDy6HCSs6sJ32cEGquxZ7iLKQf7SPjcZHlBvml7AJOep9Fs2EukYfNDz
+ 1KplYtpYhU7H+uA==
 X-Developer-Key: i=keescook@chromium.org; a=openpgp;
  fpr=A5C3F68F229DD60F723E6E138972F4DFDC6DC026
 Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
@@ -136,12 +135,12 @@ Cc: Tejas Upadhyay <tejas.upadhyay@intel.com>, Emma Anholt <emma@anholt.net>,
  Evan Quan <evan.quan@amd.com>, Sean Paul <sean@poorly.run>,
  Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>,
  Xiaojian Du <Xiaojian.Du@amd.com>, Le Ma <le.ma@amd.com>,
- freedreno@lists.freedesktop.org, Bjorn Andersson <andersson@kernel.org>, "Pan,
+ Lang Yu <Lang.Yu@amd.com>, Bjorn Andersson <andersson@kernel.org>, "Pan,
  Xinhui" <Xinhui.Pan@amd.com>, Nick Desaulniers <ndesaulniers@google.com>,
  linux-kernel@vger.kernel.org, Rob Clark <robdclark@gmail.com>,
  Zack Rusin <zackr@vmware.com>, Daniel Vetter <daniel@ffwll.ch>,
  Alex Deucher <alexander.deucher@amd.com>, Nirmoy Das <nirmoy.das@intel.com>,
- Lang Yu <Lang.Yu@amd.com>,
+ freedreno@lists.freedesktop.org,
  =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
  John Harrison <john.c.harrison@Intel.com>,
  Hawking Zhang <Hawking.Zhang@amd.com>
@@ -167,40 +166,39 @@ their accesses bounds-checked at run-time checking via CONFIG_UBSAN_BOUNDS
 (for array indexing) and CONFIG_FORTIFY_SOURCE (for strcpy/memcpy-family
 functions).
 
-As found with Coccinelle[1], add __counted_by for struct perf_series.
+As found with Coccinelle[1], add __counted_by for struct dpu_hw_intr.
 
 [1] https://github.com/kees/kernel-tools/blob/trunk/coccinelle/examples/counted_by.cocci
 
-Cc: Jani Nikula <jani.nikula@linux.intel.com>
-Cc: Joonas Lahtinen <joonas.lahtinen@linux.intel.com>
-Cc: Rodrigo Vivi <rodrigo.vivi@intel.com>
-Cc: Tvrtko Ursulin <tvrtko.ursulin@linux.intel.com>
+Cc: Rob Clark <robdclark@gmail.com>
+Cc: Abhinav Kumar <quic_abhinavk@quicinc.com>
+Cc: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Cc: Sean Paul <sean@poorly.run>
+Cc: Marijn Suijten <marijn.suijten@somainline.org>
 Cc: David Airlie <airlied@gmail.com>
 Cc: Daniel Vetter <daniel@ffwll.ch>
-Cc: Chris Wilson <chris@chris-wilson.co.uk>
-Cc: John Harrison <john.c.harrison@Intel.com>
-Cc: Andi Shyti <andi.shyti@linux.intel.com>
-Cc: Matthew Brost <matthew.brost@intel.com>
-Cc: intel-gfx@lists.freedesktop.org
+Cc: Bjorn Andersson <andersson@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org
 Cc: dri-devel@lists.freedesktop.org
+Cc: freedreno@lists.freedesktop.org
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- drivers/gpu/drm/i915/selftests/i915_request.c | 2 +-
+ drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/i915/selftests/i915_request.c b/drivers/gpu/drm/i915/selftests/i915_request.c
-index a9b79888c193..acae30a04a94 100644
---- a/drivers/gpu/drm/i915/selftests/i915_request.c
-+++ b/drivers/gpu/drm/i915/selftests/i915_request.c
-@@ -1924,7 +1924,7 @@ struct perf_stats {
- struct perf_series {
- 	struct drm_i915_private *i915;
- 	unsigned int nengines;
--	struct intel_context *ce[];
-+	struct intel_context *ce[] __counted_by(nengines);
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
+index dab761e54863..50cf9523d367 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_hw_interrupts.h
+@@ -61,7 +61,7 @@ struct dpu_hw_intr {
+ 		void (*cb)(void *arg, int irq_idx);
+ 		void *arg;
+ 		atomic_t count;
+-	} irq_tbl[];
++	} irq_tbl[] __counted_by(total_irqs);
  };
  
- static int cmp_u32(const void *A, const void *B)
+ /**
 -- 
 2.34.1
 
