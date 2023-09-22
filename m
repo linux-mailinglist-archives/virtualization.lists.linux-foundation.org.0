@@ -1,119 +1,73 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 75E2D7AAE9F
-	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 11:47:38 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id D420A7AAEE1
+	for <lists.virtualization@lfdr.de>; Fri, 22 Sep 2023 11:56:23 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id DC17D83CA5;
-	Fri, 22 Sep 2023 09:47:36 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org DC17D83CA5
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JVODK6Qf
+	by smtp3.osuosl.org (Postfix) with ESMTP id E679761087;
+	Fri, 22 Sep 2023 09:56:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E679761087
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id fbKckW1r8CSt; Fri, 22 Sep 2023 09:47:36 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id A0D9E83CA1;
-	Fri, 22 Sep 2023 09:47:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org A0D9E83CA1
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Q2BLf0hvOstt; Fri, 22 Sep 2023 09:56:21 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id BEFA560B2D;
+	Fri, 22 Sep 2023 09:56:20 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BEFA560B2D
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 87595C008C;
-	Fri, 22 Sep 2023 09:47:34 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 10F96C008C;
+	Fri, 22 Sep 2023 09:56:20 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 9624FC0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 9E4C5C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 09:47:33 +0000 (UTC)
+ Fri, 22 Sep 2023 09:56:18 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 5D5BD40461
+ by smtp1.osuosl.org (Postfix) with ESMTP id 72F51836F6
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 09:47:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 5D5BD40461
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=JVODK6Qf
+ Fri, 22 Sep 2023 09:56:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 72F51836F6
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id p71QjhmgPWBn
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 4ar66YiXiaSd
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 09:47:32 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 7775540414
+ Fri, 22 Sep 2023 09:56:17 +0000 (UTC)
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7463C830A7
  for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 09:47:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7775540414
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1695376051;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=6954+txMBpmYo04CypSUuQ2OMC1OEIajLVIpD63o/u0=;
- b=JVODK6Qfo8vRRtpri0NiDFVN9IXM3E/Nd4DxIP4WuWhAfhcn7dPCQnO0ITj/yow15KjjLJ
- GzxQxOG/OfpGxfrN+fXIeM/jNV9n5nwWwMMwq3HrE9DEnHpDbLcxdKqVY3k6Bi8f+T0gs3
- H4PsC6rgEAVP0AIuGmBE78V61igvO0Q=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-636-RAc2zYbBN7qrFo7z1nzbwQ-1; Fri, 22 Sep 2023 05:47:29 -0400
-X-MC-Unique: RAc2zYbBN7qrFo7z1nzbwQ-1
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-532e56aa8f1so1360594a12.3
- for <virtualization@lists.linux-foundation.org>;
- Fri, 22 Sep 2023 02:47:29 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695376048; x=1695980848;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6954+txMBpmYo04CypSUuQ2OMC1OEIajLVIpD63o/u0=;
- b=VtrCbWT4kVGhTKK2oAi/ysKtFqjHXYS2YGowKRq/kR6SGXoFWpAqmHevgMJ949bLqs
- G/3bWM8lc6L8mrZ6kwHkBDoODTRr77IVcOag/LjVf7W9CC0uZ5GbCZcERebLjI9nAKnZ
- qdIDN2y26WNOSVfEhg3jEi2GWOWbCdQ8H7dchYeN94F6UDunPCfbZz+bqbv876CZZBDO
- dsslG/cGlkjrpHSnz1VORrMIyC7BaL5s/0sIvkHOtDjguoA2XlJXWowCGCTe4ylYIwvl
- SUlkM6e6A0cgha3jgXoAW76jPkjDi9dplXgqs6qoYhc+pgXUrw+nbfTHJ0IUS5a1PybU
- yGtw==
-X-Gm-Message-State: AOJu0Yw40C0xmJK3A3oBmrjAmLpI7R67Yu/tMFPS3byFH+GD/FQlFjil
- 8osD3gfusi/oU1YBdxVlxXQpqRznrxWGSLxdubdBbfmsle+ixG14wFouzBfduZlSHEehuN9cLbZ
- SWt0ts1C44YIh4f85cs/cISI1zdzl+Kt6e2+SXIY7/A==
-X-Received: by 2002:a05:6402:114f:b0:522:2782:537 with SMTP id
- g15-20020a056402114f00b0052227820537mr6944667edw.15.1695376048474; 
- Fri, 22 Sep 2023 02:47:28 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IETZwiYeXyPDle3xoL9UArqKdbiEUti5oIzUYd4pU34ry486/q6oDn1zR3wW3ZaN159Z0kJKQ==
-X-Received: by 2002:a05:6402:114f:b0:522:2782:537 with SMTP id
- g15-20020a056402114f00b0052227820537mr6944656edw.15.1695376048077; 
- Fri, 22 Sep 2023 02:47:28 -0700 (PDT)
-Received: from redhat.com ([2.52.150.187]) by smtp.gmail.com with ESMTPSA id
- y6-20020aa7d506000000b0052a1a623267sm2029423edq.62.2023.09.22.02.47.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Sep 2023 02:47:27 -0700 (PDT)
-Date: Fri, 22 Sep 2023 05:47:23 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH vfio 11/11] vfio/virtio: Introduce a vfio driver over
- virtio devices
-Message-ID: <20230922011918-mutt-send-email-mst@kernel.org>
-References: <20230921125348-mutt-send-email-mst@kernel.org>
- <20230921170709.GS13733@nvidia.com>
- <20230921131035-mutt-send-email-mst@kernel.org>
- <20230921174450.GT13733@nvidia.com>
- <20230921135426-mutt-send-email-mst@kernel.org>
- <20230921181637.GU13733@nvidia.com>
- <20230921152802-mutt-send-email-mst@kernel.org>
- <20230921195345.GZ13733@nvidia.com>
- <20230921155834-mutt-send-email-mst@kernel.org>
- <20230921224836.GD13733@nvidia.com>
-MIME-Version: 1.0
-In-Reply-To: <20230921224836.GD13733@nvidia.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: kvm@vger.kernel.org, maorg@nvidia.com,
- virtualization@lists.linux-foundation.org, jiri@nvidia.com, leonro@nvidia.com
+ Fri, 22 Sep 2023 09:56:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7463C830A7
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R131e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046049;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0Vsd6I4O_1695376569; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0Vsd6I4O_1695376569) by smtp.aliyun-inc.com;
+ Fri, 22 Sep 2023 17:56:10 +0800
+Message-ID: <1695376243.9393134-1-xuanzhuo@linux.alibaba.com>
+Subject: Re: [PATCH net 5/6] virtio-net: fix the vq coalescing setting for vq
+ resize
+Date: Fri, 22 Sep 2023 17:50:43 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: Jason Wang <jasowang@redhat.com>
+References: <20230919074915.103110-1-hengqi@linux.alibaba.com>
+ <20230919074915.103110-6-hengqi@linux.alibaba.com>
+ <CACGkMEuJjxAmr6WC9ETYAw2K9dp0AUoD6LSZCduQyUQ9y7oM3Q@mail.gmail.com>
+ <c95274cd-d119-402b-baf1-0c500472c9fb@linux.alibaba.com>
+ <CACGkMEv4me_mjRJ8wEd-w_b9tjo370d6idioCTmFwJo-3TH3-A@mail.gmail.com>
+In-Reply-To: <CACGkMEv4me_mjRJ8wEd-w_b9tjo370d6idioCTmFwJo-3TH3-A@mail.gmail.com>
+Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S . Tsirkin" <mst@redhat.com>,
+ netdev@vger.kernel.org, John Fastabend <john.fastabend@gmail.com>,
+ Alexei Starovoitov <ast@kernel.org>, virtualization@lists.linux-foundation.org,
+ Eric Dumazet <edumazet@google.com>, Heng Qi <hengqi@linux.alibaba.com>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ "David S . Miller" <davem@davemloft.net>, Gavin Li <gavinl@nvidia.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -125,90 +79,50 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Sep 21, 2023 at 07:48:36PM -0300, Jason Gunthorpe wrote:
-> On Thu, Sep 21, 2023 at 04:16:25PM -0400, Michael S. Tsirkin wrote:
-> > On Thu, Sep 21, 2023 at 04:53:45PM -0300, Jason Gunthorpe wrote:
-> > > On Thu, Sep 21, 2023 at 03:34:03PM -0400, Michael S. Tsirkin wrote:
-> > > 
-> > > > that's easy/practical.  If instead VDPA gives the same speed with just
-> > > > shadow vq then keeping this hack in vfio seems like less of a problem.
-> > > > Finally if VDPA is faster then maybe you will reconsider using it ;)
-> > > 
-> > > It is not all about the speed.
-> > > 
-> > > VDPA presents another large and complex software stack in the
-> > > hypervisor that can be eliminated by simply using VFIO.
-> > 
-> > If all you want is passing through your card to guest
-> > then yes this can be addressed "by simply using VFIO".
-> 
-> That is pretty much the goal, yes.
-> 
-> > And let me give you a simple example just from this patchset:
-> > it assumes guest uses MSIX and just breaks if it doesn't.
-> 
-> It does? Really? Where did you see that?
-
-This thing apparently:
-
-+               opcode = (pos < VIRTIO_PCI_CONFIG_OFF(true)) ?
-+                       VIRTIO_ADMIN_CMD_LEGACY_COMMON_CFG_READ :
-+                       VIRTIO_ADMIN_CMD_LEGACY_DEV_CFG_READ;
-
-That "true" is supposed to be whether guest enabled MSI or not.
-
-
-> > > VFIO is
-> > > already required for other scenarios.
-> > 
-> > Required ... by some people? Most VMs I run don't use anything
-> > outside of virtio.
-> 
-> Yes, some people. The sorts of people who run large data centers.
->
-> > It seems to deal with emulating virtio which seems more like a vdpa
-> > thing.
-> 
-> Alex described it right, it creates an SW trapped IO bar that relays
-> the doorbell to an admin queue command.
-> 
-> > If you start adding virtio emulation to vfio then won't
-> > you just end up with another vdpa? And if no why not?
-> > And I don't buy the "we already invested in this vfio based solution",
-> > sorry - that's not a reason upstream has to maintain it.
-> 
-> I think you would be well justified to object to actual mediation,
-> like processing queues in VFIO or otherwise complex things.
-
-This mediation is kind of smallish, I agree. Not completely devoid of
-logic though.
-
-> Fortunately there is no need to do that with DPU HW. The legacy IO BAR
-> is a weird quirk that just cannot be done without a software trap, and
-> the OASIS standardization effort was for exactly this kind of
-> simplistic transformation.
-> 
-> I also don't buy the "upstream has to maintain it" line. The team that
-> submitted it will maintain it just fine, thank you.
-
-it will require maintainance effort when virtio changes are made.  For
-example it pokes at the device state - I don't see specific races right
-now but in the past we did e.g. reset the device to recover from errors
-and we might start doing it again.
-
-If more of the logic is under virtio directory where we'll remember
-to keep it in loop, and will be able to reuse it from vdpa
-down the road, I would be more sympathetic.
-
--- 
-MST
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+T24gRnJpLCAyMiBTZXAgMjAyMyAxNTozMjozOSArMDgwMCwgSmFzb24gV2FuZyA8amFzb3dhbmdA
+cmVkaGF0LmNvbT4gd3JvdGU6Cj4gT24gRnJpLCBTZXAgMjIsIDIwMjMgYXQgMTowMuKAr1BNIEhl
+bmcgUWkgPGhlbmdxaUBsaW51eC5hbGliYWJhLmNvbT4gd3JvdGU6Cj4gPgo+ID4KPiA+Cj4gPiDl
+nKggMjAyMy85LzIyIOS4i+WNiDEyOjI5LCBKYXNvbiBXYW5nIOWGmemBkzoKPiA+ID4gT24gVHVl
+LCBTZXAgMTksIDIwMjMgYXQgMzo0OeKAr1BNIEhlbmcgUWkgPGhlbmdxaUBsaW51eC5hbGliYWJh
+LmNvbT4gd3JvdGU6Cj4gPiA+PiBBY2NvcmRpbmcgdG8gdGhlIGRlZmluaXRpb24gb2YgdmlydHF1
+ZXVlIGNvYWxlc2Npbmcgc3BlY1sxXToKPiA+ID4+Cj4gPiA+PiAgICBVcG9uIGRpc2FibGluZyBh
+bmQgcmUtZW5hYmxpbmcgYSB0cmFuc21pdCB2aXJ0cXVldWUsIHRoZSBkZXZpY2UgTVVTVCBzZXQK
+PiA+ID4+ICAgIHRoZSBjb2FsZXNjaW5nIHBhcmFtZXRlcnMgb2YgdGhlIHZpcnRxdWV1ZSB0byB0
+aG9zZSBjb25maWd1cmVkIHRocm91Z2ggdGhlCj4gPiA+PiAgICBWSVJUSU9fTkVUX0NUUkxfTk9U
+Rl9DT0FMX1RYX1NFVCBjb21tYW5kLCBvciwgaWYgdGhlIGRyaXZlciBkaWQgbm90IHNldAo+ID4g
+Pj4gICAgYW55IFRYIGNvYWxlc2NpbmcgcGFyYW1ldGVycywgdG8gMC4KPiA+ID4+Cj4gPiA+PiAg
+ICBVcG9uIGRpc2FibGluZyBhbmQgcmUtZW5hYmxpbmcgYSByZWNlaXZlIHZpcnRxdWV1ZSwgdGhl
+IGRldmljZSBNVVNUIHNldAo+ID4gPj4gICAgdGhlIGNvYWxlc2NpbmcgcGFyYW1ldGVycyBvZiB0
+aGUgdmlydHF1ZXVlIHRvIHRob3NlIGNvbmZpZ3VyZWQgdGhyb3VnaCB0aGUKPiA+ID4+ICAgIFZJ
+UlRJT19ORVRfQ1RSTF9OT1RGX0NPQUxfUlhfU0VUIGNvbW1hbmQsIG9yLCBpZiB0aGUgZHJpdmVy
+IGRpZCBub3Qgc2V0Cj4gPiA+PiAgICBhbnkgUlggY29hbGVzY2luZyBwYXJhbWV0ZXJzLCB0byAw
+Lgo+ID4gPj4KPiA+ID4+IFdlIG5lZWQgdG8gYWRkIHRoaXMgc2V0dGluZyBmb3IgdnEgcmVzaXpl
+IChldGh0b29sIC1HKSB3aGVyZSB2cV9yZXNldCBoYXBwZW5zLgo+ID4gPj4KPiA+ID4+IFsxXSBo
+dHRwczovL2xpc3RzLm9hc2lzLW9wZW4ub3JnL2FyY2hpdmVzL3ZpcnRpby1kZXYvMjAyMzAzL21z
+ZzAwNDE1Lmh0bWwKPiA+ID4+Cj4gPiA+PiBGaXhlczogMzk0YmQ4Nzc2NGI2ICgidmlydGlvX25l
+dDogc3VwcG9ydCBwZXIgcXVldWUgaW50ZXJydXB0IGNvYWxlc2NlIGNvbW1hbmQiKQo+ID4gPiBJ
+J20gbm90IHN1cmUgdGhpcyBpcyBhIHJlYWwgZml4IGFzIHNwZWMgYWxsb3dzIGl0IHRvIGdvIHpl
+cm8/Cj4gPgo+ID4gVGhlIHNwZWMgc2F5cyB0aGF0IGlmIHRoZSB1c2VyIGhhcyBjb25maWd1cmVk
+IGludGVycnVwdCBjb2FsZXNjaW5nCj4gPiBwYXJhbWV0ZXJzLAo+ID4gcGFyYW1ldGVycyBuZWVk
+IHRvIGJlIHJlc3RvcmVkIGFmdGVyIHZxX3Jlc2V0LCBvdGhlcndpc2Ugc2V0IHRvIDAuCj4gPiB2
+aS0+aW50cl9jb2FsX3R4IGFuZCB2aS0+aW50cl9jb2FsX3J4IGFsd2F5cyBzYXZlIHRoZSBuZXdl
+c3QgZ2xvYmFsCj4gPiBwYXJhbWV0ZXJzLAo+ID4gcmVnYXJkbGVzcyBvZiB3aGV0aGVyIHRoZSBj
+b21tYW5kIGlzIHNlbnQgb3Igbm90LiBTbyBJIHRoaW5rIHdlIG5lZWQKPiA+IHRoaXMgcGF0Y2gK
+PiA+IGl0IGNvbXBsaWVzIHdpdGggdGhlIHNwZWNpZmljYXRpb24gcmVxdWlyZW1lbnRzLgo+Cj4g
+SG93IGNhbiB3ZSBtYWtlIHN1cmUgdGhlIG9sZCBjb2FsZXNjaW5nIHBhcmFtZXRlcnMgc3RpbGwg
+bWFrZSBzZW5zZQo+IGZvciB0aGUgbmV3IHJpbmcgc2l6ZT8KCkZvciB0aGUgdXNlciwgSSBkb24n
+dCB0aGluayB3ZSBzaG91bGQgZHJvcCB0aGUgY29uZmlnIGZvciB0aGUgY29hbGVzY2luZy4KTWF5
+YmUgdGhlIGNvbmZpZyBkb2VzIG5vdCBtYWtlIHNlbnNlIGZvciB0aGUgbmV3IHJpbmcgc2l6ZSwg
+YnV0IHdoZW4gdGhlIHVzZXIKanVzdCBjaGFuZ2UgdGhlIHJpbmcgc2l6ZSwgdGhlIGNvbmZpZyBm
+b3IgdGhlIGNvYWxlc2luZyBpcyBtaXNzaW5nLCBJIHRoaW5rCnRoYXQgaXMgbm90IGdvb2QuCgpU
+aGFua3MuCgoKCgo+Cj4gVGhhbmtzCj4KPiA+Cj4gPiBUaGFua3MhCj4gPgo+ID4gPgo+ID4gPiBU
+aGFua3MKPiA+Cj4KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X18KVmlydHVhbGl6YXRpb24gbWFpbGluZyBsaXN0ClZpcnR1YWxpemF0aW9uQGxpc3RzLmxpbnV4
+LWZvdW5kYXRpb24ub3JnCmh0dHBzOi8vbGlzdHMubGludXhmb3VuZGF0aW9uLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL3ZpcnR1YWxpemF0aW9u
