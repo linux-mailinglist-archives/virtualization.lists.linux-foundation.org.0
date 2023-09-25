@@ -1,89 +1,64 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 45AAC7ACEA6
-	for <lists.virtualization@lfdr.de>; Mon, 25 Sep 2023 05:19:27 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 25FE97ACEE3
+	for <lists.virtualization@lfdr.de>; Mon, 25 Sep 2023 05:58:48 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 5CD8260F69;
-	Mon, 25 Sep 2023 03:19:25 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5CD8260F69
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=dCHcd59R
+	by smtp3.osuosl.org (Postfix) with ESMTP id BECF060F7A;
+	Mon, 25 Sep 2023 03:58:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BECF060F7A
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
 	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Y32glXQTFUif; Mon, 25 Sep 2023 03:19:24 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id 014A660F4C;
-	Mon, 25 Sep 2023 03:19:23 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 014A660F4C
+	with ESMTP id K7B4r8aqgXLv; Mon, 25 Sep 2023 03:58:46 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 983CF60F54;
+	Mon, 25 Sep 2023 03:58:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 983CF60F54
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4821AC008C;
-	Mon, 25 Sep 2023 03:19:23 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F1F3FC0032;
+	Mon, 25 Sep 2023 03:58:44 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id B1DF5C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 2CB40C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Sep 2023 03:19:21 +0000 (UTC)
+ Mon, 25 Sep 2023 03:58:43 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 8CC1640589
+ by smtp1.osuosl.org (Postfix) with ESMTP id ECF5A81E14
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Sep 2023 03:19:21 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8CC1640589
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=dCHcd59R
+ Mon, 25 Sep 2023 03:58:42 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org ECF5A81E14
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id n7O3B93ieQG5
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id oLqiUNW4PJtt
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Sep 2023 03:19:20 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [134.134.136.20])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 483EC400B9
+ Mon, 25 Sep 2023 03:58:42 +0000 (UTC)
+Received: from out30-100.freemail.mail.aliyun.com
+ (out30-100.freemail.mail.aliyun.com [115.124.30.100])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D6D1481E3F
  for <virtualization@lists.linux-foundation.org>;
- Mon, 25 Sep 2023 03:19:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 483EC400B9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1695611960; x=1727147960;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=Vy/Xo+gzkc5yJcEHuTcjeuI7dv1QqXm6C+kdkDWEFlo=;
- b=dCHcd59RT8npNbqbp3vEowF6jC8I3aYDbwgLMzqNohvI4fE9JzVumhV8
- v32z4348yobkiHyIRASI46LyhBe+0sUKzwEPnisMecVno+UQOY8eg6Gy5
- j0tBZWyWdoY06Emv3k7TvIqM5U9iXVj1IFmc8RNDg0yOlrbC6i/gtQmkj
- Xu2oq8DYX+Z7cJFVj2bVEeAlxwXnIb2pFQ9Znqxtu4GwGcF629ejaI8NR
- gdv6BxHBD7P1nXy2b3ukAhq4bNxjjao/PmhawA6UrQuakWXHp+GI2raBS
- uGMpbeia1XgO/qCuSQNxEVatUb5uRL2yqjI6LHS8rHVWykTGwdEkcUGoc w==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10843"; a="371476829"
-X-IronPort-AV: E=Sophos;i="6.03,174,1694761200"; d="scan'208";a="371476829"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
- by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 24 Sep 2023 20:19:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10843"; a="748207659"
-X-IronPort-AV: E=Sophos;i="6.03,174,1694761200"; d="scan'208";a="748207659"
-Received: from lkp-server02.sh.intel.com (HELO 32c80313467c) ([10.239.97.151])
- by orsmga002.jf.intel.com with ESMTP; 24 Sep 2023 20:19:15 -0700
-Received: from kbuild by 32c80313467c with local (Exim 4.96)
- (envelope-from <lkp@intel.com>) id 1qkc7t-00018X-01;
- Mon, 25 Sep 2023 03:19:13 +0000
-Date: Mon, 25 Sep 2023 11:18:58 +0800
-From: kernel test robot <lkp@intel.com>
-To: Yishai Hadas <yishaih@nvidia.com>, alex.williamson@redhat.com,
- mst@redhat.com, jasowang@redhat.com, jgg@nvidia.com
-Subject: Re: [PATCH vfio 07/11] virtio-pci: Introduce admin commands
-Message-ID: <202309251120.rWbiAZYM-lkp@intel.com>
-References: <20230921124040.145386-8-yishaih@nvidia.com>
+ Mon, 25 Sep 2023 03:58:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D6D1481E3F
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R861e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=4; SR=0;
+ TI=SMTPD_---0VskConn_1695614310; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0VskConn_1695614310) by smtp.aliyun-inc.com;
+ Mon, 25 Sep 2023 11:58:30 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: virtualization@lists.linux-foundation.org
+Subject: [PATCH 0/2] strictly check the acccess to the common cfg
+Date: Mon, 25 Sep 2023 11:58:28 +0800
+Message-Id: <20230925035830.117710-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20230921124040.145386-8-yishaih@nvidia.com>
-Cc: kvm@vger.kernel.org, maorg@nvidia.com, llvm@lists.linux.dev,
- virtualization@lists.linux-foundation.org, jiri@nvidia.com,
- oe-kbuild-all@lists.linux.dev, leonro@nvidia.com
+X-Git-Hash: fc0cf0f2263f
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ "Michael S. Tsirkin" <mst@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,57 +75,21 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Yishai,
+1. fix the length of the pci_iomap_range() to the common cfg
+2. add check to the reset offset
+3. add build check to the new common cfg items
 
-kernel test robot noticed the following build warnings:
+Xuan Zhuo (2):
+  virtio_pci: fix the common map size and add check for vq-reset
+  virtio_pci: add build offset check for the new common cfg items
 
-[auto build test WARNING on awilliam-vfio/for-linus]
-[also build test WARNING on linus/master v6.6-rc3 next-20230921]
-[cannot apply to awilliam-vfio/next]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+ drivers/virtio/virtio_pci_modern_dev.c | 12 ++++++++++--
+ include/linux/virtio_pci_modern.h      |  1 +
+ 2 files changed, 11 insertions(+), 2 deletions(-)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Yishai-Hadas/virtio-pci-Use-virtio-pci-device-layer-vq-info-instead-of-generic-one/20230922-062611
-base:   https://github.com/awilliam/linux-vfio.git for-linus
-patch link:    https://lore.kernel.org/r/20230921124040.145386-8-yishaih%40nvidia.com
-patch subject: [PATCH vfio 07/11] virtio-pci: Introduce admin commands
-config: x86_64-rhel-8.3-rust (https://download.01.org/0day-ci/archive/20230925/202309251120.rWbiAZYM-lkp@intel.com/config)
-compiler: clang version 16.0.4 (https://github.com/llvm/llvm-project.git ae42196bc493ffe877a7e3dff8be32035dea4d07)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20230925/202309251120.rWbiAZYM-lkp@intel.com/reproduce)
+--
+2.32.0.3.g01195cf9f
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/202309251120.rWbiAZYM-lkp@intel.com/
-
-All warnings (new ones prefixed by >>):
-
-   In file included from drivers/virtio/virtio_pci_modern_dev.c:3:
-   In file included from include/linux/virtio_pci_modern.h:6:
->> include/uapi/linux/virtio_pci.h:270:4: warning: attribute '__packed__' is ignored, place it after "struct" to apply attribute to type declaration [-Wignored-attributes]
-   }; __packed
-      ^
-   include/linux/compiler_attributes.h:304:56: note: expanded from macro '__packed'
-   #define __packed                        __attribute__((__packed__))
-                                                          ^
-   1 warning generated.
-
-
-vim +270 include/uapi/linux/virtio_pci.h
-
-   264	
-   265	struct virtio_admin_cmd_notify_info_data {
-   266		u8 flags; /* 0 = end of list, 1 = owner device, 2 = member device */
-   267		u8 bar; /* BAR of the member or the owner device */
-   268		u8 padding[6];
-   269		__le64 offset; /* Offset within bar. */
- > 270	}; __packed
-   271	
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
