@@ -1,111 +1,109 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0EF987B1222
-	for <lists.virtualization@lfdr.de>; Thu, 28 Sep 2023 07:32:13 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id E32D57B1424
+	for <lists.virtualization@lfdr.de>; Thu, 28 Sep 2023 09:10:13 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id AAD1840AAB;
-	Thu, 28 Sep 2023 05:32:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AAD1840AAB
-Authentication-Results: smtp2.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=RpltgSF7
+	by smtp4.osuosl.org (Postfix) with ESMTP id F3D3641728;
+	Thu, 28 Sep 2023 07:10:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org F3D3641728
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=MomZBuIh
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
-	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 1Clr2he-7X5T; Thu, 28 Sep 2023 05:32:10 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id 7ACAC419E5;
-	Thu, 28 Sep 2023 05:32:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 7ACAC419E5
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id scdspnhLSYiU; Thu, 28 Sep 2023 07:10:10 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id B44FA4172F;
+	Thu, 28 Sep 2023 07:10:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org B44FA4172F
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 02E69C008C;
-	Thu, 28 Sep 2023 05:32:10 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id F05D8C008C;
+	Thu, 28 Sep 2023 07:10:08 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 83363C0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7F621C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Sep 2023 05:32:08 +0000 (UTC)
+ Thu, 28 Sep 2023 07:10:07 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 50A6840AAB
+ by smtp4.osuosl.org (Postfix) with ESMTP id 460FA4172F
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Sep 2023 05:32:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 50A6840AAB
+ Thu, 28 Sep 2023 07:10:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 460FA4172F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id L4ONeSZWblZy
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id AvOX7Ar0P4TE
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Sep 2023 05:32:07 +0000 (UTC)
+ Thu, 28 Sep 2023 07:10:06 +0000 (UTC)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 0F72740629
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 2531A41728
  for <virtualization@lists.linux-foundation.org>;
- Thu, 28 Sep 2023 05:32:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 0F72740629
+ Thu, 28 Sep 2023 07:10:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2531A41728
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1695879125;
+ s=mimecast20190719; t=1695885004;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=JJKTBrFfNa844uYvKAsmJlERJoic2KHS63xODOblJos=;
- b=RpltgSF7qncCwYIIQfDi07FeQQjrU+f8rPh4BX9VdbfwT0ezJuTVSW1qHRLya2lcDec6Mj
- vVqhmi9dp2+BIL161A/n8z7v01I1dth4iC430bb1qr4NV4QrEKTr3h3lEutEsIp4hz7DA1
- PZWzDFcdY7sw5F5JLk2K0c+pG/kryVE=
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=xp82++crOZoaM6X/LxOAj7IKSMWgMbb+sdsAJug1YDc=;
+ b=MomZBuIhyaTJjsEu+643LbxSD25vAfvZkYKlY+CrYACeX2O5LzmCz4MkLFGmZYtP4bhL+J
+ Ei76eWV1WamUf7ugwhbw0u4OPcsMc9Ogma+8htX4tXLWAizgXx71ChTN6Z0zZjBl4LVj1T
+ 6IOFOaYMKPzWAf7UxlKeU1Y7K4dht+M=
+Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
+ [209.85.221.72]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-656-jYUyo_LtO2C1ZCWGE_z2cg-1; Thu, 28 Sep 2023 01:32:03 -0400
-X-MC-Unique: jYUyo_LtO2C1ZCWGE_z2cg-1
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-40524bc3c5cso107940335e9.0
+ us-mta-182-gB0m_3ZMN8i5PXpD53fdxA-1; Thu, 28 Sep 2023 01:26:39 -0400
+X-MC-Unique: gB0m_3ZMN8i5PXpD53fdxA-1
+Received: by mail-wr1-f72.google.com with SMTP id
+ ffacd0b85a97d-322d2acf4abso8386815f8f.0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 27 Sep 2023 22:32:03 -0700 (PDT)
+ Wed, 27 Sep 2023 22:26:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1695879122; x=1696483922;
+ d=1e100.net; s=20230601; t=1695878798; x=1696483598;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JJKTBrFfNa844uYvKAsmJlERJoic2KHS63xODOblJos=;
- b=j/EUSzAyR8k8Pou0gU2I81mexjZJopj5B87M1tjgUyCbVtv0sfeNHTOkv2gpvWuogS
- pq7gASR71BAbI49zdF+LBng9Hc9aiyKMTuwW2Lxs4Ph6hiSIHBfHvnbBrXxES2u/wRlj
- QnXp0xO7dTSRPAYGBpMgTJ+ZBlgvLBMQYxSb5fXdfZMBWTMqY5AsfQt10yc1rq+f5aCs
- GWfv5Sxry0NsExay3oK+BDL5Wr021tikUkp/7Y1GPGtwu4YxSfsAWHVSY/bD8en2hiAV
- LXn5XbQQjEfVjHY05zxlOxH9OA+Bv4dP5nv+YyJPNZgBhAitrgCIXErU7tBlx8q54Mva
- RyOQ==
-X-Gm-Message-State: AOJu0YyneE6slgolsl2/zLwVhNsBmF5ksGPmF3y3jNNEQCBAAMobtorA
- Mum/plkpf4DB1ceKEsvcXhr0LZr7s8PQdfSHRSl/bUVDH8DNXX+zT/DoMylOm0kwEL3R4QjCss3
- nRhBqg1rbquMnJm542yb5lnSRh86BZVKNbhJdgTrT7A==
-X-Received: by 2002:a7b:cb8c:0:b0:405:36d7:4579 with SMTP id
- m12-20020a7bcb8c000000b0040536d74579mr210548wmi.28.1695879122704; 
- Wed, 27 Sep 2023 22:32:02 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHnQQOsX2nd46FlaNt8Gwvvx+JHgJ+INrZJAdTjHC8F4FEZId76DIGMa4aSekPcBkjhv4hyCA==
-X-Received: by 2002:a7b:cb8c:0:b0:405:36d7:4579 with SMTP id
- m12-20020a7bcb8c000000b0040536d74579mr210537wmi.28.1695879122411; 
- Wed, 27 Sep 2023 22:32:02 -0700 (PDT)
+ bh=xp82++crOZoaM6X/LxOAj7IKSMWgMbb+sdsAJug1YDc=;
+ b=XTYJdYUqxGQAJwYfi9101VFR0XYMQZqudt/tbMUpIfBL+EIeeDla/fJOHagfvxdRs+
+ SR9UtG0F69fv/HJea3Sdmix7zgF0H+hXiS3gyr+pdN0QPWzSPNsWx4hC+KqEVmYhMpW1
+ xYUjJfPMHWvv/GJVx89lrGLVXg9OVL1cKzGZiJJghtZNHCa8RvO+JuT3sbjnTbryMjba
+ u+8CrRHx8SJYoJfOtnQGF75zjUNpvRZokfuejRiszmmBZbqOub4hPfHG8/gbRz7WjqAi
+ 9TJ+aZNkjiT7h1BIVsI2DT1RZbTiJvG8ezgfj6jEIyMg9Vhx0+BlAtJHbsIPDPC0bwKk
+ dkJg==
+X-Gm-Message-State: AOJu0Ywmpt+y2JrvQnbYFa46J8gXHIZ8nyJdCdY1Vm8Pd2nTYVaGhYsP
+ OilklHC/lqsdVpHGtjVjFPPCuWNRdSYns2S03PUjLG6YiBXx8oSNlzw4vb9cDfzfO8RfwL8UZiS
+ hbjxYEjMFk7MsGKC2sc5zWw3lW5MkhwrueS49P64ocA==
+X-Received: by 2002:adf:ee48:0:b0:321:4790:bb5e with SMTP id
+ w8-20020adfee48000000b003214790bb5emr219024wro.38.1695878798332; 
+ Wed, 27 Sep 2023 22:26:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFPQurwO0AoypE2TWDU+Q7g/w7BZXGQF9+IGHSN11iCczls2yJnowTHsFwo18o3y5sbXPmLcA==
+X-Received: by 2002:adf:ee48:0:b0:321:4790:bb5e with SMTP id
+ w8-20020adfee48000000b003214790bb5emr219011wro.38.1695878797857; 
+ Wed, 27 Sep 2023 22:26:37 -0700 (PDT)
 Received: from redhat.com ([2.52.19.249]) by smtp.gmail.com with ESMTPSA id
- 19-20020a05600c029300b004060f0a0fdbsm6639359wmk.41.2023.09.27.22.32.00
+ a13-20020adff7cd000000b0031ad5fb5a0fsm3599926wrq.58.2023.09.27.22.26.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Sep 2023 22:32:01 -0700 (PDT)
-Date: Thu, 28 Sep 2023 01:31:58 -0400
+ Wed, 27 Sep 2023 22:26:36 -0700 (PDT)
+Date: Thu, 28 Sep 2023 01:26:33 -0400
 From: "Michael S. Tsirkin" <mst@redhat.com>
 To: Jason Gunthorpe <jgg@nvidia.com>
-Subject: Re: [PATCH vfio 11/11] vfio/virtio: Introduce a vfio driver over
- virtio devices
-Message-ID: <20230928012650-mutt-send-email-mst@kernel.org>
-References: <CACGkMEvMP05yTNGE5dBA2-M0qX-GXFcdGho7_T5NR6kAEq9FNg@mail.gmail.com>
- <20230922121132.GK13733@nvidia.com>
- <CACGkMEsxgYERbyOPU33jTQuPDLUur5jv033CQgK9oJLW+ueG8w@mail.gmail.com>
- <20230925122607.GW13733@nvidia.com>
- <20230925143708-mutt-send-email-mst@kernel.org>
- <20230926004059.GM13733@nvidia.com>
- <20230926014005-mutt-send-email-mst@kernel.org>
- <20230926135057.GO13733@nvidia.com>
- <20230927173221-mutt-send-email-mst@kernel.org>
- <20230927232005.GE339126@nvidia.com>
+Subject: Re: [PATCH vfio 10/11] vfio/virtio: Expose admin commands over
+ virtio device
+Message-ID: <20230928010136-mutt-send-email-mst@kernel.org>
+References: <20230921124040.145386-1-yishaih@nvidia.com>
+ <20230921124040.145386-11-yishaih@nvidia.com>
+ <20230922055336-mutt-send-email-mst@kernel.org>
+ <c3724e2f-7938-abf7-6aea-02bfb3881151@nvidia.com>
+ <20230926072538-mutt-send-email-mst@kernel.org>
+ <20230927131817.GA338226@nvidia.com>
+ <20230927172806-mutt-send-email-mst@kernel.org>
+ <20230927231600.GD339126@nvidia.com>
 MIME-Version: 1.0
-In-Reply-To: <20230927232005.GE339126@nvidia.com>
+In-Reply-To: <20230927231600.GD339126@nvidia.com>
 X-Mimecast-Spam-Score: 0
 X-Mimecast-Originator: redhat.com
 Content-Disposition: inline
@@ -127,51 +125,77 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Sep 27, 2023 at 08:20:05PM -0300, Jason Gunthorpe wrote:
-> On Wed, Sep 27, 2023 at 05:38:55PM -0400, Michael S. Tsirkin wrote:
-> > On Tue, Sep 26, 2023 at 10:50:57AM -0300, Jason Gunthorpe wrote:
-> > > On Tue, Sep 26, 2023 at 01:42:52AM -0400, Michael S. Tsirkin wrote:
-> > > > On Mon, Sep 25, 2023 at 09:40:59PM -0300, Jason Gunthorpe wrote:
-> > > > > On Mon, Sep 25, 2023 at 03:44:11PM -0400, Michael S. Tsirkin wrote:
-> > > > > > > VDPA is very different from this. You might call them both mediation,
-> > > > > > > sure, but then you need another word to describe the additional
-> > > > > > > changes VPDA is doing.
-> > > > > > 
-> > > > > > Sorry about hijacking the thread a little bit, but could you
-> > > > > > call out some of the changes that are the most problematic
-> > > > > > for you?
-> > > > > 
-> > > > > I don't really know these details.
-> > > > 
-> > > > Maybe, you then should desist from saying things like "It entirely fails
-> > > > to achieve the most important thing it needs to do!" You are not making
-> > > > any new friends with saying this about a piece of software without
-> > > > knowing the details.
+On Wed, Sep 27, 2023 at 08:16:00PM -0300, Jason Gunthorpe wrote:
+> On Wed, Sep 27, 2023 at 05:30:04PM -0400, Michael S. Tsirkin wrote:
+> > On Wed, Sep 27, 2023 at 10:18:17AM -0300, Jason Gunthorpe wrote:
+> > > On Tue, Sep 26, 2023 at 07:41:44AM -0400, Michael S. Tsirkin wrote:
 > > > 
-> > > I can't tell you what cloud operators are doing, but I can say with
-> > > confidence that it is not the same as VDPA. As I said, if you want to
-> > > know more details you need to ask a cloud operator.
-> >
-> > So it's not the changes that are problematic, it's that you have
-> > customers who are not using vdpa. The "most important thing" that vdpa
-> > fails at is simply converting your customers from vfio to vdpa.
+> > > > > By the way, this follows what was done already between vfio/mlx5 to
+> > > > > mlx5_core modules where mlx5_core exposes generic APIs to execute a command
+> > > > > and to get the a PF from a given mlx5 VF.
+> > > > 
+> > > > This is up to mlx5 maintainers. In particular they only need to worry
+> > > > that their patches work with specific hardware which they likely have.
+> > > > virtio has to work with multiple vendors - hardware and software -
+> > > > and exposing a low level API that I can't test on my laptop
+> > > > is not at all my ideal.
+> > > 
+> > > mlx5 has a reasonable API from the lower level that allows the vfio
+> > > driver to safely issue commands. The API provides all the safety and
+> > > locking you have been questioning here.
+> > > 
+> > > Then the vfio driver can form the commands directly and in the way it
+> > > needs. This avoids spewing code into the core modules that is only
+> > > used by vfio - which has been a key design consideration for our
+> > > driver layering.
+> > > 
+> > > I suggest following the same design here as it has been well proven.
+> > > Provide a solid API to operate the admin queue and let VFIO use
+> > > it. One of the main purposes of the admin queue is to deliver commands
+> > > on behalf of the VF driver, so this is a logical and reasonable place
+> > > to put an API.
+> > 
+> > Not the way virtio is designed now. I guess mlx5 is designed in
+> > a way that makes it safe.
 > 
-> I said the most important thing was that VFIO presents exactly the
-> same virtio device to the VM as the baremetal. Do you dispute that,
-> technically, VDPA does not actually achieve that?
-
-I dispute that it is the most important. The important thing is to have
-guests work.
-
-> Then why is it so surprising that people don't want a solution that
-> changes the vPCI ABI they worked hard to create in the first place?
+> If you can't reliably issue commmands from the VF at all it doesn't
+> really matter where you put the code. Once that is established up then
+> an admin command execution interface is a nice cut point for
+> modularity.
 > 
-> I'm still baffled why you think everyone should use vdpa..
+> The locking in mlx5 to make this safe is not too complex, if Feng
+> missed some items for virtio then he can work to fix it up.
+
+Above two paragraphs don't make sense to me at all. VF issues
+no commands and there's no locking.
+
+> > > VFIO live migration is expected to come as well once OASIS completes
+> > > its work.
+> > 
+> > Exactly. Is there doubt vdpa will want to support live migration?
+> > Put this code in a library please.
+> 
+> I have a doubt, you both said vdpa already does live migration, so
+> what will it even do with a live migration interface to a PCI
+> function?
+
+This is not the thread to explain how vdpa live migration works now and
+why it needs new interfaces, sorry. Suffice is to say right now on virtio
+tc Parav from nvidia is arguing for vdpa to use admin commands for
+migration.
+
+> It already has to use full mediation to operate a physical virtio
+> function, so it seems like it shouldn't need the migration interface?
+> 
+> Regardless, it is better kernel development hygiene to put the code
+> where it is used and wait for a second user to consolidate it than to
+> guess.
 > 
 > Jason
 
-They shouldn't. If you want proprietary extensions then vfio is the way
-to go, I don't think vdpa will support that.
+Sorry no time right now to argue philosophy. I gave some hints on how to
+make the virtio changes behave in a way that I'm ok with maintaining.
+Hope they help.
 
 -- 
 MST
