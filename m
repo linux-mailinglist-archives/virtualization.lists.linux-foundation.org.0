@@ -1,59 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id DA50D7C4EAB
-	for <lists.virtualization@lfdr.de>; Wed, 11 Oct 2023 11:27:52 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 506317C4EAD
+	for <lists.virtualization@lfdr.de>; Wed, 11 Oct 2023 11:27:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 604A041778;
-	Wed, 11 Oct 2023 09:27:51 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 604A041778
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id ceZiAaS_bdRj; Wed, 11 Oct 2023 09:27:50 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id CF27541E37;
-	Wed, 11 Oct 2023 09:27:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CF27541E37
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0A11DC0032;
-	Wed, 11 Oct 2023 09:27:49 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8CA4EC0032
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Oct 2023 09:27:47 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 59F8E61021
- for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Oct 2023 09:27:47 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 59F8E61021
+	by smtp3.osuosl.org (Postfix) with ESMTP id B510561047;
+	Wed, 11 Oct 2023 09:27:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B510561047
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id pL-YRc86NlWa
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id MshqvKdLG89q; Wed, 11 Oct 2023 09:27:49 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 679E2610C6;
+	Wed, 11 Oct 2023 09:27:49 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 679E2610C6
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A5DE6C0DD8;
+	Wed, 11 Oct 2023 09:27:48 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 63A76C0039
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 11 Oct 2023 09:27:46 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp1.osuosl.org (Postfix) with ESMTP id 3256282423
+ for <virtualization@lists.linux-foundation.org>;
+ Wed, 11 Oct 2023 09:27:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 3256282423
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id IAdkQYPvmQtR
  for <virtualization@lists.linux-foundation.org>;
  Wed, 11 Oct 2023 09:27:45 +0000 (UTC)
-Received: from out30-99.freemail.mail.aliyun.com
- (out30-99.freemail.mail.aliyun.com [115.124.30.99])
- by smtp3.osuosl.org (Postfix) with ESMTPS id C9DAA60B0B
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 19FF7823E2
  for <virtualization@lists.linux-foundation.org>;
  Wed, 11 Oct 2023 09:27:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C9DAA60B0B
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R661e4; CH=green; DM=||false|;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 19FF7823E2
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R181e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VtwGXce_1697016458; 
+ TI=SMTPD_---0VtwJVdl_1697016460; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VtwGXce_1697016458) by smtp.aliyun-inc.com;
- Wed, 11 Oct 2023 17:27:39 +0800
+ fp:SMTPD_---0VtwJVdl_1697016460) by smtp.aliyun-inc.com;
+ Wed, 11 Oct 2023 17:27:40 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost 09/22] virtio_net: separate virtnet_rx_resize()
-Date: Wed, 11 Oct 2023 17:27:15 +0800
-Message-Id: <20231011092728.105904-10-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost 10/22] virtio_net: separate virtnet_tx_resize()
+Date: Wed, 11 Oct 2023 17:27:16 +0800
+Message-Id: <20231011092728.105904-11-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20231011092728.105904-1-xuanzhuo@linux.alibaba.com>
 References: <20231011092728.105904-1-xuanzhuo@linux.alibaba.com>
@@ -82,82 +82,93 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-This patch separates two sub-functions from virtnet_rx_resize():
+This patch separates two sub-functions from virtnet_tx_resize():
 
-* virtnet_rx_pause
-* virtnet_rx_resume
+* virtnet_tx_pause
+* virtnet_tx_resume
 
-Then the subsequent reset rx for xsk can share these two functions.
+Then the subsequent virtnet_tx_reset() can share these two functions.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/main.c       | 29 +++++++++++++++++++++--------
- drivers/net/virtio/virtio_net.h |  3 +++
- 2 files changed, 24 insertions(+), 8 deletions(-)
+ drivers/net/virtio/main.c       | 35 +++++++++++++++++++++++++++------
+ drivers/net/virtio/virtio_net.h |  2 ++
+ 2 files changed, 31 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index f32cfa189972..ffab59da8506 100644
+index ffab59da8506..fb4a9cd98e0c 100644
 --- a/drivers/net/virtio/main.c
 +++ b/drivers/net/virtio/main.c
-@@ -2126,26 +2126,39 @@ static netdev_tx_t start_xmit(struct sk_buff *skb, struct net_device *dev)
- 	return NETDEV_TX_OK;
+@@ -2162,12 +2162,11 @@ static int virtnet_rx_resize(struct virtnet_info *vi,
+ 	return err;
  }
  
--static int virtnet_rx_resize(struct virtnet_info *vi,
--			     struct virtnet_rq *rq, u32 ring_num)
-+void virtnet_rx_pause(struct virtnet_info *vi, struct virtnet_rq *rq)
+-static int virtnet_tx_resize(struct virtnet_info *vi,
+-			     struct virtnet_sq *sq, u32 ring_num)
++void virtnet_tx_pause(struct virtnet_info *vi, struct virtnet_sq *sq)
  {
  	bool running = netif_running(vi->dev);
+ 	struct netdev_queue *txq;
 -	int err, qindex;
--
--	qindex = rq - vi->rq;
++	int qindex;
  
- 	if (running)
- 		napi_disable(&rq->napi);
+ 	qindex = sq - vi->sq;
+ 
+@@ -2188,10 +2187,17 @@ static int virtnet_tx_resize(struct virtnet_info *vi,
+ 	netif_stop_subqueue(vi->dev, qindex);
+ 
+ 	__netif_tx_unlock_bh(txq);
 +}
  
--	err = virtqueue_resize(rq->vq, ring_num, virtnet_rq_free_unused_buf);
+-	err = virtqueue_resize(sq->vq, ring_num, virtnet_sq_free_unused_buf);
 -	if (err)
--		netdev_err(vi->dev, "resize rx fail: rx queue index: %d err: %d\n", qindex, err);
-+void virtnet_rx_resume(struct virtnet_info *vi, struct virtnet_rq *rq)
+-		netdev_err(vi->dev, "resize tx fail: tx queue index: %d err: %d\n", qindex, err);
++void virtnet_tx_resume(struct virtnet_info *vi, struct virtnet_sq *sq)
 +{
 +	bool running = netif_running(vi->dev);
++	struct netdev_queue *txq;
++	int qindex;
++
++	qindex = sq - vi->sq;
++
++	txq = netdev_get_tx_queue(vi->dev, qindex);
  
- 	if (!try_fill_recv(vi, rq, GFP_KERNEL))
- 		schedule_delayed_work(&vi->refill, 0);
+ 	__netif_tx_lock_bh(txq);
+ 	sq->reset = false;
+@@ -2200,6 +2206,23 @@ static int virtnet_tx_resize(struct virtnet_info *vi,
  
  	if (running)
- 		virtnet_napi_enable(rq->vq, &rq->napi);
+ 		virtnet_napi_tx_enable(vi, sq->vq, &sq->napi);
 +}
 +
-+static int virtnet_rx_resize(struct virtnet_info *vi,
-+			     struct virtnet_rq *rq, u32 ring_num)
++static int virtnet_tx_resize(struct virtnet_info *vi, struct virtnet_sq *sq,
++			     u32 ring_num)
 +{
-+	int err, qindex;
++	int qindex, err;
 +
-+	qindex = rq - vi->rq;
++	qindex = sq - vi->sq;
 +
-+	virtnet_rx_pause(vi, rq);
++	virtnet_tx_pause(vi, sq);
 +
-+	err = virtqueue_resize(rq->vq, ring_num, virtnet_rq_free_unused_buf);
++	err = virtqueue_resize(sq->vq, ring_num, virtnet_sq_free_unused_buf);
 +	if (err)
-+		netdev_err(vi->dev, "resize rx fail: rx queue index: %d err: %d\n", qindex, err);
++		netdev_err(vi->dev, "resize tx fail: tx queue index: %d err: %d\n", qindex, err);
 +
-+	virtnet_rx_resume(vi, rq);
++	virtnet_tx_resume(vi, sq);
++
  	return err;
  }
  
 diff --git a/drivers/net/virtio/virtio_net.h b/drivers/net/virtio/virtio_net.h
-index 282504d6639a..70eea23adba6 100644
+index 70eea23adba6..2f930af35364 100644
 --- a/drivers/net/virtio/virtio_net.h
 +++ b/drivers/net/virtio/virtio_net.h
-@@ -253,4 +253,7 @@ static inline bool virtnet_is_xdp_raw_buffer_queue(struct virtnet_info *vi, int
- 	else
- 		return false;
- }
-+
-+void virtnet_rx_pause(struct virtnet_info *vi, struct virtnet_rq *rq);
-+void virtnet_rx_resume(struct virtnet_info *vi, struct virtnet_rq *rq);
+@@ -256,4 +256,6 @@ static inline bool virtnet_is_xdp_raw_buffer_queue(struct virtnet_info *vi, int
+ 
+ void virtnet_rx_pause(struct virtnet_info *vi, struct virtnet_rq *rq);
+ void virtnet_rx_resume(struct virtnet_info *vi, struct virtnet_rq *rq);
++void virtnet_tx_pause(struct virtnet_info *vi, struct virtnet_sq *sq);
++void virtnet_tx_resume(struct virtnet_info *vi, struct virtnet_sq *sq);
  #endif
 -- 
 2.32.0.3.g01195cf9f
