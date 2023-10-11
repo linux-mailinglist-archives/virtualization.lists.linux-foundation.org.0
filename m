@@ -1,59 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5EFFD7C4EB5
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 4567A7C4EB4
 	for <lists.virtualization@lfdr.de>; Wed, 11 Oct 2023 11:27:59 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 78F4541E68;
-	Wed, 11 Oct 2023 09:27:55 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 78F4541E68
+	by smtp3.osuosl.org (Postfix) with ESMTP id DE752611FE;
+	Wed, 11 Oct 2023 09:27:57 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DE752611FE
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id lj9zPKIa6PYF; Wed, 11 Oct 2023 09:27:54 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id C04ED41E45;
-	Wed, 11 Oct 2023 09:27:53 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org C04ED41E45
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id T-n2AuBxcqVA; Wed, 11 Oct 2023 09:27:57 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 9FE5160FEB;
+	Wed, 11 Oct 2023 09:27:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 9FE5160FEB
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 8DF96C0DD3;
-	Wed, 11 Oct 2023 09:27:53 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id C40C5C0032;
+	Wed, 11 Oct 2023 09:27:55 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 411C4C0088
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 10936C0088
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Oct 2023 09:27:52 +0000 (UTC)
+ Wed, 11 Oct 2023 09:27:53 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 168C282477
+ by smtp1.osuosl.org (Postfix) with ESMTP id 6F40682499
  for <virtualization@lists.linux-foundation.org>;
  Wed, 11 Oct 2023 09:27:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 168C282477
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 6F40682499
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
  by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id OtTRTWJaUxgm
+ with ESMTP id UAH-cnJ5k_Pb
  for <virtualization@lists.linux-foundation.org>;
- Wed, 11 Oct 2023 09:27:50 +0000 (UTC)
-Received: from out30-111.freemail.mail.aliyun.com
- (out30-111.freemail.mail.aliyun.com [115.124.30.111])
- by smtp1.osuosl.org (Postfix) with ESMTPS id 2597382444
+ Wed, 11 Oct 2023 09:27:51 +0000 (UTC)
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 5AE1E823EB
  for <virtualization@lists.linux-foundation.org>;
  Wed, 11 Oct 2023 09:27:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2597382444
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R911e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045192;
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 5AE1E823EB
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R671e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VtwMrtQ_1697016464; 
+ TI=SMTPD_---0VtwJVgi_1697016465; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VtwMrtQ_1697016464) by smtp.aliyun-inc.com;
- Wed, 11 Oct 2023 17:27:45 +0800
+ fp:SMTPD_---0VtwJVgi_1697016465) by smtp.aliyun-inc.com;
+ Wed, 11 Oct 2023 17:27:46 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: virtualization@lists.linux-foundation.org
-Subject: [PATCH vhost 14/22] virtio_net: xsk: tx: support tx
-Date: Wed, 11 Oct 2023 17:27:20 +0800
-Message-Id: <20231011092728.105904-15-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH vhost 15/22] virtio_net: xsk: tx: support wakeup
+Date: Wed, 11 Oct 2023 17:27:21 +0800
+Message-Id: <20231011092728.105904-16-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20231011092728.105904-1-xuanzhuo@linux.alibaba.com>
 References: <20231011092728.105904-1-xuanzhuo@linux.alibaba.com>
@@ -82,204 +82,148 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-The driver's tx napi is very important for XSK. It is responsible for
-obtaining data from the XSK queue and sending it out.
+xsk wakeup is used to trigger the logic for xsk xmit by xsk framework or
+user.
 
-At the beginning, we need to trigger tx napi.
+Virtio-Net does not support to actively generate an interruption, so it
+tries to trigger tx NAPI on the tx interrupt cpu.
+
+Consider the effect of cache. When interrupt triggers, it is
+generally fixed on a CPU. It is better to start TX Napi on the same
+CPU.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/main.c       |  12 +++-
- drivers/net/virtio/virtio_net.h |   3 +-
- drivers/net/virtio/xsk.c        | 108 ++++++++++++++++++++++++++++++++
- drivers/net/virtio/xsk.h        |  13 ++++
- 4 files changed, 134 insertions(+), 2 deletions(-)
+ drivers/net/virtio/main.c       |  3 ++
+ drivers/net/virtio/virtio_net.h |  8 +++++
+ drivers/net/virtio/xsk.c        | 57 +++++++++++++++++++++++++++++++++
+ drivers/net/virtio/xsk.h        |  1 +
+ 4 files changed, 69 insertions(+)
 
 diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index 90219fa4a6cd..87bed583b6c4 100644
+index 87bed583b6c4..a0a735c7aa32 100644
 --- a/drivers/net/virtio/main.c
 +++ b/drivers/net/virtio/main.c
-@@ -2060,6 +2060,7 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
- 	struct virtnet_sq *sq = container_of(napi, struct virtnet_sq, napi);
- 	struct virtnet_info *vi = sq->vq->vdev->priv;
- 	unsigned int index = vq2txq(sq->vq);
-+	struct xsk_buff_pool *pool;
- 	struct netdev_queue *txq;
- 	int busy = 0;
- 	int opaque;
-@@ -2074,7 +2075,16 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
+@@ -2072,6 +2072,8 @@ static int virtnet_poll_tx(struct napi_struct *napi, int budget)
+ 		return 0;
+ 	}
+ 
++	sq->xsk.last_cpu = smp_processor_id();
++
  	txq = netdev_get_tx_queue(vi->dev, index);
  	__netif_tx_lock(txq, raw_smp_processor_id());
  	virtqueue_disable_cb(sq->vq);
--	free_old_xmit(sq, true);
-+
-+	rcu_read_lock();
-+	pool = rcu_dereference(sq->xsk.pool);
-+	if (pool) {
-+		busy |= virtnet_xsk_xmit(sq, pool, budget);
-+		rcu_read_unlock();
-+	} else {
-+		rcu_read_unlock();
-+		free_old_xmit(sq, true);
-+	}
- 
- 	if (sq->vq->num_free >= 2 + MAX_SKB_FRAGS)
- 		netif_tx_wake_queue(txq);
+@@ -3776,6 +3778,7 @@ static const struct net_device_ops virtnet_netdev = {
+ 	.ndo_vlan_rx_kill_vid = virtnet_vlan_rx_kill_vid,
+ 	.ndo_bpf		= virtnet_xdp,
+ 	.ndo_xdp_xmit		= virtnet_xdp_xmit,
++	.ndo_xsk_wakeup         = virtnet_xsk_wakeup,
+ 	.ndo_features_check	= passthru_features_check,
+ 	.ndo_get_phys_port_name	= virtnet_get_phys_port_name,
+ 	.ndo_set_features	= virtnet_set_features,
 diff --git a/drivers/net/virtio/virtio_net.h b/drivers/net/virtio/virtio_net.h
-index 0603033b76a0..58eb7a46c489 100644
+index 58eb7a46c489..3e114360cc8a 100644
 --- a/drivers/net/virtio/virtio_net.h
 +++ b/drivers/net/virtio/virtio_net.h
-@@ -9,7 +9,8 @@
- #include <net/xdp_sock_drv.h>
+@@ -101,6 +101,14 @@ struct virtnet_sq {
+ 		struct xsk_buff_pool __rcu *pool;
  
- #define VIRTIO_XDP_FLAG	BIT(0)
--#define VIRTIO_XMIT_DATA_MASK (VIRTIO_XDP_FLAG)
-+#define VIRTIO_XSK_FLAG	BIT(1)
-+#define VIRTIO_XMIT_DATA_MASK (VIRTIO_XDP_FLAG | VIRTIO_XSK_FLAG)
+ 		dma_addr_t hdr_dma_address;
++
++		u32 last_cpu;
++		struct __call_single_data csd;
++
++		/* The lock to prevent the repeat of calling
++		 * smp_call_function_single_async().
++		 */
++		spinlock_t ipi_lock;
+ 	} xsk;
+ };
  
- /* RX packet size EWMA. The average packet size is used to determine the packet
-  * buffer size when refilling RX rings. As the entire RX ring may be refilled
 diff --git a/drivers/net/virtio/xsk.c b/drivers/net/virtio/xsk.c
-index adbaefb77480..a96e23ad577e 100644
+index a96e23ad577e..cce746301758 100644
 --- a/drivers/net/virtio/xsk.c
 +++ b/drivers/net/virtio/xsk.c
-@@ -7,6 +7,114 @@
+@@ -115,6 +115,60 @@ bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
+ 	return sent == budget;
+ }
  
- static struct virtio_net_hdr_mrg_rxbuf xsk_hdr;
- 
-+static void sg_fill_dma(struct scatterlist *sg, dma_addr_t addr, u32 len)
++static void virtnet_remote_napi_schedule(void *info)
 +{
-+	sg->dma_address = addr;
-+	sg->length = len;
++	struct virtnet_sq *sq = info;
++
++	virtnet_vq_napi_schedule(&sq->napi, sq->vq);
 +}
 +
-+static void virtnet_xsk_check_queue(struct virtnet_sq *sq)
++static void virtnet_remote_raise_napi(struct virtnet_sq *sq)
 +{
-+	struct virtnet_info *vi = sq->vq->vdev->priv;
-+	struct net_device *dev = vi->dev;
-+	int qnum = sq - vi->sq;
++	u32 last_cpu, cur_cpu;
 +
-+	/* If it is a raw buffer queue, it does not check whether the status
-+	 * of the queue is stopped when sending. So there is no need to check
-+	 * the situation of the raw buffer queue.
++	last_cpu = sq->xsk.last_cpu;
++	cur_cpu = get_cpu();
++
++	/* On remote cpu, softirq will run automatically when ipi irq exit. On
++	 * local cpu, smp_call_xxx will not trigger ipi interrupt, then softirq
++	 * cannot be triggered automatically. So Call local_bh_enable after to
++	 * trigger softIRQ processing.
 +	 */
-+	if (virtnet_is_xdp_raw_buffer_queue(vi, qnum))
-+		return;
-+
-+	/* If this sq is not the exclusive queue of the current cpu,
-+	 * then it may be called by start_xmit, so check it running out
-+	 * of space.
-+	 *
-+	 * Stop the queue to avoid getting packets that we are
-+	 * then unable to transmit. Then wait the tx interrupt.
-+	 */
-+	if (sq->vq->num_free < 2 + MAX_SKB_FRAGS)
-+		netif_stop_subqueue(dev, qnum);
-+}
-+
-+static int virtnet_xsk_xmit_one(struct virtnet_sq *sq,
-+				struct xsk_buff_pool *pool,
-+				struct xdp_desc *desc)
-+{
-+	struct virtnet_info *vi;
-+	dma_addr_t addr;
-+
-+	vi = sq->vq->vdev->priv;
-+
-+	addr = xsk_buff_raw_get_dma(pool, desc->addr);
-+	xsk_buff_raw_dma_sync_for_device(pool, addr, desc->len);
-+
-+	sg_init_table(sq->sg, 2);
-+
-+	sg_fill_dma(sq->sg, sq->xsk.hdr_dma_address, vi->hdr_len);
-+	sg_fill_dma(sq->sg + 1, addr, desc->len);
-+
-+	return virtqueue_add_outbuf(sq->vq, sq->sg, 2,
-+				    virtnet_xsk_to_ptr(desc->len), GFP_ATOMIC);
-+}
-+
-+static int virtnet_xsk_xmit_batch(struct virtnet_sq *sq,
-+				  struct xsk_buff_pool *pool,
-+				  unsigned int budget,
-+				  struct virtnet_sq_stats *stats)
-+{
-+	struct xdp_desc *descs = pool->tx_descs;
-+	u32 nb_pkts, max_pkts, i;
-+	bool kick = false;
-+	int err;
-+
-+	max_pkts = min_t(u32, budget, sq->vq->num_free / 2);
-+
-+	nb_pkts = xsk_tx_peek_release_desc_batch(pool, max_pkts);
-+	if (!nb_pkts)
-+		return 0;
-+
-+	for (i = 0; i < nb_pkts; i++) {
-+		err = virtnet_xsk_xmit_one(sq, pool, &descs[i]);
-+		if (unlikely(err))
-+			break;
-+
-+		kick = true;
++	if (last_cpu == cur_cpu) {
++		local_bh_disable();
++		virtnet_vq_napi_schedule(&sq->napi, sq->vq);
++		local_bh_enable();
++	} else {
++		if (spin_trylock(&sq->xsk.ipi_lock)) {
++			smp_call_function_single_async(last_cpu, &sq->xsk.csd);
++			spin_unlock(&sq->xsk.ipi_lock);
++		}
 +	}
 +
-+	if (kick && virtqueue_kick_prepare(sq->vq) && virtqueue_notify(sq->vq))
-+		++stats->kicks;
-+
-+	stats->xdp_tx += i;
-+
-+	return i;
++	put_cpu();
 +}
 +
-+bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
-+		      int budget)
++int virtnet_xsk_wakeup(struct net_device *dev, u32 qid, u32 flag)
 +{
-+	struct virtnet_sq_stats stats = {};
-+	int sent;
++	struct virtnet_info *vi = netdev_priv(dev);
++	struct virtnet_sq *sq;
 +
-+	virtnet_free_old_xmit(sq, true, &stats);
++	if (!netif_running(dev))
++		return -ENETDOWN;
 +
-+	sent = virtnet_xsk_xmit_batch(sq, pool, budget, &stats);
++	if (qid >= vi->curr_queue_pairs)
++		return -EINVAL;
 +
-+	virtnet_xsk_check_queue(sq);
++	sq = &vi->sq[qid];
 +
-+	u64_stats_update_begin(&sq->stats.syncp);
-+	sq->stats.packets += stats.packets;
-+	sq->stats.bytes += stats.bytes;
-+	sq->stats.kicks += stats.kicks;
-+	sq->stats.xdp_tx += stats.xdp_tx;
-+	u64_stats_update_end(&sq->stats.syncp);
++	if (napi_if_scheduled_mark_missed(&sq->napi))
++		return 0;
 +
-+	if (xsk_uses_need_wakeup(pool))
-+		xsk_set_tx_need_wakeup(pool);
++	virtnet_remote_raise_napi(sq);
 +
-+	return sent == budget;
++	return 0;
 +}
 +
  static int virtnet_rq_bind_xsk_pool(struct virtnet_info *vi, struct virtnet_rq *rq,
  				    struct xsk_buff_pool *pool)
  {
+@@ -244,6 +298,9 @@ static int virtnet_xsk_pool_enable(struct net_device *dev,
+ 
+ 	sq->xsk.hdr_dma_address = hdr_dma;
+ 
++	INIT_CSD(&sq->xsk.csd, virtnet_remote_napi_schedule, sq);
++	spin_lock_init(&sq->xsk.ipi_lock);
++
+ 	return 0;
+ 
+ err_sq:
 diff --git a/drivers/net/virtio/xsk.h b/drivers/net/virtio/xsk.h
-index 1918285c310c..73ca8cd5308b 100644
+index 73ca8cd5308b..1bd19dcda649 100644
 --- a/drivers/net/virtio/xsk.h
 +++ b/drivers/net/virtio/xsk.h
-@@ -3,5 +3,18 @@
- #ifndef __XSK_H__
- #define __XSK_H__
- 
-+#define VIRTIO_XSK_FLAG_OFFSET	4
-+
-+static inline void *virtnet_xsk_to_ptr(u32 len)
-+{
-+	unsigned long p;
-+
-+	p = len << VIRTIO_XSK_FLAG_OFFSET;
-+
-+	return (void *)(p | VIRTIO_XSK_FLAG);
-+}
-+
+@@ -17,4 +17,5 @@ static inline void *virtnet_xsk_to_ptr(u32 len)
  int virtnet_xsk_pool_setup(struct net_device *dev, struct netdev_bpf *xdp);
-+bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
-+		      int budget);
+ bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
+ 		      int budget);
++int virtnet_xsk_wakeup(struct net_device *dev, u32 qid, u32 flag);
  #endif
 -- 
 2.32.0.3.g01195cf9f
