@@ -2,71 +2,100 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 672BD7CA773
-	for <lists.virtualization@lfdr.de>; Mon, 16 Oct 2023 14:01:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTPS id 899DC7CA826
+	for <lists.virtualization@lfdr.de>; Mon, 16 Oct 2023 14:39:44 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 062C882156;
-	Mon, 16 Oct 2023 12:01:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 062C882156
+	by smtp1.osuosl.org (Postfix) with ESMTP id 229FD81FF4;
+	Mon, 16 Oct 2023 12:39:43 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 229FD81FF4
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=YzXXQasX
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id q5KfIDK1zity; Mon, 16 Oct 2023 12:01:05 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id E5546821BF;
-	Mon, 16 Oct 2023 12:01:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E5546821BF
+	with ESMTP id iRoV9vuM_-cP; Mon, 16 Oct 2023 12:39:42 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp1.osuosl.org (Postfix) with ESMTPS id C2C9881FEB;
+	Mon, 16 Oct 2023 12:39:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C2C9881FEB
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 4A7B2C0DE1;
-	Mon, 16 Oct 2023 12:01:03 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id E3CC9C008C;
+	Mon, 16 Oct 2023 12:39:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 328CCC0071
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 5419AC0032
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:01:02 +0000 (UTC)
+ Mon, 16 Oct 2023 12:39:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp1.osuosl.org (Postfix) with ESMTP id 093F38217B
+ by smtp3.osuosl.org (Postfix) with ESMTP id 2FED3611CF
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:01:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 093F38217B
+ Mon, 16 Oct 2023 12:39:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2FED3611CF
+Authentication-Results: smtp3.osuosl.org;
+ dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com
+ header.a=rsa-sha256 header.s=susede1 header.b=YzXXQasX
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
- by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nwurNW28EAHC
+Received: from smtp3.osuosl.org ([127.0.0.1])
+ by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id aVID9_ibc4J2
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:01:01 +0000 (UTC)
-Received: from out30-131.freemail.mail.aliyun.com
- (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp1.osuosl.org (Postfix) with ESMTPS id D2BA1812F8
+ Mon, 16 Oct 2023 12:39:38 +0000 (UTC)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.220.29])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id BE961611C8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:01:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D2BA1812F8
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
- MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VuHc.Ri_1697457655; 
-Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VuHc.Ri_1697457655) by smtp.aliyun-inc.com;
- Mon, 16 Oct 2023 20:00:56 +0800
-From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
-To: netdev@vger.kernel.org
-Subject: [PATCH net-next v1 19/19] virtio_net: xdp_features add
- NETDEV_XDP_ACT_XSK_ZEROCOPY
-Date: Mon, 16 Oct 2023 20:00:33 +0800
-Message-Id: <20231016120033.26933-20-xuanzhuo@linux.alibaba.com>
-X-Mailer: git-send-email 2.32.0.3.g01195cf9f
-In-Reply-To: <20231016120033.26933-1-xuanzhuo@linux.alibaba.com>
-References: <20231016120033.26933-1-xuanzhuo@linux.alibaba.com>
+ Mon, 16 Oct 2023 12:39:37 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BE961611C8
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 9FCDA1F37F;
+ Mon, 16 Oct 2023 12:39:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+ t=1697459975; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+ mime-version:mime-version: content-transfer-encoding:content-transfer-encoding;
+ bh=TrHQ0ELhL7iWzaPXNchammsXfJ1VpjNzr9oy6lA6Krc=;
+ b=YzXXQasXeVaCM4rll76gJ/cRr0gpD70UiJXXyCcxaVKzwc9L4AXNbvBrVwebwOapoEgD/V
+ kOvKYPLYE1drK+oaVua+5/yuA0E3o3tYXm/4BGroCwxVwrDXMIXbHrdl6BnhOJf4Kxonoe
+ BdcUCorSEAPEtsoXqKVKuI5f9GWDvX4=
+Received: from imap2.suse-dmz.suse.de (imap2.suse-dmz.suse.de [192.168.254.74])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature ECDSA (P-521) server-digest SHA512)
+ (No client certificate requested)
+ by imap2.suse-dmz.suse.de (Postfix) with ESMTPS id 27145133B7;
+ Mon, 16 Oct 2023 12:39:35 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([192.168.254.65])
+ by imap2.suse-dmz.suse.de with ESMTPSA id 8jQZCAcvLWX4IgAAMHmgww
+ (envelope-from <jgross@suse.com>); Mon, 16 Oct 2023 12:39:35 +0000
+To: linux-kernel@vger.kernel.org, x86@kernel.org,
+ virtualization@lists.linux-foundation.org, kvm@vger.kernel.org
+Subject: [PATCH v2 0/4] x86/paravirt: Get rid of paravirt patching
+Date: Mon, 16 Oct 2023 14:39:29 +0200
+Message-Id: <20231016123933.17284-1-jgross@suse.com>
+X-Mailer: git-send-email 2.35.3
 MIME-Version: 1.0
-X-Git-Hash: 9790cc452aab
-Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
- Jesper Dangaard Brouer <hawk@kernel.org>,
- Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
- John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
- virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
- Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
- Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
+Authentication-Results: smtp-out2.suse.de;
+	none
+X-Spamd-Result: default: False [4.05 / 50.00]; ARC_NA(0.00)[];
+ RCVD_VIA_SMTP_AUTH(0.00)[]; FROM_HAS_DN(0.00)[];
+ TO_DN_SOME(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ R_MISSING_CHARSET(2.50)[]; MIME_GOOD(-0.10)[text/plain];
+ BROKEN_CONTENT_TYPE(1.50)[];
+ DKIM_SIGNED(0.00)[suse.com:s=susede1];
+ NEURAL_HAM_SHORT(-0.85)[-0.851]; NEURAL_SPAM_LONG(3.00)[1.000];
+ RCPT_COUNT_TWELVE(0.00)[18]; MID_CONTAINS_FROM(1.00)[];
+ FROM_EQ_ENVFROM(0.00)[]; MIME_TRACE(0.00)[0:+];
+ RCVD_COUNT_TWO(0.00)[2]; RCVD_TLS_ALL(0.00)[];
+ BAYES_HAM(-3.00)[100.00%]
+Cc: Juergen Gross <jgross@suse.com>, Wanpeng Li <wanpengli@tencent.com>,
+ Alexey Makhalov <amakhalov@vmware.com>, xen-devel@lists.xenproject.org,
+ VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Ajay Kaher <akaher@vmware.com>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ "H. Peter Anvin" <hpa@zytor.com>, Paolo Bonzini <pbonzini@redhat.com>,
+ Thomas Gleixner <tglx@linutronix.de>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -78,35 +107,62 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Juergen Gross via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Juergen Gross <jgross@suse.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Now, we supported AF_XDP(xsk). Add NETDEV_XDP_ACT_XSK_ZEROCOPY to
-xdp_features.
+This is a small series getting rid of paravirt patching by switching
+completely to alternative patching for the same functionality.
 
-Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
----
- drivers/net/virtio/main.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+The basic idea is to add the capability to switch from indirect to
+direct calls via a special alternative patching option.
 
-diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index ac62d0955c13..c66d8509330e 100644
---- a/drivers/net/virtio/main.c
-+++ b/drivers/net/virtio/main.c
-@@ -4329,7 +4329,8 @@ static int virtnet_probe(struct virtio_device *vdev)
- 		dev->hw_features |= NETIF_F_GRO_HW;
- 
- 	dev->vlan_features = dev->features;
--	dev->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT;
-+	dev->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT |
-+		NETDEV_XDP_ACT_XSK_ZEROCOPY;
- 
- 	/* MTU range: 68 - 65535 */
- 	dev->min_mtu = MIN_MTU;
+This removes _some_ of the paravirt macro maze, but most of it needs
+to stay due to the need of hiding the call instructions from the
+compiler in order to avoid needless register save/restore.
+
+What is going away is the nasty stacking of alternative and paravirt
+patching and (of course) the special .parainstructions linker section.
+
+I have tested the series on bare metal and as Xen PV domain to still
+work.
+
+Note that objtool might need some changes to cope with the new
+indirect call patching mechanism. Additionally some paravirt handling
+can probably be removed from it.
+
+Changes in V2:
+- split last patch into 2
+- rebase of patch 2 as suggested by Peter
+- addressed Peter's comments for patch 3
+
+Juergen Gross (4):
+  x86/paravirt: move some functions and defines to alternative
+  x86/alternative: add indirect call patching
+  x86/paravirt: switch mixed paravirt/alternative calls to alternative_2
+  x86/paravirt: remove no longer needed paravirt patching code
+
+ arch/x86/include/asm/alternative.h        |  26 ++++-
+ arch/x86/include/asm/paravirt.h           |  79 +++++----------
+ arch/x86/include/asm/paravirt_types.h     |  73 +++-----------
+ arch/x86/include/asm/qspinlock_paravirt.h |   4 +-
+ arch/x86/include/asm/text-patching.h      |  12 ---
+ arch/x86/kernel/alternative.c             | 116 ++++++++++------------
+ arch/x86/kernel/callthunks.c              |  17 ++--
+ arch/x86/kernel/kvm.c                     |   4 +-
+ arch/x86/kernel/module.c                  |  20 +---
+ arch/x86/kernel/paravirt.c                |  54 ++--------
+ arch/x86/kernel/vmlinux.lds.S             |  13 ---
+ arch/x86/tools/relocs.c                   |   2 +-
+ arch/x86/xen/irq.c                        |   2 +-
+ 13 files changed, 137 insertions(+), 285 deletions(-)
+
 -- 
-2.32.0.3.g01195cf9f
+2.35.3
 
 _______________________________________________
 Virtualization mailing list
