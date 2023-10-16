@@ -1,59 +1,60 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D0767CA770
-	for <lists.virtualization@lfdr.de>; Mon, 16 Oct 2023 14:01:08 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 672BD7CA773
+	for <lists.virtualization@lfdr.de>; Mon, 16 Oct 2023 14:01:09 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id AB14041BE9;
-	Mon, 16 Oct 2023 12:01:06 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org AB14041BE9
+	by smtp1.osuosl.org (Postfix) with ESMTP id 062C882156;
+	Mon, 16 Oct 2023 12:01:08 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 062C882156
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 3sV_HIpAT-x7; Mon, 16 Oct 2023 12:01:05 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id q5KfIDK1zity; Mon, 16 Oct 2023 12:01:05 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 91D4741BDB;
+	by smtp1.osuosl.org (Postfix) with ESMTPS id E5546821BF;
 	Mon, 16 Oct 2023 12:01:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 91D4741BDB
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org E5546821BF
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0D033C0DDF;
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 4A7B2C0DE1;
 	Mon, 16 Oct 2023 12:01:03 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 24BB1C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 328CCC0071
  for <virtualization@lists.linux-foundation.org>;
  Mon, 16 Oct 2023 12:01:02 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 3B1224159F
+ by smtp1.osuosl.org (Postfix) with ESMTP id 093F38217B
+ for <virtualization@lists.linux-foundation.org>;
+ Mon, 16 Oct 2023 12:01:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 093F38217B
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id nwurNW28EAHC
  for <virtualization@lists.linux-foundation.org>;
  Mon, 16 Oct 2023 12:01:01 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3B1224159F
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1IBbbgeT7Rbf
- for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:01:00 +0000 (UTC)
 Received: from out30-131.freemail.mail.aliyun.com
  (out30-131.freemail.mail.aliyun.com [115.124.30.131])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 73E1041554
+ by smtp1.osuosl.org (Postfix) with ESMTPS id D2BA1812F8
  for <virtualization@lists.linux-foundation.org>;
- Mon, 16 Oct 2023 12:00:59 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 73E1041554
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R151e4; CH=green; DM=||false|;
+ Mon, 16 Oct 2023 12:01:00 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D2BA1812F8
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
  DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045176;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VuHskDZ_1697457654; 
+ TI=SMTPD_---0VuHc.Ri_1697457655; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VuHskDZ_1697457654) by smtp.aliyun-inc.com;
- Mon, 16 Oct 2023 20:00:55 +0800
+ fp:SMTPD_---0VuHc.Ri_1697457655) by smtp.aliyun-inc.com;
+ Mon, 16 Oct 2023 20:00:56 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v1 18/19] virtio_net: update tx timeout record
-Date: Mon, 16 Oct 2023 20:00:32 +0800
-Message-Id: <20231016120033.26933-19-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v1 19/19] virtio_net: xdp_features add
+ NETDEV_XDP_ACT_XSK_ZEROCOPY
+Date: Mon, 16 Oct 2023 20:00:33 +0800
+Message-Id: <20231016120033.26933-20-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20231016120033.26933-1-xuanzhuo@linux.alibaba.com>
 References: <20231016120033.26933-1-xuanzhuo@linux.alibaba.com>
@@ -82,35 +83,28 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-If send queue sent some packets, we update the tx timeout
-record to prevent the tx timeout.
+Now, we supported AF_XDP(xsk). Add NETDEV_XDP_ACT_XSK_ZEROCOPY to
+xdp_features.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 ---
- drivers/net/virtio/xsk.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ drivers/net/virtio/main.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/net/virtio/xsk.c b/drivers/net/virtio/xsk.c
-index f1c64414fac9..5d3de505c56c 100644
---- a/drivers/net/virtio/xsk.c
-+++ b/drivers/net/virtio/xsk.c
-@@ -274,6 +274,16 @@ bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
+diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
+index ac62d0955c13..c66d8509330e 100644
+--- a/drivers/net/virtio/main.c
++++ b/drivers/net/virtio/main.c
+@@ -4329,7 +4329,8 @@ static int virtnet_probe(struct virtio_device *vdev)
+ 		dev->hw_features |= NETIF_F_GRO_HW;
  
- 	virtnet_xsk_check_queue(sq);
+ 	dev->vlan_features = dev->features;
+-	dev->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT;
++	dev->xdp_features = NETDEV_XDP_ACT_BASIC | NETDEV_XDP_ACT_REDIRECT |
++		NETDEV_XDP_ACT_XSK_ZEROCOPY;
  
-+	if (stats.packets) {
-+		struct netdev_queue *txq;
-+		struct virtnet_info *vi;
-+
-+		vi = sq->vq->vdev->priv;
-+
-+		txq = netdev_get_tx_queue(vi->dev, sq - vi->sq);
-+		txq_trans_cond_update(txq);
-+	}
-+
- 	u64_stats_update_begin(&sq->stats.syncp);
- 	sq->stats.packets += stats.packets;
- 	sq->stats.bytes += stats.bytes;
+ 	/* MTU range: 68 - 65535 */
+ 	dev->min_mtu = MIN_MTU;
 -- 
 2.32.0.3.g01195cf9f
 
