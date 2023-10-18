@@ -1,110 +1,65 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 1D6537CD5E2
-	for <lists.virtualization@lfdr.de>; Wed, 18 Oct 2023 10:02:10 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+	by mail.lfdr.de (Postfix) with ESMTPS id BC1A47CD61B
+	for <lists.virtualization@lfdr.de>; Wed, 18 Oct 2023 10:11:21 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 544B841F2F;
-	Wed, 18 Oct 2023 08:02:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 544B841F2F
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Osg+yyzm
+	by smtp2.osuosl.org (Postfix) with ESMTP id DE98440547;
+	Wed, 18 Oct 2023 08:11:19 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org DE98440547
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id IBMq2IHLvHUa; Wed, 18 Oct 2023 08:02:07 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id tSYOBGk1SZWJ; Wed, 18 Oct 2023 08:11:18 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 33D6D41F23;
-	Wed, 18 Oct 2023 08:02:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 33D6D41F23
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 6FC6A404D3;
+	Wed, 18 Oct 2023 08:11:18 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 6FC6A404D3
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id F1FB6C008C;
-	Wed, 18 Oct 2023 08:02:05 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 97C7EC008C;
+	Wed, 18 Oct 2023 08:11:17 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8679AC0071
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 02CA9C0032
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Oct 2023 08:02:04 +0000 (UTC)
+ Wed, 18 Oct 2023 08:11:17 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 42BDE61317
+ by smtp1.osuosl.org (Postfix) with ESMTP id C4ADD822B1
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Oct 2023 07:59:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 42BDE61317
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=Osg+yyzm
+ Wed, 18 Oct 2023 08:11:16 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org C4ADD822B1
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id f1ZyL3ZlbTDP
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id vNDy0K3xzUwS
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Oct 2023 07:59:13 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id A27A36144B
+ Wed, 18 Oct 2023 08:11:16 +0000 (UTC)
+Received: from out30-112.freemail.mail.aliyun.com
+ (out30-112.freemail.mail.aliyun.com [115.124.30.112])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 7DAB3822B0
  for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Oct 2023 07:59:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org A27A36144B
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1697615952;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=j/RuX7PEGAER5VWHTAgQGINHue7Pa6HBkkP2SfD/G/8=;
- b=Osg+yyzmBUa3I/gTiU+X703MH+bG84ZDlVRVD0Hn+DVfht12YeHJtje4uPlXoiMXt4bPws
- S6G7QqEhLOZQyC73gKKCCL7u47HNbVRCpRLEdnzeKk4/WWW2d3Lw4evNaDQMTID+UNsjG7
- wA0C6jNHOeXgSzYHdcoZvM+KQbMtWgk=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-450-QhWLdGLqPkOvbsImBPcKMQ-1; Wed, 18 Oct 2023 03:59:11 -0400
-X-MC-Unique: QhWLdGLqPkOvbsImBPcKMQ-1
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-521da4c99d4so4995828a12.1
- for <virtualization@lists.linux-foundation.org>;
- Wed, 18 Oct 2023 00:59:10 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1697615950; x=1698220750;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=j/RuX7PEGAER5VWHTAgQGINHue7Pa6HBkkP2SfD/G/8=;
- b=uotCiSEQI76pdB/b71I5x1gG4dSpzM1qpOP45zLEWW7KIAGbzjR3cu7Nc0/TlRRJcl
- X8qX0DA1gnDkfiryFpiBIm8W+teLk0qlbZeIzQta73etHBZfv88uQjRolE/eje680m9u
- m/W5szViLIA8UjKYKwxFeZKcQoaMgOACDkskD2J592UO31qUe3koRh6CRWrZdpR02gV/
- AbuJsSjpAQ0UzpUChuy7hAV9KsLmToY3oszckiz4fqJZXhdRZYnz5AHNQh2HXns0TdC/
- St23I8r6FsRO/hJKPcAHnk1CR7tvomDr1du5N/KuITqoII3nWVb+8Pgq0nJZIZxHepW4
- 0L9g==
-X-Gm-Message-State: AOJu0YyuVQ4hG1bLKHORRz6fuFiKs86f0Acm6pggRlkYf/D1Njd8TtK3
- QmFV8UWYCJ2M4zotH53FtuHDFtM6MfQKEZhV7QygYMi7u6OsUBfIMpFXt+hBBVdcDHapPZXiXIu
- tlhnABGUl491Df5CZ3G0hV11k5aqoJxrQqb8h7+zs4w==
-X-Received: by 2002:a05:6402:518d:b0:52d:212d:78ee with SMTP id
- q13-20020a056402518d00b0052d212d78eemr3681712edd.25.1697615949943; 
- Wed, 18 Oct 2023 00:59:09 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEWa90MygBLIZW4CwgrTQDTiga7S0LJQ7NKa0AEFJwcbizxjymr8txFWZM0Exp5aJmHG3yWYA==
-X-Received: by 2002:a05:6402:518d:b0:52d:212d:78ee with SMTP id
- q13-20020a056402518d00b0052d212d78eemr3681693edd.25.1697615949647; 
- Wed, 18 Oct 2023 00:59:09 -0700 (PDT)
-Received: from redhat.com ([193.142.201.34]) by smtp.gmail.com with ESMTPSA id
- j30-20020a508a9e000000b0053f11e3c019sm2389384edj.90.2023.10.18.00.59.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 18 Oct 2023 00:59:09 -0700 (PDT)
-Date: Wed, 18 Oct 2023 03:59:03 -0400
-From: "Michael S. Tsirkin" <mst@redhat.com>
-To: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+ Wed, 18 Oct 2023 08:11:15 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 7DAB3822B0
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R211e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046059;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=13; SR=0;
+ TI=SMTPD_---0VuQ2gLM_1697616669; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0VuQ2gLM_1697616669) by smtp.aliyun-inc.com;
+ Wed, 18 Oct 2023 16:11:10 +0800
+Message-ID: <1697616022.630633-2-xuanzhuo@linux.alibaba.com>
 Subject: Re: [PATCH vhost 02/22] virtio_ring: introduce
  virtqueue_dma_[un]map_page_attrs
-Message-ID: <20231018035751-mutt-send-email-mst@kernel.org>
+Date: Wed, 18 Oct 2023 16:00:22 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>
 References: <20231011092728.105904-1-xuanzhuo@linux.alibaba.com>
  <20231011092728.105904-3-xuanzhuo@linux.alibaba.com>
  <1697615580.6880193-1-xuanzhuo@linux.alibaba.com>
-MIME-Version: 1.0
-In-Reply-To: <1697615580.6880193-1-xuanzhuo@linux.alibaba.com>
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
+ <20231018035751-mutt-send-email-mst@kernel.org>
+In-Reply-To: <20231018035751-mutt-send-email-mst@kernel.org>
 Cc: Jesper Dangaard Brouer <hawk@kernel.org>,
  Daniel Borkmann <daniel@iogearbox.net>, netdev@vger.kernel.org,
  John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
@@ -122,25 +77,41 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Wed, Oct 18, 2023 at 03:53:00PM +0800, Xuan Zhuo wrote:
-> Hi Michael,
-> 
-> Do you think it's appropriate to push the first two patches of this patch set to
-> linux 6.6?
-> 
-> Thanks.
+On Wed, 18 Oct 2023 03:59:03 -0400, "Michael S. Tsirkin" <mst@redhat.com> wrote:
+> On Wed, Oct 18, 2023 at 03:53:00PM +0800, Xuan Zhuo wrote:
+> > Hi Michael,
+> >
+> > Do you think it's appropriate to push the first two patches of this patch set to
+> > linux 6.6?
+> >
+> > Thanks.
+>
+> I generally treat patchsets as a whole unless someone asks me to do
+> otherwise. Why do you want this?
 
-I generally treat patchsets as a whole unless someone asks me to do
-otherwise. Why do you want this?
+As we discussed, the patch set supporting AF_XDP will be push to net-next.
+But the two patchs belong to the vhost.
 
--- 
-MST
+So, if you think that is appropriate, I will post a new patchset(include the two
+patchs without virtio-net + AF_XDP) to vhost. I wish that can be merged to 6.6.
 
+Then when the 6.7 net-next merge window is open, I can push this patch set to 6.7.
+The v1 version use the virtqueue_dma_map_single_attrs to replace
+virtqueue_dma_map_page_attrs. But I think we should use virtqueue_dma_map_page_attrs.
+
+Thanks.
+
+
+>
+> --
+> MST
+>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
