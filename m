@@ -1,97 +1,180 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id 9A2EC7CED47
-	for <lists.virtualization@lfdr.de>; Thu, 19 Oct 2023 03:13:13 +0200 (CEST)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 5E62E7CED7C
+	for <lists.virtualization@lfdr.de>; Thu, 19 Oct 2023 03:20:47 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 944FD6F7B4;
-	Thu, 19 Oct 2023 01:13:10 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 944FD6F7B4
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=k/BctANu
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2A627831FB;
+	Thu, 19 Oct 2023 01:20:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2A627831FB
+Authentication-Results: smtp1.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=opensynergy.com header.i=@opensynergy.com header.a=rsa-sha256 header.s=TM-DKIM-20210503141657 header.b=MN5l5Fvc
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tSBV4Z3UoPmh; Thu, 19 Oct 2023 01:13:09 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id KnJ5_yrflKv5; Thu, 19 Oct 2023 01:20:42 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id D18CE6F7C4;
-	Thu, 19 Oct 2023 01:13:08 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D18CE6F7C4
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 8D153831F5;
+	Thu, 19 Oct 2023 01:20:41 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 8D153831F5
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id B0C6FC0032;
-	Thu, 19 Oct 2023 01:13:07 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id A3D53C008C;
+	Thu, 19 Oct 2023 01:20:40 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id A263FC0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id DDC66C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:13:05 +0000 (UTC)
+ Thu, 19 Oct 2023 01:20:38 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id CCD374226B
+ by smtp1.osuosl.org (Postfix) with ESMTP id B7E37831F2
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:13:04 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org CCD374226B
-Authentication-Results: smtp4.osuosl.org;
- dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=k/BctANu
+ Thu, 19 Oct 2023 01:20:38 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B7E37831F2
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
- by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id UEEFubRHFyiV
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id DYQzr5TR2LH4
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:13:02 +0000 (UTC)
-Received: from mx0a-00069f02.pphosted.com (mx0a-00069f02.pphosted.com
- [205.220.165.32])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 20EC442263
+ Thu, 19 Oct 2023 01:20:37 +0000 (UTC)
+Received: from repost01.tmes.trendmicro.eu (repost01.tmes.trendmicro.eu
+ [18.185.115.121])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 896B8831A7
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:13:02 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 20EC442263
-Received: from pps.filterd (m0246617.ppops.net [127.0.0.1])
- by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39IIp6GW018161; Thu, 19 Oct 2023 01:13:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
- h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2023-03-30;
- bh=yqGkLUNZfGgGhNcNWbKwVR1zZTQ3CSwQRCGc1fCis9U=;
- b=k/BctANu2LWe8QIrsW808QpPS/5fAaWTY9cgPOYJnwKMA+Zn2fGb1VE9LRcGM8KTHBoG
- Qc/pcbi41iN3th0PY0sHMMFRA/r6EG3FrJbJ4suphem9FUHpiYXOX7b5CDqsemSz8PcV
- PWq7bjbNV2wr9wWDEKlzNCmUfDc8VVc/nS9BRMDqB/5C4KLzB047vN2C+qIr2WPQ/1fQ
- pQGGIouQu3zX/YMwPAmFNtDsiHpIVFbpizPhVgMlB+BLor9RfLtvPumT/L1pcCHA6Ucd
- JpWjce27vlMv9sZh7ZNm+Uc167KQ7brzahNtWWHhwg0aVUP3dqA0cZKRf4NCzhl8gnbs bg== 
-Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
- (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tqkhu95n2-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 19 Oct 2023 01:13:01 +0000
-Received: from pps.filterd
- (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 39J0UpS4015251; Thu, 19 Oct 2023 01:13:00 GMT
-Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
- [10.153.73.24])
- by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 3trg1h8w2d-6; Thu, 19 Oct 2023 01:12:59 +0000
-From: Si-Wei Liu <si-wei.liu@oracle.com>
-To: jasowang@redhat.com, mst@redhat.com, eperezma@redhat.com,
- sgarzare@redhat.com, dtatulea@nvidia.com
-Subject: [PATCH v3 5/5] vdpa_sim: implement .reset_map support
-Date: Wed, 18 Oct 2023 18:10:18 -0700
-Message-Id: <1697677818-11371-6-git-send-email-si-wei.liu@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1697677818-11371-1-git-send-email-si-wei.liu@oracle.com>
-References: <1697677818-11371-1-git-send-email-si-wei.liu@oracle.com>
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2023-10-19_01,2023-10-18_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
- phishscore=0 suspectscore=0
- mlxscore=0 mlxlogscore=999 bulkscore=0 malwarescore=0 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2309180000
- definitions=main-2310190007
-X-Proofpoint-GUID: NRw35eenR4tsRlNH_2X-m5JRqgZD1vFm
-X-Proofpoint-ORIG-GUID: NRw35eenR4tsRlNH_2X-m5JRqgZD1vFm
-Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
+ Thu, 19 Oct 2023 01:20:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 896B8831A7
+Received: from 104.47.11.168_.trendmicro.com (unknown [172.21.187.19])
+ by repost01.tmes.trendmicro.eu (Postfix) with SMTP id 67B18100004D1;
+ Thu, 19 Oct 2023 01:20:33 +0000 (UTC)
+X-TM-MAIL-RECEIVED-TIME: 1697678432.833000
+X-TM-MAIL-UUID: a3c353fc-f5b3-48a8-993e-84e00a2af078
+Received: from DEU01-FR2-obe.outbound.protection.outlook.com (unknown
+ [104.47.11.168])
+ by repre01.tmes.trendmicro.eu (Trend Micro Email Security) with ESMTPS id
+ CB9441000179E; Thu, 19 Oct 2023 01:20:32 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Jksg8j7VbiqvZIjj4n4ACGIfundryLRjgzBqRPpti1Wkt3sIKQHglXV+YFsR0AGIUPEwTfwCd8ya4vTFhv2bowU4SKNlgK0D1/xKuQMiBDZDs/uqCz8ReeJgYyyGMupskawbQrNs9El8C6NpJDp2fo0SgdlmWr32vpaSzXvITISUAHG2xtkq5Alq9ou0cVj3nZK4yIsrhWNPA0CXhzynPCJij1fCSW9ZWxMdiZwHJ61w40pnehnuJH8vT/ucc/JAX0euvouMlQcquykJWLvIyQIJj1jIWO/t5tBRQQZBdqq7At6+lEF62uGNmRFl5kVv8LNGlND3cC/5YYG8f79haA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gf8ADurVAExiXRWNH/YmTmGeaZLtnBY5G7jHDYYYD+Q=;
+ b=O+hXcympS1iT46EPVmCRjC4CAQeO1w229h35D/GeywbBs/z+1wsXrnUxbF24nFBxeOOahhnOruwDqnvPPvpg5xwjnKKXB6E0ihxzMYPyDu0db56+cEZmoV0GsCI+mkKfJBeawMwffOscNvYFSY9leiDfx742+JJOEx3mgNIuq7ojVZNGHYn5hXeX7ZNVR/ic+SOZ+GSqlmBdiuK7xLiJxHut4Dqm2lGFa0rtJ223rzIGFDKasP2S4oEfPn6cELp4uyam3boV96OJ0ggw3L5CQipdNr9VinC2X7lFXt//1oYlQ2SFAvNZI+QB5EyqgZiZbznpNYvSPKE//cG5gAeI/w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=opensynergy.com; dmarc=pass action=none
+ header.from=opensynergy.com; dkim=pass header.d=opensynergy.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=opensynergy.com;
+Message-ID: <e50c5a67-d2b7-4ef1-8aaa-309437fa8cb5@opensynergy.com>
+Date: Thu, 19 Oct 2023 10:20:19 +0900
+Subject: Re: [PATCH v2] ALSA: virtio: use copy and fill_silence callbacks
+To: Takashi Iwai <tiwai@suse.de>,
+ Matias Ezequiel Vara Larsen <mvaralar@redhat.com>
+References: <ZS+392ZzVIoEyv8n@fedora> <871qdrn6sg.wl-tiwai@suse.de>
+Content-Language: en-US
+In-Reply-To: <871qdrn6sg.wl-tiwai@suse.de>
+X-ClientProxiedBy: BE1P281CA0369.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:b10:82::15) To FR0P281MB2382.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:22::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: FR0P281MB2382:EE_|FR2P281MB2330:EE_
+X-MS-Office365-Filtering-Correlation-Id: bebe1dec-514c-4d47-2fb5-08dbd0419649
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HRM31kLYZxcAm4U1IGgr0hC8POktOxVaybqVaap2Agkf+wRTEv18CXPYrRWaNdzv0jmZhnB2e8amwkGs6UFe3SU12jviod4Gwv2KUBzO9bCULr5qToGZ1fa9iB/uazfmr0IKaD78VDSme+VV4ZTzqYfn4fL2e1Xdi4JlKFRmb7oXY4WilnAGt4eGOG2MyzmjXFAodO7spZU/mVR7vd5gL6KJk/4qBfsU/V2YHuBbK72vLQv2J5TTN4CMz54QkoE0xrTRme+pO+yEXsLG7fiMnGmix59h9zTPI8yR7g47k7XcDhJqcAiK2prHlcrxL6TUK78If1uK51BejOwxnvsMV5V48GZTOTdeWhOsbPbXIYIRCHspU7Q0Dvw6/L1Whm3lz6RkCdCxtgmNG9+rp0WSDXKLjwBR5BqagbKAmNKWmD+rbzndU/rt1b9mu3VJwoyuADJ6oJzQ5gtmhbO6GAJu+XUdm9g494OBwmqLTFDsb3gP1mP2uMjuRRO1kDbCqCf4kHyEZ35PdZK8GonfHl0Li7EYPxG/xuKbuSDd11LG6Fafgm/XY0JIVzvLKZEfJqj7egt2QoJtLgOeiIBT8P/1y3A8+QhllWQtHzGKgfNtq6V775Zm/egvZOfYQa81SUum9GSZch6IrU69WmSQ5kEUHA==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:FR0P281MB2382.DEUP281.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(346002)(396003)(366004)(39840400004)(376002)(136003)(230922051799003)(451199024)(186009)(1800799009)(64100799003)(66946007)(66556008)(110136005)(66476007)(316002)(8936002)(42186006)(478600001)(966005)(8676002)(5660300002)(2906002)(36756003)(41300700001)(44832011)(4326008)(31696002)(86362001)(7416002)(38100700002)(2616005)(53546011)(83380400001)(26005)(31686004);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?bU5MdGFGOUxPcUhuaFU5TWF5U1h1MldVaElMRFp5d2k2RW52NXZtRFN1Z0lP?=
+ =?utf-8?B?QTlZSnozcTgwQ09GOHBXYTRoaXh5Myt3VnNyYTE5aXBFUk5QOEVnTHQ3SHB0?=
+ =?utf-8?B?RFpFcHVKdWdoOEJzUjB3ZFYzRkt2NkpTakNxNjdnMFlUQjFNRFBIUk5oOHlT?=
+ =?utf-8?B?M1NwYmJHS0lDMmorY0gxQzA0Z2ZoQzgxMWdJdlRRNXh1eXBnK2FNMmJkOE9a?=
+ =?utf-8?B?dmp0Rk5ZUjQrT0lXWnVNQkVnc0ZGNk1jSWRGUFo5NVhnZWY4Z1AraWloQkRi?=
+ =?utf-8?B?Rk55djdEVGMwNHluZ2FaL3dYK3dQemRhSVozYU9ITEVyQlJ3MmtUczNYTU04?=
+ =?utf-8?B?ZjAyL05KTDJiOFdBbWJ0WGxpczBtdGR3ZlRkcmVlNERtcVAyUEUwaTJOc1hD?=
+ =?utf-8?B?VXkzM2QraDlBaWxvOWVoRFo2QmNkTG1XOWhJRkJFM2RXZ3VhMk0ybmdEaGRj?=
+ =?utf-8?B?WHh3UnRncDRnVFZJdUEza3AzSlJJbmVRRlpmWUxReFJqd3N5RmJQVXduMWdH?=
+ =?utf-8?B?QSswZ1JDUUdSRFByKzRjblFOTFBLQUN3eVJaVkU5dFcrQXR3WVR5V1FkUCtF?=
+ =?utf-8?B?ZkFQQTNjb1RjNVZCMkg3SnA4dkNReXh0ZC9BUGQ5bXo4STFqSWViN1JDSTZI?=
+ =?utf-8?B?Z1RNdEczMGkxd1dDSDNraHRwWmExUjJVU2EycnpNN3JRN0xZaFFsZ2hJY3dG?=
+ =?utf-8?B?a1pzQSs0WnNLOHp6cUplMzhmWm9iQmcxSnE0Rlk5ODZ1YTB3bzhYSWtqRlFI?=
+ =?utf-8?B?bXZhTDEzMGFJMTI4a3FOYUhSUmwxTng1NnZaaWx5NWo5VE9WNUt6S0tkbEt5?=
+ =?utf-8?B?c0FRc0lFaks5eHZXMnZXVWUwVkdSTHVZN056akprbVJLLzB3QVdNOGFzd2RO?=
+ =?utf-8?B?dVg5cTlvRjg0alJ1Zm1FeE9ROCtMNlUwYm9DT0FqSURLcVVoak5FVzJlZDVk?=
+ =?utf-8?B?UjM5Z3ZISGVqdkdSVEsrT25mdCtDQWtNcisraXF2dmZ3SDZVRnFyRk9rVGRp?=
+ =?utf-8?B?MHNOQU5LUFdaenZFdENubmNlSHVvaS9mVkRhTEV4TE9CNzZsWWxJZHRmNStm?=
+ =?utf-8?B?TEhia3g5VUgwcDNXZE95L21MbXcyMHVNM2lxR3R3UVl6VDg4cDVDRW5PTmpE?=
+ =?utf-8?B?WlhYY3dUOGIxNHFURXF6ZTNHK2t0REN3VytvUmtqQ21tRmJVTDNhL2RXMGtT?=
+ =?utf-8?B?Q1dNNUhpOTB1TGtwTkNZYy82VmhFSXQxQk9WdkJkN3RuVFYybWdoVUd4NERS?=
+ =?utf-8?B?eGxPWHlsdzdHN3pQL3pFUC90NjVqY21ZdnBxWXZiejZJK1ZTNWJCMnlLZHNp?=
+ =?utf-8?B?R3BzY0pDd3E0aDhNaVpucDNUL2kvWkxjREFDeWE1blZGd0NzcWpOQ0xQKzNH?=
+ =?utf-8?B?emVtKzBYUStwelNaR0RKNHV1ZHY5amFBNnM0MVAvY1VOY1VTTytrYjdURU1H?=
+ =?utf-8?B?SkpMdklacGNxU1gyV1I4SG9UNEV4V0VyUE9FMnZoeXB6TGNhNlVSeEtoMDlW?=
+ =?utf-8?B?N3Z4RTRsUDRuN0hRUEgwZ0hkRmQwWEo4Tm9aL050djR2NGpDSGNGWTdqZ0Qz?=
+ =?utf-8?B?M2dRWUN1VWFhOEdid0MyekxoSVpGRTREOThBRmh5T2JOYXdnYUtGS3A4Sno2?=
+ =?utf-8?B?azhPNWRQQkVacUJxSTd4TGJlTkdLeFRRTmJFUEZFN24vNjZjQnV5VWlmeWJm?=
+ =?utf-8?B?cDdwMDdJMFJZeU5DWXY0M0RuOEJsQXAxVklBR0s3L1JDb29QZkE3NGVuNytp?=
+ =?utf-8?B?SEVYVzBrQ1VJbHVWVkJ1Z0lMUW5FVjhmSXRVeVk1aVY1TG4vYVpHeVR6c1BS?=
+ =?utf-8?B?MXBITWpwek5YZjI2L21EbjBkWmtidXhBUHBvdGlSNmNiV1g0dERjdzVGKzRI?=
+ =?utf-8?B?NFRyNnVML2h0Y0JsWnlobE1jdHRlQy9nUDhBanJRSG9LWThZakFUZ0VqdXpn?=
+ =?utf-8?B?OGNpaTQ0Si84NHM1c05ZeUVxbFlVS05pbnFKZ3FzMVFKRUdnNTlMdURzVXdh?=
+ =?utf-8?B?ZWRSWFVrZSttNllDTWdGbVZkUUlwZ044R0R3QmpqemR5bCtLbkpvb21kNE9R?=
+ =?utf-8?B?K2w0Z0FJVTVVSTV6NGxEeGZFUGl5ajlOVHAxVjVYVWJ4V013azRseUdMeXpz?=
+ =?utf-8?Q?t3D9KhRvGnxBGyrn4Vg/GXlDr?=
+X-OriginatorOrg: opensynergy.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bebe1dec-514c-4d47-2fb5-08dbd0419649
+X-MS-Exchange-CrossTenant-AuthSource: FR0P281MB2382.DEUP281.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2023 01:20:31.7167 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 800fae25-9b1b-4edc-993d-c939c4e84a64
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bS7tR2gJvvjDPvpND1pyLvKAoMJQfLJsqXVmzBkV/LRzeY76638/Yyl4IwWKeuEvsHXamFAWtJ5dvlXV6YFDWQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: FR2P281MB2330
+X-TM-AS-ERS: 104.47.11.168-0.0.0.0
+X-TMASE-Version: StarCloud-1.3-9.1.1015-27944.003
+X-TMASE-Result: 10--27.350300-4.000000
+X-TMASE-MatchedRID: 0+daXaNUWRV6u8Ra7Bkp4ww4DIWv1jSVbU+XbFYs1xLykUQ3+1QpKU3S
+ C9bkE9YyNr5aA8MV0XkcydMA6f+1WPujgI8W3VQdrf03Gvoif/fn0oaU6WM++6WXeo1JBrZgw5n
+ Zy2X+Nx7e+5l0TSAQlxCNJOxfs3EOC5yGwbf+IdgsJRkKgHlrKG8lDAHJQfo4uxtkhcNHU8oUS+
+ eIOZZCPodKFEXU7ctQ12qbvVPRySQoDQ4wSBO3SRdLtszs/yIYEkUS8Erng9q2gwaXPtBp+ya2Z
+ Yhi6NLbDbopmLJYchOBariVNrrFRXX/e6Wwhp/J6x+Q+uPsJqpxd2b9FYfw7aFRWC8HCKx2feEy
+ sJu+yTJopHFvth7VZA5pdByl/RFheQczFQh2XEsD7AbA+ThQk9ztvqTn5fr3MCyfT2VAUIXaiin
+ ot3yvwUI5EMS4xHCcY6NiQNWkjVsldkOpPw3c45/KMn5sGLoglZroRtOiCG2L12p7cZqBWHUhg4
+ grojSzdl50cfr3QRNKV13hwcvu9uPXzq8/z8gYsX4aFYAMIYOVlsxwvB691Zq9yKH2z9zouhCa9
+ ZJvTFsnCwTCNGqnQA2HX3i8MKsscRyh6V9KDHJyIoQdDbaH+hSqHA2q+Ri179D5zLNFLFFDmpWA
+ k9AhwYGwjJO9Z+9p6xA0Ava73nAPm15xyht8lcTvQx6Ny2Cr+sMesHlgpMuEJNgyBSJlsiqhjeL
+ NyvT7eG3erYjBbl1+3BndfXUhXQ==
+X-TMASE-XGENCLOUD: c6379135-309e-49b6-b3d0-d057082d082d-0-0-200-0
+X-TM-Deliver-Signature: 4E2E8D0F4B9F376DEBC124A174A1973B
+X-TM-Addin-Auth: GAEFCnFsah310md1HnB79FGLTgvFkLFYnX5KZbrz7oYI/thXkI6K0PUxtN0
+ gT67t5te0QpzMI1HWVolbutRaBxr3339ouSmc5fdPohimgU9eGy2fx8HCQX+r5/L5OEPGfD8ffj
+ 42b5cpOfcRsFFTPHflVYWyyl9bONuG20NxEdlISjtxR3slFfpVKxgUrmFADz3fw+AGfQgb3NM/Y
+ Y3ozht1TMPH2RMRTfV0yk8/cO2UDST9xh36bbSgFLC2dC33607eTxIeGkXeLtmm+7ewvErQAVuR
+ pJRzah7Bd+q0gtQ=.DkvDMS0yeHgYnKftnsFg/oqf4hB02/rcMaAcDbeHRFhvzGgqCg1ciqh3G/
+ K8ERrKIpnbHs6zFqjGLxppIt1WTNKPPDlOQ0WWpK5vlkW7LQV6iHZBuSG3sR26o/GPTa2qv0M8W
+ zGjfk8iQfcU1692rilFYe7YZw9+cbliu24EMq1WYs/TDAptZ+SkErnWgM0XnRe8FSQ+bPHtuS3c
+ j32Rl0X7LtP5zqGm2PjB38eRq5+grhce9Urqn8wy0w1J8GU/QvZrauU01gMtpA6TYUaOByKXvvx
+ +taLEowRtZGkBiCwva+qVG3SswUOjhqZYbXCoBglutCG59DNyFJRu5RJwzw==
+X-TM-Addin-ProductCode: EMS
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=opensynergy.com;
+ s=TM-DKIM-20210503141657; t=1697678433;
+ bh=eVMFAFdoIfvrqzVhsneZDt7MOvUdX2fbf1KdxxiXDWE=; l=5010;
+ h=Date:To:From;
+ b=MN5l5FvcvXdFupw3he6UL0jUZ7yJGlD+M1Rfc4MY02LvqBVOBLmAZQ0wWlYh5umpB
+ Z2rOYWgFl+mCnsjkOL5kAJrLW3ddX3WIRGTpcacYT4m48s6bOK1kcaDfYFsasx61Gz
+ tbFXHGOhHl9wxxMt11rVbp6ymq/AWlq24iAn6XcpdAZRLl+PWb1560OwIt4ul1Oqhc
+ hSdhGagRWwSn4RqY8/G0FrtoIx08BbohhXqv9841M8qUaQdY6ExHfBahVybGKRzgvc
+ iBfwVaDJPjpDRn5nJ89fgDq19LRi7KpqpELk7jCIorIpsX5W9dNIviStlXK5fEAd8z
+ AgLvu8OWLBEDg==
+Cc: alsa-devel@alsa-project.org, mripard@redhat.com, mst@redhat.com,
+ tiwai@suse.com, linux-kernel@vger.kernel.org, perex@perex.cz,
+ stefanha@redhat.com, pbonzini@redhat.com,
+ virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -103,172 +186,126 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+From: Anton Yakovlev via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Anton Yakovlev <anton.yakovlev@opensynergy.com>
 Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In order to reduce excessive memory mapping cost in live migration and
-VM reboot, it is desirable to decouple the vhost-vdpa IOTLB abstraction
-from the virtio device life cycle, i.e. mappings can be kept intact
-across virtio device reset. Leverage the .reset_map callback, which is
-meant to destroy the iotlb on the given ASID and recreate the 1:1
-passthrough/identity mapping. To be consistent, the mapping on device
-creation is initiailized to passthrough/identity with PA 1:1 mapped
-as IOVA. With this the device .reset op doesn't have to maintain and
-clean up memory mappings by itself.
+Hi Takashi,
 
-Add a module paramemter, iotlb_persist, to cater for older userspace
-which may wish to see mapping to be cleared during reset.
+On 19.10.2023 03:07, Takashi Iwai wrote:
+> On Wed, 18 Oct 2023 12:48:23 +0200,
+> Matias Ezequiel Vara Larsen wrote:
+>>
+>> This commit replaces the mmap mechanism with the copy() and
+>> fill_silence() callbacks for both capturing and playback for the
+>> virtio-sound driver. This change is required to prevent the updating of
+>> the content of a buffer that is already in the available ring.
+>>
+>> The current mechanism splits a dma buffer into descriptors that are
+>> exposed to the device. This dma buffer is shared with the user
+>> application. When the device consumes a buffer, the driver moves the
+>> request from the used ring to available ring.
+>>
+>> The driver exposes the buffer to the device without knowing if the
+>> content has been updated from the user. The section 2.8.21.1 of the
+>> virtio spec states that: "The device MAY access the descriptor chains
+>> the driver created and the memory they refer to immediately". If the
+>> device picks up buffers from the available ring just after it is
+>> notified, it happens that the content may be old.
+>>
+>> By providing the copy() callback, the driver first updates the content
+>> of the buffer, and then, exposes the buffer to the device by enqueuing
+>> it in the available ring. Thus, device always picks up a buffer that is
+>> updated. During copy(), the number of requests enqueued depends on the
+>> "pos" and "bytes" arguments. The length of each request is period_size
+>> bytes.
+>>
+>> For capturing, the driver starts by exposing all the available buffers
+>> to device. After device updates the content of a buffer, it enqueues it
+>> in the used ring. It is only after the copy() for capturing is issued
+>> that the driver re-enqueues the buffer in the available ring.
+>>
+>> Co-developed-by: Anton Yakovlev <anton.yakovlev@opensynergy.com>
+>> Signed-off-by: Matias Ezequiel Vara Larsen <mvaralar@redhat.com>
+>> ---
+>> Changelog:
+>> v1 -> v2:
+>>   * Use snd_pcm_set_managed_buffer_all()for buffer allocation/freeing.
+>>   * Make virtsnd_pcm_msg_send() generic by specifying the offset and size
+>>     for the modified part of the buffer; this way no assumptions need to
+>>     be made.
+>>   * Disable SNDRV_PCM_INFO_NO_REWINDS since now only sequential
+>>     reading/writing of frames is supported.
+>>   * Correct comment at virtsnd_pcm_msg_send().
+>>   * v1 patch at:
+>>     https://ddec1-0-en-ctp.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2flore.kernel.org%2flkml%2f20231016151000.GE119987%40fedora%2ft%2f&umid=2f305b77-83e7-47b6-a461-a8ca67d0bfe2&auth=53c7c7de28b92dfd96e93d9dd61a23e634d2fbec-2d5775265e7e1741ae8eb783a3cb78ed553093c1
+>>
+>>   sound/virtio/virtio_pcm.c     |  7 ++-
+>>   sound/virtio/virtio_pcm.h     |  9 ++--
+>>   sound/virtio/virtio_pcm_msg.c | 93 ++++++++++++++++++++++-------------
+>>   sound/virtio/virtio_pcm_ops.c | 81 +++++++++++++++++++++++++-----
+>>   4 files changed, 137 insertions(+), 53 deletions(-)
+> 
+> Most of the code changes look good, but I wonder:
+> 
+>>
+>> diff --git a/sound/virtio/virtio_pcm.c b/sound/virtio/virtio_pcm.c
+>> index c10d91fff2fb..66d67eef1bcc 100644
+>> --- a/sound/virtio/virtio_pcm.c
+>> +++ b/sound/virtio/virtio_pcm.c
+>> @@ -104,12 +104,11 @@ static int virtsnd_pcm_build_hw(struct virtio_pcm_substream *vss,
+>>   	 * only message-based transport.
+>>   	 */
+>>   	vss->hw.info =
+>> -		SNDRV_PCM_INFO_MMAP |
+>> -		SNDRV_PCM_INFO_MMAP_VALID |
+> 
+> Do we need the removal of those MMAP features inevitably?
+> Usually mmap can still work even if the driver implements the copy
+> ops.  Those aren't always mutual exclusive.
 
-Signed-off-by: Si-Wei Liu <si-wei.liu@oracle.com>
-Tested-by: Stefano Garzarella <sgarzare@redhat.com>
----
- drivers/vdpa/vdpa_sim/vdpa_sim.c | 58 ++++++++++++++++++++++++++------
- 1 file changed, 47 insertions(+), 11 deletions(-)
+The driver uses a message queue to communicate with the device. Thus,
+the audio buffer is sliced into several I/O requests (= number of
+periods) of the same size (= period size).
 
-diff --git a/drivers/vdpa/vdpa_sim/vdpa_sim.c b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-index 76d41058add9..74506636375f 100644
---- a/drivers/vdpa/vdpa_sim/vdpa_sim.c
-+++ b/drivers/vdpa/vdpa_sim/vdpa_sim.c
-@@ -40,6 +40,10 @@ static bool use_va = true;
- module_param(use_va, bool, 0444);
- MODULE_PARM_DESC(use_va, "Enable/disable the device's ability to use VA");
- 
-+static bool iotlb_persist = true;
-+module_param(iotlb_persist, bool, 0444);
-+MODULE_PARM_DESC(iotlb_persist, "Enable/disable persistent iotlb across reset: 1 to keep maps, 0 to clear");
-+
- #define VDPASIM_QUEUE_ALIGN PAGE_SIZE
- #define VDPASIM_QUEUE_MAX 256
- #define VDPASIM_VENDOR_ID 0
-@@ -151,11 +155,13 @@ static void vdpasim_do_reset(struct vdpasim *vdpasim)
- 				 &vdpasim->iommu_lock);
- 	}
- 
--	for (i = 0; i < vdpasim->dev_attr.nas; i++) {
--		vhost_iotlb_reset(&vdpasim->iommu[i]);
--		vhost_iotlb_add_range(&vdpasim->iommu[i], 0, ULONG_MAX,
--				      0, VHOST_MAP_RW);
--		vdpasim->iommu_pt[i] = true;
-+	if (unlikely(!iotlb_persist)) {
-+		for (i = 0; i < vdpasim->dev_attr.nas; i++) {
-+			vhost_iotlb_reset(&vdpasim->iommu[i]);
-+			vhost_iotlb_add_range(&vdpasim->iommu[i], 0, ULONG_MAX,
-+					      0, VHOST_MAP_RW);
-+			vdpasim->iommu_pt[i] = true;
-+		}
- 	}
- 
- 	vdpasim->running = true;
-@@ -166,8 +172,8 @@ static void vdpasim_do_reset(struct vdpasim *vdpasim)
- 	++vdpasim->generation;
- }
- 
--static const struct vdpa_config_ops vdpasim_config_ops;
--static const struct vdpa_config_ops vdpasim_batch_config_ops;
-+static struct vdpa_config_ops vdpasim_config_ops;
-+static struct vdpa_config_ops vdpasim_batch_config_ops;
- 
- static void vdpasim_work_fn(struct kthread_work *work)
- {
-@@ -191,7 +197,7 @@ static void vdpasim_work_fn(struct kthread_work *work)
- struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
- 			       const struct vdpa_dev_set_config *config)
- {
--	const struct vdpa_config_ops *ops;
-+	struct vdpa_config_ops *ops;
- 	struct vdpa_device *vdpa;
- 	struct vdpasim *vdpasim;
- 	struct device *dev;
-@@ -213,6 +219,9 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
- 	else
- 		ops = &vdpasim_config_ops;
- 
-+	if (unlikely(!iotlb_persist))
-+		ops->reset_map = NULL;
-+
- 	vdpa = __vdpa_alloc_device(NULL, ops,
- 				   dev_attr->ngroups, dev_attr->nas,
- 				   dev_attr->alloc_size,
-@@ -259,8 +268,14 @@ struct vdpasim *vdpasim_create(struct vdpasim_dev_attr *dev_attr,
- 	if (!vdpasim->iommu_pt)
- 		goto err_iommu;
- 
--	for (i = 0; i < vdpasim->dev_attr.nas; i++)
-+	for (i = 0; i < vdpasim->dev_attr.nas; i++) {
- 		vhost_iotlb_init(&vdpasim->iommu[i], max_iotlb_entries, 0);
-+		if (likely(iotlb_persist)) {
-+			vhost_iotlb_add_range(&vdpasim->iommu[i], 0, ULONG_MAX, 0,
-+					      VHOST_MAP_RW);
-+			vdpasim->iommu_pt[i] = true;
-+		}
-+	}
- 
- 	for (i = 0; i < dev_attr->nvqs; i++)
- 		vringh_set_iotlb(&vdpasim->vqs[i].vring, &vdpasim->iommu[0],
-@@ -637,6 +652,25 @@ static int vdpasim_set_map(struct vdpa_device *vdpa, unsigned int asid,
- 	return ret;
- }
- 
-+static int vdpasim_reset_map(struct vdpa_device *vdpa, unsigned int asid)
-+{
-+	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
-+
-+	if (asid >= vdpasim->dev_attr.nas)
-+		return -EINVAL;
-+
-+	spin_lock(&vdpasim->iommu_lock);
-+	if (vdpasim->iommu_pt[asid])
-+		goto out;
-+	vhost_iotlb_reset(&vdpasim->iommu[asid]);
-+	vhost_iotlb_add_range(&vdpasim->iommu[asid], 0, ULONG_MAX,
-+			      0, VHOST_MAP_RW);
-+	vdpasim->iommu_pt[asid] = true;
-+out:
-+	spin_unlock(&vdpasim->iommu_lock);
-+	return 0;
-+}
-+
- static int vdpasim_bind_mm(struct vdpa_device *vdpa, struct mm_struct *mm)
- {
- 	struct vdpasim *vdpasim = vdpa_to_sim(vdpa);
-@@ -726,7 +760,7 @@ static void vdpasim_free(struct vdpa_device *vdpa)
- 	kfree(vdpasim->config);
- }
- 
--static const struct vdpa_config_ops vdpasim_config_ops = {
-+static struct vdpa_config_ops vdpasim_config_ops = {
- 	.set_vq_address         = vdpasim_set_vq_address,
- 	.set_vq_num             = vdpasim_set_vq_num,
- 	.kick_vq                = vdpasim_kick_vq,
-@@ -759,12 +793,13 @@ static const struct vdpa_config_ops vdpasim_config_ops = {
- 	.set_group_asid         = vdpasim_set_group_asid,
- 	.dma_map                = vdpasim_dma_map,
- 	.dma_unmap              = vdpasim_dma_unmap,
-+	.reset_map              = vdpasim_reset_map,
- 	.bind_mm		= vdpasim_bind_mm,
- 	.unbind_mm		= vdpasim_unbind_mm,
- 	.free                   = vdpasim_free,
- };
- 
--static const struct vdpa_config_ops vdpasim_batch_config_ops = {
-+static struct vdpa_config_ops vdpasim_batch_config_ops = {
- 	.set_vq_address         = vdpasim_set_vq_address,
- 	.set_vq_num             = vdpasim_set_vq_num,
- 	.kick_vq                = vdpasim_kick_vq,
-@@ -796,6 +831,7 @@ static const struct vdpa_config_ops vdpasim_batch_config_ops = {
- 	.get_iova_range         = vdpasim_get_iova_range,
- 	.set_group_asid         = vdpasim_set_group_asid,
- 	.set_map                = vdpasim_set_map,
-+	.reset_map              = vdpasim_reset_map,
- 	.bind_mm		= vdpasim_bind_mm,
- 	.unbind_mm		= vdpasim_unbind_mm,
- 	.free                   = vdpasim_free,
+Before this, all such requests were enqueued when the substream started,
+and immediately re-enqueued once the request is completed. This approach
+made it possible to add mmap support. But for mmap there are no explicit
+notifications from the application how many frames were written or read.
+Thus, it was assumed that the virtual device should read/write frames to
+requests based on timings. And there are some problems here:
+
+   1. This was found to violate the virtio specification: if a request is
+      already in the queue, the device can safely read/write there at any
+      time.
+   2. It looks like this breaks the use case with swiotlb. Personally I'm
+      not sure how the application handles DMA ownership in the case of
+      mmaped buffer.
+
+To correctly implement mmap support, instead of transferring data via a
+message queue, the driver and device must have a shared memory region.
+We can add mmap in the future when we expand the functionality of the
+device to support such shared memory.
+
+
+Best regards,
+
+> 
+> 
+> thanks,
+> 
+> Takashi
+
 -- 
-2.39.3
+Anton Yakovlev
+Senior Software Engineer
 
+OpenSynergy GmbH
+Rotherstr. 20, 10245 Berlin
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
