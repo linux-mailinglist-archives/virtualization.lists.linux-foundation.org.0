@@ -1,87 +1,97 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 51CB77CED7B
-	for <lists.virtualization@lfdr.de>; Thu, 19 Oct 2023 03:20:45 +0200 (CEST)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id 52AFC7CED44
+	for <lists.virtualization@lfdr.de>; Thu, 19 Oct 2023 03:13:11 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id B8C9B831F2;
-	Thu, 19 Oct 2023 01:20:43 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org B8C9B831F2
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au header.a=rsa-sha256 header.s=201909 header.b=OzA36oun
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id tezYend413tn; Thu, 19 Oct 2023 01:20:42 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id 0A6A9831FB;
-	Thu, 19 Oct 2023 01:20:42 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0A6A9831FB
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id D4D58C0DD8;
-	Thu, 19 Oct 2023 01:20:40 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 48394C0032
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:20:39 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 2434D6F7B0
- for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:20:39 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 2434D6F7B0
+	by smtp3.osuosl.org (Postfix) with ESMTP id BE86E6F78F;
+	Thu, 19 Oct 2023 01:13:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org BE86E6F78F
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au
- header.a=rsa-sha256 header.s=201909 header.b=OzA36oun
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=SBbPFARm
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PajnK0xmLCIW
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id T-wNbQXTvQMJ; Thu, 19 Oct 2023 01:13:05 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 6CE106F7B0;
+	Thu, 19 Oct 2023 01:13:05 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 6CE106F7B0
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 1B4BAC0039;
+	Thu, 19 Oct 2023 01:13:05 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7135DC008C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:20:37 +0000 (UTC)
-X-Greylist: delayed 644 seconds by postgrey-1.37 at util1.osuosl.org;
- Thu, 19 Oct 2023 01:20:36 UTC
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D01666F521
-Received: from gandalf.ozlabs.org (mail.ozlabs.org
- [IPv6:2404:9400:2221:ea00::3])
- by smtp3.osuosl.org (Postfix) with ESMTPS id D01666F521
+ Thu, 19 Oct 2023 01:13:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp4.osuosl.org (Postfix) with ESMTP id 5200D4226C
  for <virtualization@lists.linux-foundation.org>;
- Thu, 19 Oct 2023 01:20:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
- s=201909; t=1697677783;
- bh=sP/cRV4QUGjTkFLtwW0tXTJRApQEfvV0GlECJSheTZ0=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=OzA36ounnOpYrxRilcLyJmhKG74vt5b0xbblSnpZ38SXwXoRD+pqu81YjaU92OqiS
- K12o3y54lx6qpe39yAAqNZhbD2Z3NftbZ3odfdwqgqNJ5pR9T+1d1SWyxv5ED4xLsP
- 8I7wuTWDCuUgDsuuejG9J4zE5bmBSREmXITfJ3eXHU8WKIgnmZAfrtpEVwlb5yQZV9
- WNCMgxPvXT0laLMYP1cAF0XEPYLg5zqjCDWUsTrngP8pkzVgbM4HKfbkvRfDCowcFK
- 4C9L3k65lqlVMLkdmGCI0ViV1t4nAyuFMJNGHHeRywl+mYpfXEyyQkSWfovcLLvz3i
- nY7Es8JiD1N/w==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4S9qPf4HMkz4wcN;
- Thu, 19 Oct 2023 12:09:42 +1100 (AEDT)
-From: Michael Ellerman <mpe@ellerman.id.au>
-To: Srikar Dronamraju <srikar@linux.vnet.ibm.com>
-Subject: Re: [PATCH v2] powerpc/paravirt: Improve vcpu_is_preempted
-In-Reply-To: <20231018155838.2332822-1-srikar@linux.vnet.ibm.com>
-References: <20231018155838.2332822-1-srikar@linux.vnet.ibm.com>
-Date: Thu, 19 Oct 2023 12:09:38 +1100
-Message-ID: <877cnj76zx.fsf@mail.lhotse>
+ Thu, 19 Oct 2023 01:13:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 5200D4226C
+Authentication-Results: smtp4.osuosl.org;
+ dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
+ header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=SBbPFARm
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id ECBvCBNeCnh9
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Oct 2023 01:12:59 +0000 (UTC)
+Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
+ [205.220.177.32])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id A987642262
+ for <virtualization@lists.linux-foundation.org>;
+ Thu, 19 Oct 2023 01:12:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A987642262
+Received: from pps.filterd (m0246630.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
+ 39IIn39G027695; Thu, 19 Oct 2023 01:12:58 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
+ h=from : to : cc :
+ subject : date : message-id : mime-version : content-type :
+ content-transfer-encoding; s=corp-2023-03-30;
+ bh=/PCloSFrPiPsydf0JTwMrxT+NyKATOuPJq4OdDBeRMY=;
+ b=SBbPFARm70GVdtnRruwwiEyo/BIXZt0nc6N8HEqd3iHY4kKUtpPTrSgypFiA2IbHdgmB
+ FbDNOVYioxrsfnaDSjqSFSH9r0MmDt3V0vzqYh2gCwclUDcN5ZW/+fkBrrPvFXH7trs5
+ aHBT+Z4v7tcZzonvWN2Cdqa4yweG9eiAKwERSQqre0D8wM+zJ4QTE7ekjOzgOne7NhRW
+ 89exBsT77wL1jeu3dGTqz+BtqogZI8rMjfXE//j15BpPHLlPruyz1wCyB4X2V8XnV7W2
+ aB+VyKIB6dXLO2tTBwhEqWM10+KdkOIIz6HiLY9qLip/CofoGRaFx67gI7Pg3rbdJqcT DA== 
+Received: from iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta03.appoci.oracle.com [130.35.103.27])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tqk1bs077-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 19 Oct 2023 01:12:58 +0000
+Received: from pps.filterd
+ (iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
+ with ESMTP id 39J0UpRx015251; Thu, 19 Oct 2023 01:12:57 GMT
+Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
+ [10.153.73.24])
+ by iadpaimrmta03.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
+ 3trg1h8w2d-1; Thu, 19 Oct 2023 01:12:57 +0000
+From: Si-Wei Liu <si-wei.liu@oracle.com>
+To: jasowang@redhat.com, mst@redhat.com, eperezma@redhat.com,
+ sgarzare@redhat.com, dtatulea@nvidia.com
+Subject: [PATCH v3 0/4] vdpa: decouple reset of iotlb mapping from device reset
+Date: Wed, 18 Oct 2023 18:10:13 -0700
+Message-Id: <1697677818-11371-1-git-send-email-si-wei.liu@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Cc: Shrikanth Hegde <sshegde@linux.vnet.ibm.com>,
- Srikar Dronamraju <srikar@linux.vnet.ibm.com>,
- VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
- Aboorva Devarajan <aboorvad@linux.vnet.ibm.com>, x86@kernel.org,
- linux-kernel@vger.kernel.org, Nicholas Piggin <npiggin@gmail.com>,
- virtualization@lists.linux-foundation.org, Ajay Kaher <akaher@vmware.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Alexey Makhalov <amakhalov@vmware.com>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2023-10-19_01,2023-10-18_01,2023-05-22_02
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ phishscore=0 suspectscore=0
+ mlxscore=0 mlxlogscore=999 bulkscore=0 malwarescore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2309180000
+ definitions=main-2310190007
+X-Proofpoint-GUID: n2aFvESP-ekmGpSKgu-1r01yI1PXzw4b
+X-Proofpoint-ORIG-GUID: n2aFvESP-ekmGpSKgu-1r01yI1PXzw4b
+Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,144 +108,73 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Hi Srikar,
+In order to reduce needlessly high setup and teardown cost
+of iotlb mapping during live migration, it's crucial to
+decouple the vhost-vdpa iotlb abstraction from the virtio
+device life cycle, i.e. iotlb mappings should be left
+intact across virtio device reset [1]. For it to work, the
+on-chip IOMMU parent device could implement a separate
+.reset_map() operation callback to restore 1:1 DMA mapping
+without having to resort to the .reset() callback, the
+latter of which is mainly used to reset virtio device state.
+This new .reset_map() callback will be invoked only before
+the vhost-vdpa driver is to be removed and detached from
+the vdpa bus, such that other vdpa bus drivers, e.g. 
+virtio-vdpa, can start with 1:1 DMA mapping when they
+are attached. For the context, those on-chip IOMMU parent
+devices, create the 1:1 DMA mapping at vdpa device creation,
+and they would implicitly destroy the 1:1 mapping when
+the first .set_map or .dma_map callback is invoked.
 
-Srikar Dronamraju <srikar@linux.vnet.ibm.com> writes:
-> PowerVM Hypervisor dispatches on a whole core basis. In a shared LPAR, a
-> CPU from a core that is CEDED or preempted may have a larger latency. In
-> such a scenario, its preferable to choose a different CPU to run.
->
-> If one of the CPUs in the core is active, i.e neither CEDED nor
-> preempted, then consider this CPU as not preempted.
->
-> Also if any of the CPUs in the core has yielded but OS has not requested
-> CEDE or CONFER, then consider this CPU to be preempted.
+This patchset is rebased on top of the latest vhost tree.
 
-I think the change is OK, but the change log and comments are slightly
-confusing IMHO.
+[1] Reducing vdpa migration downtime because of memory pin / maps
+https://www.mail-archive.com/qemu-devel@nongnu.org/msg953755.html
 
-In several places you use "this CPU", but that usually means "the CPU
-the code is currently executing on".
+---
+v3:
+- add .reset_map support to vdpa_sim
+- introduce module parameter to provide bug-for-bug compatiblity with older
+  userspace 
 
-I think it would be clearer if you used eg. "target CPU" or something to
-make it clear that you're not talking about the currently executing CPU.
+v2:
+- improved commit message to clarify the intended csope of .reset_map API
+- improved commit messages to clarify no breakage on older userspace
 
-cheers
+v1:
+- rewrote commit messages to include more detailed description and background
+- reword to vendor specific IOMMU implementation from on-chip IOMMU
+- include parent device backend feautres to persistent iotlb precondition
+- reimplement mlx5_vdpa patch on top of descriptor group series
 
-> Correct detection of preempted CPUs is important for detecting idle
-> CPUs/cores in task scheduler.
->
-> Changelog:
-> v1 -> v2: Handle lppaca_of(cpu) in !PPC_SPLPAR case.
-> v1: https://lore.kernel.org/r/20231009051740.17683-1-srikar%40linux.vnet.ibm.com
-> 1. Fixed some compilation issues reported by kernelbot
-> a. https://lore.kernel.org/oe-kbuild-all/202310102341.K0sgoqQL-lkp@intel.com/
-> b.  https://lore.kernel.org/oe-kbuild-all/202310091636.lElmJkYV-lkp@intel.com/
-> 2. Resolved comments from Shrikanth
+RFC v3:
+- fix missing return due to merge error in patch #4
 
-That change log should appear below the break "---".
+RFC v2:
+- rebased on top of the "[PATCH RFC v2 0/3] vdpa: dedicated descriptor table group" series:
+  https://lore.kernel.org/virtualization/1694248959-13369-1-git-send-email-si-wei.liu@oracle.com/
 
-> Tested-by: Aboorva Devarajan <aboorvad@linux.vnet.ibm.com>
-> Reviewed-by: Shrikanth Hegde <sshegde@linux.vnet.ibm.com>
-> Signed-off-by: Srikar Dronamraju <srikar@linux.vnet.ibm.com>
-> ---
->  arch/powerpc/include/asm/paravirt.h | 42 ++++++++++++++++++++++++++---
->  1 file changed, 39 insertions(+), 3 deletions(-)
->
-> diff --git a/arch/powerpc/include/asm/paravirt.h b/arch/powerpc/include/asm/paravirt.h
-> index e08513d73119..0372b0093f72 100644
-> --- a/arch/powerpc/include/asm/paravirt.h
-> +++ b/arch/powerpc/include/asm/paravirt.h
-> @@ -71,6 +71,11 @@ static inline void yield_to_any(void)
->  {
->  	plpar_hcall_norets_notrace(H_CONFER, -1, 0);
->  }
-> +
-> +static inline bool is_vcpu_idle(int vcpu)
-> +{
-> +	return lppaca_of(vcpu).idle;
-> +}
->  #else
->  static inline bool is_shared_processor(void)
->  {
-> @@ -100,6 +105,10 @@ static inline void prod_cpu(int cpu)
->  	___bad_prod_cpu(); /* This would be a bug */
->  }
->  
-> +static inline bool is_vcpu_idle(int vcpu)
-> +{
-> +	return false;
-> +}
->  #endif
->  
->  #define vcpu_is_preempted vcpu_is_preempted
-> @@ -121,9 +130,19 @@ static inline bool vcpu_is_preempted(int cpu)
->  	if (!is_shared_processor())
->  		return false;
->  
-> +	if (!(yield_count_of(cpu) & 1))
-> +		return false;
+---
 
-Would be nice for that to have a short comment too.
+Si-Wei Liu (5):
+  vdpa: introduce .reset_map operation callback
+  vhost-vdpa: reset vendor specific mapping to initial state in .release
+  vhost-vdpa: introduce IOTLB_PERSIST backend feature bit
+  vdpa/mlx5: implement .reset_map driver op
+  vdpa_sim: implement .reset_map support
 
-> +
-> +	/*
-> +	 * If CPU has yielded to Hypervisor but OS has not requested idle
-> +	 * then this CPU is definitely preempted.
+ drivers/vdpa/mlx5/core/mlx5_vdpa.h |  1 +
+ drivers/vdpa/mlx5/core/mr.c        | 17 +++++++++
+ drivers/vdpa/mlx5/net/mlx5_vnet.c  | 26 ++++++++++++--
+ drivers/vdpa/vdpa_sim/vdpa_sim.c   | 58 ++++++++++++++++++++++++------
+ drivers/vhost/vdpa.c               | 31 ++++++++++++++++
+ include/linux/vdpa.h               | 10 ++++++
+ include/uapi/linux/vhost_types.h   |  2 ++
+ 7 files changed, 132 insertions(+), 13 deletions(-)
 
-eg. If the target CPU has yielded to the Hypervisor, but the OS has not
-requested idle then the target CPU has definitely been preempted.
+-- 
+2.39.3
 
-> +	 */
-> +	if (!is_vcpu_idle(cpu))
-> +		return true;
-> +
->  #ifdef CONFIG_PPC_SPLPAR
->  	if (!is_kvm_guest()) {
-> -		int first_cpu;
-> +		int first_cpu, i;
->  
->  		/*
->  		 * The result of vcpu_is_preempted() is used in a
-> @@ -149,11 +168,28 @@ static inline bool vcpu_is_preempted(int cpu)
->  		 */
->  		if (cpu_first_thread_sibling(cpu) == first_cpu)
->  			return false;
-> +
-> +		/*
-> +		 * If any of the threads of this core is not preempted or
-> +		 * ceded, then consider this CPU to be non-preempted
-> +		 */
-
-eg. If any of the threads of the target CPU's core are not preempted or
-ceded, then consider that the target CPU is also not preempted.
-
-> +		first_cpu = cpu_first_thread_sibling(cpu);
-> +		for (i = first_cpu; i < first_cpu + threads_per_core; i++) {
-> +			if (i == cpu)
-> +				continue;
-> +			if (!(yield_count_of(i) & 1))
-> +				return false;
-> +			if (!is_vcpu_idle(i))
-> +				return true;
-> +		}
->  	}
->  #endif
->  
-> -	if (yield_count_of(cpu) & 1)
-> -		return true;
-> +	/*
-> +	 * None of the threads in this core are running but none of
-> +	 * them were preempted too. Hence assume the thread to be
-> +	 * non-preempted.
-> +	 */
->  	return false;
->  }
->  
->
-> base-commit: eddc90ea2af5933249ea1a78119f2c8ef8d07156
-> -- 
-> 2.31.1
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
