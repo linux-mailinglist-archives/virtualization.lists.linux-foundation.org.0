@@ -1,89 +1,88 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
-	by mail.lfdr.de (Postfix) with ESMTPS id D65E97D0DB1
-	for <lists.virtualization@lfdr.de>; Fri, 20 Oct 2023 12:44:33 +0200 (CEST)
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+	by mail.lfdr.de (Postfix) with ESMTPS id 495337D1355
+	for <lists.virtualization@lfdr.de>; Fri, 20 Oct 2023 17:58:54 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id 4BF5170436;
-	Fri, 20 Oct 2023 10:44:32 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4BF5170436
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au header.a=rsa-sha256 header.s=201909 header.b=ifl/oYvh
+	by smtp4.osuosl.org (Postfix) with ESMTP id 8F4864EE72;
+	Fri, 20 Oct 2023 15:58:51 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 8F4864EE72
+Authentication-Results: smtp4.osuosl.org;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=LAgP6YAP
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id hdbtyVel_5sK; Fri, 20 Oct 2023 10:44:31 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id DBAB7704E3;
-	Fri, 20 Oct 2023 10:44:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DBAB7704E3
+Received: from smtp4.osuosl.org ([127.0.0.1])
+	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 1k62KeWGssTr; Fri, 20 Oct 2023 15:58:50 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp4.osuosl.org (Postfix) with ESMTPS id 3CB374EE65;
+	Fri, 20 Oct 2023 15:58:50 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 3CB374EE65
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 0B7CEC008C;
-	Fri, 20 Oct 2023 10:44:30 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 2ED5FC0032;
+	Fri, 20 Oct 2023 15:58:49 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 4544EC0032
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id D63D8C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Oct 2023 10:44:28 +0000 (UTC)
+ Fri, 20 Oct 2023 15:58:46 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 12BC14050C
+ by smtp2.osuosl.org (Postfix) with ESMTP id 9FB53433AD
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Oct 2023 10:44:28 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 12BC14050C
+ Fri, 20 Oct 2023 15:58:45 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 9FB53433AD
 Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=ellerman.id.au header.i=@ellerman.id.au
- header.a=rsa-sha256 header.s=201909 header.b=ifl/oYvh
+ dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
+ header.a=rsa-sha256 header.s=mimecast20190719 header.b=LAgP6YAP
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
  by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id im1jJRCzKwyS
+ with ESMTP id vHxieXrwOxNR
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Oct 2023 10:44:27 +0000 (UTC)
-Received: from gandalf.ozlabs.org (mail.ozlabs.org
- [IPv6:2404:9400:2221:ea00::3])
- by smtp2.osuosl.org (Postfix) with ESMTPS id AA88A432BC
+ Fri, 20 Oct 2023 15:58:44 +0000 (UTC)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id 8BEFE433B5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 20 Oct 2023 10:44:26 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org AA88A432BC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ellerman.id.au;
- s=201909; t=1697798659;
- bh=BOQy2S+gkRQ6GqEG1l3wx7Pc1XFdYna8OiPHPqKzES4=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=ifl/oYvh+TRsSqRgEPMixGOqr4MoU0N6idL02NbzyNh9SF3hMbCT+41P1QDWt9mVo
- r0TnbRSCGpHxnFA9gfGRPjgqC0x+mJUC+G5G3bjzrS2ECDmKQriQsQBsa5eSkJrlLT
- nIqcKEqedWmBVS5HNXbL1uOSBHiHHvVSm1LE7Kg0f1/pSXNmJVbpWAnvbch0WWD0+u
- Z0dVWmEId377e1yEOsZALaWYmd8CxmAeINvjgQIdioHEWLBHybz/2wsXn2p1O86dEd
- SGlFy6Qr3r8lxy7s+ZxRnYq6QqQnhT34XhJPgr0BVQ0hdxxZZmMskpbccxYulBee/c
- Cwb6zW0meP0UQ==
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ Fri, 20 Oct 2023 15:58:44 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 8BEFE433B5
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1697817523;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=umrr8klAQ5M6VrOQW9RqPBZxb5qUD5G43p73Sx5jNAU=;
+ b=LAgP6YAPbY+8vDuC50vm1Nsof4vYYDOBwu2noEdqYyqveFbrVrUO36VRWPRxHn6w/pdb/I
+ We09ZJ+6cqphBE61OXcWbs8HrdYcxAh7L+Bib1o6U311BjHJ0d+tJQsa5dpjdK0i85PmEi
+ YVJ011MTIPvLCfyfa9stc68os8emjno=
+Received: from mimecast-mx02.redhat.com (mimecast-mx02.redhat.com
+ [66.187.233.88]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ us-mta-284-uMYW_5-WPJydi6sEzSiaKA-1; Fri, 20 Oct 2023 11:58:29 -0400
+X-MC-Unique: uMYW_5-WPJydi6sEzSiaKA-1
+Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.rdu2.redhat.com
+ [10.11.54.5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mail.ozlabs.org (Postfix) with ESMTPSA id 4SBh6B6KH4z4xdP;
- Fri, 20 Oct 2023 21:44:18 +1100 (AEDT)
-From: Michael Ellerman <mpe@ellerman.id.au>
-To: Srikar Dronamraju <srikar@linux.vnet.ibm.com>
-Subject: Re: [PATCH v2 3/6] powerpc/smp: Move shared_processor static key to
- smp.h
-In-Reply-To: <20231019130843.GI2194132@linux.vnet.ibm.com>
-References: <20231018163751.2423181-1-srikar@linux.vnet.ibm.com>
- <20231018163751.2423181-4-srikar@linux.vnet.ibm.com>
- <87sf675im3.fsf@mail.lhotse> <20231019130843.GI2194132@linux.vnet.ibm.com>
-Date: Fri, 20 Oct 2023 21:44:14 +1100
-Message-ID: <877cnh60ap.fsf@mail.lhotse>
+ by mimecast-mx02.redhat.com (Postfix) with ESMTPS id 13A5988B773;
+ Fri, 20 Oct 2023 15:58:29 +0000 (UTC)
+Received: from max-p1.redhat.com (unknown [10.39.208.31])
+ by smtp.corp.redhat.com (Postfix) with ESMTP id A9B3C503B;
+ Fri, 20 Oct 2023 15:58:25 +0000 (UTC)
+From: Maxime Coquelin <maxime.coquelin@redhat.com>
+To: mst@redhat.com, jasowang@redhat.com, xuanzhuo@linux.alibaba.com,
+ paul@paul-moore.com, jmorris@namei.org, serge@hallyn.com,
+ stephen.smalley.work@gmail.com, eparis@parisplace.org,
+ xieyongji@bytedance.com, virtualization@lists.linux-foundation.org,
+ linux-kernel@vger.kernel.org, linux-security-module@vger.kernel.org,
+ selinux@vger.kernel.org, david.marchand@redhat.com, lulu@redhat.com
+Subject: [PATCH v4 0/4] vduse: add support for networking devices
+Date: Fri, 20 Oct 2023 17:58:15 +0200
+Message-ID: <20231020155819.24000-1-maxime.coquelin@redhat.com>
 MIME-Version: 1.0
-Cc: Valentin Schneider <vschneid@redhat.com>,
- Peter Zijlstra <peterz@infradead.org>, linux-kernel@vger.kernel.org,
- x86@kernel.org, Ajay Kaher <akaher@vmware.com>,
- Nicholas Piggin <npiggin@gmail.com>, virtualization@lists.linux-foundation.org,
- VMware PV-Drivers Reviewers <pv-drivers@vmware.com>,
- Rohan McLure <rmclure@linux.ibm.com>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Alexey Makhalov <amakhalov@vmware.com>,
- linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
- Josh Poimboeuf <jpoimboe@kernel.org>
+X-Scanned-By: MIMEDefang 3.4.1 on 10.11.54.5
+Cc: Maxime Coquelin <maxime.coquelin@redhat.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -100,30 +99,59 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Srikar Dronamraju <srikar@linux.vnet.ibm.com> writes:
-> * Michael Ellerman <mpe@ellerman.id.au> [2023-10-19 15:41:40]:
->
->> Srikar Dronamraju <srikar@linux.vnet.ibm.com> writes:
->> > The ability to detect if the system is running in a shared processor
->> > mode is helpful in few more generic cases not just in
->> > paravirtualization.
->> > For example: At boot time, different scheduler/ topology flags may be
->> > set based on the processor mode. Hence move it to a more generic file.
->> 
->> I'd rather you just included paravirt.h in the few files where you need it.
->
-> I thought, detecting if a Processor was shared or not was more a
-> smp/processor related than a paravirt related.
+This small series enables virtio-net device type in VDUSE.
+With it, basic operation have been tested, both with
+virtio-vdpa and vhost-vdpa using DPDK Vhost library series
+adding VDUSE support using split rings layout (merged in
+DPDK v23.07-rc1).
 
-It's both really :)
+Control queue support (and so multiqueue) has also been
+tested, but requires a Kernel series from Jason Wang
+relaxing control queue polling [1] to function reliably,
+so while Jason rework is done, a patch is added to disable
+CVQ and features that depend on it (tested also with DPDK
+v23.07-rc1).
 
-It's definitely paravirt related though, because if we weren't
-*para*virt then we wouldn't know there was a hypervisor at all :)
+In this v4, LSM hooks are added to allow/deny application
+to create/destroy/open devices based on their type (Net,
+Block).
 
-But having smaller more focused headers is preferable in general just
-for mechanical reasons.
+[1]: https://lore.kernel.org/lkml/CACGkMEtgrxN3PPwsDo4oOsnsSLJfEmBEZ0WvjGRr3whU+QasUg@mail.gmail.com/T/
 
-cheers
+v3->v4 changes:
+===============
+- Add LSM hooks (Michael)
+- Rebase
+
+v2 -> v3 changes:
+=================
+- Use allow list instead of deny list (Michael)
+
+v1 -> v2 changes:
+=================
+- Add a patch to disable CVQ (Michael)
+
+RFC -> v1 changes:
+==================
+- Fail device init if it does not support VERSION_1 (Jason)
+
+Maxime Coquelin (4):
+  vduse: validate block features only with block devices
+  vduse: enable Virtio-net device type
+  vduse: Temporarily disable control queue features
+  vduse: Add LSM hooks to check Virtio device type
+
+ drivers/vdpa/vdpa_user/vduse_dev.c  | 64 +++++++++++++++++++++++++++--
+ include/linux/lsm_hook_defs.h       |  4 ++
+ include/linux/security.h            | 15 +++++++
+ security/security.c                 | 42 +++++++++++++++++++
+ security/selinux/hooks.c            | 55 +++++++++++++++++++++++++
+ security/selinux/include/classmap.h |  2 +
+ 6 files changed, 178 insertions(+), 4 deletions(-)
+
+-- 
+2.41.0
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
