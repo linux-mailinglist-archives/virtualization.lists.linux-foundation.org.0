@@ -1,85 +1,87 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
-	by mail.lfdr.de (Postfix) with ESMTPS id EFD717D1C14
-	for <lists.virtualization@lfdr.de>; Sat, 21 Oct 2023 11:28:35 +0200 (CEST)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 9B4947D1C10
+	for <lists.virtualization@lfdr.de>; Sat, 21 Oct 2023 11:28:31 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp3.osuosl.org (Postfix) with ESMTP id DBEC66F6BE;
-	Sat, 21 Oct 2023 09:28:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org DBEC66F6BE
-Authentication-Results: smtp3.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=UoCbAFz1
+	by smtp2.osuosl.org (Postfix) with ESMTP id B034943563;
+	Sat, 21 Oct 2023 09:28:28 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B034943563
+Authentication-Results: smtp2.osuosl.org;
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=oracle.com header.i=@oracle.com header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=qRj9hrTt
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp3.osuosl.org ([127.0.0.1])
-	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 5T88mzUrdpsa; Sat, 21 Oct 2023 09:28:30 +0000 (UTC)
+Received: from smtp2.osuosl.org ([127.0.0.1])
+	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id igDmzGAbov99; Sat, 21 Oct 2023 09:28:24 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp3.osuosl.org (Postfix) with ESMTPS id C2A846F78B;
-	Sat, 21 Oct 2023 09:28:27 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org C2A846F78B
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 4757241594;
+	Sat, 21 Oct 2023 09:28:24 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 4757241594
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id A2D1CC0DDD;
-	Sat, 21 Oct 2023 09:28:26 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5CA7DC0DD3;
+	Sat, 21 Oct 2023 09:28:23 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 8897BC0032
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 46F13C0032
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Oct 2023 09:28:24 +0000 (UTC)
+ Sat, 21 Oct 2023 09:28:22 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp4.osuosl.org (Postfix) with ESMTP id 63CE54F0B9
+ by smtp4.osuosl.org (Postfix) with ESMTP id 21C784F0B7
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Oct 2023 09:28:24 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 63CE54F0B9
+ Sat, 21 Oct 2023 09:28:22 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 21C784F0B7
 Authentication-Results: smtp4.osuosl.org;
  dkim=pass (2048-bit key) header.d=oracle.com header.i=@oracle.com
- header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=UoCbAFz1
+ header.a=rsa-sha256 header.s=corp-2023-03-30 header.b=qRj9hrTt
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp4.osuosl.org ([127.0.0.1])
  by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id nXA2d0GtK991
+ with ESMTP id uMx3eN0RnPec
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Oct 2023 09:28:20 +0000 (UTC)
+ Sat, 21 Oct 2023 09:28:21 +0000 (UTC)
 Received: from mx0b-00069f02.pphosted.com (mx0b-00069f02.pphosted.com
  [205.220.177.32])
- by smtp4.osuosl.org (Postfix) with ESMTPS id 425E44F03A
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 4AB634F03C
  for <virtualization@lists.linux-foundation.org>;
- Sat, 21 Oct 2023 09:28:20 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 425E44F03A
+ Sat, 21 Oct 2023 09:28:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 4AB634F03C
 Received: from pps.filterd (m0246632.ppops.net [127.0.0.1])
  by mx0b-00069f02.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 39L5eAj6008978; Sat, 21 Oct 2023 09:28:19 GMT
+ 39L4XchN031867; Sat, 21 Oct 2023 09:28:20 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com;
  h=from : to : cc :
- subject : date : message-id : mime-version : content-type :
- content-transfer-encoding; s=corp-2023-03-30;
- bh=vXJHNbSFXSISHev3zlx79ZCGYnD++jfw2/gKRC3j7mM=;
- b=UoCbAFz1PpfdKCiAzA5FgvmBx74jQ8ve93i8OtBeiTJX6NeOT1L075fbUaZPSDr/pjih
- rbIEoG+PEw8t7a68TM8uLY9TqEj83aGybAtxTlBgUgt5Z7zKUFTG7rmU5K5PT3AjJIca
- rXjHxKqtshKtVaFHb7dNiw5LuMjNgAByjEEG1LRAK/sDCYl1csODGKk3iL0dz26meJvb
- Xehrn7Tx0cM7pFK23+f51PNzXxNkhj5WQK4N4xO9c3rRJaU3nGSYr8QPEqKNHBJKMdjL
- HX+CwmNBS0eHJ+xuYg9FMwxGaJLO7N05PAE8ahHAgxjUkcy8N5hDqoyNjnep4ACCvUcT Bg== 
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-type : content-transfer-encoding; s=corp-2023-03-30;
+ bh=9BXLcHlC+mpIFJm+VhDktZctOK6MnG2fZvm6HmvyjLg=;
+ b=qRj9hrTt55/dWqiaiiKgVl8hvOcNDqCAEnuT7CZJ22YnBTag3TwW8tH79GAJcu2G1DPm
+ R5/EyE1bKHWKFq8jL55Q0R9SUIyefquyI67NP5CfEtRqqSYalct1L3/yF80Jx5JbDw7x
+ IxbYODeYDrhqsjoSvptx1q1HPwENTL0sXHfGQ7xDN7GQ9EpL/UheTZSIAsmVIvTmuXkM
+ XPQSUsJad626U7UMuc9m7l352vKoORxbZZ2fI2zaLmiETGE3Yf+zD0evj41Dtuo5v0u+
+ e+rBfAtWCFv4dH6E1txMXGrgma6oQElcFreUzXBRW7YiMCjxiZlv/sVT/o/nJGK8P/Gi 4Q== 
 Received: from iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com
  (iadpaimrmta02.appoci.oracle.com [147.154.18.20])
- by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tv68t8c2a-1
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 3tv68t8c2c-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sat, 21 Oct 2023 09:28:18 +0000
+ Sat, 21 Oct 2023 09:28:20 +0000
 Received: from pps.filterd
  (iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
  by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (8.17.1.19/8.17.1.19)
- with ESMTP id 39L6FU68019120; Sat, 21 Oct 2023 09:28:18 GMT
+ with ESMTP id 39L6FU6C019120; Sat, 21 Oct 2023 09:28:19 GMT
 Received: from ban25x6uut24.us.oracle.com (ban25x6uut24.us.oracle.com
  [10.153.73.24])
  by iadpaimrmta02.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTP id
- 3tv532gf44-1; Sat, 21 Oct 2023 09:28:18 +0000
+ 3tv532gf44-2; Sat, 21 Oct 2023 09:28:19 +0000
 From: Si-Wei Liu <si-wei.liu@oracle.com>
 To: jasowang@redhat.com, mst@redhat.com, eperezma@redhat.com,
  sgarzare@redhat.com, dtatulea@nvidia.com
-Subject: [PATCH v4 0/7] vdpa: decouple reset of iotlb mapping from device reset
-Date: Sat, 21 Oct 2023 02:25:12 -0700
-Message-Id: <1697880319-4937-1-git-send-email-si-wei.liu@oracle.com>
+Subject: [PATCH v4 1/7] vdpa: introduce .reset_map operation callback
+Date: Sat, 21 Oct 2023 02:25:13 -0700
+Message-Id: <1697880319-4937-2-git-send-email-si-wei.liu@oracle.com>
 X-Mailer: git-send-email 1.8.3.1
+In-Reply-To: <1697880319-4937-1-git-send-email-si-wei.liu@oracle.com>
+References: <1697880319-4937-1-git-send-email-si-wei.liu@oracle.com>
 MIME-Version: 1.0
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.272,Aquarius:18.0.980,Hydra:6.0.619,FMLib:17.11.176.26
@@ -89,8 +91,8 @@ X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
  mlxscore=0 suspectscore=0 phishscore=0 adultscore=0 mlxlogscore=999
  classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2310170001
  definitions=main-2310210086
-X-Proofpoint-ORIG-GUID: OcUBGy1t-QNztFdDrpMctnzrON55byEh
-X-Proofpoint-GUID: OcUBGy1t-QNztFdDrpMctnzrON55byEh
+X-Proofpoint-ORIG-GUID: SFaXeIDhHW1n_k7DF-_ZDJHrGK52hygc
+X-Proofpoint-GUID: SFaXeIDhHW1n_k7DF-_ZDJHrGK52hygc
 Cc: linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
@@ -103,85 +105,74 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-In order to reduce needlessly high setup and teardown cost
-of iotlb mapping during live migration, it's crucial to
-decouple the vhost-vdpa iotlb abstraction from the virtio
-device life cycle, i.e. iotlb mappings should be left
-intact across virtio device reset [1]. For it to work, the
-on-chip IOMMU parent device could implement a separate
-.reset_map() operation callback to restore 1:1 DMA mapping
-without having to resort to the .reset() callback, the
-latter of which is mainly used to reset virtio device state.
-This new .reset_map() callback will be invoked only before
-the vhost-vdpa driver is to be removed and detached from
-the vdpa bus, such that other vdpa bus drivers, e.g. 
-virtio-vdpa, can start with 1:1 DMA mapping when they
-are attached. For the context, those on-chip IOMMU parent
-devices, create the 1:1 DMA mapping at vdpa device creation,
-and they would implicitly destroy the 1:1 mapping when
-the first .set_map or .dma_map callback is invoked.
-
-This patchset is rebased on top of the latest vhost tree.
-
-[1] Reducing vdpa migration downtime because of memory pin / maps
-https://www.mail-archive.com/qemu-devel@nongnu.org/msg953755.html
-
----
-v4:
-- Rework compatibility using new .compat_reset driver op
-
-v3:
-- add .reset_map support to vdpa_sim
-- introduce module parameter to provide bug-for-bug compatibility with older
-  userspace 
-
-v2:
-- improved commit message to clarify the intended csope of .reset_map API
-- improved commit messages to clarify no breakage on older userspace
-
-v1:
-- rewrote commit messages to include more detailed description and background
-- reword to vendor specific IOMMU implementation from on-chip IOMMU
-- include parent device backend feautres to persistent iotlb precondition
-- reimplement mlx5_vdpa patch on top of descriptor group series
-
-RFC v3:
-- fix missing return due to merge error in patch #4
-
-RFC v2:
-- rebased on top of the "[PATCH RFC v2 0/3] vdpa: dedicated descriptor table group" series:
-  https://lore.kernel.org/virtualization/1694248959-13369-1-git-send-email-si-wei.liu@oracle.com/
-
----
-
-Si-Wei Liu (7):
-  vdpa: introduce .reset_map operation callback
-  vhost-vdpa: reset vendor specific mapping to initial state in .release
-  vhost-vdpa: introduce IOTLB_PERSIST backend feature bit
-  vdpa: introduce .compat_reset operation callback
-  vhost-vdpa: clean iotlb map during reset for older userspace
-  vdpa/mlx5: implement .reset_map driver op
-  vdpa_sim: implement .reset_map support
-
- drivers/vdpa/mlx5/core/mlx5_vdpa.h |  1 +
- drivers/vdpa/mlx5/core/mr.c        | 17 ++++++++++
- drivers/vdpa/mlx5/net/mlx5_vnet.c  | 27 ++++++++++++++--
- drivers/vdpa/vdpa_sim/vdpa_sim.c   | 52 ++++++++++++++++++++++++------
- drivers/vhost/vdpa.c               | 49 +++++++++++++++++++++++++---
- drivers/virtio/virtio_vdpa.c       |  2 +-
- include/linux/vdpa.h               | 30 +++++++++++++++--
- include/uapi/linux/vhost_types.h   |  2 ++
- 8 files changed, 161 insertions(+), 19 deletions(-)
-
--- 
-2.39.3
-
-_______________________________________________
-Virtualization mailing list
-Virtualization@lists.linux-foundation.org
-https://lists.linuxfoundation.org/mailman/listinfo/virtualization
+U29tZSBkZXZpY2Ugc3BlY2lmaWMgSU9NTVUgcGFyZW50IGRyaXZlcnMgaGF2ZSBsb25nIHN0YW5k
+aW5nIGJvZ3VzCmJlaGF2aW9yIHRoYXQgbWlzdGFrZW5seSBjbGVhbiB1cCB0aGUgbWFwcyBkdXJp
+bmcgLnJlc2V0LiBCeSBkZWZpbml0aW9uLAp0aGlzIGlzIHZpb2xhdGlvbiB0byB0aGUgb24tY2hp
+cCBJT01NVSBvcHMgKGkuZS4gLnNldF9tYXAsIG9yIC5kbWFfbWFwICYKLmRtYV91bm1hcCkgaW4g
+dGhvc2Ugb2ZmZW5kaW5nIGRyaXZlcnMsIGFzIHRoZSByZW1vdmFsIG9mIGludGVybmFsIG1hcHMK
+aXMgY29tcGxldGVseSBhZ25vc3RpYyB0byB0aGUgdXBwZXIgbGF5ZXIsIGNhdXNpbmcgaW5jb25z
+aXN0ZW50IHZpZXcKYmV0d2VlbiB0aGUgdXNlcnNwYWNlIGFuZCB0aGUga2VybmVsLiBTb21lIHVz
+ZXJzcGFjZSBhcHAgbGlrZSBRRU1VIGdldHMKYXJvdW5kIG9mIHRoaXMgYnJva2VubmVzcyBieSBw
+cm9hY3RpdmVseSByZW1vdmluZyBhbmQgYWRkaW5nIGJhY2sgYWxsCnRoZSBtYXBzIGFyb3VuZCB2
+ZHBhIGRldmljZSByZXNldCwgYnV0IHN1Y2ggd29ya2Fyb3VuZCBhY3R1YWxseSBwZW5hbGl6ZQpv
+dGhlciB3ZWxsLWJlaGF2ZWQgZHJpdmVyIHNldHVwLCB3aGVyZSB2ZHBhIHJlc2V0IGFsd2F5cyBj
+b21lcyB3aXRoIHRoZQphc3NvY2lhdGVkIG1hcHBpbmcgY29zdCwgZXNwZWNpYWxseSBmb3Iga2Vy
+bmVsIHZEUEEgZGV2aWNlcwoodXNlX3ZhPWZhbHNlKSB0aGF0IGhhdmUgaGlnaCBjb3N0IG9uIHBp
+bm5pbmcuIEl0J3MgaW1wZXJhdGl2ZSB0bwpyZWN0aWZ5IHRoaXMgYmVoYXZpb3IgYW5kIHJlbW92
+ZSB0aGUgcHJvYmxlbWF0aWMgY29kZSBmcm9tIGFsbCB0aG9zZQpub24tY29tcGxpYW50IHBhcmVu
+dCBkcml2ZXJzLgoKVGhlIHJlYXNvbiB3aHkgYSBzZXBhcmF0ZSAucmVzZXRfbWFwIG9wIGlzIGlu
+dHJvZHVjZWQgaXMgYmVjYXVzZSB0aGlzCmFsbG93cyBhIHNpbXBsZSBvbi1jaGlwIElPTU1VIG1v
+ZGVsIHdpdGhvdXQgZXhwb3NpbmcgdG9vIG11Y2ggZGV2aWNlCmltcGxlbWVudGF0aW9uIGRldGFp
+bCB0byB0aGUgdXBwZXIgdmRwYSBsYXllci4gVGhlIC5kbWFfbWFwL3VubWFwIG9yCi5zZXRfbWFw
+IGRyaXZlciBBUEkgaXMgbWVhbnQgdG8gYmUgdXNlZCB0byBtYW5pcHVsYXRlIHRoZSBJT1RMQgpt
+YXBwaW5ncywgYW5kIGhhcyBiZWVuIGFic3RyYWN0ZWQgaW4gYSB3YXkgc2ltaWxhciB0byBob3cg
+YSByZWFsIElPTU1VCmRldmljZSBtYXBzIG9yIHVubWFwcyBwYWdlcyBmb3IgY2VydGFpbiBtZW1v
+cnkgcmFuZ2VzLiBIb3dldmVyLCBhcGFydApmcm9tIHRoaXMgdGhlcmUgYWxzbyBleGlzdHMgb3Ro
+ZXIgbWFwcGluZyBuZWVkcywgaW4gd2hpY2ggY2FzZSAxOjEKcGFzc3Rocm91Z2ggbWFwcGluZyBo
+YXMgdG8gYmUgdXNlZCBieSBvdGhlciB1c2VycyAocmVhZCB2aXJ0aW8tdmRwYSkuIFRvCmVhc2Ug
+cGFyZW50L3ZlbmRvciBkcml2ZXIgaW1wbGVtZW50YXRpb24gYW5kIHRvIGF2b2lkIGFidXNpbmcg
+RE1BIG9wcyBpbgphbiB1bmV4cGFjdGVkIHdheSwgdGhlc2Ugb24tY2hpcCBJT01NVSBkZXZpY2Vz
+IGNhbiBzdGFydCB3aXRoIDE6MQpwYXNzdGhyb3VnaCBtYXBwaW5nIG1vZGUgaW5pdGlhbGx5IGF0
+IHRoZSB0aW1lIG9mIGNyZWF0aW9uLiBUaGVuIHRoZQoucmVzZXRfbWFwIG9wIGNhbiBiZSB1c2Vk
+IHRvIHN3aXRjaCBpb3RsYiBiYWNrIHRvIHRoaXMgaW5pdGlhbCBzdGF0ZQp3aXRob3V0IGhhdmlu
+ZyB0byBleHBvc2UgYSBjb21wbGV4IHR3by1kaW1lbnNpb25hbCBJT01NVSBkZXZpY2UgbW9kZWwu
+CgpUaGUgLnJlc2V0X21hcCBpcyBub3QgYSBNVVNUIGZvciBldmVyeSBwYXJlbnQgdGhhdCBpbXBs
+ZW1lbnRzIHRoZQouZG1hX21hcCBvciAuc2V0X21hcCBBUEksIGJlY2F1c2UgZGV2aWNlIG1heSB3
+b3JrIHdpdGggRE1BIG9wcyBkaXJlY3RseQpieSBpbXBsZW1lbnQgdGhlaXIgb3duIHRvIG1hbmlw
+dWxhdGUgc3lzdGVtIG1lbW9yeSBtYXBwaW5ncywgc28gZG9uJ3QKaGF2ZSB0byB1c2UgLnJlc2V0
+X21hcCB0byBhY2hpZXZlIGEgc2ltcGxlIElPTU1VIGRldmljZSBtb2RlbCBmb3IgMToxCnBhc3N0
+aHJvdWdoIG1hcHBpbmcuCgpTaWduZWQtb2ZmLWJ5OiBTaS1XZWkgTGl1IDxzaS13ZWkubGl1QG9y
+YWNsZS5jb20+CkFja2VkLWJ5OiBFdWdlbmlvIFDDqXJleiA8ZXBlcmV6bWFAcmVkaGF0LmNvbT4K
+QWNrZWQtYnk6IEphc29uIFdhbmcgPGphc293YW5nQHJlZGhhdC5jb20+Ci0tLQogaW5jbHVkZS9s
+aW51eC92ZHBhLmggfCAxMCArKysrKysrKysrCiAxIGZpbGUgY2hhbmdlZCwgMTAgaW5zZXJ0aW9u
+cygrKQoKZGlmZiAtLWdpdCBhL2luY2x1ZGUvbGludXgvdmRwYS5oIGIvaW5jbHVkZS9saW51eC92
+ZHBhLmgKaW5kZXggZDM3NjMwOWI5OWNmLi4yNmFlNmFlMWVhYzMgMTAwNjQ0Ci0tLSBhL2luY2x1
+ZGUvbGludXgvdmRwYS5oCisrKyBiL2luY2x1ZGUvbGludXgvdmRwYS5oCkBAIC0zMjcsNiArMzI3
+LDE1IEBAIHN0cnVjdCB2ZHBhX21hcF9maWxlIHsKICAqCQkJCUBpb3ZhOiBpb3ZhIHRvIGJlIHVu
+bWFwcGVkCiAgKgkJCQlAc2l6ZTogc2l6ZSBvZiB0aGUgYXJlYQogICoJCQkJUmV0dXJucyBpbnRl
+Z2VyOiBzdWNjZXNzICgwKSBvciBlcnJvciAoPCAwKQorICogQHJlc2V0X21hcDoJCQlSZXNldCBk
+ZXZpY2UgbWVtb3J5IG1hcHBpbmcgdG8gdGhlIGRlZmF1bHQKKyAqCQkJCXN0YXRlIChvcHRpb25h
+bCkKKyAqCQkJCU5lZWRlZCBmb3IgZGV2aWNlcyB0aGF0IGFyZSB1c2luZyBkZXZpY2UKKyAqCQkJ
+CXNwZWNpZmljIERNQSB0cmFuc2xhdGlvbiBhbmQgcHJlZmVyIG1hcHBpbmcKKyAqCQkJCXRvIGJl
+IGRlY291cGxlZCBmcm9tIHRoZSB2aXJ0aW8gbGlmZSBjeWNsZSwKKyAqCQkJCWkuZS4gZGV2aWNl
+IC5yZXNldCBvcCBkb2VzIG5vdCByZXNldCBtYXBwaW5nCisgKgkJCQlAdmRldjogdmRwYSBkZXZp
+Y2UKKyAqCQkJCUBhc2lkOiBhZGRyZXNzIHNwYWNlIGlkZW50aWZpZXIKKyAqCQkJCVJldHVybnMg
+aW50ZWdlcjogc3VjY2VzcyAoMCkgb3IgZXJyb3IgKDwgMCkKICAqIEBnZXRfdnFfZG1hX2RldjoJ
+CUdldCB0aGUgZG1hIGRldmljZSBmb3IgYSBzcGVjaWZpYwogICoJCQkJdmlydHF1ZXVlIChvcHRp
+b25hbCkKICAqCQkJCUB2ZGV2OiB2ZHBhIGRldmljZQpAQCAtNDA1LDYgKzQxNCw3IEBAIHN0cnVj
+dCB2ZHBhX2NvbmZpZ19vcHMgewogCQkgICAgICAgdTY0IGlvdmEsIHU2NCBzaXplLCB1NjQgcGEs
+IHUzMiBwZXJtLCB2b2lkICpvcGFxdWUpOwogCWludCAoKmRtYV91bm1hcCkoc3RydWN0IHZkcGFf
+ZGV2aWNlICp2ZGV2LCB1bnNpZ25lZCBpbnQgYXNpZCwKIAkJCSB1NjQgaW92YSwgdTY0IHNpemUp
+OworCWludCAoKnJlc2V0X21hcCkoc3RydWN0IHZkcGFfZGV2aWNlICp2ZGV2LCB1bnNpZ25lZCBp
+bnQgYXNpZCk7CiAJaW50ICgqc2V0X2dyb3VwX2FzaWQpKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRl
+diwgdW5zaWduZWQgaW50IGdyb3VwLAogCQkJICAgICAgdW5zaWduZWQgaW50IGFzaWQpOwogCXN0
+cnVjdCBkZXZpY2UgKigqZ2V0X3ZxX2RtYV9kZXYpKHN0cnVjdCB2ZHBhX2RldmljZSAqdmRldiwg
+dTE2IGlkeCk7Ci0tIAoyLjM5LjMKCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fClZpcnR1YWxpemF0aW9uIG1haWxpbmcgbGlzdApWaXJ0dWFsaXphdGlvbkBs
+aXN0cy5saW51eC1mb3VuZGF0aW9uLm9yZwpodHRwczovL2xpc3RzLmxpbnV4Zm91bmRhdGlvbi5v
+cmcvbWFpbG1hbi9saXN0aW5mby92aXJ0dWFsaXphdGlvbg==
