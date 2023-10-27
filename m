@@ -1,112 +1,104 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 879397D9158
-	for <lists.virtualization@lfdr.de>; Fri, 27 Oct 2023 10:25:10 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 1D9FD8228F;
-	Fri, 27 Oct 2023 08:25:09 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 1D9FD8228F
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=TPFJAgaQ
-X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp1.osuosl.org ([127.0.0.1])
-	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id rwBEX8KsGPNw; Fri, 27 Oct 2023 08:25:08 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id BC1028212B;
-	Fri, 27 Oct 2023 08:25:07 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org BC1028212B
-Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id EC64BC008C;
-	Fri, 27 Oct 2023 08:25:06 +0000 (UTC)
-X-Original-To: virtualization@lists.linux-foundation.org
-Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id DB6CEC0032
- for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Oct 2023 08:25:05 +0000 (UTC)
+	by mail.lfdr.de (Postfix) with ESMTPS id A88157D94F8
+	for <lists.virtualization@lfdr.de>; Fri, 27 Oct 2023 12:16:14 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id B3D0E6FAA0
- for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Oct 2023 08:25:05 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org B3D0E6FAA0
+	by smtp3.osuosl.org (Postfix) with ESMTP id D345960AB9;
+	Fri, 27 Oct 2023 10:16:12 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org D345960AB9
 Authentication-Results: smtp3.osuosl.org;
- dkim=pass (1024-bit key) header.d=redhat.com header.i=@redhat.com
- header.a=rsa-sha256 header.s=mimecast20190719 header.b=TPFJAgaQ
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=cloudflare.com header.i=@cloudflare.com header.a=rsa-sha256 header.s=google09082023 header.b=DflqaZEw
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
- by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id gjoaNuh1xjnr
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id N9IPirv5hy1W; Fri, 27 Oct 2023 10:16:12 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 8ECF770605;
+	Fri, 27 Oct 2023 10:16:11 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 8ECF770605
+Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
+	by lists.linuxfoundation.org (Postfix) with ESMTP id B853FC008C;
+	Fri, 27 Oct 2023 10:16:10 +0000 (UTC)
+X-Original-To: virtualization@lists.linux-foundation.org
+Delivered-To: virtualization@lists.linuxfoundation.org
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 6B559C0032
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Oct 2023 08:25:03 +0000 (UTC)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 984236F6C6
+ Fri, 27 Oct 2023 10:16:09 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+ by smtp2.osuosl.org (Postfix) with ESMTP id 45FE9433B5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Oct 2023 08:25:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 984236F6C6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1698395102;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=/sRPbObTy+hr2BTc4OunFroR638IOm6pKQx0eqZEmBc=;
- b=TPFJAgaQHAuCsv0HevVH7CRjqcA0NUhU/KP0HgRQNqMgb797qxJO9V+XG4a0Lhq6FNP4FE
- UPE1jg/dugDwXgMeibNmvDmP5WaYbfpPjdmyJ8PYoiZ69O4Ge6nSWv0KWxyK0m5n5+lFly
- 9sHV5fqVYjtyooPHXCpfHbxaG7Zcmpc=
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-74-rvRBXQ4GMoCefLY6iUKueA-1; Fri, 27 Oct 2023 04:25:01 -0400
-X-MC-Unique: rvRBXQ4GMoCefLY6iUKueA-1
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-3fe1521678fso13948085e9.1
+ Fri, 27 Oct 2023 10:16:09 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 45FE9433B5
+Authentication-Results: smtp2.osuosl.org;
+ dkim=pass (2048-bit key) header.d=cloudflare.com header.i=@cloudflare.com
+ header.a=rsa-sha256 header.s=google09082023 header.b=DflqaZEw
+X-Virus-Scanned: amavisd-new at osuosl.org
+Received: from smtp2.osuosl.org ([127.0.0.1])
+ by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id VVMEsdbDNvp5
  for <virtualization@lists.linux-foundation.org>;
- Fri, 27 Oct 2023 01:25:00 -0700 (PDT)
+ Fri, 27 Oct 2023 10:16:08 +0000 (UTC)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ by smtp2.osuosl.org (Postfix) with ESMTPS id EC78C433BF
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 27 Oct 2023 10:16:07 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EC78C433BF
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-53e70b0a218so2879367a12.2
+ for <virtualization@lists.linux-foundation.org>;
+ Fri, 27 Oct 2023 03:16:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=cloudflare.com; s=google09082023; t=1698401766; x=1699006566;
+ darn=lists.linux-foundation.org; 
+ h=mime-version:message-id:in-reply-to:date:subject:cc:to:from
+ :user-agent:references:from:to:cc:subject:date:message-id:reply-to;
+ bh=VD8qxUSefDVjPXgNPb04+1sZrR4xz+3Ht2LV1rsGWpY=;
+ b=DflqaZEw/6UXi3yS1WHC2QiCLuR3TYvz5Rf8MWjtSj6ECR6eSZ6KJDRAk8tfv3Zwjv
+ aoi0hu+7CcWnXCgVTXoNyLb1qvO7mYcgCYkxfmOOEnURL/bLTpGcYyCta7xhisCYyFSW
+ ivfDWI2NTC6Nc1IE8WldFUJCjnGkF1FVJzL3Byd6U4WMs0/xe9yB9kBD+HWqlulDvb+C
+ GxvvsnLrvxXgNF7kN9tv7fiTo4UvPSvte2kIYN0qPUVPpXQHm+DECcDkSuxwuKnnwRP2
+ wpbx60b8jl/fX4DWBpt4HS9VHRGrknFNm+xmh9zdHaK3LvsRcf8MjNOrpDPzgfeGP/tm
+ OWLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698395100; x=1698999900;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=1e100.net; s=20230601; t=1698401766; x=1699006566;
+ h=mime-version:message-id:in-reply-to:date:subject:cc:to:from
+ :user-agent:references:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/sRPbObTy+hr2BTc4OunFroR638IOm6pKQx0eqZEmBc=;
- b=v2XRgz2QZ41LTGFBwru4cm9JQj4t0aexjIirY3GV6YkQT9cQfua4td9hm8xjN+mr2k
- zVXmvu1QBqqFzrNWaqdi/wsdndBS40rxwyGQwJ5g7bcCecydex9mSiSMdKpf2GGIHc0K
- fvFPvluHjQAGSQuLR2IXBpRsA7ohlc77iSxiTtFZwjwxbR184BjWVIqlCscATRSOvLFL
- dRLmPNwF94C27rUrXzE18epxGNI734g5ctlpxHTbWz+s3zOORtQQdzDXDRlmAx3vDv5i
- OAGvWG+iFOms/Zk/kRwHdMyNHFr+1m8Tjk1AVdclbou0V1HonREHhPMJaUTRyRJ66TSC
- cpmg==
-X-Gm-Message-State: AOJu0Ywgw/0h2FSvKOx/LaKtsMy45Y5kRQARbvjPQ5UcOaZYLPNrS7Df
- SRbF1/q6mnCEp1JK/eboq1v5DPEn6U2YF+DUoF6Sk0AUz8YAUd+WM4zSzKZiC9WR2nF+171tjGM
- 9YGKI5crCZPmMajb6oTwT0UcOoWXp+XoetgjDmLOY6A==
-X-Received: by 2002:a05:600c:3b8f:b0:3f6:9634:c8d6 with SMTP id
- n15-20020a05600c3b8f00b003f69634c8d6mr1735087wms.18.1698395100030; 
- Fri, 27 Oct 2023 01:25:00 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEO1d9NiGLpMH9UwrjFO3nIKYTeiI3b8cMpfwR9v8L7e0iFdiDoeQvQOBZ/uEP3Wgl9+7lyBw==
-X-Received: by 2002:a05:600c:3b8f:b0:3f6:9634:c8d6 with SMTP id
- n15-20020a05600c3b8f00b003f69634c8d6mr1735069wms.18.1698395099613; 
- Fri, 27 Oct 2023 01:24:59 -0700 (PDT)
-Received: from sgarzare-redhat (host-87-12-185-56.business.telecomitalia.it.
- [87.12.185.56]) by smtp.gmail.com with ESMTPSA id
- l12-20020adfe9cc000000b0032dba85ea1bsm1221968wrn.75.2023.10.27.01.24.57
+ bh=VD8qxUSefDVjPXgNPb04+1sZrR4xz+3Ht2LV1rsGWpY=;
+ b=Wm4Qw8v7es6QVhyElpzSRpAfJZAAuxnZyCO0ir+HyadM1rVhn/BT28rv/d3bWHEMiA
+ sMZ4oOYillitS5cJXQcmqeIw569X/xk/9uqtj/MbkPWgLBUvLFf5WQjJEz+3CNtk5jVc
+ lk9pZPgAPLzSZwswyoH5P552UL4LskGXmn1agKBuAZmxzX32Zf3NOQXLeVCP+nDT1Af4
+ owDaDbRe+ruZv/GgSSqcCM0z8FfAK+iQryFgPReuWA8EAVI+fupYssdUchzKOmDxk13V
+ KVEv1c4nFxgCir/OiLnW6spPGCtMKRhzNjXawibvy6XXTMqLkPZLY3l0sz3X1JLA+xWr
+ YRPg==
+X-Gm-Message-State: AOJu0YxM13ag5CtmfApHwP8mCCmm4sILct2YBFR/sXmeSiKTHT/twgPq
+ MSsR1Nf5wstHY6j+LcT2PYL8lg==
+X-Google-Smtp-Source: AGHT+IFfkizWmVU9WhARM2yRlhPHHxfYCuFmgAqgyUq5hVDUDfcXjYqHhdjR8kiXeJWlGUksz1K1wQ==
+X-Received: by 2002:aa7:d653:0:b0:541:2bb8:7a9f with SMTP id
+ v19-20020aa7d653000000b005412bb87a9fmr1972835edr.38.1698401765948; 
+ Fri, 27 Oct 2023 03:16:05 -0700 (PDT)
+Received: from cloudflare.com (79.184.154.62.ipv4.supernova.orange.pl.
+ [79.184.154.62]) by smtp.gmail.com with ESMTPSA id
+ y8-20020a50bb08000000b005400dc94f43sm1011571ede.45.2023.10.27.03.16.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 27 Oct 2023 01:24:59 -0700 (PDT)
-Date: Fri, 27 Oct 2023 10:24:54 +0200
-From: Stefano Garzarella <sgarzare@redhat.com>
-To: syzbot <syzbot+0c8ce1da0ac31abbadcd@syzkaller.appspotmail.com>
-Subject: Re: [syzbot] [net?] KMSAN: uninit-value in virtio_transport_recv_pkt
-Message-ID: <ooihytsfbk3brbwi2oj27ju3ff43ns36qhksfixrxdau2nieor@ervvukakvk4n>
-References: <00000000000008b2940608ae3ce9@google.com>
+ Fri, 27 Oct 2023 03:16:05 -0700 (PDT)
+References: <20231025145319.380775-1-jakub@cloudflare.com>
+ <87wmv91h3p.fsf@cloudflare.com>
+ <20231026131830-mutt-send-email-mst@kernel.org>
+User-agent: mu4e 1.6.10; emacs 28.3
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Subject: Re: [PATCH v2] virtio_pci: Switch away from deprecated
+ irq_set_affinity_hint
+Date: Fri, 27 Oct 2023 12:03:17 +0200
+In-reply-to: <20231026131830-mutt-send-email-mst@kernel.org>
+Message-ID: <87sf5w1ica.fsf@cloudflare.com>
 MIME-Version: 1.0
-In-Reply-To: <00000000000008b2940608ae3ce9@google.com>
-X-Mimecast-Spam-Score: 1
-X-Mimecast-Originator: redhat.com
-Content-Disposition: inline
-Cc: syoshida@redhat.com, kvm@vger.kernel.org, netdev@vger.kernel.org,
- syzkaller-bugs@googlegroups.com, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, edumazet@google.com,
- stefanha@redhat.com, kuba@kernel.org, pabeni@redhat.com, davem@davemloft.net
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>, kernel-team@cloudflare.com,
+ linux-kernel@vger.kernel.org, virtualization@lists.linux-foundation.org
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -118,84 +110,59 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: Jakub Sitnicki via Virtualization
+ <virtualization@lists.linux-foundation.org>
+Reply-To: Jakub Sitnicki <jakub@cloudflare.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
-Content-Type: text/plain; charset="us-ascii"; Format="flowed"
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Fri, Oct 27, 2023 at 01:11:24AM -0700, syzbot wrote:
->Hello,
+On Thu, Oct 26, 2023 at 01:20 PM -04, Michael S. Tsirkin wrote:
+> On Thu, Oct 26, 2023 at 06:25:08PM +0200, Jakub Sitnicki wrote:
+>> On Wed, Oct 25, 2023 at 04:53 PM +02, Jakub Sitnicki wrote:
+>> > Since commit 65c7cdedeb30 ("genirq: Provide new interfaces for affinity
+>> > hints") irq_set_affinity_hint is being phased out.
+>> >
+>> > Switch to new interfaces for setting and applying irq affinity hints.
+>> >
+>> > Signed-off-by: Jakub Sitnicki <jakub@cloudflare.com>
+>> > ---
+>> > v2:
+>> >  - Leave cpumask_copy as is. We can't pass pointer to stack memory as hint.
+>> >    Proposed a change to IRQ affinity interface to address this limitation:
+>> >    https://lore.kernel.org/r/20231025141517.375378-1-jakub@cloudflare.com
+>> 
+>> Just a note to the ^ - if we wanted to get rid of msix_affinity_masks,
+>> we could call irq_set_affinity directly, instead of calling it through
+>> irq_set_affinity[_and]_hint.
+>> 
+>> The hint wouldn't be available any more in /proc/irq/N/affinity_hint,
+>> but the same information can be gathered from /proc/irq/N/smp_affinity.
+>> 
+>> [...]
 >
->syzbot found the following issue on:
 >
->HEAD commit:    d90b0276af8f Merge tag 'hardening-v6.6-rc3' of git://git.k..
->git tree:       upstream
->console+strace: https://syzkaller.appspot.com/x/log.txt?x=102c8b22680000
->kernel config:  https://syzkaller.appspot.com/x/.config?x=6f1a4029b69273f3
->dashboard link: https://syzkaller.appspot.com/bug?extid=0c8ce1da0ac31abbadcd
->compiler:       Debian clang version 15.0.6, GNU ld (GNU Binutils for Debian) 2.40
->syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=101e58ec680000
->C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=17f7adb6680000
->
->Downloadable assets:
->disk image: https://storage.googleapis.com/syzbot-assets/83ae10beee39/disk-d90b0276.raw.xz
->vmlinux: https://storage.googleapis.com/syzbot-assets/c231992300f6/vmlinux-d90b0276.xz
->kernel image: https://storage.googleapis.com/syzbot-assets/6377c9c2ea97/bzImage-d90b0276.xz
->
->IMPORTANT: if you fix the issue, please add the following tag to the commit:
->Reported-by: syzbot+0c8ce1da0ac31abbadcd@syzkaller.appspotmail.com
->
->=====================================================
->BUG: KMSAN: uninit-value in virtio_transport_recv_pkt+0x1c42/0x2580 net/vmw_vsock/virtio_transport_common.c:1421
-> virtio_transport_recv_pkt+0x1c42/0x2580 net/vmw_vsock/virtio_transport_common.c:1421
-> vsock_loopback_work+0x3e2/0x5d0 net/vmw_vsock/vsock_loopback.c:120
-> process_one_work kernel/workqueue.c:2630 [inline]
-> process_scheduled_works+0x104e/0x1e70 kernel/workqueue.c:2703
-> worker_thread+0xf45/0x1490 kernel/workqueue.c:2784
-> kthread+0x3e8/0x540 kernel/kthread.c:388
-> ret_from_fork+0x66/0x80 arch/x86/kernel/process.c:147
-> ret_from_fork_asm+0x11/0x20 arch/x86/entry/entry_64.S:304
->
->Uninit was stored to memory at:
-> virtio_transport_space_update net/vmw_vsock/virtio_transport_common.c:1274 [inline]
-> virtio_transport_recv_pkt+0x1ea4/0x2580 net/vmw_vsock/virtio_transport_common.c:1415
-> vsock_loopback_work+0x3e2/0x5d0 net/vmw_vsock/vsock_loopback.c:120
-> process_one_work kernel/workqueue.c:2630 [inline]
-> process_scheduled_works+0x104e/0x1e70 kernel/workqueue.c:2703
-> worker_thread+0xf45/0x1490 kernel/workqueue.c:2784
-> kthread+0x3e8/0x540 kernel/kthread.c:388
-> ret_from_fork+0x66/0x80 arch/x86/kernel/process.c:147
-> ret_from_fork_asm+0x11/0x20 arch/x86/entry/entry_64.S:304
->
->Uninit was created at:
-> slab_post_alloc_hook+0x12f/0xb70 mm/slab.h:767
-> slab_alloc_node mm/slub.c:3478 [inline]
-> kmem_cache_alloc_node+0x577/0xa80 mm/slub.c:3523
-> kmalloc_reserve+0x13d/0x4a0 net/core/skbuff.c:559
-> __alloc_skb+0x318/0x740 net/core/skbuff.c:650
-> alloc_skb include/linux/skbuff.h:1286 [inline]
-> virtio_vsock_alloc_skb include/linux/virtio_vsock.h:66 [inline]
-> virtio_transport_alloc_skb+0x8b/0x1170 net/vmw_vsock/virtio_transport_common.c:58
-> virtio_transport_reset_no_sock net/vmw_vsock/virtio_transport_common.c:957 [inline]
-> virtio_transport_recv_pkt+0x1531/0x2580 net/vmw_vsock/virtio_transport_common.c:1387
-> vsock_loopback_work+0x3e2/0x5d0 net/vmw_vsock/vsock_loopback.c:120
-> process_one_work kernel/workqueue.c:2630 [inline]
-> process_scheduled_works+0x104e/0x1e70 kernel/workqueue.c:2703
-> worker_thread+0xf45/0x1490 kernel/workqueue.c:2784
-> kthread+0x3e8/0x540 kernel/kthread.c:388
-> ret_from_fork+0x66/0x80 arch/x86/kernel/process.c:147
-> ret_from_fork_asm+0x11/0x20 arch/x86/entry/entry_64.S:304
->
->CPU: 0 PID: 8 Comm: kworker/0:0 Not tainted 6.6.0-rc2-syzkaller-00337-gd90b0276af8f #0
->Hardware name: Google Google Compute Engine/Google Compute Engine, BIOS Google 08/04/2023
->Workqueue: vsock-loopback vsock_loopback_work
->=====================================================
->
+> So we are potentially breaking some userspace - what's the value we
+> gain?  Is there some way we can make disable_irq/enable_irq work?
+> That would have a lot of value.
+> There is an actual need for that in virtio for coco but we can't use
+> these APIs with affinity managed IRQs.
 
-Shigeru Yoshida already posted a patch here:
+Sorry, that is beyond my ken today.
 
-https://lore.kernel.org/netdev/20231026150154.3536433-1-syoshida@redhat.com/
+I saw the comment in vp_modern_disable_vq_and_reset:
 
+	/* For the case where vq has an exclusive irq, call synchronize_irq() to
+	 * wait for completion.
+	 *
+	 * note: We can't use disable_irq() since it conflicts with the affinity
+	 * managed IRQ that is used by some drivers.
+	 */
+
+... but I fail to follow how the two conflict.
+
+Perhaps Xuah could shed some light here.
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
