@@ -1,110 +1,81 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [140.211.166.137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 0CBD17DF2B4
-	for <lists.virtualization@lfdr.de>; Thu,  2 Nov 2023 13:47:58 +0100 (CET)
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [IPv6:2605:bc80:3010::138])
+	by mail.lfdr.de (Postfix) with ESMTPS id 67B177DF37E
+	for <lists.virtualization@lfdr.de>; Thu,  2 Nov 2023 14:18:06 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id 2BAA54F0BC;
-	Thu,  2 Nov 2023 12:47:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 2BAA54F0BC
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.a=rsa-sha256 header.s=google header.b=bgo+GULy
+	by smtp1.osuosl.org (Postfix) with ESMTP id AF3D685072;
+	Thu,  2 Nov 2023 13:18:02 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org AF3D685072
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 4llrOY0qhebB; Thu,  2 Nov 2023 12:47:52 +0000 (UTC)
+Received: from smtp1.osuosl.org ([127.0.0.1])
+	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id jfQXIUbMLE2M; Thu,  2 Nov 2023 13:17:58 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id 03DB24F0BB;
-	Thu,  2 Nov 2023 12:47:52 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 03DB24F0BB
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 64CBE85067;
+	Thu,  2 Nov 2023 13:17:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 64CBE85067
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 21E29C008C;
-	Thu,  2 Nov 2023 12:47:51 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 8AD40C008D;
+	Thu,  2 Nov 2023 13:17:57 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 89F29C0032
+Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 31365C0032
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Nov 2023 12:47:49 +0000 (UTC)
+ Thu,  2 Nov 2023 13:17:56 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id 645EA43402
+ by smtp1.osuosl.org (Postfix) with ESMTP id 0CD9F8506F
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Nov 2023 12:47:49 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 645EA43402
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca
- header.a=rsa-sha256 header.s=google header.b=bgo+GULy
+ Thu,  2 Nov 2023 13:17:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 0CD9F8506F
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id ZmSrNTmaMuqW
+Received: from smtp1.osuosl.org ([127.0.0.1])
+ by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id pxeANW7pFxEW
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Nov 2023 12:47:45 +0000 (UTC)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
- by smtp2.osuosl.org (Postfix) with ESMTPS id 12A2D41468
+ Thu,  2 Nov 2023 13:17:54 +0000 (UTC)
+X-Greylist: delayed 996 seconds by postgrey-1.37 at util1.osuosl.org;
+ Thu, 02 Nov 2023 13:17:53 UTC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 80D0084F70
+Received: from szxga02-in.huawei.com (szxga02-in.huawei.com [45.249.212.188])
+ by smtp1.osuosl.org (Postfix) with ESMTPS id 80D0084F70
  for <virtualization@lists.linux-foundation.org>;
- Thu,  2 Nov 2023 12:47:44 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 12A2D41468
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-7789923612dso49959885a.0
- for <virtualization@lists.linux-foundation.org>;
- Thu, 02 Nov 2023 05:47:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1698929264; x=1699534064;
- darn=lists.linux-foundation.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WQ+GdWawOo3FT7vEf5mwevTBQUu7eDKWKnvNYW/PsMc=;
- b=bgo+GULyl/S7mgs3vD/NG8Zv2Vo55x4RUtW1mJ8vFtgaMbqb+++gR4IgAXORKfKrMw
- z7cmShQX0V1rR7oFLA1W1a/7Me1alnviQLGlHJOZVIfenmCUYTZlmJejMi/IglK//fpD
- P4Bh/79Jq3XWeO7YElrmQu2tQ7IBa4wsKCg54gSmVp1Mt4q0x4M24448GzW5jCBcz2mU
- NjJsTXGgi0aQRm+K7KIqrER8nSTKEB3ObRv4kUW+xqjuJeAggfYDqxzMuW12MRTUEJ4U
- eNEwxSRbfuDZ9KewvTDFiWXhGEh2p2R7EtIOXPZb09vIUoHkYRFzZ6uFL8S3PFaHtT0i
- tMAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1698929264; x=1699534064;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=WQ+GdWawOo3FT7vEf5mwevTBQUu7eDKWKnvNYW/PsMc=;
- b=E5RinBv34URijUv/vfraIt1A692oIQEgdZ0jjoyZgl4DEoBLxwB7TejHrhyi7zLu5d
- +RC3GnqH/4YI6wyCwi7EUtQgi9GgQjIPahI4ja1dlidP3C3ePgQfyyeqriwR0vpQk0jg
- kOr00ypLtSDwcg+CNfVWr3ukUOY0y6QQa/Az2MjJ1mTa6TliS5W/ay7VWKF9ShSkx/Py
- JuqCS8p5X7VCXh2XpsbgQFUZV+AJkX96rwWNVezdHauVM9axWbIkHroHvdpG3NTBRP1Q
- SXR08PrchDNVGkf6YWLKn97lYX7eIBfqktO62qwBC22nOATt2FY1XoO10OQYfQ6t22Ql
- yPWQ==
-X-Gm-Message-State: AOJu0Yy83SyxVoLLOQkXcu8YjX1ACXbVI0eOnBFRDq/QG4Cz5gBFtB3g
- 37LUzpEmdA+eA2/X918DzbOxPA==
-X-Google-Smtp-Source: AGHT+IFxFiOR7UXzaPpwFSzkWqw0zJo0m72p87r7wZ2km12vbMwY4rfJeHI3ydNPhYo9BA85V7lP4Q==
-X-Received: by 2002:a05:620a:35e:b0:775:9bb1:9ac4 with SMTP id
- t30-20020a05620a035e00b007759bb19ac4mr18012659qkm.61.1698929263726; 
- Thu, 02 Nov 2023 05:47:43 -0700 (PDT)
-Received: from ziepe.ca
- (hlfxns017vw-142-68-26-201.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.68.26.201]) by smtp.gmail.com with ESMTPSA id
- r18-20020a05620a299200b007770673e757sm2291720qkp.94.2023.11.02.05.47.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 Nov 2023 05:47:43 -0700 (PDT)
-Received: from jgg by wakko with local (Exim 4.95)
- (envelope-from <jgg@ziepe.ca>) id 1qyX6s-0004kn-JW;
- Thu, 02 Nov 2023 09:47:42 -0300
-Date: Thu, 2 Nov 2023 09:47:42 -0300
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Lu Baolu <baolu.lu@linux.intel.com>
-Subject: Re: [PATCH v2 0/6] IOMMUFD: Deliver IO page faults to user space
-Message-ID: <20231102124742.GA4634@ziepe.ca>
-References: <20231026024930.382898-1-baolu.lu@linux.intel.com>
+ Thu,  2 Nov 2023 13:17:53 +0000 (UTC)
+Received: from dggpemm500019.china.huawei.com (unknown [172.30.72.56])
+ by szxga02-in.huawei.com (SkyGuard) with ESMTP id 4SLkX16wDrzVm1M;
+ Thu,  2 Nov 2023 21:01:05 +0800 (CST)
+Received: from dggpemm500006.china.huawei.com (7.185.36.236) by
+ dggpemm500019.china.huawei.com (7.185.36.180) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.31; Thu, 2 Nov 2023 21:01:09 +0800
+Received: from dggpemm500006.china.huawei.com ([7.185.36.236]) by
+ dggpemm500006.china.huawei.com ([7.185.36.236]) with mapi id 15.01.2507.031;
+ Thu, 2 Nov 2023 21:01:09 +0800
+To: Halil Pasic <pasic@linux.ibm.com>
+Subject: RE: [PATCH] crypto: virtio-crypto: call finalize with bh disabled
+Thread-Topic: [PATCH] crypto: virtio-crypto: call finalize with bh disabled
+Thread-Index: AdnvwZyqMOU4LXJLQHSIVFGYJFXR5QAk7LIAADLTkZAHGvVqsA==
+Date: Thu, 2 Nov 2023 13:01:09 +0000
+Message-ID: <adb0c5f790dc408887f9d98548373919@huawei.com>
+References: <1914739e2de14ed396e5674aa2d4766c@huawei.com>
+ <20230926184158.4ca2c0c3.pasic@linux.ibm.com> 
+Accept-Language: zh-CN, en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.174.149.11]
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20231026024930.382898-1-baolu.lu@linux.intel.com>
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
- Yi Liu <yi.l.liu@intel.com>, Will Deacon <will@kernel.org>,
- Joerg Roedel <joro@8bytes.org>, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux.dev,
- Jacob Pan <jacob.jun.pan@linux.intel.com>, Nicolin Chen <nicolinc@nvidia.com>,
- linux-kselftest@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>
+X-CFilter-Loop: Reflected
+Cc: Herbert Xu <herbert@gondor.apana.org.au>,
+ "Michael S. Tsirkin" <mst@redhat.com>, Cornelia Huck <cohuck@redhat.com>,
+ "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+ "pizhenwei@bytedance.com" <pizhenwei@bytedance.com>,
+ "virtualization@lists.linux-foundation.org"
+ <virtualization@lists.linux-foundation.org>,
+ Marc Hartmayer <mhartmay@linux.ibm.com>,
+ "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -116,41 +87,99 @@ List-Post: <mailto:virtualization@lists.linux-foundation.org>
 List-Help: <mailto:virtualization-request@lists.linux-foundation.org?subject=help>
 List-Subscribe: <https://lists.linuxfoundation.org/mailman/listinfo/virtualization>, 
  <mailto:virtualization-request@lists.linux-foundation.org?subject=subscribe>
+From: "Gonglei \(Arei\) via Virtualization"
+ <virtualization@lists.linux-foundation.org>
+Reply-To: "Gonglei \(Arei\)" <arei.gonglei@huawei.com>
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Thu, Oct 26, 2023 at 10:49:24AM +0800, Lu Baolu wrote:
-> Hi folks,
+Ping Herbert.  
+
+Thanks.
+
+> -----Original Message-----
+> From: Gonglei (Arei)
+> Sent: Wednesday, September 27, 2023 5:18 PM
+> To: 'Halil Pasic' <pasic@linux.ibm.com>
+> Cc: Herbert Xu <herbert@gondor.apana.org.au>; linux-crypto@vger.kernel.org;
+> Marc Hartmayer <mhartmay@linux.ibm.com>; Michael S. Tsirkin
+> <mst@redhat.com>; Jason Wang <jasowang@redhat.com>;
+> virtualization@lists.linux-foundation.org; linux-kernel@vger.kernel.org;
+> pizhenwei@bytedance.com; Cornelia Huck <cohuck@redhat.com>
+> Subject: RE: [PATCH] crypto: virtio-crypto: call finalize with bh disabled
 > 
-> This series implements the functionality of delivering IO page faults to
-> user space through the IOMMUFD framework for nested translation. Nested
-> translation is a hardware feature that supports two-stage translation
-> tables for IOMMU. The second-stage translation table is managed by the
-> host VMM, while the first-stage translation table is owned by user
-> space. This allows user space to control the IOMMU mappings for its
-> devices.
+> 
+> 
+> > -----Original Message-----
+> > From: Halil Pasic [mailto:pasic@linux.ibm.com]
+> > Sent: Wednesday, September 27, 2023 12:42 AM
+> > To: Gonglei (Arei) <arei.gonglei@huawei.com>
+> > Cc: Herbert Xu <herbert@gondor.apana.org.au>;
+> > linux-crypto@vger.kernel.org; Marc Hartmayer <mhartmay@linux.ibm.com>;
+> > Michael S. Tsirkin <mst@redhat.com>; Jason Wang
+> <jasowang@redhat.com>;
+> > virtualization@lists.linux-foundation.org;
+> > linux-kernel@vger.kernel.org; pizhenwei@bytedance.com; Halil Pasic
+> > <pasic@linux.ibm.com>; Cornelia Huck <cohuck@redhat.com>
+> > Subject: Re: [PATCH] crypto: virtio-crypto: call finalize with bh
+> > disabled
+> >
+> > [..]
+> > > --- a/drivers/crypto/virtio/virtio_crypto_akcipher_algs.c
+> > > +++ b/drivers/crypto/virtio/virtio_crypto_akcipher_algs.c
+> > > @@ -61,8 +61,9 @@ static void virtio_crypto_akcipher_finalize_req(
+> > >  	vc_akcipher_req->src_buf = NULL;
+> > >  	vc_akcipher_req->dst_buf = NULL;
+> > >  	virtcrypto_clear_request(&vc_akcipher_req->base);
+> > > -
+> > > +	local_bh_disable();
+> > >
+> > > crypto_finalize_akcipher_request(vc_akcipher_req->base.dataq->engine
+> > > ,
+> > > req, err);
+> > > +	local_bh_enable();
+> >
+> > Thanks Gonglei!
+> >
+> > I did this a quick spin, and it does not seem to be sufficient on s390x.
+> > Which does not come as a surprise to me, because
+> >
+> > #define lockdep_assert_in_softirq()
+> > \
+> > do
+> > {
+> >      \
+> >         WARN_ON_ONCE(__lockdep_enabled                  &&
+> > \
+> >                      (!in_softirq() || in_irq() || in_nmi()));          \
+> > } while (0)
+> >
+> > will still warn because  in_irq() still evaluates to true (your patch
+> > addresses the !in_softirq() part).
+> >
+> You are right.
+> 
+> So I think the core of this question is: Can we call crypto_finalize_request() in
+> the upper half of the interrupt?
+> If so, maybe we should introduce a new function, such as
+> lockdep_assert_in_interrupt().
+> 
+> #define lockdep_assert_in_interrupt()                               \
+> do {                                                           \
+>        WARN_ON_ONCE(__lockdep_enabled && !in_interrupt());        \
+> } while (0)
+> 
+> If not, why?
+> 
+> Herbert, do you have any suggestions? Thanks.
+> 
+> 
+> Regards,
+> -Gonglei
+> 
 
-Having now looked more closely at the ARM requirements it seems we
-will need generic events, not just page fault events to have a
-complete emulation.
-
-So I'd like to see this generalized into a channel to carry any
-events..
-
-> User space indicates its capability of handling IO page faults by
-> setting the IOMMU_HWPT_ALLOC_IOPF_CAPABLE flag when allocating a
-> hardware page table (HWPT). IOMMUFD will then set up its infrastructure
-> for page fault delivery. On a successful return of HWPT allocation, the
-> user can retrieve and respond to page faults by reading and writing to
-> the file descriptor (FD) returned in out_fault_fd.
-
-This is the right way to approach it, and more broadly this shouldn't
-be an iommufd specific thing. Kernel drivers will also need to create
-fault capable PAGING iommu domains.
-
-Jason
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
