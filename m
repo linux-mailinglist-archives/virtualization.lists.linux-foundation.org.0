@@ -1,87 +1,89 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
-	by mail.lfdr.de (Postfix) with ESMTPS id 5C6B27E1AEB
-	for <lists.virtualization@lfdr.de>; Mon,  6 Nov 2023 08:14:18 +0100 (CET)
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+	by mail.lfdr.de (Postfix) with ESMTPS id E79E97E1B32
+	for <lists.virtualization@lfdr.de>; Mon,  6 Nov 2023 08:27:37 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp4.osuosl.org (Postfix) with ESMTP id DFC9941DE9;
-	Mon,  6 Nov 2023 07:14:14 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org DFC9941DE9
-Authentication-Results: smtp4.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=Pdvq3G9o
+	by smtp3.osuosl.org (Postfix) with ESMTP id 5ECB3610CE;
+	Mon,  6 Nov 2023 07:27:36 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5ECB3610CE
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp4.osuosl.org ([127.0.0.1])
-	by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id G0WqtvXY30kB; Mon,  6 Nov 2023 07:14:14 +0000 (UTC)
+Received: from smtp3.osuosl.org ([127.0.0.1])
+	by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id kAdTtGaGXBvW; Mon,  6 Nov 2023 07:27:35 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp4.osuosl.org (Postfix) with ESMTPS id A43AD41E25;
-	Mon,  6 Nov 2023 07:14:13 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org A43AD41E25
+	by smtp3.osuosl.org (Postfix) with ESMTPS id 374CA610D2;
+	Mon,  6 Nov 2023 07:27:35 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 374CA610D2
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 77DA4C0DD6;
-	Mon,  6 Nov 2023 07:14:13 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 6A2FFC008C;
+	Mon,  6 Nov 2023 07:27:34 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
 Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 315B3C008C
+ by lists.linuxfoundation.org (Postfix) with ESMTP id AEACCC0032
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 07:14:12 +0000 (UTC)
+ Mon,  6 Nov 2023 07:27:32 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id E9D45610CF
+ by smtp3.osuosl.org (Postfix) with ESMTP id 86BEF610CE
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 07:14:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org E9D45610CF
-Authentication-Results: smtp3.osuosl.org;
- dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com
- header.a=rsa-sha256 header.s=Intel header.b=Pdvq3G9o
+ Mon,  6 Nov 2023 07:27:32 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 86BEF610CE
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 0ABcAfyUw2XN
+ with ESMTP id kuf5cIJFIx7S
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 07:14:11 +0000 (UTC)
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.7])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 4D9F2610CE
+ Mon,  6 Nov 2023 07:27:30 +0000 (UTC)
+X-Greylist: delayed 590 seconds by postgrey-1.37 at util1.osuosl.org;
+ Mon, 06 Nov 2023 07:27:30 UTC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5813961038
+Received: from verein.lst.de (verein.lst.de [213.95.11.211])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 5813961038
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 07:14:11 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4D9F2610CE
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1699254851; x=1730790851;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=JXrcRndberQgWoGawVfq93WylWTuPjjrsB1zsCyDKUk=;
- b=Pdvq3G9oshsK/10S7GAfl+yak1B80KtayzriiEpXy+JD8IR8QmZarkj+
- 1GooCPhIB0OoS04T0mB9PgJoaiPGjdxWCEoT714ujaABCR369/0Evj3Ot
- A6MnCHgwx0t3GrcK330ROjNsjD6c7fYeT6XIxmiz/1CrjRZARBWjWCC/F
- Mrmk/5YXn9vRQkQodY26VRH2ASWb085Jw5ywtk4u4mFouRIHK8XED0xkC
- Dt+Llx2haVlsbuGO4C1kRhn6iHg96ZfjGrNc8EjSupLwBZJE+ZgCSDE2C
- +jShQeNsmNGjCh/oAOKLYu4UIjZm22lBTFQFWAToT7oxcPkCyI+jVCdXH Q==;
-X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="10759077"
-X-IronPort-AV: E=Sophos;i="6.03,280,1694761200"; d="scan'208";a="10759077"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
- by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 05 Nov 2023 23:14:11 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=McAfee;i="6600,9927,10885"; a="1093690912"
-X-IronPort-AV: E=Sophos;i="6.03,280,1694761200"; d="scan'208";a="1093690912"
-Received: from sqa-gate.sh.intel.com (HELO localhost.localdomain)
- ([10.239.48.212])
- by fmsmga005.fm.intel.com with ESMTP; 05 Nov 2023 23:14:07 -0800
-From: Tina Zhang <tina.zhang@intel.com>
-To: Jean-Philippe Brucker <jean-philippe@linaro.org>,
- Kevin Tian <kevin.tian@intel.com>, Lu Baolu <baolu.lu@linux.intel.com>,
- joro@8bytes.org, will@kernel.org, Yi Liu <yi.l.liu@intel.com>
-Subject: [RFC PATCH 5/5] iommu/virtio-iommu: Support attaching VT-d IO pgtable
-Date: Mon,  6 Nov 2023 02:12:26 -0500
-Message-Id: <20231106071226.9656-6-tina.zhang@intel.com>
-X-Mailer: git-send-email 2.39.3
-In-Reply-To: <20231106071226.9656-1-tina.zhang@intel.com>
-References: <20231106071226.9656-1-tina.zhang@intel.com>
+ Mon,  6 Nov 2023 07:27:30 +0000 (UTC)
+Received: by verein.lst.de (Postfix, from userid 2407)
+ id 4BBAD6732D; Mon,  6 Nov 2023 08:17:33 +0100 (CET)
+Date: Mon, 6 Nov 2023 08:17:33 +0100
+From: Christoph Hellwig <hch@lst.de>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Subject: Re: [PATCH RFC 01/17] iommu: Remove struct iommu_ops *iommu from
+ arch_setup_dma_ops()
+Message-ID: <20231106071733.GA17258@lst.de>
+References: <0-v1-5f734af130a3+34f-iommu_fwspec_jgg@nvidia.com>
+ <1-v1-5f734af130a3+34f-iommu_fwspec_jgg@nvidia.com>
 MIME-Version: 1.0
-Cc: iommu@lists.linux.dev, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org
+Content-Disposition: inline
+In-Reply-To: <1-v1-5f734af130a3+34f-iommu_fwspec_jgg@nvidia.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
+Cc: linux-hyperv@vger.kernel.org, "Rafael J. Wysocki" <rafael@kernel.org>,
+ Catalin Marinas <catalin.marinas@arm.com>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Robert Moore <robert.moore@intel.com>,
+ Thierry Reding <thierry.reding@gmail.com>, Hanjun Guo <guohanjun@huawei.com>,
+ acpica-devel@lists.linuxfoundation.org, Christoph Hellwig <hch@lst.de>,
+ Alyssa Rosenzweig <alyssa@rosenzweig.io>,
+ Marek Szyprowski <m.szyprowski@samsung.com>,
+ Jean-Philippe Brucker <jean-philippe@linaro.org>, Wei Liu <wei.liu@kernel.org>,
+ Will Deacon <will@kernel.org>, Joerg Roedel <joro@8bytes.org>,
+ Dexuan Cui <decui@microsoft.com>, Russell King <linux@armlinux.org.uk>,
+ linux-riscv@lists.infradead.org, Jonathan Hunter <jonathanh@nvidia.com>,
+ linux-acpi@vger.kernel.org, iommu@lists.linux.dev,
+ Vineet Gupta <vgupta@kernel.org>, linux-snps-arc@lists.infradead.org,
+ Len Brown <lenb@kernel.org>, devicetree@vger.kernel.org,
+ Albert Ou <aou@eecs.berkeley.edu>, Sven Peter <sven@svenpeter.dev>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Krishna Reddy <vdumpa@nvidia.com>,
+ Rob Herring <robh+dt@kernel.org>, Paul Walmsley <paul.walmsley@sifive.com>,
+ linux-tegra@vger.kernel.org, virtualization@lists.linux-foundation.org,
+ linux-arm-kernel@lists.infradead.org,
+ Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+ Robin Murphy <robin.murphy@arm.com>, Zhenhua Huang <quic_zhenhuah@quicinc.com>,
+ Hector Martin <marcan@marcan.st>, linux-mips@vger.kernel.org,
+ Palmer Dabbelt <palmer@dabbelt.com>, asahi@lists.linux.dev,
+ Suravee Suthikulpanit <suravee.suthikulpanit@amd.com>,
+ Sudeep Holla <sudeep.holla@arm.com>, David Woodhouse <dwmw2@infradead.org>,
+ Lu Baolu <baolu.lu@linux.intel.com>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -98,115 +100,16 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Add VT-d IO page table support to ATTACH_TABLE request.
+On Fri, Nov 03, 2023 at 01:44:46PM -0300, Jason Gunthorpe wrote:
+> This is not being used to pass ops, it is just a way to tell if an
+> iommu driver was probed. These days this can be detected directly via
+> device_iommu_mapped(). Call device_iommu_mapped() in the two places that
+> need to check it and remove the iommu parameter everywhere.
 
-Signed-off-by: Tina Zhang <tina.zhang@intel.com>
----
- drivers/iommu/virtio-iommu.c      | 23 +++++++++++++++++++++++
- include/uapi/linux/virtio_iommu.h | 26 ++++++++++++++++++++++++++
- 2 files changed, 49 insertions(+)
+Yes, that's much better than exposing the iommu ops to a place that
+should not care about them:
 
-diff --git a/drivers/iommu/virtio-iommu.c b/drivers/iommu/virtio-iommu.c
-index b1ceaac974e2..b02eeb1d27a4 100644
---- a/drivers/iommu/virtio-iommu.c
-+++ b/drivers/iommu/virtio-iommu.c
-@@ -991,12 +991,25 @@ static int viommu_attach_pgtable(struct viommu_domain *vdomain,
- 	};
- 
- 	/* TODO: bypass flag? */
-+	if (vdomain->bypass == true)
-+		return 0;
- 
- 	switch (fmt) {
- 	case VIRT_IO_PGTABLE:
- 		req.format = cpu_to_le16(VIRTIO_IOMMU_FORMAT_PGTF_VIRT);
- 		req.pgd = cpu_to_le64((u64)cfg->virt.pgd);
- 		break;
-+	case INTEL_IOMMU: {
-+		struct virtio_iommu_req_attach_pgt_vtd *vtd_req =
-+			(struct virtio_iommu_req_attach_pgt_vtd *)&req;
-+
-+		vtd_req->format = cpu_to_le16(VIRTIO_IOMMU_FORMAT_PGTF_VTD);
-+		vtd_req->pgd = cpu_to_le64((u64)cfg->virt.pgd);
-+		vtd_req->addr_width = cpu_to_le32(cfg->oas);
-+		vtd_req->pasid = IOMMU_NO_PASID;
-+		break;
-+	}
-+
- 	default:
- 		return -EINVAL;
- 	};
-@@ -1034,6 +1047,16 @@ static int viommu_setup_pgtable(struct viommu_domain *vdomain,
- 	case VIRTIO_IOMMU_FORMAT_PGTF_VIRT:
- 		fmt = VIRT_IO_PGTABLE;
- 		break;
-+	case VIRTIO_IOMMU_FORMAT_PGTF_VTD:
-+	{
-+		struct virtio_iommu_probe_pgt_vtd *vtd_desc =
-+			(struct virtio_iommu_probe_pgt_vtd *)desc;
-+
-+		cfg.vtd_cfg.cap_reg = le64_to_cpu(vtd_desc->cap_reg);
-+		cfg.vtd_cfg.ecap_reg = le64_to_cpu(vtd_desc->ecap_reg);
-+		fmt = INTEL_IOMMU;
-+		break;
-+	}
- 	default:
- 		dev_warn(vdev->dev, "unsupported page table format 0x%x\n",
- 			 le16_to_cpu(desc->format));
-diff --git a/include/uapi/linux/virtio_iommu.h b/include/uapi/linux/virtio_iommu.h
-index 656be1f3d926..17e0d5fcdd54 100644
---- a/include/uapi/linux/virtio_iommu.h
-+++ b/include/uapi/linux/virtio_iommu.h
-@@ -139,6 +139,22 @@ struct virtio_iommu_req_attach_pgt_virt {
- 	struct virtio_iommu_req_tail		tail;
- };
- 
-+/* Vt-d I/O Page Table Descriptor */
-+struct virtio_iommu_req_attach_pgt_vtd {
-+	struct virtio_iommu_req_head		head;
-+	__le32					domain;
-+	__le32					endpoint;
-+	__le32					flags;
-+	__le16					format;
-+	__u8					reserved[2];
-+	__le32					pasid;
-+	__le64					pgd;
-+	__le64                                  fl_flags;
-+	__le32                                  addr_width;
-+	__u8					reserved2[36];
-+	struct virtio_iommu_req_tail		tail;
-+};
-+
- #define VIRTIO_IOMMU_MAP_F_READ			(1 << 0)
- #define VIRTIO_IOMMU_MAP_F_WRITE		(1 << 1)
- #define VIRTIO_IOMMU_MAP_F_MMIO			(1 << 2)
-@@ -224,6 +240,8 @@ struct virtio_iommu_probe_pasid_size {
- #define VIRTIO_IOMMU_FORMAT_PSTF_ARM_SMMU_V3	2
- /* Virt I/O page table format */
- #define VIRTIO_IOMMU_FORMAT_PGTF_VIRT		3
-+/* VT-d I/O page table format */
-+#define VIRTIO_IOMMU_FORMAT_PGTF_VTD		4
- 
- struct virtio_iommu_probe_table_format {
- 	struct virtio_iommu_probe_property	head;
-@@ -231,6 +249,14 @@ struct virtio_iommu_probe_table_format {
- 	__u8					reserved[2];
- };
- 
-+struct virtio_iommu_probe_pgt_vtd {
-+	struct virtio_iommu_probe_property	head;
-+	__le16					format;
-+	__u8					reserved[2];
-+	__le64					cap_reg;
-+	__le64					ecap_reg;
-+};
-+
- struct virtio_iommu_req_probe {
- 	struct virtio_iommu_req_head		head;
- 	__le32					endpoint;
--- 
-2.39.3
-
+Acked-by: Christoph Hellwig <hch@lst.de>
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
