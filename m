@@ -2,108 +2,68 @@ Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
 Received: from smtp1.osuosl.org (smtp1.osuosl.org [140.211.166.138])
-	by mail.lfdr.de (Postfix) with ESMTPS id 956AE7E2CE1
-	for <lists.virtualization@lfdr.de>; Mon,  6 Nov 2023 20:32:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTPS id 091A97E33B4
+	for <lists.virtualization@lfdr.de>; Tue,  7 Nov 2023 04:12:50 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp1.osuosl.org (Postfix) with ESMTP id 276EC827A0;
-	Mon,  6 Nov 2023 19:32:35 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 276EC827A0
-Authentication-Results: smtp1.osuosl.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.a=rsa-sha256 header.s=google header.b=SH7Y1GQb
+	by smtp1.osuosl.org (Postfix) with ESMTP id 2078A82B69;
+	Tue,  7 Nov 2023 03:12:48 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 2078A82B69
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp1.osuosl.org ([127.0.0.1])
 	by localhost (smtp1.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 6x_0AOP4Jf16; Mon,  6 Nov 2023 19:32:34 +0000 (UTC)
+	with ESMTP id aNp2JF3YcF41; Tue,  7 Nov 2023 03:12:47 +0000 (UTC)
 Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
-	by smtp1.osuosl.org (Postfix) with ESMTPS id D94C882848;
-	Mon,  6 Nov 2023 19:32:33 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org D94C882848
+	by smtp1.osuosl.org (Postfix) with ESMTPS id 933F9828DF;
+	Tue,  7 Nov 2023 03:12:46 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp1.osuosl.org 933F9828DF
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id DA054C008C;
-	Mon,  6 Nov 2023 19:32:32 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 5506BC0DD7;
+	Tue,  7 Nov 2023 03:12:45 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
- by lists.linuxfoundation.org (Postfix) with ESMTP id EB74DC0032
+Received: from smtp4.osuosl.org (smtp4.osuosl.org [IPv6:2605:bc80:3010::137])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 52CA4C0032
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 19:32:31 +0000 (UTC)
+ Tue,  7 Nov 2023 03:12:39 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp2.osuosl.org (Postfix) with ESMTP id BFAB541596
+ by smtp4.osuosl.org (Postfix) with ESMTP id 1E8D142091
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 19:32:31 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BFAB541596
-Authentication-Results: smtp2.osuosl.org;
- dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca
- header.a=rsa-sha256 header.s=google header.b=SH7Y1GQb
+ Tue,  7 Nov 2023 03:12:39 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1E8D142091
 X-Virus-Scanned: amavisd-new at osuosl.org
-Received: from smtp2.osuosl.org ([127.0.0.1])
- by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id PZpehNYLScWm
+Received: from smtp4.osuosl.org ([127.0.0.1])
+ by localhost (smtp4.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id KMfd7IJNnvJc
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 19:32:31 +0000 (UTC)
-Received: from mail-ua1-x934.google.com (mail-ua1-x934.google.com
- [IPv6:2607:f8b0:4864:20::934])
- by smtp2.osuosl.org (Postfix) with ESMTPS id B3E1F400C5
+ Tue,  7 Nov 2023 03:12:36 +0000 (UTC)
+Received: from out30-118.freemail.mail.aliyun.com
+ (out30-118.freemail.mail.aliyun.com [115.124.30.118])
+ by smtp4.osuosl.org (Postfix) with ESMTPS id 1F5ED40333
  for <virtualization@lists.linux-foundation.org>;
- Mon,  6 Nov 2023 19:32:30 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org B3E1F400C5
-Received: by mail-ua1-x934.google.com with SMTP id
- a1e0cc1a2514c-7bae0c07086so1427684241.1
- for <virtualization@lists.linux-foundation.org>;
- Mon, 06 Nov 2023 11:32:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ziepe.ca; s=google; t=1699299149; x=1699903949;
- darn=lists.linux-foundation.org; 
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DAHtCI4uX5rSDG9hdPsxsTF21tKIZfBDAKE7xDsp3rU=;
- b=SH7Y1GQbUyt7VmjM8SYBRKDLenK1W33RNvokdFG0rUAB2B410gmltzKXdzOlihbrSU
- pTMgtJI5UhlTZJtJ6ASiLtbRVyLfxxVCpF7T/pHrzxbHoRql8Sl0gXoap6k1Ssf/KQYx
- xYkeeD0ZLZxgTw85ON+DOhZbJo96ck1e9kECjQf0XNNydf5kFy1pVBdSgVUQKqaVYgud
- LMljWDsRFLW3/Pp2OKGrt0vhLJoJqOBK6GlQqQl2k3tif+s9hYw5Weo1G/XtRJ87dTy5
- +nw1Bl6kMOJ/ua/Eyhv09xJ/AFBj8jUklTMVISIQ8DOOCQ/p4VxqGN7ziIVmUt5f+FJ0
- 9KgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1699299149; x=1699903949;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DAHtCI4uX5rSDG9hdPsxsTF21tKIZfBDAKE7xDsp3rU=;
- b=w9Wy2ufnpAee2nlUv82RXU0H/HSBfgSJkaS8JNOn7ClOV1jPc3ujdIJkLF9xy6k7Dp
- 1aCnk0rPK7dcPo8xuNgCfFB/zeCL034I7H6M7FdyduWpPtWVaONIihAJkrRKpLZnGcFM
- ssJ3tANv+EBFzO/OKXP9GRT7p2369K4IbBhDw5JckAYIuEWLcYlkyosf5sFdFX+KzONq
- N3LNQqwz6kD99suUzIUhG7aVAMDHEgYwFwWaReNuc8Rb7HLjVbdsKrNaq1RwItW1vQbp
- hObk3SIKv3OibGMfz2v+ZZ3lESTgXEEec3wNZlLm+ZKY68uwbj40OmQIylBCrLDztq0U
- jEQg==
-X-Gm-Message-State: AOJu0Yw7YoZapNM6cfUvDIbh2O65d5g/Rt4Eq0Jsp8Buh4qBzBsv3Vki
- dqnyVtDZyVGfNHxIhmbKNPYGMw==
-X-Google-Smtp-Source: AGHT+IHHrThxyHmJktLceZ794OYsaOv21wFux00FTZbUeam8b2XhNtl+ya1TeSFos/G045SdeP1ylg==
-X-Received: by 2002:a1f:1c4a:0:b0:49b:289a:cc4a with SMTP id
- c71-20020a1f1c4a000000b0049b289acc4amr27005359vkc.3.1699299149465; 
- Mon, 06 Nov 2023 11:32:29 -0800 (PST)
-Received: from ziepe.ca
- (hlfxns017vw-142-68-26-201.dhcp-dynamic.fibreop.ns.bellaliant.net.
- [142.68.26.201]) by smtp.gmail.com with ESMTPSA id
- b3-20020a0ce883000000b0066cfd398ab5sm3663160qvo.146.2023.11.06.11.32.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 06 Nov 2023 11:32:28 -0800 (PST)
-Received: from jgg by wakko with local (Exim 4.95)
- (envelope-from <jgg@ziepe.ca>) id 1r05Km-001Qut-BY;
- Mon, 06 Nov 2023 15:32:28 -0400
-Date: Mon, 6 Nov 2023 15:32:28 -0400
-From: Jason Gunthorpe <jgg@ziepe.ca>
-To: Tina Zhang <tina.zhang@intel.com>
-Subject: Re: [RFC PATCH 2/5] iommu/vt-d: Add generic IO page table support
-Message-ID: <20231106193228.GU4634@ziepe.ca>
-References: <20231106071226.9656-1-tina.zhang@intel.com>
- <20231106071226.9656-3-tina.zhang@intel.com>
+ Tue,  7 Nov 2023 03:12:34 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp4.osuosl.org 1F5ED40333
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R201e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046060;
+ MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
+ TI=SMTPD_---0VvsPwKh_1699326747; 
+Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
+ fp:SMTPD_---0VvsPwKh_1699326747) by smtp.aliyun-inc.com;
+ Tue, 07 Nov 2023 11:12:28 +0800
+From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+To: netdev@vger.kernel.org
+Subject: [PATCH net-next v2 00/21] virtio-net: support AF_XDP zero copy
+Date: Tue,  7 Nov 2023 11:12:06 +0800
+Message-Id: <20231107031227.100015-1-xuanzhuo@linux.alibaba.com>
+X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <20231106071226.9656-3-tina.zhang@intel.com>
-Cc: Jean-Philippe Brucker <jean-philippe@linaro.org>,
- Yi Liu <yi.l.liu@intel.com>, joro@8bytes.org, linux-kernel@vger.kernel.org,
- virtualization@lists.linux-foundation.org, iommu@lists.linux.dev,
- will@kernel.org, Lu Baolu <baolu.lu@linux.intel.com>
+X-Git-Hash: 59a160d210e8
+Cc: Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ Jesper Dangaard Brouer <hawk@kernel.org>,
+ Daniel Borkmann <daniel@iogearbox.net>, "Michael S. Tsirkin" <mst@redhat.com>,
+ John Fastabend <john.fastabend@gmail.com>, Alexei Starovoitov <ast@kernel.org>,
+ virtualization@lists.linux-foundation.org, Eric Dumazet <edumazet@google.com>,
+ Jakub Kicinski <kuba@kernel.org>, bpf@vger.kernel.org,
+ Paolo Abeni <pabeni@redhat.com>, "David S. Miller" <davem@davemloft.net>
 X-BeenThere: virtualization@lists.linux-foundation.org
 X-Mailman-Version: 2.1.15
 Precedence: list
@@ -120,23 +80,137 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-On Mon, Nov 06, 2023 at 02:12:23AM -0500, Tina Zhang wrote:
-> Add basic hook up code to implement generic IO page table framework.
-> 
-> Signed-off-by: Tina Zhang <tina.zhang@intel.com>
-> ---
->  drivers/iommu/intel/Kconfig |  1 +
->  drivers/iommu/intel/iommu.c | 94 +++++++++++++++++++++++++++++++++++++
->  drivers/iommu/intel/iommu.h |  7 +++
->  drivers/iommu/io-pgtable.c  |  3 ++
->  include/linux/io-pgtable.h  |  2 +
->  5 files changed, 107 insertions(+)
+## AF_XDP
 
-If this is going to happen can we also convert vt-d to actually use
-the io page table stuff directly and shuffle the code around so it is
-structured like the rest of the io page table implementations?
+XDP socket(AF_XDP) is an excellent bypass kernel network framework. The zero
+copy feature of xsk (XDP socket) needs to be supported by the driver. The
+performance of zero copy is very good. mlx5 and intel ixgbe already support
+this feature, This patch set allows virtio-net to support xsk's zerocopy xmit
+feature.
 
-Jason
+At present, we have completed some preparation:
+
+1. vq-reset (virtio spec and kernel code)
+2. virtio-core premapped dma
+3. virtio-net xdp refactor
+
+So it is time for Virtio-Net to complete the support for the XDP Socket
+Zerocopy.
+
+Virtio-net can not increase the queue num at will, so xsk shares the queue with
+kernel.
+
+On the other hand, Virtio-Net does not support generate interrupt from driver
+manually, so when we wakeup tx xmit, we used some tips. If the CPU run by TX
+NAPI last time is other CPUs, use IPI to wake up NAPI on the remote CPU. If it
+is also the local CPU, then we wake up napi directly.
+
+This patch set includes some refactor to the virtio-net to let that to support
+AF_XDP.
+
+## performance
+
+ENV: Qemu with vhost-user(polling mode).
+Host CPU: Intel(R) Xeon(R) Platinum 8163 CPU @ 2.50GHz
+
+### virtio PMD in guest with testpmd
+
+testpmd> show port stats all
+
+ ######################## NIC statistics for port 0 ########################
+ RX-packets: 19531092064 RX-missed: 0     RX-bytes: 1093741155584
+ RX-errors: 0
+ RX-nombuf: 0
+ TX-packets: 5959955552 TX-errors: 0     TX-bytes: 371030645664
+
+
+ Throughput (since last show)
+ Rx-pps:   8861574     Rx-bps:  3969985208
+ Tx-pps:   8861493     Tx-bps:  3969962736
+ ############################################################################
+
+### AF_XDP PMD in guest with testpmd
+
+testpmd> show port stats all
+
+  ######################## NIC statistics for port 0  ########################
+  RX-packets: 68152727   RX-missed: 0          RX-bytes:  3816552712
+  RX-errors: 0
+  RX-nombuf:  0
+  TX-packets: 68114967   TX-errors: 33216      TX-bytes:  3814438152
+
+  Throughput (since last show)
+  Rx-pps:      6333196          Rx-bps:   2837272088
+  Tx-pps:      6333227          Tx-bps:   2837285936
+  ############################################################################
+
+But AF_XDP consumes more CPU for tx and rx napi(100% and 86%).
+
+## maintain
+
+I am currently a reviewer for virtio-net. I commit to maintain AF_XDP support in
+virtio-net.
+
+Please review.
+
+Thanks.
+
+v2
+    1. wakeup uses the way of GVE. No send ipi to wakeup napi on remote cpu.
+    2. remove rcu. Because we synchronize all operat, so the rcu is not needed.
+    3. split the commit "move to virtio_net.h" in last patch set. Just move the
+       struct/api to header when we use them.
+    4. add comments for some code
+
+v1:
+    1. remove two virtio commits. Push this patchset to net-next
+    2. squash "virtio_net: virtnet_poll_tx support rescheduled" to xsk: support tx
+    3. fix some warnings
+
+
+Xuan Zhuo (21):
+  virtio_net: rename free_old_xmit_skbs to free_old_xmit
+  virtio_net: unify the code for recycling the xmit ptr
+  virtio_net: independent directory
+  virtio_net: move core structures to virtio_net.h
+  virtio_net: add prefix virtnet to all struct inside virtio_net.h
+  virtio_net: separate virtnet_rx_resize()
+  virtio_net: separate virtnet_tx_resize()
+  virtio_net: sq support premapped mode
+  virtio_net: xsk: bind/unbind xsk
+  virtio_net: xsk: prevent disable tx napi
+  virtio_net: move some api to header
+  virtio_net: xsk: tx: support tx
+  virtio_net: xsk: tx: support wakeup
+  virtio_net: xsk: tx: virtnet_free_old_xmit() distinguishes xsk buffer
+  virtio_net: xsk: tx: virtnet_sq_free_unused_buf() check xsk buffer
+  virtio_net: xsk: rx: introduce add_recvbuf_xsk()
+  virtio_net: xsk: rx: skip dma unmap when rq is bind with AF_XDP
+  virtio_net: xsk: rx: introduce receive_xsk() to recv xsk buffer
+  virtio_net: xsk: rx: virtnet_rq_free_unused_buf() check xsk buffer
+  virtio_net: update tx timeout record
+  virtio_net: xdp_features add NETDEV_XDP_ACT_XSK_ZEROCOPY
+
+ MAINTAINERS                                 |   2 +-
+ drivers/net/Kconfig                         |   8 +-
+ drivers/net/Makefile                        |   2 +-
+ drivers/net/virtio/Kconfig                  |  13 +
+ drivers/net/virtio/Makefile                 |   8 +
+ drivers/net/{virtio_net.c => virtio/main.c} | 630 +++++++++-----------
+ drivers/net/virtio/virtio_net.h             | 346 +++++++++++
+ drivers/net/virtio/xsk.c                    | 498 ++++++++++++++++
+ drivers/net/virtio/xsk.h                    |  32 +
+ 9 files changed, 1174 insertions(+), 365 deletions(-)
+ create mode 100644 drivers/net/virtio/Kconfig
+ create mode 100644 drivers/net/virtio/Makefile
+ rename drivers/net/{virtio_net.c => virtio/main.c} (92%)
+ create mode 100644 drivers/net/virtio/virtio_net.h
+ create mode 100644 drivers/net/virtio/xsk.c
+ create mode 100644 drivers/net/virtio/xsk.h
+
+--
+2.32.0.3.g01195cf9f
+
 _______________________________________________
 Virtualization mailing list
 Virtualization@lists.linux-foundation.org
