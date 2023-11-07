@@ -1,60 +1,59 @@
 Return-Path: <virtualization-bounces@lists.linux-foundation.org>
 X-Original-To: lists.virtualization@lfdr.de
 Delivered-To: lists.virtualization@lfdr.de
-Received: from smtp2.osuosl.org (smtp2.osuosl.org [140.211.166.133])
-	by mail.lfdr.de (Postfix) with ESMTPS id 755187E33CB
-	for <lists.virtualization@lfdr.de>; Tue,  7 Nov 2023 04:13:05 +0100 (CET)
+Received: from smtp2.osuosl.org (smtp2.osuosl.org [IPv6:2605:bc80:3010::133])
+	by mail.lfdr.de (Postfix) with ESMTPS id 6DF1E7E33CE
+	for <lists.virtualization@lfdr.de>; Tue,  7 Nov 2023 04:13:09 +0100 (CET)
 Received: from localhost (localhost [127.0.0.1])
-	by smtp2.osuosl.org (Postfix) with ESMTP id 3F7C5416FC;
+	by smtp2.osuosl.org (Postfix) with ESMTP id EEC4C416E6;
 	Tue,  7 Nov 2023 03:13:00 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 3F7C5416FC
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org EEC4C416E6
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp2.osuosl.org ([127.0.0.1])
 	by localhost (smtp2.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7IGF9iKLykuF; Tue,  7 Nov 2023 03:12:59 +0000 (UTC)
-Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [IPv6:2605:bc80:3010:104::8cd3:938])
-	by smtp2.osuosl.org (Postfix) with ESMTPS id BED81416F3;
-	Tue,  7 Nov 2023 03:12:58 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org BED81416F3
+	with ESMTP id iO2A_3HtmJ8o; Tue,  7 Nov 2023 03:13:00 +0000 (UTC)
+Received: from lists.linuxfoundation.org (lf-lists.osuosl.org [140.211.9.56])
+	by smtp2.osuosl.org (Postfix) with ESMTPS id 94B5D416EC;
+	Tue,  7 Nov 2023 03:12:59 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp2.osuosl.org 94B5D416EC
 Received: from lf-lists.osuosl.org (localhost [127.0.0.1])
-	by lists.linuxfoundation.org (Postfix) with ESMTP id 3537AC0032;
-	Tue,  7 Nov 2023 03:12:58 +0000 (UTC)
+	by lists.linuxfoundation.org (Postfix) with ESMTP id 7B96CC0DD5;
+	Tue,  7 Nov 2023 03:12:59 +0000 (UTC)
 X-Original-To: virtualization@lists.linux-foundation.org
 Delivered-To: virtualization@lists.linuxfoundation.org
-Received: from smtp3.osuosl.org (smtp3.osuosl.org [140.211.166.136])
- by lists.linuxfoundation.org (Postfix) with ESMTP id 319C3C008C
+Received: from smtp3.osuosl.org (smtp3.osuosl.org [IPv6:2605:bc80:3010::136])
+ by lists.linuxfoundation.org (Postfix) with ESMTP id 7C13FC0DD9
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Nov 2023 03:12:56 +0000 (UTC)
+ Tue,  7 Nov 2023 03:12:58 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
- by smtp3.osuosl.org (Postfix) with ESMTP id 1B72861324
+ by smtp3.osuosl.org (Postfix) with ESMTP id 5876761333
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Nov 2023 03:12:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 1B72861324
+ Tue,  7 Nov 2023 03:12:58 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 5876761333
 X-Virus-Scanned: amavisd-new at osuosl.org
 Received: from smtp3.osuosl.org ([127.0.0.1])
  by localhost (smtp3.osuosl.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 6jelTX9Ml9yI
+ with ESMTP id WJeFUtYcs1W8
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Nov 2023 03:12:55 +0000 (UTC)
-Received: from out30-133.freemail.mail.aliyun.com
- (out30-133.freemail.mail.aliyun.com [115.124.30.133])
- by smtp3.osuosl.org (Postfix) with ESMTPS id 03BAF61316
+ Tue,  7 Nov 2023 03:12:57 +0000 (UTC)
+Received: from out30-111.freemail.mail.aliyun.com
+ (out30-111.freemail.mail.aliyun.com [115.124.30.111])
+ by smtp3.osuosl.org (Postfix) with ESMTPS id 4181861325
  for <virtualization@lists.linux-foundation.org>;
- Tue,  7 Nov 2023 03:12:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 03BAF61316
-X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R251e4; CH=green; DM=||false|;
- DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018045168;
+ Tue,  7 Nov 2023 03:12:56 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 smtp3.osuosl.org 4181861325
+X-Alimail-AntiSpam: AC=PASS; BC=-1|-1; BR=01201311R711e4; CH=green; DM=||false|;
+ DS=||; FP=0|-1|-1|-1|0|-1|-1|-1; HT=ay29a033018046050;
  MF=xuanzhuo@linux.alibaba.com; NM=1; PH=DS; RN=14; SR=0;
- TI=SMTPD_---0VvsNijc_1699326769; 
+ TI=SMTPD_---0VvsPwSF_1699326771; 
 Received: from localhost(mailfrom:xuanzhuo@linux.alibaba.com
- fp:SMTPD_---0VvsNijc_1699326769) by smtp.aliyun-inc.com;
- Tue, 07 Nov 2023 11:12:50 +0800
+ fp:SMTPD_---0VvsPwSF_1699326771) by smtp.aliyun-inc.com;
+ Tue, 07 Nov 2023 11:12:52 +0800
 From: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
 To: netdev@vger.kernel.org
-Subject: [PATCH net-next v2 19/21] virtio_net: xsk: rx:
- virtnet_rq_free_unused_buf() check xsk buffer
-Date: Tue,  7 Nov 2023 11:12:25 +0800
-Message-Id: <20231107031227.100015-20-xuanzhuo@linux.alibaba.com>
+Subject: [PATCH net-next v2 20/21] virtio_net: update tx timeout record
+Date: Tue,  7 Nov 2023 11:12:26 +0800
+Message-Id: <20231107031227.100015-21-xuanzhuo@linux.alibaba.com>
 X-Mailer: git-send-email 2.32.0.3.g01195cf9f
 In-Reply-To: <20231107031227.100015-1-xuanzhuo@linux.alibaba.com>
 References: <20231107031227.100015-1-xuanzhuo@linux.alibaba.com>
@@ -83,34 +82,36 @@ Content-Transfer-Encoding: 7bit
 Errors-To: virtualization-bounces@lists.linux-foundation.org
 Sender: "Virtualization" <virtualization-bounces@lists.linux-foundation.org>
 
-Since this will be called in other circumstances(freeze), we must check
-whether it is xsk's buffer in this function. It cannot be judged outside
-this function.
+If send queue sent some packets, we update the tx timeout
+record to prevent the tx timeout.
 
 Signed-off-by: Xuan Zhuo <xuanzhuo@linux.alibaba.com>
+Acked-by: Jason Wang <jasowang@redhat.com>
 ---
- drivers/net/virtio/main.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/net/virtio/xsk.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/net/virtio/main.c b/drivers/net/virtio/main.c
-index 095f4acb0577..42c7dbf53e63 100644
---- a/drivers/net/virtio/main.c
-+++ b/drivers/net/virtio/main.c
-@@ -3948,6 +3948,14 @@ void virtnet_rq_free_unused_buf(struct virtqueue *vq, void *buf)
+diff --git a/drivers/net/virtio/xsk.c b/drivers/net/virtio/xsk.c
+index 5c7eb19ab04b..96bf5d8260f8 100644
+--- a/drivers/net/virtio/xsk.c
++++ b/drivers/net/virtio/xsk.c
+@@ -259,6 +259,16 @@ bool virtnet_xsk_xmit(struct virtnet_sq *sq, struct xsk_buff_pool *pool,
  
- 	rq = &vi->rq[i];
+ 	virtnet_xsk_check_queue(sq);
  
-+	if (rq->xsk.pool) {
-+		struct xdp_buff *xdp;
++	if (packets) {
++		struct netdev_queue *txq;
++		struct virtnet_info *vi;
 +
-+		xdp = (struct xdp_buff *)buf;
-+		xsk_buff_free(xdp);
-+		return;
++		vi = sq->vq->vdev->priv;
++
++		txq = netdev_get_tx_queue(vi->dev, sq - vi->sq);
++		txq_trans_cond_update(txq);
 +	}
 +
- 	if (rq->do_dma_unmap)
- 		virtnet_rq_unmap(rq, buf, 0);
- 
+ 	u64_stats_update_begin(&sq->stats.syncp);
+ 	u64_stats_add(&sq->stats.packets, packets);
+ 	u64_stats_add(&sq->stats.bytes, bytes);
 -- 
 2.32.0.3.g01195cf9f
 
